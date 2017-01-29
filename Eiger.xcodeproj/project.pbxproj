@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8378C8F6D4B063605AA2555B /* Pods_Eiger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */; };
 		A57EFEA51E3E06D300B66701 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57EFEA41E3E06D300B66701 /* AppDelegate.swift */; };
 		A57EFEA71E3E06D300B66701 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57EFEA61E3E06D300B66701 /* ViewController.swift */; };
 		A57EFEAA1E3E06D300B66701 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEA81E3E06D300B66701 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.release.xcconfig"; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Eiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eiger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57EFEA41E3E06D300B66701 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A57EFEA61E3E06D300B66701 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +24,8 @@
 		A57EFEAB1E3E06D300B66701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A57EFEAE1E3E06D300B66701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A57EFEB01E3E06D300B66701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8378C8F6D4B063605AA2555B /* Pods_Eiger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2D6EC82ACCDEE92B54408E2F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */,
+				1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A57EFE981E3E06D300B66701 = {
 			isa = PBXGroup;
 			children = (
 				A57EFEA31E3E06D300B66701 /* Eiger */,
 				A57EFEA21E3E06D300B66701 /* Products */,
+				2D6EC82ACCDEE92B54408E2F /* Pods */,
+				1BAE9B5DD71F0DF92296651C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A57EFEB31E3E06D300B66701 /* Build configuration list for PBXNativeTarget "Eiger" */;
 			buildPhases = (
+				57D8DA48BB701B7EFB84CDD9 /* [CP] Check Pods Manifest.lock */,
 				A57EFE9D1E3E06D300B66701 /* Sources */,
 				A57EFE9E1E3E06D300B66701 /* Frameworks */,
 				A57EFE9F1E3E06D300B66701 /* Resources */,
+				1D029561B4665ADEDAE1473F /* [CP] Embed Pods Frameworks */,
+				1E63D71BB12081FC0887EC86 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1D029561B4665ADEDAE1473F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Eiger/Pods-Eiger-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1E63D71BB12081FC0887EC86 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Eiger/Pods-Eiger-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		57D8DA48BB701B7EFB84CDD9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A57EFE9D1E3E06D300B66701 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -182,6 +257,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -231,6 +307,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -257,6 +334,7 @@
 		};
 		A57EFEB41E3E06D300B66701 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NBF83W557A;
@@ -270,6 +348,7 @@
 		};
 		A57EFEB51E3E06D300B66701 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NBF83W557A;
@@ -300,6 +379,7 @@
 				A57EFEB51E3E06D300B66701 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
