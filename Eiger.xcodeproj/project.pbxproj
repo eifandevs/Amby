@@ -86,9 +86,6 @@
 				A5D88FA11E460FE70099DFA3 /* Views */,
 				A5D88FA01E460FE00099DFA3 /* Commons */,
 				A57EFEA41E3E06D300B66701 /* AppDelegate.swift */,
-				A54251F21E45F26D0037AED1 /* EGApplication.swift */,
-				A57EFEA61E3E06D300B66701 /* BaseViewController.swift */,
-				A54251F41E45F27F0037AED1 /* EGlogger.swift */,
 				A57EFEAB1E3E06D300B66701 /* Assets.xcassets */,
 				A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */,
 				A57EFEB01E3E06D300B66701 /* Info.plist */,
@@ -99,6 +96,8 @@
 		A5D88FA01E460FE00099DFA3 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				A54251F21E45F26D0037AED1 /* EGApplication.swift */,
+				A54251F41E45F27F0037AED1 /* EGlogger.swift */,
 			);
 			name = Commons;
 			sourceTree = "<group>";
@@ -127,6 +126,7 @@
 		A5D88FA41E46100C0099DFA3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A57EFEA61E3E06D300B66701 /* BaseViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
