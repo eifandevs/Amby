@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class BaseViewController: UIViewController, EGApplicationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        EGApplication.sharedMyApplication.egDelegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +21,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func sendEvent(event: UIEvent) {
+        debugLog("sendEvent")
+    }
 
 }
 

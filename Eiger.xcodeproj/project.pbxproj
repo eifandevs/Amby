@@ -8,19 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		8378C8F6D4B063605AA2555B /* Pods_Eiger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */; };
+		A54251F31E45F26E0037AED1 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54251F21E45F26D0037AED1 /* EGApplication.swift */; };
+		A54251F51E45F27F0037AED1 /* EGlogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54251F41E45F27F0037AED1 /* EGlogger.swift */; };
 		A57EFEA51E3E06D300B66701 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57EFEA41E3E06D300B66701 /* AppDelegate.swift */; };
-		A57EFEA71E3E06D300B66701 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57EFEA61E3E06D300B66701 /* ViewController.swift */; };
-		A57EFEAA1E3E06D300B66701 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEA81E3E06D300B66701 /* Main.storyboard */; };
+		A57EFEA71E3E06D300B66701 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57EFEA61E3E06D300B66701 /* BaseViewController.swift */; };
 		A57EFEAC1E3E06D300B66701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAB1E3E06D300B66701 /* Assets.xcassets */; };
 		A57EFEAF1E3E06D300B66701 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.release.xcconfig"; sourceTree = "<group>"; };
+		A54251F21E45F26D0037AED1 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
+		A54251F41E45F27F0037AED1 /* EGlogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGlogger.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Eiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eiger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57EFEA41E3E06D300B66701 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A57EFEA61E3E06D300B66701 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A57EFEA91E3E06D300B66701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A57EFEA61E3E06D300B66701 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A57EFEAB1E3E06D300B66701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A57EFEAE1E3E06D300B66701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A57EFEB01E3E06D300B66701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,14 +80,55 @@
 		A57EFEA31E3E06D300B66701 /* Eiger */ = {
 			isa = PBXGroup;
 			children = (
+				A5D88FA41E46100C0099DFA3 /* Controllers */,
+				A5D88FA31E460FF40099DFA3 /* ViewModels */,
+				A5D88FA21E460FED0099DFA3 /* Models */,
+				A5D88FA11E460FE70099DFA3 /* Views */,
+				A5D88FA01E460FE00099DFA3 /* Commons */,
 				A57EFEA41E3E06D300B66701 /* AppDelegate.swift */,
-				A57EFEA61E3E06D300B66701 /* ViewController.swift */,
-				A57EFEA81E3E06D300B66701 /* Main.storyboard */,
+				A54251F21E45F26D0037AED1 /* EGApplication.swift */,
+				A57EFEA61E3E06D300B66701 /* BaseViewController.swift */,
+				A54251F41E45F27F0037AED1 /* EGlogger.swift */,
 				A57EFEAB1E3E06D300B66701 /* Assets.xcassets */,
 				A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */,
 				A57EFEB01E3E06D300B66701 /* Info.plist */,
 			);
 			path = Eiger;
+			sourceTree = "<group>";
+		};
+		A5D88FA01E460FE00099DFA3 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Commons;
+			sourceTree = "<group>";
+		};
+		A5D88FA11E460FE70099DFA3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A5D88FA21E460FED0099DFA3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A5D88FA31E460FF40099DFA3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		A5D88FA41E46100C0099DFA3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,7 +196,6 @@
 			files = (
 				A57EFEAF1E3E06D300B66701 /* LaunchScreen.storyboard in Resources */,
 				A57EFEAC1E3E06D300B66701 /* Assets.xcassets in Resources */,
-				A57EFEAA1E3E06D300B66701 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,22 +254,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A57EFEA71E3E06D300B66701 /* ViewController.swift in Sources */,
+				A57EFEA71E3E06D300B66701 /* BaseViewController.swift in Sources */,
+				A54251F51E45F27F0037AED1 /* EGlogger.swift in Sources */,
 				A57EFEA51E3E06D300B66701 /* AppDelegate.swift in Sources */,
+				A54251F31E45F26E0037AED1 /* EGApplication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A57EFEA81E3E06D300B66701 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A57EFEA91E3E06D300B66701 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -280,7 +316,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -324,7 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
