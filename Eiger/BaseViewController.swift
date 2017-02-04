@@ -21,9 +21,20 @@ class BaseViewController: UIViewController, EGApplicationDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    func sendEvent(event: UIEvent) {
-        debugLog("sendEvent")
+    internal func screenTouchBegan(touch: UITouch) {
+        debugLog("began")
+    }
+    
+    internal func screenTouchMoved(touch: UITouch) {
+        debugLog("moved")
+    }
+    
+    internal func screenTouchEnded(touch: UITouch) {
+        debugLog("ended")
     }
 
+    internal func screenTouchCancelled(touch: UITouch) {
+        debugLog("cancelled")
+    }
 }
 
