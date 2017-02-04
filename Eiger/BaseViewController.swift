@@ -8,33 +8,21 @@
 
 import UIKit
 
-class BaseViewController: UIViewController, EGApplicationDelegate {
+class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        EGApplication.sharedMyApplication.egDelegate = self
+        self.view = BaseViewControllerViewModel()
     }
 
+    override func viewDidLayoutSubviews() {
+        self.view.frame = CGRect(origin: CGPoint.zero, size: self.view.bounds.size)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    internal func screenTouchBegan(touch: UITouch) {
-        debugLog("began")
-    }
-    
-    internal func screenTouchMoved(touch: UITouch) {
-        debugLog("moved")
-    }
-    
-    internal func screenTouchEnded(touch: UITouch) {
-        debugLog("ended")
-    }
-
-    internal func screenTouchCancelled(touch: UITouch) {
-        debugLog("cancelled")
     }
 }
 
