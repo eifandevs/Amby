@@ -14,6 +14,7 @@
 		A57EFEA71E3E06D300B66701 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57EFEA61E3E06D300B66701 /* BaseViewController.swift */; };
 		A57EFEAC1E3E06D300B66701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAB1E3E06D300B66701 /* Assets.xcassets */; };
 		A57EFEAF1E3E06D300B66701 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */; };
+		A5D88FA61E46251D0099DFA3 /* BaseViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FA51E46251D0099DFA3 /* BaseViewControllerViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A57EFEAB1E3E06D300B66701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A57EFEAE1E3E06D300B66701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A57EFEB01E3E06D300B66701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5D88FA51E46251D0099DFA3 /* BaseViewControllerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewControllerViewModel.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 		A5D88FA31E460FF40099DFA3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				A5D88FA51E46251D0099DFA3 /* BaseViewControllerViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				A57EFEA71E3E06D300B66701 /* BaseViewController.swift in Sources */,
 				A54251F51E45F27F0037AED1 /* EGlogger.swift in Sources */,
 				A57EFEA51E3E06D300B66701 /* AppDelegate.swift in Sources */,
+				A5D88FA61E46251D0099DFA3 /* BaseViewControllerViewModel.swift in Sources */,
 				A54251F31E45F26E0037AED1 /* EGApplication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +323,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
