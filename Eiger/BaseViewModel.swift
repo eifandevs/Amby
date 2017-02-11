@@ -11,7 +11,7 @@ import Foundation
 class BaseViewModel {
     private var history: [History] = []
     func saveHistory(urlStr: String) {
-        debugLog("save history. url: \(url)")
+        log.debug("save history. url: \(urlStr)")
     }
     
     var defaultUrl: String {

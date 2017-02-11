@@ -67,19 +67,15 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     // MARK: EGApplication Delegate
     internal func screenTouchBegan(touch: UITouch) {
-        debugLog("began")
     }
     
     internal func screenTouchMoved(touch: UITouch) {
-        debugLog("moved")
     }
     
     internal func screenTouchEnded(touch: UITouch) {
-        debugLog("ended")
     }
     
     internal func screenTouchCancelled(touch: UITouch) {
-        debugLog("cancelled")
     }
     
 // MARK: WebView Delegate
@@ -106,7 +102,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
 // MARK: Public Method
     func stopProgressObserving() {
-        debugLog("stop progress observe")
+        log.debug("stop progress observe")
         if let _webView = webView {
             _webView.removeObserver(self, forKeyPath: "estimatedProgress")
             _webView.removeObserver(self, forKeyPath: "loading")
@@ -118,16 +114,16 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     func storeHistory() {
-        debugLog("store history")
+        log.debug("store history")
     }
     
 // MARK: Private Method
     private func saveHistory() {
-        debugLog("save history")
+        log.debug("save history")
     }
     
     private func startProgressObserving() {
-        debugLog("start progress observe")
+        log.debug("start progress observe")
         progressBar = EGProgressBar()
         
         //読み込み状態が変更されたことを取得
