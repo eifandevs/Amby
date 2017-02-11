@@ -25,6 +25,7 @@
 		A5D88FC61E4F1F3D0099DFA3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FC51E4F1F3D0099DFA3 /* BaseViewController.swift */; };
 		A5D88FC81E4F1FFE0099DFA3 /* UIColor+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FC71E4F1FFE0099DFA3 /* UIColor+Extend.swift */; };
 		A5D88FCA1E4F20050099DFA3 /* timeout.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FC91E4F20050099DFA3 /* timeout.html */; };
+		A5D88FCC1E4F60260099DFA3 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FCB1E4F60260099DFA3 /* History.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		A5D88FC51E4F1F3D0099DFA3 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A5D88FC71E4F1FFE0099DFA3 /* UIColor+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extend.swift"; sourceTree = "<group>"; };
 		A5D88FC91E4F20050099DFA3 /* timeout.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = timeout.html; sourceTree = "<group>"; };
+		A5D88FCB1E4F60260099DFA3 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +144,7 @@
 		A5D88FA21E460FED0099DFA3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A5D88FCB1E4F60260099DFA3 /* History.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				A5D88FBE1E4F1F050099DFA3 /* EGApplication.swift in Sources */,
 				A5D88FC21E4F1F1E0099DFA3 /* EGProgressBar.swift in Sources */,
 				A5D88FC61E4F1F3D0099DFA3 /* BaseViewController.swift in Sources */,
+				A5D88FCC1E4F60260099DFA3 /* History.swift in Sources */,
 				A5D88FAE1E4F1E5D0099DFA3 /* EGlogger.swift in Sources */,
 				A5D88FB61E4F1ED70099DFA3 /* AppDataManager.swift in Sources */,
 				A5D88FBA1E4F1EED0099DFA3 /* BaseView.swift in Sources */,

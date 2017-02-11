@@ -56,14 +56,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         _ = webView.load(urlStr: viewModel.defaultUrl)
     }
     
-    private func createWebView() -> EGWebView {
-        let wv = EGWebView(pool: processPool)
-        wv.navigationDelegate = self
-        wv.uiDelegate = self;
-        wv.scrollView.delegate = self
-        return wv
-    }
-    
     override func layoutSubviews() {
         webView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         progressBar.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: 3)
@@ -73,6 +65,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: EGApplication Delegate
     internal func screenTouchBegan(touch: UITouch) {
         debugLog("began")
     }
@@ -89,48 +82,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         debugLog("cancelled")
     }
     
-    func stopProgressObserving() {
-        if let _webView = webView {
-            _webView.removeObserver(self, forKeyPath: "estimatedProgress")
-            _webView.removeObserver(self, forKeyPath: "loading")
-        }
-        if let _progressBar = progressBar {
-            _progressBar.initializeProgress()
-            progressBar = nil
-        }
-    }
-    
-    private func startProgressObserving() {
-        debugLog(frame.size.width)
-        progressBar = EGProgressBar()
-        
-        //読み込み状態が変更されたことを取得
-        webView.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
-        //プログレスが変更されたことを取得
-        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-        if webView.isLoading == true {
-            progressBar.setProgress(CGFloat(webView.estimatedProgress), animated: true)
-        }
-        UIApplication.shared.isNetworkActivityIndicatorVisible = webView.isLoading
-        // プルダウンリフレッシュ
-//        if refreshControl != nil {
-//            refreshControl.removeFromSuperview()
-//            refreshControl = nil
-//        }
-//        refreshControl = UIRefreshControl()
-//        refreshControl.attributedTitle = NSAttributedString(string: " ")
-//        refreshControl.addTarget(self, action: #selector(BaseViewController.pullToRefresh), forControlEvents:.ValueChanged)
-//        webView.scrollView.addSubview(refreshControl)
-        
-        addSubview(progressBar)
-    }
-    
-    // MARK: WebView Delegate
+// MARK: WebView Delegate
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         progressBar.setProgress(0.0, animated: false)
     }
     
-    // MARK: WebView Observer
+// MARK: KVO(Progress)
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             //estimatedProgressが変更されたときに、setProgressを使ってプログレスバーの値を変更する。
@@ -147,7 +104,59 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
     }
     
+// MARK: Public Method
+    func stopProgressObserving() {
+        debugLog("stop progress observe")
+        if let _webView = webView {
+            _webView.removeObserver(self, forKeyPath: "estimatedProgress")
+            _webView.removeObserver(self, forKeyPath: "loading")
+        }
+        if let _progressBar = progressBar {
+            _progressBar.initializeProgress()
+            progressBar = nil
+        }
+    }
+    
+    func storeHistory() {
+        debugLog("store history")
+    }
+    
+// MARK: Private Method
     private func saveHistory() {
         debugLog("save history")
     }
+    
+    private func startProgressObserving() {
+        debugLog("start progress observe")
+        progressBar = EGProgressBar()
+        
+        //読み込み状態が変更されたことを取得
+        webView.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
+        //プログレスが変更されたことを取得
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        if webView.isLoading == true {
+            progressBar.setProgress(CGFloat(webView.estimatedProgress), animated: true)
+        }
+        UIApplication.shared.isNetworkActivityIndicatorVisible = webView.isLoading
+        // プルダウンリフレッシュ
+        //        if refreshControl != nil {
+        //            refreshControl.removeFromSuperview()
+        //            refreshControl = nil
+        //        }
+        //        refreshControl = UIRefreshControl()
+        //        refreshControl.attributedTitle = NSAttributedString(string: " ")
+        //        refreshControl.addTarget(self, action: #selector(BaseViewController.pullToRefresh), forControlEvents:.ValueChanged)
+        //        webView.scrollView.addSubview(refreshControl)
+        
+        addSubview(progressBar)
+    }
+    
+    private func createWebView() -> EGWebView {
+        let wv = EGWebView(pool: processPool)
+        wv.navigationDelegate = self
+        wv.uiDelegate = self;
+        wv.scrollView.delegate = self
+        return wv
+    }
+    
 }
