@@ -8,28 +8,47 @@
 
 /* Begin PBXBuildFile section */
 		8378C8F6D4B063605AA2555B /* Pods_Eiger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */; };
-		A54251F31E45F26E0037AED1 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54251F21E45F26D0037AED1 /* EGApplication.swift */; };
-		A54251F51E45F27F0037AED1 /* EGlogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54251F41E45F27F0037AED1 /* EGlogger.swift */; };
-		A57EFEA51E3E06D300B66701 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57EFEA41E3E06D300B66701 /* AppDelegate.swift */; };
-		A57EFEA71E3E06D300B66701 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57EFEA61E3E06D300B66701 /* BaseViewController.swift */; };
 		A57EFEAC1E3E06D300B66701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAB1E3E06D300B66701 /* Assets.xcassets */; };
 		A57EFEAF1E3E06D300B66701 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */; };
-		A5D88FA61E46251D0099DFA3 /* BaseViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FA51E46251D0099DFA3 /* BaseViewControllerViewModel.swift */; };
-		A5D88FA81E4632100099DFA3 /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FA71E4632100099DFA3 /* EGWebView.swift */; };
+		A5D88FAE1E4F1E5D0099DFA3 /* EGlogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FAD1E4F1E5D0099DFA3 /* EGlogger.swift */; };
+		A5D88FB01E4F1E9A0099DFA3 /* invalid.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FAF1E4F1E9A0099DFA3 /* invalid.html */; };
+		A5D88FB21E4F1EA40099DFA3 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FB11E4F1EA40099DFA3 /* dns.html */; };
+		A5D88FB41E4F1EB00099DFA3 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FB31E4F1EB00099DFA3 /* authorize.html */; };
+		A5D88FB61E4F1ED70099DFA3 /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FB51E4F1ED70099DFA3 /* AppDataManager.swift */; };
+		A5D88FB81E4F1EE30099DFA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FB71E4F1EE30099DFA3 /* AppDelegate.swift */; };
+		A5D88FBA1E4F1EED0099DFA3 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FB91E4F1EED0099DFA3 /* BaseView.swift */; };
+		A5D88FBC1E4F1EF50099DFA3 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FBB1E4F1EF50099DFA3 /* BaseViewModel.swift */; };
+		A5D88FBE1E4F1F050099DFA3 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FBD1E4F1F050099DFA3 /* EGApplication.swift */; };
+		A5D88FC01E4F1F130099DFA3 /* DeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FBF1E4F1F130099DFA3 /* DeviceDataManager.swift */; };
+		A5D88FC21E4F1F1E0099DFA3 /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FC11E4F1F1E0099DFA3 /* EGProgressBar.swift */; };
+		A5D88FC41E4F1F2F0099DFA3 /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FC31E4F1F2F0099DFA3 /* EGWebView.swift */; };
+		A5D88FC61E4F1F3D0099DFA3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FC51E4F1F3D0099DFA3 /* BaseViewController.swift */; };
+		A5D88FC81E4F1FFE0099DFA3 /* UIColor+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FC71E4F1FFE0099DFA3 /* UIColor+Extend.swift */; };
+		A5D88FCA1E4F20050099DFA3 /* timeout.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FC91E4F20050099DFA3 /* timeout.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.release.xcconfig"; sourceTree = "<group>"; };
-		A54251F21E45F26D0037AED1 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
-		A54251F41E45F27F0037AED1 /* EGlogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGlogger.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Eiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eiger.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A57EFEA41E3E06D300B66701 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A57EFEA61E3E06D300B66701 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A57EFEAB1E3E06D300B66701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A57EFEAE1E3E06D300B66701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A57EFEB01E3E06D300B66701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5D88FA51E46251D0099DFA3 /* BaseViewControllerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewControllerViewModel.swift; sourceTree = "<group>"; };
-		A5D88FA71E4632100099DFA3 /* EGWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGWebView.swift; sourceTree = "<group>"; };
+		A5D88FAC1E4F1E5C0099DFA3 /* Eiger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Eiger-Bridging-Header.h"; sourceTree = "<group>"; };
+		A5D88FAD1E4F1E5D0099DFA3 /* EGlogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGlogger.swift; sourceTree = "<group>"; };
+		A5D88FAF1E4F1E9A0099DFA3 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
+		A5D88FB11E4F1EA40099DFA3 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
+		A5D88FB31E4F1EB00099DFA3 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
+		A5D88FB51E4F1ED70099DFA3 /* AppDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
+		A5D88FB71E4F1EE30099DFA3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A5D88FB91E4F1EED0099DFA3 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		A5D88FBB1E4F1EF50099DFA3 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		A5D88FBD1E4F1F050099DFA3 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
+		A5D88FBF1E4F1F130099DFA3 /* DeviceDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDataManager.swift; sourceTree = "<group>"; };
+		A5D88FC11E4F1F1E0099DFA3 /* EGProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGProgressBar.swift; sourceTree = "<group>"; };
+		A5D88FC31E4F1F2F0099DFA3 /* EGWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGWebView.swift; sourceTree = "<group>"; };
+		A5D88FC51E4F1F3D0099DFA3 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		A5D88FC71E4F1FFE0099DFA3 /* UIColor+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extend.swift"; sourceTree = "<group>"; };
+		A5D88FC91E4F20050099DFA3 /* timeout.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = timeout.html; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,32 +103,38 @@
 		A57EFEA31E3E06D300B66701 /* Eiger */ = {
 			isa = PBXGroup;
 			children = (
+				A5D88FAA1E4F1D660099DFA3 /* Resources */,
+				A5D88FA91E4F1D280099DFA3 /* CommonData */,
 				A5D88FA41E46100C0099DFA3 /* Controllers */,
 				A5D88FA31E460FF40099DFA3 /* ViewModels */,
 				A5D88FA21E460FED0099DFA3 /* Models */,
 				A5D88FA11E460FE70099DFA3 /* Views */,
-				A5D88FA01E460FE00099DFA3 /* Commons */,
-				A57EFEA41E3E06D300B66701 /* AppDelegate.swift */,
+				A5D88FA01E460FE00099DFA3 /* CommonsUtil */,
 				A57EFEAB1E3E06D300B66701 /* Assets.xcassets */,
+				A5D88FBD1E4F1F050099DFA3 /* EGApplication.swift */,
+				A5D88FB71E4F1EE30099DFA3 /* AppDelegate.swift */,
 				A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */,
 				A57EFEB01E3E06D300B66701 /* Info.plist */,
 			);
 			path = Eiger;
 			sourceTree = "<group>";
 		};
-		A5D88FA01E460FE00099DFA3 /* Commons */ = {
+		A5D88FA01E460FE00099DFA3 /* CommonsUtil */ = {
 			isa = PBXGroup;
 			children = (
-				A54251F21E45F26D0037AED1 /* EGApplication.swift */,
-				A54251F41E45F27F0037AED1 /* EGlogger.swift */,
+				A5D88FC71E4F1FFE0099DFA3 /* UIColor+Extend.swift */,
+				A5D88FAD1E4F1E5D0099DFA3 /* EGlogger.swift */,
+				A5D88FAC1E4F1E5C0099DFA3 /* Eiger-Bridging-Header.h */,
 			);
-			name = Commons;
+			name = CommonsUtil;
 			sourceTree = "<group>";
 		};
 		A5D88FA11E460FE70099DFA3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A5D88FA71E4632100099DFA3 /* EGWebView.swift */,
+				A5D88FB91E4F1EED0099DFA3 /* BaseView.swift */,
+				A5D88FC11E4F1F1E0099DFA3 /* EGProgressBar.swift */,
+				A5D88FC31E4F1F2F0099DFA3 /* EGWebView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -124,7 +149,7 @@
 		A5D88FA31E460FF40099DFA3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				A5D88FA51E46251D0099DFA3 /* BaseViewControllerViewModel.swift */,
+				A5D88FBB1E4F1EF50099DFA3 /* BaseViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -132,9 +157,37 @@
 		A5D88FA41E46100C0099DFA3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A57EFEA61E3E06D300B66701 /* BaseViewController.swift */,
+				A5D88FC51E4F1F3D0099DFA3 /* BaseViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A5D88FA91E4F1D280099DFA3 /* CommonData */ = {
+			isa = PBXGroup;
+			children = (
+				A5D88FBF1E4F1F130099DFA3 /* DeviceDataManager.swift */,
+				A5D88FB51E4F1ED70099DFA3 /* AppDataManager.swift */,
+			);
+			name = CommonData;
+			sourceTree = "<group>";
+		};
+		A5D88FAA1E4F1D660099DFA3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A5D88FAB1E4F1D8D0099DFA3 /* www */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A5D88FAB1E4F1D8D0099DFA3 /* www */ = {
+			isa = PBXGroup;
+			children = (
+				A5D88FC91E4F20050099DFA3 /* timeout.html */,
+				A5D88FB31E4F1EB00099DFA3 /* authorize.html */,
+				A5D88FB11E4F1EA40099DFA3 /* dns.html */,
+				A5D88FAF1E4F1E9A0099DFA3 /* invalid.html */,
+			);
+			name = www;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +226,7 @@
 					A57EFEA01E3E06D300B66701 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = NBF83W557A;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -200,8 +254,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5D88FCA1E4F20050099DFA3 /* timeout.html in Resources */,
+				A5D88FB21E4F1EA40099DFA3 /* dns.html in Resources */,
 				A57EFEAF1E3E06D300B66701 /* LaunchScreen.storyboard in Resources */,
 				A57EFEAC1E3E06D300B66701 /* Assets.xcassets in Resources */,
+				A5D88FB01E4F1E9A0099DFA3 /* invalid.html in Resources */,
+				A5D88FB41E4F1EB00099DFA3 /* authorize.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,12 +318,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A57EFEA71E3E06D300B66701 /* BaseViewController.swift in Sources */,
-				A54251F51E45F27F0037AED1 /* EGlogger.swift in Sources */,
-				A57EFEA51E3E06D300B66701 /* AppDelegate.swift in Sources */,
-				A5D88FA61E46251D0099DFA3 /* BaseViewControllerViewModel.swift in Sources */,
-				A54251F31E45F26E0037AED1 /* EGApplication.swift in Sources */,
-				A5D88FA81E4632100099DFA3 /* EGWebView.swift in Sources */,
+				A5D88FB81E4F1EE30099DFA3 /* AppDelegate.swift in Sources */,
+				A5D88FBC1E4F1EF50099DFA3 /* BaseViewModel.swift in Sources */,
+				A5D88FC01E4F1F130099DFA3 /* DeviceDataManager.swift in Sources */,
+				A5D88FBE1E4F1F050099DFA3 /* EGApplication.swift in Sources */,
+				A5D88FC21E4F1F1E0099DFA3 /* EGProgressBar.swift in Sources */,
+				A5D88FC61E4F1F3D0099DFA3 /* BaseViewController.swift in Sources */,
+				A5D88FAE1E4F1E5D0099DFA3 /* EGlogger.swift in Sources */,
+				A5D88FB61E4F1ED70099DFA3 /* AppDataManager.swift in Sources */,
+				A5D88FBA1E4F1EED0099DFA3 /* BaseView.swift in Sources */,
+				A5D88FC81E4F1FFE0099DFA3 /* UIColor+Extend.swift in Sources */,
+				A5D88FC41E4F1F2F0099DFA3 /* EGWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,11 +445,14 @@
 			baseConfigurationReference = F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NBF83W557A;
 				INFOPLIST_FILE = Eiger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.Eiger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Eiger/Eiger-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
@@ -396,11 +462,13 @@
 			baseConfigurationReference = 1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NBF83W557A;
 				INFOPLIST_FILE = Eiger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.Eiger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Eiger/Eiger-Bridging-Header.h";
 				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;

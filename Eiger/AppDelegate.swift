@@ -16,11 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // ユーザーデフォルト初期値設定
+        AppDataManager.shared.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         let baseVC = BaseViewController()
         self.window!.rootViewController = baseVC
-        self.window!.backgroundColor = UIColor.white
+        self.window!.backgroundColor = UIColor.frenchBlue
         self.window!.makeKeyAndVisible()
         return true
     }
