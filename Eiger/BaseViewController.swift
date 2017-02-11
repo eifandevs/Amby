@@ -14,11 +14,30 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationWillResignActive),
+            name: NSNotification.Name("UIApplicationWillResignActiveNotification"),
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationDidBecomeActive),
+            name: NSNotification.Name("UIApplicationDidBecomeActiveNotification"),
+            object: nil
+        )
         view = baseView
     }
 
+    func applicationWillResignActive() {
+        log.debug("store history")
+        baseView.storeHistory()
+    }
+    
+    func applicationDidBecomeActive() {
+        baseView.initializeProgress()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         baseView.stopProgressObserving()

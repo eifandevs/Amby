@@ -108,8 +108,14 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             _webView.removeObserver(self, forKeyPath: "loading")
         }
         if let _progressBar = progressBar {
-            _progressBar.initializeProgress()
+            _progressBar.removeProgress()
             progressBar = nil
+        }
+    }
+    
+    func initializeProgress() {
+        if let _progressBar = progressBar {
+            _progressBar.initializeProgress()
         }
     }
     

@@ -28,9 +28,13 @@ class EGProgressBar: YLProgressBar {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func removeProgress() {
+        initializeProgress()
+        removeFromSuperview()
+    }
+
     func initializeProgress() {
         self.setProgress(0, animated: false)
         self.progress = 0
-        removeFromSuperview()
     }
 }
