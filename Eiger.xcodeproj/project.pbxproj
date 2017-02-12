@@ -10,6 +10,8 @@
 		8378C8F6D4B063605AA2555B /* Pods_Eiger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */; };
 		A57EFEAC1E3E06D300B66701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAB1E3E06D300B66701 /* Assets.xcassets */; };
 		A57EFEAF1E3E06D300B66701 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */; };
+		A5CB30231E50975800A59A82 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB30221E50975700A59A82 /* HistoryModel.swift */; };
+		A5CB30261E5099C400A59A82 /* ModelBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB30251E5099C400A59A82 /* ModelBase.swift */; };
 		A5D88FB01E4F1E9A0099DFA3 /* invalid.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FAF1E4F1E9A0099DFA3 /* invalid.html */; };
 		A5D88FB21E4F1EA40099DFA3 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FB11E4F1EA40099DFA3 /* dns.html */; };
 		A5D88FB41E4F1EB00099DFA3 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FB31E4F1EB00099DFA3 /* authorize.html */; };
@@ -33,6 +35,8 @@
 		A57EFEAB1E3E06D300B66701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A57EFEAE1E3E06D300B66701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A57EFEB01E3E06D300B66701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5CB30221E50975700A59A82 /* HistoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
+		A5CB30251E5099C400A59A82 /* ModelBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelBase.swift; sourceTree = "<group>"; };
 		A5D88FAC1E4F1E5C0099DFA3 /* Eiger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Eiger-Bridging-Header.h"; sourceTree = "<group>"; };
 		A5D88FAF1E4F1E9A0099DFA3 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
 		A5D88FB11E4F1EA40099DFA3 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 				A5D88FA11E460FE70099DFA3 /* Views */,
 				A5D88FA01E460FE00099DFA3 /* CommonUtil */,
 				A57EFEAB1E3E06D300B66701 /* Assets.xcassets */,
+				A5D88FAC1E4F1E5C0099DFA3 /* Eiger-Bridging-Header.h */,
 				A5D88FBD1E4F1F050099DFA3 /* EGApplication.swift */,
 				A5D88FB71E4F1EE30099DFA3 /* AppDelegate.swift */,
 				A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */,
@@ -119,11 +124,18 @@
 			path = Eiger;
 			sourceTree = "<group>";
 		};
+		A5CB30241E50994500A59A82 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				A5D88FCB1E4F60260099DFA3 /* History.swift */,
+			);
+			name = DB;
+			sourceTree = "<group>";
+		};
 		A5D88FA01E460FE00099DFA3 /* CommonUtil */ = {
 			isa = PBXGroup;
 			children = (
 				A5D88FC71E4F1FFE0099DFA3 /* UIColor+Extend.swift */,
-				A5D88FAC1E4F1E5C0099DFA3 /* Eiger-Bridging-Header.h */,
 			);
 			name = CommonUtil;
 			sourceTree = "<group>";
@@ -141,7 +153,9 @@
 		A5D88FA21E460FED0099DFA3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A5D88FCB1E4F60260099DFA3 /* History.swift */,
+				A5CB30241E50994500A59A82 /* DB */,
+				A5CB30221E50975700A59A82 /* HistoryModel.swift */,
+				A5CB30251E5099C400A59A82 /* ModelBase.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -318,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5CB30261E5099C400A59A82 /* ModelBase.swift in Sources */,
 				A5D88FB81E4F1EE30099DFA3 /* AppDelegate.swift in Sources */,
 				A5D88FBC1E4F1EF50099DFA3 /* BaseViewModel.swift in Sources */,
 				A5D88FC01E4F1F130099DFA3 /* DeviceDataManager.swift in Sources */,
@@ -326,6 +341,7 @@
 				A5D88FC61E4F1F3D0099DFA3 /* BaseViewController.swift in Sources */,
 				A5D88FCC1E4F60260099DFA3 /* History.swift in Sources */,
 				A5D88FB61E4F1ED70099DFA3 /* AppDataManager.swift in Sources */,
+				A5CB30231E50975800A59A82 /* HistoryModel.swift in Sources */,
 				A5D88FBA1E4F1EED0099DFA3 /* BaseView.swift in Sources */,
 				A5D88FC81E4F1FFE0099DFA3 /* UIColor+Extend.swift in Sources */,
 				A5D88FC41E4F1F2F0099DFA3 /* EGWebView.swift in Sources */,

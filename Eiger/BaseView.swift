@@ -94,7 +94,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             if webView.isLoading == true {
                 progressBar.setProgress(0.1, animated: true)
             } else {
-                saveHistory()
+                viewModel.saveHistory(webView: webView)
                 progressBar.setProgress(0.0, animated: false)
             }
         }
@@ -120,14 +120,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     func storeHistory() {
-        log.debug("store history")
+        viewModel.storeHistory()
     }
     
 // MARK: Private Method
-    private func saveHistory() {
-        log.debug("save history")
-    }
-    
     private func startProgressObserving() {
         log.debug("start progress observe")
         progressBar = EGProgressBar()

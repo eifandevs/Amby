@@ -13,7 +13,7 @@ class History: Object {
     dynamic var id: String = NSUUID().uuidString
     dynamic var title: String = ""
     dynamic var url: String = ""
-    dynamic var date: NSDate = NSDate()
+    dynamic var date: Date = Date()
     
     override static func primaryKey() -> String? {
         return "id"

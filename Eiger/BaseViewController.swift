@@ -30,7 +30,6 @@ class BaseViewController: UIViewController {
     }
 
     func applicationWillResignActive() {
-        log.debug("store history")
         baseView.storeHistory()
     }
     

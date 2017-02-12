@@ -17,7 +17,7 @@ class EGWebView: WKWebView {
         case UNAUTHORIZED
     }
     
-    var previousUrl: String? = nil
+    var previousUrl: URL? = nil
     
     init(pool: WKProcessPool) {
         let configuration = WKWebViewConfiguration()
