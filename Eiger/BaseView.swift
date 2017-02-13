@@ -28,25 +28,49 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         
         
         /* テストコード */
-//        do {
-//            let button = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 50), size: CGSize(width: 50, height: 50)))
-//            button.backgroundColor = UIColor.red
-//            _ = button.reactive.tap
-//                .observe { _ in
-//                    print("Button tapped.")
-//            }
-//            addSubview(button)
-//        }
-//        
-//        do {
-//            let button = UIButton(frame: CGRect(origin: CGPoint(x: 100, y: 50), size: CGSize(width: 50, height: 50)))
-//            button.backgroundColor = UIColor.red
-//            _ = button.reactive.tap
-//                .observe { _ in
-//                    print("Button tapped.")
-//            }
-//            addSubview(button)
-//        }
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 200), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("戻る(ページ)", for: .normal)
+            _ = button.reactive.tap
+                .observe { _ in
+                    log.debug("Button tapped.")
+            }
+            addSubview(button)
+        }
+        
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 280), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("戻る(wv)", for: .normal)
+            _ = button.reactive.tap
+                .observe { _ in
+                    log.debug("Button tapped.")
+            }
+            addSubview(button)
+        }
+
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 200, y: 200), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("進む(ページ)", for: .normal)
+            _ = button.reactive.tap
+                .observe { _ in
+                    log.debug("Button tapped.")
+            }
+            addSubview(button)
+        }
+        
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 200, y: 280), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("進む(wv)", for: .normal)
+            _ = button.reactive.tap
+                .observe { _ in
+                    log.debug("Button tapped.")
+            }
+            addSubview(button)
+        }
         /*-----------*/
         
         // プログレスバー
@@ -94,7 +118,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             if webView.isLoading == true {
                 progressBar.setProgress(0.1, animated: true)
             } else {
-                viewModel.saveHistory(webView: webView)
+                viewModel.saveCommonHistory(webView: webView)
                 progressBar.setProgress(0.0, animated: false)
             }
         }
@@ -120,7 +144,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     func storeHistory() {
-        viewModel.storeHistory()
+        viewModel.storeCommonHistory()
+        viewModel.storeEachHistory()
     }
     
 // MARK: Private Method

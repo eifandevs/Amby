@@ -9,8 +9,17 @@
 import Foundation
 
 class BaseViewModel {
-    private var history: [History] = []
+    
     private let historyModel = HistoryModel()
+
+    // 現在表示しているwebviewのインデックス
+    private var locationIndex = 0
+    
+    // 全てのwebViewの履歴
+    private var commonHistory: [History] = []
+    
+    // webViewそれぞれの履歴とカレントページインデックス
+    var eachHistory: [[String: Any]] = [["history": [], "current": 0]]
     
     var defaultUrl: String {
         get {
@@ -20,35 +29,63 @@ class BaseViewModel {
             UserDefaults.standard.set(url, forKey: AppDataManager.shared.defaultUrlKey)
         }
     }
-    var historySavableTerm: Int {
+    
+    private var historySavableTerm: Int {
         get {
             return UserDefaults.standard.integer(forKey: AppDataManager.shared.historySavableTermKey)
         }
     }
     
-    func saveHistory(webView: EGWebView) {
+    private var currentHistoryInfo: [String: Any] {
+        get {
+            return eachHistory[locationIndex]
+        }
+    }
+    
+    init() {
+        // historyInfo読み込み
+        do {
+            let data = try Data(contentsOf: AppDataManager.shared.historyPath)
+            eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [[String: Any]]
+            log.debug("history info read: \n\(eachHistory)")
+        } catch let error as NSError {
+            log.error("failed to read: \(error)")
+        }
+    }
+    
+    func saveCommonHistory(webView: EGWebView) {
         if (hasValidUrl(webView: webView)) {
             let h = History()
             h.title = webView.title!
             h.url = (webView.url?.absoluteString.removingPercentEncoding)!
             h.date = Date()
             
-            history.append(h)
+            commonHistory.append(h)
             log.debug("save history. url: \(h.url)")
         }
         webView.previousUrl = webView.url
     }
     
-    func storeHistory() {
-        if history.count > 0 {
+    func storeCommonHistory() {
+        if commonHistory.count > 0 {
             let savingTerm = Date(timeIntervalSinceNow: -1 * Double(historySavableTerm) * 24 * 60 * 60)
             let deleteHistory = historyModel.select().filter({ $0.date < savingTerm })
             if deleteHistory.count > 0 {
                 historyModel.deleteWithRLMObjects(data: deleteHistory)
             }
-            historyModel.insertWithRLMObjects(data: history)
+            historyModel.insertWithRLMObjects(data: commonHistory)
             log.debug("store history. all history: \(historyModel.select())")
-            history = []
+            commonHistory = []
+        }
+    }
+    
+    func storeEachHistory() {
+        // hisotryInfo書き込み
+        let historyInfoData =  NSKeyedArchiver.archivedData(withRootObject: eachHistory)
+        do {
+            try historyInfoData.write(to: AppDataManager.shared.historyPath)
+        } catch let error as NSError {
+            log.error("failed to write: \(error)")
         }
     }
     

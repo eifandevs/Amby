@@ -12,7 +12,7 @@ class AppDataManager {
     static let shared: AppDataManager = AppDataManager()
     let defaultUrlKey = "default-url"
     let historySavableTermKey = "history-savebla-term"
-    
+    let historyPath = URL(fileURLWithPath: DeviceDataManager.shared.documentsDir + "/tab_history.dat")
     private init() {
         
     }

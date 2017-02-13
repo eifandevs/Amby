@@ -18,6 +18,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // ログ設定
+        // SwiftyBeaver
+        let console = ConsoleDestination()  // log to Xcode Console
+        let file = FileDestination()  // log to default swiftybeaver.log file
+        
+        #if DEBUG
+            console.minLevel = log.Level.verbose
+            file.minLevel = log.Level.verbose
+        #else
+            console.minLevel = log.Level.error
+            file.minLevel = log.Level.error
+        #endif
+        
+        console.format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
+        
+        log.addDestination(console)
+        log.addDestination(file)
+        
         // ユーザーデフォルト初期値設定
         AppDataManager.shared.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -26,23 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.rootViewController = baseVC
         self.window!.backgroundColor = UIColor.frenchBlue
         self.window!.makeKeyAndVisible()
-        
-        // SwiftyBeaver
-        let console = ConsoleDestination()  // log to Xcode Console
-        let file = FileDestination()  // log to default swiftybeaver.log file
-        
-#if DEBUG
-        console.minLevel = log.Level.verbose
-        file.minLevel = log.Level.verbose
-#else
-        console.minLevel = log.Level.error
-        file.minLevel = log.Level.error
-#endif
-
-        console.format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
-        
-        log.addDestination(console)
-        log.addDestination(file)
         
         return true
     }
