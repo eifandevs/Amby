@@ -9,23 +9,25 @@
 import Foundation
 import YLProgressBar
 
-class EGProgressBar: YLProgressBar {
+class EGProgressBar: UIView {
+    var progress: CGFloat = 0
+    private let bar: UIView = UIView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.type = YLProgressBarType.flat
-        self.setProgress(0, animated: false)
-        self.progress = 0
-        self.progressTintColors = [UIColor.orange, UIColor.blazingYellow]
-        self.hideStripes = true
-        self.hideGloss = true
-        self.hideTrack = true
-        self.progressStretch = false
-        self.backgroundColor = UIColor.clear
-        self.trackTintColor = UIColor.clear
+        backgroundColor = UIColor.lightGray
+        bar.backgroundColor = UIColor.red
+        addSubview(bar)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        // widthはsetProgressで決定する
+        bar.frame.origin = CGPoint.zero
+        bar.frame.size.height = frame.size.height
     }
     
     func removeProgress() {
@@ -33,6 +35,12 @@ class EGProgressBar: YLProgressBar {
         removeFromSuperview()
     }
 
+    func setProgress(_ progress: CGFloat, animated: Bool) {
+        log.debug("set progress. progress: \(frame.size.width * progress)")
+        bar.frame.size.width = frame.size.width * progress
+//        frame.size.width = width * progress
+    }
+    
     func initializeProgress() {
         self.setProgress(0, animated: false)
         self.progress = 0

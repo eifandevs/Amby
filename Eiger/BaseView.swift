@@ -188,7 +188,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 progressBar.setProgress(0.1, animated: true)
             } else {
                 viewModel.saveCommonHistory(webView: wv)
-                progressBar.setProgress(0.0, animated: false)
+                progressBar.setProgress(1.0, animated: false)
             }
         }
     }
