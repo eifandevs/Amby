@@ -140,6 +140,29 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
     }
 
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        log.debug("[request url]\(navigationAction.request.url)")
+
+        // TODO: 自動スクロール実装
+//        if autoScrollTimer?.valid == true {
+//            autoScrollTimer?.invalidate()
+//            autoScrollTimer = nil
+//        }
+
+        guard let url = navigationAction.request.url else {
+            decisionHandler(.cancel)
+            return
+        }
+        
+        if ((url.absoluteString.range(of: "//itunes.apple.com/") != nil) ||
+            (!url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") && !url.absoluteString.hasPrefix("file://"))) {
+            UIApplication.shared.openURL(url)
+            decisionHandler(.cancel)
+            return
+        }
+        decisionHandler(.allow)
+    }
+
 // MARK: KVO(Progress)
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
