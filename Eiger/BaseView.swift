@@ -25,10 +25,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         // TODO: 最初に表示するWebViewを決定する
         wv = createWebView()
         
+        addSubview(wv)
+        
         // プログレスバー
         startProgressObserving()
-        
-        addSubview(wv)
         
         
         /* テストコード */
