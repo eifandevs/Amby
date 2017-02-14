@@ -51,7 +51,7 @@ class EGWebView: WKWebView {
                ((urlStr.hasPrefix("http://") == true) || (urlStr.hasPrefix("https://") == true))
     }
     
-    private func loadHtml(code: NETWORK_ERROR) {
+    func loadHtml(code: NETWORK_ERROR) {
         let path: String = { _ in
             if code == NETWORK_ERROR.TIMEOUT { return Bundle.main.path(forResource: "timeout", ofType: "html")! }
             if code == NETWORK_ERROR.DNS_NOT_FOUND { return Bundle.main.path(forResource: "dns", ofType: "html")! }

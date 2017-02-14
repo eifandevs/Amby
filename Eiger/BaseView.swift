@@ -109,6 +109,37 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         wv.loadHtml(error: (error as NSError))
     }
     
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            // SSL認証
+            let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+            completionHandler(URLSession.AuthChallengeDisposition.useCredential, credential);
+        } else if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodHTTPBasic {
+            // Basic認証
+            let alertController = UIAlertController(title: "Authentication Required", message: webView.url!.host, preferredStyle: .alert)
+            weak var usernameTextField: UITextField!
+            alertController.addTextField { textField in
+                textField.placeholder = "Username"
+                usernameTextField = textField
+            }
+            weak var passwordTextField: UITextField!
+            alertController.addTextField { textField in
+                textField.placeholder = "Password"
+                textField.isSecureTextEntry = true
+                passwordTextField = textField
+            }
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] action in
+                completionHandler(.cancelAuthenticationChallenge, nil)
+                self!.wv.loadHtml(code: .UNAUTHORIZED)
+            }))
+            alertController.addAction(UIAlertAction(title: "Log In", style: .default, handler: { action in
+                let credential = URLCredential(user: usernameTextField.text!, password: passwordTextField.text!, persistence: URLCredential.Persistence.forSession)
+                completionHandler(.useCredential, credential)
+            }))
+            Util.shared.foregroundViewController().present(alertController, animated: true, completion: nil)
+        }
+    }
+
 // MARK: KVO(Progress)
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
