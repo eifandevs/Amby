@@ -13,6 +13,7 @@ target 'Eiger' do
   pod 'SwiftyBeaver', '~> 1.1'
   pod 'TextFieldEffects', '1.3.0'
   pod 'SVProgressHUD', '2.1.2'
+  pod "SpringIndicator", '1.4.1'
   pod 'YLProgressBar', '3.10.1'
   pod 'RealmSwift', '~> 2.4'
 end

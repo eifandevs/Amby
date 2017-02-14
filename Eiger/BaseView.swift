@@ -81,6 +81,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         _ = wv.load(urlStr: viewModel.defaultUrl)
     }
     
+    deinit {
+        wv.removeObserver(self, forKeyPath: "estimatedProgress")
+        wv.removeObserver(self, forKeyPath: "loading")
+    }
+    
     override func layoutSubviews() {
         wv.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         progressBar.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: 3)
