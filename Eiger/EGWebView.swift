@@ -42,7 +42,7 @@ class EGWebView: WKWebView {
             super.load(URLRequest(url: url))
             return true
         }
-        loadErrorHtml(code: NETWORK_ERROR.INVALID_URL)
+        loadHtml(code: NETWORK_ERROR.INVALID_URL)
         return false
     }
     
@@ -51,7 +51,7 @@ class EGWebView: WKWebView {
                ((urlStr.hasPrefix("http://") == true) || (urlStr.hasPrefix("https://") == true))
     }
     
-    private func loadErrorHtml(code: NETWORK_ERROR) {
+    private func loadHtml(code: NETWORK_ERROR) {
         let path: String = { _ in
             if code == NETWORK_ERROR.TIMEOUT { return Bundle.main.path(forResource: "timeout", ofType: "html")! }
             if code == NETWORK_ERROR.DNS_NOT_FOUND { return Bundle.main.path(forResource: "dns", ofType: "html")! }
@@ -60,6 +60,20 @@ class EGWebView: WKWebView {
         }()
             
         super.loadFileURL(URL(string: path)!, allowingReadAccessTo: URL(string: path)!)
+    }
+    
+    func loadHtml(error: NSError) {
+        let errorType = { () -> EGWebView.NETWORK_ERROR in
+            switch error.code {
+            case -1003:
+                return NETWORK_ERROR.DNS_NOT_FOUND
+            case -1001:
+                return NETWORK_ERROR.TIMEOUT
+            default:
+                return NETWORK_ERROR.INVALID_URL
+            }
+        }()
+        loadHtml(code: errorType)
     }
     
     required init?(coder: NSCoder) {

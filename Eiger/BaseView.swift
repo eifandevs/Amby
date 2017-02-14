@@ -13,7 +13,7 @@ import Bond
 
 class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDelegate, WKUIDelegate, EGApplicationDelegate {
     
-    private var webView: EGWebView! = nil
+    private var wv: EGWebView! = nil
     private var progressBar: EGProgressBar! = nil
     private let viewModel = BaseViewModel()
     private var processPool = WKProcessPool()
@@ -23,8 +23,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         EGApplication.sharedMyApplication.egDelegate = self
         
         // TODO: 最初に表示するWebViewを決定する
-        webView = createWebView()
-        addSubview(webView)
+        wv = createWebView()
+        
+        // プログレスバー
+        startProgressObserving()
+        
+        addSubview(wv)
         
         
         /* テストコード */
@@ -72,16 +76,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             addSubview(button)
         }
         /*-----------*/
-        
-        // プログレスバー
-        startProgressObserving()
 
         // ロード
-        _ = webView.load(urlStr: viewModel.defaultUrl)
+        _ = wv.load(urlStr: viewModel.defaultUrl)
     }
     
     override func layoutSubviews() {
-        webView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
+        wv.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         progressBar.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: 3)
     }
     
@@ -105,20 +106,21 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 // MARK: WebView Delegate
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         progressBar.setProgress(0.0, animated: false)
+        wv.loadHtml(error: (error as NSError))
     }
     
 // MARK: KVO(Progress)
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             //estimatedProgressが変更されたときに、setProgressを使ってプログレスバーの値を変更する。
-            progressBar.setProgress(CGFloat(webView.estimatedProgress), animated: true)
+            progressBar.setProgress(CGFloat(wv.estimatedProgress), animated: true)
         } else if keyPath == "loading" {
             //インジゲーターの表示、非表示をきりかえる。
-            UIApplication.shared.isNetworkActivityIndicatorVisible = webView.isLoading
-            if webView.isLoading == true {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
+            if wv.isLoading == true {
                 progressBar.setProgress(0.1, animated: true)
             } else {
-                viewModel.saveCommonHistory(webView: webView)
+                viewModel.saveCommonHistory(webView: wv)
                 progressBar.setProgress(0.0, animated: false)
             }
         }
@@ -127,7 +129,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 // MARK: Public Method
     func stopProgressObserving() {
         log.debug("stop progress observe")
-        if let _webView = webView {
+        if let _webView = wv {
             _webView.removeObserver(self, forKeyPath: "estimatedProgress")
             _webView.removeObserver(self, forKeyPath: "loading")
         }
@@ -154,13 +156,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         progressBar = EGProgressBar()
         
         //読み込み状態が変更されたことを取得
-        webView.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
+        wv.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
         //プログレスが変更されたことを取得
-        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-        if webView.isLoading == true {
-            progressBar.setProgress(CGFloat(webView.estimatedProgress), animated: true)
+        wv.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        if wv.isLoading == true {
+            progressBar.setProgress(CGFloat(wv.estimatedProgress), animated: true)
         }
-        UIApplication.shared.isNetworkActivityIndicatorVisible = webView.isLoading
+        UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
         // プルダウンリフレッシュ
         //        if refreshControl != nil {
         //            refreshControl.removeFromSuperview()
