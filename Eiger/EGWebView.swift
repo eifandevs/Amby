@@ -18,6 +18,7 @@ class EGWebView: WKWebView {
     }
     
     var previousUrl: URL? = nil
+    private let refreshControl = UIRefreshControl()
     
     init(pool: WKProcessPool) {
         let configuration = WKWebViewConfiguration()
@@ -28,6 +29,18 @@ class EGWebView: WKWebView {
         super.init(frame: CGRect.zero, configuration: configuration)
         isOpaque = true
         allowsLinkPreview = true
+        
+        // プルダウンリフレッシュ
+        refreshControl.addTarget(self, action: #selector(EGWebView.onRefresh), for: .valueChanged)
+        scrollView.addSubview(refreshControl)
+        
+    }
+    
+    func onRefresh() {
+        reload()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.05) {
+            self.refreshControl.endRefreshing()
+        }
     }
     
     func load(urlStr: String) -> Bool {
@@ -59,7 +72,7 @@ class EGWebView: WKWebView {
             return Bundle.main.path(forResource: "invalid", ofType: "html")!
         }()
             
-        super.loadFileURL(URL(string: path)!, allowingReadAccessTo: URL(string: path)!)
+        super.loadFileURL(URL(fileURLWithPath: path), allowingReadAccessTo: URL(fileURLWithPath: path))
     }
     
     func loadHtml(error: NSError) {

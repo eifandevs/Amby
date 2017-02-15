@@ -37,7 +37,6 @@ class EGProgressBar: UIView {
     }
 
     func setProgress(_ progress: CGFloat) {
-        log.debug("set progress. progress: \(frame.size.width * progress)")
         
         if progress > 0 {
             alpha = 1
