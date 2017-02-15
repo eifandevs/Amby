@@ -6,6 +6,8 @@
 	<dict>
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 	</dict>
 	<key>NSPrincipalClass</key>
 	<string>EGApplication</string>
