@@ -110,7 +110,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
 // MARK: WebView Delegate
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        progressBar.setProgress(0.0, animated: false)
+        progressBar.initializeProgress()
         wv.loadHtml(error: (error as NSError))
     }
     
@@ -180,15 +180,15 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             //estimatedProgressが変更されたときに、setProgressを使ってプログレスバーの値を変更する。
-            progressBar.setProgress(CGFloat(wv.estimatedProgress), animated: true)
+            progressBar.setProgress(CGFloat(wv.estimatedProgress))
         } else if keyPath == "loading" {
             //インジゲーターの表示、非表示をきりかえる。
             UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
             if wv.isLoading == true {
-                progressBar.setProgress(0.1, animated: true)
+                progressBar.setProgress(0.1)
             } else {
                 viewModel.saveCommonHistory(webView: wv)
-                progressBar.setProgress(1.0, animated: false)
+                progressBar.setProgress(1.0)
             }
         }
     }
@@ -227,7 +227,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         //プログレスが変更されたことを取得
         wv.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         if wv.isLoading == true {
-            progressBar.setProgress(CGFloat(wv.estimatedProgress), animated: true)
+            progressBar.setProgress(CGFloat(wv.estimatedProgress))
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
         // プルダウンリフレッシュ

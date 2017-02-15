@@ -8,15 +8,16 @@
 
 import Foundation
 import YLProgressBar
+import Bond
 
 class EGProgressBar: UIView {
-    var progress: CGFloat = 0
     private let bar: UIView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.lightGray
         bar.backgroundColor = UIColor.red
+        
         addSubview(bar)
     }
     
@@ -35,14 +36,30 @@ class EGProgressBar: UIView {
         removeFromSuperview()
     }
 
-    func setProgress(_ progress: CGFloat, animated: Bool) {
+    func setProgress(_ progress: CGFloat) {
         log.debug("set progress. progress: \(frame.size.width * progress)")
-        bar.frame.size.width = frame.size.width * progress
-//        frame.size.width = width * progress
+        
+        if progress > 0 {
+            alpha = 1
+        }
+        
+        layer.removeAllAnimations()
+        UIView.animate(withDuration: 0.22, animations: {
+            self.bar.frame.size.width = self.frame.size.width * progress
+        }) { _ in
+            if self.bar.frame.size.width == self.frame.size.width {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.alpha = 0
+                }) { _ in
+                    self.bar.frame.size.width = 0
+                }
+            }
+        }
+        
     }
     
     func initializeProgress() {
-        self.setProgress(0, animated: false)
-        self.progress = 0
+        bar.frame.size.width = 0
+        self.alpha = 0
     }
 }
