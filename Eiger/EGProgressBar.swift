@@ -43,11 +43,11 @@ class EGProgressBar: UIView {
         }
         
         layer.removeAllAnimations()
-        UIView.animate(withDuration: 0.22, animations: {
+        UIView.animate(withDuration: 0.4, animations: {
             self.bar.frame.size.width = self.frame.size.width * progress
         }) { _ in
             if self.bar.frame.size.width == self.frame.size.width {
-                UIView.animate(withDuration: 0.3, animations: {
+                UIView.animate(withDuration: 0.4, animations: {
                     self.alpha = 0
                 }) { _ in
                     self.bar.frame.size.width = 0

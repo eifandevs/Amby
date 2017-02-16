@@ -19,7 +19,7 @@ class BaseViewModel {
     private var commonHistory: [History] = []
     
     // webViewそれぞれの履歴とカレントページインデックス
-    var eachHistory: [[String: Any]] = [["history": [], "current": 0]]
+    var eachHistory: [EachHistoryItem] = [EachHistoryItem()]
     
     var defaultUrl: String {
         get {
@@ -36,7 +36,7 @@ class BaseViewModel {
         }
     }
     
-    private var currentHistoryInfo: [String: Any] {
+    private var currentHistory: EachHistoryItem {
         get {
             return eachHistory[locationIndex]
         }
@@ -46,11 +46,19 @@ class BaseViewModel {
         // historyInfo読み込み
         do {
             let data = try Data(contentsOf: AppDataManager.shared.historyPath)
-            eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [[String: Any]]
+            eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [EachHistoryItem]
             log.debug("history info read: \n\(eachHistory)")
         } catch let error as NSError {
             log.error("failed to read: \(error)")
         }
+    }
+    
+    func requestNextUrl() -> String? {
+        return (currentHistory.history.count >= currentHistory.index + 1) ? currentHistory.history[currentHistory.index + 1] : nil
+    }
+    
+    func requestPrevUrl() -> String? {
+        return (0 <= currentHistory.index - 1) ? currentHistory.history[currentHistory.index - 1] : nil
     }
     
     func saveCommonHistory(webView: EGWebView) {
@@ -62,6 +70,9 @@ class BaseViewModel {
             
             commonHistory.append(h)
             log.debug("save history. url: \(h.url)")
+            
+            // each historyも更新する
+            saveEachHistory(urlStr: h.url)
         }
         webView.previousUrl = webView.url
     }
@@ -87,6 +98,10 @@ class BaseViewModel {
         } catch let error as NSError {
             log.error("failed to write: \(error)")
         }
+    }
+    
+    private func saveEachHistory(urlStr: String) {
+        eachHistory[locationIndex].add(urlStr: urlStr)
     }
     
     private func hasValidUrl(webView: EGWebView) -> Bool {

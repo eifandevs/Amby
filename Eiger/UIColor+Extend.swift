@@ -11,6 +11,10 @@ import Foundation
 import UIKit
 
 extension UIColor {
+    static var deepOrange: UIColor {
+        return UIColor(red: 255/255, green: 127/255, blue: 0/255, alpha: 1)
+    }
+    
     static var frenchBlue: UIColor {
         return UIColor(red: 0/255, green: 175/255, blue: 240/255, alpha: 1)
     }

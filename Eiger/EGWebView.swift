@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import SpringIndicator
 
 class EGWebView: WKWebView {
     enum NETWORK_ERROR {
@@ -18,7 +19,7 @@ class EGWebView: WKWebView {
     }
     
     var previousUrl: URL? = nil
-    private let refreshControl = UIRefreshControl()
+    private let refreshControl = SpringIndicator.Refresher()
     
     init(pool: WKProcessPool) {
         let configuration = WKWebViewConfiguration()
@@ -31,8 +32,11 @@ class EGWebView: WKWebView {
         allowsLinkPreview = true
         
         // プルダウンリフレッシュ
+        refreshControl.indicator.lineCap = true
+        refreshControl.indicator.lineColor = UIColor.frenchBlue
         refreshControl.addTarget(self, action: #selector(EGWebView.onRefresh), for: .valueChanged)
         scrollView.addSubview(refreshControl)
+        refreshControl.endRefreshing() // 初回起動時に表示される問題を修正
         
     }
     

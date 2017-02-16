@@ -37,8 +37,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             button.backgroundColor = UIColor.gray
             button.setTitle("戻る(ページ)", for: .normal)
             _ = button.reactive.tap
-                .observe { _ in
+                .observe { [weak self] _ in
                     log.debug("Button tapped.")
+                    if let url = self!.viewModel.requestPrevUrl() {
+                        _ = self!.wv.load(urlStr: url)
+                    }
             }
             addSubview(button)
         }
@@ -88,7 +91,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     override func layoutSubviews() {
         wv.frame = CGRect(origin: CGPoint.zero, size: frame.size)
-        progressBar.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: 3)
+        progressBar.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: 2.1)
     }
     
     required init(coder aDecoder: NSCoder) {

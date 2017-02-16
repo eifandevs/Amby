@@ -15,4 +15,6 @@ target 'Eiger' do
   pod 'SVProgressHUD', '2.1.2'
   pod 'YLProgressBar', '3.10.1'
   pod 'RealmSwift', '~> 2.4'
+  pod "SpringIndicator", '1.4.1'
+
 end
