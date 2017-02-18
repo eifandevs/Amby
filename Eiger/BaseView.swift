@@ -190,7 +190,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             if wv.isLoading == true {
                 progressBar.setProgress(0.1)
             } else {
-                viewModel.saveCommonHistory(webView: wv)
+                viewModel.saveCommonHistory(wv: wv)
                 progressBar.setProgress(1.0)
             }
         }

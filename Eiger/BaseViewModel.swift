@@ -78,25 +78,25 @@ class BaseViewModel {
         }
     }
 
-    func saveCommonHistory(webView: EGWebView) {
-        if (hasValidUrl(webView: webView)) {
+    func saveCommonHistory(wv: EGWebView) {
+        if (hasValidUrl(wv: wv)) {
             let h = History()
-            h.title = webView.title!
-            h.url = (webView.url?.absoluteString.removingPercentEncoding)!
+            h.title = wv.title!
+            h.url = (wv.url?.absoluteString.removingPercentEncoding)!
             h.date = Date()
             
             commonHistory.append(h)
             log.debug("save history. url: \(h.url)")
             
             // each historyも更新する
-            if webView.isHistoryRequest == false {
+            if wv.isHistoryRequest == false {
                 // ページを戻る(進む)アクションの場合は、eachHistoryには追加しない
                 log.debug("save each history too")
                 saveEachHistory(urlStr: h.url)
-                webView.isHistoryRequest = false
             }
         }
-        webView.previousUrl = webView.url
+        wv.previousUrl = wv.url
+        wv.isHistoryRequest = false // 読み込みが終わったら、履歴リクエストフラグを落としておく
     }
     
     func storeCommonHistory() {
@@ -125,14 +125,14 @@ class BaseViewModel {
     private func saveEachHistory(urlStr: String) {
         if currentHistory.index + 1 < currentHistory.history.count {
             // ページを戻るで過去ページに戻り、別のリンクをタップした場合は、新しいルートで履歴をとる
-            eachHistory[locationIndex].history[(currentHistory.index + 1)...currentHistory.history.count] = []
+            eachHistory[locationIndex].history[(currentHistory.index + 1)...(currentHistory.history.count - 1)] = []
         }
         eachHistory[locationIndex].add(urlStr: urlStr)
     }
     
-    private func hasValidUrl(webView: EGWebView) -> Bool {
-        return ((webView.title != nil) &&
-                (webView.url != nil) &&
-                (webView.previousUrl?.absoluteString != webView.url?.absoluteString))
+    private func hasValidUrl(wv: EGWebView) -> Bool {
+        return ((wv.title != nil) &&
+                (wv.url != nil) &&
+                (wv.previousUrl?.absoluteString != wv.url?.absoluteString))
     }
 }
