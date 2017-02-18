@@ -7,9 +7,13 @@
 //
 
 import Foundation
+import Bond
 
 class BaseViewModel {
-    
+
+    // リクエストURL。これを変更すると、BaseViewがそのURLでロードする
+    var requestUrl = Observable(UserDefaults.standard.string(forKey: AppDataManager.shared.defaultUrlKey)!)
+
     private let historyModel = HistoryModel()
 
     // 現在表示しているwebviewのインデックス
@@ -54,30 +58,26 @@ class BaseViewModel {
 //        }
     }
     
-    func incrementLocation() -> Bool {
+    func incrementLocation(wv: EGWebView) {
         if currentHistory.history.count > currentHistory.index + 1 {
-            eachHistory[locationIndex].index = eachHistory[locationIndex].index + 1
-            return true
+            wv.isHistoryRequest = true
+            requestUrl.value = currentHistory.history[currentHistory.index + 1]
+            eachHistory[locationIndex].index += 1
+        } else {
+            log.warning("can not go forward webview")
         }
-        return false
     }
 
-    func decrementLocation() -> Bool {
+    func decrementLocation(wv: EGWebView) {
         if 0 <= currentHistory.index - 1 {
-            eachHistory[locationIndex].index = eachHistory[locationIndex].index - 1
-            return true
+            wv.isHistoryRequest = true
+            requestUrl.value = currentHistory.history[currentHistory.index - 1]
+            eachHistory[locationIndex].index -= 1
+        } else {
+            log.warning("can not back webview")
         }
-        return false
     }
-    
-    func requestNextUrl() -> String? {
-        return (currentHistory.history.count > currentHistory.index + 1) ? currentHistory.history[currentHistory.index + 1] : nil
-    }
-    
-    func requestPrevUrl() -> String? {
-        return (0 <= currentHistory.index - 1) ? currentHistory.history[currentHistory.index - 1] : nil
-    }
-    
+
     func saveCommonHistory(webView: EGWebView) {
         if (hasValidUrl(webView: webView)) {
             let h = History()

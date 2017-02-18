@@ -30,7 +30,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         // プログレスバー
         startProgressObserving()
         
-        
         /* テストコード */
         do {
             let button = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 200), size: CGSize(width: 150, height: 50)))
@@ -38,13 +37,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             button.setTitle("戻る(ページ)", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    if let url = self!.viewModel.requestPrevUrl() {
-                        self!.wv.isHistoryRequest = true
-                        _ = self!.viewModel.decrementLocation()
-                        _ = self!.wv.load(urlStr: url)
-                    } else {
-                        log.warning("can not back webview")
-                    }
+                    self!.viewModel.decrementLocation(wv: self!.wv)
             }
             addSubview(button)
         }
@@ -55,13 +48,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             button.setTitle("進む(ページ)", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    if let url = self!.viewModel.requestNextUrl() {
-                        self!.wv.isHistoryRequest = true
-                        _ = self!.viewModel.incrementLocation()
-                        _ = self!.wv.load(urlStr: url)
-                    } else {
-                        log.warning("can not go forward webview")
-                    }
+                    self!.viewModel.incrementLocation(wv: self!.wv)
             }
             addSubview(button)
         }
@@ -89,8 +76,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
         /*-----------*/
 
-        // ロード
-        _ = wv.load(urlStr: viewModel.defaultUrl)
+        // Observer登録
+        _ = viewModel.requestUrl.observeNext { [weak self] value in
+            // ロード
+            _ = self!.wv.load(urlStr: value)
+        }
     }
     
     deinit {
