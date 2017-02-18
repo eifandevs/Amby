@@ -128,12 +128,12 @@
 			path = Eiger;
 			sourceTree = "<group>";
 		};
-		A5CB30241E50994500A59A82 /* DB */ = {
+		A5CB30241E50994500A59A82 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
 				A5D88FCB1E4F60260099DFA3 /* History.swift */,
 			);
-			name = DB;
+			name = Entity;
 			sourceTree = "<group>";
 		};
 		A5D88FA01E460FE00099DFA3 /* CommonUtil */ = {
@@ -158,7 +158,7 @@
 		A5D88FA21E460FED0099DFA3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A5CB30241E50994500A59A82 /* DB */,
+				A5CB30241E50994500A59A82 /* Entity */,
 				A5CB30221E50975700A59A82 /* HistoryModel.swift */,
 				A5CB30251E5099C400A59A82 /* ModelBase.swift */,
 			);
