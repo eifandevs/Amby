@@ -38,9 +38,29 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             button.setTitle("戻る(ページ)", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    log.debug("Button tapped.")
                     if let url = self!.viewModel.requestPrevUrl() {
+                        self!.wv.isHistoryRequest = true
+                        _ = self!.viewModel.decrementLocation()
                         _ = self!.wv.load(urlStr: url)
+                    } else {
+                        log.warning("can not back webview")
+                    }
+            }
+            addSubview(button)
+        }
+        
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 200, y: 200), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("進む(ページ)", for: .normal)
+            _ = button.reactive.tap
+                .observe { [weak self] _ in
+                    if let url = self!.viewModel.requestNextUrl() {
+                        self!.wv.isHistoryRequest = true
+                        _ = self!.viewModel.incrementLocation()
+                        _ = self!.wv.load(urlStr: url)
+                    } else {
+                        log.warning("can not go forward webview")
                     }
             }
             addSubview(button)
@@ -57,17 +77,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             addSubview(button)
         }
 
-        do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 200, y: 200), size: CGSize(width: 150, height: 50)))
-            button.backgroundColor = UIColor.gray
-            button.setTitle("進む(ページ)", for: .normal)
-            _ = button.reactive.tap
-                .observe { _ in
-                    log.debug("Button tapped.")
-            }
-            addSubview(button)
-        }
-        
         do {
             let button = UIButton(frame: CGRect(origin: CGPoint(x: 200, y: 280), size: CGSize(width: 150, height: 50)))
             button.backgroundColor = UIColor.gray
@@ -168,6 +177,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             decisionHandler(.cancel)
             return
         }
+        
         decisionHandler(.allow)
     }
 
@@ -233,15 +243,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             progressBar.setProgress(CGFloat(wv.estimatedProgress))
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
-        // プルダウンリフレッシュ
-        //        if refreshControl != nil {
-        //            refreshControl.removeFromSuperview()
-        //            refreshControl = nil
-        //        }
-        //        refreshControl = UIRefreshControl()
-        //        refreshControl.attributedTitle = NSAttributedString(string: " ")
-        //        refreshControl.addTarget(self, action: #selector(BaseViewController.pullToRefresh), forControlEvents:.ValueChanged)
-        //        webView.scrollView.addSubview(refreshControl)
         
         addSubview(progressBar)
     }

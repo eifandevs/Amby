@@ -44,17 +44,34 @@ class BaseViewModel {
     
     init() {
         // historyInfo読み込み
-        do {
-            let data = try Data(contentsOf: AppDataManager.shared.historyPath)
-            eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [EachHistoryItem]
-            log.debug("history info read: \n\(eachHistory)")
-        } catch let error as NSError {
-            log.error("failed to read: \(error)")
+        // TODO: コメントを外す
+//        do {
+//            let data = try Data(contentsOf: AppDataManager.shared.historyPath)
+//            eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [EachHistoryItem]
+//            log.debug("history info read: \n\(eachHistory)")
+//        } catch let error as NSError {
+//            log.error("failed to read: \(error)")
+//        }
+    }
+    
+    func incrementLocation() -> Bool {
+        if currentHistory.history.count > currentHistory.index + 1 {
+            eachHistory[locationIndex].index = eachHistory[locationIndex].index + 1
+            return true
         }
+        return false
+    }
+
+    func decrementLocation() -> Bool {
+        if 0 <= currentHistory.index - 1 {
+            eachHistory[locationIndex].index = eachHistory[locationIndex].index - 1
+            return true
+        }
+        return false
     }
     
     func requestNextUrl() -> String? {
-        return (currentHistory.history.count >= currentHistory.index + 1) ? currentHistory.history[currentHistory.index + 1] : nil
+        return (currentHistory.history.count > currentHistory.index + 1) ? currentHistory.history[currentHistory.index + 1] : nil
     }
     
     func requestPrevUrl() -> String? {
@@ -72,7 +89,12 @@ class BaseViewModel {
             log.debug("save history. url: \(h.url)")
             
             // each historyも更新する
-            saveEachHistory(urlStr: h.url)
+            if webView.isHistoryRequest == false {
+                // ページを戻る(進む)アクションの場合は、eachHistoryには追加しない
+                log.debug("save each history too")
+                saveEachHistory(urlStr: h.url)
+                webView.isHistoryRequest = false
+            }
         }
         webView.previousUrl = webView.url
     }
@@ -101,13 +123,16 @@ class BaseViewModel {
     }
     
     private func saveEachHistory(urlStr: String) {
+        if currentHistory.index + 1 < currentHistory.history.count {
+            // ページを戻るで過去ページに戻り、別のリンクをタップした場合は、新しいルートで履歴をとる
+            eachHistory[locationIndex].history[(currentHistory.index + 1)...currentHistory.history.count] = []
+        }
         eachHistory[locationIndex].add(urlStr: urlStr)
     }
     
     private func hasValidUrl(webView: EGWebView) -> Bool {
         return ((webView.title != nil) &&
                 (webView.url != nil) &&
-                (webView.previousUrl != nil) &&
                 (webView.previousUrl?.absoluteString != webView.url?.absoluteString))
     }
 }

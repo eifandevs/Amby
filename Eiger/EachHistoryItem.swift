@@ -10,7 +10,7 @@ import Foundation
 
 struct EachHistoryItem {
     var history: [String] = []
-    var index: Int = 0
+    var index: Int = -1
     
     mutating func add(urlStr: String) {
         history.append(urlStr)

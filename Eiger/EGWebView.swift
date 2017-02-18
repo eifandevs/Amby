@@ -18,7 +18,8 @@ class EGWebView: WKWebView {
         case UNAUTHORIZED
     }
     
-    var previousUrl: URL? = nil
+    var previousUrl: URL? = nil // リロードしたページを履歴に登録しないためのフラグ
+    var isHistoryRequest: Bool = false // ページを戻る(進む)のリクエストかどうか
     private let refreshControl = SpringIndicator.Refresher()
     
     init(pool: WKProcessPool) {
