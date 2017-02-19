@@ -13,6 +13,7 @@ import SpringIndicator
 class EGWebView: WKWebView {
     enum NETWORK_ERROR {
         case DNS_NOT_FOUND
+        case OFFLINE
         case TIMEOUT
         case INVALID_URL
         case UNAUTHORIZED
@@ -73,6 +74,7 @@ class EGWebView: WKWebView {
         let path: String = { _ in
             if code == NETWORK_ERROR.TIMEOUT { return Bundle.main.path(forResource: "timeout", ofType: "html")! }
             if code == NETWORK_ERROR.DNS_NOT_FOUND { return Bundle.main.path(forResource: "dns", ofType: "html")! }
+            if code == NETWORK_ERROR.OFFLINE { return Bundle.main.path(forResource: "offline", ofType: "html")! }
             if code == NETWORK_ERROR.UNAUTHORIZED { return Bundle.main.path(forResource: "authorize", ofType: "html")! }
             return Bundle.main.path(forResource: "invalid", ofType: "html")!
         }()
@@ -84,10 +86,12 @@ class EGWebView: WKWebView {
         let errorType = { () -> EGWebView.NETWORK_ERROR in
             log.error("webview load error. code: \(error.code)")
             switch error.code {
-            case -1003:
+            case NSURLErrorCannotFindHost:
                 return NETWORK_ERROR.DNS_NOT_FOUND
-            case -1001:
+            case NSURLErrorTimedOut:
                 return NETWORK_ERROR.TIMEOUT
+            case NSURLErrorNotConnectedToInternet:
+                return NETWORK_ERROR.OFFLINE
             default:
                 return NETWORK_ERROR.INVALID_URL
             }
