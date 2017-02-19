@@ -82,6 +82,7 @@ class EGWebView: WKWebView {
     
     func loadHtml(error: NSError) {
         let errorType = { () -> EGWebView.NETWORK_ERROR in
+            log.error("webview load error. code: \(error.code)")
             switch error.code {
             case -1003:
                 return NETWORK_ERROR.DNS_NOT_FOUND

@@ -23,7 +23,7 @@ class BaseViewModel {
     private var commonHistory: [History] = []
     
     // webViewそれぞれの履歴とカレントページインデックス
-    var eachHistory: [EachHistoryItem] = [EachHistoryItem()]
+    var eachHistory: [EachHistoryItem] = [EachHistoryItem(history: [], index: -1)]
     
     var defaultUrl: String {
         get {
@@ -107,7 +107,7 @@ class BaseViewModel {
                 historyModel.deleteWithRLMObjects(data: deleteHistory)
             }
             historyModel.insertWithRLMObjects(data: commonHistory)
-            log.debug("store history. all history: \(historyModel.select())")
+            log.debug("store common history. all history: \(historyModel.select())")
             commonHistory = []
         }
     }
@@ -117,6 +117,7 @@ class BaseViewModel {
         let historyInfoData =  NSKeyedArchiver.archivedData(withRootObject: eachHistory)
         do {
             try historyInfoData.write(to: AppDataManager.shared.historyPath)
+            log.debug("store each history")
         } catch let error as NSError {
             log.error("failed to write: \(error)")
         }
