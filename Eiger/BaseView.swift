@@ -109,6 +109,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     internal func screenTouchCancelled(touch: UITouch) {
     }
+
+// MARK: ScrollView Delegate
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        wv.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
+    }
     
 // MARK: WebView Delegate
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
