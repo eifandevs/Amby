@@ -8,7 +8,6 @@
 
 import Foundation
 import WebKit
-import SpringIndicator
 
 class EGWebView: WKWebView {
     enum NETWORK_ERROR {
@@ -19,9 +18,9 @@ class EGWebView: WKWebView {
         case UNAUTHORIZED
     }
     
+    var originalUrl: URL? = nil // リダイレクト前の最初のリクエスト
     var previousUrl: URL? = nil // リロードしたページを履歴に登録しないためのフラグ
     var isHistoryRequest: Bool = false // ページを戻る(進む)のリクエストかどうか
-    private let refreshControl = SpringIndicator.Refresher()
     
     init(pool: WKProcessPool) {
         let configuration = WKWebViewConfiguration()
@@ -32,21 +31,6 @@ class EGWebView: WKWebView {
         super.init(frame: CGRect.zero, configuration: configuration)
         isOpaque = true
         allowsLinkPreview = true
-        
-        // プルダウンリフレッシュ
-        refreshControl.indicator.lineCap = true
-        refreshControl.indicator.lineColor = UIColor.frenchBlue
-        refreshControl.addTarget(self, action: #selector(EGWebView.onRefresh), for: .valueChanged)
-        scrollView.addSubview(refreshControl)
-        refreshControl.endRefreshing() // 初回起動時に表示される問題を修正
-        
-    }
-    
-    func onRefresh() {
-        reload()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.05) {
-            self.refreshControl.endRefreshing()
-        }
     }
     
     func load(urlStr: String) -> Bool {
@@ -97,6 +81,10 @@ class EGWebView: WKWebView {
             }
         }()
         loadHtml(code: errorType)
+    }
+    
+    func isLocalRequest() -> Bool {
+        return (self.url?.absoluteString.hasPrefix("file://"))!
     }
     
     required init?(coder: NSCoder) {

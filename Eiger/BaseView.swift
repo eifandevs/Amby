@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import WebKit
 import Bond
+import SpringIndicator
 
 class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDelegate, WKUIDelegate, EGApplicationDelegate {
     
@@ -17,6 +18,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private var progressBar: EGProgressBar! = nil
     private let viewModel = BaseViewModel()
     private var processPool = WKProcessPool()
+    private var refreshControl = SpringIndicator.Refresher()
 
     init() {
         super.init(frame: CGRect.zero)
@@ -193,13 +195,21 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             //インジゲーターの表示、非表示をきりかえる。
             UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
             if wv.isLoading == true {
+                if (wv.isLocalRequest() == false) {
+                    log.debug("[original url]\(wv.url?.absoluteString)")
+                    wv.originalUrl = wv.url
+                }
                 progressBar.setProgress(0.1)
             } else {
-                if (wv.url?.absoluteString.hasPrefix("file://") == true) {
-                    log.error("save local error file")
+                if (wv.isLocalRequest() == true) {
+                    progressBar.initializeProgress()
+                } else {
+                    if refreshControl.refreshing {
+                        refreshControl.endRefreshing()
+                    }
+                    progressBar.setProgress(1.0)
                 }
                 viewModel.saveCommonHistory(wv: wv)
-                progressBar.setProgress(1.0)
             }
         }
     }
@@ -250,7 +260,18 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         wv.navigationDelegate = self
         wv.uiDelegate = self;
         wv.scrollView.delegate = self
+        
+        // プルダウンリフレッシュ
+        refreshControl.indicator.lineCap = true
+        refreshControl.indicator.lineColor = UIColor.frenchBlue
+        refreshControl.addTarget(self, action: #selector(BaseView.onRefresh), for: .valueChanged)
+        wv.scrollView.addSubview(refreshControl)
+        refreshControl.endRefreshing() // 初回起動時に表示される問題を修正
         return wv
+    }
+    
+    func onRefresh() {
+        viewModel.refresh()
     }
     
 }

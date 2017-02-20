@@ -86,13 +86,13 @@ class BaseViewModel {
             h.date = Date()
             
             commonHistory.append(h)
-            log.debug("save history. url: \(h.url)")
+            log.debug("save common history. url: \(h.url)")
             
             // each historyも更新する
             if wv.isHistoryRequest == false {
                 // ページを戻る(進む)アクションの場合は、eachHistoryには追加しない
                 log.debug("save each history too")
-                saveEachHistory(urlStr: h.url)
+                saveEachHistory(originalUrl: (wv.originalUrl?.absoluteString.removingPercentEncoding)!, requestUrl: h.url)
             }
         }
         wv.previousUrl = wv.url
@@ -123,12 +123,17 @@ class BaseViewModel {
         }
     }
     
-    private func saveEachHistory(urlStr: String) {
+    func refresh() {
+        requestUrl.value = currentHistory.history[currentHistory.index]
+    }
+    
+    private func saveEachHistory(originalUrl: String, requestUrl: String) {
         if currentHistory.index + 1 < currentHistory.history.count {
             // ページを戻るで過去ページに戻り、別のリンクをタップした場合は、新しいルートで履歴をとる
             eachHistory[locationIndex].history[(currentHistory.index + 1)...(currentHistory.history.count - 1)] = []
         }
-        eachHistory[locationIndex].add(urlStr: urlStr)
+        let addUrl = (requestUrl.hasPrefix("file://") == true) ? originalUrl : requestUrl
+        eachHistory[locationIndex].add(urlStr: addUrl)
     }
     
     private func hasValidUrl(wv: EGWebView) -> Bool {

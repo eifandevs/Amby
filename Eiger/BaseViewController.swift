@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SpringIndicator
 
 class BaseViewController: UIViewController {
 
