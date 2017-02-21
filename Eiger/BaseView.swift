@@ -18,7 +18,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private var progressBar: EGProgressBar! = nil
     private let viewModel = BaseViewModel()
     private var processPool = WKProcessPool()
-    private var refreshControl = SpringIndicator.Refresher()
 
     init() {
         super.init(frame: CGRect.zero)
@@ -34,7 +33,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         
         /* テストコード */
         do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 200), size: CGSize(width: 150, height: 50)))
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 200), size: CGSize(width: 150, height: 50)))
             button.backgroundColor = UIColor.gray
             button.setTitle("戻る(ページ)", for: .normal)
             _ = button.reactive.tap
@@ -56,7 +55,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
         
         do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 280), size: CGSize(width: 150, height: 50)))
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 280), size: CGSize(width: 150, height: 50)))
             button.backgroundColor = UIColor.gray
             button.setTitle("戻る(wv)", for: .normal)
             _ = button.reactive.tap
@@ -73,6 +72,17 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             _ = button.reactive.tap
                 .observe { _ in
                     log.debug("Button tapped.")
+            }
+            addSubview(button)
+        }
+        
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 360), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("リロード", for: .normal)
+            _ = button.reactive.tap
+                .observe { [weak self] _ in
+                    self!.viewModel.refresh(wv: self!.wv)
             }
             addSubview(button)
         }
@@ -201,15 +211,14 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 }
                 progressBar.setProgress(0.1)
             } else {
-                if (wv.isLocalRequest() == true) {
-                    progressBar.initializeProgress()
-                } else {
-                    if refreshControl.refreshing {
-                        refreshControl.endRefreshing()
+                if wv.isValid == true {
+                    if wv.isLocalRequest() == true {
+                        progressBar.initializeProgress()
+                    } else {
+                        progressBar.setProgress(1.0)
                     }
-                    progressBar.setProgress(1.0)
+                    viewModel.saveCommonHistory(wv: wv)
                 }
-                viewModel.saveCommonHistory(wv: wv)
             }
         }
     }
@@ -260,18 +269,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         wv.navigationDelegate = self
         wv.uiDelegate = self;
         wv.scrollView.delegate = self
-        
-        // プルダウンリフレッシュ
-        refreshControl.indicator.lineCap = true
-        refreshControl.indicator.lineColor = UIColor.frenchBlue
-        refreshControl.addTarget(self, action: #selector(BaseView.onRefresh), for: .valueChanged)
-        wv.scrollView.addSubview(refreshControl)
-        refreshControl.endRefreshing() // 初回起動時に表示される問題を修正
         return wv
-    }
-    
-    func onRefresh() {
-        viewModel.refresh()
     }
     
 }

@@ -63,6 +63,7 @@ class BaseViewModel {
             wv.isHistoryRequest = true
             requestUrl.value = currentHistory.history[currentHistory.index + 1]
             eachHistory[locationIndex].index += 1
+            log.debug("進むを検知。index: \(eachHistory[locationIndex].index - 1) -> \(eachHistory[locationIndex].index)")
         } else {
             log.warning("can not go forward webview")
         }
@@ -73,13 +74,15 @@ class BaseViewModel {
             wv.isHistoryRequest = true
             requestUrl.value = currentHistory.history[currentHistory.index - 1]
             eachHistory[locationIndex].index -= 1
+            log.debug("戻るを検知。index: \(eachHistory[locationIndex].index + 1) -> \(eachHistory[locationIndex].index)")
+            
         } else {
             log.warning("can not back webview")
         }
     }
 
     func saveCommonHistory(wv: EGWebView) {
-        if (hasValidUrl(wv: wv)) {
+        if wv.isLocalRequest() == false {
             let h = History()
             h.title = wv.title!
             h.url = (wv.url?.absoluteString.removingPercentEncoding)!
@@ -87,13 +90,12 @@ class BaseViewModel {
             
             commonHistory.append(h)
             log.debug("save common history. url: \(h.url)")
-            
-            // each historyも更新する
-            if wv.isHistoryRequest == false {
-                // ページを戻る(進む)アクションの場合は、eachHistoryには追加しない
-                log.debug("save each history too")
-                saveEachHistory(originalUrl: (wv.originalUrl?.absoluteString.removingPercentEncoding)!, requestUrl: h.url)
-            }
+        }
+        
+        // each historyを更新する
+        if wv.isHistoryRequest == false {
+            // ページを戻る(進む)アクションの場合は、eachHistoryには追加しない
+            saveEachHistory(wv: wv)
         }
         wv.previousUrl = wv.url
         wv.isHistoryRequest = false // 読み込みが終わったら、履歴リクエストフラグを落としておく
@@ -123,22 +125,20 @@ class BaseViewModel {
         }
     }
     
-    func refresh() {
+    func refresh(wv: EGWebView) {
+        wv.isHistoryRequest = true // 読み込みが終わったら、履歴リクエストフラグを落としておく
         requestUrl.value = currentHistory.history[currentHistory.index]
     }
     
-    private func saveEachHistory(originalUrl: String, requestUrl: String) {
+    private func saveEachHistory(wv: EGWebView) {
+        let originalUrl = (wv.originalUrl?.absoluteString.removingPercentEncoding)!
+        let requestUrl = (wv.url?.absoluteString.removingPercentEncoding)!
         if currentHistory.index + 1 < currentHistory.history.count {
             // ページを戻るで過去ページに戻り、別のリンクをタップした場合は、新しいルートで履歴をとる
             eachHistory[locationIndex].history[(currentHistory.index + 1)...(currentHistory.history.count - 1)] = []
         }
         let addUrl = (requestUrl.hasPrefix("file://") == true) ? originalUrl : requestUrl
+        log.debug("save each history. url: \(addUrl)")
         eachHistory[locationIndex].add(urlStr: addUrl)
-    }
-    
-    private func hasValidUrl(wv: EGWebView) -> Bool {
-        return ((wv.title != nil) &&
-                (wv.url != nil) &&
-                (wv.previousUrl?.absoluteString != wv.url?.absoluteString))
     }
 }

@@ -13,9 +13,9 @@
 		A5800E7B1E565E00004A1AF0 /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5800E7A1E565E00004A1AF0 /* EGProgressBar.swift */; };
 		A5800E7F1E565E48004A1AF0 /* UIColor+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5800E7E1E565E48004A1AF0 /* UIColor+Extend.swift */; };
 		A58581011E59D0B700CCC098 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A58581001E59D0B700CCC098 /* offline.html */; };
-		A58581031E5B339E00CCC098 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58581021E5B339E00CCC098 /* BaseView.swift */; };
-		A58581051E5B33B900CCC098 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58581041E5B33B900CCC098 /* BaseViewModel.swift */; };
 		A58581071E5B33C600CCC098 /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58581061E5B33C600CCC098 /* EGWebView.swift */; };
+		A58581091E5C760400CCC098 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58581081E5C760400CCC098 /* BaseViewModel.swift */; };
+		A585810B1E5C761300CCC098 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585810A1E5C761300CCC098 /* BaseView.swift */; };
 		A5CB30231E50975800A59A82 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB30221E50975700A59A82 /* HistoryModel.swift */; };
 		A5CB30261E5099C400A59A82 /* ModelBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB30251E5099C400A59A82 /* ModelBase.swift */; };
 		A5CB302C1E530E6700A59A82 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB302B1E530E6700A59A82 /* Util.swift */; };
@@ -41,9 +41,9 @@
 		A5800E7A1E565E00004A1AF0 /* EGProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGProgressBar.swift; sourceTree = "<group>"; };
 		A5800E7E1E565E48004A1AF0 /* UIColor+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extend.swift"; sourceTree = "<group>"; };
 		A58581001E59D0B700CCC098 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
-		A58581021E5B339E00CCC098 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
-		A58581041E5B33B900CCC098 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		A58581061E5B33C600CCC098 /* EGWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGWebView.swift; sourceTree = "<group>"; };
+		A58581081E5C760400CCC098 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		A585810A1E5C761300CCC098 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A5CB30221E50975700A59A82 /* HistoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		A5CB30251E5099C400A59A82 /* ModelBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelBase.swift; sourceTree = "<group>"; };
 		A5CB302B1E530E6700A59A82 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 		A5D88FA11E460FE70099DFA3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A58581021E5B339E00CCC098 /* BaseView.swift */,
+				A585810A1E5C761300CCC098 /* BaseView.swift */,
 				A58581061E5B33C600CCC098 /* EGWebView.swift */,
 				A5800E7A1E565E00004A1AF0 /* EGProgressBar.swift */,
 			);
@@ -170,8 +170,8 @@
 		A5D88FA31E460FF40099DFA3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				A58581041E5B33B900CCC098 /* BaseViewModel.swift */,
 				A5D40C611E58A794004B7454 /* EachHistoryItem.swift */,
+				A58581081E5C760400CCC098 /* BaseViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -353,8 +353,8 @@
 				A5D88FCC1E4F60260099DFA3 /* History.swift in Sources */,
 				A5D88FB61E4F1ED70099DFA3 /* AppDataManager.swift in Sources */,
 				A5CB30231E50975800A59A82 /* HistoryModel.swift in Sources */,
-				A58581051E5B33B900CCC098 /* BaseViewModel.swift in Sources */,
-				A58581031E5B339E00CCC098 /* BaseView.swift in Sources */,
+				A58581091E5C760400CCC098 /* BaseViewModel.swift in Sources */,
+				A585810B1E5C761300CCC098 /* BaseView.swift in Sources */,
 				A5CB302C1E530E6700A59A82 /* Util.swift in Sources */,
 				A58581071E5B33C600CCC098 /* EGWebView.swift in Sources */,
 			);

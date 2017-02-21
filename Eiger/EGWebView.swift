@@ -21,6 +21,13 @@ class EGWebView: WKWebView {
     var originalUrl: URL? = nil // リダイレクト前の最初のリクエスト
     var previousUrl: URL? = nil // リロードしたページを履歴に登録しないためのフラグ
     var isHistoryRequest: Bool = false // ページを戻る(進む)のリクエストかどうか
+    var isValid: Bool {
+        get {
+            return ((title != nil) &&
+                (url != nil) &&
+                (previousUrl?.absoluteString != url?.absoluteString))
+        }
+    }
     
     init(pool: WKProcessPool) {
         let configuration = WKWebViewConfiguration()
