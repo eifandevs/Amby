@@ -12,10 +12,17 @@ import Bond
 class BaseViewModel {
 
     // リクエストURL。これを変更すると、BaseViewがそのURLでロードする
-    var requestUrl = Observable(UserDefaults.standard.string(forKey: AppDataManager.shared.defaultUrlKey)!)
+    var requestUrl = Observable("http://about:blank")
 
     // 現在表示しているwebviewのインデックス
-    private var locationIndex = 0
+    private var locationIndex: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey)
+        }
+        set(index) {
+            UserDefaults.standard.set(index, forKey: AppDataManager.shared.locationIndexKey)
+        }
+    }
     
     // 全てのwebViewの履歴
     private var commonHistory: [CommonHistoryItem] = []
@@ -23,7 +30,7 @@ class BaseViewModel {
     // webViewそれぞれの履歴とカレントページインデックス
     private var eachHistory: [EachHistoryItem] = [EachHistoryItem()]
     
-    var defaultUrl: String {
+    private var defaultUrl: String {
         get {
             return UserDefaults.standard.string(forKey: AppDataManager.shared.defaultUrlKey)!
         }
@@ -31,23 +38,18 @@ class BaseViewModel {
             UserDefaults.standard.set(url, forKey: AppDataManager.shared.defaultUrlKey)
         }
     }
-    
-    private var historySavableTerm: Int {
-        get {
-            return UserDefaults.standard.integer(forKey: AppDataManager.shared.historySavableTermKey)
-        }
-    }
-    
+
     init() {
-        // historyInfo読み込み
-        // TODO: コメントを外す
-//        do {
-//            let data = try Data(contentsOf: AppDataManager.shared.historyPath)
-//            eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [EachHistoryItem]
-//            log.debug("history info read: \n\(eachHistory)")
-//        } catch let error as NSError {
-//            log.error("failed to read: \(error)")
-//        }
+        // eachHistory読み込み
+        do {
+            let data = try Data(contentsOf: AppDataManager.shared.eachHistoryPath)
+            eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [EachHistoryItem]
+            requestUrl.value = eachHistory[locationIndex].url
+            log.debug("each history read. url: \n\(eachHistory[locationIndex].url)")
+        } catch let error as NSError {
+            requestUrl.value = defaultUrl
+            log.error("failed to read: \(error)")
+        }
     }
 
     func saveHistory(wv: EGWebView) {
@@ -58,9 +60,7 @@ class BaseViewModel {
         
         // Each History
         let each = EachHistoryItem(url: common.url, title: common.title)
-        eachHistory[locationIndex] = each
-        
-        wv.previousUrl = wv.url
+        eachHistory[locationIndex] = each        
     }
     
     func storeCommonHistory() {
@@ -76,13 +76,14 @@ class BaseViewModel {
     }
     
     func storeEachHistory() {
-        // hisotryInfo書き込み
-        let historyInfoData = NSKeyedArchiver.archivedData(withRootObject: eachHistory)
-        do {
-            try historyInfoData.write(to: AppDataManager.shared.eachHistoryPath)
-            log.debug("store each history")
-        } catch let error as NSError {
-            log.error("failed to write: \(error)")
+        if commonHistory.count > 0 {
+            let historyInfoData = NSKeyedArchiver.archivedData(withRootObject: eachHistory)
+            do {
+                try historyInfoData.write(to: AppDataManager.shared.eachHistoryPath)
+                log.debug("store each history")
+            } catch let error as NSError {
+                log.error("failed to write: \(error)")
+            }
         }
     }
 }

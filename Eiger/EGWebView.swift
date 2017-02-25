@@ -23,6 +23,8 @@ class EGWebView: WKWebView {
         get {
             return ((title != nil) &&
                 (url != nil) &&
+                (previousUrl != nil) &&
+                (url?.absoluteString != "http://about:blank") &&
                 (previousUrl?.absoluteString != url?.absoluteString))
         }
     }

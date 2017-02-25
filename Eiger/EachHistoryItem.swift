@@ -12,7 +12,6 @@ import UIKit
 class EachHistoryItem: NSObject, NSCoding {
     var url: String = ""
     var title: String = ""
-    var thumbnail: UIImage = UIImage()
 
     override init() {
         super.init()

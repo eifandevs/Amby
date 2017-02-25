@@ -205,7 +205,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             //インジゲーターの表示、非表示をきりかえる。
             UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
             if wv.isLoading == true {
-                log.debug("isFinished を falseにします")
                 progressBar.isFinished = false
                 progressBar.setProgress(0.1)
             } else {
@@ -213,6 +212,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 if wv.isValid == true {
                     viewModel.saveHistory(wv: wv)
                 }
+                log.debug("set previous url. url: \(wv.url)")
+                wv.previousUrl = wv.url
             }
         }
     }
