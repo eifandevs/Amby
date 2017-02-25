@@ -18,17 +18,22 @@ class EGWebView: WKWebView {
         case UNAUTHORIZED
     }
     
+    var errorUrl: URL? = nil // 読み込みに失敗したURL
     var previousUrl: URL? = nil // リロードしたページを履歴に登録しないためのフラグ
-    var isValid: Bool {
+    var hasSavableUrl: Bool {
         get {
-            return ((title != nil) &&
-                (url != nil) &&
-                (previousUrl != nil) &&
+            return ((previousUrl != nil) &&
                 (url?.absoluteString != "http://about:blank") &&
                 (previousUrl?.absoluteString != url?.absoluteString))
         }
     }
     
+    var hasValidUrl: Bool {
+        get {
+            return (url?.absoluteString)!.hasValidUrl
+        }
+    }
+
     init(pool: WKProcessPool) {
         let configuration = WKWebViewConfiguration()
         configuration.processPool = pool
@@ -41,8 +46,7 @@ class EGWebView: WKWebView {
     }
     
     func load(urlStr: String) -> Bool {
-        if (validUrl(urlStr: urlStr)) {
-
+        if  urlStr.hasValidUrl {
             let encodedURL = urlStr.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
             
             guard let url = URL(string: encodedURL!) else {
@@ -51,14 +55,26 @@ class EGWebView: WKWebView {
             }
             super.load(URLRequest(url: url))
             return true
+        } else if urlStr.hasPrefix("file://") {
+            loadHtml(code: urlToCode(urlStr: urlStr))
         }
         loadHtml(code: NETWORK_ERROR.INVALID_URL)
         return false
     }
     
-    private func validUrl(urlStr: String) -> Bool {
-        return (urlStr != "http://") && (urlStr != "https://") &&
-               ((urlStr.hasPrefix("http://") == true) || (urlStr.hasPrefix("https://") == true))
+    private func urlToCode(urlStr: String) -> NETWORK_ERROR {
+        switch (urlStr as NSString).lastPathComponent {
+        case "timeout.html":
+            return NETWORK_ERROR.TIMEOUT
+        case "dns.html":
+            return NETWORK_ERROR.DNS_NOT_FOUND
+        case "offline.html":
+            return NETWORK_ERROR.OFFLINE
+        case "authorize.html":
+            return NETWORK_ERROR.UNAUTHORIZED
+        default:
+            return NETWORK_ERROR.INVALID_URL
+        }
     }
     
     func loadHtml(code: NETWORK_ERROR) {
@@ -69,7 +85,9 @@ class EGWebView: WKWebView {
             if code == NETWORK_ERROR.UNAUTHORIZED { return Bundle.main.path(forResource: "authorize", ofType: "html")! }
             return Bundle.main.path(forResource: "invalid", ofType: "html")!
         }()
-            
+        if hasValidUrl {
+            errorUrl = requestUrl // 読み込みに失敗したURLは保存しておく
+        }
         super.loadFileURL(URL(fileURLWithPath: path), allowingReadAccessTo: URL(fileURLWithPath: path))
     }
     

@@ -166,7 +166,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         log.debug("[request url]\(navigationAction.request.url)")
-
+        
+        // リクエストURLはエラーが発生した時のため保持しておく
+        // エラー発生時は、リクエストしたURLを履歴に保持する
+        webView.requestUrl = navigationAction.request.url
         // TODO: 自動スクロール実装
 //        if autoScrollTimer?.valid == true {
 //            autoScrollTimer?.invalidate()
@@ -209,11 +212,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 progressBar.setProgress(0.1)
             } else {
                 progressBar.setProgress(1.0)
-                if wv.isValid == true {
-                    viewModel.saveHistory(wv: wv)
+                if wv.title != nil && wv.url != nil {
+                    if wv.hasSavableUrl {
+                        viewModel.saveHistory(wv: wv)
+                    }
+                    wv.previousUrl = (wv.hasValidUrl || wv.errorUrl == nil) ? wv.url : wv.errorUrl
+                    log.debug("set previous url. url: \(wv.previousUrl)")
                 }
-                log.debug("set previous url. url: \(wv.url)")
-                wv.previousUrl = wv.url
             }
         }
     }

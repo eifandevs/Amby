@@ -15,6 +15,8 @@
 		A562096D1E619C3400F8996A /* EachHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562096C1E619C3400F8996A /* EachHistoryItem.swift */; };
 		A562096F1E619C4100F8996A /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562096E1E619C4100F8996A /* EGProgressBar.swift */; };
 		A56209711E619C5000F8996A /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209701E619C5000F8996A /* EGWebView.swift */; };
+		A56209731E61EDFC00F8996A /* String+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209721E61EDFC00F8996A /* String+Extend.swift */; };
+		A56209751E61F3B500F8996A /* WKWebView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209741E61F3B500F8996A /* WKWebView+Extend.swift */; };
 		A57EFEAC1E3E06D300B66701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAB1E3E06D300B66701 /* Assets.xcassets */; };
 		A57EFEAF1E3E06D300B66701 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */; };
 		A5800E7F1E565E48004A1AF0 /* UIColor+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5800E7E1E565E48004A1AF0 /* UIColor+Extend.swift */; };
@@ -39,6 +41,8 @@
 		A562096C1E619C3400F8996A /* EachHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EachHistoryItem.swift; sourceTree = "<group>"; };
 		A562096E1E619C4100F8996A /* EGProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGProgressBar.swift; sourceTree = "<group>"; };
 		A56209701E619C5000F8996A /* EGWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGWebView.swift; sourceTree = "<group>"; };
+		A56209721E61EDFC00F8996A /* String+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extend.swift"; sourceTree = "<group>"; };
+		A56209741E61F3B500F8996A /* WKWebView+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+Extend.swift"; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Eiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eiger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57EFEAB1E3E06D300B66701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A57EFEAE1E3E06D300B66701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 			children = (
 				A5CB302B1E530E6700A59A82 /* Util.swift */,
 				A5800E7E1E565E48004A1AF0 /* UIColor+Extend.swift */,
+				A56209721E61EDFC00F8996A /* String+Extend.swift */,
+				A56209741E61F3B500F8996A /* WKWebView+Extend.swift */,
 			);
 			name = CommonUtil;
 			sourceTree = "<group>";
@@ -328,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A56209731E61EDFC00F8996A /* String+Extend.swift in Sources */,
 				A5D88FB81E4F1EE30099DFA3 /* AppDelegate.swift in Sources */,
 				A562096D1E619C3400F8996A /* EachHistoryItem.swift in Sources */,
 				A5D88FC01E4F1F130099DFA3 /* DeviceDataManager.swift in Sources */,
@@ -336,6 +343,7 @@
 				A5D88FBE1E4F1F050099DFA3 /* EGApplication.swift in Sources */,
 				A5D88FC61E4F1F3D0099DFA3 /* BaseViewController.swift in Sources */,
 				A5CB302C1E530E6700A59A82 /* Util.swift in Sources */,
+				A56209751E61F3B500F8996A /* WKWebView+Extend.swift in Sources */,
 				A56209691E619C1600F8996A /* BaseViewModel.swift in Sources */,
 				A562096B1E619C2100F8996A /* CommonHistoryItem.swift in Sources */,
 				A56209671E619C0700F8996A /* BaseView.swift in Sources */,

@@ -53,13 +53,14 @@ class BaseViewModel {
     }
 
     func saveHistory(wv: EGWebView) {
+        let saveUrl = (((wv.hasValidUrl || wv.errorUrl == nil) ? wv.url : wv.errorUrl)?.absoluteString.removingPercentEncoding)!
         // Common History
-        let common = CommonHistoryItem(url: (wv.url?.absoluteString.removingPercentEncoding)!, title: wv.title!, date: Date())
+        let common = CommonHistoryItem(url: saveUrl, title: wv.title!, date: Date())
         commonHistory.append(common)
         log.debug("save history. url: \(common.url)")
         
         // Each History
-        let each = EachHistoryItem(url: common.url, title: common.title)
+        let each = EachHistoryItem(url: saveUrl, title: common.title)
         eachHistory[locationIndex] = each        
     }
     
