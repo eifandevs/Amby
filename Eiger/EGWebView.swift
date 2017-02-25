@@ -18,9 +18,7 @@ class EGWebView: WKWebView {
         case UNAUTHORIZED
     }
     
-    var originalUrl: URL? = nil // リダイレクト前の最初のリクエスト
     var previousUrl: URL? = nil // リロードしたページを履歴に登録しないためのフラグ
-    var isHistoryRequest: Bool = false // ページを戻る(進む)のリクエストかどうか
     var isValid: Bool {
         get {
             return ((title != nil) &&
@@ -89,11 +87,7 @@ class EGWebView: WKWebView {
         }()
         loadHtml(code: errorType)
     }
-    
-    func isLocalRequest() -> Bool {
-        return (self.url?.absoluteString.hasPrefix("file://"))!
-    }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

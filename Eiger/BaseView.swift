@@ -38,18 +38,18 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             button.setTitle("戻る(ページ)", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    self!.viewModel.decrementLocation(wv: self!.wv)
+                    self!.wv.goBack()
             }
             addSubview(button)
         }
         
         do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 200, y: 200), size: CGSize(width: 150, height: 50)))
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 220, y: 200), size: CGSize(width: 150, height: 50)))
             button.backgroundColor = UIColor.gray
             button.setTitle("進む(ページ)", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    self!.viewModel.incrementLocation(wv: self!.wv)
+                    self!.wv.goForward()
             }
             addSubview(button)
         }
@@ -66,7 +66,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
 
         do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 200, y: 280), size: CGSize(width: 150, height: 50)))
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 220, y: 280), size: CGSize(width: 150, height: 50)))
             button.backgroundColor = UIColor.gray
             button.setTitle("進む(wv)", for: .normal)
             _ = button.reactive.tap
@@ -82,7 +82,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             button.setTitle("リロード", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    self!.viewModel.refresh(wv: self!.wv)
+                    self!.wv.reload()
             }
             addSubview(button)
         }
@@ -205,19 +205,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             //インジゲーターの表示、非表示をきりかえる。
             UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
             if wv.isLoading == true {
-                if (wv.isLocalRequest() == false) {
-                    log.debug("[original url]\(wv.url?.absoluteString)")
-                    wv.originalUrl = wv.url
-                }
+                log.debug("isFinished を falseにします")
+                progressBar.isFinished = false
                 progressBar.setProgress(0.1)
             } else {
+                progressBar.setProgress(1.0)
                 if wv.isValid == true {
-                    if wv.isLocalRequest() == true {
-                        progressBar.initializeProgress()
-                    } else {
-                        progressBar.setProgress(1.0)
-                    }
-                    viewModel.saveCommonHistory(wv: wv)
+                    viewModel.saveHistory(wv: wv)
                 }
             }
         }

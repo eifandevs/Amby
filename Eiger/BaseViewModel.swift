@@ -14,16 +14,14 @@ class BaseViewModel {
     // リクエストURL。これを変更すると、BaseViewがそのURLでロードする
     var requestUrl = Observable(UserDefaults.standard.string(forKey: AppDataManager.shared.defaultUrlKey)!)
 
-    private let historyModel = HistoryModel()
-
     // 現在表示しているwebviewのインデックス
     private var locationIndex = 0
     
     // 全てのwebViewの履歴
-    private var commonHistory: [History] = []
+    private var commonHistory: [CommonHistoryItem] = []
     
     // webViewそれぞれの履歴とカレントページインデックス
-    var eachHistory: [EachHistoryItem] = [EachHistoryItem(history: [], index: -1)]
+    private var eachHistory: [EachHistoryItem] = [EachHistoryItem()]
     
     var defaultUrl: String {
         get {
@@ -40,12 +38,6 @@ class BaseViewModel {
         }
     }
     
-    private var currentHistory: EachHistoryItem {
-        get {
-            return eachHistory[locationIndex]
-        }
-    }
-    
     init() {
         // historyInfo読み込み
         // TODO: コメントを外す
@@ -57,88 +49,40 @@ class BaseViewModel {
 //            log.error("failed to read: \(error)")
 //        }
     }
-    
-    func incrementLocation(wv: EGWebView) {
-        if currentHistory.history.count > currentHistory.index + 1 {
-            wv.isHistoryRequest = true
-            requestUrl.value = currentHistory.history[currentHistory.index + 1]
-            eachHistory[locationIndex].index += 1
-            log.debug("進むを検知。index: \(eachHistory[locationIndex].index - 1) -> \(eachHistory[locationIndex].index)")
-        } else {
-            log.warning("can not go forward webview")
-        }
-    }
 
-    func decrementLocation(wv: EGWebView) {
-        if 0 <= currentHistory.index - 1 {
-            wv.isHistoryRequest = true
-            requestUrl.value = currentHistory.history[currentHistory.index - 1]
-            eachHistory[locationIndex].index -= 1
-            log.debug("戻るを検知。index: \(eachHistory[locationIndex].index + 1) -> \(eachHistory[locationIndex].index)")
-            
-        } else {
-            log.warning("can not back webview")
-        }
-    }
-
-    func saveCommonHistory(wv: EGWebView) {
-        if wv.isLocalRequest() == false {
-            let h = History()
-            h.title = wv.title!
-            h.url = (wv.url?.absoluteString.removingPercentEncoding)!
-            h.date = Date()
-            
-            commonHistory.append(h)
-            log.debug("save common history. url: \(h.url)")
-        }
+    func saveHistory(wv: EGWebView) {
+        // Common History
+        let common = CommonHistoryItem(url: (wv.url?.absoluteString.removingPercentEncoding)!, title: wv.title!, date: Date())
+        commonHistory.append(common)
+        log.debug("save history. url: \(common.url)")
         
-        // each historyを更新する
-        if wv.isHistoryRequest == false {
-            // ページを戻る(進む)アクションの場合は、eachHistoryには追加しない
-            saveEachHistory(wv: wv)
-        }
+        // Each History
+        let each = EachHistoryItem(url: common.url, title: common.title)
+        eachHistory[locationIndex] = each
+        
         wv.previousUrl = wv.url
-        wv.isHistoryRequest = false // 読み込みが終わったら、履歴リクエストフラグを落としておく
     }
     
     func storeCommonHistory() {
         if commonHistory.count > 0 {
-            let savingTerm = Date(timeIntervalSinceNow: -1 * Double(historySavableTerm) * 24 * 60 * 60)
-            let deleteHistory = historyModel.select().filter({ $0.date < savingTerm })
-            if deleteHistory.count > 0 {
-                historyModel.deleteWithRLMObjects(data: deleteHistory)
+            let historyInfoData = NSKeyedArchiver.archivedData(withRootObject: commonHistory)
+            do {
+                try historyInfoData.write(to: AppDataManager.shared.commonHistoryPath)
+                log.debug("store common history")
+            } catch let error as NSError {
+                log.error("failed to write: \(error)")
             }
-            historyModel.insertWithRLMObjects(data: commonHistory)
-            log.debug("store common history. all history: \(historyModel.select())")
-            commonHistory = []
         }
     }
     
     func storeEachHistory() {
         // hisotryInfo書き込み
-        let historyInfoData =  NSKeyedArchiver.archivedData(withRootObject: eachHistory)
+        let historyInfoData = NSKeyedArchiver.archivedData(withRootObject: eachHistory)
         do {
-            try historyInfoData.write(to: AppDataManager.shared.historyPath)
+            try historyInfoData.write(to: AppDataManager.shared.eachHistoryPath)
             log.debug("store each history")
         } catch let error as NSError {
             log.error("failed to write: \(error)")
         }
-    }
-    
-    func refresh(wv: EGWebView) {
-        wv.isHistoryRequest = true // 読み込みが終わったら、履歴リクエストフラグを落としておく
-        requestUrl.value = currentHistory.history[currentHistory.index]
-    }
-    
-    private func saveEachHistory(wv: EGWebView) {
-        let originalUrl = (wv.originalUrl?.absoluteString.removingPercentEncoding)!
-        let requestUrl = (wv.url?.absoluteString.removingPercentEncoding)!
-        if currentHistory.index + 1 < currentHistory.history.count {
-            // ページを戻るで過去ページに戻り、別のリンクをタップした場合は、新しいルートで履歴をとる
-            eachHistory[locationIndex].history[(currentHistory.index + 1)...(currentHistory.history.count - 1)] = []
-        }
-        let addUrl = (requestUrl.hasPrefix("file://") == true) ? originalUrl : requestUrl
-        log.debug("save each history. url: \(addUrl)")
-        eachHistory[locationIndex].add(urlStr: addUrl)
     }
 }

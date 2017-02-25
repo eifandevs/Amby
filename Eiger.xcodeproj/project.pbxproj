@@ -8,57 +8,53 @@
 
 /* Begin PBXBuildFile section */
 		8378C8F6D4B063605AA2555B /* Pods_Eiger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */; };
+		A56209651E619BF300F8996A /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209641E619BF300F8996A /* AppDataManager.swift */; };
+		A56209671E619C0700F8996A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209661E619C0700F8996A /* BaseView.swift */; };
+		A56209691E619C1600F8996A /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209681E619C1600F8996A /* BaseViewModel.swift */; };
+		A562096B1E619C2100F8996A /* CommonHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562096A1E619C2100F8996A /* CommonHistoryItem.swift */; };
+		A562096D1E619C3400F8996A /* EachHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562096C1E619C3400F8996A /* EachHistoryItem.swift */; };
+		A562096F1E619C4100F8996A /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562096E1E619C4100F8996A /* EGProgressBar.swift */; };
+		A56209711E619C5000F8996A /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209701E619C5000F8996A /* EGWebView.swift */; };
 		A57EFEAC1E3E06D300B66701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAB1E3E06D300B66701 /* Assets.xcassets */; };
 		A57EFEAF1E3E06D300B66701 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */; };
-		A5800E7B1E565E00004A1AF0 /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5800E7A1E565E00004A1AF0 /* EGProgressBar.swift */; };
 		A5800E7F1E565E48004A1AF0 /* UIColor+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5800E7E1E565E48004A1AF0 /* UIColor+Extend.swift */; };
 		A58581011E59D0B700CCC098 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A58581001E59D0B700CCC098 /* offline.html */; };
-		A58581071E5B33C600CCC098 /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58581061E5B33C600CCC098 /* EGWebView.swift */; };
-		A58581091E5C760400CCC098 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58581081E5C760400CCC098 /* BaseViewModel.swift */; };
-		A585810B1E5C761300CCC098 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585810A1E5C761300CCC098 /* BaseView.swift */; };
-		A5CB30231E50975800A59A82 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB30221E50975700A59A82 /* HistoryModel.swift */; };
-		A5CB30261E5099C400A59A82 /* ModelBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB30251E5099C400A59A82 /* ModelBase.swift */; };
 		A5CB302C1E530E6700A59A82 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB302B1E530E6700A59A82 /* Util.swift */; };
-		A5D40C621E58A794004B7454 /* EachHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D40C611E58A794004B7454 /* EachHistoryItem.swift */; };
 		A5D88FB01E4F1E9A0099DFA3 /* invalid.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FAF1E4F1E9A0099DFA3 /* invalid.html */; };
 		A5D88FB21E4F1EA40099DFA3 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FB11E4F1EA40099DFA3 /* dns.html */; };
 		A5D88FB41E4F1EB00099DFA3 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FB31E4F1EB00099DFA3 /* authorize.html */; };
-		A5D88FB61E4F1ED70099DFA3 /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FB51E4F1ED70099DFA3 /* AppDataManager.swift */; };
 		A5D88FB81E4F1EE30099DFA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FB71E4F1EE30099DFA3 /* AppDelegate.swift */; };
 		A5D88FBE1E4F1F050099DFA3 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FBD1E4F1F050099DFA3 /* EGApplication.swift */; };
 		A5D88FC01E4F1F130099DFA3 /* DeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FBF1E4F1F130099DFA3 /* DeviceDataManager.swift */; };
 		A5D88FC61E4F1F3D0099DFA3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FC51E4F1F3D0099DFA3 /* BaseViewController.swift */; };
 		A5D88FCA1E4F20050099DFA3 /* timeout.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FC91E4F20050099DFA3 /* timeout.html */; };
-		A5D88FCC1E4F60260099DFA3 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D88FCB1E4F60260099DFA3 /* History.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.release.xcconfig"; sourceTree = "<group>"; };
+		A56209641E619BF300F8996A /* AppDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
+		A56209661E619C0700F8996A /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		A56209681E619C1600F8996A /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		A562096A1E619C2100F8996A /* CommonHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryItem.swift; sourceTree = "<group>"; };
+		A562096C1E619C3400F8996A /* EachHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EachHistoryItem.swift; sourceTree = "<group>"; };
+		A562096E1E619C4100F8996A /* EGProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGProgressBar.swift; sourceTree = "<group>"; };
+		A56209701E619C5000F8996A /* EGWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGWebView.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Eiger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eiger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57EFEAB1E3E06D300B66701 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A57EFEAE1E3E06D300B66701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A57EFEB01E3E06D300B66701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5800E7A1E565E00004A1AF0 /* EGProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGProgressBar.swift; sourceTree = "<group>"; };
 		A5800E7E1E565E48004A1AF0 /* UIColor+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extend.swift"; sourceTree = "<group>"; };
 		A58581001E59D0B700CCC098 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
-		A58581061E5B33C600CCC098 /* EGWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGWebView.swift; sourceTree = "<group>"; };
-		A58581081E5C760400CCC098 /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
-		A585810A1E5C761300CCC098 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
-		A5CB30221E50975700A59A82 /* HistoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
-		A5CB30251E5099C400A59A82 /* ModelBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelBase.swift; sourceTree = "<group>"; };
 		A5CB302B1E530E6700A59A82 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		A5D40C611E58A794004B7454 /* EachHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EachHistoryItem.swift; sourceTree = "<group>"; };
 		A5D88FAC1E4F1E5C0099DFA3 /* Eiger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Eiger-Bridging-Header.h"; sourceTree = "<group>"; };
 		A5D88FAF1E4F1E9A0099DFA3 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
 		A5D88FB11E4F1EA40099DFA3 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
 		A5D88FB31E4F1EB00099DFA3 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
-		A5D88FB51E4F1ED70099DFA3 /* AppDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
 		A5D88FB71E4F1EE30099DFA3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5D88FBD1E4F1F050099DFA3 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A5D88FBF1E4F1F130099DFA3 /* DeviceDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDataManager.swift; sourceTree = "<group>"; };
 		A5D88FC51E4F1F3D0099DFA3 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A5D88FC91E4F20050099DFA3 /* timeout.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = timeout.html; sourceTree = "<group>"; };
-		A5D88FCB1E4F60260099DFA3 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,14 +126,6 @@
 			path = Eiger;
 			sourceTree = "<group>";
 		};
-		A5CB30241E50994500A59A82 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-				A5D88FCB1E4F60260099DFA3 /* History.swift */,
-			);
-			name = Entity;
-			sourceTree = "<group>";
-		};
 		A5D88FA01E460FE00099DFA3 /* CommonUtil */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,9 +138,9 @@
 		A5D88FA11E460FE70099DFA3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A585810A1E5C761300CCC098 /* BaseView.swift */,
-				A58581061E5B33C600CCC098 /* EGWebView.swift */,
-				A5800E7A1E565E00004A1AF0 /* EGProgressBar.swift */,
+				A56209661E619C0700F8996A /* BaseView.swift */,
+				A56209701E619C5000F8996A /* EGWebView.swift */,
+				A562096E1E619C4100F8996A /* EGProgressBar.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -160,9 +148,8 @@
 		A5D88FA21E460FED0099DFA3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A5CB30241E50994500A59A82 /* Entity */,
-				A5CB30221E50975700A59A82 /* HistoryModel.swift */,
-				A5CB30251E5099C400A59A82 /* ModelBase.swift */,
+				A562096C1E619C3400F8996A /* EachHistoryItem.swift */,
+				A562096A1E619C2100F8996A /* CommonHistoryItem.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -170,8 +157,7 @@
 		A5D88FA31E460FF40099DFA3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				A5D40C611E58A794004B7454 /* EachHistoryItem.swift */,
-				A58581081E5C760400CCC098 /* BaseViewModel.swift */,
+				A56209681E619C1600F8996A /* BaseViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -188,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				A5D88FBF1E4F1F130099DFA3 /* DeviceDataManager.swift */,
-				A5D88FB51E4F1ED70099DFA3 /* AppDataManager.swift */,
+				A56209641E619BF300F8996A /* AppDataManager.swift */,
 			);
 			name = CommonData;
 			sourceTree = "<group>";
@@ -342,21 +328,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5CB30261E5099C400A59A82 /* ModelBase.swift in Sources */,
 				A5D88FB81E4F1EE30099DFA3 /* AppDelegate.swift in Sources */,
-				A5D40C621E58A794004B7454 /* EachHistoryItem.swift in Sources */,
+				A562096D1E619C3400F8996A /* EachHistoryItem.swift in Sources */,
 				A5D88FC01E4F1F130099DFA3 /* DeviceDataManager.swift in Sources */,
+				A562096F1E619C4100F8996A /* EGProgressBar.swift in Sources */,
 				A5800E7F1E565E48004A1AF0 /* UIColor+Extend.swift in Sources */,
 				A5D88FBE1E4F1F050099DFA3 /* EGApplication.swift in Sources */,
-				A5800E7B1E565E00004A1AF0 /* EGProgressBar.swift in Sources */,
 				A5D88FC61E4F1F3D0099DFA3 /* BaseViewController.swift in Sources */,
-				A5D88FCC1E4F60260099DFA3 /* History.swift in Sources */,
-				A5D88FB61E4F1ED70099DFA3 /* AppDataManager.swift in Sources */,
-				A5CB30231E50975800A59A82 /* HistoryModel.swift in Sources */,
-				A58581091E5C760400CCC098 /* BaseViewModel.swift in Sources */,
-				A585810B1E5C761300CCC098 /* BaseView.swift in Sources */,
 				A5CB302C1E530E6700A59A82 /* Util.swift in Sources */,
-				A58581071E5B33C600CCC098 /* EGWebView.swift in Sources */,
+				A56209691E619C1600F8996A /* BaseViewModel.swift in Sources */,
+				A562096B1E619C2100F8996A /* CommonHistoryItem.swift in Sources */,
+				A56209671E619C0700F8996A /* BaseView.swift in Sources */,
+				A56209651E619BF300F8996A /* AppDataManager.swift in Sources */,
+				A56209711E619C5000F8996A /* EGWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

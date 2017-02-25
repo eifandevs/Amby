@@ -12,6 +12,7 @@ import Bond
 
 class EGProgressBar: UIView {
     private let bar: UIView = UIView()
+    var isFinished: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,23 +38,31 @@ class EGProgressBar: UIView {
     }
 
     func setProgress(_ progress: CGFloat) {
-        
-        if progress > 0 {
-            alpha = 1
+        if isFinished == true {
+            return
         }
         
         layer.removeAllAnimations()
-        UIView.animate(withDuration: 0.4, animations: {
-            self.bar.frame.size.width = self.frame.size.width * progress
-        }) { _ in
-            if self.bar.frame.size.width == self.frame.size.width {
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.alpha = 0
-                }) { _ in
-                    self.bar.frame.size.width = 0
+        
+        var completion: ((Bool) -> Void)? = nil
+
+        if progress > 0 {
+            alpha = 1
+            if progress >= 1 {
+                isFinished = true
+                completion = { finished in
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.alpha = 0
+                    }) { _ in
+                        self.bar.frame.size.width = 0
+                    }
                 }
             }
         }
+        
+        UIView.animate(withDuration: 0.4, animations: {
+            self.bar.frame.size.width = self.frame.size.width * progress
+        }, completion: completion)
         
     }
     
