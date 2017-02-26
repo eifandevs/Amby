@@ -55,7 +55,7 @@ class BaseViewModel {
     func saveHistory(wv: EGWebView) {
         let saveUrl = (((wv.hasValidUrl || wv.errorUrl == nil) ? wv.url : wv.errorUrl)?.absoluteString.removingPercentEncoding)!
         // Common History
-        let common = CommonHistoryItem(url: saveUrl, title: wv.title!)
+        let common = CommonHistoryItem(url: saveUrl, title: wv.title!, date: Date())
         commonHistory.append(common)
         log.debug("save history. url: \(common.url)")
         
@@ -72,18 +72,6 @@ class BaseViewModel {
     
     private func storeCommonHistory() {
         if commonHistory.count > 0 {
-            // 現在保存しているものに追加する
-//            let saveData = { () -> [CommonHistoryItem] in
-//                do {
-//                    let data = try Data(contentsOf: AppDataManager.shared.commonHistoryPath)
-//                    return NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem] + self.commonHistory
-//                } catch let error as NSError {
-//                    log.error("failed to read: \(error)")
-//                    return self.commonHistory
-//                }
-//            }
-//            
-//            log.debug("これから保存するCommonData: \(saveData)")
             let saveData: [CommonHistoryItem] = { () -> [CommonHistoryItem] in
                 do {
                     let data = try Data(contentsOf: AppDataManager.shared.commonHistoryPath)
@@ -95,8 +83,14 @@ class BaseViewModel {
                     return commonHistory
                 }
             }()
+
+            log.debug("*********** 保存するCommonHistory **************")
+            for data in saveData {
+                log.debug("url: \(data.url)")
+                log.debug("date: \(data.date)")
+            }
+            log.debug("***********************************************")
             
-            log.debug("保存するCommonData: \(saveData)")
             let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
             do {
                 try commonHistoryData.write(to: AppDataManager.shared.commonHistoryPath)
