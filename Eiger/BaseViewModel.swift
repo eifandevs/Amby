@@ -55,7 +55,7 @@ class BaseViewModel {
     func saveHistory(wv: EGWebView) {
         let saveUrl = (((wv.hasValidUrl || wv.errorUrl == nil) ? wv.url : wv.errorUrl)?.absoluteString.removingPercentEncoding)!
         // Common History
-        let common = CommonHistoryItem(url: saveUrl, title: wv.title!, date: Date())
+        let common = CommonHistoryItem(url: saveUrl, title: wv.title!)
         commonHistory.append(common)
         log.debug("save history. url: \(common.url)")
         
@@ -64,11 +64,42 @@ class BaseViewModel {
         eachHistory[locationIndex] = each        
     }
     
-    func storeCommonHistory() {
+    func storeHistory() {
+        storeCommonHistory()
+        storeEachHistory()
+        commonHistory = []
+    }
+    
+    private func storeCommonHistory() {
         if commonHistory.count > 0 {
-            let historyInfoData = NSKeyedArchiver.archivedData(withRootObject: commonHistory)
+            // 現在保存しているものに追加する
+//            let saveData = { () -> [CommonHistoryItem] in
+//                do {
+//                    let data = try Data(contentsOf: AppDataManager.shared.commonHistoryPath)
+//                    return NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem] + self.commonHistory
+//                } catch let error as NSError {
+//                    log.error("failed to read: \(error)")
+//                    return self.commonHistory
+//                }
+//            }
+//            
+//            log.debug("これから保存するCommonData: \(saveData)")
+            let saveData: [CommonHistoryItem] = { () -> [CommonHistoryItem] in
+                do {
+                    let data = try Data(contentsOf: AppDataManager.shared.commonHistoryPath)
+                    let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
+                    let saveData: [CommonHistoryItem] = old + commonHistory
+                    return saveData
+                } catch let error as NSError {
+                    log.error("failed to read: \(error)")
+                    return commonHistory
+                }
+            }()
+            
+            log.debug("保存するCommonData: \(saveData)")
+            let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
             do {
-                try historyInfoData.write(to: AppDataManager.shared.commonHistoryPath)
+                try commonHistoryData.write(to: AppDataManager.shared.commonHistoryPath)
                 log.debug("store common history")
             } catch let error as NSError {
                 log.error("failed to write: \(error)")
@@ -76,11 +107,11 @@ class BaseViewModel {
         }
     }
     
-    func storeEachHistory() {
+    private func storeEachHistory() {
         if commonHistory.count > 0 {
-            let historyInfoData = NSKeyedArchiver.archivedData(withRootObject: eachHistory)
+            let eachHistoryData = NSKeyedArchiver.archivedData(withRootObject: eachHistory)
             do {
-                try historyInfoData.write(to: AppDataManager.shared.eachHistoryPath)
+                try eachHistoryData.write(to: AppDataManager.shared.eachHistoryPath)
                 log.debug("store each history")
             } catch let error as NSError {
                 log.error("failed to write: \(error)")

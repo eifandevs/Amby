@@ -243,8 +243,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     func storeHistory() {
-        viewModel.storeCommonHistory()
-        viewModel.storeEachHistory()
+        viewModel.storeHistory()
     }
     
 // MARK: Private Method
