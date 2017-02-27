@@ -13,14 +13,17 @@ class AppDataManager {
     let defaultUrlKey = "defaultUrl"
     let locationIndexKey = "locationIndex"
     let historySavableTermKey = "historySaveblaTerm"
-    let eachHistoryPath = URL(fileURLWithPath: DeviceDataManager.shared.documentsDir + "/tab_history.dat")
-    let commonHistoryPath = URL(fileURLWithPath: DeviceDataManager.shared.documentsDir + "/common_history.dat")
+    let eachHistoryPath = URL(fileURLWithPath: DeviceDataManager.shared.documentsDir + "/each_history.dat")
 
     private init() {
         
     }
     
-    public func registerDefaultData() {
+    func commonHistoryPath(date: String) -> URL {
+        return URL(fileURLWithPath: DeviceDataManager.shared.documentsDir + "/\(date).dat")
+    }
+    
+    func registerDefaultData() {
         UserDefaults.standard.register(defaults: [defaultUrlKey: "https://google.com",
                                                   locationIndexKey: 0,
                                                   historySavableTermKey: 10])

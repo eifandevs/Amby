@@ -11,7 +11,7 @@ import Bond
 
 class BaseViewModel {
 
-    // リクエストURL。これを変更すると、BaseViewがそのURLでロードする
+    // リクエストURL
     var requestUrl = Observable("http://about:blank")
 
     // 現在表示しているwebviewのインデックス
@@ -72,31 +72,49 @@ class BaseViewModel {
     
     private func storeCommonHistory() {
         if commonHistory.count > 0 {
-            let saveData: [CommonHistoryItem] = { () -> [CommonHistoryItem] in
-                do {
-                    let data = try Data(contentsOf: AppDataManager.shared.commonHistoryPath)
-                    let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
-                    let saveData: [CommonHistoryItem] = old + commonHistory
-                    return saveData
-                } catch let error as NSError {
-                    log.error("failed to read: \(error)")
-                    return commonHistory
+            // commonHistoryを日付毎に分ける
+            var commonHistoryByDate: [String: [CommonHistoryItem]] = [:]
+            for item in commonHistory {
+                let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale(identifier: NSLocale.current.identifier)
+                dateFormatter.dateFormat = "yyyyMMdd"
+                let key = dateFormatter.string(from: item.date)
+                if commonHistoryByDate[key] == nil {
+                    commonHistoryByDate[key] = [item]
+                } else {
+                    commonHistoryByDate[key]?.append(item)
                 }
-            }()
-
-            log.debug("*********** 保存するCommonHistory **************")
-            for data in saveData {
-                log.debug("url: \(data.url)")
-                log.debug("date: \(data.date)")
             }
-            log.debug("***********************************************")
             
-            let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-            do {
-                try commonHistoryData.write(to: AppDataManager.shared.commonHistoryPath)
-                log.debug("store common history")
-            } catch let error as NSError {
-                log.error("failed to write: \(error)")
+            for (key, value) in commonHistoryByDate {
+                let commonHistoryPath = AppDataManager.shared.commonHistoryPath(date: key)
+                
+                let saveData: [CommonHistoryItem] = { () -> [CommonHistoryItem] in
+                    do {
+                        let data = try Data(contentsOf: commonHistoryPath)
+                        let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
+                        let saveData: [CommonHistoryItem] = old + value
+                        return saveData
+                    } catch let error as NSError {
+                        log.error("failed to read: \(error)")
+                        return value
+                    }
+                }()
+
+//                log.debug("*********** 保存するCommonHistory **************")
+//                for data in saveData {
+//                    log.debug("url: \(data.url)")
+//                    log.debug("date: \(data.date)")
+//                }
+//                log.debug("***********************************************")
+                
+                let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
+                do {
+                    try commonHistoryData.write(to: commonHistoryPath)
+                    log.debug("store common history")
+                } catch let error as NSError {
+                    log.error("failed to write: \(error)")
+                }
             }
         }
     }
