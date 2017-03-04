@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8378C8F6D4B063605AA2555B /* Pods_Eiger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */; };
+		A55A60301E6AF418005C03F3 /* BaseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A602F1E6AF418005C03F3 /* BaseLayer.swift */; };
+		A55A60321E6AF454005C03F3 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A60311E6AF454005C03F3 /* HeaderView.swift */; };
 		A56209651E619BF300F8996A /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209641E619BF300F8996A /* AppDataManager.swift */; };
 		A56209671E619C0700F8996A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209661E619C0700F8996A /* BaseView.swift */; };
 		A56209691E619C1600F8996A /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209681E619C1600F8996A /* BaseViewModel.swift */; };
@@ -34,6 +36,8 @@
 
 /* Begin PBXFileReference section */
 		1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.release.xcconfig"; sourceTree = "<group>"; };
+		A55A602F1E6AF418005C03F3 /* BaseLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLayer.swift; sourceTree = "<group>"; };
+		A55A60311E6AF454005C03F3 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		A56209641E619BF300F8996A /* AppDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
 		A56209661E619C0700F8996A /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A56209681E619C1600F8996A /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -92,6 +96,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A55A602E1E6AF342005C03F3 /* BaseLayer */ = {
+			isa = PBXGroup;
+			children = (
+				A56209661E619C0700F8996A /* BaseView.swift */,
+				A56209701E619C5000F8996A /* EGWebView.swift */,
+				A562096E1E619C4100F8996A /* EGProgressBar.swift */,
+				A55A602F1E6AF418005C03F3 /* BaseLayer.swift */,
+				A55A60311E6AF454005C03F3 /* HeaderView.swift */,
+			);
+			name = BaseLayer;
+			sourceTree = "<group>";
+		};
 		A57EFE981E3E06D300B66701 = {
 			isa = PBXGroup;
 			children = (
@@ -144,9 +160,7 @@
 		A5D88FA11E460FE70099DFA3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A56209661E619C0700F8996A /* BaseView.swift */,
-				A56209701E619C5000F8996A /* EGWebView.swift */,
-				A562096E1E619C4100F8996A /* EGProgressBar.swift */,
+				A55A602E1E6AF342005C03F3 /* BaseLayer */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -336,9 +350,11 @@
 			files = (
 				A56209731E61EDFC00F8996A /* String+Extend.swift in Sources */,
 				A5D88FB81E4F1EE30099DFA3 /* AppDelegate.swift in Sources */,
+				A55A60301E6AF418005C03F3 /* BaseLayer.swift in Sources */,
 				A562096D1E619C3400F8996A /* EachHistoryItem.swift in Sources */,
 				A5D88FC01E4F1F130099DFA3 /* DeviceDataManager.swift in Sources */,
 				A562096F1E619C4100F8996A /* EGProgressBar.swift in Sources */,
+				A55A60321E6AF454005C03F3 /* HeaderView.swift in Sources */,
 				A5800E7F1E565E48004A1AF0 /* UIColor+Extend.swift in Sources */,
 				A5D88FBE1E4F1F050099DFA3 /* EGApplication.swift in Sources */,
 				A5D88FC61E4F1F3D0099DFA3 /* BaseViewController.swift in Sources */,

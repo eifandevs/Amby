@@ -30,10 +30,13 @@ class EGWebView: WKWebView {
     
     var hasValidUrl: Bool {
         get {
-            return (url?.absoluteString)!.hasValidUrl
+            if let url = url {
+                return url.absoluteString.hasValidUrl
+            }
+            return false
         }
     }
-
+    
     init(pool: WKProcessPool) {
         let configuration = WKWebViewConfiguration()
         configuration.processPool = pool
@@ -107,9 +110,8 @@ class EGWebView: WKWebView {
         }()
         loadHtml(code: errorType)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-    

@@ -10,41 +10,19 @@ import UIKit
 import SpringIndicator
 
 class BaseViewController: UIViewController {
-
-    private let baseView: BaseView = BaseView()
+    
+    private var baseLayer: BaseLayer! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(applicationWillResignActive),
-            name: NSNotification.Name("UIApplicationWillResignActiveNotification"),
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(applicationDidBecomeActive),
-            name: NSNotification.Name("UIApplicationDidBecomeActiveNotification"),
-            object: nil
-        )
-        view = baseView
-    }
-
-    func applicationWillResignActive() {
-        baseView.storeHistory()
-    }
-    
-    func applicationDidBecomeActive() {
-        baseView.initializeProgress()
+        // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
+        baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
+        view.addSubview(baseLayer)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        baseView.stopProgressObserving()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        self.view.frame = CGRect(origin: CGPoint(x: 0, y: DeviceDataManager.shared.statusBarHeight), size: self.view.bounds.size)
+        baseLayer.stopProgressObserving()
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,4 +30,3 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
-
