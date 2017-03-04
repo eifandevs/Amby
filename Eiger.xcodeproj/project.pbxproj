@@ -99,10 +99,10 @@
 		A55A602E1E6AF342005C03F3 /* BaseLayer */ = {
 			isa = PBXGroup;
 			children = (
+				A55A602F1E6AF418005C03F3 /* BaseLayer.swift */,
 				A56209661E619C0700F8996A /* BaseView.swift */,
 				A56209701E619C5000F8996A /* EGWebView.swift */,
 				A562096E1E619C4100F8996A /* EGProgressBar.swift */,
-				A55A602F1E6AF418005C03F3 /* BaseLayer.swift */,
 				A55A60311E6AF454005C03F3 /* HeaderView.swift */,
 			);
 			name = BaseLayer;

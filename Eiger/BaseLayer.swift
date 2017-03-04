@@ -14,6 +14,7 @@ class BaseLayer: UIView {
     private var baseView: BaseView! = nil
     private var headerView: HeaderView = HeaderView()
     private let kDecelerationSpeedJudge: CGFloat = 2.0
+    private let kHeaderSizeMax: CGFloat = DeviceDataManager.shared.statusBarHeight * 2.4
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,14 +33,45 @@ class BaseLayer: UIView {
             name: NSNotification.Name("UIApplicationDidBecomeActiveNotification"),
             object: nil
         )
-        
-        _ = baseView.decelerationSpeed.observeNext { [weak self] value in
+
+        _ = baseView.scrollSpeed.observeNext { [weak self] value in
             //            if value < -(self!.kDecelerationSpeedJudge), self!.expanded == false {
             //                self!.expanded = true
             //            } else if value > self!.kDecelerationSpeedJudge, self!.expanded == true {
             //                self!.expanded = false
             //            }
             // ロード
+            
+            let slide = { [weak self] (val: CGFloat) -> Void in
+                self!.headerView.frame.size.height += value
+//                self!.baseView.frame.size.height -= value
+//                self!.baseView.frame.origin.y -= value
+            }
+            
+            if self!.headerView.frame.size.height != self!.kHeaderSizeMax && value > 0 {
+                // headerViewを拡大、baseViewを縮小
+                if self!.headerView.frame.size.height + value > self!.kHeaderSizeMax {
+                    self!.headerView.frame.size.height = self!.kHeaderSizeMax
+//                    self!.baseView.frame.size.height = self!.frame.size.height - self!.kHeaderSizeMax
+//                    self!.baseView.frame.origin.y = self!.kHeaderSizeMax
+                } else {
+                    slide(value)
+                }
+            }
+                
+            if self!.headerView.frame.size.height != DeviceDataManager.shared.statusBarHeight && value < 0 {
+                // headerを縮小、baseViewを拡大
+                if self!.headerView.frame.size.height + value < DeviceDataManager.shared.statusBarHeight {
+                    self!.headerView.frame.size.height = DeviceDataManager.shared.statusBarHeight
+//                    self!.baseView.frame.size.height = self!.frame.size.height - DeviceDataManager.shared.statusBarHeight
+//                    self!.baseView.frame.origin.y = DeviceDataManager.shared.statusBarHeight
+                } else {
+                    slide(value)
+                }
+            }
+            
+            self!.headerView.frame.origin.y = 0
+            
             log.debug("speed: \(value)")
         }
         

@@ -16,13 +16,6 @@ class HeaderView: UIView {
         backgroundColor = UIColor.frenchBlue
     }
     
-    func expand() {
-        UIView.animate(withDuration: 0.1, animations: {
-            self.frame.size.height = DeviceDataManager.shared.statusBarHeight * 2.5
-            self.frame.origin.y = 0
-        })
-    }
-    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

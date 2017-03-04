@@ -18,10 +18,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private var progressBar: EGProgressBar! = nil
     private let viewModel = BaseViewModel()
     private var processPool = WKProcessPool()
-    private var decelerating = false
-    private var decelerationMovingPointY: CGFloat = 0
+    private var isTouching = false
+    private var scrollMovingPointY: CGFloat = 0
     
-    var decelerationSpeed = Observable<CGFloat>(0)
+    var scrollSpeed = Observable<CGFloat>(0)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -115,15 +115,20 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     // MARK: EGApplication Delegate
     internal func screenTouchBegan(touch: UITouch) {
+        isTouching = true
     }
     
     internal func screenTouchMoved(touch: UITouch) {
     }
     
     internal func screenTouchEnded(touch: UITouch) {
+        isTouching = false
+        scrollMovingPointY = 0
     }
     
     internal func screenTouchCancelled(touch: UITouch) {
+        isTouching = false
+        scrollMovingPointY = 0
     }
     
     // MARK: ScrollView Delegate
@@ -131,22 +136,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
     }
     
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        decelerating = true
-        decelerationMovingPointY = scrollView.contentOffset.y
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        decelerating = false
-        decelerationMovingPointY = 0
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let overScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
-        if decelerating && !overScrolling {
-            decelerationSpeed.value = scrollView.contentOffset.y - decelerationMovingPointY
-            decelerationMovingPointY = scrollView.contentOffset.y
+        let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
+        if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching && isOverScrolling)) {
+            scrollSpeed.value =  -1 * (scrollView.contentOffset.y - scrollMovingPointY)
         }
+        scrollMovingPointY = scrollView.contentOffset.y
     }
     
     // MARK: WebView Delegate

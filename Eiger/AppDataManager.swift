@@ -24,7 +24,7 @@ class AppDataManager {
     }
     
     func registerDefaultData() {
-        UserDefaults.standard.register(defaults: [defaultUrlKey: "https://google.com",
+        UserDefaults.standard.register(defaults: [defaultUrlKey: "https://www.amazon.co.jp",
                                                   locationIndexKey: 0,
                                                   historySavableTermKey: 10])
     }
