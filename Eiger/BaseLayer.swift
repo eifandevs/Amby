@@ -45,7 +45,8 @@ class BaseLayer: UIView {
             let slide = { [weak self] (val: CGFloat) -> Void in
                 self!.headerView.frame.size.height += value
 //                self!.baseView.frame.size.height -= value
-//                self!.baseView.frame.origin.y -= value
+                self!.baseView.frame.origin.y += value
+                self!.baseView.scroll(pt: -val)
             }
             
             if self!.headerView.frame.size.height != self!.kHeaderSizeMax && value > 0 {
@@ -53,7 +54,7 @@ class BaseLayer: UIView {
                 if self!.headerView.frame.size.height + value > self!.kHeaderSizeMax {
                     self!.headerView.frame.size.height = self!.kHeaderSizeMax
 //                    self!.baseView.frame.size.height = self!.frame.size.height - self!.kHeaderSizeMax
-//                    self!.baseView.frame.origin.y = self!.kHeaderSizeMax
+                    self!.baseView.frame.origin.y = self!.kHeaderSizeMax
                 } else {
                     slide(value)
                 }
@@ -64,7 +65,7 @@ class BaseLayer: UIView {
                 if self!.headerView.frame.size.height + value < DeviceDataManager.shared.statusBarHeight {
                     self!.headerView.frame.size.height = DeviceDataManager.shared.statusBarHeight
 //                    self!.baseView.frame.size.height = self!.frame.size.height - DeviceDataManager.shared.statusBarHeight
-//                    self!.baseView.frame.origin.y = DeviceDataManager.shared.statusBarHeight
+                    self!.baseView.frame.origin.y = DeviceDataManager.shared.statusBarHeight
                 } else {
                     slide(value)
                 }

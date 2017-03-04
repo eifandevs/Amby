@@ -138,8 +138,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
-        if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching && isOverScrolling)) {
-            scrollSpeed.value =  -1 * (scrollView.contentOffset.y - scrollMovingPointY)
+        let speed = scrollView.contentOffset.y - scrollMovingPointY
+        
+        if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching && isOverScrolling && speed < 0)) {
+            scrollSpeed.value =  -1 * speed
         }
         scrollMovingPointY = scrollView.contentOffset.y
     }
@@ -241,6 +243,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     // MARK: Public Method
+    func scroll(pt: CGFloat) {
+        wv.scrollView.setContentOffset(CGPoint(x: wv.scrollView.contentOffset.x, y: wv.scrollView.contentOffset.y - pt), animated: false)
+    }
+
     func stopProgressObserving() {
         log.debug("stop progress observe")
         if let _webView = wv {
