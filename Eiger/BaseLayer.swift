@@ -13,6 +13,7 @@ class BaseLayer: UIView {
     
     private var baseView: BaseView! = nil
     private var headerView: HeaderView = HeaderView()
+    private var footerView: FooterView = FooterView()
     private let kDecelerationSpeedJudge: CGFloat = 2.0
     private let kHeaderSizeMax: CGFloat = DeviceDataManager.shared.statusBarHeight * 2.4
     
@@ -20,7 +21,9 @@ class BaseLayer: UIView {
         super.init(frame: frame)
         backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         baseView = BaseView(frame: CGRect(x: 0, y: DeviceDataManager.shared.statusBarHeight, width: frame.size.width, height: frame.size.height - DeviceDataManager.shared.statusBarHeight))
+        // サイズが可変なので、layoutSubViewsで初期化しない
         headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight))
+        footerView = FooterView(frame: CGRect(x: 0, y: frame.size.height - DeviceDataManager.shared.statusBarHeight * 5, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight * 5))
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(applicationWillResignActive),
@@ -75,6 +78,7 @@ class BaseLayer: UIView {
         
         addSubview(baseView)
         addSubview(headerView)
+        addSubview(footerView)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-class HeaderView: UIView {
+class HeaderView: UIView, ShadowView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addShadow()
         backgroundColor = UIColor.frenchBlue
     }
     
