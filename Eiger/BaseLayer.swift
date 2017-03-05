@@ -92,6 +92,7 @@ class BaseLayer: UIView {
     }
     
     func applicationDidBecomeActive() {
-        baseView.initializeProgress()
+        // TODO: プログレスバーの初期化
+        // setProgres(0)を実施する
     }
 }

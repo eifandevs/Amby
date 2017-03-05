@@ -147,7 +147,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     // MARK: WebView Delegate
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        progressBar.initializeProgress()
+        progressBar.setProgress(progressBar.progressZero)
         wv.loadHtml(error: (error as NSError))
     }
     
@@ -250,16 +250,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         if let _webView = wv {
             _webView.removeObserver(self, forKeyPath: "estimatedProgress")
             _webView.removeObserver(self, forKeyPath: "loading")
-        }
-        if let _progressBar = progressBar {
-            _progressBar.removeProgress()
-            progressBar = nil
-        }
-    }
-    
-    func initializeProgress() {
-        if let _progressBar = progressBar {
-            _progressBar.initializeProgress()
         }
     }
     
