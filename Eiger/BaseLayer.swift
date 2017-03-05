@@ -71,9 +71,7 @@ class BaseLayer: UIView {
                 }
             }
             
-            self!.headerView.frame.origin.y = 0
-            
-            log.debug("speed: \(value)")
+            self!.headerView.frame.origin.y = 0            
         }
         
         addSubview(baseView)

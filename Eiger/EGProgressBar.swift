@@ -12,6 +12,7 @@ import Bond
 
 class EGProgressBar: UIView {
     private let bar: UIView = UIView()
+    let progressMin: CGFloat = 0.1
     var isFinished: Bool = false
     
     override init(frame: CGRect) {
@@ -38,6 +39,10 @@ class EGProgressBar: UIView {
     }
 
     func setProgress(_ progress: CGFloat) {
+        if progress == progressMin {
+            isFinished = false
+        }
+        
         if isFinished == true {
             return
         }

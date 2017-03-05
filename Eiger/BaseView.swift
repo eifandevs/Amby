@@ -131,7 +131,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         scrollMovingPointY = 0
     }
     
-    // MARK: ScrollView Delegate
+// MARK: ScrollView Delegate
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
     }
@@ -139,7 +139,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
         let speed = scrollView.contentOffset.y - scrollMovingPointY
-        
         if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching && isOverScrolling && speed < 0)) {
             scrollSpeed.value =  -1 * speed
         }
@@ -227,8 +226,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             //インジゲーターの表示、非表示をきりかえる。
             UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
             if wv.isLoading == true {
-                progressBar.isFinished = false
-                progressBar.setProgress(0.1)
+                progressBar.setProgress(progressBar.progressMin)
             } else {
                 progressBar.setProgress(1.0)
                 if wv.title != nil && wv.url != nil {
