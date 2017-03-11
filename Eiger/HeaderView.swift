@@ -14,7 +14,7 @@ class HeaderView: UIView, ShadowView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addShadow()
-        backgroundColor = UIColor.frenchBlue
+        backgroundColor = UIColor.pastelLightGray
     }
     
     required init(coder aDecoder: NSCoder) {

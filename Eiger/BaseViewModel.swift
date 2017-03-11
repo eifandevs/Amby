@@ -10,10 +10,10 @@ import Foundation
 import Bond
 
 class BaseViewModel {
-
+    
     // リクエストURL
     var requestUrl = Observable("http://about:blank")
-
+    
     // 現在表示しているwebviewのインデックス
     private var locationIndex: Int {
         get {
@@ -38,7 +38,7 @@ class BaseViewModel {
             UserDefaults.standard.set(url, forKey: AppDataManager.shared.defaultUrlKey)
         }
     }
-
+    
     init() {
         // eachHistory読み込み
         do {
@@ -51,9 +51,9 @@ class BaseViewModel {
             log.error("failed to read: \(error)")
         }
     }
-
+    
     func saveHistory(wv: EGWebView) {
-        let saveUrl = (((wv.hasValidUrl || wv.errorUrl == nil) ? wv.url : wv.errorUrl)?.absoluteString.removingPercentEncoding)!
+        let saveUrl = (((wv.hasValidUrl || wv.errorUrl == nil) ? wv.requestUrl : wv.errorUrl)?.absoluteString.removingPercentEncoding)!
         // Common History
         let common = CommonHistoryItem(url: saveUrl, title: wv.title!, date: Date())
         commonHistory.append(common)
@@ -61,13 +61,18 @@ class BaseViewModel {
         
         // Each History
         let each = EachHistoryItem(url: saveUrl, title: common.title)
-        eachHistory[locationIndex] = each        
+        eachHistory[locationIndex] = each
     }
     
     func storeHistory() {
         storeCommonHistory()
         storeEachHistory()
         commonHistory = []
+    }
+    
+    func reload(wv: EGWebView) {
+        let reloadUrl = (wv.errorUrl != nil) ? wv.errorUrl! : wv.requestUrl!
+        requestUrl.value = eachHistory[locationIndex].url.isEmpty ? (reloadUrl.absoluteString.removingPercentEncoding)! : eachHistory[locationIndex].url
     }
     
     private func storeCommonHistory() {
@@ -100,13 +105,13 @@ class BaseViewModel {
                         return value
                     }
                 }()
-
-//                log.debug("*********** 保存するCommonHistory **************")
-//                for data in saveData {
-//                    log.debug("url: \(data.url)")
-//                    log.debug("date: \(data.date)")
-//                }
-//                log.debug("***********************************************")
+                
+                //                log.debug("*********** 保存するCommonHistory **************")
+                //                for data in saveData {
+                //                    log.debug("url: \(data.url)")
+                //                    log.debug("date: \(data.date)")
+                //                }
+                //                log.debug("***********************************************")
                 
                 let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
                 do {

@@ -15,9 +15,18 @@ protocol ShadowView {
 
 extension ShadowView where Self: UIView {
     func addShadow() {
-        layer.shadowOffset = CGSize(width: 0, height: 1.0)
-        layer.shadowRadius = 0.3
-        layer.shadowOpacity = 0.4
+        layer.shadowOffset = CGSize(width: 0, height: 0.5)
+        layer.shadowRadius = 0.2
+        layer.shadowOpacity = 0.3
+        layer.masksToBounds = false
+    }
+}
+
+extension ShadowView where Self: UITextField {
+    func addShadow() {
+        layer.shadowOffset = CGSize(width: 0, height: 0.1)
+        layer.shadowRadius = 0.5
+        layer.shadowOpacity = 0.6
         layer.masksToBounds = false
     }
 }

@@ -13,6 +13,8 @@ private var requestUrlAssociationKey: UInt8 = 0
 
 extension WKWebView {
     
+    // 最新のリクエストURLを常に保持しておく
+    // 履歴保存時やリロード時に使用する
     var requestUrl: URL! {
         get {
             return objc_getAssociatedObject(self, &requestUrlAssociationKey) as? URL

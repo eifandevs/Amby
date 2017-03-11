@@ -18,10 +18,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private var progressBar: EGProgressBar! = nil
     private let viewModel = BaseViewModel()
     private var processPool = WKProcessPool()
-    private var isTouching = false
     private var scrollMovingPointY: CGFloat = 0
     
+    var isTouching = Observable<Bool>(false)
     var scrollSpeed = Observable<CGFloat>(0)
+    var progress = Observable<CGFloat>(0)
+    var headerFieldText = Observable<String>("")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -84,9 +86,14 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 360), size: CGSize(width: 150, height: 50)))
             button.backgroundColor = UIColor.gray
             button.setTitle("リロード", for: .normal)
+            // TODO: リロードは自前で管理しているURLから実施する
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    self!.wv.reload()
+                    if self!.wv.hasValidUrl {
+                        self!.wv.reload()
+                    } else {
+                        self!.viewModel.reload(wv: self!.wv)
+                    }
             }
             addSubview(button)
         }
@@ -106,7 +113,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     override func layoutSubviews() {
         wv.frame = CGRect(origin: CGPoint.zero, size: frame.size)
-        progressBar.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: 2.1)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -115,23 +121,23 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     // MARK: EGApplication Delegate
     internal func screenTouchBegan(touch: UITouch) {
-        isTouching = true
+        isTouching.value = true
     }
     
     internal func screenTouchMoved(touch: UITouch) {
     }
     
     internal func screenTouchEnded(touch: UITouch) {
-        isTouching = false
+        isTouching.value = false
         scrollMovingPointY = 0
     }
     
     internal func screenTouchCancelled(touch: UITouch) {
-        isTouching = false
+        isTouching.value = false
         scrollMovingPointY = 0
     }
     
-// MARK: ScrollView Delegate
+    // MARK: ScrollView Delegate
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
     }
@@ -139,7 +145,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
         let speed = scrollView.contentOffset.y - scrollMovingPointY
-        if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching && isOverScrolling && speed < 0)) {
+        if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching.value && isOverScrolling && speed < 0)) {
             scrollSpeed.value =  -1 * speed
         }
         scrollMovingPointY = scrollView.contentOffset.y
@@ -147,8 +153,15 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     // MARK: WebView Delegate
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        progressBar.setProgress(progressBar.progressZero)
-        wv.loadHtml(error: (error as NSError))
+        log.error("[error url]\(webView.url)")
+        if wv.isLoading {
+            progress.value = 0
+        }
+        if wv.hasValidUrl {
+            wv.loadHtml(error: (error as NSError))
+        } else {
+            log.warning("already load error html")
+        }
     }
     
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
@@ -188,6 +201,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         // リクエストURLはエラーが発生した時のため保持しておく
         // エラー発生時は、リクエストしたURLを履歴に保持する
         webView.requestUrl = navigationAction.request.url
+        if let host = webView.requestUrl.host {
+            headerFieldText.value = host
+        }
         // TODO: 自動スクロール実装
         //        if autoScrollTimer?.valid == true {
         //            autoScrollTimer?.invalidate()
@@ -220,21 +236,21 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     // MARK: KVO(Progress)
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
-            //estimatedProgressが変更されたときに、setProgressを使ってプログレスバーの値を変更する。
-            progressBar.setProgress(CGFloat(wv.estimatedProgress))
+            //estimatedProgressが変更されたときに、プログレスバーの値を変更する。
+            progress.value = CGFloat(wv.estimatedProgress)
         } else if keyPath == "loading" {
             //インジゲーターの表示、非表示をきりかえる。
             UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
             if wv.isLoading == true {
-                progressBar.setProgress(progressBar.progressMin)
+                progress.value = CGFloat(AppDataManager.shared.progressMin)
             } else {
-                progressBar.setProgress(1.0)
+                progress.value = 1.0
                 if wv.title != nil && wv.url != nil {
                     if wv.hasSavableUrl {
                         viewModel.saveHistory(wv: wv)
                     }
                     wv.previousUrl = (wv.hasValidUrl || wv.errorUrl == nil) ? wv.url : wv.errorUrl
-                    log.debug("set previous url. url: \(wv.previousUrl)")
+                    log.debug("[previous url]\(wv.previousUrl)")
                 }
             }
         }
@@ -244,7 +260,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func scroll(pt: CGFloat) {
         wv.scrollView.setContentOffset(CGPoint(x: wv.scrollView.contentOffset.x, y: wv.scrollView.contentOffset.y - pt), animated: false)
     }
-
+    
     func stopProgressObserving() {
         log.debug("stop progress observe")
         if let _webView = wv {
@@ -257,35 +273,17 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         viewModel.storeHistory()
     }
     
-    func expand() {
-        UIView.animate(withDuration: 0.1, animations: {
-            //            self.frame.size.height = DeviceDataManager.shared.statusBarHeight * 2.5
-            self.frame.origin.y -= DeviceDataManager.shared.statusBarHeight * 1.5
-        })
-    }
-    
-    func reduction() {
-        UIView.animate(withDuration: 0.1, animations: {
-            //            self.frame.size.height = DeviceDataManager.shared.statusBarHeight
-            self.frame.origin.y += DeviceDataManager.shared.statusBarHeight * 1.5
-        })
-    }
-    
     // MARK: Private Method
     private func startProgressObserving() {
         log.debug("start progress observe")
-        progressBar = EGProgressBar()
-        
         //読み込み状態が変更されたことを取得
         wv.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
         //プログレスが変更されたことを取得
         wv.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         if wv.isLoading == true {
-            progressBar.setProgress(CGFloat(wv.estimatedProgress))
+            progress.value = CGFloat(wv.estimatedProgress)
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
-        
-        addSubview(progressBar)
     }
     
     private func createWebView() -> EGWebView {

@@ -7,14 +7,18 @@
 //
 
 import Foundation
+import UIKit
 
 class AppDataManager {
     static let shared: AppDataManager = AppDataManager()
+    let progressMin = 0.1
+    let headerViewSizeMax: CGFloat = 65
     let defaultUrlKey = "defaultUrl"
     let locationIndexKey = "locationIndex"
     let historySavableTermKey = "historySaveblaTerm"
+    let appFont = "Avenir"
     let eachHistoryPath = URL(fileURLWithPath: DeviceDataManager.shared.documentsDir + "/each_history.dat")
-
+    
     private init() {
         
     }
@@ -24,7 +28,7 @@ class AppDataManager {
     }
     
     func registerDefaultData() {
-        UserDefaults.standard.register(defaults: [defaultUrlKey: "https://www.amazon.co.jp",
+        UserDefaults.standard.register(defaults: [defaultUrlKey: "https://amazon.co.jp",
                                                   locationIndexKey: 0,
                                                   historySavableTermKey: 10])
     }

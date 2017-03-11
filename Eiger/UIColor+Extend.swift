@@ -19,6 +19,10 @@ extension UIColor {
         return UIColor(red: 0/255, green: 175/255, blue: 240/255, alpha: 1)
     }
     
+    static var lightBlue: UIColor {
+        return UIColor(red: 173/255, green: 225/255, blue: 247/255, alpha: 1)
+    }
+    
     static var blueGray: UIColor {
         return UIColor(red: 44/255, green: 71/255, blue: 98/255, alpha: 1)
     }
@@ -29,6 +33,10 @@ extension UIColor {
     
     static var blazingYellow: UIColor {
         return UIColor(red: 255/255, green: 195/255, blue: 0/255, alpha: 1)
+    }
+    
+    static var pastelLightGray: UIColor {
+        return UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 1)
     }
     
     static var dandilionSeeds: UIColor {
