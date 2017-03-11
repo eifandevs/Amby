@@ -49,7 +49,6 @@ class BaseLayer: UIView, UITextFieldDelegate {
         )
         
         let resizeHeaderToMax = { [weak self] in
-            log.warning("resizeHeaderToMax")
             self!.headerView.frame.size.height = self!.headerViewSizeMax
             self!.baseView.frame.origin.y = self!.headerViewSizeMax
             self!.headerField.frame = CGRect(x: 65, y: self!.headerView.frame.size.height - self!.headerViewSizeMax * 0.63, width: frame.size.width - 130, height: self!.headerViewSizeMax * 0.5)
@@ -58,7 +57,6 @@ class BaseLayer: UIView, UITextFieldDelegate {
         }
         
         let resizeHeaderToMin = { [weak self] in
-            log.warning("resizeHeaderToMin")
             self!.headerView.frame.size.height = DeviceDataManager.shared.statusBarHeight
             self!.baseView.frame.origin.y = DeviceDataManager.shared.statusBarHeight
             self!.headerField.frame = CGRect(x: 65, y: self!.headerView.frame.size.height - self!.headerViewSizeMax * 0.63, width: frame.size.width - 130, height: self!.headerViewSizeMax * 0.5)

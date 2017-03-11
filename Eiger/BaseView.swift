@@ -19,6 +19,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private let viewModel = BaseViewModel()
     private var processPool = WKProcessPool()
     private var scrollMovingPointY: CGFloat = 0
+    private var latestRequestUrl: String = ""
     
     var isTouching = Observable<Bool>(false)
     var scrollSpeed = Observable<CGFloat>(0)
@@ -92,7 +93,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     if self!.wv.hasValidUrl {
                         self!.wv.reload()
                     } else {
-                        self!.viewModel.reload(wv: self!.wv)
+                        _ = self!.wv.load(urlStr: self!.latestRequestUrl)
                     }
             }
             addSubview(button)
@@ -158,6 +159,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             progress.value = 0
         }
         if wv.hasValidUrl {
+            headerFieldText.value = latestRequestUrl
             wv.loadHtml(error: (error as NSError))
         } else {
             log.warning("already load error html")
@@ -196,14 +198,15 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        log.debug("[request url]\(navigationAction.request.url)")
-        
         // リクエストURLはエラーが発生した時のため保持しておく
         // エラー発生時は、リクエストしたURLを履歴に保持する
-        webView.requestUrl = navigationAction.request.url
-        if let host = webView.requestUrl.host {
-            headerFieldText.value = host
+        let latest = (navigationAction.request.url?.absoluteString.removingPercentEncoding)!
+        if latest.hasValidUrl {
+            latestRequestUrl = latest
         }
+        
+        saveMetaData(completion: nil)
+        
         // TODO: 自動スクロール実装
         //        if autoScrollTimer?.valid == true {
         //            autoScrollTimer?.invalidate()
@@ -245,13 +248,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 progress.value = CGFloat(AppDataManager.shared.progressMin)
             } else {
                 progress.value = 1.0
-                if wv.title != nil && wv.url != nil {
-                    if wv.hasSavableUrl {
-                        viewModel.saveHistory(wv: wv)
+                saveMetaData(completion: { [weak self] in
+                    if self!.wv.hasSavableUrl {
+                        self!.viewModel.saveHistory(wv: self!.wv)
                     }
-                    wv.previousUrl = (wv.hasValidUrl || wv.errorUrl == nil) ? wv.url : wv.errorUrl
-                    log.debug("[previous url]\(wv.previousUrl)")
-                }
+                    self!.wv.previousUrl = self!.wv.requestUrl
+                    log.debug("[previous url]\(self!.wv.previousUrl)")
+                })
             }
         }
     }
@@ -292,6 +295,23 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         wv.uiDelegate = self;
         wv.scrollView.delegate = self
         return wv
+    }
+    
+    private func saveMetaData(completion: (() -> ())?) {
+        wv.evaluateJavaScript("window.location.href") { [weak self] (object, error) in
+            if let url = object {
+                let urlStr = (url as! String).removingPercentEncoding!
+                if urlStr.hasValidUrl && self!.wv.requestUrl != urlStr {
+                    self!.wv.requestUrl = urlStr
+                    self!.headerFieldText.value = self!.wv.requestUrl
+                    log.debug("[request url]\(self!.wv.requestUrl)")
+                }
+            }
+            self!.wv.evaluateJavaScript("document.title") { (object, error) in
+                self!.wv.requestTitle = object as! String
+                if completion != nil { completion!() }
+            }
+        }
     }
     
 }

@@ -53,14 +53,13 @@ class BaseViewModel {
     }
     
     func saveHistory(wv: EGWebView) {
-        let saveUrl = (((wv.hasValidUrl || wv.errorUrl == nil) ? wv.requestUrl : wv.errorUrl)?.absoluteString.removingPercentEncoding)!
         // Common History
-        let common = CommonHistoryItem(url: saveUrl, title: wv.title!, date: Date())
+        let common = CommonHistoryItem(url: wv.requestUrl, title: wv.requestTitle, date: Date())
         commonHistory.append(common)
         log.debug("save history. url: \(common.url)")
         
         // Each History
-        let each = EachHistoryItem(url: saveUrl, title: common.title)
+        let each = EachHistoryItem(url: common.url, title: common.title)
         eachHistory[locationIndex] = each
     }
     
@@ -68,11 +67,6 @@ class BaseViewModel {
         storeCommonHistory()
         storeEachHistory()
         commonHistory = []
-    }
-    
-    func reload(wv: EGWebView) {
-        let reloadUrl = (wv.errorUrl != nil) ? wv.errorUrl! : wv.requestUrl!
-        requestUrl.value = eachHistory[locationIndex].url.isEmpty ? (reloadUrl.absoluteString.removingPercentEncoding)! : eachHistory[locationIndex].url
     }
     
     private func storeCommonHistory() {

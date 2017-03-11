@@ -18,20 +18,20 @@ class EGWebView: WKWebView {
         case UNAUTHORIZED
     }
     
-    var errorUrl: URL? = nil // 読み込みに失敗した最新のURL
-    var previousUrl: URL? = nil // リロードしたページを履歴に登録しないために、前回URLを保持しておく
+    var previousUrl: String = "" // リロードしたページを履歴に登録しないために、前回URLを保持しておく
     var hasSavableUrl: Bool {
         get {
-            return ((previousUrl != nil) &&
-                (url?.absoluteString != "http://about:blank") &&
-                (previousUrl?.absoluteString != url?.absoluteString))
+            return  !previousUrl.isEmpty &&
+                    previousUrl != requestUrl &&
+                    !requestTitle.isEmpty &&
+                    requestUrl.hasValidUrl
         }
     }
     
     var hasValidUrl: Bool {
         get {
-            if requestUrl != nil {
-                return requestUrl.absoluteString.hasValidUrl
+            if let url = url {
+                return url.absoluteString.hasValidUrl
             }
             return false
         }
@@ -49,7 +49,6 @@ class EGWebView: WKWebView {
     }
     
     func load(urlStr: String) -> Bool {
-        requestUrl = URL(string: urlStr)
         if  urlStr.hasValidUrl {
             let encodedURL = urlStr.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
             
@@ -89,9 +88,6 @@ class EGWebView: WKWebView {
             if code == NETWORK_ERROR.UNAUTHORIZED { return Bundle.main.path(forResource: "authorize", ofType: "html")! }
             return Bundle.main.path(forResource: "invalid", ofType: "html")!
         }()
-        if hasValidUrl || requestUrl.absoluteString.hasValidUrl {
-            errorUrl = requestUrl // 読み込みに失敗したURLは保存しておく
-        }
         super.loadFileURL(URL(fileURLWithPath: path), allowingReadAccessTo: URL(fileURLWithPath: path))
     }
     

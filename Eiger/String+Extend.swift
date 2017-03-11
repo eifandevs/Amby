@@ -12,8 +12,10 @@ import UIKit
 extension String {
     var hasValidUrl: Bool {
         get {
-            return (self != "http://") && (self != "https://") &&
-                ((hasPrefix("http://") == true) || (hasPrefix("https://") == true))
+            return self != "http://" &&
+                   self != "https://" &&
+                   !isEmpty &&
+                   (hasPrefix("http://") == true || hasPrefix("https://") == true)
         }
     }
 }
