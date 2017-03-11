@@ -23,4 +23,23 @@ extension WKWebView {
             objc_setAssociatedObject(self, &requestUrlAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
+    
+    func evaluate(script: String, completion: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) {
+        var finished = false
+        
+        evaluateJavaScript(script) { (result, error) in
+            if error == nil {
+                if result != nil {
+                    completion(result as AnyObject?, nil)
+                }
+            } else {
+                completion(nil, error as NSError?)
+            }
+            finished = true
+        }
+        
+        while !finished {
+            RunLoop.current.run(mode: RunLoopMode(rawValue: "NSDefaultRunLoopMode"), before: NSDate.distantFuture)
+        }
+    }
 }
