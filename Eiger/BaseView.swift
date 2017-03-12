@@ -45,7 +45,26 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             button.setTitle("戻る(ページ)", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    self!.wv.goBack()
+                    if self!.wv.canGoBack {
+                        if (self!.wv.backForwardList.backItem?.url.absoluteString.hasValidUrl)! == true {
+                            self!.wv.goBack()
+                        } else {
+                            // 有効なURLを探す
+                            let backUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
+                                for item in self!.wv.backForwardList.backList.reversed() {
+                                    if item.url.absoluteString.hasValidUrl {
+                                        return item
+                                    }
+                                }
+                                // nilが返る事は運用上あり得ない
+                                log.error("webview go back error")
+                                return nil
+                            }()
+                            if let item = backUrl {
+                                self!.wv.go(to: item)
+                            }
+                        }
+                    }
             }
             addSubview(button)
         }
@@ -56,7 +75,26 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             button.setTitle("進む(ページ)", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    self!.wv.goForward()
+                    if self!.wv.canGoForward {
+                        if (self!.wv.backForwardList.forwardItem?.url.absoluteString.hasValidUrl)! == true {
+                            self!.wv.goForward()
+                        } else {
+                            // 有効なURLを探す
+                            let forwardUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
+                                for item in self!.wv.backForwardList.forwardList {
+                                    if item.url.absoluteString.hasValidUrl {
+                                        return item
+                                    }
+                                }
+                                // nilが返る事は運用上あり得ない
+                                log.error("webview go back error")
+                                return nil
+                            }()
+                            if let item = forwardUrl {
+                                self!.wv.go(to: item)
+                            }
+                        }
+                    }
             }
             addSubview(button)
         }
