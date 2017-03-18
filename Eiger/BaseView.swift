@@ -158,7 +158,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: EGApplication Delegate
+// MARK: EGApplication Delegate
+    
     internal func screenTouchBegan(touch: UITouch) {
         isTouching.value = true
     }
@@ -176,7 +177,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         scrollMovingPointY = 0
     }
     
-    // MARK: ScrollView Delegate
+// MARK: ScrollView Delegate
+    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
     }
@@ -190,7 +192,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         scrollMovingPointY = scrollView.contentOffset.y
     }
     
-    // MARK: WebView Delegate
+// MARK: WebView Delegate
+    
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         log.error("[error url]\(webView.url)")
         if wv.isLoading {
@@ -279,6 +282,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
 // MARK: KVO(Progress)
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             //estimatedProgressが変更されたときに、プログレスバーの値を変更する。
@@ -303,7 +307,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
     }
     
-    // MARK: Public Method
+// MARK: Public Method
+    
     func scroll(pt: CGFloat) {
         wv.scrollView.setContentOffset(CGPoint(x: wv.scrollView.contentOffset.x, y: wv.scrollView.contentOffset.y - pt), animated: false)
     }
@@ -320,7 +325,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         viewModel.storeHistory()
     }
     
-    // MARK: Private Method
+// MARK: Private Method
+    
     private func startProgressObserving() {
         log.debug("start progress observe")
         //読み込み状態が変更されたことを取得

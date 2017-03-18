@@ -9,8 +9,15 @@
 import Foundation
 import UIKit
 
-class HeaderView: UIView, ShadowView {
+protocol HeaderViewDelegate {
+    func textFieldDidBeginEditing()
+    func textFieldDidEndEditing()
+}
+
+class HeaderView: UIView, UITextFieldDelegate, ShadowView {
     
+    var delegate: HeaderViewDelegate?
+
     let heightMax: CGFloat = 65
     private var headerField: EGTextField! = nil
     private var isEditing = false
@@ -53,21 +60,10 @@ class HeaderView: UIView, ShadowView {
                     self!.headerField.frame = self!.frame
                 }, completion: { _ in
                     // キーボード表示
+                    self!.headerField.makeInputForm(height: self!.frame.size.height - self!.heightMax * 0.63, obj: self!)
                 })
                 self!.headerField.removeContent()
-                let overlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: self!.frame.size.height), size: CGSize(width: self!.superview!.frame.size.width, height: self!.superview!.frame.size.height - self!.frame.size.height)))
-                overlay.backgroundColor = UIColor.gray
-                _ = overlay.reactive.controlEvents(.touchDown)
-                    .observeNext { [weak self] _ in
-                        UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseInOut, animations: {
-                            self!.headerField.frame = CGRect(x: 95, y: self!.frame.size.height - self!.heightMax * 0.63, width: self!.superview!.frame.size.width - 190, height: self!.heightMax * 0.5)
-                        }, completion: { _ in
-                            self!.isEditing = false
-                            self!.headerField.makeContent(restore: true, restoreText: nil)
-                        })
-                        overlay.removeFromSuperview()
-                }
-                self!.superview!.addSubview(overlay)
+                self!.delegate?.textFieldDidBeginEditing()
         }
         
         addSubview(headerField)
@@ -89,6 +85,27 @@ class HeaderView: UIView, ShadowView {
         headerField.alpha = 0
     }
     
+    func finishEditing(force: Bool) {
+        if force {
+            headerField.removeInputForm()
+            
+            self.headerField.frame = CGRect(x: 95, y: self.frame.size.height - self.heightMax * 0.63, width: self.superview!.frame.size.width - 190, height: self.heightMax * 0.5)
+            self.isEditing = false
+            self.headerField.makeContent(restore: true, restoreText: nil)
+        } else {
+            let text = headerField.textField?.text
+            headerField.removeInputForm()
+            
+            self.headerField.frame = CGRect(x: 95, y: self.frame.size.height - self.heightMax * 0.63, width: self.superview!.frame.size.width - 190, height: self.heightMax * 0.5)
+            self.isEditing = false
+            if text == nil || text!.isEmpty {
+                self.headerField.makeContent(restore: true, restoreText: nil)
+            } else {
+                self.headerField.makeContent(restore: true, restoreText: text)
+            }
+        }
+    }
+    
     func resize(value: CGFloat) {
         frame.size.height += value
         headerField.alpha += value / (heightMax - DeviceDataManager.shared.statusBarHeight)
@@ -98,5 +115,14 @@ class HeaderView: UIView, ShadowView {
         if !isEditing {
             headerField.frame = CGRect(x: 95, y: frame.size.height - heightMax * 0.63, width: superview!.frame.size.width - 190, height: heightMax * 0.5)
         }
+    }
+    
+// MARK: UITextField Delegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        log.debug("textFieldShouldReturn called")
+        self.delegate?.textFieldDidEndEditing()
+
+        return true
     }
 }

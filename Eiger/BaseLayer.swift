@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 import TextFieldEffects
 
-class BaseLayer: UIView, UITextFieldDelegate {
+class BaseLayer: UIView, HeaderViewDelegate {
     
     private let baseView: BaseView = BaseView()
     private let headerView: HeaderView = HeaderView(frame: CGRect.zero)
     private let footerView: FooterView = FooterView()
     private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
+    private var overlay: UIButton? = nil
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,6 +24,7 @@ class BaseLayer: UIView, UITextFieldDelegate {
         baseView.frame = CGRect(x: 0, y: DeviceDataManager.shared.statusBarHeight, width: frame.size.width, height: frame.size.height - DeviceDataManager.shared.statusBarHeight)
         // サイズが可変なので、layoutSubViewsで初期化しない
         headerView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight)
+        headerView.delegate = self
         
         NotificationCenter.default.addObserver(
             self,
@@ -137,40 +139,23 @@ class BaseLayer: UIView, UITextFieldDelegate {
         progressBar.setProgress(0)
     }
     
-// MARK: TextField Delegate
+// MARK: HeaderView Delegate
     
-//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        isEditing = true
-//        headerField.removeContent()
-//        baseViewOverlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - headerView.frame.size.height)))
-//        baseViewOverlay.backgroundColor = UIColor.gray
-//        _ = baseViewOverlay.reactive.controlEvents(.touchDown)
-//            .observeNext { [weak self] _ in
-//                self!.endEditing(true)
-//                self!.headerField.makeContent(restore: true, restoreText: nil)
-//                self!.baseViewOverlay.removeFromSuperview()
-//                self!.baseViewOverlay = nil
-//        }
-//        addSubview(baseViewOverlay)
-//
-//        return true
-//    }
-//    
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        isEditing = false
-//    }
-//    
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        log.debug("textFieldShouldReturn called")
-//        let text = headerField.superText
-//        endEditing(true)
-//        if text == nil || text!.isEmpty {
-//            headerField.makeContent(restore: true, restoreText: nil)
-//        } else {
-//            headerField.makeContent(restore: true, restoreText: text)
-//        }
-//        baseViewOverlay.removeFromSuperview()
-//        baseViewOverlay = nil
-//        return true
-//    }
+    func textFieldDidBeginEditing() {
+        overlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
+        overlay!.backgroundColor = UIColor.gray
+        _ = overlay!.reactive.controlEvents(.touchDown)
+            .observeNext { [weak self] _ in
+                self!.overlay!.removeFromSuperview()
+                self!.overlay = nil
+                self!.headerView.finishEditing(force: true)
+        }
+        addSubview(overlay!)
+    }
+    
+    func textFieldDidEndEditing() {
+        overlay!.removeFromSuperview()
+        overlay = nil
+        headerView.finishEditing(force: false)
+    }
 }

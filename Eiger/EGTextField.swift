@@ -15,7 +15,8 @@ class EGTextField: UIButton, ShadowView {
     private var size: CGSize = CGSize.zero
     private var label: EGGradientLabel? = nil
     private var pastLabelText: String? = nil
-    private var textField: UITextField? = nil
+    private let fontSize: CGFloat = 15
+    var textField: UITextField? = nil
     
     var text: String? {
         get {
@@ -39,15 +40,22 @@ class EGTextField: UIButton, ShadowView {
         self.init()
         size = iconSize
         backgroundColor = UIColor.white
-//        borderStyle = .none
-//        alpha = 0
-//        font = UIFont(name: AppDataManager.shared.appFont, size: AppDataManager.shared.headerViewSizeMax / 4.8)
-//        keyboardType = .default
         makeContent(restore: false, restoreText: nil)
     }
     
-    func makeInputForm(obj: UIView) {
-//        textField = UITextField(frame: CGRect(x: 5, y: frame.size.height / 2, width: 0, height: 0)
+    func makeInputForm(height: CGFloat, obj: UITextFieldDelegate) {
+        textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: height), size: CGSize(width: frame.size.width - 10, height: size.height)))
+        textField!.borderStyle = .none
+        textField!.keyboardType = .default
+        textField!.delegate = obj
+        textField!.becomeFirstResponder()
+        addSubview(textField!)
+    }
+    
+    func removeInputForm() {
+        textField?.endEditing(true)
+        textField?.removeFromSuperview()
+        textField = nil
     }
     
     func makeContent(restore: Bool, restoreText: String?) {
@@ -108,7 +116,7 @@ class EGTextField: UIButton, ShadowView {
         
         let attr = [
             NSForegroundColorAttributeName: UIColor.black,
-            NSFontAttributeName: UIFont(name: AppDataManager.shared.appFont, size: 15) ?? UIFont.systemFont(ofSize: 15),
+            NSFontAttributeName: UIFont(name: AppDataManager.shared.appFont, size: fontSize) ?? UIFont.systemFont(ofSize: fontSize),
             NSParagraphStyleAttributeName: style,
             ] as [String : Any]
         
