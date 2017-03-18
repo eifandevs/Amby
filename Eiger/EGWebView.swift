@@ -37,6 +37,15 @@ class EGWebView: WKWebView {
         }
     }
     
+    var hasLocalUrl: Bool {
+        get {
+            if let url = url {
+                return url.absoluteString.hasLocalUrl
+            }
+            return false
+        }
+    }
+    
     init(pool: WKProcessPool) {
         let configuration = WKWebViewConfiguration()
         configuration.processPool = pool

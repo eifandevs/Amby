@@ -17,5 +17,16 @@ extension String {
                    !isEmpty &&
                    (hasPrefix("http://") == true || hasPrefix("https://") == true)
         }
+    }    
+    var hasLocalUrl: Bool {
+        get {
+            return hasPrefix("file://")
+        }
+    }
+    
+    var hasHttpsUrl: Bool {
+        get {
+            return hasPrefix("https://")
+        }
     }
 }

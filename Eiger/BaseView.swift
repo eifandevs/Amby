@@ -19,7 +19,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private let viewModel = BaseViewModel()
     private var processPool = WKProcessPool()
     private var scrollMovingPointY: CGFloat = 0
-    private var latestRequestUrl: String = ""
     
     var isTouching = Observable<Bool>(false)
     var scrollSpeed = Observable<CGFloat>(0)
@@ -131,7 +130,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     if self!.wv.hasValidUrl {
                         self!.wv.reload()
                     } else {
-                        _ = self!.wv.load(urlStr: self!.latestRequestUrl)
+                        let reloadUrl = self!.headerFieldText.value.isEmpty ? self!.viewModel.defaultUrl : self!.headerFieldText.value
+                        _ = self!.wv.load(urlStr: reloadUrl)
                     }
             }
             addSubview(button)
@@ -196,8 +196,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         if wv.isLoading {
             progress.value = 0
         }
-        if wv.hasValidUrl {
-            headerFieldText.value = latestRequestUrl
+        
+        if !wv.hasLocalUrl {
             wv.loadHtml(error: (error as NSError))
         } else {
             log.warning("already load error html")
@@ -240,11 +240,15 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         // エラー発生時は、リクエストしたURLを履歴に保持する
         let latest = (navigationAction.request.url?.absoluteString.removingPercentEncoding)!
         if latest.hasValidUrl {
-            latestRequestUrl = latest
+            viewModel.latestRequestUrl = latest
+            saveMetaData(completion: nil)
         }
         
-        saveMetaData(completion: nil)
-        
+        if latest.hasLocalUrl {
+            // エラーが発生した時のheaderField更新
+            headerFieldText.value = viewModel.latestRequestUrl
+        }
+
         // TODO: 自動スクロール実装
         //        if autoScrollTimer?.valid == true {
         //            autoScrollTimer?.invalidate()
@@ -274,7 +278,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         return nil
     }
     
-    // MARK: KVO(Progress)
+// MARK: KVO(Progress)
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             //estimatedProgressが変更されたときに、プログレスバーの値を変更する。
@@ -290,8 +294,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     if self!.wv.hasSavableUrl {
                         self!.viewModel.saveHistory(wv: self!.wv)
                     }
-                    self!.wv.previousUrl = self!.wv.requestUrl
-                    log.debug("[previous url]\(self!.wv.previousUrl)")
+                    if self!.wv.requestUrl != nil {
+                        self!.wv.previousUrl = self!.wv.requestUrl
+                        log.debug("[previous url]\(self!.wv.previousUrl)")
+                    }
                 })
             }
         }

@@ -11,9 +11,12 @@ import Bond
 
 class BaseViewModel {
     
-    // リクエストURL
+    // リクエストURL(jsのURL)
     var requestUrl = Observable("http://about:blank")
     
+    // 最新のリクエストURL(wv.url)。エラーが発生した時用
+    var latestRequestUrl: String = ""
+
     // 現在表示しているwebviewのインデックス
     private var locationIndex: Int {
         get {
@@ -30,7 +33,7 @@ class BaseViewModel {
     // webViewそれぞれの履歴とカレントページインデックス
     private var eachHistory: [EachHistoryItem] = [EachHistoryItem()]
     
-    private var defaultUrl: String {
+    var defaultUrl: String {
         get {
             return UserDefaults.standard.string(forKey: AppDataManager.shared.defaultUrlKey)!
         }
@@ -50,6 +53,7 @@ class BaseViewModel {
             requestUrl.value = defaultUrl
             log.error("failed to read: \(error)")
         }
+        latestRequestUrl = requestUrl.value
     }
     
     func saveHistory(wv: EGWebView) {

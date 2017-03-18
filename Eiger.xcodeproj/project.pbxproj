@@ -14,6 +14,7 @@
 		A55E0E831E6C417B00278D8A /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55E0E821E6C417B00278D8A /* ShadowView.swift */; };
 		A55E0E871E7452DE00278D8A /* EGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55E0E861E7452DE00278D8A /* EGTextField.swift */; };
 		A55E0E891E74533500278D8A /* DispatchQueue+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55E0E881E74533500278D8A /* DispatchQueue+Extend.swift */; };
+		A55E0E8B1E7D070400278D8A /* EGGradientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55E0E8A1E7D070400278D8A /* EGGradientLabel.swift */; };
 		A56209651E619BF300F8996A /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209641E619BF300F8996A /* AppDataManager.swift */; };
 		A56209671E619C0700F8996A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209661E619C0700F8996A /* BaseView.swift */; };
 		A56209691E619C1600F8996A /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56209681E619C1600F8996A /* BaseViewModel.swift */; };
@@ -46,6 +47,7 @@
 		A55E0E821E6C417B00278D8A /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		A55E0E861E7452DE00278D8A /* EGTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGTextField.swift; sourceTree = "<group>"; };
 		A55E0E881E74533500278D8A /* DispatchQueue+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extend.swift"; sourceTree = "<group>"; };
+		A55E0E8A1E7D070400278D8A /* EGGradientLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGGradientLabel.swift; sourceTree = "<group>"; };
 		A56209641E619BF300F8996A /* AppDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
 		A56209661E619C0700F8996A /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A56209681E619C1600F8996A /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				A56209661E619C0700F8996A /* BaseView.swift */,
 				A56209701E619C5000F8996A /* EGWebView.swift */,
 				A562096E1E619C4100F8996A /* EGProgressBar.swift */,
+				A55E0E8A1E7D070400278D8A /* EGGradientLabel.swift */,
 			);
 			name = BaseLayer;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				A56209671E619C0700F8996A /* BaseView.swift in Sources */,
 				A56209651E619BF300F8996A /* AppDataManager.swift in Sources */,
 				A55E0E831E6C417B00278D8A /* ShadowView.swift in Sources */,
+				A55E0E8B1E7D070400278D8A /* EGGradientLabel.swift in Sources */,
 				A56209711E619C5000F8996A /* EGWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
