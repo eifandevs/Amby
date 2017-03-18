@@ -9,15 +9,15 @@
 import Foundation
 import UIKit
 
-class EGTextField: UITextField, ShadowView {
+class EGTextField: UIButton, ShadowView {
     
     private var icon: UIImageView? = nil
     private var size: CGSize = CGSize.zero
     private var label: EGGradientLabel? = nil
     private var pastLabelText: String? = nil
-    private var fontSize: CGFloat = 4.5
+    private var textField: UITextField? = nil
     
-    override var text: String? {
+    var text: String? {
         get {
             return label?.attributedText?.string
         }
@@ -34,30 +34,30 @@ class EGTextField: UITextField, ShadowView {
             label.attributedText = attribute(text: value)
         }
     }
-
-    var superText: String? {
-        get {
-            return super.text
-        }
-    }
     
     convenience init(iconSize: CGSize) {
         self.init()
         size = iconSize
         backgroundColor = UIColor.white
-        borderStyle = .none
-        alpha = 0
-        font = UIFont(name: AppDataManager.shared.appFont, size: AppDataManager.shared.headerViewSizeMax / 4.8)
-        keyboardType = .default
+//        borderStyle = .none
+//        alpha = 0
+//        font = UIFont(name: AppDataManager.shared.appFont, size: AppDataManager.shared.headerViewSizeMax / 4.8)
+//        keyboardType = .default
         makeContent(restore: false, restoreText: nil)
+    }
+    
+    func makeInputForm(obj: UIView) {
+//        textField = UITextField(frame: CGRect(x: 5, y: frame.size.height / 2, width: 0, height: 0)
     }
     
     func makeContent(restore: Bool, restoreText: String?) {
         icon = UIImageView()
         icon!.backgroundColor = UIColor.raspberry
+        icon?.isUserInteractionEnabled = false
         addSubview(icon!)
         
         label = EGGradientLabel()
+        label?.isUserInteractionEnabled = false
         label!.numberOfLines = 1
         // 復元フラグが立っていれば、前回状態で作成する
         if let _pastLabelText = pastLabelText, restore {
@@ -108,7 +108,7 @@ class EGTextField: UITextField, ShadowView {
         
         let attr = [
             NSForegroundColorAttributeName: UIColor.black,
-            NSFontAttributeName: UIFont(name: AppDataManager.shared.appFont, size: AppDataManager.shared.headerViewSizeMax / fontSize) ?? UIFont.systemFont(ofSize: AppDataManager.shared.headerViewSizeMax / fontSize),
+            NSFontAttributeName: UIFont(name: AppDataManager.shared.appFont, size: 15) ?? UIFont.systemFont(ofSize: 15),
             NSParagraphStyleAttributeName: style,
             ] as [String : Any]
         

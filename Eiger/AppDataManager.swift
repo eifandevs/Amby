@@ -12,7 +12,6 @@ import UIKit
 class AppDataManager {
     static let shared: AppDataManager = AppDataManager()
     let progressMin = 0.1
-    let headerViewSizeMax: CGFloat = 65
     let defaultUrlKey = "defaultUrl"
     let locationIndexKey = "locationIndex"
     let historySavableTermKey = "historySaveblaTerm"
