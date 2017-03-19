@@ -126,9 +126,9 @@ class EGTextField: UIButton, ShadowView {
         let mString = NSMutableAttributedString(string: text, attributes: attr)
         mString.addAttribute(
             NSForegroundColorAttributeName,
-            value: UIColor.frenchBlue,
+            value: UIColor.blue,
             range: (text as NSString).range(of: "https"))
-        
+
         return mString
     }
 }
