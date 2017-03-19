@@ -333,6 +333,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         viewModel.storeHistory()
     }
     
+    func search(text: String) {
+        let search = text.hasValidUrl ? text : "\(AppDataManager.shared.searchPath)\(text)"
+        _ = wv.load(urlStr: search)
+    }
+    
 // MARK: Private Method
     
     private func startProgressObserving() {

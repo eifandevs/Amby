@@ -11,7 +11,7 @@ import UIKit
 
 protocol HeaderViewDelegate {
     func textFieldDidBeginEditing()
-    func textFieldDidEndEditing()
+    func textFieldDidEndEditing(text: String?)
 }
 
 class HeaderView: UIView, UITextFieldDelegate, ShadowView {
@@ -99,10 +99,12 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
             
             self.headerField.frame = CGRect(x: 95, y: self.frame.size.height - self.heightMax * 0.63, width: self.superview!.frame.size.width - 190, height: self.heightMax * 0.5)
             self.isEditing = false
-            if text == nil || text!.isEmpty {
-                self.headerField.makeContent(restore: true, restoreText: nil)
+            
+            if let text = text, !text.isEmpty {
+                let restoreText = text.hasValidUrl ? text : "\(AppDataManager.shared.searchPath)\(text)"
+                self.headerField.makeContent(restore: true, restoreText: restoreText)
             } else {
-                self.headerField.makeContent(restore: true, restoreText: text)
+                self.headerField.makeContent(restore: true, restoreText: nil)
             }
         }
     }
@@ -121,8 +123,7 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
 // MARK: UITextField Delegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        log.debug("textFieldShouldReturn called")
-        self.delegate?.textFieldDidEndEditing()
+        self.delegate?.textFieldDidEndEditing(text: textField.text)
 
         return true
     }

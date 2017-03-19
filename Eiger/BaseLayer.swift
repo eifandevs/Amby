@@ -163,9 +163,13 @@ class BaseLayer: UIView, HeaderViewDelegate {
         addSubview(overlay!)
     }
     
-    func textFieldDidEndEditing() {
+    func textFieldDidEndEditing(text: String?) {
         overlay!.removeFromSuperview()
         overlay = nil
         headerView.finishEditing(force: false)
+        
+        if let text = text, !text.isEmpty {
+            baseView.search(text: text)
+        }
     }
 }
