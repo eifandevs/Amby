@@ -18,6 +18,9 @@ class BaseLayer: UIView, HeaderViewDelegate {
     private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
     private var overlay: UIButton? = nil
     
+    // 次のタッチを受け付けるまで、headerのアニメーションを強制Stopするフラグ
+    private var slideForceStopFlag = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -52,9 +55,11 @@ class BaseLayer: UIView, HeaderViewDelegate {
         }
         
         let slide = { [weak self] (val: CGFloat) -> Void in
-            self!.headerView.resize(value: val)
-            self!.baseView.frame.origin.y += val
-            self!.baseView.scroll(pt: -val)
+            if !self!.slideForceStopFlag {
+                self!.headerView.resize(value: val)
+                self!.baseView.frame.origin.y += val
+                self!.baseView.scroll(pt: -val)
+            }
         }
         
         _ = baseView.headerFieldText.observeNext { [weak self] value in
@@ -64,7 +69,12 @@ class BaseLayer: UIView, HeaderViewDelegate {
         }
         _ = baseView.isTouching.observeNext { [weak self] value in
             // タッチ終了時にheaderViewのサイズを調整する
+            if value {
+                self!.slideForceStopFlag = false
+            }
+            
             if !value && self!.headerView.resizing {
+                self!.slideForceStopFlag = true
                 if self!.headerView.frame.size.height > self!.headerView.heightMax / 2 {
                     UIView.animate(withDuration: 0.2, animations: {
                         resizeHeaderToMax()
