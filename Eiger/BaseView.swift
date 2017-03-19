@@ -239,9 +239,17 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
         // リクエストURLはエラーが発生した時のため保持しておく
         // エラー発生時は、リクエストしたURLを履歴に保持する
         let latest = (navigationAction.request.url?.absoluteString.removingPercentEncoding)!
+        
+        if let url = wv.url, url.absoluteString.hasLocalUrl && latest.hasLocalUrl {
+            // ローカルリクエストの連続リクエスト抑止
+            decisionHandler(.cancel)
+            return
+        }
+
         if latest.hasValidUrl {
             viewModel.latestRequestUrl = latest
             saveMetaData(completion: nil)
