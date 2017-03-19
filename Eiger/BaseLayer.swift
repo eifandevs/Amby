@@ -64,7 +64,7 @@ class BaseLayer: UIView, HeaderViewDelegate {
         }
         _ = baseView.isTouching.observeNext { [weak self] value in
             // タッチ終了時にheaderViewのサイズを調整する
-            if self!.headerView.resizing {
+            if !value && self!.headerView.resizing {
                 if self!.headerView.frame.size.height > self!.headerView.heightMax / 2 {
                     UIView.animate(withDuration: 0.2, animations: {
                         resizeHeaderToMax()
