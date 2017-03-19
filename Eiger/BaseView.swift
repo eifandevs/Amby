@@ -136,6 +136,23 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             }
             addSubview(button)
         }
+        
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 220, y: 360), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("キャプチャ", for: .normal)
+            _ = button.reactive.tap
+                .observe { [weak self] _ in
+                    log.debug("Button tapped.")
+                    if let img = self!.wv.screenshot() {
+                        let imgView = UIImageView(image: img)
+                        imgView.frame = CGRect(x: 0, y: 200, width: self!.bounds.size.width, height: self!.bounds.size.width)
+                        self!.addSubview(imgView)
+                    }
+                    
+            }
+            addSubview(button)
+        }
         /*-----------*/
         
         // Observer登録

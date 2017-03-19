@@ -117,6 +117,14 @@ class EGWebView: WKWebView {
         loadHtml(code: errorType)
     }
     
+    func screenshot() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: bounds.size.width, height: bounds.size.width), true, 0);
+        self.drawHierarchy(in: self.bounds, afterScreenUpdates: true);
+        let snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return snapshotImage;
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
