@@ -13,8 +13,8 @@ import TextFieldEffects
 class BaseLayer: UIView, HeaderViewDelegate {
     
     private let baseView: BaseView = BaseView()
-    private let headerView: HeaderView = HeaderView(frame: CGRect.zero)
-    private let footerView: FooterView = FooterView()
+    private let headerView: HeaderView = HeaderView()
+    private let footerView: FooterView = FooterView(thumbnailSize: CGSize(width: 70, height: DeviceDataManager.shared.statusBarHeight * 3))
     private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
     private var overlay: UIButton? = nil
     
@@ -24,7 +24,7 @@ class BaseLayer: UIView, HeaderViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        baseView.frame = CGRect(x: 0, y: DeviceDataManager.shared.statusBarHeight, width: frame.size.width, height: frame.size.height - DeviceDataManager.shared.statusBarHeight)
+        baseView.frame = CGRect(x: 0, y: DeviceDataManager.shared.statusBarHeight, width: frame.size.width, height: frame.size.height - DeviceDataManager.shared.statusBarHeight * 4)
         // サイズが可変なので、layoutSubViewsで初期化しない
         headerView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight)
         headerView.delegate = self
@@ -132,7 +132,7 @@ class BaseLayer: UIView, HeaderViewDelegate {
     }
     
     override func layoutSubviews() {
-        footerView.frame = CGRect(x: 0, y: frame.size.height - DeviceDataManager.shared.statusBarHeight * 5, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight * 5)
+        footerView.frame = CGRect(x: 0, y: frame.size.height - DeviceDataManager.shared.statusBarHeight * 3, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight * 3)
         progressBar.frame = CGRect(x: 0, y: headerView.frame.size.height - 2.1, width: frame.size.width, height: 2.1)
     }
     

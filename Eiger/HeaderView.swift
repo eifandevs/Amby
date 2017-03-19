@@ -48,9 +48,9 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
         }
     }
     
-    override init(frame: CGRect) {
+    init() {
         headerField = EGTextField(iconSize: CGSize(width: heightMax / 2, height: heightMax / 2))
-        super.init(frame: frame)
+        super.init(frame: CGRect.zero)
         addShadow()
         backgroundColor = UIColor.pastelLightGray
         
