@@ -22,7 +22,7 @@ extension ShadowView where Self: UIView {
     }
 }
 
-extension ShadowView where Self: UITextField {
+extension ShadowView where Self: UIButton {
     func addShadow() {
         layer.shadowOffset = CGSize(width: 0, height: 0.1)
         layer.shadowRadius = 0.5

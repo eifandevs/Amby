@@ -17,7 +17,7 @@ class EGGradientLabel: UILabel {
         gradient.colors = [
             UIColor.init(red: 1, green: 1, blue: 1, alpha: 0).cgColor,
             UIColor.init(red: 1, green: 1, blue: 1, alpha: 1).cgColor]
-        gradient.startPoint = CGPoint(x: 0.76, y: 0.0)
+        gradient.startPoint = CGPoint(x: 0.55, y: 0.0)
         gradient.endPoint = CGPoint(x: 1, y: 0.0)
         layer.addSublayer(gradient)
     }

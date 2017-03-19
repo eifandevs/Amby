@@ -38,6 +38,8 @@ class EGTextField: UIButton, ShadowView {
     
     convenience init(iconSize: CGSize) {
         self.init()
+        addShadow()
+        
         size = iconSize
         backgroundColor = UIColor.white
         makeContent(restore: false, restoreText: nil)
