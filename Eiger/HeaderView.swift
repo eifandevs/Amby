@@ -19,6 +19,7 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
     var delegate: HeaderViewDelegate?
 
     let heightMax: CGFloat = 65
+    
     private var headerField: EGTextField! = nil
     private var isEditing = false
     
@@ -75,13 +76,13 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
     
     func resizeToMax() {
         frame.size.height = heightMax
-        headerField.frame = CGRect(x: 95, y: frame.size.height - frame.size.height * 0.63, width: superview!.frame.size.width - 190, height: heightMax * 0.5)
+        headerField.frame = CGRect(x: 95, y: frame.size.height - heightMax * 0.63, width: superview!.frame.size.width - 190, height: heightMax * 0.5)
         headerField.alpha = 1
     }
     
     func resizeToMin() {
         frame.size.height = DeviceDataManager.shared.statusBarHeight
-        headerField.frame = CGRect(x: 95, y: frame.size.height - frame.size.height * 0.63, width: superview!.frame.size.width - 190, height: heightMax * 0.5)
+        headerField.frame = CGRect(x: 95, y: frame.size.height - heightMax * 0.63, width: superview!.frame.size.width - 190, height: heightMax * 0.5)
         headerField.alpha = 0
     }
     
