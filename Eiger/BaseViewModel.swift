@@ -53,7 +53,6 @@ class BaseViewModel {
             requestUrl.value = defaultUrl
             log.error("failed to read: \(error)")
         }
-        latestRequestUrl = requestUrl.value
     }
     
     func saveHistory(wv: EGWebView) {

@@ -14,7 +14,7 @@ class BaseLayer: UIView, HeaderViewDelegate {
     
     private let baseView: BaseView = BaseView()
     private let headerView: HeaderView = HeaderView()
-    private let footerView: FooterView = FooterView(thumbnailSize: CGSize(width: 70, height: DeviceDataManager.shared.statusBarHeight * 3))
+    private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceDataManager.shared.displaySize.height - DeviceDataManager.shared.statusBarHeight * 3, width: DeviceDataManager.shared.displaySize.width, height: DeviceDataManager.shared.statusBarHeight * 3), thumbnailSize: CGSize(width: 70, height: DeviceDataManager.shared.statusBarHeight * 3))
     private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
     private var overlay: UIButton? = nil
     
@@ -132,7 +132,6 @@ class BaseLayer: UIView, HeaderViewDelegate {
     }
     
     override func layoutSubviews() {
-        footerView.frame = CGRect(x: 0, y: frame.size.height - DeviceDataManager.shared.statusBarHeight * 3, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight * 3)
         progressBar.frame = CGRect(x: 0, y: headerView.frame.size.height - 2.1, width: frame.size.width, height: 2.1)
     }
     
