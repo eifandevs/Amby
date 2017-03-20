@@ -102,7 +102,9 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
             
             if let text = text, !text.isEmpty {
                 let restoreText = text.hasValidUrl ? text : "\(AppDataManager.shared.searchPath)\(text)"
-                self.headerField.makeContent(restore: true, restoreText: restoreText)
+                let encodedText = restoreText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+
+                self.headerField.makeContent(restore: true, restoreText: encodedText)
             } else {
                 self.headerField.makeContent(restore: true, restoreText: nil)
             }

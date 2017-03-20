@@ -59,9 +59,7 @@ class EGWebView: WKWebView {
     
     func load(urlStr: String) -> Bool {
         if  urlStr.hasValidUrl {
-            let encodedURL = urlStr.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
-            
-            guard let url = URL(string: encodedURL!) else {
+            guard let url = URL(string: urlStr) else {
                 log.error("invalud url load")
                 return false
             }

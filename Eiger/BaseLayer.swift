@@ -168,7 +168,8 @@ class BaseLayer: UIView, HeaderViewDelegate {
         headerView.finishEditing(force: false)
         
         if let text = text, !text.isEmpty {
-            baseView.search(text: text)
+            let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+            baseView.search(text: encodedText!)
         }
     }
 }

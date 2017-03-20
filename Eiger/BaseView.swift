@@ -259,7 +259,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         
         // リクエストURLはエラーが発生した時のため保持しておく
         // エラー発生時は、リクエストしたURLを履歴に保持する
-        let latest = (navigationAction.request.url?.absoluteString.removingPercentEncoding)!
+        let latest = (navigationAction.request.url?.absoluteString)!
 
         if latest.hasValidUrl {
             viewModel.latestRequestUrl = latest
@@ -374,7 +374,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private func saveMetaData(completion: (() -> ())?) {
         wv.evaluateJavaScript("window.location.href") { [weak self] (object, error) in
             if let url = object {
-                let urlStr = (url as! String).removingPercentEncoding!
+                let urlStr = url as! String
                 if urlStr.hasValidUrl && self!.wv.requestUrl != urlStr {
                     self!.wv.requestUrl = urlStr
                     self!.headerFieldText.value = self!.wv.requestUrl
