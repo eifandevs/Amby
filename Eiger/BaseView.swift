@@ -103,7 +103,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             button.backgroundColor = UIColor.gray
             button.setTitle("戻る(wv)", for: .normal)
             _ = button.reactive.tap
-                .observe { _ in
+                .observe { [weak self] _ in
                     log.debug("Button tapped.")
             }
             addSubview(button)
@@ -310,6 +310,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             //インジゲーターの表示、非表示をきりかえる。
             UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
             if wv.isLoading == true {
+                viewModel.center.post(name: .baseViewDidStartLoading, object: nil)
                 progress.value = CGFloat(AppDataManager.shared.progressMin)
             } else {
                 progress.value = 1.0
@@ -368,6 +369,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         wv.navigationDelegate = self
         wv.uiDelegate = self;
         wv.scrollView.delegate = self
+
         return wv
     }
     

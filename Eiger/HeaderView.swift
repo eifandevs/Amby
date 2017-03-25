@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 protocol HeaderViewDelegate {
-    func textFieldDidBeginEditing()
-    func textFieldDidEndEditing(text: String?)
+    func headerViewDidBeginEditing()
+    func headerViewDidEndEditing(text: String?)
 }
 
 class HeaderView: UIView, UITextFieldDelegate, ShadowView {
@@ -64,7 +64,7 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
                     self!.headerField.makeInputForm(height: self!.frame.size.height - self!.heightMax * 0.63, obj: self!)
                 })
                 self!.headerField.removeContent()
-                self!.delegate?.textFieldDidBeginEditing()
+                self!.delegate?.headerViewDidBeginEditing()
         }
         
         addSubview(headerField)
@@ -125,8 +125,7 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
 // MARK: UITextField Delegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.delegate?.textFieldDidEndEditing(text: textField.text)
-
+        self.delegate?.headerViewDidEndEditing(text: textField.text)
         return true
     }
 }

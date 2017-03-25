@@ -15,9 +15,11 @@ class AppDataManager {
     let searchPath = "https://www.google.co.jp/search?q="
     let defaultUrlKey = "defaultUrl"
     let locationIndexKey = "locationIndex"
+    let webViewTotalCountKey = "webViewTotalCount"
     let historySavableTermKey = "historySaveblaTerm"
     let appFont = "Avenir"
     let eachHistoryPath = URL(fileURLWithPath: DeviceDataManager.shared.documentsDir + "/each_history.dat")
+    let eachThumbnailPath = URL(fileURLWithPath: DeviceDataManager.shared.documentsDir + "/each_thumbnail.dat")
     
     private init() {
         
@@ -28,7 +30,7 @@ class AppDataManager {
     }
     
     func registerDefaultData() {
-        UserDefaults.standard.register(defaults: [defaultUrlKey: "https://amazon.co.jp",
+        UserDefaults.standard.register(defaults: [defaultUrlKey: "55555555555555555555555555555555555555555555555555555555555555",
                                                   locationIndexKey: 0,
                                                   historySavableTermKey: 10])
     }

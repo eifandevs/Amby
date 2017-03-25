@@ -33,6 +33,9 @@ class BaseViewModel {
     // webViewそれぞれの履歴とカレントページインデックス
     private var eachHistory: [EachHistoryItem] = [EachHistoryItem()]
     
+    // Footerへ送信する用の通知センター
+    let center = NotificationCenter.default
+    
     var defaultUrl: String {
         get {
             return UserDefaults.standard.string(forKey: AppDataManager.shared.defaultUrlKey)!
@@ -51,8 +54,12 @@ class BaseViewModel {
             log.debug("each history read. url: \n\(eachHistory[locationIndex].url)")
         } catch let error as NSError {
             requestUrl.value = defaultUrl
-            log.error("failed to read: \(error)")
+            log.error("failed to read each history: \(error)")
         }
+    }
+    
+    func postCenter() {
+        center.post(name: .baseViewDidStartLoading, object: nil)
     }
     
     func saveHistory(wv: EGWebView) {

@@ -12,9 +12,9 @@ import TextFieldEffects
 
 class BaseLayer: UIView, HeaderViewDelegate {
     
-    private let baseView: BaseView = BaseView()
     private let headerView: HeaderView = HeaderView()
     private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceDataManager.shared.displaySize.height - DeviceDataManager.shared.statusBarHeight * 3, width: DeviceDataManager.shared.displaySize.width, height: DeviceDataManager.shared.statusBarHeight * 3), thumbnailSize: CGSize(width: 70, height: DeviceDataManager.shared.statusBarHeight * 3))
+    private let baseView: BaseView = BaseView()
     private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
     private var overlay: UIButton? = nil
     
@@ -135,9 +135,13 @@ class BaseLayer: UIView, HeaderViewDelegate {
         progressBar.frame = CGRect(x: 0, y: headerView.frame.size.height - 2.1, width: frame.size.width, height: 2.1)
     }
     
+// MARK: Public Method
+    
     func stopProgressObserving() {
         baseView.stopProgressObserving()
     }
+    
+// MARK: Notification Center
     
     func applicationWillResignActive() {
         baseView.storeHistory()
@@ -150,7 +154,7 @@ class BaseLayer: UIView, HeaderViewDelegate {
     
 // MARK: HeaderView Delegate
     
-    func textFieldDidBeginEditing() {
+    func headerViewDidBeginEditing() {
         overlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
         overlay!.backgroundColor = UIColor.gray
         _ = overlay!.reactive.controlEvents(.touchDown)
@@ -162,7 +166,7 @@ class BaseLayer: UIView, HeaderViewDelegate {
         addSubview(overlay!)
     }
     
-    func textFieldDidEndEditing(text: String?) {
+    func headerViewDidEndEditing(text: String?) {
         overlay!.removeFromSuperview()
         overlay = nil
         headerView.finishEditing(force: false)
