@@ -7,17 +7,31 @@
 //
 
 import Foundation
+import Bond
+
+protocol FooterViewModelDelegate {
+    func footerViewModelDidAddThumbnail()
+    func footerViewModelDidStartLoading(index: Int)
+}
 
 class FooterViewModel {
     // 現在位置
-    private var locationIndex: Int  = UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey)
+    private var locationIndex: Int  = 0
     private var eachThumbnail: [EachThumbnailItem] = []
     
-    init() {
+    var delegate: FooterViewModelDelegate?
+
+    init(index: Int) {
         // Notification Center登録
+        locationIndex = index
         let center = NotificationCenter.default
         center.addObserver(self,
-                           selector: #selector(type(of: self).notified(notification:)),
+                           selector: #selector(type(of: self).baseViewDidAddWebView(notification:)),
+                           name: .baseViewDidAddWebView,
+                           object: nil)
+        
+        center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewDidStartLoading(notification:)),
                            name: .baseViewDidStartLoading,
                            object: nil)
         
@@ -33,8 +47,21 @@ class FooterViewModel {
         }
     }
     
-    @objc private func notified(notification: Notification) {
-        print("呼ばれた \(notification)")
+    @objc private func baseViewDidAddWebView(notification: Notification) {
+        log.debug("footer is notified. Name: baseViewDidAddWebView")
+        if eachThumbnail.count > 0 {
+            locationIndex = locationIndex + 1
+        }
+        
+        // 新しいサムネイルを追加
+        eachThumbnail.append(EachThumbnailItem())
+        delegate?.footerViewModelDidAddThumbnail()
+    }
+    
+    @objc private func baseViewDidStartLoading(notification: Notification) {
+        log.debug("footer is notified. Name: baseViewDidStartLoading")
+        // FooterViewに通知をする
+        delegate?.footerViewModelDidStartLoading(index: locationIndex)
     }
     
     private func saveThumbnail() {

@@ -58,8 +58,8 @@ class BaseViewModel {
         }
     }
     
-    func postCenter() {
-        center.post(name: .baseViewDidStartLoading, object: nil)
+    func postNotification(name: NSNotification.Name, object: [String: Int]?) {
+        center.post(name: name, object: object)
     }
     
     func saveHistory(wv: EGWebView) {

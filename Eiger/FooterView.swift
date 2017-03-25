@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-class FooterView: UIView {
+class FooterView: UIView, FooterViewModelDelegate {
     
-    private var viewModel = FooterViewModel()
+    private var viewModel = FooterViewModel(index: UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey))
     private let scrollView = UIScrollView()
     private var imageSize: CGSize! = nil
     private var thumbnails: [UIButton] = []
@@ -22,6 +22,7 @@ class FooterView: UIView {
     
     convenience init(frame: CGRect, thumbnailSize: CGSize) {
         self.init(frame: frame)
+        viewModel.delegate = self
         imageSize = thumbnailSize
 
         backgroundColor = UIColor.white
@@ -66,7 +67,7 @@ class FooterView: UIView {
         let btn = UIButton()
         btn.center = CGPoint(x: (frame.size.width / 2) + (CGFloat(thumbnails.count) * imageSize.width), y: frame.size.height / 2)
         btn.bounds.size = imageSize
-        btn.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        btn.backgroundColor = UIColor.gray
         scrollView.addSubview(btn)
         thumbnails.append(btn)
     }
@@ -74,4 +75,16 @@ class FooterView: UIView {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+// MARK: FooterViewModel Delegate
+
+    func footerViewModelDidAddThumbnail() {
+        // 新しいサムネイルスペースを作成
+        addCaptureSpace()
+    }
+    
+    func footerViewModelDidStartLoading(index: Int) {
+        // くるくるを表示する
+    }
+    
 }

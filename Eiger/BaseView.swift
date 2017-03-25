@@ -369,7 +369,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         wv.navigationDelegate = self
         wv.uiDelegate = self;
         wv.scrollView.delegate = self
-
+        
+        viewModel.postNotification(name: .baseViewDidAddWebView, object: nil)
+        
         return wv
     }
     
