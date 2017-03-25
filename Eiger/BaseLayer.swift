@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import TextFieldEffects
 
 class BaseLayer: UIView, HeaderViewDelegate {
     

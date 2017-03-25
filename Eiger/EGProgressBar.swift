@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import YLProgressBar
 import Bond
 
 class EGProgressBar: UIView {

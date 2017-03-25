@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import WebKit
 import Bond
-import SpringIndicator
 
 class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDelegate, WKUIDelegate, EGApplicationDelegate {
     
