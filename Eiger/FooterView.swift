@@ -8,66 +8,42 @@
 
 import Foundation
 import UIKit
+import NVActivityIndicatorView
 
 class FooterView: UIView, FooterViewModelDelegate {
     
     private var viewModel = FooterViewModel(index: UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey))
     private let scrollView = UIScrollView()
-    private var imageSize: CGSize! = nil
     private var thumbnails: [UIButton] = []
+    
+    private var thumbnail: UIButton {
+        get {
+            return thumbnails[viewModel.locationIndex]
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-    }
-    
-    convenience init(frame: CGRect, thumbnailSize: CGSize) {
-        self.init(frame: frame)
         viewModel.delegate = self
-        imageSize = thumbnailSize
-
+        
         backgroundColor = UIColor.white
         scrollView.frame = CGRect(origin: CGPoint(x: 0, y:0), size: frame.size)
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width + 1, height: scrollView.frame.size.height)
-
+        
         scrollView.bounces = true
-        scrollView.backgroundColor = UIColor.frenchBlue
+        scrollView.backgroundColor = UIColor.clear
         scrollView.isPagingEnabled = false
         scrollView.isUserInteractionEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         addSubview(scrollView)
-        
-//        let btn = UIButton()
-//        btn.center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
-//        btn.bounds.size = thumbnailSize
-//        btn.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        scrollView.addSubview(btn)
-//        thumbnails.append(btn)
-        
-//        let addCaptureBtn = UIButton()
-//        addCaptureBtn.center = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
-//        addCaptureBtn.bounds.size = thumbnailSize
-//        addCaptureBtn.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
-//        addCaptureBtn.setTitle("追加", for: .normal)
-//        _ = addCaptureBtn.reactive.tap
-//            .observe { [weak self] _ in
-//                let btn = UIButton()
-//                btn.center = CGPoint(x: (self!.frame.size.width / 2) + (CGFloat(self!.thumbnails.count) * self!.imageSize.width), y: self!.frame.size.height / 2)
-//                btn.bounds.size = self!.imageSize
-//                btn.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//                addCaptureBtn.frame.origin.x += self!.imageSize.width
-//                self!.scrollView.addSubview(btn)
-//                self!.thumbnails.append(btn)
-//                
-//        }
-//        scrollView.addSubview(addCaptureBtn)
     }
 
     func addCaptureSpace() {
         let btn = UIButton()
-        btn.center = CGPoint(x: (frame.size.width / 2) + (CGFloat(thumbnails.count) * imageSize.width), y: frame.size.height / 2)
-        btn.bounds.size = imageSize
-        btn.backgroundColor = UIColor.gray
+        btn.center = CGPoint(x: (frame.size.width / 2) + (CGFloat(thumbnails.count) * AppDataManager.shared.thumbnailSize.width), y: frame.size.height / 2)
+        btn.bounds.size = AppDataManager.shared.thumbnailSize
+        btn.backgroundColor = UIColor.lightGray
         scrollView.addSubview(btn)
         thumbnails.append(btn)
     }
@@ -85,6 +61,11 @@ class FooterView: UIView, FooterViewModelDelegate {
     
     func footerViewModelDidStartLoading(index: Int) {
         // くるくるを表示する
+        let rect = CGRect(x: 0, y: 0, width: AppDataManager.shared.thumbnailSize.height * 0.7, height: AppDataManager.shared.thumbnailSize.height * 0.7)
+        let indicator = NVActivityIndicatorView(frame: rect, type: NVActivityIndicatorType.ballClipRotate, color: UIColor.frenchBlue, padding: 0)
+        indicator.center = CGPoint(x: thumbnail.bounds.size.width / 2, y: thumbnail.bounds.size.height / 2)
+        thumbnail.addSubview(indicator)
+        indicator.startAnimating()
     }
     
 }

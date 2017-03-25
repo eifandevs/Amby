@@ -12,6 +12,7 @@ import UIKit
 class AppDataManager {
     static let shared: AppDataManager = AppDataManager()
     let progressMin = 0.1
+    let thumbnailSize = CGSize(width: 85, height: 85 * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
     let searchPath = "https://www.google.co.jp/search?q="
     let defaultUrlKey = "defaultUrl"
     let locationIndexKey = "locationIndex"

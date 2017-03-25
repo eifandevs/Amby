@@ -18,7 +18,7 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
     
     var delegate: HeaderViewDelegate?
 
-    let heightMax: CGFloat = 65
+    let heightMax: CGFloat = 45 + DeviceDataManager.shared.statusBarHeight
     
     private var headerField: EGTextField! = nil
     private var isEditing = false

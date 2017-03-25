@@ -16,7 +16,7 @@ protocol FooterViewModelDelegate {
 
 class FooterViewModel {
     // 現在位置
-    private var locationIndex: Int  = 0
+    var locationIndex: Int  = 0
     private var eachThumbnail: [EachThumbnailItem] = []
     
     var delegate: FooterViewModelDelegate?

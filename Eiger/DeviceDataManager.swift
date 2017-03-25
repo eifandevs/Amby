@@ -14,6 +14,7 @@ class DeviceDataManager {
     let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
     let displaySize = UIScreen.main.bounds.size
     let documentsDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+    let aspectRate = UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height
     private init() {
         
     }

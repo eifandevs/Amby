@@ -13,4 +13,5 @@ target 'Eiger' do
   pod 'SwiftyBeaver', '~> 1.1'
   pod 'SVProgressHUD', '2.1.2'
   pod 'RealmSwift', '~> 2.4'
+  pod 'NVActivityIndicatorView'
 end

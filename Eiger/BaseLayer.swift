@@ -12,7 +12,7 @@ import UIKit
 class BaseLayer: UIView, HeaderViewDelegate {
     
     private let headerView: HeaderView = HeaderView()
-    private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceDataManager.shared.displaySize.height - DeviceDataManager.shared.statusBarHeight * 3, width: DeviceDataManager.shared.displaySize.width, height: DeviceDataManager.shared.statusBarHeight * 3), thumbnailSize: CGSize(width: 70, height: DeviceDataManager.shared.statusBarHeight * 3))
+    private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceDataManager.shared.displaySize.height - AppDataManager.shared.thumbnailSize.height, width: DeviceDataManager.shared.displaySize.width, height: AppDataManager.shared.thumbnailSize.height))
     private let baseView: BaseView = BaseView()
     private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
     private var overlay: UIButton? = nil
@@ -23,7 +23,7 @@ class BaseLayer: UIView, HeaderViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        baseView.frame = CGRect(x: 0, y: DeviceDataManager.shared.statusBarHeight, width: frame.size.width, height: frame.size.height - DeviceDataManager.shared.statusBarHeight * 4)
+        baseView.frame = CGRect(x: 0, y: DeviceDataManager.shared.statusBarHeight, width: frame.size.width, height: frame.size.height - AppDataManager.shared.thumbnailSize.height)
         // サイズが可変なので、layoutSubViewsで初期化しない
         headerView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight)
         headerView.delegate = self
