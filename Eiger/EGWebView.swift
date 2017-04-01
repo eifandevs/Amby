@@ -17,7 +17,7 @@ class EGWebView: WKWebView {
         case INVALID_URL
         case UNAUTHORIZED
     }
-    
+    var context = NSUUID().uuidString // 監視ID
     var previousUrl: String = "" // リロードしたページを履歴に登録しないために、前回URLを保持しておく
     var hasSavableUrl: Bool {
         get {
@@ -46,7 +46,11 @@ class EGWebView: WKWebView {
         }
     }
     
-    init(pool: WKProcessPool) {
+    init(id: String?, pool: WKProcessPool) {
+        if let id = id, !id.isEmpty {
+            // コンテキストを復元
+            context = id
+        }
         let configuration = WKWebViewConfiguration()
         configuration.processPool = pool
         // Cookie, Cache, その他Webデータを端末内に残す
@@ -115,14 +119,14 @@ class EGWebView: WKWebView {
         loadHtml(code: errorType)
     }
     
-    func screenshot() -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: bounds.size.width, height: bounds.size.width), true, 0);
-        self.drawHierarchy(in: self.bounds, afterScreenUpdates: true);
+    func takeThumbnail() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: bounds.size.width, height: bounds.size.width * DeviceDataManager.shared.aspectRate), true, 0);
+        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false);
         let snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return snapshotImage;
+        return snapshotImage?.crop(w: Int(AppDataManager.shared.thumbnailSize.width), h: Int(AppDataManager.shared.thumbnailSize.height));
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

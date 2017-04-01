@@ -124,6 +124,87 @@ class BaseLayer: UIView, HeaderViewDelegate {
         addSubview(headerView)
         addSubview(footerView)
         headerView.addSubview(progressBar)
+        
+        /* テストコード */
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 100), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("戻る(ページ)", for: .normal)
+            _ = button.reactive.tap
+                .observe { [weak self] _ in
+                    self!.baseView.doHistoryBack()
+            }
+            addSubview(button)
+        }
+        
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 220, y: 100), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("進む(ページ)", for: .normal)
+            _ = button.reactive.tap
+                .observe { [weak self] _ in
+                    self!.baseView.doHistoryForward()
+            }
+            addSubview(button)
+        }
+        
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 180), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("戻る(wv)", for: .normal)
+            _ = button.reactive.tap
+                .observe { [weak self] _ in
+                    self!.baseView.doWebViewBack()
+            }
+            addSubview(button)
+        }
+        
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 220, y: 180), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("進む(wv)", for: .normal)
+            _ = button.reactive.tap
+                .observe { [weak self] _ in
+                    self!.baseView.doWebViewForward()
+            }
+            addSubview(button)
+        }
+        
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 260), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("リロード", for: .normal)
+            // TODO: リロードは自前で管理しているURLから実施する
+            _ = button.reactive.tap
+                .observe { [weak self] _ in
+                    self!.baseView.doWebViewReload()
+            }
+            addSubview(button)
+        }
+
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 340), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("wv作成・移動", for: .normal)
+            // TODO: リロードは自前で管理しているURLから実施する
+            _ = button.reactive.tap
+                .observe { [weak self] _ in
+                    self!.baseView.doWebViewAdd()
+            }
+            addSubview(button)
+        }
+        
+        do {
+            let button = UIButton(frame: CGRect(origin: CGPoint(x: 220, y: 340), size: CGSize(width: 150, height: 50)))
+            button.backgroundColor = UIColor.gray
+            button.setTitle("現在のwv削除", for: .normal)
+            _ = button.reactive.tap
+                .observe { [weak self] _ in
+                    self!.baseView.doWebViewDelete()
+            }
+            addSubview(button)
+        }
+        /*-----------*/
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -172,7 +253,7 @@ class BaseLayer: UIView, HeaderViewDelegate {
         
         if let text = text, !text.isEmpty {
             let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
-            baseView.search(text: encodedText!)
+            baseView.doSearch(text: encodedText!)
         }
     }
 }

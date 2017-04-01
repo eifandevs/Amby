@@ -8,12 +8,16 @@
 
 import Foundation
 import Bond
+import WebKit
 
 class BaseViewModel {
     
     // リクエストURL(jsのURL)
     var requestUrl = Observable("http://about:blank")
     
+    // クッキーの共有
+    var processPool = WKProcessPool()
+
     // 最新のリクエストURL(wv.url)。エラーが発生した時用
     var latestRequestUrl: String = ""
 
@@ -23,7 +27,14 @@ class BaseViewModel {
             return UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey)
         }
         set(index) {
+            log.debug("location index changed. \(locationIndex) -> \(index)")
             UserDefaults.standard.set(index, forKey: AppDataManager.shared.locationIndexKey)
+            if eachHistory.count == index {
+                // 新規追加
+                log.debug("create new each history")
+                eachHistory.append(EachHistoryItem())
+                requestUrl.value = (!eachHistory[locationIndex].url.isEmpty) ? eachHistory[locationIndex].url : defaultUrl
+            }
         }
     }
     
@@ -31,7 +42,7 @@ class BaseViewModel {
     private var commonHistory: [CommonHistoryItem] = []
     
     // webViewそれぞれの履歴とカレントページインデックス
-    private var eachHistory: [EachHistoryItem] = [EachHistoryItem()]
+    private var eachHistory: [EachHistoryItem] = []
     
     // Footerへ送信する用の通知センター
     let center = NotificationCenter.default
@@ -45,20 +56,27 @@ class BaseViewModel {
         }
     }
     
+    var currentContext: String? {
+        get {
+            return eachHistory.count > locationIndex ? eachHistory[locationIndex].context : nil
+        }
+    }
+    
     init() {
         // eachHistory読み込み
         do {
             let data = try Data(contentsOf: AppDataManager.shared.eachHistoryPath)
             eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [EachHistoryItem]
-            requestUrl.value = eachHistory[locationIndex].url
-            log.debug("each history read. url: \n\(eachHistory[locationIndex].url)")
+            requestUrl.value = (!eachHistory[locationIndex].url.isEmpty) ? eachHistory[locationIndex].url : defaultUrl
+            log.debug("each history read. url: \n\(requestUrl.value)")
         } catch let error as NSError {
+            eachHistory.append(EachHistoryItem())
             requestUrl.value = defaultUrl
             log.error("failed to read each history: \(error)")
         }
     }
     
-    func postNotification(name: NSNotification.Name, object: [String: Int]?) {
+    func postNotification(name: NSNotification.Name, object: [String: Any]?) {
         center.post(name: name, object: object)
     }
     
@@ -69,7 +87,7 @@ class BaseViewModel {
         log.debug("save history. url: \(common.url)")
         
         // Each History
-        let each = EachHistoryItem(url: common.url, title: common.title)
+        let each = EachHistoryItem(context: wv.context, url: common.url, title: common.title)
         eachHistory[locationIndex] = each
     }
     
@@ -77,6 +95,18 @@ class BaseViewModel {
         storeCommonHistory()
         storeEachHistory()
         commonHistory = []
+    }
+    
+    func getLocationIndex() -> Int {
+        return locationIndex
+    }
+    
+    func goForwardLocationIndex() {
+        locationIndex = locationIndex + 1
+    }
+    
+    func goBackLocationIndex() {
+        locationIndex = locationIndex - 1
     }
     
     private func storeCommonHistory() {
@@ -109,14 +139,7 @@ class BaseViewModel {
                         return value
                     }
                 }()
-                
-                //                log.debug("*********** 保存するCommonHistory **************")
-                //                for data in saveData {
-                //                    log.debug("url: \(data.url)")
-                //                    log.debug("date: \(data.date)")
-                //                }
-                //                log.debug("***********************************************")
-                
+
                 let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
                 do {
                     try commonHistoryData.write(to: commonHistoryPath)

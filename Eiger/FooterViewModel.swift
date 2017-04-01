@@ -12,12 +12,18 @@ import Bond
 protocol FooterViewModelDelegate {
     func footerViewModelDidAddThumbnail()
     func footerViewModelDidStartLoading(index: Int)
+    func footerViewModelDidEndLoading(context: String)
 }
 
 class FooterViewModel {
     // 現在位置
-    var locationIndex: Int  = 0
+    private var locationIndex: Int  = 0
     private var eachThumbnail: [EachThumbnailItem] = []
+    private var currentThumbnail: EachThumbnailItem {
+        get {
+            return eachThumbnail[locationIndex]
+        }
+    }
     
     var delegate: FooterViewModelDelegate?
 
@@ -35,20 +41,18 @@ class FooterViewModel {
                            name: .baseViewDidStartLoading,
                            object: nil)
         
-        // eachThumbnail読み込み
-        do {
-            let data = try Data(contentsOf: AppDataManager.shared.eachThumbnailPath)
-            eachThumbnail = NSKeyedUnarchiver.unarchiveObject(with: data) as! [EachThumbnailItem]
-            log.debug("each thumbnail read")
-            
-            // TODO: eachThumnailからそれぞれのサムネイルを復元
-        } catch let error as NSError {
-            log.error("failed to read each thumbnail: \(error)")
-        }
+        center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewDidEndLoading(notification:)),
+                           name: .baseViewDidEndLoading,
+                           object: nil)
+    }
+    
+    func getLocationIndex() -> Int {
+        return locationIndex
     }
     
     @objc private func baseViewDidAddWebView(notification: Notification) {
-        log.debug("footer is notified. Name: baseViewDidAddWebView")
+        log.debug("[Footer Event]: baseViewDidAddWebView")
         if eachThumbnail.count > 0 {
             locationIndex = locationIndex + 1
         }
@@ -59,14 +63,19 @@ class FooterViewModel {
     }
     
     @objc private func baseViewDidStartLoading(notification: Notification) {
-        log.debug("footer is notified. Name: baseViewDidStartLoading")
+        log.debug("[Footer Event]: baseViewDidStartLoading")
         // FooterViewに通知をする
         delegate?.footerViewModelDidStartLoading(index: locationIndex)
     }
     
-    private func saveThumbnail() {
-    }
-    
-    private func storeThumbnail() {
+    @objc private func baseViewDidEndLoading(notification: Notification) {
+        log.debug("[Footer Event]: baseViewDidEndLoading")
+        // FooterViewに通知をする
+        let context = (notification.object as! [String: String])["context"]!
+        if let url = (notification.object as! [String: String])["url"] {
+            currentThumbnail.context = context
+            currentThumbnail.url = url
+        }
+        delegate?.footerViewModelDidEndLoading(context: context)
     }
 }

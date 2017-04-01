@@ -10,26 +10,26 @@ import Foundation
 import UIKit
 
 class EachThumbnailItem: NSObject, NSCoding {
+    var context: String = ""
     var url: String = ""
-    var name: String = ""
     
     override init() {
         super.init()
     }
     
-    init(url: String, name: String) {
+    init(url: String, context: String) {
         self.url = url
-        self.name = name
+        self.context = context
     }
     
     required convenience init?(coder decoder: NSCoder) {
         let url = decoder.decodeObject(forKey: "url") as! String
-        let name = decoder.decodeObject(forKey: "name") as! String
-        self.init(url: url, name: name)
+        let context = decoder.decodeObject(forKey: "context") as! String
+        self.init(url: url, context: context)
     }
     
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(url, forKey: "url")
-        aCoder.encode(name, forKey: "name")
+        aCoder.encode(context, forKey: "context")
     }
 }

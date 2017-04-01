@@ -12,26 +12,44 @@ import UIKit
 class AppDataManager {
     static let shared: AppDataManager = AppDataManager()
     let progressMin = 0.1
-    let thumbnailSize = CGSize(width: 85, height: 85 * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
+    let thumbnailSize = CGSize(width: 105, height: 105 * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
     let searchPath = "https://www.google.co.jp/search?q="
     let defaultUrlKey = "defaultUrl"
     let locationIndexKey = "locationIndex"
     let webViewTotalCountKey = "webViewTotalCount"
     let historySavableTermKey = "historySaveblaTerm"
     let appFont = "Avenir"
-    let eachHistoryPath = URL(fileURLWithPath: DeviceDataManager.shared.documentsDir + "/each_history.dat")
-    let eachThumbnailPath = URL(fileURLWithPath: DeviceDataManager.shared.documentsDir + "/each_thumbnail.dat")
+    let eachHistoryPath = URL(fileURLWithPath: DeviceDataManager.shared.cachesPath + "/each_history.dat")
     
     private init() {
         
     }
     
+    func thumbnailPath(folder: String) -> URL {
+        let path = DeviceDataManager.shared.cachesPath + "/thumbnails/\(folder)"
+        createFolder(path: path)
+        return URL(fileURLWithPath: path + "/thumbnail.png")
+    }
+    
     func commonHistoryPath(date: String) -> URL {
-        return URL(fileURLWithPath: DeviceDataManager.shared.documentsDir + "/\(date).dat")
+        let path = DeviceDataManager.shared.cachesPath + "/common_history"
+        createFolder(path: path)
+        return URL(fileURLWithPath: path + "/\(date).dat")
+    }
+    
+    private func createFolder(path: String) {
+        let fileManager = FileManager.default
+        var isDir : ObjCBool = false
+        
+        fileManager.fileExists(atPath: path, isDirectory: &isDir)
+        
+        if !isDir.boolValue {
+            try! fileManager.createDirectory(atPath: path ,withIntermediateDirectories: true, attributes: nil)
+        }
     }
     
     func registerDefaultData() {
-        UserDefaults.standard.register(defaults: [defaultUrlKey: "55555555555555555555555555555555555555555555555555555555555555",
+        UserDefaults.standard.register(defaults: [defaultUrlKey: "https://amazon.co.jp",
                                                   locationIndexKey: 0,
                                                   historySavableTermKey: 10])
     }

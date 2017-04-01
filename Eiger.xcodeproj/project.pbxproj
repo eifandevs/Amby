@@ -27,6 +27,7 @@
 		A57EFEAC1E3E06D300B66701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAB1E3E06D300B66701 /* Assets.xcassets */; };
 		A57EFEAF1E3E06D300B66701 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A57EFEAD1E3E06D300B66701 /* LaunchScreen.storyboard */; };
 		A5800E7F1E565E48004A1AF0 /* UIColor+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5800E7E1E565E48004A1AF0 /* UIColor+Extend.swift */; };
+		A58138591E8F442900612AE4 /* UIImage+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58138581E8F442900612AE4 /* UIImage+Extend.swift */; };
 		A58581011E59D0B700CCC098 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A58581001E59D0B700CCC098 /* offline.html */; };
 		A59BF5B41E86BA05002249E7 /* FooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF5B31E86BA04002249E7 /* FooterViewModel.swift */; };
 		A59BF5B61E86C465002249E7 /* EachThumbnailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF5B51E86C465002249E7 /* EachThumbnailItem.swift */; };
@@ -65,6 +66,7 @@
 		A57EFEAE1E3E06D300B66701 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A57EFEB01E3E06D300B66701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5800E7E1E565E48004A1AF0 /* UIColor+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extend.swift"; sourceTree = "<group>"; };
+		A58138581E8F442900612AE4 /* UIImage+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extend.swift"; sourceTree = "<group>"; };
 		A58581001E59D0B700CCC098 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
 		A59BF5B31E86BA04002249E7 /* FooterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterViewModel.swift; sourceTree = "<group>"; };
 		A59BF5B51E86C465002249E7 /* EachThumbnailItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EachThumbnailItem.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				A5800E7E1E565E48004A1AF0 /* UIColor+Extend.swift */,
 				A55E0E881E74533500278D8A /* DispatchQueue+Extend.swift */,
 				A59BF5B91E86C4CB002249E7 /* NSNotification+Extend.swift */,
+				A58138581E8F442900612AE4 /* UIImage+Extend.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				A59BF5B61E86C465002249E7 /* EachThumbnailItem.swift in Sources */,
 				A562096F1E619C4100F8996A /* EGProgressBar.swift in Sources */,
 				A55A60321E6AF454005C03F3 /* HeaderView.swift in Sources */,
+				A58138591E8F442900612AE4 /* UIImage+Extend.swift in Sources */,
 				A59BF5B41E86BA05002249E7 /* FooterViewModel.swift in Sources */,
 				A5800E7F1E565E48004A1AF0 /* UIColor+Extend.swift in Sources */,
 				A5D88FBE1E4F1F050099DFA3 /* EGApplication.swift in Sources */,

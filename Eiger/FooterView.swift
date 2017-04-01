@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import NVActivityIndicatorView
 
-class FooterView: UIView, FooterViewModelDelegate {
+class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
     private var viewModel = FooterViewModel(index: UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey))
     private let scrollView = UIScrollView()
@@ -18,7 +18,7 @@ class FooterView: UIView, FooterViewModelDelegate {
     
     private var thumbnail: UIButton {
         get {
-            return thumbnails[viewModel.locationIndex]
+            return thumbnails[viewModel.getLocationIndex()]
         }
     }
     
@@ -26,7 +26,9 @@ class FooterView: UIView, FooterViewModelDelegate {
         super.init(frame: frame)
         viewModel.delegate = self
         
-        backgroundColor = UIColor.white
+        addAreaShadow()
+        
+        backgroundColor = UIColor.pastelLightGray
         scrollView.frame = CGRect(origin: CGPoint(x: 0, y:0), size: frame.size)
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width + 1, height: scrollView.frame.size.height)
         
@@ -43,7 +45,7 @@ class FooterView: UIView, FooterViewModelDelegate {
         let btn = UIButton()
         btn.center = CGPoint(x: (frame.size.width / 2) + (CGFloat(thumbnails.count) * AppDataManager.shared.thumbnailSize.width), y: frame.size.height / 2)
         btn.bounds.size = AppDataManager.shared.thumbnailSize
-        btn.backgroundColor = UIColor.lightGray
+        btn.backgroundColor = UIColor.black
         scrollView.addSubview(btn)
         thumbnails.append(btn)
     }
@@ -66,6 +68,23 @@ class FooterView: UIView, FooterViewModelDelegate {
         indicator.center = CGPoint(x: thumbnail.bounds.size.width / 2, y: thumbnail.bounds.size.height / 2)
         thumbnail.addSubview(indicator)
         indicator.startAnimating()
+    }
+    
+    func footerViewModelDidEndLoading(context: String) {
+        // くるくるを止めて、サムネイルを表示する
+        DispatchQueue.mainSyncSafe { [weak self] _ in
+            let image = UIImage(contentsOfFile: AppDataManager.shared.thumbnailPath(folder: context).path)
+            if image == nil {
+                log.error("missing thumbnail image")
+                return
+            }
+            _ = self!.thumbnail.subviews.map { (v) -> Void in
+                v.removeFromSuperview()
+            }
+            let imageView = UIImageView(image: image)
+            imageView.frame = CGRect(origin: CGPoint.zero, size: self!.thumbnail.bounds.size)
+            self!.thumbnail.addSubview(imageView)
+        }
     }
     
 }
