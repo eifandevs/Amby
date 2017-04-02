@@ -124,7 +124,8 @@ class EGWebView: WKWebView {
         self.drawHierarchy(in: self.bounds, afterScreenUpdates: false);
         let snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return snapshotImage?.crop(w: Int(AppDataManager.shared.thumbnailSize.width), h: Int(AppDataManager.shared.thumbnailSize.height));
+        return snapshotImage?.crop(w: Int(AppDataManager.shared.thumbnailSize.width * 2), h: Int((AppDataManager.shared.thumbnailSize.width * 2) * DeviceDataManager.shared.aspectRate));
+//        return snapshotImage
     }
 
     required init?(coder: NSCoder) {

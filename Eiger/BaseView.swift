@@ -102,7 +102,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 // MARK: WebView Delegate
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        log.error("[error url]\(webView.url)")
+        log.error("[error url]\(String(describing: webView.url))")
         if wv.isLoading {
             progress.value = 0
         }
