@@ -125,7 +125,6 @@ class EGWebView: WKWebView {
         let snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return snapshotImage?.crop(w: Int(AppDataManager.shared.thumbnailSize.width * 2), h: Int((AppDataManager.shared.thumbnailSize.width * 2) * DeviceDataManager.shared.aspectRate));
-//        return snapshotImage
     }
 
     required init?(coder: NSCoder) {

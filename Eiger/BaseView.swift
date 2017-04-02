@@ -219,7 +219,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                         
                         // サムネイルを保存
                         DispatchQueue.mainSyncSafe {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] _ in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] _ in
                                 let img = self!.wv.takeThumbnail()
                                 let pngImageData = UIImagePNGRepresentation(img!)
                                 let context = self!.wv.context
