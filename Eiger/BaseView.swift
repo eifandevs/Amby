@@ -32,12 +32,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         EGApplication.sharedMyApplication.egDelegate = self
         
         // TODO: 最初に表示するWebViewを決定する
-        let wv = createWebView(context: viewModel.currentContext)
-        
-        addSubview(wv)
-        
-        // プログレスバー
-        startProgressObserving()
+        let _ = createWebView(context: viewModel.currentContext)
         
         // Observer登録
         _ = viewModel.requestUrl.observeNext { [weak self] value in
@@ -328,9 +323,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         progress.value = 0
         
         let _ = createWebView(context: nil)
-        
-        // プログレスバー
-        startProgressObserving()
     }
 
     func doWebViewDelete() {
@@ -349,21 +341,21 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 
 // MARK: Private Method
     
-    private func startProgressObserving() {
+    private func startProgressObserving(target: EGWebView) {
         log.debug("start progress observe")
 
         //読み込み状態が変更されたことを取得
-        wv.addObserver(self, forKeyPath: "loading", options: .new, context: &(wv.context))
+        target.addObserver(self, forKeyPath: "loading", options: .new, context: &(target.context))
         //プログレスが変更されたことを取得
-        wv.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-        if wv.isLoading == true {
-            progress.value = CGFloat(wv.estimatedProgress)
+        target.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        if target.isLoading == true {
+            progress.value = CGFloat(target.estimatedProgress)
         }
-        UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
+        UIApplication.shared.isNetworkActivityIndicatorVisible = target.isLoading
     }
     
     // 初回起動時に表示するwebviewを作成
-    private func createWebView(context: String?) -> EGWebView {
+    private func createWebView(context: String?) {
         let wv = EGWebView(id: context, pool: viewModel.processPool)
         wv.navigationDelegate = self
         wv.uiDelegate = self;
@@ -373,9 +365,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         
         addSubview(wv)
 
+        // プログレスバー
+        startProgressObserving(target: wv)
+        
         webViews.append(wv)
-
-        return wv
     }
     
     private func saveMetaData(completion: ((_ url: String?) -> ())?) {
