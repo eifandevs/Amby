@@ -9,6 +9,7 @@
 import Foundation
 
 extension NSNotification.Name {
+    static let baseViewDidLoad = NSNotification.Name("baseViewDidLoad")
     static let baseViewDidAddWebView = NSNotification.Name("baseViewDidAddWebView")
     static let baseViewDidRemoveWebView = NSNotification.Name("baseViewDidRemoveWebView")
     static let baseViewDidChangeWebView = NSNotification.Name("baseViewDidChangeWebView")

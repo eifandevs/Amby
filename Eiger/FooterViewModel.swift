@@ -32,6 +32,11 @@ class FooterViewModel {
         locationIndex = index
         let center = NotificationCenter.default
         center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewDidLoad(notification:)),
+                           name: .baseViewDidLoad,
+                           object: nil)
+        
+        center.addObserver(self,
                            selector: #selector(type(of: self).baseViewDidAddWebView(notification:)),
                            name: .baseViewDidAddWebView,
                            object: nil)
@@ -49,6 +54,10 @@ class FooterViewModel {
     
     func getLocationIndex() -> Int {
         return locationIndex
+    }
+
+    @objc private func baseViewDidLoad(notification: Notification) {
+        log.debug("[Footer Event]: baseViewDidLoad")
     }
     
     @objc private func baseViewDidAddWebView(notification: Notification) {

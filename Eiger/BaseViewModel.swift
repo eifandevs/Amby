@@ -74,6 +74,7 @@ class BaseViewModel {
             requestUrl.value = defaultUrl
             log.error("failed to read each history: \(error)")
         }
+        center.post(name: .baseViewDidLoad, object: nil)
     }
     
     func postNotification(name: NSNotification.Name, object: [String: Any]?) {
