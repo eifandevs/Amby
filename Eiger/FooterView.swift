@@ -18,7 +18,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
     private var thumbnail: UIButton {
         get {
-            return thumbnails[viewModel.getLocationIndex()]
+            return thumbnails[viewModel.locationIndex]
         }
     }
     
@@ -41,13 +41,15 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         addSubview(scrollView)
     }
 
-    func addCaptureSpace() {
+    func createCaptureSpace() -> UIButton {
+        log.warning("何回来てる？")
         let btn = UIButton()
         btn.center = CGPoint(x: (frame.size.width / 2) + (CGFloat(thumbnails.count) * AppDataManager.shared.thumbnailSize.width), y: frame.size.height / 2)
         btn.bounds.size = AppDataManager.shared.thumbnailSize
         btn.backgroundColor = UIColor.black
         scrollView.addSubview(btn)
         thumbnails.append(btn)
+        return btn
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -58,7 +60,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
 
     func footerViewModelDidAddThumbnail() {
         // 新しいサムネイルスペースを作成
-        addCaptureSpace()
+        let _ = createCaptureSpace()
     }
     
     func footerViewModelDidStartLoading(index: Int) {
@@ -84,6 +86,22 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             let imageView = UIImageView(image: image)
             imageView.frame = CGRect(origin: CGPoint.zero, size: self!.thumbnail.bounds.size)
             self!.thumbnail.addSubview(imageView)
+        }
+    }
+    
+    func footerViewModelDidLoadThumbnail(eachThumbnail: [EachHistoryItem]) {
+        eachThumbnail.forEach { (item) in
+            if !item.context.isEmpty {
+                let btn = createCaptureSpace()
+                let image = UIImage(contentsOfFile: AppDataManager.shared.thumbnailPath(folder: item.context).path)
+                if image == nil {
+                    log.error("missing thumbnail image")
+                    return
+                }
+                let imageView = UIImageView(image: image)
+                imageView.frame = CGRect(origin: CGPoint.zero, size: AppDataManager.shared.thumbnailSize)
+                btn.addSubview(imageView)
+            }
         }
     }
     

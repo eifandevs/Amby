@@ -21,9 +21,7 @@ class EGWebView: WKWebView {
     var previousUrl: String = "" // リロードしたページを履歴に登録しないために、前回URLを保持しておく
     var hasSavableUrl: Bool {
         get {
-            return  !previousUrl.isEmpty &&
-                    previousUrl != requestUrl &&
-                    !requestTitle.isEmpty &&
+            return  previousUrl != requestUrl &&
                     requestUrl.hasValidUrl
         }
     }

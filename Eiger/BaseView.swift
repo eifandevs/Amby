@@ -15,7 +15,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     private var wv: EGWebView! {
         get {
-            return webViews[viewModel.getLocationIndex()] as! EGWebView
+            return webViews[viewModel.locationIndex] as! EGWebView
         }
     }
     let webViews = MutableObservableArray([])
@@ -31,8 +31,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         super.init(frame: frame)
         EGApplication.sharedMyApplication.egDelegate = self
         
-        // TODO: 最初に表示するWebViewを決定する
-        let _ = createWebView(context: viewModel.currentContext)
+        // webviewsに初期値を入れる
+        for _ in 0...viewModel.webViewCount - 1 {
+            webViews.append(0)
+        }
+        
+        loadWebView(context: viewModel.currentContext)
         
         // Observer登録
         _ = viewModel.requestUrl.observeNext { [weak self] value in
@@ -321,8 +325,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         log.debug("[WebView Action]: webview add")
         wv.removeObserver(self, forKeyPath: "estimatedProgress")
         progress.value = 0
-        
-        let _ = createWebView(context: nil)
+        addWebView()
     }
 
     func doWebViewDelete() {
@@ -354,21 +357,30 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         UIApplication.shared.isNetworkActivityIndicatorVisible = target.isLoading
     }
     
-    // 初回起動時に表示するwebviewを作成
-    private func createWebView(context: String?) {
+    // webviewを新規作成
+    private func createWebView(context: String?) -> EGWebView {
         let wv = EGWebView(id: context, pool: viewModel.processPool)
         wv.navigationDelegate = self
         wv.uiDelegate = self;
         wv.scrollView.delegate = self
-        
-        viewModel.postNotification(name: .baseViewDidAddWebView, object: nil)
-        
+
         addSubview(wv)
 
         // プログレスバー
         startProgressObserving(target: wv)
         
-        webViews.append(wv)
+        return wv
+    }
+    
+    private func loadWebView(context: String?) {
+        let newWv = createWebView(context: context)
+        webViews[viewModel.locationIndex] = newWv
+    }
+    
+    private func addWebView() {
+        let newWv = createWebView(context: nil)
+        viewModel.postNotification(name: .baseViewDidAddWebView, object: nil)
+        webViews.append(newWv)
     }
     
     private func saveMetaData(completion: ((_ url: String?) -> ())?) {

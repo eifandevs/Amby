@@ -20,9 +20,16 @@ class BaseViewModel {
 
     // 最新のリクエストURL(wv.url)。エラーが発生した時用
     var latestRequestUrl: String = ""
+    
+    // webviewの数
+    var webViewCount: Int {
+        get {
+            return eachHistory.count
+        }
+    }
 
     // 現在表示しているwebviewのインデックス
-    private var locationIndex: Int {
+    var locationIndex: Int {
         get {
             return UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey)
         }
@@ -74,7 +81,7 @@ class BaseViewModel {
             requestUrl.value = defaultUrl
             log.error("failed to read each history: \(error)")
         }
-        center.post(name: .baseViewDidLoad, object: nil)
+        center.post(name: .baseViewDidLoad, object: eachHistory)
     }
     
     func postNotification(name: NSNotification.Name, object: [String: Any]?) {
@@ -96,10 +103,6 @@ class BaseViewModel {
         storeCommonHistory()
         storeEachHistory()
         commonHistory = []
-    }
-    
-    func getLocationIndex() -> Int {
-        return locationIndex
     }
     
     func goForwardLocationIndex() {

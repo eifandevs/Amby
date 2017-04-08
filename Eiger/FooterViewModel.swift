@@ -10,6 +10,7 @@ import Foundation
 import Bond
 
 protocol FooterViewModelDelegate {
+    func footerViewModelDidLoadThumbnail(eachThumbnail: [EachHistoryItem])
     func footerViewModelDidAddThumbnail()
     func footerViewModelDidStartLoading(index: Int)
     func footerViewModelDidEndLoading(context: String)
@@ -17,9 +18,9 @@ protocol FooterViewModelDelegate {
 
 class FooterViewModel {
     // 現在位置
-    private var locationIndex: Int  = 0
-    private var eachThumbnail: [EachThumbnailItem] = []
-    private var currentThumbnail: EachThumbnailItem {
+    var locationIndex: Int  = 0
+    private var eachThumbnail: [EachHistoryItem] = []
+    private var currentThumbnail: EachHistoryItem {
         get {
             return eachThumbnail[locationIndex]
         }
@@ -51,13 +52,10 @@ class FooterViewModel {
                            name: .baseViewDidEndLoading,
                            object: nil)
     }
-    
-    func getLocationIndex() -> Int {
-        return locationIndex
-    }
 
     @objc private func baseViewDidLoad(notification: Notification) {
         log.debug("[Footer Event]: baseViewDidLoad")
+        delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: notification.object as! [EachHistoryItem])
     }
     
     @objc private func baseViewDidAddWebView(notification: Notification) {
@@ -67,7 +65,7 @@ class FooterViewModel {
         }
         
         // 新しいサムネイルを追加
-        eachThumbnail.append(EachThumbnailItem())
+        eachThumbnail.append(EachHistoryItem())
         delegate?.footerViewModelDidAddThumbnail()
     }
     
