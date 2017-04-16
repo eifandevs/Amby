@@ -55,7 +55,12 @@ class FooterViewModel {
 
     @objc private func baseViewDidLoad(notification: Notification) {
         log.debug("[Footer Event]: baseViewDidLoad")
-        delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: notification.object as! [EachHistoryItem])
+        let eachHistory = notification.object as! [EachHistoryItem]
+        if eachHistory.count == 0 {
+            // 初回起動時
+            eachThumbnail.append(EachHistoryItem())
+        }
+        delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: eachHistory)
     }
     
     @objc private func baseViewDidAddWebView(notification: Notification) {
@@ -72,6 +77,7 @@ class FooterViewModel {
     @objc private func baseViewDidStartLoading(notification: Notification) {
         log.debug("[Footer Event]: baseViewDidStartLoading")
         // FooterViewに通知をする
+        
         delegate?.footerViewModelDidStartLoading(index: locationIndex)
     }
     
