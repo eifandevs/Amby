@@ -13,7 +13,11 @@ import WebKit
 class BaseViewModel {
     
     // リクエストURL(jsのURL)
-    var requestUrl = Observable("http://about:blank")
+    var requestUrl: String {
+        get {
+            return (!eachHistory[locationIndex].url.isEmpty) ? eachHistory[locationIndex].url : defaultUrl
+        }
+    }
     
     // クッキーの共有
     var processPool = WKProcessPool()
@@ -32,12 +36,6 @@ class BaseViewModel {
     var locationIndex: Int  = UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey) {
         didSet {
             log.debug("location index changed. \(oldValue) -> \(locationIndex)")
-            if eachHistory.count == locationIndex {
-                // 新規追加
-                log.debug("create new each history")
-                eachHistory.append(EachHistoryItem())
-                requestUrl.value = (!eachHistory[locationIndex].url.isEmpty) ? eachHistory[locationIndex].url : defaultUrl
-            }
         }
     }
     
@@ -70,18 +68,26 @@ class BaseViewModel {
         do {
             let data = try Data(contentsOf: AppDataManager.shared.eachHistoryPath)
             eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [EachHistoryItem]
-            requestUrl.value = (!eachHistory[locationIndex].url.isEmpty) ? eachHistory[locationIndex].url : defaultUrl
-            log.debug("each history read. url: \n\(requestUrl.value)")
+            log.debug("each history read. url: \n\(requestUrl)")
         } catch let error as NSError {
             eachHistory.append(EachHistoryItem())
-            requestUrl.value = defaultUrl
             log.error("failed to read each history: \(error)")
         }
         center.post(name: .baseViewDidLoad, object: eachHistory)
     }
     
-    func postNotification(name: NSNotification.Name, object: [String: Any]?) {
-        center.post(name: name, object: object)
+    func notifyAddWebView() {
+        eachHistory.append(EachHistoryItem())
+        locationIndex = eachHistory.count - 1
+        center.post(name: .baseViewDidAddWebView, object: ["context": currentContext])
+    }
+    
+    func notifyStartLoadingWebView(object: [String: Any]?) {
+        center.post(name: .baseViewDidStartLoading, object: object)
+    }
+    
+    func notifyEndLoadingWebView(object: [String: Any]?) {
+        center.post(name: .baseViewDidEndLoading, object: object)
     }
     
     func saveHistory(wv: EGWebView) {
@@ -92,8 +98,13 @@ class BaseViewModel {
             log.debug("save history. url: \(common.url)")
             
             // Each History
-            let each = EachHistoryItem(context: wv.context, url: common.url, title: common.title)
-            eachHistory[locationIndex] = each
+            for history in eachHistory {
+                if history.context == wv.context {
+                    history.url = common.url
+                    history.title = common.title
+                    break
+                }
+            }
         }
     }
     
@@ -102,14 +113,6 @@ class BaseViewModel {
         storeCommonHistory()
         storeEachHistory()
         commonHistory = []
-    }
-    
-    func goForwardLocationIndex() {
-        locationIndex = locationIndex + 1
-    }
-    
-    func goBackLocationIndex() {
-        locationIndex = locationIndex - 1
     }
     
     private func storeCommonHistory() {

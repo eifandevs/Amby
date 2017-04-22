@@ -16,7 +16,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     private let scrollView = UIScrollView()
     private var thumbnails: [UIButton] = []
     
-    private var thumbnail: UIButton {
+    private var frontThumbnail: UIButton {
         get {
             return thumbnails[viewModel.locationIndex]
         }
@@ -79,8 +79,8 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         // くるくるを表示する
         let rect = CGRect(x: 0, y: 0, width: AppDataManager.shared.thumbnailSize.height * 0.7, height: AppDataManager.shared.thumbnailSize.height * 0.7)
         let indicator = NVActivityIndicatorView(frame: rect, type: NVActivityIndicatorType.ballClipRotate, color: UIColor.frenchBlue, padding: 0)
-        indicator.center = CGPoint(x: thumbnail.bounds.size.width / 2, y: thumbnail.bounds.size.height / 2)
-        thumbnail.addSubview(indicator)
+        indicator.center = CGPoint(x: frontThumbnail.bounds.size.width / 2, y: frontThumbnail.bounds.size.height / 2)
+        frontThumbnail.addSubview(indicator)
         indicator.startAnimating()
     }
     
@@ -95,7 +95,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         startIndicator()
     }
     
-    func footerViewModelDidEndLoading(context: String) {
+    func footerViewModelDidEndLoading(context: String, index: Int) {
         // くるくるを止めて、サムネイルを表示する
         DispatchQueue.mainSyncSafe { [weak self] _ in
             let image = UIImage(contentsOfFile: AppDataManager.shared.thumbnailPath(folder: context).path)
@@ -103,12 +103,12 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                 log.error("missing thumbnail image")
                 return
             }
-            _ = self!.thumbnail.subviews.map { (v) -> Void in
+            _ = self!.thumbnails[index].subviews.map { (v) -> Void in
                 v.removeFromSuperview()
             }
             let imageView = UIImageView(image: image)
-            imageView.frame = CGRect(origin: CGPoint.zero, size: self!.thumbnail.bounds.size)
-            self!.thumbnail.addSubview(imageView)
+            imageView.frame = CGRect(origin: CGPoint.zero, size: self!.thumbnails[index].bounds.size)
+            self!.thumbnails[index].addSubview(imageView)
         }
     }
     

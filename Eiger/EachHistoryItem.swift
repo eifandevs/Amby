@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class EachHistoryItem: NSObject, NSCoding {
-    var context: String = ""
+    var context: String = NSUUID().uuidString
     var url: String = ""
     var title: String = ""
 

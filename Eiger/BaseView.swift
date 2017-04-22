@@ -13,7 +13,7 @@ import Bond
 
 class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDelegate, WKUIDelegate, EGApplicationDelegate {
     
-    private var wv: EGWebView! {
+    private var front: EGWebView! {
         get {
             return webViews[viewModel.locationIndex] 
         }
@@ -36,22 +36,16 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             webViews.append(nil)
         }
         
-        loadWebView(context: viewModel.currentContext)
-        
-        // Observer登録
-        _ = viewModel.requestUrl.observeNext { [weak self] value in
-            // ロード
-            _ = self!.wv.load(urlStr: value)
-        }
+        loadWebView()
     }
     
     deinit {
-        wv.removeObserver(self, forKeyPath: "estimatedProgress")
-        wv.removeObserver(self, forKeyPath: "loading")
+        front.removeObserver(self, forKeyPath: "estimatedProgress")
+        front.removeObserver(self, forKeyPath: "loading")
     }
     
     override func layoutSubviews() {
-        wv.frame = CGRect(origin: CGPoint.zero, size: frame.size)
+        front.frame = CGRect(origin: CGPoint.zero, size: frame.size)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -96,12 +90,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         log.error("[error url]\(String(describing: webView.url))")
-        if wv.isLoading {
+        if webView.isLoading {
             progress.value = 0
         }
         
-        if !wv.hasLocalUrl {
-            wv.loadHtml(error: (error as NSError))
+        if !webView.hasLocalUrl {
+            webView.loadHtml(error: (error as NSError))
         } else {
             log.warning("already load error html")
         }
@@ -126,9 +120,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 textField.isSecureTextEntry = true
                 passwordTextField = textField
             }
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] action in
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
                 completionHandler(.cancelAuthenticationChallenge, nil)
-                self!.wv.loadHtml(code: .UNAUTHORIZED)
+                webView.loadHtml(code: .UNAUTHORIZED)
             }))
             alertController.addAction(UIAlertAction(title: "Log In", style: .default, handler: { action in
                 let credential = URLCredential(user: usernameTextField.text!, password: passwordTextField.text!, persistence: URLCredential.Persistence.forSession)
@@ -144,9 +138,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         // エラー発生時は、リクエストしたURLを履歴に保持する
         let latest = (navigationAction.request.url?.absoluteString)!
 
+        log.debug("[webview request url]\(latest)")
+        
         if latest.hasValidUrl {
             viewModel.latestRequestUrl = latest
-            saveMetaData(completion: nil)
+            saveMetaData(webView: webView, completion: nil)
         }
         
         if latest.hasLocalUrl {
@@ -188,7 +184,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             //estimatedProgressが変更されたときに、プログレスバーの値を変更する。
-            progress.value = CGFloat(wv.estimatedProgress)
+            progress.value = CGFloat(front.estimatedProgress)
         } else if keyPath == "loading" {
             // 対象のwebviewを検索する
             let otherWv: EGWebView = webViews.filter({ (w) -> Bool in
@@ -199,38 +195,37 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             }).first!!
             
             
-            if otherWv.context == wv.context {
+            if otherWv.context == front.context {
                 //インジゲーターの表示、非表示をきりかえる。
-                log.warning("フロントきた!!!")
-                UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
-                if wv.isLoading == true {
-                    viewModel.postNotification(name: .baseViewDidStartLoading, object: nil)
+                log.debug("front webview load end")
+                UIApplication.shared.isNetworkActivityIndicatorVisible = front.isLoading
+                if front.isLoading == true {
+                    viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
                     progress.value = CGFloat(AppDataManager.shared.progressMin)
                 } else {
                     progress.value = 1.0
                     
                     // ページ情報を取得
-                    saveMetaData(completion: { [weak self] (url) in
-                        if self!.wv.hasSavableUrl {
+                    saveMetaData(webView: otherWv, completion: { [weak self] (url) in
+                        if self!.front.hasSavableUrl {
                             // 有効なURLの場合は、履歴に保存する
-                            self!.viewModel.saveHistory(wv: self!.wv)
+                            self!.viewModel.saveHistory(wv: self!.front)
                         }
-                        if self!.wv.requestUrl != nil {
-                            self!.wv.previousUrl = self!.wv.requestUrl
-                            log.debug("[previous url]\(self!.wv.previousUrl)")
+                        if self!.front.requestUrl != nil {
+                            self!.front.previousUrl = self!.front.requestUrl
                         }
                         
                         // サムネイルを保存
                         DispatchQueue.mainSyncSafe {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] _ in
-                                let img = self!.wv.takeThumbnail()
+                                let img = self!.front.takeThumbnail()
                                 let pngImageData = UIImagePNGRepresentation(img!)
-                                let context = self!.wv.context
+                                let context = self!.front.context
                                 do {
                                     try pngImageData?.write(to: AppDataManager.shared.thumbnailPath(folder: context))
-                                    let object = url == nil ? ["context": context] : ["context": context, "url": (url! as String)]
-                                    self!.viewModel.postNotification(name: .baseViewDidEndLoading, object: object)
-                                    log.debug("save thumbnal success. context: \(context)")
+                                    let object: [String: Any]? = ["context": context, "url": otherWv.requestUrl, "title": otherWv.requestTitle]
+                                    self!.viewModel.notifyEndLoadingWebView(object: object)
+                                    log.debug("save thumbnal. context: \(context)")
                                 } catch let error as NSError {
                                     log.error("failed to store thumbnail: \(error)")
                                 }
@@ -240,12 +235,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 }
             } else {
                 //インジゲーターの表示、非表示をきりかえる。
-                log.warning("サブきた!!!. \(otherWv.isLoading)")
+                log.debug("sub webview load end")
                 if otherWv.isLoading == true {
-                    viewModel.postNotification(name: .baseViewDidStartLoading, object: nil)
+                    viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
                 } else {
                     // ページ情報を取得
-                    saveMetaData(completion: { [weak self] (url) in
+                    saveMetaData(webView: otherWv, completion: { [weak self] (url) in
                         if otherWv.hasSavableUrl {
                             // 有効なURLの場合は、履歴に保存する
                             self!.viewModel.saveHistory(wv: otherWv)
@@ -263,8 +258,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                                 let context = otherWv.context
                                 do {
                                     try pngImageData?.write(to: AppDataManager.shared.thumbnailPath(folder: context))
-                                    let object = url == nil ? ["context": context] : ["context": context, "url": (url! as String)]
-                                    self!.viewModel.postNotification(name: .baseViewDidEndLoading, object: object)
+                                    let object: [String: Any]? = ["context": context, "url": otherWv.requestUrl, "title": otherWv.requestTitle]
+                                    log.warning("Javascriptで取得したURL: \(url)")
+                                    self!.viewModel.notifyEndLoadingWebView(object: object)
                                     log.debug("save thumbnal success. context: \(context)")
                                 } catch let error as NSError {
                                     log.error("failed to store thumbnail: \(error)")
@@ -281,12 +277,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 // MARK: Public Method
     
     func scroll(pt: CGFloat) {
-        wv.scrollView.setContentOffset(CGPoint(x: wv.scrollView.contentOffset.x, y: wv.scrollView.contentOffset.y - pt), animated: false)
+        front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y - pt), animated: false)
     }
     
     func stopProgressObserving() {
         log.debug("stop progress observe")
-        if let _webView = wv {
+        if let _webView = front {
             _webView.removeObserver(self, forKeyPath: "estimatedProgress")
             _webView.removeObserver(self, forKeyPath: "loading")
         }
@@ -300,18 +296,18 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     func doSearch(text: String) {
         let search = text.hasValidUrl ? text : "\(AppDataManager.shared.searchPath)\(text)"
-        _ = wv.load(urlStr: search)
+        _ = front.load(urlStr: search)
     }
     
     func doHistoryBack() {
         log.debug("[WebView Action]: history back")
-        if wv.canGoBack {
-            if (wv.backForwardList.backItem?.url.absoluteString.hasValidUrl)! == true {
-                wv.goBack()
+        if front.canGoBack {
+            if (front.backForwardList.backItem?.url.absoluteString.hasValidUrl)! == true {
+                front.goBack()
             } else {
                 // 有効なURLを探す
                 let backUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
-                    for item in wv.backForwardList.backList.reversed() {
+                    for item in front.backForwardList.backList.reversed() {
                         if item.url.absoluteString.hasValidUrl {
                             return item
                         }
@@ -321,7 +317,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     return nil
                 }()
                 if let item = backUrl {
-                    wv.go(to: item)
+                    front.go(to: item)
                 }
             }
         }
@@ -329,13 +325,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     func doHistoryForward() {
         log.debug("[WebView Action]: history forward")
-        if wv.canGoForward {
-            if (wv.backForwardList.forwardItem?.url.absoluteString.hasValidUrl)! == true {
-                wv.goForward()
+        if front.canGoForward {
+            if (front.backForwardList.forwardItem?.url.absoluteString.hasValidUrl)! == true {
+                front.goForward()
             } else {
                 // 有効なURLを探す
                 let forwardUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
-                    for item in wv.backForwardList.forwardList {
+                    for item in front.backForwardList.forwardList {
                         if item.url.absoluteString.hasValidUrl {
                             return item
                         }
@@ -345,7 +341,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     return nil
                 }()
                 if let item = forwardUrl {
-                    wv.go(to: item)
+                    front.go(to: item)
                 }
             }
         }
@@ -363,7 +359,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     // 作成と同時にそのWebViewに移動する
     func doWebViewAdd() {
         log.debug("[WebView Action]: webview add")
-        wv.removeObserver(self, forKeyPath: "estimatedProgress")
+        front.removeObserver(self, forKeyPath: "estimatedProgress")
         progress.value = 0
         addWebView()
     }
@@ -374,11 +370,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     func doWebViewReload() {
         log.debug("[WebView Action]: webview reload")
-        if wv.hasValidUrl {
-            wv.reload()
+        if front.hasValidUrl {
+            front.reload()
         } else {
             let reloadUrl = headerFieldText.value.isEmpty ? viewModel.defaultUrl : headerFieldText.value
-            _ = wv.load(urlStr: reloadUrl)
+            _ = front.load(urlStr: reloadUrl)
         }
     }
 
@@ -399,41 +395,42 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     // webviewを新規作成
     private func createWebView(context: String?) -> EGWebView {
-        let wv = EGWebView(id: context, pool: viewModel.processPool)
-        wv.navigationDelegate = self
-        wv.uiDelegate = self;
-        wv.scrollView.delegate = self
+        let newWv = EGWebView(id: context, pool: viewModel.processPool)
+        newWv.navigationDelegate = self
+        newWv.uiDelegate = self;
+        newWv.scrollView.delegate = self
 
-        addSubview(wv)
+        addSubview(newWv)
 
         // プログレスバー
-        startProgressObserving(target: wv)
+        startProgressObserving(target: newWv)
         
-        return wv
+        return newWv
     }
     
-    private func loadWebView(context: String?) {
-        let newWv = createWebView(context: context)
+    private func loadWebView() {
+        let newWv = createWebView(context: viewModel.currentContext)
         webViews[viewModel.locationIndex] = newWv
+        _ = front.load(urlStr: viewModel.requestUrl)
     }
     
     private func addWebView() {
-        let newWv = createWebView(context: nil)
-        viewModel.postNotification(name: .baseViewDidAddWebView, object: nil)
+        viewModel.notifyAddWebView()
+        let newWv = createWebView(context: viewModel.currentContext)
         webViews.append(newWv)
-        viewModel.goForwardLocationIndex()
+        _ = front.load(urlStr: viewModel.requestUrl)
     }
     
-    private func saveMetaData(completion: ((_ url: String?) -> ())?) {
-        wv.evaluateJavaScript("window.location.href") { [weak self] (object, error) in
+    private func saveMetaData(webView: WKWebView, completion: ((_ url: String?) -> ())?) {
+        front.evaluateJavaScript("window.location.href") { [weak self] (object, error) in
             if let url = object {
                 let urlStr = url as! String
-                if urlStr.hasValidUrl && self!.wv.requestUrl != urlStr {
-                    self!.wv.requestUrl = urlStr
-                    self!.headerFieldText.value = self!.wv.requestUrl
-                    log.debug("[request url]\(self!.wv.requestUrl)")
-                    self!.wv.evaluateJavaScript("document.title") { (object, error) in
-                        self!.wv.requestTitle = object as! String
+                if urlStr.hasValidUrl && webView.requestUrl != urlStr {
+                    webView.requestUrl = urlStr
+                    self!.headerFieldText.value = webView.requestUrl
+                    log.debug("[javascript request url]\(webView.requestUrl)")
+                    webView.evaluateJavaScript("document.title") { (object, error) in
+                        webView.requestTitle = object as! String
                         completion?(urlStr)
                         return
                     }

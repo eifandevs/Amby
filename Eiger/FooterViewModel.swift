@@ -13,7 +13,7 @@ protocol FooterViewModelDelegate {
     func footerViewModelDidLoadThumbnail(eachThumbnail: [EachThumbnailItem])
     func footerViewModelDidAddThumbnail()
     func footerViewModelDidStartLoading(index: Int)
-    func footerViewModelDidEndLoading(context: String)
+    func footerViewModelDidEndLoading(context: String, index: Int)
 }
 
 class FooterViewModel {
@@ -61,11 +61,9 @@ class FooterViewModel {
         if eachHistory.count > 0 {
             eachHistory.forEach { (item) in
                 let thumbnailItem = EachThumbnailItem()
-                if item.context.isEmpty == false {
-                    thumbnailItem.context = item.context
-                    thumbnailItem.url = item.url
-                    thumbnailItem.title = item.title
-                }
+                thumbnailItem.context = item.context
+                thumbnailItem.url = item.url
+                thumbnailItem.title = item.title
                 eachThumbnail.append(thumbnailItem)
             }
         }
@@ -74,13 +72,15 @@ class FooterViewModel {
     
     @objc private func baseViewDidAddWebView(notification: Notification) {
         log.debug("[Footer Event]: baseViewDidAddWebView")
-        if eachThumbnail.count > 0 {
-            locationIndex = locationIndex + 1
-        }
-        
+        let context = (notification.object as! [String: String])["context"]!
+
         // 新しいサムネイルを追加
-        eachThumbnail.append(EachThumbnailItem())
+        let thumbnailItem = EachThumbnailItem()
+        thumbnailItem.context = context
+        eachThumbnail.append(thumbnailItem)
         delegate?.footerViewModelDidAddThumbnail()
+        
+        locationIndex = eachThumbnail.count - 1
     }
     
     @objc private func baseViewDidStartLoading(notification: Notification) {
@@ -94,10 +94,16 @@ class FooterViewModel {
         log.debug("[Footer Event]: baseViewDidEndLoading")
         // FooterViewに通知をする
         let context = (notification.object as! [String: String])["context"]!
-        if let url = (notification.object as! [String: String])["url"] {
-            currentThumbnail.context = context
-            currentThumbnail.url = url
+        let url = (notification.object as! [String: String])["url"]!
+        let title = (notification.object as! [String: String])["title"]!
+        
+        for (index, thumbnail) in eachThumbnail.enumerated() {
+            if thumbnail.context == context {
+                thumbnail.url = url
+                thumbnail.title = title
+                delegate?.footerViewModelDidEndLoading(context: context, index: index)
+                break
+            }
         }
-        delegate?.footerViewModelDidEndLoading(context: context)
     }
 }
