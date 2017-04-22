@@ -29,14 +29,10 @@ class BaseViewModel {
     }
 
     // 現在表示しているwebviewのインデックス
-    var locationIndex: Int {
-        get {
-            return UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey)
-        }
-        set(index) {
-            log.debug("location index changed. \(locationIndex) -> \(index)")
-            UserDefaults.standard.set(index, forKey: AppDataManager.shared.locationIndexKey)
-            if eachHistory.count == index {
+    var locationIndex: Int  = UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey) {
+        didSet {
+            log.debug("location index changed. \(oldValue) -> \(locationIndex)")
+            if eachHistory.count == locationIndex {
                 // 新規追加
                 log.debug("create new each history")
                 eachHistory.append(EachHistoryItem())
@@ -89,17 +85,20 @@ class BaseViewModel {
     }
     
     func saveHistory(wv: EGWebView) {
-        // Common History
-        let common = CommonHistoryItem(url: wv.requestUrl, title: wv.requestTitle, date: Date())
-        commonHistory.append(common)
-        log.debug("save history. url: \(common.url)")
-        
-        // Each History
-        let each = EachHistoryItem(context: wv.context, url: common.url, title: common.title)
-        eachHistory[locationIndex] = each
+        if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle {
+            // Common History
+            let common = CommonHistoryItem(url: requestUrl, title: requestTitle, date: Date())
+            commonHistory.append(common)
+            log.debug("save history. url: \(common.url)")
+            
+            // Each History
+            let each = EachHistoryItem(context: wv.context, url: common.url, title: common.title)
+            eachHistory[locationIndex] = each
+        }
     }
     
     func storeHistory() {
+        UserDefaults.standard.set(locationIndex, forKey: AppDataManager.shared.locationIndexKey)
         storeCommonHistory()
         storeEachHistory()
         commonHistory = []

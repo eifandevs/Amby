@@ -49,11 +49,29 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
     private func createCaptureSpace() -> UIButton {
         let btn = UIButton()
-        btn.center = CGPoint(x: (frame.size.width / 2) + (CGFloat(thumbnails.count) * AppDataManager.shared.thumbnailSize.width), y: frame.size.height / 2)
+        let animationsCount = thumbnails.count == 0 ? 0 : thumbnails.count - 1
+        btn.center = CGPoint(x: (frame.size.width / 2) + (CGFloat(thumbnails.count) * AppDataManager.shared.thumbnailSize.width) - (CGFloat(animationsCount) * AppDataManager.shared.thumbnailSize.width / 2), y: frame.size.height / 2)
         btn.bounds.size = AppDataManager.shared.thumbnailSize
         btn.backgroundColor = UIColor.black
+        _ = btn.reactive.tap
+            .observe { _ in
+                log.warning("削除!!")
+        }
         scrollView.addSubview(btn)
+        scrollView.backgroundColor = #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
         thumbnails.append(btn)
+        if CGFloat(thumbnails.count) * btn.frame.size.width > scrollView.frame.size.width {
+            // スクロールビューのコンテンツサイズを大きくする
+            scrollView.contentSize.width += btn.frame.size.width / 2
+            scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + btn.frame.size.width / 2, 0, 0)
+        }
+        if thumbnails.count > 1 {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.thumbnails.forEach({ (item) in
+                    item.frame.origin.x -= btn.frame.size.width / 2
+                })
+            }, completion: nil)
+        }
         return btn
     }
     
@@ -94,11 +112,11 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         }
     }
     
-    func footerViewModelDidLoadThumbnail(eachThumbnail: [EachHistoryItem]) {
+    func footerViewModelDidLoadThumbnail(eachThumbnail: [EachThumbnailItem]) {
         if eachThumbnail.count > 0 {
             eachThumbnail.forEach { (item) in
+                let btn = createCaptureSpace()
                 if !item.context.isEmpty {
-                    let btn = createCaptureSpace()
                     let image = UIImage(contentsOfFile: AppDataManager.shared.thumbnailPath(folder: item.context).path)
                     if image == nil {
                         log.error("missing thumbnail image")
@@ -109,8 +127,6 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                     btn.addSubview(imageView)
                 }
             }
-        } else {
-            let _ = createCaptureSpace()
         }
     }
     

@@ -15,10 +15,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     private var wv: EGWebView! {
         get {
-            return webViews[viewModel.locationIndex] as! EGWebView
+            return webViews[viewModel.locationIndex] 
         }
     }
-    let webViews = MutableObservableArray([])
+    var webViews: [EGWebView?] = []
     private let viewModel = BaseViewModel()
     private var scrollMovingPointY: CGFloat = 0
     
@@ -33,7 +33,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         
         // webviewsに初期値を入れる
         for _ in 0...viewModel.webViewCount - 1 {
-            webViews.append(0)
+            webViews.append(nil)
         }
         
         loadWebView(context: viewModel.currentContext)
@@ -42,12 +42,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         _ = viewModel.requestUrl.observeNext { [weak self] value in
             // ロード
             _ = self!.wv.load(urlStr: value)
-        }
-        
-        _ = webViews.observeNext { [weak self] e in
-            if e.change == .inserts([self!.webViews.count - 1]) {
-                self!.viewModel.goForwardLocationIndex()
-            }
         }
     }
     
@@ -196,8 +190,18 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             //estimatedProgressが変更されたときに、プログレスバーの値を変更する。
             progress.value = CGFloat(wv.estimatedProgress)
         } else if keyPath == "loading" {
-            if context == &(wv.context) {
+            // 対象のwebviewを検索する
+            let otherWv: EGWebView = webViews.filter({ (w) -> Bool in
+                if let w = w {
+                    return context == &(w.context)
+                }
+                return false
+            }).first!!
+            
+            
+            if otherWv.context == wv.context {
                 //インジゲーターの表示、非表示をきりかえる。
+                log.warning("フロントきた!!!")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = wv.isLoading
                 if wv.isLoading == true {
                     viewModel.postNotification(name: .baseViewDidStartLoading, object: nil)
@@ -234,6 +238,42 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                         }
                     })
                 }
+            } else {
+                //インジゲーターの表示、非表示をきりかえる。
+                log.warning("サブきた!!!. \(otherWv.isLoading)")
+                if otherWv.isLoading == true {
+                    viewModel.postNotification(name: .baseViewDidStartLoading, object: nil)
+                } else {
+                    // ページ情報を取得
+                    saveMetaData(completion: { [weak self] (url) in
+                        if otherWv.hasSavableUrl {
+                            // 有効なURLの場合は、履歴に保存する
+                            self!.viewModel.saveHistory(wv: otherWv)
+                        }
+                        if otherWv.requestUrl != nil {
+                            otherWv.previousUrl = otherWv.requestUrl
+                            log.debug("[previous url]\(otherWv.previousUrl)")
+                        }
+                        
+                        // サムネイルを保存
+                        DispatchQueue.mainSyncSafe {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] _ in
+                                let img = otherWv.takeThumbnail()
+                                let pngImageData = UIImagePNGRepresentation(img!)
+                                let context = otherWv.context
+                                do {
+                                    try pngImageData?.write(to: AppDataManager.shared.thumbnailPath(folder: context))
+                                    let object = url == nil ? ["context": context] : ["context": context, "url": (url! as String)]
+                                    self!.viewModel.postNotification(name: .baseViewDidEndLoading, object: object)
+                                    log.debug("save thumbnal success. context: \(context)")
+                                } catch let error as NSError {
+                                    log.error("failed to store thumbnail: \(error)")
+                                }
+                            }
+                        }
+                    })
+                }
+
             }
         }
     }
@@ -345,12 +385,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 // MARK: Private Method
     
     private func startProgressObserving(target: EGWebView) {
-        log.debug("start progress observe")
+        log.warning("start progress observe. target: \(target.context)")
 
         //読み込み状態が変更されたことを取得
         target.addObserver(self, forKeyPath: "loading", options: .new, context: &(target.context))
         //プログレスが変更されたことを取得
-        target.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        target.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(target.context))
         if target.isLoading == true {
             progress.value = CGFloat(target.estimatedProgress)
         }
@@ -381,6 +421,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         let newWv = createWebView(context: nil)
         viewModel.postNotification(name: .baseViewDidAddWebView, object: nil)
         webViews.append(newWv)
+        viewModel.goForwardLocationIndex()
     }
     
     private func saveMetaData(completion: ((_ url: String?) -> ())?) {

@@ -10,7 +10,7 @@ import Foundation
 import Bond
 
 protocol FooterViewModelDelegate {
-    func footerViewModelDidLoadThumbnail(eachThumbnail: [EachHistoryItem])
+    func footerViewModelDidLoadThumbnail(eachThumbnail: [EachThumbnailItem])
     func footerViewModelDidAddThumbnail()
     func footerViewModelDidStartLoading(index: Int)
     func footerViewModelDidEndLoading(context: String)
@@ -19,8 +19,8 @@ protocol FooterViewModelDelegate {
 class FooterViewModel {
     // 現在位置
     var locationIndex: Int  = 0
-    private var eachThumbnail: [EachHistoryItem] = []
-    private var currentThumbnail: EachHistoryItem {
+    private var eachThumbnail: [EachThumbnailItem] = []
+    private var currentThumbnail: EachThumbnailItem {
         get {
             return eachThumbnail[locationIndex]
         }
@@ -56,11 +56,20 @@ class FooterViewModel {
     @objc private func baseViewDidLoad(notification: Notification) {
         log.debug("[Footer Event]: baseViewDidLoad")
         let eachHistory = notification.object as! [EachHistoryItem]
-        if eachHistory.count == 0 {
-            // 初回起動時
-            eachThumbnail.append(EachHistoryItem())
+        
+        
+        if eachHistory.count > 0 {
+            eachHistory.forEach { (item) in
+                let thumbnailItem = EachThumbnailItem()
+                if item.context.isEmpty == false {
+                    thumbnailItem.context = item.context
+                    thumbnailItem.url = item.url
+                    thumbnailItem.title = item.title
+                }
+                eachThumbnail.append(thumbnailItem)
+            }
         }
-        delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: eachHistory)
+        delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: eachThumbnail)
     }
     
     @objc private func baseViewDidAddWebView(notification: Notification) {
@@ -70,7 +79,7 @@ class FooterViewModel {
         }
         
         // 新しいサムネイルを追加
-        eachThumbnail.append(EachHistoryItem())
+        eachThumbnail.append(EachThumbnailItem())
         delegate?.footerViewModelDidAddThumbnail()
     }
     
