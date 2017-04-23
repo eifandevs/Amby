@@ -136,25 +136,22 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         
         // リクエストURLはエラーが発生した時のため保持しておく
         // エラー発生時は、リクエストしたURLを履歴に保持する
-        guard let url = navigationAction.request.url else {
-            decisionHandler(.cancel)
-            return
+        if let latest = navigationAction.request.url?.absoluteString, latest.hasValidUrl {
+            viewModel.latestRequestUrl = latest
         }
         
-        if let urlStr = webView.url?.absoluteString {
-            log.debug("[webview url property]\(urlStr)")
-            saveMetaData(webView: webView, completion: nil)
-            if urlStr.hasLocalUrl {
-                // エラーが発生した時のheaderField更新
-                headerFieldText.value = webView.requestUrl
-            }
-        }
+        saveMetaData(webView: webView, completion: nil)
 
         // TODO: 自動スクロール実装
         //        if autoScrollTimer?.valid == true {
         //            autoScrollTimer?.invalidate()
         //            autoScrollTimer = nil
         //        }
+        
+        guard let url = navigationAction.request.url else {
+            decisionHandler(.cancel)
+            return
+        }
         
         if ((url.absoluteString.range(of: "//itunes.apple.com/") != nil) ||
             (!url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") && !url.absoluteString.hasPrefix("file://"))) {
@@ -419,6 +416,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 webView.requestUrl = urlStr
                 headerFieldText.value = webView.requestUrl
                 webView.requestTitle = title
+            } else if urlStr.hasLocalUrl {
+                // エラーが発生した時のheaderField更新
+                headerFieldText.value = viewModel.latestRequestUrl
             }
             completion?(urlStr)
         }
