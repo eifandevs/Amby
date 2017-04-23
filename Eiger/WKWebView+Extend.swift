@@ -35,6 +35,8 @@ extension WKWebView {
         }
     }
     
+    // 最新のリクエストURL
+    // 不正なリクエストは入らない
     var requestUrl: String! {
         get {
             return objc_getAssociatedObject(self, &requestUrlAssociationKey) as? String

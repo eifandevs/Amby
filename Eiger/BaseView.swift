@@ -136,18 +136,18 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         
         // リクエストURLはエラーが発生した時のため保持しておく
         // エラー発生時は、リクエストしたURLを履歴に保持する
-        let latest = (navigationAction.request.url?.absoluteString)!
-
-        log.debug("[webview request url]\(latest)")
-        
-        if latest.hasValidUrl {
-            viewModel.latestRequestUrl = latest
-            saveMetaData(webView: webView, completion: nil)
+        guard let url = navigationAction.request.url else {
+            decisionHandler(.cancel)
+            return
         }
         
-        if latest.hasLocalUrl {
-            // エラーが発生した時のheaderField更新
-            headerFieldText.value = viewModel.latestRequestUrl
+        if let urlStr = webView.url?.absoluteString {
+            log.debug("[webview url property]\(urlStr)")
+            saveMetaData(webView: webView, completion: nil)
+            if urlStr.hasLocalUrl {
+                // エラーが発生した時のheaderField更新
+                headerFieldText.value = webView.requestUrl
+            }
         }
 
         // TODO: 自動スクロール実装
@@ -155,11 +155,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         //            autoScrollTimer?.invalidate()
         //            autoScrollTimer = nil
         //        }
-        
-        guard let url = navigationAction.request.url else {
-            decisionHandler(.cancel)
-            return
-        }
         
         if ((url.absoluteString.range(of: "//itunes.apple.com/") != nil) ||
             (!url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") && !url.absoluteString.hasPrefix("file://"))) {
@@ -193,7 +188,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 }
                 return false
             }).first!!
-            
             
             if otherWv.context == front.context {
                 //インジゲーターの表示、非表示をきりかえる。
@@ -247,7 +241,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                         }
                         if otherWv.requestUrl != nil {
                             otherWv.previousUrl = otherWv.requestUrl
-                            log.debug("[previous url]\(otherWv.previousUrl)")
                         }
                         
                         // サムネイルを保存
@@ -259,7 +252,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                                 do {
                                     try pngImageData?.write(to: AppDataManager.shared.thumbnailPath(folder: context))
                                     let object: [String: Any]? = ["context": context, "url": otherWv.requestUrl, "title": otherWv.requestTitle]
-                                    log.warning("Javascriptで取得したURL: \(url)")
                                     self!.viewModel.notifyEndLoadingWebView(object: object)
                                     log.debug("save thumbnal success. context: \(context)")
                                 } catch let error as NSError {
@@ -422,21 +414,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     private func saveMetaData(webView: WKWebView, completion: ((_ url: String?) -> ())?) {
-        front.evaluateJavaScript("window.location.href") { [weak self] (object, error) in
-            if let url = object {
-                let urlStr = url as! String
-                if urlStr.hasValidUrl && webView.requestUrl != urlStr {
-                    webView.requestUrl = urlStr
-                    self!.headerFieldText.value = webView.requestUrl
-                    log.debug("[javascript request url]\(webView.requestUrl)")
-                    webView.evaluateJavaScript("document.title") { (object, error) in
-                        webView.requestTitle = object as! String
-                        completion?(urlStr)
-                        return
-                    }
-                }
+        if let urlStr = webView.url?.absoluteString, let title = webView.title {
+            if urlStr.hasValidUrl && webView.requestUrl != urlStr {
+                webView.requestUrl = urlStr
+                headerFieldText.value = webView.requestUrl
+                webView.requestTitle = title
             }
-            completion?(nil)
+            completion?(urlStr)
         }
     }
     

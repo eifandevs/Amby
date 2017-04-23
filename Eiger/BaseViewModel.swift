@@ -21,9 +21,6 @@ class BaseViewModel {
     
     // クッキーの共有
     var processPool = WKProcessPool()
-
-    // 最新のリクエストURL(wv.url)。エラーが発生した時用
-    var latestRequestUrl: String = ""
     
     // webviewの数
     var webViewCount: Int {
