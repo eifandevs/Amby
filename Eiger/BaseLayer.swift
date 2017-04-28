@@ -23,7 +23,7 @@ class BaseLayer: UIView, HeaderViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        baseView.frame = CGRect(x: 0, y: DeviceDataManager.shared.statusBarHeight, width: frame.size.width, height: frame.size.height - AppDataManager.shared.thumbnailSize.height)
+        baseView.frame = CGRect(x: 0, y: DeviceDataManager.shared.statusBarHeight, width: frame.size.width, height: frame.size.height - AppDataManager.shared.thumbnailSize.height - DeviceDataManager.shared.statusBarHeight)
         // サイズが可変なので、layoutSubViewsで初期化しない
         headerView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight)
         headerView.delegate = self
