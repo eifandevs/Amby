@@ -57,10 +57,13 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             .observe { _ in
                 let alert = UIAlertController(title: "アクション", message: "アクションを選択してください", preferredStyle: .actionSheet)
                 let delete = UIAlertAction(title: "削除", style: .default, handler: { (action) in
-                    log.warning("削除")
                 })
                 let change = UIAlertAction(title: "変更", style: .default, handler: { (action) in
-                    log.warning("変更")
+                    for (index, thumbnail) in self.thumbnails.enumerated() {
+                        if btn == thumbnail {
+                            self.viewModel.notifyChangeWebView(index: index)
+                        }
+                    }
                 })
                 alert.addAction(delete)
                 alert.addAction(change)

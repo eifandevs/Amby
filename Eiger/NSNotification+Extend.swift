@@ -9,10 +9,13 @@
 import Foundation
 
 extension NSNotification.Name {
-    static let baseViewDidLoad = NSNotification.Name("baseViewDidLoad")
-    static let baseViewDidAddWebView = NSNotification.Name("baseViewDidAddWebView")
-    static let baseViewDidRemoveWebView = NSNotification.Name("baseViewDidRemoveWebView")
-    static let baseViewDidChangeWebView = NSNotification.Name("baseViewDidChangeWebView")
-    static let baseViewDidStartLoading = NSNotification.Name("baseViewDidStartLoading")
-    static let baseViewDidEndLoading = NSNotification.Name("baseViewDidEndLoading")
+    static let baseViewAddWebView = NSNotification.Name("baseViewAddWebView")
+    static let baseViewRemoveWebView = NSNotification.Name("baseViewRemoveWebView")
+    static let baseViewChangeWebView = NSNotification.Name("baseViewChangeWebView")
+    static let footerViewLoad = NSNotification.Name("footerViewLoad")
+    static let footerViewAddWebView = NSNotification.Name("footerViewAddWebView")
+    static let footerViewRemoveWebView = NSNotification.Name("footerViewRemoveWebView")
+    static let footerViewChangeWebView = NSNotification.Name("footerViewChangeWebView")
+    static let footerViewStartLoading = NSNotification.Name("footerViewStartLoading")
+    static let footerViewEndLoading = NSNotification.Name("footerViewEndLoading")
 }

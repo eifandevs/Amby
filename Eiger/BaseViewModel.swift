@@ -10,6 +10,10 @@ import Foundation
 import Bond
 import WebKit
 
+protocol BaseViewModelDelegate {
+    func baseViewModelDidChangeWebView(index: Int)
+}
+
 class BaseViewModel {
     
     // リクエストURL(jsのURL)
@@ -19,8 +23,11 @@ class BaseViewModel {
         }
     }
     
+    var delegate: BaseViewModelDelegate?
+    
     // クッキーの共有
     var processPool = WKProcessPool()
+    
     // 最新のリクエストURL(wv.url)。エラーが発生した時用
     var latestRequestUrl: String = ""
     
@@ -44,7 +51,7 @@ class BaseViewModel {
     // webViewそれぞれの履歴とカレントページインデックス
     private var eachHistory: [EachHistoryItem] = []
     
-    // Footerへ送信する用の通知センター
+    // 通知センター
     let center = NotificationCenter.default
     
     var defaultUrl: String {
@@ -63,6 +70,16 @@ class BaseViewModel {
     }
     
     init() {
+        center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewAddWebView(notification:)),
+                           name: .baseViewAddWebView,
+                           object: nil)
+        
+        center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewChangeWebView(notification:)),
+                           name: .baseViewChangeWebView,
+                           object: nil)
+        
         // eachHistory読み込み
         do {
             let data = try Data(contentsOf: AppDataManager.shared.eachHistoryPath)
@@ -72,21 +89,23 @@ class BaseViewModel {
             eachHistory.append(EachHistoryItem())
             log.error("failed to read each history: \(error)")
         }
-        center.post(name: .baseViewDidLoad, object: eachHistory)
+        center.post(name: .footerViewLoad, object: eachHistory)
     }
+    
+// MARK: Public Method
     
     func notifyAddWebView() {
         eachHistory.append(EachHistoryItem())
         locationIndex = eachHistory.count - 1
-        center.post(name: .baseViewDidAddWebView, object: ["context": currentContext])
+        center.post(name: .footerViewAddWebView, object: ["context": currentContext])
     }
     
     func notifyStartLoadingWebView(object: [String: Any]?) {
-        center.post(name: .baseViewDidStartLoading, object: object)
+        center.post(name: .footerViewStartLoading, object: object)
     }
     
     func notifyEndLoadingWebView(object: [String: Any]?) {
-        center.post(name: .baseViewDidEndLoading, object: object)
+        center.post(name: .footerViewEndLoading, object: object)
     }
     
     func saveHistory(wv: EGWebView) {
@@ -113,6 +132,22 @@ class BaseViewModel {
         storeEachHistory()
         commonHistory = []
     }
+    
+// MARK: Notification受信
+    
+    @objc private func baseViewAddWebView(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewAddWebView")
+        notifyAddWebView()
+    }
+    
+    
+    @objc private func baseViewChangeWebView(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewChangeWebView")
+        let index = notification.object as! Int
+        delegate?.baseViewModelDidChangeWebView(index: index)
+    }
+    
+// MARK: Private Method
     
     private func storeCommonHistory() {
         if commonHistory.count > 0 {
@@ -144,7 +179,7 @@ class BaseViewModel {
                         return value
                     }
                 }()
-
+                
                 let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
                 do {
                     try commonHistoryData.write(to: commonHistoryPath)

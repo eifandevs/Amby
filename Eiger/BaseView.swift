@@ -11,7 +11,7 @@ import UIKit
 import WebKit
 import Bond
 
-class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDelegate, WKUIDelegate, EGApplicationDelegate {
+class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDelegate, WKUIDelegate, EGApplicationDelegate, BaseViewModelDelegate {
     
     private var front: EGWebView! {
         get {
@@ -29,6 +29,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        viewModel.delegate = self
         EGApplication.sharedMyApplication.egDelegate = self
         
         // webviewsに初期値を入れる
@@ -422,4 +423,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
     }
     
+// MARK: FooterViewModel Delegate
+    
+    func baseViewModelDidChangeWebView(index: Int) {
+        log.warning(index)
+    }
 }

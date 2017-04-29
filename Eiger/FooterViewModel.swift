@@ -28,33 +28,44 @@ class FooterViewModel {
     
     var delegate: FooterViewModelDelegate?
 
+    // 通知センター
+    let center = NotificationCenter.default
+    
     init(index: Int) {
         // Notification Center登録
         locationIndex = index
         let center = NotificationCenter.default
         center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewDidLoad(notification:)),
-                           name: .baseViewDidLoad,
+                           selector: #selector(type(of: self).footerViewLoad(notification:)),
+                           name: .footerViewLoad,
                            object: nil)
         
         center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewDidAddWebView(notification:)),
-                           name: .baseViewDidAddWebView,
+                           selector: #selector(type(of: self).footerViewAddWebView(notification:)),
+                           name: .footerViewAddWebView,
                            object: nil)
         
         center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewDidStartLoading(notification:)),
-                           name: .baseViewDidStartLoading,
+                           selector: #selector(type(of: self).footerViewStartLoading(notification:)),
+                           name: .footerViewStartLoading,
                            object: nil)
         
         center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewDidEndLoading(notification:)),
-                           name: .baseViewDidEndLoading,
+                           selector: #selector(type(of: self).footerViewEndLoading(notification:)),
+                           name: .footerViewEndLoading,
                            object: nil)
     }
+    
+// MARK: Public Method
+    
+    func notifyChangeWebView(index: Int) {
+        center.post(name: .baseViewChangeWebView, object: index)
+    }
 
-    @objc private func baseViewDidLoad(notification: Notification) {
-        log.debug("[Footer Event]: baseViewDidLoad")
+// MARK: Notification受信
+    
+    @objc private func footerViewLoad(notification: Notification) {
+        log.debug("[Footer Event]: footerViewLoad")
         let eachHistory = notification.object as! [EachHistoryItem]
         
         
@@ -70,8 +81,8 @@ class FooterViewModel {
         delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: eachThumbnail)
     }
     
-    @objc private func baseViewDidAddWebView(notification: Notification) {
-        log.debug("[Footer Event]: baseViewDidAddWebView")
+    @objc private func footerViewAddWebView(notification: Notification) {
+        log.debug("[Footer Event]: footerViewAddWebView")
         let context = (notification.object as! [String: String])["context"]!
 
         // 新しいサムネイルを追加
@@ -83,15 +94,15 @@ class FooterViewModel {
         locationIndex = eachThumbnail.count - 1
     }
     
-    @objc private func baseViewDidStartLoading(notification: Notification) {
-        log.debug("[Footer Event]: baseViewDidStartLoading")
+    @objc private func footerViewStartLoading(notification: Notification) {
+        log.debug("[Footer Event]: footerViewStartLoading")
         // FooterViewに通知をする
         
         delegate?.footerViewModelDidStartLoading(index: locationIndex)
     }
     
-    @objc private func baseViewDidEndLoading(notification: Notification) {
-        log.debug("[Footer Event]: baseViewDidEndLoading")
+    @objc private func footerViewEndLoading(notification: Notification) {
+        log.debug("[Footer Event]: footerViewEndLoading")
         // FooterViewに通知をする
         let context = (notification.object as! [String: String])["context"]!
         let url = (notification.object as! [String: String])["url"]!
