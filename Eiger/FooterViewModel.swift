@@ -34,7 +34,6 @@ class FooterViewModel {
     init(index: Int) {
         // Notification Center登録
         locationIndex = index
-        let center = NotificationCenter.default
         center.addObserver(self,
                            selector: #selector(type(of: self).footerViewLoad(notification:)),
                            name: .footerViewLoad,

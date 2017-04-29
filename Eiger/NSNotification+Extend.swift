@@ -12,6 +12,7 @@ extension NSNotification.Name {
     static let baseViewAddWebView = NSNotification.Name("baseViewAddWebView")
     static let baseViewRemoveWebView = NSNotification.Name("baseViewRemoveWebView")
     static let baseViewChangeWebView = NSNotification.Name("baseViewChangeWebView")
+    static let baseViewSearchWebView = NSNotification.Name("baseViewSearchWebView")
     static let footerViewLoad = NSNotification.Name("footerViewLoad")
     static let footerViewAddWebView = NSNotification.Name("footerViewAddWebView")
     static let footerViewRemoveWebView = NSNotification.Name("footerViewRemoveWebView")

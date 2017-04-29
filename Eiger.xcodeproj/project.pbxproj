@@ -10,6 +10,7 @@
 		8378C8F6D4B063605AA2555B /* Pods_Eiger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */; };
 		A51A15B11EABB3CA00BCFF5F /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A15B01EABB3CA00BCFF5F /* EGWebView.swift */; };
 		A51A15B31EB3168200BCFF5F /* UIApplication+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A15B21EB3168200BCFF5F /* UIApplication+Extend.swift */; };
+		A51A15B51EB5015E00BCFF5F /* HeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A15B41EB5015E00BCFF5F /* HeaderViewModel.swift */; };
 		A53613BE1EA5A3CF000EC46B /* EachThumbnailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53613BD1EA5A3CF000EC46B /* EachThumbnailItem.swift */; };
 		A55A60301E6AF418005C03F3 /* BaseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A602F1E6AF418005C03F3 /* BaseLayer.swift */; };
 		A55A60321E6AF454005C03F3 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55A60311E6AF454005C03F3 /* HeaderView.swift */; };
@@ -48,6 +49,7 @@
 		1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.release.xcconfig"; sourceTree = "<group>"; };
 		A51A15B01EABB3CA00BCFF5F /* EGWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGWebView.swift; sourceTree = "<group>"; };
 		A51A15B21EB3168200BCFF5F /* UIApplication+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extend.swift"; sourceTree = "<group>"; };
+		A51A15B41EB5015E00BCFF5F /* HeaderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewModel.swift; sourceTree = "<group>"; };
 		A53613BD1EA5A3CF000EC46B /* EachThumbnailItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EachThumbnailItem.swift; sourceTree = "<group>"; };
 		A55A602F1E6AF418005C03F3 /* BaseLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLayer.swift; sourceTree = "<group>"; };
 		A55A60311E6AF454005C03F3 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				A59BF5BB1E86C50B002249E7 /* Data */,
 				A56209681E619C1600F8996A /* BaseViewModel.swift */,
 				A59BF5B31E86BA04002249E7 /* FooterViewModel.swift */,
+				A51A15B41EB5015E00BCFF5F /* HeaderViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				A55E0E891E74533500278D8A /* DispatchQueue+Extend.swift in Sources */,
 				A56209671E619C0700F8996A /* BaseView.swift in Sources */,
 				A56209651E619BF300F8996A /* AppDataManager.swift in Sources */,
+				A51A15B51EB5015E00BCFF5F /* HeaderViewModel.swift in Sources */,
 				A55E0E831E6C417B00278D8A /* ShadowView.swift in Sources */,
 				A55E0E8B1E7D070400278D8A /* EGGradientLabel.swift in Sources */,
 			);

@@ -282,11 +282,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
 // MARK: Public Method(WebView Action)
     
-    func doSearch(text: String) {
-        let search = text.hasValidUrl ? text : "\(AppDataManager.shared.searchPath)\(text)"
-        _ = front.load(urlStr: search)
-    }
-    
     func doHistoryBack() {
         log.debug("[WebView Action]: history back")
         if front.canGoBack {
@@ -369,7 +364,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 // MARK: Private Method
     
     private func startProgressObserving(target: EGWebView) {
-        log.warning("start progress observe. target: \(target.context)")
+        log.debug("start progress observe. target: \(target.context)")
 
         //読み込み状態が変更されたことを取得
         target.addObserver(self, forKeyPath: "loading", options: .new, context: &(target.context))
@@ -423,9 +418,14 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
     }
     
-// MARK: FooterViewModel Delegate
+// MARK: BaseViewModel Delegate
     
     func baseViewModelDidChangeWebView(index: Int) {
         log.warning(index)
+    }
+    
+    func baseViewModelDidSearchWebView(text: String) {
+        let search = text.hasValidUrl ? text : "\(AppDataManager.shared.searchPath)\(text)"
+        _ = front.load(urlStr: search)
     }
 }

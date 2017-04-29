@@ -242,14 +242,9 @@ class BaseLayer: UIView, HeaderViewDelegate {
         addSubview(overlay!)
     }
     
-    func headerViewDidEndEditing(text: String?) {
+    func headerViewDidEndEditing() {
         overlay!.removeFromSuperview()
         overlay = nil
         headerView.finishEditing(force: false)
-        
-        if let text = text, !text.isEmpty {
-            let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
-            baseView.doSearch(text: encodedText!)
-        }
     }
 }

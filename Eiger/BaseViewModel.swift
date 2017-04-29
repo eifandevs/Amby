@@ -12,6 +12,7 @@ import WebKit
 
 protocol BaseViewModelDelegate {
     func baseViewModelDidChangeWebView(index: Int)
+    func baseViewModelDidSearchWebView(text: String)
 }
 
 class BaseViewModel {
@@ -80,6 +81,11 @@ class BaseViewModel {
                            name: .baseViewChangeWebView,
                            object: nil)
         
+        center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewSearchWebView(notification:)),
+                           name: .baseViewSearchWebView,
+                           object: nil)
+        
         // eachHistory読み込み
         do {
             let data = try Data(contentsOf: AppDataManager.shared.eachHistoryPath)
@@ -145,6 +151,12 @@ class BaseViewModel {
         log.debug("[BaseView Event]: baseViewChangeWebView")
         let index = notification.object as! Int
         delegate?.baseViewModelDidChangeWebView(index: index)
+    }
+    
+    @objc private func baseViewSearchWebView(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewSearchWebView")
+        let text = notification.object as! String
+        delegate?.baseViewModelDidSearchWebView(text: text)
     }
     
 // MARK: Private Method

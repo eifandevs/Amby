@@ -11,7 +11,7 @@ import UIKit
 
 protocol HeaderViewDelegate {
     func headerViewDidBeginEditing()
-    func headerViewDidEndEditing(text: String?)
+    func headerViewDidEndEditing()
 }
 
 class HeaderView: UIView, UITextFieldDelegate, ShadowView {
@@ -23,6 +23,7 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
     private var headerField: EGTextField! = nil
     private var isEditing = false
     
+    private let viewModel = HeaderViewModel()
 
     var text: String? {
         get {
@@ -125,7 +126,12 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
 // MARK: UITextField Delegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.delegate?.headerViewDidEndEditing(text: textField.text)
+        self.delegate?.headerViewDidEndEditing()
+        
+        if let text = text, !text.isEmpty {
+            let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+            viewModel.notifyChangeWebView(text: encodedText!)
+        }
         return true
     }
 }
