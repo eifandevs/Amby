@@ -55,10 +55,18 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         btn.backgroundColor = UIColor.black
         _ = btn.reactive.tap
             .observe { _ in
-                log.warning("削除!!")
+                let alert = UIAlertController(title: "アクション", message: "アクションを選択してください", preferredStyle: .actionSheet)
+                let delete = UIAlertAction(title: "削除", style: .default, handler: { (action) in
+                    log.warning("削除")
+                })
+                let change = UIAlertAction(title: "変更", style: .default, handler: { (action) in
+                    log.warning("変更")
+                })
+                alert.addAction(delete)
+                alert.addAction(change)
+                UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
         }
         scrollView.addSubview(btn)
-        scrollView.backgroundColor = #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
         thumbnails.append(btn)
         if CGFloat(thumbnails.count) * btn.frame.size.width > scrollView.frame.size.width {
             // スクロールビューのコンテンツサイズを大きくする

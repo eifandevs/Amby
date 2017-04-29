@@ -216,11 +216,7 @@ class BaseLayer: UIView, HeaderViewDelegate {
     }
     
 // MARK: Public Method
-    
-    func stopProgressObserving() {
-        baseView.stopProgressObserving()
-    }
-    
+        
 // MARK: Notification Center
     
     func applicationWillResignActive() {

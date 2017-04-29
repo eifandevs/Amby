@@ -40,8 +40,14 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     deinit {
-        front.removeObserver(self, forKeyPath: "estimatedProgress")
-        front.removeObserver(self, forKeyPath: "loading")
+        for webView in webViews {
+            if let unwrappedWebView = webView {
+                if unwrappedWebView.context == front.context {
+                    front.removeObserver(self, forKeyPath: "estimatedProgress")
+                }
+                front.removeObserver(self, forKeyPath: "loading")
+            }
+        }
     }
     
     override func layoutSubviews() {
@@ -267,14 +273,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     func scroll(pt: CGFloat) {
         front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y - pt), animated: false)
-    }
-    
-    func stopProgressObserving() {
-        log.debug("stop progress observe")
-        if let _webView = front {
-            _webView.removeObserver(self, forKeyPath: "estimatedProgress")
-            _webView.removeObserver(self, forKeyPath: "loading")
-        }
     }
     
     func storeHistory() {

@@ -21,7 +21,6 @@ class BaseViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        baseLayer.stopProgressObserving()
     }
     
     override func didReceiveMemoryWarning() {
