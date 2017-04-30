@@ -11,6 +11,8 @@ import Bond
 import WebKit
 
 protocol BaseViewModelDelegate {
+    func baseViewModelDidAddWebView()
+    func baseViewModelDidReloadWebView()
     func baseViewModelDidChangeWebView(index: Int)
     func baseViewModelDidHistoryBackWebView()
     func baseViewModelDidHistoryForwardWebView()
@@ -77,7 +79,10 @@ class BaseViewModel {
                            selector: #selector(type(of: self).baseViewModelWillAddWebView(notification:)),
                            name: .baseViewModelWillAddWebView,
                            object: nil)
-        
+        center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewModelWillReloadWebView(notification:)),
+                           name: .baseViewModelWillReloadWebView,
+                           object: nil)
         center.addObserver(self,
                            selector: #selector(type(of: self).baseViewModelWillChangeWebView(notification:)),
                            name: .baseViewModelWillChangeWebView,
@@ -108,13 +113,7 @@ class BaseViewModel {
         center.post(name: .footerViewModelWillLoad, object: eachHistory)
     }
     
-    // MARK: Public Method
-    
-    func notifyAddWebView() {
-        eachHistory.append(EachHistoryItem())
-        locationIndex = eachHistory.count - 1
-        center.post(name: .footerViewModelWillAddWebView, object: ["context": currentContext])
-    }
+// MARK: Public Method
     
     func notifyStartLoadingWebView(object: [String: Any]?) {
         center.post(name: .footerViewModelWillStartLoading, object: object)
@@ -153,9 +152,16 @@ class BaseViewModel {
     
     @objc private func baseViewModelWillAddWebView(notification: Notification) {
         log.debug("[BaseView Event]: baseViewModelWillAddWebView")
-        notifyAddWebView()
+        eachHistory.append(EachHistoryItem())
+        locationIndex = eachHistory.count - 1
+        center.post(name: .footerViewModelWillAddWebView, object: ["context": currentContext])
+        delegate?.baseViewModelDidAddWebView()
     }
     
+    @objc private func baseViewModelWillReloadWebView(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewModelWillReloadWebView")
+        delegate?.baseViewModelDidReloadWebView()
+    }
     
     @objc private func baseViewModelWillChangeWebView(notification: Notification) {
         log.debug("[BaseView Event]: baseViewModelWillChangeWebView")

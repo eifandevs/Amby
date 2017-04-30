@@ -13,11 +13,7 @@ import Bond
 
 class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDelegate, WKUIDelegate, EGApplicationDelegate, BaseViewModelDelegate {
     
-    private var front: EGWebView! {
-        get {
-            return webViews[viewModel.locationIndex] 
-        }
-    }
+    private var front: EGWebView!
     var webViews: [EGWebView?] = []
     private let viewModel = BaseViewModel()
     private var scrollMovingPointY: CGFloat = 0
@@ -38,17 +34,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
         
         loadWebView()
-    }
-    
-    deinit {
-        for webView in webViews {
-            if let unwrappedWebView = webView {
-                if unwrappedWebView.context == front.context {
-                    front.removeObserver(self, forKeyPath: "estimatedProgress")
-                }
-                front.removeObserver(self, forKeyPath: "loading")
-            }
-        }
     }
     
     override func layoutSubviews() {
@@ -195,7 +180,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             
             if otherWv.context == front.context {
                 //インジゲーターの表示、非表示をきりかえる。
-                log.debug("front webview load end")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = front.isLoading
                 if front.isLoading == true {
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
@@ -279,39 +263,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func storeHistory() {
         viewModel.storeHistory()
     }
-    
-// MARK: Public Method(WebView Action)
-
-    func doWebViewBack() {
-        log.debug("[WebView Action]: webview back")
-    }
-    
-    func doWebViewForward() {
-        log.debug("[WebView Action]: webview forward")
-    }
-    
-    // 新しいWebViewを配列の最後尾に作成する
-    // 作成と同時にそのWebViewに移動する
-    func doWebViewAdd() {
-        log.debug("[WebView Action]: webview add")
-        front.removeObserver(self, forKeyPath: "estimatedProgress")
-        progress.value = 0
-        addWebView()
-    }
-
-    func doWebViewDelete() {
-        log.debug("[WebView Action]: webview delete")
-    }
-    
-    func doWebViewReload() {
-        log.debug("[WebView Action]: webview reload")
-        if front.hasValidUrl {
-            front.reload()
-        } else {
-            let reloadUrl = headerFieldText.value.isEmpty ? viewModel.defaultUrl : headerFieldText.value
-            _ = front.load(urlStr: reloadUrl)
-        }
-    }
 
 // MARK: Private Method
     
@@ -334,7 +285,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         newWv.navigationDelegate = self
         newWv.uiDelegate = self;
         newWv.scrollView.delegate = self
-
+        
+        front = newWv
         addSubview(newWv)
 
         // プログレスバー
@@ -346,13 +298,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private func loadWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
         webViews[viewModel.locationIndex] = newWv
-        _ = front.load(urlStr: viewModel.requestUrl)
-    }
-    
-    private func addWebView() {
-        viewModel.notifyAddWebView()
-        let newWv = createWebView(context: viewModel.currentContext)
-        webViews.append(newWv)
         _ = front.load(urlStr: viewModel.requestUrl)
     }
     
@@ -371,7 +316,23 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
 // MARK: BaseViewModel Delegate
+
+    func baseViewModelDidAddWebView() {
+        front.removeObserver(self, forKeyPath: "estimatedProgress")
+        progress.value = 0
+        let newWv = createWebView(context: viewModel.currentContext)
+        webViews.append(newWv)
+        _ = front.load(urlStr: viewModel.requestUrl)
+    }
     
+    func baseViewModelDidReloadWebView() {
+        if front.hasValidUrl {
+            front.reload()
+        } else {
+            let reloadUrl = headerFieldText.value.isEmpty ? viewModel.defaultUrl : headerFieldText.value
+            _ = front.load(urlStr: reloadUrl)
+        }
+    }
     func baseViewModelDidChangeWebView(index: Int) {
         log.warning(index)
     }

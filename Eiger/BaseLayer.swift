@@ -154,7 +154,6 @@ class BaseLayer: UIView, HeaderViewDelegate {
             button.setTitle("戻る(wv)", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    self!.baseView.doWebViewBack()
             }
             addSubview(button)
         }
@@ -165,7 +164,6 @@ class BaseLayer: UIView, HeaderViewDelegate {
             button.setTitle("進む(wv)", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    self!.baseView.doWebViewForward()
             }
             addSubview(button)
         }
@@ -176,8 +174,8 @@ class BaseLayer: UIView, HeaderViewDelegate {
             button.setTitle("リロード", for: .normal)
             // TODO: リロードは自前で管理しているURLから実施する
             _ = button.reactive.tap
-                .observe { [weak self] _ in
-                    self!.baseView.doWebViewReload()
+                .observe { _ in
+                    NotificationCenter.default.post(name: .baseViewModelWillReloadWebView, object: nil)
             }
             addSubview(button)
         }
@@ -189,7 +187,7 @@ class BaseLayer: UIView, HeaderViewDelegate {
             // TODO: リロードは自前で管理しているURLから実施する
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    self!.baseView.doWebViewAdd()
+                    NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: nil)
             }
             addSubview(button)
         }
@@ -200,7 +198,6 @@ class BaseLayer: UIView, HeaderViewDelegate {
             button.setTitle("現在のwv削除", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    self!.baseView.doWebViewDelete()
             }
             addSubview(button)
         }
