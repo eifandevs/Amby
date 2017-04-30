@@ -16,6 +16,6 @@ class HeaderViewModel {
 // MARK: Public Method
     
     func notifyChangeWebView(text: String) {
-        center.post(name: .baseViewSearchWebView, object: text)
+        center.post(name: .baseViewModelWillSearchWebView, object: text)
     }
 }

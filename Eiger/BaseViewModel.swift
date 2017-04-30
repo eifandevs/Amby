@@ -12,6 +12,8 @@ import WebKit
 
 protocol BaseViewModelDelegate {
     func baseViewModelDidChangeWebView(index: Int)
+    func baseViewModelDidHistoryBackWebView()
+    func baseViewModelDidHistoryForwardWebView()
     func baseViewModelDidSearchWebView(text: String)
 }
 
@@ -38,7 +40,7 @@ class BaseViewModel {
             return eachHistory.count
         }
     }
-
+    
     // 現在表示しているwebviewのインデックス
     var locationIndex: Int  = UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey) {
         didSet {
@@ -72,18 +74,26 @@ class BaseViewModel {
     
     init() {
         center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewAddWebView(notification:)),
-                           name: .baseViewAddWebView,
+                           selector: #selector(type(of: self).baseViewModelWillAddWebView(notification:)),
+                           name: .baseViewModelWillAddWebView,
                            object: nil)
         
         center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewChangeWebView(notification:)),
-                           name: .baseViewChangeWebView,
+                           selector: #selector(type(of: self).baseViewModelWillChangeWebView(notification:)),
+                           name: .baseViewModelWillChangeWebView,
                            object: nil)
         
         center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewSearchWebView(notification:)),
-                           name: .baseViewSearchWebView,
+                           selector: #selector(type(of: self).baseViewModelWillSearchWebView(notification:)),
+                           name: .baseViewModelWillSearchWebView,
+                           object: nil)
+        center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewModelWillHistoryBackWebView(notification:)),
+                           name: .baseViewModelWillHistoryBackWebView,
+                           object: nil)
+        center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewModelWillHistoryForwardWebView(notification:)),
+                           name: .baseViewModelWillHistoryForwardWebView,
                            object: nil)
         
         // eachHistory読み込み
@@ -95,23 +105,23 @@ class BaseViewModel {
             eachHistory.append(EachHistoryItem())
             log.error("failed to read each history: \(error)")
         }
-        center.post(name: .footerViewLoad, object: eachHistory)
+        center.post(name: .footerViewModelWillLoad, object: eachHistory)
     }
     
-// MARK: Public Method
+    // MARK: Public Method
     
     func notifyAddWebView() {
         eachHistory.append(EachHistoryItem())
         locationIndex = eachHistory.count - 1
-        center.post(name: .footerViewAddWebView, object: ["context": currentContext])
+        center.post(name: .footerViewModelWillAddWebView, object: ["context": currentContext])
     }
     
     func notifyStartLoadingWebView(object: [String: Any]?) {
-        center.post(name: .footerViewStartLoading, object: object)
+        center.post(name: .footerViewModelWillStartLoading, object: object)
     }
     
     func notifyEndLoadingWebView(object: [String: Any]?) {
-        center.post(name: .footerViewEndLoading, object: object)
+        center.post(name: .footerViewModelWillEndLoading, object: object)
     }
     
     func saveHistory(wv: EGWebView) {
@@ -141,22 +151,32 @@ class BaseViewModel {
     
 // MARK: Notification受信
     
-    @objc private func baseViewAddWebView(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewAddWebView")
+    @objc private func baseViewModelWillAddWebView(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewModelWillAddWebView")
         notifyAddWebView()
     }
     
     
-    @objc private func baseViewChangeWebView(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewChangeWebView")
+    @objc private func baseViewModelWillChangeWebView(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewModelWillChangeWebView")
         let index = notification.object as! Int
         delegate?.baseViewModelDidChangeWebView(index: index)
     }
     
-    @objc private func baseViewSearchWebView(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewSearchWebView")
+    @objc private func baseViewModelWillSearchWebView(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewModelWillSearchWebView")
         let text = notification.object as! String
         delegate?.baseViewModelDidSearchWebView(text: text)
+    }
+    
+    @objc private func baseViewModelWillHistoryBackWebView(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewModelWillHistoryBackWebView")
+        delegate?.baseViewModelDidHistoryBackWebView()
+    }
+    
+    @objc private func baseViewModelWillHistoryForwardWebView(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewModelWillHistoryForwardWebView")
+        delegate?.baseViewModelDidHistoryForwardWebView()
     }
     
 // MARK: Private Method

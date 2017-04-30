@@ -27,7 +27,7 @@ class FooterViewModel {
     }
     
     var delegate: FooterViewModelDelegate?
-
+    
     // 通知センター
     let center = NotificationCenter.default
     
@@ -35,36 +35,36 @@ class FooterViewModel {
         // Notification Center登録
         locationIndex = index
         center.addObserver(self,
-                           selector: #selector(type(of: self).footerViewLoad(notification:)),
-                           name: .footerViewLoad,
+                           selector: #selector(type(of: self).footerViewModelWillLoad(notification:)),
+                           name: .footerViewModelWillLoad,
                            object: nil)
         
         center.addObserver(self,
-                           selector: #selector(type(of: self).footerViewAddWebView(notification:)),
-                           name: .footerViewAddWebView,
+                           selector: #selector(type(of: self).footerViewModelWillAddWebView(notification:)),
+                           name: .footerViewModelWillAddWebView,
                            object: nil)
         
         center.addObserver(self,
-                           selector: #selector(type(of: self).footerViewStartLoading(notification:)),
-                           name: .footerViewStartLoading,
+                           selector: #selector(type(of: self).footerViewModelWillStartLoading(notification:)),
+                           name: .footerViewModelWillStartLoading,
                            object: nil)
         
         center.addObserver(self,
-                           selector: #selector(type(of: self).footerViewEndLoading(notification:)),
-                           name: .footerViewEndLoading,
+                           selector: #selector(type(of: self).footerViewModelWillEndLoading(notification:)),
+                           name: .footerViewModelWillEndLoading,
                            object: nil)
     }
     
-// MARK: Public Method
+    // MARK: Public Method
     
     func notifyChangeWebView(index: Int) {
-        center.post(name: .baseViewChangeWebView, object: index)
+        center.post(name: .baseViewModelWillChangeWebView, object: index)
     }
-
-// MARK: Notification受信
     
-    @objc private func footerViewLoad(notification: Notification) {
-        log.debug("[Footer Event]: footerViewLoad")
+    // MARK: Notification受信
+    
+    @objc private func footerViewModelWillLoad(notification: Notification) {
+        log.debug("[Footer Event]: footerViewModelWillLoad")
         let eachHistory = notification.object as! [EachHistoryItem]
         
         
@@ -80,10 +80,10 @@ class FooterViewModel {
         delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: eachThumbnail)
     }
     
-    @objc private func footerViewAddWebView(notification: Notification) {
-        log.debug("[Footer Event]: footerViewAddWebView")
+    @objc private func footerViewModelWillAddWebView(notification: Notification) {
+        log.debug("[Footer Event]: footerViewModelWillAddWebView")
         let context = (notification.object as! [String: String])["context"]!
-
+        
         // 新しいサムネイルを追加
         let thumbnailItem = EachThumbnailItem()
         thumbnailItem.context = context
@@ -93,15 +93,15 @@ class FooterViewModel {
         locationIndex = eachThumbnail.count - 1
     }
     
-    @objc private func footerViewStartLoading(notification: Notification) {
-        log.debug("[Footer Event]: footerViewStartLoading")
+    @objc private func footerViewModelWillStartLoading(notification: Notification) {
+        log.debug("[Footer Event]: footerViewModelWillStartLoading")
         // FooterViewに通知をする
         
         delegate?.footerViewModelDidStartLoading(index: locationIndex)
     }
     
-    @objc private func footerViewEndLoading(notification: Notification) {
-        log.debug("[Footer Event]: footerViewEndLoading")
+    @objc private func footerViewModelWillEndLoading(notification: Notification) {
+        log.debug("[Footer Event]: footerViewModelWillEndLoading")
         // FooterViewに通知をする
         let context = (notification.object as! [String: String])["context"]!
         let url = (notification.object as! [String: String])["url"]!

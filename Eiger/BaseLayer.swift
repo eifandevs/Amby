@@ -131,8 +131,8 @@ class BaseLayer: UIView, HeaderViewDelegate {
             button.backgroundColor = UIColor.gray
             button.setTitle("戻る(ページ)", for: .normal)
             _ = button.reactive.tap
-                .observe { [weak self] _ in
-                    self!.baseView.doHistoryBack()
+                .observe { _ in
+                    NotificationCenter.default.post(name: .baseViewModelWillHistoryBackWebView, object: nil)
             }
             addSubview(button)
         }
@@ -142,8 +142,8 @@ class BaseLayer: UIView, HeaderViewDelegate {
             button.backgroundColor = UIColor.gray
             button.setTitle("進む(ページ)", for: .normal)
             _ = button.reactive.tap
-                .observe { [weak self] _ in
-                    self!.baseView.doHistoryForward()
+                .observe { _ in
+                    NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
             }
             addSubview(button)
         }

@@ -9,14 +9,16 @@
 import Foundation
 
 extension NSNotification.Name {
-    static let baseViewAddWebView = NSNotification.Name("baseViewAddWebView")
-    static let baseViewRemoveWebView = NSNotification.Name("baseViewRemoveWebView")
-    static let baseViewChangeWebView = NSNotification.Name("baseViewChangeWebView")
-    static let baseViewSearchWebView = NSNotification.Name("baseViewSearchWebView")
-    static let footerViewLoad = NSNotification.Name("footerViewLoad")
-    static let footerViewAddWebView = NSNotification.Name("footerViewAddWebView")
-    static let footerViewRemoveWebView = NSNotification.Name("footerViewRemoveWebView")
-    static let footerViewChangeWebView = NSNotification.Name("footerViewChangeWebView")
-    static let footerViewStartLoading = NSNotification.Name("footerViewStartLoading")
-    static let footerViewEndLoading = NSNotification.Name("footerViewEndLoading")
+    static let baseViewModelWillAddWebView = NSNotification.Name("baseViewModelWillAddWebView")
+    static let baseViewModelWillRemoveWebView = NSNotification.Name("baseViewModelWillRemoveWebView")
+    static let baseViewModelWillChangeWebView = NSNotification.Name("baseViewModelWillChangeWebView")
+    static let baseViewModelWillHistoryBackWebView = NSNotification.Name("baseViewModelWillHistoryBackWebView")
+    static let baseViewModelWillHistoryForwardWebView = NSNotification.Name("baseViewModelWillHistoryForwardWebView")
+    static let baseViewModelWillSearchWebView = NSNotification.Name("baseViewModelWillSearchWebView")
+    static let footerViewModelWillLoad = NSNotification.Name("footerViewModelWillLoad")
+    static let footerViewModelWillAddWebView = NSNotification.Name("footerViewModelWillAddWebView")
+    static let footerViewModelWillRemoveWebView = NSNotification.Name("footerViewModelWillRemoveWebView")
+    static let footerViewModelWillChangeWebView = NSNotification.Name("footerViewModelWillChangeWebView")
+    static let footerViewModelWillStartLoading = NSNotification.Name("footerViewModelWillStartLoading")
+    static let footerViewModelWillEndLoading = NSNotification.Name("footerViewModelWillEndLoading")
 }

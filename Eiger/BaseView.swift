@@ -281,54 +281,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
 // MARK: Public Method(WebView Action)
-    
-    func doHistoryBack() {
-        log.debug("[WebView Action]: history back")
-        if front.canGoBack {
-            if (front.backForwardList.backItem?.url.absoluteString.hasValidUrl)! == true {
-                front.goBack()
-            } else {
-                // 有効なURLを探す
-                let backUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
-                    for item in front.backForwardList.backList.reversed() {
-                        if item.url.absoluteString.hasValidUrl {
-                            return item
-                        }
-                    }
-                    // nilが返る事は運用上あり得ない
-                    log.error("webview go back error")
-                    return nil
-                }()
-                if let item = backUrl {
-                    front.go(to: item)
-                }
-            }
-        }
-    }
-    
-    func doHistoryForward() {
-        log.debug("[WebView Action]: history forward")
-        if front.canGoForward {
-            if (front.backForwardList.forwardItem?.url.absoluteString.hasValidUrl)! == true {
-                front.goForward()
-            } else {
-                // 有効なURLを探す
-                let forwardUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
-                    for item in front.backForwardList.forwardList {
-                        if item.url.absoluteString.hasValidUrl {
-                            return item
-                        }
-                    }
-                    // nilが返る事は運用上あり得ない
-                    log.error("webview go back error")
-                    return nil
-                }()
-                if let item = forwardUrl {
-                    front.go(to: item)
-                }
-            }
-        }
-    }
 
     func doWebViewBack() {
         log.debug("[WebView Action]: webview back")
@@ -427,5 +379,51 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func baseViewModelDidSearchWebView(text: String) {
         let search = text.hasValidUrl ? text : "\(AppDataManager.shared.searchPath)\(text)"
         _ = front.load(urlStr: search)
+    }
+    
+    func baseViewModelDidHistoryBackWebView() {
+        if front.canGoBack {
+            if (front.backForwardList.backItem?.url.absoluteString.hasValidUrl)! == true {
+                front.goBack()
+            } else {
+                // 有効なURLを探す
+                let backUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
+                    for item in front.backForwardList.backList.reversed() {
+                        if item.url.absoluteString.hasValidUrl {
+                            return item
+                        }
+                    }
+                    // nilが返る事は運用上あり得ない
+                    log.error("webview go back error")
+                    return nil
+                }()
+                if let item = backUrl {
+                    front.go(to: item)
+                }
+            }
+        }
+    }
+    
+    func baseViewModelDidHistoryForwardWebView() {
+        if front.canGoForward {
+            if (front.backForwardList.forwardItem?.url.absoluteString.hasValidUrl)! == true {
+                front.goForward()
+            } else {
+                // 有効なURLを探す
+                let forwardUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
+                    for item in front.backForwardList.forwardList {
+                        if item.url.absoluteString.hasValidUrl {
+                            return item
+                        }
+                    }
+                    // nilが返る事は運用上あり得ない
+                    log.error("webview go back error")
+                    return nil
+                }()
+                if let item = forwardUrl {
+                    front.go(to: item)
+                }
+            }
+        }
     }
 }
