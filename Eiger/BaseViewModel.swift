@@ -13,7 +13,7 @@ import WebKit
 protocol BaseViewModelDelegate {
     func baseViewModelDidAddWebView()
     func baseViewModelDidReloadWebView()
-    func baseViewModelDidChangeWebView(index: Int)
+    func baseViewModelDidChangeWebView()
     func baseViewModelDidHistoryBackWebView()
     func baseViewModelDidHistoryForwardWebView()
     func baseViewModelDidSearchWebView(text: String)
@@ -87,7 +87,6 @@ class BaseViewModel {
                            selector: #selector(type(of: self).baseViewModelWillChangeWebView(notification:)),
                            name: .baseViewModelWillChangeWebView,
                            object: nil)
-        
         center.addObserver(self,
                            selector: #selector(type(of: self).baseViewModelWillSearchWebView(notification:)),
                            name: .baseViewModelWillSearchWebView,
@@ -165,8 +164,14 @@ class BaseViewModel {
     
     @objc private func baseViewModelWillChangeWebView(notification: Notification) {
         log.debug("[BaseView Event]: baseViewModelWillChangeWebView")
+        center.post(name: .footerViewModelWillChangeWebView, object: notification.object)
         let index = notification.object as! Int
-        delegate?.baseViewModelDidChangeWebView(index: index)
+        if locationIndex != index {
+            locationIndex = index
+            delegate?.baseViewModelDidChangeWebView()
+        } else {
+            log.warning("selected current webView")
+        }
     }
     
     @objc private func baseViewModelWillSearchWebView(notification: Notification) {

@@ -12,6 +12,7 @@ import Bond
 protocol FooterViewModelDelegate {
     func footerViewModelDidLoadThumbnail(eachThumbnail: [EachThumbnailItem])
     func footerViewModelDidAddThumbnail()
+    func footerViewModelDidChangeThumbnail()
     func footerViewModelDidStartLoading(index: Int)
     func footerViewModelDidEndLoading(context: String, index: Int)
 }
@@ -53,15 +54,28 @@ class FooterViewModel {
                            selector: #selector(type(of: self).footerViewModelWillEndLoading(notification:)),
                            name: .footerViewModelWillEndLoading,
                            object: nil)
+        center.addObserver(self,
+                           selector: #selector(type(of: self).footerViewModelWillChangeWebView(notification:)),
+                           name: .footerViewModelWillChangeWebView,
+                           object: nil)
     }
     
-    // MARK: Public Method
+// MARK: Public Method
     
     func notifyChangeWebView(index: Int) {
         center.post(name: .baseViewModelWillChangeWebView, object: index)
     }
     
-    // MARK: Notification受信
+// MARK: Notification受信
+    
+    @objc private func footerViewModelWillChangeWebView(notification: Notification) {
+        log.debug("[Footer Event]: footerViewModelWillChangeWebView")
+        let index = notification.object as! Int
+        if locationIndex != index {
+            locationIndex = index
+            delegate?.footerViewModelDidChangeThumbnail()
+        }
+    }
     
     @objc private func footerViewModelWillLoad(notification: Notification) {
         log.debug("[Footer Event]: footerViewModelWillLoad")

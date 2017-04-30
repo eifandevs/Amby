@@ -102,6 +102,10 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         let _ = createCaptureSpace()
     }
     
+    func footerViewModelDidChangeThumbnail() {
+        // TODO: 現在値を変更する
+    }
+    
     func footerViewModelDidStartLoading(index: Int) {
         startIndicator()
     }

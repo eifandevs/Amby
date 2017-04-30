@@ -333,8 +333,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             _ = front.load(urlStr: reloadUrl)
         }
     }
-    func baseViewModelDidChangeWebView(index: Int) {
-        log.warning(index)
+    func baseViewModelDidChangeWebView() {
+        front.removeObserver(self, forKeyPath: "estimatedProgress")
+        progress.value = 0
+        let current = webViews[viewModel.locationIndex]!
+        current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
+        front = current
+        bringSubview(toFront: current)
     }
     
     func baseViewModelDidSearchWebView(text: String) {
