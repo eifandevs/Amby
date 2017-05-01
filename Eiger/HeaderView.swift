@@ -14,7 +14,7 @@ protocol HeaderViewDelegate {
     func headerViewDidEndEditing()
 }
 
-class HeaderView: UIView, UITextFieldDelegate, ShadowView {
+class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowView {
     
     var delegate: HeaderViewDelegate?
 
@@ -24,6 +24,7 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
     private var isEditing = false
     
     private let viewModel = HeaderViewModel()
+    private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
 
     var text: String? {
         get {
@@ -52,6 +53,7 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
     init() {
         headerField = EGTextField(iconSize: CGSize(width: heightMax / 2, height: heightMax / 2))
         super.init(frame: CGRect.zero)
+        viewModel.delegate = self
         addShadow()
         backgroundColor = UIColor.pastelLightGray
         
@@ -69,6 +71,7 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
         }
         
         addSubview(headerField)
+        addSubview(progressBar)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -118,6 +121,7 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
     }
     
     override func layoutSubviews() {
+        progressBar.frame = CGRect(x: 0, y: frame.size.height - 2.1, width: frame.size.width, height: 2.1)
         if !isEditing {
             headerField.frame = CGRect(x: 95, y: frame.size.height - heightMax * 0.63, width: superview!.frame.size.width - 190, height: heightMax * 0.5)
         }
@@ -133,5 +137,12 @@ class HeaderView: UIView, UITextFieldDelegate, ShadowView {
             viewModel.notifyChangeWebView(text: encodedText!)
         }
         return true
+    }
+    
+// MARK: HeaderViewModel Delegate
+    
+    func headerViewModelDidChangeProgress(progress: CGFloat) {
+        log.warning("set progress")
+        progressBar.setProgress(progress)
     }
 }

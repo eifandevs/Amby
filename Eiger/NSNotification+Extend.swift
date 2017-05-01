@@ -9,6 +9,7 @@
 import Foundation
 
 extension NSNotification.Name {
+    static let headerViewModelWillChangeProgress = NSNotification.Name("headerViewModelWillChangeProgress")
     static let baseViewModelWillAddWebView = NSNotification.Name("baseViewModelWillAddWebView")
     static let baseViewModelWillReloadWebView = NSNotification.Name("baseViewModelWillReloadWebView")
     static let baseViewModelWillRemoveWebView = NSNotification.Name("baseViewModelWillRemoveWebView")

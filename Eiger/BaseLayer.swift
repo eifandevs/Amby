@@ -14,7 +14,6 @@ class BaseLayer: UIView, HeaderViewDelegate {
     private let headerView: HeaderView = HeaderView()
     private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceDataManager.shared.displaySize.height - AppDataManager.shared.thumbnailSize.height, width: DeviceDataManager.shared.displaySize.width, height: AppDataManager.shared.thumbnailSize.height))
     private let baseView: BaseView = BaseView()
-    private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
     private var overlay: UIButton? = nil
     
     // 次のタッチを受け付けるまで、headerのアニメーションを強制Stopするフラグ
@@ -34,23 +33,15 @@ class BaseLayer: UIView, HeaderViewDelegate {
             name: NSNotification.Name("UIApplicationWillResignActiveNotification"),
             object: nil
         )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(applicationDidBecomeActive),
-            name: NSNotification.Name("UIApplicationDidBecomeActiveNotification"),
-            object: nil
-        )
         
         let resizeHeaderToMax = { [weak self] in
             self!.headerView.resizeToMax()
             self!.baseView.frame.origin.y = self!.headerView.heightMax
-            self!.progressBar.frame = CGRect(x: 0, y: self!.headerView.frame.size.height - 2.1, width: frame.size.width, height: 2.1)
         }
         
         let resizeHeaderToMin = { [weak self] in
             self!.headerView.resizeToMin()
             self!.baseView.frame.origin.y = DeviceDataManager.shared.statusBarHeight
-            self!.progressBar.frame = CGRect(x: 0, y: self!.headerView.frame.size.height - 2.1, width: frame.size.width, height: 2.1)
         }
         
         let slide = { [weak self] (val: CGFloat) -> Void in
@@ -86,10 +77,6 @@ class BaseLayer: UIView, HeaderViewDelegate {
             }
         }
         
-        _ = baseView.progress.observeNext { [weak self] value in
-            self!.progressBar.setProgress(value)
-        }
-        
         _ = baseView.scrollSpeed.observeNext { [weak self] value in
             if self!.headerView.frame.size.height >= self!.headerView.heightMax {
                 self!.headerView.fieldAlpha = 1
@@ -123,7 +110,6 @@ class BaseLayer: UIView, HeaderViewDelegate {
         addSubview(baseView)
         addSubview(headerView)
         addSubview(footerView)
-        headerView.addSubview(progressBar)
         
         /* テストコード */
         do {
@@ -208,21 +194,10 @@ class BaseLayer: UIView, HeaderViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        progressBar.frame = CGRect(x: 0, y: headerView.frame.size.height - 2.1, width: frame.size.width, height: 2.1)
-    }
-    
-// MARK: Public Method
-        
 // MARK: Notification Center
     
     func applicationWillResignActive() {
         baseView.storeHistory()
-    }
-    
-    func applicationDidBecomeActive() {
-        // プログレスバーの初期化
-        progressBar.setProgress(0)
     }
     
 // MARK: HeaderView Delegate

@@ -122,6 +122,10 @@ class BaseViewModel {
         center.post(name: .footerViewModelWillEndLoading, object: object)
     }
     
+    func notifyChangeProgress(object: CGFloat) {
+        center.post(name: .headerViewModelWillChangeProgress, object: object)
+    }
+    
     func saveHistory(wv: EGWebView) {
         if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle {
             // Common History

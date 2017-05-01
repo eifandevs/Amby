@@ -20,7 +20,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     var isTouching = Observable<Bool>(false)
     var scrollSpeed = Observable<CGFloat>(0)
-    var progress = Observable<CGFloat>(0)
     var headerFieldText = Observable<String>("")
     
     override init(frame: CGRect) {
@@ -83,7 +82,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         log.error("[error url]\(String(describing: webView.url))")
         if webView.isLoading {
-            progress.value = 0
+            viewModel.notifyChangeProgress(object: 0)
         }
         
         if !webView.hasLocalUrl {
@@ -168,7 +167,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             //estimatedProgressが変更されたときに、プログレスバーの値を変更する。
-            progress.value = CGFloat(front.estimatedProgress)
+            viewModel.notifyChangeProgress(object: CGFloat(front.estimatedProgress))
         } else if keyPath == "loading" {
             // 対象のwebviewを検索する
             let otherWv: EGWebView = webViews.filter({ (w) -> Bool in
@@ -183,9 +182,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 UIApplication.shared.isNetworkActivityIndicatorVisible = front.isLoading
                 if front.isLoading == true {
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
-                    progress.value = CGFloat(AppDataManager.shared.progressMin)
+                    viewModel.notifyChangeProgress(object: CGFloat(AppDataManager.shared.progressMin))
                 } else {
-                    progress.value = 1.0
+                    viewModel.notifyChangeProgress(object: 1.0)
                     
                     // ページ情報を取得
                     saveMetaData(webView: otherWv, completion: { [weak self] (url) in
@@ -274,7 +273,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         //プログレスが変更されたことを取得
         target.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(target.context))
         if target.isLoading == true {
-            progress.value = CGFloat(target.estimatedProgress)
+            viewModel.notifyChangeProgress(object: CGFloat(target.estimatedProgress))
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = target.isLoading
     }
@@ -319,7 +318,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 
     func baseViewModelDidAddWebView() {
         front.removeObserver(self, forKeyPath: "estimatedProgress")
-        progress.value = 0
+        viewModel.notifyChangeProgress(object: 0)
         let newWv = createWebView(context: viewModel.currentContext)
         webViews.append(newWv)
         _ = front.load(urlStr: viewModel.requestUrl)
@@ -335,7 +334,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     func baseViewModelDidChangeWebView() {
         front.removeObserver(self, forKeyPath: "estimatedProgress")
-        progress.value = 0
+        viewModel.notifyChangeProgress(object: 0)
         let current = webViews[viewModel.locationIndex]!
         current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
         front = current
