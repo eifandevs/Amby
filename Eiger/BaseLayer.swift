@@ -177,24 +177,18 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     }
     
     func baseViewDidScroll(speed: CGFloat) {
-        if headerView.frame.size.height >= headerView.heightMax {
-            headerView.fieldAlpha = 1
-        } else {
-            if speed > 0 {
-                // headerViewを拡大、baseViewを縮小
+        if speed > 0 {
+            // headerViewを拡大、baseViewを縮小
+            if headerView.frame.size.height != headerView.heightMax {
                 if headerView.frame.size.height + speed > headerView.heightMax {
                     resizeHeaderToMax()
                 } else {
                     slide(val: speed)
                 }
             }
-        }
-        
-        if headerView.frame.size.height <= DeviceDataManager.shared.statusBarHeight {
-            headerView.fieldAlpha = 0
-        } else {
-            if speed < 0 {
-                // headerを縮小、baseViewを拡大
+        } else if speed < 0 {
+            // headerを縮小、baseViewを拡大
+            if headerView.frame.size.height != DeviceDataManager.shared.statusBarHeight {
                 if headerView.frame.size.height + speed < DeviceDataManager.shared.statusBarHeight {
                     resizeHeaderToMin()
                 } else {
@@ -202,7 +196,6 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
                 }
             }
         }
-        
         headerView.frame.origin.y = 0
     }
     
