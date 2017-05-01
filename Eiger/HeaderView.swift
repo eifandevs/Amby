@@ -17,12 +17,9 @@ protocol HeaderViewDelegate {
 class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowView {
     
     var delegate: HeaderViewDelegate?
-
-    let heightMax: CGFloat = 45 + DeviceDataManager.shared.statusBarHeight
-    
-    private var headerField: EGTextField! = nil
+    let heightMax = AppDataManager.shared.headerViewHeight
+    private var headerField = EGTextField(iconSize: CGSize(width: AppDataManager.shared.headerViewHeight / 2, height: AppDataManager.shared.headerViewHeight / 2))
     private var isEditing = false
-    
     private let viewModel = HeaderViewModel()
     private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
 
@@ -42,7 +39,6 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     }
     
     init() {
-        headerField = EGTextField(iconSize: CGSize(width: heightMax / 2, height: heightMax / 2))
         super.init(frame: CGRect.zero)
         viewModel.delegate = self
         addShadow()
@@ -71,13 +67,15 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     
     func resizeToMax() {
         frame.size.height = heightMax
-        headerField.frame = CGRect(x: 95, y: frame.size.height - heightMax * 0.63, width: superview!.frame.size.width - 190, height: heightMax * 0.5)
+        progressBar.frame = CGRect(x: 0, y: frame.size.height - 2.1, width: frame.size.width, height: 2.1)
+        headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
         headerField.alpha = 1
     }
     
     func resizeToMin() {
         frame.size.height = DeviceDataManager.shared.statusBarHeight
-        headerField.frame = CGRect(x: 95, y: frame.size.height - heightMax * 0.63, width: superview!.frame.size.width - 190, height: heightMax * 0.5)
+        progressBar.frame = CGRect(x: 0, y: frame.size.height - 2.1, width: frame.size.width, height: 2.1)
+        headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
         headerField.alpha = 0
     }
     
@@ -85,14 +83,14 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         if force {
             headerField.removeInputForm()
             
-            self.headerField.frame = CGRect(x: 95, y: self.frame.size.height - self.heightMax * 0.63, width: self.superview!.frame.size.width - 190, height: self.heightMax * 0.5)
+            headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
             self.isEditing = false
             self.headerField.makeContent(restore: true, restoreText: nil)
         } else {
             let text = headerField.textField?.text
             headerField.removeInputForm()
             
-            self.headerField.frame = CGRect(x: 95, y: self.frame.size.height - self.heightMax * 0.63, width: self.superview!.frame.size.width - 190, height: self.heightMax * 0.5)
+            headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
             self.isEditing = false
             
             if let text = text, !text.isEmpty {
@@ -114,7 +112,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     override func layoutSubviews() {
         progressBar.frame = CGRect(x: 0, y: frame.size.height - 2.1, width: frame.size.width, height: 2.1)
         if !isEditing {
-            headerField.frame = CGRect(x: 95, y: frame.size.height - heightMax * 0.63, width: superview!.frame.size.width - 190, height: heightMax * 0.5)
+            headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
         }
     }
     

@@ -42,6 +42,7 @@ class EGTextField: UIButton, ShadowView {
         
         size = iconSize
         backgroundColor = UIColor.white
+        alpha = 0
         makeContent(restore: false, restoreText: nil)
     }
     

@@ -11,15 +11,25 @@ import UIKit
 import WebKit
 import Bond
 
+protocol BaseViewDelegate {
+    func baseViewDidScroll(speed: CGFloat)
+    func baseViewDidTouch(touch: Bool)
+}
+
 class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDelegate, WKUIDelegate, EGApplicationDelegate, BaseViewModelDelegate {
     
+    var delegate: BaseViewDelegate?
+
     private var front: EGWebView!
     var webViews: [EGWebView?] = []
     private let viewModel = BaseViewModel()
     private var scrollMovingPointY: CGFloat = 0
     
-    var isTouching = Observable<Bool>(false)
-    var scrollSpeed = Observable<CGFloat>(0)
+    private var isTouching = false {
+        didSet {
+            delegate?.baseViewDidTouch(touch: isTouching)
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,19 +55,19 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 // MARK: EGApplication Delegate
     
     internal func screenTouchBegan(touch: UITouch) {
-        isTouching.value = true
+        isTouching = true
     }
     
     internal func screenTouchMoved(touch: UITouch) {
     }
     
     internal func screenTouchEnded(touch: UITouch) {
-        isTouching.value = false
+        isTouching = false
         scrollMovingPointY = 0
     }
     
     internal func screenTouchCancelled(touch: UITouch) {
-        isTouching.value = false
+        isTouching = false
         scrollMovingPointY = 0
     }
     
@@ -70,8 +80,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
         let speed = scrollView.contentOffset.y - scrollMovingPointY
-        if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching.value && isOverScrolling && speed < 0)) {
-            scrollSpeed.value =  -1 * speed
+        if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching && isOverScrolling && speed < 0)) {
+            delegate?.baseViewDidScroll(speed: -1 * speed)
         }
         scrollMovingPointY = scrollView.contentOffset.y
     }

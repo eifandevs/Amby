@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class BaseLayer: UIView, HeaderViewDelegate {
+class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     
     private let headerView: HeaderView = HeaderView()
     private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceDataManager.shared.displaySize.height - AppDataManager.shared.thumbnailSize.height, width: DeviceDataManager.shared.displaySize.width, height: AppDataManager.shared.thumbnailSize.height))
@@ -23,77 +23,10 @@ class BaseLayer: UIView, HeaderViewDelegate {
         super.init(frame: frame)
 
         baseView.frame = CGRect(x: 0, y: DeviceDataManager.shared.statusBarHeight, width: frame.size.width, height: frame.size.height - AppDataManager.shared.thumbnailSize.height - DeviceDataManager.shared.statusBarHeight)
+        baseView.delegate = self
         // サイズが可変なので、layoutSubViewsで初期化しない
         headerView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight)
         headerView.delegate = self
-        
-        let resizeHeaderToMax = { [weak self] in
-            self!.headerView.resizeToMax()
-            self!.baseView.frame.origin.y = self!.headerView.heightMax
-        }
-        
-        let resizeHeaderToMin = { [weak self] in
-            self!.headerView.resizeToMin()
-            self!.baseView.frame.origin.y = DeviceDataManager.shared.statusBarHeight
-        }
-        
-        let slide = { [weak self] (val: CGFloat) -> Void in
-            if !self!.slideForceStopFlag {
-                self!.headerView.resize(value: val)
-                self!.baseView.frame.origin.y += val
-                self!.baseView.scroll(pt: -val)
-            }
-        }
-        
-        _ = baseView.isTouching.observeNext { [weak self] value in
-            // タッチ終了時にheaderViewのサイズを調整する
-            if value {
-                self!.slideForceStopFlag = false
-            }
-            
-            if !value && self!.headerView.resizing {
-                self!.slideForceStopFlag = true
-                if self!.headerView.frame.size.height > self!.headerView.heightMax / 2 {
-                    UIView.animate(withDuration: 0.2, animations: {
-                        resizeHeaderToMax()
-                    })
-                } else {
-                    UIView.animate(withDuration: 0.2, animations: {
-                        resizeHeaderToMin()
-                    })
-                }
-            }
-        }
-        
-        _ = baseView.scrollSpeed.observeNext { [weak self] value in
-            if self!.headerView.frame.size.height >= self!.headerView.heightMax {
-                self!.headerView.fieldAlpha = 1
-            } else {
-                if value > 0 {
-                    // headerViewを拡大、baseViewを縮小
-                    if self!.headerView.frame.size.height + value > self!.headerView.heightMax {
-                        resizeHeaderToMax()
-                    } else {
-                        slide(value)
-                    }
-                }
-            }
-            
-            if self!.headerView.frame.size.height <= DeviceDataManager.shared.statusBarHeight {
-                self!.headerView.fieldAlpha = 0
-            } else {
-                if value < 0 {
-                    // headerを縮小、baseViewを拡大
-                    if self!.headerView.frame.size.height + value < DeviceDataManager.shared.statusBarHeight {
-                        resizeHeaderToMin()
-                    } else {
-                        slide(value)
-                    }
-                }
-            }
-            
-            self!.headerView.frame.origin.y = 0
-        }
         
         addSubview(baseView)
         addSubview(headerView)
@@ -182,6 +115,25 @@ class BaseLayer: UIView, HeaderViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+// MARK: Private Method
+    
+    private func resizeHeaderToMax() {
+        headerView.resizeToMax()
+        baseView.frame.origin.y = headerView.heightMax
+    }
+    
+    private func resizeHeaderToMin() {
+        headerView.resizeToMin()
+        baseView.frame.origin.y = DeviceDataManager.shared.statusBarHeight
+    }
+    
+    private func slide(val: CGFloat) {
+        if !slideForceStopFlag {
+            headerView.resize(value: val)
+            baseView.frame.origin.y += val
+            baseView.scroll(pt: -val)
+        }
+    }
 // MARK: HeaderView Delegate
     
     func headerViewDidBeginEditing() {
@@ -201,4 +153,57 @@ class BaseLayer: UIView, HeaderViewDelegate {
         overlay = nil
         headerView.finishEditing(force: false)
     }
+    
+// MARK: BaseView Delegate
+    
+    func baseViewDidTouch(touch: Bool) {
+        // タッチ終了時にheaderViewのサイズを調整する
+        if touch {
+            slideForceStopFlag = false
+        }
+        
+        if !touch && headerView.resizing {
+            slideForceStopFlag = true
+            if headerView.frame.size.height > headerView.heightMax / 2 {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.resizeHeaderToMax()
+                })
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.resizeHeaderToMin()
+                })
+            }
+        }
+    }
+    
+    func baseViewDidScroll(speed: CGFloat) {
+        if headerView.frame.size.height >= headerView.heightMax {
+            headerView.fieldAlpha = 1
+        } else {
+            if speed > 0 {
+                // headerViewを拡大、baseViewを縮小
+                if headerView.frame.size.height + speed > headerView.heightMax {
+                    resizeHeaderToMax()
+                } else {
+                    slide(val: speed)
+                }
+            }
+        }
+        
+        if headerView.frame.size.height <= DeviceDataManager.shared.statusBarHeight {
+            headerView.fieldAlpha = 0
+        } else {
+            if speed < 0 {
+                // headerを縮小、baseViewを拡大
+                if headerView.frame.size.height + speed < DeviceDataManager.shared.statusBarHeight {
+                    resizeHeaderToMin()
+                } else {
+                    slide(val: speed)
+                }
+            }
+        }
+        
+        headerView.frame.origin.y = 0
+    }
+    
 }
