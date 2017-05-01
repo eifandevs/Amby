@@ -11,6 +11,7 @@ import UIKit
 
 protocol HeaderViewModelDelegate {
     func headerViewModelDidChangeProgress(progress: CGFloat)
+    func headerViewModelDidChangeField(text: String)
 }
 
 class HeaderViewModel {
@@ -28,6 +29,10 @@ class HeaderViewModel {
                            selector: #selector(type(of: self).headerViewModelWillChangeProgress(notification:)),
                            name: .headerViewModelWillChangeProgress,
                            object: nil)
+        center.addObserver(self,
+                           selector: #selector(type(of: self).headerViewModelWillChangeField(notification:)),
+                           name: .headerViewModelWillChangeField,
+                           object: nil)
     }
 
 // MARK: Public Method
@@ -41,6 +46,11 @@ class HeaderViewModel {
     @objc private func headerViewModelWillChangeProgress(notification: Notification) {
         log.debug("[HeaderView Event]: headerViewModelWillChangeProgress")
         delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
+    }
+    
+    @objc private func headerViewModelWillChangeField(notification: Notification) {
+        log.debug("[HeaderView Event]: headerViewModelWillChangeField")
+        delegate?.headerViewModelDidChangeField(text: notification.object as! String)
     }
     
     @objc private func applicationDidBecomeActive(notification: Notification) {

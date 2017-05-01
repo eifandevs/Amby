@@ -20,7 +20,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     var isTouching = Observable<Bool>(false)
     var scrollSpeed = Observable<CGFloat>(0)
-    var headerFieldText = Observable<String>("")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -300,11 +299,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         if let urlStr = webView.url?.absoluteString, let title = webView.title {
             if urlStr.hasValidUrl && webView.requestUrl != urlStr {
                 webView.requestUrl = urlStr
-                headerFieldText.value = webView.requestUrl
+                viewModel.headerFieldText = webView.requestUrl
                 webView.requestTitle = title
             } else if urlStr.hasLocalUrl {
                 // エラーが発生した時のheaderField更新
-                headerFieldText.value = viewModel.latestRequestUrl
+                viewModel.headerFieldText = viewModel.latestRequestUrl
             }
             completion?(urlStr)
         }
@@ -324,8 +323,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         if front.hasValidUrl {
             front.reload()
         } else {
-            let reloadUrl = headerFieldText.value.isEmpty ? viewModel.defaultUrl : headerFieldText.value
-            _ = front.load(urlStr: reloadUrl)
+            _ = front.load(urlStr: viewModel.reloadUrl)
         }
     }
     func baseViewModelDidChangeWebView() {

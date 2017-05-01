@@ -26,15 +26,6 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     private let viewModel = HeaderViewModel()
     private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
 
-    var text: String? {
-        get {
-            return headerField.text
-        }
-        set {
-            headerField.text = newValue
-        }
-    }
-    
     var fieldAlpha: CGFloat {
         get {
             return headerField.alpha
@@ -132,7 +123,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.delegate?.headerViewDidEndEditing()
         
-        if let text = text, !text.isEmpty {
+        if let text = headerField.text, !text.isEmpty {
             let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
             viewModel.notifyChangeWebView(text: encodedText!)
         }
@@ -143,5 +134,9 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     
     func headerViewModelDidChangeProgress(progress: CGFloat) {
         progressBar.setProgress(progress)
+    }
+    
+    func headerViewModelDidChangeField(text: String) {
+        headerField.text = text
     }
 }

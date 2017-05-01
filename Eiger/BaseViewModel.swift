@@ -28,6 +28,18 @@ class BaseViewModel {
         }
     }
     
+    var headerFieldText: String = "" {
+        didSet {
+            center.post(name: .headerViewModelWillChangeField, object: headerFieldText)
+        }
+    }
+    
+    var reloadUrl: String {
+        get {
+            return headerFieldText.isEmpty ? defaultUrl : headerFieldText
+        }
+    }
+    
     var delegate: BaseViewModelDelegate?
     
     // クッキーの共有

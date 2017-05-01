@@ -45,11 +45,6 @@ class BaseLayer: UIView, HeaderViewDelegate {
             }
         }
         
-        _ = baseView.headerFieldText.observeNext { [weak self] value in
-            DispatchQueue.mainSyncSafe(execute: {
-                self!.headerView.text = value
-            })
-        }
         _ = baseView.isTouching.observeNext { [weak self] value in
             // タッチ終了時にheaderViewのサイズを調整する
             if value {
