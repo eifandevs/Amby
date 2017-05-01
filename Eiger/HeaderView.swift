@@ -142,7 +142,6 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
 // MARK: HeaderViewModel Delegate
     
     func headerViewModelDidChangeProgress(progress: CGFloat) {
-        log.warning("set progress")
         progressBar.setProgress(progress)
     }
 }

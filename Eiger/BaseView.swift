@@ -258,10 +258,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func scroll(pt: CGFloat) {
         front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y - pt), animated: false)
     }
-    
-    func storeHistory() {
-        viewModel.storeHistory()
-    }
 
 // MARK: Private Method
     

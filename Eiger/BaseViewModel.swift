@@ -76,6 +76,10 @@ class BaseViewModel {
     
     init() {
         center.addObserver(self,
+                           selector: #selector(type(of: self).applicationWillResignActive(notification:)),
+                           name: .UIApplicationWillResignActive,
+                           object: nil)
+        center.addObserver(self,
                            selector: #selector(type(of: self).baseViewModelWillAddWebView(notification:)),
                            name: .baseViewModelWillAddWebView,
                            object: nil)
@@ -192,6 +196,10 @@ class BaseViewModel {
     @objc private func baseViewModelWillHistoryForwardWebView(notification: Notification) {
         log.debug("[BaseView Event]: baseViewModelWillHistoryForwardWebView")
         delegate?.baseViewModelDidHistoryForwardWebView()
+    }
+
+    @objc private func applicationWillResignActive(notification: Notification) {
+        storeHistory()
     }
     
 // MARK: Private Method

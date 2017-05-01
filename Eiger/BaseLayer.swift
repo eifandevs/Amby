@@ -27,13 +27,6 @@ class BaseLayer: UIView, HeaderViewDelegate {
         headerView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight)
         headerView.delegate = self
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(applicationWillResignActive),
-            name: NSNotification.Name("UIApplicationWillResignActiveNotification"),
-            object: nil
-        )
-        
         let resizeHeaderToMax = { [weak self] in
             self!.headerView.resizeToMax()
             self!.baseView.frame.origin.y = self!.headerView.heightMax
@@ -192,12 +185,6 @@ class BaseLayer: UIView, HeaderViewDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-// MARK: Notification Center
-    
-    func applicationWillResignActive() {
-        baseView.storeHistory()
     }
     
 // MARK: HeaderView Delegate

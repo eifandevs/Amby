@@ -20,13 +20,10 @@ class HeaderViewModel {
     var delegate: HeaderViewModelDelegate?
 
     init () {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(applicationDidBecomeActive),
-            name: NSNotification.Name("UIApplicationDidBecomeActiveNotification"),
-            object: nil
-        )
-        
+        center.addObserver(self,
+                           selector: #selector(type(of: self).applicationDidBecomeActive(notification:)),
+                           name: .UIApplicationDidBecomeActive,
+                           object: nil)
         center.addObserver(self,
                            selector: #selector(type(of: self).headerViewModelWillChangeProgress(notification:)),
                            name: .headerViewModelWillChangeProgress,
@@ -46,7 +43,7 @@ class HeaderViewModel {
         delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
     }
     
-    @objc func applicationDidBecomeActive() {
+    @objc private func applicationDidBecomeActive(notification: Notification) {
         // プログレスバーの初期化
         delegate?.headerViewModelDidChangeProgress(progress: 0)
     }
