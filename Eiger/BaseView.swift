@@ -12,7 +12,7 @@ import WebKit
 import Bond
 
 protocol BaseViewDelegate {
-    func baseViewDidScroll(speed: CGFloat, overScroll: Bool)
+    func baseViewDidScroll(speed: CGFloat)
     func baseViewDidTouch(touch: Bool)
 }
 
@@ -80,8 +80,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
         let speed = scrollView.contentOffset.y - scrollMovingPointY
-        if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching && isOverScrolling && scrollView.contentOffset.y > 0)) {
-            delegate?.baseViewDidScroll(speed: -1 * speed, overScroll: isOverScrolling)
+        log.warning("speed: \(speed)")
+        log.warning("offsetY: \(scrollView.contentOffset.y)")
+        log.warning("isDecelerating: \(scrollView.isDecelerating)")
+        if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching && isOverScrolling && speed < 0) || (isTouching && isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0)) {
+            delegate?.baseViewDidScroll(speed: -1 * speed)
         }
         scrollMovingPointY = scrollView.contentOffset.y
     }

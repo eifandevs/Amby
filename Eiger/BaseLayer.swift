@@ -36,7 +36,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
                            selector: #selector(type(of: self).applicationDidBecomeActive(notification:)),
                            name: .UIApplicationDidBecomeActive,
                            object: nil)
-        resizeHeaderToMax()
+//        resizeHeaderToMax()
         /* テストコード */
         do {
             let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 100), size: CGSize(width: 150, height: 50)))
@@ -181,7 +181,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
         }
     }
     
-    func baseViewDidScroll(speed: CGFloat, overScroll: Bool) {
+    func baseViewDidScroll(speed: CGFloat) {
         if speed > 0 {
             // headerViewを拡大、baseViewを縮小
             if headerView.frame.size.height != headerView.heightMax {
@@ -192,7 +192,8 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
                 }
             } else if baseView.frame.origin.y !=  headerView.heightMax {
                 // バックグラウンドから復帰した際は、ヘッダーが最大サイズで表示されるが、baseViewは移動していない
-                baseView.frame.origin.y = baseView.frame.origin.y + speed > headerView.heightMax ? headerView.heightMax : baseView.frame.origin.y + speed
+                //                log.warning("きてる")
+                //                baseView.frame.origin.y = baseView.frame.origin.y + speed > headerView.heightMax ? headerView.heightMax : baseView.frame.origin.y + speed
             }
         } else if speed < 0 {
             // headerを縮小、baseViewを拡大
@@ -210,6 +211,6 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
 // MARK: Notification受信
 
     @objc private func applicationDidBecomeActive(notification: Notification) {
-        headerView.resizeToMax()
+//        headerView.resizeToMax()
     }
 }
