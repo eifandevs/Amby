@@ -32,11 +32,6 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
         addSubview(headerView)
         addSubview(footerView)
         
-        NotificationCenter.default.addObserver(self,
-                           selector: #selector(type(of: self).applicationDidBecomeActive(notification:)),
-                           name: .UIApplicationDidBecomeActive,
-                           object: nil)
-//        resizeHeaderToMax()
         /* テストコード */
         do {
             let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 100), size: CGSize(width: 150, height: 50)))
@@ -206,11 +201,5 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
             }
         }
         headerView.frame.origin.y = 0
-    }
-    
-// MARK: Notification受信
-
-    @objc private func applicationDidBecomeActive(notification: Notification) {
-//        headerView.resizeToMax()
     }
 }
