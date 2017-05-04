@@ -119,10 +119,6 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         thumbnails[index].removeFromSuperview()
         thumbnails.remove(at: index)
         initializeLocation()
-        
-        if thumbnails.count == 0 {
-            viewModel.notifyAddWebView()
-        }
     }
     
     func footerViewModelDidStartLoading(index: Int) {

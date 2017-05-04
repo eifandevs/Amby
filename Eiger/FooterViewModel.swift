@@ -75,10 +75,6 @@ class FooterViewModel {
         center.post(name: .baseViewModelWillRemoveWebView, object: index)
     }
     
-    func notifyAddWebView() {
-        center.post(name: .baseViewModelWillAddWebView, object: nil)
-    }
-    
 // MARK: Notification受信
     
     @objc private func footerViewModelWillChangeWebView(notification: Notification) {

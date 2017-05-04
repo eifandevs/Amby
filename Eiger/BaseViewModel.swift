@@ -14,7 +14,7 @@ protocol BaseViewModelDelegate {
     func baseViewModelDidAddWebView()
     func baseViewModelDidReloadWebView()
     func baseViewModelDidChangeWebView()
-    func baseViewModelDidRemoveWebView(index: Int)
+    func baseViewModelDidRemoveWebView(index: Int, isFrontDelete: Bool)
     func baseViewModelDidHistoryBackWebView()
     func baseViewModelDidHistoryForwardWebView()
     func baseViewModelDidSearchWebView(text: String)
@@ -147,6 +147,10 @@ class BaseViewModel {
         center.post(name: .headerViewModelWillChangeProgress, object: object)
     }
     
+    func notifyAddWebView() {
+        center.post(name: .baseViewModelWillAddWebView, object: nil)
+    }
+    
     func saveHistory(wv: EGWebView) {
         if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle {
             // Common History
@@ -203,14 +207,14 @@ class BaseViewModel {
         log.debug("[BaseView Event]: baseViewModelWillRemoveWebView")
         center.post(name: .footerViewModelWillRemoveWebView, object: notification.object)
         let index = notification.object as! Int
-        // まずは、カレントではないwebviewが削除される場合
+        let isFrontDelete = locationIndex == index
         if index != 0 && locationIndex == index && index == eachHistory.count - 1 {
             // フロントの削除
             // 最後の要素を削除する場合
             locationIndex = locationIndex - 1
         }
         eachHistory.remove(at: index)
-        delegate?.baseViewModelDidRemoveWebView(index: index)
+        delegate?.baseViewModelDidRemoveWebView(index: index, isFrontDelete: isFrontDelete)
     }
     
     @objc private func baseViewModelWillSearchWebView(notification: Notification) {

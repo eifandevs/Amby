@@ -333,7 +333,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 // MARK: BaseViewModel Delegate
 
     func baseViewModelDidAddWebView() {
-        front.removeObserver(self, forKeyPath: "estimatedProgress")
+        if let front = front {
+            // 全てのwebviewが削除された場合
+            front.removeObserver(self, forKeyPath: "estimatedProgress")
+        }
         viewModel.notifyChangeProgress(object: 0)
         let newWv = createWebView(context: viewModel.currentContext)
         webViews.append(newWv)
@@ -357,12 +360,27 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         bringSubview(toFront: current)
     }
     
-    func baseViewModelDidRemoveWebView(index: Int) {
+    func baseViewModelDidRemoveWebView(index: Int, isFrontDelete: Bool) {
         if let webView = webViews[index] {
+            if isFrontDelete {
+                webView.removeObserver(self, forKeyPath: "estimatedProgress")
+                front = nil
+            }
             webView.removeObserver(self, forKeyPath: "loading")
             webView.removeFromSuperview()
         }
         webViews.remove(at: index)
+        
+        
+        if webViews.count == 0 {
+            viewModel.notifyAddWebView()
+        } else if isFrontDelete {
+            // フロントの削除で、削除後にwebviewが存在する場合
+            // 存在しない場合は、AddWebViewが呼ばれる
+            front = webViews[viewModel.locationIndex]
+            front.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(front.context))
+            bringSubview(toFront: front)
+        }
     }
     func baseViewModelDidSearchWebView(text: String) {
         let search = text.hasValidUrl ? text : "\(AppDataManager.shared.searchPath)\(text)"
