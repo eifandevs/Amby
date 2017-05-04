@@ -204,6 +204,15 @@ class BaseViewModel {
         center.post(name: .footerViewModelWillRemoveWebView, object: notification.object)
         let index = notification.object as! Int
         // まずは、カレントではないwebviewが削除される場合
+        if locationIndex == index {
+            // フロントの削除
+            if index == eachHistory.count - 1 {
+                // 最後の要素を削除する場合
+                locationIndex = locationIndex - 1
+            }
+        } else {
+            // フロントではない
+        }
         eachHistory.remove(at: index)
         delegate?.baseViewModelDidRemoveWebView(index: index)
     }

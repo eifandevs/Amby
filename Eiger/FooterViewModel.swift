@@ -88,8 +88,16 @@ class FooterViewModel {
 
     @objc private func footerViewModelWillRemoveWebView(notification: Notification) {
         log.debug("[Footer Event]: footerViewModelWillRemoveWebView")
-        // フロントではない
         let index = notification.object as! Int
+        if locationIndex == index {
+            // フロントの削除
+            if index == eachThumbnail.count - 1 {
+                // 最後の要素を削除する場合
+                locationIndex = locationIndex - 1
+            }
+        } else {
+            // フロントではない
+        }
         eachThumbnail.remove(at: index)
         delegate?.footerViewModelDidRemoveThumbnail(index: index)
     }
