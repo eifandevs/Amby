@@ -44,6 +44,17 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         loadWebView()
     }
     
+    deinit {        
+        webViews.forEach { (webView) in
+            if let unwrappedWebView = webView {
+                if unwrappedWebView == front {
+                    unwrappedWebView.removeObserver(self, forKeyPath: "estimatedProgress")
+                }
+                unwrappedWebView.removeObserver(self, forKeyPath: "loading")
+            }
+        }
+    }
+    
     override func layoutSubviews() {
         front.frame = CGRect(origin: CGPoint.zero, size: frame.size)
     }
@@ -336,6 +347,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             _ = front.load(urlStr: viewModel.reloadUrl)
         }
     }
+    
     func baseViewModelDidChangeWebView() {
         front.removeObserver(self, forKeyPath: "estimatedProgress")
         viewModel.notifyChangeProgress(object: 0)
@@ -345,6 +357,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         bringSubview(toFront: current)
     }
     
+    func baseViewModelDidRemoveWebView(index: Int) {
+        if let webView = webViews[index] {
+            webView.removeObserver(self, forKeyPath: "loading")
+            webView.removeFromSuperview()
+        }
+        webViews.remove(at: index)
+    }
     func baseViewModelDidSearchWebView(text: String) {
         let search = text.hasValidUrl ? text : "\(AppDataManager.shared.searchPath)\(text)"
         _ = front.load(urlStr: search)

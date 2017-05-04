@@ -49,14 +49,17 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
     private func createCaptureSpace() -> UIButton {
         let btn = UIButton()
-        let animationsCount = thumbnails.count == 0 ? 0 : thumbnails.count - 1
-        btn.center = CGPoint(x: (frame.size.width / 2) + (CGFloat(thumbnails.count) * AppDataManager.shared.thumbnailSize.width) - (CGFloat(animationsCount) * AppDataManager.shared.thumbnailSize.width / 2), y: frame.size.height / 2)
         btn.bounds.size = AppDataManager.shared.thumbnailSize
         btn.backgroundColor = UIColor.black
         _ = btn.reactive.tap
             .observe { _ in
                 let alert = UIAlertController(title: "アクション", message: "アクションを選択してください", preferredStyle: .actionSheet)
                 let delete = UIAlertAction(title: "削除", style: .default, handler: { (action) in
+                    for (index, thumbnail) in self.thumbnails.enumerated() {
+                        if btn == thumbnail {
+                            self.viewModel.notifyRemoveWebView(index: index)
+                        }
+                    }
                 })
                 let change = UIAlertAction(title: "変更", style: .default, handler: { (action) in
                     for (index, thumbnail) in self.thumbnails.enumerated() {
@@ -69,20 +72,9 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                 alert.addAction(change)
                 UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
         }
-        scrollView.addSubview(btn)
         thumbnails.append(btn)
-        if CGFloat(thumbnails.count) * btn.frame.size.width > scrollView.frame.size.width {
-            // スクロールビューのコンテンツサイズを大きくする
-            scrollView.contentSize.width += btn.frame.size.width / 2
-            scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + btn.frame.size.width / 2, 0, 0)
-        }
-        if thumbnails.count > 1 {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.thumbnails.forEach({ (item) in
-                    item.frame.origin.x -= btn.frame.size.width / 2
-                })
-            }, completion: nil)
-        }
+        self.initializeLocation()
+        scrollView.addSubview(btn)
         return btn
     }
     
@@ -95,6 +87,22 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         indicator.startAnimating()
     }
     
+    private func initializeLocation() {
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width + 1, height: scrollView.frame.size.height)
+        scrollView.contentInset =  UIEdgeInsetsMake(0, 0, 0, 0)
+
+        for (index, thumbnail) in thumbnails.enumerated() {
+            if (CGFloat(index + 1) * thumbnail.frame.size.width > scrollView.frame.size.width) {
+                // スクロールビューのコンテンツサイズを大きくする
+                scrollView.contentSize.width += thumbnail.frame.size.width / 2
+                scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + thumbnail.frame.size.width / 2, 0, 0)
+            }
+            thumbnail.center = CGPoint(x: (frame.size.width / 2) + (thumbnail.frame.size.width * CGFloat(index)), y: frame.size.height / 2)
+            thumbnail.center.x -= (thumbnail.frame.size.width / 2) * CGFloat(thumbnails.count - 1)
+
+        }
+    }
+    
 // MARK: FooterViewModel Delegate
 
     func footerViewModelDidAddThumbnail() {
@@ -104,6 +112,13 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
     func footerViewModelDidChangeThumbnail() {
         // TODO: 現在値を変更する
+    }
+    
+    func footerViewModelDidRemoveThumbnail(index: Int) {
+        // フロントではない
+        thumbnails[index].removeFromSuperview()
+        thumbnails.remove(at: index)
+        initializeLocation()
     }
     
     func footerViewModelDidStartLoading(index: Int) {

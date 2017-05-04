@@ -14,6 +14,7 @@ protocol BaseViewModelDelegate {
     func baseViewModelDidAddWebView()
     func baseViewModelDidReloadWebView()
     func baseViewModelDidChangeWebView()
+    func baseViewModelDidRemoveWebView(index: Int)
     func baseViewModelDidHistoryBackWebView()
     func baseViewModelDidHistoryForwardWebView()
     func baseViewModelDidSearchWebView(text: String)
@@ -104,6 +105,10 @@ class BaseViewModel {
                            name: .baseViewModelWillChangeWebView,
                            object: nil)
         center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewModelWillRemoveWebView(notification:)),
+                           name: .baseViewModelWillRemoveWebView,
+                           object: nil)
+        center.addObserver(self,
                            selector: #selector(type(of: self).baseViewModelWillSearchWebView(notification:)),
                            name: .baseViewModelWillSearchWebView,
                            object: nil)
@@ -192,6 +197,15 @@ class BaseViewModel {
         } else {
             log.warning("selected current webView")
         }
+    }
+
+    @objc private func baseViewModelWillRemoveWebView(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewModelWillRemoveWebView")
+        center.post(name: .footerViewModelWillRemoveWebView, object: notification.object)
+        let index = notification.object as! Int
+        // まずは、カレントではないwebviewが削除される場合
+        eachHistory.remove(at: index)
+        delegate?.baseViewModelDidRemoveWebView(index: index)
     }
     
     @objc private func baseViewModelWillSearchWebView(notification: Notification) {

@@ -13,6 +13,7 @@ protocol FooterViewModelDelegate {
     func footerViewModelDidLoadThumbnail(eachThumbnail: [EachThumbnailItem])
     func footerViewModelDidAddThumbnail()
     func footerViewModelDidChangeThumbnail()
+    func footerViewModelDidRemoveThumbnail(index: Int)
     func footerViewModelDidStartLoading(index: Int)
     func footerViewModelDidEndLoading(context: String, index: Int)
 }
@@ -58,12 +59,20 @@ class FooterViewModel {
                            selector: #selector(type(of: self).footerViewModelWillChangeWebView(notification:)),
                            name: .footerViewModelWillChangeWebView,
                            object: nil)
+        center.addObserver(self,
+                           selector: #selector(type(of: self).footerViewModelWillRemoveWebView(notification:)),
+                           name: .footerViewModelWillRemoveWebView,
+                           object: nil)
     }
     
 // MARK: Public Method
     
     func notifyChangeWebView(index: Int) {
         center.post(name: .baseViewModelWillChangeWebView, object: index)
+    }
+    
+    func notifyRemoveWebView(index: Int) {
+        center.post(name: .baseViewModelWillRemoveWebView, object: index)
     }
     
 // MARK: Notification受信
@@ -75,6 +84,14 @@ class FooterViewModel {
             locationIndex = index
             delegate?.footerViewModelDidChangeThumbnail()
         }
+    }
+
+    @objc private func footerViewModelWillRemoveWebView(notification: Notification) {
+        log.debug("[Footer Event]: footerViewModelWillRemoveWebView")
+        // フロントではない
+        let index = notification.object as! Int
+        eachThumbnail.remove(at: index)
+        delegate?.footerViewModelDidRemoveThumbnail(index: index)
     }
     
     @objc private func footerViewModelWillLoad(notification: Notification) {
