@@ -89,6 +89,10 @@ class FooterViewModel {
     @objc private func footerViewModelWillRemoveWebView(notification: Notification) {
         log.debug("[Footer Event]: footerViewModelWillRemoveWebView")
         let index = notification.object as! Int
+        
+        // 実データの削除
+        try! FileManager.default.removeItem(atPath: AppDataManager.shared.thumbnailFolderPath(folder: eachThumbnail[index].context).path)
+
         if locationIndex == index {
             // フロントの削除
             if index == eachThumbnail.count - 1 {

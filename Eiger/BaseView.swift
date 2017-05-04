@@ -225,8 +225,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                                 do {
                                     try pngImageData?.write(to: AppDataManager.shared.thumbnailPath(folder: context))
                                     let object: [String: Any]? = ["context": context, "url": otherWv.requestUrl, "title": otherWv.requestTitle]
-                                    self!.viewModel.notifyEndLoadingWebView(object: object)
                                     log.debug("save thumbnal. context: \(context)")
+                                    self!.viewModel.notifyEndLoadingWebView(object: object)
                                 } catch let error as NSError {
                                     log.error("failed to store thumbnail: \(error)")
                                 }

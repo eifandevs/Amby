@@ -33,6 +33,11 @@ class AppDataManager {
         return URL(fileURLWithPath: path + "/thumbnail.png")
     }
     
+    func thumbnailFolderPath(folder: String) -> URL {
+        let path = DeviceDataManager.shared.cachesPath + "/thumbnails/\(folder)"
+        return URL(fileURLWithPath: path)
+    }
+    
     func commonHistoryPath(date: String) -> URL {
         let path = DeviceDataManager.shared.cachesPath + "/common_history"
         createFolder(path: path)
