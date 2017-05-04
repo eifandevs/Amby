@@ -75,6 +75,10 @@ class FooterViewModel {
         center.post(name: .baseViewModelWillRemoveWebView, object: index)
     }
     
+    func notifyAddWebView() {
+        center.post(name: .baseViewModelWillAddWebView, object: nil)
+    }
+    
 // MARK: Notification受信
     
     @objc private func footerViewModelWillChangeWebView(notification: Notification) {
@@ -93,14 +97,10 @@ class FooterViewModel {
         // 実データの削除
         try! FileManager.default.removeItem(atPath: AppDataManager.shared.thumbnailFolderPath(folder: eachThumbnail[index].context).path)
 
-        if locationIndex == index {
+        if index != 0 && locationIndex == index && index == eachThumbnail.count - 1 {
             // フロントの削除
-            if index == eachThumbnail.count - 1 {
-                // 最後の要素を削除する場合
-                locationIndex = locationIndex - 1
-            }
-        } else {
-            // フロントではない
+            // 最後の要素を削除する場合
+            locationIndex = locationIndex - 1
         }
         eachThumbnail.remove(at: index)
         delegate?.footerViewModelDidRemoveThumbnail(index: index)
