@@ -93,7 +93,7 @@ class FooterViewModel {
         // 実データの削除
         try! FileManager.default.removeItem(atPath: AppDataManager.shared.thumbnailFolderPath(folder: eachThumbnail[index].context).path)
 
-        if index != 0 && locationIndex == index && index == eachThumbnail.count - 1 {
+        if ((index != 0 && locationIndex == index && index == eachThumbnail.count - 1) || (index < locationIndex)) {
             // フロントの削除
             // 最後の要素を削除する場合
             locationIndex = locationIndex - 1
