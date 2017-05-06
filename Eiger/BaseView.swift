@@ -197,76 +197,58 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 return false
             }).first!!
             
+            let updateHistoryAndThumbnail = { (webView: EGWebView) in
+                // ページ情報を取得
+                self.saveMetaData(webView: webView, completion: { [weak self] (url) in
+                    if webView.hasSavableUrl {
+                        // 有効なURLの場合は、履歴に保存する
+                        self!.viewModel.saveHistory(wv: self!.front)
+                    }
+                    if webView.requestUrl != nil {
+                        webView.previousUrl = self!.front.requestUrl
+                    }
+                    
+                    // サムネイルを保存
+                    DispatchQueue.mainSyncSafe {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] _ in
+                            let img = webView.takeThumbnail()
+                            let pngImageData = UIImagePNGRepresentation(img!)
+                            let context = webView.context
+                            do {
+                                try pngImageData?.write(to: AppDataManager.shared.thumbnailPath(folder: context))
+                                let object: [String: Any]? = ["context": context, "url": webView.requestUrl, "title": webView.requestTitle]
+                                log.debug("save thumbnal. context: \(context)")
+                                self!.viewModel.notifyEndLoadingWebView(object: object)
+                            } catch let error as NSError {
+                                log.error("failed to store thumbnail: \(error)")
+                            }
+                        }
+                    }
+                })
+            }
             if otherWv.context == front.context {
                 //インジゲーターの表示、非表示をきりかえる。
-                UIApplication.shared.isNetworkActivityIndicatorVisible = front.isLoading
-                if front.isLoading == true {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = otherWv.isLoading
+                if otherWv.isLoading == true {
+                    log.debug("front webview load start")
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
                     viewModel.notifyChangeProgress(object: CGFloat(AppDataManager.shared.progressMin))
                 } else {
+                    log.debug("front webview load end")
                     viewModel.notifyChangeProgress(object: 1.0)
                     
-                    // ページ情報を取得
-                    saveMetaData(webView: otherWv, completion: { [weak self] (url) in
-                        if self!.front.hasSavableUrl {
-                            // 有効なURLの場合は、履歴に保存する
-                            self!.viewModel.saveHistory(wv: self!.front)
-                        }
-                        if self!.front.requestUrl != nil {
-                            self!.front.previousUrl = self!.front.requestUrl
-                        }
-                        
-                        // サムネイルを保存
-                        DispatchQueue.mainSyncSafe {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] _ in
-                                let img = self!.front.takeThumbnail()
-                                let pngImageData = UIImagePNGRepresentation(img!)
-                                let context = self!.front.context
-                                do {
-                                    try pngImageData?.write(to: AppDataManager.shared.thumbnailPath(folder: context))
-                                    let object: [String: Any]? = ["context": context, "url": otherWv.requestUrl, "title": otherWv.requestTitle]
-                                    log.debug("save thumbnal. context: \(context)")
-                                    self!.viewModel.notifyEndLoadingWebView(object: object)
-                                } catch let error as NSError {
-                                    log.error("failed to store thumbnail: \(error)")
-                                }
-                            }
-                        }
-                    })
+                    // 履歴とサムネイルを更新
+                    updateHistoryAndThumbnail(otherWv)
                 }
             } else {
                 //インジゲーターの表示、非表示をきりかえる。
-                log.debug("sub webview load end")
                 if otherWv.isLoading == true {
+                    log.debug("other webview load start")
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
                 } else {
-                    // ページ情報を取得
-                    saveMetaData(webView: otherWv, completion: { [weak self] (url) in
-                        if otherWv.hasSavableUrl {
-                            // 有効なURLの場合は、履歴に保存する
-                            self!.viewModel.saveHistory(wv: otherWv)
-                        }
-                        if otherWv.requestUrl != nil {
-                            otherWv.previousUrl = otherWv.requestUrl
-                        }
-                        
-                        // サムネイルを保存
-                        DispatchQueue.mainSyncSafe {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] _ in
-                                let img = otherWv.takeThumbnail()
-                                let pngImageData = UIImagePNGRepresentation(img!)
-                                let context = otherWv.context
-                                do {
-                                    try pngImageData?.write(to: AppDataManager.shared.thumbnailPath(folder: context))
-                                    let object: [String: Any]? = ["context": context, "url": otherWv.requestUrl, "title": otherWv.requestTitle]
-                                    self!.viewModel.notifyEndLoadingWebView(object: object)
-                                    log.debug("save thumbnal success. context: \(context)")
-                                } catch let error as NSError {
-                                    log.error("failed to store thumbnail: \(error)")
-                                }
-                            }
-                        }
-                    })
+                    log.debug("other webview load end")
+                    // 履歴とサムネイルを更新
+                    updateHistoryAndThumbnail(otherWv)
                 }
 
             }
@@ -300,7 +282,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         newWv.navigationDelegate = self
         newWv.uiDelegate = self;
         newWv.scrollView.delegate = self
-        
+
+        log.debug("change front webview. from: \(front.context) to: \(newWv.context)")
         front = newWv
         addSubview(newWv)
 

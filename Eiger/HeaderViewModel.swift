@@ -44,7 +44,6 @@ class HeaderViewModel {
 // MARK: Notification受信
     
     @objc private func headerViewModelWillChangeProgress(notification: Notification) {
-        log.verbose("[HeaderView Event]: headerViewModelWillChangeProgress")
         delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
     }
     

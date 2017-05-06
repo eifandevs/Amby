@@ -70,7 +70,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                 })
                 alert.addAction(delete)
                 alert.addAction(change)
-                UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+                Util.shared.foregroundViewController().present(alert, animated: true, completion: nil)
         }
         thumbnails.append(btn)
         self.initializeLocation()
