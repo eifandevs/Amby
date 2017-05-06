@@ -282,8 +282,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         newWv.navigationDelegate = self
         newWv.uiDelegate = self;
         newWv.scrollView.delegate = self
-
-        log.debug("change front webview. from: \(front.context) to: \(newWv.context)")
         front = newWv
         addSubview(newWv)
 
