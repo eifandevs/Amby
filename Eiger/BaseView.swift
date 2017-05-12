@@ -291,6 +291,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         return newWv
     }
     
+    // loadWebViewはwebviewスペースがある状態で新規作成するときにコールする
     private func loadWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
         webViews[viewModel.locationIndex] = newWv
@@ -335,10 +336,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func baseViewModelDidChangeWebView() {
         front.removeObserver(self, forKeyPath: "estimatedProgress")
         viewModel.notifyChangeProgress(object: 0)
-        let current = webViews[viewModel.locationIndex]!
-        current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
-        front = current
-        bringSubview(toFront: current)
+        if let current = webViews[viewModel.locationIndex] {
+            current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
+            front = current
+            bringSubview(toFront: current)
+        } else {
+            loadWebView()
+        }
     }
     
     func baseViewModelDidRemoveWebView(index: Int, isFrontDelete: Bool) {
