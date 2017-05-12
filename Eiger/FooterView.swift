@@ -48,8 +48,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
 // MARK: Private Method
     
     private func createCaptureSpace() -> UIButton {
-        let btn = UIButton()
-        btn.bounds.size = AppDataManager.shared.thumbnailSize
+        let btn = UIButton(frame: CGRect(origin: CGPoint(x: -100, y: 0), size: AppDataManager.shared.thumbnailSize))
         btn.backgroundColor = UIColor.black
         _ = btn.reactive.tap
             .observe { _ in
@@ -73,7 +72,6 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                 Util.shared.foregroundViewController().present(alert, animated: true, completion: nil)
         }
         thumbnails.append(btn)
-        self.initializeLocation()
         scrollView.addSubview(btn)
         return btn
     }
@@ -90,7 +88,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     private func initializeLocation() {
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width + 1, height: scrollView.frame.size.height)
         scrollView.contentInset =  UIEdgeInsetsMake(0, 0, 0, 0)
-
+        
         for (index, thumbnail) in thumbnails.enumerated() {
             if (CGFloat(index + 1) * thumbnail.frame.size.width > scrollView.frame.size.width) {
                 // スクロールビューのコンテンツサイズを大きくする
@@ -101,6 +99,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             thumbnail.center.x -= (thumbnail.frame.size.width / 2) * CGFloat(thumbnails.count - 1)
 
         }
+        scrollView.scroll(to: .right, animated: false)
     }
     
 // MARK: FooterViewModel Delegate
@@ -108,6 +107,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     func footerViewModelDidAddThumbnail() {
         // 新しいサムネイルスペースを作成
         let _ = createCaptureSpace()
+        initializeLocation()
     }
     
     func footerViewModelDidChangeThumbnail() {
@@ -158,6 +158,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                 }
             }
         }
+        self.initializeLocation()
     }
     
 }
