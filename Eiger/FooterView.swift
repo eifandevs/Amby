@@ -15,6 +15,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     private var viewModel = FooterViewModel(index: UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey))
     private let scrollView = UIScrollView()
     private var thumbnails: [UIButton] = []
+    private let contentView = UIView()
     
     private var frontThumbnail: UIButton {
         get {
@@ -28,9 +29,13 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         
         addAreaShadow()
         
+        // content
+        contentView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width + 1, height: frame.size.height))
+        contentView.backgroundColor = UIColor.clear
+        
         backgroundColor = UIColor.pastelLightGray
         scrollView.frame = CGRect(origin: CGPoint(x: 0, y:0), size: frame.size)
-        scrollView.contentSize = CGSize(width: scrollView.frame.size.width + 1, height: scrollView.frame.size.height)
+        scrollView.contentSize = contentView.frame.size
         
         scrollView.bounces = true
         scrollView.backgroundColor = UIColor.clear
@@ -38,6 +43,9 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         scrollView.isUserInteractionEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        
+        scrollView.addSubview(contentView)
+        
         addSubview(scrollView)
     }
     
@@ -48,7 +56,8 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
 // MARK: Private Method
     
     private func createCaptureSpace() -> UIButton {
-        let btn = UIButton(frame: CGRect(origin: CGPoint(x: -100, y: 0), size: AppDataManager.shared.thumbnailSize))
+        let additionalPointX = ((thumbnails.count).cgfloat * AppDataManager.shared.thumbnailSize.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).cgfloat * AppDataManager.shared.thumbnailSize.width / 2
+        let btn = UIButton(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppDataManager.shared.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppDataManager.shared.thumbnailSize))
         btn.backgroundColor = UIColor.black
         _ = btn.reactive.tap
             .observe { _ in
@@ -72,7 +81,24 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                 Util.shared.foregroundViewController().present(alert, animated: true, completion: nil)
         }
         thumbnails.append(btn)
-        scrollView.addSubview(btn)
+        
+        if ((thumbnails.count).cgfloat * btn.frame.size.width > scrollView.frame.size.width) {
+            // スクロールビューのコンテンツサイズを大きくする
+            contentView.frame.size.width += btn.frame.size.width / 2
+            scrollView.contentSize = contentView.frame.size
+            scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
+        }
+        
+        contentView.addSubview(btn)
+
+        if thumbnails.count > 1 {
+            for thumbnail in thumbnails {
+                UIView.animate(withDuration: 0.3, animations: { 
+                    thumbnail.center.x -= thumbnail.frame.size.width / 2
+                })
+            }
+        }
+        scrollView.scroll(to: .right, animated: true)
         return btn
     }
     
@@ -85,29 +111,11 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         indicator.startAnimating()
     }
     
-    private func initializeLocation() {
-        scrollView.contentSize = CGSize(width: scrollView.frame.size.width + 1, height: scrollView.frame.size.height)
-        scrollView.contentInset =  UIEdgeInsetsMake(0, 0, 0, 0)
-        
-        for (index, thumbnail) in thumbnails.enumerated() {
-            if (CGFloat(index + 1) * thumbnail.frame.size.width > scrollView.frame.size.width) {
-                // スクロールビューのコンテンツサイズを大きくする
-                scrollView.contentSize.width += thumbnail.frame.size.width / 2
-                scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + thumbnail.frame.size.width / 2, 0, 0)
-            }
-            thumbnail.center = CGPoint(x: (frame.size.width / 2) + (thumbnail.frame.size.width * CGFloat(index)), y: frame.size.height / 2)
-            thumbnail.center.x -= (thumbnail.frame.size.width / 2) * CGFloat(thumbnails.count - 1)
-
-        }
-        scrollView.scroll(to: .right, animated: false)
-    }
-    
 // MARK: FooterViewModel Delegate
 
     func footerViewModelDidAddThumbnail() {
         // 新しいサムネイルスペースを作成
         let _ = createCaptureSpace()
-        initializeLocation()
     }
     
     func footerViewModelDidChangeThumbnail() {
@@ -115,10 +123,24 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     }
     
     func footerViewModelDidRemoveThumbnail(index: Int) {
-        // フロントではない
-        thumbnails[index].removeFromSuperview()
-        thumbnails.remove(at: index)
-        initializeLocation()
+        thumbnails[index].alpha = 0
+        UIView.animate(withDuration: 0.3, animations: {
+            for i in 0...self.thumbnails.count - 1 {
+                if i < index {
+                    self.thumbnails[i].center.x += self.thumbnails[i].frame.size.width / 2
+                } else if i > index {
+                    self.thumbnails[i].center.x -= self.thumbnails[i].frame.size.width / 2
+                }
+            }
+            if ((self.thumbnails.count).cgfloat * AppDataManager.shared.thumbnailSize.width > self.scrollView.frame.size.width) {
+                self.contentView.frame.size.width -= AppDataManager.shared.thumbnailSize.width / 2
+                self.scrollView.contentSize = self.contentView.frame.size
+                self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppDataManager.shared.thumbnailSize.width / 2), 0, 0)
+            }
+        }, completion: { (isFinish) in
+            self.thumbnails[index].removeFromSuperview()
+            self.thumbnails.remove(at: index)
+        })
     }
     
     func footerViewModelDidStartLoading(index: Int) {
@@ -158,7 +180,6 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                 }
             }
         }
-        self.initializeLocation()
     }
     
 }

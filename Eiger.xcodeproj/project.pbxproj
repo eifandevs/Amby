@@ -34,6 +34,7 @@
 		A58581011E59D0B700CCC098 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A58581001E59D0B700CCC098 /* offline.html */; };
 		A59BF5B41E86BA05002249E7 /* FooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF5B31E86BA04002249E7 /* FooterViewModel.swift */; };
 		A59BF5BA1E86C4CB002249E7 /* NSNotification+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF5B91E86C4CB002249E7 /* NSNotification+Extend.swift */; };
+		A5CB19601ED0730100029715 /* Int+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB195F1ED0730100029715 /* Int+Extend.swift */; };
 		A5CB302C1E530E6700A59A82 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CB302B1E530E6700A59A82 /* Util.swift */; };
 		A5D88FB01E4F1E9A0099DFA3 /* invalid.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FAF1E4F1E9A0099DFA3 /* invalid.html */; };
 		A5D88FB21E4F1EA40099DFA3 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A5D88FB11E4F1EA40099DFA3 /* dns.html */; };
@@ -75,6 +76,7 @@
 		A58581001E59D0B700CCC098 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
 		A59BF5B31E86BA04002249E7 /* FooterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterViewModel.swift; sourceTree = "<group>"; };
 		A59BF5B91E86C4CB002249E7 /* NSNotification+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extend.swift"; sourceTree = "<group>"; };
+		A5CB195F1ED0730100029715 /* Int+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extend.swift"; sourceTree = "<group>"; };
 		A5CB302B1E530E6700A59A82 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		A5D88FAC1E4F1E5C0099DFA3 /* Eiger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Eiger-Bridging-Header.h"; sourceTree = "<group>"; };
 		A5D88FAF1E4F1E9A0099DFA3 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				A59BF5B91E86C4CB002249E7 /* NSNotification+Extend.swift */,
 				A58138581E8F442900612AE4 /* UIImage+Extend.swift */,
 				A53ECF961EC6286B0004DE9A /* UIScrollView+Extend.swift */,
+				A5CB195F1ED0730100029715 /* Int+Extend.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				A5D88FB81E4F1EE30099DFA3 /* AppDelegate.swift in Sources */,
 				A59BF5BA1E86C4CB002249E7 /* NSNotification+Extend.swift in Sources */,
 				A55A60301E6AF418005C03F3 /* BaseLayer.swift in Sources */,
+				A5CB19601ED0730100029715 /* Int+Extend.swift in Sources */,
 				A55E0E811E6B3D5600278D8A /* FooterView.swift in Sources */,
 				A562096D1E619C3400F8996A /* EachHistoryItem.swift in Sources */,
 				A5D88FC01E4F1F130099DFA3 /* DeviceDataManager.swift in Sources */,
