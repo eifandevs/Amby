@@ -61,24 +61,12 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         btn.backgroundColor = UIColor.black
         _ = btn.reactive.tap
             .observe { _ in
-                let alert = UIAlertController(title: "アクション", message: "アクションを選択してください", preferredStyle: .actionSheet)
-                let delete = UIAlertAction(title: "削除", style: .default, handler: { (action) in
-                    for (index, thumbnail) in self.thumbnails.enumerated() {
-                        if btn == thumbnail {
-                            self.viewModel.notifyRemoveWebView(index: index)
-                        }
+                for (index, thumbnail) in self.thumbnails.enumerated() {
+                    if btn == thumbnail {
+                        self.viewModel.notifyChangeWebView(index: index)
+                        break
                     }
-                })
-                let change = UIAlertAction(title: "変更", style: .default, handler: { (action) in
-                    for (index, thumbnail) in self.thumbnails.enumerated() {
-                        if btn == thumbnail {
-                            self.viewModel.notifyChangeWebView(index: index)
-                        }
-                    }
-                })
-                alert.addAction(delete)
-                alert.addAction(change)
-                Util.shared.foregroundViewController().present(alert, animated: true, completion: nil)
+                }
         }
         thumbnails.append(btn)
         
@@ -123,24 +111,32 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     }
     
     func footerViewModelDidRemoveThumbnail(index: Int) {
-        thumbnails[index].alpha = 0
-        UIView.animate(withDuration: 0.3, animations: {
-            for i in 0...self.thumbnails.count - 1 {
-                if i < index {
-                    self.thumbnails[i].center.x += self.thumbnails[i].frame.size.width / 2
-                } else if i > index {
-                    self.thumbnails[i].center.x -= self.thumbnails[i].frame.size.width / 2
+        let completion: (() -> ()) = { [weak self] _ in
+            self!.thumbnails[index].removeFromSuperview()
+            self!.thumbnails.remove(at: index)
+        }
+        if thumbnails.count > 1 {
+            thumbnails[index].alpha = 0
+            UIView.animate(withDuration: 0.3, animations: {
+                for i in 0...self.thumbnails.count - 1 {
+                    if i < index {
+                        self.thumbnails[i].center.x += self.thumbnails[i].frame.size.width / 2
+                    } else if i > index {
+                        self.thumbnails[i].center.x -= self.thumbnails[i].frame.size.width / 2
+                    }
                 }
-            }
-            if ((self.thumbnails.count).cgfloat * AppDataManager.shared.thumbnailSize.width > self.scrollView.frame.size.width) {
-                self.contentView.frame.size.width -= AppDataManager.shared.thumbnailSize.width / 2
-                self.scrollView.contentSize = self.contentView.frame.size
-                self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppDataManager.shared.thumbnailSize.width / 2), 0, 0)
-            }
-        }, completion: { (isFinish) in
-            self.thumbnails[index].removeFromSuperview()
-            self.thumbnails.remove(at: index)
-        })
+                if ((self.thumbnails.count).cgfloat * AppDataManager.shared.thumbnailSize.width > self.scrollView.frame.size.width) {
+                    self.contentView.frame.size.width -= AppDataManager.shared.thumbnailSize.width / 2
+                    self.scrollView.contentSize = self.contentView.frame.size
+                    self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppDataManager.shared.thumbnailSize.width / 2), 0, 0)
+                }
+            }, completion: { (isFinish) in
+                completion()
+            })
+        } else {
+            // 最後のwebview削除の場合は、速攻削除する
+            completion()
+        }
     }
     
     func footerViewModelDidStartLoading(index: Int) {

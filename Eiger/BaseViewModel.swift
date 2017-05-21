@@ -120,6 +120,10 @@ class BaseViewModel {
                            selector: #selector(type(of: self).baseViewModelWillHistoryForwardWebView(notification:)),
                            name: .baseViewModelWillHistoryForwardWebView,
                            object: nil)
+        center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewModelWillRegisterAsFavorite(notification:)),
+                           name: .baseViewModelWillRegisterAsFavorite,
+                           object: nil)
         
         // eachHistory読み込み
         do {
@@ -205,16 +209,16 @@ class BaseViewModel {
 
     @objc private func baseViewModelWillRemoveWebView(notification: Notification) {
         log.debug("[BaseView Event]: baseViewModelWillRemoveWebView")
-        center.post(name: .footerViewModelWillRemoveWebView, object: notification.object)
-        let index = notification.object as! Int
-        let isFrontDelete = locationIndex == index
-        if ((index != 0 && locationIndex == index && index == eachHistory.count - 1) || (index < locationIndex)) {
-            // フロントの削除
-            // 最後の要素を削除する場合
-            locationIndex = locationIndex - 1
-        }
-        eachHistory.remove(at: index)
-        delegate?.baseViewModelDidRemoveWebView(index: index, isFrontDelete: isFrontDelete)
+        Util.shared.presentAlert(title: "ページ削除確認", message: "ページを削除しますよ？", completion: { [weak self]  _ in
+            let index = ((notification.object as? Int) != nil) ? notification.object as! Int : self!.locationIndex
+            self!.center.post(name: .footerViewModelWillRemoveWebView, object: index)
+            if ((index != 0 && self!.locationIndex == index && index == self!.eachHistory.count - 1) || (index < self!.locationIndex)) {
+                // indexの調整
+                self!.locationIndex = self!.locationIndex - 1
+            }
+            self!.eachHistory.remove(at: index)
+            self!.delegate?.baseViewModelDidRemoveWebView(index: index, isFrontDelete: self!.locationIndex == index)
+        })
     }
     
     @objc private func baseViewModelWillSearchWebView(notification: Notification) {
@@ -233,6 +237,22 @@ class BaseViewModel {
         delegate?.baseViewModelDidHistoryForwardWebView()
     }
 
+    @objc private func baseViewModelWillRegisterAsFavorite(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewModelWillRegisterAsFavorite")
+        if (!eachHistory[locationIndex].url.isEmpty && !eachHistory[locationIndex].title.isEmpty) {
+            Util.shared.presentAlert(title: "お気に入り登録確認", message: "お気に入りに保存しますね？", completion: { [weak self]  _ in
+                let fd = Favorite()
+                fd.title = self!.eachHistory[self!.locationIndex].title
+                fd.url = self!.eachHistory[self!.locationIndex].url
+                StoreManager.shared.insertWithRLMObjects(data: [fd])
+                
+                log.debug(StoreManager.shared.selectAllFavoriteInfo())
+            })
+        } else {
+            Util.shared.presentWarning(title: "お気に入り登録確認", message: "登録情報を取得できませんでした。。")
+        }
+    }
+    
     @objc private func applicationWillResignActive(notification: Notification) {
         storeHistory()
     }

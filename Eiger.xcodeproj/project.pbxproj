@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8378C8F6D4B063605AA2555B /* Pods_Eiger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */; };
+		A516D8B31ED1AD670044D67A /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516D8B21ED1AD670044D67A /* Favorite.swift */; };
+		A516D8B51ED1AD9A0044D67A /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516D8B41ED1AD9A0044D67A /* StoreManager.swift */; };
 		A51A15B11EABB3CA00BCFF5F /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A15B01EABB3CA00BCFF5F /* EGWebView.swift */; };
 		A51A15B51EB5015E00BCFF5F /* HeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A15B41EB5015E00BCFF5F /* HeaderViewModel.swift */; };
 		A53613BE1EA5A3CF000EC46B /* EachThumbnailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53613BD1EA5A3CF000EC46B /* EachThumbnailItem.swift */; };
@@ -48,6 +50,8 @@
 
 /* Begin PBXFileReference section */
 		1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.release.xcconfig"; sourceTree = "<group>"; };
+		A516D8B21ED1AD670044D67A /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		A516D8B41ED1AD9A0044D67A /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		A51A15B01EABB3CA00BCFF5F /* EGWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGWebView.swift; sourceTree = "<group>"; };
 		A51A15B41EB5015E00BCFF5F /* HeaderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewModel.swift; sourceTree = "<group>"; };
 		A53613BD1EA5A3CF000EC46B /* EachThumbnailItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EachThumbnailItem.swift; sourceTree = "<group>"; };
@@ -233,6 +237,7 @@
 		A5D88FA01E460FE00099DFA3 /* CommonUtil */ = {
 			isa = PBXGroup;
 			children = (
+				A516D8B41ED1AD9A0044D67A /* StoreManager.swift */,
 				A55E0E851E6C419C00278D8A /* Protocol */,
 				A55E0E841E6C418B00278D8A /* Extension */,
 				A5CB302B1E530E6700A59A82 /* Util.swift */,
@@ -251,6 +256,7 @@
 		A5D88FA21E460FED0099DFA3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A516D8B21ED1AD670044D67A /* Favorite.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -445,8 +451,10 @@
 				A5D88FC01E4F1F130099DFA3 /* DeviceDataManager.swift in Sources */,
 				A562096F1E619C4100F8996A /* EGProgressBar.swift in Sources */,
 				A55A60321E6AF454005C03F3 /* HeaderView.swift in Sources */,
+				A516D8B51ED1AD9A0044D67A /* StoreManager.swift in Sources */,
 				A58138591E8F442900612AE4 /* UIImage+Extend.swift in Sources */,
 				A59BF5B41E86BA05002249E7 /* FooterViewModel.swift in Sources */,
+				A516D8B31ED1AD670044D67A /* Favorite.swift in Sources */,
 				A5800E7F1E565E48004A1AF0 /* UIColor+Extend.swift in Sources */,
 				A5D88FBE1E4F1F050099DFA3 /* EGApplication.swift in Sources */,
 				A5D88FC61E4F1F3D0099DFA3 /* BaseViewController.swift in Sources */,

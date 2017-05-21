@@ -202,10 +202,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 self.saveMetaData(webView: webView, completion: { [weak self] (url) in
                     if webView.hasSavableUrl {
                         // 有効なURLの場合は、履歴に保存する
-                        self!.viewModel.saveHistory(wv: self!.front)
+                        self!.viewModel.saveHistory(wv: webView)
                     }
                     if webView.requestUrl != nil {
-                        webView.previousUrl = self!.front.requestUrl
+                        webView.previousUrl = webView.requestUrl
                     }
                     
                     // サムネイルを保存
@@ -230,11 +230,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 //インジゲーターの表示、非表示をきりかえる。
                 UIApplication.shared.isNetworkActivityIndicatorVisible = otherWv.isLoading
                 if otherWv.isLoading == true {
-                    log.debug("front webview load start")
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
                     viewModel.notifyChangeProgress(object: CGFloat(AppDataManager.shared.progressMin))
                 } else {
-                    log.debug("front webview load end")
                     viewModel.notifyChangeProgress(object: 1.0)
                     
                     // 履歴とサムネイルを更新
@@ -243,10 +241,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             } else {
                 //インジゲーターの表示、非表示をきりかえる。
                 if otherWv.isLoading == true {
-                    log.debug("other webview load start")
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
                 } else {
-                    log.debug("other webview load end")
                     // 履歴とサムネイルを更新
                     updateHistoryAndThumbnail(otherWv)
                 }
@@ -300,7 +296,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     private func saveMetaData(webView: WKWebView, completion: ((_ url: String?) -> ())?) {
         if let urlStr = webView.url?.absoluteString, let title = webView.title {
-            if urlStr.hasValidUrl && webView.requestUrl != urlStr {
+            if urlStr.hasValidUrl {
                 webView.requestUrl = urlStr
                 viewModel.headerFieldText = webView.requestUrl
                 webView.requestTitle = title

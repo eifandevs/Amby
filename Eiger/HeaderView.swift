@@ -22,6 +22,8 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     private var isEditing = false
     private let viewModel = HeaderViewModel()
     private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
+    private var favoriteButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: AppDataManager.shared.headerViewHeight, height: AppDataManager.shared.headerViewHeight)))
+    private var deleteButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: AppDataManager.shared.headerViewHeight, height: AppDataManager.shared.headerViewHeight)))
 
     var fieldAlpha: CGFloat {
         get {
@@ -43,6 +45,24 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         viewModel.delegate = self
         addShadow()
         backgroundColor = UIColor.pastelLightGray
+        
+        /// ヘッダーアイテム
+        // お気に入り登録
+        favoriteButton.backgroundColor = UIColor.clear
+        _ = favoriteButton.reactive.tap
+            .observe { [weak self] _ in
+                self!.viewModel.notifyRegisterAsFavorite()
+        }
+        
+        // 現在のWebView削除
+        deleteButton.backgroundColor = UIColor.clear
+        _ = deleteButton.reactive.tap
+            .observe { [weak self] _ in
+                self!.viewModel.notifyRemoveWebView()
+        }
+        
+        addSubview(favoriteButton)
+        addSubview(deleteButton)
         
         _ = headerField.reactive.controlEvents(.touchUpInside)
             .observeNext { [weak self] _ in
@@ -110,6 +130,8 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     }
     
     override func layoutSubviews() {
+        favoriteButton.center = CGPoint(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2 / 2, y: frame.size.height - heightMax * 0.5)
+        deleteButton.center = CGPoint(x: DeviceDataManager.shared.displaySize.width - (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2 / 2, y: frame.size.height - heightMax * 0.5)
         progressBar.frame = CGRect(x: 0, y: frame.size.height - 2.1, width: frame.size.width, height: 2.1)
         if !isEditing {
             headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)

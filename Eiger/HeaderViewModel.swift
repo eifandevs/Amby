@@ -40,6 +40,14 @@ class HeaderViewModel {
     func notifyChangeWebView(text: String) {
         center.post(name: .baseViewModelWillSearchWebView, object: text)
     }
+
+    func notifyRegisterAsFavorite() {
+        center.post(name: .baseViewModelWillRegisterAsFavorite, object: nil)
+    }
+    
+    func notifyRemoveWebView() {
+        center.post(name: .baseViewModelWillRemoveWebView, object: nil)
+    }
     
 // MARK: Notification受信
     
