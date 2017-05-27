@@ -21,9 +21,11 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     private var headerField = EGTextField(iconSize: CGSize(width: AppDataManager.shared.headerViewHeight / 2, height: AppDataManager.shared.headerViewHeight / 2))
     private var isEditing = false
     private let viewModel = HeaderViewModel()
-    private var progressBar: EGProgressBar = EGProgressBar(min: CGFloat(AppDataManager.shared.progressMin))
-    private var favoriteButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: AppDataManager.shared.headerViewHeight, height: AppDataManager.shared.headerViewHeight)))
-    private var deleteButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: AppDataManager.shared.headerViewHeight, height: AppDataManager.shared.headerViewHeight)))
+    private var progressBar: EGProgressBar = EGProgressBar(frame: CGRect(x: 0, y: 0, width: DeviceDataManager.shared.displaySize.width, height: 2.1), min: CGFloat(AppDataManager.shared.progressMin))
+    private var historyBackButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, height: AppDataManager.shared.headerViewHeight)))
+    private var historyForwardButton = UIButton(frame: CGRect(origin: CGPoint(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, y: 0), size: CGSize(width: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, height: AppDataManager.shared.headerViewHeight)))
+    private var favoriteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppDataManager.shared.headerFieldWidth + (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: 0), size: CGSize(width: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, height: AppDataManager.shared.headerViewHeight)))
+    private var deleteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppDataManager.shared.headerFieldWidth + (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4 * 3, y: 0), size: CGSize(width: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, height: AppDataManager.shared.headerViewHeight)))
 
     var fieldAlpha: CGFloat {
         get {
@@ -47,20 +49,36 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         backgroundColor = UIColor.pastelLightGray
         
         /// ヘッダーアイテム
+        // ヒストリバック
+        historyBackButton.backgroundColor = UIColor.blue
+        _ = historyBackButton.reactive.tap
+            .observe { [weak self] _ in
+                self!.viewModel.notifyHistoryBackWebView()
+        }
+        
+        // ヒストリフォアード
+        historyForwardButton.backgroundColor = UIColor.yellow
+        _ = historyForwardButton.reactive.tap
+            .observe { [weak self] _ in
+                self!.viewModel.notifyHistoryForwardWebView()
+        }
+        
         // お気に入り登録
-        favoriteButton.backgroundColor = UIColor.clear
+        favoriteButton.backgroundColor = UIColor.red
         _ = favoriteButton.reactive.tap
             .observe { [weak self] _ in
                 self!.viewModel.notifyRegisterAsFavorite()
         }
         
         // 現在のWebView削除
-        deleteButton.backgroundColor = UIColor.clear
+        deleteButton.backgroundColor = UIColor.purple
         _ = deleteButton.reactive.tap
             .observe { [weak self] _ in
                 self!.viewModel.notifyRemoveWebView()
         }
         
+        addSubview(historyBackButton)
+        addSubview(historyForwardButton)
         addSubview(favoriteButton)
         addSubview(deleteButton)
         
@@ -85,16 +103,35 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        historyBackButton.center.y = frame.size.height - heightMax * 0.5
+        historyForwardButton.center.y = frame.size.height - heightMax * 0.5
+        favoriteButton.center.y = frame.size.height - heightMax * 0.5
+        deleteButton.center.y = frame.size.height - heightMax * 0.5
+        progressBar.frame.origin.y = frame.size.height - 2.1
+        if !isEditing {
+            headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
+        }
+    }
+    
     func resizeToMax() {
         frame.size.height = heightMax
-        progressBar.frame = CGRect(x: 0, y: frame.size.height - 2.1, width: frame.size.width, height: 2.1)
+        historyBackButton.center.y = frame.size.height - heightMax * 0.5
+        historyForwardButton.center.y = frame.size.height - heightMax * 0.5
+        favoriteButton.center.y = frame.size.height - heightMax * 0.5
+        deleteButton.center.y = frame.size.height - heightMax * 0.5
+        progressBar.frame.origin.y = frame.size.height - 2.1
         headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
         headerField.alpha = 1
     }
     
     func resizeToMin() {
         frame.size.height = DeviceDataManager.shared.statusBarHeight
-        progressBar.frame = CGRect(x: 0, y: frame.size.height - 2.1, width: frame.size.width, height: 2.1)
+        historyBackButton.center.y = frame.size.height - heightMax * 0.5
+        historyForwardButton.center.y = frame.size.height - heightMax * 0.5
+        favoriteButton.center.y = frame.size.height - heightMax * 0.5
+        deleteButton.center.y = frame.size.height - heightMax * 0.5
+        progressBar.frame.origin.y = frame.size.height - 2.1
         headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
         headerField.alpha = 0
     }
@@ -127,15 +164,6 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     func resize(value: CGFloat) {
         frame.size.height += value
         headerField.alpha += value / (heightMax - DeviceDataManager.shared.statusBarHeight)
-    }
-    
-    override func layoutSubviews() {
-        favoriteButton.center = CGPoint(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2 / 2, y: frame.size.height - heightMax * 0.5)
-        deleteButton.center = CGPoint(x: DeviceDataManager.shared.displaySize.width - (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2 / 2, y: frame.size.height - heightMax * 0.5)
-        progressBar.frame = CGRect(x: 0, y: frame.size.height - 2.1, width: frame.size.width, height: 2.1)
-        if !isEditing {
-            headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
-        }
     }
     
 // MARK: UITextField Delegate

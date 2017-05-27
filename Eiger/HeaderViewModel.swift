@@ -36,6 +36,14 @@ class HeaderViewModel {
     }
 
 // MARK: Public Method
+
+    func notifyHistoryBackWebView() {
+        center.post(name: .baseViewModelWillHistoryBackWebView, object: nil)
+    }
+
+    func notifyHistoryForwardWebView() {
+        center.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
+    }
     
     func notifyChangeWebView(text: String) {
         center.post(name: .baseViewModelWillSearchWebView, object: text)

@@ -14,9 +14,9 @@ class EGProgressBar: UIView {
     let progressMin: CGFloat
     var isFinished: Bool = false
     
-    init(min: CGFloat) {
+    init(frame: CGRect, min: CGFloat) {
         progressMin = min
-        super.init(frame: CGRect.zero)
+        super.init(frame: frame)
         backgroundColor = UIColor.lightBlue
         bar.backgroundColor = UIColor.frenchBlue
         alpha = 0
