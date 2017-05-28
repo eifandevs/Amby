@@ -45,6 +45,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     init() {
         super.init(frame: CGRect.zero)
         viewModel.delegate = self
+        headerField.delegate = self
         addShadow()
         backgroundColor = UIColor.pastelLightGray
         
@@ -85,14 +86,14 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         _ = headerField.reactive.controlEvents(.touchUpInside)
             .observeNext { [weak self] _ in
                 self!.isEditing = true
+                self!.headerField.removeContent()
+                self!.delegate?.headerViewDidBeginEditing()
                 UIView.animate(withDuration: 0.11, delay: 0, options: .curveLinear, animations: {
                     self!.headerField.frame = self!.frame
                 }, completion: { _ in
                     // キーボード表示
-                    self!.headerField.makeInputForm(height: self!.frame.size.height - self!.heightMax * 0.63, obj: self!)
+                    self!.headerField.makeInputForm(height: self!.frame.size.height - self!.heightMax * 0.63)
                 })
-                self!.headerField.removeContent()
-                self!.delegate?.headerViewDidBeginEditing()
         }
         
         addSubview(headerField)
@@ -173,11 +174,15 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         
         if let text = headerField.text, !text.isEmpty {
             let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
-            viewModel.notifyChangeWebView(text: encodedText!)
+            viewModel.notifySearchWebView(text: encodedText!)
         }
         return true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+    }
+
 // MARK: HeaderViewModel Delegate
     
     func headerViewModelDidChangeProgress(progress: CGFloat) {

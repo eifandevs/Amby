@@ -16,7 +16,8 @@ class EGTextField: UIButton, ShadowView {
     private var label: EGGradientLabel? = nil
     private var pastLabelText: String? = nil
     private let fontSize: CGFloat = 15
-    var textField: UITextField? = nil
+    var delegate : UITextFieldDelegate? = nil
+    var textField: UITextField! = nil
     
     var text: String? {
         get {
@@ -46,23 +47,27 @@ class EGTextField: UIButton, ShadowView {
         makeContent(restore: false, restoreText: nil)
     }
     
-    func makeInputForm(height: CGFloat, obj: UITextFieldDelegate) {
+    // ヘッダービューをタップしたらコールされる
+    // それまで、テキストフィールドは表示しない
+    func makeInputForm(height: CGFloat) {
         textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: height), size: CGSize(width: frame.size.width - 10, height: size.height)))
-        textField!.borderStyle = .none
-        textField!.keyboardType = .default
-        textField!.delegate = obj
-        textField!.placeholder = "検索 or URL or 位置検索(@)"
-        textField!.text = pastLabelText
-        textField!.becomeFirstResponder()
-        addSubview(textField!)
+        textField.borderStyle = .none
+        textField.keyboardType = .default
+        textField.delegate = delegate
+        textField.placeholder = "検索 / URL / 位置検索(@)"
+        textField.text = pastLabelText
+        textField.becomeFirstResponder()
+        addSubview(textField)
     }
     
+    // テキストフィールドの削除
     func removeInputForm() {
-        textField?.endEditing(true)
-        textField?.removeFromSuperview()
+        textField.endEditing(true)
+        textField.removeFromSuperview()
         textField = nil
     }
     
+    // ヘッダービューのコンテンツを作成(テキストフィールドではない)
     func makeContent(restore: Bool, restoreText: String?) {
         icon = UIImageView()
         icon!.backgroundColor = UIColor.raspberry

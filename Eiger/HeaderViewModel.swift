@@ -45,7 +45,7 @@ class HeaderViewModel {
         center.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
     }
     
-    func notifyChangeWebView(text: String) {
+    func notifySearchWebView(text: String) {
         center.post(name: .baseViewModelWillSearchWebView, object: text)
     }
 
