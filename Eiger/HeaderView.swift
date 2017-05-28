@@ -174,12 +174,8 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         self.delegate?.headerViewDidEndEditing()
         
         if let text = textField.text, !text.isEmpty {
-            if text[text.startIndex] == "@" {
-                log.warning("地図起動")
-            } else {
-                let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
-                viewModel.notifySearchWebView(text: encodedText!)
-            }
+            let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+            viewModel.notifySearchWebView(text: encodedText!)
         }
         return true
     }
