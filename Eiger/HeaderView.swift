@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 protocol HeaderViewDelegate {
     func headerViewDidBeginEditing()
@@ -172,9 +173,13 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.delegate?.headerViewDidEndEditing()
         
-        if let text = headerField.text, !text.isEmpty {
-            let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
-            viewModel.notifySearchWebView(text: encodedText!)
+        if let text = textField.text, !text.isEmpty {
+            if text[text.startIndex] == "@" {
+                log.warning("地図起動")
+            } else {
+                let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+                viewModel.notifySearchWebView(text: encodedText!)
+            }
         }
         return true
     }
