@@ -101,6 +101,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         log.error("[error url]\(String(describing: webView.url))")
+        
+        if (error as NSError).code == NSURLErrorCancelled {
+            // 連打したら-999 "(null)"になる対応
+            return
+        }
+        
         if webView.isLoading {
             viewModel.notifyChangeProgress(object: 0)
         }
