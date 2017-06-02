@@ -171,20 +171,19 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             return
         }
         
-        switch navigationAction.navigationType {
-        case .linkActivated:
-            log.warning("リンクタップ")
-        case .backForward:
-            break
-        case .formResubmitted:
-            break
-        case .formSubmitted:
-            break
-        case .other:
-            break
-        case .reload:
-            break
-        }
+//        switch navigationAction.navigationType {
+//        case .linkActivated:
+//        case .backForward:
+//            break
+//        case .formResubmitted:
+//            break
+//        case .formSubmitted:
+//            break
+//        case .other:
+//            break
+//        case .reload:
+//            break
+//        }
 
         decisionHandler(.allow)
     }
