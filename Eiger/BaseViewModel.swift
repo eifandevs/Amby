@@ -211,13 +211,14 @@ class BaseViewModel {
         log.debug("[BaseView Event]: baseViewModelWillRemoveWebView")
         Util.shared.presentAlert(title: "ページ削除確認", message: "ページを削除しますよ？", completion: { [weak self]  _ in
             let index = ((notification.object as? Int) != nil) ? notification.object as! Int : self!.locationIndex
+            let isFrontDelete = self!.locationIndex == index
             self!.center.post(name: .footerViewModelWillRemoveWebView, object: index)
             if ((index != 0 && self!.locationIndex == index && index == self!.eachHistory.count - 1) || (index < self!.locationIndex)) {
                 // indexの調整
                 self!.locationIndex = self!.locationIndex - 1
             }
             self!.eachHistory.remove(at: index)
-            self!.delegate?.baseViewModelDidRemoveWebView(index: index, isFrontDelete: self!.locationIndex == index)
+            self!.delegate?.baseViewModelDidRemoveWebView(index: index, isFrontDelete: isFrontDelete)
         })
     }
     

@@ -311,7 +311,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private func loadWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
         webViews[viewModel.locationIndex] = newWv
-        _ = front.load(urlStr: viewModel.requestUrl)
+        bringSubview(toFront: newWv)
+        _ = newWv.load(urlStr: viewModel.requestUrl)
     }
     
     private func saveMetaData(webView: WKWebView, completion: ((_ url: String?) -> ())?) {
@@ -378,9 +379,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         } else if isFrontDelete {
             // フロントの削除で、削除後にwebviewが存在する場合
             // 存在しない場合は、AddWebViewが呼ばれる
-            front = webViews[viewModel.locationIndex]
-            front.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(front.context))
-            bringSubview(toFront: front)
+            if let current = webViews[viewModel.locationIndex] {
+                current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
+                front = current
+                bringSubview(toFront: current)
+            } else {
+                loadWebView()
+            }
         }
     }
     func baseViewModelDidSearchWebView(text: String) {
