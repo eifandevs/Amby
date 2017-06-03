@@ -163,6 +163,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
         }
         
         if !touch && headerView.resizing {
+            // TODO: resizing判定を見直す。スクロール後に変な位置でheaderviewが止まる
             slideForceStopFlag = true
             if headerView.frame.size.height > headerView.heightMax / 2 {
                 UIView.animate(withDuration: 0.2, animations: {
@@ -185,10 +186,6 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
                 } else {
                     slide(val: speed)
                 }
-            } else if baseView.frame.origin.y !=  headerView.heightMax {
-                // バックグラウンドから復帰した際は、ヘッダーが最大サイズで表示されるが、baseViewは移動していない
-                //                log.warning("きてる")
-                //                baseView.frame.origin.y = baseView.frame.origin.y + speed > headerView.heightMax ? headerView.heightMax : baseView.frame.origin.y + speed
             }
         } else if speed < 0 {
             // headerを縮小、baseViewを拡大
