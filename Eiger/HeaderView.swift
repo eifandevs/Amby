@@ -28,6 +28,12 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     private var favoriteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppDataManager.shared.headerFieldWidth + (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: 0), size: CGSize(width: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, height: AppDataManager.shared.headerViewHeight)))
     private var deleteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppDataManager.shared.headerFieldWidth + (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4 * 3, y: 0), size: CGSize(width: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, height: AppDataManager.shared.headerViewHeight)))
 
+    private var headerItems: [UIButton] {
+        get {
+            return [historyBackButton, historyForwardButton, favoriteButton, deleteButton]
+        }
+    }
+    
     var fieldAlpha: CGFloat {
         get {
             return headerField.alpha
@@ -51,38 +57,38 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         backgroundColor = UIColor.pastelLightGray
         
         /// ヘッダーアイテム
+        let addButton = { (button: UIButton, image: UIImage, action: @escaping (() -> ())) -> Void in
+            let tintedImage = image.withRenderingMode(.alwaysTemplate)
+            button.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            button.imageView?.contentMode = .scaleAspectFit
+            button.setImage(tintedImage, for: .normal)
+            button.alpha = 0
+            button.imageEdgeInsets = UIEdgeInsetsMake(18, 6.5, 6.5, 6.5)
+            _ = button.reactive.tap
+                .observe { _ in
+                    action()
+            }
+            self.addSubview(button)
+        }
+        
         // ヒストリバック
-        historyBackButton.backgroundColor = UIColor.blue
-        _ = historyBackButton.reactive.tap
-            .observe { [weak self] _ in
-                self!.viewModel.notifyHistoryBackWebView()
+        addButton(historyBackButton, #imageLiteral(resourceName: "historyback_webview")) { [weak self] _ in
+            self!.viewModel.notifyHistoryBackWebView()
         }
         
         // ヒストリフォアード
-        historyForwardButton.backgroundColor = UIColor.yellow
-        _ = historyForwardButton.reactive.tap
-            .observe { [weak self] _ in
-                self!.viewModel.notifyHistoryForwardWebView()
+        addButton(historyForwardButton, #imageLiteral(resourceName: "historyforward_webview")) { [weak self] _ in
+            self!.viewModel.notifyHistoryForwardWebView()
         }
         
         // お気に入り登録
-        favoriteButton.backgroundColor = UIColor.red
-        _ = favoriteButton.reactive.tap
-            .observe { [weak self] _ in
-                self!.viewModel.notifyRegisterAsFavorite()
+        addButton(favoriteButton, #imageLiteral(resourceName: "favorite_webview")) { [weak self] _ in
+            self!.viewModel.notifyRegisterAsFavorite()
         }
-        
         // 現在のWebView削除
-        deleteButton.backgroundColor = UIColor.purple
-        _ = deleteButton.reactive.tap
-            .observe { [weak self] _ in
-                self!.viewModel.notifyRemoveWebView()
-        }
-        
-        addSubview(historyBackButton)
-        addSubview(historyForwardButton)
-        addSubview(favoriteButton)
-        addSubview(deleteButton)
+        addButton(deleteButton, #imageLiteral(resourceName: "delete_webview"), { [weak self] _ in
+            self!.viewModel.notifyRemoveWebView()
+        })
         
         _ = headerField.reactive.controlEvents(.touchUpInside)
             .observeNext { [weak self] _ in
@@ -106,10 +112,9 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     }
     
     override func layoutSubviews() {
-        historyBackButton.center.y = frame.size.height - heightMax * 0.5
-        historyForwardButton.center.y = frame.size.height - heightMax * 0.5
-        favoriteButton.center.y = frame.size.height - heightMax * 0.5
-        deleteButton.center.y = frame.size.height - heightMax * 0.5
+        headerItems.forEach { (button) in
+            button.center.y = frame.size.height - heightMax * 0.5
+        }
         progressBar.frame.origin.y = frame.size.height - 2.1
         if !isEditing {
             headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
@@ -118,10 +123,10 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     
     func resizeToMax() {
         frame.size.height = heightMax
-        historyBackButton.center.y = frame.size.height - heightMax * 0.5
-        historyForwardButton.center.y = frame.size.height - heightMax * 0.5
-        favoriteButton.center.y = frame.size.height - heightMax * 0.5
-        deleteButton.center.y = frame.size.height - heightMax * 0.5
+        headerItems.forEach { (button) in
+            button.center.y = frame.size.height - heightMax * 0.5
+            button.alpha = 1
+        }
         progressBar.frame.origin.y = frame.size.height - 2.1
         headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
         headerField.alpha = 1
@@ -129,10 +134,10 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     
     func resizeToMin() {
         frame.size.height = DeviceDataManager.shared.statusBarHeight
-        historyBackButton.center.y = frame.size.height - heightMax * 0.5
-        historyForwardButton.center.y = frame.size.height - heightMax * 0.5
-        favoriteButton.center.y = frame.size.height - heightMax * 0.5
-        deleteButton.center.y = frame.size.height - heightMax * 0.5
+        headerItems.forEach { (button) in
+            button.center.y = frame.size.height - heightMax * 0.5
+            button.alpha = 0
+        }
         progressBar.frame.origin.y = frame.size.height - 2.1
         headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
         headerField.alpha = 0
@@ -166,6 +171,9 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     func resize(value: CGFloat) {
         frame.size.height += value
         headerField.alpha += value / (heightMax - DeviceDataManager.shared.statusBarHeight)
+        headerItems.forEach { (button) in
+            button.alpha += value / (heightMax - DeviceDataManager.shared.statusBarHeight)
+        }
     }
     
 // MARK: UITextField Delegate
