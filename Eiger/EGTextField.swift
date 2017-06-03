@@ -70,7 +70,10 @@ class EGTextField: UIButton, ShadowView {
     // ヘッダービューのコンテンツを作成(テキストフィールドではない)
     func makeContent(restore: Bool, restoreText: String?) {
         icon = UIImageView()
-        icon!.backgroundColor = UIColor.raspberry
+        
+        let tintedImage = #imageLiteral(resourceName: "key").withRenderingMode(.alwaysTemplate)
+        icon?.tintColor = UIColor.lightGreen
+        icon?.image = tintedImage
         icon?.isUserInteractionEnabled = false
         addSubview(icon!)
         
@@ -133,7 +136,7 @@ class EGTextField: UIButton, ShadowView {
         let mString = NSMutableAttributedString(string: text, attributes: attr)
         mString.addAttribute(
             NSForegroundColorAttributeName,
-            value: UIColor.blue,
+            value: UIColor.lightGreen,
             range: (text as NSString).range(of: "https"))
 
         return mString

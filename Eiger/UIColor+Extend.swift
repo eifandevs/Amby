@@ -62,4 +62,8 @@ extension UIColor {
     static var magenta: UIColor {
         return UIColor(red: 127 / 255, green: 39 / 255, blue: 127 / 255, alpha: 1)
     }
+    
+    static var lightGreen: UIColor {
+        return UIColor(red: 29/255, green: 205/255, blue: 0/255, alpha: 1)
+    }
 }
