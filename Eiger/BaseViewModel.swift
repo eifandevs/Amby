@@ -209,17 +209,15 @@ class BaseViewModel {
 
     @objc private func baseViewModelWillRemoveWebView(notification: Notification) {
         log.debug("[BaseView Event]: baseViewModelWillRemoveWebView")
-        Util.shared.presentAlert(title: "ページ削除確認", message: "ページを削除しますよ？", completion: { [weak self]  _ in
-            let index = ((notification.object as? Int) != nil) ? notification.object as! Int : self!.locationIndex
-            let isFrontDelete = self!.locationIndex == index
-            self!.center.post(name: .footerViewModelWillRemoveWebView, object: index)
-            if ((index != 0 && self!.locationIndex == index && index == self!.eachHistory.count - 1) || (index < self!.locationIndex)) {
-                // indexの調整
-                self!.locationIndex = self!.locationIndex - 1
-            }
-            self!.eachHistory.remove(at: index)
-            self!.delegate?.baseViewModelDidRemoveWebView(index: index, isFrontDelete: isFrontDelete)
-        })
+        let index = ((notification.object as? Int) != nil) ? notification.object as! Int : locationIndex
+        let isFrontDelete = locationIndex == index
+        center.post(name: .footerViewModelWillRemoveWebView, object: index)
+        if ((index != 0 && locationIndex == index && index == eachHistory.count - 1) || (index < locationIndex)) {
+            // indexの調整
+            locationIndex = locationIndex - 1
+        }
+        eachHistory.remove(at: index)
+        delegate?.baseViewModelDidRemoveWebView(index: index, isFrontDelete: isFrontDelete)
     }
     
     @objc private func baseViewModelWillSearchWebView(notification: Notification) {
@@ -241,16 +239,15 @@ class BaseViewModel {
     @objc private func baseViewModelWillRegisterAsFavorite(notification: Notification) {
         log.debug("[BaseView Event]: baseViewModelWillRegisterAsFavorite")
         if (!eachHistory[locationIndex].url.isEmpty && !eachHistory[locationIndex].title.isEmpty) {
-            Util.shared.presentAlert(title: "お気に入り登録確認", message: "お気に入りに保存しますね？", completion: { [weak self]  _ in
-                let fd = Favorite()
-                fd.title = self!.eachHistory[self!.locationIndex].title
-                fd.url = self!.eachHistory[self!.locationIndex].url
-                StoreManager.shared.insertWithRLMObjects(data: [fd])
-                
-                log.debug(StoreManager.shared.selectAllFavoriteInfo())
-            })
+            let fd = Favorite()
+            fd.title = eachHistory[locationIndex].title
+            fd.url = eachHistory[locationIndex].url
+            StoreManager.shared.insertWithRLMObjects(data: [fd])
+            
+            log.debug(StoreManager.shared.selectAllFavoriteInfo())
+            Util.shared.presentWarning(title: "登録完了", message: "お気に入りに登録しました。")
         } else {
-            Util.shared.presentWarning(title: "お気に入り登録確認", message: "登録情報を取得できませんでした。。")
+            Util.shared.presentWarning(title: "登録エラー", message: "登録情報を取得できませんでした。")
         }
     }
     
