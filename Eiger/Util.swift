@@ -30,6 +30,16 @@ class Util {
         Util.shared.foregroundViewController().present(alert, animated: true, completion: nil)
     }
     
+    func presentSimpleAlert(title: String, message: String, completion: @escaping (() -> ()?)) {
+        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler:{
+            (action: UIAlertAction!) -> Void in
+            completion()
+        })
+        alert.addAction(defaultAction)
+        Util.shared.foregroundViewController().present(alert, animated: true, completion: nil)
+    }
+    
     func presentAlert(title: String, message: String, completion: @escaping (() -> ())) {
         let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler:{
