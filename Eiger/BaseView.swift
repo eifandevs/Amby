@@ -438,4 +438,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             }
         }
     }
+    
+    func baseViewModelDidRegisterAsForm() {
+        StoreManager.shared.storeForm(webView: front)
+    }
 }

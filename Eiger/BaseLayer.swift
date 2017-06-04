@@ -36,10 +36,10 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
         do {
             let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 100), size: CGSize(width: 150, height: 50)))
             button.backgroundColor = UIColor.gray
-            button.setTitle("戻る(ページ)", for: .normal)
+            button.setTitle("フォーム情報保存", for: .normal)
             _ = button.reactive.tap
                 .observe { _ in
-                    NotificationCenter.default.post(name: .baseViewModelWillHistoryBackWebView, object: nil)
+                    NotificationCenter.default.post(name: .baseViewModelWillRegisterAsForm, object: nil)
             }
             addSubview(button)
         }
@@ -47,10 +47,9 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
         do {
             let button = UIButton(frame: CGRect(origin: CGPoint(x: 220, y: 100), size: CGSize(width: 150, height: 50)))
             button.backgroundColor = UIColor.gray
-            button.setTitle("進む(ページ)", for: .normal)
+            button.setTitle("自動スクロール", for: .normal)
             _ = button.reactive.tap
                 .observe { _ in
-                    NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
             }
             addSubview(button)
         }

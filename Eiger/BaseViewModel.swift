@@ -18,6 +18,7 @@ protocol BaseViewModelDelegate {
     func baseViewModelDidHistoryBackWebView()
     func baseViewModelDidHistoryForwardWebView()
     func baseViewModelDidSearchWebView(text: String)
+    func baseViewModelDidRegisterAsForm()
 }
 
 class BaseViewModel {
@@ -123,6 +124,10 @@ class BaseViewModel {
         center.addObserver(self,
                            selector: #selector(type(of: self).baseViewModelWillRegisterAsFavorite(notification:)),
                            name: .baseViewModelWillRegisterAsFavorite,
+                           object: nil)
+        center.addObserver(self,
+                           selector: #selector(type(of: self).baseViewModelWillRegisterAsForm(notification:)),
+                           name: .baseViewModelWillRegisterAsForm,
                            object: nil)
         
         // eachHistory読み込み
@@ -249,6 +254,11 @@ class BaseViewModel {
         } else {
             Util.shared.presentWarning(title: "登録エラー", message: "登録情報を取得できませんでした。")
         }
+    }
+    
+    @objc private func baseViewModelWillRegisterAsForm(notification: Notification) {
+        log.debug("[BaseView Event]: baseViewModelWillRegisterAsForm")
+        delegate?.baseViewModelDidRegisterAsForm()
     }
     
     @objc private func applicationWillResignActive(notification: Notification) {
