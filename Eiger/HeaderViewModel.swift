@@ -21,18 +21,19 @@ class HeaderViewModel {
     var delegate: HeaderViewModelDelegate?
 
     init () {
-        center.addObserver(self,
-                           selector: #selector(type(of: self).applicationDidBecomeActive(notification:)),
-                           name: .UIApplicationDidBecomeActive,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).headerViewModelWillChangeProgress(notification:)),
-                           name: .headerViewModelWillChangeProgress,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).headerViewModelWillChangeField(notification:)),
-                           name: .headerViewModelWillChangeField,
-                           object: nil)
+        // プログレスバーの初期化
+        center.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (notification) in
+            self!.delegate?.headerViewModelDidChangeProgress(progress: 0)
+        }
+        // プログレス更新
+        center.addObserver(forName: .headerViewModelWillChangeProgress, object: nil, queue: nil) { [weak self] (notification) in
+            self!.delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
+        }
+        // ヘッダーURL更新
+        center.addObserver(forName: .headerViewModelWillChangeField, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[HeaderView Event]: headerViewModelWillChangeField")
+            self!.delegate?.headerViewModelDidChangeField(text: notification.object as! String)
+        }
     }
 
 // MARK: Public Method
@@ -55,21 +56,5 @@ class HeaderViewModel {
     
     func notifyRemoveWebView() {
         center.post(name: .baseViewModelWillRemoveWebView, object: nil)
-    }
-    
-// MARK: Notification受信
-    
-    @objc private func headerViewModelWillChangeProgress(notification: Notification) {
-        delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
-    }
-    
-    @objc private func headerViewModelWillChangeField(notification: Notification) {
-        log.debug("[HeaderView Event]: headerViewModelWillChangeField")
-        delegate?.headerViewModelDidChangeField(text: notification.object as! String)
-    }
-    
-    @objc private func applicationDidBecomeActive(notification: Notification) {
-        // プログレスバーの初期化
-        delegate?.headerViewModelDidChangeProgress(progress: 0)
     }
 }

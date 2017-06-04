@@ -89,46 +89,84 @@ class BaseViewModel {
     }
     
     init() {
-        center.addObserver(self,
-                           selector: #selector(type(of: self).applicationWillResignActive(notification:)),
-                           name: .UIApplicationWillResignActive,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewModelWillAddWebView(notification:)),
-                           name: .baseViewModelWillAddWebView,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewModelWillReloadWebView(notification:)),
-                           name: .baseViewModelWillReloadWebView,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewModelWillChangeWebView(notification:)),
-                           name: .baseViewModelWillChangeWebView,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewModelWillRemoveWebView(notification:)),
-                           name: .baseViewModelWillRemoveWebView,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewModelWillSearchWebView(notification:)),
-                           name: .baseViewModelWillSearchWebView,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewModelWillHistoryBackWebView(notification:)),
-                           name: .baseViewModelWillHistoryBackWebView,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewModelWillHistoryForwardWebView(notification:)),
-                           name: .baseViewModelWillHistoryForwardWebView,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewModelWillRegisterAsFavorite(notification:)),
-                           name: .baseViewModelWillRegisterAsFavorite,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).baseViewModelWillRegisterAsForm(notification:)),
-                           name: .baseViewModelWillRegisterAsForm,
-                           object: nil)
+        // バックグラウンドに入るときに履歴を保存する
+        center.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (notification) in
+            self!.storeHistory()
+        }
+        // webviewの追加作成
+        center.addObserver(forName: .baseViewModelWillAddWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillAddWebView")
+            self!.eachHistory.append(EachHistoryItem())
+            self!.locationIndex = self!.eachHistory.count - 1
+            self!.center.post(name: .footerViewModelWillAddWebView, object: ["context": self!.currentContext])
+            self!.delegate?.baseViewModelDidAddWebView()
+        }
+        // webviewのリロード
+        center.addObserver(forName: .baseViewModelWillReloadWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillReloadWebView")
+            self!.delegate?.baseViewModelDidReloadWebView()
+        }
+        // フロントwebviewの変更
+        center.addObserver(forName: .baseViewModelWillChangeWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillChangeWebView")
+            self!.center.post(name: .footerViewModelWillChangeWebView, object: notification.object)
+            let index = notification.object as! Int
+            if self!.locationIndex != index {
+                self!.locationIndex = index
+                self!.delegate?.baseViewModelDidChangeWebView()
+            } else {
+                log.warning("selected current webView")
+            }
+        }
+        // webviewの削除
+        center.addObserver(forName: .baseViewModelWillRemoveWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillRemoveWebView")
+            let index = ((notification.object as? Int) != nil) ? notification.object as! Int : self!.locationIndex
+            let isFrontDelete = self!.locationIndex == index
+            self!.center.post(name: .footerViewModelWillRemoveWebView, object: index)
+            if ((index != 0 && self!.locationIndex == index && index == self!.eachHistory.count - 1) || (index < self!.locationIndex)) {
+                // indexの調整
+                self!.locationIndex = self!.locationIndex - 1
+            }
+            self!.eachHistory.remove(at: index)
+            self!.delegate?.baseViewModelDidRemoveWebView(index: index, isFrontDelete: isFrontDelete)
+        }
+        // webview検索
+        center.addObserver(forName: .baseViewModelWillSearchWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillSearchWebView")
+            let text = notification.object as! String
+            self!.delegate?.baseViewModelDidSearchWebView(text: text)
+        }
+        // webviewヒストリバック
+        center.addObserver(forName: .baseViewModelWillHistoryBackWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillHistoryBackWebView")
+            self!.delegate?.baseViewModelDidHistoryBackWebView()
+        }
+        // webviewヒストリフォワード
+        center.addObserver(forName: .baseViewModelWillHistoryForwardWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillHistoryForwardWebView")
+            self!.delegate?.baseViewModelDidHistoryForwardWebView()
+        }
+        // webviewお気に入り登録
+        center.addObserver(forName: .baseViewModelWillRegisterAsFavorite, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillRegisterAsFavorite")
+            if (!self!.eachHistory[self!.locationIndex].url.isEmpty && !self!.eachHistory[self!.locationIndex].title.isEmpty) {
+                let fd = Favorite()
+                fd.title = self!.eachHistory[self!.locationIndex].title
+                fd.url = self!.eachHistory[self!.locationIndex].url
+                StoreManager.shared.insertWithRLMObjects(data: [fd])
+                
+                log.debug(StoreManager.shared.selectAllFavoriteInfo())
+                Util.shared.presentWarning(title: "登録完了", message: "お気に入りに登録しました。")
+            } else {
+                Util.shared.presentWarning(title: "登録エラー", message: "登録情報を取得できませんでした。")
+            }
+        }
+        // webviewフォーム情報登録
+        center.addObserver(forName: .baseViewModelWillRegisterAsForm, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillRegisterAsForm")
+            self!.delegate?.baseViewModelDidRegisterAsForm()
+        }
         
         // eachHistory読み込み
         do {
@@ -183,86 +221,6 @@ class BaseViewModel {
         storeCommonHistory()
         storeEachHistory()
         commonHistory = []
-    }
-    
-// MARK: Notification受信
-    
-    @objc private func baseViewModelWillAddWebView(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewModelWillAddWebView")
-        eachHistory.append(EachHistoryItem())
-        locationIndex = eachHistory.count - 1
-        center.post(name: .footerViewModelWillAddWebView, object: ["context": currentContext])
-        delegate?.baseViewModelDidAddWebView()
-    }
-    
-    @objc private func baseViewModelWillReloadWebView(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewModelWillReloadWebView")
-        delegate?.baseViewModelDidReloadWebView()
-    }
-    
-    @objc private func baseViewModelWillChangeWebView(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewModelWillChangeWebView")
-        center.post(name: .footerViewModelWillChangeWebView, object: notification.object)
-        let index = notification.object as! Int
-        if locationIndex != index {
-            locationIndex = index
-            delegate?.baseViewModelDidChangeWebView()
-        } else {
-            log.warning("selected current webView")
-        }
-    }
-
-    @objc private func baseViewModelWillRemoveWebView(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewModelWillRemoveWebView")
-        let index = ((notification.object as? Int) != nil) ? notification.object as! Int : locationIndex
-        let isFrontDelete = locationIndex == index
-        center.post(name: .footerViewModelWillRemoveWebView, object: index)
-        if ((index != 0 && locationIndex == index && index == eachHistory.count - 1) || (index < locationIndex)) {
-            // indexの調整
-            locationIndex = locationIndex - 1
-        }
-        eachHistory.remove(at: index)
-        delegate?.baseViewModelDidRemoveWebView(index: index, isFrontDelete: isFrontDelete)
-    }
-    
-    @objc private func baseViewModelWillSearchWebView(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewModelWillSearchWebView")
-        let text = notification.object as! String
-        delegate?.baseViewModelDidSearchWebView(text: text)
-    }
-    
-    @objc private func baseViewModelWillHistoryBackWebView(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewModelWillHistoryBackWebView")
-        delegate?.baseViewModelDidHistoryBackWebView()
-    }
-    
-    @objc private func baseViewModelWillHistoryForwardWebView(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewModelWillHistoryForwardWebView")
-        delegate?.baseViewModelDidHistoryForwardWebView()
-    }
-
-    @objc private func baseViewModelWillRegisterAsFavorite(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewModelWillRegisterAsFavorite")
-        if (!eachHistory[locationIndex].url.isEmpty && !eachHistory[locationIndex].title.isEmpty) {
-            let fd = Favorite()
-            fd.title = eachHistory[locationIndex].title
-            fd.url = eachHistory[locationIndex].url
-            StoreManager.shared.insertWithRLMObjects(data: [fd])
-            
-            log.debug(StoreManager.shared.selectAllFavoriteInfo())
-            Util.shared.presentWarning(title: "登録完了", message: "お気に入りに登録しました。")
-        } else {
-            Util.shared.presentWarning(title: "登録エラー", message: "登録情報を取得できませんでした。")
-        }
-    }
-    
-    @objc private func baseViewModelWillRegisterAsForm(notification: Notification) {
-        log.debug("[BaseView Event]: baseViewModelWillRegisterAsForm")
-        delegate?.baseViewModelDidRegisterAsForm()
-    }
-    
-    @objc private func applicationWillResignActive(notification: Notification) {
-        storeHistory()
     }
     
 // MARK: Private Method

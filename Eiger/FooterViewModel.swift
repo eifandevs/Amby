@@ -36,33 +36,84 @@ class FooterViewModel {
     init(index: Int) {
         // Notification Center登録
         locationIndex = index
-        center.addObserver(self,
-                           selector: #selector(type(of: self).footerViewModelWillLoad(notification:)),
-                           name: .footerViewModelWillLoad,
-                           object: nil)
-        
-        center.addObserver(self,
-                           selector: #selector(type(of: self).footerViewModelWillAddWebView(notification:)),
-                           name: .footerViewModelWillAddWebView,
-                           object: nil)
-        
-        center.addObserver(self,
-                           selector: #selector(type(of: self).footerViewModelWillStartLoading(notification:)),
-                           name: .footerViewModelWillStartLoading,
-                           object: nil)
-        
-        center.addObserver(self,
-                           selector: #selector(type(of: self).footerViewModelWillEndLoading(notification:)),
-                           name: .footerViewModelWillEndLoading,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).footerViewModelWillChangeWebView(notification:)),
-                           name: .footerViewModelWillChangeWebView,
-                           object: nil)
-        center.addObserver(self,
-                           selector: #selector(type(of: self).footerViewModelWillRemoveWebView(notification:)),
-                           name: .footerViewModelWillRemoveWebView,
-                           object: nil)
+        // 初期ロード開始
+        center.addObserver(forName: .footerViewModelWillLoad, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[Footer Event]: footerViewModelWillLoad")
+            let eachHistory = notification.object as! [EachHistoryItem]
+            
+            
+            if eachHistory.count > 0 {
+                eachHistory.forEach { (item) in
+                    let thumbnailItem = EachThumbnailItem()
+                    thumbnailItem.context = item.context
+                    thumbnailItem.url = item.url
+                    thumbnailItem.title = item.title
+                    self!.eachThumbnail.append(thumbnailItem)
+                }
+            }
+            self!.delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: self!.eachThumbnail)
+        }
+        // webview追加
+        center.addObserver(forName: .footerViewModelWillAddWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[Footer Event]: footerViewModelWillAddWebView")
+            let context = (notification.object as! [String: String])["context"]!
+            
+            // 新しいサムネイルを追加
+            let thumbnailItem = EachThumbnailItem()
+            thumbnailItem.context = context
+            self!.eachThumbnail.append(thumbnailItem)
+            self!.delegate?.footerViewModelDidAddThumbnail()
+            
+            self!.locationIndex = self!.eachThumbnail.count - 1
+        }
+        // webviewロード開始
+        center.addObserver(forName: .footerViewModelWillStartLoading, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[Footer Event]: footerViewModelWillStartLoading")
+            // FooterViewに通知をする
+            self!.delegate?.footerViewModelDidStartLoading(index: self!.locationIndex)
+        }
+        // webviewロード完了
+        center.addObserver(forName: .footerViewModelWillEndLoading, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[Footer Event]: footerViewModelWillEndLoading")
+            // FooterViewに通知をする
+            let context = (notification.object as! [String: String])["context"]!
+            let url = (notification.object as! [String: String])["url"]!
+            let title = (notification.object as! [String: String])["title"]!
+            
+            for (index, thumbnail) in self!.eachThumbnail.enumerated() {
+                if thumbnail.context == context {
+                    thumbnail.url = url
+                    thumbnail.title = title
+                    self!.delegate?.footerViewModelDidEndLoading(context: context, index: index)
+                    break
+                }
+            }
+        }
+        // webview切り替え
+        center.addObserver(forName: .footerViewModelWillChangeWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[Footer Event]: footerViewModelWillChangeWebView")
+            let index = notification.object as! Int
+            if self!.locationIndex != index {
+                self!.locationIndex = index
+                self!.delegate?.footerViewModelDidChangeThumbnail()
+            }
+        }
+        // webview削除
+        center.addObserver(forName: .footerViewModelWillRemoveWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[Footer Event]: footerViewModelWillRemoveWebView")
+            let index = notification.object as! Int
+            
+            // 実データの削除
+            try! FileManager.default.removeItem(atPath: AppDataManager.shared.thumbnailFolderPath(folder: self!.eachThumbnail[index].context).path)
+            
+            if ((index != 0 && self!.locationIndex == index && index == self!.eachThumbnail.count - 1) || (index < self!.locationIndex)) {
+                // フロントの削除
+                // 最後の要素を削除する場合
+                self!.locationIndex = self!.locationIndex - 1
+            }
+            self!.eachThumbnail.remove(at: index)
+            self!.delegate?.footerViewModelDidRemoveThumbnail(index: index)
+        }
     }
     
 // MARK: Public Method
@@ -73,86 +124,5 @@ class FooterViewModel {
     
     func notifyRemoveWebView(index: Int) {
         center.post(name: .baseViewModelWillRemoveWebView, object: index)
-    }
-    
-// MARK: Notification受信
-    
-    @objc private func footerViewModelWillChangeWebView(notification: Notification) {
-        log.debug("[Footer Event]: footerViewModelWillChangeWebView")
-        let index = notification.object as! Int
-        if locationIndex != index {
-            locationIndex = index
-            delegate?.footerViewModelDidChangeThumbnail()
-        }
-    }
-
-    @objc private func footerViewModelWillRemoveWebView(notification: Notification) {
-        log.debug("[Footer Event]: footerViewModelWillRemoveWebView")
-        let index = notification.object as! Int
-        
-        // 実データの削除
-        try! FileManager.default.removeItem(atPath: AppDataManager.shared.thumbnailFolderPath(folder: eachThumbnail[index].context).path)
-
-        if ((index != 0 && locationIndex == index && index == eachThumbnail.count - 1) || (index < locationIndex)) {
-            // フロントの削除
-            // 最後の要素を削除する場合
-            locationIndex = locationIndex - 1
-        }
-        eachThumbnail.remove(at: index)
-        delegate?.footerViewModelDidRemoveThumbnail(index: index)
-    }
-    
-    @objc private func footerViewModelWillLoad(notification: Notification) {
-        log.debug("[Footer Event]: footerViewModelWillLoad")
-        let eachHistory = notification.object as! [EachHistoryItem]
-        
-        
-        if eachHistory.count > 0 {
-            eachHistory.forEach { (item) in
-                let thumbnailItem = EachThumbnailItem()
-                thumbnailItem.context = item.context
-                thumbnailItem.url = item.url
-                thumbnailItem.title = item.title
-                eachThumbnail.append(thumbnailItem)
-            }
-        }
-        delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: eachThumbnail)
-    }
-    
-    @objc private func footerViewModelWillAddWebView(notification: Notification) {
-        log.debug("[Footer Event]: footerViewModelWillAddWebView")
-        let context = (notification.object as! [String: String])["context"]!
-        
-        // 新しいサムネイルを追加
-        let thumbnailItem = EachThumbnailItem()
-        thumbnailItem.context = context
-        eachThumbnail.append(thumbnailItem)
-        delegate?.footerViewModelDidAddThumbnail()
-        
-        locationIndex = eachThumbnail.count - 1
-    }
-    
-    @objc private func footerViewModelWillStartLoading(notification: Notification) {
-        log.debug("[Footer Event]: footerViewModelWillStartLoading")
-        // FooterViewに通知をする
-        
-        delegate?.footerViewModelDidStartLoading(index: locationIndex)
-    }
-    
-    @objc private func footerViewModelWillEndLoading(notification: Notification) {
-        log.debug("[Footer Event]: footerViewModelWillEndLoading")
-        // FooterViewに通知をする
-        let context = (notification.object as! [String: String])["context"]!
-        let url = (notification.object as! [String: String])["url"]!
-        let title = (notification.object as! [String: String])["title"]!
-        
-        for (index, thumbnail) in eachThumbnail.enumerated() {
-            if thumbnail.context == context {
-                thumbnail.url = url
-                thumbnail.title = title
-                delegate?.footerViewModelDidEndLoading(context: context, index: index)
-                break
-            }
-        }
     }
 }
