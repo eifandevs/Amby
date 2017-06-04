@@ -156,7 +156,7 @@ class BaseViewModel {
                 fd.url = self!.eachHistory[self!.locationIndex].url
                 StoreManager.shared.insertWithRLMObjects(data: [fd])
                 
-                log.debug(StoreManager.shared.selectAllFavoriteInfo())
+                log.debug(StoreManager.shared.selectAllFavorite())
                 Util.shared.presentWarning(title: "登録完了", message: "お気に入りに登録しました。")
             } else {
                 Util.shared.presentWarning(title: "登録エラー", message: "登録情報を取得できませんでした。")

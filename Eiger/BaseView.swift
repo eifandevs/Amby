@@ -24,7 +24,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     var webViews: [EGWebView?] = []
     private let viewModel = BaseViewModel()
     private var scrollMovingPointY: CGFloat = 0
-    
+    private var isDisplayedKeyBoard = false
+    private var isDoneAutoInput = false
     private var isTouching = false {
         didSet {
             delegate?.baseViewDidTouch(touch: isTouching)
@@ -35,6 +36,31 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         super.init(frame: frame)
         viewModel.delegate = self
         EGApplication.sharedMyApplication.egDelegate = self
+        
+        // キーボード表示の処理(フォームの自動設定)
+        registerForKeyboardDidShowNotification { [weak self] (notification, size) in
+            if !self!.isDisplayedKeyBoard {
+                self!.isDisplayedKeyBoard = true
+
+                let forms = StoreManager.shared.selectAllForm()
+                for form in forms {
+                    if (self!.front.url?.absoluteString == form.url && !self!.isDoneAutoInput) {
+                        Util.shared.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: {
+                            for input in form.inputs {
+                                self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(input.value)\"") { (object, error) in
+                                }
+                            }
+                        })
+                        self!.isDoneAutoInput = true
+                        break;
+                    }
+                }
+            }
+        }
+        
+        registerForKeyboardWillHideNotification { [weak self] (notification) in
+            self!.isDisplayedKeyBoard = false
+        }
         
         // webviewsに初期値を入れる
         for _ in 0...viewModel.webViewCount - 1 {
@@ -221,6 +247,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 // ページ情報を取得
                 self.saveMetaData(webView: webView, completion: { [weak self] (url) in
                     if webView.hasSavableUrl {
+                        self!.isDoneAutoInput = false
                         // 有効なURLの場合は、履歴に保存する
                         self!.viewModel.saveHistory(wv: webView)
                     }

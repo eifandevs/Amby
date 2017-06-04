@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UIViewController {
+extension UIView {
     func registerForKeyboardWillShowNotification(usingBlock block: ((NSNotification, CGSize) -> Void)? = nil) {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: nil, using: { (notification) -> Void in
             let userInfo = notification.userInfo!

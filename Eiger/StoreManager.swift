@@ -31,8 +31,13 @@ final class StoreManager {
     }
     
     // Favorite
-    func selectAllFavoriteInfo() -> [Favorite] {
+    func selectAllFavorite() -> [Favorite] {
         return realm.objects(Favorite.self).map { $0 }
+    }
+    
+    // Form
+    func selectAllForm() -> [Form] {
+        return realm.objects(Form.self).map { $0 }
     }
     
     // Form
@@ -82,7 +87,7 @@ final class StoreManager {
                     if input.value.characters.count > 0 {
                         // 入力済みのフォームが一つでもあれば保存する
                         StoreManager.shared.insertWithRLMObjects(data: [form])
-                        Util.shared.presentWarning(title: "登録エラー", message: "フォーム情報を登録しました。")
+                        Util.shared.presentWarning(title: "フォーム登録完了", message: "フォーム情報を登録しました。")
                         return
                     }
                 }
