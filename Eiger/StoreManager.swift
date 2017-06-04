@@ -86,6 +86,13 @@ final class StoreManager {
                 for input in form.inputs {
                     if input.value.characters.count > 0 {
                         // 入力済みのフォームが一つでもあれば保存する
+                        let savedForm = StoreManager.shared.selectAllForm().filter({ (f) -> Bool in
+                            return form.url == f.url
+                        }).first
+                        if let unwrappedSavedForm = savedForm {
+                            // すでに登録済みの場合は、まず削除する
+                            StoreManager.shared.deleteWithRLMObjects(data: [unwrappedSavedForm])
+                        }
                         StoreManager.shared.insertWithRLMObjects(data: [form])
                         Util.shared.presentWarning(title: "フォーム登録完了", message: "フォーム情報を登録しました。")
                         return
