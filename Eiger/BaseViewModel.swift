@@ -154,10 +154,19 @@ class BaseViewModel {
                 let fd = Favorite()
                 fd.title = self!.eachHistory[self!.locationIndex].title
                 fd.url = self!.eachHistory[self!.locationIndex].url
-                StoreManager.shared.insertWithRLMObjects(data: [fd])
                 
-                log.debug(StoreManager.shared.selectAllFavorite())
-                Util.shared.presentWarning(title: "登録完了", message: "お気に入りに登録しました。")
+                let savedForm = StoreManager.shared.selectAllFavorite().filter({ (f) -> Bool in
+                    return fd.url == f.url
+                }).first
+                if savedForm != nil {
+                    // すでに登録済みの場合は、登録しない
+                    Util.shared.presentWarning(title: "登録エラー", message: "すでに登録済みです。")
+                } else {
+                    StoreManager.shared.insertWithRLMObjects(data: [fd])
+                    
+                    log.debug(StoreManager.shared.selectAllFavorite())
+                    Util.shared.presentWarning(title: "登録完了", message: "お気に入りに登録しました。")
+                }
             } else {
                 Util.shared.presentWarning(title: "登録エラー", message: "登録情報を取得できませんでした。")
             }
