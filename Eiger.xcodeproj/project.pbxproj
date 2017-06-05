@@ -229,16 +229,6 @@
 			path = Eiger;
 			sourceTree = "<group>";
 		};
-		A59BF5BB1E86C50B002249E7 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				A562096C1E619C3400F8996A /* EachHistoryItem.swift */,
-				A562096A1E619C2100F8996A /* CommonHistoryItem.swift */,
-				A53613BD1EA5A3CF000EC46B /* EachThumbnailItem.swift */,
-			);
-			name = Data;
-			sourceTree = "<group>";
-		};
 		A5D88FA01E460FE00099DFA3 /* CommonUtil */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +251,9 @@
 		A5D88FA21E460FED0099DFA3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A562096C1E619C3400F8996A /* EachHistoryItem.swift */,
+				A562096A1E619C2100F8996A /* CommonHistoryItem.swift */,
+				A53613BD1EA5A3CF000EC46B /* EachThumbnailItem.swift */,
 				A580AEA71EE3D627009FCBCF /* Form.swift */,
 				A516D8B21ED1AD670044D67A /* Favorite.swift */,
 			);
@@ -270,7 +263,6 @@
 		A5D88FA31E460FF40099DFA3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				A59BF5BB1E86C50B002249E7 /* Data */,
 				A56209681E619C1600F8996A /* BaseViewModel.swift */,
 				A59BF5B31E86BA04002249E7 /* FooterViewModel.swift */,
 				A51A15B41EB5015E00BCFF5F /* HeaderViewModel.swift */,

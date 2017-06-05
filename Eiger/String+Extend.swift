@@ -29,4 +29,10 @@ extension String {
             return hasPrefix("https://")
         }
     }
+    
+    var domainAndPath: String {
+        get {
+            return self.components(separatedBy: "?").first!
+        }
+    }
 }

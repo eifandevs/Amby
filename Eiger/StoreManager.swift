@@ -84,10 +84,10 @@ final class StoreManager {
             // 有効なフォーム情報かを判定
             if ((form.inputs.count > 0) && (form.title != nil) && (form.url != nil) && (form.host != nil)) {
                 for input in form.inputs {
+                    // 入力済みのフォームが一つでもあれば保存する
                     if input.value.characters.count > 0 {
-                        // 入力済みのフォームが一つでもあれば保存する
                         let savedForm = StoreManager.shared.selectAllForm().filter({ (f) -> Bool in
-                            return form.url == f.url
+                            return form.url?.domainAndPath == f.url?.domainAndPath
                         }).first
                         if let unwrappedSavedForm = savedForm {
                             // すでに登録済みの場合は、まず削除する

@@ -157,7 +157,7 @@ class BaseViewModel {
                 fd.url = self!.eachHistory[self!.locationIndex].url
                 
                 let savedForm = StoreManager.shared.selectAllFavorite().filter({ (f) -> Bool in
-                    return fd.url == f.url
+                    return fd.url.domainAndPath == f.url.domainAndPath
                 }).first
                 if savedForm != nil {
                     // すでに登録済みの場合は、登録しない

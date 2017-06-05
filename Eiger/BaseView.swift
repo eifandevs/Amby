@@ -47,7 +47,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 
                 let forms = StoreManager.shared.selectAllForm()
                 for form in forms {
-                    if (self!.front.url?.absoluteString == form.url && !self!.isDoneAutoInput) {
+                    if (self!.front.url?.absoluteString.domainAndPath == form.url?.domainAndPath && !self!.isDoneAutoInput) {
                         Util.shared.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: {
                             for input in form.inputs {
                                 self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(input.value)\"") { (object, error) in
