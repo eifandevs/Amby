@@ -21,6 +21,8 @@ import UIKit
     static let sharedMyApplication = UIApplication.shared as! EGApplication
     
     override func sendEvent(_ event: UIEvent) {
+        // webviewでタッチイベントを検知するため
+        // タッチイベントをフックする
         if event.type == .touches {
             if let touches = event.allTouches, let touch = touches.first, touches.count == 1 {
                 switch touch.phase {
