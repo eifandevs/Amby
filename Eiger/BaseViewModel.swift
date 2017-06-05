@@ -19,6 +19,7 @@ protocol BaseViewModelDelegate {
     func baseViewModelDidHistoryForwardWebView()
     func baseViewModelDidSearchWebView(text: String)
     func baseViewModelDidRegisterAsForm()
+    func baseViewModelDidAutoScroll()
 }
 
 class BaseViewModel {
@@ -176,7 +177,11 @@ class BaseViewModel {
             log.debug("[BaseView Event]: baseViewModelWillRegisterAsForm")
             self!.delegate?.baseViewModelDidRegisterAsForm()
         }
-        
+        // webview自動スクロール
+        center.addObserver(forName: .baseViewModelWillAutoScroll, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillAutoScroll")
+            self!.delegate?.baseViewModelDidAutoScroll()
+        }
         // eachHistory読み込み
         do {
             let data = try Data(contentsOf: AppDataManager.shared.eachHistoryPath)

@@ -21,6 +21,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     var delegate: BaseViewDelegate?
 
     private var front: EGWebView!
+    private let autoScrollSpeed: CGFloat = 0.25
     var webViews: [EGWebView?] = []
     private let viewModel = BaseViewModel()
     private var scrollMovingPointY: CGFloat = 0
@@ -31,6 +32,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             delegate?.baseViewDidTouch(touch: isTouching)
         }
     }
+    // 自動スクロール
+    private var autoScrollTimer: Timer? = nil
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -454,5 +457,27 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     func baseViewModelDidRegisterAsForm() {
         StoreManager.shared.storeForm(webView: front)
+    }
+    
+    func baseViewModelDidAutoScroll() {
+        if autoScrollTimer != nil || autoScrollTimer?.isValid == true {
+            autoScrollTimer?.invalidate()
+            autoScrollTimer = nil
+        } else {
+            autoScrollTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.updateAutoScrolling), userInfo: nil, repeats: true)
+            autoScrollTimer?.fire()
+        }
+    }
+
+// MARK: 自動スクロールタイマー通知
+    func updateAutoScrolling(sender: Timer) {
+        let bottomOffset = front.scrollView.contentSize.height - front.scrollView.bounds.size.height + front.scrollView.contentInset.bottom
+        if (front.scrollView.contentOffset.y >= bottomOffset) {
+            sender.invalidate()
+            autoScrollTimer = nil
+            front.scrollView.scroll(to: .bottom, animated: false)
+        } else {
+            front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y + autoScrollSpeed), animated: false)
+        }
     }
 }

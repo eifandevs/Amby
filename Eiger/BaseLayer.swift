@@ -50,6 +50,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
             button.setTitle("自動スクロール", for: .normal)
             _ = button.reactive.tap
                 .observe { _ in
+                    NotificationCenter.default.post(name: .baseViewModelWillAutoScroll, object: nil)
             }
             addSubview(button)
         }
