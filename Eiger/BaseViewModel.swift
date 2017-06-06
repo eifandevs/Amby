@@ -156,16 +156,13 @@ class BaseViewModel {
                 fd.title = self!.eachHistory[self!.locationIndex].title
                 fd.url = self!.eachHistory[self!.locationIndex].url
                 
-                let savedForm = StoreManager.shared.selectAllFavorite().filter({ (f) -> Bool in
-                    return fd.url.domainAndPath == f.url.domainAndPath
-                }).first
-                if savedForm != nil {
+                if StoreManager.shared.existSameFavorite(url: fd.url) {
                     // すでに登録済みの場合は、登録しない
                     Util.shared.presentWarning(title: "登録エラー", message: "すでに登録済みです。")
                 } else {
                     StoreManager.shared.insertWithRLMObjects(data: [fd])
-                    
-                    log.debug(StoreManager.shared.selectAllFavorite())
+                    // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
+                    self!.center.post(name: .headerViewModelWillChangeFavorite, object: fd.url)
                     Util.shared.presentWarning(title: "登録完了", message: "お気に入りに登録しました。")
                 }
             } else {
@@ -214,6 +211,9 @@ class BaseViewModel {
     
     func saveHistory(wv: EGWebView) {
         if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle {
+            // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
+            center.post(name: .headerViewModelWillChangeFavorite, object: requestUrl)
+
             // Common History
             let common = CommonHistoryItem(url: requestUrl, title: requestTitle, date: Date())
             commonHistory.append(common)

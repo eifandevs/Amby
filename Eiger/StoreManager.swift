@@ -35,6 +35,13 @@ final class StoreManager {
         return realm.objects(Favorite.self).map { $0 }
     }
     
+    func existSameFavorite(url: String) -> Bool {
+        let savedFavorite = StoreManager.shared.selectAllFavorite().filter({ (f) -> Bool in
+            return url.domainAndPath == f.url.domainAndPath
+        }).first
+        return savedFavorite != nil
+    }
+    
     // Form
     func selectAllForm() -> [Form] {
         return realm.objects(Form.self).map { $0 }

@@ -201,4 +201,17 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     func headerViewModelDidChangeField(text: String) {
         headerField.text = text
     }
+    
+    func headerViewModelDidChangeFavorite(url: String) {
+        var tintedImage: UIImage? = nil
+        if StoreManager.shared.existSameFavorite(url: url) {
+            // すでに登録済みの場合は、お気に入りボタンの色を変更する
+            tintedImage = #imageLiteral(resourceName: "favorite_webview_selected").withRenderingMode(.alwaysTemplate)
+            favoriteButton.tintColor = UIColor.frenchBlue
+        } else {
+            tintedImage = #imageLiteral(resourceName: "favorite_webview").withRenderingMode(.alwaysTemplate)
+            favoriteButton.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        }
+        favoriteButton.setImage(tintedImage, for: .normal)
+    }
 }

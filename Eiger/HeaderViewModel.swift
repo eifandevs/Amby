@@ -12,6 +12,7 @@ import UIKit
 protocol HeaderViewModelDelegate {
     func headerViewModelDidChangeProgress(progress: CGFloat)
     func headerViewModelDidChangeField(text: String)
+    func headerViewModelDidChangeFavorite(url: String)
 }
 
 class HeaderViewModel {
@@ -28,6 +29,11 @@ class HeaderViewModel {
         // プログレス更新
         center.addObserver(forName: .headerViewModelWillChangeProgress, object: nil, queue: nil) { [weak self] (notification) in
             self!.delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
+        }
+        // 読み込み終了
+        center.addObserver(forName: .headerViewModelWillChangeFavorite, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[HeaderView Event]: headerViewModelWillChangeFavorite")
+            self!.delegate?.headerViewModelDidChangeFavorite(url: notification.object as! String)
         }
         // ヘッダーURL更新
         center.addObserver(forName: .headerViewModelWillChangeField, object: nil, queue: nil) { [weak self] (notification) in
