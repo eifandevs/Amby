@@ -54,7 +54,7 @@ class EGTextField: UIButton, ShadowView {
         textField.borderStyle = .none
         textField.keyboardType = .default
         textField.delegate = delegate
-        textField.placeholder = "検索 / URL / 位置検索(@)"
+        textField.placeholder = "検索 / URL"
         textField.text = pastLabelText
         textField.becomeFirstResponder()
         addSubview(textField)
