@@ -8,14 +8,16 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, BaseLayerDelegate {
     
     private var baseLayer: BaseLayer! = nil
+    private var frontLayer: FrontLayer! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
         baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
+        baseLayer.delegate = self
         view.addSubview(baseLayer)
     }
     
@@ -27,4 +29,12 @@ class BaseViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+// MARK: BaseLayer Delegate
+    
+    func baseLayerDidEdgeSwiped() {
+        frontLayer = FrontLayer(frame: baseLayer.frame)
+        view.addSubview(frontLayer)
+    }
+
 }

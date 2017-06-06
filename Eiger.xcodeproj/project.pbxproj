@@ -34,6 +34,8 @@
 		A5800E7F1E565E48004A1AF0 /* UIColor+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5800E7E1E565E48004A1AF0 /* UIColor+Extend.swift */; };
 		A580AEA81EE3D627009FCBCF /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = A580AEA71EE3D627009FCBCF /* Form.swift */; };
 		A580AEAC1EE3E2D9009FCBCF /* UIView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A580AEAB1EE3E2D9009FCBCF /* UIView+Extend.swift */; };
+		A580AEAE1EE6DAB7009FCBCF /* FrontLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A580AEAD1EE6DAB7009FCBCF /* FrontLayer.swift */; };
+		A580AEB01EE6DAC6009FCBCF /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A580AEAF1EE6DAC6009FCBCF /* CircleMenu.swift */; };
 		A58138591E8F442900612AE4 /* UIImage+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58138581E8F442900612AE4 /* UIImage+Extend.swift */; };
 		A58581011E59D0B700CCC098 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A58581001E59D0B700CCC098 /* offline.html */; };
 		A59BF5B41E86BA05002249E7 /* FooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59BF5B31E86BA04002249E7 /* FooterViewModel.swift */; };
@@ -80,6 +82,8 @@
 		A5800E7E1E565E48004A1AF0 /* UIColor+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extend.swift"; sourceTree = "<group>"; };
 		A580AEA71EE3D627009FCBCF /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		A580AEAB1EE3E2D9009FCBCF /* UIView+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extend.swift"; sourceTree = "<group>"; };
+		A580AEAD1EE6DAB7009FCBCF /* FrontLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontLayer.swift; sourceTree = "<group>"; };
+		A580AEAF1EE6DAC6009FCBCF /* CircleMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenu.swift; sourceTree = "<group>"; };
 		A58138581E8F442900612AE4 /* UIImage+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extend.swift"; sourceTree = "<group>"; };
 		A58581001E59D0B700CCC098 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
 		A59BF5B31E86BA04002249E7 /* FooterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterViewModel.swift; sourceTree = "<group>"; };
@@ -229,6 +233,15 @@
 			path = Eiger;
 			sourceTree = "<group>";
 		};
+		A580AEB11EE6DACB009FCBCF /* FrontLayer */ = {
+			isa = PBXGroup;
+			children = (
+				A580AEAD1EE6DAB7009FCBCF /* FrontLayer.swift */,
+				A580AEAF1EE6DAC6009FCBCF /* CircleMenu.swift */,
+			);
+			name = FrontLayer;
+			sourceTree = "<group>";
+		};
 		A5D88FA01E460FE00099DFA3 /* CommonUtil */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +256,7 @@
 		A5D88FA11E460FE70099DFA3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A580AEB11EE6DACB009FCBCF /* FrontLayer */,
 				A55A602E1E6AF342005C03F3 /* BaseLayer */,
 			);
 			name = Views;
@@ -448,6 +462,7 @@
 				A562096D1E619C3400F8996A /* EachHistoryItem.swift in Sources */,
 				A5D88FC01E4F1F130099DFA3 /* DeviceDataManager.swift in Sources */,
 				A562096F1E619C4100F8996A /* EGProgressBar.swift in Sources */,
+				A580AEAE1EE6DAB7009FCBCF /* FrontLayer.swift in Sources */,
 				A55A60321E6AF454005C03F3 /* HeaderView.swift in Sources */,
 				A516D8B51ED1AD9A0044D67A /* StoreManager.swift in Sources */,
 				A58138591E8F442900612AE4 /* UIImage+Extend.swift in Sources */,
@@ -469,6 +484,7 @@
 				A51A15B51EB5015E00BCFF5F /* HeaderViewModel.swift in Sources */,
 				A55E0E831E6C417B00278D8A /* ShadowView.swift in Sources */,
 				A55E0E8B1E7D070400278D8A /* EGGradientLabel.swift in Sources */,
+				A580AEB01EE6DAC6009FCBCF /* CircleMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

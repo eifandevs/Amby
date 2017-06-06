@@ -9,8 +9,14 @@
 import Foundation
 import UIKit
 
+protocol BaseLayerDelegate {
+    func baseLayerDidEdgeSwiped()
+}
+
 class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     
+    var delegate: BaseLayerDelegate?
+
     private let headerView: HeaderView = HeaderView()
     private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceDataManager.shared.displaySize.height - AppDataManager.shared.thumbnailSize.height, width: DeviceDataManager.shared.displaySize.width, height: AppDataManager.shared.thumbnailSize.height))
     private let baseView: BaseView = BaseView()
@@ -155,6 +161,10 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     }
     
 // MARK: BaseView Delegate
+    
+    func baseViewDidEdgeSwiped() {
+        delegate?.baseLayerDidEdgeSwiped()
+    }
     
     func baseViewDidTouch(touch: Bool) {
         // タッチ終了時にheaderViewのサイズを調整する

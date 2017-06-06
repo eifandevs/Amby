@@ -14,6 +14,13 @@ import Bond
 protocol BaseViewDelegate {
     func baseViewDidScroll(speed: CGFloat)
     func baseViewDidTouch(touch: Bool)
+    func baseViewDidEdgeSwiped()
+}
+
+enum EdgeSwipeDirection: CGFloat {
+    case right = 1
+    case left = -1
+    case none = 0
 }
 
 class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDelegate, WKUIDelegate, EGApplicationDelegate, BaseViewModelDelegate {
@@ -25,7 +32,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     var webViews: [EGWebView?] = []
     private let viewModel = BaseViewModel()
     private var scrollMovingPointY: CGFloat = 0
+    // キーボード表示中フラグ
     private var isDisplayedKeyBoard = false
+    // 自動スクロール中フラグ
     private var isDoneAutoInput = false
     private var isTouching = false {
         didSet {
@@ -34,6 +43,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     // 自動スクロール
     private var autoScrollTimer: Timer? = nil
+    // エッジスワイプ有効範囲
+    private let kEdgeSwipeErea: CGFloat = 11.0
+    // スワイプ方向
+    private var swipeDirection: EdgeSwipeDirection = .none
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -96,9 +109,26 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     internal func screenTouchBegan(touch: UITouch) {
         isTouching = true
+        let touchPoint = touch.location(in: self)
+        if touchPoint.x < kEdgeSwipeErea {
+            swipeDirection = .right
+        } else if touchPoint.x > self.bounds.size.width - kEdgeSwipeErea {
+            swipeDirection = .left
+        } else {
+            swipeDirection = .none
+        }
     }
     
     internal func screenTouchMoved(touch: UITouch) {
+        if front.scrollView.isScrollEnabled {
+            let touchPoint = touch.location(in: self)
+            if ((swipeDirection == .right && touchPoint.x > kEdgeSwipeErea + 20) ||
+                (swipeDirection == .left && touchPoint.x < self.bounds.width - kEdgeSwipeErea - 20)) {
+                // エッジスワイプ検知
+                invalidateUserInteraction()
+                delegate?.baseViewDidEdgeSwiped()
+            }
+        }
     }
     
     internal func screenTouchEnded(touch: UITouch) {
@@ -294,6 +324,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
 
 // MARK: Private Method
+    
+    private func invalidateUserInteraction() {
+        isUserInteractionEnabled = false
+        front.scrollView.isScrollEnabled = false
+        front.scrollView.bounces = false
+    }
     
     private func startProgressObserving(target: EGWebView) {
         log.debug("start progress observe. target: \(target.context)")
