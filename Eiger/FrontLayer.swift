@@ -9,8 +9,14 @@
 import Foundation
 import UIKit
 
-class FrontLayer: UIView {
-    let kCircleButtonRadius = 50;
+protocol FrontLayerDelegate {
+    func frontLayerDidInvalidate()
+}
+
+class FrontLayer: UIView, CircleMenuDelegate {
+    var delegate: FrontLayerDelegate?
+
+    let kCircleButtonRadius = 43;
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,7 +27,35 @@ class FrontLayer: UIView {
     }
     
     override func didMoveToSuperview() {
-        let circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: 100, y: 100), size: CGSize(width: kCircleButtonRadius, height: kCircleButtonRadius)))
+        let menuItems = [
+            [
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("たあっぷお")
+                }),
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("たあっぷお")
+                }),
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("たあっぷお")
+                }),
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("たあっぷお")
+                }),
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("たあっぷお")
+                }),
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("たあっぷお")
+                })
+            ]
+        ]
+        let circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: kCircleButtonRadius, height: kCircleButtonRadius)) ,menuItems: menuItems)
+        circleMenu.delegate = self
         addSubview(circleMenu)
+    }
+    
+// MARK: CircleMenu Delegate
+    func circleMenuDidClose() {
+        delegate?.frontLayerDidInvalidate()
     }
 }

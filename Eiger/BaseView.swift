@@ -43,8 +43,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     // 自動スクロール
     private var autoScrollTimer: Timer? = nil
-    // エッジスワイプ有効範囲
-    private let kEdgeSwipeErea: CGFloat = 11.0
     // スワイプ方向
     private var swipeDirection: EdgeSwipeDirection = .none
     
@@ -110,9 +108,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     internal func screenTouchBegan(touch: UITouch) {
         isTouching = true
         let touchPoint = touch.location(in: self)
-        if touchPoint.x < kEdgeSwipeErea {
+        if touchPoint.x < AppDataManager.shared.edgeSwipeErea {
             swipeDirection = .right
-        } else if touchPoint.x > self.bounds.size.width - kEdgeSwipeErea {
+        } else if touchPoint.x > self.bounds.size.width - AppDataManager.shared.edgeSwipeErea {
             swipeDirection = .left
         } else {
             swipeDirection = .none
@@ -122,8 +120,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     internal func screenTouchMoved(touch: UITouch) {
         if front.scrollView.isScrollEnabled {
             let touchPoint = touch.location(in: self)
-            if ((swipeDirection == .right && touchPoint.x > kEdgeSwipeErea + 20) ||
-                (swipeDirection == .left && touchPoint.x < self.bounds.width - kEdgeSwipeErea - 20)) {
+            if ((swipeDirection == .right && touchPoint.x > AppDataManager.shared.edgeSwipeErea + 20) ||
+                (swipeDirection == .left && touchPoint.x < self.bounds.width - AppDataManager.shared.edgeSwipeErea - 20)) {
                 // エッジスワイプ検知
                 invalidateUserInteraction()
                 delegate?.baseViewDidEdgeSwiped()
@@ -323,6 +321,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y - pt), animated: false)
     }
 
+    func validateUserInteraction() {
+        EGApplication.sharedMyApplication.egDelegate = self
+        isUserInteractionEnabled = true
+        front.scrollView.isScrollEnabled = true
+        front.scrollView.bounces = true
+    }
+    
 // MARK: Private Method
     
     private func invalidateUserInteraction() {

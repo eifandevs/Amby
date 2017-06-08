@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseViewController: UIViewController, BaseLayerDelegate {
+class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegate {
     
     private var baseLayer: BaseLayer! = nil
     private var frontLayer: FrontLayer! = nil
@@ -31,10 +31,17 @@ class BaseViewController: UIViewController, BaseLayerDelegate {
     }
     
 // MARK: BaseLayer Delegate
-    
-    func baseLayerDidEdgeSwiped() {
+    func baseLayerDidInvalidate() {
         frontLayer = FrontLayer(frame: baseLayer.frame)
+        frontLayer.delegate = self
         view.addSubview(frontLayer)
+    }
+    
+// MARK: FrontLayer Delegate
+    func frontLayerDidInvalidate() {
+        frontLayer.removeFromSuperview()
+        frontLayer = nil
+        baseLayer.validateUserInteraction()
     }
 
 }

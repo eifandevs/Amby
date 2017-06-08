@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol BaseLayerDelegate {
-    func baseLayerDidEdgeSwiped()
+    func baseLayerDidInvalidate()
 }
 
 class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
@@ -140,6 +140,12 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
             baseView.scroll(pt: -val)
         }
     }
+    
+// MARK: Public Method
+    func validateUserInteraction() {
+        baseView.validateUserInteraction()
+    }
+    
 // MARK: HeaderView Delegate
     
     func headerViewDidBeginEditing() {
@@ -163,7 +169,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
 // MARK: BaseView Delegate
     
     func baseViewDidEdgeSwiped() {
-        delegate?.baseLayerDidEdgeSwiped()
+        delegate?.baseLayerDidInvalidate()
     }
     
     func baseViewDidTouch(touch: Bool) {

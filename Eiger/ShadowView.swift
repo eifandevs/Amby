@@ -27,6 +27,13 @@ extension ShadowView where Self: UIView {
         layer.shadowOpacity = 0.3
         layer.masksToBounds = false
     }
+    
+    func addCircleShadow() {
+        layer.shadowOffset = CGSize(width: 0, height: 0.65)
+        layer.shadowRadius = 0.4
+        layer.shadowOpacity = 0.5
+        layer.masksToBounds = false
+    }
 }
 
 extension ShadowView where Self: UIButton {

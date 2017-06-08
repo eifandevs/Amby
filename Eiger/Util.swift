@@ -54,3 +54,60 @@ class Util {
         Util.shared.foregroundViewController().present(alert, animated: true, completion: nil)
     }
 }
+
+func *(left: CGSize, right: CGFloat) -> CGSize {
+    return CGSize(width: left.width * right, height: left.height * right)
+}
+
+func +(left: CGSize, right: CGSize) -> CGSize {
+    return CGSize(width: left.width + right.width, height: left.height + right.height)
+}
+
+func -(left: CGSize, right: CGSize) -> CGSize {
+    return CGSize(width: left.width - right.width, height: left.height - right.height)
+}
+
+func *(left: CGSize, right: CGSize) -> CGSize {
+    return CGSize(width: left.width * right.width, height: left.height * right.height)
+}
+
+func +(left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint(x: left.x + right.x, y: left.y + right.y)
+}
+
+func -(left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint(x: left.x - right.x, y: left.y - right.y)
+    
+}
+
+func *(left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPoint(x: left.x * right.x, y: left.y * right.y)
+}
+
+func *(left: CGPoint, right: CGFloat) -> CGPoint {
+    return CGPoint(x: left.x * right, y: left.y * right)
+}
+
+func *= ( left: inout CGSize, right: CGSize) {
+    left = left * right
+}
+
+func *= (left: inout CGSize, right: CGFloat) {
+    left = left * right
+}
+
+func += (left: inout CGSize, right: CGSize) {
+    left = left + right
+}
+
+func *= (left: inout CGPoint, right: CGPoint) {
+    left = left * right
+}
+
+func *= (left: inout CGPoint, right: CGFloat) {
+    left = left * right
+}
+
+func += (left: inout CGPoint, right: CGPoint) {
+    left = left + right
+}

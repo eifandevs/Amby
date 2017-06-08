@@ -14,6 +14,7 @@ class AppDataManager {
     let progressMin = 0.1
     let headerViewHeight = 45 + DeviceDataManager.shared.statusBarHeight
     let headerFieldWidth = DeviceDataManager.shared.displaySize.width / 1.8
+    let edgeSwipeErea: CGFloat = 15.0
     let thumbnailSize = CGSize(width: 105, height: 105 * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
     let searchPath = "https://www.google.co.jp/search?q="
     let defaultUrlKey = "defaultUrl"
