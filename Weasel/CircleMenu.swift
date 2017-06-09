@@ -20,7 +20,13 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
     var isEdgeSwiping = true
     var isClosing = false
     var progress: CircleProgress! = nil
-    var circleMenuItems: [[CircleMenuItem]] = []
+    var circleMenuItemGroup: [[CircleMenuItem]] = []
+    var menuIndex: Int = 0
+    var circleMenuItems: [CircleMenuItem] {
+        get {
+            return circleMenuItemGroup[menuIndex]
+        }
+    }
     let circleMenuLocations: [CGPoint] = [
         CGPoint(x: 0, y: -110), // Upper
         CGPoint(x: 57, y: -82), // UpperRight
@@ -46,7 +52,7 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
     
     convenience init(frame: CGRect, menuItems: [[CircleMenuItem]]) {
         self.init(frame: frame)
-        circleMenuItems = menuItems
+        circleMenuItemGroup = menuItems
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -64,10 +70,13 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
             if initialPt == nil {
                 initialPt = pt
                 // CircleMenuItemを作成する
-                for (index, circleMenuItem) in circleMenuItems.first!.enumerated() {
+                for (index, circleMenuItem) in circleMenuItems.enumerated() {
                     circleMenuItem.frame.size = self.frame.size
-                    circleMenuItem.center = center + circleMenuLocations[index]
+                    circleMenuItem.center = initialPt!
                     superview!.addSubview(circleMenuItem)
+                    UIView.animate(withDuration: 0.25, animations: { 
+                        circleMenuItem.center = self.center + self.circleMenuLocations[index]
+                    })
                 }
             }
             
@@ -147,7 +156,15 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
         }) { (finished) in
             if finished {
                 self.progress.start {
-                    self.delegate?.circleMenuDidClose()
+                    UIView.animate(withDuration: 0.15, animations: {
+                        self.circleMenuItems.forEach({ (menuItem) in
+                            menuItem.center = self.initialPt!
+                        })
+                    }, completion: { (finished) in
+                        if finished {
+                            self.delegate?.circleMenuDidClose()
+                        }
+                    })
                 }
             }
         }
