@@ -18,7 +18,7 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
 
     var initialPt: CGPoint? = nil
     var isEdgeSwiping = true
-    var isClosing = false
+    var isEdgeClosing = false
     var progress: CircleProgress! = nil
     var circleMenuItemGroup: [[CircleMenuItem]] = []
     var menuIndex: Int = 0
@@ -27,15 +27,20 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
             return circleMenuItemGroup[menuIndex]
         }
     }
-    let circleMenuLocations: [CGPoint] = [
-        CGPoint(x: 0, y: -110), // Upper
-        CGPoint(x: 57, y: -82), // UpperRight
-        CGPoint(x: 92, y: -30), // RightUpper
-        CGPoint(x: 92, y:  30), // RightLower
-        CGPoint(x: 57, y: 82), // LowerRight
-        CGPoint(x: 0, y: 110) // Lower
-    ]
     
+    var circleMenuLocations: [CGPoint] {
+        get {
+            let i = self.center.x < DeviceDataManager.shared.displaySize.width / 2 ? 1 : -1
+            return [
+                CGPoint(x: 0, y: -110), // Upper
+                CGPoint(x: i*57, y: -82), // UpperRight
+                CGPoint(x: i*92, y: -30), // RightUpper
+                CGPoint(x: i*92, y:  30), // RightLower
+                CGPoint(x: i*57, y: 82), // LowerRight
+                CGPoint(x: 0, y: 110) // Lower
+            ]
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,56 +68,37 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
     }
     
     internal func screenTouchMoved(touch: UITouch) {
-        if !isClosing && isEdgeSwiping {
+        if !isEdgeClosing && isEdgeSwiping {
             let pt = touch.location(in: superview!)
             center = pt
 
+            // CircleMenuItemを作成する
             if initialPt == nil {
                 initialPt = pt
-                // CircleMenuItemを作成する
                 for (index, circleMenuItem) in circleMenuItems.enumerated() {
                     circleMenuItem.frame.size = self.frame.size
                     circleMenuItem.center = initialPt!
                     superview!.addSubview(circleMenuItem)
-                    UIView.animate(withDuration: 0.25, animations: { 
+                    UIView.animate(withDuration: 0.15, animations: {
                         circleMenuItem.center = self.center + self.circleMenuLocations[index]
                     })
                 }
             }
             
-            if center.x < AppDataManager.shared.edgeSwipeErea * 0.98 {
-                isClosing = true
-                isUserInteractionEnabled = false
-                UIView.animate(withDuration: 0.2, animations: { 
-                    self.center.x = -1 * self.frame.size.width / 2
-                }, completion: { (finished) in
-                    if finished {
-                        self.delegate?.circleMenuDidClose()
-                    }
-                })
-            } else if center.x > DeviceDataManager.shared.displaySize.width * 0.98 {
-                isClosing = true
-                isUserInteractionEnabled = false
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.center.x = DeviceDataManager.shared.displaySize.width + self.frame.size.width / 2
-                }, completion: { (finished) in
-                    if finished {
-                        self.delegate?.circleMenuDidClose()
-                    }
-                })
-            }
+            // エッジクローズを検知する
+            edgeClose()
         }
     }
     
     internal func screenTouchEnded(touch: UITouch) {
-        if !isClosing && isEdgeSwiping {
+        if !isEdgeClosing && isEdgeSwiping {
             isEdgeSwiping = false
             startCloseAnimation()
         }
     }
     
     internal func screenTouchCancelled(touch: UITouch) {
-        if !isClosing && isEdgeSwiping {
+        if !isEdgeClosing && isEdgeSwiping {
             isEdgeSwiping = false
             startCloseAnimation()
         }
@@ -120,7 +106,7 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
     
 // MARK: Touch Event
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !isClosing {
+        if !isEdgeClosing {
             progress.invalidate()
             let pt = touches.first!.location(in: superview!)
             initialPt = pt
@@ -128,23 +114,24 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !isClosing {
+        if !isEdgeClosing {
             let touch = touches.first!
             let newPt = touch.location(in: superview!)
             let oldPt = touch.previousLocation(in: superview!)
             let diff = newPt - oldPt
             center = center + diff
+            edgeClose()
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !isClosing {
+        if !isEdgeClosing {
             startCloseAnimation()
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !isClosing {
+        if !isEdgeClosing {
             startCloseAnimation()
         }
     }
@@ -167,6 +154,36 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
                     })
                 }
             }
+        }
+    }
+    
+    private func edgeClose() {
+        if center.x < AppDataManager.shared.edgeSwipeErea * 0.98 {
+            isEdgeClosing = true
+            isUserInteractionEnabled = false
+            UIView.animate(withDuration: 0.2, animations: {
+                self.center.x = -1 * self.frame.size.width / 2
+                self.circleMenuItems.forEach({ (item) in
+                    item.center = CGPoint(x: -1 * self.frame.size.width / 2, y: self.center.y)
+                })
+            }, completion: { (finished) in
+                if finished {
+                    self.delegate?.circleMenuDidClose()
+                }
+            })
+        } else if center.x > DeviceDataManager.shared.displaySize.width * 0.98 {
+            isEdgeClosing = true
+            isUserInteractionEnabled = false
+            UIView.animate(withDuration: 0.2, animations: {
+                self.center.x = DeviceDataManager.shared.displaySize.width + self.frame.size.width / 2
+                self.circleMenuItems.forEach({ (item) in
+                    item.center = CGPoint(x: DeviceDataManager.shared.displaySize.width + self.frame.size.width / 2, y: self.center.y)
+                })
+            }, completion: { (finished) in
+                if finished {
+                    self.delegate?.circleMenuDidClose()
+                }
+            })
         }
     }
     
