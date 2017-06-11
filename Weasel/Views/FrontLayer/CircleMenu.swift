@@ -16,7 +16,8 @@ protocol CircleMenuDelegate {
 class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
     var delegate: CircleMenuDelegate?
 
-    var initialPt: CGPoint? = nil
+    private var initialPt: CGPoint? = nil
+    var swipeDirection: EdgeSwipeDirection = .none
     var isEdgeSwiping = true
     var isEdgeClosing = false
     var progress: CircleProgress! = nil
@@ -30,7 +31,7 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
     
     var circleMenuLocations: [CGPoint] {
         get {
-            let i = self.center.x < DeviceDataManager.shared.displaySize.width / 2 ? 1 : -1
+            let i = swipeDirection == .left ? 1 : -1
             return [
                 CGPoint(x: 0, y: -110), // Upper
                 CGPoint(x: i*57, y: -82), // UpperRight

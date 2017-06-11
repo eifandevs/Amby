@@ -14,7 +14,7 @@ import Bond
 protocol BaseViewDelegate {
     func baseViewDidScroll(speed: CGFloat)
     func baseViewDidTouch(touch: Bool)
-    func baseViewDidEdgeSwiped()
+    func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection)
 }
 
 enum EdgeSwipeDirection: CGFloat {
@@ -109,9 +109,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         isTouching = true
         let touchPoint = touch.location(in: self)
         if touchPoint.x < AppDataManager.shared.edgeSwipeErea {
-            swipeDirection = .right
-        } else if touchPoint.x > self.bounds.size.width - AppDataManager.shared.edgeSwipeErea {
             swipeDirection = .left
+        } else if touchPoint.x > self.bounds.size.width - AppDataManager.shared.edgeSwipeErea {
+            swipeDirection = .right
         } else {
             swipeDirection = .none
         }
@@ -120,11 +120,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     internal func screenTouchMoved(touch: UITouch) {
         if front.scrollView.isScrollEnabled {
             let touchPoint = touch.location(in: self)
-            if ((swipeDirection == .right && touchPoint.x > AppDataManager.shared.edgeSwipeErea + 20) ||
-                (swipeDirection == .left && touchPoint.x < self.bounds.width - AppDataManager.shared.edgeSwipeErea - 20)) {
+            if ((swipeDirection == .left && touchPoint.x > AppDataManager.shared.edgeSwipeErea + 20) ||
+                (swipeDirection == .right && touchPoint.x < self.bounds.width - AppDataManager.shared.edgeSwipeErea - 20)) {
                 // エッジスワイプ検知
                 invalidateUserInteraction()
-                delegate?.baseViewDidEdgeSwiped()
+                delegate?.baseViewDidEdgeSwiped(direction: swipeDirection)
             }
         }
     }

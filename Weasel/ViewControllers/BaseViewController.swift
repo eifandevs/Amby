@@ -31,8 +31,9 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
     }
     
 // MARK: BaseLayer Delegate
-    func baseLayerDidInvalidate() {
+    func baseLayerDidInvalidate(direction: EdgeSwipeDirection) {
         frontLayer = FrontLayer(frame: baseLayer.frame)
+        frontLayer.swipeDirection = direction
         frontLayer.delegate = self
         view.addSubview(frontLayer)
     }

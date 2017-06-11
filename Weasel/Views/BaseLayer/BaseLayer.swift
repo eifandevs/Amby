@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol BaseLayerDelegate {
-    func baseLayerDidInvalidate()
+    func baseLayerDidInvalidate(direction: EdgeSwipeDirection)
 }
 
 class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
@@ -168,8 +168,8 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     
 // MARK: BaseView Delegate
     
-    func baseViewDidEdgeSwiped() {
-        delegate?.baseLayerDidInvalidate()
+    func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection) {
+        delegate?.baseLayerDidInvalidate(direction: direction)
     }
     
     func baseViewDidTouch(touch: Bool) {

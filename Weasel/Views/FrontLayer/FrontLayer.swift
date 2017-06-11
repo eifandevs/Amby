@@ -15,6 +15,7 @@ protocol FrontLayerDelegate {
 
 class FrontLayer: UIView, CircleMenuDelegate {
     var delegate: FrontLayerDelegate?
+    var swipeDirection: EdgeSwipeDirection = .none
 
     let kCircleButtonRadius = 43;
     
@@ -50,6 +51,7 @@ class FrontLayer: UIView, CircleMenuDelegate {
             ]
         ]
         let circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: kCircleButtonRadius, height: kCircleButtonRadius)) ,menuItems: menuItems)
+        circleMenu.swipeDirection = swipeDirection
         circleMenu.delegate = self
         addSubview(circleMenu)
     }
