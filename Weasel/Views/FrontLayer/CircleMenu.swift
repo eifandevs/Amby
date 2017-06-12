@@ -13,7 +13,7 @@ protocol CircleMenuDelegate {
     func circleMenuDidClose()
 }
 
-class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
+class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     var delegate: CircleMenuDelegate?
 
     private var initialPt: CGPoint? = nil
@@ -63,6 +63,9 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+// MARK: Public Method
+
     
 // MARK: EGApplication Delegate
     internal func screenTouchBegan(touch: UITouch) {
@@ -86,6 +89,8 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
                 }
             }
             
+            // CircleMenuとCircleMenuItemの重なり検知
+            collisionLoop()
             // エッジクローズを検知する
             edgeClose()
         }
@@ -109,8 +114,6 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !isEdgeClosing {
             progress.invalidate()
-            let pt = touches.first!.location(in: superview!)
-            initialPt = pt
         }
     }
     
@@ -121,12 +124,26 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
             let oldPt = touch.previousLocation(in: superview!)
             let diff = newPt - oldPt
             center = center + diff
+            // CircleMenuとCircleMenuItemの重なり検知
+            collisionLoop()
+            // エッジクローズ検知
             edgeClose()
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !isEdgeClosing {
+            // CircleMenu押下判定
+            if  center == initialPt! {
+                // サークルメニューアイテムを切り替える
+                let currentCircleMenuItems = circleMenuItems
+                menuIndex = menuIndex + 1 == circleMenuItemGroup.count ? 0 : menuIndex + 1
+                for (index, item) in currentCircleMenuItems.enumerated() {
+                    circleMenuItems[index].frame = item.frame
+                    superview!.addSubview(circleMenuItems[index])
+                    item.removeFromSuperview()
+                }
+            }
             startCloseAnimation()
         }
     }
@@ -143,16 +160,45 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
             self.center = self.initialPt!
         }) { (finished) in
             if finished {
-                self.progress.start {
-                    UIView.animate(withDuration: 0.15, animations: {
+                if self.executeCircleMenuAction() {
+                    UIView.animate(withDuration: 0.2, animations: {
                         self.circleMenuItems.forEach({ (menuItem) in
-                            menuItem.center = self.initialPt!
+                            if menuItem.scheduledAction {
+                                menuItem.transform = CGAffineTransform(scaleX: 2, y: 2)
+                            } else {
+                                menuItem.center = self.initialPt!
+                            }
                         })
                     }, completion: { (finished) in
                         if finished {
-                            self.delegate?.circleMenuDidClose()
+                            self.alpha = 0
+                            self.circleMenuItems.forEach({ (menuItem) in
+                                if menuItem.scheduledAction {
+                                    UIView.animate(withDuration: 0.2, animations: {
+                                        menuItem.alpha = 0
+                                    }, completion: { (finished) in
+                                        if finished {
+                                            self.delegate?.circleMenuDidClose()
+                                        }
+                                    })
+                                } else {
+                                    menuItem.alpha = 0
+                                }
+                            })
                         }
                     })
+                } else {
+                    self.progress.start {
+                        UIView.animate(withDuration: 0.2, animations: {
+                            self.circleMenuItems.forEach({ (menuItem) in
+                                menuItem.center = self.initialPt!
+                            })
+                        }, completion: { (finished) in
+                            if finished {
+                                self.delegate?.circleMenuDidClose()
+                            }
+                        })
+                    }
                 }
             }
         }
@@ -188,4 +234,53 @@ class CircleMenu: UIView, ShadowView, CircleView, EGApplicationDelegate {
         }
     }
     
+    private func collisionLoop() {
+        // CircleMenuとCircleMenuItemの重なりを検知
+        for item in self.circleMenuItems {
+            if (detectCollision(a: self.frame, b: item.frame)) {
+                if item.isValid == false && item.scheduledAction == false {
+                    // 他のitemを無効にする
+                    for v in self.circleMenuItems {
+                        v.scheduledAction = false
+                        v.backgroundColor = UIColor.gray
+                    }
+                    
+                    item.scheduledAction = true
+                    item.isValid = true
+                    item.backgroundColor = UIColor.frenchBlue
+                    UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseIn, animations: {
+                        item.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+                    }, completion: nil)
+                }
+            } else {
+                if item.isValid {
+                    item.backgroundColor = UIColor.gray
+                    item.scheduledAction = false
+                    item.isValid = false
+                    UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseOut, animations: {
+                        item.transform = CGAffineTransform.identity
+                    }, completion: nil)
+                }
+                
+            }
+        }
+    }
+    
+    private func detectCollision(a: CGRect, b: CGRect) -> Bool {
+        let distance = a.origin.distance(pt: b.origin)
+        if (distance < ((a.size.width / 2) + (b.size.width / 2))) {
+            return true
+        }
+        return false
+    }
+    
+    private func executeCircleMenuAction() -> Bool {
+        for item in circleMenuItems {
+            if item.scheduledAction {
+                item.action?()
+                return true
+            }
+        }
+        return false
+    }
 }

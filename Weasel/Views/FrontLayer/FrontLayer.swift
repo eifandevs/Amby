@@ -16,6 +16,7 @@ protocol FrontLayerDelegate {
 class FrontLayer: UIView, CircleMenuDelegate {
     var delegate: FrontLayerDelegate?
     var swipeDirection: EdgeSwipeDirection = .none
+    private var optionMenu: OptionMenuTableView? = nil
 
     let kCircleButtonRadius = 43;
     
@@ -30,23 +31,52 @@ class FrontLayer: UIView, CircleMenuDelegate {
     override func didMoveToSuperview() {
         let menuItems = [
             [
-                CircleMenuItem(tapAction: { _ in
-                    log.warning("たあっぷお")
+                CircleMenuItem(tapAction: { [weak self] _ in
+                    log.warning("メニュー")
+                    self!.optionMenu = OptionMenuTableView(frame: CGRect(x: 0, y: 100, width: 200, height: 300))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self!.addSubview(self!.optionMenu!)
+                    }
                 }),
                 CircleMenuItem(tapAction: { _ in
-                    log.warning("たあっぷお")
+                    log.warning("自動スクロール")
+                    NotificationCenter.default.post(name: .baseViewModelWillAutoScroll, object: nil)
                 }),
                 CircleMenuItem(tapAction: { _ in
-                    log.warning("たあっぷお")
+                    log.warning("ヒストリーバック")
+                    NotificationCenter.default.post(name: .baseViewModelWillHistoryBackWebView, object: nil)
                 }),
                 CircleMenuItem(tapAction: { _ in
-                    log.warning("たあっぷお")
+                    log.warning("ヒストリーフォワード")
+                    NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
                 }),
                 CircleMenuItem(tapAction: { _ in
-                    log.warning("たあっぷお")
+                    log.warning("デリート")
+                    NotificationCenter.default.post(name: .baseViewModelWillRemoveWebView, object: nil)
                 }),
                 CircleMenuItem(tapAction: { _ in
-                    log.warning("たあっぷお")
+                    log.warning("アッド")
+                    NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: nil)
+                })
+            ],
+            [
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("裏メニュー")
+                }),
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("裏メニュー")
+                }),
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("裏メニュー")
+                }),
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("裏メニュー")
+                }),
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("裏メニュー")
+                }),
+                CircleMenuItem(tapAction: { _ in
+                    log.warning("裏メニュー")
                 })
             ]
         ]
@@ -58,6 +88,8 @@ class FrontLayer: UIView, CircleMenuDelegate {
     
 // MARK: CircleMenu Delegate
     func circleMenuDidClose() {
-        delegate?.frontLayerDidInvalidate()
+        if self.optionMenu == nil {
+            delegate?.frontLayerDidInvalidate()
+        }
     }
 }

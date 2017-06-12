@@ -12,10 +12,12 @@ import UIKit
 class CircleMenuItem: UIView, ShadowView, CircleView {
     
     var action: (() -> ())? = nil
+    var scheduledAction: Bool = false
+    var isValid: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        backgroundColor = UIColor.gray
     }
     
     override func didMoveToSuperview() {
