@@ -17,11 +17,23 @@ class FrontLayer: UIView, CircleMenuDelegate {
     var delegate: FrontLayerDelegate?
     var swipeDirection: EdgeSwipeDirection = .none
     private var optionMenu: OptionMenuTableView? = nil
+    private var detailMenu: OptionMenuTableView? = nil
+    private var overlay: UIButton! = nil
 
     let kCircleButtonRadius = 43;
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        overlay = UIButton(frame: frame)
+        _ = overlay.reactive.tap
+            .observe { [weak self] _ in
+                if let optionMenu = self!.optionMenu {
+                    optionMenu.removeFromSuperview()
+                    self!.optionMenu = nil
+                    self!.delegate?.frontLayerDidInvalidate()
+                }
+        }
+        addSubview(overlay)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,11 +43,23 @@ class FrontLayer: UIView, CircleMenuDelegate {
     override func didMoveToSuperview() {
         let menuItems = [
             [
-                CircleMenuItem(tapAction: { [weak self] _ in
-                    log.warning("メニュー")
-                    self!.optionMenu = OptionMenuTableView(frame: CGRect(x: 0, y: 100, width: 200, height: 300))
+                CircleMenuItem(tapAction: { [weak self] (initialPt: CGPoint) in
+                    let ptX = self!.swipeDirection == .left ? initialPt.x / 6 : DeviceDataManager.shared.displaySize.width - 250  - (DeviceDataManager.shared.displaySize.width - initialPt.x) / 6
+                    let ptY: CGFloat = { () -> CGFloat in
+                        let y = initialPt.y - AppDataManager.shared.optionMenuSize.height / 2
+                        if y < 0 {
+                            return 0
+                        }
+                        if y + AppDataManager.shared.optionMenuSize.height > DeviceDataManager.shared.displaySize.height {
+                            return DeviceDataManager.shared.displaySize.height - AppDataManager.shared.optionMenuSize.height
+                        }
+                        return y
+                    }()
+                    self!.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppDataManager.shared.optionMenuSize.width, height: AppDataManager.shared.optionMenuSize.height), viewModel: BaseMenuViewModel(), direction: self!.swipeDirection)
+                    self!.detailMenu = OptionMenuTableView(frame: CGRect(x: ptX + 20, y: ptY, width: AppDataManager.shared.optionMenuSize.width, height: AppDataManager.shared.optionMenuSize.height), viewModel: BaseMenuViewModel(), direction: self!.swipeDirection)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self!.addSubview(self!.optionMenu!)
+                        self!.addSubview(self!.detailMenu!)
                     }
                 }),
                 CircleMenuItem(tapAction: { _ in

@@ -36,9 +36,9 @@ extension ShadowView where Self: UIView {
     }
     
     func addMenuShadow() {
-        layer.shadowOffset = CGSize(width: 0, height: 0.65)
-        layer.shadowRadius = 2
-        layer.shadowOpacity = 0.9
+        layer.shadowOffset = CGSize(width: 2, height: 2.65)
+        layer.shadowRadius = 2.5
+        layer.shadowOpacity = 0.8
         layer.masksToBounds = false
     }
 }

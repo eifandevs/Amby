@@ -20,6 +20,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     var swipeDirection: EdgeSwipeDirection = .none
     var isEdgeSwiping = true
     var isEdgeClosing = false
+    var isClosing = false
     var progress: CircleProgress! = nil
     var circleMenuItemGroup: [[CircleMenuItem]] = []
     var menuIndex: Int = 0
@@ -82,6 +83,13 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                 for (index, circleMenuItem) in circleMenuItems.enumerated() {
                     circleMenuItem.frame.size = self.frame.size
                     circleMenuItem.center = initialPt!
+                    _ = circleMenuItem.reactive.tap
+                        .observe { [weak self] _ in
+                            if !self!.isClosing {
+                                circleMenuItem.scheduledAction = true
+                                self!.closeCircleMenuItems()
+                            }
+                    }
                     superview!.addSubview(circleMenuItem)
                     UIView.animate(withDuration: 0.15, animations: {
                         circleMenuItem.center = self.center + self.circleMenuLocations[index]
@@ -140,6 +148,13 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                 menuIndex = menuIndex + 1 == circleMenuItemGroup.count ? 0 : menuIndex + 1
                 for (index, item) in currentCircleMenuItems.enumerated() {
                     circleMenuItems[index].frame = item.frame
+                    _ = circleMenuItems[index].reactive.tap
+                        .observe { [weak self] _ in
+                            if !self!.isClosing {
+                                self!.circleMenuItems[index].scheduledAction = true
+                                self!.closeCircleMenuItems()
+                            }
+                    }
                     superview!.addSubview(circleMenuItems[index])
                     item.removeFromSuperview()
                 }
@@ -150,56 +165,81 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !isEdgeClosing {
+            // CircleMenu押下判定
+            if  center == initialPt! {
+                // サークルメニューアイテムを切り替える
+                let currentCircleMenuItems = circleMenuItems
+                menuIndex = menuIndex + 1 == circleMenuItemGroup.count ? 0 : menuIndex + 1
+                for (index, item) in currentCircleMenuItems.enumerated() {
+                    circleMenuItems[index].frame = item.frame
+                    _ = circleMenuItems[index].reactive.tap
+                        .observe { [weak self] _ in
+                            if !self!.isClosing {
+                                self!.circleMenuItems[index].scheduledAction = true
+                                self!.closeCircleMenuItems()
+                            }
+                    }
+                    superview!.addSubview(circleMenuItems[index])
+                    item.removeFromSuperview()
+                }
+            }
             startCloseAnimation()
         }
     }
     
 // MARK: Private Method
+    private func closeCircleMenuItems() {
+        if self.executeCircleMenuAction() {
+            isClosing = true
+            progress.invalidate()
+            UIView.animate(withDuration: 0.2, animations: {
+                self.circleMenuItems.forEach({ (menuItem) in
+                    if menuItem.scheduledAction {
+                        menuItem.transform = CGAffineTransform(scaleX: 2, y: 2)
+                        menuItem.backgroundColor = UIColor.frenchBlue
+                    } else {
+                        menuItem.center = self.initialPt!
+                    }
+                })
+            }, completion: { (finished) in
+                if finished {
+                    self.alpha = 0
+                    self.circleMenuItems.forEach({ (menuItem) in
+                        if menuItem.scheduledAction {
+                            UIView.animate(withDuration: 0.2, animations: {
+                                menuItem.alpha = 0
+                            }, completion: { (finished) in
+                                if finished {
+                                    self.delegate?.circleMenuDidClose()
+                                }
+                            })
+                        } else {
+                            menuItem.alpha = 0
+                        }
+                    })
+                }
+            })
+        } else {
+            self.progress.start {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.circleMenuItems.forEach({ (menuItem) in
+                        menuItem.center = self.initialPt!
+                    })
+                }, completion: { (finished) in
+                    if finished {
+                        self.delegate?.circleMenuDidClose()
+                    }
+                })
+            }
+        }
+    }
+    
     private func startCloseAnimation() {
         UIView.animate(withDuration: 0.15, animations: {
             self.center = self.initialPt!
         }) { (finished) in
             if finished {
-                if self.executeCircleMenuAction() {
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.circleMenuItems.forEach({ (menuItem) in
-                            if menuItem.scheduledAction {
-                                menuItem.transform = CGAffineTransform(scaleX: 2, y: 2)
-                            } else {
-                                menuItem.center = self.initialPt!
-                            }
-                        })
-                    }, completion: { (finished) in
-                        if finished {
-                            self.alpha = 0
-                            self.circleMenuItems.forEach({ (menuItem) in
-                                if menuItem.scheduledAction {
-                                    UIView.animate(withDuration: 0.2, animations: {
-                                        menuItem.alpha = 0
-                                    }, completion: { (finished) in
-                                        if finished {
-                                            self.delegate?.circleMenuDidClose()
-                                        }
-                                    })
-                                } else {
-                                    menuItem.alpha = 0
-                                }
-                            })
-                        }
-                    })
-                } else {
-                    self.progress.start {
-                        UIView.animate(withDuration: 0.2, animations: {
-                            self.circleMenuItems.forEach({ (menuItem) in
-                                menuItem.center = self.initialPt!
-                            })
-                        }, completion: { (finished) in
-                            if finished {
-                                self.delegate?.circleMenuDidClose()
-                            }
-                        })
-                    }
-                }
+                self.closeCircleMenuItems()
             }
         }
     }
@@ -277,7 +317,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     private func executeCircleMenuAction() -> Bool {
         for item in circleMenuItems {
             if item.scheduledAction {
-                item.action?()
+                item.action?(initialPt!)
                 return true
             }
         }

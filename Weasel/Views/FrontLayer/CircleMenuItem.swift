@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-class CircleMenuItem: UIView, ShadowView, CircleView {
+class CircleMenuItem: UIButton, ShadowView, CircleView {
     
-    var action: (() -> ())? = nil
+    var action: ((CGPoint) -> ())? = nil
     var scheduledAction: Bool = false
     var isValid: Bool = false
     
@@ -25,7 +25,7 @@ class CircleMenuItem: UIView, ShadowView, CircleView {
         addCircle()
     }
     
-    convenience init(tapAction: (() -> ())?) {
+    convenience init(tapAction: ((CGPoint) -> ())?) {
         self.init(frame: CGRect.zero)
         action = tapAction
     }

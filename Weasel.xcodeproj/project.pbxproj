@@ -56,6 +56,9 @@
 		A5B628D71EEECC28005CC957 /* Double+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628D61EEECC28005CC957 /* Double+Extend.swift */; };
 		A5B628D91EEECC46005CC957 /* CGPoint+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628D81EEECC46005CC957 /* CGPoint+Extend.swift */; };
 		A5B628DB1EEECC76005CC957 /* OptionMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628DA1EEECC76005CC957 /* OptionMenuTableView.swift */; };
+		A5B628DD1EF01A57005CC957 /* OptionMenuTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628DC1EF01A57005CC957 /* OptionMenuTableViewModel.swift */; };
+		A5B628DF1EF01A78005CC957 /* SettingMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628DE1EF01A78005CC957 /* SettingMenuViewModel.swift */; };
+		A5B628E11EF01A93005CC957 /* BaseMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628E01EF01A93005CC957 /* BaseMenuViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +115,9 @@
 		A5B628D61EEECC28005CC957 /* Double+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extend.swift"; sourceTree = "<group>"; };
 		A5B628D81EEECC46005CC957 /* CGPoint+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extend.swift"; sourceTree = "<group>"; };
 		A5B628DA1EEECC76005CC957 /* OptionMenuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableView.swift; sourceTree = "<group>"; };
+		A5B628DC1EF01A57005CC957 /* OptionMenuTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewModel.swift; sourceTree = "<group>"; };
+		A5B628DE1EF01A78005CC957 /* SettingMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingMenuViewModel.swift; sourceTree = "<group>"; };
+		A5B628E01EF01A93005CC957 /* BaseMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMenuViewModel.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -240,6 +246,9 @@
 				A55EBF351EEB009000304C69 /* BaseViewModel.swift */,
 				A55EBF361EEB009000304C69 /* FooterViewModel.swift */,
 				A55EBF371EEB009000304C69 /* HeaderViewModel.swift */,
+				A5B628DC1EF01A57005CC957 /* OptionMenuTableViewModel.swift */,
+				A5B628DE1EF01A78005CC957 /* SettingMenuViewModel.swift */,
+				A5B628E01EF01A93005CC957 /* BaseMenuViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -481,6 +490,8 @@
 				A55EBF721EEB009000304C69 /* EGTextField.swift in Sources */,
 				A55EBF6A1EEB009000304C69 /* FooterViewModel.swift in Sources */,
 				A55EBF6D1EEB009000304C69 /* BaseView.swift in Sources */,
+				A5B628DD1EF01A57005CC957 /* OptionMenuTableViewModel.swift in Sources */,
+				A5B628DF1EF01A78005CC957 /* SettingMenuViewModel.swift in Sources */,
 				A55EBF571EEB009000304C69 /* WKWebView+Extend.swift in Sources */,
 				A55EBF771EEB009000304C69 /* FrontLayer.swift in Sources */,
 				A55EBF4E1EEB009000304C69 /* DeviceDataManager.swift in Sources */,
@@ -490,6 +501,7 @@
 				A55EBF751EEB009000304C69 /* CircleMenuItem.swift in Sources */,
 				A55EBF6E1EEB009000304C69 /* EGWebView.swift in Sources */,
 				A55EBF551EEB009000304C69 /* UIScrollView+Extend.swift in Sources */,
+				A5B628E11EF01A93005CC957 /* BaseMenuViewModel.swift in Sources */,
 				A55EBF731EEB009000304C69 /* HeaderView.swift in Sources */,
 				A55EBF581EEB009000304C69 /* CircleView.swift in Sources */,
 				A55EBF511EEB009000304C69 /* NSNotification+Extend.swift in Sources */,
