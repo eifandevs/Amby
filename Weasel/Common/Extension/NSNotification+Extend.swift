@@ -13,6 +13,7 @@ extension NSNotification.Name {
     static let headerViewModelWillChangeField = NSNotification.Name("headerViewModelWillChangeField")
     static let headerViewModelWillChangeFavorite = NSNotification.Name("headerViewModelWillChangeFavorite")
     static let baseViewModelWillAddWebView = NSNotification.Name("baseViewModelWillAddWebView")
+    static let baseViewModelWillCopyWebView = NSNotification.Name("baseViewModelWillCopyWebView")
     static let baseViewModelWillReloadWebView = NSNotification.Name("baseViewModelWillReloadWebView")
     static let baseViewModelWillRemoveWebView = NSNotification.Name("baseViewModelWillRemoveWebView")
     static let baseViewModelWillChangeWebView = NSNotification.Name("baseViewModelWillChangeWebView")

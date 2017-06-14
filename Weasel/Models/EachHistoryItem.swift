@@ -18,6 +18,15 @@ class EachHistoryItem: NSObject, NSCoding {
         super.init()
     }
     
+    init(url: String) {
+        self.url = url
+    }
+    
+    init(url: String, title: String) {
+        self.url = url
+        self.title = title
+    }
+    
     init(context: String, url: String, title: String) {
         self.context = context
         self.url = url

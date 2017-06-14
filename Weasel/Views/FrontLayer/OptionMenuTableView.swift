@@ -9,9 +9,14 @@
 import Foundation
 import UIKit
 
-class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, ShadowView {
-    
+protocol OptionMenuTableViewDelegate {
+    func optionMenuDidClose()
+}
+
+class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, ShadowView, OptionMenuTableViewDelegate {
+    var delegate: OptionMenuTableViewDelegate? = nil
     private var tableView: UITableView? = nil
+    private var detailView: OptionMenuTableView? = nil
     private var viewModel: OptionMenuTableViewModel!
     private var clickedLocation: CGPoint! = nil
     private var swipeDirection: EdgeSwipeDirection! = .none
@@ -72,9 +77,28 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         log.warning("did select")
-//            let cell = tableView.cellForRow(at: indexPath)
-//            let margin = swipeDirection == .left ? 20 : -20
-//            detailView = OptionMenuTableView(frame: CGRect(x: margin.cgfloat, y: 0, width: AppDataManager.shared.optionMenuSize.width, height: AppDataManager.shared.optionMenuSize.height), viewModel: SettingMenuViewModel(), direction: swipeDirection)
-//            addSubview(detailView!)
+        if detailView == nil {
+            let detailViewModel = viewModel.actionItems[indexPath.row]()
+            detailViewModel?.setup()
+            if detailViewModel != nil {
+                let marginX = swipeDirection == .left ? 30 : -30
+                detailView = OptionMenuTableView(frame: frame, viewModel: detailViewModel!, direction: swipeDirection)
+                detailView?.center.x += marginX.cgfloat
+                detailView?.delegate = self
+                superview!.addSubview(detailView!)
+            } else {
+                // メニューを全て閉じる
+                delegate?.optionMenuDidClose()
+            }
+        } else {
+            // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
+            detailView?.removeFromSuperview()
+            detailView = nil
+        }
+    }
+    
+// MARK: OptionMenuTableViewDelegate
+    func optionMenuDidClose() {
+        delegate?.optionMenuDidClose()
     }
 }

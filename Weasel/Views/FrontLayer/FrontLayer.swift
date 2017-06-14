@@ -13,7 +13,7 @@ protocol FrontLayerDelegate {
     func frontLayerDidInvalidate()
 }
 
-class FrontLayer: UIView, CircleMenuDelegate {
+class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     var delegate: FrontLayerDelegate?
     var swipeDirection: EdgeSwipeDirection = .none
     private var optionMenu: OptionMenuTableView? = nil
@@ -44,6 +44,7 @@ class FrontLayer: UIView, CircleMenuDelegate {
         let menuItems = [
             [
                 CircleMenuItem(tapAction: { [weak self] (initialPt: CGPoint) in
+                    // オプションメニューの表示位置を計算
                     let ptX = self!.swipeDirection == .left ? initialPt.x / 6 : DeviceDataManager.shared.displaySize.width - 250  - (DeviceDataManager.shared.displaySize.width - initialPt.x) / 6
                     let ptY: CGFloat = { () -> CGFloat in
                         let y = initialPt.y - AppDataManager.shared.optionMenuSize.height / 2
@@ -56,10 +57,9 @@ class FrontLayer: UIView, CircleMenuDelegate {
                         return y
                     }()
                     self!.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppDataManager.shared.optionMenuSize.width, height: AppDataManager.shared.optionMenuSize.height), viewModel: BaseMenuViewModel(), direction: self!.swipeDirection)
-                    self!.detailMenu = OptionMenuTableView(frame: CGRect(x: ptX + 20, y: ptY, width: AppDataManager.shared.optionMenuSize.width, height: AppDataManager.shared.optionMenuSize.height), viewModel: BaseMenuViewModel(), direction: self!.swipeDirection)
+                    self!.optionMenu?.delegate = self
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self!.addSubview(self!.optionMenu!)
-                        self!.addSubview(self!.detailMenu!)
                     }
                 }),
                 CircleMenuItem(tapAction: { _ in
@@ -110,10 +110,15 @@ class FrontLayer: UIView, CircleMenuDelegate {
         addSubview(circleMenu)
     }
     
-// MARK: CircleMenu Delegate
+// MARK: CircleMenuDelegate
     func circleMenuDidClose() {
         if self.optionMenu == nil {
             delegate?.frontLayerDidInvalidate()
         }
+    }
+    
+// MARK: OptionMenuTableViewDelegate
+    func optionMenuDidClose() {
+        delegate?.frontLayerDidInvalidate()
     }
 }

@@ -68,6 +68,9 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                     }
                 }
         }
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
+        btn.addGestureRecognizer(longPressRecognizer)
+        
         thumbnails.append(btn)
         
         if ((thumbnails.count).cgfloat * btn.frame.size.width > scrollView.frame.size.width) {
@@ -181,4 +184,16 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         }
     }
     
+    func longPressed(sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            for (index, thumbnail) in self.thumbnails.enumerated() {
+                if sender.view == thumbnail {
+                    self.viewModel.notifyRemoveWebView(index: index)
+                    break
+                }
+            }
+        default:break
+        }
+    }
 }

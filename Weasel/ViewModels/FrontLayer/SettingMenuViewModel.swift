@@ -15,5 +15,15 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
             "bbbbb",
             "aaaaa"
         ]
+        actionItems = [
+            { () -> OptionMenuTableViewModel? in
+                log.warning("tapped!!!!!")
+                return nil
+            },
+            { () -> OptionMenuTableViewModel? in
+                log.warning("tapped!!!!!")
+                return nil
+            }
+        ]
     }
 }

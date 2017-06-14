@@ -59,6 +59,7 @@
 		A5B628ED1EF0AF79005CC957 /* BaseMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628E71EF0AF79005CC957 /* BaseMenuViewModel.swift */; };
 		A5B628EE1EF0AF79005CC957 /* OptionMenuTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628E81EF0AF79005CC957 /* OptionMenuTableViewModel.swift */; };
 		A5B628EF1EF0AF79005CC957 /* SettingMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628E91EF0AF79005CC957 /* SettingMenuViewModel.swift */; };
+		A5B628F11EF18532005CC957 /* HistoryMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628F01EF18532005CC957 /* HistoryMenuViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +119,7 @@
 		A5B628E71EF0AF79005CC957 /* BaseMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMenuViewModel.swift; sourceTree = "<group>"; };
 		A5B628E81EF0AF79005CC957 /* OptionMenuTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewModel.swift; sourceTree = "<group>"; };
 		A5B628E91EF0AF79005CC957 /* SettingMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingMenuViewModel.swift; sourceTree = "<group>"; };
+		A5B628F01EF18532005CC957 /* HistoryMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryMenuViewModel.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -354,6 +356,7 @@
 				A5B628E71EF0AF79005CC957 /* BaseMenuViewModel.swift */,
 				A5B628E81EF0AF79005CC957 /* OptionMenuTableViewModel.swift */,
 				A5B628E91EF0AF79005CC957 /* SettingMenuViewModel.swift */,
+				A5B628F01EF18532005CC957 /* HistoryMenuViewModel.swift */,
 			);
 			path = FrontLayer;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A55EBF561EEB009000304C69 /* UIView+Extend.swift in Sources */,
+				A5B628F11EF18532005CC957 /* HistoryMenuViewModel.swift in Sources */,
 				A55EBF7D1EEB014E00304C69 /* AppDelegate.swift in Sources */,
 				A55EBF601EEB009000304C69 /* EachThumbnailItem.swift in Sources */,
 				A55EBF6F1EEB009000304C69 /* FooterView.swift in Sources */,

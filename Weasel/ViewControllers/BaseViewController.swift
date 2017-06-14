@@ -45,4 +45,17 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
         baseLayer.validateUserInteraction()
     }
 
+// MARK: WebView Touch
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        if Bundle(for: type(of: viewControllerToPresent)).bundleIdentifier == "com.apple.WebKit" {
+            if let orgActionSheet = viewControllerToPresent as? UIAlertController, let url = orgActionSheet.title {
+                if ((orgActionSheet.preferredStyle == .actionSheet) && (orgActionSheet.title != nil)) {
+                    // webviewを長押しされたら、そのURLで新しいタブを作成する
+                    NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: ["url": url])
+                    return
+                }
+            }
+        }
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
 }

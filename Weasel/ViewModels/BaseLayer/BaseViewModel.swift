@@ -97,11 +97,26 @@ class BaseViewModel {
         // webviewの追加作成
         center.addObserver(forName: .baseViewModelWillAddWebView, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[BaseView Event]: baseViewModelWillAddWebView")
-            self!.eachHistory.append(EachHistoryItem())
+            let url = notification.object != nil ? (notification.object as! [String: String])["url"] : nil
+            if url == nil {
+                self!.eachHistory.append(EachHistoryItem())
+            } else {
+                self!.eachHistory.append(EachHistoryItem(url: url!))
+            }
             self!.locationIndex = self!.eachHistory.count - 1
             self!.center.post(name: .footerViewModelWillAddWebView, object: ["context": self!.currentContext])
             self!.delegate?.baseViewModelDidAddWebView()
         }
+        
+        // webviewのコピー
+        center.addObserver(forName: .baseViewModelWillCopyWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillCopyWebView")
+            self!.eachHistory.append(EachHistoryItem(url: self!.eachHistory[self!.locationIndex].url, title: self!.eachHistory[self!.locationIndex].title))
+            self!.locationIndex = self!.eachHistory.count - 1
+            self!.center.post(name: .footerViewModelWillAddWebView, object: ["context": self!.currentContext])
+            self!.delegate?.baseViewModelDidAddWebView()
+        }
+        
         // webviewのリロード
         center.addObserver(forName: .baseViewModelWillReloadWebView, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[BaseView Event]: baseViewModelWillReloadWebView")

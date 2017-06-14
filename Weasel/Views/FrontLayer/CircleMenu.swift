@@ -112,20 +112,19 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     }
     
     internal func screenTouchCancelled(touch: UITouch) {
-        if !isEdgeClosing && isEdgeSwiping {
-            isEdgeSwiping = false
-            startCloseAnimation()
-        }
+        screenTouchEnded(touch: touch)
     }
     
 // MARK: Touch Event
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         if !isEdgeClosing {
             progress.invalidate()
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
         if !isEdgeClosing {
             let touch = touches.first!
             let newPt = touch.location(in: superview!)
@@ -140,6 +139,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         if !isEdgeClosing {
             // CircleMenu押下判定
             if  center == initialPt! {
@@ -164,27 +164,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !isEdgeClosing {
-            // CircleMenu押下判定
-            if  center == initialPt! {
-                // サークルメニューアイテムを切り替える
-                let currentCircleMenuItems = circleMenuItems
-                menuIndex = menuIndex + 1 == circleMenuItemGroup.count ? 0 : menuIndex + 1
-                for (index, item) in currentCircleMenuItems.enumerated() {
-                    circleMenuItems[index].frame = item.frame
-                    _ = circleMenuItems[index].reactive.tap
-                        .observe { [weak self] _ in
-                            if !self!.isClosing {
-                                self!.circleMenuItems[index].scheduledAction = true
-                                self!.closeCircleMenuItems()
-                            }
-                    }
-                    superview!.addSubview(circleMenuItems[index])
-                    item.removeFromSuperview()
-                }
-            }
-            startCloseAnimation()
-        }
+        touchesEnded(touches, with: event)
     }
     
 // MARK: Private Method
@@ -294,9 +274,16 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                 }
             } else {
                 if item.isValid {
-                    item.backgroundColor = UIColor.gray
-                    item.scheduledAction = false
                     item.isValid = false
+                    item.backgroundColor = UIColor.gray
+                    if item.scheduledAction {
+                        // 他のValidなitemをアクション予約する
+                        for v in self.circleMenuItems where v.isValid {
+                            v.scheduledAction = true
+                            v.backgroundColor = UIColor.frenchBlue
+                        }
+                    }
+                    item.scheduledAction = false
                     UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseOut, animations: {
                         item.transform = CGAffineTransform.identity
                     }, completion: nil)

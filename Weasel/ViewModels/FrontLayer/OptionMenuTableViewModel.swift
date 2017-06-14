@@ -10,6 +10,10 @@ import Foundation
 
 class OptionMenuTableViewModel {
     var menuItems: [String] = []
+    var actionItems: [(() -> (OptionMenuTableViewModel?))] = []
     init() {
+    }
+    func setup() {
+    
     }
 }
