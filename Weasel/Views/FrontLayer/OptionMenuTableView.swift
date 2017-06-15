@@ -82,8 +82,14 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
             detailViewModel?.setup()
             if detailViewModel != nil {
                 let marginX = swipeDirection == .left ? 30 : -30
+                let marginY = 20
                 detailView = OptionMenuTableView(frame: frame, viewModel: detailViewModel!, direction: swipeDirection)
-                detailView?.center.x += marginX.cgfloat
+                detailView?.center += CGPoint(x: marginX.cgfloat, y: marginY.cgfloat)
+                
+                if (detailView?.frame.origin.y)! + AppDataManager.shared.optionMenuSize.height > DeviceDataManager.shared.displaySize.height {
+                    detailView?.frame.origin.y = DeviceDataManager.shared.displaySize.height - AppDataManager.shared.optionMenuSize.height
+                }
+                
                 detailView?.delegate = self
                 superview!.addSubview(detailView!)
             } else {
