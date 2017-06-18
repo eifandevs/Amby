@@ -9,7 +9,8 @@
 import Foundation
 
 class OptionMenuTableViewModel {
-    var menuItems: [String] = []
+    var sectionItems: [String] = []
+    var menuItems: [[String]] = []
     var actionItems: [(() -> (OptionMenuTableViewModel?))] = []
     init() {
     }

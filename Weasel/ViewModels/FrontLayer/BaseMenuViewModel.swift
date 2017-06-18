@@ -12,14 +12,16 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
     override init() {
         super.init()
         menuItems = [
-            "新しいタブ",
-            "新しいタブ(URLコピー)",
-            "履歴",
-            "フォーム",
-            "お気に入り",
-            "キャッシュ設定",
-            "設定",
-            "ヘルプ"
+            [
+                "新しいタブ",
+                "新しいタブ(URLコピー)",
+                "履歴",
+                "フォーム",
+                "お気に入り",
+                "キャッシュ設定",
+                "設定",
+                "ヘルプ"
+            ]
         ]
         actionItems = [
             { () -> OptionMenuTableViewModel? in

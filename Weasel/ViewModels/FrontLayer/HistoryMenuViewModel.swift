@@ -13,10 +13,6 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
     
     override init() {
         super.init()
-        menuItems = [
-            "bbbbb",
-            "aaaaa"
-        ]
         actionItems = [
             { () -> OptionMenuTableViewModel? in
                 log.warning("tapped!!!!!")
@@ -44,6 +40,10 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
                 let data = try Data(contentsOf: AppDataManager.shared.commonHistoryPath(date: keyStr))
                 let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
                 commonHistoryByDate.append([keyStr: commonHistory])
+                sectionItems.append(keyStr)
+                menuItems.append(commonHistory.map({ (item) -> String in
+                    return item.title
+                }))
                 log.debug("common history read. key: \(keyStr)")
             } catch let error as NSError {
                 log.error("failed to read each history. key: \(keyStr)")

@@ -12,8 +12,10 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
     override init() {
         super.init()
         menuItems = [
-            "bbbbb",
-            "aaaaa"
+            [
+                "bbbbb",
+                "aaaaa"
+            ]
         ]
         actionItems = [
             { () -> OptionMenuTableViewModel? in

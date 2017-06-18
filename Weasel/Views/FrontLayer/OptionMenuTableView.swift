@@ -57,13 +57,13 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.menuItems.count
+        return viewModel.menuItems.count > 0 ? viewModel.menuItems[section].count : 0
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.sectionItems.count > 0 ? viewModel.sectionItems.count : 1
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
@@ -71,12 +71,15 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath)
         cell.backgroundColor = UIColor.clear
-        cell.textLabel?.text = viewModel.menuItems[indexPath.row]
+        cell.textLabel?.text = viewModel.menuItems[indexPath.section][indexPath.row]
         return cell
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return viewModel.sectionItems.count > 0 ? viewModel.sectionItems[section] : nil
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        log.warning("did select")
         if detailView == nil {
             let detailViewModel = viewModel.actionItems[indexPath.row]()
             detailViewModel?.setup()
