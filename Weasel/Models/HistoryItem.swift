@@ -1,5 +1,5 @@
 //
-//  EachHistoryItem.swift
+//  HistoryItem.swift
 //  Eiger
 //
 //  Created by tenma on 2017/02/16.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EachHistoryItem: NSObject, NSCoding {
+class HistoryItem: NSObject, NSCoding {
     var context: String = NSUUID().uuidString
     var url: String = ""
     var title: String = ""

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9CCB516EFF3A6712AE346D1E /* Pods_Weasel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 615FE5E3DFBC7266C29F3D82 /* Pods_Weasel.framework */; };
+		A55409561EF8032900F29140 /* OptionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55409551EF8032900F29140 /* OptionMenuItem.swift */; };
+		A55409581EF8034400F29140 /* OptionMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55409571EF8034400F29140 /* OptionMenuTableViewCell.swift */; };
 		A55EBF4D1EEB009000304C69 /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF131EEB009000304C69 /* AppDataManager.swift */; };
 		A55EBF4E1EEB009000304C69 /* DeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF141EEB009000304C69 /* DeviceDataManager.swift */; };
 		A55EBF4F1EEB009000304C69 /* DispatchQueue+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF161EEB009000304C69 /* DispatchQueue+Extend.swift */; };
@@ -24,8 +26,8 @@
 		A55EBF5A1EEB009000304C69 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF221EEB009000304C69 /* StoreManager.swift */; };
 		A55EBF5B1EEB009000304C69 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF231EEB009000304C69 /* Util.swift */; };
 		A55EBF5E1EEB009000304C69 /* CommonHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF271EEB009000304C69 /* CommonHistoryItem.swift */; };
-		A55EBF5F1EEB009000304C69 /* EachHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF281EEB009000304C69 /* EachHistoryItem.swift */; };
-		A55EBF601EEB009000304C69 /* EachThumbnailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF291EEB009000304C69 /* EachThumbnailItem.swift */; };
+		A55EBF5F1EEB009000304C69 /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF281EEB009000304C69 /* HistoryItem.swift */; };
+		A55EBF601EEB009000304C69 /* ThumbnailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF291EEB009000304C69 /* ThumbnailItem.swift */; };
 		A55EBF611EEB009000304C69 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF2A1EEB009000304C69 /* Favorite.swift */; };
 		A55EBF621EEB009000304C69 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF2B1EEB009000304C69 /* Form.swift */; };
 		A55EBF631EEB009000304C69 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A55EBF2D1EEB009000304C69 /* authorize.html */; };
@@ -67,6 +69,8 @@
 		154C578B614B8069966E6018 /* Pods-Weasel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weasel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weasel/Pods-Weasel.release.xcconfig"; sourceTree = "<group>"; };
 		3E3D0BCEC79923FEA1441070 /* Pods-Weasel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weasel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weasel/Pods-Weasel.debug.xcconfig"; sourceTree = "<group>"; };
 		615FE5E3DFBC7266C29F3D82 /* Pods_Weasel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weasel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A55409551EF8032900F29140 /* OptionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuItem.swift; sourceTree = "<group>"; };
+		A55409571EF8034400F29140 /* OptionMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewCell.swift; sourceTree = "<group>"; };
 		A55EBF131EEB009000304C69 /* AppDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
 		A55EBF141EEB009000304C69 /* DeviceDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDataManager.swift; sourceTree = "<group>"; };
 		A55EBF161EEB009000304C69 /* DispatchQueue+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extend.swift"; sourceTree = "<group>"; };
@@ -83,8 +87,8 @@
 		A55EBF221EEB009000304C69 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		A55EBF231EEB009000304C69 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		A55EBF271EEB009000304C69 /* CommonHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryItem.swift; sourceTree = "<group>"; };
-		A55EBF281EEB009000304C69 /* EachHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EachHistoryItem.swift; sourceTree = "<group>"; };
-		A55EBF291EEB009000304C69 /* EachThumbnailItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EachThumbnailItem.swift; sourceTree = "<group>"; };
+		A55EBF281EEB009000304C69 /* HistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryItem.swift; sourceTree = "<group>"; };
+		A55EBF291EEB009000304C69 /* ThumbnailItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailItem.swift; sourceTree = "<group>"; };
 		A55EBF2A1EEB009000304C69 /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A55EBF2B1EEB009000304C69 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		A55EBF2D1EEB009000304C69 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
@@ -214,10 +218,11 @@
 			isa = PBXGroup;
 			children = (
 				A55EBF271EEB009000304C69 /* CommonHistoryItem.swift */,
-				A55EBF281EEB009000304C69 /* EachHistoryItem.swift */,
-				A55EBF291EEB009000304C69 /* EachThumbnailItem.swift */,
+				A55EBF281EEB009000304C69 /* HistoryItem.swift */,
+				A55EBF291EEB009000304C69 /* ThumbnailItem.swift */,
 				A55EBF2A1EEB009000304C69 /* Favorite.swift */,
 				A55EBF2B1EEB009000304C69 /* Form.swift */,
+				A55409551EF8032900F29140 /* OptionMenuItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 				A55EBF471EEB009000304C69 /* CircleMenuItem.swift */,
 				A55EBF481EEB009000304C69 /* CircleProgress.swift */,
 				A5B628DA1EEECC76005CC957 /* OptionMenuTableView.swift */,
+				A55409571EF8034400F29140 /* OptionMenuTableViewCell.swift */,
 			);
 			path = FrontLayer;
 			sourceTree = "<group>";
@@ -493,7 +499,7 @@
 				A55EBF561EEB009000304C69 /* UIView+Extend.swift in Sources */,
 				A5B628F11EF18532005CC957 /* HistoryMenuViewModel.swift in Sources */,
 				A55EBF7D1EEB014E00304C69 /* AppDelegate.swift in Sources */,
-				A55EBF601EEB009000304C69 /* EachThumbnailItem.swift in Sources */,
+				A55EBF601EEB009000304C69 /* ThumbnailItem.swift in Sources */,
 				A55EBF6F1EEB009000304C69 /* FooterView.swift in Sources */,
 				A5B628ED1EF0AF79005CC957 /* BaseMenuViewModel.swift in Sources */,
 				A55EBF711EEB009000304C69 /* EGProgressBar.swift in Sources */,
@@ -505,6 +511,7 @@
 				A55EBF701EEB009000304C69 /* EGGradientLabel.swift in Sources */,
 				A5B628D71EEECC28005CC957 /* Double+Extend.swift in Sources */,
 				A55EBF541EEB009000304C69 /* UIImage+Extend.swift in Sources */,
+				A55409581EF8034400F29140 /* OptionMenuTableViewCell.swift in Sources */,
 				A55EBF5B1EEB009000304C69 /* Util.swift in Sources */,
 				A5B628D91EEECC46005CC957 /* CGPoint+Extend.swift in Sources */,
 				A55EBF721EEB009000304C69 /* EGTextField.swift in Sources */,
@@ -526,13 +533,14 @@
 				A5B628EC1EF0AF79005CC957 /* HeaderViewModel.swift in Sources */,
 				A55EBF511EEB009000304C69 /* NSNotification+Extend.swift in Sources */,
 				A55EBF611EEB009000304C69 /* Favorite.swift in Sources */,
-				A55EBF5F1EEB009000304C69 /* EachHistoryItem.swift in Sources */,
+				A55EBF5F1EEB009000304C69 /* HistoryItem.swift in Sources */,
 				A55EBF5A1EEB009000304C69 /* StoreManager.swift in Sources */,
 				A5B628DB1EEECC76005CC957 /* OptionMenuTableView.swift in Sources */,
 				A55EBF4D1EEB009000304C69 /* AppDataManager.swift in Sources */,
 				A5B628EE1EF0AF79005CC957 /* OptionMenuTableViewModel.swift in Sources */,
 				A55EBF761EEB009000304C69 /* CircleProgress.swift in Sources */,
 				A55EBF531EEB009000304C69 /* UIColor+Extend.swift in Sources */,
+				A55409561EF8032900F29140 /* OptionMenuItem.swift in Sources */,
 				A55EBF621EEB009000304C69 /* Form.swift in Sources */,
 				A55EBF741EEB009000304C69 /* CircleMenu.swift in Sources */,
 			);

@@ -10,7 +10,7 @@ import Foundation
 import Bond
 
 protocol FooterViewModelDelegate {
-    func footerViewModelDidLoadThumbnail(eachThumbnail: [EachThumbnailItem])
+    func footerViewModelDidLoadThumbnail(eachThumbnail: [ThumbnailItem])
     func footerViewModelDidAddThumbnail()
     func footerViewModelDidChangeThumbnail()
     func footerViewModelDidRemoveThumbnail(index: Int)
@@ -21,8 +21,8 @@ protocol FooterViewModelDelegate {
 class FooterViewModel {
     // 現在位置
     var locationIndex: Int  = 0
-    private var eachThumbnail: [EachThumbnailItem] = []
-    private var currentThumbnail: EachThumbnailItem {
+    private var eachThumbnail: [ThumbnailItem] = []
+    private var currentThumbnail: ThumbnailItem {
         get {
             return eachThumbnail[locationIndex]
         }
@@ -39,12 +39,12 @@ class FooterViewModel {
         // 初期ロード開始
         center.addObserver(forName: .footerViewModelWillLoad, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[Footer Event]: footerViewModelWillLoad")
-            let eachHistory = notification.object as! [EachHistoryItem]
+            let eachHistory = notification.object as! [HistoryItem]
             
             
             if eachHistory.count > 0 {
                 eachHistory.forEach { (item) in
-                    let thumbnailItem = EachThumbnailItem()
+                    let thumbnailItem = ThumbnailItem()
                     thumbnailItem.context = item.context
                     thumbnailItem.url = item.url
                     thumbnailItem.title = item.title
@@ -59,7 +59,7 @@ class FooterViewModel {
             let context = (notification.object as! [String: String])["context"]!
             
             // 新しいサムネイルを追加
-            let thumbnailItem = EachThumbnailItem()
+            let thumbnailItem = ThumbnailItem()
             thumbnailItem.context = context
             self!.eachThumbnail.append(thumbnailItem)
             self!.delegate?.footerViewModelDidAddThumbnail()

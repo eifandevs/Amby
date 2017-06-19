@@ -41,12 +41,12 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
                 let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
                 commonHistoryByDate.append([keyStr: commonHistory])
                 sectionItems.append(keyStr)
-                menuItems.append(commonHistory.map({ (item) -> String in
-                    return item.title
+                menuItems.append(commonHistory.map({ (item) -> OptionMenuItem in
+                    return OptionMenuItem(titleText: item.title, urlText: item.url, thumbnailImage: nil)
                 }))
                 log.debug("common history read. key: \(keyStr)")
             } catch let error as NSError {
-                log.error("failed to read each history. key: \(keyStr)")
+                log.error("failed to read common history. key: \(keyStr)")
             }
         }
     }

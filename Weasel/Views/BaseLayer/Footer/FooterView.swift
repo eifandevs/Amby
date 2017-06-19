@@ -166,7 +166,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         }
     }
     
-    func footerViewModelDidLoadThumbnail(eachThumbnail: [EachThumbnailItem]) {
+    func footerViewModelDidLoadThumbnail(eachThumbnail: [ThumbnailItem]) {
         if eachThumbnail.count > 0 {
             eachThumbnail.forEach { (item) in
                 let btn = createCaptureSpace()

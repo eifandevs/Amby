@@ -69,7 +69,7 @@ class BaseViewModel {
     private var commonHistory: [CommonHistoryItem] = []
     
     // webViewそれぞれの履歴とカレントページインデックス
-    private var eachHistory: [EachHistoryItem] = []
+    private var eachHistory: [HistoryItem] = []
     
     // 通知センター
     let center = NotificationCenter.default
@@ -99,9 +99,9 @@ class BaseViewModel {
             log.debug("[BaseView Event]: baseViewModelWillAddWebView")
             let url = notification.object != nil ? (notification.object as! [String: String])["url"] : nil
             if url == nil {
-                self!.eachHistory.append(EachHistoryItem())
+                self!.eachHistory.append(HistoryItem())
             } else {
-                self!.eachHistory.append(EachHistoryItem(url: url!))
+                self!.eachHistory.append(HistoryItem(url: url!))
             }
             self!.locationIndex = self!.eachHistory.count - 1
             self!.center.post(name: .footerViewModelWillAddWebView, object: ["context": self!.currentContext])
@@ -111,7 +111,7 @@ class BaseViewModel {
         // webviewのコピー
         center.addObserver(forName: .baseViewModelWillCopyWebView, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[BaseView Event]: baseViewModelWillCopyWebView")
-            self!.eachHistory.append(EachHistoryItem(url: self!.eachHistory[self!.locationIndex].url, title: self!.eachHistory[self!.locationIndex].title))
+            self!.eachHistory.append(HistoryItem(url: self!.eachHistory[self!.locationIndex].url, title: self!.eachHistory[self!.locationIndex].title))
             self!.locationIndex = self!.eachHistory.count - 1
             self!.center.post(name: .footerViewModelWillAddWebView, object: ["context": self!.currentContext])
             self!.delegate?.baseViewModelDidAddWebView()
@@ -197,10 +197,10 @@ class BaseViewModel {
         // eachHistory読み込み
         do {
             let data = try Data(contentsOf: AppDataManager.shared.eachHistoryPath)
-            eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [EachHistoryItem]
+            eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [HistoryItem]
             log.debug("each history read. url: \n\(requestUrl)")
         } catch let error as NSError {
-            eachHistory.append(EachHistoryItem())
+            eachHistory.append(HistoryItem())
             log.error("failed to read each history: \(error)")
         }
         center.post(name: .footerViewModelWillLoad, object: eachHistory)

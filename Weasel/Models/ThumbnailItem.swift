@@ -1,5 +1,5 @@
 //
-//  EachThumbnailItem.swift
+//  ThumbnailItem.swift
 //  Eiger
 //
 //  Created by temma on 2017/04/18.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EachThumbnailItem: NSObject, NSCoding {
+class ThumbnailItem: NSObject, NSCoding {
     var context: String = ""
     var url: String = ""
     var title: String = ""

@@ -43,6 +43,8 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layer.cornerRadius = 2.5
+        tableView.register(OptionMenuTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(OptionMenuTableViewCell.self))
+
         addSubview(tableView)
     }
     
@@ -65,18 +67,26 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return AppDataManager.shared.optionMenuCellHeight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath)
-        cell.backgroundColor = UIColor.clear
-        cell.textLabel?.text = viewModel.menuItems[indexPath.section][indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(OptionMenuTableViewCell.self), for: indexPath) as! OptionMenuTableViewCell
+        let menuItem: OptionMenuItem = viewModel.menuItems[indexPath.section][indexPath.row]
+        cell.setTitle(title: menuItem.title, url: menuItem.url, thumbnail: menuItem.thumbnail)
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.sectionItems.count > 0 ? viewModel.sectionItems[section] : nil
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label : UILabel = UILabel()
+        label.backgroundColor = UIColor.pastelLightGray
+        label.text = "   \(viewModel.sectionItems[section])"
+        label.font = UIFont(name: AppDataManager.shared.appFont, size: 15)
+        return label
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

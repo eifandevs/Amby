@@ -13,8 +13,8 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
         super.init()
         menuItems = [
             [
-                "bbbbb",
-                "aaaaa"
+                OptionMenuItem(titleText: "aaaaa", urlText: nil, thumbnailImage: nil),
+                OptionMenuItem(titleText: "bbbbb", urlText: nil, thumbnailImage: nil)
             ]
         ]
         actionItems = [

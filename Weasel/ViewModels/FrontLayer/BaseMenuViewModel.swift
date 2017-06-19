@@ -13,14 +13,14 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
         super.init()
         menuItems = [
             [
-                "新しいタブ",
-                "新しいタブ(URLコピー)",
-                "履歴",
-                "フォーム",
-                "お気に入り",
-                "キャッシュ設定",
-                "設定",
-                "ヘルプ"
+                OptionMenuItem(titleText: "新しいタブ", urlText: nil, thumbnailImage: nil),
+                OptionMenuItem(titleText: "新しいタブ(URLコピー)", urlText: nil, thumbnailImage: nil),
+                OptionMenuItem(titleText: "履歴", urlText: nil, thumbnailImage: nil),
+                OptionMenuItem(titleText: "フォーム", urlText: nil, thumbnailImage: nil),
+                OptionMenuItem(titleText: "お気に入り", urlText: nil, thumbnailImage: nil),
+                OptionMenuItem(titleText: "キャッシュ設定", urlText: nil, thumbnailImage: nil),
+                OptionMenuItem(titleText: "設定", urlText: nil, thumbnailImage: nil),
+                OptionMenuItem(titleText: "ヘルプ", urlText: nil, thumbnailImage: nil)
             ]
         ]
         actionItems = [

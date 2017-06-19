@@ -1,5 +1,5 @@
 //
-//  EachHistoryItem.swift
+//  HistoryItem.swift
 //  Eiger
 //
 //  Created by tenma on 2017/02/16.
