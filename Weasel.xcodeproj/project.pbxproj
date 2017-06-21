@@ -10,6 +10,8 @@
 		9CCB516EFF3A6712AE346D1E /* Pods_Weasel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 615FE5E3DFBC7266C29F3D82 /* Pods_Weasel.framework */; };
 		A55409561EF8032900F29140 /* OptionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55409551EF8032900F29140 /* OptionMenuItem.swift */; };
 		A55409581EF8034400F29140 /* OptionMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55409571EF8034400F29140 /* OptionMenuTableViewCell.swift */; };
+		A554095A1EFAAA9900F29140 /* FormMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55409591EFAAA9900F29140 /* FormMenuViewModel.swift */; };
+		A554095C1EFAAAB600F29140 /* FavoriteMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554095B1EFAAAB600F29140 /* FavoriteMenuViewModel.swift */; };
 		A55EBF4D1EEB009000304C69 /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF131EEB009000304C69 /* AppDataManager.swift */; };
 		A55EBF4E1EEB009000304C69 /* DeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF141EEB009000304C69 /* DeviceDataManager.swift */; };
 		A55EBF4F1EEB009000304C69 /* DispatchQueue+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF161EEB009000304C69 /* DispatchQueue+Extend.swift */; };
@@ -71,6 +73,8 @@
 		615FE5E3DFBC7266C29F3D82 /* Pods_Weasel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weasel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A55409551EF8032900F29140 /* OptionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuItem.swift; sourceTree = "<group>"; };
 		A55409571EF8034400F29140 /* OptionMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewCell.swift; sourceTree = "<group>"; };
+		A55409591EFAAA9900F29140 /* FormMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormMenuViewModel.swift; sourceTree = "<group>"; };
+		A554095B1EFAAAB600F29140 /* FavoriteMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteMenuViewModel.swift; sourceTree = "<group>"; };
 		A55EBF131EEB009000304C69 /* AppDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
 		A55EBF141EEB009000304C69 /* DeviceDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDataManager.swift; sourceTree = "<group>"; };
 		A55EBF161EEB009000304C69 /* DispatchQueue+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extend.swift"; sourceTree = "<group>"; };
@@ -363,6 +367,8 @@
 				A5B628E81EF0AF79005CC957 /* OptionMenuTableViewModel.swift */,
 				A5B628E91EF0AF79005CC957 /* SettingMenuViewModel.swift */,
 				A5B628F01EF18532005CC957 /* HistoryMenuViewModel.swift */,
+				A55409591EFAAA9900F29140 /* FormMenuViewModel.swift */,
+				A554095B1EFAAAB600F29140 /* FavoriteMenuViewModel.swift */,
 			);
 			path = FrontLayer;
 			sourceTree = "<group>";
@@ -503,6 +509,7 @@
 				A55EBF6F1EEB009000304C69 /* FooterView.swift in Sources */,
 				A5B628ED1EF0AF79005CC957 /* BaseMenuViewModel.swift in Sources */,
 				A55EBF711EEB009000304C69 /* EGProgressBar.swift in Sources */,
+				A554095C1EFAAAB600F29140 /* FavoriteMenuViewModel.swift in Sources */,
 				A55EBF681EEB009000304C69 /* BaseViewController.swift in Sources */,
 				A55EBF5E1EEB009000304C69 /* CommonHistoryItem.swift in Sources */,
 				A55EBF6C1EEB009000304C69 /* BaseLayer.swift in Sources */,
@@ -531,6 +538,7 @@
 				A55EBF731EEB009000304C69 /* HeaderView.swift in Sources */,
 				A55EBF581EEB009000304C69 /* CircleView.swift in Sources */,
 				A5B628EC1EF0AF79005CC957 /* HeaderViewModel.swift in Sources */,
+				A554095A1EFAAA9900F29140 /* FormMenuViewModel.swift in Sources */,
 				A55EBF511EEB009000304C69 /* NSNotification+Extend.swift in Sources */,
 				A55EBF611EEB009000304C69 /* Favorite.swift in Sources */,
 				A55EBF5F1EEB009000304C69 /* HistoryItem.swift in Sources */,

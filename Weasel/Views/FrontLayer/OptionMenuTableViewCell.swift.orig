@@ -27,24 +27,14 @@ class OptionMenuTableViewCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    func setTitle(title: String?, url: String?, image: UIImage?) {
+    func setTitle(title: String?, url: String?, thumbnail: UIImageView?) {
         initialize()
-        var marginX: CGFloat = 10
-        
-        if let unwrappedImage = image {
-            marginX = AppDataManager.shared.optionMenuCellHeight
-            thumbnail = UIImageView(frame: CGRect(x: 0, y: 0, width: AppDataManager.shared.optionMenuCellHeight, height: AppDataManager.shared.optionMenuCellHeight))
-            thumbnail.image = unwrappedImage
-            thumbnail.backgroundColor = UIColor.black
-            contentView.addSubview(thumbnail)
-        }
-        
         if url == nil {
-            titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - marginX, height: AppDataManager.shared.optionMenuCellHeight / 1.5))
+            titleLabel.frame = CGRect(origin: CGPoint(x: 10, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - 10, height: AppDataManager.shared.optionMenuCellHeight / 1.5))
             titleLabel.center.y = frame.size.height / 2
         } else {
-            titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - marginX, height: AppDataManager.shared.optionMenuCellHeight / 1.5))
-            urlLabel.frame = CGRect(origin: CGPoint(x: marginX, y: AppDataManager.shared.optionMenuCellHeight / 1.5 - 3), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - marginX, height: AppDataManager.shared.optionMenuCellHeight - titleLabel.frame.size.height))
+            titleLabel.frame = CGRect(origin: CGPoint(x: 10, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - 10, height: AppDataManager.shared.optionMenuCellHeight / 1.5))
+            urlLabel.frame = CGRect(origin: CGPoint(x: 10, y: AppDataManager.shared.optionMenuCellHeight / 1.5 - 3), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - 10, height: AppDataManager.shared.optionMenuCellHeight - titleLabel.frame.size.height))
         }
         titleLabel.textAlignment = .left
         titleLabel.text = title

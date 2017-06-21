@@ -73,7 +73,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(OptionMenuTableViewCell.self), for: indexPath) as! OptionMenuTableViewCell
         let menuItem: OptionMenuItem = viewModel.menuItems[indexPath.section][indexPath.row]
-        cell.setTitle(title: menuItem.title, url: menuItem.url, thumbnail: menuItem.thumbnail)
+        cell.setTitle(title: menuItem.title, url: menuItem.url, image: menuItem.thumbnail)
         return cell
     }
     
@@ -91,7 +91,9 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if detailView == nil {
-            let detailViewModel = viewModel.actionItems[indexPath.row]()
+            let detailViewModel = viewModel.commonAction != nil ?
+                viewModel.commonAction!(viewModel.menuItems[indexPath.section][indexPath.row]) :
+                viewModel.actionItems[indexPath.section][indexPath.row](viewModel.menuItems[indexPath.section][indexPath.row])
             detailViewModel?.setup()
             if detailViewModel != nil {
                 let marginX = swipeDirection == .left ? 30 : -30
@@ -105,14 +107,25 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
                 
                 detailView?.delegate = self
                 superview!.addSubview(detailView!)
+                
+                let overlay = UIButton(frame: CGRect(origin: CGPoint.zero, size: tableView.frame.size))
+                overlay.backgroundColor = UIColor.clear
+                _ = overlay.reactive.tap
+                    .observe { [weak self] _ in
+                        guard let `self` = self else {
+                            return
+                        }
+                        // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
+                        self.detailView?.removeFromSuperview()
+                        self.detailView = nil
+                        
+                        overlay.removeFromSuperview()
+                }
+                tableView.addSubview(overlay)
             } else {
                 // メニューを全て閉じる
                 delegate?.optionMenuDidClose()
             }
-        } else {
-            // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
-            detailView?.removeFromSuperview()
-            detailView = nil
         }
     }
     

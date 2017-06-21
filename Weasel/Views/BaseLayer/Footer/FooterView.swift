@@ -15,7 +15,6 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     private var viewModel = FooterViewModel(index: UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey))
     private let scrollView = UIScrollView()
     private var thumbnails: [UIButton] = []
-    private let contentView = UIView()
     
     private var frontThumbnail: UIButton {
         get {
@@ -29,23 +28,16 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         
         addAreaShadow()
         
-        // content
-        contentView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width + 1, height: frame.size.height))
-        contentView.backgroundColor = UIColor.clear
-        
         backgroundColor = UIColor.pastelLightGray
         scrollView.frame = CGRect(origin: CGPoint(x: 0, y:0), size: frame.size)
-        scrollView.contentSize = contentView.frame.size
-        
+        scrollView.contentSize = CGSize(width: frame.size.width + 1, height: frame.size.height)
         scrollView.bounces = true
         scrollView.backgroundColor = UIColor.clear
         scrollView.isPagingEnabled = false
         scrollView.isUserInteractionEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
-        
-        scrollView.addSubview(contentView)
-        
+
         addSubview(scrollView)
     }
     
@@ -61,12 +53,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         btn.backgroundColor = UIColor.black
         _ = btn.reactive.tap
             .observe { _ in
-                for (index, thumbnail) in self.thumbnails.enumerated() {
-                    if btn == thumbnail {
-                        self.viewModel.notifyChangeWebView(index: index)
-                        break
-                    }
-                }
+                self.viewModel.notifyChangeWebView(index: self.thumbnails.index(of: btn)!)
         }
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
         btn.addGestureRecognizer(longPressRecognizer)
@@ -75,12 +62,11 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         
         if ((thumbnails.count).cgfloat * btn.frame.size.width > scrollView.frame.size.width) {
             // スクロールビューのコンテンツサイズを大きくする
-            contentView.frame.size.width += btn.frame.size.width / 2
-            scrollView.contentSize = contentView.frame.size
+            scrollView.contentSize.width += btn.frame.size.width / 2
             scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
         }
         
-        contentView.addSubview(btn)
+        scrollView.addSubview(btn)
 
         if thumbnails.count > 1 {
             for thumbnail in thumbnails {
@@ -132,8 +118,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                     }
                 }
                 if ((self.thumbnails.count).cgfloat * AppDataManager.shared.thumbnailSize.width > self.scrollView.frame.size.width) {
-                    self.contentView.frame.size.width -= AppDataManager.shared.thumbnailSize.width / 2
-                    self.scrollView.contentSize = self.contentView.frame.size
+                    self.scrollView.contentSize.width -= AppDataManager.shared.thumbnailSize.width / 2
                     self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppDataManager.shared.thumbnailSize.width / 2), 0, 0)
                 }
             }, completion: { (isFinish) in

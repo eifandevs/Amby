@@ -291,6 +291,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 })
             }
             if otherWv.context == front.context {
+                // フロントwebviewの通知なので、プログレスを更新する
                 //インジゲーターの表示、非表示をきりかえる。
                 UIApplication.shared.isNetworkActivityIndicatorVisible = otherWv.isLoading
                 if otherWv.isLoading == true {
@@ -307,6 +308,16 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 if otherWv.isLoading == true {
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
                 } else {
+                    let loadingWebViews: [EGWebView?] = webViews.filter({ (wv) -> Bool in
+                        if let wv = wv {
+                            return wv.isLoading
+                        }
+                        return false;
+                    })
+                    if loadingWebViews.count < 1 {
+                        // 他にローディング中のwebviewがなければ、くるくるを停止する
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = otherWv.isLoading
+                    }
                     // 履歴とサムネイルを更新
                     updateHistoryAndThumbnail(otherWv)
                 }

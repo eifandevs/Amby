@@ -12,11 +12,11 @@ import UIKit
 class OptionMenuItem {
     var title: String? = nil
     var url: String? = nil
-    var thumbnail: UIImageView? =  nil
+    var thumbnail: UIImage? =  nil
     
-    init(titleText: String?, urlText: String?, thumbnailImage: UIImageView?) {
+    init(titleText: String?, urlText: String?, image: UIImage?) {
         title = titleText
         url = urlText
-        thumbnail = thumbnailImage
+        thumbnail = image
     }
 }

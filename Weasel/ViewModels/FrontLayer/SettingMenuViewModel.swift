@@ -7,25 +7,31 @@
 //
 
 import Foundation
+import UIKit
 
 class SettingMenuViewModel: OptionMenuTableViewModel {
     override init() {
         super.init()
+    }
+    
+    override func setup() {
         menuItems = [
             [
-                OptionMenuItem(titleText: "aaaaa", urlText: nil, thumbnailImage: nil),
-                OptionMenuItem(titleText: "bbbbb", urlText: nil, thumbnailImage: nil)
+                OptionMenuItem(titleText: "aaaaa", urlText: nil, image: UIImage(named: "historyforward_webview")),
+                OptionMenuItem(titleText: "bbbbb", urlText: nil, image: UIImage(named: "historyforward_webview"))
             ]
         ]
         actionItems = [
-            { () -> OptionMenuTableViewModel? in
-                log.warning("tapped!!!!!")
-                return nil
-            },
-            { () -> OptionMenuTableViewModel? in
-                log.warning("tapped!!!!!")
-                return nil
-            }
+            [
+                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    log.warning("tapped!!!!!")
+                    return nil
+                },
+                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    log.warning("tapped!!!!!")
+                    return nil
+                }
+            ]
         ]
     }
 }

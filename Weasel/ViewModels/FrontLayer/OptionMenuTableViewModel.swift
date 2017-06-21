@@ -11,10 +11,9 @@ import Foundation
 class OptionMenuTableViewModel {
     var sectionItems: [String] = []
     var menuItems: [[OptionMenuItem]] = []
-    var actionItems: [(() -> (OptionMenuTableViewModel?))] = []
+    var actionItems: [[((OptionMenuItem) -> (OptionMenuTableViewModel?))]] = []
+    var commonAction: ((OptionMenuItem) -> (OptionMenuTableViewModel?))? = nil
     init() {
     }
-    func setup() {
-    
-    }
+    func setup() { /* setupコール時に上記Itemsに値を入れる */ }
 }

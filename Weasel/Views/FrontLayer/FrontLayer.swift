@@ -56,7 +56,9 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                         }
                         return y
                     }()
-                    self!.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppDataManager.shared.optionMenuSize.width, height: AppDataManager.shared.optionMenuSize.height), viewModel: BaseMenuViewModel(), direction: self!.swipeDirection)
+                    let viewModel = BaseMenuViewModel()
+                    viewModel.setup()
+                    self!.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppDataManager.shared.optionMenuSize.width, height: AppDataManager.shared.optionMenuSize.height), viewModel: viewModel, direction: self!.swipeDirection)
                     self!.optionMenu?.delegate = self
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self!.addSubview(self!.optionMenu!)

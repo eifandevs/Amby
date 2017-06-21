@@ -13,16 +13,6 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
     
     override init() {
         super.init()
-        actionItems = [
-            { () -> OptionMenuTableViewModel? in
-                log.warning("tapped!!!!!")
-                return nil
-            },
-            { () -> OptionMenuTableViewModel? in
-                log.warning("tapped!!!!!")
-                return nil
-            }
-        ]
     }
     
     override func setup() {
@@ -42,12 +32,17 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
                 commonHistoryByDate.append([keyStr: commonHistory])
                 sectionItems.append(keyStr)
                 menuItems.append(commonHistory.map({ (item) -> OptionMenuItem in
-                    return OptionMenuItem(titleText: item.title, urlText: item.url, thumbnailImage: nil)
+                    return OptionMenuItem(titleText: item.title, urlText: item.url, image: nil)
                 }))
                 log.debug("common history read. key: \(keyStr)")
             } catch let error as NSError {
                 log.error("failed to read common history. key: \(keyStr)")
             }
+        }
+        commonAction = { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+            let encodedText = menuItem.url!.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+            NotificationCenter.default.post(name: .baseViewModelWillSearchWebView, object: encodedText!)
+            return nil
         }
     }
 }
