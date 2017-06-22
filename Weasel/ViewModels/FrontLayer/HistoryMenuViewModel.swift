@@ -32,11 +32,11 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
                 commonHistoryByDate.append([keyStr: commonHistory])
                 sectionItems.append(keyStr)
                 menuItems.append(commonHistory.map({ (item) -> OptionMenuItem in
-                    return OptionMenuItem(titleText: item.title, urlText: item.url, image: nil)
+                    return OptionMenuItem(title: item.title, url: item.url, image: nil)
                 }))
                 log.debug("common history read. key: \(keyStr)")
             } catch let error as NSError {
-                log.error("failed to read common history. key: \(keyStr)")
+                log.error("failed to read common history. error: \(error.localizedDescription)")
             }
         }
         commonAction = { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in

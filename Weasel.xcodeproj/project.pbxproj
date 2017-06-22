@@ -12,6 +12,7 @@
 		A55409581EF8034400F29140 /* OptionMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55409571EF8034400F29140 /* OptionMenuTableViewCell.swift */; };
 		A554095A1EFAAA9900F29140 /* FormMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55409591EFAAA9900F29140 /* FormMenuViewModel.swift */; };
 		A554095C1EFAAAB600F29140 /* FavoriteMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554095B1EFAAAB600F29140 /* FavoriteMenuViewModel.swift */; };
+		A554095E1EFBF71100F29140 /* OptionMenuTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554095D1EFBF71100F29140 /* OptionMenuTextField.swift */; };
 		A55EBF4D1EEB009000304C69 /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF131EEB009000304C69 /* AppDataManager.swift */; };
 		A55EBF4E1EEB009000304C69 /* DeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF141EEB009000304C69 /* DeviceDataManager.swift */; };
 		A55EBF4F1EEB009000304C69 /* DispatchQueue+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF161EEB009000304C69 /* DispatchQueue+Extend.swift */; };
@@ -75,6 +76,7 @@
 		A55409571EF8034400F29140 /* OptionMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewCell.swift; sourceTree = "<group>"; };
 		A55409591EFAAA9900F29140 /* FormMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormMenuViewModel.swift; sourceTree = "<group>"; };
 		A554095B1EFAAAB600F29140 /* FavoriteMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteMenuViewModel.swift; sourceTree = "<group>"; };
+		A554095D1EFBF71100F29140 /* OptionMenuTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTextField.swift; sourceTree = "<group>"; };
 		A55EBF131EEB009000304C69 /* AppDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
 		A55EBF141EEB009000304C69 /* DeviceDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDataManager.swift; sourceTree = "<group>"; };
 		A55EBF161EEB009000304C69 /* DispatchQueue+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extend.swift"; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				A55EBF481EEB009000304C69 /* CircleProgress.swift */,
 				A5B628DA1EEECC76005CC957 /* OptionMenuTableView.swift */,
 				A55409571EF8034400F29140 /* OptionMenuTableViewCell.swift */,
+				A554095D1EFBF71100F29140 /* OptionMenuTextField.swift */,
 			);
 			path = FrontLayer;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				A55EBF7F1EEB014E00304C69 /* EGApplication.swift in Sources */,
 				A55EBF701EEB009000304C69 /* EGGradientLabel.swift in Sources */,
 				A5B628D71EEECC28005CC957 /* Double+Extend.swift in Sources */,
+				A554095E1EFBF71100F29140 /* OptionMenuTextField.swift in Sources */,
 				A55EBF541EEB009000304C69 /* UIImage+Extend.swift in Sources */,
 				A55409581EF8034400F29140 /* OptionMenuTableViewCell.swift in Sources */,
 				A55EBF5B1EEB009000304C69 /* Util.swift in Sources */,

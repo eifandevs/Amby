@@ -11,7 +11,6 @@ import Foundation
 class OptionMenuTableViewModel {
     var sectionItems: [String] = []
     var menuItems: [[OptionMenuItem]] = []
-    var actionItems: [[((OptionMenuItem) -> (OptionMenuTableViewModel?))]] = []
     var commonAction: ((OptionMenuItem) -> (OptionMenuTableViewModel?))? = nil
     init() {
     }

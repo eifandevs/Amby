@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class BaseMenuViewModel: OptionMenuTableViewModel {
     override init() {
@@ -16,32 +17,27 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
     override func setup() {
         menuItems = [
             [
-                OptionMenuItem(titleText: "新しいタブ", urlText: nil, image: nil),
-                OptionMenuItem(titleText: "新しいタブ(URLコピー)", urlText: nil, image: nil),
-                OptionMenuItem(titleText: "履歴", urlText: nil, image: nil),
-                OptionMenuItem(titleText: "フォーム", urlText: nil, image: nil),
-                OptionMenuItem(titleText: "お気に入り", urlText: nil, image: nil),
-                OptionMenuItem(titleText: "キャッシュ設定", urlText: nil, image: nil),
-                OptionMenuItem(titleText: "設定", urlText: nil, image: nil),
-                OptionMenuItem(titleText: "ヘルプ", urlText: nil, image: nil)
-            ]
-        ]
-        actionItems = [
-            [
-                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                OptionMenuItem(title: "新しいタブ", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: nil)
                     return nil
-                },
-                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                }),
+                OptionMenuItem(title: "新しいタブ(URLコピー)", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationCenter.default.post(name: .baseViewModelWillCopyWebView, object: nil)
                     return nil
-                },
-                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return HistoryMenuViewModel() },
-                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FormMenuViewModel() },
-                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FavoriteMenuViewModel() },
-                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel() },
-                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel() },
-                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel() }
+                }),
+                OptionMenuItem(title: "履歴", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return HistoryMenuViewModel()
+                }),
+                OptionMenuItem(title: "フォーム", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FormMenuViewModel()
+                }),
+                OptionMenuItem(title: "ブックマーク", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FavoriteMenuViewModel()
+                }),
+                OptionMenuItem(title: "問題の報告", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
+                }),
+                OptionMenuItem(title: "設定", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
+                }),
+                OptionMenuItem(title: "ヘルプ", image: UIImage(named: "historyforward_webview")),
+                OptionMenuItem(title: "初期化", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
+                }),
             ]
         ]
     }

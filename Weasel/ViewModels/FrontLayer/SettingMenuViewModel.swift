@@ -15,22 +15,20 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
     }
     
     override func setup() {
+        sectionItems = ["初期表示URL", "データ保持設定", "自動スクロール設定", "データ削除"]
         menuItems = [
             [
-                OptionMenuItem(titleText: "aaaaa", urlText: nil, image: UIImage(named: "historyforward_webview")),
-                OptionMenuItem(titleText: "bbbbb", urlText: nil, image: UIImage(named: "historyforward_webview"))
-            ]
-        ]
-        actionItems = [
+                OptionMenuItem(type: .input)
+            ],
             [
-                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    log.warning("tapped!!!!!")
-                    return nil
-                },
-                { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    log.warning("tapped!!!!!")
-                    return nil
-                }
+                OptionMenuItem(type: .select, title: "閲覧履歴を記録する"),
+                OptionMenuItem(type: .select, title: "キャッシュを利用する")
+            ],
+            [
+                OptionMenuItem(title: "bbbb")
+            ],
+            [
+                OptionMenuItem(title: "bbbb")
             ]
         ]
     }

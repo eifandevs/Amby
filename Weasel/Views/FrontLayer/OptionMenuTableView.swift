@@ -33,8 +33,8 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         tableView.isUserInteractionEnabled = true
-        tableView.separatorColor = UIColor.dandilionSeeds
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
+        tableView.separatorColor = UIColor.clear
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         tableView.showsHorizontalScrollIndicator = true
         tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = UIColor.white
@@ -73,7 +73,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(OptionMenuTableViewCell.self), for: indexPath) as! OptionMenuTableViewCell
         let menuItem: OptionMenuItem = viewModel.menuItems[indexPath.section][indexPath.row]
-        cell.setTitle(title: menuItem.title, url: menuItem.url, image: menuItem.thumbnail)
+        cell.setTitle(menuItem: menuItem)
         return cell
     }
     
@@ -91,40 +91,50 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if detailView == nil {
-            let detailViewModel = viewModel.commonAction != nil ?
-                viewModel.commonAction!(viewModel.menuItems[indexPath.section][indexPath.row]) :
-                viewModel.actionItems[indexPath.section][indexPath.row](viewModel.menuItems[indexPath.section][indexPath.row])
-            detailViewModel?.setup()
-            if detailViewModel != nil {
-                let marginX = swipeDirection == .left ? 30 : -30
-                let marginY = 20
-                detailView = OptionMenuTableView(frame: frame, viewModel: detailViewModel!, direction: swipeDirection)
-                detailView?.center += CGPoint(x: marginX.cgfloat, y: marginY.cgfloat)
-                
-                if (detailView?.frame.origin.y)! + AppDataManager.shared.optionMenuSize.height > DeviceDataManager.shared.displaySize.height {
-                    detailView?.frame.origin.y = DeviceDataManager.shared.displaySize.height - AppDataManager.shared.optionMenuSize.height
+            let action: ((OptionMenuItem) -> (OptionMenuTableViewModel?))? = { () -> ((OptionMenuItem) -> (OptionMenuTableViewModel?))? in
+                if viewModel.commonAction != nil {
+                    return viewModel.commonAction!
                 }
-                
-                detailView?.delegate = self
-                superview!.addSubview(detailView!)
-                
-                let overlay = UIButton(frame: CGRect(origin: CGPoint.zero, size: tableView.frame.size))
-                overlay.backgroundColor = UIColor.clear
-                _ = overlay.reactive.tap
-                    .observe { [weak self] _ in
-                        guard let `self` = self else {
-                            return
-                        }
-                        // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
-                        self.detailView?.removeFromSuperview()
-                        self.detailView = nil
-                        
-                        overlay.removeFromSuperview()
+                if viewModel.menuItems[indexPath.section][indexPath.row].action != nil {
+                    return viewModel.menuItems[indexPath.section][indexPath.row].action!
                 }
-                tableView.addSubview(overlay)
-            } else {
-                // メニューを全て閉じる
-                delegate?.optionMenuDidClose()
+                return nil
+            }()
+            
+            if action != nil {
+                let detailViewModel: OptionMenuTableViewModel? = action!((viewModel.menuItems[indexPath.section][indexPath.row]))
+                if detailViewModel != nil {
+                    detailViewModel!.setup()
+                    let marginX = swipeDirection == .left ? 30 : -30
+                    let marginY = 20
+                    detailView = OptionMenuTableView(frame: frame, viewModel: detailViewModel!, direction: swipeDirection)
+                    detailView?.center += CGPoint(x: marginX.cgfloat, y: marginY.cgfloat)
+                    
+                    if (detailView?.frame.origin.y)! + AppDataManager.shared.optionMenuSize.height > DeviceDataManager.shared.displaySize.height {
+                        detailView?.frame.origin.y = DeviceDataManager.shared.displaySize.height - AppDataManager.shared.optionMenuSize.height
+                    }
+                    
+                    detailView?.delegate = self
+                    superview!.addSubview(detailView!)
+                    
+                    let overlay = UIButton(frame: CGRect(origin: CGPoint.zero, size: tableView.frame.size))
+                    overlay.backgroundColor = UIColor.clear
+                    _ = overlay.reactive.tap
+                        .observe { [weak self] _ in
+                            guard let `self` = self else {
+                                return
+                            }
+                            // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
+                            self.detailView?.removeFromSuperview()
+                            self.detailView = nil
+                            
+                            overlay.removeFromSuperview()
+                    }
+                    tableView.addSubview(overlay)
+                } else {
+                    // メニューを全て閉じる
+                    delegate?.optionMenuDidClose()
+                }
             }
         }
     }
@@ -132,5 +142,12 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
 // MARK: OptionMenuTableViewDelegate
     func optionMenuDidClose() {
         delegate?.optionMenuDidClose()
+    }
+
+// MARK: Public Method
+    func closeKeyBoard() {
+        if let detailView = detailView {
+            detailView.endEditing(true)
+        }
     }
 }

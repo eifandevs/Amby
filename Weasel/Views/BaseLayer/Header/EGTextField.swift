@@ -53,6 +53,7 @@ class EGTextField: UIButton, ShadowView {
         textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: height), size: CGSize(width: frame.size.width - 10, height: size.height)))
         textField.borderStyle = .none
         textField.keyboardType = .default
+        textField.returnKeyType = .search
         textField.delegate = delegate
         textField.placeholder = "検索 / URL"
         textField.text = pastLabelText

@@ -17,7 +17,6 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     var delegate: FrontLayerDelegate?
     var swipeDirection: EdgeSwipeDirection = .none
     private var optionMenu: OptionMenuTableView? = nil
-    private var detailMenu: OptionMenuTableView? = nil
     private var overlay: UIButton! = nil
 
     let kCircleButtonRadius = 43;
@@ -28,9 +27,21 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         _ = overlay.reactive.tap
             .observe { [weak self] _ in
                 if let optionMenu = self!.optionMenu {
-                    optionMenu.removeFromSuperview()
-                    self!.optionMenu = nil
-                    self!.delegate?.frontLayerDidInvalidate()
+                    let window: UIWindow? = {
+                        for w in UIApplication.shared.windows {
+                            if NSStringFromClass(type(of: w)) == "UIRemoteKeyboardWindow" {
+                                return w
+                            }
+                        }
+                        return nil
+                    }()
+                    if let window = window {
+                        optionMenu.closeKeyBoard()
+                    } else {
+                        optionMenu.removeFromSuperview()
+                        self!.optionMenu = nil
+                        self!.delegate?.frontLayerDidInvalidate()
+                    }
                 }
         }
         addSubview(overlay)

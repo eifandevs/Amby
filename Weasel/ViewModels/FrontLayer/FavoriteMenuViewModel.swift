@@ -15,7 +15,7 @@ class FavoriteMenuViewModel: OptionMenuTableViewModel {
     
     override func setup() {
         let items = StoreManager.shared.selectAllFavorite().map { (favorite) -> OptionMenuItem in
-            return OptionMenuItem(titleText: favorite.title, urlText: favorite.url, image: nil)
+            return OptionMenuItem(title: favorite.title, url: favorite.url, image: nil)
         }
         
         menuItems.append(items)
