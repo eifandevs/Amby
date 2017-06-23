@@ -14,7 +14,7 @@ class Form: Object {
     dynamic var title: String? = ""
     dynamic var host: String? = ""
     dynamic var url: String? = ""
-    dynamic var date: NSDate = NSDate()
+    dynamic var date: Date = Date()
     let inputs = List<Input>()
     
     override static func primaryKey() -> String? {

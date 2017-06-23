@@ -15,7 +15,7 @@ class FormMenuViewModel: OptionMenuTableViewModel {
     
     override func setup() {
         let items = StoreManager.shared.selectAllForm().map { (form) -> OptionMenuItem in
-            return OptionMenuItem(title: form.title, url: form.url, image: nil)
+            return OptionMenuItem(_id: form.id, type: .deletablePlain, title: form.title, url: form.url, date: form.date)
         }
         
         menuItems.append(items)

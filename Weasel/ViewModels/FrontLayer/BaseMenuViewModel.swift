@@ -25,7 +25,9 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
                     NotificationCenter.default.post(name: .baseViewModelWillCopyWebView, object: nil)
                     return nil
                 }),
-                OptionMenuItem(title: "履歴", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return HistoryMenuViewModel()
+                OptionMenuItem(title: "履歴", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    NotificationCenter.default.post(name: .baseViewModelWillStoreHistory, object: nil)
+                    return HistoryMenuViewModel()
                 }),
                 OptionMenuItem(title: "フォーム", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FormMenuViewModel()
                 }),

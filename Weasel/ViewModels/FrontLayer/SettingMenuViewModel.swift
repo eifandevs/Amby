@@ -28,7 +28,11 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 OptionMenuItem(title: "bbbb")
             ],
             [
-                OptionMenuItem(title: "bbbb")
+                OptionMenuItem(title: "閲覧履歴"),
+                OptionMenuItem(title: "ブックマーク"),
+                OptionMenuItem(title: "フォームデータ"),
+                OptionMenuItem(title: "Cookie"),
+                OptionMenuItem(title: "キャッシュ")
             ]
         ]
     }

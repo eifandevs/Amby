@@ -134,6 +134,11 @@ class BaseViewModel {
                 log.warning("selected current webView")
             }
         }
+        // フロントwebviewの変更
+        center.addObserver(forName: .baseViewModelWillStoreHistory, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillStoreHistory")
+            self!.storeHistory()
+        }
         // webviewの削除
         center.addObserver(forName: .baseViewModelWillRemoveWebView, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[BaseView Event]: baseViewModelWillRemoveWebView")
@@ -171,13 +176,14 @@ class BaseViewModel {
                 fd.title = self!.eachHistory[self!.locationIndex].title
                 fd.url = self!.eachHistory[self!.locationIndex].url
                 
-                if StoreManager.shared.existSameFavorite(url: fd.url) {
-                    // すでに登録済みの場合は、登録しない
-                    Util.shared.presentWarning(title: "登録エラー", message: "すでに登録済みです。")
+                if let favoriteData = StoreManager.shared.selectFavorite(url: fd.url) {
+                    // すでに登録済みの場合は、お気に入りから削除する
+                    StoreManager.shared.deleteWithRLMObjects(data: [favoriteData])
+                    self!.center.post(name: .headerViewModelWillChangeFavorite, object: false)
                 } else {
                     StoreManager.shared.insertWithRLMObjects(data: [fd])
                     // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
-                    self!.center.post(name: .headerViewModelWillChangeFavorite, object: fd.url)
+                    self!.center.post(name: .headerViewModelWillChangeFavorite, object: true)
                     Util.shared.presentWarning(title: "登録完了", message: "お気に入りに登録しました。")
                 }
             } else {
@@ -227,10 +233,10 @@ class BaseViewModel {
     func saveHistory(wv: EGWebView) {
         if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle {
             // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
-            center.post(name: .headerViewModelWillChangeFavorite, object: requestUrl)
+            center.post(name: .headerViewModelWillChangeFavorite, object: StoreManager.shared.selectFavorite(url: requestUrl) != nil)
 
             // Common History
-            let common = CommonHistoryItem(url: requestUrl, title: requestTitle, date: Date())
+            let common = CommonHistoryItem(_id: NSUUID().uuidString, url: requestUrl, title: requestTitle, date: Date())
             commonHistory.append(common)
             log.debug("save history. url: \(common.url)")
             
@@ -271,11 +277,11 @@ class BaseViewModel {
             }
             
             for (key, value) in commonHistoryByDate {
-                let commonHistoryPath = AppDataManager.shared.commonHistoryPath(date: key)
+                let commonHistoryUrl = AppDataManager.shared.commonHistoryUrl(date: key)
                 
                 let saveData: [CommonHistoryItem] = { () -> [CommonHistoryItem] in
                     do {
-                        let data = try Data(contentsOf: commonHistoryPath)
+                        let data = try Data(contentsOf: commonHistoryUrl)
                         let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
                         let saveData: [CommonHistoryItem] = old + value
                         return saveData
@@ -287,7 +293,7 @@ class BaseViewModel {
                 
                 let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
                 do {
-                    try commonHistoryData.write(to: commonHistoryPath)
+                    try commonHistoryData.write(to: commonHistoryUrl)
                     log.debug("store common history")
                 } catch let error as NSError {
                     log.error("failed to write: \(error)")

@@ -41,10 +41,15 @@ class AppDataManager {
         return URL(fileURLWithPath: path)
     }
     
-    func commonHistoryPath(date: String) -> URL {
+    func commonHistoryUrl(date: String) -> URL {
         let path = DeviceDataManager.shared.cachesPath + "/common_history"
         createFolder(path: path)
         return URL(fileURLWithPath: path + "/\(date).dat")
+    }
+    
+    func commonHistoryFilePath(date: String) -> String {
+        let path = DeviceDataManager.shared.cachesPath + "/common_history"
+        return path + "/\(date).dat"
     }
     
     private func createFolder(path: String) {

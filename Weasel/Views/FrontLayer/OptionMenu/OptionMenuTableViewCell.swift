@@ -15,6 +15,8 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
     var thumbnail: UIImageView = UIImageView()
     var textField: OptionMenuTextField = OptionMenuTextField()
     var switchControl: UISwitch = UISwitch()
+    var indexPath: IndexPath! = nil
+    private var type: OptionMenuType = .plain
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -31,9 +33,9 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func setTitle(menuItem: OptionMenuItem) {
         initialize()
-        
+        type = menuItem.type
         switch menuItem.type {
-        case .plain:
+        case .plain, .deletablePlain:
             var marginX: CGFloat = 10
             
             if let unwrappedImage = menuItem.image {
@@ -92,7 +94,6 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             
             switchControl.frame = CGRect(origin: CGPoint(x: marginX + titleLabel.frame.size.width, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - titleLabel.frame.size.width, height: titleLabel.frame.size.height))
             switchControl.center.y = frame.size.height / 2
-//            switchControl.autoresizingMask = [.flexibleLeftMargin, .flexibleHeight]
             switchControl.onTintColor = UIColor.frenchBlue
             contentView.addSubview(switchControl)
         }

@@ -11,15 +11,17 @@ import UIKit
 
 protocol OptionMenuTableViewDelegate {
     func optionMenuDidClose()
+    func optionMenuDidDeleteHistoryData(_id: String, date: Date)
+    func optionMenuDidDeleteFavoriteData(_id: String)
+    func optionMenuDidDeleteFormData(_id: String)
 }
 
 class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, ShadowView, OptionMenuTableViewDelegate {
     var delegate: OptionMenuTableViewDelegate? = nil
-    private var tableView: UITableView? = nil
+    private var tableView: UITableView = UITableView()
     private var detailView: OptionMenuTableView? = nil
     private var viewModel: OptionMenuTableViewModel!
-    private var clickedLocation: CGPoint! = nil
-    private var swipeDirection: EdgeSwipeDirection! = .none
+    private var swipeDirection: EdgeSwipeDirection = .none
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +31,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         backgroundColor = UIColor.clear
         layer.cornerRadius = 2.5
         
-        let tableView = UITableView(frame: CGRect(origin: CGPoint.zero, size: frame.size))
+        tableView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         tableView.isUserInteractionEnabled = true
@@ -44,7 +46,12 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         tableView.dataSource = self
         tableView.layer.cornerRadius = 2.5
         tableView.register(OptionMenuTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(OptionMenuTableViewCell.self))
-
+        
+        // ロングプレスで削除
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed
+            ))
+        addGestureRecognizer(longPressRecognizer)
+        
         addSubview(tableView)
     }
     
@@ -63,7 +70,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.sectionItems.count > 0 ? viewModel.sectionItems.count : 1
+        return viewModel.sectionItems.count > 0 ? viewModel.sectionItems.count : viewModel.menuItems.count > 0 ? 1 : 0
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -74,6 +81,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(OptionMenuTableViewCell.self), for: indexPath) as! OptionMenuTableViewCell
         let menuItem: OptionMenuItem = viewModel.menuItems[indexPath.section][indexPath.row]
         cell.setTitle(menuItem: menuItem)
+        cell.indexPath = indexPath
         return cell
     }
     
@@ -138,12 +146,55 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
             }
         }
     }
+
+// MARK: Gesture Event
+    func longPressed(sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            let point: CGPoint = sender.location(in: tableView)
+            let indexPath: IndexPath = tableView.indexPathForRow(at: point)!
+            let menuItem = viewModel.menuItems[indexPath.section][indexPath.row]
+            if menuItem.type == .deletablePlain {
+                tableView.beginUpdates()
+                viewModel.menuItems[indexPath.section].remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                if viewModel.menuItems[indexPath.section].count == 0 {
+                    viewModel.deleteSection(index: indexPath.section)
+                    tableView.deleteSections([indexPath.section], with: .automatic)
+                }
+                // 削除対象をFrontLayerに通知する
+                // データの削除はフロントビューが閉じられた、もしくはBG遷移時に行う
+                if viewModel is HistoryMenuViewModel {
+                    delegate?.optionMenuDidDeleteHistoryData(_id: menuItem._id!, date: menuItem.date!)
+                } else if viewModel is FavoriteMenuViewModel {
+                    delegate?.optionMenuDidDeleteFavoriteData(_id: menuItem._id!)
+                } else if viewModel is FormMenuViewModel {
+                    delegate?.optionMenuDidDeleteFormData(_id: menuItem._id!)
+                }
+                tableView.endUpdates()
+            }
+        default:
+            break
+        }
+    }
     
 // MARK: OptionMenuTableViewDelegate
     func optionMenuDidClose() {
         delegate?.optionMenuDidClose()
     }
 
+    func optionMenuDidDeleteHistoryData(_id: String, date: Date) {
+        delegate?.optionMenuDidDeleteHistoryData(_id: _id, date: date)
+    }
+    
+    func optionMenuDidDeleteFavoriteData(_id: String) {
+        delegate?.optionMenuDidDeleteFavoriteData(_id: _id)
+    }
+    
+    func optionMenuDidDeleteFormData(_id: String) {
+        delegate?.optionMenuDidDeleteFormData(_id: _id)
+    }
+    
 // MARK: Public Method
     func closeKeyBoard() {
         if let detailView = detailView {

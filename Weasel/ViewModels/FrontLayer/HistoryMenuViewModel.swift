@@ -9,6 +9,7 @@
 import Foundation
 
 class HistoryMenuViewModel: OptionMenuTableViewModel {
+    
     var commonHistoryByDate: [[String: [CommonHistoryItem]]] = []
     
     override init() {
@@ -27,12 +28,12 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
             // デフォルトでは、過去7日分読み込む
             let keyStr = String(Int(todayStr)! - index)
             do {
-                let data = try Data(contentsOf: AppDataManager.shared.commonHistoryPath(date: keyStr))
+                let data = try Data(contentsOf: AppDataManager.shared.commonHistoryUrl(date: keyStr))
                 let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
                 commonHistoryByDate.append([keyStr: commonHistory])
                 sectionItems.append(keyStr)
                 menuItems.append(commonHistory.map({ (item) -> OptionMenuItem in
-                    return OptionMenuItem(title: item.title, url: item.url, image: nil)
+                    return OptionMenuItem(_id: item._id, type: .deletablePlain, title: item.title, url: item.url, date: item.date)
                 }))
                 log.debug("common history read. key: \(keyStr)")
             } catch let error as NSError {

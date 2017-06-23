@@ -15,4 +15,10 @@ class OptionMenuTableViewModel {
     init() {
     }
     func setup() { /* setupコール時に上記Itemsに値を入れる */ }
+    
+    /// セクションの削除
+    func deleteSection(index: NSInteger) {
+        sectionItems.remove(at: index)
+        menuItems.remove(at: index)
+    }
 }

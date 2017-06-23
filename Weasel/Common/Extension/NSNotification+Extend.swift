@@ -15,6 +15,7 @@ extension NSNotification.Name {
     static let baseViewModelWillAddWebView = NSNotification.Name("baseViewModelWillAddWebView")
     static let baseViewModelWillCopyWebView = NSNotification.Name("baseViewModelWillCopyWebView")
     static let baseViewModelWillReloadWebView = NSNotification.Name("baseViewModelWillReloadWebView")
+    static let baseViewModelWillStoreHistory = NSNotification.Name("baseViewModelWillStoreHistory")
     static let baseViewModelWillRemoveWebView = NSNotification.Name("baseViewModelWillRemoveWebView")
     static let baseViewModelWillChangeWebView = NSNotification.Name("baseViewModelWillChangeWebView")
     static let baseViewModelWillHistoryBackWebView = NSNotification.Name("baseViewModelWillHistoryBackWebView")

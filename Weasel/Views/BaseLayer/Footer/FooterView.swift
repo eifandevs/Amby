@@ -168,7 +168,8 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             }
         }
     }
-    
+
+// MARK: Gesture Event
     func longPressed(sender: UILongPressGestureRecognizer) {
         switch sender.state {
         case .began:

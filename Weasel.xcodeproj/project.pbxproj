@@ -27,7 +27,6 @@
 		A55EBF541EEB009000304C69 /* UIImage+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF1B1EEB009000304C69 /* UIImage+Extend.swift */; };
 		A55EBF551EEB009000304C69 /* UIScrollView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF1C1EEB009000304C69 /* UIScrollView+Extend.swift */; };
 		A55EBF561EEB009000304C69 /* UIView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF1D1EEB009000304C69 /* UIView+Extend.swift */; };
-		A55EBF571EEB009000304C69 /* WKWebView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF1E1EEB009000304C69 /* WKWebView+Extend.swift */; };
 		A55EBF581EEB009000304C69 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF201EEB009000304C69 /* CircleView.swift */; };
 		A55EBF591EEB009000304C69 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF211EEB009000304C69 /* ShadowView.swift */; };
 		A55EBF5A1EEB009000304C69 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF221EEB009000304C69 /* StoreManager.swift */; };
@@ -91,7 +90,6 @@
 		A55EBF1B1EEB009000304C69 /* UIImage+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extend.swift"; sourceTree = "<group>"; };
 		A55EBF1C1EEB009000304C69 /* UIScrollView+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extend.swift"; sourceTree = "<group>"; };
 		A55EBF1D1EEB009000304C69 /* UIView+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extend.swift"; sourceTree = "<group>"; };
-		A55EBF1E1EEB009000304C69 /* WKWebView+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+Extend.swift"; sourceTree = "<group>"; };
 		A55EBF201EEB009000304C69 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		A55EBF211EEB009000304C69 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		A55EBF221EEB009000304C69 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				A55EBF1B1EEB009000304C69 /* UIImage+Extend.swift */,
 				A55EBF1C1EEB009000304C69 /* UIScrollView+Extend.swift */,
 				A55EBF1D1EEB009000304C69 /* UIView+Extend.swift */,
-				A55EBF1E1EEB009000304C69 /* WKWebView+Extend.swift */,
 				A5B628D61EEECC28005CC957 /* Double+Extend.swift */,
 				A5B628D81EEECC46005CC957 /* CGPoint+Extend.swift */,
 			);
@@ -542,7 +539,6 @@
 				A5B628D91EEECC46005CC957 /* CGPoint+Extend.swift in Sources */,
 				A55EBF721EEB009000304C69 /* EGTextField.swift in Sources */,
 				A55EBF6D1EEB009000304C69 /* BaseView.swift in Sources */,
-				A55EBF571EEB009000304C69 /* WKWebView+Extend.swift in Sources */,
 				A554096A1EFBF83700F29140 /* OptionMenuTableView.swift in Sources */,
 				A55EBF771EEB009000304C69 /* FrontLayer.swift in Sources */,
 				A5B628EF1EF0AF79005CC957 /* SettingMenuViewModel.swift in Sources */,

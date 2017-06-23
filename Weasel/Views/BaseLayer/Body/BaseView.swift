@@ -159,6 +159,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         log.error("[error url]\(String(describing: webView.url))")
         
+        let egWv: EGWebView = webView as! EGWebView
         if (error as NSError).code == NSURLErrorCancelled {
             // 連打したら-999 "(null)"になる対応
             return
@@ -168,14 +169,16 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             viewModel.notifyChangeProgress(object: 0)
         }
         
-        if !webView.hasLocalUrl {
-            webView.loadHtml(error: (error as NSError))
+        if !egWv.hasLocalUrl {
+            egWv.loadHtml(error: (error as NSError))
         } else {
             log.warning("already load error html")
         }
     }
     
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        let egWv: EGWebView = webView as! EGWebView
+
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
             // SSL認証
             let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
@@ -196,7 +199,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             }
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
                 completionHandler(.cancelAuthenticationChallenge, nil)
-                webView.loadHtml(code: .UNAUTHORIZED)
+                egWv.loadHtml(code: .UNAUTHORIZED)
             }))
             alertController.addAction(UIAlertAction(title: "Log In", style: .default, handler: { action in
                 let credential = URLCredential(user: usernameTextField.text!, password: passwordTextField.text!, persistence: URLCredential.Persistence.forSession)
@@ -214,7 +217,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             viewModel.latestRequestUrl = latest
         }
         
-        saveMetaData(webView: webView, completion: nil)
+        saveMetaData(webView: webView as! EGWebView, completion: nil)
 
         // TODO: 自動スクロール実装
         //        if autoScrollTimer?.valid == true {
@@ -383,7 +386,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         _ = newWv.load(urlStr: viewModel.requestUrl)
     }
     
-    private func saveMetaData(webView: WKWebView, completion: ((_ url: String?) -> ())?) {
+    private func saveMetaData(webView: EGWebView, completion: ((_ url: String?) -> ())?) {
         if let urlStr = webView.url?.absoluteString, let title = webView.title {
             if urlStr.hasValidUrl {
                 webView.requestUrl = urlStr
