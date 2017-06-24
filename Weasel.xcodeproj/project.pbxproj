@@ -115,7 +115,7 @@
 		A55EBF441EEB009000304C69 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		A55EBF491EEB009000304C69 /* FrontLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontLayer.swift; sourceTree = "<group>"; };
 		A55EBF791EEB014E00304C69 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A55EBF7A1EEB014E00304C69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A55EBF7A1EEB014E00304C69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../App/Assets.xcassets; sourceTree = "<group>"; };
 		A55EBF7B1EEB014E00304C69 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A55EBF7C1EEB014E00304C69 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Weasel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weasel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -253,6 +253,7 @@
 		A55EBF2C1EEB009000304C69 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A55EBF7A1EEB014E00304C69 /* Assets.xcassets */,
 				A55EBF2D1EEB009000304C69 /* authorize.html */,
 				A55EBF2E1EEB009000304C69 /* dns.html */,
 				A55EBF2F1EEB009000304C69 /* invalid.html */,
@@ -341,7 +342,6 @@
 			isa = PBXGroup;
 			children = (
 				A55EBF791EEB014E00304C69 /* AppDelegate.swift */,
-				A55EBF7A1EEB014E00304C69 /* Assets.xcassets */,
 				A55EBF7B1EEB014E00304C69 /* EGApplication.swift */,
 				A55EBF7C1EEB014E00304C69 /* Info.plist */,
 			);
