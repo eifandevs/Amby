@@ -46,6 +46,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
                 thumbnail.setImage(tintedImage, for: .normal)
                 thumbnail.imageView?.contentMode = .scaleAspectFit
                 thumbnail.tintColor = UIColor.black
+                thumbnail.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
                 contentView.addSubview(thumbnail)
             }
             

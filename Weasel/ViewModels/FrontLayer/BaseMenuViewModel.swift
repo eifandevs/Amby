@@ -21,11 +21,11 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
                     NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: nil)
                     return nil
                 }),
-                OptionMenuItem(title: "新しいタブ(URLコピー)", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                OptionMenuItem(title: "新しいタブ(URLコピー)", image: UIImage(named: "option_menu_copy"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationCenter.default.post(name: .baseViewModelWillCopyWebView, object: nil)
                     return nil
                 }),
-                OptionMenuItem(title: "履歴", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                OptionMenuItem(title: "履歴", image: UIImage(named: "option_menu_history"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationCenter.default.post(name: .baseViewModelWillStoreHistory, object: nil)
                     return HistoryMenuViewModel()
                 }),
