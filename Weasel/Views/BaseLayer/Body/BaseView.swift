@@ -214,6 +214,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         // リクエストURLはエラーが発生した時のため保持しておく
         // エラー発生時は、リクエストしたURLを履歴に保持する
         if let latest = navigationAction.request.url?.absoluteString, latest.hasValidUrl {
+            log.debug("[Request Url]: \(latest)")
             viewModel.latestRequestUrl = latest
         }
         

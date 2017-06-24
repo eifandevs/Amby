@@ -12,7 +12,7 @@ import UIKit
 class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
     var titleLabel: UILabel = UILabel()
     var urlLabel: UILabel = UILabel()
-    var thumbnail: UIImageView = UIImageView()
+    var thumbnail: UIButton = UIButton()
     var textField: OptionMenuTextField = OptionMenuTextField()
     var switchControl: UISwitch = UISwitch()
     var indexPath: IndexPath! = nil
@@ -40,9 +40,12 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             
             if let unwrappedImage = menuItem.image {
                 marginX = AppDataManager.shared.optionMenuCellHeight
-                thumbnail = UIImageView(frame: CGRect(x: 0, y: 0, width: AppDataManager.shared.optionMenuCellHeight, height: AppDataManager.shared.optionMenuCellHeight))
-                thumbnail.image = unwrappedImage
-                thumbnail.backgroundColor = UIColor.black
+                thumbnail = UIButton(frame: CGRect(x: 0, y: 0, width: AppDataManager.shared.optionMenuCellHeight, height: AppDataManager.shared.optionMenuCellHeight))
+                thumbnail.isUserInteractionEnabled = false
+                let tintedImage = unwrappedImage.withRenderingMode(.alwaysTemplate)
+                thumbnail.setImage(tintedImage, for: .normal)
+                thumbnail.imageView?.contentMode = .scaleAspectFit
+                thumbnail.tintColor = UIColor.black
                 contentView.addSubview(thumbnail)
             }
             

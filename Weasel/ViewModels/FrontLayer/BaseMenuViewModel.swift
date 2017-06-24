@@ -17,7 +17,7 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
     override func setup() {
         menuItems = [
             [
-                OptionMenuItem(title: "新しいタブ", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                OptionMenuItem(title: "新しいタブ", image: UIImage(named: "option_menu_add"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: nil)
                     return nil
                 }),
