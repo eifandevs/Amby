@@ -253,64 +253,10 @@ class BaseViewModel {
     
     func storeHistory() {
         UserDefaults.standard.set(locationIndex, forKey: AppDataManager.shared.locationIndexKey)
-        storeCommonHistory()
-        storeEachHistory()
+        StoreManager.shared.storeCommonHistory(commonHistory: commonHistory)
+        if commonHistory.count > 0 {
+            StoreManager.shared.storeEachHistory(eachHistory: eachHistory)
+        }
         commonHistory = []
-    }
-    
-// MARK: Private Method
-    
-    private func storeCommonHistory() {
-        if commonHistory.count > 0 {
-            // commonHistoryを日付毎に分ける
-            var commonHistoryByDate: [String: [CommonHistoryItem]] = [:]
-            for item in commonHistory {
-                let dateFormatter = DateFormatter()
-                dateFormatter.locale = Locale(identifier: NSLocale.current.identifier)
-                dateFormatter.dateFormat = "yyyyMMdd"
-                let key = dateFormatter.string(from: item.date)
-                if commonHistoryByDate[key] == nil {
-                    commonHistoryByDate[key] = [item]
-                } else {
-                    commonHistoryByDate[key]?.append(item)
-                }
-            }
-            
-            for (key, value) in commonHistoryByDate {
-                let commonHistoryUrl = AppDataManager.shared.commonHistoryUrl(date: key)
-                
-                let saveData: [CommonHistoryItem] = { () -> [CommonHistoryItem] in
-                    do {
-                        let data = try Data(contentsOf: commonHistoryUrl)
-                        let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
-                        let saveData: [CommonHistoryItem] = old + value
-                        return saveData
-                    } catch let error as NSError {
-                        log.error("failed to read: \(error)")
-                        return value
-                    }
-                }()
-                
-                let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                do {
-                    try commonHistoryData.write(to: commonHistoryUrl)
-                    log.debug("store common history")
-                } catch let error as NSError {
-                    log.error("failed to write: \(error)")
-                }
-            }
-        }
-    }
-    
-    private func storeEachHistory() {
-        if commonHistory.count > 0 {
-            let eachHistoryData = NSKeyedArchiver.archivedData(withRootObject: eachHistory)
-            do {
-                try eachHistoryData.write(to: AppDataManager.shared.eachHistoryPath)
-                log.debug("store each history")
-            } catch let error as NSError {
-                log.error("failed to write: \(error)")
-            }
-        }
     }
 }

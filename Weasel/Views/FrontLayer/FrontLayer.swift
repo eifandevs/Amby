@@ -131,37 +131,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     /// 閲覧履歴、お気に入り、フォームデータを削除する
     func deleteStoreData() {
         // 履歴
-        for (key, value) in deleteHistoryIds {
-            let commonHistoryUrl = AppDataManager.shared.commonHistoryUrl(date: key)
-            let saveData: [CommonHistoryItem]? = { () -> [CommonHistoryItem]? in
-                do {
-                    let data = try Data(contentsOf: commonHistoryUrl)
-                    let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
-                    let saveData = old.filter({ (historyItem) -> Bool in
-                        return !value.contains(historyItem._id)
-                    })
-                    return saveData
-                } catch let error as NSError {
-                    log.error("failed to read: \(error)")
-                    return nil
-                }
-            }()
-            
-            if let saveData = saveData {
-                if saveData.count > 0 {
-                    let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                    do {
-                        try commonHistoryData.write(to: commonHistoryUrl)
-                        log.debug("store common history")
-                    } catch let error as NSError {
-                        log.error("failed to write: \(error)")
-                    }
-                } else {
-                    try! FileManager.default.removeItem(atPath: AppDataManager.shared.commonHistoryFilePath(date: key))
-                    log.debug("remove common history file")
-                }
-            }
-        }
+        StoreManager.shared.deleteStoreData(deleteHistoryIds: deleteHistoryIds)
     }
 
 // MARK: CircleMenuDelegate
