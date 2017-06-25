@@ -82,7 +82,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         }
         
         // お気に入り登録
-        addButton(favoriteButton, #imageLiteral(resourceName: "favorite_webview")) { [weak self] _ in
+        addButton(favoriteButton, #imageLiteral(resourceName: "header_favorite")) { [weak self] _ in
             self!.viewModel.notifyRegisterAsFavorite()
         }
         // 現在のWebView削除
@@ -206,10 +206,10 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         var tintedImage: UIImage? = nil
         if changed {
             // すでに登録済みの場合は、お気に入りボタンの色を変更する
-            tintedImage = #imageLiteral(resourceName: "favorite_webview_selected").withRenderingMode(.alwaysTemplate)
+            tintedImage = #imageLiteral(resourceName: "header_favorite_selected").withRenderingMode(.alwaysTemplate)
             favoriteButton.tintColor = UIColor.frenchBlue
         } else {
-            tintedImage = #imageLiteral(resourceName: "favorite_webview").withRenderingMode(.alwaysTemplate)
+            tintedImage = #imageLiteral(resourceName: "header_favorite").withRenderingMode(.alwaysTemplate)
             favoriteButton.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         }
         favoriteButton.setImage(tintedImage, for: .normal)
