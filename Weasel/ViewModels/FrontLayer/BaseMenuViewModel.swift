@@ -29,16 +29,16 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
                     NotificationCenter.default.post(name: .baseViewModelWillStoreHistory, object: nil)
                     return HistoryMenuViewModel()
                 }),
-                OptionMenuItem(title: "フォーム", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FormMenuViewModel()
+                OptionMenuItem(title: "フォーム", image: UIImage(named: "option_menu_form"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FormMenuViewModel()
                 }),
-                OptionMenuItem(title: "ブックマーク", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FavoriteMenuViewModel()
+                OptionMenuItem(title: "ブックマーク", image: UIImage(named: "favorite_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FavoriteMenuViewModel()
                 }),
-                OptionMenuItem(title: "問題の報告", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
+                OptionMenuItem(title: "問題の報告", image: UIImage(named: "option_menu_mail"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
                 }),
-                OptionMenuItem(title: "設定", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
+                OptionMenuItem(title: "設定", image: UIImage(named: "option_menu_setting"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
                 }),
-                OptionMenuItem(title: "ヘルプ", image: UIImage(named: "historyforward_webview")),
-                OptionMenuItem(title: "初期化", image: UIImage(named: "historyforward_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
+                OptionMenuItem(title: "ヘルプ", image: UIImage(named: "option_menu_help")),
+                OptionMenuItem(title: "初期化", image: UIImage(named: "option_menu_initialize"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
                 }),
             ]
         ]
