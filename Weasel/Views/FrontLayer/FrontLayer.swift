@@ -17,7 +17,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     var delegate: FrontLayerDelegate?
     var swipeDirection: EdgeSwipeDirection = .none
     private var optionMenu: OptionMenuTableView? = nil
-    var overlay: UIButton! = nil
+    private var overlay: UIButton! = nil
     private var deleteHistoryIds: [String: [String]] = [:]
     private var deleteFavoriteIds: [String] = []
     private var deleteFormIds: [String] = []
@@ -31,7 +31,10 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         self.overlay.alpha = 0
         _ = overlay.reactive.tap
             .observe { [weak self] _ in
-                if let optionMenu = self!.optionMenu {
+                guard let `self` = self else {
+                    return
+                }
+                if let optionMenu = self.optionMenu {
                     let window: UIWindow? = {
                         for w in UIApplication.shared.windows {
                             if NSStringFromClass(type(of: w)) == "UIRemoteKeyboardWindow" {
@@ -43,10 +46,18 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                     if window != nil {
                         optionMenu.closeKeyBoard()
                     } else {
-                        optionMenu.removeFromSuperview()
-                        self!.optionMenu = nil
-                        self!.deleteStoreData()
-                        self!.delegate?.frontLayerDidInvalidate()
+                        self.deleteStoreData()
+                        UIView.animate(withDuration: 0.15, animations: {
+                            self.overlay.alpha = 0
+                            self.optionMenu?.alpha = 0
+                            self.alpha = 0
+                        }, completion: { (finished) in
+                            if finished {
+                                optionMenu.removeFromSuperview()
+                                self.optionMenu = nil
+                                self.delegate?.frontLayerDidInvalidate()
+                            }
+                        })
                     }
                 }
         }
@@ -142,14 +153,30 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
 // MARK: CircleMenuDelegate
     func circleMenuDidClose() {
         if self.optionMenu == nil {
-            delegate?.frontLayerDidInvalidate()
+            UIView.animate(withDuration: 0.15, animations: { 
+                self.overlay.alpha = 0
+            }, completion: { (finished) in
+                if finished {
+                    self.delegate?.frontLayerDidInvalidate()
+                }
+            })
         }
     }
     
 // MARK: OptionMenuTableViewDelegate
     func optionMenuDidClose() {
         deleteStoreData()
-        delegate?.frontLayerDidInvalidate()
+        UIView.animate(withDuration: 0.15, animations: {
+            self.overlay.alpha = 0
+            self.optionMenu?.alpha = 0
+            self.alpha = 0
+        }, completion: { (finished) in
+            if finished {
+                self.optionMenu?.removeFromSuperview()
+                self.optionMenu = nil
+                self.delegate?.frontLayerDidInvalidate()
+            }
+        })
     }
     
     func optionMenuDidDeleteHistoryData(_id: String, date: Date) {

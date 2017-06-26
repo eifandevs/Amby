@@ -69,8 +69,9 @@ class CircleProgress: UIView {
     func updateProgress(tiemr: Timer) {
         progress.strokeEnd += 0.01
         
-        if progress.strokeEnd >= 1.0 {
+        if progress.strokeEnd >= 1.15 {
             // アニメーション終了前
+            superview?.isUserInteractionEnabled = false
         }
         
         if progress.strokeEnd >= 1.25 {

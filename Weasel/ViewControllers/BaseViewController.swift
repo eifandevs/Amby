@@ -40,15 +40,9 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
     
 // MARK: FrontLayer Delegate
     func frontLayerDidInvalidate() {
-        UIView.animate(withDuration: 0.15, animations: {
-            self.frontLayer.overlay.alpha = 0
-        }) { (finished) in
-            if finished {
-                self.frontLayer.removeFromSuperview()
-                self.frontLayer = nil
-                self.baseLayer.validateUserInteraction()
-            }
-        }
+        self.frontLayer.removeFromSuperview()
+        self.frontLayer = nil
+        self.baseLayer.validateUserInteraction()
     }
 
 // MARK: WebView Touch

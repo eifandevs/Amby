@@ -173,6 +173,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
             isClosing = true
             progress.invalidate()
             UIView.animate(withDuration: 0.2, animations: {
+                self.alpha = 0
                 self.circleMenuItems.forEach({ (menuItem) in
                     if menuItem.scheduledAction {
                         menuItem.transform = CGAffineTransform(scaleX: 2, y: 2)
@@ -203,6 +204,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
         } else {
             self.progress.start {
                 UIView.animate(withDuration: 0.2, animations: {
+                    self.alpha = 0
                     self.circleMenuItems.forEach({ (menuItem) in
                         menuItem.center = self.initialPt!
                         menuItem.alpha = 0

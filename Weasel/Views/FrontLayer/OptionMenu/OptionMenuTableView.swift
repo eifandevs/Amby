@@ -113,7 +113,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
                 let detailViewModel: OptionMenuTableViewModel? = action!((viewModel.menuItems[indexPath.section][indexPath.row]))
                 if detailViewModel != nil {
                     detailViewModel!.setup()
-                    let marginX = swipeDirection == .left ? 30 : -30
+                    let marginX = swipeDirection == .left ? 35 : -35
                     let marginY = 20
                     detailView = OptionMenuTableView(frame: frame, viewModel: detailViewModel!, direction: swipeDirection)
                     detailView?.center += CGPoint(x: marginX.cgfloat, y: marginY.cgfloat)
@@ -133,10 +133,15 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
                                 return
                             }
                             // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
-                            self.detailView?.removeFromSuperview()
-                            self.detailView = nil
-                            
                             overlay.removeFromSuperview()
+                            UIView.animate(withDuration: 0.15, animations: {
+                                self.detailView?.alpha = 0
+                            }, completion: { (finished) in
+                                if finished {
+                                    self.detailView?.removeFromSuperview()
+                                    self.detailView = nil
+                                }
+                            })
                     }
                     tableView.addSubview(overlay)
                 } else {
