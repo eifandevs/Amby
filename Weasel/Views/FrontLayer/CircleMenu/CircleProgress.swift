@@ -54,7 +54,7 @@ class CircleProgress: UIView {
 // MARK: Private Method
     func createProgress() {
         let centerPoint = CGPoint(x: self.bounds.size.width / 2, y: self.bounds.size.height / 2)
-        let circleRadius : CGFloat = self.bounds.size.width / 2.8
+        let circleRadius : CGFloat = self.bounds.size.width / 4
         let circlePath = UIBezierPath(arcCenter: centerPoint, radius: circleRadius, startAngle: CGFloat(-0.5 * M_PI), endAngle: CGFloat(1.5 * M_PI), clockwise: true)
         progress = CAShapeLayer()
         progress.path = circlePath.cgPath

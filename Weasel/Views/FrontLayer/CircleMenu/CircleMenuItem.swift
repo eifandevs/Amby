@@ -17,7 +17,7 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.gray
+        backgroundColor = UIColor.white
     }
     
     override func didMoveToSuperview() {

@@ -22,7 +22,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     private var deleteFavoriteIds: [String] = []
     private var deleteFormIds: [String] = []
 
-    let kCircleButtonRadius = 46;
+    let kCircleButtonRadius = 43;
     
     override init(frame: CGRect) {
         super.init(frame: frame)

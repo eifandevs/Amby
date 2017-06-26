@@ -48,7 +48,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
         super.init(frame: frame)
         addCircleShadow()
         addCircle()
-        backgroundColor = UIColor.darkGray
+        setImage(UIColor.gray.circleImage(size: CGSize(width: 33, height: 33)), for: .normal)
         alpha = 0.4
         EGApplication.sharedMyApplication.egDelegate = self
         
@@ -91,7 +91,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                             }
                     }
                     superview!.addSubview(circleMenuItem)
-                    UIView.animate(withDuration: 0.15, animations: {
+                    UIView.animate(withDuration: 0.18, animations: {
                         circleMenuItem.center = self.center + self.circleMenuLocations[index]
                     })
                 }
@@ -179,6 +179,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                         menuItem.backgroundColor = UIColor.frenchBlue
                     } else {
                         menuItem.center = self.initialPt!
+                        menuItem.alpha = 0
                     }
                 })
             }, completion: { (finished) in
@@ -204,6 +205,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                 UIView.animate(withDuration: 0.2, animations: {
                     self.circleMenuItems.forEach({ (menuItem) in
                         menuItem.center = self.initialPt!
+                        menuItem.alpha = 0
                     })
                 }, completion: { (finished) in
                     if finished {
@@ -262,20 +264,20 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                     // 他のitemを無効にする
                     for v in self.circleMenuItems {
                         v.scheduledAction = false
-                        v.backgroundColor = UIColor.gray
+                        v.backgroundColor = UIColor.white
                     }
                     
                     item.scheduledAction = true
                     item.isValid = true
                     item.backgroundColor = UIColor.frenchBlue
                     UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseIn, animations: {
-                        item.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+                        item.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
                     }, completion: nil)
                 }
             } else {
                 if item.isValid {
                     item.isValid = false
-                    item.backgroundColor = UIColor.gray
+                    item.backgroundColor = UIColor.white
                     if item.scheduledAction {
                         // 他のValidなitemをアクション予約する
                         for v in self.circleMenuItems where v.isValid {
