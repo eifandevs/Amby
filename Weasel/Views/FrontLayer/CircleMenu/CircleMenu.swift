@@ -34,11 +34,11 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
         get {
             let i = swipeDirection == .left ? 1 : -1
             return [
-                CGPoint(x: 0, y: -110), // Upper
-                CGPoint(x: i*57, y: -82), // UpperRight
-                CGPoint(x: i*92, y: -30), // RightUpper
-                CGPoint(x: i*92, y:  30), // RightLower
-                CGPoint(x: i*57, y: 82), // LowerRight
+                CGPoint(x: 0, y: -120), // Upper
+                CGPoint(x: i*60, y: -88), // UpperRight
+                CGPoint(x: i*95, y: -34), // RightUpper
+                CGPoint(x: i*95, y:  34), // RightLower
+                CGPoint(x: i*60, y: 88), // LowerRight
                 CGPoint(x: 0, y: 110) // Lower
             ]
         }
@@ -48,8 +48,8 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
         super.init(frame: frame)
         addCircleShadow()
         addCircle()
-        backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        alpha = 0.9
+        backgroundColor = UIColor.darkGray
+        alpha = 0.4
         EGApplication.sharedMyApplication.egDelegate = self
         
         // プログレス
@@ -81,7 +81,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
             if initialPt == nil {
                 initialPt = pt
                 for (index, circleMenuItem) in circleMenuItems.enumerated() {
-                    circleMenuItem.frame.size = self.frame.size
+                    circleMenuItem.frame.size = frame.size
                     circleMenuItem.center = initialPt!
                     _ = circleMenuItem.reactive.tap
                         .observe { [weak self] _ in
@@ -257,7 +257,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     private func collisionLoop() {
         // CircleMenuとCircleMenuItemの重なりを検知
         for item in self.circleMenuItems {
-            if (detectCollision(a: self.frame, b: item.frame)) {
+            if (detectCollision(item: item)) {
                 if item.isValid == false && item.scheduledAction == false {
                     // 他のitemを無効にする
                     for v in self.circleMenuItems {
@@ -293,9 +293,9 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
         }
     }
     
-    private func detectCollision(a: CGRect, b: CGRect) -> Bool {
-        let distance = a.origin.distance(pt: b.origin)
-        if (distance < ((a.size.width / 2) + (b.size.width / 2))) {
+    private func detectCollision(item: CircleMenuItem) -> Bool {
+        let distance = center.distance(pt: item.center)
+        if (distance < (((bounds.size.width * 1.5) / 2) + (item.bounds.size.width / 2))) {
             return true
         }
         return false

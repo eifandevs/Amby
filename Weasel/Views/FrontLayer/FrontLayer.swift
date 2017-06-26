@@ -17,16 +17,18 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     var delegate: FrontLayerDelegate?
     var swipeDirection: EdgeSwipeDirection = .none
     private var optionMenu: OptionMenuTableView? = nil
-    private var overlay: UIButton! = nil
+    var overlay: UIButton! = nil
     private var deleteHistoryIds: [String: [String]] = [:]
     private var deleteFavoriteIds: [String] = []
     private var deleteFormIds: [String] = []
 
-    let kCircleButtonRadius = 43;
+    let kCircleButtonRadius = 46;
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         overlay = UIButton(frame: frame)
+        overlay.backgroundColor = UIColor.lightGray
+        self.overlay.alpha = 0
         _ = overlay.reactive.tap
             .observe { [weak self] _ in
                 if let optionMenu = self!.optionMenu {
@@ -49,6 +51,9 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                 }
         }
         addSubview(overlay)
+        UIView.animate(withDuration: 0.35) {
+            self.overlay.alpha = 0.2
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
