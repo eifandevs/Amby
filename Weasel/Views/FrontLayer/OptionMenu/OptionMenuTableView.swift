@@ -82,7 +82,6 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(OptionMenuTableViewCell.self), for: indexPath) as! OptionMenuTableViewCell
         let menuItem: OptionMenuItem = viewModel.menuItems[indexPath.section][indexPath.row]
         cell.setTitle(menuItem: menuItem)
-        cell.indexPath = indexPath
         return cell
     }
     

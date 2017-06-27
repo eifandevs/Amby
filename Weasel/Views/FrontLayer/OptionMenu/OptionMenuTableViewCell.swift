@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 
 class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
-    var titleLabel: UILabel = UILabel()
-    var urlLabel: UILabel = UILabel()
-    var thumbnail: UIButton = UIButton()
-    var textField: OptionMenuTextField = OptionMenuTextField()
-    var switchControl: UISwitch = UISwitch()
-    var indexPath: IndexPath! = nil
+    private var titleLabel: UILabel = UILabel()
+    private var urlLabel: UILabel = UILabel()
+    private var thumbnail: UIButton = UIButton()
+    private var textField: OptionMenuTextField = OptionMenuTextField()
+    private var switchControl: UISwitch = UISwitch()
     private var type: OptionMenuType = .plain
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -39,14 +38,17 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             var marginX: CGFloat = 10
             
             if let unwrappedImage = menuItem.image {
-                marginX = AppDataManager.shared.optionMenuCellHeight
-                thumbnail = UIButton(frame: CGRect(x: 0, y: 0, width: AppDataManager.shared.optionMenuCellHeight, height: AppDataManager.shared.optionMenuCellHeight))
+                marginX = AppDataManager.shared.optionMenuCellHeight + 8
+                thumbnail = UIButton(frame: CGRect(x: 0, y: 0, width: AppDataManager.shared.optionMenuCellHeight / 1.35, height: AppDataManager.shared.optionMenuCellHeight / 1.35))
+                thumbnail.center = CGPoint(x: marginX / 2, y: AppDataManager.shared.optionMenuCellHeight / 2)
                 thumbnail.isUserInteractionEnabled = false
                 let tintedImage = unwrappedImage.withRenderingMode(.alwaysTemplate)
                 thumbnail.setImage(tintedImage, for: .normal)
                 thumbnail.imageView?.contentMode = .scaleAspectFit
-                thumbnail.tintColor = UIColor.black
+                thumbnail.tintColor = UIColor.white
                 thumbnail.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+                thumbnail.layer.cornerRadius = thumbnail.bounds.size.width / 2
+                thumbnail.backgroundColor = UIColor.raspberry
                 contentView.addSubview(thumbnail)
             }
             
