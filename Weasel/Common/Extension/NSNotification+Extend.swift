@@ -21,6 +21,7 @@ extension NSNotification.Name {
     static let baseViewModelWillHistoryBackWebView = NSNotification.Name("baseViewModelWillHistoryBackWebView")
     static let baseViewModelWillHistoryForwardWebView = NSNotification.Name("baseViewModelWillHistoryForwardWebView")
     static let baseViewModelWillSearchWebView = NSNotification.Name("baseViewModelWillSearchWebView")
+    static let baseViewModelWillChangeFavorite = NSNotification.Name("baseViewModelWillChangeFavorite")
     static let baseViewModelWillRegisterAsFavorite = NSNotification.Name("baseViewModelWillRegisterAsFavorite")
     static let baseViewModelWillRegisterAsForm = NSNotification.Name("baseViewModelWillRegisterAsForm")
     static let baseViewModelWillAutoScroll = NSNotification.Name("baseViewModelWillAutoScroll")

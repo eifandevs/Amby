@@ -11,6 +11,7 @@ import UIKit
 
 protocol OptionMenuTableViewDelegate {
     func optionMenuDidClose()
+    func optionMenuDidCloseDetailMenu()
     func optionMenuDidDeleteHistoryData(_id: String, date: Date)
     func optionMenuDidDeleteFavoriteData(_id: String)
     func optionMenuDidDeleteFormData(_id: String)
@@ -140,6 +141,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
                                 if finished {
                                     self.detailView?.removeFromSuperview()
                                     self.detailView = nil
+                                    self.delegate?.optionMenuDidCloseDetailMenu()
                                 }
                             })
                     }
@@ -157,26 +159,28 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         switch sender.state {
         case .began:
             let point: CGPoint = sender.location(in: tableView)
-            let indexPath: IndexPath = tableView.indexPathForRow(at: point)!
-            let menuItem = viewModel.menuItems[indexPath.section][indexPath.row]
-            if menuItem.type == .deletablePlain {
-                tableView.beginUpdates()
-                viewModel.menuItems[indexPath.section].remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-                if viewModel.menuItems[indexPath.section].count == 0 {
-                    viewModel.deleteSection(index: indexPath.section)
-                    tableView.deleteSections([indexPath.section], with: .automatic)
+            let indexPath: IndexPath? = tableView.indexPathForRow(at: point)
+            if let indexPath = indexPath {
+                let menuItem = viewModel.menuItems[indexPath.section][indexPath.row]
+                if menuItem.type == .deletablePlain {
+                    tableView.beginUpdates()
+                    viewModel.menuItems[indexPath.section].remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    if viewModel.sectionItems.count > 0 && viewModel.menuItems[indexPath.section].count == 0 {
+                        viewModel.deleteSection(index: indexPath.section)
+                        tableView.deleteSections([indexPath.section], with: .automatic)
+                    }
+                    // 削除対象をFrontLayerに通知する
+                    // データの削除はフロントビューが閉じられた、もしくはBG遷移時に行う
+                    if viewModel is HistoryMenuViewModel {
+                        delegate?.optionMenuDidDeleteHistoryData(_id: menuItem._id!, date: menuItem.date!)
+                    } else if viewModel is FavoriteMenuViewModel {
+                        delegate?.optionMenuDidDeleteFavoriteData(_id: menuItem._id!)
+                    } else if viewModel is FormMenuViewModel {
+                        delegate?.optionMenuDidDeleteFormData(_id: menuItem._id!)
+                    }
+                    tableView.endUpdates()
                 }
-                // 削除対象をFrontLayerに通知する
-                // データの削除はフロントビューが閉じられた、もしくはBG遷移時に行う
-                if viewModel is HistoryMenuViewModel {
-                    delegate?.optionMenuDidDeleteHistoryData(_id: menuItem._id!, date: menuItem.date!)
-                } else if viewModel is FavoriteMenuViewModel {
-                    delegate?.optionMenuDidDeleteFavoriteData(_id: menuItem._id!)
-                } else if viewModel is FormMenuViewModel {
-                    delegate?.optionMenuDidDeleteFormData(_id: menuItem._id!)
-                }
-                tableView.endUpdates()
             }
         default:
             break
@@ -186,6 +190,10 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
 // MARK: OptionMenuTableViewDelegate
     func optionMenuDidClose() {
         delegate?.optionMenuDidClose()
+    }
+    
+    func optionMenuDidCloseDetailMenu() {
+        delegate?.optionMenuDidCloseDetailMenu()
     }
 
     func optionMenuDidDeleteHistoryData(_id: String, date: Date) {

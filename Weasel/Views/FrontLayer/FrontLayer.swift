@@ -18,6 +18,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     var swipeDirection: EdgeSwipeDirection = .none
     private var optionMenu: OptionMenuTableView? = nil
     private var overlay: UIButton! = nil
+    /// ["20170625": ["123456", "234567"], "20170626": ["123456", "234567"]]の形式
     private var deleteHistoryIds: [String: [String]] = [:]
     private var deleteFavoriteIds: [String] = []
     private var deleteFormIds: [String] = []
@@ -26,6 +27,11 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        // バックグラウンドに入るときに保持していた削除対象を削除する
+        NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (notification) in
+            self!.deleteStoreData()
+        }
+        
         overlay = UIButton(frame: frame)
         overlay.backgroundColor = UIColor.lightGray
         self.overlay.alpha = 0
@@ -46,18 +52,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                     if window != nil {
                         optionMenu.closeKeyBoard()
                     } else {
-                        self.deleteStoreData()
-                        UIView.animate(withDuration: 0.15, animations: {
-                            self.overlay.alpha = 0
-                            self.optionMenu?.alpha = 0
-                            self.alpha = 0
-                        }, completion: { (finished) in
-                            if finished {
-                                optionMenu.removeFromSuperview()
-                                self.optionMenu = nil
-                                self.delegate?.frontLayerDidInvalidate()
-                            }
-                        })
+                        self.optionMenuDidClose()
                     }
                 }
         }
@@ -148,6 +143,12 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     func deleteStoreData() {
         // 履歴
         StoreManager.shared.deleteStoreData(deleteHistoryIds: deleteHistoryIds)
+        // お気に入り
+        let deleteFavorites = deleteFavoriteIds.map { (id) -> Favorite in
+            return StoreManager.shared.selectFavorite(id: id)!
+        }
+        StoreManager.shared.deleteWithRLMObjects(data: deleteFavorites)
+        NotificationCenter.default.post(name: .baseViewModelWillChangeFavorite, object: nil)
     }
 
 // MARK: CircleMenuDelegate
@@ -177,6 +178,10 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                 self.delegate?.frontLayerDidInvalidate()
             }
         })
+    }
+    
+    func optionMenuDidCloseDetailMenu() {
+        deleteStoreData()
     }
     
     func optionMenuDidDeleteHistoryData(_id: String, date: Date) {

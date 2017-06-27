@@ -168,6 +168,19 @@ class BaseViewModel {
             log.debug("[BaseView Event]: baseViewModelWillHistoryForwardWebView")
             self!.delegate?.baseViewModelDidHistoryForwardWebView()
         }
+        // webviewお気に入り更新
+        center.addObserver(forName: .baseViewModelWillChangeFavorite, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillChangeFavorite")
+            // 現在表示しているURLがお気に入りかどうか調べる
+            let currentUrl = self!.eachHistory[self!.locationIndex].url
+            if (!currentUrl.isEmpty) {
+                let savedFavoriteUrls = StoreManager.shared.selectAllFavorite().map({ (f) -> String in
+                    return f.url.domainAndPath
+                })
+                self!.center.post(name: .headerViewModelWillChangeFavorite, object: savedFavoriteUrls.contains(currentUrl.domainAndPath))
+            }
+        }
+        
         // webviewお気に入り登録
         center.addObserver(forName: .baseViewModelWillRegisterAsFavorite, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[BaseView Event]: baseViewModelWillRegisterAsFavorite")

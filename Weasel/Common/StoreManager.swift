@@ -35,10 +35,17 @@ final class StoreManager {
         return realm.objects(Favorite.self).map { $0 }
     }
     
-    func selectFavorite(url: String) -> Favorite? {
-        return StoreManager.shared.selectAllFavorite().filter({ (f) -> Bool in
-            return url.domainAndPath == f.url.domainAndPath
-        }).first
+    func selectFavorite(id: String = "", url: String = "") -> Favorite? {
+        if !id.isEmpty {
+            return StoreManager.shared.selectAllFavorite().filter({ (f) -> Bool in
+                return id == f.id
+            }).first
+        } else if !url.isEmpty {
+            return StoreManager.shared.selectAllFavorite().filter({ (f) -> Bool in
+                return url.domainAndPath == f.url.domainAndPath
+            }).first
+        }
+        return nil
     }
     
     // Form
