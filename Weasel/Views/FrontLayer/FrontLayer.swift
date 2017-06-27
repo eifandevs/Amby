@@ -147,8 +147,13 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         let deleteFavorites = deleteFavoriteIds.map { (id) -> Favorite in
             return StoreManager.shared.selectFavorite(id: id)!
         }
-        StoreManager.shared.deleteWithRLMObjects(data: deleteFavorites)
-        NotificationCenter.default.post(name: .baseViewModelWillChangeFavorite, object: nil)
+        if deleteFavorites.count > 0 {
+            StoreManager.shared.deleteWithRLMObjects(data: deleteFavorites)
+            NotificationCenter.default.post(name: .baseViewModelWillChangeFavorite, object: nil)
+        }
+        deleteHistoryIds = [:]
+        deleteFavoriteIds = []
+        deleteFormIds = []
     }
 
 // MARK: CircleMenuDelegate
