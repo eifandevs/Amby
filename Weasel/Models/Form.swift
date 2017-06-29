@@ -11,9 +11,9 @@ import RealmSwift
 
 class Form: Object {
     dynamic var id: String = NSUUID().uuidString
-    dynamic var title: String? = ""
-    dynamic var host: String? = ""
-    dynamic var url: String? = ""
+    dynamic var title: String = ""
+    dynamic var host: String = ""
+    dynamic var url: String = ""
     dynamic var date: Date = Date()
     let inputs = List<Input>()
     

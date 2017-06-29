@@ -21,29 +21,29 @@ class AppDataManager {
     let searchPath = "https://www.google.co.jp/search?q="
     let defaultUrlKey = "defaultUrl"
     let locationIndexKey = "locationIndex"
-    let webViewTotalCountKey = "webViewTotalCount"
-    let historySavableTermKey = "historySaveblaTerm"
+    let autoScrollIntervalKey = "autoScrollInterval"
     let appFont = "Avenir"
     let eachHistoryPath = URL(fileURLWithPath: DeviceDataManager.shared.cachesPath + "/each_history.dat")
+    let commonHistoryPath = DeviceDataManager.shared.cachesPath + "/common_history"
     
     private init() {
         
     }
     
-    func thumbnailPath(folder: String) -> URL {
+    func thumbnailUrl(folder: String) -> URL {
         let path = DeviceDataManager.shared.cachesPath + "/thumbnails/\(folder)"
-        createFolder(path: path)
+        Util.shared.createFolder(path: path)
         return URL(fileURLWithPath: path + "/thumbnail.png")
     }
     
-    func thumbnailFolderPath(folder: String) -> URL {
+    func thumbnailFolderUrl(folder: String) -> URL {
         let path = DeviceDataManager.shared.cachesPath + "/thumbnails/\(folder)"
         return URL(fileURLWithPath: path)
     }
     
     func commonHistoryUrl(date: String) -> URL {
         let path = DeviceDataManager.shared.cachesPath + "/common_history"
-        createFolder(path: path)
+        Util.shared.createFolder(path: path)
         return URL(fileURLWithPath: path + "/\(date).dat")
     }
     
@@ -52,20 +52,9 @@ class AppDataManager {
         return path + "/\(date).dat"
     }
     
-    private func createFolder(path: String) {
-        let fileManager = FileManager.default
-        var isDir : ObjCBool = false
-        
-        fileManager.fileExists(atPath: path, isDirectory: &isDir)
-        
-        if !isDir.boolValue {
-            try! fileManager.createDirectory(atPath: path ,withIntermediateDirectories: true, attributes: nil)
-        }
-    }
-    
     func registerDefaultData() {
         UserDefaults.standard.register(defaults: [defaultUrlKey: "https://www.amazon.co.jp/",
                                                   locationIndexKey: 0,
-                                                  historySavableTermKey: 10])
+                                                  autoScrollIntervalKey: 0.06])
     }
 }

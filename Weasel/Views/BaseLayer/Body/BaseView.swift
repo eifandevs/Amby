@@ -28,7 +28,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     var delegate: BaseViewDelegate?
 
     private var front: EGWebView!
-    private let autoScrollSpeed: CGFloat = 0.25
     var webViews: [EGWebView?] = []
     private let viewModel = BaseViewModel()
     private var scrollMovingPointY: CGFloat = 0
@@ -58,7 +57,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 
                 let forms = StoreManager.shared.selectAllForm()
                 for form in forms {
-                    if (self!.front.url?.absoluteString.domainAndPath == form.url?.domainAndPath && !self!.isDoneAutoInput) {
+                    if (self!.front.url?.absoluteString.domainAndPath == form.url.domainAndPath && !self!.isDoneAutoInput) {
                         Util.shared.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: {
                             for input in form.inputs {
                                 self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(input.value)\"") { (object, error) in
@@ -283,7 +282,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                             let pngImageData = UIImagePNGRepresentation(img!)
                             let context = webView.context
                             do {
-                                try pngImageData?.write(to: AppDataManager.shared.thumbnailPath(folder: context))
+                                try pngImageData?.write(to: AppDataManager.shared.thumbnailUrl(folder: context))
                                 let object: [String: Any]? = ["context": context, "url": webView.requestUrl, "title": webView.requestTitle]
                                 log.debug("save thumbnal. context: \(context)")
                                 self!.viewModel.notifyEndLoadingWebView(object: object)
@@ -520,7 +519,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             autoScrollTimer?.invalidate()
             autoScrollTimer = nil
         } else {
-            autoScrollTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.updateAutoScrolling), userInfo: nil, repeats: true)
+            autoScrollTimer = Timer.scheduledTimer(timeInterval: Double(viewModel.autoScrollInterval), target: self, selector: #selector(self.updateAutoScrolling), userInfo: nil, repeats: true)
             autoScrollTimer?.fire()
         }
     }
@@ -533,7 +532,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             autoScrollTimer = nil
             front.scrollView.scroll(to: .bottom, animated: false)
         } else {
-            front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y + autoScrollSpeed), animated: false)
+            front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y + viewModel.autoScrollSpeed), animated: false)
         }
     }
 }

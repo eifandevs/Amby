@@ -83,6 +83,15 @@ class BaseViewModel {
         }
     }
     
+    // 自動スクロールのタイムインターバル
+    var autoScrollInterval: CGFloat {
+        get {
+            return CGFloat(UserDefaults.standard.float(forKey: AppDataManager.shared.autoScrollIntervalKey))
+        }
+    }
+    
+    let autoScrollSpeed: CGFloat = 0.6
+    
     var currentContext: String? {
         get {
             return eachHistory.count > locationIndex ? eachHistory[locationIndex].context : nil

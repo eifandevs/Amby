@@ -53,6 +53,19 @@ final class StoreManager {
         return realm.objects(Form.self).map { $0 }
     }
     
+    func selectForm(id: String = "", url: String = "") -> Form? {
+        if !id.isEmpty {
+            return StoreManager.shared.selectAllForm().filter({ (f) -> Bool in
+                return id == f.id
+            }).first
+        } else if !url.isEmpty {
+            return StoreManager.shared.selectAllForm().filter({ (f) -> Bool in
+                return url.domainAndPath == f.url.domainAndPath
+            }).first
+        }
+        return nil
+    }
+
     // Form
     // フォーム情報の保存
     func storeForm(webView: EGWebView) {
@@ -100,7 +113,7 @@ final class StoreManager {
                     // 入力済みのフォームが一つでもあれば保存する
                     if input.value.characters.count > 0 {
                         let savedForm = StoreManager.shared.selectAllForm().filter({ (f) -> Bool in
-                            return form.url?.domainAndPath == f.url?.domainAndPath
+                            return form.url.domainAndPath == f.url.domainAndPath
                         }).first
                         if let unwrappedSavedForm = savedForm {
                             // すでに登録済みの場合は、まず削除する
@@ -177,7 +190,7 @@ final class StoreManager {
     
     /// 閲覧履歴、お気に入り、フォームデータを削除する
     /// [日付: [id, id, ...]]
-    func deleteStoreData(deleteHistoryIds: [String: [String]]) {
+    func deleteHistory(deleteHistoryIds: [String: [String]]) {
         // 履歴
         for (key, value) in deleteHistoryIds {
             let commonHistoryUrl = AppDataManager.shared.commonHistoryUrl(date: key)
@@ -210,5 +223,10 @@ final class StoreManager {
                 }
             }
         }
+    }
+    
+    func deleteAllHistory() {
+        Util.shared.deleteFolder(path: AppDataManager.shared.commonHistoryPath)
+        Util.shared.createFolder(path: AppDataManager.shared.commonHistoryPath)
     }
 }

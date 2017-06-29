@@ -53,6 +53,28 @@ class Util {
         alert.addAction(defaultAction)
         Util.shared.foregroundViewController().present(alert, animated: true, completion: nil)
     }
+    
+    func createFolder(path: String) {
+        let fileManager = FileManager.default
+        var isDir : ObjCBool = false
+        
+        fileManager.fileExists(atPath: path, isDirectory: &isDir)
+        
+        if !isDir.boolValue {
+            try! fileManager.createDirectory(atPath: path ,withIntermediateDirectories: true, attributes: nil)
+        }
+    }
+    
+    func deleteFolder(path: String) {
+        let fileManager = FileManager.default
+        var isDir : ObjCBool = false
+        
+        fileManager.fileExists(atPath: path, isDirectory: &isDir)
+        
+        if isDir.boolValue {
+            try! fileManager.removeItem(atPath: path)
+        }
+    }
 }
 
 func *(left: CGSize, right: CGFloat) -> CGSize {

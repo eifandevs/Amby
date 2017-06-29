@@ -14,6 +14,7 @@ enum OptionMenuType: CGFloat {
     case deletablePlain
     case input
     case select
+    case slider
 }
 
 class OptionMenuItem {

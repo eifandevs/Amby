@@ -130,7 +130,7 @@ class EGTextField: UIButton, ShadowView {
         
         let attr = [
             NSForegroundColorAttributeName: UIColor.black,
-            NSFontAttributeName: UIFont(name: AppDataManager.shared.appFont, size: fontSize) ?? UIFont.systemFont(ofSize: fontSize),
+            NSFontAttributeName: UIFont(name: AppDataManager.shared.appFont, size: fontSize)!,
             NSParagraphStyleAttributeName: style,
             ] as [String : Any]
         

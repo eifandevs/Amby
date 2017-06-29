@@ -15,6 +15,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
     private var thumbnail: UIButton = UIButton()
     private var textField: OptionMenuTextField = OptionMenuTextField()
     private var switchControl: UISwitch = UISwitch()
+    private var slider: UISlider = UISlider()
     private var type: OptionMenuType = .plain
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -38,17 +39,17 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             var marginX: CGFloat = 10
             
             if let unwrappedImage = menuItem.image {
-                marginX = AppDataManager.shared.optionMenuCellHeight + 8
-                thumbnail = UIButton(frame: CGRect(x: 0, y: 0, width: AppDataManager.shared.optionMenuCellHeight / 1.35, height: AppDataManager.shared.optionMenuCellHeight / 1.35))
+                marginX = AppDataManager.shared.optionMenuCellHeight + 10
+                thumbnail = UIButton(frame: CGRect(x: 0, y: 0, width: AppDataManager.shared.optionMenuCellHeight / 1.3, height: AppDataManager.shared.optionMenuCellHeight / 1.3))
                 thumbnail.center = CGPoint(x: marginX / 2, y: AppDataManager.shared.optionMenuCellHeight / 2)
                 thumbnail.isUserInteractionEnabled = false
                 let tintedImage = unwrappedImage.withRenderingMode(.alwaysTemplate)
                 thumbnail.setImage(tintedImage, for: .normal)
                 thumbnail.imageView?.contentMode = .scaleAspectFit
-                thumbnail.tintColor = UIColor.white
+                thumbnail.tintColor = UIColor.black
                 thumbnail.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
                 thumbnail.layer.cornerRadius = thumbnail.bounds.size.width / 2
-                thumbnail.backgroundColor = UIColor.raspberry
+                thumbnail.backgroundColor = UIColor.clear
                 contentView.addSubview(thumbnail)
             }
             
@@ -62,13 +63,13 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
                 // urlを配置
                 urlLabel.textAlignment = .left
                 urlLabel.text = menuItem.url
-                urlLabel.font = UIFont(name: AppDataManager.shared.appFont, size: 12)
+                urlLabel.font = UIFont(name: AppDataManager.shared.appFont, size: 11)
                 contentView.addSubview(urlLabel)
             }
             // titleを配置
             titleLabel.textAlignment = .left
             titleLabel.text = menuItem.title
-            titleLabel.font = UIFont(name: AppDataManager.shared.appFont, size: 15)
+            titleLabel.font = UIFont(name: AppDataManager.shared.appFont, size: 13.5)
             contentView.addSubview(titleLabel)
         case .input:
             selectionStyle = .none
@@ -98,10 +99,23 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             titleLabel.font = UIFont(name: AppDataManager.shared.appFont, size: 13.5)
             contentView.addSubview(titleLabel)
             
-            switchControl.frame = CGRect(origin: CGPoint(x: marginX + titleLabel.frame.size.width, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - titleLabel.frame.size.width, height: titleLabel.frame.size.height))
+            switchControl.frame = CGRect(origin: CGPoint(x: marginX + titleLabel.frame.size.width, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - titleLabel.frame.size.width, height: AppDataManager.shared.optionMenuCellHeight / 3))
             switchControl.center.y = frame.size.height / 2
             switchControl.onTintColor = UIColor.frenchBlue
             contentView.addSubview(switchControl)
+        case .slider:
+            selectionStyle = .none
+            let marginX: CGFloat = 10
+            slider.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - marginX * 2, height: AppDataManager.shared.optionMenuCellHeight / 3))
+            slider.center.y = frame.size.height / 2
+            slider.minimumValue = -0.07
+            slider.maximumValue = -0.01
+            slider.value = -UserDefaults.standard.float(forKey: AppDataManager.shared.autoScrollIntervalKey)
+            slider.isContinuous = false
+            slider.maximumValueImage = UIColor.blue.circleImage(size: CGSize(width: 5, height: 5))
+            slider.minimumValueImage = UIColor.red.circleImage(size: CGSize(width: 5, height: 5))
+            slider.addTarget(self, action: #selector(changeSlider), for: .valueChanged)
+            contentView.addSubview(slider)
         }
     }
     
@@ -111,6 +125,12 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
         thumbnail.removeFromSuperview()
         textField.removeFromSuperview()
         switchControl.removeFromSuperview()
+        slider.removeFromSuperview()
+    }
+
+// MARK: UISliderDelegate
+    func changeSlider(sender: UISlider) {
+        UserDefaults.standard.set(-sender.value, forKey: AppDataManager.shared.autoScrollIntervalKey)
     }
     
 // MARK: UITextFieldDelegate

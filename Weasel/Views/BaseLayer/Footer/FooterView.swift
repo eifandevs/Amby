@@ -137,7 +137,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     func footerViewModelDidEndLoading(context: String, index: Int) {
         // くるくるを止めて、サムネイルを表示する
         DispatchQueue.mainSyncSafe { [weak self] _ in
-            let image = UIImage(contentsOfFile: AppDataManager.shared.thumbnailPath(folder: context).path)
+            let image = UIImage(contentsOfFile: AppDataManager.shared.thumbnailUrl(folder: context).path)
             if image == nil {
                 log.error("missing thumbnail image")
                 return
@@ -156,7 +156,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             eachThumbnail.forEach { (item) in
                 let btn = createCaptureSpace()
                 if !item.context.isEmpty {
-                    let image = UIImage(contentsOfFile: AppDataManager.shared.thumbnailPath(folder: item.context).path)
+                    let image = UIImage(contentsOfFile: AppDataManager.shared.thumbnailUrl(folder: item.context).path)
                     if image == nil {
                         log.error("missing thumbnail image")
                         return

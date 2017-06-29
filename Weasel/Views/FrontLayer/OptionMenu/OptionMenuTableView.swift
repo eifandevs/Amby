@@ -90,10 +90,10 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label : UILabel = UILabel()
+        let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: 11)))
         label.backgroundColor = UIColor.pastelLightGray
         label.text = "   \(viewModel.sectionItems[section])"
-        label.font = UIFont(name: AppDataManager.shared.appFont, size: 15)
+        label.font = UIFont(name: AppDataManager.shared.appFont, size: 13)
         return label
     }
     

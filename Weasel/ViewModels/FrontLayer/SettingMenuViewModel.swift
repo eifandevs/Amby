@@ -25,10 +25,15 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 OptionMenuItem(type: .select, title: "キャッシュを利用する")
             ],
             [
-                OptionMenuItem(title: "bbbb")
+                OptionMenuItem(type: .slider)
             ],
             [
-                OptionMenuItem(title: "閲覧履歴"),
+                OptionMenuItem(title: "閲覧履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    Util.shared.presentAlert(title: "データ削除", message: "閲覧履歴を全て削除します。よろしいですか？", completion: {
+                        StoreManager.shared.deleteAllHistory()
+                    })
+                    return nil
+                }),
                 OptionMenuItem(title: "ブックマーク"),
                 OptionMenuItem(title: "フォームデータ"),
                 OptionMenuItem(title: "Cookie"),
