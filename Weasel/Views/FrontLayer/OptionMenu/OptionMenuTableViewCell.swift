@@ -31,6 +31,12 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
         super.prepareForReuse()
     }
     
+    deinit {
+        if type == .input {
+            NotificationCenter.default.removeObserver(self)
+        }
+    }
+        
     func setTitle(menuItem: OptionMenuItem) {
         initialize()
         type = menuItem.type
