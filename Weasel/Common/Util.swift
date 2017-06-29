@@ -75,6 +75,22 @@ class Util {
             try! fileManager.removeItem(atPath: path)
         }
     }
+    
+    func findFirstResponder(view: UIView) -> UIView? {
+        if view.isFirstResponder {
+            return view
+        }
+        for subview in view.subviews {
+            if subview.isFirstResponder {
+                return subview
+            }
+            let responder = findFirstResponder(view: subview)
+            if let responder = responder {
+                return responder
+            }
+        }
+        return nil
+    }
 }
 
 func *(left: CGSize, right: CGFloat) -> CGSize {

@@ -32,7 +32,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private let viewModel = BaseViewModel()
     private var scrollMovingPointY: CGFloat = 0
     // キーボード表示中フラグ
-    private var isDisplayedKeyBoard = false
+    var isDisplayedKeyBoard = false
     // 自動スクロール中フラグ
     private var isDoneAutoInput = false
     private var isTouching = false {

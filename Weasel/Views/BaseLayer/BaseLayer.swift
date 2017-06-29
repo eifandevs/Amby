@@ -149,6 +149,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
 // MARK: HeaderView Delegate
     
     func headerViewDidBeginEditing() {
+        baseView.isDisplayedKeyBoard = true // キーボード表示中フラグをtrueにし、自動入力させない
         overlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
         overlay!.backgroundColor = UIColor.gray
         _ = overlay!.reactive.controlEvents(.touchDown)
