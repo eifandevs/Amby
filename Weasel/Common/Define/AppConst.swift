@@ -29,9 +29,15 @@ class AppConst {
         
     }
     
+    static func thumbnailPath(folder: String) -> String {
+        let path = DeviceConst.cachesPath + "/thumbnails/\(folder)"
+        Util.createFolder(path: path)
+        return path + "/thumbnail.png"
+    }
+    
     static func thumbnailUrl(folder: String) -> URL {
         let path = DeviceConst.cachesPath + "/thumbnails/\(folder)"
-        Util.shared.createFolder(path: path)
+        Util.createFolder(path: path)
         return URL(fileURLWithPath: path + "/thumbnail.png")
     }
     
@@ -42,7 +48,7 @@ class AppConst {
     
     static func commonHistoryUrl(date: String) -> URL {
         let path = DeviceConst.cachesPath + "/common_history"
-        Util.shared.createFolder(path: path)
+        Util.createFolder(path: path)
         return URL(fileURLWithPath: path + "/\(date).dat")
     }
     

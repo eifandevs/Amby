@@ -58,7 +58,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 let forms = StoreManager.shared.selectAllForm()
                 for form in forms {
                     if (self!.front.url?.absoluteString.domainAndPath == form.url.domainAndPath && !self!.isDoneAutoInput) {
-                        Util.shared.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: {
+                        Util.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: {
                             for input in form.inputs {
                                 self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(input.value)\"") { (object, error) in
                                 }
@@ -204,7 +204,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 let credential = URLCredential(user: usernameTextField.text!, password: passwordTextField.text!, persistence: URLCredential.Persistence.forSession)
                 completionHandler(.useCredential, credential)
             }))
-            Util.shared.foregroundViewController().present(alertController, animated: true, completion: nil)
+            Util.foregroundViewController().present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -277,18 +277,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     
                     // サムネイルを保存
                     DispatchQueue.mainSyncSafe {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] _ in
-                            let img = webView.takeThumbnail()
-                            let pngImageData = UIImagePNGRepresentation(img!)
-                            let context = webView.context
-                            do {
-                                try pngImageData?.write(to: AppConst.thumbnailUrl(folder: context))
-                                let object: [String: Any]? = ["context": context, "url": webView.requestUrl, "title": webView.requestTitle]
-                                log.debug("save thumbnal. context: \(context)")
-                                self!.viewModel.notifyEndLoadingWebView(object: object)
-                            } catch let error as NSError {
-                                log.error("failed to store thumbnail: \(error)")
-                            }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { _ in
+                            self!.saveThumbnail(webView: webView)
                         }
                     }
                 })
@@ -400,6 +390,26 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
     }
     
+    private func saveThumbnail(webView: EGWebView) {
+        // サムネイルを保存
+        let img = webView.takeThumbnail()
+        let pngImageData = UIImagePNGRepresentation(img!)
+        let context = webView.context
+        do {
+            try pngImageData?.write(to: AppConst.thumbnailUrl(folder: context))
+            let object: [String: Any]? = ["context": context, "url": webView.requestUrl, "title": webView.requestTitle]
+            log.debug("save thumbnal. context: \(context)")
+            self.viewModel.notifyEndLoadingWebView(object: object)
+        } catch let error as NSError {
+            log.error("failed to store thumbnail: \(error)")
+        }
+    }
+    
+    private func deleteThumbnail(webView: EGWebView) {
+        log.debug("delete thumbnail. context: \(webView.context)")
+        Util.deleteFolder(path: AppConst.thumbnailPath(folder: webView.context))
+    }
+    
 // MARK: BaseViewModel Delegate
 
     func baseViewModelDidAddWebView() {
@@ -435,11 +445,14 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     func baseViewModelDidRemoveWebView(index: Int, isFrontDelete: Bool) {
         if let webView = webViews[index] {
+            // サムネイルの削除
+            deleteThumbnail(webView: webView)
+            
+            webView.removeObserver(self, forKeyPath: "loading")
             if isFrontDelete {
                 webView.removeObserver(self, forKeyPath: "estimatedProgress")
                 front = nil
             }
-            webView.removeObserver(self, forKeyPath: "loading")
             webView.removeFromSuperview()
         }
         webViews.remove(at: index)

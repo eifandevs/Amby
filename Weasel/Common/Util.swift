@@ -10,10 +10,9 @@ import Foundation
 import UIKit
 
 class Util {
-    static let shared: Util = Util()
     private init() {}
 
-    func foregroundViewController() -> UIViewController {
+    static func foregroundViewController() -> UIViewController {
         var vc = UIApplication.shared.keyWindow?.rootViewController;
         while ((vc!.presentedViewController) != nil) {
             vc = vc!.presentedViewController;
@@ -21,26 +20,26 @@ class Util {
         return vc!;
     }
     
-    func presentWarning(title: String, message: String) {
+    static func presentWarning(title: String, message: String) {
         let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler:{
             (action: UIAlertAction!) -> Void in
         })
         alert.addAction(defaultAction)
-        Util.shared.foregroundViewController().present(alert, animated: true, completion: nil)
+        Util.foregroundViewController().present(alert, animated: true, completion: nil)
     }
     
-    func presentSimpleAlert(title: String, message: String, completion: @escaping (() -> ()?)) {
+    static func presentSimpleAlert(title: String, message: String, completion: @escaping (() -> ()?)) {
         let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler:{
             (action: UIAlertAction!) -> Void in
             completion()
         })
         alert.addAction(defaultAction)
-        Util.shared.foregroundViewController().present(alert, animated: true, completion: nil)
+        Util.foregroundViewController().present(alert, animated: true, completion: nil)
     }
     
-    func presentAlert(title: String, message: String, completion: @escaping (() -> ())) {
+    static func presentAlert(title: String, message: String, completion: @escaping (() -> ())) {
         let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler:{
             (action: UIAlertAction!) -> Void in
@@ -51,10 +50,10 @@ class Util {
         })
         alert.addAction(cancelAction)
         alert.addAction(defaultAction)
-        Util.shared.foregroundViewController().present(alert, animated: true, completion: nil)
+        Util.foregroundViewController().present(alert, animated: true, completion: nil)
     }
     
-    func createFolder(path: String) {
+    static func createFolder(path: String) {
         let fileManager = FileManager.default
         var isDir : ObjCBool = false
         
@@ -65,7 +64,7 @@ class Util {
         }
     }
     
-    func deleteFolder(path: String) {
+    static func deleteFolder(path: String) {
         let fileManager = FileManager.default
         var isDir : ObjCBool = false
         
@@ -76,7 +75,7 @@ class Util {
         }
     }
     
-    func findFirstResponder(view: UIView) -> UIView? {
+    static func findFirstResponder(view: UIView) -> UIView? {
         if view.isFirstResponder {
             return view
         }

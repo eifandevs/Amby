@@ -108,7 +108,7 @@ final class StoreManager {
             }
             
             // 有効なフォーム情報かを判定
-            if ((form.inputs.count > 0) && (form.title != nil) && (form.url != nil) && (form.host != nil)) {
+            if (form.inputs.count > 0) {
                 for input in form.inputs {
                     // 入力済みのフォームが一つでもあれば保存する
                     if input.value.characters.count > 0 {
@@ -120,16 +120,16 @@ final class StoreManager {
                             StoreManager.shared.deleteWithRLMObjects(data: [unwrappedSavedForm])
                         }
                         StoreManager.shared.insertWithRLMObjects(data: [form])
-                        Util.shared.presentWarning(title: "フォーム登録完了", message: "フォーム情報を登録しました。")
+                        Util.presentWarning(title: "フォーム登録完了", message: "フォーム情報を登録しました。")
                         return
                     }
                 }
-                Util.shared.presentWarning(title: "登録エラー", message: "フォーム情報の入力を確認できませんでした。")
+                Util.presentWarning(title: "登録エラー", message: "フォーム情報の入力を確認できませんでした。")
             } else {
-                Util.shared.presentWarning(title: "登録エラー", message: "フォーム情報を取得できませんでした。")
+                Util.presentWarning(title: "登録エラー", message: "フォーム情報を取得できませんでした。")
             }
         } else {
-            Util.shared.presentWarning(title: "登録エラー", message: "ページ情報を取得できませんでした。")
+            Util.presentWarning(title: "登録エラー", message: "ページ情報を取得できませんでした。")
         }
     }
     
@@ -226,7 +226,7 @@ final class StoreManager {
     }
     
     func deleteAllHistory() {
-        Util.shared.deleteFolder(path: AppConst.commonHistoryPath)
-        Util.shared.createFolder(path: AppConst.commonHistoryPath)
+        Util.deleteFolder(path: AppConst.commonHistoryPath)
+        Util.createFolder(path: AppConst.commonHistoryPath)
     }
 }

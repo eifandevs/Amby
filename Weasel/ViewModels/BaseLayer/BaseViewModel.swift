@@ -206,10 +206,10 @@ class BaseViewModel {
                     StoreManager.shared.insertWithRLMObjects(data: [fd])
                     // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
                     self!.center.post(name: .headerViewModelWillChangeFavorite, object: true)
-                    Util.shared.presentWarning(title: "登録完了", message: "お気に入りに登録しました。")
+                    Util.presentWarning(title: "登録完了", message: "お気に入りに登録しました。")
                 }
             } else {
-                Util.shared.presentWarning(title: "登録エラー", message: "登録情報を取得できませんでした。")
+                Util.presentWarning(title: "登録エラー", message: "登録情報を取得できませんでした。")
             }
         }
         // webviewフォーム情報登録
