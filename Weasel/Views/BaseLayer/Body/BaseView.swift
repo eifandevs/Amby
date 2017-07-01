@@ -219,11 +219,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         
         saveMetaData(webView: webView as! EGWebView, completion: nil)
 
-        // TODO: 自動スクロール実装
-        //        if autoScrollTimer?.valid == true {
-        //            autoScrollTimer?.invalidate()
-        //            autoScrollTimer = nil
-        //        }
+        // 自動スクロールを停止する
+        if let autoScrollTimer = autoScrollTimer, autoScrollTimer.isValid {
+            autoScrollTimer.invalidate()
+            self.autoScrollTimer = nil
+        }
         
         guard let url = navigationAction.request.url else {
             decisionHandler(.cancel)
