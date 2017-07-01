@@ -360,6 +360,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         newWv.uiDelegate = self;
         newWv.scrollView.delegate = self
         front = newWv
+        Util.createFolder(path: AppConst.thumbnailFolderPath(folder: newWv.context))
         addSubview(newWv)
 
         // プログレスバー

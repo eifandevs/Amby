@@ -29,6 +29,12 @@ class AppConst {
         
     }
     
+    static func thumbnailFolderPath(folder: String) -> String {
+        let path = DeviceConst.cachesPath + "/thumbnails/\(folder)"
+        Util.createFolder(path: path)
+        return path
+    }
+    
     static func thumbnailPath(folder: String) -> String {
         let path = DeviceConst.cachesPath + "/thumbnails/\(folder)"
         Util.createFolder(path: path)
