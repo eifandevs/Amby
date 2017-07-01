@@ -22,7 +22,7 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
     override func setup() {
         let manager = FileManager.default
         do {
-            let list = try manager.contentsOfDirectory(atPath: AppDataManager.shared.commonHistoryPath)
+            let list = try manager.contentsOfDirectory(atPath: AppConst.commonHistoryPath)
             readFiles = list.map({ (path: String) -> String in
                 return path.substring(to: path.index(path.startIndex, offsetBy: 8))
             })
@@ -43,7 +43,7 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
             readFiles = Array(readFiles.dropFirst(readInterval))
             latestFiles.forEach({ (keyStr: String) in
                 do {
-                    let data = try Data(contentsOf: AppDataManager.shared.commonHistoryUrl(date: keyStr))
+                    let data = try Data(contentsOf: AppConst.commonHistoryUrl(date: keyStr))
                     let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
                     commonHistoryByDate.append([keyStr: commonHistory])
                     sectionItems.append(keyStr)

@@ -17,8 +17,6 @@
 		A554096A1EFBF83700F29140 /* OptionMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55409641EFBF83700F29140 /* OptionMenuTableView.swift */; };
 		A554096B1EFBF83700F29140 /* OptionMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55409651EFBF83700F29140 /* OptionMenuTableViewCell.swift */; };
 		A554096C1EFBF83700F29140 /* OptionMenuTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55409661EFBF83700F29140 /* OptionMenuTextField.swift */; };
-		A55EBF4D1EEB009000304C69 /* AppDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF131EEB009000304C69 /* AppDataManager.swift */; };
-		A55EBF4E1EEB009000304C69 /* DeviceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF141EEB009000304C69 /* DeviceDataManager.swift */; };
 		A55EBF4F1EEB009000304C69 /* DispatchQueue+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF161EEB009000304C69 /* DispatchQueue+Extend.swift */; };
 		A55EBF501EEB009000304C69 /* Int+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF171EEB009000304C69 /* Int+Extend.swift */; };
 		A55EBF511EEB009000304C69 /* NSNotification+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF181EEB009000304C69 /* NSNotification+Extend.swift */; };
@@ -55,6 +53,8 @@
 		A55EBF7E1EEB014E00304C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A55EBF7A1EEB014E00304C69 /* Assets.xcassets */; };
 		A55EBF7F1EEB014E00304C69 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF7B1EEB014E00304C69 /* EGApplication.swift */; };
 		A55EBF801EEB014E00304C69 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A55EBF7C1EEB014E00304C69 /* Info.plist */; };
+		A57CD1221F06B79B00F29A11 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD1201F06B79B00F29A11 /* AppConst.swift */; };
+		A57CD1231F06B79B00F29A11 /* DeviceConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD1211F06B79B00F29A11 /* DeviceConst.swift */; };
 		A5B628D71EEECC28005CC957 /* Double+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628D61EEECC28005CC957 /* Double+Extend.swift */; };
 		A5B628D91EEECC46005CC957 /* CGPoint+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628D81EEECC46005CC957 /* CGPoint+Extend.swift */; };
 		A5B628EA1EF0AF79005CC957 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628E31EF0AF79005CC957 /* BaseViewModel.swift */; };
@@ -80,8 +80,6 @@
 		A55409641EFBF83700F29140 /* OptionMenuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableView.swift; sourceTree = "<group>"; };
 		A55409651EFBF83700F29140 /* OptionMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewCell.swift; sourceTree = "<group>"; };
 		A55409661EFBF83700F29140 /* OptionMenuTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTextField.swift; sourceTree = "<group>"; };
-		A55EBF131EEB009000304C69 /* AppDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataManager.swift; sourceTree = "<group>"; };
-		A55EBF141EEB009000304C69 /* DeviceDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceDataManager.swift; sourceTree = "<group>"; };
 		A55EBF161EEB009000304C69 /* DispatchQueue+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extend.swift"; sourceTree = "<group>"; };
 		A55EBF171EEB009000304C69 /* Int+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extend.swift"; sourceTree = "<group>"; };
 		A55EBF181EEB009000304C69 /* NSNotification+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extend.swift"; sourceTree = "<group>"; };
@@ -118,6 +116,8 @@
 		A55EBF7A1EEB014E00304C69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../App/Assets.xcassets; sourceTree = "<group>"; };
 		A55EBF7B1EEB014E00304C69 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A55EBF7C1EEB014E00304C69 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A57CD1201F06B79B00F29A11 /* AppConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConst.swift; sourceTree = "<group>"; };
+		A57CD1211F06B79B00F29A11 /* DeviceConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceConst.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Weasel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weasel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B628D61EEECC28005CC957 /* Double+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extend.swift"; sourceTree = "<group>"; };
 		A5B628D81EEECC46005CC957 /* CGPoint+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extend.swift"; sourceTree = "<group>"; };
@@ -201,8 +201,7 @@
 		A55EBF121EEB009000304C69 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				A55EBF131EEB009000304C69 /* AppDataManager.swift */,
-				A55EBF141EEB009000304C69 /* DeviceDataManager.swift */,
+				A57CD11F1F06B79B00F29A11 /* Define */,
 				A55EBF221EEB009000304C69 /* StoreManager.swift */,
 				A55EBF231EEB009000304C69 /* Util.swift */,
 				A55EBF151EEB009000304C69 /* Extension */,
@@ -346,6 +345,15 @@
 				A55EBF7C1EEB014E00304C69 /* Info.plist */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		A57CD11F1F06B79B00F29A11 /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				A57CD1201F06B79B00F29A11 /* AppConst.swift */,
+				A57CD1211F06B79B00F29A11 /* DeviceConst.swift */,
+			);
+			path = Define;
 			sourceTree = "<group>";
 		};
 		A57EFE981E3E06D300B66701 = {
@@ -523,6 +531,7 @@
 				A55EBF7D1EEB014E00304C69 /* AppDelegate.swift in Sources */,
 				A55EBF601EEB009000304C69 /* ThumbnailItem.swift in Sources */,
 				A55EBF6F1EEB009000304C69 /* FooterView.swift in Sources */,
+				A57CD1221F06B79B00F29A11 /* AppConst.swift in Sources */,
 				A5B628ED1EF0AF79005CC957 /* BaseMenuViewModel.swift in Sources */,
 				A55EBF711EEB009000304C69 /* EGProgressBar.swift in Sources */,
 				A554095C1EFAAAB600F29140 /* FavoriteMenuViewModel.swift in Sources */,
@@ -540,12 +549,12 @@
 				A55EBF721EEB009000304C69 /* EGTextField.swift in Sources */,
 				A55EBF6D1EEB009000304C69 /* BaseView.swift in Sources */,
 				A554096A1EFBF83700F29140 /* OptionMenuTableView.swift in Sources */,
+				A57CD1231F06B79B00F29A11 /* DeviceConst.swift in Sources */,
 				A55EBF771EEB009000304C69 /* FrontLayer.swift in Sources */,
 				A5B628EF1EF0AF79005CC957 /* SettingMenuViewModel.swift in Sources */,
 				A55409691EFBF83700F29140 /* CircleProgress.swift in Sources */,
 				A5B628EB1EF0AF79005CC957 /* FooterViewModel.swift in Sources */,
 				A55409671EFBF83700F29140 /* CircleMenu.swift in Sources */,
-				A55EBF4E1EEB009000304C69 /* DeviceDataManager.swift in Sources */,
 				A5B628EA1EF0AF79005CC957 /* BaseViewModel.swift in Sources */,
 				A55409681EFBF83700F29140 /* CircleMenuItem.swift in Sources */,
 				A55EBF501EEB009000304C69 /* Int+Extend.swift in Sources */,
@@ -562,7 +571,6 @@
 				A55EBF5F1EEB009000304C69 /* HistoryItem.swift in Sources */,
 				A55EBF5A1EEB009000304C69 /* StoreManager.swift in Sources */,
 				A554096B1EFBF83700F29140 /* OptionMenuTableViewCell.swift in Sources */,
-				A55EBF4D1EEB009000304C69 /* AppDataManager.swift in Sources */,
 				A5B628EE1EF0AF79005CC957 /* OptionMenuTableViewModel.swift in Sources */,
 				A55EBF531EEB009000304C69 /* UIColor+Extend.swift in Sources */,
 				A55409561EF8032900F29140 /* OptionMenuItem.swift in Sources */,

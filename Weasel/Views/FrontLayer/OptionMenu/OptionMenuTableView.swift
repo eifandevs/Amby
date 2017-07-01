@@ -75,7 +75,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return AppDataManager.shared.optionMenuCellHeight
+        return AppConst.optionMenuCellHeight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,7 +93,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: 11)))
         label.backgroundColor = UIColor.pastelLightGray
         label.text = "   \(viewModel.sectionItems[section])"
-        label.font = UIFont(name: AppDataManager.shared.appFont, size: 13)
+        label.font = UIFont(name: AppConst.appFont, size: 13)
         return label
     }
     
@@ -118,8 +118,8 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
                     detailView = OptionMenuTableView(frame: frame, viewModel: detailViewModel!, direction: swipeDirection)
                     detailView?.center += CGPoint(x: marginX.cgfloat, y: marginY.cgfloat)
                     
-                    if (detailView?.frame.origin.y)! + AppDataManager.shared.optionMenuSize.height > DeviceDataManager.shared.displaySize.height {
-                        detailView?.frame.origin.y = DeviceDataManager.shared.displaySize.height - AppDataManager.shared.optionMenuSize.height
+                    if (detailView?.frame.origin.y)! + AppConst.optionMenuSize.height > DeviceConst.displaySize.height {
+                        detailView?.frame.origin.y = DeviceConst.displaySize.height - AppConst.optionMenuSize.height
                     }
                     
                     detailView?.delegate = self

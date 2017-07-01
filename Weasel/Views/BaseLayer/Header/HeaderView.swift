@@ -18,15 +18,15 @@ protocol HeaderViewDelegate {
 class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowView {
     
     var delegate: HeaderViewDelegate?
-    let heightMax = AppDataManager.shared.headerViewHeight
-    private var headerField = EGTextField(iconSize: CGSize(width: AppDataManager.shared.headerViewHeight / 2, height: AppDataManager.shared.headerViewHeight / 2))
+    let heightMax = AppConst.headerViewHeight
+    private var headerField = EGTextField(iconSize: CGSize(width: AppConst.headerViewHeight / 2, height: AppConst.headerViewHeight / 2))
     private var isEditing = false
     private let viewModel = HeaderViewModel()
-    private var progressBar: EGProgressBar = EGProgressBar(frame: CGRect(x: 0, y: 0, width: DeviceDataManager.shared.displaySize.width, height: 2.1), min: CGFloat(AppDataManager.shared.progressMin))
-    private var historyBackButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, height: AppDataManager.shared.headerViewHeight)))
-    private var historyForwardButton = UIButton(frame: CGRect(origin: CGPoint(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, y: 0), size: CGSize(width: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, height: AppDataManager.shared.headerViewHeight)))
-    private var favoriteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppDataManager.shared.headerFieldWidth + (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: 0), size: CGSize(width: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, height: AppDataManager.shared.headerViewHeight)))
-    private var deleteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppDataManager.shared.headerFieldWidth + (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4 * 3, y: 0), size: CGSize(width: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 4, height: AppDataManager.shared.headerViewHeight)))
+    private var progressBar: EGProgressBar = EGProgressBar(frame: CGRect(x: 0, y: 0, width: DeviceConst.displaySize.width, height: 2.1), min: CGFloat(AppConst.progressMin))
+    private var historyBackButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, height: AppConst.headerViewHeight)))
+    private var historyForwardButton = UIButton(frame: CGRect(origin: CGPoint(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, y: 0), size: CGSize(width: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, height: AppConst.headerViewHeight)))
+    private var favoriteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: 0), size: CGSize(width: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, height: AppConst.headerViewHeight)))
+    private var deleteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4 * 3, y: 0), size: CGSize(width: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, height: AppConst.headerViewHeight)))
 
     private var headerItems: [UIButton] {
         get {
@@ -45,7 +45,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     
     var resizing: Bool {
         get {
-            return frame.size.height != DeviceDataManager.shared.statusBarHeight && frame.size.height != heightMax
+            return frame.size.height != DeviceConst.statusBarHeight && frame.size.height != heightMax
         }
     }
     
@@ -117,7 +117,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         }
         progressBar.frame.origin.y = frame.size.height - 2.1
         if !isEditing {
-            headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
+            headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
         }
     }
     
@@ -128,18 +128,18 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
             button.alpha = 1
         }
         progressBar.frame.origin.y = frame.size.height - 2.1
-        headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
+        headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
         headerField.alpha = 1
     }
     
     func resizeToMin() {
-        frame.size.height = DeviceDataManager.shared.statusBarHeight
+        frame.size.height = DeviceConst.statusBarHeight
         headerItems.forEach { (button) in
             button.center.y = frame.size.height - heightMax * 0.5
             button.alpha = 0
         }
         progressBar.frame.origin.y = frame.size.height - 2.1
-        headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
+        headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
         headerField.alpha = 0
     }
     
@@ -147,18 +147,18 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         if force {
             headerField.removeInputForm()
             
-            headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
+            headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
             self.isEditing = false
             self.headerField.makeContent(restore: true, restoreText: nil)
         } else {
             let text = headerField.textField?.text
             headerField.removeInputForm()
             
-            headerField.frame = CGRect(x: (DeviceDataManager.shared.displaySize.width - AppDataManager.shared.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppDataManager.shared.headerFieldWidth, height: heightMax * 0.5)
+            headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
             self.isEditing = false
             
             if let text = text, !text.isEmpty {
-                let restoreText = text.hasValidUrl ? text : "\(AppDataManager.shared.searchPath)\(text)"
+                let restoreText = text.hasValidUrl ? text : "\(AppConst.searchPath)\(text)"
                 let encodedText = restoreText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
 
                 self.headerField.makeContent(restore: true, restoreText: encodedText)
@@ -170,9 +170,9 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     
     func resize(value: CGFloat) {
         frame.size.height += value
-        headerField.alpha += value / (heightMax - DeviceDataManager.shared.statusBarHeight)
+        headerField.alpha += value / (heightMax - DeviceConst.statusBarHeight)
         headerItems.forEach { (button) in
-            button.alpha += value / (heightMax - DeviceDataManager.shared.statusBarHeight)
+            button.alpha += value / (heightMax - DeviceConst.statusBarHeight)
         }
     }
     

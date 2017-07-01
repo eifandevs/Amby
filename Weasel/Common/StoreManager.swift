@@ -151,7 +151,7 @@ final class StoreManager {
             }
             
             for (key, value) in commonHistoryByDate {
-                let commonHistoryUrl = AppDataManager.shared.commonHistoryUrl(date: key)
+                let commonHistoryUrl = AppConst.commonHistoryUrl(date: key)
                 
                 let saveData: [CommonHistoryItem] = { () -> [CommonHistoryItem] in
                     do {
@@ -180,7 +180,7 @@ final class StoreManager {
         if eachHistory.count > 0 {
             let eachHistoryData = NSKeyedArchiver.archivedData(withRootObject: eachHistory)
             do {
-                try eachHistoryData.write(to: AppDataManager.shared.eachHistoryPath)
+                try eachHistoryData.write(to: AppConst.eachHistoryPath)
                 log.debug("store each history")
             } catch let error as NSError {
                 log.error("failed to write: \(error)")
@@ -193,7 +193,7 @@ final class StoreManager {
     func deleteHistory(deleteHistoryIds: [String: [String]]) {
         // 履歴
         for (key, value) in deleteHistoryIds {
-            let commonHistoryUrl = AppDataManager.shared.commonHistoryUrl(date: key)
+            let commonHistoryUrl = AppConst.commonHistoryUrl(date: key)
             let saveData: [CommonHistoryItem]? = { () -> [CommonHistoryItem]? in
                 do {
                     let data = try Data(contentsOf: commonHistoryUrl)
@@ -218,7 +218,7 @@ final class StoreManager {
                         log.error("failed to write: \(error)")
                     }
                 } else {
-                    try! FileManager.default.removeItem(atPath: AppDataManager.shared.commonHistoryFilePath(date: key))
+                    try! FileManager.default.removeItem(atPath: AppConst.commonHistoryFilePath(date: key))
                     log.debug("remove common history file")
                 }
             }
@@ -226,7 +226,7 @@ final class StoreManager {
     }
     
     func deleteAllHistory() {
-        Util.shared.deleteFolder(path: AppDataManager.shared.commonHistoryPath)
-        Util.shared.createFolder(path: AppDataManager.shared.commonHistoryPath)
+        Util.shared.deleteFolder(path: AppConst.commonHistoryPath)
+        Util.shared.createFolder(path: AppConst.commonHistoryPath)
     }
 }

@@ -12,7 +12,7 @@ import NVActivityIndicatorView
 
 class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
-    private var viewModel = FooterViewModel(index: UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey))
+    private var viewModel = FooterViewModel(index: UserDefaults.standard.integer(forKey: AppConst.locationIndexKey))
     private let scrollView = UIScrollView()
     private var thumbnails: [UIButton] = []
     
@@ -48,8 +48,8 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
 // MARK: Private Method
     
     private func createCaptureSpace() -> UIButton {
-        let additionalPointX = ((thumbnails.count).cgfloat * AppDataManager.shared.thumbnailSize.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).cgfloat * AppDataManager.shared.thumbnailSize.width / 2
-        let btn = UIButton(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppDataManager.shared.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppDataManager.shared.thumbnailSize))
+        let additionalPointX = ((thumbnails.count).cgfloat * AppConst.thumbnailSize.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).cgfloat * AppConst.thumbnailSize.width / 2
+        let btn = UIButton(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppConst.thumbnailSize))
         btn.backgroundColor = UIColor.black
         _ = btn.reactive.tap
             .observe { _ in
@@ -83,7 +83,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         // くるくるを表示する
         let existIndicator = frontThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
         if !existIndicator {
-            let rect = CGRect(x: 0, y: 0, width: AppDataManager.shared.thumbnailSize.height * 0.7, height: AppDataManager.shared.thumbnailSize.height * 0.7)
+            let rect = CGRect(x: 0, y: 0, width: AppConst.thumbnailSize.height * 0.7, height: AppConst.thumbnailSize.height * 0.7)
             let indicator = NVActivityIndicatorView(frame: rect, type: NVActivityIndicatorType.ballClipRotate, color: UIColor.frenchBlue, padding: 0)
             indicator.center = CGPoint(x: frontThumbnail.bounds.size.width / 2, y: frontThumbnail.bounds.size.height / 2)
             frontThumbnail.addSubview(indicator)
@@ -117,9 +117,9 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                         self.thumbnails[i].center.x -= self.thumbnails[i].frame.size.width / 2
                     }
                 }
-                if ((self.thumbnails.count).cgfloat * AppDataManager.shared.thumbnailSize.width > self.scrollView.frame.size.width) {
-                    self.scrollView.contentSize.width -= AppDataManager.shared.thumbnailSize.width / 2
-                    self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppDataManager.shared.thumbnailSize.width / 2), 0, 0)
+                if ((self.thumbnails.count).cgfloat * AppConst.thumbnailSize.width > self.scrollView.frame.size.width) {
+                    self.scrollView.contentSize.width -= AppConst.thumbnailSize.width / 2
+                    self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.thumbnailSize.width / 2), 0, 0)
                 }
             }, completion: { (isFinish) in
                 completion()
@@ -137,7 +137,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     func footerViewModelDidEndLoading(context: String, index: Int) {
         // くるくるを止めて、サムネイルを表示する
         DispatchQueue.mainSyncSafe { [weak self] _ in
-            let image = UIImage(contentsOfFile: AppDataManager.shared.thumbnailUrl(folder: context).path)
+            let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: context).path)
             if image == nil {
                 log.error("missing thumbnail image")
                 return
@@ -156,13 +156,13 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             eachThumbnail.forEach { (item) in
                 let btn = createCaptureSpace()
                 if !item.context.isEmpty {
-                    let image = UIImage(contentsOfFile: AppDataManager.shared.thumbnailUrl(folder: item.context).path)
+                    let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: item.context).path)
                     if image == nil {
                         log.error("missing thumbnail image")
                         return
                     }
                     let imageView = UIImageView(image: image)
-                    imageView.frame = CGRect(origin: CGPoint.zero, size: AppDataManager.shared.thumbnailSize)
+                    imageView.frame = CGRect(origin: CGPoint.zero, size: AppConst.thumbnailSize)
                     btn.addSubview(imageView)
                 }
             }

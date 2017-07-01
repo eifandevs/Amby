@@ -71,20 +71,20 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
             [
                 CircleMenuItem(tapAction: { [weak self] (initialPt: CGPoint) in
                     // オプションメニューの表示位置を計算
-                    let ptX = self!.swipeDirection == .left ? initialPt.x / 6 : DeviceDataManager.shared.displaySize.width - 250  - (DeviceDataManager.shared.displaySize.width - initialPt.x) / 6
+                    let ptX = self!.swipeDirection == .left ? initialPt.x / 6 : DeviceConst.displaySize.width - 250  - (DeviceConst.displaySize.width - initialPt.x) / 6
                     let ptY: CGFloat = { () -> CGFloat in
-                        let y = initialPt.y - AppDataManager.shared.optionMenuSize.height / 2
+                        let y = initialPt.y - AppConst.optionMenuSize.height / 2
                         if y < 0 {
                             return 0
                         }
-                        if y + AppDataManager.shared.optionMenuSize.height > DeviceDataManager.shared.displaySize.height {
-                            return DeviceDataManager.shared.displaySize.height - AppDataManager.shared.optionMenuSize.height
+                        if y + AppConst.optionMenuSize.height > DeviceConst.displaySize.height {
+                            return DeviceConst.displaySize.height - AppConst.optionMenuSize.height
                         }
                         return y
                     }()
                     let viewModel = BaseMenuViewModel()
                     viewModel.setup()
-                    self!.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppDataManager.shared.optionMenuSize.width, height: AppDataManager.shared.optionMenuSize.height), viewModel: viewModel, direction: self!.swipeDirection)
+                    self!.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppConst.optionMenuSize.width, height: AppConst.optionMenuSize.height), viewModel: viewModel, direction: self!.swipeDirection)
                     self!.optionMenu?.delegate = self
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self!.addSubview(self!.optionMenu!)

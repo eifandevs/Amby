@@ -45,9 +45,9 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             var marginX: CGFloat = 10
             
             if let unwrappedImage = menuItem.image {
-                marginX = AppDataManager.shared.optionMenuCellHeight + 10
-                thumbnail = UIButton(frame: CGRect(x: 0, y: 0, width: AppDataManager.shared.optionMenuCellHeight / 1.3, height: AppDataManager.shared.optionMenuCellHeight / 1.3))
-                thumbnail.center = CGPoint(x: marginX / 2, y: AppDataManager.shared.optionMenuCellHeight / 2)
+                marginX = AppConst.optionMenuCellHeight + 10
+                thumbnail = UIButton(frame: CGRect(x: 0, y: 0, width: AppConst.optionMenuCellHeight / 1.3, height: AppConst.optionMenuCellHeight / 1.3))
+                thumbnail.center = CGPoint(x: marginX / 2, y: AppConst.optionMenuCellHeight / 2)
                 thumbnail.isUserInteractionEnabled = false
                 let tintedImage = unwrappedImage.withRenderingMode(.alwaysTemplate)
                 thumbnail.setImage(tintedImage, for: .normal)
@@ -60,36 +60,36 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             }
             
             if menuItem.url == nil {
-                titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - marginX, height: AppDataManager.shared.optionMenuCellHeight / 1.5))
+                titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - marginX, height: AppConst.optionMenuCellHeight / 1.5))
                 titleLabel.center.y = frame.size.height / 2
             } else {
-                titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - marginX, height: AppDataManager.shared.optionMenuCellHeight / 1.5))
-                urlLabel.frame = CGRect(origin: CGPoint(x: marginX, y: AppDataManager.shared.optionMenuCellHeight / 1.5 - 3), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - marginX, height: AppDataManager.shared.optionMenuCellHeight - titleLabel.frame.size.height))
+                titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - marginX, height: AppConst.optionMenuCellHeight / 1.5))
+                urlLabel.frame = CGRect(origin: CGPoint(x: marginX, y: AppConst.optionMenuCellHeight / 1.5 - 3), size: CGSize(width: AppConst.optionMenuSize.width - marginX, height: AppConst.optionMenuCellHeight - titleLabel.frame.size.height))
                 
                 // urlを配置
                 urlLabel.textAlignment = .left
                 urlLabel.text = menuItem.url
-                urlLabel.font = UIFont(name: AppDataManager.shared.appFont, size: 11)
+                urlLabel.font = UIFont(name: AppConst.appFont, size: 11)
                 contentView.addSubview(urlLabel)
             }
             // titleを配置
             titleLabel.textAlignment = .left
             titleLabel.text = menuItem.title
-            titleLabel.font = UIFont(name: AppDataManager.shared.appFont, size: 13.5)
+            titleLabel.font = UIFont(name: AppConst.appFont, size: 13.5)
             contentView.addSubview(titleLabel)
         case .input:
             selectionStyle = .none
             let marginX: CGFloat = 10
-            textField.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - marginX * 2, height: AppDataManager.shared.optionMenuCellHeight / 1.5))
+            textField.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - marginX * 2, height: AppConst.optionMenuCellHeight / 1.5))
             textField.center.y = frame.size.height / 2
-            textField.text = UserDefaults.standard.string(forKey: AppDataManager.shared.defaultUrlKey)!
-            textField.font = UIFont(name: AppDataManager.shared.appFont, size: 14)
+            textField.text = UserDefaults.standard.string(forKey: AppConst.defaultUrlKey)!
+            textField.font = UIFont(name: AppConst.appFont, size: 14)
             textField.keyboardType = .default
             textField.returnKeyType = .done
             textField.delegate = self
             registerForKeyboardWillHideNotification { [weak self] (notification) in
                 if !self!.textField.edited {
-                    self!.textField.text = UserDefaults.standard.string(forKey: AppDataManager.shared.defaultUrlKey)!
+                    self!.textField.text = UserDefaults.standard.string(forKey: AppConst.defaultUrlKey)!
                 } else {
                     self!.textField.edited = false
                 }
@@ -98,25 +98,25 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
         case .select:
             selectionStyle = .none
             let marginX: CGFloat = 10
-            titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width / 1.5, height: AppDataManager.shared.optionMenuCellHeight / 1.5))
+            titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.optionMenuSize.width / 1.5, height: AppConst.optionMenuCellHeight / 1.5))
             titleLabel.center.y = frame.size.height / 2
             titleLabel.textAlignment = .left
             titleLabel.text = menuItem.title
-            titleLabel.font = UIFont(name: AppDataManager.shared.appFont, size: 13.5)
+            titleLabel.font = UIFont(name: AppConst.appFont, size: 13.5)
             contentView.addSubview(titleLabel)
             
-            switchControl.frame = CGRect(origin: CGPoint(x: marginX + titleLabel.frame.size.width, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - titleLabel.frame.size.width, height: AppDataManager.shared.optionMenuCellHeight / 3))
+            switchControl.frame = CGRect(origin: CGPoint(x: marginX + titleLabel.frame.size.width, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - titleLabel.frame.size.width, height: AppConst.optionMenuCellHeight / 3))
             switchControl.center.y = frame.size.height / 2
             switchControl.onTintColor = UIColor.frenchBlue
             contentView.addSubview(switchControl)
         case .slider:
             selectionStyle = .none
             let marginX: CGFloat = 10
-            slider.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppDataManager.shared.optionMenuSize.width - marginX * 2, height: AppDataManager.shared.optionMenuCellHeight / 3))
+            slider.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - marginX * 2, height: AppConst.optionMenuCellHeight / 3))
             slider.center.y = frame.size.height / 2
             slider.minimumValue = -0.07
             slider.maximumValue = -0.01
-            slider.value = -UserDefaults.standard.float(forKey: AppDataManager.shared.autoScrollIntervalKey)
+            slider.value = -UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey)
             slider.isContinuous = false
             slider.maximumValueImage = UIColor.blue.circleImage(size: CGSize(width: 5, height: 5))
             slider.minimumValueImage = UIColor.red.circleImage(size: CGSize(width: 5, height: 5))
@@ -136,7 +136,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
 
 // MARK: UISliderDelegate
     func changeSlider(sender: UISlider) {
-        UserDefaults.standard.set(-sender.value, forKey: AppDataManager.shared.autoScrollIntervalKey)
+        UserDefaults.standard.set(-sender.value, forKey: AppConst.autoScrollIntervalKey)
     }
     
 // MARK: UITextFieldDelegate
@@ -144,7 +144,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
         if string == "\n" {
             // 有効なURLが設定されている場合に、保存する
             if (self.textField.text?.hasValidUrl)! {
-                UserDefaults.standard.set(self.textField.text, forKey: AppDataManager.shared.defaultUrlKey)
+                UserDefaults.standard.set(self.textField.text, forKey: AppConst.defaultUrlKey)
                 self.textField.edited = true
             }
             self.textField.resignFirstResponder()

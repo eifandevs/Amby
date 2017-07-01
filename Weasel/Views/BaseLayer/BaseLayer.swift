@@ -18,7 +18,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     var delegate: BaseLayerDelegate?
 
     private let headerView: HeaderView = HeaderView()
-    private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceDataManager.shared.displaySize.height - AppDataManager.shared.thumbnailSize.height, width: DeviceDataManager.shared.displaySize.width, height: AppDataManager.shared.thumbnailSize.height))
+    private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceConst.displaySize.height - AppConst.thumbnailSize.height, width: DeviceConst.displaySize.width, height: AppConst.thumbnailSize.height))
     private let baseView: BaseView = BaseView()
     private var overlay: UIButton? = nil
     
@@ -28,10 +28,10 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        baseView.frame = CGRect(x: 0, y: DeviceDataManager.shared.statusBarHeight, width: frame.size.width, height: frame.size.height - AppDataManager.shared.thumbnailSize.height - DeviceDataManager.shared.statusBarHeight)
+        baseView.frame = CGRect(x: 0, y: DeviceConst.statusBarHeight, width: frame.size.width, height: frame.size.height - AppConst.thumbnailSize.height - DeviceConst.statusBarHeight)
         baseView.delegate = self
         // サイズが可変なので、layoutSubViewsで初期化しない
-        headerView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: DeviceDataManager.shared.statusBarHeight)
+        headerView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: DeviceConst.statusBarHeight)
         headerView.delegate = self
         
         addSubview(baseView)
@@ -130,7 +130,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     
     private func resizeHeaderToMin() {
         headerView.resizeToMin()
-        baseView.frame.origin.y = DeviceDataManager.shared.statusBarHeight
+        baseView.frame.origin.y = DeviceConst.statusBarHeight
     }
     
     private func slide(val: CGFloat) {
@@ -206,8 +206,8 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
             }
         } else if speed < 0 {
             // headerを縮小、baseViewを拡大
-            if headerView.frame.size.height != DeviceDataManager.shared.statusBarHeight {
-                if headerView.frame.size.height + speed < DeviceDataManager.shared.statusBarHeight {
+            if headerView.frame.size.height != DeviceConst.statusBarHeight {
+                if headerView.frame.size.height + speed < DeviceConst.statusBarHeight {
                     resizeHeaderToMin()
                 } else {
                     slide(val: speed)

@@ -107,9 +107,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     internal func screenTouchBegan(touch: UITouch) {
         isTouching = true
         let touchPoint = touch.location(in: self)
-        if touchPoint.x < AppDataManager.shared.edgeSwipeErea {
+        if touchPoint.x < AppConst.edgeSwipeErea {
             swipeDirection = .left
-        } else if touchPoint.x > self.bounds.size.width - AppDataManager.shared.edgeSwipeErea {
+        } else if touchPoint.x > self.bounds.size.width - AppConst.edgeSwipeErea {
             swipeDirection = .right
         } else {
             swipeDirection = .none
@@ -119,8 +119,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     internal func screenTouchMoved(touch: UITouch) {
         if front.scrollView.isScrollEnabled {
             let touchPoint = touch.location(in: self)
-            if ((swipeDirection == .left && touchPoint.x > AppDataManager.shared.edgeSwipeErea + 20) ||
-                (swipeDirection == .right && touchPoint.x < self.bounds.width - AppDataManager.shared.edgeSwipeErea - 20)) {
+            if ((swipeDirection == .left && touchPoint.x > AppConst.edgeSwipeErea + 20) ||
+                (swipeDirection == .right && touchPoint.x < self.bounds.width - AppConst.edgeSwipeErea - 20)) {
                 // エッジスワイプ検知
                 invalidateUserInteraction()
                 delegate?.baseViewDidEdgeSwiped(direction: swipeDirection)
@@ -282,7 +282,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                             let pngImageData = UIImagePNGRepresentation(img!)
                             let context = webView.context
                             do {
-                                try pngImageData?.write(to: AppDataManager.shared.thumbnailUrl(folder: context))
+                                try pngImageData?.write(to: AppConst.thumbnailUrl(folder: context))
                                 let object: [String: Any]? = ["context": context, "url": webView.requestUrl, "title": webView.requestTitle]
                                 log.debug("save thumbnal. context: \(context)")
                                 self!.viewModel.notifyEndLoadingWebView(object: object)
@@ -299,7 +299,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 UIApplication.shared.isNetworkActivityIndicatorVisible = otherWv.isLoading
                 if otherWv.isLoading == true {
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
-                    viewModel.notifyChangeProgress(object: CGFloat(AppDataManager.shared.progressMin))
+                    viewModel.notifyChangeProgress(object: CGFloat(AppConst.progressMin))
                 } else {
                     viewModel.notifyChangeProgress(object: 1.0)
                     
@@ -460,7 +460,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
     }
     func baseViewModelDidSearchWebView(text: String) {
-        let search = text.hasValidUrl ? text : "\(AppDataManager.shared.searchPath)\(text)"
+        let search = text.hasValidUrl ? text : "\(AppConst.searchPath)\(text)"
         _ = front.load(urlStr: search)
     }
     

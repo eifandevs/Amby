@@ -229,7 +229,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     }
     
     private func edgeClose() {
-        if center.x < AppDataManager.shared.edgeSwipeErea * 0.98 {
+        if center.x < AppConst.edgeSwipeErea * 0.98 {
             isEdgeClosing = true
             isUserInteractionEnabled = false
             UIView.animate(withDuration: 0.2, animations: {
@@ -242,13 +242,13 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                     self.delegate?.circleMenuDidClose()
                 }
             })
-        } else if center.x > DeviceDataManager.shared.displaySize.width * 0.98 {
+        } else if center.x > DeviceConst.displaySize.width * 0.98 {
             isEdgeClosing = true
             isUserInteractionEnabled = false
             UIView.animate(withDuration: 0.2, animations: {
-                self.center.x = DeviceDataManager.shared.displaySize.width + self.frame.size.width / 2
+                self.center.x = DeviceConst.displaySize.width + self.frame.size.width / 2
                 self.circleMenuItems.forEach({ (item) in
-                    item.center = CGPoint(x: DeviceDataManager.shared.displaySize.width + self.frame.size.width / 2, y: self.center.y)
+                    item.center = CGPoint(x: DeviceConst.displaySize.width + self.frame.size.width / 2, y: self.center.y)
                 })
             }, completion: { (finished) in
                 if finished {

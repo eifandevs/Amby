@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.addDestination(file)
         
         // ユーザーデフォルト初期値設定
-        AppDataManager.shared.registerDefaultData()
+        AppConst.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         let baseVC = BaseViewController()

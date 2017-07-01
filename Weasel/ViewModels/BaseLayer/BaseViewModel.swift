@@ -59,7 +59,7 @@ class BaseViewModel {
     }
     
     // 現在表示しているwebviewのインデックス
-    var locationIndex: Int  = UserDefaults.standard.integer(forKey: AppDataManager.shared.locationIndexKey) {
+    var locationIndex: Int  = UserDefaults.standard.integer(forKey: AppConst.locationIndexKey) {
         didSet {
             log.debug("location index changed. \(oldValue) -> \(locationIndex)")
         }
@@ -76,17 +76,17 @@ class BaseViewModel {
     
     var defaultUrl: String {
         get {
-            return UserDefaults.standard.string(forKey: AppDataManager.shared.defaultUrlKey)!
+            return UserDefaults.standard.string(forKey: AppConst.defaultUrlKey)!
         }
         set(url) {
-            UserDefaults.standard.set(url, forKey: AppDataManager.shared.defaultUrlKey)
+            UserDefaults.standard.set(url, forKey: AppConst.defaultUrlKey)
         }
     }
     
     // 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
         get {
-            return CGFloat(UserDefaults.standard.float(forKey: AppDataManager.shared.autoScrollIntervalKey))
+            return CGFloat(UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey))
         }
     }
     
@@ -224,7 +224,7 @@ class BaseViewModel {
         }
         // eachHistory読み込み
         do {
-            let data = try Data(contentsOf: AppDataManager.shared.eachHistoryPath)
+            let data = try Data(contentsOf: AppConst.eachHistoryPath)
             eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [HistoryItem]
             log.debug("each history read. url: \n\(requestUrl)")
         } catch let error as NSError {
@@ -274,7 +274,7 @@ class BaseViewModel {
     }
     
     func storeHistory() {
-        UserDefaults.standard.set(locationIndex, forKey: AppDataManager.shared.locationIndexKey)
+        UserDefaults.standard.set(locationIndex, forKey: AppConst.locationIndexKey)
         StoreManager.shared.storeCommonHistory(commonHistory: commonHistory)
         if commonHistory.count > 0 {
             StoreManager.shared.storeEachHistory(eachHistory: eachHistory)
