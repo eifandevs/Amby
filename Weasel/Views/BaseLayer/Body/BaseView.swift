@@ -326,10 +326,14 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
 
     func validateUserInteraction() {
-        EGApplication.sharedMyApplication.egDelegate = self
         isUserInteractionEnabled = true
-        front.scrollView.isScrollEnabled = true
-        front.scrollView.bounces = true
+        EGApplication.sharedMyApplication.egDelegate = self
+        webViews.forEach { (wv: EGWebView?) in
+            if let wv = wv, !wv.scrollView.isScrollEnabled {
+                wv.scrollView.isScrollEnabled = true
+                wv.scrollView.bounces = true
+            }
+        }
     }
     
 // MARK: Private Method
