@@ -26,7 +26,7 @@
 		A55EBF561EEB009000304C69 /* UIView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF1D1EEB009000304C69 /* UIView+Extend.swift */; };
 		A55EBF581EEB009000304C69 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF201EEB009000304C69 /* CircleView.swift */; };
 		A55EBF591EEB009000304C69 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF211EEB009000304C69 /* ShadowView.swift */; };
-		A55EBF5A1EEB009000304C69 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF221EEB009000304C69 /* StoreManager.swift */; };
+		A55EBF5A1EEB009000304C69 /* CommonDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF221EEB009000304C69 /* CommonDao.swift */; };
 		A55EBF5B1EEB009000304C69 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF231EEB009000304C69 /* Util.swift */; };
 		A55EBF631EEB009000304C69 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A55EBF2D1EEB009000304C69 /* authorize.html */; };
 		A55EBF641EEB009000304C69 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A55EBF2E1EEB009000304C69 /* dns.html */; };
@@ -55,6 +55,10 @@
 		A57CD12F1F0845B400F29A11 /* ThumbnailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD1281F0845B400F29A11 /* ThumbnailItem.swift */; };
 		A57CD1301F0845B400F29A11 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD12A1F0845B400F29A11 /* Favorite.swift */; };
 		A57CD1311F0845B400F29A11 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD12B1F0845B400F29A11 /* Form.swift */; };
+		A57CD1331F0BC3D000F29A11 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD1321F0BC3D000F29A11 /* RealmHelper.swift */; };
+		A57CD1351F0BC54300F29A11 /* Collection+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD1341F0BC54300F29A11 /* Collection+Extend.swift */; };
+		A57CD1371F0BC56000F29A11 /* UIButton+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD1361F0BC56000F29A11 /* UIButton+Extend.swift */; };
+		A57CD1391F0BC58700F29A11 /* EnumEnumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD1381F0BC58700F29A11 /* EnumEnumerable.swift */; };
 		A5B628D71EEECC28005CC957 /* Double+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628D61EEECC28005CC957 /* Double+Extend.swift */; };
 		A5B628D91EEECC46005CC957 /* CGPoint+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628D81EEECC46005CC957 /* CGPoint+Extend.swift */; };
 		A5B628EA1EF0AF79005CC957 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628E31EF0AF79005CC957 /* BaseViewModel.swift */; };
@@ -89,7 +93,7 @@
 		A55EBF1D1EEB009000304C69 /* UIView+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extend.swift"; sourceTree = "<group>"; };
 		A55EBF201EEB009000304C69 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		A55EBF211EEB009000304C69 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
-		A55EBF221EEB009000304C69 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		A55EBF221EEB009000304C69 /* CommonDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDao.swift; sourceTree = "<group>"; };
 		A55EBF231EEB009000304C69 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		A55EBF2D1EEB009000304C69 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
 		A55EBF2E1EEB009000304C69 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
@@ -118,6 +122,10 @@
 		A57CD1281F0845B400F29A11 /* ThumbnailItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailItem.swift; sourceTree = "<group>"; };
 		A57CD12A1F0845B400F29A11 /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A57CD12B1F0845B400F29A11 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		A57CD1321F0BC3D000F29A11 /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		A57CD1341F0BC54300F29A11 /* Collection+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Extend.swift"; sourceTree = "<group>"; };
+		A57CD1361F0BC56000F29A11 /* UIButton+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extend.swift"; sourceTree = "<group>"; };
+		A57CD1381F0BC58700F29A11 /* EnumEnumerable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumEnumerable.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Weasel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weasel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B628D61EEECC28005CC957 /* Double+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extend.swift"; sourceTree = "<group>"; };
 		A5B628D81EEECC46005CC957 /* CGPoint+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extend.swift"; sourceTree = "<group>"; };
@@ -201,9 +209,10 @@
 		A55EBF121EEB009000304C69 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				A57CD11F1F06B79B00F29A11 /* Define */,
-				A55EBF221EEB009000304C69 /* StoreManager.swift */,
+				A55EBF221EEB009000304C69 /* CommonDao.swift */,
+				A57CD1321F0BC3D000F29A11 /* RealmHelper.swift */,
 				A55EBF231EEB009000304C69 /* Util.swift */,
+				A57CD11F1F06B79B00F29A11 /* Define */,
 				A55EBF151EEB009000304C69 /* Extension */,
 				A55EBF1F1EEB009000304C69 /* Protocol */,
 			);
@@ -223,6 +232,8 @@
 				A55EBF1D1EEB009000304C69 /* UIView+Extend.swift */,
 				A5B628D61EEECC28005CC957 /* Double+Extend.swift */,
 				A5B628D81EEECC46005CC957 /* CGPoint+Extend.swift */,
+				A57CD1341F0BC54300F29A11 /* Collection+Extend.swift */,
+				A57CD1361F0BC56000F29A11 /* UIButton+Extend.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -232,6 +243,7 @@
 			children = (
 				A55EBF201EEB009000304C69 /* CircleView.swift */,
 				A55EBF211EEB009000304C69 /* ShadowView.swift */,
+				A57CD1381F0BC58700F29A11 /* EnumEnumerable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -550,6 +562,7 @@
 				A5B628ED1EF0AF79005CC957 /* BaseMenuViewModel.swift in Sources */,
 				A55EBF711EEB009000304C69 /* EGProgressBar.swift in Sources */,
 				A554095C1EFAAAB600F29140 /* FavoriteMenuViewModel.swift in Sources */,
+				A57CD1351F0BC54300F29A11 /* Collection+Extend.swift in Sources */,
 				A55EBF681EEB009000304C69 /* BaseViewController.swift in Sources */,
 				A57CD1301F0845B400F29A11 /* Favorite.swift in Sources */,
 				A55EBF6C1EEB009000304C69 /* BaseLayer.swift in Sources */,
@@ -561,17 +574,20 @@
 				A554096C1EFBF83700F29140 /* OptionMenuTextField.swift in Sources */,
 				A55EBF541EEB009000304C69 /* UIImage+Extend.swift in Sources */,
 				A55EBF5B1EEB009000304C69 /* Util.swift in Sources */,
+				A57CD1331F0BC3D000F29A11 /* RealmHelper.swift in Sources */,
 				A57CD12F1F0845B400F29A11 /* ThumbnailItem.swift in Sources */,
 				A5B628D91EEECC46005CC957 /* CGPoint+Extend.swift in Sources */,
 				A55EBF721EEB009000304C69 /* EGTextField.swift in Sources */,
 				A55EBF6D1EEB009000304C69 /* BaseView.swift in Sources */,
 				A554096A1EFBF83700F29140 /* OptionMenuTableView.swift in Sources */,
 				A57CD1231F06B79B00F29A11 /* DeviceConst.swift in Sources */,
+				A57CD1391F0BC58700F29A11 /* EnumEnumerable.swift in Sources */,
 				A55EBF771EEB009000304C69 /* FrontLayer.swift in Sources */,
 				A5B628EF1EF0AF79005CC957 /* SettingMenuViewModel.swift in Sources */,
 				A55409691EFBF83700F29140 /* CircleProgress.swift in Sources */,
 				A5B628EB1EF0AF79005CC957 /* FooterViewModel.swift in Sources */,
 				A55409671EFBF83700F29140 /* CircleMenu.swift in Sources */,
+				A57CD1371F0BC56000F29A11 /* UIButton+Extend.swift in Sources */,
 				A5B628EA1EF0AF79005CC957 /* BaseViewModel.swift in Sources */,
 				A55409681EFBF83700F29140 /* CircleMenuItem.swift in Sources */,
 				A55EBF501EEB009000304C69 /* Int+Extend.swift in Sources */,
@@ -586,7 +602,7 @@
 				A57CD12D1F0845B400F29A11 /* HistoryItem.swift in Sources */,
 				A554095A1EFAAA9900F29140 /* FormMenuViewModel.swift in Sources */,
 				A55EBF511EEB009000304C69 /* NSNotification+Extend.swift in Sources */,
-				A55EBF5A1EEB009000304C69 /* StoreManager.swift in Sources */,
+				A55EBF5A1EEB009000304C69 /* CommonDao.swift in Sources */,
 				A554096B1EFBF83700F29140 /* OptionMenuTableViewCell.swift in Sources */,
 				A5B628EE1EF0AF79005CC957 /* OptionMenuTableViewModel.swift in Sources */,
 				A57CD12E1F0845B400F29A11 /* OptionMenuItem.swift in Sources */,

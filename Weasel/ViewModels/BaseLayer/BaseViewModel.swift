@@ -183,7 +183,7 @@ class BaseViewModel {
             // 現在表示しているURLがお気に入りかどうか調べる
             let currentUrl = self!.eachHistory[self!.locationIndex].url
             if (!currentUrl.isEmpty) {
-                let savedFavoriteUrls = StoreManager.shared.selectAllFavorite().map({ (f) -> String in
+                let savedFavoriteUrls = CommonDao.s.selectAllFavorite().map({ (f) -> String in
                     return f.url.domainAndPath
                 })
                 self!.center.post(name: .headerViewModelWillChangeFavorite, object: savedFavoriteUrls.contains(currentUrl.domainAndPath))
@@ -198,12 +198,12 @@ class BaseViewModel {
                 fd.title = self!.eachHistory[self!.locationIndex].title
                 fd.url = self!.eachHistory[self!.locationIndex].url
                 
-                if let favoriteData = StoreManager.shared.selectFavorite(url: fd.url) {
+                if let favoriteData = CommonDao.s.selectFavorite(url: fd.url) {
                     // すでに登録済みの場合は、お気に入りから削除する
-                    StoreManager.shared.deleteWithRLMObjects(data: [favoriteData])
+                    CommonDao.s.deleteWithRLMObjects(data: [favoriteData])
                     self!.center.post(name: .headerViewModelWillChangeFavorite, object: false)
                 } else {
-                    StoreManager.shared.insertWithRLMObjects(data: [fd])
+                    CommonDao.s.insertWithRLMObjects(data: [fd])
                     // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
                     self!.center.post(name: .headerViewModelWillChangeFavorite, object: true)
                     Util.presentWarning(title: "登録完了", message: "お気に入りに登録しました。")
@@ -255,7 +255,7 @@ class BaseViewModel {
     func saveHistory(wv: EGWebView) {
         if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle {
             // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
-            center.post(name: .headerViewModelWillChangeFavorite, object: StoreManager.shared.selectFavorite(url: requestUrl) != nil)
+            center.post(name: .headerViewModelWillChangeFavorite, object: CommonDao.s.selectFavorite(url: requestUrl) != nil)
 
             // Common History
             let common = CommonHistoryItem(_id: NSUUID().uuidString, url: requestUrl, title: requestTitle, date: Date())
@@ -275,9 +275,9 @@ class BaseViewModel {
     
     func storeHistory() {
         UserDefaults.standard.set(locationIndex, forKey: AppConst.locationIndexKey)
-        StoreManager.shared.storeCommonHistory(commonHistory: commonHistory)
+        CommonDao.s.storeCommonHistory(commonHistory: commonHistory)
         if commonHistory.count > 0 {
-            StoreManager.shared.storeEachHistory(eachHistory: eachHistory)
+            CommonDao.s.storeEachHistory(eachHistory: eachHistory)
         }
         commonHistory = []
     }

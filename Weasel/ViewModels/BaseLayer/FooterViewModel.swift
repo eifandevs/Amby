@@ -11,7 +11,7 @@ import Bond
 
 protocol FooterViewModelDelegate {
     func footerViewModelDidLoadThumbnail(eachThumbnail: [ThumbnailItem])
-    func footerViewModelDidAddThumbnail()
+    func footerViewModelDidAddThumbnail(context: String)
     func footerViewModelDidChangeThumbnail()
     func footerViewModelDidRemoveThumbnail(index: Int)
     func footerViewModelDidStartLoading(index: Int)
@@ -62,7 +62,7 @@ class FooterViewModel {
             let thumbnailItem = ThumbnailItem()
             thumbnailItem.context = context
             self!.eachThumbnail.append(thumbnailItem)
-            self!.delegate?.footerViewModelDidAddThumbnail()
+            self!.delegate?.footerViewModelDidAddThumbnail(context: context)
             
             self!.locationIndex = self!.eachThumbnail.count - 1
         }

@@ -14,7 +14,7 @@ class FavoriteMenuViewModel: OptionMenuTableViewModel {
     }
     
     override func setup() {
-        let items = StoreManager.shared.selectAllFavorite().map { (favorite) -> OptionMenuItem in
+        let items = CommonDao.s.selectAllFavorite().map { (favorite) -> OptionMenuItem in
             return OptionMenuItem(_id: favorite.id, type: .deletablePlain, title: favorite.title, url: favorite.url)
         }
         

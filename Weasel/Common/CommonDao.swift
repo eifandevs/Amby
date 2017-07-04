@@ -1,5 +1,5 @@
 //
-//  StoreManager.swift
+//  CommonDao.swift
 //  one-hand-browsing
 //
 //  Created by user1 on 2016/07/19.
@@ -9,13 +9,19 @@
 import Foundation
 import UIKit
 import RealmSwift
+import Realm
 
-final class StoreManager {
-    static let shared = StoreManager()
-    private let realm: Realm
+final class CommonDao {
+    static let s = CommonDao()
+    private let realm: Realm!
     
     private init() {
-        realm = try! Realm()
+        do {
+            realm = try Realm(configuration: RealmHelper.realmConfiguration())
+        } catch let error as NSError {
+            log.error("Realm initialize error. description: \(error.description)")
+            realm = nil
+        }
     }
 
     func insertWithRLMObjects(data: [Object]) {
@@ -37,11 +43,11 @@ final class StoreManager {
     
     func selectFavorite(id: String = "", url: String = "") -> Favorite? {
         if !id.isEmpty {
-            return StoreManager.shared.selectAllFavorite().filter({ (f) -> Bool in
+            return CommonDao.s.selectAllFavorite().filter({ (f) -> Bool in
                 return id == f.id
             }).first
         } else if !url.isEmpty {
-            return StoreManager.shared.selectAllFavorite().filter({ (f) -> Bool in
+            return CommonDao.s.selectAllFavorite().filter({ (f) -> Bool in
                 return url.domainAndPath == f.url.domainAndPath
             }).first
         }
@@ -55,11 +61,11 @@ final class StoreManager {
     
     func selectForm(id: String = "", url: String = "") -> Form? {
         if !id.isEmpty {
-            return StoreManager.shared.selectAllForm().filter({ (f) -> Bool in
+            return CommonDao.s.selectAllForm().filter({ (f) -> Bool in
                 return id == f.id
             }).first
         } else if !url.isEmpty {
-            return StoreManager.shared.selectAllForm().filter({ (f) -> Bool in
+            return CommonDao.s.selectAllForm().filter({ (f) -> Bool in
                 return url.domainAndPath == f.url.domainAndPath
             }).first
         }
@@ -112,14 +118,14 @@ final class StoreManager {
                 for input in form.inputs {
                     // 入力済みのフォームが一つでもあれば保存する
                     if input.value.characters.count > 0 {
-                        let savedForm = StoreManager.shared.selectAllForm().filter({ (f) -> Bool in
+                        let savedForm = CommonDao.s.selectAllForm().filter({ (f) -> Bool in
                             return form.url.domainAndPath == f.url.domainAndPath
                         }).first
                         if let unwrappedSavedForm = savedForm {
                             // すでに登録済みの場合は、まず削除する
-                            StoreManager.shared.deleteWithRLMObjects(data: [unwrappedSavedForm])
+                            CommonDao.s.deleteWithRLMObjects(data: [unwrappedSavedForm])
                         }
-                        StoreManager.shared.insertWithRLMObjects(data: [form])
+                        CommonDao.s.insertWithRLMObjects(data: [form])
                         Util.presentWarning(title: "フォーム登録完了", message: "フォーム情報を登録しました。")
                         return
                     }

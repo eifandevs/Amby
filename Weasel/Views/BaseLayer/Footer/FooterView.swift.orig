@@ -47,7 +47,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
 // MARK: Private Method
     
-    private func createCaptureSpace(context: String) -> UIButton {
+    private func createCaptureSpace() -> UIButton {
         let additionalPointX = ((thumbnails.count).cgfloat * AppConst.thumbnailSize.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).cgfloat * AppConst.thumbnailSize.width / 2
         let btn = UIButton(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppConst.thumbnailSize))
         btn.backgroundColor = UIColor.black
@@ -57,7 +57,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         }
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
         btn.addGestureRecognizer(longPressRecognizer)
-        btn.context = context
+        
         thumbnails.append(btn)
         
         if ((thumbnails.count).cgfloat * btn.frame.size.width > scrollView.frame.size.width) {
@@ -93,9 +93,9 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
 // MARK: FooterViewModel Delegate
 
-    func footerViewModelDidAddThumbnail(context: String) {
+    func footerViewModelDidAddThumbnail() {
         // 新しいサムネイルスペースを作成
-        let _ = createCaptureSpace(context: context)
+        let _ = createCaptureSpace()
     }
     
     func footerViewModelDidChangeThumbnail() {
@@ -137,27 +137,24 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     func footerViewModelDidEndLoading(context: String, index: Int) {
         // くるくるを止めて、サムネイルを表示する
         DispatchQueue.mainSyncSafe { [weak self] _ in
-            let targetThumbnail: UIButton = self!.thumbnails.filter({ (thumbnail) -> Bool in
-                return thumbnail.context == context
-            })[0]
             let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: context).path)
             if image == nil {
                 log.error("missing thumbnail image")
                 return
             }
-            _ = targetThumbnail.subviews.map { (v) -> Void in
+            _ = self!.thumbnails[index].subviews.map { (v) -> Void in
                 v.removeFromSuperview()
             }
             let imageView = UIImageView(image: image)
-            imageView.frame = CGRect(origin: CGPoint.zero, size: targetThumbnail.bounds.size)
-            targetThumbnail.addSubview(imageView)
+            imageView.frame = CGRect(origin: CGPoint.zero, size: self!.thumbnails[index].bounds.size)
+            self!.thumbnails[index].addSubview(imageView)
         }
     }
     
     func footerViewModelDidLoadThumbnail(eachThumbnail: [ThumbnailItem]) {
         if eachThumbnail.count > 0 {
             eachThumbnail.forEach { (item) in
-                let btn = createCaptureSpace(context: item.context)
+                let btn = createCaptureSpace()
                 if !item.context.isEmpty {
                     let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: item.context).path)
                     if image == nil {

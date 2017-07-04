@@ -24,6 +24,7 @@ class AppConst {
     static let appFont = "Avenir"
     static let eachHistoryPath = URL(fileURLWithPath: DeviceConst.cachesPath + "/each_history.dat")
     static let commonHistoryPath = DeviceConst.cachesPath + "/common_history"
+    static let realmPath = DeviceConst.cachesPath + "/database"
     
     private init() {
         

@@ -55,7 +55,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             if !self!.isDisplayedKeyBoard {
                 self!.isDisplayedKeyBoard = true
 
-                let forms = StoreManager.shared.selectAllForm()
+                let forms = CommonDao.s.selectAllForm()
                 for form in forms {
                     if (self!.front.url?.absoluteString.domainAndPath == form.url.domainAndPath && !self!.isDoneAutoInput) {
                         Util.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: {
@@ -145,10 +145,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
-        let speed = scrollView.contentOffset.y - scrollMovingPointY
-        if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching && isOverScrolling && speed < 0) || (isTouching && isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0)) {
-            delegate?.baseViewDidScroll(speed: -1 * speed)
+        if scrollMovingPointY != 0 {
+            let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
+            let speed = scrollView.contentOffset.y - scrollMovingPointY
+            if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching && isOverScrolling && speed < 0) || (isTouching && isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0)) {
+                delegate?.baseViewDidScroll(speed: -1 * speed)
+            }
         }
         scrollMovingPointY = scrollView.contentOffset.y
     }
@@ -529,7 +531,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     func baseViewModelDidRegisterAsForm() {
-        StoreManager.shared.storeForm(webView: front)
+        CommonDao.s.storeForm(webView: front)
     }
     
     func baseViewModelDidAutoScroll() {
