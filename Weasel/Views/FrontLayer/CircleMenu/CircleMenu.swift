@@ -235,7 +235,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
             UIView.animate(withDuration: 0.2, animations: {
                 self.center.x = -1 * self.frame.size.width / 2
                 self.circleMenuItems.forEach({ (item) in
-                    item.center = CGPoint(x: -1 * self.frame.size.width / 2, y: self.center.y)
+                    item.center = CGPoint(x: -1 * self.frame.size.width, y: self.center.y)
                 })
             }, completion: { (finished) in
                 if finished {
@@ -248,7 +248,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
             UIView.animate(withDuration: 0.2, animations: {
                 self.center.x = DeviceConst.displaySize.width + self.frame.size.width / 2
                 self.circleMenuItems.forEach({ (item) in
-                    item.center = CGPoint(x: DeviceConst.displaySize.width + self.frame.size.width / 2, y: self.center.y)
+                    item.center = CGPoint(x: DeviceConst.displaySize.width + self.frame.size.width, y: self.center.y)
                 })
             }, completion: { (finished) in
                 if finished {
