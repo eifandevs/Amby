@@ -36,7 +36,7 @@ final class CommonDao {
         }
     }
     
-    // Favorite
+    /// Favorite
     func selectAllFavorite() -> [Favorite] {
         return realm.objects(Favorite.self).map { $0 }
     }
@@ -54,7 +54,11 @@ final class CommonDao {
         return nil
     }
     
-    // Form
+    func deleteAllFavorite() {
+        deleteWithRLMObjects(data: selectAllFavorite())
+    }
+    
+    /// Form
     func selectAllForm() -> [Form] {
         return realm.objects(Form.self).map { $0 }
     }
@@ -72,8 +76,7 @@ final class CommonDao {
         return nil
     }
 
-    // Form
-    // フォーム情報の保存
+    /// フォーム情報の保存
     func storeForm(webView: EGWebView) {
         if let title = webView.title, let host = webView.url?.host, let url = webView.url?.absoluteString {
             let form = Form()
@@ -231,6 +234,7 @@ final class CommonDao {
         }
     }
     
+    /// 閲覧履歴を全て削除
     func deleteAllHistory() {
         Util.deleteFolder(path: AppConst.commonHistoryPath)
         Util.createFolder(path: AppConst.commonHistoryPath)

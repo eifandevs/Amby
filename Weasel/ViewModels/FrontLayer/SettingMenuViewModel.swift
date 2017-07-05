@@ -34,7 +34,13 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                     })
                     return nil
                 }),
-                OptionMenuItem(title: "ブックマーク"),
+                OptionMenuItem(title: "ブックマーク", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    Util.presentAlert(title: "データ削除", message: "ブックマークを全て削除します。よろしいですか？", completion: {
+                        CommonDao.s.deleteAllFavorite()
+                        NotificationCenter.default.post(name: .headerViewModelWillChangeFavorite, object: false)
+                    })
+                    return nil
+                }),
                 OptionMenuItem(title: "フォームデータ"),
                 OptionMenuItem(title: "Cookie"),
                 OptionMenuItem(title: "キャッシュ")
