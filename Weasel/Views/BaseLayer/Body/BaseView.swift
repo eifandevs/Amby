@@ -294,7 +294,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             if otherWv.context == front.context {
                 // フロントwebviewの通知なので、プログレスを更新する
                 //インジゲーターの表示、非表示をきりかえる。
-                UIApplication.shared.isNetworkActivityIndicatorVisible = otherWv.isLoading
                 if otherWv.isLoading == true {
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
                     viewModel.notifyChangeProgress(object: CGFloat(AppConst.progressMin))
@@ -309,21 +308,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 if otherWv.isLoading == true {
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
                 } else {
-                    let loadingWebViews: [EGWebView?] = webViews.filter({ (wv) -> Bool in
-                        if let wv = wv {
-                            return wv.isLoading
-                        }
-                        return false;
-                    })
-                    if loadingWebViews.count < 1 {
-                        // 他にローディング中のwebviewがなければ、くるくるを停止する
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = otherWv.isLoading
-                    }
                     // 履歴とサムネイルを更新
                     updateHistoryAndThumbnail(otherWv)
                 }
 
             }
+            // くるくるを更新する
+            updateNetworkActivityIndicator()
         }
     }
     
@@ -345,6 +336,17 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
 // MARK: Private Method
+    
+    private func updateNetworkActivityIndicator() {
+        let loadingWebViews: [EGWebView?] = webViews.filter({ (wv) -> Bool in
+            if let wv = wv {
+                return wv.isLoading
+            }
+            return false;
+        })
+        // 他にローディング中のwebviewがなければ、くるくるを停止する
+        UIApplication.shared.isNetworkActivityIndicatorVisible = loadingWebViews.count < 1 ? false : true
+    }
     
     private func invalidateUserInteraction() {
         isUserInteractionEnabled = false
@@ -464,13 +466,16 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             webView.removeObserver(self, forKeyPath: "loading")
             if isFrontDelete {
                 webView.removeObserver(self, forKeyPath: "estimatedProgress")
+                viewModel.notifyChangeProgress(object: 0)
                 front = nil
             }
             webView.removeFromSuperview()
         }
         webViews.remove(at: index)
         
-        
+        // くるくるを更新
+        updateNetworkActivityIndicator()
+
         if webViews.count == 0 {
             viewModel.notifyAddWebView()
         } else if isFrontDelete {
