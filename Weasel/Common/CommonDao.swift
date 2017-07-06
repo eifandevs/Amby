@@ -76,6 +76,10 @@ final class CommonDao {
         return nil
     }
 
+    func deleteAllForm() {
+        deleteWithRLMObjects(data: selectAllForm())
+    }
+    
     /// フォーム情報の保存
     func storeForm(webView: EGWebView) {
         if let title = webView.title, let host = webView.url?.host, let url = webView.url?.absoluteString {

@@ -21,6 +21,7 @@ class AppConst {
     static let defaultUrlKey = "defaultUrl"
     static let locationIndexKey = "locationIndex"
     static let autoScrollIntervalKey = "autoScrollInterval"
+    static let privateModeKey = "privateMode"
     static let appFont = "Avenir"
     static let eachHistoryPath = URL(fileURLWithPath: DeviceConst.cachesPath + "/each_history.dat")
     static let commonHistoryPath = DeviceConst.cachesPath + "/common_history"
@@ -67,6 +68,7 @@ class AppConst {
     static func registerDefaultData() {
         UserDefaults.standard.register(defaults: [defaultUrlKey: "https://www.amazon.co.jp/",
                                                   locationIndexKey: 0,
+                                                  privateModeKey: "false",
                                                   autoScrollIntervalKey: 0.06])
     }
 }

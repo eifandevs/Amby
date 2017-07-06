@@ -47,6 +47,8 @@
 		A55EBF7E1EEB014E00304C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A55EBF7A1EEB014E00304C69 /* Assets.xcassets */; };
 		A55EBF7F1EEB014E00304C69 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EBF7B1EEB014E00304C69 /* EGApplication.swift */; };
 		A55EBF801EEB014E00304C69 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A55EBF7C1EEB014E00304C69 /* Info.plist */; };
+		A575D1941F0E7B8C00714FE4 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575D1931F0E7B8C00714FE4 /* Thumbnail.swift */; };
+		A575D1961F0E7C1800714FE4 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575D1951F0E7C1800714FE4 /* CacheHelper.swift */; };
 		A57CD1221F06B79B00F29A11 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD1201F06B79B00F29A11 /* AppConst.swift */; };
 		A57CD1231F06B79B00F29A11 /* DeviceConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD1211F06B79B00F29A11 /* DeviceConst.swift */; };
 		A57CD12C1F0845B400F29A11 /* CommonHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CD1251F0845B400F29A11 /* CommonHistoryItem.swift */; };
@@ -114,6 +116,8 @@
 		A55EBF7A1EEB014E00304C69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../App/Assets.xcassets; sourceTree = "<group>"; };
 		A55EBF7B1EEB014E00304C69 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A55EBF7C1EEB014E00304C69 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A575D1931F0E7B8C00714FE4 /* Thumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
+		A575D1951F0E7C1800714FE4 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
 		A57CD1201F06B79B00F29A11 /* AppConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConst.swift; sourceTree = "<group>"; };
 		A57CD1211F06B79B00F29A11 /* DeviceConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceConst.swift; sourceTree = "<group>"; };
 		A57CD1251F0845B400F29A11 /* CommonHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryItem.swift; sourceTree = "<group>"; };
@@ -215,6 +219,7 @@
 				A57CD11F1F06B79B00F29A11 /* Define */,
 				A55EBF151EEB009000304C69 /* Extension */,
 				A55EBF1F1EEB009000304C69 /* Protocol */,
+				A575D1951F0E7C1800714FE4 /* CacheHelper.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				A55EBF3F1EEB009000304C69 /* FooterView.swift */,
+				A575D1931F0E7B8C00714FE4 /* Thumbnail.swift */,
 			);
 			path = Footer;
 			sourceTree = "<group>";
@@ -560,6 +566,7 @@
 				A55EBF6F1EEB009000304C69 /* FooterView.swift in Sources */,
 				A57CD1221F06B79B00F29A11 /* AppConst.swift in Sources */,
 				A5B628ED1EF0AF79005CC957 /* BaseMenuViewModel.swift in Sources */,
+				A575D1961F0E7C1800714FE4 /* CacheHelper.swift in Sources */,
 				A55EBF711EEB009000304C69 /* EGProgressBar.swift in Sources */,
 				A554095C1EFAAAB600F29140 /* FavoriteMenuViewModel.swift in Sources */,
 				A57CD1351F0BC54300F29A11 /* Collection+Extend.swift in Sources */,
@@ -596,6 +603,7 @@
 				A55EBF6E1EEB009000304C69 /* EGWebView.swift in Sources */,
 				A55EBF551EEB009000304C69 /* UIScrollView+Extend.swift in Sources */,
 				A55EBF731EEB009000304C69 /* HeaderView.swift in Sources */,
+				A575D1941F0E7B8C00714FE4 /* Thumbnail.swift in Sources */,
 				A55EBF581EEB009000304C69 /* CircleView.swift in Sources */,
 				A57CD12C1F0845B400F29A11 /* CommonHistoryItem.swift in Sources */,
 				A5B628EC1EF0AF79005CC957 /* HeaderViewModel.swift in Sources */,

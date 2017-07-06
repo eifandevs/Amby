@@ -38,8 +38,7 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
                 OptionMenuItem(title: "設定", image: UIImage(named: "option_menu_setting"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
                 }),
                 OptionMenuItem(title: "ヘルプ", image: UIImage(named: "option_menu_help")),
-                OptionMenuItem(title: "初期化", image: UIImage(named: "option_menu_initialize"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
-                }),
+                OptionMenuItem(title: "APP情報", image: UIImage(named: "option_menu_help")),
             ]
         ]
     }

@@ -29,17 +29,12 @@ class EGWebView: WKWebView {
     var requestUrl: String!
     var requestTitle: String!
     
-    init(id: String?, pool: WKProcessPool) {
+    init(id: String?, isPrivate: Bool) {
         if let id = id, !id.isEmpty {
             // コンテキストを復元
             context = id
         }
-        let configuration = WKWebViewConfiguration()
-        configuration.processPool = pool
-        // Cookie, Cache, その他Webデータを端末内に残す
-        configuration.websiteDataStore = WKWebsiteDataStore.default()
-        configuration.allowsPictureInPictureMediaPlayback = true
-        super.init(frame: CGRect.zero, configuration: configuration)
+        super.init(frame: CGRect.zero, configuration: CacheHelper.cacheConfiguration(isPrivate: isPrivate))
         isOpaque = true
         allowsLinkPreview = true
     }

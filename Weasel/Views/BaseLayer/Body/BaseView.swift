@@ -27,7 +27,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     var delegate: BaseViewDelegate?
 
-    private var front: EGWebView!
+    private var front: EGWebView! {
+        didSet {
+            if let newValue = front {
+                // プライベートモードならデザインを変更する
+            }
+        }
+    }
     var webViews: [EGWebView?] = []
     private let viewModel = BaseViewModel()
     private var scrollMovingPointY: CGFloat = 0
@@ -359,9 +365,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         UIApplication.shared.isNetworkActivityIndicatorVisible = target.isLoading
     }
     
-    // webviewを新規作成
+    /// webviewを新規作成
     private func createWebView(context: String?) -> EGWebView {
-        let newWv = EGWebView(id: context, pool: viewModel.processPool)
+        let newWv = EGWebView(id: context, isPrivate: viewModel.isPrivateMode!)
         newWv.navigationDelegate = self
         newWv.uiDelegate = self;
         newWv.scrollView.delegate = self

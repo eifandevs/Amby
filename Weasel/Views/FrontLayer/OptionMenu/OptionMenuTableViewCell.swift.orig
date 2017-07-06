@@ -89,7 +89,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             textField.delegate = self
             registerForKeyboardWillHideNotification { [weak self] (notification) in
                 if !self!.textField.edited {
-                    self!.textField.text = (menuItem.defaultValue! as! String)
+                    self!.textField.text = UserDefaults.standard.string(forKey: AppConst.defaultUrlKey)!
                 } else {
                     self!.textField.edited = false
                 }
@@ -107,11 +107,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             
             switchControl.frame = CGRect(origin: CGPoint(x: marginX + titleLabel.frame.size.width, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - titleLabel.frame.size.width, height: AppConst.optionMenuCellHeight / 3))
             switchControl.center.y = frame.size.height / 2
-            switchControl.isOn = menuItem.defaultValue! as! Bool
             switchControl.onTintColor = UIColor.frenchBlue
-            let _ = switchControl.reactive.controlEvents(.valueChanged).observeNext(with: { [weak self] (e) in
-                menuItem.switchAction?(self!.switchControl.isOn)
-            })
             contentView.addSubview(switchControl)
         case .slider:
             selectionStyle = .none
@@ -120,14 +116,11 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             slider.center.y = frame.size.height / 2
             slider.minimumValue = -0.07
             slider.maximumValue = -0.01
-            slider.value = menuItem.defaultValue! as! Float
+            slider.value = -UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey)
             slider.isContinuous = false
-            slider.tintColor = UIColor.frenchBlue
             slider.maximumValueImage = UIColor.blue.circleImage(size: CGSize(width: 5, height: 5))
             slider.minimumValueImage = UIColor.red.circleImage(size: CGSize(width: 5, height: 5))
-            let _ = slider.reactive.controlEvents(.valueChanged).observeNext(with: { [weak self] (e) in
-                UserDefaults.standard.set(-self!.slider.value, forKey: AppConst.autoScrollIntervalKey)
-            })
+            slider.addTarget(self, action: #selector(changeSlider), for: .valueChanged)
             contentView.addSubview(slider)
         }
     }
@@ -141,6 +134,11 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
         slider.removeFromSuperview()
     }
 
+// MARK: UISliderDelegate
+    func changeSlider(sender: UISlider) {
+        UserDefaults.standard.set(-sender.value, forKey: AppConst.autoScrollIntervalKey)
+    }
+    
 // MARK: UITextFieldDelegate
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if string == "\n" {

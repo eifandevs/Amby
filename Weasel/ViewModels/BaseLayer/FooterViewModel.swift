@@ -62,9 +62,8 @@ class FooterViewModel {
             let thumbnailItem = ThumbnailItem()
             thumbnailItem.context = context
             self!.eachThumbnail.append(thumbnailItem)
-            self!.delegate?.footerViewModelDidAddThumbnail(context: context)
-            
             self!.locationIndex = self!.eachThumbnail.count - 1
+            self!.delegate?.footerViewModelDidAddThumbnail(context: context)
         }
         // webviewロード開始
         center.addObserver(forName: .footerViewModelWillStartLoading, object: nil, queue: nil) { [weak self] (notification) in

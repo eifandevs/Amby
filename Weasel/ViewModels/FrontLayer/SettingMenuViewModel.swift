@@ -18,14 +18,18 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
         sectionItems = ["初期表示URL", "データ保持設定", "自動スクロール設定", "データ削除"]
         menuItems = [
             [
-                OptionMenuItem(type: .input)
+                OptionMenuItem(type: .input, defaultValue: UserDefaults.standard.string(forKey: AppConst.defaultUrlKey)!)
             ],
             [
-                OptionMenuItem(type: .select, title: "閲覧履歴を記録する"),
-                OptionMenuItem(type: .select, title: "キャッシュを利用する")
+                OptionMenuItem(type: .select,
+                               title: "プライベートモード",
+                               switchAction: { (isOn: Bool) -> () in
+                                UserDefaults.standard.set(isOn ? "true" : "false", forKey: AppConst.privateModeKey)
+                               },
+                               defaultValue: UserDefaults.standard.string(forKey: AppConst.privateModeKey) == "true"),
             ],
             [
-                OptionMenuItem(type: .slider)
+                OptionMenuItem(type: .slider, defaultValue: -UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey))
             ],
             [
                 OptionMenuItem(title: "閲覧履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
@@ -41,9 +45,24 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                     })
                     return nil
                 }),
-                OptionMenuItem(title: "フォームデータ"),
-                OptionMenuItem(title: "Cookie"),
-                OptionMenuItem(title: "キャッシュ")
+                OptionMenuItem(title: "フォームデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    Util.presentAlert(title: "データ削除", message: "フォームデータを全て削除します。よろしいですか？", completion: {
+                        CommonDao.s.deleteAllForm()
+                    })
+                    return nil
+                }),
+                OptionMenuItem(title: "Cookie", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    Util.presentAlert(title: "データ削除", message: "Cookieデータを全て削除します。よろしいですか？", completion: {
+                        CacheHelper.deleteCookies()
+                    })
+                    return nil
+                }),
+                OptionMenuItem(title: "キャッシュ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    Util.presentAlert(title: "データ削除", message: "キャッシュデータを全て削除します。よろしいですか？", completion: {
+                        CacheHelper.deleteCaches()
+                    })
+                    return nil
+                })
             ]
         ]
     }

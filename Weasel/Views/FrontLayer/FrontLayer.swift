@@ -40,6 +40,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                 guard let `self` = self else {
                     return
                 }
+                // キーボードが表示されていれば、キーボードを非表示にし、表示されていなければオプションメニューを削除する
                 if let optionMenu = self.optionMenu {
                     let window: UIWindow? = {
                         for w in UIApplication.shared.windows {

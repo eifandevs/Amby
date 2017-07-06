@@ -45,9 +45,6 @@ class BaseViewModel {
     
     var delegate: BaseViewModelDelegate?
     
-    // クッキーの共有
-    var processPool = WKProcessPool()
-    
     // 最新のリクエストURL(wv.url)。エラーが発生した時用
     var latestRequestUrl: String = ""
     
@@ -80,6 +77,12 @@ class BaseViewModel {
         }
         set(url) {
             UserDefaults.standard.set(url, forKey: AppConst.defaultUrlKey)
+        }
+    }
+    
+    var isPrivateMode: Bool? {
+        get {
+            return eachHistory.count > locationIndex ? eachHistory[locationIndex].isPrivate == "true" : nil
         }
     }
     
@@ -253,21 +256,23 @@ class BaseViewModel {
     }
     
     func saveHistory(wv: EGWebView) {
-        if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle {
-            // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
-            center.post(name: .headerViewModelWillChangeFavorite, object: CommonDao.s.selectFavorite(url: requestUrl) != nil)
+        if !isPrivateMode! {
+            if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle {
+                // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
+                center.post(name: .headerViewModelWillChangeFavorite, object: CommonDao.s.selectFavorite(url: requestUrl) != nil)
 
-            // Common History
-            let common = CommonHistoryItem(_id: NSUUID().uuidString, url: requestUrl, title: requestTitle, date: Date())
-            commonHistory.append(common)
-            log.debug("save history. url: \(common.url)")
-            
-            // Each History
-            for history in eachHistory {
-                if history.context == wv.context {
-                    history.url = common.url
-                    history.title = common.title
-                    break
+                // Common History
+                let common = CommonHistoryItem(_id: NSUUID().uuidString, url: requestUrl, title: requestTitle, date: Date())
+                commonHistory.append(common)
+                log.debug("save history. url: \(common.url)")
+                
+                // Each History
+                for history in eachHistory {
+                    if history.context == wv.context {
+                        history.url = common.url
+                        history.title = common.title
+                        break
+                    }
                 }
             }
         }

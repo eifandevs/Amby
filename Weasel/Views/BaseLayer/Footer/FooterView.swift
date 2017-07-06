@@ -14,9 +14,9 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
     private var viewModel = FooterViewModel(index: UserDefaults.standard.integer(forKey: AppConst.locationIndexKey))
     private let scrollView = UIScrollView()
-    private var thumbnails: [UIButton] = []
+    private var thumbnails: [Thumbnail] = []
     
-    private var frontThumbnail: UIButton {
+    private var frontThumbnail: Thumbnail {
         get {
             return thumbnails[viewModel.locationIndex]
         }
@@ -47,9 +47,9 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
 // MARK: Private Method
     
-    private func createCaptureSpace(context: String) -> UIButton {
+    private func createCaptureSpace(context: String) -> Thumbnail {
         let additionalPointX = ((thumbnails.count).cgfloat * AppConst.thumbnailSize.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).cgfloat * AppConst.thumbnailSize.width / 2
-        let btn = UIButton(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppConst.thumbnailSize))
+        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppConst.thumbnailSize))
         btn.backgroundColor = UIColor.black
         _ = btn.reactive.tap
             .observe { _ in
@@ -76,6 +76,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             }
         }
         scrollView.scroll(to: .right, animated: true)
+        updateFrontBar()
         return btn
     }
     
@@ -91,6 +92,17 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         }
     }
     
+    /// フロントバーの変更
+    private func updateFrontBar() {
+        for (index, thumbnail) in thumbnails.enumerated() {
+            if index == viewModel.locationIndex {
+                thumbnail.isFront = true
+            } else {
+                thumbnail.isFront = false
+            }
+        }
+    }
+    
 // MARK: FooterViewModel Delegate
 
     func footerViewModelDidAddThumbnail(context: String) {
@@ -99,13 +111,17 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     }
     
     func footerViewModelDidChangeThumbnail() {
-        // TODO: 現在値を変更する
+        updateFrontBar()
     }
     
     func footerViewModelDidRemoveThumbnail(index: Int) {
         let completion: (() -> ()) = { [weak self] _ in
-            self!.thumbnails[index].removeFromSuperview()
-            self!.thumbnails.remove(at: index)
+            guard let `self` = self else {
+                return
+            }
+            self.thumbnails[index].removeFromSuperview()
+            self.thumbnails.remove(at: index)
+            self.updateFrontBar()
         }
         if thumbnails.count > 1 {
             thumbnails[index].alpha = 0
@@ -137,7 +153,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     func footerViewModelDidEndLoading(context: String, index: Int) {
         // くるくるを止めて、サムネイルを表示する
         DispatchQueue.mainSyncSafe { [weak self] _ in
-            let targetThumbnail: UIButton = self!.thumbnails.filter({ (thumbnail) -> Bool in
+            let targetThumbnail: Thumbnail = self!.thumbnails.filter({ (thumbnail) -> Bool in
                 return thumbnail.context == context
             })[0]
             let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: context).path)
@@ -145,12 +161,13 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                 log.error("missing thumbnail image")
                 return
             }
-            _ = targetThumbnail.subviews.map { (v) -> Void in
-                v.removeFromSuperview()
-            }
-            let imageView = UIImageView(image: image)
-            imageView.frame = CGRect(origin: CGPoint.zero, size: targetThumbnail.bounds.size)
-            targetThumbnail.addSubview(imageView)
+            
+            targetThumbnail.subviews.forEach({ (v) in
+                if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
+                    v.removeFromSuperview()
+                }
+            })
+            targetThumbnail.setBackgroundImage(image, for: .normal)
         }
     }
     
@@ -164,9 +181,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                         log.error("missing thumbnail image")
                         return
                     }
-                    let imageView = UIImageView(image: image)
-                    imageView.frame = CGRect(origin: CGPoint.zero, size: AppConst.thumbnailSize)
-                    btn.addSubview(imageView)
+                    btn.setBackgroundImage(image, for: .normal)
                 }
             }
         }

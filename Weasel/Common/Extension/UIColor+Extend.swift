@@ -42,7 +42,7 @@ extension UIColor {
         return UIColor(red: 44/255, green: 71/255, blue: 98/255, alpha: 1)
     }
     
-    static var raspberry: UIColor {
+    static var rasberry: UIColor {
         return UIColor(red: 219 / 255, green: 74 / 255, blue: 57 / 255, alpha: 1)
     }
     
@@ -80,5 +80,9 @@ extension UIColor {
     
     static var lightGreen: UIColor {
         return UIColor(red: 29/255, green: 205/255, blue: 0/255, alpha: 1)
+    }
+    
+    static var popOrange: UIColor {
+        return UIColor(red: 255/255, green: 121/255, blue: 19/255, alpha: 1)
     }
 }
