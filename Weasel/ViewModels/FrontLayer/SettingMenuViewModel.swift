@@ -15,7 +15,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
     }
     
     override func setup() {
-        sectionItems = ["初期表示URL", "データ保持設定", "自動スクロール設定", "データ削除"]
+        sectionItems = ["初期表示URL", "データ保持設定", "自動スクロール設定", "データ削除", "初期化"]
         menuItems = [
             [
                 OptionMenuItem(type: .input, defaultValue: UserDefaults.standard.string(forKey: AppConst.defaultUrlKey)!)
@@ -34,7 +34,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
             [
                 OptionMenuItem(title: "閲覧履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     Util.presentAlert(title: "データ削除", message: "閲覧履歴を全て削除します。よろしいですか？", completion: {
-                        CommonDao.s.deleteAllHistory()
+                        CommonDao.s.deleteAllCommonHistory()
                     })
                     return nil
                 }),
@@ -57,13 +57,28 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                     })
                     return nil
                 }),
-                OptionMenuItem(title: "キャッシュ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    Util.presentAlert(title: "データ削除", message: "キャッシュデータを全て削除します。よろしいですか？", completion: {
+                OptionMenuItem(title: "サイトデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    Util.presentAlert(title: "データ削除", message: "サイトデータを全て削除します。よろしいですか？", completion: {
                         CacheHelper.deleteCaches()
                     })
                     return nil
                 })
-            ]
+            ],
+            [
+                OptionMenuItem(title: "初期化", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    Util.presentAlert(title: "データ削除", message: "全てのデータを削除し、初期化します。よろしいですか？", completion: {
+                        CommonDao.s.deleteAllCommonHistory()
+                        CommonDao.s.deleteAllHistory()
+                        CommonDao.s.deleteAllFavorite()
+                        CommonDao.s.deleteAllForm()
+                        CacheHelper.deleteCookies()
+                        CacheHelper.deleteCaches()
+                        CommonDao.s.deleteAllThumbnail()
+                        (UIApplication.shared.delegate as! AppDelegate).initialize()
+                    })
+                    return nil
+                })
+            ],
         ]
     }
 }

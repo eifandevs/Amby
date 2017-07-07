@@ -23,8 +23,10 @@ class AppConst {
     static let autoScrollIntervalKey = "autoScrollInterval"
     static let privateModeKey = "privateMode"
     static let appFont = "Avenir"
-    static let eachHistoryPath = URL(fileURLWithPath: DeviceConst.cachesPath + "/each_history.dat")
+    static let eachHistoryPath = DeviceConst.cachesPath + "/each_history.dat"
+    static let eachHistoryUrl = URL(fileURLWithPath: AppConst.eachHistoryPath)
     static let commonHistoryPath = DeviceConst.cachesPath + "/common_history"
+    static let thumbnailBaseFolderPath = DeviceConst.cachesPath + "/thumbnails"
     static let realmPath = DeviceConst.cachesPath + "/database"
     
     private init() {
@@ -32,13 +34,13 @@ class AppConst {
     }
     
     static func thumbnailFolderPath(folder: String) -> String {
-        let path = DeviceConst.cachesPath + "/thumbnails/\(folder)"
+        let path = thumbnailBaseFolderPath + "/\(folder)"
         Util.createFolder(path: path)
         return path
     }
     
     static func thumbnailPath(folder: String) -> String {
-        let path = DeviceConst.cachesPath + "/thumbnails/\(folder)"
+        let path = thumbnailBaseFolderPath + "/\(folder)"
         Util.createFolder(path: path)
         return path + "/thumbnail.png"
     }

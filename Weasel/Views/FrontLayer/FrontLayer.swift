@@ -143,7 +143,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     /// 閲覧履歴、お気に入り、フォームデータを削除する
     func deleteStoreData() {
         // 履歴
-        CommonDao.s.deleteHistory(deleteHistoryIds: deleteHistoryIds)
+        CommonDao.s.deleteCommonHistory(deleteHistoryIds: deleteHistoryIds)
         // お気に入り
         let deleteFavorites = deleteFavoriteIds.map { (id) -> Favorite in
             return CommonDao.s.selectFavorite(id: id)!

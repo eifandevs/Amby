@@ -87,6 +87,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             let rect = CGRect(x: 0, y: 0, width: AppConst.thumbnailSize.height * 0.7, height: AppConst.thumbnailSize.height * 0.7)
             let indicator = NVActivityIndicatorView(frame: rect, type: NVActivityIndicatorType.ballClipRotate, color: UIColor.frenchBlue, padding: 0)
             indicator.center = CGPoint(x: frontThumbnail.bounds.size.width / 2, y: frontThumbnail.bounds.size.height / 2)
+            indicator.isUserInteractionEnabled = false
             frontThumbnail.addSubview(indicator)
             indicator.startAnimating()
         }
@@ -164,7 +165,10 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             
             targetThumbnail.subviews.forEach({ (v) in
                 if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
-                    v.removeFromSuperview()
+                    let indicator = v as! NVActivityIndicatorView
+                    indicator.stopAnimating()
+                    indicator.alpha = 0
+                    indicator.removeFromSuperview()
                 }
             })
             targetThumbnail.setBackgroundImage(image, for: .normal)

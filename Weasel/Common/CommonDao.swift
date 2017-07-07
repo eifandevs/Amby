@@ -193,7 +193,7 @@ final class CommonDao {
         if eachHistory.count > 0 {
             let eachHistoryData = NSKeyedArchiver.archivedData(withRootObject: eachHistory)
             do {
-                try eachHistoryData.write(to: AppConst.eachHistoryPath)
+                try eachHistoryData.write(to: AppConst.eachHistoryUrl)
                 log.debug("store each history")
             } catch let error as NSError {
                 log.error("failed to write: \(error)")
@@ -201,9 +201,20 @@ final class CommonDao {
         }
     }
     
+    /// サムネイルデータの削除
+    func deleteAllThumbnail() {
+        Util.deleteFolder(path: AppConst.thumbnailBaseFolderPath)
+        Util.createFolder(path: AppConst.thumbnailBaseFolderPath)
+    }
+    
+    /// 表示中ページ情報の削除
+    func deleteAllHistory() {
+        Util.deleteFolder(path: AppConst.eachHistoryPath)
+    }
+    
     /// 閲覧履歴、お気に入り、フォームデータを削除する
     /// [日付: [id, id, ...]]
-    func deleteHistory(deleteHistoryIds: [String: [String]]) {
+    func deleteCommonHistory(deleteHistoryIds: [String: [String]]) {
         // 履歴
         for (key, value) in deleteHistoryIds {
             let commonHistoryUrl = AppConst.commonHistoryUrl(date: key)
@@ -239,7 +250,7 @@ final class CommonDao {
     }
     
     /// 閲覧履歴を全て削除
-    func deleteAllHistory() {
+    func deleteAllCommonHistory() {
         Util.deleteFolder(path: AppConst.commonHistoryPath)
         Util.createFolder(path: AppConst.commonHistoryPath)
     }

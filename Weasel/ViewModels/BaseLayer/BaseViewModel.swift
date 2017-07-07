@@ -227,7 +227,7 @@ class BaseViewModel {
         }
         // eachHistory読み込み
         do {
-            let data = try Data(contentsOf: AppConst.eachHistoryPath)
+            let data = try Data(contentsOf: AppConst.eachHistoryUrl)
             eachHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [HistoryItem]
             log.debug("each history read. url: \n\(requestUrl)")
         } catch let error as NSError {

@@ -68,9 +68,7 @@ class Util {
         let fileManager = FileManager.default
         var isDir : ObjCBool = false
         
-        fileManager.fileExists(atPath: path, isDirectory: &isDir)
-        
-        if isDir.boolValue {
+        if fileManager.fileExists(atPath: path, isDirectory: &isDir) {
             try! fileManager.removeItem(atPath: path)
         }
     }
