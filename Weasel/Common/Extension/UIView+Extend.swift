@@ -33,4 +33,10 @@ extension UIView {
             block?(notification as NSNotification, keyboardSize)
         })
     }
+    
+    func removeAllSubviews() {
+        subviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
 }
