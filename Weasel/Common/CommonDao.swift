@@ -254,4 +254,12 @@ final class CommonDao {
         Util.deleteFolder(path: AppConst.commonHistoryPath)
         Util.createFolder(path: AppConst.commonHistoryPath)
     }
+
+    /// UDデフォルト値登録
+    func registerDefaultData() {
+        UserDefaults.standard.register(defaults: [AppConst.defaultUrlKey: "https://www.amazon.co.jp/",
+                                                  AppConst.locationIndexKey: 0,
+                                                  AppConst.privateModeKey: "false",
+                                                  AppConst.autoScrollIntervalKey: 0.06])
+    }
 }

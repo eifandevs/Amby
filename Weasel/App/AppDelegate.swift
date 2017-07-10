@@ -11,6 +11,15 @@ import SwiftyBeaver
 
 let log = SwiftyBeaver.self
 
+/// クラッシュ時にスタックトレースを表示する
+let uncaughtExceptionHandler : Void = NSSetUncaughtExceptionHandler { exception in
+    log.error("Name: \(exception.name.rawValue)")
+    if let reason = exception.reason {
+        log.error("Reason: \(exception.reason!)")
+    }
+    log.error("Symbols: \(exception.callStackSymbols)")
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -37,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.addDestination(file)
         
         // ユーザーデフォルト初期値設定
-        AppConst.registerDefaultData()
+        CommonDao.s.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         let baseVC = BaseViewController()

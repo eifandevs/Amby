@@ -66,11 +66,4 @@ class AppConst {
         let path = DeviceConst.cachesPath + "/common_history"
         return path + "/\(date).dat"
     }
-    
-    static func registerDefaultData() {
-        UserDefaults.standard.register(defaults: [defaultUrlKey: "https://www.amazon.co.jp/",
-                                                  locationIndexKey: 0,
-                                                  privateModeKey: "false",
-                                                  autoScrollIntervalKey: 0.06])
-    }
 }

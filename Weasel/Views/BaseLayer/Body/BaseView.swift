@@ -287,6 +287,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     DispatchQueue.mainSyncSafe {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { _ in
                             self!.saveThumbnail(webView: webView)
+                            // くるくるを更新する
+                            self!.updateNetworkActivityIndicator()
                         }
                     }
                 })
@@ -297,9 +299,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 if otherWv.isLoading == true {
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
                     viewModel.notifyChangeProgress(object: CGFloat(AppConst.progressMin))
+                    // くるくるを更新する
+                    updateNetworkActivityIndicator()
                 } else {
                     viewModel.notifyChangeProgress(object: 1.0)
-                    
                     // 履歴とサムネイルを更新
                     updateHistoryAndThumbnail(otherWv)
                 }
@@ -307,14 +310,14 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 //インジゲーターの表示、非表示をきりかえる。
                 if otherWv.isLoading == true {
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
+                    // くるくるを更新する
+                    updateNetworkActivityIndicator()
                 } else {
                     // 履歴とサムネイルを更新
                     updateHistoryAndThumbnail(otherWv)
                 }
 
             }
-            // くるくるを更新する
-            updateNetworkActivityIndicator()
         }
     }
     
