@@ -14,7 +14,4 @@ class DeviceConst {
     static let displaySize = UIScreen.main.bounds.size
     static let cachesPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
     static let aspectRate = UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height
-    private init() {
-        
-    }
 }

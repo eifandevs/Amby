@@ -13,10 +13,6 @@ class CacheHelper {
     // クッキーの共有
     static let processPool = WKProcessPool()
     
-    init() {
-        
-    }
-    
     static func cacheConfiguration(isPrivate: Bool) -> WKWebViewConfiguration {
         let configuration = WKWebViewConfiguration()
         configuration.processPool = processPool

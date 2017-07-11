@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 
 class Util {
-    private init() {}
-
+    
     static func foregroundViewController() -> UIViewController {
         var vc = UIApplication.shared.keyWindow?.rootViewController;
         while ((vc!.presentedViewController) != nil) {
@@ -92,6 +91,10 @@ class Util {
 
 func *(left: CGSize, right: CGFloat) -> CGSize {
     return CGSize(width: left.width * right, height: left.height * right)
+}
+
+func /(left: CGSize, right: CGFloat) -> CGSize {
+    return CGSize(width: left.width / right, height: left.height / right)
 }
 
 func +(left: CGSize, right: CGSize) -> CGSize {

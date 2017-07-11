@@ -36,6 +36,18 @@ extension String {
         }
     }
     
+    var toInt: Int {
+        get {
+            return Int(self)!
+        }
+    }
+    
+    var tofloat: CGFloat {
+        get {
+            return CGFloat(Double(self)!)
+        }
+    }
+    
     func index(from: Int) -> Index {
         return self.index(startIndex, offsetBy: from)
     }

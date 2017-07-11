@@ -11,9 +11,6 @@ import Realm
 
 final class RealmHelper {
     
-    init() {
-    }
-    
     static func realmConfiguration() -> Realm.Configuration {
         var config = Realm.Configuration()
         config.encryptionKey = RealmHelper.realmEncryptionKey()

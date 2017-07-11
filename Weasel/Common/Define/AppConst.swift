@@ -29,10 +29,6 @@ class AppConst {
     static let thumbnailBaseFolderPath = DeviceConst.cachesPath + "/thumbnails"
     static let realmPath = DeviceConst.cachesPath + "/database"
     
-    private init() {
-        
-    }
-    
     static func thumbnailFolderPath(folder: String) -> String {
         let path = thumbnailBaseFolderPath + "/\(folder)"
         Util.createFolder(path: path)
