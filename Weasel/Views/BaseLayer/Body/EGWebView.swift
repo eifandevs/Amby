@@ -95,26 +95,9 @@ class EGWebView: WKWebView {
             }
             load(URLRequest(url: url))
             return true
-        } else if urlStr.hasPrefix("file://") {
-            loadHtml(code: urlToCode(urlStr: urlStr))
         }
         loadHtml(code: NETWORK_ERROR.INVALID_URL)
         return false
-    }
-    
-    private func urlToCode(urlStr: String) -> NETWORK_ERROR {
-        switch (urlStr as NSString).lastPathComponent {
-        case "timeout.html":
-            return NETWORK_ERROR.TIMEOUT
-        case "dns.html":
-            return NETWORK_ERROR.DNS_NOT_FOUND
-        case "offline.html":
-            return NETWORK_ERROR.OFFLINE
-        case "authorize.html":
-            return NETWORK_ERROR.UNAUTHORIZED
-        default:
-            return NETWORK_ERROR.INVALID_URL
-        }
     }
     
     func loadHtml(code: NETWORK_ERROR) {

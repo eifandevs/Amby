@@ -15,11 +15,8 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
     }
     
     override func setup() {
-        sectionItems = ["初期表示URL", "データ保持設定", "自動スクロール設定", "データ削除", "初期化"]
+        sectionItems = ["データ保持設定", "自動スクロール設定", "データ削除", "初期化"]
         menuItems = [
-            [
-                OptionMenuItem(type: .input, defaultValue: UserDefaults.standard.string(forKey: AppConst.defaultUrlKey)!)
-            ],
             [
                 OptionMenuItem(type: .select,
                                title: "プライベートモード",

@@ -37,25 +37,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         self.overlay.alpha = 0
         _ = overlay.reactive.tap
             .observe { [weak self] _ in
-                guard let `self` = self else {
-                    return
-                }
-                // キーボードが表示されていれば、キーボードを非表示にし、表示されていなければオプションメニューを削除する
-                if let optionMenu = self.optionMenu {
-                    let window: UIWindow? = {
-                        for w in UIApplication.shared.windows {
-                            if NSStringFromClass(type(of: w)) == "UIRemoteKeyboardWindow" {
-                                return w
-                            }
-                        }
-                        return nil
-                    }()
-                    if window != nil {
-                        optionMenu.closeKeyBoard()
-                    } else {
-                        self.optionMenuDidClose()
-                    }
-                }
+                self!.optionMenuDidClose()
         }
         addSubview(overlay)
         UIView.animate(withDuration: 0.35) {

@@ -13,7 +13,6 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
     private var titleLabel: UILabel = UILabel()
     private var urlLabel: UILabel = UILabel()
     private var thumbnail: UIButton = UIButton()
-    private var textField: OptionMenuTextField = OptionMenuTextField()
     private var switchControl: UISwitch = UISwitch()
     private var slider: UISlider = UISlider()
     private var type: OptionMenuType = .plain
@@ -31,12 +30,6 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
         super.prepareForReuse()
     }
     
-    deinit {
-        if type == .input {
-            NotificationCenter.default.removeObserver(self)
-        }
-    }
-        
     func setTitle(menuItem: OptionMenuItem) {
         initialize()
         type = menuItem.type
@@ -77,24 +70,6 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             titleLabel.text = menuItem.title
             titleLabel.font = UIFont(name: AppConst.appFont, size: 13.5)
             contentView.addSubview(titleLabel)
-        case .input:
-            selectionStyle = .none
-            let marginX: CGFloat = 10
-            textField.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - marginX * 2, height: AppConst.optionMenuCellHeight / 1.5))
-            textField.center.y = frame.size.height / 2
-            textField.text = UserDefaults.standard.string(forKey: AppConst.defaultUrlKey)!
-            textField.font = UIFont(name: AppConst.appFont, size: 14)
-            textField.keyboardType = .default
-            textField.returnKeyType = .done
-            textField.delegate = self
-            registerForKeyboardWillHideNotification { [weak self] (notification) in
-                if !self!.textField.edited {
-                    self!.textField.text = (menuItem.defaultValue! as! String)
-                } else {
-                    self!.textField.edited = false
-                }
-            }
-            contentView.addSubview(textField)
         case .select:
             selectionStyle = .none
             let marginX: CGFloat = 10
@@ -136,22 +111,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
         titleLabel.removeFromSuperview()
         urlLabel.removeFromSuperview()
         thumbnail.removeFromSuperview()
-        textField.removeFromSuperview()
         switchControl.removeFromSuperview()
         slider.removeFromSuperview()
-    }
-
-// MARK: UITextFieldDelegate
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string == "\n" {
-            // 有効なURLが設定されている場合に、保存する
-            if (self.textField.text?.hasValidUrl)! {
-                UserDefaults.standard.set(self.textField.text, forKey: AppConst.defaultUrlKey)
-                self.textField.edited = true
-            }
-            self.textField.resignFirstResponder()
-            return false
-        }
-        return true
     }
 }

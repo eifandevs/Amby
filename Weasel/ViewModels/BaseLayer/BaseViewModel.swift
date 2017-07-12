@@ -27,7 +27,7 @@ class BaseViewModel {
     // リクエストURL(jsのURL)
     var requestUrl: String {
         get {
-            return (!eachHistory[locationIndex].url.isEmpty) ? eachHistory[locationIndex].url : defaultUrl
+            return eachHistory[safe: locationIndex] != nil ? eachHistory[locationIndex].url : ""
         }
     }
     
@@ -39,7 +39,7 @@ class BaseViewModel {
     
     var reloadUrl: String {
         get {
-            return headerFieldText.isEmpty ? defaultUrl : headerFieldText
+            return headerFieldText
         }
     }
     
@@ -70,15 +70,6 @@ class BaseViewModel {
     
     // 通知センター
     let center = NotificationCenter.default
-    
-    var defaultUrl: String {
-        get {
-            return UserDefaults.standard.string(forKey: AppConst.defaultUrlKey)!
-        }
-        set(url) {
-            UserDefaults.standard.set(url, forKey: AppConst.defaultUrlKey)
-        }
-    }
     
     var isPrivateMode: Bool? {
         get {

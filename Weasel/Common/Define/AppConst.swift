@@ -18,7 +18,6 @@ class AppConst {
     static let optionMenuSize: CGSize = CGSize(width: 250, height: 450)
     static let thumbnailSize = CGSize(width: 105, height: 105 * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
     static let searchPath = "https://www.google.co.jp/search?q="
-    static let defaultUrlKey = "defaultUrl"
     static let locationIndexKey = "locationIndex"
     static let autoScrollIntervalKey = "autoScrollInterval"
     static let privateModeKey = "privateMode"

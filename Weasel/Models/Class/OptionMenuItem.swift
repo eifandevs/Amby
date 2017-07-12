@@ -12,7 +12,6 @@ import UIKit
 enum OptionMenuType: CGFloat {
     case plain
     case deletablePlain
-    case input
     case select
     case slider
 }

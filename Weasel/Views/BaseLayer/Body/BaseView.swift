@@ -86,7 +86,12 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             webViews.append(nil)
         }
         
-        loadWebView()
+        let newWv = createWebView(context: viewModel.currentContext)
+        webViews[viewModel.locationIndex] = newWv
+        bringSubview(toFront: newWv)
+        if !viewModel.requestUrl.isEmpty {
+            _ = newWv.load(urlStr: viewModel.requestUrl)
+        }
     }
     
     deinit {        
@@ -438,7 +443,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         viewModel.notifyChangeProgress(object: 0)
         let newWv = createWebView(context: viewModel.currentContext)
         webViews.append(newWv)
-        _ = front.load(urlStr: viewModel.requestUrl)
     }
     
     func baseViewModelDidReloadWebView() {
