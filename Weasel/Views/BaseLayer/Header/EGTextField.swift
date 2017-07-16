@@ -12,7 +12,7 @@ import UIKit
 class EGTextField: UIButton, ShadowView {
     
     private var icon: UIImageView? = nil
-    private var size: CGSize = CGSize.zero
+    private let iconSize: CGSize = CGSize(width: AppConst.headerViewHeight / 2, height: AppConst.headerViewHeight / 2)
     private var label: EGGradientLabel? = nil
     private var pastLabelText: String? = nil
     private let fontSize: CGFloat = 15
@@ -28,7 +28,7 @@ class EGTextField: UIButton, ShadowView {
                 return
             }
             if let value = newValue, value.hasHttpsUrl {
-                icon.frame.size = size
+                icon.frame.size = iconSize
             } else {
                 icon.frame.size = CGSize.zero
             }
@@ -37,11 +37,10 @@ class EGTextField: UIButton, ShadowView {
         }
     }
     
-    convenience init(iconSize: CGSize) {
-        self.init()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         addShadow()
         
-        size = iconSize
         backgroundColor = UIColor.white
         alpha = 0
         makeContent(restore: false, restoreText: nil)
@@ -50,7 +49,7 @@ class EGTextField: UIButton, ShadowView {
     // ヘッダービューをタップしたらコールされる
     // それまで、テキストフィールドは表示しない
     func makeInputForm(height: CGFloat) {
-        textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: height), size: CGSize(width: frame.size.width - 10, height: size.height)))
+        textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: height), size: CGSize(width: frame.size.width - 10, height: iconSize.height)))
         textField.borderStyle = .none
         textField.keyboardType = .default
         textField.returnKeyType = .search
@@ -116,7 +115,7 @@ class EGTextField: UIButton, ShadowView {
             return
         }
         if let text = text, text.hasHttpsUrl {
-            icon.frame.size = size
+            icon.frame.size = iconSize
         } else {
             icon.frame.size = CGSize.zero
         }

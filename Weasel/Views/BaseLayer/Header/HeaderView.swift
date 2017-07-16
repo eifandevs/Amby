@@ -19,14 +19,14 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     
     var delegate: HeaderViewDelegate?
     let heightMax = AppConst.headerViewHeight
-    private var headerField = EGTextField(iconSize: CGSize(width: AppConst.headerViewHeight / 2, height: AppConst.headerViewHeight / 2))
+    private var headerField: EGTextField
     private var isEditing = false
     private let viewModel = HeaderViewModel()
-    private var progressBar: EGProgressBar = EGProgressBar(frame: CGRect(x: 0, y: 0, width: DeviceConst.displaySize.width, height: 2.1), min: CGFloat(AppConst.progressMin))
-    private var historyBackButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, height: AppConst.headerViewHeight)))
-    private var historyForwardButton = UIButton(frame: CGRect(origin: CGPoint(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, y: 0), size: CGSize(width: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, height: AppConst.headerViewHeight)))
-    private var favoriteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: 0), size: CGSize(width: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, height: AppConst.headerViewHeight)))
-    private var deleteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4 * 3, y: 0), size: CGSize(width: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, height: AppConst.headerViewHeight)))
+    private var progressBar: EGProgressBar
+    private var historyBackButton: UIButton
+    private var historyForwardButton: UIButton
+    private var favoriteButton: UIButton
+    private var deleteButton: UIButton
 
     private var headerItems: [UIButton] {
         get {
@@ -49,14 +49,27 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         }
     }
     
-    init() {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        // ヘッダーフィールド
+        headerField = EGTextField(frame: CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5))
+        // ヒストリーバックボタン
+        historyBackButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: (frame.size.width - AppConst.headerFieldWidth) / 4, height: frame.size.height)))
+        // ヒストリーフォワードボタン
+        historyForwardButton = UIButton(frame: CGRect(origin: CGPoint(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, y: 0), size: historyBackButton.frame.size))
+        // ブックマークボタン
+        favoriteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: 0), size: historyBackButton.frame.size))
+        // 削除ボタン
+        deleteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4 * 3, y: 0), size: historyBackButton.frame.size))
+        // プログレスバー
+        progressBar = EGProgressBar(frame: CGRect(x: 0, y: frame.size.height - 2.1, width: DeviceConst.displaySize.width, height: 2.1))
+        
+        super.init(frame: frame)
         viewModel.delegate = self
         headerField.delegate = self
         addShadow()
         backgroundColor = UIColor.pastelLightGray
         
-        /// ヘッダーアイテム
+        // ヘッダーアイテム
         let addButton = { (button: UIButton, image: UIImage, action: @escaping (() -> ())) -> Void in
             let tintedImage = image.withRenderingMode(.alwaysTemplate)
             button.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
@@ -111,35 +124,19 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        headerItems.forEach { (button) in
-            button.center.y = frame.size.height - heightMax * 0.5
-        }
-        progressBar.frame.origin.y = frame.size.height - 2.1
-        if !isEditing {
-            headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
-        }
-    }
-    
     func resizeToMax() {
         frame.origin.y = 0
         headerItems.forEach { (button) in
-            button.center.y = frame.size.height - heightMax * 0.5
             button.alpha = 1
         }
-        progressBar.frame.origin.y = frame.size.height - 2.1
-        headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
         headerField.alpha = 1
     }
     
     func resizeToMin() {
         frame.origin.y = -(AppConst.headerViewHeight - DeviceConst.statusBarHeight)
         headerItems.forEach { (button) in
-            button.center.y = frame.size.height - heightMax * 0.5
             button.alpha = 0
         }
-        progressBar.frame.origin.y = frame.size.height - 2.1
-        headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
         headerField.alpha = 0
     }
     

@@ -41,6 +41,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     var isDisplayedKeyBoard = false
     // 自動スクロール中フラグ
     private var isDoneAutoInput = false
+    // タッチ中フラグ
     private var isTouching = false
     // 自動スクロール
     private var autoScrollTimer: Timer? = nil
@@ -303,7 +304,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 //インジゲーターの表示、非表示をきりかえる。
                 if otherWv.isLoading == true {
                     viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
-                    viewModel.notifyChangeProgress(object: CGFloat(AppConst.progressMin))
+                    viewModel.notifyChangeProgress(object: CGFloat(0.1))
                     // くるくるを更新する
                     updateNetworkActivityIndicator()
                 } else {

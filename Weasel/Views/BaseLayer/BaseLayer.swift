@@ -17,18 +17,17 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     
     var delegate: BaseLayerDelegate?
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.headerViewHeight - DeviceConst.statusBarHeight))
-    private let headerView: HeaderView = HeaderView()
+    private var headerView: HeaderView
     private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceConst.displaySize.height - AppConst.thumbnailSize.height, width: DeviceConst.displaySize.width, height: AppConst.thumbnailSize.height))
     private let baseView: BaseView = BaseView()
     private var overlay: UIButton? = nil
 
     override init(frame: CGRect) {
+        headerView = HeaderView(frame: CGRect(x: 0, y: headerViewOriginY.min, width: frame.size.width, height: AppConst.headerViewHeight))
         super.init(frame: frame)
 
         baseView.frame = CGRect(x: 0, y: DeviceConst.statusBarHeight, width: frame.size.width, height: frame.size.height - AppConst.thumbnailSize.height - DeviceConst.statusBarHeight)
         baseView.delegate = self
-        // サイズが可変なので、layoutSubViewsで初期化しない
-        headerView.frame = CGRect(x: 0, y: headerViewOriginY.min, width: frame.size.width, height: AppConst.headerViewHeight)
         headerView.delegate = self
         
         addSubview(baseView)

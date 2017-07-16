@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class AppConst {
-    static let progressMin = 0.1
     static let headerViewHeight = 45 + DeviceConst.statusBarHeight
     static let headerFieldWidth = DeviceConst.displaySize.width / 1.8
     static let edgeSwipeErea: CGFloat = 15.0
