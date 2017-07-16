@@ -736,7 +736,7 @@
 				DEVELOPMENT_TEAM = NBF83W557A;
 				INFOPLIST_FILE = Weasel/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.Weasel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.Qas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -753,7 +753,7 @@
 				DEVELOPMENT_TEAM = NBF83W557A;
 				INFOPLIST_FILE = Weasel/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.Weasel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.Qas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0.1;
