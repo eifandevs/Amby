@@ -43,9 +43,9 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         }
     }
     
-    var resizing: Bool {
+    var isMoving: Bool {
         get {
-            return frame.size.height != DeviceConst.statusBarHeight && frame.size.height != heightMax
+            return frame.origin.y != 0 && frame.origin.y != -(AppConst.headerViewHeight - DeviceConst.statusBarHeight)
         }
     }
     
@@ -122,7 +122,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     }
     
     func resizeToMax() {
-        frame.size.height = heightMax
+        frame.origin.y = 0
         headerItems.forEach { (button) in
             button.center.y = frame.size.height - heightMax * 0.5
             button.alpha = 1
@@ -133,7 +133,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     }
     
     func resizeToMin() {
-        frame.size.height = DeviceConst.statusBarHeight
+        frame.origin.y = -(AppConst.headerViewHeight - DeviceConst.statusBarHeight)
         headerItems.forEach { (button) in
             button.center.y = frame.size.height - heightMax * 0.5
             button.alpha = 0
@@ -168,8 +168,8 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         }
     }
     
-    func resize(value: CGFloat) {
-        frame.size.height += value
+    func slide(value: CGFloat) {
+        frame.origin.y += value
         headerField.alpha += value / (heightMax - DeviceConst.statusBarHeight)
         headerItems.forEach { (button) in
             button.alpha += value / (heightMax - DeviceConst.statusBarHeight)

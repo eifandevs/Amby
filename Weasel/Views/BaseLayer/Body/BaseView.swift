@@ -13,7 +13,7 @@ import Bond
 
 protocol BaseViewDelegate {
     func baseViewDidScroll(speed: CGFloat)
-    func baseViewDidTouch(touch: Bool)
+    func baseViewDidTouchEnd()
     func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection)
 }
 
@@ -41,11 +41,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     var isDisplayedKeyBoard = false
     // 自動スクロール中フラグ
     private var isDoneAutoInput = false
-    private var isTouching = false {
-        didSet {
-            delegate?.baseViewDidTouch(touch: isTouching)
-        }
-    }
+    private var isTouching = false
     // 自動スクロール
     private var autoScrollTimer: Timer? = nil
     // スワイプ方向
@@ -91,6 +87,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         bringSubview(toFront: newWv)
         if !viewModel.requestUrl.isEmpty {
             _ = newWv.load(urlStr: viewModel.requestUrl)
+        } else {
+            _ = newWv.load(urlStr: "https://amazon.com")
         }
     }
     
@@ -141,11 +139,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     internal func screenTouchEnded(touch: UITouch) {
         isTouching = false
+        delegate?.baseViewDidTouchEnd()
         scrollMovingPointY = 0
     }
     
     internal func screenTouchCancelled(touch: UITouch) {
         isTouching = false
+        delegate?.baseViewDidTouchEnd()
         scrollMovingPointY = 0
     }
     
@@ -327,9 +327,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
 // MARK: Public Method
-    
-    func scroll(pt: CGFloat) {
-        front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y - pt), animated: false)
+    func slide(value: CGFloat) {
+        frame.origin.y += value
+        front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y + value), animated: false)
     }
 
     func validateUserInteraction() {

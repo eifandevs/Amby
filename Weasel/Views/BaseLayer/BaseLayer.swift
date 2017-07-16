@@ -16,14 +16,11 @@ protocol BaseLayerDelegate {
 class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     
     var delegate: BaseLayerDelegate?
-
+    let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.headerViewHeight - DeviceConst.statusBarHeight))
     private let headerView: HeaderView = HeaderView()
     private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceConst.displaySize.height - AppConst.thumbnailSize.height, width: DeviceConst.displaySize.width, height: AppConst.thumbnailSize.height))
     private let baseView: BaseView = BaseView()
     private var overlay: UIButton? = nil
-    
-    // 次のタッチを受け付けるまで、headerのアニメーションを強制Stopするフラグ
-    private var slideForceStopFlag = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,7 +28,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
         baseView.frame = CGRect(x: 0, y: DeviceConst.statusBarHeight, width: frame.size.width, height: frame.size.height - AppConst.thumbnailSize.height - DeviceConst.statusBarHeight)
         baseView.delegate = self
         // サイズが可変なので、layoutSubViewsで初期化しない
-        headerView.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: DeviceConst.statusBarHeight)
+        headerView.frame = CGRect(x: 0, y: headerViewOriginY.min, width: frame.size.width, height: AppConst.headerViewHeight)
         headerView.delegate = self
         
         addSubview(baseView)
@@ -134,11 +131,8 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     }
     
     private func slide(val: CGFloat) {
-        if !slideForceStopFlag {
-            headerView.resize(value: val)
-            baseView.frame.origin.y += val
-            baseView.scroll(pt: -val)
-        }
+        headerView.slide(value: val)
+        baseView.slide(value: val)
     }
     
 // MARK: Public Method
@@ -173,16 +167,9 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
         delegate?.baseLayerDidInvalidate(direction: direction)
     }
     
-    func baseViewDidTouch(touch: Bool) {
-        // タッチ終了時にheaderViewのサイズを調整する
-        if touch {
-            slideForceStopFlag = false
-        }
-        
-        if !touch && headerView.resizing {
-            // TODO: resizing判定を見直す。スクロール後に変な位置でheaderviewが止まる
-            slideForceStopFlag = true
-            if headerView.frame.size.height > headerView.heightMax / 2 {
+    func baseViewDidTouchEnd() {
+        if headerView.isMoving {
+            if headerView.frame.origin.y > headerViewOriginY.min / 2 {
                 UIView.animate(withDuration: 0.2, animations: {
                     self.resizeHeaderToMax()
                 })
@@ -196,24 +183,21 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     
     func baseViewDidScroll(speed: CGFloat) {
         if speed > 0 {
-            // headerViewを拡大、baseViewを縮小
-            if headerView.frame.size.height != headerView.heightMax {
-                if headerView.frame.size.height + speed > headerView.heightMax {
+            if headerView.frame.origin.y != headerViewOriginY.max {
+                if headerView.frame.origin.y + speed > headerViewOriginY.max {
                     resizeHeaderToMax()
                 } else {
                     slide(val: speed)
                 }
             }
         } else if speed < 0 {
-            // headerを縮小、baseViewを拡大
-            if headerView.frame.size.height != DeviceConst.statusBarHeight {
-                if headerView.frame.size.height + speed < DeviceConst.statusBarHeight {
+            if headerView.frame.origin.y != headerViewOriginY.min {
+                if headerView.frame.origin.y + speed < headerViewOriginY.min {
                     resizeHeaderToMin()
                 } else {
                     slide(val: speed)
                 }
             }
         }
-        headerView.frame.origin.y = 0
     }
 }
