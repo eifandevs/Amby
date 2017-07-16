@@ -18,15 +18,20 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     var delegate: BaseLayerDelegate?
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.headerViewHeight - DeviceConst.statusBarHeight))
     private var headerView: HeaderView
-    private let footerView: FooterView = FooterView(frame: CGRect(x: 0, y: DeviceConst.displaySize.height - AppConst.thumbnailSize.height, width: DeviceConst.displaySize.width, height: AppConst.thumbnailSize.height))
-    private let baseView: BaseView = BaseView()
+    private let footerView: FooterView
+    private let baseView: BaseView
     private var overlay: UIButton? = nil
+    private var isTouchEndAnimating = false
 
     override init(frame: CGRect) {
+        // ヘッダービュー
         headerView = HeaderView(frame: CGRect(x: 0, y: headerViewOriginY.min, width: frame.size.width, height: AppConst.headerViewHeight))
+        // フッタービュー
+        footerView = FooterView(frame: CGRect(x: 0, y: DeviceConst.displaySize.height - AppConst.thumbnailSize.height, width: frame.size.width, height: AppConst.thumbnailSize.height))
+        // ベースビュー
+        baseView = BaseView(frame: CGRect(x: 0, y: DeviceConst.statusBarHeight, width: frame.size.width, height: frame.size.height - AppConst.thumbnailSize.height - DeviceConst.statusBarHeight))
         super.init(frame: frame)
 
-        baseView.frame = CGRect(x: 0, y: DeviceConst.statusBarHeight, width: frame.size.width, height: frame.size.height - AppConst.thumbnailSize.height - DeviceConst.statusBarHeight)
         baseView.delegate = self
         headerView.delegate = self
         
@@ -130,8 +135,10 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     }
     
     private func slide(val: CGFloat) {
-        headerView.slide(value: val)
-        baseView.slide(value: val)
+        if !isTouchEndAnimating {
+            headerView.slide(value: val)
+            baseView.slide(value: val)
+        }
     }
     
 // MARK: Public Method
@@ -168,13 +175,22 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     
     func baseViewDidTouchEnd() {
         if headerView.isMoving {
+            isTouchEndAnimating = true
             if headerView.frame.origin.y > headerViewOriginY.min / 2 {
-                UIView.animate(withDuration: 0.2, animations: {
+                UIView.animate(withDuration: 0.2, animations: { 
                     self.resizeHeaderToMax()
+                }, completion: { (finished) in
+                    if finished {
+                        self.isTouchEndAnimating = false
+                    }
                 })
             } else {
                 UIView.animate(withDuration: 0.2, animations: {
                     self.resizeHeaderToMin()
+                }, completion: { (finished) in
+                    if finished {
+                        self.isTouchEndAnimating = false
+                    }
                 })
             }
         }
