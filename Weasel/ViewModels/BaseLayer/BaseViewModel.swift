@@ -246,6 +246,14 @@ class BaseViewModel {
         center.post(name: .baseViewModelWillAddWebView, object: nil)
     }
     
+    func notifyBeginEditing() {
+        center.post(name: .headerViewModelWillBeginEditing, object: nil)
+    }
+    
+    func reloadHeaderText() {
+        headerFieldText = requestUrl
+    }
+    
     func saveHistory(wv: EGWebView) {
         if !isPrivateMode! {
             if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle {

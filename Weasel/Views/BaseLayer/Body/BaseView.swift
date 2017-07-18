@@ -13,6 +13,8 @@ import Bond
 
 protocol BaseViewDelegate {
     func baseViewDidScroll(speed: CGFloat)
+    func baseViewDidChangeFront()
+    func baseViewDidTouchBegan()
     func baseViewDidTouchEnd()
     func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection)
 }
@@ -27,27 +29,76 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     var delegate: BaseViewDelegate?
 
+    /// 編集状態にするクロージャ
+    var beginEditingWorkItem: DispatchWorkItem? = nil
+    
+    /// 最前面のWebView
     private var front: EGWebView! {
         didSet {
             if let newValue = front {
                 // プライベートモードならデザインを変更する
+                delegate?.baseViewDidChangeFront()
+                // ヘッダーフィールドを更新する
+                viewModel.reloadHeaderText()
+                // 編集状態にする
+                if let beginEditingWorkItem = self.beginEditingWorkItem {
+                    beginEditingWorkItem.cancel()
+                }
+                beginEditingWorkItem = DispatchWorkItem() { [weak self] _  in
+                    self!.viewModel.notifyBeginEditing()
+                    self!.beginEditingWorkItem = nil
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
             }
         }
     }
+    /// 現在表示中の全てのWebView。アプリを殺して、起動した後などは、WebViewインスタンスは入っていないが、配列のスペースは作成される
     var webViews: [EGWebView?] = []
     private let viewModel = BaseViewModel()
+    /// Y軸移動量を計算するための一時変数
     private var scrollMovingPointY: CGFloat = 0
-    // キーボード表示中フラグ
+    /// キーボード表示中フラグ
     var isDisplayedKeyBoard = false
-    // 自動スクロール中フラグ
+    /// 自動スクロール中フラグ
     private var isDoneAutoInput = false
-    // タッチ中フラグ
+    /// タッチ中フラグ
     private var isTouching = false
-    // 自動スクロール
+    /// 自動スクロール
     private var autoScrollTimer: Timer? = nil
-    // スワイプ方向
+    /// スワイプ方向
     private var swipeDirection: EdgeSwipeDirection = .none
     
+    /// ベースビューがスライド中かどうかのフラグ
+    var isMoving: Bool {
+        get {
+            return !isLocateMax && !isLocateMax
+        }
+    }
+
+    /// ベースビューがMaxポジションにあるかどうかのフラグ
+    var isLocateMax: Bool {
+        get {
+            return frame.origin.y == AppConst.headerViewHeight
+        }
+    }
+    /// ベースビューがMinポジションにあるかどうかのフラグ
+    var isLocateMin: Bool {
+        get {
+            return frame.origin.y == DeviceConst.statusBarHeight
+        }
+    }
+    /// 逆順方向のスクロールが可能かどうかのフラグ
+    var canPastScroll: Bool {
+        get {
+            return front.scrollView.contentOffset.y > 0
+        }
+    }
+    ///順方向のスクロールが可能かどうかのフラグ
+    var canForwardScroll: Bool {
+        get {
+            return front.scrollView.contentOffset.y < front.scrollView.contentSize.height - front.frame.size.height
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         viewModel.delegate = self
@@ -89,7 +140,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         if !viewModel.requestUrl.isEmpty {
             _ = newWv.load(urlStr: viewModel.requestUrl)
         } else {
-            _ = newWv.load(urlStr: "https://amazon.com")
+            // 1秒後にwillBeginEditingする
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] _ in
+                self!.viewModel.notifyBeginEditing()
+            }
         }
     }
     
@@ -116,6 +170,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     internal func screenTouchBegan(touch: UITouch) {
         isTouching = true
+        delegate?.baseViewDidTouchBegan()
         let touchPoint = touch.location(in: self)
         if touchPoint.x < AppConst.edgeSwipeErea {
             swipeDirection = .left
@@ -160,7 +215,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         if scrollMovingPointY != 0 {
             let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
             let speed = scrollView.contentOffset.y - scrollMovingPointY
-            if (scrollMovingPointY != 0 && !isOverScrolling || (isTouching && isOverScrolling && speed < 0) || (isTouching && isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0)) {
+            if (scrollMovingPointY != 0 && !isOverScrolling || (canForwardScroll && isOverScrolling && speed < 0) || (isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0)) {
                 delegate?.baseViewDidScroll(speed: -1 * speed)
             }
         }
@@ -330,9 +385,18 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 // MARK: Public Method
     func slide(value: CGFloat) {
         frame.origin.y += value
+        // スライドと同時にスクロールが発生しているので、逆方向にスクロールし、スクロールを無効化する
         front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y + value), animated: false)
     }
 
+    func slideToMax() {
+        frame.origin.y = AppConst.headerViewHeight
+    }
+    
+    func slideToMin() {
+        frame.origin.y = DeviceConst.statusBarHeight
+    }
+    
     func validateUserInteraction() {
         isUserInteractionEnabled = true
         EGApplication.sharedMyApplication.egDelegate = self

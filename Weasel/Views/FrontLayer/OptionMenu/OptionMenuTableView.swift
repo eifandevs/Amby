@@ -33,7 +33,6 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         layer.cornerRadius = 2.5
         
         tableView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         tableView.isUserInteractionEnabled = true
         tableView.separatorColor = UIColor.clear

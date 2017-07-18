@@ -18,7 +18,7 @@ protocol HeaderViewDelegate {
 class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowView {
     
     var delegate: HeaderViewDelegate?
-    let heightMax = AppConst.headerViewHeight
+    private let heightMax = AppConst.headerViewHeight
     private var headerField: EGTextField
     private var isEditing = false
     private let viewModel = HeaderViewModel()
@@ -43,9 +43,24 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         }
     }
     
+    /// ヘッダービューがスライド中かどうかのフラグ
     var isMoving: Bool {
         get {
-            return frame.origin.y != 0 && frame.origin.y != -(AppConst.headerViewHeight - DeviceConst.statusBarHeight)
+            return !isLocateMax && !isLocateMin
+        }
+    }
+    
+    /// ヘッダービューがMaxポジションにあるかどうかのフラグ
+    var isLocateMax: Bool {
+        get {
+            return frame.origin.y == 0
+        }
+    }
+    
+    /// ヘッダービューがMinポジションにあるかどうかのフラグ
+    var isLocateMin: Bool {
+        get {
+            return frame.origin.y == -(AppConst.headerViewHeight - DeviceConst.statusBarHeight)
         }
     }
     
@@ -75,7 +90,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
             button.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
             button.imageView?.contentMode = .scaleAspectFit
             button.setImage(tintedImage, for: .normal)
-            button.alpha = 0
+            button.alpha = 1
             button.imageEdgeInsets = UIEdgeInsetsMake(18, 6.5, 6.5, 6.5)
             _ = button.reactive.tap
                 .observe { _ in
@@ -105,15 +120,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         
         _ = headerField.reactive.controlEvents(.touchUpInside)
             .observeNext { [weak self] _ in
-                self!.isEditing = true
-                self!.headerField.removeContent()
-                self!.delegate?.headerViewDidBeginEditing()
-                UIView.animate(withDuration: 0.11, delay: 0, options: .curveLinear, animations: {
-                    self!.headerField.frame = self!.frame
-                }, completion: { _ in
-                    // キーボード表示
-                    self!.headerField.makeInputForm(height: self!.frame.size.height - self!.heightMax * 0.63)
-                })
+                self!.headerViewModelDidBeginEditing()
         }
         
         addSubview(headerField)
@@ -124,7 +131,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         fatalError("init(coder:) has not been implemented")
     }
     
-    func resizeToMax() {
+    func slideToMax() {
         frame.origin.y = 0
         headerItems.forEach { (button) in
             button.alpha = 1
@@ -132,7 +139,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         headerField.alpha = 1
     }
     
-    func resizeToMin() {
+    func slideToMin() {
         frame.origin.y = -(AppConst.headerViewHeight - DeviceConst.statusBarHeight)
         headerItems.forEach { (button) in
             button.alpha = 0
@@ -210,5 +217,20 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
             favoriteButton.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         }
         favoriteButton.setImage(tintedImage, for: .normal)
+    }
+    
+    func headerViewModelDidBeginEditing() {
+        // 編集状態にする
+        if !isEditing && headerField.text.isEmpty {
+            isEditing = true
+            headerField.removeContent()
+            delegate?.headerViewDidBeginEditing()
+            UIView.animate(withDuration: 0.11, delay: 0, options: .curveLinear, animations: {
+                self.headerField.frame = self.frame
+            }, completion: { _ in
+                // キーボード表示
+                self.headerField.makeInputForm(height: self.frame.size.height - self.heightMax * 0.63)
+            })
+        }
     }
 }

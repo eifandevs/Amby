@@ -32,8 +32,14 @@ class EGTextField: UIButton, ShadowView {
             } else {
                 icon.frame.size = CGSize.zero
             }
-            label.frame = CGRect(x: icon.frame.size.width, y: 0, width: frame.size.width - icon.frame.size.width, height: frame.size.height)
-            label.attributedText = attribute(text: value)
+            // テキストフィールドがちらつくので、ラベルを再生成する
+            self.label!.removeFromSuperview()
+            self.label! = EGGradientLabel()
+            addSubview(self.label!)
+            self.label!.isUserInteractionEnabled = false
+            self.label!.numberOfLines = 1
+            self.label!.frame = CGRect(x: icon.frame.size.width, y: 0, width: frame.size.width - icon.frame.size.width, height: frame.size.height)
+            self.label!.attributedText = attribute(text: value)
         }
     }
     
@@ -42,7 +48,7 @@ class EGTextField: UIButton, ShadowView {
         addShadow()
         
         backgroundColor = UIColor.white
-        alpha = 0
+        alpha = 1
         makeContent(restore: false, restoreText: nil)
     }
     
@@ -54,7 +60,7 @@ class EGTextField: UIButton, ShadowView {
         textField.keyboardType = .default
         textField.returnKeyType = .search
         textField.delegate = delegate
-        textField.placeholder = "検索 / URL"
+        textField.placeholder = "検索ワードまたは、URLを入力"
         textField.text = pastLabelText
         textField.becomeFirstResponder()
         addSubview(textField)

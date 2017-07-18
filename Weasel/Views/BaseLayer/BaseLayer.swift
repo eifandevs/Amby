@@ -17,6 +17,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     
     var delegate: BaseLayerDelegate?
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.headerViewHeight - DeviceConst.statusBarHeight))
+    let baseViewOriginY: (max: CGFloat, min: CGFloat) = (AppConst.headerViewHeight, DeviceConst.statusBarHeight)
     private var headerView: HeaderView
     private let footerView: FooterView
     private let baseView: BaseView
@@ -25,13 +26,18 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
 
     override init(frame: CGRect) {
         // ヘッダービュー
-        headerView = HeaderView(frame: CGRect(x: 0, y: headerViewOriginY.min, width: frame.size.width, height: AppConst.headerViewHeight))
+        headerView = HeaderView(frame: CGRect(x: 0, y: headerViewOriginY.max, width: frame.size.width, height: AppConst.headerViewHeight))
         // フッタービュー
         footerView = FooterView(frame: CGRect(x: 0, y: DeviceConst.displaySize.height - AppConst.thumbnailSize.height, width: frame.size.width, height: AppConst.thumbnailSize.height))
         // ベースビュー
-        baseView = BaseView(frame: CGRect(x: 0, y: DeviceConst.statusBarHeight, width: frame.size.width, height: frame.size.height - AppConst.thumbnailSize.height - DeviceConst.statusBarHeight))
+        baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: frame.size.width, height: frame.size.height - AppConst.thumbnailSize.height - DeviceConst.statusBarHeight))
         super.init(frame: frame)
 
+        // フォアグラウンド時にヘッダービューの位置をMaxにする
+        NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: nil) { [weak self] (notification) in
+            self!.headerView.slideToMax()
+        }
+        
         baseView.delegate = self
         headerView.delegate = self
         
@@ -123,20 +129,14 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     }
     
 // MARK: Private Method
-    
-    private func resizeHeaderToMax() {
-        headerView.resizeToMax()
-        baseView.frame.origin.y = headerView.heightMax
-    }
-    
-    private func resizeHeaderToMin() {
-        headerView.resizeToMin()
-        baseView.frame.origin.y = DeviceConst.statusBarHeight
-    }
-    
-    private func slide(val: CGFloat) {
+    private func slideHeaderView(val: CGFloat) {
         if !isTouchEndAnimating {
             headerView.slide(value: val)
+        }
+    }
+    
+    private func slideBaseView(val: CGFloat) {
+        if !isTouchEndAnimating {
             baseView.slide(value: val)
         }
     }
@@ -147,7 +147,6 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     }
     
 // MARK: HeaderView Delegate
-    
     func headerViewDidBeginEditing() {
         baseView.isDisplayedKeyBoard = true // キーボード表示中フラグをtrueにし、自動入力させない
         overlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
@@ -168,49 +167,93 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     }
     
 // MARK: BaseView Delegate
-    
     func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection) {
         delegate?.baseLayerDidInvalidate(direction: direction)
     }
     
+    func baseViewDidChangeFront() {
+        headerView.slideToMax()
+    }
+    
+    func baseViewDidTouchBegan() {
+        //
+    }
+    
     func baseViewDidTouchEnd() {
+        // タッチ終了時にヘッダービューの高さを調整する
         if headerView.isMoving {
             isTouchEndAnimating = true
             if headerView.frame.origin.y > headerViewOriginY.min / 2 {
-                UIView.animate(withDuration: 0.2, animations: { 
-                    self.resizeHeaderToMax()
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.headerView.slideToMax()
                 }, completion: { (finished) in
                     if finished {
                         self.isTouchEndAnimating = false
                     }
                 })
             } else {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.resizeHeaderToMin()
-                }, completion: { (finished) in
-                    if finished {
-                        self.isTouchEndAnimating = false
-                    }
-                })
+                // ベースビューの黒背景が表示される場合は、ベースビューもslideToMinする
+                if !self.baseView.isLocateMin {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.headerView.slideToMin()
+                        self.baseView.slideToMin()
+                    }, completion: { (finished) in
+                        if finished {
+                            self.isTouchEndAnimating = false
+                        }
+                    })
+                } else {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.headerView.slideToMin()
+                    }, completion: { (finished) in
+                        if finished {
+                            self.isTouchEndAnimating = false
+                        }
+                    })
+                }
             }
         }
     }
     
     func baseViewDidScroll(speed: CGFloat) {
         if speed > 0 {
-            if headerView.frame.origin.y != headerViewOriginY.max {
+            // 逆順方向(過去)のスクロール
+            // ヘッダービューがスライド可能の場合にスライドさせる
+            if !headerView.isLocateMax {
                 if headerView.frame.origin.y + speed > headerViewOriginY.max {
-                    resizeHeaderToMax()
+                    // スライドした結果、Maxを超える場合は、調整する
+                    headerView.slideToMax()
                 } else {
-                    slide(val: speed)
+                    slideHeaderView(val: speed)
+                }
+            }
+            // ベースビューがスクロール不可の場合にスライドさせる
+            if !baseView.isLocateMax && !baseView.canPastScroll {
+                if baseView.frame.origin.y + speed > baseViewOriginY.max {
+                    // スライドした結果、Maxを超える場合は、調整する
+                    baseView.slideToMax()
+                } else {
+                    slideBaseView(val: speed)
                 }
             }
         } else if speed < 0 {
-            if headerView.frame.origin.y != headerViewOriginY.min {
+            // 順方向(未来)のスクロール
+            // ヘッダービューがスライド可能の場合にスライドさせる
+            if !headerView.isLocateMin {
                 if headerView.frame.origin.y + speed < headerViewOriginY.min {
-                    resizeHeaderToMin()
+                    // スライドした結果、Minを下回る場合は、調整する
+                    headerView.slideToMin()
                 } else {
-                    slide(val: speed)
+                    slideHeaderView(val: speed)
+                }
+            }
+            // ベースビューがスライド可能な場合にスライドさせる
+            if !baseView.isLocateMin {
+                if baseView.frame.origin.y + speed < baseViewOriginY.min {
+                    // スライドした結果、Minを下回る場合は、調整する
+                    baseView.slideToMin()
+                } else {
+                    slideBaseView(val: speed)
                 }
             }
         }

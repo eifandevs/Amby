@@ -73,6 +73,7 @@
 		A5B628EE1EF0AF79005CC957 /* OptionMenuTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628E81EF0AF79005CC957 /* OptionMenuTableViewModel.swift */; };
 		A5B628EF1EF0AF79005CC957 /* SettingMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628E91EF0AF79005CC957 /* SettingMenuViewModel.swift */; };
 		A5B628F11EF18532005CC957 /* HistoryMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B628F01EF18532005CC957 /* HistoryMenuViewModel.swift */; };
+		A5CC948B1F1E441B00876AC4 /* SearchMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC948A1F1E441B00876AC4 /* SearchMenuTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +147,7 @@
 		A5B628E81EF0AF79005CC957 /* OptionMenuTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewModel.swift; sourceTree = "<group>"; };
 		A5B628E91EF0AF79005CC957 /* SettingMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingMenuViewModel.swift; sourceTree = "<group>"; };
 		A5B628F01EF18532005CC957 /* HistoryMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryMenuViewModel.swift; sourceTree = "<group>"; };
+		A5CC948A1F1E441B00876AC4 /* SearchMenuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMenuTableView.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -326,6 +328,7 @@
 			children = (
 				A55EBF3C1EEB009000304C69 /* BaseView.swift */,
 				A55EBF3D1EEB009000304C69 /* EGWebView.swift */,
+				A5CC948A1F1E441B00876AC4 /* SearchMenuTableView.swift */,
 			);
 			path = Body;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				A55EBF6C1EEB009000304C69 /* BaseLayer.swift in Sources */,
 				A55EBF521EEB009000304C69 /* String+Extend.swift in Sources */,
 				A57CD1311F0845B400F29A11 /* Form.swift in Sources */,
+				A5CC948B1F1E441B00876AC4 /* SearchMenuTableView.swift in Sources */,
 				A55EBF7F1EEB014E00304C69 /* EGApplication.swift in Sources */,
 				A55EBF701EEB009000304C69 /* EGGradientLabel.swift in Sources */,
 				A5B628D71EEECC28005CC957 /* Double+Extend.swift in Sources */,
