@@ -35,11 +35,12 @@ class EGTextField: UIButton, ShadowView {
             // テキストフィールドがちらつくので、ラベルを再生成する
             self.label!.removeFromSuperview()
             self.label! = EGGradientLabel()
-            addSubview(self.label!)
             self.label!.isUserInteractionEnabled = false
             self.label!.numberOfLines = 1
-            self.label!.frame = CGRect(x: icon.frame.size.width, y: 0, width: frame.size.width - icon.frame.size.width, height: frame.size.height)
-            self.label!.attributedText = attribute(text: value)
+            self.label!.frame = CGRect(x: 0, y: 0, width: frame.size.width - icon.frame.size.width, height: frame.size.height)
+            let isHttpRequest = !value.isEmpty && icon.frame.size.width == 0
+            self.label!.attributedText = attribute(text: isHttpRequest ? "   \(value)" : value)
+            addSubview(self.label!)
         }
     }
     
@@ -68,9 +69,14 @@ class EGTextField: UIButton, ShadowView {
     
     // テキストフィールドの削除
     func removeInputForm() {
-        textField.endEditing(true)
+        closeKeyBoard()
         textField.removeFromSuperview()
         textField = nil
+    }
+    
+    // キーボードの削除
+    func closeKeyBoard() {
+        textField.endEditing(true)
     }
     
     // ヘッダービューのコンテンツを作成(テキストフィールドではない)
@@ -130,7 +136,7 @@ class EGTextField: UIButton, ShadowView {
     
     private func attribute(text: String) -> NSMutableAttributedString? {
         let style = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-        style.alignment = NSTextAlignment.left
+//        style.alignment = NSTextAlignment.left
         style.lineBreakMode = NSLineBreakMode.byClipping
         
         let attr = [

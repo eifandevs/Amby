@@ -13,7 +13,7 @@ protocol BaseLayerDelegate {
     func baseLayerDidInvalidate(direction: EdgeSwipeDirection)
 }
 
-class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
+class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableViewDelegate {
     
     var delegate: BaseLayerDelegate?
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.headerViewHeight - DeviceConst.statusBarHeight))
@@ -21,8 +21,9 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     private var headerView: HeaderView
     private let footerView: FooterView
     private let baseView: BaseView
-    private var overlay: UIButton? = nil
+    private var overlay: SearchMenuTableView? = nil
     private var isTouchEndAnimating = false
+    private var isHeaderViewEditing = false
 
     override init(frame: CGRect) {
         // ヘッダービュー
@@ -145,28 +146,39 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     func validateUserInteraction() {
         baseView.validateUserInteraction()
     }
-    
+// MARK: SearchMenuTableView Delegate
+    func searchMenuDidEndEditing() {
+        headerView.closeKeyBoard()
+    }
 // MARK: HeaderView Delegate
     func headerViewDidBeginEditing() {
-        baseView.isDisplayedKeyBoard = true // キーボード表示中フラグをtrueにし、自動入力させない
-        overlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
-        overlay!.backgroundColor = UIColor.gray
-        _ = overlay!.reactive.controlEvents(.touchDown)
-            .observeNext { [weak self] _ in
-                self!.overlay!.removeFromSuperview()
-                self!.overlay = nil
-                self!.headerView.finishEditing(force: true)
-        }
+        isHeaderViewEditing = true
+        overlay = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
+        overlay?.delegate = self
+//        _ = overlay!.reactive.controlEvents(.touchDown)
+//            .observeNext { [weak self] _ in
+//                self!.overlay!.removeFromSuperview()
+//                self!.overlay = nil
+//                self!.headerView.finishEditing(force: true)
+//        }
         addSubview(overlay!)
     }
     
     func headerViewDidEndEditing() {
+        isHeaderViewEditing = false
         overlay!.removeFromSuperview()
         overlay = nil
         headerView.finishEditing(force: false)
     }
     
 // MARK: BaseView Delegate
+    func baseViewWillAutoInput() {
+        // ベースビューから自動入力したいと通知がきたので、判断する
+        if !isHeaderViewEditing {
+            NotificationCenter.default.post(name: .baseViewModelWillAutoInput, object: nil)
+        }
+    }
+    
     func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection) {
         delegate?.baseLayerDidInvalidate(direction: direction)
     }
@@ -180,37 +192,27 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
     }
     
     func baseViewDidTouchEnd() {
-        // タッチ終了時にヘッダービューの高さを調整する
+        // タッチ終了時にヘッダービューとベースビューの高さを調整する
         if headerView.isMoving {
             isTouchEndAnimating = true
             if headerView.frame.origin.y > headerViewOriginY.min / 2 {
                 UIView.animate(withDuration: 0.2, animations: {
                     self.headerView.slideToMax()
+                    self.baseView.slideToMax()
                 }, completion: { (finished) in
                     if finished {
                         self.isTouchEndAnimating = false
                     }
                 })
             } else {
-                // ベースビューの黒背景が表示される場合は、ベースビューもslideToMinする
-                if !self.baseView.isLocateMin {
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.headerView.slideToMin()
-                        self.baseView.slideToMin()
-                    }, completion: { (finished) in
-                        if finished {
-                            self.isTouchEndAnimating = false
-                        }
-                    })
-                } else {
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.headerView.slideToMin()
-                    }, completion: { (finished) in
-                        if finished {
-                            self.isTouchEndAnimating = false
-                        }
-                    })
-                }
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.headerView.slideToMin()
+                    self.baseView.slideToMin()
+                }, completion: { (finished) in
+                    if finished {
+                        self.isTouchEndAnimating = false
+                    }
+                })
             }
         }
     }
@@ -227,8 +229,8 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate {
                     slideHeaderView(val: speed)
                 }
             }
-            // ベースビューがスクロール不可の場合にスライドさせる
-            if !baseView.isLocateMax && !baseView.canPastScroll {
+            // ベースビューがスライド可能な場合にスライドさせる
+            if !baseView.isLocateMax {
                 if baseView.frame.origin.y + speed > baseViewOriginY.max {
                     // スライドした結果、Maxを超える場合は、調整する
                     baseView.slideToMax()

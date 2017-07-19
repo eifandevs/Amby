@@ -20,6 +20,7 @@ protocol BaseViewModelDelegate {
     func baseViewModelDidSearchWebView(text: String)
     func baseViewModelDidRegisterAsForm()
     func baseViewModelDidAutoScroll()
+    func baseViewModelDidAutoInput()
 }
 
 class BaseViewModel {
@@ -125,6 +126,13 @@ class BaseViewModel {
             log.debug("[BaseView Event]: baseViewModelWillReloadWebView")
             self!.delegate?.baseViewModelDidReloadWebView()
         }
+        
+        // webviewの自動入力
+        center.addObserver(forName: .baseViewModelWillAutoInput, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillAutoInput")
+            self!.delegate?.baseViewModelDidAutoInput()
+        }
+        
         // フロントwebviewの変更
         center.addObserver(forName: .baseViewModelWillChangeWebView, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[BaseView Event]: baseViewModelWillChangeWebView")

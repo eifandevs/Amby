@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class Thumbnail: UIButton {
+    var context: String!
     var isFront = false {
         didSet {
             frontBar.alpha = isFront ? 1 : 0

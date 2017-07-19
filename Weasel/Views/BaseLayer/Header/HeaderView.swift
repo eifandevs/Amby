@@ -120,7 +120,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         
         _ = headerField.reactive.controlEvents(.touchUpInside)
             .observeNext { [weak self] _ in
-                self!.headerViewModelDidBeginEditing()
+                self!.startEditing()
         }
         
         addSubview(headerField)
@@ -145,6 +145,10 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
             button.alpha = 0
         }
         headerField.alpha = 0
+    }
+    
+    func closeKeyBoard() {
+        headerField.closeKeyBoard()
     }
     
     func finishEditing(force: Bool) {
@@ -221,7 +225,13 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     
     func headerViewModelDidBeginEditing() {
         // 編集状態にする
-        if !isEditing && headerField.text.isEmpty {
+        if headerField.text.isEmpty {
+            startEditing()
+        }
+    }
+    
+    func startEditing() {
+        if !isEditing {
             isEditing = true
             headerField.removeContent()
             delegate?.headerViewDidBeginEditing()

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol SearchMenuTableViewDelegate {
-    func searchMenuDidClose()
+    func searchMenuDidEndEditing()
 }
 
 class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource {
@@ -80,6 +80,10 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        log.warning("tableView.isFirstResponder: \(tableView.isFirstResponder)")
+        if !tableView.isFirstResponder {
+            delegate?.searchMenuDidEndEditing()
+        }
         log.warning("検索を実行")
     }
 }

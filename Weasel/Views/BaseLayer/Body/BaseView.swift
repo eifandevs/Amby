@@ -17,6 +17,7 @@ protocol BaseViewDelegate {
     func baseViewDidTouchBegan()
     func baseViewDidTouchEnd()
     func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection)
+    func baseViewWillAutoInput()
 }
 
 enum EdgeSwipeDirection: CGFloat {
@@ -40,15 +41,17 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 delegate?.baseViewDidChangeFront()
                 // ヘッダーフィールドを更新する
                 viewModel.reloadHeaderText()
-                // 編集状態にする
-                if let beginEditingWorkItem = self.beginEditingWorkItem {
-                    beginEditingWorkItem.cancel()
+                // 空ページの場合は、編集状態にする
+                if viewModel.requestUrl.isEmpty {
+                    if let beginEditingWorkItem = self.beginEditingWorkItem {
+                        beginEditingWorkItem.cancel()
+                    }
+                    beginEditingWorkItem = DispatchWorkItem() { [weak self] _  in
+                        self!.viewModel.notifyBeginEditing()
+                        self!.beginEditingWorkItem = nil
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
                 }
-                beginEditingWorkItem = DispatchWorkItem() { [weak self] _  in
-                    self!.viewModel.notifyBeginEditing()
-                    self!.beginEditingWorkItem = nil
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
             }
         }
     }
@@ -59,7 +62,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private var scrollMovingPointY: CGFloat = 0
     /// キーボード表示中フラグ
     var isDisplayedKeyBoard = false
-    /// 自動スクロール中フラグ
+    /// 自動入力ダイアログ表示済みフラグ
     private var isDoneAutoInput = false
     /// タッチ中フラグ
     private var isTouching = false
@@ -106,23 +109,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         
         // キーボード表示の処理(フォームの自動設定)
         registerForKeyboardDidShowNotification { [weak self] (notification, size) in
-            if !self!.isDisplayedKeyBoard {
-                self!.isDisplayedKeyBoard = true
-
-                let forms = CommonDao.s.selectAllForm()
-                for form in forms {
-                    if (self!.front.url?.absoluteString.domainAndPath == form.url.domainAndPath && !self!.isDoneAutoInput) {
-                        Util.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: {
-                            for input in form.inputs {
-                                self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(input.value)\"") { (object, error) in
-                                }
-                            }
-                        })
-                        self!.isDoneAutoInput = true
-                        break;
-                    }
-                }
-            }
+            self!.delegate?.baseViewWillAutoInput()
         }
         
         registerForKeyboardWillHideNotification { [weak self] (notification) in
@@ -136,7 +123,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         
         let newWv = createWebView(context: viewModel.currentContext)
         webViews[viewModel.locationIndex] = newWv
-        bringSubview(toFront: newWv)
         if !viewModel.requestUrl.isEmpty {
             _ = newWv.load(urlStr: viewModel.requestUrl)
         } else {
@@ -460,7 +446,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private func loadWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
         webViews[viewModel.locationIndex] = newWv
-        bringSubview(toFront: newWv)
         _ = newWv.load(urlStr: viewModel.requestUrl)
     }
     
@@ -468,11 +453,15 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         if let urlStr = webView.url?.absoluteString, let title = webView.title {
             if urlStr.hasValidUrl {
                 webView.requestUrl = urlStr
-                viewModel.headerFieldText = webView.requestUrl
                 webView.requestTitle = title
+                if webView == front {
+                    viewModel.headerFieldText = webView.requestUrl
+                }
             } else if urlStr.hasLocalUrl {
                 // エラーが発生した時のheaderField更新
-                viewModel.headerFieldText = viewModel.latestRequestUrl
+                if webView == front {
+                    viewModel.headerFieldText = viewModel.latestRequestUrl
+                }
             }
             completion?(urlStr)
         }
@@ -499,7 +488,26 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
 // MARK: BaseViewModel Delegate
-
+    func baseViewModelDidAutoInput() {
+        if !isDisplayedKeyBoard {
+            isDisplayedKeyBoard = true
+            
+            let forms = CommonDao.s.selectAllForm()
+            for form in forms {
+                if (front.url?.absoluteString.domainAndPath == form.url.domainAndPath && !isDoneAutoInput) {
+                    Util.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: { [weak self] _ in
+                        for input in form.inputs {
+                            self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(input.value)\"") { (object, error) in
+                            }
+                        }
+                    })
+                    isDoneAutoInput = true
+                    break;
+                }
+            }
+        }
+    }
+    
     func baseViewModelDidAddWebView() {
         if let front = front {
             // 全てのwebviewが削除された場合
@@ -508,6 +516,19 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         viewModel.notifyChangeProgress(object: 0)
         let newWv = createWebView(context: viewModel.currentContext)
         webViews.append(newWv)
+        if viewModel.requestUrl.isEmpty {
+            // 編集状態にする
+            if let beginEditingWorkItem = self.beginEditingWorkItem {
+                beginEditingWorkItem.cancel()
+            }
+            beginEditingWorkItem = DispatchWorkItem() { [weak self] _  in
+                self!.viewModel.notifyBeginEditing()
+                self!.beginEditingWorkItem = nil
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
+        } else {
+            _ = newWv.load(urlStr: viewModel.requestUrl)
+        }
     }
     
     func baseViewModelDidReloadWebView() {
