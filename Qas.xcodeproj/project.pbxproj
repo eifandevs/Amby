@@ -62,7 +62,6 @@
 		A5223F1A1F1F8EA20097E793 /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223ED01F1F8EA20097E793 /* EGWebView.swift */; };
 		A5223F1B1F1F8EA20097E793 /* SearchMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223ED11F1F8EA20097E793 /* SearchMenuTableView.swift */; };
 		A5223F1C1F1F8EA20097E793 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223ED31F1F8EA20097E793 /* FooterView.swift */; };
-		A5223F1D1F1F8EA20097E793 /* FooterView.swift.orig in Resources */ = {isa = PBXBuildFile; fileRef = A5223ED41F1F8EA20097E793 /* FooterView.swift.orig */; };
 		A5223F1E1F1F8EA20097E793 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223ED51F1F8EA20097E793 /* Thumbnail.swift */; };
 		A5223F1F1F1F8EA20097E793 /* EGGradientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223ED71F1F8EA20097E793 /* EGGradientLabel.swift */; };
 		A5223F201F1F8EA20097E793 /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223ED81F1F8EA20097E793 /* EGProgressBar.swift */; };
@@ -75,6 +74,7 @@
 		A5223F271F1F8EA20097E793 /* OptionMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223EE21F1F8EA20097E793 /* OptionMenuTableView.swift */; };
 		A5223F281F1F8EA20097E793 /* OptionMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223EE31F1F8EA20097E793 /* OptionMenuTableViewCell.swift */; };
 		A5223F2A1F1F8EA20097E793 /* OptionMenuTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223EE51F1F8EA20097E793 /* OptionMenuTextField.swift */; };
+		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		A9872C50D89BD4A2A7B139E5 /* Pods_Qas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */; };
 /* End PBXBuildFile section */
 
@@ -141,7 +141,6 @@
 		A5223ED01F1F8EA20097E793 /* EGWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGWebView.swift; sourceTree = "<group>"; };
 		A5223ED11F1F8EA20097E793 /* SearchMenuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMenuTableView.swift; sourceTree = "<group>"; };
 		A5223ED31F1F8EA20097E793 /* FooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
-		A5223ED41F1F8EA20097E793 /* FooterView.swift.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FooterView.swift.orig; sourceTree = "<group>"; };
 		A5223ED51F1F8EA20097E793 /* Thumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		A5223ED71F1F8EA20097E793 /* EGGradientLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGGradientLabel.swift; sourceTree = "<group>"; };
 		A5223ED81F1F8EA20097E793 /* EGProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGProgressBar.swift; sourceTree = "<group>"; };
@@ -155,6 +154,7 @@
 		A5223EE31F1F8EA20097E793 /* OptionMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewCell.swift; sourceTree = "<group>"; };
 		A5223EE51F1F8EA20097E793 /* OptionMenuTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTextField.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qas.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -390,7 +390,6 @@
 			isa = PBXGroup;
 			children = (
 				A5223ED31F1F8EA20097E793 /* FooterView.swift */,
-				A5223ED41F1F8EA20097E793 /* FooterView.swift.orig */,
 				A5223ED51F1F8EA20097E793 /* Thumbnail.swift */,
 			);
 			path = Footer;
@@ -440,6 +439,7 @@
 		A57EFE981E3E06D300B66701 = {
 			isa = PBXGroup;
 			children = (
+				A5A6F2C51F1F92DD00A4620C /* R.generated.swift */,
 				A5223E8A1F1F8EA20097E793 /* Qas */,
 				A57EFEA21E3E06D300B66701 /* Products */,
 				2D6EC82ACCDEE92B54408E2F /* Pods */,
@@ -463,6 +463,7 @@
 			buildConfigurationList = A57EFEB31E3E06D300B66701 /* Build configuration list for PBXNativeTarget "Qas" */;
 			buildPhases = (
 				57D8DA48BB701B7EFB84CDD9 /* [CP] Check Pods Manifest.lock */,
+				A5A6F2C41F1F917600A4620C /* ShellScript */,
 				A57EFE9D1E3E06D300B66701 /* Sources */,
 				A57EFE9E1E3E06D300B66701 /* Frameworks */,
 				A57EFE9F1E3E06D300B66701 /* Resources */,
@@ -526,7 +527,6 @@
 				A5223F0A1F1F8EA20097E793 /* dns.html in Resources */,
 				A5223EE91F1F8EA20097E793 /* Info.plist in Resources */,
 				A5223F0D1F1F8EA20097E793 /* timeout.html in Resources */,
-				A5223F1D1F1F8EA20097E793 /* FooterView.swift.orig in Resources */,
 				A5223EE71F1F8EA20097E793 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -578,6 +578,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		A5A6F2C41F1F917600A4620C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -633,6 +646,7 @@
 				A5223EED1F1F8EA20097E793 /* AppConst.swift in Sources */,
 				A5223F1F1F1F8EA20097E793 /* EGGradientLabel.swift in Sources */,
 				A5223F081F1F8EA20097E793 /* Form.swift in Sources */,
+				A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */,
 				A5223EFC1F1F8EA20097E793 /* UIScrollView+Extend.swift in Sources */,
 				A5223F101F1F8EA20097E793 /* FooterViewModel.swift in Sources */,
 				A5223EFB1F1F8EA20097E793 /* UIImage+Extend.swift in Sources */,
