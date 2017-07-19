@@ -13,5 +13,6 @@ target 'Weasel' do
   pod 'SwiftyBeaver', '~> 1.1'
   pod 'SVProgressHUD', '2.1.2'
   pod 'RealmSwift', '~> 2.4'
-  pod 'NVActivityIndicatorView'
+  pod 'NVActivityIndicatorView', '~> 3.3'
+  pod 'R.swift', '~> 3.3'
 end
