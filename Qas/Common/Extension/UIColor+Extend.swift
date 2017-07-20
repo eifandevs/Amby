@@ -11,6 +11,10 @@ import Foundation
 import UIKit
 
 extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        self.init(red: red.cgfloat/255, green: green.cgfloat/255, blue: blue.cgfloat/255, alpha: 1)
+    }
+    
     /// サークル画像を作成
     func circleImage(size: CGSize) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)

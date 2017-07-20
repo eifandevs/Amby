@@ -181,14 +181,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     internal func screenTouchEnded(touch: UITouch) {
         isTouching = false
-        delegate?.baseViewDidTouchEnd()
-        scrollMovingPointY = 0
     }
     
     internal func screenTouchCancelled(touch: UITouch) {
         isTouching = false
-        delegate?.baseViewDidTouchEnd()
-        scrollMovingPointY = 0
     }
     
 // MARK: ScrollView Delegate
@@ -206,6 +202,17 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             }
         }
         scrollMovingPointY = scrollView.contentOffset.y
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if velocity.y == 0 {
+            delegate?.baseViewDidTouchEnd()
+            scrollMovingPointY = 0
+        }
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        delegate?.baseViewDidTouchEnd()
+        scrollMovingPointY = 0
     }
     
 // MARK: WebView Delegate
