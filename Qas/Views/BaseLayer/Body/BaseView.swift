@@ -205,14 +205,16 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if velocity.y == 0 {
+        if velocity.y == 0 && !isTouching {
             delegate?.baseViewDidTouchEnd()
             scrollMovingPointY = 0
         }
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        delegate?.baseViewDidTouchEnd()
-        scrollMovingPointY = 0
+        if !isTouching {
+            delegate?.baseViewDidTouchEnd()
+            scrollMovingPointY = 0
+        }
     }
     
 // MARK: WebView Delegate

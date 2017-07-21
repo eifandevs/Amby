@@ -11,6 +11,7 @@ import UIKit
 
 protocol SearchMenuTableViewDelegate {
     func searchMenuDidEndEditing()
+    func searchMenuDidClose()
 }
 
 class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource {
@@ -80,10 +81,18 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        log.warning("tableView.isFirstResponder: \(tableView.isFirstResponder)")
-        if !tableView.isFirstResponder {
+        let window: UIWindow? = {
+            for w in UIApplication.shared.windows {
+                if w.className == "UIRemoteKeyboardWindow" {
+                    return w
+                }
+            }
+            return nil
+        }()
+        if window != nil {
             delegate?.searchMenuDidEndEditing()
+        } else {
+            delegate?.searchMenuDidClose()
         }
-        log.warning("検索を実行")
     }
 }

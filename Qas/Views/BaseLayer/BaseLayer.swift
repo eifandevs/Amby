@@ -13,7 +13,7 @@ protocol BaseLayerDelegate {
     func baseLayerDidInvalidate(direction: EdgeSwipeDirection)
 }
 
-class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableViewDelegate {
+class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableViewDelegate, EGApplicationDelegate {
     
     var delegate: BaseLayerDelegate?
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.headerViewHeight - DeviceConst.statusBarHeight))
@@ -150,8 +150,16 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     func searchMenuDidEndEditing() {
         headerView.closeKeyBoard()
     }
+    
+    func searchMenuDidClose() {
+        headerViewDidEndEditing()
+    }
+    
 // MARK: HeaderView Delegate
     func headerViewDidBeginEditing() {
+        // ディスプレイタップのイベントをベースビューから奪う
+        // サークルメニューを表示させないため
+        EGApplication.sharedMyApplication.egDelegate = self
         isHeaderViewEditing = true
         overlay = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
         overlay?.delegate = self
@@ -165,10 +173,21 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     }
     
     func headerViewDidEndEditing() {
+        EGApplication.sharedMyApplication.egDelegate = baseView
         isHeaderViewEditing = false
         overlay!.removeFromSuperview()
         overlay = nil
         headerView.finishEditing(force: false)
+    }
+
+// MARK: Screen Event
+    func screenTouchBegan(touch: UITouch) {
+    }
+    func screenTouchEnded(touch: UITouch) {
+    }
+    func screenTouchMoved(touch: UITouch) {
+    }
+    func screenTouchCancelled(touch: UITouch) {
     }
     
 // MARK: BaseView Delegate

@@ -15,11 +15,10 @@ protocol HeaderViewDelegate {
     func headerViewDidEndEditing()
 }
 
-class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowView {
-    
+class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowView {
     var delegate: HeaderViewDelegate?
     private let heightMax = AppConst.headerViewHeight
-    private var headerField: EGTextField
+    private var headerField: HeaderField
     private var isEditing = false
     private let viewModel = HeaderViewModel()
     private var progressBar: EGProgressBar
@@ -66,7 +65,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     
     override init(frame: CGRect) {
         // ヘッダーフィールド
-        headerField = EGTextField(frame: CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5))
+        headerField = HeaderField(frame: CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5))
         // ヒストリーバックボタン
         historyBackButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: (frame.size.width - AppConst.headerFieldWidth) / 4, height: frame.size.height)))
         // ヒストリーフォワードボタン
@@ -79,8 +78,8 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         progressBar = EGProgressBar(frame: CGRect(x: 0, y: frame.size.height - 2.1, width: DeviceConst.displaySize.width, height: 2.1))
         
         super.init(frame: frame)
-        viewModel.delegate = self
         headerField.delegate = self
+        viewModel.delegate = self
         addShadow()
         backgroundColor = UIColor.pastelLightGray
         
@@ -184,20 +183,14 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
         }
     }
     
-// MARK: UITextField Delegate
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+// MARK: EGTextField Delegate
+    func headerFieldDidEndEditing(text: String?) {
         self.delegate?.headerViewDidEndEditing()
         
-        if let text = textField.text, !text.isEmpty {
+        if let text = text, !text.isEmpty {
             let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
             viewModel.notifySearchWebView(text: encodedText!)
         }
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
     }
 
 // MARK: HeaderViewModel Delegate
@@ -224,7 +217,7 @@ class HeaderView: UIView, UITextFieldDelegate, HeaderViewModelDelegate, ShadowVi
     }
     
     func headerViewModelDidBeginEditing() {
-        // 編集状態にする
+        // 自動で編集状態にする
         if headerField.text.isEmpty {
             startEditing()
         }

@@ -9,14 +9,17 @@
 import Foundation
 import UIKit
 
-class EGTextField: UIButton, ShadowView {
-    
+protocol HeaderFieldDelegate {
+    func headerFieldDidEndEditing(text: String?)
+}
+
+class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
+    var delegate: HeaderFieldDelegate?
     private var icon: UIImageView? = nil
     private let iconSize: CGSize = CGSize(width: AppConst.headerViewHeight / 2, height: AppConst.headerViewHeight / 2)
     private var label: EGGradientLabel? = nil
     private var pastLabelText: String? = nil
     private let fontSize: CGFloat = 15
-    var delegate : UITextFieldDelegate? = nil
     var textField: UITextField! = nil
     
     var text: String? {
@@ -53,20 +56,35 @@ class EGTextField: UIButton, ShadowView {
         makeContent(restore: false, restoreText: nil)
     }
     
+    func reduction(frame: CGRect) {
+        self.frame = frame
+        textField.frame.size.width = textField.frame.size.width + 40
+    }
     // ヘッダービューをタップしたらコールされる
     // それまで、テキストフィールドは表示しない
     func makeInputForm(height: CGFloat) {
-        textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: height), size: CGSize(width: frame.size.width - 10, height: iconSize.height)))
+        textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: height), size: CGSize(width: frame.size.width - 50, height: iconSize.height)))
         textField.borderStyle = .none
         textField.keyboardType = .default
         textField.returnKeyType = .search
-        textField.delegate = delegate
+        textField.delegate = self
         textField.placeholder = "検索ワードまたは、URLを入力"
         textField.text = pastLabelText
+        textField.clearButtonMode = .always
+        
+        // 削除ボタン作成
+        let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width, y: 0, width: 50, height: self.frame.size.height))
+        closeMenuButton.backgroundColor = UIColor.red
+        _ = closeMenuButton.reactive.tap
+            .observe { _ in
+                self.delegate?.headerFieldDidEndEditing(text: nil)
+        }
+        self.addSubview(closeMenuButton)
+        
         textField.becomeFirstResponder()
         addSubview(textField)
     }
-    
+
     // テキストフィールドの削除
     func removeInputForm() {
         closeKeyBoard()
@@ -153,4 +171,16 @@ class EGTextField: UIButton, ShadowView {
 
         return mString
     }
+
+// MARK: UITextField Delegate
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.delegate?.headerFieldDidEndEditing(text: textField.text)
+        
+        return true
+    }
+
 }
