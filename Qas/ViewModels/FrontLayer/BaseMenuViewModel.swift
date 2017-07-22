@@ -25,6 +25,10 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
                     NotificationCenter.default.post(name: .baseViewModelWillCopyWebView, object: nil)
                     return nil
                 }),
+                OptionMenuItem(title: "新しいタブ(プライベート)", image: UIImage(named: "option_menu_copy"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    NotificationCenter.default.post(name: .baseViewModelWillAddPrivateWebView, object: nil)
+                    return nil
+                }),
                 OptionMenuItem(title: "履歴", image: UIImage(named: "option_menu_history"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationCenter.default.post(name: .baseViewModelWillStoreHistory, object: nil)
                     return HistoryMenuViewModel()

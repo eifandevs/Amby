@@ -11,7 +11,7 @@ import UIKit
 
 class HistoryItem: NSObject, NSCoding {
     var context: String = NSUUID().uuidString
-    var isPrivate: String = UserDefaults.standard.string(forKey: AppConst.privateModeKey)!
+    var isPrivate: String = "false"
     var url: String = ""
     var title: String = ""
 
@@ -19,7 +19,7 @@ class HistoryItem: NSObject, NSCoding {
         super.init()
     }
     
-    init(context: String = NSUUID().uuidString, url: String = "", title: String = "", isPrivate: String = UserDefaults.standard.string(forKey: AppConst.privateModeKey)!) {
+    init(context: String = NSUUID().uuidString, url: String = "", title: String = "", isPrivate: String = "false") {
         self.context = context
         self.url = url
         self.title = title

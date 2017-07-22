@@ -258,7 +258,6 @@ final class CommonDao {
     /// UDデフォルト値登録
     func registerDefaultData() {
         UserDefaults.standard.register(defaults: [AppConst.locationIndexKey: 0,
-                                                  AppConst.privateModeKey: "false",
                                                   AppConst.autoScrollIntervalKey: 0.06])
     }
 }

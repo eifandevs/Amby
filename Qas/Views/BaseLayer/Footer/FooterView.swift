@@ -47,9 +47,9 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
 // MARK: Private Method
     
-    private func createCaptureSpace(context: String) -> Thumbnail {
+    private func createCaptureSpace(context: String, isPrivateMode: Bool) -> Thumbnail {
         let additionalPointX = ((thumbnails.count).cgfloat * AppConst.thumbnailSize.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).cgfloat * AppConst.thumbnailSize.width / 2
-        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppConst.thumbnailSize))
+        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppConst.thumbnailSize), isPrivateMode: isPrivateMode)
         btn.backgroundColor = UIColor.black
         _ = btn.reactive.tap
             .observe { _ in
@@ -106,9 +106,9 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
 // MARK: FooterViewModel Delegate
 
-    func footerViewModelDidAddThumbnail(context: String) {
+    func footerViewModelDidAddThumbnail(context: String, isPrivateMode: Bool) {
         // 新しいサムネイルスペースを作成
-        let _ = createCaptureSpace(context: context)
+        let _ = createCaptureSpace(context: context, isPrivateMode: isPrivateMode)
     }
     
     func footerViewModelDidChangeThumbnail() {
@@ -175,10 +175,10 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         }
     }
     
-    func footerViewModelDidLoadThumbnail(eachThumbnail: [ThumbnailItem]) {
+    func footerViewModelDidLoadThumbnail(eachThumbnail: [HistoryItem]) {
         if eachThumbnail.count > 0 {
             eachThumbnail.forEach { (item) in
-                let btn = createCaptureSpace(context: item.context)
+                let btn = createCaptureSpace(context: item.context, isPrivateMode: item.isPrivate == "true")
                 if !item.context.isEmpty {
                     let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: item.context).path)
                     if image == nil {

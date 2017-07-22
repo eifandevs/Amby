@@ -108,7 +108,21 @@ class BaseViewModel {
                 self!.eachHistory.append(HistoryItem(url: url!))
             }
             self!.locationIndex = self!.eachHistory.count - 1
-            self!.center.post(name: .footerViewModelWillAddWebView, object: ["context": self!.currentContext])
+            self!.center.post(name: .footerViewModelWillAddWebView, object: self!.eachHistory.last!)
+            self!.delegate?.baseViewModelDidAddWebView()
+        }
+        
+        // private webviewの追加作成
+        center.addObserver(forName: .baseViewModelWillAddPrivateWebView, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillAddPrivateWebView")
+            let url = notification.object != nil ? (notification.object as! [String: String])["url"] : nil
+            if url == nil {
+                self!.eachHistory.append(HistoryItem(isPrivate: "true"))
+            } else {
+                self!.eachHistory.append(HistoryItem(url: url!, isPrivate: "true"))
+            }
+            self!.locationIndex = self!.eachHistory.count - 1
+            self!.center.post(name: .footerViewModelWillAddWebView, object: self!.eachHistory.last!)
             self!.delegate?.baseViewModelDidAddWebView()
         }
         

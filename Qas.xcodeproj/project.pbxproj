@@ -224,12 +224,12 @@
 			isa = PBXGroup;
 			children = (
 				A5223E931F1F8EA20097E793 /* CacheHelper.swift */,
+				A5223EAC1F1F8EA20097E793 /* RealmHelper.swift */,
 				A5223E941F1F8EA20097E793 /* CommonDao.swift */,
+				A5223EAD1F1F8EA20097E793 /* Util.swift */,
 				A5223E951F1F8EA20097E793 /* Define */,
 				A5223E981F1F8EA20097E793 /* Extension */,
 				A5223EA81F1F8EA20097E793 /* Protocol */,
-				A5223EAC1F1F8EA20097E793 /* RealmHelper.swift */,
-				A5223EAD1F1F8EA20097E793 /* Util.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";

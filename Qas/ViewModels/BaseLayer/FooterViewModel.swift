@@ -10,8 +10,8 @@ import Foundation
 import Bond
 
 protocol FooterViewModelDelegate {
-    func footerViewModelDidLoadThumbnail(eachThumbnail: [ThumbnailItem])
-    func footerViewModelDidAddThumbnail(context: String)
+    func footerViewModelDidLoadThumbnail(eachThumbnail: [HistoryItem])
+    func footerViewModelDidAddThumbnail(context: String, isPrivateMode: Bool)
     func footerViewModelDidChangeThumbnail()
     func footerViewModelDidRemoveThumbnail(index: Int)
     func footerViewModelDidStartLoading(index: Int)
@@ -21,8 +21,8 @@ protocol FooterViewModelDelegate {
 class FooterViewModel {
     // 現在位置
     var locationIndex: Int  = 0
-    private var eachThumbnail: [ThumbnailItem] = []
-    private var currentThumbnail: ThumbnailItem {
+    private var eachThumbnail: [HistoryItem] = []
+    private var currentThumbnail: HistoryItem {
         get {
             return eachThumbnail[locationIndex]
         }
@@ -40,30 +40,19 @@ class FooterViewModel {
         center.addObserver(forName: .footerViewModelWillLoad, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[Footer Event]: footerViewModelWillLoad")
             let eachHistory = notification.object as! [HistoryItem]
-            
-            
-            if eachHistory.count > 0 {
-                eachHistory.forEach { (item) in
-                    let thumbnailItem = ThumbnailItem()
-                    thumbnailItem.context = item.context
-                    thumbnailItem.url = item.url
-                    thumbnailItem.title = item.title
-                    self!.eachThumbnail.append(thumbnailItem)
-                }
-            }
-            self!.delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: self!.eachThumbnail)
+            self?.eachThumbnail = eachHistory
+            self!.delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: eachHistory)
         }
+        
         // webview追加
         center.addObserver(forName: .footerViewModelWillAddWebView, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[Footer Event]: footerViewModelWillAddWebView")
-            let context = (notification.object as! [String: String])["context"]!
+            let eachHistory = notification.object as! HistoryItem
             
             // 新しいサムネイルを追加
-            let thumbnailItem = ThumbnailItem()
-            thumbnailItem.context = context
-            self!.eachThumbnail.append(thumbnailItem)
+            self!.eachThumbnail.append(eachHistory)
             self!.locationIndex = self!.eachThumbnail.count - 1
-            self!.delegate?.footerViewModelDidAddThumbnail(context: context)
+            self!.delegate?.footerViewModelDidAddThumbnail(context: eachHistory.context, isPrivateMode: eachHistory.isPrivate == "true")
         }
         // webviewロード開始
         center.addObserver(forName: .footerViewModelWillStartLoading, object: nil, queue: nil) { [weak self] (notification) in

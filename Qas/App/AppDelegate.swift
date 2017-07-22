@@ -59,7 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func initialize() {
         UserDefaults.standard.set(0, forKey: AppConst.locationIndexKey)
-        UserDefaults.standard.set("false", forKey: AppConst.privateModeKey)
         UserDefaults.standard.set(0.06, forKey: AppConst.autoScrollIntervalKey)
 
         self.window!.rootViewController?.removeFromParentViewController()

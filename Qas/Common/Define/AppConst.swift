@@ -19,7 +19,6 @@ class AppConst {
     static let searchPath = "https://www.google.co.jp/search?q="
     static let locationIndexKey = "locationIndex"
     static let autoScrollIntervalKey = "autoScrollInterval"
-    static let privateModeKey = "privateMode"
     static let appFont = "Avenir"
     static let eachHistoryPath = DeviceConst.cachesPath + "/each_history.dat"
     static let eachHistoryUrl = URL(fileURLWithPath: AppConst.eachHistoryPath)

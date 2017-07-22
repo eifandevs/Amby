@@ -15,16 +15,16 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
     }
     
     override func setup() {
-        sectionItems = ["データ保持設定", "自動スクロール設定", "データ削除", "初期化"]
+        sectionItems = ["自動スクロール設定", "データ削除", "初期化"]
         menuItems = [
-            [
-                OptionMenuItem(type: .select,
-                               title: "プライベートモード",
-                               switchAction: { (isOn: Bool) -> () in
-                                UserDefaults.standard.set(isOn ? "true" : "false", forKey: AppConst.privateModeKey)
-                               },
-                               defaultValue: UserDefaults.standard.string(forKey: AppConst.privateModeKey) == "true"),
-            ],
+//            [
+//                OptionMenuItem(type: .select,
+//                               title: "プライベートモード",
+//                               switchAction: { (isOn: Bool) -> () in
+//                                UserDefaults.standard.set(isOn ? "true" : "false", forKey: AppConst.privateModeKey)
+//                               },
+//                               defaultValue: UserDefaults.standard.string(forKey: AppConst.privateModeKey) == "true"),
+//            ],
             [
                 OptionMenuItem(type: .slider, defaultValue: -UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey))
             ],
