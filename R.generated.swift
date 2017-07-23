@@ -80,7 +80,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 16 images.
+  /// This `R.image` struct is generated, and contains static references to 17 images.
   struct image {
     /// Image `delete_webview`.
     static let delete_webview = Rswift.ImageResource(bundle: R.hostingBundle, name: "delete_webview")
@@ -88,6 +88,8 @@ struct R: Rswift.Validatable {
     static let favorite_webview_selected = Rswift.ImageResource(bundle: R.hostingBundle, name: "favorite_webview_selected")
     /// Image `favorite_webview`.
     static let favorite_webview = Rswift.ImageResource(bundle: R.hostingBundle, name: "favorite_webview")
+    /// Image `header_close`.
+    static let header_close = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_close")
     /// Image `header_favorite_selected`.
     static let header_favorite_selected = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_favorite_selected")
     /// Image `header_favorite`.
@@ -128,6 +130,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "favorite_webview_selected", bundle: ..., traitCollection: ...)`
     static func favorite_webview_selected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.favorite_webview_selected, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "header_close", bundle: ..., traitCollection: ...)`
+    static func header_close(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.header_close, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "header_favorite", bundle: ..., traitCollection: ...)`

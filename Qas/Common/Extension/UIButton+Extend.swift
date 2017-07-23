@@ -6,20 +6,17 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
-//import Foundation
-//import UIKit
-//import ObjectiveC
-//
-//private var contextAssociationKey: UInt8 = 0
-//
-//extension UIButton {
-//    
-//    var context: String! {
-//        get {
-//            return objc_getAssociatedObject(self, &contextAssociationKey) as? String
-//        }
-//        set(newValue) {
-//            objc_setAssociatedObject(self, &contextAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
-//        }
-//    }
-//}
+import Foundation
+import UIKit
+
+extension UIButton {
+
+    /// ボタンの画像に色をつける
+    func setImage(image: UIImage?, color: UIColor) {
+        let tintedImage = image?.withRenderingMode(.alwaysTemplate)
+        tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        imageView?.contentMode = .scaleAspectFit
+        setImage(tintedImage, for: .normal)
+    }
+    
+}

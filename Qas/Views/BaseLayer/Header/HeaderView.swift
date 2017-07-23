@@ -85,10 +85,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         
         // ヘッダーアイテム
         let addButton = { (button: UIButton, image: UIImage, action: @escaping (() -> ())) -> Void in
-            let tintedImage = image.withRenderingMode(.alwaysTemplate)
-            button.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-            button.imageView?.contentMode = .scaleAspectFit
-            button.setImage(tintedImage, for: .normal)
+            button.setImage(image: image, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
             button.alpha = 1
             button.imageEdgeInsets = UIEdgeInsetsMake(18, 6.5, 6.5, 6.5)
             _ = button.reactive.tap
@@ -204,16 +201,12 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     }
     
     func headerViewModelDidChangeFavorite(changed: Bool) {
-        var tintedImage: UIImage? = nil
         if changed {
             // すでに登録済みの場合は、お気に入りボタンの色を変更する
-            tintedImage = #imageLiteral(resourceName: "header_favorite_selected").withRenderingMode(.alwaysTemplate)
-            favoriteButton.tintColor = UIColor.frenchBlue
+            favoriteButton.setImage(image: R.image.header_favorite_selected(), color: UIColor.frenchBlue)
         } else {
-            tintedImage = #imageLiteral(resourceName: "header_favorite").withRenderingMode(.alwaysTemplate)
-            favoriteButton.tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+            favoriteButton.setImage(image: R.image.header_favorite(), color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
         }
-        favoriteButton.setImage(tintedImage, for: .normal)
     }
     
     func headerViewModelDidBeginEditing() {

@@ -73,8 +73,9 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
         textField.clearButtonMode = .always
         
         // 削除ボタン作成
-        let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width, y: 0, width: 50, height: self.frame.size.height))
-        closeMenuButton.backgroundColor = UIColor.red
+        let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width, y: 0, width: 50, height: self.frame.size.height))        
+        closeMenuButton.setImage(image: R.image.header_close(), color: UIColor.gray)
+        closeMenuButton.imageEdgeInsets = UIEdgeInsetsMake(20, 6, 6, 6)
         _ = closeMenuButton.reactive.tap
             .observe { _ in
                 self.delegate?.headerFieldDidEndEditing(text: nil)
@@ -100,10 +101,7 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     // ヘッダービューのコンテンツを作成(テキストフィールドではない)
     func makeContent(restore: Bool, restoreText: String?) {
         icon = UIImageView()
-        
-        let tintedImage = #imageLiteral(resourceName: "key").withRenderingMode(.alwaysTemplate)
-        icon?.tintColor = UIColor.lightGreen
-        icon?.image = tintedImage
+        icon?.setImage(image: R.image.key(), color: UIColor.lightGreen)
         icon?.isUserInteractionEnabled = false
         addSubview(icon!)
         

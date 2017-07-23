@@ -42,10 +42,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
                 thumbnail = UIButton(frame: CGRect(x: 0, y: 0, width: AppConst.optionMenuCellHeight / 1.3, height: AppConst.optionMenuCellHeight / 1.3))
                 thumbnail.center = CGPoint(x: marginX / 2, y: AppConst.optionMenuCellHeight / 2)
                 thumbnail.isUserInteractionEnabled = false
-                let tintedImage = unwrappedImage.withRenderingMode(.alwaysTemplate)
-                thumbnail.setImage(tintedImage, for: .normal)
-                thumbnail.imageView?.contentMode = .scaleAspectFit
-                thumbnail.tintColor = UIColor.black
+                thumbnail.setImage(image: unwrappedImage, color: UIColor.black)
                 thumbnail.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
                 thumbnail.layer.cornerRadius = thumbnail.bounds.size.width / 2
                 thumbnail.backgroundColor = UIColor.clear

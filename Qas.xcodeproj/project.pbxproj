@@ -65,7 +65,7 @@
 		A5223F1E1F1F8EA20097E793 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223ED51F1F8EA20097E793 /* Thumbnail.swift */; };
 		A5223F1F1F1F8EA20097E793 /* EGGradientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223ED71F1F8EA20097E793 /* EGGradientLabel.swift */; };
 		A5223F201F1F8EA20097E793 /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223ED81F1F8EA20097E793 /* EGProgressBar.swift */; };
-		A5223F211F1F8EA20097E793 /* EGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223ED91F1F8EA20097E793 /* EGTextField.swift */; };
+		A5223F211F1F8EA20097E793 /* HeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223ED91F1F8EA20097E793 /* HeaderField.swift */; };
 		A5223F221F1F8EA20097E793 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223EDA1F1F8EA20097E793 /* HeaderView.swift */; };
 		A5223F231F1F8EA20097E793 /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223EDD1F1F8EA20097E793 /* CircleMenu.swift */; };
 		A5223F241F1F8EA20097E793 /* CircleMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223EDE1F1F8EA20097E793 /* CircleMenuItem.swift */; };
@@ -74,6 +74,7 @@
 		A5223F271F1F8EA20097E793 /* OptionMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223EE21F1F8EA20097E793 /* OptionMenuTableView.swift */; };
 		A5223F281F1F8EA20097E793 /* OptionMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223EE31F1F8EA20097E793 /* OptionMenuTableViewCell.swift */; };
 		A5223F2A1F1F8EA20097E793 /* OptionMenuTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223EE51F1F8EA20097E793 /* OptionMenuTextField.swift */; };
+		A565ED031F24D629005740E3 /* UIImageView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A565ED021F24D629005740E3 /* UIImageView+Extend.swift */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		A9872C50D89BD4A2A7B139E5 /* Pods_Qas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */; };
 /* End PBXBuildFile section */
@@ -144,7 +145,7 @@
 		A5223ED51F1F8EA20097E793 /* Thumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		A5223ED71F1F8EA20097E793 /* EGGradientLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGGradientLabel.swift; sourceTree = "<group>"; };
 		A5223ED81F1F8EA20097E793 /* EGProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGProgressBar.swift; sourceTree = "<group>"; };
-		A5223ED91F1F8EA20097E793 /* EGTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGTextField.swift; sourceTree = "<group>"; };
+		A5223ED91F1F8EA20097E793 /* HeaderField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderField.swift; sourceTree = "<group>"; };
 		A5223EDA1F1F8EA20097E793 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		A5223EDD1F1F8EA20097E793 /* CircleMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenu.swift; sourceTree = "<group>"; };
 		A5223EDE1F1F8EA20097E793 /* CircleMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenuItem.swift; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 		A5223EE21F1F8EA20097E793 /* OptionMenuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableView.swift; sourceTree = "<group>"; };
 		A5223EE31F1F8EA20097E793 /* OptionMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewCell.swift; sourceTree = "<group>"; };
 		A5223EE51F1F8EA20097E793 /* OptionMenuTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTextField.swift; sourceTree = "<group>"; };
+		A565ED021F24D629005740E3 /* UIImageView+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extend.swift"; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,6 +263,7 @@
 				A5223EA51F1F8EA20097E793 /* UIImage+Extend.swift */,
 				A5223EA61F1F8EA20097E793 /* UIScrollView+Extend.swift */,
 				A5223EA71F1F8EA20097E793 /* UIView+Extend.swift */,
+				A565ED021F24D629005740E3 /* UIImageView+Extend.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -400,7 +403,7 @@
 			children = (
 				A5223ED71F1F8EA20097E793 /* EGGradientLabel.swift */,
 				A5223ED81F1F8EA20097E793 /* EGProgressBar.swift */,
-				A5223ED91F1F8EA20097E793 /* EGTextField.swift */,
+				A5223ED91F1F8EA20097E793 /* HeaderField.swift */,
 				A5223EDA1F1F8EA20097E793 /* HeaderView.swift */,
 			);
 			path = Header;
@@ -611,6 +614,7 @@
 				A5223F161F1F8EA20097E793 /* OptionMenuTableViewModel.swift in Sources */,
 				A5223F111F1F8EA20097E793 /* HeaderViewModel.swift in Sources */,
 				A5223EF01F1F8EA20097E793 /* Collection+Extend.swift in Sources */,
+				A565ED031F24D629005740E3 /* UIImageView+Extend.swift in Sources */,
 				A5223EF11F1F8EA20097E793 /* Dictionary+Extend.swift in Sources */,
 				A5223EE81F1F8EA20097E793 /* EGApplication.swift in Sources */,
 				A5223EF91F1F8EA20097E793 /* UIButton+Extend.swift in Sources */,
@@ -641,7 +645,7 @@
 				A5223EF51F1F8EA20097E793 /* NSNotification+Extend.swift in Sources */,
 				A5223F271F1F8EA20097E793 /* OptionMenuTableView.swift in Sources */,
 				A5223F061F1F8EA20097E793 /* ThumbnailItem.swift in Sources */,
-				A5223F211F1F8EA20097E793 /* EGTextField.swift in Sources */,
+				A5223F211F1F8EA20097E793 /* HeaderField.swift in Sources */,
 				A5223EEC1F1F8EA20097E793 /* CommonDao.swift in Sources */,
 				A5223EED1F1F8EA20097E793 /* AppConst.swift in Sources */,
 				A5223F1F1F1F8EA20097E793 /* EGGradientLabel.swift in Sources */,
