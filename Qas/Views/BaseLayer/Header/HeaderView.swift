@@ -87,7 +87,8 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         let addButton = { (button: UIButton, image: UIImage, action: @escaping (() -> ())) -> Void in
             button.setImage(image: image, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
             button.alpha = 1
-            button.imageEdgeInsets = UIEdgeInsetsMake(18, 6.5, 6.5, 6.5)
+            let edgeInset: CGFloat = button.frame.size.width / 7.0769
+            button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset + 11.5, edgeInset, edgeInset, edgeInset)
             _ = button.reactive.tap
                 .observe { _ in
                     action()

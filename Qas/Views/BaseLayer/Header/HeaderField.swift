@@ -63,7 +63,8 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     // ヘッダービューをタップしたらコールされる
     // それまで、テキストフィールドは表示しない
     func makeInputForm(height: CGFloat) {
-        textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: height), size: CGSize(width: frame.size.width - 50, height: iconSize.height)))
+        let closeMenuButtonWidth: CGFloat = frame.size.width / 8.28
+        textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: height), size: CGSize(width: frame.size.width - closeMenuButtonWidth, height: iconSize.height)))
         textField.borderStyle = .none
         textField.keyboardType = .default
         textField.returnKeyType = .search
@@ -73,9 +74,10 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
         textField.clearButtonMode = .always
         
         // 削除ボタン作成
-        let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width, y: 0, width: 50, height: self.frame.size.height))        
+        let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width, y: 0, width: closeMenuButtonWidth, height: self.frame.size.height))
         closeMenuButton.setImage(image: R.image.header_close(), color: UIColor.gray)
-        closeMenuButton.imageEdgeInsets = UIEdgeInsetsMake(20, 6, 6, 6)
+        let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
+        closeMenuButton.imageEdgeInsets = UIEdgeInsetsMake(edgeInset + 14, edgeInset, edgeInset, edgeInset)
         _ = closeMenuButton.reactive.tap
             .observe { _ in
                 self.delegate?.headerFieldDidEndEditing(text: nil)
