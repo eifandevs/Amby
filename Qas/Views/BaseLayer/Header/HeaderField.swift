@@ -72,6 +72,8 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
         textField.placeholder = "検索ワードまたは、URLを入力"
         textField.text = pastLabelText
         textField.clearButtonMode = .always
+        textField.addTarget(self, action: #selector(HeaderField.textFieldEditingChanged), for: .editingChanged)
+
         
         // 削除ボタン作成
         let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width, y: 0, width: closeMenuButtonWidth, height: self.frame.size.height))
@@ -176,10 +178,10 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
     }
-    
+    func textFieldEditingChanged(sender: UITextField) {
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.delegate?.headerFieldDidEndEditing(text: textField.text)
-        
         return true
     }
 

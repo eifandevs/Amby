@@ -33,7 +33,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         }
         
         overlay = UIButton(frame: frame)
-        overlay.backgroundColor = UIColor.lightGray
+        overlay.backgroundColor = UIColor.darkGray
         self.overlay.alpha = 0
         _ = overlay.reactive.tap
             .observe { [weak self] _ in

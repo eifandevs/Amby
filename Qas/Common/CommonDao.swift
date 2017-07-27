@@ -170,7 +170,7 @@ final class CommonDao {
                     do {
                         let data = try Data(contentsOf: commonHistoryUrl)
                         let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
-                        let saveData: [CommonHistoryItem] = old + value
+                        let saveData: [CommonHistoryItem] = value + old
                         return saveData
                     } catch let error as NSError {
                         log.error("failed to read: \(error)")

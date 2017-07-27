@@ -284,7 +284,8 @@ class BaseViewModel {
 
                 // Common History
                 let common = CommonHistoryItem(_id: NSUUID().uuidString, url: requestUrl, title: requestTitle, date: Date())
-                commonHistory.append(common)
+                // 配列の先頭に追加する
+                commonHistory.insert(common, at: 0)
                 log.debug("save history. url: \(common.url)")
                 
                 // Each History

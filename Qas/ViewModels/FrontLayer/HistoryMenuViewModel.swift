@@ -25,7 +25,7 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
             let list = try manager.contentsOfDirectory(atPath: AppConst.commonHistoryPath)
             readFiles = list.map({ (path: String) -> String in
                 return path.substring(to: path.index(path.startIndex, offsetBy: 8))
-            })
+            }).reversed()
         } catch let error as NSError {
             log.error("failed to read common history. error: \(error.localizedDescription)")
         }
