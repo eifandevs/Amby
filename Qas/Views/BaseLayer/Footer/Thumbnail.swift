@@ -29,9 +29,8 @@ class Thumbnail: UIButton {
     convenience init(frame: CGRect, isPrivateMode: Bool = false) {
         self.init(frame: frame)
         if isPrivateMode {
-            let privateIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width / 3, height: frame.size.width / 3))
-            privateIcon.backgroundColor = UIColor.red
-//            privateIcon.image = R.image.favorite_webview()
+            let privateIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width / 4.5, height: frame.size.height / 2))
+            privateIcon.setImage(image: R.image.footer_private(), color: UIColor.rasberry)
             addSubview(privateIcon)
         }
     }
