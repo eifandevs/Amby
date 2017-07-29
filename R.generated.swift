@@ -80,8 +80,14 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 18 images.
+  /// This `R.image` struct is generated, and contains static references to 21 images.
   struct image {
+    /// Image `circlemenu_historyback`.
+    static let circlemenu_historyback = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_historyback")
+    /// Image `circlemenu_historyforward`.
+    static let circlemenu_historyforward = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_historyforward")
+    /// Image `circlemenu_menu`.
+    static let circlemenu_menu = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_menu")
     /// Image `delete_webview`.
     static let delete_webview = Rswift.ImageResource(bundle: R.hostingBundle, name: "delete_webview")
     /// Image `favorite_webview_selected`.
@@ -118,6 +124,21 @@ struct R: Rswift.Validatable {
     static let option_menu_mail = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_mail")
     /// Image `option_menu_setting`.
     static let option_menu_setting = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_setting")
+    
+    /// `UIImage(named: "circlemenu_historyback", bundle: ..., traitCollection: ...)`
+    static func circlemenu_historyback(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenu_historyback, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "circlemenu_historyforward", bundle: ..., traitCollection: ...)`
+    static func circlemenu_historyforward(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenu_historyforward, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "circlemenu_menu", bundle: ..., traitCollection: ...)`
+    static func circlemenu_menu(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenu_menu, compatibleWith: traitCollection)
+    }
     
     /// `UIImage(named: "delete_webview", bundle: ..., traitCollection: ...)`
     static func delete_webview(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {

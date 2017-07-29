@@ -25,8 +25,12 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
         addCircle()
     }
     
-    convenience init(tapAction: ((CGPoint) -> ())?) {
+    convenience init(image: UIImage? = nil, tapAction: ((CGPoint) -> ())?) {
         self.init(frame: CGRect.zero)
+        if let image = image {
+            imageEdgeInsets = UIEdgeInsetsMake(6.5, 6.5, 6.5, 6.5)
+            setImage(image: image, color: UIColor.darkGray)
+        }
         action = tapAction
     }
     

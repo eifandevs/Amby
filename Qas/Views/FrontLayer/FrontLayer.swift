@@ -52,7 +52,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     override func didMoveToSuperview() {
         let menuItems = [
             [
-                CircleMenuItem(tapAction: { [weak self] (initialPt: CGPoint) in
+                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { [weak self] (initialPt: CGPoint) in
                     // オプションメニューの表示位置を計算
                     let ptX = self!.swipeDirection == .left ? initialPt.x / 6 : DeviceConst.displaySize.width - 250  - (DeviceConst.displaySize.width - initialPt.x) / 6
                     let ptY: CGFloat = { () -> CGFloat in
@@ -73,44 +73,44 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                         self!.addSubview(self!.optionMenu!)
                     }
                 }),
-                CircleMenuItem(tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("自動スクロール")
                     NotificationCenter.default.post(name: .baseViewModelWillAutoScroll, object: nil)
                 }),
-                CircleMenuItem(tapAction: { _ in
+                CircleMenuItem(image: R.image.historyback_webview(), tapAction: { _ in
                     log.warning("ヒストリーバック")
                     NotificationCenter.default.post(name: .baseViewModelWillHistoryBackWebView, object: nil)
                 }),
-                CircleMenuItem(tapAction: { _ in
+                CircleMenuItem(image: R.image.historyforward_webview(), tapAction: { _ in
                     log.warning("ヒストリーフォワード")
                     NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
                 }),
-                CircleMenuItem(tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("デリート")
                     NotificationCenter.default.post(name: .baseViewModelWillRemoveWebView, object: nil)
                 }),
-                CircleMenuItem(tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("アッド")
                     NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: nil)
                 })
             ],
             [
-                CircleMenuItem(tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("裏メニュー")
                 }),
-                CircleMenuItem(tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("裏メニュー")
                 }),
-                CircleMenuItem(tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("裏メニュー")
                 }),
-                CircleMenuItem(tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("裏メニュー")
                 }),
-                CircleMenuItem(tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("裏メニュー")
                 }),
-                CircleMenuItem(tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("裏メニュー")
                 })
             ]

@@ -14,7 +14,7 @@ extension UIButton {
     /// ボタンの画像に色をつける
     func setImage(image: UIImage?, color: UIColor) {
         let tintedImage = image?.withRenderingMode(.alwaysTemplate)
-        tintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        tintColor = color
         imageView?.contentMode = .scaleAspectFit
         setImage(tintedImage, for: .normal)
     }

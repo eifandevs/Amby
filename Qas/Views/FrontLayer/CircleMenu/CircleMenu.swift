@@ -266,11 +266,13 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                     // 他のitemを無効にする
                     for v in self.circleMenuItems {
                         v.scheduledAction = false
+                        v.setImage(image: v.imageView?.image, color: UIColor.darkGray)
                         v.backgroundColor = UIColor.white
                     }
                     
                     item.scheduledAction = true
                     item.isValid = true
+                    item.setImage(image: item.imageView?.image, color: UIColor.white)
                     item.backgroundColor = UIColor.frenchBlue
                     UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseIn, animations: {
                         item.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
@@ -279,11 +281,13 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
             } else {
                 if item.isValid {
                     item.isValid = false
+                    item.setImage(image: item.imageView?.image, color: UIColor.darkGray)
                     item.backgroundColor = UIColor.white
                     if item.scheduledAction {
                         // 他のValidなitemをアクション予約する
                         for v in self.circleMenuItems where v.isValid {
                             v.scheduledAction = true
+                            v.setImage(image: v.imageView?.image, color: UIColor.white)
                             v.backgroundColor = UIColor.frenchBlue
                         }
                     }
