@@ -32,6 +32,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 OptionMenuItem(title: "閲覧履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     Util.presentAlert(title: "データ削除", message: "閲覧履歴を全て削除します。よろしいですか？", completion: {
                         CommonDao.s.deleteAllCommonHistory()
+                        NotificationCenter.default.post(name: .baseViewModelWillDeleteHistory, object: nil)
                     })
                     return nil
                 }),
@@ -71,6 +72,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                         CacheHelper.deleteCookies()
                         CacheHelper.deleteCaches()
                         CommonDao.s.deleteAllThumbnail()
+                        NotificationCenter.default.post(name: .baseViewModelWillInitialize, object: nil)
                         (UIApplication.shared.delegate as! AppDelegate).initialize()
                     })
                     return nil

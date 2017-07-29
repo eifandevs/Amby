@@ -126,6 +126,19 @@ class BaseViewModel {
             self!.delegate?.baseViewModelDidAddWebView()
         }
         
+        // 閲覧履歴の削除
+        center.addObserver(forName: .baseViewModelWillDeleteHistory, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillDeleteHistory")
+            self!.commonHistory = []
+        }
+        
+        // 初期化
+        center.addObserver(forName: .baseViewModelWillInitialize, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillInitialize")
+            self!.commonHistory = []
+            self!.eachHistory = []
+        }
+        
         // webviewのコピー
         center.addObserver(forName: .baseViewModelWillCopyWebView, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[BaseView Event]: baseViewModelWillCopyWebView")
