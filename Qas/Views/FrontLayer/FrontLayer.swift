@@ -73,23 +73,23 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                         self!.addSubview(self!.optionMenu!)
                     }
                 }),
-                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_autoscroll(), tapAction: { _ in
                     log.warning("自動スクロール")
                     NotificationCenter.default.post(name: .baseViewModelWillAutoScroll, object: nil)
                 }),
-                CircleMenuItem(image: R.image.historyback_webview(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_historyback(), tapAction: { _ in
                     log.warning("ヒストリーバック")
                     NotificationCenter.default.post(name: .baseViewModelWillHistoryBackWebView, object: nil)
                 }),
-                CircleMenuItem(image: R.image.historyforward_webview(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_historyforward(), tapAction: { _ in
                     log.warning("ヒストリーフォワード")
                     NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_close(), tapAction: { _ in
                     log.warning("デリート")
                     NotificationCenter.default.post(name: .baseViewModelWillRemoveWebView, object: nil)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_add(), tapAction: { _ in
                     log.warning("アッド")
                     NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: nil)
                 })

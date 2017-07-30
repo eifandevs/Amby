@@ -80,8 +80,14 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 21 images.
+  /// This `R.image` struct is generated, and contains static references to 24 images.
   struct image {
+    /// Image `circlemenu_add`.
+    static let circlemenu_add = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_add")
+    /// Image `circlemenu_autoscroll`.
+    static let circlemenu_autoscroll = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_autoscroll")
+    /// Image `circlemenu_close`.
+    static let circlemenu_close = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_close")
     /// Image `circlemenu_historyback`.
     static let circlemenu_historyback = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_historyback")
     /// Image `circlemenu_historyforward`.
@@ -124,6 +130,21 @@ struct R: Rswift.Validatable {
     static let option_menu_mail = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_mail")
     /// Image `option_menu_setting`.
     static let option_menu_setting = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_setting")
+    
+    /// `UIImage(named: "circlemenu_add", bundle: ..., traitCollection: ...)`
+    static func circlemenu_add(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenu_add, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "circlemenu_autoscroll", bundle: ..., traitCollection: ...)`
+    static func circlemenu_autoscroll(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenu_autoscroll, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "circlemenu_close", bundle: ..., traitCollection: ...)`
+    static func circlemenu_close(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenu_close, compatibleWith: traitCollection)
+    }
     
     /// `UIImage(named: "circlemenu_historyback", bundle: ..., traitCollection: ...)`
     static func circlemenu_historyback(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
