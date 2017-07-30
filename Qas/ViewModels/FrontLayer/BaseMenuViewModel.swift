@@ -35,7 +35,7 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
                 }),
                 OptionMenuItem(title: "フォーム", image: UIImage(named: "option_menu_form"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FormMenuViewModel()
                 }),
-                OptionMenuItem(title: "ブックマーク", image: UIImage(named: "favorite_webview"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FavoriteMenuViewModel()
+                OptionMenuItem(title: "ブックマーク", image: R.image.optionmenu_favorite(), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FavoriteMenuViewModel()
                 }),
                 OptionMenuItem(title: "問題の報告", image: UIImage(named: "option_menu_mail"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
                 }),

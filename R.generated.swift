@@ -80,7 +80,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 24 images.
+  /// This `R.image` struct is generated, and contains static references to 20 images.
   struct image {
     /// Image `circlemenu_add`.
     static let circlemenu_add = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_add")
@@ -94,12 +94,6 @@ struct R: Rswift.Validatable {
     static let circlemenu_historyforward = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_historyforward")
     /// Image `circlemenu_menu`.
     static let circlemenu_menu = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_menu")
-    /// Image `delete_webview`.
-    static let delete_webview = Rswift.ImageResource(bundle: R.hostingBundle, name: "delete_webview")
-    /// Image `favorite_webview_selected`.
-    static let favorite_webview_selected = Rswift.ImageResource(bundle: R.hostingBundle, name: "favorite_webview_selected")
-    /// Image `favorite_webview`.
-    static let favorite_webview = Rswift.ImageResource(bundle: R.hostingBundle, name: "favorite_webview")
     /// Image `footer_private`.
     static let footer_private = Rswift.ImageResource(bundle: R.hostingBundle, name: "footer_private")
     /// Image `header_close`.
@@ -108,10 +102,6 @@ struct R: Rswift.Validatable {
     static let header_favorite_selected = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_favorite_selected")
     /// Image `header_favorite`.
     static let header_favorite = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_favorite")
-    /// Image `historyback_webview`.
-    static let historyback_webview = Rswift.ImageResource(bundle: R.hostingBundle, name: "historyback_webview")
-    /// Image `historyforward_webview`.
-    static let historyforward_webview = Rswift.ImageResource(bundle: R.hostingBundle, name: "historyforward_webview")
     /// Image `key`.
     static let key = Rswift.ImageResource(bundle: R.hostingBundle, name: "key")
     /// Image `option_menu_add`.
@@ -130,6 +120,8 @@ struct R: Rswift.Validatable {
     static let option_menu_mail = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_mail")
     /// Image `option_menu_setting`.
     static let option_menu_setting = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_setting")
+    /// Image `optionmenu_favorite`.
+    static let optionmenu_favorite = Rswift.ImageResource(bundle: R.hostingBundle, name: "optionmenu_favorite")
     
     /// `UIImage(named: "circlemenu_add", bundle: ..., traitCollection: ...)`
     static func circlemenu_add(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
@@ -161,21 +153,6 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.circlemenu_menu, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "delete_webview", bundle: ..., traitCollection: ...)`
-    static func delete_webview(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.delete_webview, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "favorite_webview", bundle: ..., traitCollection: ...)`
-    static func favorite_webview(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.favorite_webview, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "favorite_webview_selected", bundle: ..., traitCollection: ...)`
-    static func favorite_webview_selected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.favorite_webview_selected, compatibleWith: traitCollection)
-    }
-    
     /// `UIImage(named: "footer_private", bundle: ..., traitCollection: ...)`
     static func footer_private(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.footer_private, compatibleWith: traitCollection)
@@ -194,16 +171,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "header_favorite_selected", bundle: ..., traitCollection: ...)`
     static func header_favorite_selected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.header_favorite_selected, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "historyback_webview", bundle: ..., traitCollection: ...)`
-    static func historyback_webview(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.historyback_webview, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "historyforward_webview", bundle: ..., traitCollection: ...)`
-    static func historyforward_webview(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.historyforward_webview, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "key", bundle: ..., traitCollection: ...)`
@@ -249,6 +216,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "option_menu_setting", bundle: ..., traitCollection: ...)`
     static func option_menu_setting(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.option_menu_setting, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "optionmenu_favorite", bundle: ..., traitCollection: ...)`
+    static func optionmenu_favorite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.optionmenu_favorite, compatibleWith: traitCollection)
     }
     
     fileprivate init() {}

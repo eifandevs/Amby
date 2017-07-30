@@ -88,7 +88,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
             button.setImage(image: image, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
             button.alpha = 1
             let edgeInset: CGFloat = button.frame.size.width / 7.0769
-            button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset + 11.5, edgeInset, edgeInset, edgeInset)
+            button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset + 15, edgeInset, edgeInset, edgeInset)
             _ = button.reactive.tap
                 .observe { _ in
                     action()
@@ -97,12 +97,12 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         }
         
         // ヒストリバック
-        addButton(historyBackButton, #imageLiteral(resourceName: "historyback_webview")) { [weak self] _ in
+        addButton(historyBackButton, R.image.circlemenu_historyback()!) { [weak self] _ in
             self!.viewModel.notifyHistoryBackWebView()
         }
         
         // ヒストリフォアード
-        addButton(historyForwardButton, #imageLiteral(resourceName: "historyforward_webview")) { [weak self] _ in
+        addButton(historyForwardButton, R.image.circlemenu_historyforward()!) { [weak self] _ in
             self!.viewModel.notifyHistoryForwardWebView()
         }
         
@@ -111,7 +111,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
             self!.viewModel.notifyRegisterAsFavorite()
         }
         // 現在のWebView削除
-        addButton(deleteButton, #imageLiteral(resourceName: "delete_webview"), { [weak self] _ in
+        addButton(deleteButton, R.image.circlemenu_close()!, { [weak self] _ in
             self!.viewModel.notifyRemoveWebView()
         })
         
