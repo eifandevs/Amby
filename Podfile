@@ -15,4 +15,5 @@ target 'Qas' do
   pod 'RealmSwift', '~> 2.4'
   pod 'NVActivityIndicatorView', '~> 3.3'
   pod 'R.swift', '~> 3.3'
+  pod 'Alamofire', '~> 4.4'
 end
