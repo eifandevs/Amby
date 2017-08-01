@@ -87,6 +87,23 @@ class Util {
         }
         return nil
     }
+    
+    /// キーボードが表示されているか
+    static func displayedKeyboard() -> Bool {
+        let window: UIWindow? = {
+            for w in UIApplication.shared.windows {
+                if w.className == "UIRemoteKeyboardWindow" {
+                    return w
+                }
+            }
+            return nil
+        }()
+        if window != nil {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 func *(left: CGSize, right: CGFloat) -> CGSize {

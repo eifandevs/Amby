@@ -177,6 +177,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                 self.circleMenuItems.forEach({ (menuItem) in
                     if menuItem.scheduledAction {
                         menuItem.transform = CGAffineTransform(scaleX: 2, y: 2)
+                        menuItem.setImage(image: menuItem.imageView?.image, color: UIColor.white)
                         menuItem.backgroundColor = UIColor.frenchBlue
                     } else {
                         menuItem.center = self.initialPt!

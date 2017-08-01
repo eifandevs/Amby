@@ -157,18 +157,15 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     
 // MARK: HeaderView Delegate
     func headerViewDidBeginEditing() {
+        // 履歴検索を行うので、事前に永続化しておく
+        NotificationCenter.default.post(name: .baseViewModelWillStoreHistory, object: nil)
+
         // ディスプレイタップのイベントをベースビューから奪う
         // サークルメニューを表示させないため
         EGApplication.sharedMyApplication.egDelegate = self
         isHeaderViewEditing = true
         overlay = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
         overlay?.delegate = self
-//        _ = overlay!.reactive.controlEvents(.touchDown)
-//            .observeNext { [weak self] _ in
-//                self!.overlay!.removeFromSuperview()
-//                self!.overlay = nil
-//                self!.headerView.finishEditing(force: true)
-//        }
         addSubview(overlay!)
     }
     

@@ -292,21 +292,23 @@ class BaseViewModel {
     func saveHistory(wv: EGWebView) {
         if !isPrivateMode! {
             if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle {
-                // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
-                center.post(name: .headerViewModelWillChangeFavorite, object: CommonDao.s.selectFavorite(url: requestUrl) != nil)
-
-                // Common History
-                let common = CommonHistoryItem(_id: NSUUID().uuidString, url: requestUrl, title: requestTitle, date: Date())
-                // 配列の先頭に追加する
-                commonHistory.insert(common, at: 0)
-                log.debug("save history. url: \(common.url)")
-                
-                // Each History
-                for history in eachHistory {
-                    if history.context == wv.context {
-                        history.url = common.url
-                        history.title = common.title
-                        break
+                //　アプリ起動後の前回ページロード時は、履歴に保存しない
+                if requestUrl != self.requestUrl {
+                    // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
+                    center.post(name: .headerViewModelWillChangeFavorite, object: CommonDao.s.selectFavorite(url: requestUrl) != nil)
+                    // Common History
+                    let common = CommonHistoryItem(url: requestUrl, title: requestTitle, date: Date())
+                    // 配列の先頭に追加する
+                    commonHistory.insert(common, at: 0)
+                    log.debug("save history. url: \(common.url)")
+                    
+                    // Each History
+                    for history in eachHistory {
+                        if history.context == wv.context {
+                            history.url = common.url
+                            history.title = common.title
+                            break
+                        }
                     }
                 }
             }

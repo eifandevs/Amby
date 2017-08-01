@@ -23,6 +23,7 @@ class AppConst {
     static let eachHistoryPath = DeviceConst.cachesPath + "/each_history.dat"
     static let eachHistoryUrl = URL(fileURLWithPath: AppConst.eachHistoryPath)
     static let commonHistoryPath = DeviceConst.cachesPath + "/common_history"
+    static let searchHistoryPath = DeviceConst.cachesPath + "/search_history"
     static let thumbnailBaseFolderPath = DeviceConst.cachesPath + "/thumbnails"
     static let realmPath = DeviceConst.cachesPath + "/database"
     
@@ -57,6 +58,17 @@ class AppConst {
     
     static func commonHistoryFilePath(date: String) -> String {
         let path = DeviceConst.cachesPath + "/common_history"
+        return path + "/\(date).dat"
+    }
+    
+    static func searchHistoryUrl(date: String) -> URL {
+        let path = DeviceConst.cachesPath + "/search_history"
+        Util.createFolder(path: path)
+        return URL(fileURLWithPath: path + "/\(date).dat")
+    }
+    
+    static func searchHistoryFilePath(date: String) -> String {
+        let path = DeviceConst.cachesPath + "/search_history"
         return path + "/\(date).dat"
     }
 }

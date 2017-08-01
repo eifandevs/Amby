@@ -1,17 +1,16 @@
 //
-//  HistoryItem.swift
-//  Eiger
+//  SearchHistoryItem.swift
+//  Qas
 //
-//  Created by tenma on 2017/02/16.
+//  Created by temma on 2017/08/01.
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class CommonHistoryItem: NSObject, NSCoding {
+class SearchHistoryItem: NSObject, NSCoding {
     var _id: String = NSUUID().uuidString
-    var url: String = ""
     var title: String = ""
     var date: Date = Date()
     
@@ -19,26 +18,22 @@ class CommonHistoryItem: NSObject, NSCoding {
         super.init()
     }
     
-    init(_id: String = NSUUID().uuidString, url: String, title: String, date: Date) {
+    init(_id: String = NSUUID().uuidString, title: String, date: Date) {
         self._id = _id
-        self.url = url
         self.title = title
         self.date = date
     }
     
     required convenience init?(coder decoder: NSCoder) {
         let _id = decoder.decodeObject(forKey: "_id") as! String
-        let url = decoder.decodeObject(forKey: "url") as! String
         let title = decoder.decodeObject(forKey: "title") as! String
         let date = decoder.decodeObject(forKey: "date") as! Date
-        self.init(_id: _id, url: url, title: title, date: date)
+        self.init(_id: _id, title: title, date: date)
     }
     
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(_id, forKey: "_id")
-        aCoder.encode(url, forKey: "url")
         aCoder.encode(title, forKey: "title")
         aCoder.encode(date, forKey: "date")
     }
 }
-

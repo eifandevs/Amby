@@ -147,6 +147,50 @@ final class CommonDao {
     }
     
 // MARK: キャッシュ管理
+    /// 検索履歴の保存
+    func storeSearchHistory(searchHistory: [SearchHistoryItem]) {
+        if searchHistory.count > 0 {
+            // searchHistoryを日付毎に分ける
+            var searchHistoryByDate: [String: [SearchHistoryItem]] = [:]
+            for item in searchHistory {
+                let dateFormatter = DateFormatter()
+                dateFormatter.locale = Locale(identifier: NSLocale.current.identifier)
+                dateFormatter.dateFormat = "yyyyMMdd"
+                let key = dateFormatter.string(from: item.date)
+                if searchHistoryByDate[key] == nil {
+                    searchHistoryByDate[key] = [item]
+                } else {
+                    searchHistoryByDate[key]?.append(item)
+                }
+            }
+            
+            for (key, value) in searchHistoryByDate {
+                let searchHistoryUrl = AppConst.searchHistoryUrl(date: key)
+                
+                let saveData: [SearchHistoryItem] = { () -> [SearchHistoryItem] in
+                    do {
+                        let data = try Data(contentsOf: searchHistoryUrl)
+                        let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [SearchHistoryItem]
+                        let saveData: [SearchHistoryItem] = value + old
+                        return saveData
+                    } catch let error as NSError {
+                        log.error("failed to read search history: \(error)")
+                        return value
+                    }
+                }()
+                
+                let searchHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
+                do {
+                    try searchHistoryData.write(to: searchHistoryUrl)
+                    log.debug("store search history")
+                } catch let error as NSError {
+                    log.error("failed to write search history: \(error)")
+                }
+            }
+        }
+    }
+    
+    /// 閲覧履歴の保存
     func storeCommonHistory(commonHistory: [CommonHistoryItem]) {
         if commonHistory.count > 0 {
             // commonHistoryを日付毎に分ける
@@ -173,7 +217,7 @@ final class CommonDao {
                         let saveData: [CommonHistoryItem] = value + old
                         return saveData
                     } catch let error as NSError {
-                        log.error("failed to read: \(error)")
+                        log.error("failed to read common history: \(error)")
                         return value
                     }
                 }()
@@ -183,12 +227,13 @@ final class CommonDao {
                     try commonHistoryData.write(to: commonHistoryUrl)
                     log.debug("store common history")
                 } catch let error as NSError {
-                    log.error("failed to write: \(error)")
+                    log.error("failed to write common history: \(error)")
                 }
             }
         }
     }
     
+    /// 表示中ページの保存
     func storeEachHistory(eachHistory: [HistoryItem]) {
         if eachHistory.count > 0 {
             let eachHistoryData = NSKeyedArchiver.archivedData(withRootObject: eachHistory)
@@ -212,7 +257,103 @@ final class CommonDao {
         Util.deleteFolder(path: AppConst.eachHistoryPath)
     }
     
-    /// 閲覧履歴、お気に入り、フォームデータを削除する
+    /// 検索履歴の検索
+    func selectSearchHistory(title: String, readNum: Int) -> [SearchHistoryItem] {
+        let manager = FileManager.default
+        var readFiles: [String] = []
+        var result: [SearchHistoryItem] = []
+        do {
+            let list = try manager.contentsOfDirectory(atPath: AppConst.searchHistoryPath)
+            readFiles = list.map({ (path: String) -> String in
+                return path.substring(to: path.index(path.startIndex, offsetBy: 8))
+            }).reversed()
+            
+            if readFiles.count > 0 {
+                let latestFiles = readFiles.prefix(readNum)
+                var allSearchHistory: [SearchHistoryItem] = []
+                latestFiles.forEach({ (keyStr: String) in
+                    do {
+                        let data = try Data(contentsOf: AppConst.searchHistoryUrl(date: keyStr))
+                        let searchHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [SearchHistoryItem]
+                        allSearchHistory = allSearchHistory + searchHistory
+                    } catch let error as NSError {
+                        log.error("failed to read search history. error: \(error.localizedDescription)")
+                    }
+                })
+                let hitSearchHistory = allSearchHistory.filter({ (searchHistoryItem) -> Bool in
+                    return searchHistoryItem.title.lowercased().contains(title.lowercased())
+                })
+                
+                // 重複の削除
+                hitSearchHistory.forEach({ (item) in
+                    if result.count == 0 {
+                        result.append(item)
+                    } else {
+                        let resultTitles: [String] = result.map({ (item) -> String in
+                            return item.title
+                        })
+                        if !resultTitles.contains(item.title) {
+                            result.append(item)
+                        }
+                    }
+                })
+            }
+            
+        } catch let error as NSError {
+            log.error("failed to read search history. error: \(error.localizedDescription)")
+        }
+        return result
+    }
+    
+    /// 閲覧履歴の検索
+    func selectCommonHistory(title: String, readNum: Int) -> [CommonHistoryItem] {
+        let manager = FileManager.default
+        var readFiles: [String] = []
+        var result: [CommonHistoryItem] = []
+        do {
+            let list = try manager.contentsOfDirectory(atPath: AppConst.commonHistoryPath)
+            readFiles = list.map({ (path: String) -> String in
+                return path.substring(to: path.index(path.startIndex, offsetBy: 8))
+            }).reversed()
+            
+            if readFiles.count > 0 {
+                let latestFiles = readFiles.prefix(readNum)
+                var allCommonHistory: [CommonHistoryItem] = []
+                latestFiles.forEach({ (keyStr: String) in
+                    do {
+                        let data = try Data(contentsOf: AppConst.commonHistoryUrl(date: keyStr))
+                        let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
+                        allCommonHistory = allCommonHistory + commonHistory
+                    } catch let error as NSError {
+                        log.error("failed to read common history. error: \(error.localizedDescription)")
+                    }
+                })
+                let hitCommonHistory = allCommonHistory.filter({ (commonHistoryItem) -> Bool in
+                    return commonHistoryItem.title.lowercased().contains(title)
+                })
+                
+                // 重複の削除
+                hitCommonHistory.forEach({ (item) in
+                    if result.count == 0 {
+                        result.append(item)
+                    } else {
+                        let resultTitles: [String] = result.map({ (item) -> String in
+                            return item.title
+                        })
+                        if !resultTitles.contains(item.title) {
+                            result.append(item)
+                        }
+                    }
+                })
+            }
+            
+        } catch let error as NSError {
+            log.error("failed to read common history. error: \(error.localizedDescription)")
+        }
+        return result
+    }
+    
+    /// 特定の閲覧履歴を削除する
     /// [日付: [id, id, ...]]
     func deleteCommonHistory(deleteHistoryIds: [String: [String]]) {
         // 履歴

@@ -65,7 +65,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     
     override init(frame: CGRect) {
         // ヘッダーフィールド
-        headerField = HeaderField(frame: CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5))
+        headerField = HeaderField(frame: CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppConst.headerFieldWidth, height: heightMax * 0.5))
         // ヒストリーバックボタン
         historyBackButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: (frame.size.width - AppConst.headerFieldWidth) / 4, height: frame.size.height)))
         // ヒストリーフォワードボタン
@@ -88,7 +88,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
             button.setImage(image: image, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
             button.alpha = 1
             let edgeInset: CGFloat = button.frame.size.width / 7.0769
-            button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset + 15, edgeInset, edgeInset, edgeInset)
+            button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset + 10.5, edgeInset, edgeInset, edgeInset)
             _ = button.reactive.tap
                 .observe { _ in
                     action()
@@ -152,14 +152,14 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         if force {
             headerField.removeInputForm()
             
-            headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
+            headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
             self.isEditing = false
             self.headerField.makeContent(restore: true, restoreText: nil)
         } else {
             let text = headerField.textField?.text
             headerField.removeInputForm()
             
-            headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.63, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
+            headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
             self.isEditing = false
             
             if let text = text, !text.isEmpty {
@@ -186,8 +186,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         self.delegate?.headerViewDidEndEditing()
         
         if let text = text, !text.isEmpty {
-            let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
-            viewModel.notifySearchWebView(text: encodedText!)
+            viewModel.notifySearchWebView(text: text)
         }
     }
 
@@ -226,7 +225,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
                 self.headerField.frame = self.frame
             }, completion: { _ in
                 // キーボード表示
-                self.headerField.makeInputForm(height: self.frame.size.height - self.heightMax * 0.63)
+                self.headerField.makeInputForm(height: self.frame.size.height - self.heightMax * 0.66)
             })
         }
     }

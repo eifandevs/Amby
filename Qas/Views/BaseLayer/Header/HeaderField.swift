@@ -93,6 +93,7 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     // テキストフィールドの削除
     func removeInputForm() {
         closeKeyBoard()
+        textField.removeTarget(self, action: #selector(HeaderField.textFieldEditingChanged), for: .editingChanged)
         textField.removeFromSuperview()
         textField = nil
     }
@@ -179,6 +180,8 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
         textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
     }
     func textFieldEditingChanged(sender: UITextField) {
+        // 表示している履歴情報の更新
+        NotificationCenter.default.post(name: .searchMenuTableViewModelWillUpdateSearchToken, object: ["token": sender.text])
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.delegate?.headerFieldDidEndEditing(text: textField.text)

@@ -30,6 +30,7 @@ extension NSNotification.Name {
     static let baseViewModelWillRegisterAsFavorite = NSNotification.Name("baseViewModelWillRegisterAsFavorite")
     static let baseViewModelWillRegisterAsForm = NSNotification.Name("baseViewModelWillRegisterAsForm")
     static let baseViewModelWillAutoScroll = NSNotification.Name("baseViewModelWillAutoScroll")
+    static let searchMenuTableViewModelWillUpdateSearchToken = NSNotification.Name("searchMenuTableViewModelWillUpdateSearchToken")
     static let footerViewModelWillLoad = NSNotification.Name("footerViewModelWillLoad")
     static let footerViewModelWillAddWebView = NSNotification.Name("footerViewModelWillAddWebView")
     static let footerViewModelWillRemoveWebView = NSNotification.Name("footerViewModelWillRemoveWebView")

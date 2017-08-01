@@ -604,8 +604,15 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
     }
     func baseViewModelDidSearchWebView(text: String) {
-        let search = text.hasValidUrl ? text : "\(AppConst.searchPath)\(text)"
-        _ = front.load(urlStr: search)
+        if text.hasValidUrl {
+            let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+            _ = front.load(urlStr: encodedText)
+        } else {
+            // 閲覧履歴を保存する
+            CommonDao.s.storeSearchHistory(searchHistory: [SearchHistoryItem(title: text, date: Date())])
+            let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+            _ = front.load(urlStr: "\(AppConst.searchPath)\(encodedText)")
+        }
     }
     
     func baseViewModelDidHistoryBackWebView() {

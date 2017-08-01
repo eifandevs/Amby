@@ -17,7 +17,7 @@ protocol OptionMenuTableViewDelegate {
     func optionMenuDidDeleteFormData(_id: String)
 }
 
-class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, ShadowView, OptionMenuTableViewDelegate {
+class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ShadowView, OptionMenuTableViewDelegate {
     var delegate: OptionMenuTableViewDelegate? = nil
     private var tableView: UITableView = UITableView()
     private var detailView: OptionMenuTableView? = nil
@@ -73,6 +73,18 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         return viewModel.sectionItems.count > 0 ? viewModel.sectionItems.count : viewModel.menuItems.count > 0 ? 1 : 0
     }
 
+// MARK: ScrollView Delegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // 履歴表示で、コンテンツが残り２ページであれば、次の履歴を読みに行く
+        if viewModel is HistoryMenuViewModel {
+            if scrollView.contentOffset.y < scrollView.contentSize.height - (frame.size.height * 2) {
+                (viewModel as! HistoryMenuViewModel).updateHistoryData()
+                tableView.reloadData()
+            }
+        }
+    }
+    
+// MARK: TableView Delegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return AppConst.optionMenuCellHeight
     }
