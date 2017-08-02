@@ -396,6 +396,12 @@ final class CommonDao {
         Util.createFolder(path: AppConst.commonHistoryPath)
     }
 
+    /// 検索履歴を全て削除
+    func deleteAllSearchHistory() {
+        Util.deleteFolder(path: AppConst.searchHistoryPath)
+        Util.createFolder(path: AppConst.searchHistoryPath)
+    }
+
     /// UDデフォルト値登録
     func registerDefaultData() {
         UserDefaults.standard.register(defaults: [AppConst.locationIndexKey: 0,

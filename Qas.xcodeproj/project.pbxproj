@@ -78,6 +78,10 @@
 		A545D70C1F30B6F20023C160 /* SearchHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545D70B1F30B6F20023C160 /* SearchHistoryItem.swift */; };
 		A545D70E1F30B70A0023C160 /* SearchMenuTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545D70D1F30B70A0023C160 /* SearchMenuTableViewModel.swift */; };
 		A545D7101F30B7390023C160 /* SearchMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545D70F1F30B7390023C160 /* SearchMenuTableViewCell.swift */; };
+		A545D7131F320C7D0023C160 /* SuggestGetApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545D7121F320C7D0023C160 /* SuggestGetApiResponse.swift */; };
+		A545D7151F320CA70023C160 /* HttpConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545D7141F320CA70023C160 /* HttpConst.swift */; };
+		A545D71E1F320D790023C160 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545D71C1F320D790023C160 /* ApiManager.swift */; };
+		A545D71F1F320D790023C160 /* SuggestGetApiRequestExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545D71D1F320D790023C160 /* SuggestGetApiRequestExecuter.swift */; };
 		A565ED031F24D629005740E3 /* UIImageView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A565ED021F24D629005740E3 /* UIImageView+Extend.swift */; };
 		A565ED051F27536E005740E3 /* OnceExec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A565ED041F27536E005740E3 /* OnceExec.swift */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
@@ -163,6 +167,10 @@
 		A545D70B1F30B6F20023C160 /* SearchHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryItem.swift; sourceTree = "<group>"; };
 		A545D70D1F30B70A0023C160 /* SearchMenuTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMenuTableViewModel.swift; sourceTree = "<group>"; };
 		A545D70F1F30B7390023C160 /* SearchMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMenuTableViewCell.swift; sourceTree = "<group>"; };
+		A545D7121F320C7D0023C160 /* SuggestGetApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestGetApiResponse.swift; sourceTree = "<group>"; };
+		A545D7141F320CA70023C160 /* HttpConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpConst.swift; sourceTree = "<group>"; };
+		A545D71C1F320D790023C160 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		A545D71D1F320D790023C160 /* SuggestGetApiRequestExecuter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestGetApiRequestExecuter.swift; sourceTree = "<group>"; };
 		A565ED021F24D629005740E3 /* UIImageView+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extend.swift"; sourceTree = "<group>"; };
 		A565ED041F27536E005740E3 /* OnceExec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnceExec.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qas.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,13 +218,13 @@
 			isa = PBXGroup;
 			children = (
 				A5223E8B1F1F8EA20097E793 /* App */,
-				A5223E901F1F8EA20097E793 /* LaunchScreen.storyboard */,
 				A5223E921F1F8EA20097E793 /* Common */,
-				A5223EAE1F1F8EA20097E793 /* Models */,
-				A5223EB71F1F8EA20097E793 /* Resources */,
 				A5223EBD1F1F8EA20097E793 /* ViewControllers */,
 				A5223EBF1F1F8EA20097E793 /* ViewModels */,
 				A5223ECB1F1F8EA20097E793 /* Views */,
+				A5223EAE1F1F8EA20097E793 /* Models */,
+				A5223EB71F1F8EA20097E793 /* Resources */,
+				A5223E901F1F8EA20097E793 /* LaunchScreen.storyboard */,
 			);
 			path = Qas;
 			sourceTree = "<group>";
@@ -236,13 +244,14 @@
 			isa = PBXGroup;
 			children = (
 				A5223E931F1F8EA20097E793 /* CacheHelper.swift */,
-				A5223EAC1F1F8EA20097E793 /* RealmHelper.swift */,
 				A5223E941F1F8EA20097E793 /* CommonDao.swift */,
+				A565ED041F27536E005740E3 /* OnceExec.swift */,
+				A5223EAC1F1F8EA20097E793 /* RealmHelper.swift */,
 				A5223EAD1F1F8EA20097E793 /* Util.swift */,
 				A5223E951F1F8EA20097E793 /* Define */,
 				A5223E981F1F8EA20097E793 /* Extension */,
+				A545D71B1F320D790023C160 /* Http */,
 				A5223EA81F1F8EA20097E793 /* Protocol */,
-				A565ED041F27536E005740E3 /* OnceExec.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -252,6 +261,7 @@
 			children = (
 				A5223E961F1F8EA20097E793 /* AppConst.swift */,
 				A5223E971F1F8EA20097E793 /* DeviceConst.swift */,
+				A545D7141F320CA70023C160 /* HttpConst.swift */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -293,6 +303,7 @@
 		A5223EAE1F1F8EA20097E793 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A545D7111F320C690023C160 /* Http */,
 				A5223EAF1F1F8EA20097E793 /* Class */,
 				A5223EB41F1F8EA20097E793 /* DB */,
 			);
@@ -452,6 +463,23 @@
 				A5223EE51F1F8EA20097E793 /* OptionMenuTextField.swift */,
 			);
 			path = OptionMenu;
+			sourceTree = "<group>";
+		};
+		A545D7111F320C690023C160 /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				A545D7121F320C7D0023C160 /* SuggestGetApiResponse.swift */,
+			);
+			path = Http;
+			sourceTree = "<group>";
+		};
+		A545D71B1F320D790023C160 /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				A545D71C1F320D790023C160 /* ApiManager.swift */,
+				A545D71D1F320D790023C160 /* SuggestGetApiRequestExecuter.swift */,
+			);
+			path = Http;
 			sourceTree = "<group>";
 		};
 		A57EFE981E3E06D300B66701 = {
@@ -641,6 +669,7 @@
 				A5223EFE1F1F8EA20097E793 /* CircleView.swift in Sources */,
 				A5223F2A1F1F8EA20097E793 /* OptionMenuTextField.swift in Sources */,
 				A5223EEE1F1F8EA20097E793 /* DeviceConst.swift in Sources */,
+				A545D7151F320CA70023C160 /* HttpConst.swift in Sources */,
 				A5223F151F1F8EA20097E793 /* HistoryMenuViewModel.swift in Sources */,
 				A545D70C1F30B6F20023C160 /* SearchHistoryItem.swift in Sources */,
 				A545D70E1F30B70A0023C160 /* SearchMenuTableViewModel.swift in Sources */,
@@ -671,7 +700,9 @@
 				A5223F1F1F1F8EA20097E793 /* EGGradientLabel.swift in Sources */,
 				A5223F081F1F8EA20097E793 /* Form.swift in Sources */,
 				A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */,
+				A545D7131F320C7D0023C160 /* SuggestGetApiResponse.swift in Sources */,
 				A5223EFC1F1F8EA20097E793 /* UIScrollView+Extend.swift in Sources */,
+				A545D71F1F320D790023C160 /* SuggestGetApiRequestExecuter.swift in Sources */,
 				A5223F101F1F8EA20097E793 /* FooterViewModel.swift in Sources */,
 				A5223EFB1F1F8EA20097E793 /* UIImage+Extend.swift in Sources */,
 				A5223F281F1F8EA20097E793 /* OptionMenuTableViewCell.swift in Sources */,
@@ -679,6 +710,7 @@
 				A5223EF31F1F8EA20097E793 /* Double+Extend.swift in Sources */,
 				A5223F251F1F8EA20097E793 /* CircleProgress.swift in Sources */,
 				A5223EF71F1F8EA20097E793 /* Optional+Extend.swift in Sources */,
+				A545D71E1F320D790023C160 /* ApiManager.swift in Sources */,
 				A5223F1C1F1F8EA20097E793 /* FooterView.swift in Sources */,
 				A5223EF21F1F8EA20097E793 /* DispatchQueue+Extend.swift in Sources */,
 				A5223F1A1F1F8EA20097E793 /* EGWebView.swift in Sources */,

@@ -209,13 +209,20 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         }
     }
     
-    func headerViewModelDidBeginEditing() {
-        // 自動で編集状態にする
-        if headerField.text.isEmpty {
+    func headerViewModelDidBeginEditing(forceEditFlg: Bool) {
+        if forceEditFlg {
+            // サークルメニューから検索を押下したとき
             startEditing()
+        } else {
+            // 空のページを表示したとき
+            // 自動で編集状態にする
+            if headerField.text.isEmpty {
+                startEditing()
+            }
         }
     }
     
+    /// 検索開始
     func startEditing() {
         if !isEditing {
             isEditing = true

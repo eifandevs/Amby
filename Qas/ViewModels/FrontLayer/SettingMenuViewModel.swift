@@ -17,14 +17,6 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
     override func setup() {
         sectionItems = ["自動スクロール設定", "データ削除", "初期化"]
         menuItems = [
-//            [
-//                OptionMenuItem(type: .select,
-//                               title: "プライベートモード",
-//                               switchAction: { (isOn: Bool) -> () in
-//                                UserDefaults.standard.set(isOn ? "true" : "false", forKey: AppConst.privateModeKey)
-//                               },
-//                               defaultValue: UserDefaults.standard.string(forKey: AppConst.privateModeKey) == "true"),
-//            ],
             [
                 OptionMenuItem(type: .slider, defaultValue: -UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey))
             ],
@@ -46,6 +38,12 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 OptionMenuItem(title: "フォームデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     Util.presentAlert(title: "データ削除", message: "フォームデータを全て削除します。よろしいですか？", completion: {
                         CommonDao.s.deleteAllForm()
+                    })
+                    return nil
+                }),
+                OptionMenuItem(title: "検索履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    Util.presentAlert(title: "データ削除", message: "検索履歴を全て削除します。よろしいですか？", completion: {
+                        CommonDao.s.deleteAllSearchHistory()
                     })
                     return nil
                 }),

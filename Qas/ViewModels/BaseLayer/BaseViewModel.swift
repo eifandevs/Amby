@@ -282,7 +282,7 @@ class BaseViewModel {
     }
     
     func notifyBeginEditing() {
-        center.post(name: .headerViewModelWillBeginEditing, object: nil)
+        center.post(name: .headerViewModelWillBeginEditing, object: false)
     }
     
     func reloadHeaderText() {

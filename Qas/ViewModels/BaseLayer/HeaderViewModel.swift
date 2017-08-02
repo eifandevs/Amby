@@ -13,7 +13,7 @@ protocol HeaderViewModelDelegate {
     func headerViewModelDidChangeProgress(progress: CGFloat)
     func headerViewModelDidChangeField(text: String)
     func headerViewModelDidChangeFavorite(changed: Bool)
-    func headerViewModelDidBeginEditing()
+    func headerViewModelDidBeginEditing(forceEditFlg: Bool)
 }
 
 class HeaderViewModel {
@@ -44,7 +44,7 @@ class HeaderViewModel {
         // 検索開始
         center.addObserver(forName: .headerViewModelWillBeginEditing, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[HeaderView Event]: headerViewModelWillBeginEditing")
-            self!.delegate?.headerViewModelDidBeginEditing()
+            self!.delegate?.headerViewModelDidBeginEditing(forceEditFlg: notification.object as! Bool)
         }
     }
 
