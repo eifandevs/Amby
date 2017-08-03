@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-protocol FrontLayerDelegate {
+protocol FrontLayerDelegate: class {
     func frontLayerDidInvalidate()
 }
 
 class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
-    var delegate: FrontLayerDelegate?
+    weak var delegate: FrontLayerDelegate?
     var swipeDirection: EdgeSwipeDirection = .none
     private var optionMenu: OptionMenuTableView? = nil
     private var overlay: UIButton! = nil
@@ -29,7 +29,10 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         super.init(frame: frame)
         // バックグラウンドに入るときに保持していた削除対象を削除する
         NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (notification) in
-            self!.deleteStoreData()
+            guard let `self` = self else {
+                return
+            }
+            self.deleteStoreData()
         }
         
         overlay = UIButton(frame: frame)

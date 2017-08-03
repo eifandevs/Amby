@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-protocol SearchMenuTableViewDelegate {
+protocol SearchMenuTableViewDelegate: class  {
     func searchMenuDidEndEditing()
     func searchMenuDidClose()
 }
 
 class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, SearchMenuTableViewModelDelegate {
 
-    var delegate: SearchMenuTableViewDelegate? = nil
+    weak var delegate: SearchMenuTableViewDelegate? = nil
     let viewModel: SearchMenuTableViewModel = SearchMenuTableViewModel()
     let cellHeight = 50.0
     var tapRecognizer: UITapGestureRecognizer!

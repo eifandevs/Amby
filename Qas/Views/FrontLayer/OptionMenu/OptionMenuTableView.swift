@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol OptionMenuTableViewDelegate {
+protocol OptionMenuTableViewDelegate: class {
     func optionMenuDidClose()
     func optionMenuDidCloseDetailMenu()
     func optionMenuDidDeleteHistoryData(_id: String, date: Date)
@@ -18,7 +18,7 @@ protocol OptionMenuTableViewDelegate {
 }
 
 class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ShadowView, OptionMenuTableViewDelegate {
-    var delegate: OptionMenuTableViewDelegate? = nil
+    weak var delegate: OptionMenuTableViewDelegate? = nil
     private var tableView: UITableView = UITableView()
     private var detailView: OptionMenuTableView? = nil
     private var viewModel: OptionMenuTableViewModel!
