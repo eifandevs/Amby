@@ -12,7 +12,7 @@ import CoreLocation
 
 protocol HeaderViewDelegate {
     func headerViewDidBeginEditing()
-    func headerViewDidEndEditing()
+    func headerViewDidEndEditing(headerFieldUpdate: Bool)
 }
 
 class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowView {
@@ -149,28 +149,20 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         headerField.closeKeyBoard()
     }
     
-    func finishEditing(force: Bool) {
-        if force {
-            headerField.removeInputForm()
-            
-            headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
-            self.isEditing = false
-            self.headerField.makeContent(restore: true, restoreText: nil)
-        } else {
-            let text = headerField.textField?.text
-            headerField.removeInputForm()
-            
-            headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
-            self.isEditing = false
-            
-            if let text = text, !text.isEmpty {
-                let restoreText = text.hasValidUrl ? text : "\(AppConst.searchPath)\(text)"
-                let encodedText = restoreText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+    func finishEditing(headerFieldUpdate: Bool) {
+        let text = headerField.textField?.text
+        headerField.removeInputForm()
+        
+        headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
+        self.isEditing = false
+        
+        if let text = text, headerFieldUpdate && !text.isEmpty {
+            let restoreText = text.hasValidUrl ? text : "\(AppConst.searchPath)\(text)"
+            let encodedText = restoreText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
 
-                self.headerField.makeContent(restore: true, restoreText: encodedText)
-            } else {
-                self.headerField.makeContent(restore: true, restoreText: nil)
-            }
+            self.headerField.makeContent(restore: true, restoreText: encodedText)
+        } else {
+            self.headerField.makeContent(restore: true, restoreText: nil)
         }
     }
     
@@ -184,10 +176,11 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     
 // MARK: EGTextField Delegate
     func headerFieldDidEndEditing(text: String?) {
-        self.delegate?.headerViewDidEndEditing()
-        
         if let text = text, !text.isEmpty {
+            self.delegate?.headerViewDidEndEditing(headerFieldUpdate: true)
             viewModel.notifySearchWebView(text: text)
+        } else {
+            self.delegate?.headerViewDidEndEditing(headerFieldUpdate: false)
         }
     }
 

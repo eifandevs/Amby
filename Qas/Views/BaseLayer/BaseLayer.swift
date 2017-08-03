@@ -152,7 +152,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     }
     
     func searchMenuDidClose() {
-        headerViewDidEndEditing()
+        headerViewDidEndEditing(headerFieldUpdate: false)
     }
     
 // MARK: HeaderView Delegate
@@ -169,12 +169,12 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
         addSubview(overlay!)
     }
     
-    func headerViewDidEndEditing() {
+    func headerViewDidEndEditing(headerFieldUpdate: Bool) {
         EGApplication.sharedMyApplication.egDelegate = baseView
         isHeaderViewEditing = false
         overlay!.removeFromSuperview()
         overlay = nil
-        headerView.finishEditing(force: false)
+        headerView.finishEditing(headerFieldUpdate: headerFieldUpdate)
     }
 
 // MARK: Screen Event
