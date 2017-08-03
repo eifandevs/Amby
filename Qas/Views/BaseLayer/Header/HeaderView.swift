@@ -128,6 +128,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// サイズの最大化。BG->FGにユーザにURLを見せる
     func slideToMax() {
         frame.origin.y = 0
         headerItems.forEach { (button) in
@@ -225,6 +226,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     /// 検索開始
     func startEditing() {
         if !isEditing {
+            slideToMax()
             isEditing = true
             headerField.removeContent()
             delegate?.headerViewDidBeginEditing()

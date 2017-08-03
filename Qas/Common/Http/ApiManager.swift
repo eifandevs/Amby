@@ -15,7 +15,7 @@ class ApiManager {
     let parameters: Parameters?
     
     init(url: String, method: HTTPMethod = .get, parameters: Parameters? = nil) {
-        self.url = url
+        self.url = url.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         self.method = method
         self.parameters = parameters
     }

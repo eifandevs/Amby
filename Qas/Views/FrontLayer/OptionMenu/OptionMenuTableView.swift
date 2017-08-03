@@ -111,11 +111,11 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if detailView == nil {
             let action: ((OptionMenuItem) -> (OptionMenuTableViewModel?))? = { () -> ((OptionMenuItem) -> (OptionMenuTableViewModel?))? in
-                if viewModel.commonAction != nil {
-                    return viewModel.commonAction!
+                if let commonAction = viewModel.commonAction {
+                    return commonAction
                 }
-                if viewModel.menuItems[indexPath.section][indexPath.row].action != nil {
-                    return viewModel.menuItems[indexPath.section][indexPath.row].action!
+                if let cellAction = viewModel.menuItems[indexPath.section][indexPath.row].action {
+                    return cellAction
                 }
                 return nil
             }()

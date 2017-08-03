@@ -31,8 +31,7 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
         }
         updateHistoryData()
         commonAction = { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-            let encodedText = menuItem.url!.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
-            NotificationCenter.default.post(name: .baseViewModelWillSearchWebView, object: encodedText!)
+            NotificationCenter.default.post(name: .baseViewModelWillSearchWebView, object: menuItem.url!)
             return nil
         }
     }
@@ -48,7 +47,8 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
                     commonHistoryByDate.append([keyStr: commonHistory])
                     sectionItems.append(keyStr)
                     menuItems.append(commonHistory.map({ (item) -> OptionMenuItem in
-                        return OptionMenuItem(_id: item._id, type: .deletablePlain, title: item.title, url: item.url, date: item.date)
+                        let decodedUrl = item.url.removingPercentEncoding!
+                        return OptionMenuItem(_id: item._id, type: .deletablePlain, title: item.title, url: decodedUrl, date: item.date)
                     }))
                     log.debug("common history read. key: \(keyStr)")
                 } catch let error as NSError {

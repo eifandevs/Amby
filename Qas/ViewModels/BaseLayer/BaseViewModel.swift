@@ -291,7 +291,7 @@ class BaseViewModel {
     
     func saveHistory(wv: EGWebView) {
         if !isPrivateMode! {
-            if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle {
+            if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle, !requestTitle.isEmpty {
                 //　アプリ起動後の前回ページロード時は、履歴に保存しない
                 if requestUrl != self.requestUrl {
                     // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する

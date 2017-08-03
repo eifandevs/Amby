@@ -16,6 +16,6 @@ class SuggestGetApiResponse {
     }
     
     private func mapping(response: Dictionary<String, Any>) {
-        data = (response["result"] as! [Any])[1] as! [String]
+        data = (response["result"] as? [Any] ?? [String]())[safe: 1] as? [String] ?? [String]()
     }
 }

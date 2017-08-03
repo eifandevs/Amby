@@ -105,7 +105,7 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.textLabel?.text = "ああああ"
+            cell.textLabel?.text = viewModel.googleSearchCellItem[indexPath.row]
             return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -131,6 +131,15 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)!
+        if cell.className == SearchMenuTableViewCell.className {
+            let text = (cell as! SearchMenuTableViewCell).urlLabel.text!
+            NotificationCenter.default.post(name: .baseViewModelWillSearchWebView, object: text)
+        } else {
+            let text = cell.textLabel!.text!
+            NotificationCenter.default.post(name: .baseViewModelWillSearchWebView, object: text)
+        }
+        delegate?.searchMenuDidClose()
     }
     
 // MARK: Touch Event
