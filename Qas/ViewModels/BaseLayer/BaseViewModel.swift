@@ -196,6 +196,12 @@ class BaseViewModel {
             let text = notification.object as! String
             self!.delegate?.baseViewModelDidSearchWebView(text: text)
         }
+        
+        // URLコピー
+        center.addObserver(forName: .baseViewModelWillCopyUrl, object: nil, queue: nil) { [weak self] (notification) in
+            log.debug("[BaseView Event]: baseViewModelWillCopyUrl")
+            UIPasteboard.general.string = self!.requestUrl
+        }
         // webviewヒストリバック
         center.addObserver(forName: .baseViewModelWillHistoryBackWebView, object: nil, queue: nil) { [weak self] (notification) in
             log.debug("[BaseView Event]: baseViewModelWillHistoryBackWebView")

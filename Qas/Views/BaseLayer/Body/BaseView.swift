@@ -389,6 +389,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
 // MARK: Public Method
+    func getFrontUrl() -> String? {
+        return front.url?.absoluteString
+    }
+    
     func slide(value: CGFloat) {
         frame.origin.y += value
         // スライドと同時にスクロールが発生しているので、逆方向にスクロールし、スクロールを無効化する

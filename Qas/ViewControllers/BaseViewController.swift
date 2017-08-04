@@ -51,8 +51,10 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
             if let orgActionSheet = viewControllerToPresent as? UIAlertController, let url = orgActionSheet.title {
                 if ((orgActionSheet.preferredStyle == .actionSheet) && (orgActionSheet.title != nil)) {
                     // webviewを長押しされたら、そのURLで新しいタブを作成する
-                    NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: ["url": url])
-                    return
+                    if url.hasValidUrl {
+                        NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: ["url": url])
+                        return
+                    }
                 }
             }
         }

@@ -23,6 +23,9 @@ extension Array where Element: Equatable {
     
     /// 複数のオブジェクトを安全にとりだす
     func objects(for : Int) -> Array {
+        if self.count == 0 {
+            return self
+        }
         guard 0...self.count-1 ~= `for` else {
             return objects(for: self.count - 1)
         }

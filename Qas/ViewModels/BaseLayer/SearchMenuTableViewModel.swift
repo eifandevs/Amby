@@ -11,6 +11,7 @@ import UIKit
 
 protocol SearchMenuTableViewModelDelegate: class {
     func searchMenuViewWillUpdateLayout()
+    func searchMenuViewWillHide()
 }
 
 class SearchMenuTableViewModel {
@@ -34,8 +35,9 @@ class SearchMenuTableViewModel {
             log.debug("[SearchMenuTableView Event]: searchMenuTableViewModelWillUpdateSearchToken")
             let token = notification.object != nil ? (notification.object as! [String: String])["token"] : nil
             if let token = token, !token.isEmpty {
-                self.historyCellItem = CommonDao.s.selectCommonHistory(title: token, readNum: self.readHistoryNum)
-                self.searchHistoryCellItem = CommonDao.s.selectSearchHistory(title: token, readNum: self.readHistoryNum)
+                log.warning(CommonDao.s.selectCommonHistory(title: token, readNum: self.readHistoryNum))
+                self.historyCellItem = CommonDao.s.selectCommonHistory(title: token, readNum: self.readHistoryNum).objects(for: 4)
+                self.searchHistoryCellItem = CommonDao.s.selectSearchHistory(title: token, readNum: self.readHistoryNum).objects(for: 4)
                 SuggestGetAPIRequestExecuter.request(token: token, completion: { (response) in
                     if let response = response, response.data.count > 0 {
                         // suggestあり
@@ -47,7 +49,7 @@ class SearchMenuTableViewModel {
                 self.googleSearchCellItem = []
                 self.historyCellItem = []
                 self.searchHistoryCellItem = []
-                self.delegate?.searchMenuViewWillUpdateLayout()
+                self.delegate?.searchMenuViewWillHide()
             }
         }
     }

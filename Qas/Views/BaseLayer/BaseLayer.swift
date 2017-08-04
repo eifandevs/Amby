@@ -21,7 +21,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     private var headerView: HeaderView
     private let footerView: FooterView
     private let baseView: BaseView
-    private var overlay: SearchMenuTableView? = nil
+    private var searchMenuTableView: SearchMenuTableView? = nil
     private var isTouchEndAnimating = false
     private var isHeaderViewEditing = false
 
@@ -116,9 +116,12 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
         do {
             let button = UIButton(frame: CGRect(origin: CGPoint(x: 220, y: 340), size: CGSize(width: 150, height: 50)))
             button.backgroundColor = UIColor.gray
-            button.setTitle("現在のwv削除", for: .normal)
+            button.setTitle("URLコピー", for: .normal)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
+                    if let url = self!.baseView.getFrontUrl() {
+                        UIPasteboard.general.string = url
+                    }
             }
             addSubview(button)
         }
@@ -164,16 +167,16 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
         // サークルメニューを表示させないため
         EGApplication.sharedMyApplication.egDelegate = self
         isHeaderViewEditing = true
-        overlay = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
-        overlay?.delegate = self
-        addSubview(overlay!)
+        searchMenuTableView = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
+        searchMenuTableView?.delegate = self
+        addSubview(searchMenuTableView!)
     }
     
     func headerViewDidEndEditing(headerFieldUpdate: Bool) {
         EGApplication.sharedMyApplication.egDelegate = baseView
         isHeaderViewEditing = false
-        overlay!.removeFromSuperview()
-        overlay = nil
+        searchMenuTableView!.removeFromSuperview()
+        searchMenuTableView = nil
         headerView.finishEditing(headerFieldUpdate: headerFieldUpdate)
     }
 

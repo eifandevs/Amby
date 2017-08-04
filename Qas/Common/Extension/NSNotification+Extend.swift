@@ -25,6 +25,7 @@ extension NSNotification.Name {
     static let baseViewModelWillDeleteHistory = NSNotification.Name("baseViewModelWillDeleteHistory")
     static let baseViewModelWillInitialize = NSNotification.Name("baseViewModelWillInitialize")
     static let baseViewModelWillHistoryForwardWebView = NSNotification.Name("baseViewModelWillHistoryForwardWebView")
+    static let baseViewModelWillCopyUrl = NSNotification.Name("baseViewModelWillCopyUrl")
     static let baseViewModelWillSearchWebView = NSNotification.Name("baseViewModelWillSearchWebView")
     static let baseViewModelWillChangeFavorite = NSNotification.Name("baseViewModelWillChangeFavorite")
     static let baseViewModelWillRegisterAsFavorite = NSNotification.Name("baseViewModelWillRegisterAsFavorite")

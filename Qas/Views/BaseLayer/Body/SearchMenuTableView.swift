@@ -20,6 +20,7 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     let viewModel: SearchMenuTableViewModel = SearchMenuTableViewModel()
     let cellHeight = 50.0
     var tapRecognizer: UITapGestureRecognizer!
+    var overlay: UIButton?
     
     private var tableView: UITableView = UITableView()
     
@@ -150,5 +151,25 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
 // MARK: SearchMenuTableViewModelDelegate
     func searchMenuViewWillUpdateLayout() {
         tableView.reloadData()
+        alpha = 1
+        if let overlay = overlay {
+            overlay.removeFromSuperview()
+            self.overlay = nil
+        }
+    }
+    
+    func searchMenuViewWillHide() {
+        if overlay == nil {
+            alpha = 0
+            let button = UIButton(frame: frame)
+            button.backgroundColor = UIColor.clear
+            _ = button.reactive.tap
+                .observe { [weak self] _ in
+                    self!.delegate?.searchMenuDidClose()
+                    button.removeFromSuperview()
+            }
+            overlay = button
+            superview?.addSubview(button)
+        }
     }
 }

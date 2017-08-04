@@ -101,10 +101,12 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
             ],
             [
                 CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
-                    log.warning("裏メニュー")
+                    log.warning("URLコピー")
+                    NotificationCenter.default.post(name: .baseViewModelWillCopyUrl, object: nil)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_historyforward(), tapAction: { _ in
                     log.warning("ヒストリーフォワード")
+                    NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("裏メニュー")
@@ -154,7 +156,8 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
 // MARK: CircleMenuDelegate
     func circleMenuDidClose() {
         if self.optionMenu == nil {
-            UIView.animate(withDuration: 0.15, animations: { 
+            UIView.animate(withDuration: 0.15, animations: {
+                // ここでおちる
                 self.overlay.alpha = 0
             }, completion: { (finished) in
                 if finished {
