@@ -45,6 +45,10 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        log.debug("footerView deinit")
+    }
+    
 // MARK: Private Method
     
     private func createCaptureSpace(context: String, isPrivateMode: Bool) -> Thumbnail {

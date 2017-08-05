@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 import CoreLocation
 
-protocol HeaderViewDelegate {
+protocol HeaderViewDelegate: class {
     func headerViewDidBeginEditing()
     func headerViewDidEndEditing(headerFieldUpdate: Bool)
 }
 
 class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowView {
-    var delegate: HeaderViewDelegate?
+    weak var delegate: HeaderViewDelegate?
     private let heightMax = AppConst.headerViewHeight
     private var headerField: HeaderField
     private var isEditing = false
@@ -90,7 +90,8 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
             let edgeInset: CGFloat = button.frame.size.width / 7.0769
             button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset + 10.5, edgeInset, edgeInset, edgeInset)
             _ = button.reactive.tap
-                .observe { _ in
+                .observe { [weak self] _ in
+                    guard let `self` = self else { return }
                     action()
             }
             self.addSubview(button)
@@ -98,26 +99,31 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         
         // ヒストリバック
         addButton(historyBackButton, R.image.circlemenu_historyback()!) { [weak self] _ in
-            self!.viewModel.notifyHistoryBackWebView()
+            guard let `self` = self else { return }
+            self.viewModel.notifyHistoryBackWebView()
         }
         
         // ヒストリフォアード
         addButton(historyForwardButton, R.image.circlemenu_historyforward()!) { [weak self] _ in
-            self!.viewModel.notifyHistoryForwardWebView()
+            guard let `self` = self else { return }
+            self.viewModel.notifyHistoryForwardWebView()
         }
         
         // お気に入り登録
         addButton(favoriteButton, #imageLiteral(resourceName: "header_favorite")) { [weak self] _ in
-            self!.viewModel.notifyRegisterAsFavorite()
+            guard let `self` = self else { return }
+            self.viewModel.notifyRegisterAsFavorite()
         }
         // 現在のWebView削除
         addButton(deleteButton, R.image.circlemenu_close()!, { [weak self] _ in
-            self!.viewModel.notifyRemoveWebView()
+            guard let `self` = self else { return }
+            self.viewModel.notifyRemoveWebView()
         })
         
         _ = headerField.reactive.controlEvents(.touchUpInside)
             .observeNext { [weak self] _ in
-                self!.startEditing()
+                guard let `self` = self else { return }
+                self.startEditing()
         }
         
         addSubview(headerField)
@@ -126,6 +132,10 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     /// サイズの最大化。BG->FGにユーザにURLを見せる

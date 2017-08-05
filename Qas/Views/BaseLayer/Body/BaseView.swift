@@ -11,7 +11,7 @@ import UIKit
 import WebKit
 import Bond
 
-protocol BaseViewDelegate {
+protocol BaseViewDelegate: class {
     func baseViewDidScroll(speed: CGFloat)
     func baseViewDidChangeFront()
     func baseViewDidTouchBegan()
@@ -28,7 +28,7 @@ enum EdgeSwipeDirection: CGFloat {
 
 class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDelegate, WKUIDelegate, EGApplicationDelegate, BaseViewModelDelegate {
     
-    var delegate: BaseViewDelegate?
+    weak var delegate: BaseViewDelegate?
 
     /// 編集状態にするクロージャ
     var beginEditingWorkItem: DispatchWorkItem? = nil
@@ -111,11 +111,13 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         
         // キーボード表示の処理(フォームの自動設定)
         registerForKeyboardDidShowNotification { [weak self] (notification, size) in
-            self!.delegate?.baseViewWillAutoInput()
+            guard let `self` = self else { return }
+            self.delegate?.baseViewWillAutoInput()
         }
         
         registerForKeyboardWillHideNotification { [weak self] (notification) in
-            self!.isDisplayedKeyBoard = false
+            guard let `self` = self else { return }
+            self.isDisplayedKeyBoard = false
         }
         
         // webviewsに初期値を入れる
@@ -135,7 +137,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
     }
     
-    deinit {        
+    deinit {
         webViews.forEach { (webView) in
             if let unwrappedWebView = webView {
                 if unwrappedWebView == front {
@@ -144,6 +146,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 unwrappedWebView.removeObserver(self, forKeyPath: "loading")
             }
         }
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func layoutSubviews() {

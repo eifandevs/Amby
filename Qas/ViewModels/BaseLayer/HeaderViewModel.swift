@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol HeaderViewModelDelegate {
+protocol HeaderViewModelDelegate: class {
     func headerViewModelDidChangeProgress(progress: CGFloat)
     func headerViewModelDidChangeField(text: String)
     func headerViewModelDidChangeFavorite(changed: Bool)
@@ -20,34 +20,43 @@ class HeaderViewModel {
     // 通知センター
     private let center = NotificationCenter.default
     
-    var delegate: HeaderViewModelDelegate?
+    weak var delegate: HeaderViewModelDelegate?
 
     init () {
         // プログレスバーの初期化
         center.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (notification) in
-            self!.delegate?.headerViewModelDidChangeProgress(progress: 0)
+            guard let `self` = self else { return }
+            self.delegate?.headerViewModelDidChangeProgress(progress: 0)
         }
         // プログレス更新
         center.addObserver(forName: .headerViewModelWillChangeProgress, object: nil, queue: nil) { [weak self] (notification) in
-            self!.delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
+            guard let `self` = self else { return }
+            self.delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
         }
         // 読み込み終了
         center.addObserver(forName: .headerViewModelWillChangeFavorite, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
             log.debug("[HeaderView Event]: headerViewModelWillChangeFavorite")
-            self!.delegate?.headerViewModelDidChangeFavorite(changed: notification.object as! Bool)
+            self.delegate?.headerViewModelDidChangeFavorite(changed: notification.object as! Bool)
         }
         // ヘッダーURL更新
         center.addObserver(forName: .headerViewModelWillChangeField, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
             log.debug("[HeaderView Event]: headerViewModelWillChangeField")
-            self!.delegate?.headerViewModelDidChangeField(text: notification.object as! String)
+            self.delegate?.headerViewModelDidChangeField(text: notification.object as! String)
         }
         // 検索開始
         center.addObserver(forName: .headerViewModelWillBeginEditing, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
             log.debug("[HeaderView Event]: headerViewModelWillBeginEditing")
-            self!.delegate?.headerViewModelDidBeginEditing(forceEditFlg: notification.object as! Bool)
+            self.delegate?.headerViewModelDidBeginEditing(forceEditFlg: notification.object as! Bool)
         }
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
 // MARK: Public Method
 
     func notifyHistoryBackWebView() {

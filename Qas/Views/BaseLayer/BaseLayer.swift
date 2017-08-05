@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-protocol BaseLayerDelegate {
+protocol BaseLayerDelegate: class {
     func baseLayerDidInvalidate(direction: EdgeSwipeDirection)
 }
 
 class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableViewDelegate, EGApplicationDelegate {
     
-    var delegate: BaseLayerDelegate?
+    weak var delegate: BaseLayerDelegate?
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.headerViewHeight - DeviceConst.statusBarHeight))
     let baseViewOriginY: (max: CGFloat, min: CGFloat) = (AppConst.headerViewHeight, DeviceConst.statusBarHeight)
     private var headerView: HeaderView
@@ -36,7 +36,8 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
 
         // フォアグラウンド時にヘッダービューの位置をMaxにする
         NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: nil) { [weak self] (notification) in
-            self!.headerView.slideToMax()
+            guard let `self` = self else { return }
+            self.headerView.slideToMax()
         }
         
         baseView.delegate = self
@@ -45,91 +46,14 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
         addSubview(baseView)
         addSubview(headerView)
         addSubview(footerView)
-        
-        /* テストコード */
-        do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 100), size: CGSize(width: 150, height: 50)))
-            button.backgroundColor = UIColor.gray
-            button.setTitle("フォーム情報保存", for: .normal)
-            _ = button.reactive.tap
-                .observe { _ in
-                    NotificationCenter.default.post(name: .baseViewModelWillRegisterAsForm, object: nil)
-            }
-            addSubview(button)
-        }
-        
-        do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 220, y: 100), size: CGSize(width: 150, height: 50)))
-            button.backgroundColor = UIColor.gray
-            button.setTitle("自動スクロール", for: .normal)
-            _ = button.reactive.tap
-                .observe { _ in
-                    NotificationCenter.default.post(name: .baseViewModelWillAutoScroll, object: nil)
-            }
-            addSubview(button)
-        }
-        
-        do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 180), size: CGSize(width: 150, height: 50)))
-            button.backgroundColor = UIColor.gray
-            button.setTitle("戻る(wv)", for: .normal)
-            _ = button.reactive.tap
-                .observe { [weak self] _ in
-            }
-            addSubview(button)
-        }
-        
-        do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 220, y: 180), size: CGSize(width: 150, height: 50)))
-            button.backgroundColor = UIColor.gray
-            button.setTitle("進む(wv)", for: .normal)
-            _ = button.reactive.tap
-                .observe { [weak self] _ in
-            }
-            addSubview(button)
-        }
-        
-        do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 260), size: CGSize(width: 150, height: 50)))
-            button.backgroundColor = UIColor.gray
-            button.setTitle("リロード", for: .normal)
-            // TODO: リロードは自前で管理しているURLから実施する
-            _ = button.reactive.tap
-                .observe { _ in
-                    NotificationCenter.default.post(name: .baseViewModelWillReloadWebView, object: nil)
-            }
-            addSubview(button)
-        }
-
-        do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 20, y: 340), size: CGSize(width: 150, height: 50)))
-            button.backgroundColor = UIColor.gray
-            button.setTitle("wv作成・移動", for: .normal)
-            // TODO: リロードは自前で管理しているURLから実施する
-            _ = button.reactive.tap
-                .observe { [weak self] _ in
-                    NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: nil)
-            }
-            addSubview(button)
-        }
-        
-        do {
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: 220, y: 340), size: CGSize(width: 150, height: 50)))
-            button.backgroundColor = UIColor.gray
-            button.setTitle("URLコピー", for: .normal)
-            _ = button.reactive.tap
-                .observe { [weak self] _ in
-                    if let url = self!.baseView.getFrontUrl() {
-                        UIPasteboard.general.string = url
-                    }
-            }
-            addSubview(button)
-        }
-        /*-----------*/
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
 // MARK: Private Method

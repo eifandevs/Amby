@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-protocol HeaderFieldDelegate {
+protocol HeaderFieldDelegate: class {
     func headerFieldDidEndEditing(text: String?)
 }
 
 class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
-    var delegate: HeaderFieldDelegate?
+    weak var delegate: HeaderFieldDelegate?
     private var icon: UIImageView? = nil
     private let iconSize: CGSize = CGSize(width: AppConst.headerViewHeight / 2, height: AppConst.headerViewHeight / 2)
     private var label: EGGradientLabel? = nil

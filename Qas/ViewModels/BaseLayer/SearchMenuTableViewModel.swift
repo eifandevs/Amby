@@ -29,9 +29,7 @@ class SearchMenuTableViewModel {
     init() {
         // webview検索
         NotificationCenter.default.addObserver(forName: .searchMenuTableViewModelWillUpdateSearchToken, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else {
-                return
-            }
+            guard let `self` = self else { return }
             log.debug("[SearchMenuTableView Event]: searchMenuTableViewModelWillUpdateSearchToken")
             let token = notification.object != nil ? (notification.object as! [String: String])["token"] : nil
             if let token = token, !token.isEmpty {
