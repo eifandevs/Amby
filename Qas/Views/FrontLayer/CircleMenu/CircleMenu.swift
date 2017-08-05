@@ -87,9 +87,12 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                     circleMenuItem.center = initialPt!
                     _ = circleMenuItem.reactive.tap
                         .observe { [weak self] _ in
-                            if !self!.isClosing {
+                            guard let `self` = self else {
+                                return
+                            }
+                            if !self.isClosing {
                                 circleMenuItem.scheduledAction = true
-                                self!.closeCircleMenuItems()
+                                self.closeCircleMenuItems()
                             }
                     }
                     superview!.addSubview(circleMenuItem)
@@ -152,9 +155,12 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                     circleMenuItems[index].frame = item.frame
                     _ = circleMenuItems[index].reactive.tap
                         .observe { [weak self] _ in
-                            if !self!.isClosing {
-                                self!.circleMenuItems[index].scheduledAction = true
-                                self!.closeCircleMenuItems()
+                            guard let `self` = self else {
+                                return
+                            }
+                            if !self.isClosing {
+                                self.circleMenuItems[index].scheduledAction = true
+                                self.closeCircleMenuItems()
                             }
                     }
                     superview!.addSubview(circleMenuItems[index])

@@ -165,7 +165,10 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
             button.backgroundColor = UIColor.clear
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    self!.delegate?.searchMenuDidClose()
+                    guard let `self` = self else {
+                        return
+                    }
+                    self.delegate?.searchMenuDidClose()
                     button.removeFromSuperview()
             }
             overlay = button
