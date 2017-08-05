@@ -157,25 +157,28 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
     func footerViewModelDidEndLoading(context: String, index: Int) {
         // くるくるを止めて、サムネイルを表示する
-        DispatchQueue.mainSyncSafe { [weak self] _ in
-            let targetThumbnail: Thumbnail = self!.thumbnails.filter({ (thumbnail) -> Bool in
-                return thumbnail.context == context
-            })[0]
-            let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: context).path)
-            if image == nil {
-                log.error("missing thumbnail image")
-                return
-            }
-            
-            targetThumbnail.subviews.forEach({ (v) in
-                if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
-                    let indicator = v as! NVActivityIndicatorView
-                    indicator.stopAnimating()
-                    indicator.alpha = 0
-                    indicator.removeFromSuperview()
+        let existIndicator = frontThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
+        if existIndicator {
+            DispatchQueue.mainSyncSafe { [weak self] _ in
+                let targetThumbnail: Thumbnail = self!.thumbnails.filter({ (thumbnail) -> Bool in
+                    return thumbnail.context == context
+                })[0]
+                let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: context).path)
+                if image == nil {
+                    log.error("missing thumbnail image")
+                    return
                 }
-            })
-            targetThumbnail.setBackgroundImage(image, for: .normal)
+                
+                targetThumbnail.subviews.forEach({ (v) in
+                    if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
+                        let indicator = v as! NVActivityIndicatorView
+                        indicator.stopAnimating()
+                        indicator.alpha = 0
+                        indicator.removeFromSuperview()
+                    }
+                })
+                targetThumbnail.setBackgroundImage(image, for: .normal)
+            }
         }
     }
     
