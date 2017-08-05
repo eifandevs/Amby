@@ -76,7 +76,7 @@ class BaseViewModel {
     
     var isPrivateMode: Bool? {
         get {
-            return eachHistory.count > locationIndex ? eachHistory[locationIndex].isPrivate == "true" : nil
+            return eachHistory.count > locationIndex ? eachHistory[locationIndex].isPrivate == "true" : false
         }
     }
     
