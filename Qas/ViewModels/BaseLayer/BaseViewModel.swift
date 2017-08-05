@@ -144,7 +144,7 @@ class BaseViewModel {
             log.debug("[BaseView Event]: baseViewModelWillCopyWebView")
             self!.eachHistory.append(HistoryItem(url: self!.eachHistory[self!.locationIndex].url, title: self!.eachHistory[self!.locationIndex].title))
             self!.locationIndex = self!.eachHistory.count - 1
-            self!.center.post(name: .footerViewModelWillAddWebView, object: ["context": self!.currentContext])
+            self!.center.post(name: .footerViewModelWillAddWebView, object: self!.eachHistory[self!.locationIndex])
             self!.delegate?.baseViewModelDidAddWebView()
         }
         

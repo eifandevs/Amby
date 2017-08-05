@@ -88,7 +88,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                     log.warning("ヒストリーバック")
                     NotificationCenter.default.post(name: .baseViewModelWillHistoryBackWebView, object: nil)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_historyforward(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_search(), tapAction: { _ in
                     log.warning("検索")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         NotificationCenter.default.post(name: .headerViewModelWillBeginEditing, object: true)
@@ -104,7 +104,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                 })
             ],
             [
-                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenu_url(), tapAction: { _ in
                     log.warning("URLコピー")
                     NotificationCenter.default.post(name: .baseViewModelWillCopyUrl, object: nil)
                 }),
@@ -112,8 +112,9 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                     log.warning("ヒストリーフォワード")
                     NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
-                    log.warning("裏メニュー")
+                CircleMenuItem(image: R.image.circlemenu_copy(), tapAction: { _ in
+                    log.warning("コピー")
+                    NotificationCenter.default.post(name: .baseViewModelWillCopyWebView, object: nil)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("裏メニュー")
