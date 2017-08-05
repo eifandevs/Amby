@@ -16,8 +16,9 @@ protocol FrontLayerDelegate: class {
 class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     weak var delegate: FrontLayerDelegate?
     var swipeDirection: EdgeSwipeDirection = .none
-    private var optionMenu: OptionMenuTableView? = nil
-    private var overlay: UIButton! = nil
+    private var optionMenu: OptionMenuTableView?
+    private var overlay: UIButton!
+    private var circleMenu: CircleMenu!
     /// ["20170625": ["123456", "234567"], "20170626": ["123456", "234567"]]の形式
     private var deleteHistoryIds: [String: [String]] = [:]
     private var deleteFavoriteIds: [String] = []
@@ -40,7 +41,10 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         self.overlay.alpha = 0
         _ = overlay.reactive.tap
             .observe { [weak self] _ in
-                self!.optionMenuDidClose()
+                guard let `self` = self else {
+                    return
+                }
+                self.optionMenuDidClose()
         }
         addSubview(overlay)
         UIView.animate(withDuration: 0.35) {
@@ -122,7 +126,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                 })
             ]
         ]
-        let circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: kCircleButtonRadius, height: kCircleButtonRadius)) ,menuItems: menuItems)
+        circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: kCircleButtonRadius, height: kCircleButtonRadius)) ,menuItems: menuItems)
         circleMenu.swipeDirection = swipeDirection
         circleMenu.delegate = self
         addSubview(circleMenu)
@@ -169,6 +173,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     
 // MARK: OptionMenuTableViewDelegate
     func optionMenuDidClose() {
+        circleMenu.invalidate()
         deleteStoreData()
         UIView.animate(withDuration: 0.15, animations: {
             self.overlay.alpha = 0

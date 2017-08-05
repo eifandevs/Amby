@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-protocol CircleMenuDelegate {
+protocol CircleMenuDelegate: class {
     func circleMenuDidClose()
 }
 
 class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
-    var delegate: CircleMenuDelegate?
+    weak var delegate: CircleMenuDelegate?
 
     private var initialPt: CGPoint? = nil
     var swipeDirection: EdgeSwipeDirection = .none
@@ -66,7 +66,9 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     }
 
 // MARK: Public Method
-
+    func invalidate() {
+        progress.invalidate()
+    }
     
 // MARK: EGApplication Delegate
     internal func screenTouchBegan(touch: UITouch) {
