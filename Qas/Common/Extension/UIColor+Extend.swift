@@ -45,7 +45,7 @@ extension UIColor {
     
     /// 青系
     static var limoges: UIColor {
-        return UIColor(red: 36/255, green: 63/255, blue: 108/255, alpha: 1)
+        return UIColor(red: 100/255, green: 94/255, blue: 127/255, alpha: 1)
     }
     
     static var frenchBlue: UIColor {
@@ -53,7 +53,7 @@ extension UIColor {
     }
     
     static var brilliantBlue: UIColor {
-        return UIColor(red: 0/255, green: 117/255, blue: 179/255, alpha: 1)
+        return UIColor(red: 183/255, green: 156/255, blue: 204/255, alpha: 1)
     }
     
     static var lightBlue: UIColor {

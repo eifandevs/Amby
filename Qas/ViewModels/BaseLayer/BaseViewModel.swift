@@ -59,6 +59,8 @@ class BaseViewModel {
     // 現在表示しているwebviewのインデックス
     var locationIndex: Int  = UserDefaults.standard.integer(forKey: AppConst.locationIndexKey) {
         didSet {
+            // locationIndexに動きがあったら、インデックスとeachHistoryを保存する
+            UserDefaults.standard.set(locationIndex, forKey: AppConst.locationIndexKey)
             log.debug("location index changed. \(oldValue) -> \(locationIndex)")
         }
     }
@@ -322,11 +324,8 @@ class BaseViewModel {
     }
     
     func storeHistory() {
-        UserDefaults.standard.set(locationIndex, forKey: AppConst.locationIndexKey)
         CommonDao.s.storeCommonHistory(commonHistory: commonHistory)
-        if commonHistory.count > 0 {
-            CommonDao.s.storeEachHistory(eachHistory: eachHistory)
-        }
+        CommonDao.s.storeEachHistory(eachHistory: eachHistory)
         commonHistory = []
     }
 }

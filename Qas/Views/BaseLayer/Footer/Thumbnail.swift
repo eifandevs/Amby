@@ -21,7 +21,7 @@ class Thumbnail: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         frontBar.frame = CGRect(origin: CGPoint(x: 0, y: frame.size.height - 4), size: CGSize(width: frame.size.width, height: 4))
-        frontBar.backgroundColor = UIColor.limoges
+        frontBar.backgroundColor = UIColor.frenchBlue
         frontBar.alpha = 0
         addSubview(frontBar)
     }
@@ -30,7 +30,7 @@ class Thumbnail: UIButton {
         self.init(frame: frame)
         if isPrivateMode {
             let privateIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width / 4.5, height: frame.size.height / 2))
-            privateIcon.setImage(image: R.image.footer_private(), color: UIColor.limoges)
+            privateIcon.setImage(image: R.image.footer_private(), color: UIColor.frenchBlue)
             addSubview(privateIcon)
         }
     }
