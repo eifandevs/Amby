@@ -154,6 +154,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         headerField.removeInputForm()
         
         headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
+        self.headerField.layer.shadowColor = UIColor.black.cgColor
         self.isEditing = false
         
         if let text = text, headerFieldUpdate && !text.isEmpty {
@@ -225,6 +226,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
             delegate?.headerViewDidBeginEditing()
             UIView.animate(withDuration: 0.11, delay: 0, options: .curveLinear, animations: {
                 self.headerField.frame = self.frame
+                self.headerField.layer.shadowColor = UIColor.clear.cgColor
             }, completion: { _ in
                 // キーボード表示
                 self.headerField.makeInputForm(height: self.frame.size.height - self.heightMax * 0.66)
