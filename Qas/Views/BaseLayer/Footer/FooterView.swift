@@ -45,10 +45,6 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        log.debug("footerView deinit")
-    }
-    
 // MARK: Private Method
     
     private func createCaptureSpace(context: String, isPrivateMode: Bool) -> Thumbnail {
@@ -56,7 +52,8 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppConst.thumbnailSize), isPrivateMode: isPrivateMode)
         btn.backgroundColor = UIColor.black
         _ = btn.reactive.tap
-            .observe { _ in
+            .observe { [weak self] _ in
+                guard let `self` = self else { return }
                 self.viewModel.notifyChangeWebView(index: self.thumbnails.index(of: btn)!)
         }
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
