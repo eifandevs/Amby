@@ -15,7 +15,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
     }
     
     override func setup() {
-        sectionItems = ["自動スクロール設定", "データ削除", "初期化"]
+        sectionItems = ["自動スクロール設定", "データ削除"]
         menuItems = [
             [
                 OptionMenuItem(type: .slider, defaultValue: -UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey))
@@ -58,13 +58,12 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                         CacheHelper.deleteCaches()
                     })
                     return nil
-                })
-            ],
-            [
-                OptionMenuItem(title: "初期化", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                }),
+                OptionMenuItem(title: "全てのデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     Util.presentAlert(title: "データ削除", message: "全てのデータを削除し、初期化します。よろしいですか？", completion: {
                         CommonDao.s.deleteAllCommonHistory()
                         CommonDao.s.deleteAllHistory()
+                        CommonDao.s.deleteAllSearchHistory()
                         CommonDao.s.deleteAllFavorite()
                         CommonDao.s.deleteAllForm()
                         CacheHelper.deleteCookies()
@@ -75,7 +74,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                     })
                     return nil
                 })
-            ],
+            ]
         ]
     }
 }
