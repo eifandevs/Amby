@@ -80,7 +80,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 23 images.
+  /// This `R.image` struct is generated, and contains static references to 24 images.
   struct image {
     /// Image `circlemenu_add`.
     static let circlemenu_add = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_add")
@@ -90,6 +90,8 @@ struct R: Rswift.Validatable {
     static let circlemenu_close = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_close")
     /// Image `circlemenu_copy`.
     static let circlemenu_copy = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_copy")
+    /// Image `circlemenu_form`.
+    static let circlemenu_form = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_form")
     /// Image `circlemenu_historyback`.
     static let circlemenu_historyback = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_historyback")
     /// Image `circlemenu_historyforward`.
@@ -147,6 +149,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "circlemenu_copy", bundle: ..., traitCollection: ...)`
     static func circlemenu_copy(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.circlemenu_copy, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "circlemenu_form", bundle: ..., traitCollection: ...)`
+    static func circlemenu_form(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenu_form, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "circlemenu_historyback", bundle: ..., traitCollection: ...)`

@@ -80,13 +80,13 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                         self!.addSubview(self!.optionMenu!)
                     }
                 }),
-                CircleMenuItem(image: R.image.circlemenu_autoscroll(), tapAction: { _ in
-                    log.warning("自動スクロール")
-                    NotificationCenter.default.post(name: .baseViewModelWillAutoScroll, object: nil)
-                }),
                 CircleMenuItem(image: R.image.circlemenu_historyback(), tapAction: { _ in
                     log.warning("ヒストリーバック")
                     NotificationCenter.default.post(name: .baseViewModelWillHistoryBackWebView, object: nil)
+                }),
+                CircleMenuItem(image: R.image.circlemenu_historyforward(), tapAction: { _ in
+                    log.warning("ヒストリーフォワード")
+                    NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_search(), tapAction: { _ in
                     log.warning("検索")
@@ -108,16 +108,17 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                     log.warning("URLコピー")
                     NotificationCenter.default.post(name: .baseViewModelWillCopyUrl, object: nil)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_historyforward(), tapAction: { _ in
-                    log.warning("ヒストリーフォワード")
-                    NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
+                CircleMenuItem(image: R.image.circlemenu_autoscroll(), tapAction: { _ in
+                    log.warning("自動スクロール")
+                    NotificationCenter.default.post(name: .baseViewModelWillAutoScroll, object: nil)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_copy(), tapAction: { _ in
                     log.warning("コピー")
                     NotificationCenter.default.post(name: .baseViewModelWillCopyWebView, object: nil)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
-                    log.warning("裏メニュー")
+                CircleMenuItem(image: R.image.circlemenu_form(), tapAction: { _ in
+                    log.warning("フォーム")
+                    NotificationCenter.default.post(name: .baseViewModelWillRegisterAsForm, object: nil)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("裏メニュー")
