@@ -216,6 +216,7 @@ class BaseViewModel {
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillCopyUrl")
             UIPasteboard.general.string = self.requestUrl
+            Util.presentWarning(title: "", message: "URLをコピーしました。")
         }
         // webviewヒストリバック
         center.addObserver(forName: .baseViewModelWillHistoryBackWebView, object: nil, queue: nil) { [weak self] (notification) in
