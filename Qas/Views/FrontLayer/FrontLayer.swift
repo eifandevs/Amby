@@ -120,8 +120,8 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                     log.warning("フォーム")
                     NotificationCenter.default.post(name: .baseViewModelWillRegisterAsForm, object: nil)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
-                    log.warning("裏メニュー")
+                CircleMenuItem(image: R.image.header_favorite(), tapAction: { _ in
+                    log.warning("お気に入り")
                 }),
                 CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
                     log.warning("裏メニュー")
