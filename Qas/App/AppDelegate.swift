@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyBeaver
+import Onboard
 
 let log = SwiftyBeaver.self
 
@@ -49,7 +50,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CommonDao.s.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let baseVC = BaseViewController()
+        let content1 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ", image: nil, buttonText: nil, action: nil)
+        let content2 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ2", image: nil, buttonText: nil, action: nil)
+        let content3 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ", image: nil, buttonText: "スタート") {
+            self.initialize()
+        }
+        let baseVC = OnboardingViewController(backgroundImage: R.image.onboard_back(), contents: [content1, content2, content3])
+        baseVC?.allowSkipping = true
+        _ = baseVC?.skipButton.reactive.tap
+            .observe { [weak self] _ in
+                self!.initialize()
+                log.warning("スタート")
+        }
+        baseVC?.shouldBlurBackground = false
+        baseVC?.shouldFadeTransitions = false
+
+        
+//        let baseVC = BaseViewController()
         self.window!.rootViewController = baseVC
         self.window!.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.window!.makeKeyAndVisible()

@@ -80,7 +80,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 26 images.
+  /// This `R.image` struct is generated, and contains static references to 27 images.
   struct image {
     /// Image `circlemenu_add_private`.
     static let circlemenu_add_private = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_add_private")
@@ -114,6 +114,8 @@ struct R: Rswift.Validatable {
     static let header_favorite = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_favorite")
     /// Image `key`.
     static let key = Rswift.ImageResource(bundle: R.hostingBundle, name: "key")
+    /// Image `onboard_back`.
+    static let onboard_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "onboard_back")
     /// Image `option_menu_add`.
     static let option_menu_add = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_add")
     /// Image `option_menu_copy`.
@@ -213,6 +215,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "key", bundle: ..., traitCollection: ...)`
     static func key(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.key, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "onboard_back", bundle: ..., traitCollection: ...)`
+    static func onboard_back(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.onboard_back, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "option_menu_add", bundle: ..., traitCollection: ...)`
