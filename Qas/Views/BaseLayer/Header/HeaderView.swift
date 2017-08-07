@@ -91,7 +91,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
             button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset + 10.5, edgeInset, edgeInset, edgeInset)
             _ = button.reactive.tap
                 .observe { [weak self] _ in
-                    guard let `self` = self else { return }
+                    if self == nil { return }
                     action()
             }
             self.addSubview(button)
