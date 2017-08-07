@@ -124,8 +124,9 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                     log.warning("お気に入り")
                     NotificationCenter.default.post(name: .baseViewModelWillRegisterAsFavorite, object: nil)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { _ in
-                    log.warning("裏メニュー")
+                CircleMenuItem(image: R.image.circlemenu_add_private(), tapAction: { _ in
+                    log.warning("プライベート")
+                    NotificationCenter.default.post(name: .baseViewModelWillAddPrivateWebView, object: nil)
                 })
             ]
         ]
