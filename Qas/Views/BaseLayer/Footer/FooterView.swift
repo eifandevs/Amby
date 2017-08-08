@@ -86,7 +86,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         let existIndicator = frontThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
         if !existIndicator {
             let rect = CGRect(x: 0, y: 0, width: AppConst.thumbnailSize.height * 0.7, height: AppConst.thumbnailSize.height * 0.7)
-            let indicator = NVActivityIndicatorView(frame: rect, type: NVActivityIndicatorType.ballClipRotate, color: UIColor.frenchBlue, padding: 0)
+            let indicator = NVActivityIndicatorView(frame: rect, type: NVActivityIndicatorType.ballClipRotate, color: UIColor.brilliantBlue, padding: 0)
             indicator.center = CGPoint(x: frontThumbnail.bounds.size.width / 2, y: frontThumbnail.bounds.size.height / 2)
             indicator.isUserInteractionEnabled = false
             frontThumbnail.addSubview(indicator)
