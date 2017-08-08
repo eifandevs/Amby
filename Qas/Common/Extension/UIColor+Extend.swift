@@ -53,7 +53,7 @@ extension UIColor {
     }
     
     static var brilliantBlue: UIColor {
-        return UIColor(red: 183/255, green: 156/255, blue: 204/255, alpha: 1)
+        return UIColor(red: 0/255, green: 103/255, blue: 173/255, alpha: 1)
     }
     
     static var lightBlue: UIColor {

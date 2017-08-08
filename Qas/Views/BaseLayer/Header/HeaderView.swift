@@ -208,7 +208,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     func headerViewModelDidChangeFavorite(changed: Bool) {
         if changed {
             // すでに登録済みの場合は、お気に入りボタンの色を変更する
-            favoriteButton.setImage(image: R.image.header_favorite_selected(), color: UIColor.lightBlue)
+            favoriteButton.setImage(image: R.image.header_favorite_selected(), color: UIColor.brilliantBlue)
         } else {
             favoriteButton.setImage(image: R.image.header_favorite(), color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
         }
