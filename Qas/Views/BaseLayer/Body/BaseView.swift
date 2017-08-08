@@ -49,8 +49,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                         beginEditingWorkItem.cancel()
                     }
                     beginEditingWorkItem = DispatchWorkItem() { [weak self] _  in
-                        self!.viewModel.notifyBeginEditing()
-                        self!.beginEditingWorkItem = nil
+                        guard let `self` = self else { return }
+                        self.viewModel.notifyBeginEditing()
+                        self.beginEditingWorkItem = nil
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
                 }
@@ -132,7 +133,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         } else {
             // 1秒後にwillBeginEditingする
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] _ in
-                self!.viewModel.notifyBeginEditing()
+                guard let `self` = self else { return }
+                self.viewModel.notifyBeginEditing()
             }
         }
     }
@@ -356,9 +358,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     // サムネイルを保存
                     DispatchQueue.mainSyncSafe {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { _ in
-                            self!.saveThumbnail(webView: webView)
+                            guard let `self` = self else { return }
+                            self.saveThumbnail(webView: webView)
                             // くるくるを更新する
-                            self!.updateNetworkActivityIndicator()
+                            self.updateNetworkActivityIndicator()
                         }
                     }
                 })
@@ -549,8 +552,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 beginEditingWorkItem.cancel()
             }
             beginEditingWorkItem = DispatchWorkItem() { [weak self] _  in
-                self!.viewModel.notifyBeginEditing()
-                self!.beginEditingWorkItem = nil
+                guard let `self` = self else { return }
+                self.viewModel.notifyBeginEditing()
+                self.beginEditingWorkItem = nil
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
         } else {

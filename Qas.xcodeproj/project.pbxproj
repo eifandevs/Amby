@@ -89,9 +89,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.release.xcconfig"; sourceTree = "<group>"; };
-		154C578B614B8069966E6018 /* Pods-Weasel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weasel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weasel/Pods-Weasel.release.xcconfig"; sourceTree = "<group>"; };
-		3E3D0BCEC79923FEA1441070 /* Pods-Weasel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weasel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weasel/Pods-Weasel.debug.xcconfig"; sourceTree = "<group>"; };
 		42C12585ED85520E5C6B12C1 /* Pods-Qas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.debug.xcconfig"; sourceTree = "<group>"; };
 		51C114ABBF1F1B2A8CDC9EB4 /* Pods-Qas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.release.xcconfig"; sourceTree = "<group>"; };
 		615FE5E3DFBC7266C29F3D82 /* Pods_Weasel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weasel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,7 +173,6 @@
 		A57EFEA11E3E06D300B66701 /* Qas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eiger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Eiger/Pods-Eiger.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,10 +200,6 @@
 		2D6EC82ACCDEE92B54408E2F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F75ECE3546ED4778637DAC93 /* Pods-Eiger.debug.xcconfig */,
-				1295D5195CBCC3B4AD027352 /* Pods-Eiger.release.xcconfig */,
-				3E3D0BCEC79923FEA1441070 /* Pods-Weasel.debug.xcconfig */,
-				154C578B614B8069966E6018 /* Pods-Weasel.release.xcconfig */,
 				42C12585ED85520E5C6B12C1 /* Pods-Qas.debug.xcconfig */,
 				51C114ABBF1F1B2A8CDC9EB4 /* Pods-Qas.release.xcconfig */,
 			);

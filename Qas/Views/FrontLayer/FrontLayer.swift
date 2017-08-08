@@ -77,7 +77,8 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                     self!.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppConst.optionMenuSize.width, height: AppConst.optionMenuSize.height), viewModel: viewModel, direction: self!.swipeDirection)
                     self!.optionMenu?.delegate = self
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        self!.addSubview(self!.optionMenu!)
+                        guard let `self` = self else { return }
+                        self.addSubview(self.optionMenu!)
                     }
                 }),
                 CircleMenuItem(image: R.image.circlemenu_historyback(), tapAction: { _ in
@@ -90,7 +91,8 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                 }),
                 CircleMenuItem(image: R.image.circlemenu_search(), tapAction: { _ in
                     log.warning("検索")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] _ in
+                        guard let `self` = self else { return }
                         NotificationCenter.default.post(name: .headerViewModelWillBeginEditing, object: true)
                     }
                 }),

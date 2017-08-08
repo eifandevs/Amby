@@ -49,24 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ユーザーデフォルト初期値設定
         CommonDao.s.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        
-        let content1 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ", image: nil, buttonText: nil, action: nil)
-        let content2 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ2", image: nil, buttonText: nil, action: nil)
-        let content3 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ", image: nil, buttonText: "スタート") {
-            self.initialize()
-        }
-        let baseVC = OnboardingViewController(backgroundImage: R.image.onboard_back(), contents: [content1, content2, content3])
-        baseVC?.allowSkipping = true
-        _ = baseVC?.skipButton.reactive.tap
-            .observe { [weak self] _ in
-                self!.initialize()
-                log.warning("スタート")
-        }
-        baseVC?.shouldBlurBackground = false
-        baseVC?.shouldFadeTransitions = false
-
-        
-//        let baseVC = BaseViewController()
+        let baseVC = boardingViewController()
         self.window!.rootViewController = baseVC
         self.window!.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.window!.makeKeyAndVisible()
@@ -80,6 +63,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window!.rootViewController?.removeFromParentViewController()
         self.window!.rootViewController = BaseViewController()
+    }
+    
+    func boardingViewController() -> OnboardingViewController {
+        let content1 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ", image: nil, buttonText: nil, action: nil)
+        let content2 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ2", image: nil, buttonText: nil, action: nil)
+        let content3 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ", image: nil, buttonText: "スタート") {
+            (UIApplication.shared.delegate as! AppDelegate).initialize()
+        }
+        let onBoardingVC = OnboardingViewController(backgroundImage: R.image.onboard_back(), contents: [content1, content2, content3])!
+        onBoardingVC.allowSkipping = true
+        _ = onBoardingVC.skipButton.reactive.tap
+            .observe { _ in
+                (UIApplication.shared.delegate as! AppDelegate).initialize()
+        }
+        onBoardingVC.shouldBlurBackground = false
+        onBoardingVC.shouldFadeTransitions = false
+        return onBoardingVC
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
