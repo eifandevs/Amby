@@ -50,7 +50,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     private func createCaptureSpace(context: String, isPrivateMode: Bool) -> Thumbnail {
         let additionalPointX = ((thumbnails.count).cgfloat * AppConst.thumbnailSize.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).cgfloat * AppConst.thumbnailSize.width / 2
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppConst.thumbnailSize), isPrivateMode: isPrivateMode)
-        btn.backgroundColor = UIColor.white
+        btn.backgroundColor = UIColor.darkGray
         btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
         btn.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         btn.addTarget(self, action: #selector(self.onTappedThumbnail(_:)), for: .touchUpInside)

@@ -350,6 +350,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                         self!.isDoneAutoInput = false
                         // 有効なURLの場合は、履歴に保存する
                         self!.viewModel.saveHistory(wv: webView)
+                        self!.viewModel.storeEachHistory()
                     }
                     if webView.requestUrl != nil {
                         webView.previousUrl = webView.requestUrl

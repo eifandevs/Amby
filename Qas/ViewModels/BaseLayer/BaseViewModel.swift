@@ -352,4 +352,8 @@ class BaseViewModel {
         CommonDao.s.storeEachHistory(eachHistory: eachHistory)
         commonHistory = []
     }
+    
+    func storeEachHistory() {
+        CommonDao.s.storeEachHistory(eachHistory: eachHistory)
+    }
 }
