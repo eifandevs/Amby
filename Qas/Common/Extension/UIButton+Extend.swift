@@ -12,11 +12,17 @@ import UIKit
 extension UIButton {
 
     /// ボタンの画像に色をつける
-    func setImage(image: UIImage?, color: UIColor) {
+    func setImage(image: UIImage?, color: UIColor, contentMode: UIViewContentMode = .scaleAspectFit) {
         let tintedImage = image?.withRenderingMode(.alwaysTemplate)
         tintColor = color
-        imageView?.contentMode = .scaleAspectFit
+        imageView?.contentMode = contentMode
         setImage(tintedImage, for: .normal)
     }
     
+    func setBackgroundImage(image: UIImage?, color: UIColor, contentMode: UIViewContentMode = .scaleAspectFit) {
+        let tintedImage = image?.withRenderingMode(.alwaysTemplate)
+        tintColor = color
+        imageView?.contentMode = contentMode
+        setBackgroundImage(tintedImage, for: .normal)
+    }
 }

@@ -50,7 +50,9 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     private func createCaptureSpace(context: String, isPrivateMode: Bool) -> Thumbnail {
         let additionalPointX = ((thumbnails.count).cgfloat * AppConst.thumbnailSize.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).cgfloat * AppConst.thumbnailSize.width / 2
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppConst.thumbnailSize), isPrivateMode: isPrivateMode)
-        btn.backgroundColor = UIColor.black
+        btn.backgroundColor = UIColor.white
+        btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
+        btn.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         _ = btn.reactive.tap
             .observe { [weak self] _ in
                 guard let `self` = self else { return }
@@ -174,6 +176,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                         indicator.removeFromSuperview()
                     }
                 })
+                targetThumbnail.setImage(UIImage(), for: .normal)
                 targetThumbnail.setBackgroundImage(image, for: .normal)
             }
         }
@@ -189,6 +192,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                         log.error("missing thumbnail image")
                         return
                     }
+                    btn.setImage(UIImage(), for: .normal)
                     btn.setBackgroundImage(image, for: .normal)
                 }
             }

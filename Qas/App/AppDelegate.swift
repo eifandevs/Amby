@@ -60,7 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func initialize() {
         UserDefaults.standard.set(0, forKey: AppConst.locationIndexKey)
         UserDefaults.standard.set(0.06, forKey: AppConst.autoScrollIntervalKey)
-
         self.window!.rootViewController?.removeFromParentViewController()
         self.window!.rootViewController = BaseViewController()
     }
@@ -74,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let onBoardingVC = OnboardingViewController(backgroundImage: R.image.onboard_back(), contents: [content1, content2, content3])!
         onBoardingVC.allowSkipping = true
         _ = onBoardingVC.skipButton.reactive.tap
-            .observe { _ in
+            .observe { [weak self] _ in
                 (UIApplication.shared.delegate as! AppDelegate).initialize()
         }
         onBoardingVC.shouldBlurBackground = false

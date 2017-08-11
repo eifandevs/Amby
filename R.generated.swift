@@ -80,7 +80,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 28 images.
+  /// This `R.image` struct is generated, and contains static references to 29 images.
   struct image {
     /// Image `circlemenu_add_private`.
     static let circlemenu_add_private = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_add_private")
@@ -104,6 +104,8 @@ struct R: Rswift.Validatable {
     static let circlemenu_search = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_search")
     /// Image `circlemenu_url`.
     static let circlemenu_url = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_url")
+    /// Image `footer_back`.
+    static let footer_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "footer_back")
     /// Image `footer_private`.
     static let footer_private = Rswift.ImageResource(bundle: R.hostingBundle, name: "footer_private")
     /// Image `header_close`.
@@ -192,6 +194,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "circlemenu_url", bundle: ..., traitCollection: ...)`
     static func circlemenu_url(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.circlemenu_url, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "footer_back", bundle: ..., traitCollection: ...)`
+    static func footer_back(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.footer_back, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "footer_private", bundle: ..., traitCollection: ...)`
