@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import UIKit
 
 class EGWebView: WKWebView {
     enum NETWORK_ERROR {
@@ -29,6 +30,9 @@ class EGWebView: WKWebView {
     var requestUrl: String!
     var requestTitle: String!
     
+    // スワイプ中かどうか
+    var isSwiping: Bool = false
+    
     init(id: String?, isPrivate: Bool) {
         if let id = id, !id.isEmpty {
             // コンテキストを復元
@@ -37,6 +41,8 @@ class EGWebView: WKWebView {
         super.init(frame: CGRect.zero, configuration: CacheHelper.cacheConfiguration(isPrivate: isPrivate))
         isOpaque = true
         allowsLinkPreview = true
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panned))
+        addGestureRecognizer(panGesture)
     }
     
     required init?(coder: NSCoder) {
@@ -134,5 +140,14 @@ class EGWebView: WKWebView {
         let snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return snapshotImage?.crop(w: Int(AppConst.thumbnailSize.width * 2), h: Int((AppConst.thumbnailSize.width * 2) * DeviceConst.aspectRate));
+    }
+
+// MARK: Gesture Event
+    func panned(sender: UIPanGestureRecognizer) {
+        if sender.state == .began || sender.state == .changed {
+            isSwiping = true
+        } else {
+            isSwiping = false
+        }
     }
 }
