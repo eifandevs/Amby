@@ -138,23 +138,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
                     
                     let overlay = UIButton(frame: CGRect(origin: CGPoint.zero, size: tableView.frame.size))
                     overlay.backgroundColor = UIColor.clear
-                    _ = overlay.reactive.tap
-                        .observe { [weak self] _ in
-                            guard let `self` = self else {
-                                return
-                            }
-                            // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
-                            overlay.removeFromSuperview()
-                            UIView.animate(withDuration: 0.15, animations: {
-                                self.detailView?.alpha = 0
-                            }, completion: { (finished) in
-                                if finished {
-                                    self.detailView?.removeFromSuperview()
-                                    self.detailView = nil
-                                    self.delegate?.optionMenuDidCloseDetailMenu()
-                                }
-                            })
-                    }
+                    overlay.addTarget(self, action: #selector(self.onTappedOverlay(_:)), for: .touchUpInside)
                     tableView.addSubview(overlay)
                 } else {
                     // メニューを全て閉じる
@@ -223,5 +207,20 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
         if let detailView = detailView {
             detailView.endEditing(true)
         }
+    }
+    
+// MARK: Button Event
+    func onTappedOverlay(_ sender: AnyObject) {
+        // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
+        (sender as! UIButton).removeFromSuperview()
+        UIView.animate(withDuration: 0.15, animations: {
+            self.detailView?.alpha = 0
+        }, completion: { (finished) in
+            if finished {
+                self.detailView?.removeFromSuperview()
+                self.detailView = nil
+                self.delegate?.optionMenuDidCloseDetailMenu()
+            }
+        })
     }
 }

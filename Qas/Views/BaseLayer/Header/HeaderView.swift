@@ -84,47 +84,32 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         backgroundColor = UIColor.pastelLightGray
         
         // ヘッダーアイテム
-        let addButton = { (button: UIButton, image: UIImage, action: @escaping (() -> ())) -> Void in
+        let addButton = { (button: UIButton, image: UIImage) -> Void in
             button.setImage(image: image, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
             button.alpha = 1
             let edgeInset: CGFloat = button.frame.size.width / 7.0769
             button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset + 10.5, edgeInset, edgeInset, edgeInset)
-            _ = button.reactive.tap
-                .observe { [weak self] _ in
-                    if self == nil { return }
-                    action()
-            }
             self.addSubview(button)
         }
         
         // ヒストリバック
-        addButton(historyBackButton, R.image.circlemenu_historyback()!) { [weak self] _ in
-            guard let `self` = self else { return }
-            self.viewModel.notifyHistoryBackWebView()
-        }
+        historyBackButton.addTarget(self, action: #selector(self.onTappedHistoryBackButton(_:)), for: .touchUpInside)
+        addButton(historyBackButton, R.image.circlemenu_historyback()!)
         
         // ヒストリフォアード
-        addButton(historyForwardButton, R.image.circlemenu_historyforward()!) { [weak self] _ in
-            guard let `self` = self else { return }
-            self.viewModel.notifyHistoryForwardWebView()
-        }
+        historyForwardButton.addTarget(self, action: #selector(self.onTappedHistoryForwardButton(_:)), for: .touchUpInside)
+        addButton(historyForwardButton, R.image.circlemenu_historyforward()!)
         
         // お気に入り登録
-        addButton(favoriteButton, #imageLiteral(resourceName: "header_favorite")) { [weak self] _ in
-            guard let `self` = self else { return }
-            self.viewModel.notifyRegisterAsFavorite()
-        }
-        // 現在のWebView削除
-        addButton(deleteButton, R.image.circlemenu_close()!, { [weak self] _ in
-            guard let `self` = self else { return }
-            self.viewModel.notifyRemoveWebView()
-        })
+        favoriteButton.addTarget(self, action: #selector(self.onTappedFavoriteButton(_:)), for: .touchUpInside)
+        addButton(favoriteButton, R.image.header_favorite()!)
         
-        _ = headerField.reactive.controlEvents(.touchUpInside)
-            .observeNext { [weak self] _ in
-                guard let `self` = self else { return }
-                self.startEditing()
-        }
+        // 現在のWebView削除
+        deleteButton.addTarget(self, action: #selector(self.onTappedDeleteButton(_:)), for: .touchUpInside)
+        addButton(deleteButton, R.image.circlemenu_close()!)
+
+        // ヘッダーフィールド
+        headerField.addTarget(self, action: #selector(self.onTappedHeaderField(_:)), for: .touchUpInside)
         
         addSubview(headerField)
         addSubview(progressBar)
@@ -242,5 +227,26 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
                 self.headerField.makeInputForm(height: self.frame.size.height - self.heightMax * 0.66)
             })
         }
+    }
+    
+// MARK: Button Event
+    func onTappedHistoryBackButton(_ sender: AnyObject) {
+        viewModel.notifyHistoryBackWebView()
+    }
+
+    func onTappedHistoryForwardButton(_ sender: AnyObject) {
+        viewModel.notifyHistoryForwardWebView()
+    }
+
+    func onTappedFavoriteButton(_ sender: AnyObject) {
+        viewModel.notifyRegisterAsFavorite()
+    }
+
+    func onTappedDeleteButton(_ sender: AnyObject) {
+        viewModel.notifyRemoveWebView()
+    }
+    
+    func onTappedHeaderField(_ sender: AnyObject) {
+        startEditing()
     }
 }

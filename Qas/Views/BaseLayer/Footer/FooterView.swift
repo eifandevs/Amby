@@ -53,11 +53,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         btn.backgroundColor = UIColor.white
         btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
         btn.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        _ = btn.reactive.tap
-            .observe { [weak self] _ in
-                guard let `self` = self else { return }
-                self.viewModel.notifyChangeWebView(index: self.thumbnails.index(of: btn)!)
-        }
+        btn.addTarget(self, action: #selector(self.onTappedThumbnail(_:)), for: .touchUpInside)
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
         btn.addGestureRecognizer(longPressRecognizer)
         btn.context = context
@@ -211,5 +207,10 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             }
         default:break
         }
+    }
+    
+// MARK: Button Event
+    func onTappedThumbnail(_ sender: AnyObject) {
+        viewModel.notifyChangeWebView(index: thumbnails.index(of: (sender as! Thumbnail))!)
     }
 }

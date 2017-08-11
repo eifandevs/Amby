@@ -163,16 +163,14 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
             alpha = 0
             let button = UIButton(frame: frame)
             button.backgroundColor = UIColor.clear
-            _ = button.reactive.tap
-                .observe { [weak self] _ in
-                    guard let `self` = self else {
-                        return
-                    }
-                    self.delegate?.searchMenuDidClose()
-                    button.removeFromSuperview()
-            }
+            button.addTarget(self, action: #selector(self.onTappedOverlay(_:)), for: .touchUpInside)
             overlay = button
             superview?.addSubview(button)
         }
+    }
+    
+    func onTappedOverlay(_ sender: AnyObject) {
+        delegate?.searchMenuDidClose()
+        (sender as! UIButton).removeFromSuperview()
     }
 }

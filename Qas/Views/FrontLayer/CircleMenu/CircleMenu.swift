@@ -85,16 +85,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                 for (index, circleMenuItem) in circleMenuItems.enumerated() {
                     circleMenuItem.frame.size = frame.size
                     circleMenuItem.center = initialPt!
-                    _ = circleMenuItem.reactive.tap
-                        .observe { [weak self] _ in
-                            guard let `self` = self else {
-                                return
-                            }
-                            if !self.isClosing {
-                                circleMenuItem.scheduledAction = true
-                                self.closeCircleMenuItems()
-                            }
-                    }
+                    circleMenuItem.addTarget(self, action: #selector(self.onTappedCircleMenuItem(_:)), for: .touchUpInside)
                     superview!.addSubview(circleMenuItem)
                     UIView.animate(withDuration: 0.18, animations: {
                         circleMenuItem.center = self.center + self.circleMenuLocations[index]
@@ -153,16 +144,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                 menuIndex = menuIndex + 1 == circleMenuItemGroup.count ? 0 : menuIndex + 1
                 for (index, item) in currentCircleMenuItems.enumerated() {
                     circleMenuItems[index].frame = item.frame
-                    _ = circleMenuItems[index].reactive.tap
-                        .observe { [weak self] _ in
-                            guard let `self` = self else {
-                                return
-                            }
-                            if !self.isClosing {
-                                self.circleMenuItems[index].scheduledAction = true
-                                self.closeCircleMenuItems()
-                            }
-                    }
+                    circleMenuItems[index].addTarget(self, action: #selector(self.onTappedCircleMenuItem(_:)), for: .touchUpInside)
                     superview!.addSubview(circleMenuItems[index])
                     item.removeFromSuperview()
                 }
@@ -326,5 +308,13 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
             }
         }
         return false
+    }
+    
+// MARK: Button Event
+    func onTappedCircleMenuItem(_ sender: AnyObject) {
+        if isClosing {
+            (sender as! CircleMenuItem).scheduledAction = true
+            closeCircleMenuItems()
+        }
     }
 }

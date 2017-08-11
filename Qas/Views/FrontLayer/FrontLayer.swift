@@ -39,13 +39,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         overlay = UIButton(frame: frame)
         overlay.backgroundColor = UIColor.darkGray
         self.overlay.alpha = 0
-        _ = overlay.reactive.tap
-            .observe { [weak self] _ in
-                guard let `self` = self else {
-                    return
-                }
-                self.optionMenuDidClose()
-        }
+        overlay.addTarget(self, action: #selector(self.onTappedOverlay(_:)), for: .touchUpInside)
         addSubview(overlay)
         UIView.animate(withDuration: 0.35) {
             self.overlay.alpha = 0.2
@@ -217,5 +211,10 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     
     func optionMenuDidDeleteFormData(_id: String) {
         deleteFormIds.append(_id)
+    }
+    
+// MARK: Button Event
+    func onTappedOverlay(_ sender: AnyObject) {
+        optionMenuDidClose()
     }
 }

@@ -80,10 +80,7 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
         closeMenuButton.setImage(image: R.image.header_close(), color: UIColor.gray)
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
         closeMenuButton.imageEdgeInsets = UIEdgeInsetsMake(edgeInset + 14, edgeInset, edgeInset, edgeInset)
-        _ = closeMenuButton.reactive.tap
-            .observe { _ in
-                self.delegate?.headerFieldDidEndEditing(text: nil)
-        }
+        closeMenuButton.addTarget(self, action: #selector(self.onTappedCloseMenuButton(_:)), for: .touchUpInside)
         self.addSubview(closeMenuButton)
         
         textField.becomeFirstResponder()
@@ -188,4 +185,8 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
         return true
     }
 
+// MARK: Button Event
+    func onTappedCloseMenuButton(_ sender: AnyObject) {
+        delegate?.headerFieldDidEndEditing(text: nil)
+    }
 }
