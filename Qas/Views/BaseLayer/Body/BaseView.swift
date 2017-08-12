@@ -60,6 +60,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     /// 現在表示中の全てのWebView。アプリを殺して、起動した後などは、WebViewインスタンスは入っていないが、配列のスペースは作成される
     var webViews: [EGWebView?] = []
+    /// 前後ページ
+    private let previousImageView: UIImageView = UIImageView()
+    private let nextImageView: UIImageView = UIImageView()
+    /// ビューモデル
     private let viewModel = BaseViewModel()
     /// Y軸移動量を計算するための一時変数
     private var scrollMovingPointY: CGFloat = 0
@@ -123,8 +127,16 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             webViews.append(nil)
         }
         
-        let newWv = createWebView(context: viewModel.currentContext)
+        let newWv = createWebView(size: frame.size, context: viewModel.currentContext)
         webViews[viewModel.locationIndex] = newWv
+        
+        // 前後のページ
+        previousImageView.frame = CGRect(origin: CGPoint(x: -frame.size.width, y: 0), size: frame.size)
+        nextImageView.frame = CGRect(origin: CGPoint(x: frame.size.width, y: 0), size: frame.size)
+        addSubview(previousImageView)
+        addSubview(nextImageView)
+        
+        // ロードする
         if !viewModel.requestUrl.isEmpty {
             _ = newWv.load(urlStr: viewModel.requestUrl)
         } else {
@@ -146,10 +158,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             }
         }
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    override func layoutSubviews() {
-        front.frame = CGRect(origin: CGPoint.zero, size: frame.size)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -183,10 +191,15 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             }
             
             if swipeDirection == .none && front.isSwiping {
+                // フロントの左右に切り替え後のページを表示しとく
+                if previousImageView.image == nil && nextImageView.image == nil {
+                    previousImageView.image = R.image.logo()
+                    nextImageView.image = R.image.logo()
+                }
                 if isChangingFront {
                     let previousTouchPoint = touch.previousLocation(in: self)
                     let distance: CGPoint = touchPoint - previousTouchPoint
-                    front.frame.origin.x += distance.x
+                    frame.origin.x += distance.x
                 } else {
                     if touchBeganPoint.y != -1 {
                         if fabs(touchPoint.y - touchBeganPoint.y) < 7.5 {
@@ -205,10 +218,40 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     internal func screenTouchEnded(touch: UITouch) {
         isTouching = false
+        if isChangingFront {
+            isChangingFront = false
+            let targetOriginX = {() -> CGFloat in
+                if frame.origin.x  > frame.size.width / 3 {
+                    return frame.size.width
+                } else if frame.origin.x < -(frame.size.width / 3) {
+                    return -frame.size.width
+                } else {
+                    return 0
+                }
+            }()
+            UIView.animate(withDuration: 0.3, animations: {
+                self.frame.origin.x = targetOriginX
+            }, completion: { (finished) in
+                if finished {
+                    // 入れ替える
+                    if targetOriginX == self.frame.size.width {
+                        // 前のwebviewに遷移
+                        self.viewModel.changePreviousWebView()
+                    } else if targetOriginX == -self.frame.size.width {
+                        self.viewModel.changeNextWebView()
+                    }
+                    // baseViewの位置を元に戻す
+                    self.frame.origin.x = 0
+                    self.previousImageView.image = nil
+                    self.nextImageView.image = nil
+                }
+            })
+        }
     }
     
     internal func screenTouchCancelled(touch: UITouch) {
         isTouching = false
+        screenTouchEnded(touch: touch)
     }
     
 // MARK: ScrollView Delegate
@@ -475,8 +518,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     /// webviewを新規作成
-    private func createWebView(context: String?) -> EGWebView {
+    private func createWebView(size: CGSize? = nil, context: String?) -> EGWebView {
         let newWv = EGWebView(id: context, isPrivate: viewModel.isPrivateMode!)
+        newWv.frame = CGRect(origin: CGPoint.zero, size: size ?? frame.size)
         newWv.navigationDelegate = self
         newWv.uiDelegate = self;
         newWv.scrollView.delegate = self
@@ -619,7 +663,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         updateNetworkActivityIndicator()
 
         if webViews.count == 0 {
-            viewModel.notifyAddWebView()
+            viewModel.addWebView()
         } else if isFrontDelete {
             // フロントの削除で、削除後にwebviewが存在する場合
             // 存在しない場合は、AddWebViewが呼ばれる

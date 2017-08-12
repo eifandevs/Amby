@@ -172,7 +172,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                         indicator.removeFromSuperview()
                     }
                 })
-                targetThumbnail.setImage(UIImage(), for: .normal)
+                targetThumbnail.setImage(nil, for: .normal)
                 targetThumbnail.setBackgroundImage(image, for: .normal)
             }
         }
@@ -188,7 +188,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                         log.error("missing thumbnail image")
                         return
                     }
-                    btn.setImage(UIImage(), for: .normal)
+                    btn.setImage(nil, for: .normal)
                     btn.setBackgroundImage(image, for: .normal)
                 }
             }

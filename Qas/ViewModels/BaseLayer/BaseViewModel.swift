@@ -106,14 +106,7 @@ class BaseViewModel {
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillAddWebView")
             let url = notification.object != nil ? (notification.object as! [String: String])["url"] : nil
-            if url == nil {
-                self.eachHistory.append(HistoryItem())
-            } else {
-                self.eachHistory.append(HistoryItem(url: url!))
-            }
-            self.locationIndex = self.eachHistory.count - 1
-            self.center.post(name: .footerViewModelWillAddWebView, object: self.eachHistory.last!)
-            self.delegate?.baseViewModelDidAddWebView()
+            self.addWebView(url: url)
         }
         
         // private webviewの追加作成
@@ -121,14 +114,7 @@ class BaseViewModel {
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillAddPrivateWebView")
             let url = notification.object != nil ? (notification.object as! [String: String])["url"] : nil
-            if url == nil {
-                self.eachHistory.append(HistoryItem(isPrivate: "true"))
-            } else {
-                self.eachHistory.append(HistoryItem(url: url!, isPrivate: "true"))
-            }
-            self.locationIndex = self.eachHistory.count - 1
-            self.center.post(name: .footerViewModelWillAddWebView, object: self.eachHistory.last!)
-            self.delegate?.baseViewModelDidAddWebView()
+            self.addWebView(url: url, isPrivate: "true")
         }
         
         // 閲覧履歴の削除
@@ -174,14 +160,7 @@ class BaseViewModel {
         center.addObserver(forName: .baseViewModelWillChangeWebView, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillChangeWebView")
-            self.center.post(name: .footerViewModelWillChangeWebView, object: notification.object)
-            let index = notification.object as! Int
-            if self.locationIndex != index {
-                self.locationIndex = index
-                self.delegate?.baseViewModelDidChangeWebView()
-            } else {
-                log.warning("selected current webView")
-            }
+            self.changeWebView(index: notification.object as! Int)
         }
         // フロントwebviewの変更
         center.addObserver(forName: .baseViewModelWillStoreHistory, object: nil, queue: nil) { [weak self] (notification) in
@@ -201,6 +180,7 @@ class BaseViewModel {
                 self.locationIndex = self.locationIndex - 1
             }
             self.eachHistory.remove(at: index)
+            self.reloadFavorite()
             self.delegate?.baseViewModelDidRemoveWebView(index: index, isFrontDelete: isFrontDelete)
         }
         // webview検索
@@ -234,14 +214,7 @@ class BaseViewModel {
         center.addObserver(forName: .baseViewModelWillChangeFavorite, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillChangeFavorite")
-            // 現在表示しているURLがお気に入りかどうか調べる
-            let currentUrl = self.eachHistory[self.locationIndex].url
-            if (!currentUrl.isEmpty) {
-                let savedFavoriteUrls = CommonDao.s.selectAllFavorite().map({ (f) -> String in
-                    return f.url.domainAndPath
-                })
-                self.center.post(name: .headerViewModelWillChangeFavorite, object: savedFavoriteUrls.contains(currentUrl.domainAndPath))
-            }
+            self.reloadFavorite()
         }
         
         // webviewお気に入り登録
@@ -309,8 +282,16 @@ class BaseViewModel {
         center.post(name: .headerViewModelWillChangeProgress, object: object)
     }
     
-    func notifyAddWebView() {
-        center.post(name: .baseViewModelWillAddWebView, object: nil)
+    func addWebView(url: String? = nil, isPrivate: String = "false") {
+        if let url = url {
+            self.eachHistory.append(HistoryItem(url: url, isPrivate: isPrivate))
+        } else {
+            self.eachHistory.append(HistoryItem(isPrivate: isPrivate))
+        }
+        self.locationIndex = self.eachHistory.count - 1
+        self.reloadFavorite()
+        self.center.post(name: .footerViewModelWillAddWebView, object: self.eachHistory.last!)
+        self.delegate?.baseViewModelDidAddWebView()
     }
     
     func notifyBeginEditing() {
@@ -321,13 +302,21 @@ class BaseViewModel {
         headerFieldText = requestUrl
     }
     
+    func changePreviousWebView() {
+        changeWebView(index: locationIndex - 1)
+    }
+    
+    func changeNextWebView() {
+        changeWebView(index: locationIndex + 1)
+    }
+    
     func saveHistory(wv: EGWebView) {
         if !isPrivateMode! {
             if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle, !requestTitle.isEmpty {
+                // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
+                center.post(name: .headerViewModelWillChangeFavorite, object: CommonDao.s.selectFavorite(url: requestUrl) != nil)
                 //　アプリ起動後の前回ページロード時は、履歴に保存しない
                 if requestUrl != self.requestUrl {
-                    // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
-                    center.post(name: .headerViewModelWillChangeFavorite, object: CommonDao.s.selectFavorite(url: requestUrl) != nil)
                     // Common History
                     let common = CommonHistoryItem(url: requestUrl, title: requestTitle, date: Date())
                     // 配列の先頭に追加する
@@ -355,5 +344,35 @@ class BaseViewModel {
     
     func storeEachHistory() {
         CommonDao.s.storeEachHistory(eachHistory: eachHistory)
+    }
+    
+// MARK: Private Method
+    private func changeWebView(index: Int) {
+        if index < 0 {
+            log.error("change webview error")
+            return
+        } else if index >= eachHistory.count {
+            addWebView()
+        } else {
+            self.center.post(name: .footerViewModelWillChangeWebView, object: index)
+            if self.locationIndex != index {
+                self.locationIndex = index
+                self.reloadFavorite()
+                self.delegate?.baseViewModelDidChangeWebView()
+            } else {
+                log.warning("selected current webView")
+            }
+        }
+    }
+    
+    private func reloadFavorite() {
+        // 現在表示しているURLがお気に入りかどうか調べる
+        let currentUrl = eachHistory[locationIndex].url
+        if (!currentUrl.isEmpty) {
+            let savedFavoriteUrls = CommonDao.s.selectAllFavorite().map({ (f) -> String in
+                return f.url.domainAndPath
+            })
+            self.center.post(name: .headerViewModelWillChangeFavorite, object: savedFavoriteUrls.contains(currentUrl.domainAndPath))
+        }
     }
 }
