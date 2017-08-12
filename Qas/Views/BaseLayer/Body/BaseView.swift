@@ -73,13 +73,10 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private var autoScrollTimer: Timer? = nil
     /// スワイプ方向
     private var swipeDirection: EdgeSwipeDirection = .none
-    
-    /// ベースビューがスライド中かどうかのフラグ
-    var isMoving: Bool {
-        get {
-            return !isLocateMax && !isLocateMax
-        }
-    }
+    /// タッチ開始位置
+    private var touchBeganPoint: CGPoint = CGPoint.zero
+    /// スワイプでページ切り替えを検知したかどうかのフラグ
+    private var isChangingFront: Bool = false
 
     /// ベースビューがMaxポジションにあるかどうかのフラグ
     var isLocateMax: Bool {
@@ -164,10 +161,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     internal func screenTouchBegan(touch: UITouch) {
         isTouching = true
         delegate?.baseViewDidTouchBegan()
-        let touchPoint = touch.location(in: self)
-        if touchPoint.x < AppConst.edgeSwipeErea {
+        touchBeganPoint = touch.location(in: self)
+        isChangingFront = false
+        if touchBeganPoint.x < AppConst.edgeSwipeErea {
             swipeDirection = .left
-        } else if touchPoint.x > self.bounds.size.width - AppConst.edgeSwipeErea {
+        } else if touchBeganPoint.x > self.bounds.size.width - AppConst.edgeSwipeErea {
             swipeDirection = .right
         } else {
             swipeDirection = .none
@@ -182,6 +180,25 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 // エッジスワイプ検知
                 invalidateUserInteraction()
                 delegate?.baseViewDidEdgeSwiped(direction: swipeDirection)
+            }
+            
+            if swipeDirection == .none && front.isSwiping {
+                if isChangingFront {
+                    let previousTouchPoint = touch.previousLocation(in: self)
+                    let distance: CGPoint = touchPoint - previousTouchPoint
+                    front.frame.origin.x += distance.x
+                } else {
+                    if touchBeganPoint.y != -1 {
+                        if fabs(touchPoint.y - touchBeganPoint.y) < 7.5 {
+                            // エッジスワイプではないスワイプを検知し、y軸に誤差7.5pxで、x軸に11px移動したらフロントビューの移動をする
+                            if fabs(touchPoint.x - touchBeganPoint.x) > 11 {
+                                isChangingFront = true
+                            }
+                        } else {
+                            touchBeganPoint.y = -1
+                        }
+                    }
+                }
             }
         }
     }
