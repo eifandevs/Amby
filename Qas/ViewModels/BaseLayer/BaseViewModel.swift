@@ -303,6 +303,7 @@ class BaseViewModel {
     
     /// ロケーションインデックスの永続化
     func storeLocationIndex() {
+        log.debug("store location index")
         UserDefaults.standard.set(locationIndex, forKey: AppConst.locationIndexKey)
     }
     
@@ -354,20 +355,22 @@ class BaseViewModel {
     
 // MARK: Private Method
     private func changeWebView(index: Int) {
-        if index < 0 {
-            log.error("change webview error")
-            return
-        } else if index >= eachHistory.count {
-            addWebView()
-        } else {
-            self.center.post(name: .footerViewModelWillChangeWebView, object: index)
-            if self.locationIndex != index {
-                self.locationIndex = index
-                self.reloadFavorite()
-                self.delegate?.baseViewModelDidChangeWebView()
+        let targetIndex = {() -> Int in
+            if index < 0 {
+                return eachHistory.count - 1
+            } else if index >= eachHistory.count {
+                return 0
             } else {
-                log.warning("selected current webView")
+                return index
             }
+        }()
+        self.center.post(name: .footerViewModelWillChangeWebView, object: targetIndex)
+        if self.locationIndex != targetIndex {
+            self.locationIndex = targetIndex
+            self.reloadFavorite()
+            self.delegate?.baseViewModelDidChangeWebView()
+        } else {
+            log.warning("selected current webView")
         }
     }
     

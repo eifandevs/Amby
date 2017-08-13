@@ -75,15 +75,18 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     }
 // MARK: SearchMenuTableView Delegate
     func searchMenuDidEndEditing() {
+        log.debug("[BaseLayer Event]: searchMenuDidEndEditing. close keyboard")
         headerView.closeKeyBoard()
     }
     
     func searchMenuDidClose() {
+        log.debug("[BaseLayer Event]: searchMenuDidClose")
         headerViewDidEndEditing(headerFieldUpdate: false)
     }
     
 // MARK: HeaderView Delegate
     func headerViewDidBeginEditing() {
+        log.debug("[BaseLayer Event]: headerViewDidBeginEditing")
         // 履歴検索を行うので、事前に永続化しておく
         NotificationCenter.default.post(name: .baseViewModelWillStoreHistory, object: nil)
 
@@ -97,6 +100,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     }
     
     func headerViewDidEndEditing(headerFieldUpdate: Bool) {
+        log.debug("[BaseLayer Event]: headerViewDidEndEditing")
         EGApplication.sharedMyApplication.egDelegate = baseView
         isHeaderViewEditing = false
         searchMenuTableView!.removeFromSuperview()
@@ -116,6 +120,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     
 // MARK: BaseView Delegate
     func baseViewWillAutoInput() {
+        log.debug("[BaseLayer Event]: baseViewWillAutoInput")
         // ベースビューから自動入力したいと通知がきたので、判断する
         if !isHeaderViewEditing {
             NotificationCenter.default.post(name: .baseViewModelWillAutoInput, object: nil)
@@ -123,10 +128,12 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     }
     
     func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection) {
+        log.debug("[BaseLayer Event]: baseViewDidEdgeSwiped")
         delegate?.baseLayerDidInvalidate(direction: direction)
     }
     
     func baseViewDidChangeFront() {
+        log.debug("[BaseLayer Event]: baseViewDidChangeFront. headerView slideToMax")
         headerView.slideToMax()
     }
     
@@ -135,6 +142,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     }
     
     func baseViewDidTouchEnd() {
+        log.debug("[BaseLayer Event]: baseViewDidTouchEnd. adjust header location")
         // タッチ終了時にヘッダービューとベースビューの高さを調整する
         if headerView.isMoving {
             isTouchEndAnimating = true

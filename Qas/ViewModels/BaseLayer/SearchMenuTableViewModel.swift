@@ -55,11 +55,4 @@ class SearchMenuTableViewModel {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
-    //    func getModelData(token: String) {
-    //        if !token.isEmpty {
-    //            historyCellItem = CommonDao.s.selectCommonHistory(title: token, readNum: readHistoryNum)
-    //        }
-    //        delegate?.searchMenuViewWillUpdateLayout()
-    //    }
 }
