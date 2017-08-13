@@ -195,8 +195,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             if swipeDirection == .none && front.isSwiping {
                 // フロントの左右に切り替え後のページを表示しとく
                 if previousImageView.image == nil && nextImageView.image == nil {
-                    previousImageView.image = R.image.logo()
-                    nextImageView.image = R.image.logo()
+                    previousImageView.image = viewModel.getPreviousCapture()
+                    nextImageView.image = viewModel.getNextCapture()
                 }
                 if isChangingFront {
                     let previousTouchPoint = touch.previousLocation(in: self)
@@ -420,7 +420,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     
                     // サムネイルを保存
                     DispatchQueue.mainSyncSafe {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { _ in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { _ in
                             guard let `self` = self else { return }
                             self.saveThumbnail(webView: webView)
                             // くるくるを更新する

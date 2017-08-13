@@ -37,7 +37,9 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
         // フォアグラウンド時にヘッダービューの位置をMaxにする
         NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            self.headerView.slideToMax()
+            UIView.animate(withDuration: 0.35, animations: {
+                self.headerView.slideToMax()
+            }, completion: nil)
         }
         
         baseView.delegate = self
@@ -134,7 +136,9 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     
     func baseViewDidChangeFront() {
         log.debug("[BaseLayer Event]: baseViewDidChangeFront. headerView slideToMax")
-        headerView.slideToMax()
+        UIView.animate(withDuration: 0.35, animations: {
+            self.headerView.slideToMax()
+        }, completion: nil)
     }
     
     func baseViewDidTouchBegan() {

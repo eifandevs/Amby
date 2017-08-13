@@ -296,6 +296,27 @@ class BaseViewModel {
         center.post(name: .headerViewModelWillBeginEditing, object: false)
     }
     
+    /// 前webviewのキャプチャ取得
+    func getPreviousCapture() -> UIImage {
+        let targetIndex = locationIndex == 0 ? eachHistory.count - 1 : locationIndex - 1
+        let targetContext = eachHistory[targetIndex].context
+        if let image = CommonDao.s.getCaptureImage(context: targetContext) {
+            return image
+        } else {
+            return UIImage()
+        }
+    }
+    
+    func getNextCapture() -> UIImage {
+        let targetIndex = locationIndex == eachHistory.count - 1 ? 0 : locationIndex + 1
+        let targetContext = eachHistory[targetIndex].context
+        if let image = CommonDao.s.getCaptureImage(context: targetContext) {
+            return image
+        } else {
+            return UIImage()
+        }
+    }
+    
     /// ヘッダーフィールドの更新
     func reloadHeaderText() {
         headerFieldText = requestUrl

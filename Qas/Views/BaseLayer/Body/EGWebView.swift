@@ -135,11 +135,11 @@ class EGWebView: WKWebView {
     }
     
     func takeThumbnail() -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: bounds.size.width, height: bounds.size.width * DeviceConst.aspectRate), true, 0);
-        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false);
-        let snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        return snapshotImage?.crop(w: Int(AppConst.thumbnailSize.width * 2), h: Int((AppConst.thumbnailSize.width * 2) * DeviceConst.aspectRate));
+        UIGraphicsBeginImageContextWithOptions(frame.size, true, 0)
+        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
+        let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return snapshotImage
     }
 
 // MARK: Gesture Event

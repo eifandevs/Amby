@@ -35,7 +35,7 @@ extension UIImage {
         UIGraphicsEndImageContext()
         
         // 切り抜き処理
-        let cropRect  = CGRect.init(x: CGFloat((resizeWidth - w) / 2), y: CGFloat((resizeHeight - h) / 2), width: CGFloat(w), height: CGFloat(h))
+        let cropRect  = CGRect.init(x: CGFloat((resizeWidth - w) / 2), y: 0, width: CGFloat(w), height: CGFloat(h))
         let cropRef   = resizeImage!.cgImage!.cropping(to: cropRect)
         let cropImage = UIImage(cgImage: cropRef!)
         

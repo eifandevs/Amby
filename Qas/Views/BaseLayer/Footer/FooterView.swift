@@ -102,7 +102,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             }
         }
     }
-    
+
 // MARK: FooterViewModel Delegate
 
     func footerViewModelDidAddThumbnail(context: String, isPrivateMode: Bool) {
@@ -155,25 +155,24 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         let existIndicator = frontThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
         if existIndicator {
             DispatchQueue.mainSyncSafe { [weak self] _ in
-                let targetThumbnail: Thumbnail = self!.thumbnails.filter({ (thumbnail) -> Bool in
+                guard let `self` = self else { return }
+                let targetThumbnail: Thumbnail = self.thumbnails.filter({ (thumbnail) -> Bool in
                     return thumbnail.context == context
                 })[0]
-                let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: context).path)
-                if image == nil {
+                if let image = CommonDao.s.getThumbnailImage(context: context) {
+                    targetThumbnail.subviews.forEach({ (v) in
+                        if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
+                            let indicator = v as! NVActivityIndicatorView
+                            indicator.stopAnimating()
+                            indicator.alpha = 0
+                            indicator.removeFromSuperview()
+                        }
+                    })
+                    targetThumbnail.setImage(nil, for: .normal)
+                    targetThumbnail.setBackgroundImage(image, for: .normal)
+                } else {
                     log.error("missing thumbnail image")
-                    return
                 }
-                
-                targetThumbnail.subviews.forEach({ (v) in
-                    if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
-                        let indicator = v as! NVActivityIndicatorView
-                        indicator.stopAnimating()
-                        indicator.alpha = 0
-                        indicator.removeFromSuperview()
-                    }
-                })
-                targetThumbnail.setImage(nil, for: .normal)
-                targetThumbnail.setBackgroundImage(image, for: .normal)
             }
         }
     }
@@ -183,13 +182,10 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             eachThumbnail.forEach { (item) in
                 let btn = createCaptureSpace(context: item.context, isPrivateMode: item.isPrivate == "true")
                 if !item.context.isEmpty {
-                    let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: item.context).path)
-                    if image == nil {
-                        log.error("missing thumbnail image")
-                        return
+                    if let image = CommonDao.s.getThumbnailImage(context: item.context) {
+                        btn.setImage(nil, for: .normal)
+                        btn.setBackgroundImage(image, for: .normal)
                     }
-                    btn.setImage(nil, for: .normal)
-                    btn.setBackgroundImage(image, for: .normal)
                 }
             }
         }

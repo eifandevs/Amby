@@ -145,7 +145,16 @@ final class CommonDao {
             Util.presentWarning(title: "登録エラー", message: "ページ情報を取得できませんでした。")
         }
     }
+
+// MARK: サムネイル取得
+    func getThumbnailImage(context: String) -> UIImage? {
+        let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: context).path)
+        return image?.crop(w: Int(AppConst.thumbnailSize.width * 2), h: Int((AppConst.thumbnailSize.width * 2) * DeviceConst.aspectRate))
+    }
     
+    func getCaptureImage(context: String) -> UIImage? {
+        return UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: context).path)
+    }
 // MARK: キャッシュ管理
     /// 検索履歴の保存
     func storeSearchHistory(searchHistory: [SearchHistoryItem]) {
