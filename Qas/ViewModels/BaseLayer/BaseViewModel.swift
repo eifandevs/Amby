@@ -59,8 +59,6 @@ class BaseViewModel {
     // 現在表示しているwebviewのインデックス
     var locationIndex: Int  = UserDefaults.standard.integer(forKey: AppConst.locationIndexKey) {
         didSet {
-            // locationIndexに動きがあったら、インデックスとeachHistoryを保存する
-            UserDefaults.standard.set(locationIndex, forKey: AppConst.locationIndexKey)
             log.debug("location index changed. \(oldValue) -> \(locationIndex)")
         }
     }
@@ -298,14 +296,22 @@ class BaseViewModel {
         center.post(name: .headerViewModelWillBeginEditing, object: false)
     }
     
+    /// ヘッダーフィールドの更新
     func reloadHeaderText() {
         headerFieldText = requestUrl
     }
     
+    /// ロケーションインデックスの永続化
+    func storeLocationIndex() {
+        UserDefaults.standard.set(locationIndex, forKey: AppConst.locationIndexKey)
+    }
+    
+    /// 前WebViewに切り替え
     func changePreviousWebView() {
         changeWebView(index: locationIndex - 1)
     }
     
+    /// 後WebViewに切り替え
     func changeNextWebView() {
         changeWebView(index: locationIndex + 1)
     }

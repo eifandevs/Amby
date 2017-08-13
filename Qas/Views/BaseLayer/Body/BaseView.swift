@@ -43,6 +43,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 delegate?.baseViewDidChangeFront()
                 // ヘッダーフィールドを更新する
                 viewModel.reloadHeaderText()
+                // ロケーションインデックスを保存
+                viewModel.storeLocationIndex()
                 // 空ページの場合は、編集状態にする
                 if viewModel.requestUrl.isEmpty {
                     if let beginEditingWorkItem = self.beginEditingWorkItem {
