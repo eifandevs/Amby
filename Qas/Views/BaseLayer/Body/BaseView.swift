@@ -420,7 +420,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     
                     // サムネイルを保存
                     DispatchQueue.mainSyncSafe {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { _ in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { _ in
                             guard let `self` = self else { return }
                             self.saveThumbnail(webView: webView)
                             // くるくるを更新する
