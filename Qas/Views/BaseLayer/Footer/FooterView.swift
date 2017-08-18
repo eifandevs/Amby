@@ -96,11 +96,6 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         for (index, thumbnail) in thumbnails.enumerated() {
             if index == viewModel.locationIndex {
                 thumbnail.isFront = true
-                log.warning("frame: \(frame)")
-                log.warning("scrollView.frame: \(scrollView.frame)")
-                log.warning("frontThumbnail.frame: \(thumbnail.frame)")
-                log.warning("scrollView.contentOffset: \(scrollView.contentOffset)")
-                log.warning("scrollView.contentSize: \(scrollView.contentSize)")
             } else {
                 thumbnail.isFront = false
             }
@@ -193,8 +188,15 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
                     }
                 }
             }
-            updateFrontBar()
         }
+        updateFrontBar()
+        // スクロールする
+        var ptX = -scrollView.contentInset.left + (viewModel.locationIndex.cgfloat * AppConst.thumbnailSize.width)
+        if ptX > scrollView.contentSize.width - frame.width + scrollView.contentInset.right {
+            ptX = scrollView.contentSize.width - frame.width + scrollView.contentInset.right
+        }
+        let offset = CGPoint(x: ptX, y: scrollView.contentOffset.y)
+        scrollView.setContentOffset(offset, animated: true)
     }
 
 // MARK: Gesture Event
