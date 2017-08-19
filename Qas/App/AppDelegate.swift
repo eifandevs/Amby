@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyBeaver
-import Onboard
 
 let log = SwiftyBeaver.self
 
@@ -49,8 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ユーザーデフォルト初期値設定
         CommonDao.s.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let baseVC = boardingViewController()
-        self.window!.rootViewController = baseVC
+        self.window!.rootViewController = BaseViewController()
         self.window!.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.window!.makeKeyAndVisible()
         
@@ -62,20 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(0.06, forKey: AppConst.autoScrollIntervalKey)
         self.window!.rootViewController?.removeFromParentViewController()
         self.window!.rootViewController = BaseViewController()
-    }
-    
-    func boardingViewController() -> OnboardingViewController {
-        let content1 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ", image: nil, buttonText: nil, action: nil)
-        let content2 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ2", image: nil, buttonText: nil, action: nil)
-        let content3 = OnboardingContentViewController(title: "チュートリアル", body: "最高のブラウザ", image: nil, buttonText: "スタート") {
-            (UIApplication.shared.delegate as! AppDelegate).initialize()
-        }
-        let onBoardingVC = OnboardingViewController(backgroundImage: R.image.onboard_back(), contents: [content1, content2, content3])!
-        onBoardingVC.allowSkipping = true
-        onBoardingVC.skipButton.addTarget(self, action: #selector(self.onTappedSkipButton(_:)), for: .touchUpInside)
-        onBoardingVC.shouldBlurBackground = false
-        onBoardingVC.shouldFadeTransitions = false
-        return onBoardingVC
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

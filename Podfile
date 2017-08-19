@@ -16,5 +16,4 @@ target 'Qas' do
   pod 'NVActivityIndicatorView', '~> 3.3'
   pod 'R.swift', '~> 3.3'
   pod 'Alamofire', '~> 4.4'
-  pod 'Onboard', '~> 2.3'
 end
