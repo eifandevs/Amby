@@ -18,6 +18,7 @@ class HelpMenuViewModel: OptionMenuTableViewModel {
         menuItems = [
             [
                 OptionMenuItem(title: "フォームについて", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    NotificationCenter.default.post(name: .baseViewControllerWillPresentHelp, object: nil)
                     return nil
                 }),
                 OptionMenuItem(title: "自動スクロールについて", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in

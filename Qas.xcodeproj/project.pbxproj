@@ -86,6 +86,8 @@
 		A565ED051F27536E005740E3 /* OnceExec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A565ED041F27536E005740E3 /* OnceExec.swift */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		A5C1FDAE1F48A0250048E711 /* HelpMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1FDAD1F48A0250048E711 /* HelpMenuViewModel.swift */; };
+		A5C1FDB31F48B1E60048E711 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1FDB11F48B1E60048E711 /* HelpViewController.swift */; };
+		A5C1FDB41F48B1E60048E711 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5C1FDB21F48B1E60048E711 /* HelpViewController.xib */; };
 		A9872C50D89BD4A2A7B139E5 /* Pods_Qas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */; };
 /* End PBXBuildFile section */
 
@@ -174,6 +176,8 @@
 		A57EFEA11E3E06D300B66701 /* Qas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		A5C1FDAD1F48A0250048E711 /* HelpMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpMenuViewModel.swift; sourceTree = "<group>"; };
+		A5C1FDB11F48B1E60048E711 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		A5C1FDB21F48B1E60048E711 /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -341,6 +345,8 @@
 			isa = PBXGroup;
 			children = (
 				A5223EBE1F1F8EA20097E793 /* BaseViewController.swift */,
+				A5C1FDB11F48B1E60048E711 /* HelpViewController.swift */,
+				A5C1FDB21F48B1E60048E711 /* HelpViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -562,6 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5223F0C1F1F8EA20097E793 /* offline.html in Resources */,
+				A5C1FDB41F48B1E60048E711 /* HelpViewController.xib in Resources */,
 				A5223F091F1F8EA20097E793 /* authorize.html in Resources */,
 				A5223EEA1F1F8EA20097E793 /* LaunchScreen.storyboard in Resources */,
 				A5223F0B1F1F8EA20097E793 /* invalid.html in Resources */,
@@ -707,6 +714,7 @@
 				A5223F251F1F8EA20097E793 /* CircleProgress.swift in Sources */,
 				A5223EF71F1F8EA20097E793 /* Optional+Extend.swift in Sources */,
 				A545D71E1F320D790023C160 /* ApiManager.swift in Sources */,
+				A5C1FDB31F48B1E60048E711 /* HelpViewController.swift in Sources */,
 				A5223F1C1F1F8EA20097E793 /* FooterView.swift in Sources */,
 				A5223EF21F1F8EA20097E793 /* DispatchQueue+Extend.swift in Sources */,
 				A5223F1A1F1F8EA20097E793 /* EGWebView.swift in Sources */,

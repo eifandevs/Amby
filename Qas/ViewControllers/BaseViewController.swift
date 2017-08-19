@@ -15,6 +15,20 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let center = NotificationCenter.default
+        // ヘルプ画面の表示通知
+        center.addObserver(forName: .baseViewControllerWillPresentHelp, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
+            log.debug("[BaseViewController Event]: baseViewControllerWillPresentHelp")
+            // TODO: ヘルプ画面を表示する
+            let vc = HelpViewController(nibName: R.nib.helpViewController.name, bundle: nil)
+            let nv = UINavigationController(rootViewController: vc)
+            
+            var searchButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: "closeHelpViewController")
+            nv.navigationItem.setLeftBarButton(searchButton, animated: false)
+            nv.navigationBar.topItem?.title = "ヘルプ"
+            self.present(nv, animated: true)
+        }
         // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
         baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
         baseLayer.delegate = self
@@ -28,6 +42,10 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
 // MARK: BaseLayer Delegate
@@ -59,5 +77,10 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
             }
         }
         super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
+    
+// MARK: Button Event
+    func closeHelpViewController() {
+        log.debug("閉じる")
     }
 }

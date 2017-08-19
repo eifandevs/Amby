@@ -80,7 +80,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             switchControl.frame = CGRect(origin: CGPoint(x: marginX + titleLabel.frame.size.width, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - titleLabel.frame.size.width, height: AppConst.optionMenuCellHeight / 3))
             switchControl.center.y = frame.size.height / 2
             switchControl.isOn = menuItem.defaultValue! as! Bool
-            switchControl.onTintColor = UIColor.frenchBlue
+            switchControl.onTintColor = UIColor.brilliantBlue
             let _ = switchControl.reactive.controlEvents(.valueChanged).observeNext(with: { [weak self] (e) in
                 menuItem.switchAction?(self!.switchControl.isOn)
             })
@@ -94,7 +94,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             slider.maximumValue = -0.01
             slider.value = menuItem.defaultValue! as! Float
             slider.isContinuous = false
-            slider.tintColor = UIColor.frenchBlue
+            slider.tintColor = UIColor.brilliantBlue
             slider.maximumValueImage = UIColor.blue.circleImage(size: CGSize(width: 5, height: 5))
             slider.minimumValueImage = UIColor.red.circleImage(size: CGSize(width: 5, height: 5))
             let _ = slider.reactive.controlEvents(.valueChanged).observeNext(with: { [weak self] (e) in
