@@ -85,6 +85,7 @@
 		A565ED031F24D629005740E3 /* UIImageView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A565ED021F24D629005740E3 /* UIImageView+Extend.swift */; };
 		A565ED051F27536E005740E3 /* OnceExec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A565ED041F27536E005740E3 /* OnceExec.swift */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
+		A5C1FDAE1F48A0250048E711 /* HelpMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1FDAD1F48A0250048E711 /* HelpMenuViewModel.swift */; };
 		A9872C50D89BD4A2A7B139E5 /* Pods_Qas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +173,7 @@
 		A565ED041F27536E005740E3 /* OnceExec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnceExec.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		A5C1FDAD1F48A0250048E711 /* HelpMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpMenuViewModel.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -372,6 +374,7 @@
 				A5223EC81F1F8EA20097E793 /* HistoryMenuViewModel.swift */,
 				A5223EC91F1F8EA20097E793 /* OptionMenuTableViewModel.swift */,
 				A5223ECA1F1F8EA20097E793 /* SettingMenuViewModel.swift */,
+				A5C1FDAD1F48A0250048E711 /* HelpMenuViewModel.swift */,
 			);
 			path = FrontLayer;
 			sourceTree = "<group>";
@@ -677,6 +680,7 @@
 				A5223F0F1F1F8EA20097E793 /* BaseViewModel.swift in Sources */,
 				A5223F121F1F8EA20097E793 /* BaseMenuViewModel.swift in Sources */,
 				A545D7101F30B7390023C160 /* SearchMenuTableViewCell.swift in Sources */,
+				A5C1FDAE1F48A0250048E711 /* HelpMenuViewModel.swift in Sources */,
 				A5223EE61F1F8EA20097E793 /* AppDelegate.swift in Sources */,
 				A5223F261F1F8EA20097E793 /* FrontLayer.swift in Sources */,
 				A5223F071F1F8EA20097E793 /* Favorite.swift in Sources */,

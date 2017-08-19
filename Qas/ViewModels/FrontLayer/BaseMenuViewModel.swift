@@ -37,12 +37,11 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
                 }),
                 OptionMenuItem(title: "ブックマーク", image: R.image.optionmenu_favorite(), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FavoriteMenuViewModel()
                 }),
-                OptionMenuItem(title: "問題の報告", image: UIImage(named: "option_menu_mail"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
-                }),
                 OptionMenuItem(title: "設定", image: UIImage(named: "option_menu_setting"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return SettingMenuViewModel()
                 }),
-                OptionMenuItem(title: "ヘルプ", image: UIImage(named: "option_menu_help")),
-                OptionMenuItem(title: "APP情報", image: UIImage(named: "option_menu_help")),
+                OptionMenuItem(title: "ヘルプ", image: UIImage(named: "option_menu_help"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return HelpMenuViewModel()
+                }),
+                OptionMenuItem(title: "アプリ情報", image: R.image.optionmenu_app()),
             ]
         ]
     }
