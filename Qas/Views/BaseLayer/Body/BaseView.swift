@@ -192,7 +192,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 delegate?.baseViewDidEdgeSwiped(direction: swipeDirection)
             }
             
-            if swipeDirection == .none && front.isSwiping {
+            if webViews.count > 1 && swipeDirection == .none && front.isSwiping {
                 // フロントの左右に切り替え後のページを表示しとく
                 if previousImageView.image == nil && nextImageView.image == nil {
                     previousImageView.image = viewModel.getPreviousCapture()

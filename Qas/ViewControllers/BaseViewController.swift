@@ -21,13 +21,8 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
             guard let `self` = self else { return }
             log.debug("[BaseViewController Event]: baseViewControllerWillPresentHelp")
             // TODO: ヘルプ画面を表示する
-            let vc = HelpViewController(nibName: R.nib.helpViewController.name, bundle: nil)
-            let nv = UINavigationController(rootViewController: vc)
-            
-            var searchButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: "closeHelpViewController")
-            nv.navigationItem.setLeftBarButton(searchButton, animated: false)
-            nv.navigationBar.topItem?.title = "ヘルプ"
-            self.present(nv, animated: true)
+            let vc = HelpViewController(subtitle: "あああああああ", message: "いいいいいいいい")
+            self.present(vc, animated: true)
         }
         // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
         baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
