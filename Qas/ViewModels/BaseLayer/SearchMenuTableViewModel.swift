@@ -20,11 +20,9 @@ class SearchMenuTableViewModel {
     var googleSearchCellItem: [String] = []
     var searchHistoryCellItem: [SearchHistoryItem] = []
     var historyCellItem: [CommonHistoryItem] = []
-    let readHistoryNum: Int = 31
+    private let readHistoryNum: Int = 31
     var existDisplayData: Bool {
-        get {
-            return googleSearchCellItem.count > 0 || historyCellItem.count > 0 || searchHistoryCellItem.count > 0
-        }
+        return googleSearchCellItem.count > 0 || historyCellItem.count > 0 || searchHistoryCellItem.count > 0
     }
     init() {
         // webview検索

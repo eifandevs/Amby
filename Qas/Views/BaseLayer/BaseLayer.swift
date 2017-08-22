@@ -21,7 +21,7 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     private var headerView: HeaderView
     private let footerView: FooterView
     private let baseView: BaseView
-    private var searchMenuTableView: SearchMenuTableView? = nil
+    private var searchMenuTableView: SearchMenuTableView?
     private var isTouchEndAnimating = false
     private var isHeaderViewEditing = false
 

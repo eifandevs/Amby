@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class EGGradientLabel: UILabel {
-    let gradient = CAGradientLayer.init()
+    private let gradient = CAGradientLayer.init()
     
     init() {
         super.init(frame: CGRect.zero)

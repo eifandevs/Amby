@@ -16,11 +16,11 @@ protocol SearchMenuTableViewDelegate: class  {
 
 class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, SearchMenuTableViewModelDelegate {
 
-    weak var delegate: SearchMenuTableViewDelegate? = nil
-    let viewModel: SearchMenuTableViewModel = SearchMenuTableViewModel()
-    let cellHeight = 50.0
-    var tapRecognizer: UITapGestureRecognizer!
-    var overlay: UIButton?
+    weak var delegate: SearchMenuTableViewDelegate?
+    private let viewModel: SearchMenuTableViewModel = SearchMenuTableViewModel()
+    private let cellHeight = 50.0
+    private var tapRecognizer: UITapGestureRecognizer!
+    private var overlay: UIButton?
     
     private var tableView: UITableView = UITableView()
     

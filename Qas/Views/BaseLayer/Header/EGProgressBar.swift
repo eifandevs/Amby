@@ -11,8 +11,8 @@ import Bond
 
 class EGProgressBar: UIView {
     private let bar: UIView = UIView()
-    let progressMin: CGFloat = 0.1
-    var isFinished: Bool = false
+    private let progressMin: CGFloat = 0.1
+    private var isFinished: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)

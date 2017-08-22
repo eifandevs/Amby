@@ -18,9 +18,9 @@ protocol OptionMenuTableViewDelegate: class {
 }
 
 class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ShadowView, OptionMenuTableViewDelegate {
-    weak var delegate: OptionMenuTableViewDelegate? = nil
+    weak var delegate: OptionMenuTableViewDelegate?
     private var tableView: UITableView = UITableView()
-    private var detailView: OptionMenuTableView? = nil
+    private var detailView: OptionMenuTableView?
     private var viewModel: OptionMenuTableViewModel!
     private var swipeDirection: EdgeSwipeDirection = .none
     

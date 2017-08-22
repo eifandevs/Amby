@@ -11,7 +11,7 @@ import UIKit
 
 class CircleMenuItem: UIButton, ShadowView, CircleView {
     
-    var action: ((CGPoint) -> ())? = nil
+    var action: ((CGPoint) -> ())?
     var scheduledAction: Bool = false
     var isValid: Bool = false
     

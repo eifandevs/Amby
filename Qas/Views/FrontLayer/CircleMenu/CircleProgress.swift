@@ -11,19 +11,19 @@ import UIKit
 
 class CircleProgress: UIView {
     
-    var circle: UIView! = nil
-    var progress: CAShapeLayer! = nil
-    var progressTimer: Timer! = nil
-    var animationFinishAction: (() -> ())? = nil
+    private var circle: UIView
+    private var progress: CAShapeLayer!
+    private var progressTimer: Timer!
+    private var animationFinishAction: (() -> ())?
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.circle = UIView()
-        self.circle.layoutIfNeeded()
-        createProgress()
+        circle = UIView()
+        circle.layoutIfNeeded()
         
-        self.circle!.layer.addSublayer(progress)
-        self.addSubview(self.circle!)
+        super.init(frame: frame)
+        createProgress()
+        circle.layer.addSublayer(progress)
+        addSubview(self.circle)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -63,7 +63,7 @@ class CircleProgress: UIView {
         progress.lineWidth = 2.5
         progress.strokeStart = 0
         progress.strokeEnd = 0
-        self.circle!.layer.addSublayer(progress)
+        circle.layer.addSublayer(progress)
     }
     
     func updateProgress(tiemr: Timer) {

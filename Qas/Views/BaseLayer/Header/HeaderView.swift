@@ -18,19 +18,17 @@ protocol HeaderViewDelegate: class {
 class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowView {
     weak var delegate: HeaderViewDelegate?
     private let heightMax = AppConst.headerViewHeight
-    private var headerField: HeaderField
+    private let headerField: HeaderField
     private var isEditing = false
     private let viewModel = HeaderViewModel()
-    private var progressBar: EGProgressBar
-    private var historyBackButton: UIButton
-    private var historyForwardButton: UIButton
-    private var favoriteButton: UIButton
-    private var deleteButton: UIButton
+    private let progressBar: EGProgressBar
+    private let historyBackButton: UIButton
+    private let historyForwardButton: UIButton
+    private let favoriteButton: UIButton
+    private let deleteButton: UIButton
 
     private var headerItems: [UIButton] {
-        get {
-            return [historyBackButton, historyForwardButton, favoriteButton, deleteButton]
-        }
+        return [historyBackButton, historyForwardButton, favoriteButton, deleteButton]
     }
     
     var fieldAlpha: CGFloat {

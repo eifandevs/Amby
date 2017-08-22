@@ -15,33 +15,31 @@ protocol CircleMenuDelegate: class {
 
 class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     weak var delegate: CircleMenuDelegate?
-
-    private var initialPt: CGPoint? = nil
     var swipeDirection: EdgeSwipeDirection = .none
-    var isEdgeSwiping = true
-    var isEdgeClosing = false
-    var isClosing = false
-    var progress: CircleProgress! = nil
-    var circleMenuItemGroup: [[CircleMenuItem]] = []
-    var menuIndex: Int = 0
-    var circleMenuItems: [CircleMenuItem] {
+
+    private var initialPt: CGPoint?
+    private var isEdgeSwiping = true
+    private var isEdgeClosing = false
+    private var isClosing = false
+    private var progress: CircleProgress!
+    private var circleMenuItemGroup: [[CircleMenuItem]] = []
+    private var menuIndex: Int = 0
+    private var circleMenuItems: [CircleMenuItem] {
         get {
             return circleMenuItemGroup[menuIndex]
         }
     }
     
-    var circleMenuLocations: [CGPoint] {
-        get {
-            let i = swipeDirection == .left ? 1 : -1
-            return [
-                CGPoint(x: 0, y: -120), // Upper
-                CGPoint(x: i*60, y: -88), // UpperRight
-                CGPoint(x: i*95, y: -34), // RightUpper
-                CGPoint(x: i*95, y:  34), // RightLower
-                CGPoint(x: i*60, y: 88), // LowerRight
-                CGPoint(x: 0, y: 110) // Lower
-            ]
-        }
+    private var circleMenuLocations: [CGPoint] {
+        let i = swipeDirection == .left ? 1 : -1
+        return [
+            CGPoint(x: 0, y: -120), // Upper
+            CGPoint(x: i*60, y: -88), // UpperRight
+            CGPoint(x: i*95, y: -34), // RightUpper
+            CGPoint(x: i*95, y:  34), // RightLower
+            CGPoint(x: i*60, y: 88), // LowerRight
+            CGPoint(x: 0, y: 110) // Lower
+        ]
     }
     
     override init(frame: CGRect) {

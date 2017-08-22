@@ -10,8 +10,8 @@ import UIKit
 
 class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegate {
     
-    private var baseLayer: BaseLayer! = nil
-    private var frontLayer: FrontLayer! = nil
+    private var baseLayer: BaseLayer!
+    private var frontLayer: FrontLayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()

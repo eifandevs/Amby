@@ -15,12 +15,12 @@ protocol HeaderFieldDelegate: class {
 
 class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     weak var delegate: HeaderFieldDelegate?
-    private var icon: UIImageView? = nil
+    private var icon: UIImageView?
     private let iconSize: CGSize = CGSize(width: AppConst.headerViewHeight / 2, height: AppConst.headerViewHeight / 2)
-    private var label: EGGradientLabel? = nil
-    private var pastLabelText: String? = nil
+    private var label: EGGradientLabel?
+    private var pastLabelText: String?
     private let fontSize: CGFloat = 15
-    var textField: UITextField! = nil
+    var textField: UITextField!
     
     var text: String? {
         get {

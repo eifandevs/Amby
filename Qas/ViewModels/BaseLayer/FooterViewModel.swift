@@ -23,9 +23,7 @@ class FooterViewModel {
     var locationIndex: Int  = 0
     private var eachThumbnail: [HistoryItem] = []
     private var currentThumbnail: HistoryItem {
-        get {
-            return eachThumbnail[locationIndex]
-        }
+        return eachThumbnail[locationIndex]
     }
     
     weak var delegate: FooterViewModelDelegate?

@@ -31,7 +31,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     weak var delegate: BaseViewDelegate?
 
     /// 編集状態にするクロージャ
-    var beginEditingWorkItem: DispatchWorkItem? = nil
+    private var beginEditingWorkItem: DispatchWorkItem?
     
     /// 最前面のWebView
     private var front: EGWebView! {
@@ -61,7 +61,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
     }
     /// 現在表示中の全てのWebView。アプリを殺して、起動した後などは、WebViewインスタンスは入っていないが、配列のスペースは作成される
-    var webViews: [EGWebView?] = []
+    private var webViews: [EGWebView?] = []
     /// 前後ページ
     private let previousImageView: UIImageView = UIImageView()
     private let nextImageView: UIImageView = UIImageView()
@@ -86,27 +86,19 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 
     /// ベースビューがMaxポジションにあるかどうかのフラグ
     var isLocateMax: Bool {
-        get {
-            return frame.origin.y == AppConst.headerViewHeight
-        }
+        return frame.origin.y == AppConst.headerViewHeight
     }
     /// ベースビューがMinポジションにあるかどうかのフラグ
     var isLocateMin: Bool {
-        get {
-            return frame.origin.y == DeviceConst.statusBarHeight
-        }
+        return frame.origin.y == DeviceConst.statusBarHeight
     }
     /// 逆順方向のスクロールが可能かどうかのフラグ
     var canPastScroll: Bool {
-        get {
-            return front.scrollView.contentOffset.y > 0
-        }
+        return front.scrollView.contentOffset.y > 0
     }
     ///順方向のスクロールが可能かどうかのフラグ
     var canForwardScroll: Bool {
-        get {
-            return front.scrollView.contentOffset.y < front.scrollView.contentSize.height - front.frame.size.height
-        }
+        return front.scrollView.contentOffset.y < front.scrollView.contentSize.height - front.frame.size.height
     }
     override init(frame: CGRect) {
         super.init(frame: frame)

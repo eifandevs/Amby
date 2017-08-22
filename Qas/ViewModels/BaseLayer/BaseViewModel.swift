@@ -27,9 +27,7 @@ class BaseViewModel {
     
     // リクエストURL(jsのURL)
     var requestUrl: String {
-        get {
-            return eachHistory[safe: locationIndex] != nil ? eachHistory[locationIndex].url : ""
-        }
+        return eachHistory[safe: locationIndex] != nil ? eachHistory[locationIndex].url : ""
     }
     
     var headerFieldText: String = "" {
@@ -39,9 +37,7 @@ class BaseViewModel {
     }
     
     var reloadUrl: String {
-        get {
-            return headerFieldText
-        }
+        return headerFieldText
     }
     
     weak var delegate: BaseViewModelDelegate?
@@ -51,9 +47,7 @@ class BaseViewModel {
     
     // webviewの数
     var webViewCount: Int {
-        get {
-            return eachHistory.count
-        }
+        return eachHistory.count
     }
     
     // 現在表示しているwebviewのインデックス
@@ -70,27 +64,21 @@ class BaseViewModel {
     private var eachHistory: [HistoryItem] = []
     
     // 通知センター
-    let center = NotificationCenter.default
+    private let center = NotificationCenter.default
     
     var isPrivateMode: Bool? {
-        get {
-            return eachHistory.count > locationIndex ? eachHistory[locationIndex].isPrivate == "true" : false
-        }
+        return eachHistory.count > locationIndex ? eachHistory[locationIndex].isPrivate == "true" : false
     }
     
     // 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
-        get {
-            return CGFloat(UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey))
-        }
+        return CGFloat(UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey))
     }
     
     let autoScrollSpeed: CGFloat = 0.6
     
     var currentContext: String? {
-        get {
-            return eachHistory.count > locationIndex ? eachHistory[locationIndex].context : nil
-        }
+        return eachHistory.count > locationIndex ? eachHistory[locationIndex].context : nil
     }
     
     init() {
