@@ -15,7 +15,7 @@ class AppConst {
     static let edgeSwipeErea: CGFloat = 15.0
     static let optionMenuCellHeight: CGFloat = 50
     static let optionMenuSize: CGSize = CGSize(width: 250, height: 450)
-    static let thumbnailSize = CGSize(width: 105, height: 105 * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
+    static let thumbnailSize = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
     static let searchPath = "https://www.google.co.jp/search?q="
     static let locationIndexKey = "locationIndex"
     static let autoScrollIntervalKey = "autoScrollInterval"
