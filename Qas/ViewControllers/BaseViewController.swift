@@ -21,7 +21,7 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
             guard let `self` = self else { return }
             log.debug("[BaseViewController Event]: baseViewControllerWillPresentHelp")
             // TODO: ヘルプ画面を表示する
-            let vc = HelpViewController(subtitle: "あああああああ", message: "いいいいいいいい")
+            let vc = HelpViewController(subtitle: "フォーム情報の自動入力", message: "1. ああああああああえふぇっふぁえwっふぇfqfqqfわあえいいいいいいいい\n\n2. ううううううううううううううううううう\n\n3. あえjふぁおえjふぉえjふぉえあjふぉえあjふぉあ；うぇjふぇおうぃjふぁえを；jふぇお；ふぃj")
             self.present(vc, animated: true)
         }
         // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)

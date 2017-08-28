@@ -152,13 +152,12 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
     
     func footerViewModelDidEndLoading(context: String, index: Int) {
         // くるくるを止めて、サムネイルを表示する
-        let existIndicator = frontThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
+        let targetThumbnail: Thumbnail = self.thumbnails.filter({ (thumbnail) -> Bool in
+            return thumbnail.context == context
+        })[0]
+        let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
         if existIndicator {
             DispatchQueue.mainSyncSafe { [weak self] _ in
-                guard let `self` = self else { return }
-                let targetThumbnail: Thumbnail = self.thumbnails.filter({ (thumbnail) -> Bool in
-                    return thumbnail.context == context
-                })[0]
                 if let image = CommonDao.s.getThumbnailImage(context: context) {
                     targetThumbnail.subviews.forEach({ (v) in
                         if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
@@ -182,6 +181,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
             eachThumbnail.forEach { (item) in
                 let btn = createCaptureSpace(context: item.context, isPrivateMode: item.isPrivate == "true")
                 if !item.context.isEmpty {
+                    // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合
                     if let image = CommonDao.s.getThumbnailImage(context: item.context) {
                         btn.setImage(nil, for: .normal)
                         btn.setBackgroundImage(image, for: .normal)

@@ -93,6 +93,7 @@ class EGWebView: WKWebView {
         }
     }
     
+    @discardableResult
     func load(urlStr: String) -> Bool {
         if  urlStr.hasValidUrl {
             guard let url = URL(string: urlStr) else {

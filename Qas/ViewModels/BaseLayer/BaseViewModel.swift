@@ -141,14 +141,13 @@ class BaseViewModel {
             log.debug("[BaseView Event]: baseViewModelWillAutoInput")
             self.delegate?.baseViewModelDidAutoInput()
         }
-        
         // フロントwebviewの変更
         center.addObserver(forName: .baseViewModelWillChangeWebView, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillChangeWebView")
             self.changeWebView(index: notification.object as! Int)
         }
-        // フロントwebviewの変更
+        // 履歴の永続化
         center.addObserver(forName: .baseViewModelWillStoreHistory, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillStoreHistory")

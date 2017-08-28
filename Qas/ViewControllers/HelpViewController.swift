@@ -15,6 +15,7 @@ class HelpViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var gifImageView: UIImageView!
+    @IBOutlet weak var contentSubView: UIView!
     
     private var subtitle: String = ""
     private var message: String = ""
@@ -31,8 +32,9 @@ class HelpViewController: UIViewController {
         // Do any additional setup after loading the view.
         subtitleLabel.text = subtitle
         messageLabel.text = message
-        contentView.backgroundColor = UIColor.white
         closeButton.addTarget(self, action: #selector(self.onTappedCloseButton(_:)), for: .touchUpInside)
+        contentSubView.frame.origin.x = (DeviceConst.displaySize.width - contentSubView.frame.size.width) / 2
+        contentSubView.frame.origin.y = (DeviceConst.displaySize.height - contentSubView.frame.size.height) / 2
     }
 
     override func didReceiveMemoryWarning() {

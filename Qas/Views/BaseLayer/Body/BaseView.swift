@@ -532,7 +532,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private func loadWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
         webViews[viewModel.locationIndex] = newWv
-        _ = newWv.load(urlStr: viewModel.requestUrl)
+        if !viewModel.requestUrl.isEmpty {
+            newWv.load(urlStr: viewModel.requestUrl)
+        }
     }
     
     private func saveMetaData(webView: EGWebView, completion: ((_ url: String?) -> ())?) {
