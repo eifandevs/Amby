@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ユーザーデフォルト初期値設定
         CommonDao.s.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window!.rootViewController = LaunchViewController()
+        self.window!.rootViewController = SplashViewController()
         self.window!.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.window!.makeKeyAndVisible()
         

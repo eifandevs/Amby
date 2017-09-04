@@ -289,14 +289,21 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 2 nibs.
   struct nib {
     /// Nib `HelpViewController`.
     static let helpViewController = _R.nib._HelpViewController()
+    /// Nib `SplashViewController`.
+    static let splashViewController = _R.nib._SplashViewController()
     
     /// `UINib(name: "HelpViewController", in: bundle)`
     static func helpViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.helpViewController)
+    }
+    
+    /// `UINib(name: "SplashViewController", in: bundle)`
+    static func splashViewController(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.splashViewController)
     }
     
     fileprivate init() {}
@@ -346,15 +353,35 @@ struct R: Rswift.Validatable {
 struct _R: Rswift.Validatable {
   static func validate() throws {
     try storyboard.validate()
+    try nib.validate()
   }
   
-  struct nib {
+  struct nib: Rswift.Validatable {
+    static func validate() throws {
+      try _SplashViewController.validate()
+    }
+    
     struct _HelpViewController: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "HelpViewController"
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _SplashViewController: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "SplashViewController"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo' is used in nib 'SplashViewController', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
