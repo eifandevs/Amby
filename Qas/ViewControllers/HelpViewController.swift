@@ -32,9 +32,12 @@ class HelpViewController: UIViewController {
         // Do any additional setup after loading the view.
         subtitleLabel.text = subtitle
         messageLabel.text = message
+        closeButton.backgroundColor = UIColor.brilliantBlue
         closeButton.addTarget(self, action: #selector(self.onTappedCloseButton(_:)), for: .touchUpInside)
-        contentSubView.frame.origin.x = (DeviceConst.displaySize.width - contentSubView.frame.size.width) / 2
-        contentSubView.frame.origin.y = (DeviceConst.displaySize.height - contentSubView.frame.size.height) / 2
+        let widthDiffRate = DeviceConst.displaySize.width / contentSubView.frame.size.width
+        let heightDiffRate = DeviceConst.displaySize.height / contentSubView.frame.size.height
+        contentSubView.transform = CGAffineTransform(scaleX: widthDiffRate, y: heightDiffRate)
+        contentSubView.center = CGPoint(x: DeviceConst.displaySize.width / 2, y: DeviceConst.displaySize.height / 2)
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,7 +46,7 @@ class HelpViewController: UIViewController {
     }
     
     func onTappedCloseButton(_ sender: AnyObject) {
-        log.debug("閉じる")
+        dismiss(animated: true, completion: nil)
     }
 
 }

@@ -88,6 +88,7 @@
 		A5C1FDAE1F48A0250048E711 /* HelpMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1FDAD1F48A0250048E711 /* HelpMenuViewModel.swift */; };
 		A5C1FDB31F48B1E60048E711 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1FDB11F48B1E60048E711 /* HelpViewController.swift */; };
 		A5C1FDB41F48B1E60048E711 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5C1FDB21F48B1E60048E711 /* HelpViewController.xib */; };
+		A5D775121F5D857C000A53E6 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D775111F5D857C000A53E6 /* LaunchViewController.swift */; };
 		A9872C50D89BD4A2A7B139E5 /* Pods_Qas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */; };
 /* End PBXBuildFile section */
 
@@ -178,6 +179,7 @@
 		A5C1FDAD1F48A0250048E711 /* HelpMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpMenuViewModel.swift; sourceTree = "<group>"; };
 		A5C1FDB11F48B1E60048E711 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		A5C1FDB21F48B1E60048E711 /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
+		A5D775111F5D857C000A53E6 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -347,6 +349,7 @@
 				A5223EBE1F1F8EA20097E793 /* BaseViewController.swift */,
 				A5C1FDB11F48B1E60048E711 /* HelpViewController.swift */,
 				A5C1FDB21F48B1E60048E711 /* HelpViewController.xib */,
+				A5D775111F5D857C000A53E6 /* LaunchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				A545D7131F320C7D0023C160 /* SuggestGetApiResponse.swift in Sources */,
 				A5223EFC1F1F8EA20097E793 /* UIScrollView+Extend.swift in Sources */,
 				A545D71F1F320D790023C160 /* SuggestGetApiRequestExecuter.swift in Sources */,
+				A5D775121F5D857C000A53E6 /* LaunchViewController.swift in Sources */,
 				A5223F101F1F8EA20097E793 /* FooterViewModel.swift in Sources */,
 				A5223EFB1F1F8EA20097E793 /* UIImage+Extend.swift in Sources */,
 				A5223F281F1F8EA20097E793 /* OptionMenuTableViewCell.swift in Sources */,

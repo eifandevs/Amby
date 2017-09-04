@@ -26,7 +26,7 @@ final class CommonDao {
 
     func insertWithRLMObjects(data: [Object]) {
         try! realm.write {
-            realm.add(data)
+            realm.add(data, update: true)
         }
     }
     

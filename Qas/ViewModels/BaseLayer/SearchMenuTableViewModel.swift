@@ -20,7 +20,8 @@ class SearchMenuTableViewModel {
     var googleSearchCellItem: [String] = []
     var searchHistoryCellItem: [SearchHistoryItem] = []
     var historyCellItem: [CommonHistoryItem] = []
-    private let readHistoryNum: Int = 31
+    private let readCommonHistoryNum: Int = 31
+    private let readSearchHistoryNum: Int = 62
     var existDisplayData: Bool {
         return googleSearchCellItem.count > 0 || historyCellItem.count > 0 || searchHistoryCellItem.count > 0
     }
@@ -31,9 +32,8 @@ class SearchMenuTableViewModel {
             log.debug("[SearchMenuTableView Event]: searchMenuTableViewModelWillUpdateSearchToken")
             let token = notification.object != nil ? (notification.object as! [String: String])["token"] : nil
             if let token = token, !token.isEmpty {
-                log.warning(CommonDao.s.selectCommonHistory(title: token, readNum: self.readHistoryNum))
-                self.historyCellItem = CommonDao.s.selectCommonHistory(title: token, readNum: self.readHistoryNum).objects(for: 4)
-                self.searchHistoryCellItem = CommonDao.s.selectSearchHistory(title: token, readNum: self.readHistoryNum).objects(for: 4)
+                self.historyCellItem = CommonDao.s.selectCommonHistory(title: token, readNum: self.readCommonHistoryNum).objects(for: 4)
+                self.searchHistoryCellItem = CommonDao.s.selectSearchHistory(title: token, readNum: self.readSearchHistoryNum).objects(for: 4)
                 SuggestGetAPIRequestExecuter.request(token: token, completion: { (response) in
                     if let response = response, response.data.count > 0 {
                         // suggestあり

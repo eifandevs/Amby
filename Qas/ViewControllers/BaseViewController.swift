@@ -20,8 +20,10 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
         center.addObserver(forName: .baseViewControllerWillPresentHelp, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseViewController Event]: baseViewControllerWillPresentHelp")
-            // TODO: ヘルプ画面を表示する
-            let vc = HelpViewController(subtitle: "フォーム情報の自動入力", message: "1. ああああああああえふぇっふぁえwっふぇfqfqqfわあえいいいいいいいい\n\n2. ううううううううううううううううううう\n\n3. あえjふぁおえjふぉえjふぉえあjふぉえあjふぉあ；うぇjふぇおうぃjふぁえを；jふぇお；ふぃj")
+            // ヘルプ画面を表示する
+            let subtitle = (notification.object as! [String: String])["subtitle"]!
+            let message = (notification.object as! [String: String])["message"]!
+            let vc = HelpViewController(subtitle: subtitle, message: message)
             self.present(vc, animated: true)
         }
         // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
