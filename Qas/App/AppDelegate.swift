@@ -21,7 +21,7 @@ let uncaughtExceptionHandler : Void = NSSetUncaughtExceptionHandler { exception 
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, SplashViewControllerDelegate {
     
     var window: UIWindow?
     
@@ -48,7 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ユーザーデフォルト初期値設定
         CommonDao.s.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window!.rootViewController = SplashViewController()
+        let splash = SplashViewController()
+        splash.delegate = self
+        self.window!.rootViewController = splash
         self.window!.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.window!.makeKeyAndVisible()
         
@@ -62,6 +64,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.rootViewController = BaseViewController()
     }
 
+// MARK: SplashViewController Delegate
+
+    func splashViewControllerDidEndDrawing() {
+        if let splash = self.window!.rootViewController {
+            splash.removeFromParentViewController()
+            self.window!.rootViewController = BaseViewController()
+        }
+    }
+
+// MARK: App Delegate
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

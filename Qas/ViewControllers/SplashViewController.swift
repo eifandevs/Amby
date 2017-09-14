@@ -9,20 +9,32 @@
 import UIKit
 import LTMorphingLabel
 
+protocol SplashViewControllerDelegate: class {
+    func splashViewControllerDidEndDrawing()
+}
+
 class SplashViewController: UIViewController, LTMorphingLabelDelegate {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var splashLabel: LTMorphingLabel!
     
+    weak var delegate: SplashViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        splashLabel.morphingEffect = .pixelate
-        splashLabel.text = "Quick Access Browser"
+        let effects: [LTMorphingEffect] = [.scale, .evaporate, .fall, .pixelate, .sparkle, .burn, .anvil]
+        splashLabel.morphingEffect = effects[Int(arc4random_uniform(7))]
+        splashLabel.delegate = self
+        splashLabel.text = "Quick AcceSs Browser"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func morphingDidComplete(_ label: LTMorphingLabel) {
+        delegate?.splashViewControllerDidEndDrawing()
     }
     
 
