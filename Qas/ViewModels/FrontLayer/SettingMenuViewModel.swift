@@ -22,45 +22,45 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
             ],
             [
                 OptionMenuItem(title: "閲覧履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    Util.presentAlert(title: "データ削除", message: "閲覧履歴を全て削除します。よろしいですか？", completion: {
+                    NotificationManager.presentAlert(title: "データ削除", message: "閲覧履歴を全て削除します。よろしいですか？", completion: {
                         CommonDao.s.deleteAllCommonHistory()
                         NotificationCenter.default.post(name: .baseViewModelWillDeleteHistory, object: nil)
                     })
                     return nil
                 }),
                 OptionMenuItem(title: "ブックマーク", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    Util.presentAlert(title: "データ削除", message: "ブックマークを全て削除します。よろしいですか？", completion: {
+                    NotificationManager.presentAlert(title: "データ削除", message: "ブックマークを全て削除します。よろしいですか？", completion: {
                         CommonDao.s.deleteAllFavorite()
                         NotificationCenter.default.post(name: .headerViewModelWillChangeFavorite, object: false)
                     })
                     return nil
                 }),
                 OptionMenuItem(title: "フォームデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    Util.presentAlert(title: "データ削除", message: "フォームデータを全て削除します。よろしいですか？", completion: {
+                    NotificationManager.presentAlert(title: "データ削除", message: "フォームデータを全て削除します。よろしいですか？", completion: {
                         CommonDao.s.deleteAllForm()
                     })
                     return nil
                 }),
                 OptionMenuItem(title: "検索履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    Util.presentAlert(title: "データ削除", message: "検索履歴を全て削除します。よろしいですか？", completion: {
+                    NotificationManager.presentAlert(title: "データ削除", message: "検索履歴を全て削除します。よろしいですか？", completion: {
                         CommonDao.s.deleteAllSearchHistory()
                     })
                     return nil
                 }),
                 OptionMenuItem(title: "Cookie", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    Util.presentAlert(title: "データ削除", message: "Cookieデータを全て削除します。よろしいですか？", completion: {
+                    NotificationManager.presentAlert(title: "データ削除", message: "Cookieデータを全て削除します。よろしいですか？", completion: {
                         CacheHelper.deleteCookies()
                     })
                     return nil
                 }),
                 OptionMenuItem(title: "サイトデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    Util.presentAlert(title: "データ削除", message: "サイトデータを全て削除します。よろしいですか？", completion: {
+                    NotificationManager.presentAlert(title: "データ削除", message: "サイトデータを全て削除します。よろしいですか？", completion: {
                         CacheHelper.deleteCaches()
                     })
                     return nil
                 }),
                 OptionMenuItem(title: "全てのデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    Util.presentAlert(title: "データ削除", message: "全てのデータを削除し、初期化します。よろしいですか？", completion: {
+                    NotificationManager.presentAlert(title: "データ削除", message: "全てのデータを削除し、初期化します。よろしいですか？", completion: {
                         CommonDao.s.deleteAllCommonHistory()
                         CommonDao.s.deleteAllHistory()
                         CommonDao.s.deleteAllSearchHistory()

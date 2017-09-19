@@ -133,16 +133,16 @@ final class CommonDao {
                             CommonDao.s.deleteWithRLMObjects(data: [unwrappedSavedForm])
                         }
                         CommonDao.s.insertWithRLMObjects(data: [form])
-                        Util.presentWarning(title: "フォーム登録完了", message: "フォーム情報を登録しました。")
+                        NotificationManager.presentNotification(message: "フォーム情報を登録しました")
                         return
                     }
                 }
-                Util.presentWarning(title: "登録エラー", message: "フォーム情報の入力を確認できませんでした。")
+                NotificationManager.presentNotification(message: "フォーム情報の入力を確認できませんでした")
             } else {
-                Util.presentWarning(title: "登録エラー", message: "フォーム情報を取得できませんでした。")
+                NotificationManager.presentNotification(message: "フォーム情報を取得できませんでした。")
             }
         } else {
-            Util.presentWarning(title: "登録エラー", message: "ページ情報を取得できませんでした。")
+            NotificationManager.presentNotification(message: "ページ情報を取得できませんでした。")
         }
     }
 

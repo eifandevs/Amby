@@ -82,6 +82,7 @@
 		A545D7151F320CA70023C160 /* HttpConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545D7141F320CA70023C160 /* HttpConst.swift */; };
 		A545D71E1F320D790023C160 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545D71C1F320D790023C160 /* ApiManager.swift */; };
 		A545D71F1F320D790023C160 /* SuggestGetApiRequestExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545D71D1F320D790023C160 /* SuggestGetApiRequestExecuter.swift */; };
+		A554E4511F71630B00C8281D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554E4501F71630B00C8281D /* NotificationManager.swift */; };
 		A565ED031F24D629005740E3 /* UIImageView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A565ED021F24D629005740E3 /* UIImageView+Extend.swift */; };
 		A565ED051F27536E005740E3 /* OnceExec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A565ED041F27536E005740E3 /* OnceExec.swift */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
@@ -173,6 +174,7 @@
 		A545D7141F320CA70023C160 /* HttpConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpConst.swift; sourceTree = "<group>"; };
 		A545D71C1F320D790023C160 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		A545D71D1F320D790023C160 /* SuggestGetApiRequestExecuter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestGetApiRequestExecuter.swift; sourceTree = "<group>"; };
+		A554E4501F71630B00C8281D /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A565ED021F24D629005740E3 /* UIImageView+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extend.swift"; sourceTree = "<group>"; };
 		A565ED041F27536E005740E3 /* OnceExec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnceExec.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qas.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -254,6 +256,7 @@
 				A5223E981F1F8EA20097E793 /* Extension */,
 				A545D71B1F320D790023C160 /* Http */,
 				A5223EA81F1F8EA20097E793 /* Protocol */,
+				A554E4501F71630B00C8281D /* NotificationManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				A5223F031F1F8EA20097E793 /* CommonHistoryItem.swift in Sources */,
 				A565ED051F27536E005740E3 /* OnceExec.swift in Sources */,
 				A5223F171F1F8EA20097E793 /* SettingMenuViewModel.swift in Sources */,
+				A554E4511F71630B00C8281D /* NotificationManager.swift in Sources */,
 				A5223EFF1F1F8EA20097E793 /* EnumEnumerable.swift in Sources */,
 				A5223F141F1F8EA20097E793 /* FormMenuViewModel.swift in Sources */,
 				A5223F131F1F8EA20097E793 /* FavoriteMenuViewModel.swift in Sources */,

@@ -21,7 +21,7 @@ let uncaughtExceptionHandler : Void = NSSetUncaughtExceptionHandler { exception 
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, SplashViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
@@ -48,9 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashViewControllerDeleg
         // ユーザーデフォルト初期値設定
         CommonDao.s.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let splash = SplashViewController()
-        splash.delegate = self
-        self.window!.rootViewController = splash
+        self.window!.rootViewController = BaseViewController()
         self.window!.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         self.window!.makeKeyAndVisible()
         
@@ -62,15 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SplashViewControllerDeleg
         UserDefaults.standard.set(0.06, forKey: AppConst.autoScrollIntervalKey)
         self.window!.rootViewController?.removeFromParentViewController()
         self.window!.rootViewController = BaseViewController()
-    }
-
-// MARK: SplashViewController Delegate
-
-    func splashViewControllerDidEndDrawing() {
-        if let splash = self.window!.rootViewController {
-            splash.removeFromParentViewController()
-            self.window!.rootViewController = BaseViewController()
-        }
     }
 
 // MARK: App Delegate

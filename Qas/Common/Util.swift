@@ -19,39 +19,6 @@ class Util {
         return vc!;
     }
     
-    static func presentWarning(title: String, message: String) {
-        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler:{
-            (action: UIAlertAction!) -> Void in
-        })
-        alert.addAction(defaultAction)
-        Util.foregroundViewController().present(alert, animated: true, completion: nil)
-    }
-    
-    static func presentSimpleAlert(title: String, message: String, completion: @escaping (() -> ()?)) {
-        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler:{
-            (action: UIAlertAction!) -> Void in
-            completion()
-        })
-        alert.addAction(defaultAction)
-        Util.foregroundViewController().present(alert, animated: true, completion: nil)
-    }
-    
-    static func presentAlert(title: String, message: String, completion: @escaping (() -> ())) {
-        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler:{
-            (action: UIAlertAction!) -> Void in
-            completion()
-        })
-        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: .cancel, handler:{
-            (action: UIAlertAction!) -> Void in
-        })
-        alert.addAction(cancelAction)
-        alert.addAction(defaultAction)
-        Util.foregroundViewController().present(alert, animated: true, completion: nil)
-    }
-    
     static func createFolder(path: String) {
         let fileManager = FileManager.default
         var isDir : ObjCBool = false
