@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class AppConst {
-    static let headerViewHeight = 50 + DeviceConst.statusBarHeight
+    static let headerViewHeight = AppConst.thumbnailSize.height * 1.25
     static let headerFieldWidth = DeviceConst.displaySize.width / 1.8
     static let edgeSwipeErea: CGFloat = 15.0
     static let optionMenuCellHeight: CGFloat = 50

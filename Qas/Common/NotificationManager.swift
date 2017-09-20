@@ -12,8 +12,13 @@ import UIKit
 class NotificationManager {
     
     static func presentNotification(message: String) {
-        // TODO: 通知の表示
-        log.debug("通知: \(message)")
+        let notificationView = UILabel(frame: CGRect(x: 0, y: DeviceConst.displaySize.height - (AppConst.thumbnailSize.height * 0.9), width: DeviceConst.displaySize.width, height: AppConst.thumbnailSize.height * 0.9))
+        notificationView.textColor = UIColor.white
+        notificationView.font = UIFont(name: AppConst.appFont, size: notificationView.frame.size.height / 4)
+        notificationView.backgroundColor = UIColor.darkGray
+        notificationView.text = " 　\(message)"
+        notificationView.textAlignment = .left
+        (UIApplication.shared.delegate as! AppDelegate).window?.addSubview(notificationView)
     }
     
     static func presentAlert(title: String, message: String, completion: @escaping (() -> ())) {

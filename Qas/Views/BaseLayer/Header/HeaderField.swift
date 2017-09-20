@@ -19,7 +19,6 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     private let iconSize: CGSize = CGSize(width: AppConst.headerViewHeight / 2, height: AppConst.headerViewHeight / 2)
     private var label: EGGradientLabel?
     private var pastLabelText: String?
-    private let fontSize: CGFloat = 15
     var textField: UITextField!
     
     var text: String? {
@@ -159,7 +158,7 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
         
         let attr = [
             NSForegroundColorAttributeName: UIColor.black,
-            NSFontAttributeName: UIFont(name: AppConst.appFont, size: fontSize)!,
+            NSFontAttributeName: UIFont(name: AppConst.appFont, size: frame.size.height / 2.5)!,
             NSParagraphStyleAttributeName: style,
             ] as [String : Any]
         
