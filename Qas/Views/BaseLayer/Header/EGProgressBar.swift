@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Bond
+import UIKit
 
 class EGProgressBar: UIView {
     private let bar: UIView = UIView()

@@ -15,6 +15,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
     private var thumbnail: UIButton = UIButton()
     private var switchControl: UISwitch = UISwitch()
     private var slider: UISlider = UISlider()
+    private var menuItem: OptionMenuItem?
     private var type: OptionMenuType = .plain
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -33,6 +34,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
     func setTitle(menuItem: OptionMenuItem) {
         initialize()
         type = menuItem.type
+        self.menuItem = menuItem
         switch menuItem.type {
         case .plain, .deletablePlain:
             var marginX: CGFloat = 10
@@ -81,9 +83,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             switchControl.center.y = frame.size.height / 2
             switchControl.isOn = menuItem.defaultValue! as! Bool
             switchControl.onTintColor = UIColor.brilliantBlue
-            let _ = switchControl.reactive.controlEvents(.valueChanged).observeNext(with: { [weak self] (e) in
-                menuItem.switchAction?(self!.switchControl.isOn)
-            })
+            switchControl.addTarget(self, action: #selector(self.onChangedSwitchValue(_:)), for: .valueChanged)
             contentView.addSubview(switchControl)
         case .slider:
             selectionStyle = .none
@@ -97,9 +97,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             slider.tintColor = UIColor.brilliantBlue
             slider.maximumValueImage = UIColor.blue.circleImage(size: CGSize(width: 5, height: 5))
             slider.minimumValueImage = UIColor.red.circleImage(size: CGSize(width: 5, height: 5))
-            let _ = slider.reactive.controlEvents(.valueChanged).observeNext(with: { [weak self] (e) in
-                UserDefaults.standard.set(-self!.slider.value, forKey: AppConst.autoScrollIntervalKey)
-            })
+            slider.addTarget(self, action: #selector(self.onChangedSliderValue(_:)), for: .valueChanged)
             contentView.addSubview(slider)
         }
     }
@@ -110,5 +108,17 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
         thumbnail.removeFromSuperview()
         switchControl.removeFromSuperview()
         slider.removeFromSuperview()
+    }
+    
+// MARK: UISwitch Event
+    func onChangedSwitchValue(_ sender: AnyObject) {
+        if let menuItem = menuItem {
+            menuItem.switchAction?(switchControl.isOn)
+        }
+    }
+    
+// MARK: UISlider Event
+    func onChangedSliderValue(_ sender: AnyObject) {
+        UserDefaults.standard.set(-slider.value, forKey: AppConst.autoScrollIntervalKey)
     }
 }

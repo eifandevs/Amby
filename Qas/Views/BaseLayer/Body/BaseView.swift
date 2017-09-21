@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import WebKit
-import Bond
 
 protocol BaseViewDelegate: class {
     func baseViewDidScroll(speed: CGFloat)

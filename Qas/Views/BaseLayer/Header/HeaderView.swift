@@ -222,7 +222,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
                 self.headerField.layer.shadowColor = UIColor.clear.cgColor
             }, completion: { _ in
                 // キーボード表示
-                self.headerField.makeInputForm(height: self.frame.size.height - self.heightMax * 0.66)
+                self.headerField.makeInputForm(height: self.frame.size.height - AppConst.headerViewHeight * 0.66)
             })
         }
     }

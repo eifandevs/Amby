@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Bond
 
 protocol FooterViewModelDelegate: class {
     func footerViewModelDidLoadThumbnail(eachThumbnail: [HistoryItem])

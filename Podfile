@@ -8,7 +8,6 @@ target 'Qas' do
   # Pods for one-hand-browsing
   swift_version = "3.0"
   pod "PromiseKit", "~> 4.0"
-  pod 'Bond', '~> 6.0'
   pod 'Realm', '~> 2.4'
   pod 'SwiftyBeaver', '~> 1.1'
   pod 'SVProgressHUD', '2.1.2'

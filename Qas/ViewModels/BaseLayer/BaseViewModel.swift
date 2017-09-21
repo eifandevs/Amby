@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Bond
 import WebKit
 
 protocol BaseViewModelDelegate: class {
