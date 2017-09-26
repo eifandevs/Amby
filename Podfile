@@ -16,4 +16,5 @@ target 'Qas' do
   pod 'R.swift', '~> 3.3'
   pod 'Alamofire', '~> 4.4'
   pod 'LTMorphingLabel', '~> 0.5'
+  pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift", :branch => "master"
 end

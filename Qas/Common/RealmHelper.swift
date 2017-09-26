@@ -20,8 +20,7 @@ final class RealmHelper {
     
     static func realmEncryptionKey() -> Data? {
         // 暗号化キー文字列は、定数クラスから呼び出す
-        let key = "usjdkxms7f9j37dywgfrm38d7ch2j891jcy3qa0zol5mnh23jchw9ikj10divuu9"
-        return key.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        return AppConst.realmkey.data(using: String.Encoding.utf8, allowLossyConversion: false)
     }
     
     static func realmFileURL() -> URL? {

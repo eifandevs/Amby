@@ -16,6 +16,9 @@ class AppConst {
     static let optionMenuCellHeight: CGFloat = 50
     static let optionMenuSize: CGSize = CGSize(width: 250, height: 450)
     static let thumbnailSize = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
+    static let realmkey = "usjdkxms7f9j37dywgfrm38d7ch2j891jcy3qa0zol5mnh23jchw9ikj10divuu9"
+    static let encryptKey = "passwordpasswordpasswordpassword"
+    static let encryptIv = "drowssapdrowssap"
     static let searchPath = "https://www.google.co.jp/search?q="
     static let locationIndexKey = "locationIndex"
     static let autoScrollIntervalKey = "autoScrollInterval"
