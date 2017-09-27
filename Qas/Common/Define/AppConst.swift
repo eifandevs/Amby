@@ -19,6 +19,7 @@ class AppConst {
     static let realmkey = "usjdkxms7f9j37dywgfrm38d7ch2j891jcy3qa0zol5mnh23jchw9ikj10divuu9"
     static let encryptKey = "passwordpasswordpasswordpassword"
     static let encryptIv = "drowssapdrowssap"
+    static let keychainServiceToken = "com.eifaniori.qas-encrypt-token"
     static let searchPath = "https://www.google.co.jp/search?q="
     static let locationIndexKey = "locationIndex"
     static let autoScrollIntervalKey = "autoScrollInterval"

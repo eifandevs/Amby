@@ -90,6 +90,8 @@
 		A5C1FDB31F48B1E60048E711 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1FDB11F48B1E60048E711 /* HelpViewController.swift */; };
 		A5C1FDB41F48B1E60048E711 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5C1FDB21F48B1E60048E711 /* HelpViewController.xib */; };
 		A5C427AE1F7B1ADD00BBAB8F /* EncryptHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C427AD1F7B1ADD00BBAB8F /* EncryptHelper.swift */; };
+		A5C427B01F7C6CD200BBAB8F /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C427AF1F7C6CD200BBAB8F /* KeyChainHelper.swift */; };
+		A5C427B21F7C6CED00BBAB8F /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C427B11F7C6CED00BBAB8F /* Data+Extension.swift */; };
 		A5D775151F5D87E0000A53E6 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D775131F5D87E0000A53E6 /* SplashViewController.swift */; };
 		A5D775161F5D87E0000A53E6 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D775141F5D87E0000A53E6 /* SplashViewController.xib */; };
 		A9872C50D89BD4A2A7B139E5 /* Pods_Qas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */; };
@@ -184,6 +186,8 @@
 		A5C1FDB11F48B1E60048E711 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		A5C1FDB21F48B1E60048E711 /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		A5C427AD1F7B1ADD00BBAB8F /* EncryptHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptHelper.swift; sourceTree = "<group>"; };
+		A5C427AF1F7C6CD200BBAB8F /* KeyChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
+		A5C427B11F7C6CED00BBAB8F /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		A5D775131F5D87E0000A53E6 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		A5D775141F5D87E0000A53E6 /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -260,6 +264,7 @@
 				A5223EA81F1F8EA20097E793 /* Protocol */,
 				A554E4501F71630B00C8281D /* NotificationManager.swift */,
 				A5C427AD1F7B1ADD00BBAB8F /* EncryptHelper.swift */,
+				A5C427AF1F7C6CD200BBAB8F /* KeyChainHelper.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				A5223EA71F1F8EA20097E793 /* UIView+Extend.swift */,
 				A565ED021F24D629005740E3 /* UIImageView+Extend.swift */,
 				A545D7091F30B6B50023C160 /* Array+Extend.swift */,
+				A5C427B11F7C6CED00BBAB8F /* Data+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -668,6 +674,7 @@
 				A5223F031F1F8EA20097E793 /* CommonHistoryItem.swift in Sources */,
 				A565ED051F27536E005740E3 /* OnceExec.swift in Sources */,
 				A5223F171F1F8EA20097E793 /* SettingMenuViewModel.swift in Sources */,
+				A5C427B21F7C6CED00BBAB8F /* Data+Extension.swift in Sources */,
 				A554E4511F71630B00C8281D /* NotificationManager.swift in Sources */,
 				A5223EFF1F1F8EA20097E793 /* EnumEnumerable.swift in Sources */,
 				A5223F141F1F8EA20097E793 /* FormMenuViewModel.swift in Sources */,
@@ -715,6 +722,7 @@
 				A5223F061F1F8EA20097E793 /* ThumbnailItem.swift in Sources */,
 				A5223F211F1F8EA20097E793 /* HeaderField.swift in Sources */,
 				A5223EEC1F1F8EA20097E793 /* CommonDao.swift in Sources */,
+				A5C427B01F7C6CD200BBAB8F /* KeyChainHelper.swift in Sources */,
 				A5223EED1F1F8EA20097E793 /* AppConst.swift in Sources */,
 				A5223F1F1F1F8EA20097E793 /* EGGradientLabel.swift in Sources */,
 				A5223F081F1F8EA20097E793 /* Form.swift in Sources */,
