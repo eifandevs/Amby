@@ -10,6 +10,18 @@ import Foundation
 import UIKit
 
 extension String {
+
+    /// ランダム文字列作成
+    static func getRandomStringWithLength(length: Int) -> String {
+
+        let alphabet = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        let upperBound = UInt32(alphabet.characters.count)
+
+        return String((0..<length).map { _ -> Character in
+            return alphabet[alphabet.index(alphabet.startIndex, offsetBy: Int(arc4random_uniform(upperBound)))]
+        })
+    }
+
     var hasValidUrl: Bool {
         get {
             return self != "http://" &&

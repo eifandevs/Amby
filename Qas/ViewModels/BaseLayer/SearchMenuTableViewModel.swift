@@ -22,16 +22,32 @@ class SearchMenuTableViewModel {
     var historyCellItem: [CommonHistoryItem] = []
     private let readCommonHistoryNum: Int = 31
     private let readSearchHistoryNum: Int = 62
+    private var requestSearchQueue = [String?]()
+    private var isRequesting = false
     var existDisplayData: Bool {
         return googleSearchCellItem.count > 0 || historyCellItem.count > 0 || searchHistoryCellItem.count > 0
     }
+
     init() {
         // webview検索
         NotificationCenter.default.addObserver(forName: .searchMenuTableViewModelWillUpdateSearchToken, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[SearchMenuTableView Event]: searchMenuTableViewModelWillUpdateSearchToken")
             let token = notification.object != nil ? (notification.object as! [String: String])["token"] : nil
-            if let token = token, !token.isEmpty {
+            self.requestSearchQueue.append(token)
+            self.requestSearch()
+        }
+    }
+
+    deinit {
+        requestSearchQueue.removeAll()
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    private func requestSearch() {
+        if !isRequesting {
+            isRequesting = true
+            if let token = self.requestSearchQueue.removeFirst(), !token.isEmpty {
                 self.historyCellItem = CommonDao.s.selectCommonHistory(title: token, readNum: self.readCommonHistoryNum).objects(for: 4)
                 self.searchHistoryCellItem = CommonDao.s.selectSearchHistory(title: token, readNum: self.readSearchHistoryNum).objects(for: 4)
                 SuggestGetAPIRequestExecuter.request(token: token, completion: { (response) in
@@ -39,18 +55,24 @@ class SearchMenuTableViewModel {
                         // suggestあり
                         self.googleSearchCellItem = response.data.objects(for: 4)
                     }
-                    self.delegate?.searchMenuViewWillUpdateLayout()
+                    self.isRequesting = false
+                    if self.requestSearchQueue.count > 0 {
+                        self.requestSearch()
+                    } else {
+                        self.delegate?.searchMenuViewWillUpdateLayout()
+                    }
                 })
             } else {
                 self.googleSearchCellItem = []
                 self.historyCellItem = []
                 self.searchHistoryCellItem = []
-                self.delegate?.searchMenuViewWillHide()
+                isRequesting = false
+                if self.requestSearchQueue.count > 0 {
+                    self.requestSearch()
+                } else {
+                    self.delegate?.searchMenuViewWillHide()
+                }
             }
         }
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
 }

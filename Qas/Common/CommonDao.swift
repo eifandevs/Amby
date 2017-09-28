@@ -14,10 +14,18 @@ import Realm
 final class CommonDao {
     static let s = CommonDao()
     private let realm: Realm!
+    private let realmEncryptionToken: String!
+    let keychainServiceToken: String!
+    let keychainIvToken: String!
     
     private init() {
+        // キーチェーンからトークン取得
+        realmEncryptionToken = KeyChainHelper.getToken(key: AppConst.keychainRealmToken)
+        keychainServiceToken = KeyChainHelper.getToken(key: AppConst.keychainEncryptServiceToken)
+        keychainIvToken = KeyChainHelper.getToken(key: AppConst.keychainEncryptIvToken)
+
         do {
-            realm = try Realm(configuration: RealmHelper.realmConfiguration())
+            realm = try Realm(configuration: RealmHelper.realmConfiguration(realmEncryptionToken: realmEncryptionToken))
         } catch let error as NSError {
             log.error("Realm initialize error. description: \(error.description)")
             realm = nil
@@ -93,7 +101,8 @@ final class CommonDao {
                     let formLength = Int((object as? NSNumber)!)
                     if formLength > 0 {
                         for i in 0...(formLength - 1) {
-                            webView.evaluate(script: "document.forms[\(i)].elements.length") { (object, error) in
+                            webView.evaluate(script: "document.forms[\(i)].elements.length") { [weak self] (object, error) in
+                                guard let `self` = self else { return }
                                 if ((object != nil) && (error == nil)) {
                                     let elementLength = Int((object as? NSNumber)!)
                                     for j in 0...elementLength {
@@ -102,13 +111,16 @@ final class CommonDao {
                                                 let type = object as? String
                                                 if ((type != "hidden") && (type != "submit") && (type != "checkbox")) {
                                                     let input = Input()
-                                                    input.type = type!
-                                                    input.formIndex = i
-                                                    input.formInputIndex = j
                                                     webView.evaluate(script: "document.forms[\(i)].elements[\(j)].value") { (object, error) in
-                                                        input.value = (object as? String)!
+                                                        let value = object as! String
+                                                        if value.characters.count > 0 {
+                                                            input.type = type!
+                                                            input.formIndex = i
+                                                            input.formInputIndex = j
+                                                            input.value = EncryptHelper.encrypt(serviceToken: self.keychainServiceToken, ivToken: self.keychainIvToken, value: value)!
+                                                            form.inputs.append(input)
+                                                        }
                                                     }
-                                                    form.inputs.append(input)
                                                 }
                                             }
                                         }
@@ -121,25 +133,19 @@ final class CommonDao {
             }
             
             // 有効なフォーム情報かを判定
-            if (form.inputs.count > 0) {
-                for input in form.inputs {
-                    // 入力済みのフォームが一つでもあれば保存する
-                    if input.value.characters.count > 0 {
-                        let savedForm = CommonDao.s.selectAllForm().filter({ (f) -> Bool in
-                            return form.url.domainAndPath == f.url.domainAndPath
-                        }).first
-                        if let unwrappedSavedForm = savedForm {
-                            // すでに登録済みの場合は、まず削除する
-                            CommonDao.s.deleteWithRLMObjects(data: [unwrappedSavedForm])
-                        }
-                        CommonDao.s.insertWithRLMObjects(data: [form])
-                        NotificationManager.presentNotification(message: "フォーム情報を登録しました")
-                        return
-                    }
+            if form.inputs.count > 0 {
+                // 入力済みのフォームが一つでもあれば保存する
+                let savedForm = CommonDao.s.selectAllForm().filter({ (f) -> Bool in
+                    return form.url.domainAndPath == f.url.domainAndPath
+                }).first
+                if let unwrappedSavedForm = savedForm {
+                    // すでに登録済みの場合は、まず削除する
+                    CommonDao.s.deleteWithRLMObjects(data: [unwrappedSavedForm])
                 }
-                NotificationManager.presentNotification(message: "フォーム情報の入力を確認できませんでした")
+                CommonDao.s.insertWithRLMObjects(data: [form])
+                NotificationManager.presentNotification(message: "フォーム情報を登録しました")
             } else {
-                NotificationManager.presentNotification(message: "フォーム情報を取得できませんでした。")
+                NotificationManager.presentNotification(message: "フォーム情報の入力を確認できませんでした")
             }
         } else {
             NotificationManager.presentNotification(message: "ページ情報を取得できませんでした。")

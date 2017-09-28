@@ -11,16 +11,11 @@ import Realm
 
 final class RealmHelper {
     
-    static func realmConfiguration() -> Realm.Configuration {
+    static func realmConfiguration(realmEncryptionToken: String) -> Realm.Configuration {
         var config = Realm.Configuration()
-        config.encryptionKey = RealmHelper.realmEncryptionKey()
+        config.encryptionKey = realmEncryptionToken.data(using: String.Encoding.utf8, allowLossyConversion: false)
         config.fileURL = RealmHelper.realmFileURL()
         return config
-    }
-    
-    static func realmEncryptionKey() -> Data? {
-        // 暗号化キー文字列は、定数クラスから呼び出す
-        return AppConst.realmkey.data(using: String.Encoding.utf8, allowLossyConversion: false)
     }
     
     static func realmFileURL() -> URL? {

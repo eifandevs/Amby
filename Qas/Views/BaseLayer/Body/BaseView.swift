@@ -584,7 +584,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 if (front.url?.absoluteString.domainAndPath == form.url.domainAndPath && !isDoneAutoInput) {
                     NotificationManager.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: { [weak self] _ in
                         for input in form.inputs {
-                            self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(input.value)\"") { (object, error) in
+                            let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: input.value)!
+                            self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(value)\"") { (object, error) in
                             }
                         }
                     })

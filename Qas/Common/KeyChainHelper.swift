@@ -10,13 +10,13 @@ import Foundation
 import KeychainAccess
 
 class KeyChainHelper {
-    static func saveToken(token: String) {
-        let keychain = Keychain(service: AppConst.keychainServiceToken)
-        keychain[AppConst.keychainServiceToken] = token
+    static func saveToken(key: String, value: String) {
+        let keychain = Keychain(service: key)
+        keychain[key] = value
     }
     
-    static func getToken() -> String? {
-        let keychain = Keychain(service: AppConst.keychainServiceToken)
-        return keychain[AppConst.keychainServiceToken]
+    static func getToken(key: String) -> String? {
+        let keychain = Keychain(service: key)
+        return keychain[key]
     }
 }

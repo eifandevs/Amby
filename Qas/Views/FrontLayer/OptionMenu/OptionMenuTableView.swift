@@ -31,6 +31,10 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
         
         backgroundColor = UIColor.clear
         layer.cornerRadius = 2.5
+        if #available(iOS 11.0, *) {
+            // safe area対応
+            tableView.contentInsetAdjustmentBehavior = .never
+        }
         
         tableView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         
@@ -61,6 +65,10 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
         self.viewModel = viewModel
     }
     
+    override func didMoveToSuperview() {
+        tableView.contentOffset = CGPoint.zero
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -89,6 +97,10 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
         return AppConst.optionMenuCellHeight
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.sectionItems.count > 0 ? AppConst.optionMenuSectionHeight : 0
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(OptionMenuTableViewCell.self), for: indexPath) as! OptionMenuTableViewCell
         let menuItem: OptionMenuItem = viewModel.menuItems[indexPath.section][indexPath.row]
@@ -99,13 +111,15 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.sectionItems.count > 0 ? viewModel.sectionItems[section] : nil
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: 11)))
-        label.backgroundColor = UIColor.pastelLightGray
-        label.text = "   \(viewModel.sectionItems[section])"
-        label.font = UIFont(name: AppConst.appFont, size: 13)
-        return label
+        let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionItems.count > 0 ? AppConst.optionMenuSectionHeight : 0)))
+        label.backgroundColor = UIColor.black
+        label.textAlignment = .left
+        label.text = "   \(viewModel.sectionItems[safe: section] ?? "")"
+        label.textColor = UIColor.white
+        label.font = UIFont(name: AppConst.appFont, size: 12)
+        return viewModel.sectionItems.count > 0 ? label : nil
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

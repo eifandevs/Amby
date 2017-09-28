@@ -24,10 +24,10 @@ class SplashViewController: UIViewController, LTMorphingLabelDelegate {
         super.viewDidLoad()
         splashLabel.frame.size = CGSize(width: DeviceConst.displaySize.width / 1.2, height: DeviceConst.displaySize.height / 18)
         splashLabel.center = CGPoint(x: DeviceConst.displaySize.width / 2, y: DeviceConst.displaySize.height / 2)
-        splashLabel.morphingEffect = .pixelate
+        splashLabel.morphingEffect = .scale
         splashLabel.delegate = self
         splashLabel.font = UIFont(name: splashLabel.font.fontName, size: splashLabel.frame.size.height / 2)
-        splashLabel.text = "Quick AcceSs browser."
+        splashLabel.text = "Quick AcceSs browser"
     }
 
     override func didReceiveMemoryWarning() {

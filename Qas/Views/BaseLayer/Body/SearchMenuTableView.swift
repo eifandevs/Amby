@@ -123,11 +123,16 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         return viewModel.sectionItem[section]
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return AppConst.optionMenuSectionHeight
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: 11)))
-        label.backgroundColor = UIColor.pastelLightGray
+        label.backgroundColor = UIColor.black
         label.text = "   \(viewModel.sectionItem[section])"
-        label.font = UIFont(name: AppConst.appFont, size: 13)
+        label.textColor = UIColor.white
+        label.font = UIFont(name: AppConst.appFont, size: 12)
         return label
     }
     

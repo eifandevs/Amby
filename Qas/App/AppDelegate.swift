@@ -45,6 +45,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.addDestination(console)
         log.addDestination(file)
         
+        // 初回起動時のみキーチェーンにトークンを保存
+        if KeyChainHelper.getToken(key: AppConst.keychainRealmToken) == nil {
+            let token = String.getRandomStringWithLength(length: 64)
+            log.debug("Realmトークンを作成します。token: \(token)")
+            KeyChainHelper.saveToken(key: AppConst.keychainRealmToken, value: token)
+        }
+        if KeyChainHelper.getToken(key: AppConst.keychainEncryptServiceToken) == nil {
+            let token = String.getRandomStringWithLength(length: 32)
+            log.debug("Encrypt Serviceトークンを作成します。token: \(token)")
+            KeyChainHelper.saveToken(key: AppConst.keychainEncryptServiceToken, value: token)
+        }
+        if KeyChainHelper.getToken(key: AppConst.keychainEncryptIvToken) == nil {
+            let token = String.getRandomStringWithLength(length: 16)
+            log.debug("Encrypt Ivトークンを作成します。token: \(token)")
+            KeyChainHelper.saveToken(key: AppConst.keychainEncryptIvToken, value: token)
+        }
+
         // ユーザーデフォルト初期値設定
         CommonDao.s.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)

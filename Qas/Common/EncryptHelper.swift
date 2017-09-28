@@ -10,10 +10,10 @@ import Foundation
 import CryptoSwift
 
 class EncryptHelper {
-    static func encrypt(str: String) -> Data? {
-        let input = [UInt8](str.utf8)
+    static func encrypt(serviceToken: String, ivToken: String, value: String) -> Data? {
+        let input = [UInt8](value.utf8)
         do {
-            let aes = try AES(key: AppConst.encryptKey, iv: AppConst.encryptIv)
+            let aes = try AES(key: serviceToken, iv: ivToken)
             let encrypted = try aes.encrypt(input)
             return Data(fromArray: encrypted)
         } catch {
@@ -22,10 +22,10 @@ class EncryptHelper {
         }
     }
     
-    static func decrypt(data: Data) -> String? {
+    static func decrypt(serviceToken: String, ivToken: String, data: Data) -> String? {
         let input = data.toArray(type: UInt8.self)
         do {
-            let aes = try AES(key: AppConst.encryptKey, iv: AppConst.encryptIv)
+            let aes = try AES(key: serviceToken, iv: ivToken)
             let decrypted = try aes.decrypt(input)
             return decrypted.reduce("", { $0 + String(format: "%c", $1)})
         } catch {

@@ -26,5 +26,5 @@ class Input: Object {
     dynamic var formIndex: Int = 0
     dynamic var formInputIndex: Int = 0
     dynamic var type: String = ""
-    dynamic var value: String = ""
+    dynamic var value: Data = Data()
 }
