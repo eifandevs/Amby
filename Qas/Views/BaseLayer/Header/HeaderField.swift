@@ -75,7 +75,7 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
 
         
         // 削除ボタン作成
-        let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width, y: 0, width: closeMenuButtonWidth, height: self.frame.size.height))
+        let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width, y: DeviceConst.statusBarHeight, width: closeMenuButtonWidth, height: self.frame.size.height - DeviceConst.statusBarHeight))
         closeMenuButton.center.y = self.frame.size.height / 2
         closeMenuButton.setImage(image: R.image.header_close(), color: UIColor.gray)
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333

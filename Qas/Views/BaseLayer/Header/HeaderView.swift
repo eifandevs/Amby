@@ -17,7 +17,6 @@ protocol HeaderViewDelegate: class {
 
 class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowView {
     weak var delegate: HeaderViewDelegate?
-    private let heightMax = AppConst.headerViewHeight
     private let headerField: HeaderField
     private var isEditing = false
     private let viewModel = HeaderViewModel()
@@ -62,16 +61,17 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     }
     
     override init(frame: CGRect) {
+        let headerFieldOriginY = DeviceConst.statusBarHeight + (frame.size.height - DeviceConst.statusBarHeight - (AppConst.headerViewHeight * 0.5)) / 2
         // ヘッダーフィールド
-        headerField = HeaderField(frame: CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppConst.headerFieldWidth, height: heightMax * 0.5))
+        headerField = HeaderField(frame: CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: headerFieldOriginY, width: AppConst.headerFieldWidth, height: AppConst.headerViewHeight * 0.5))
         // ヒストリーバックボタン
-        historyBackButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: (frame.size.width - AppConst.headerFieldWidth) / 4, height: frame.size.height)))
+        historyBackButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: DeviceConst.statusBarHeight), size: CGSize(width: (frame.size.width - AppConst.headerFieldWidth) / 4, height: frame.size.height - DeviceConst.statusBarHeight)))
         // ヒストリーフォワードボタン
-        historyForwardButton = UIButton(frame: CGRect(origin: CGPoint(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, y: 0), size: historyBackButton.frame.size))
+        historyForwardButton = UIButton(frame: CGRect(origin: CGPoint(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, y: DeviceConst.statusBarHeight), size: historyBackButton.frame.size))
         // ブックマークボタン
-        favoriteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: 0), size: historyBackButton.frame.size))
+        favoriteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: DeviceConst.statusBarHeight), size: historyBackButton.frame.size))
         // 削除ボタン
-        deleteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4 * 3, y: 0), size: historyBackButton.frame.size))
+        deleteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4 * 3, y: DeviceConst.statusBarHeight), size: historyBackButton.frame.size))
         // プログレスバー
         progressBar = EGProgressBar(frame: CGRect(x: 0, y: frame.size.height - 2.1, width: DeviceConst.displaySize.width, height: 2.1))
         
@@ -86,7 +86,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
             button.setImage(image: image, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
             button.alpha = 1
             let edgeInset: CGFloat = button.frame.size.width / 7.0769
-            button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset + 10.5, edgeInset, edgeInset, edgeInset)
+            button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset, edgeInset, edgeInset, edgeInset)
             self.addSubview(button)
         }
         
@@ -145,8 +145,8 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     func finishEditing(headerFieldUpdate: Bool) {
         let text = headerField.textField?.text
         headerField.removeInputForm()
-        
-        headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: frame.size.height - heightMax * 0.66, width: AppConst.headerFieldWidth, height: heightMax * 0.5)
+        let headerFieldOriginY = DeviceConst.statusBarHeight + (frame.size.height - DeviceConst.statusBarHeight - (AppConst.headerViewHeight * 0.5)) / 2
+        headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: headerFieldOriginY, width: AppConst.headerFieldWidth, height: AppConst.headerViewHeight * 0.5)
         self.headerField.layer.shadowColor = UIColor.black.cgColor
         self.isEditing = false
         
@@ -162,9 +162,9 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     
     func slide(value: CGFloat) {
         frame.origin.y += value
-        headerField.alpha += value / (heightMax - DeviceConst.statusBarHeight)
+        headerField.alpha += value / (AppConst.headerViewHeight - DeviceConst.statusBarHeight)
         headerItems.forEach { (button) in
-            button.alpha += value / (heightMax - DeviceConst.statusBarHeight)
+            button.alpha += value / (AppConst.headerViewHeight - DeviceConst.statusBarHeight)
         }
     }
     
@@ -222,7 +222,8 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
                 self.headerField.layer.shadowColor = UIColor.clear.cgColor
             }, completion: { _ in
                 // キーボード表示
-                self.headerField.makeInputForm(height: self.frame.size.height - AppConst.headerViewHeight * 0.66)
+                let headerFieldOriginY = DeviceConst.statusBarHeight + (self.frame.size.height - DeviceConst.statusBarHeight - (AppConst.headerViewHeight * 0.5)) / 2
+                self.headerField.makeInputForm(height: headerFieldOriginY)
             })
         }
     }
