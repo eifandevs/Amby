@@ -52,7 +52,8 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppConst.thumbnailSize), isPrivateMode: isPrivateMode)
         btn.backgroundColor = UIColor.darkGray
         btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
-        btn.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        let inset = btn.frame.size.width / 5.5
+        btn.imageEdgeInsets = UIEdgeInsetsMake(inset, inset, inset, inset)
         btn.addTarget(self, action: #selector(self.onTappedThumbnail(_:)), for: .touchUpInside)
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
         btn.addGestureRecognizer(longPressRecognizer)
