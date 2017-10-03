@@ -39,6 +39,8 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         scrollView.showsHorizontalScrollIndicator = false
 
         addSubview(scrollView)
+        // サムネイル説明用に、スクロールビューの領域外に配置できるようにする
+        scrollView.clipsToBounds = false
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -52,7 +54,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.thumbnailSize.width / 2.0) + additionalPointX, y: 0), size: AppConst.thumbnailSize), isPrivateMode: isPrivateMode)
         btn.backgroundColor = UIColor.darkGray
         btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
-        let inset = btn.frame.size.width / 5.5
+        let inset: CGFloat = btn.frame.size.width / 9
         btn.imageEdgeInsets = UIEdgeInsetsMake(inset, inset, inset, inset)
         btn.addTarget(self, action: #selector(self.onTappedThumbnail(_:)), for: .touchUpInside)
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
