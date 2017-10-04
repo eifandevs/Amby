@@ -94,11 +94,11 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
     
 // MARK: TableView Delegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return AppConst.optionMenuCellHeight
+        return AppConst.tableViewCellHeight
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return viewModel.sectionItems.count > 0 ? AppConst.optionMenuSectionHeight : 0
+        return viewModel.sectionItems.count > 0 ? AppConst.tableViewSectionHeight : 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,7 +113,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionItems.count > 0 ? AppConst.optionMenuSectionHeight : 0)))
+        let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionItems.count > 0 ? AppConst.tableViewSectionHeight : 0)))
         label.backgroundColor = UIColor.black
         label.textAlignment = .left
         label.text = "   \(viewModel.sectionItems[safe: section] ?? "")"

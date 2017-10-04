@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import NVActivityIndicatorView
 
-class FooterView: UIView, ShadowView, FooterViewModelDelegate {
+class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDelegate {
     
     private var viewModel = FooterViewModel(index: UserDefaults.standard.integer(forKey: AppConst.locationIndexKey))
     private let scrollView = UIScrollView()
@@ -30,6 +30,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         
         backgroundColor = UIColor.pastelLightGray
         scrollView.frame = CGRect(origin: CGPoint(x: 0, y:0), size: frame.size)
+        scrollView.delegate = self
         scrollView.contentSize = CGSize(width: frame.size.width + 1, height: frame.size.height)
         scrollView.bounces = true
         scrollView.backgroundColor = UIColor.clear
@@ -200,6 +201,20 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate {
         }
         let offset = CGPoint(x: ptX, y: scrollView.contentOffset.y)
         scrollView.setContentOffset(offset, animated: true)
+    }
+
+// MARK: ScrollView Delegate
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        thumbnails.forEach { (thumbnail) in
+            thumbnail.thumbnailInfo.alpha = 1
+        }
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        thumbnails.forEach { (thumbnail) in
+            thumbnail.thumbnailInfo.alpha = 0
+        }
+
     }
 
 // MARK: Gesture Event

@@ -13,8 +13,8 @@ class AppConst {
     static let headerViewHeight = AppConst.thumbnailSize.height * 1.3
     static let headerFieldWidth = DeviceConst.displaySize.width / 1.8
     static let edgeSwipeErea: CGFloat = 15.0
-    static let optionMenuCellHeight: CGFloat = 50
-    static let optionMenuSectionHeight: CGFloat = 17
+    static let tableViewCellHeight: CGFloat = 50
+    static let tableViewSectionHeight: CGFloat = 17
     static let optionMenuSize: CGSize = CGSize(width: 250, height: 450)
     static let thumbnailSize = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
     static let keychainRealmToken = "com.eifaniori.qas-realm-token"

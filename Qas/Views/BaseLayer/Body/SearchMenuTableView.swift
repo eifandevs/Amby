@@ -18,7 +18,6 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
 
     weak var delegate: SearchMenuTableViewDelegate?
     private let viewModel: SearchMenuTableViewModel = SearchMenuTableViewModel()
-    private let cellHeight = 50.0
     private var tapRecognizer: UITapGestureRecognizer!
     private var overlay: UIButton?
     
@@ -100,7 +99,7 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight.cgfloat
+        return AppConst.tableViewCellHeight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,7 +123,7 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return AppConst.optionMenuSectionHeight
+        return AppConst.tableViewSectionHeight
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

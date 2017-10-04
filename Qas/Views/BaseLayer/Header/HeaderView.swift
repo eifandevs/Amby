@@ -30,6 +30,10 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
         return [historyBackButton, historyForwardButton, favoriteButton, deleteButton]
     }
     
+    private var headerFieldOriginY: CGFloat {
+        return DeviceConst.statusBarHeight + ((frame.size.height - DeviceConst.statusBarHeight - (AppConst.headerViewHeight * 0.5)) / 2)
+    }
+
     var fieldAlpha: CGFloat {
         get {
             return headerField.alpha
@@ -61,7 +65,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     }
     
     override init(frame: CGRect) {
-        let headerFieldOriginY = DeviceConst.statusBarHeight + (frame.size.height - DeviceConst.statusBarHeight - (AppConst.headerViewHeight * 0.5)) / 2
+        let headerFieldOriginY = DeviceConst.statusBarHeight + ((frame.size.height - DeviceConst.statusBarHeight - (AppConst.headerViewHeight * 0.5)) / 2)
         // ヘッダーフィールド
         headerField = HeaderField(frame: CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: headerFieldOriginY, width: AppConst.headerFieldWidth, height: AppConst.headerViewHeight * 0.5))
         // ヒストリーバックボタン
@@ -86,6 +90,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
             button.setImage(image: image, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
             button.alpha = 1
             let edgeInset: CGFloat = button.frame.size.width / 7.0769
+            button.imageView?.contentMode = .scaleAspectFit
             button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset, edgeInset, edgeInset, edgeInset)
             self.addSubview(button)
         }
@@ -145,7 +150,6 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     func finishEditing(headerFieldUpdate: Bool) {
         let text = headerField.textField?.text
         headerField.removeInputForm()
-        let headerFieldOriginY = DeviceConst.statusBarHeight + (frame.size.height - DeviceConst.statusBarHeight - (AppConst.headerViewHeight * 0.5)) / 2
         headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: headerFieldOriginY, width: AppConst.headerFieldWidth, height: AppConst.headerViewHeight * 0.5)
         self.headerField.layer.shadowColor = UIColor.black.cgColor
         self.isEditing = false
@@ -222,8 +226,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
                 self.headerField.layer.shadowColor = UIColor.clear.cgColor
             }, completion: { _ in
                 // キーボード表示
-                let headerFieldOriginY = DeviceConst.statusBarHeight + (self.frame.size.height - DeviceConst.statusBarHeight - (AppConst.headerViewHeight * 0.5)) / 2
-                self.headerField.makeInputForm(height: headerFieldOriginY)
+                self.headerField.makeInputForm(height: self.headerFieldOriginY)
             })
         }
     }
