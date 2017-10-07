@@ -208,11 +208,13 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     }
     
     private func startCloseAnimation() {
-        UIView.animate(withDuration: 0.15, animations: {
-            self.center = self.initialPt!
-        }) { (finished) in
-            if finished {
-                self.closeCircleMenuItems()
+        if self.initialPt != nil {
+            UIView.animate(withDuration: 0.15, animations: {
+                self.center = self.initialPt!
+            }) { (finished) in
+                if finished {
+                    self.closeCircleMenuItems()
+                }
             }
         }
     }

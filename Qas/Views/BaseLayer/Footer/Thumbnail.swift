@@ -16,28 +16,27 @@ class Thumbnail: UIButton {
             frontBar.alpha = isFront ? 1 : 0
         }
     }
+
     var thumbnailInfo: UIButton!
 
     private let frontBar = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        // フロントバーを配置
         frontBar.frame = CGRect(origin: CGPoint(x: 0, y: frame.size.height - 4), size: CGSize(width: frame.size.width, height: 4))
         frontBar.backgroundColor = UIColor.brilliantBlue
         frontBar.alpha = 0
         addSubview(frontBar)
-        let h = frame.size.width / 3
-        let w = frame.size.width * 2.5
 
-        thumbnailInfo = UIButton(frame: CGRect(x: h / 3.6, y: -(w / 2) , width: w, height: h))
-        thumbnailInfo.backgroundColor = UIColor.darkGray
-        let angle2:CGFloat = CGFloat((-45.0 * Double.pi) / 180.0)
-        thumbnailInfo.transform = CGAffineTransform(rotationAngle: angle2)
-        thumbnailInfo.titleLabel?.font = UIFont(name: AppConst.appFont, size: h / 3)
-        thumbnailInfo.titleLabel?.textColor = UIColor.white
+        // サムネイルタイトル配置
+        thumbnailInfo = UIButton()
+        thumbnailInfo.titleLabel?.font = UIFont(name: AppConst.appFont, size: frame.size.width / 9)
+        thumbnailInfo.titleLabel?.textColor = UIColor.darkGray
         thumbnailInfo.titleLabel?.lineBreakMode = .byTruncatingTail
-        thumbnailInfo.setTitle(" あああああああああああああああああああああああああああああ ", for: .normal)
+        thumbnailInfo.layer.anchorPoint = CGPoint.zero
         thumbnailInfo.alpha = 0
+        setThumbnailTitle(title: " ああああああああああああああああああああああああああああああああああああああああ ")
         addSubview(thumbnailInfo)
     }
     
@@ -49,6 +48,19 @@ class Thumbnail: UIButton {
             privateIcon.setImage(image: R.image.footer_private(), color: UIColor.brilliantBlue)
             addSubview(privateIcon)
         }
+    }
+
+// MARK: Public Method
+    func setThumbnailTitle(title: String) {
+        thumbnailInfo.transform = CGAffineTransform.identity
+        thumbnailInfo.setTitle(title, for: .normal)
+        var width = (thumbnailInfo.titleLabel?.sizeThatFits(frame.size).width)!
+        if width > frame.size.width * 2.2 {
+            width = frame.size.width * 2.2
+        }
+        thumbnailInfo.frame = CGRect(x: frame.size.width / 2, y: -30, width: width, height: frame.size.width / 3)
+        let angle2:CGFloat = CGFloat((-45.0 * Double.pi) / 180.0)
+        thumbnailInfo.transform = CGAffineTransform(rotationAngle: angle2)
     }
 
     required init?(coder aDecoder: NSCoder) {

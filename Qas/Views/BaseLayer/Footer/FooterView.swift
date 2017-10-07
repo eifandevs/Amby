@@ -206,15 +206,18 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
 // MARK: ScrollView Delegate
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         thumbnails.forEach { (thumbnail) in
-            thumbnail.thumbnailInfo.alpha = 1
+            UIView.animate(withDuration: 0.2, animations: {
+                thumbnail.thumbnailInfo.alpha = 1
+            })
         }
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         thumbnails.forEach { (thumbnail) in
-            thumbnail.thumbnailInfo.alpha = 0
+            UIView.animate(withDuration: 0.2, animations: {
+                thumbnail.thumbnailInfo.alpha = 0
+            })
         }
-
     }
 
 // MARK: Gesture Event
