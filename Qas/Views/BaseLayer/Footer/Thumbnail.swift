@@ -36,7 +36,6 @@ class Thumbnail: UIButton {
         thumbnailInfo.titleLabel?.lineBreakMode = .byTruncatingTail
         thumbnailInfo.layer.anchorPoint = CGPoint.zero
         thumbnailInfo.alpha = 0
-        setThumbnailTitle(title: " ああああああああああああああああああああああああああああああああああああああああ ")
         addSubview(thumbnailInfo)
     }
     

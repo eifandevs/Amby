@@ -15,10 +15,17 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
     }
     
     override func setup() {
-        sectionItems = ["自動スクロール設定", "データ削除"]
+        sectionItems = ["自動スクロール設定", "履歴保存期間", "データ削除"]
         menuItems = [
             [
-                OptionMenuItem(type: .slider, defaultValue: -UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey))
+                OptionMenuItem(type: .slider, sliderAction: { (value: Float) -> Void in
+                    UserDefaults.standard.set(-value, forKey: AppConst.autoScrollIntervalKey)
+                }, defaultValue: -UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey), minValue: Float(-0.07), maxValue: Float(-0.01))
+            ],
+            [
+                OptionMenuItem(type: .slider, sliderAction: { (value: Float) -> Void in
+                    log.warning(value)
+                }, defaultValue: Float(UserDefaults.standard.integer(forKey: AppConst.historySaveTermKey)), minValue: Float(1), maxValue: Float(365))
             ],
             [
                 OptionMenuItem(title: "閲覧履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in

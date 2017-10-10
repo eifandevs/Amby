@@ -20,8 +20,8 @@ class SearchMenuTableViewModel {
     var googleSearchCellItem: [String] = []
     var searchHistoryCellItem: [SearchHistoryItem] = []
     var historyCellItem: [CommonHistoryItem] = []
-    private let readCommonHistoryNum: Int = 31
-    private let readSearchHistoryNum: Int = 62
+    private let readCommonHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.historySaveTermKey)
+    private let readSearchHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.searchHistorySaveTermKey)
     private var requestSearchQueue = [String?]()
     private var isRequesting = false
     var existDisplayData: Bool {

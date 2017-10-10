@@ -14,7 +14,7 @@ protocol FooterViewModelDelegate: class {
     func footerViewModelDidChangeThumbnail()
     func footerViewModelDidRemoveThumbnail(index: Int)
     func footerViewModelDidStartLoading(index: Int)
-    func footerViewModelDidEndLoading(context: String, index: Int)
+    func footerViewModelDidEndLoading(context: String, title: String, index: Int)
 }
 
 class FooterViewModel {
@@ -73,7 +73,7 @@ class FooterViewModel {
                 if thumbnail.context == context {
                     thumbnail.url = url
                     thumbnail.title = title
-                    self.delegate?.footerViewModelDidEndLoading(context: context, index: index)
+                    self.delegate?.footerViewModelDidEndLoading(context: context, title: title, index: index)
                     break
                 }
             }

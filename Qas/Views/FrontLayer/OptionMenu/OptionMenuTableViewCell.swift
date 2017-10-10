@@ -90,8 +90,8 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             let marginX: CGFloat = 10
             slider.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - marginX * 2, height: AppConst.tableViewCellHeight / 3))
             slider.center.y = frame.size.height / 2
-            slider.minimumValue = -0.07
-            slider.maximumValue = -0.01
+            slider.minimumValue = menuItem.minValue
+            slider.maximumValue = menuItem.maxValue
             slider.value = menuItem.defaultValue! as! Float
             slider.isContinuous = false
             slider.tintColor = UIColor.brilliantBlue
@@ -113,12 +113,14 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
 // MARK: UISwitch Event
     func onChangedSwitchValue(_ sender: AnyObject) {
         if let menuItem = menuItem {
-            menuItem.switchAction?(switchControl.isOn)
+//            menuItem.switchAction?(switchControl.isOn)
         }
     }
     
 // MARK: UISlider Event
     func onChangedSliderValue(_ sender: AnyObject) {
-        UserDefaults.standard.set(-slider.value, forKey: AppConst.autoScrollIntervalKey)
+        if let menuItem = menuItem {
+            menuItem.sliderAction?(slider.value)
+        }
     }
 }

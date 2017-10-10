@@ -75,6 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func initialize() {
         UserDefaults.standard.set(0, forKey: AppConst.locationIndexKey)
         UserDefaults.standard.set(0.06, forKey: AppConst.autoScrollIntervalKey)
+        UserDefaults.standard.set(90, forKey: AppConst.historySaveTermKey)
+        UserDefaults.standard.set(90, forKey: AppConst.searchHistorySaveTermKey)
         self.window!.rootViewController?.removeFromParentViewController()
         self.window!.rootViewController = BaseViewController()
     }
@@ -96,6 +98,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        CommonDao.s.deleteCommonHistory()
+        CommonDao.s.deleteSearchHistory()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

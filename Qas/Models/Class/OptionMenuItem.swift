@@ -24,11 +24,13 @@ class OptionMenuItem {
     var image: UIImage? =  nil
     var date: Date? = nil
     var action: ((OptionMenuItem) -> (OptionMenuTableViewModel?))? = nil
-    var switchAction: ((Bool) -> ())? = nil
+    var sliderAction: ((Float) -> ())? = nil
     var defaultValue: Any? = nil
+    var minValue: Float = 0
+    var maxValue: Float = 0
     
     
-    init(_id: String? = nil, type: OptionMenuType = .plain, title: String? = nil, url: String? = nil, image: UIImage? = nil, date: Date? = nil, action: ((OptionMenuItem) -> (OptionMenuTableViewModel?))? = nil, switchAction: ((Bool) -> ())? = nil, defaultValue: Any? = nil) {
+    init(_id: String? = nil, type: OptionMenuType = .plain, title: String? = nil, url: String? = nil, image: UIImage? = nil, date: Date? = nil, action: ((OptionMenuItem) -> (OptionMenuTableViewModel?))? = nil, sliderAction: ((Float) -> ())? = nil, defaultValue: Any? = nil, minValue: Float = 0, maxValue: Float = 0) {
         self._id = _id
         self.type = type
         self.title = title
@@ -36,7 +38,9 @@ class OptionMenuItem {
         self.image = image
         self.date = date
         self.action = action
-        self.switchAction = switchAction
+        self.sliderAction = sliderAction
         self.defaultValue = defaultValue
+        self.minValue = minValue
+        self.maxValue = maxValue
     }
 }

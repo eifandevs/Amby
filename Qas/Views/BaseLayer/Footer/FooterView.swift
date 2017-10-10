@@ -154,7 +154,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
         startIndicator()
     }
     
-    func footerViewModelDidEndLoading(context: String, index: Int) {
+    func footerViewModelDidEndLoading(context: String, title: String, index: Int) {
         // くるくるを止めて、サムネイルを表示する
         let targetThumbnail: Thumbnail = self.thumbnails.filter({ (thumbnail) -> Bool in
             return thumbnail.context == context
@@ -173,6 +173,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
                     })
                     targetThumbnail.setImage(nil, for: .normal)
                     targetThumbnail.setBackgroundImage(image, for: .normal)
+                    targetThumbnail.setThumbnailTitle(title: title)
                 } else {
                     log.error("missing thumbnail image")
                 }
@@ -189,6 +190,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
                     if let image = CommonDao.s.getThumbnailImage(context: item.context) {
                         btn.setImage(nil, for: .normal)
                         btn.setBackgroundImage(image, for: .normal)
+                        btn.setThumbnailTitle(title: item.title)
                     }
                 }
             }

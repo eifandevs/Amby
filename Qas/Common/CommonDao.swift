@@ -320,6 +320,30 @@ final class CommonDao {
         return result
     }
     
+    /// 閲覧履歴の削除
+    func deleteSearchHistory() {
+        let manager = FileManager.default
+        var readFiles: [String] = []
+        let saveTerm = Int(UserDefaults.standard.float(forKey: AppConst.searchHistorySaveTermKey))
+        do {
+            let list = try manager.contentsOfDirectory(atPath: AppConst.searchHistoryPath)
+            readFiles = list.map({ (path: String) -> String in
+                return path.substring(to: path.index(path.startIndex, offsetBy: 8))
+            }).reversed()
+
+            if readFiles.count > saveTerm {
+                let deleteFiles = readFiles.suffix(from: saveTerm)
+                deleteFiles.forEach({ (key) in
+                    try! FileManager.default.removeItem(atPath: AppConst.searchHistoryFilePath(date: key))
+                })
+                log.debug("deleteSearchHistory: \(deleteFiles)")
+            }
+
+        } catch let error as NSError {
+            log.error("failed to read common history. error: \(error.localizedDescription)")
+        }
+    }
+
     /// 閲覧履歴の検索
     func selectCommonHistory(title: String, readNum: Int) -> [CommonHistoryItem] {
         let manager = FileManager.default
@@ -368,6 +392,30 @@ final class CommonDao {
         return result
     }
     
+    /// 閲覧履歴の削除
+    func deleteCommonHistory() {
+        let manager = FileManager.default
+        var readFiles: [String] = []
+        let saveTerm = Int(UserDefaults.standard.integer(forKey: AppConst.historySaveTermKey))
+        do {
+            let list = try manager.contentsOfDirectory(atPath: AppConst.commonHistoryPath)
+            readFiles = list.map({ (path: String) -> String in
+                return path.substring(to: path.index(path.startIndex, offsetBy: 8))
+            }).reversed()
+
+            if readFiles.count > saveTerm {
+                let deleteFiles = readFiles.suffix(from: saveTerm)
+                deleteFiles.forEach({ (key) in
+                    try! FileManager.default.removeItem(atPath: AppConst.commonHistoryFilePath(date: key))
+                })
+                log.debug("deleteCommonHistory: \(deleteFiles)")
+            }
+
+        } catch let error as NSError {
+            log.error("failed to read common history. error: \(error.localizedDescription)")
+        }
+    }
+
     /// 特定の閲覧履歴を削除する
     /// [日付: [id, id, ...]]
     func deleteCommonHistory(deleteHistoryIds: [String: [String]]) {
@@ -399,7 +447,7 @@ final class CommonDao {
                     }
                 } else {
                     try! FileManager.default.removeItem(atPath: AppConst.commonHistoryFilePath(date: key))
-                    log.debug("remove common history file")
+                    log.debug("remove common history file. date: \(key)")
                 }
             }
         }
@@ -420,6 +468,8 @@ final class CommonDao {
     /// UDデフォルト値登録
     func registerDefaultData() {
         UserDefaults.standard.register(defaults: [AppConst.locationIndexKey: 0,
-                                                  AppConst.autoScrollIntervalKey: 0.06])
+                                                  AppConst.autoScrollIntervalKey: 0.06,
+                                                  AppConst.historySaveTermKey: 90,
+                                                  AppConst.searchHistorySaveTermKey: 90])
     }
 }

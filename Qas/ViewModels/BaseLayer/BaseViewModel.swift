@@ -383,12 +383,13 @@ class BaseViewModel {
     
     private func reloadFavorite() {
         // 現在表示しているURLがお気に入りかどうか調べる
-        let currentUrl = eachHistory[locationIndex].url
-        if (!currentUrl.isEmpty) {
-            let savedFavoriteUrls = CommonDao.s.selectAllFavorite().map({ (f) -> String in
-                return f.url.domainAndPath
-            })
-            self.center.post(name: .headerViewModelWillChangeFavorite, object: savedFavoriteUrls.contains(currentUrl.domainAndPath))
+        if let history = eachHistory[safe: locationIndex] {
+            if (!history.url.isEmpty) {
+                let savedFavoriteUrls = CommonDao.s.selectAllFavorite().map({ (f) -> String in
+                    return f.url.domainAndPath
+                })
+                self.center.post(name: .headerViewModelWillChangeFavorite, object: savedFavoriteUrls.contains(history.url.domainAndPath))
+            }
         }
     }
 }
