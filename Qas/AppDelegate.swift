@@ -39,11 +39,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             console.minLevel = log.Level.error
             file.minLevel = log.Level.error
         #endif
-        
+
         console.format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
         
         log.addDestination(console)
         log.addDestination(file)
+        
+        #if FREE
+            log.debug("this app is free version.")
+        #else
+            log.debug("this app is full version.")
+        #endif
         
         // 初回起動時のみキーチェーンにトークンを保存
         if KeyChainHelper.getToken(key: AppConst.keychainRealmToken) == nil {
