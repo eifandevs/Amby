@@ -324,7 +324,6 @@
 			isa = PBXGroup;
 			children = (
 				A5223E8C1F1F8EA20097E793 /* AppDelegate.swift */,
-				A5A598E91FA516E1000B56AE /* Environment */,
 				A5BCE7001FA501B800E0C6E5 /* Protocol */,
 				A5BCE6DC1FA501B800E0C6E5 /* Extension */,
 				A5BCE6EF1FA501B800E0C6E5 /* Define */,
@@ -333,6 +332,7 @@
 				A5BCE7951FA50BFA00E0C6E5 /* ViewModel */,
 				A5BCE7631FA50BFA00E0C6E5 /* Model */,
 				A5BCE7CD1FA50C3A00E0C6E5 /* Resources */,
+				A5A598E91FA516E1000B56AE /* Environment */,
 			);
 			path = Qas;
 			sourceTree = "<group>";
