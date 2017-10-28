@@ -11,6 +11,18 @@
 		A5223EE71F1F8EA20097E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5223E8D1F1F8EA20097E793 /* Assets.xcassets */; };
 		A5223EE81F1F8EA20097E793 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223E8E1F1F8EA20097E793 /* EGApplication.swift */; };
 		A5223EEA1F1F8EA20097E793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5223E901F1F8EA20097E793 /* LaunchScreen.storyboard */; };
+		A56983B91FA523F4000A585F /* CommonHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983B81FA523F4000A585F /* CommonHistoryModel.swift */; };
+		A56983BA1FA523F4000A585F /* CommonHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983B81FA523F4000A585F /* CommonHistoryModel.swift */; };
+		A56983BC1FA52405000A585F /* PageHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983BB1FA52405000A585F /* PageHistoryModel.swift */; };
+		A56983BD1FA52405000A585F /* PageHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983BB1FA52405000A585F /* PageHistoryModel.swift */; };
+		A56983C11FA52490000A585F /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C01FA52490000A585F /* SearchHistoryModel.swift */; };
+		A56983C21FA52490000A585F /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C01FA52490000A585F /* SearchHistoryModel.swift */; };
+		A56983C41FA5249C000A585F /* FormDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C31FA5249C000A585F /* FormDataModel.swift */; };
+		A56983C51FA5249C000A585F /* FormDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C31FA5249C000A585F /* FormDataModel.swift */; };
+		A56983C71FA524A8000A585F /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C61FA524A8000A585F /* FavoriteDataModel.swift */; };
+		A56983C81FA524A8000A585F /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C61FA524A8000A585F /* FavoriteDataModel.swift */; };
+		A56983CB1FA527B5000A585F /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983CA1FA527B5000A585F /* SuggestDataModel.swift */; };
+		A56983CC1FA527B5000A585F /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983CA1FA527B5000A585F /* SuggestDataModel.swift */; };
 		A5A598F01FA51710000B56AE /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7831FA50BFA00E0C6E5 /* CircleMenu.swift */; };
 		A5A598F11FA51710000B56AE /* CommonDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F91FA501B800E0C6E5 /* CommonDao.swift */; };
 		A5A598F21FA51710000B56AE /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F81FA501B800E0C6E5 /* CacheHelper.swift */; };
@@ -193,6 +205,12 @@
 		A5223E8E1F1F8EA20097E793 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A5223E8F1F1F8EA20097E793 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5223E911F1F8EA20097E793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A56983B81FA523F4000A585F /* CommonHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryModel.swift; sourceTree = "<group>"; };
+		A56983BB1FA52405000A585F /* PageHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryModel.swift; sourceTree = "<group>"; };
+		A56983C01FA52490000A585F /* SearchHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryModel.swift; sourceTree = "<group>"; };
+		A56983C31FA5249C000A585F /* FormDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataModel.swift; sourceTree = "<group>"; };
+		A56983C61FA524A8000A585F /* FavoriteDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataModel.swift; sourceTree = "<group>"; };
+		A56983CA1FA527B5000A585F /* SuggestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestDataModel.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A5994F1FA51710000B56AE /* QasFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QasFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A599501FA51711000B56AE /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = info.plist; path = /Users/temma/dev/projects/Qas/Qas/Environment/Free/info.plist; sourceTree = "<absolute>"; };
@@ -337,6 +355,54 @@
 			path = Qas;
 			sourceTree = "<group>";
 		};
+		A56983B51FA523D2000A585F /* PageHistoryModel */ = {
+			isa = PBXGroup;
+			children = (
+				A56983BB1FA52405000A585F /* PageHistoryModel.swift */,
+			);
+			path = PageHistoryModel;
+			sourceTree = "<group>";
+		};
+		A56983B61FA523D2000A585F /* SearchHistoryModel */ = {
+			isa = PBXGroup;
+			children = (
+				A56983C01FA52490000A585F /* SearchHistoryModel.swift */,
+			);
+			path = SearchHistoryModel;
+			sourceTree = "<group>";
+		};
+		A56983B71FA523D3000A585F /* CommonHistoryModel */ = {
+			isa = PBXGroup;
+			children = (
+				A56983B81FA523F4000A585F /* CommonHistoryModel.swift */,
+			);
+			path = CommonHistoryModel;
+			sourceTree = "<group>";
+		};
+		A56983BE1FA52482000A585F /* FavoriteDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				A56983C61FA524A8000A585F /* FavoriteDataModel.swift */,
+			);
+			path = FavoriteDataModel;
+			sourceTree = "<group>";
+		};
+		A56983BF1FA52483000A585F /* FormDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				A56983C31FA5249C000A585F /* FormDataModel.swift */,
+			);
+			path = FormDataModel;
+			sourceTree = "<group>";
+		};
+		A56983C91FA527AA000A585F /* SuggestDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				A56983CA1FA527B5000A585F /* SuggestDataModel.swift */,
+			);
+			path = SuggestDataModel;
+			sourceTree = "<group>";
+		};
 		A57EFE981E3E06D300B66701 = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +530,12 @@
 		A5BCE7631FA50BFA00E0C6E5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A56983C91FA527AA000A585F /* SuggestDataModel */,
+				A56983BE1FA52482000A585F /* FavoriteDataModel */,
+				A56983BF1FA52483000A585F /* FormDataModel */,
+				A56983B71FA523D3000A585F /* CommonHistoryModel */,
+				A56983B51FA523D2000A585F /* PageHistoryModel */,
+				A56983B61FA523D2000A585F /* SearchHistoryModel */,
 				A5BCE7641FA50BFA00E0C6E5 /* Class */,
 				A5BCE76A1FA50BFA00E0C6E5 /* DB */,
 				A5BCE76D1FA50BFA00E0C6E5 /* Http */,
@@ -963,16 +1035,20 @@
 				A5223EE81F1F8EA20097E793 /* EGApplication.swift in Sources */,
 				A5BCE7221FA501B900E0C6E5 /* Util.swift in Sources */,
 				A5BCE7A41FA50BFA00E0C6E5 /* HistoryItem.swift in Sources */,
+				A56983C71FA524A8000A585F /* FavoriteDataModel.swift in Sources */,
+				A56983BC1FA52405000A585F /* PageHistoryModel.swift in Sources */,
 				A5BCE7BF1FA50BFA00E0C6E5 /* SplashViewController.swift in Sources */,
 				A5BCE7C91FA50BFA00E0C6E5 /* HelpMenuViewModel.swift in Sources */,
 				A5BCE7081FA501B900E0C6E5 /* Dictionary+Extend.swift in Sources */,
 				A5BCE7B31FA50BFA00E0C6E5 /* EGProgressBar.swift in Sources */,
 				A5BCE7201FA501B900E0C6E5 /* OnceExec.swift in Sources */,
 				A5BCE7231FA501B900E0C6E5 /* CircleView.swift in Sources */,
+				A56983B91FA523F4000A585F /* CommonHistoryModel.swift in Sources */,
 				A5BCE7C51FA50BFA00E0C6E5 /* SearchMenuTableViewModel.swift in Sources */,
 				A5BCE7181FA501B900E0C6E5 /* HttpConst.swift in Sources */,
 				A5BCE7161FA501B900E0C6E5 /* AppConst.swift in Sources */,
 				A5BCE7B61FA50BFA00E0C6E5 /* BaseViewController.swift in Sources */,
+				A56983CB1FA527B5000A585F /* SuggestDataModel.swift in Sources */,
 				A5BCE70E1FA501B900E0C6E5 /* Optional+Extend.swift in Sources */,
 				A5BCE7BE1FA50BFA00E0C6E5 /* HelpViewController.swift in Sources */,
 				A5BCE7251FA501B900E0C6E5 /* ShadowView.swift in Sources */,
@@ -984,6 +1060,7 @@
 				A5BCE7C21FA50BFA00E0C6E5 /* BaseViewModel.swift in Sources */,
 				A5BCE7131FA501B900E0C6E5 /* UIImageView+Extend.swift in Sources */,
 				A5BCE7151FA501B900E0C6E5 /* UIView+Extend.swift in Sources */,
+				A56983C11FA52490000A585F /* SearchHistoryModel.swift in Sources */,
 				A5BCE7B41FA50BFA00E0C6E5 /* HeaderField.swift in Sources */,
 				A5BCE7041FA501B900E0C6E5 /* Array+Extend.swift in Sources */,
 				A5223EE61F1F8EA20097E793 /* AppDelegate.swift in Sources */,
@@ -1015,6 +1092,7 @@
 				A5BCE7C61FA50BFA00E0C6E5 /* BaseMenuViewModel.swift in Sources */,
 				A5BCE7211FA501B900E0C6E5 /* RealmHelper.swift in Sources */,
 				A5BCE71F1FA501B900E0C6E5 /* NotificationManager.swift in Sources */,
+				A56983C41FA5249C000A585F /* FormDataModel.swift in Sources */,
 				A5BCE7AC1FA50BFA00E0C6E5 /* BaseView.swift in Sources */,
 				A5BCE7AD1FA50BFA00E0C6E5 /* EGWebView.swift in Sources */,
 				A5BCE7B51FA50BFA00E0C6E5 /* HeaderView.swift in Sources */,
@@ -1047,16 +1125,20 @@
 				A5A599021FA51710000B56AE /* EGApplication.swift in Sources */,
 				A5A599031FA51710000B56AE /* Util.swift in Sources */,
 				A5A599041FA51710000B56AE /* HistoryItem.swift in Sources */,
+				A56983C81FA524A8000A585F /* FavoriteDataModel.swift in Sources */,
+				A56983BD1FA52405000A585F /* PageHistoryModel.swift in Sources */,
 				A5A599051FA51710000B56AE /* SplashViewController.swift in Sources */,
 				A5A599061FA51710000B56AE /* HelpMenuViewModel.swift in Sources */,
 				A5A599071FA51710000B56AE /* Dictionary+Extend.swift in Sources */,
 				A5A599081FA51710000B56AE /* EGProgressBar.swift in Sources */,
 				A5A599091FA51710000B56AE /* OnceExec.swift in Sources */,
 				A5A5990A1FA51710000B56AE /* CircleView.swift in Sources */,
+				A56983BA1FA523F4000A585F /* CommonHistoryModel.swift in Sources */,
 				A5A5990B1FA51710000B56AE /* SearchMenuTableViewModel.swift in Sources */,
 				A5A5990C1FA51710000B56AE /* HttpConst.swift in Sources */,
 				A5A5990D1FA51710000B56AE /* AppConst.swift in Sources */,
 				A5A5990E1FA51710000B56AE /* BaseViewController.swift in Sources */,
+				A56983CC1FA527B5000A585F /* SuggestDataModel.swift in Sources */,
 				A5A5990F1FA51710000B56AE /* Optional+Extend.swift in Sources */,
 				A5A599101FA51710000B56AE /* HelpViewController.swift in Sources */,
 				A5A599111FA51710000B56AE /* ShadowView.swift in Sources */,
@@ -1068,6 +1150,7 @@
 				A5A599171FA51710000B56AE /* BaseViewModel.swift in Sources */,
 				A5A599181FA51710000B56AE /* UIImageView+Extend.swift in Sources */,
 				A5A599191FA51710000B56AE /* UIView+Extend.swift in Sources */,
+				A56983C21FA52490000A585F /* SearchHistoryModel.swift in Sources */,
 				A5A5991A1FA51710000B56AE /* HeaderField.swift in Sources */,
 				A5A5991B1FA51710000B56AE /* Array+Extend.swift in Sources */,
 				A5A5991C1FA51710000B56AE /* AppDelegate.swift in Sources */,
@@ -1099,6 +1182,7 @@
 				A5A599361FA51710000B56AE /* BaseMenuViewModel.swift in Sources */,
 				A5A599371FA51710000B56AE /* RealmHelper.swift in Sources */,
 				A5A599381FA51710000B56AE /* NotificationManager.swift in Sources */,
+				A56983C51FA5249C000A585F /* FormDataModel.swift in Sources */,
 				A5A599391FA51710000B56AE /* BaseView.swift in Sources */,
 				A5A5993A1FA51710000B56AE /* EGWebView.swift in Sources */,
 				A5A5993B1FA51710000B56AE /* HeaderView.swift in Sources */,
