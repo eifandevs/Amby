@@ -11,6 +11,7 @@ import UIKit
 
 class Util {
     
+    /// フォアグラウンドビューコントローラー取得
     static func foregroundViewController() -> UIViewController {
         var vc = UIApplication.shared.keyWindow?.rootViewController;
         while ((vc!.presentedViewController) != nil) {
@@ -19,6 +20,7 @@ class Util {
         return vc!;
     }
     
+    /// フォルダー削除
     static func createFolder(path: String) {
         let fileManager = FileManager.default
         var isDir : ObjCBool = false
@@ -30,6 +32,7 @@ class Util {
         }
     }
     
+    /// フォルダー削除
     static func deleteFolder(path: String) {
         let fileManager = FileManager.default
         var isDir : ObjCBool = false
@@ -39,6 +42,7 @@ class Util {
         }
     }
     
+    /// ファーストレスポンダー取得
     static func findFirstResponder(view: UIView) -> UIView? {
         if view.isFirstResponder {
             return view
@@ -73,6 +77,7 @@ class Util {
     }
 }
 
+/// 演算子拡張
 func *(left: CGSize, right: CGFloat) -> CGSize {
     return CGSize(width: left.width * right, height: left.height * right)
 }
