@@ -37,8 +37,8 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 }),
                 OptionMenuItem(title: "ブックマーク", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationManager.presentAlert(title: "データ削除", message: "ブックマークを全て削除します。よろしいですか？", completion: {
-                        CommonDao.s.deleteAllFavorite()
-                        NotificationCenter.default.post(name: .headerViewModelWillChangeFavorite, object: false)
+                        FavoriteDataModel.delete()
+                        NotificationCenter.default.post(name: .headerViewModelWillChangeFavorite, object: nil)
                     })
                     return nil
                 }),
@@ -71,7 +71,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                         CommonDao.s.deleteAllCommonHistory()
                         CommonDao.s.deleteAllHistory()
                         CommonDao.s.deleteAllSearchHistory()
-                        CommonDao.s.deleteAllFavorite()
+                        FavoriteDataModel.delete()
                         CommonDao.s.deleteAllForm()
                         CacheHelper.deleteCookies()
                         CacheHelper.deleteCaches()

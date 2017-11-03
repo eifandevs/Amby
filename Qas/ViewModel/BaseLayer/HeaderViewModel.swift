@@ -12,7 +12,7 @@ import UIKit
 protocol HeaderViewModelDelegate: class {
     func headerViewModelDidChangeProgress(progress: CGFloat)
     func headerViewModelDidChangeField(text: String)
-    func headerViewModelDidChangeFavorite(changed: Bool)
+    func headerViewModelDidChangeFavorite(enable: Bool)
     func headerViewModelDidBeginEditing(forceEditFlg: Bool)
 }
 
@@ -37,7 +37,15 @@ class HeaderViewModel {
         center.addObserver(forName: .headerViewModelWillChangeFavorite, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[HeaderView Event]: headerViewModelWillChangeFavorite")
-            self.delegate?.headerViewModelDidChangeFavorite(changed: notification.object as! Bool)
+            let url = notification.object != nil ? (notification.object as! [String: String])["url"] : nil
+            let enable = { () -> Bool in
+                if url == nil {
+                    return false
+                } else {
+                    return FavoriteDataModel.select().map({ $0.url }).contains(url!)
+                }
+            }()
+            self.delegate?.headerViewModelDidChangeFavorite(enable: enable)
         }
         // ヘッダーURL更新
         center.addObserver(forName: .headerViewModelWillChangeField, object: nil, queue: nil) { [weak self] (notification) in

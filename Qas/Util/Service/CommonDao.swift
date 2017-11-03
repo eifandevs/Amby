@@ -32,38 +32,20 @@ final class CommonDao {
         }
     }
 
-    func insertWithRLMObjects(data: [Object]) {
+    func insert(data: [Object]) {
         try! realm.write {
             realm.add(data, update: true)
         }
     }
     
-    func deleteWithRLMObjects(data: [Object]) {
+    func delete(data: [Object]) {
         try! realm.write {
             realm.delete(data)
         }
     }
     
-    /// Favorite
-    func selectAllFavorite() -> [Favorite] {
-        return realm.objects(Favorite.self).map { $0 }
-    }
-    
-    func selectFavorite(id: String = "", url: String = "") -> Favorite? {
-        if !id.isEmpty {
-            return CommonDao.s.selectAllFavorite().filter({ (f) -> Bool in
-                return id == f.id
-            }).first
-        } else if !url.isEmpty {
-            return CommonDao.s.selectAllFavorite().filter({ (f) -> Bool in
-                return url.domainAndPath == f.url.domainAndPath
-            }).first
-        }
-        return nil
-    }
-    
-    func deleteAllFavorite() {
-        deleteWithRLMObjects(data: selectAllFavorite())
+    func select(type: Object.Type) -> [Object] {
+        return realm.objects(type).map { $0 }
     }
     
     /// Form
@@ -85,7 +67,7 @@ final class CommonDao {
     }
 
     func deleteAllForm() {
-        deleteWithRLMObjects(data: selectAllForm())
+        delete(data: selectAllForm())
     }
     
     /// フォーム情報の保存
@@ -140,9 +122,9 @@ final class CommonDao {
                 }).first
                 if let unwrappedSavedForm = savedForm {
                     // すでに登録済みの場合は、まず削除する
-                    CommonDao.s.deleteWithRLMObjects(data: [unwrappedSavedForm])
+                    CommonDao.s.delete(data: [unwrappedSavedForm])
                 }
-                CommonDao.s.insertWithRLMObjects(data: [form])
+                CommonDao.s.insert(data: [form])
                 NotificationManager.presentNotification(message: "フォーム情報を登録しました")
             } else {
                 NotificationManager.presentNotification(message: "フォーム情報の入力を確認できませんでした")

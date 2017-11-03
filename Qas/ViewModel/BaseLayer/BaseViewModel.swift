@@ -210,14 +210,14 @@ class BaseViewModel {
                 fd.title = self.eachHistory[self.locationIndex].title
                 fd.url = self.eachHistory[self.locationIndex].url
                 
-                if let favoriteData = CommonDao.s.selectFavorite(url: fd.url) {
+                if let favorite = FavoriteDataModel.select(url: fd.url).first {
                     // すでに登録済みの場合は、お気に入りから削除する
-                    CommonDao.s.deleteWithRLMObjects(data: [favoriteData])
-                    self.center.post(name: .headerViewModelWillChangeFavorite, object: false)
+                    FavoriteDataModel.delete(favorites: [favorite])
+                    self.center.post(name: .headerViewModelWillChangeFavorite, object: ["url": fd.url])
                 } else {
-                    CommonDao.s.insertWithRLMObjects(data: [fd])
+                    FavoriteDataModel.insert(favorites: [fd])
                     // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
-                    self.center.post(name: .headerViewModelWillChangeFavorite, object: true)
+                    self.center.post(name: .headerViewModelWillChangeFavorite, object: ["url": fd.url])
                     NotificationManager.presentNotification(message: "お気に入りに登録しました")
                 }
             } else {
@@ -325,10 +325,13 @@ class BaseViewModel {
     }
     
     func saveHistory(wv: EGWebView) {
-        if !isPrivateMode! {
-            if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle, !requestTitle.isEmpty {
-                // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
-                center.post(name: .headerViewModelWillChangeFavorite, object: CommonDao.s.selectFavorite(url: requestUrl) != nil)
+        if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle, !requestTitle.isEmpty {
+            // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
+            if wv.context == currentContext {
+                // フロントページの保存の場合
+                center.post(name: .headerViewModelWillChangeFavorite, object: ["url": requestUrl])
+            }
+            if !isPrivateMode! {
                 //　アプリ起動後の前回ページロード時は、履歴に保存しない
                 if requestUrl != self.requestUrl {
                     // Common History
@@ -385,10 +388,7 @@ class BaseViewModel {
         // 現在表示しているURLがお気に入りかどうか調べる
         if let history = eachHistory[safe: locationIndex] {
             if (!history.url.isEmpty) {
-                let savedFavoriteUrls = CommonDao.s.selectAllFavorite().map({ (f) -> String in
-                    return f.url.domainAndPath
-                })
-                self.center.post(name: .headerViewModelWillChangeFavorite, object: savedFavoriteUrls.contains(history.url.domainAndPath))
+                self.center.post(name: .headerViewModelWillChangeFavorite, object: ["url": history.url])
             }
         }
     }

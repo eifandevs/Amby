@@ -139,10 +139,10 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         CommonDao.s.deleteCommonHistory(deleteHistoryIds: deleteHistoryIds)
         // お気に入り
         let deleteFavorites = deleteFavoriteIds.map { (id) -> Favorite in
-            return CommonDao.s.selectFavorite(id: id)!
+            return FavoriteDataModel.select(id: id).first!
         }
         if deleteFavorites.count > 0 {
-            CommonDao.s.deleteWithRLMObjects(data: deleteFavorites)
+            CommonDao.s.delete(data: deleteFavorites)
             NotificationCenter.default.post(name: .baseViewModelWillChangeFavorite, object: nil)
         }
         // フォーム
@@ -150,7 +150,7 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
             return CommonDao.s.selectForm(id: id)!
         }
         if deleteForms.count > 0 {
-            CommonDao.s.deleteWithRLMObjects(data: deleteForms)
+            CommonDao.s.delete(data: deleteForms)
         }
         deleteHistoryIds = [:]
         deleteFavoriteIds = []

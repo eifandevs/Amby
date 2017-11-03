@@ -40,7 +40,6 @@
 		A5A598FE1FA51710000B56AE /* EnumEnumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7021FA501B800E0C6E5 /* EnumEnumerable.swift */; };
 		A5A598FF1FA51710000B56AE /* UIImage+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6EB1FA501B800E0C6E5 /* UIImage+Extend.swift */; };
 		A5A599001FA51710000B56AE /* CircleProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7851FA50BFA00E0C6E5 /* CircleProgress.swift */; };
-		A5A599011FA51710000B56AE /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE76B1FA50BFA00E0C6E5 /* Favorite.swift */; };
 		A5A599021FA51710000B56AE /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223E8E1F1F8EA20097E793 /* EGApplication.swift */; };
 		A5A599031FA51710000B56AE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6FF1FA501B800E0C6E5 /* Util.swift */; };
 		A5A599041FA51710000B56AE /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7661FA50BFA00E0C6E5 /* HistoryItem.swift */; };
@@ -150,7 +149,6 @@
 		A5BCE7A51FA50BFA00E0C6E5 /* OptionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7671FA50BFA00E0C6E5 /* OptionMenuItem.swift */; };
 		A5BCE7A61FA50BFA00E0C6E5 /* SearchHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7681FA50BFA00E0C6E5 /* SearchHistoryItem.swift */; };
 		A5BCE7A71FA50BFA00E0C6E5 /* ThumbnailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7691FA50BFA00E0C6E5 /* ThumbnailItem.swift */; };
-		A5BCE7A81FA50BFA00E0C6E5 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE76B1FA50BFA00E0C6E5 /* Favorite.swift */; };
 		A5BCE7A91FA50BFA00E0C6E5 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE76C1FA50BFA00E0C6E5 /* Form.swift */; };
 		A5BCE7AA1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE76E1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift */; };
 		A5BCE7AB1FA50BFA00E0C6E5 /* BaseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7721FA50BFA00E0C6E5 /* BaseLayer.swift */; };
@@ -254,7 +252,6 @@
 		A5BCE7671FA50BFA00E0C6E5 /* OptionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuItem.swift; sourceTree = "<group>"; };
 		A5BCE7681FA50BFA00E0C6E5 /* SearchHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryItem.swift; sourceTree = "<group>"; };
 		A5BCE7691FA50BFA00E0C6E5 /* ThumbnailItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailItem.swift; sourceTree = "<group>"; };
-		A5BCE76B1FA50BFA00E0C6E5 /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A5BCE76C1FA50BFA00E0C6E5 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		A5BCE76E1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestGetApiResponse.swift; sourceTree = "<group>"; };
 		A5BCE7721FA50BFA00E0C6E5 /* BaseLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLayer.swift; sourceTree = "<group>"; };
@@ -558,7 +555,6 @@
 		A5BCE76A1FA50BFA00E0C6E5 /* DB */ = {
 			isa = PBXGroup;
 			children = (
-				A5BCE76B1FA50BFA00E0C6E5 /* Favorite.swift */,
 				A5BCE76C1FA50BFA00E0C6E5 /* Form.swift */,
 			);
 			path = DB;
@@ -1031,7 +1027,6 @@
 				A5BCE7241FA501B900E0C6E5 /* EnumEnumerable.swift in Sources */,
 				A5BCE7121FA501B900E0C6E5 /* UIImage+Extend.swift in Sources */,
 				A5BCE7B91FA50BFA00E0C6E5 /* CircleProgress.swift in Sources */,
-				A5BCE7A81FA50BFA00E0C6E5 /* Favorite.swift in Sources */,
 				A5223EE81F1F8EA20097E793 /* EGApplication.swift in Sources */,
 				A5BCE7221FA501B900E0C6E5 /* Util.swift in Sources */,
 				A5BCE7A41FA50BFA00E0C6E5 /* HistoryItem.swift in Sources */,
@@ -1121,7 +1116,6 @@
 				A5A598FE1FA51710000B56AE /* EnumEnumerable.swift in Sources */,
 				A5A598FF1FA51710000B56AE /* UIImage+Extend.swift in Sources */,
 				A5A599001FA51710000B56AE /* CircleProgress.swift in Sources */,
-				A5A599011FA51710000B56AE /* Favorite.swift in Sources */,
 				A5A599021FA51710000B56AE /* EGApplication.swift in Sources */,
 				A5A599031FA51710000B56AE /* Util.swift in Sources */,
 				A5A599041FA51710000B56AE /* HistoryItem.swift in Sources */,
