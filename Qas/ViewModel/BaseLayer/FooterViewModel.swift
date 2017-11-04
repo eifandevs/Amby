@@ -9,7 +9,7 @@
 import Foundation
 
 protocol FooterViewModelDelegate: class {
-    func footerViewModelDidLoadThumbnail(eachThumbnail: [HistoryItem])
+    func footerViewModelDidLoadThumbnail(eachThumbnail: [PageHistory])
     func footerViewModelDidAddThumbnail(context: String, isPrivateMode: Bool)
     func footerViewModelDidChangeThumbnail()
     func footerViewModelDidRemoveThumbnail(index: Int)
@@ -20,8 +20,8 @@ protocol FooterViewModelDelegate: class {
 class FooterViewModel {
     // 現在位置
     var locationIndex: Int  = 0
-    private var eachThumbnail: [HistoryItem] = []
-    private var currentThumbnail: HistoryItem {
+    private var eachThumbnail: [PageHistory] = []
+    private var currentThumbnail: PageHistory {
         return eachThumbnail[locationIndex]
     }
     
@@ -37,21 +37,21 @@ class FooterViewModel {
         center.addObserver(forName: .footerViewModelWillLoad, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[Footer Event]: footerViewModelWillLoad")
-            let eachHistory = notification.object as! [HistoryItem]
-            self.eachThumbnail = eachHistory
-            self.delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: eachHistory)
+            let pageHistory = notification.object as! [PageHistory]
+            self.eachThumbnail = pageHistory
+            self.delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: pageHistory)
         }
         
         // webview追加
         center.addObserver(forName: .footerViewModelWillAddWebView, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[Footer Event]: footerViewModelWillAddWebView")
-            let eachHistory = notification.object as! HistoryItem
+            let pageHistory = notification.object as! PageHistory
             
             // 新しいサムネイルを追加
-            self.eachThumbnail.append(eachHistory)
+            self.eachThumbnail.append(pageHistory)
             self.locationIndex = self.eachThumbnail.count - 1
-            self.delegate?.footerViewModelDidAddThumbnail(context: eachHistory.context, isPrivateMode: eachHistory.isPrivate == "true")
+            self.delegate?.footerViewModelDidAddThumbnail(context: pageHistory.context, isPrivateMode: pageHistory.isPrivate == "true")
         }
         // webviewロード開始
         center.addObserver(forName: .footerViewModelWillStartLoading, object: nil, queue: nil) { [weak self] (notification) in

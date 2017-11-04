@@ -181,7 +181,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
         }
     }
     
-    func footerViewModelDidLoadThumbnail(eachThumbnail: [HistoryItem]) {
+    func footerViewModelDidLoadThumbnail(eachThumbnail: [PageHistory]) {
         if eachThumbnail.count > 0 {
             eachThumbnail.forEach { (item) in
                 let btn = createCaptureSpace(context: item.context, isPrivateMode: item.isPrivate == "true")

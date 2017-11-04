@@ -26,8 +26,8 @@ class AppConst {
     static let historySaveTermKey = "historySaveTerm"
     static let searchHistorySaveTermKey = "searchHistorySaveTerm"
     static let appFont = "Avenir"
-    static let eachHistoryPath = DeviceConst.cachesPath + "/each_history.dat"
-    static let eachHistoryUrl = URL(fileURLWithPath: AppConst.eachHistoryPath)
+    static let pageHistoryPath = DeviceConst.cachesPath + "/each_history.dat"
+    static let pageHistoryUrl = URL(fileURLWithPath: AppConst.pageHistoryPath)
     static let commonHistoryPath = DeviceConst.cachesPath + "/common_history"
     static let searchHistoryPath = DeviceConst.cachesPath + "/search_history"
     static let thumbnailBaseFolderPath = DeviceConst.cachesPath + "/thumbnails"

@@ -230,19 +230,6 @@ final class CommonDao {
         }
     }
     
-    /// 表示中ページの保存
-    func storeEachHistory(eachHistory: [HistoryItem]) {
-        if eachHistory.count > 0 {
-            let eachHistoryData = NSKeyedArchiver.archivedData(withRootObject: eachHistory)
-            do {
-                try eachHistoryData.write(to: AppConst.eachHistoryUrl)
-                log.debug("store each history")
-            } catch let error as NSError {
-                log.error("failed to write: \(error)")
-            }
-        }
-    }
-    
     /// サムネイルデータの削除
     func deleteAllThumbnail() {
         Util.deleteFolder(path: AppConst.thumbnailBaseFolderPath)
@@ -251,7 +238,7 @@ final class CommonDao {
     
     /// 表示中ページ情報の削除
     func deleteAllHistory() {
-        Util.deleteFolder(path: AppConst.eachHistoryPath)
+        Util.deleteFolder(path: AppConst.pageHistoryPath)
     }
     
     /// 検索履歴の検索
