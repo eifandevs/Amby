@@ -23,7 +23,9 @@ protocol BaseViewModelDelegate: class {
 }
 
 class BaseViewModel {
-    
+    var locationIndex: Int {
+        return PageHistoryDataModel.s.locationIndex
+    }
     // リクエストURL(jsのURL)
     var requestUrl: String {
         return PageHistoryDataModel.s.histories[safe: locationIndex] != nil ? PageHistoryDataModel.s.histories[locationIndex].url : ""
@@ -47,13 +49,6 @@ class BaseViewModel {
     // webviewの数
     var webViewCount: Int {
         return PageHistoryDataModel.s.histories.count
-    }
-    
-    // 現在表示しているwebviewのインデックス
-    var locationIndex: Int  = UserDefaults.standard.integer(forKey: AppConst.locationIndexKey) {
-        didSet {
-            log.debug("location index changed. \(oldValue) -> \(locationIndex)")
-        }
     }
     
     // 全てのwebViewの履歴
@@ -119,7 +114,7 @@ class BaseViewModel {
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillCopyWebView")
             PageHistoryDataModel.s.histories.append(PageHistory(url: PageHistoryDataModel.s.histories[self.locationIndex].url, title: PageHistoryDataModel.s.histories[self.locationIndex].title))
-            self.locationIndex = PageHistoryDataModel.s.histories.count - 1
+            PageHistoryDataModel.s.locationIndex = PageHistoryDataModel.s.histories.count - 1
             self.center.post(name: .footerViewModelWillAddWebView, object: PageHistoryDataModel.s.histories[self.locationIndex])
             self.delegate?.baseViewModelDidAddWebView()
         }
@@ -158,7 +153,7 @@ class BaseViewModel {
             self.center.post(name: .footerViewModelWillRemoveWebView, object: index)
             if ((index != 0 && self.locationIndex == index && index == PageHistoryDataModel.s.histories.count - 1) || (index < self.locationIndex)) {
                 // indexの調整
-                self.locationIndex = self.locationIndex - 1
+                PageHistoryDataModel.s.locationIndex = self.locationIndex - 1
             }
             PageHistoryDataModel.s.histories.remove(at: index)
             self.reloadFavorite()
@@ -260,7 +255,7 @@ class BaseViewModel {
         } else {
             PageHistoryDataModel.s.histories.append(PageHistory(isPrivate: isPrivate))
         }
-        self.locationIndex = PageHistoryDataModel.s.histories.count - 1
+        PageHistoryDataModel.s.locationIndex = PageHistoryDataModel.s.histories.count - 1
         self.reloadFavorite()
         self.center.post(name: .footerViewModelWillAddWebView, object: PageHistoryDataModel.s.histories.last!)
         self.delegate?.baseViewModelDidAddWebView()
@@ -294,12 +289,6 @@ class BaseViewModel {
     /// ヘッダーフィールドの更新
     func reloadHeaderText() {
         headerFieldText = requestUrl
-    }
-    
-    /// ロケーションインデックスの永続化
-    func storeLocationIndex() {
-        log.debug("store location index")
-        UserDefaults.standard.set(locationIndex, forKey: AppConst.locationIndexKey)
     }
     
     /// 前WebViewに切り替え
@@ -364,7 +353,7 @@ class BaseViewModel {
         }()
         self.center.post(name: .footerViewModelWillChangeWebView, object: targetIndex)
         if self.locationIndex != targetIndex {
-            self.locationIndex = targetIndex
+            PageHistoryDataModel.s.locationIndex = targetIndex
             self.reloadFavorite()
             self.delegate?.baseViewModelDidChangeWebView()
         } else {

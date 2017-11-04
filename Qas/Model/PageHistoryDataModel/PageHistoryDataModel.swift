@@ -11,10 +11,20 @@ import UIKit
 
 final class PageHistoryDataModel {
     static let s = PageHistoryDataModel()
+    // 現在表示しているwebviewのインデックス
+    var locationIndex: Int {
+        didSet {
+            log.debug("location index changed. \(oldValue) -> \(locationIndex)")
+            UserDefaults.standard.set(locationIndex, forKey: AppConst.locationIndexKey)
+        }
+    }
     // webViewそれぞれの履歴とカレントページインデックス
     var histories: [PageHistory] = []
     
     private init() {
+        // ロケーション情報取得
+        locationIndex = UserDefaults.standard.integer(forKey: AppConst.locationIndexKey)
+        
         // pageHistory読み込み
         do {
             let data = try Data(contentsOf: AppConst.pageHistoryUrl)
