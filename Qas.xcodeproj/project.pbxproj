@@ -72,7 +72,6 @@
 		A5A599201FA51710000B56AE /* BaseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7721FA50BFA00E0C6E5 /* BaseLayer.swift */; };
 		A5A599211FA51710000B56AE /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7791FA50BFA00E0C6E5 /* FooterView.swift */; };
 		A5A599221FA51710000B56AE /* FrontLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7861FA50BFA00E0C6E5 /* FrontLayer.swift */; };
-		A5A599231FA51710000B56AE /* ThumbnailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7691FA50BFA00E0C6E5 /* ThumbnailItem.swift */; };
 		A5A599241FA51710000B56AE /* CGPoint+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6DE1FA501B800E0C6E5 /* CGPoint+Extend.swift */; };
 		A5A599251FA51710000B56AE /* SettingMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7A21FA50BFA00E0C6E5 /* SettingMenuViewModel.swift */; };
 		A5A599261FA51710000B56AE /* HeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7991FA50BFA00E0C6E5 /* HeaderViewModel.swift */; };
@@ -146,7 +145,6 @@
 		A5BCE7A31FA50BFA00E0C6E5 /* CommonHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7651FA50BFA00E0C6E5 /* CommonHistoryItem.swift */; };
 		A5BCE7A51FA50BFA00E0C6E5 /* OptionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7671FA50BFA00E0C6E5 /* OptionMenuItem.swift */; };
 		A5BCE7A61FA50BFA00E0C6E5 /* SearchHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7681FA50BFA00E0C6E5 /* SearchHistoryItem.swift */; };
-		A5BCE7A71FA50BFA00E0C6E5 /* ThumbnailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7691FA50BFA00E0C6E5 /* ThumbnailItem.swift */; };
 		A5BCE7A91FA50BFA00E0C6E5 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE76C1FA50BFA00E0C6E5 /* Form.swift */; };
 		A5BCE7AA1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE76E1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift */; };
 		A5BCE7AB1FA50BFA00E0C6E5 /* BaseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7721FA50BFA00E0C6E5 /* BaseLayer.swift */; };
@@ -248,7 +246,6 @@
 		A5BCE7651FA50BFA00E0C6E5 /* CommonHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryItem.swift; sourceTree = "<group>"; };
 		A5BCE7671FA50BFA00E0C6E5 /* OptionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuItem.swift; sourceTree = "<group>"; };
 		A5BCE7681FA50BFA00E0C6E5 /* SearchHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryItem.swift; sourceTree = "<group>"; };
-		A5BCE7691FA50BFA00E0C6E5 /* ThumbnailItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailItem.swift; sourceTree = "<group>"; };
 		A5BCE76C1FA50BFA00E0C6E5 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		A5BCE76E1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestGetApiResponse.swift; sourceTree = "<group>"; };
 		A5BCE7721FA50BFA00E0C6E5 /* BaseLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLayer.swift; sourceTree = "<group>"; };
@@ -543,7 +540,6 @@
 				A5BCE7651FA50BFA00E0C6E5 /* CommonHistoryItem.swift */,
 				A5BCE7671FA50BFA00E0C6E5 /* OptionMenuItem.swift */,
 				A5BCE7681FA50BFA00E0C6E5 /* SearchHistoryItem.swift */,
-				A5BCE7691FA50BFA00E0C6E5 /* ThumbnailItem.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -1060,7 +1056,6 @@
 				A5BCE7AB1FA50BFA00E0C6E5 /* BaseLayer.swift in Sources */,
 				A5BCE7B01FA50BFA00E0C6E5 /* FooterView.swift in Sources */,
 				A5BCE7BA1FA50BFA00E0C6E5 /* FrontLayer.swift in Sources */,
-				A5BCE7A71FA50BFA00E0C6E5 /* ThumbnailItem.swift in Sources */,
 				A5BCE7051FA501B900E0C6E5 /* CGPoint+Extend.swift in Sources */,
 				A5BCE7CC1FA50BFA00E0C6E5 /* SettingMenuViewModel.swift in Sources */,
 				A5BCE7C41FA50BFA00E0C6E5 /* HeaderViewModel.swift in Sources */,
@@ -1148,7 +1143,6 @@
 				A5A599201FA51710000B56AE /* BaseLayer.swift in Sources */,
 				A5A599211FA51710000B56AE /* FooterView.swift in Sources */,
 				A5A599221FA51710000B56AE /* FrontLayer.swift in Sources */,
-				A5A599231FA51710000B56AE /* ThumbnailItem.swift in Sources */,
 				A5A599241FA51710000B56AE /* CGPoint+Extend.swift in Sources */,
 				A5A599251FA51710000B56AE /* SettingMenuViewModel.swift in Sources */,
 				A5A599261FA51710000B56AE /* HeaderViewModel.swift in Sources */,
