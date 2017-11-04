@@ -181,9 +181,9 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
         }
     }
     
-    func footerViewModelDidLoadThumbnail(eachThumbnail: [PageHistory]) {
-        if eachThumbnail.count > 0 {
-            eachThumbnail.forEach { (item) in
+    func footerViewModelDidLoadThumbnail(pageHistories: [PageHistory]) {
+        if pageHistories.count > 0 {
+            pageHistories.forEach { (item) in
                 let btn = createCaptureSpace(context: item.context, isPrivateMode: item.isPrivate == "true")
                 if !item.context.isEmpty {
                     // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合

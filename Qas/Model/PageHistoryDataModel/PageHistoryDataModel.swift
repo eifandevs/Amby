@@ -21,6 +21,11 @@ final class PageHistoryDataModel {
     // webViewそれぞれの履歴とカレントページインデックス
     var histories: [PageHistory] = []
     
+    // 現在のページ情報
+    var currentHistory: PageHistory? {
+        return histories[safe: locationIndex]
+    }
+    
     // 現在のURL(jsのURL)
     var currentUrl: String {
         return histories[safe: locationIndex] != nil ? histories[locationIndex].url : ""

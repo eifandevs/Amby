@@ -9,7 +9,7 @@
 import Foundation
 
 protocol FooterViewModelDelegate: class {
-    func footerViewModelDidLoadThumbnail(eachThumbnail: [PageHistory])
+    func footerViewModelDidLoadThumbnail(pageHistories: [PageHistory])
     func footerViewModelDidAddThumbnail(context: String, isPrivateMode: Bool)
     func footerViewModelDidChangeThumbnail()
     func footerViewModelDidRemoveThumbnail(index: Int)
@@ -20,9 +20,9 @@ protocol FooterViewModelDelegate: class {
 class FooterViewModel {
     // 現在位置
     var locationIndex: Int  = 0
-    private var eachThumbnail: [PageHistory] = []
+    private var pageHistories: [PageHistory] = []
     private var currentThumbnail: PageHistory {
-        return eachThumbnail[locationIndex]
+        return pageHistories[locationIndex]
     }
     
     weak var delegate: FooterViewModelDelegate?
@@ -37,9 +37,8 @@ class FooterViewModel {
         center.addObserver(forName: .footerViewModelWillLoad, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[Footer Event]: footerViewModelWillLoad")
-            let pageHistory = notification.object as! [PageHistory]
-            self.eachThumbnail = pageHistory
-            self.delegate?.footerViewModelDidLoadThumbnail(eachThumbnail: pageHistory)
+            self.pageHistories = notification.object as! [PageHistory]
+            self.delegate?.footerViewModelDidLoadThumbnail(pageHistories: self.pageHistories)
         }
         
         // webview追加
@@ -49,8 +48,8 @@ class FooterViewModel {
             let pageHistory = notification.object as! PageHistory
             
             // 新しいサムネイルを追加
-            self.eachThumbnail.append(pageHistory)
-            self.locationIndex = self.eachThumbnail.count - 1
+            self.pageHistories.append(pageHistory)
+            self.locationIndex = self.pageHistories.count - 1
             self.delegate?.footerViewModelDidAddThumbnail(context: pageHistory.context, isPrivateMode: pageHistory.isPrivate == "true")
         }
         // webviewロード開始
@@ -69,7 +68,7 @@ class FooterViewModel {
             let url = (notification.object as! [String: String])["url"]!
             let title = (notification.object as! [String: String])["title"]!
             
-            for (index, thumbnail) in self.eachThumbnail.enumerated() {
+            for (index, thumbnail) in self.pageHistories.enumerated() {
                 if thumbnail.context == context {
                     thumbnail.url = url
                     thumbnail.title = title
@@ -95,14 +94,14 @@ class FooterViewModel {
             let index = notification.object as! Int
             
             // 実データの削除
-            try! FileManager.default.removeItem(atPath: AppConst.thumbnailFolderUrl(folder: self.eachThumbnail[index].context).path)
+            try! FileManager.default.removeItem(atPath: AppConst.thumbnailFolderUrl(folder: self.pageHistories[index].context).path)
             
-            if ((index != 0 && self.locationIndex == index && index == self.eachThumbnail.count - 1) || (index < self.locationIndex)) {
+            if ((index != 0 && self.locationIndex == index && index == self.pageHistories.count - 1) || (index < self.locationIndex)) {
                 // フロントの削除
                 // 最後の要素を削除する場合
                 self.locationIndex = self.locationIndex - 1
             }
-            self.eachThumbnail.remove(at: index)
+            self.pageHistories.remove(at: index)
             self.delegate?.footerViewModelDidRemoveThumbnail(index: index)
         }
     }
