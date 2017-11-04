@@ -43,7 +43,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                 // ヘッダーフィールドを更新する
                 viewModel.reloadHeaderText()
                 // 空ページの場合は、編集状態にする
-                if viewModel.requestUrl.isEmpty {
+                if viewModel.currentUrl.isEmpty {
                     if let beginEditingWorkItem = self.beginEditingWorkItem {
                         beginEditingWorkItem.cancel()
                     }
@@ -128,8 +128,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         addSubview(nextImageView)
         
         // ロードする
-        if !viewModel.requestUrl.isEmpty {
-            _ = newWv.load(urlStr: viewModel.requestUrl)
+        if !viewModel.currentUrl.isEmpty {
+            _ = newWv.load(urlStr: viewModel.currentUrl)
         } else {
             // 1秒後にwillBeginEditingする
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] _ in
@@ -529,8 +529,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     private func loadWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
         webViews[viewModel.locationIndex] = newWv
-        if !viewModel.requestUrl.isEmpty {
-            newWv.load(urlStr: viewModel.requestUrl)
+        if !viewModel.currentUrl.isEmpty {
+            newWv.load(urlStr: viewModel.currentUrl)
         }
     }
     
@@ -602,7 +602,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         viewModel.notifyChangeProgress(object: 0)
         let newWv = createWebView(context: viewModel.currentContext)
         webViews.append(newWv)
-        if viewModel.requestUrl.isEmpty {
+        if viewModel.currentUrl.isEmpty {
             // 編集状態にする
             if let beginEditingWorkItem = self.beginEditingWorkItem {
                 beginEditingWorkItem.cancel()
@@ -614,7 +614,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
         } else {
-            _ = newWv.load(urlStr: viewModel.requestUrl)
+            _ = newWv.load(urlStr: viewModel.currentUrl)
         }
     }
     

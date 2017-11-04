@@ -27,8 +27,13 @@ class BaseViewModel {
         return PageHistoryDataModel.s.locationIndex
     }
     // リクエストURL(jsのURL)
-    var requestUrl: String {
-        return PageHistoryDataModel.s.histories[safe: locationIndex] != nil ? PageHistoryDataModel.s.histories[locationIndex].url : ""
+    var currentUrl: String {
+        return PageHistoryDataModel.s.currentUrl
+    }
+    
+    // 現在のコンテキスト
+    var currentContext: String? {
+        return PageHistoryDataModel.s.currentContext
     }
     
     var headerFieldText: String = "" {
@@ -67,10 +72,6 @@ class BaseViewModel {
     }
     
     let autoScrollSpeed: CGFloat = 0.6
-    
-    var currentContext: String? {
-        return PageHistoryDataModel.s.histories.count > locationIndex ? PageHistoryDataModel.s.histories[locationIndex].context : nil
-    }
     
     init() {
         // バックグラウンドに入るときに履歴を保存する
@@ -171,7 +172,7 @@ class BaseViewModel {
         center.addObserver(forName: .baseViewModelWillCopyUrl, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillCopyUrl")
-            UIPasteboard.general.string = self.requestUrl
+            UIPasteboard.general.string = self.currentUrl
             NotificationManager.presentNotification(message: "URLをコピーしました")
         }
         // webviewヒストリバック
@@ -288,7 +289,7 @@ class BaseViewModel {
     
     /// ヘッダーフィールドの更新
     func reloadHeaderText() {
-        headerFieldText = requestUrl
+        headerFieldText = currentUrl
     }
     
     /// 前WebViewに切り替え
@@ -310,7 +311,7 @@ class BaseViewModel {
             }
             if !isPrivateMode! {
                 //　アプリ起動後の前回ページロード時は、履歴に保存しない
-                if requestUrl != self.requestUrl {
+                if requestUrl != self.currentUrl {
                     // Common History
                     let common = CommonHistoryItem(url: requestUrl, title: requestTitle, date: Date())
                     // 配列の先頭に追加する

@@ -21,6 +21,16 @@ final class PageHistoryDataModel {
     // webViewそれぞれの履歴とカレントページインデックス
     var histories: [PageHistory] = []
     
+    // 現在のURL(jsのURL)
+    var currentUrl: String {
+        return histories[safe: locationIndex] != nil ? histories[locationIndex].url : ""
+    }
+    
+    // 現在のコンテキスト
+    var currentContext: String? {
+        return PageHistoryDataModel.s.histories.count > locationIndex ? PageHistoryDataModel.s.histories[locationIndex].context : nil
+    }
+    
     private init() {
         // ロケーション情報取得
         locationIndex = UserDefaults.standard.integer(forKey: AppConst.locationIndexKey)
