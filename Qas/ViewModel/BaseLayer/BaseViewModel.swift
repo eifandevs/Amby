@@ -57,7 +57,7 @@ class BaseViewModel {
     }
     
     // 全てのwebViewの履歴
-    private var commonHistory: [CommonHistoryItem] = []
+    private var commonHistory: [CommonHistory] = []
     
     // 通知センター
     private let center = NotificationCenter.default
@@ -313,7 +313,7 @@ class BaseViewModel {
                 //　アプリ起動後の前回ページロード時は、履歴に保存しない
                 if requestUrl != self.currentUrl {
                     // Common History
-                    let common = CommonHistoryItem(url: requestUrl, title: requestTitle, date: Date())
+                    let common = CommonHistory(url: requestUrl, title: requestTitle, date: Date())
                     // 配列の先頭に追加する
                     commonHistory.insert(common, at: 0)
                     log.debug("save history. url: \(common.url)")

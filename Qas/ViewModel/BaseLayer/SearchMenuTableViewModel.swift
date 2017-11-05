@@ -19,7 +19,7 @@ class SearchMenuTableViewModel {
     weak var delegate: SearchMenuTableViewModelDelegate?
     var googleSearchCellItem: [String] = []
     var searchHistoryCellItem: [SearchHistoryItem] = []
-    var historyCellItem: [CommonHistoryItem] = []
+    var historyCellItem: [CommonHistory] = []
     private let readCommonHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.historySaveTermKey)
     private let readSearchHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.searchHistorySaveTermKey)
     private var requestSearchQueue = [String?]()

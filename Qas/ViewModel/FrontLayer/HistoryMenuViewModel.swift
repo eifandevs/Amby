@@ -10,7 +10,7 @@ import Foundation
 
 class HistoryMenuViewModel: OptionMenuTableViewModel {
     
-    private var commonHistoryByDate: [[String: [CommonHistoryItem]]] = []
+    private var commonHistoryByDate: [[String: [CommonHistory]]] = []
     private var readIndex = 0
     private let readInterval = 6
     private var readFiles: [String] = []
@@ -43,7 +43,7 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
             latestFiles.forEach({ (keyStr: String) in
                 do {
                     let data = try Data(contentsOf: AppConst.commonHistoryUrl(date: keyStr))
-                    let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
+                    let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
                     commonHistoryByDate.append([keyStr: commonHistory])
                     sectionItems.append(keyStr)
                     menuItems.append(commonHistory.map({ (item) -> OptionMenuItem in

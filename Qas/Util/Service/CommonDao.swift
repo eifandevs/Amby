@@ -102,10 +102,10 @@ final class CommonDao {
     }
     
     /// 閲覧履歴の保存
-    func storeCommonHistory(commonHistory: [CommonHistoryItem]) {
+    func storeCommonHistory(commonHistory: [CommonHistory]) {
         if commonHistory.count > 0 {
             // commonHistoryを日付毎に分ける
-            var commonHistoryByDate: [String: [CommonHistoryItem]] = [:]
+            var commonHistoryByDate: [String: [CommonHistory]] = [:]
             for item in commonHistory {
                 let dateFormatter = DateFormatter()
                 dateFormatter.locale = Locale(identifier: NSLocale.current.identifier)
@@ -121,11 +121,11 @@ final class CommonDao {
             for (key, value) in commonHistoryByDate {
                 let commonHistoryUrl = AppConst.commonHistoryUrl(date: key)
                 
-                let saveData: [CommonHistoryItem] = { () -> [CommonHistoryItem] in
+                let saveData: [CommonHistory] = { () -> [CommonHistory] in
                     do {
                         let data = try Data(contentsOf: commonHistoryUrl)
-                        let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
-                        let saveData: [CommonHistoryItem] = value + old
+                        let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
+                        let saveData: [CommonHistory] = value + old
                         return saveData
                     } catch let error as NSError {
                         log.error("failed to read common history: \(error)")
@@ -228,10 +228,10 @@ final class CommonDao {
     }
 
     /// 閲覧履歴の検索
-    func selectCommonHistory(title: String, readNum: Int) -> [CommonHistoryItem] {
+    func selectCommonHistory(title: String, readNum: Int) -> [CommonHistory] {
         let manager = FileManager.default
         var readFiles: [String] = []
-        var result: [CommonHistoryItem] = []
+        var result: [CommonHistory] = []
         do {
             let list = try manager.contentsOfDirectory(atPath: AppConst.commonHistoryPath)
             readFiles = list.map({ (path: String) -> String in
@@ -240,11 +240,11 @@ final class CommonDao {
             
             if readFiles.count > 0 {
                 let latestFiles = readFiles.prefix(readNum)
-                var allCommonHistory: [CommonHistoryItem] = []
+                var allCommonHistory: [CommonHistory] = []
                 latestFiles.forEach({ (keyStr: String) in
                     do {
                         let data = try Data(contentsOf: AppConst.commonHistoryUrl(date: keyStr))
-                        let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
+                        let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
                         allCommonHistory = allCommonHistory + commonHistory
                     } catch let error as NSError {
                         log.error("failed to read common history. error: \(error.localizedDescription)")
@@ -305,10 +305,10 @@ final class CommonDao {
         // 履歴
         for (key, value) in deleteHistoryIds {
             let commonHistoryUrl = AppConst.commonHistoryUrl(date: key)
-            let saveData: [CommonHistoryItem]? = { () -> [CommonHistoryItem]? in
+            let saveData: [CommonHistory]? = { () -> [CommonHistory]? in
                 do {
                     let data = try Data(contentsOf: commonHistoryUrl)
-                    let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistoryItem]
+                    let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
                     let saveData = old.filter({ (historyItem) -> Bool in
                         return !value.contains(historyItem._id)
                     })
