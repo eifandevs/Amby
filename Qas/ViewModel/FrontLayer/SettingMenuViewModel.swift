@@ -44,7 +44,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 }),
                 OptionMenuItem(title: "フォームデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationManager.presentAlert(title: "データ削除", message: "フォームデータを全て削除します。よろしいですか？", completion: {
-                        CommonDao.s.deleteAllForm()
+                        FormDataModel.delete()
                     })
                     return nil
                 }),
@@ -72,7 +72,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                         CommonDao.s.deleteAllHistory()
                         CommonDao.s.deleteAllSearchHistory()
                         FavoriteDataModel.delete()
-                        CommonDao.s.deleteAllForm()
+                        FormDataModel.delete()
                         CacheHelper.deleteCookies()
                         CacheHelper.deleteCaches()
                         CommonDao.s.deleteAllThumbnail()

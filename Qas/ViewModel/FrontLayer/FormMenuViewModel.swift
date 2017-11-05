@@ -14,7 +14,7 @@ class FormMenuViewModel: OptionMenuTableViewModel {
     }
     
     override func setup() {
-        let items = CommonDao.s.selectAllForm().map { (form) -> OptionMenuItem in
+        let items = FormDataModel.select().map { (form) -> OptionMenuItem in
             return OptionMenuItem(_id: form.id, type: .deletablePlain, title: form.title, url: form.url, date: form.date)
         }
         

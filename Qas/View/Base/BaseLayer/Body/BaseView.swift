@@ -577,19 +577,15 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         if !isDisplayedKeyBoard {
             isDisplayedKeyBoard = true
             
-            let forms = CommonDao.s.selectAllForm()
-            for form in forms {
-                if (front.url?.absoluteString.domainAndPath == form.url.domainAndPath && !isDoneAutoInput) {
-                    NotificationManager.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: { [weak self] _ in
-                        for input in form.inputs {
-                            let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: input.value)!
-                            self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(value)\"") { (object, error) in
-                            }
+            if let inputForm = FormDataModel.select(url: front.url?.absoluteString).first, !isDoneAutoInput {
+                NotificationManager.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: { [weak self] _ in
+                    for input in inputForm.inputs {
+                        let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: input.value)!
+                        self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(value)\"") { (object, error) in
                         }
-                    })
-                    isDoneAutoInput = true
-                    break;
-                }
+                    }
+                })
+                isDoneAutoInput = true
             }
         }
     }
@@ -729,7 +725,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     
     func baseViewModelDidRegisterAsForm() {
-        CommonDao.s.storeForm(webView: front)
+        FormDataModel.store(webView: front)
     }
     
     func baseViewModelDidAutoScroll() {

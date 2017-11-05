@@ -147,10 +147,10 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         }
         // フォーム
         let deleteForms = deleteFormIds.map { (id) -> Form in
-            return CommonDao.s.selectForm(id: id)!
+            return FormDataModel.select(id: id).first!
         }
         if deleteForms.count > 0 {
-            CommonDao.s.delete(data: deleteForms)
+            FormDataModel.delete(forms: deleteForms)
         }
         deleteHistoryIds = [:]
         deleteFavoriteIds = []
