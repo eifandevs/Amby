@@ -163,7 +163,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
     }
 
 // MARK: Gesture Event
-    func longPressed(sender: UILongPressGestureRecognizer) {
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
         switch sender.state {
         case .began:
             let point: CGPoint = sender.location(in: tableView)
@@ -224,7 +224,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
     }
     
 // MARK: Button Event
-    func onTappedOverlay(_ sender: AnyObject) {
+    @objc func onTappedOverlay(_ sender: AnyObject) {
         // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
         (sender as! UIButton).removeFromSuperview()
         UIView.animate(withDuration: 0.15, animations: {

@@ -66,7 +66,7 @@ class CircleProgress: UIView {
         circle.layer.addSublayer(progress)
     }
     
-    func updateProgress(tiemr: Timer) {
+    @objc func updateProgress(tiemr: Timer) {
         progress.strokeEnd += 0.01
         
         if progress.strokeEnd >= 1.15 {

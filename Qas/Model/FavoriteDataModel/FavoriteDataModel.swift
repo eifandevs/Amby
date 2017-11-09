@@ -35,9 +35,9 @@ class FavoriteDataModel {
 }
 
 class Favorite: Object {
-    dynamic var id: String = NSUUID().uuidString
-    dynamic var title: String = ""
-    dynamic var url: String = ""
+    @objc dynamic var id: String = NSUUID().uuidString
+    @objc dynamic var title: String = ""
+    @objc dynamic var url: String = ""
     
     override static func primaryKey() -> String? {
         return "id"

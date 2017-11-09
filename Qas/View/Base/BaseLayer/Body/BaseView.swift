@@ -47,7 +47,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     if let beginEditingWorkItem = self.beginEditingWorkItem {
                         beginEditingWorkItem.cancel()
                     }
-                    beginEditingWorkItem = DispatchWorkItem() { [weak self] _  in
+                    beginEditingWorkItem = DispatchWorkItem() { [weak self] in
                         guard let `self` = self else { return }
                         self.viewModel.notifyBeginEditing()
                         self.beginEditingWorkItem = nil
@@ -108,7 +108,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             self.delegate?.baseViewWillAutoInput()
         }
         
-        registerForKeyboardWillHideNotification { [weak self] (notification) in
+        registerForKeyboardWillHideNotification { [weak self] (notification, size) in
             guard let `self` = self else { return }
             self.isDisplayedKeyBoard = false
         }
@@ -132,7 +132,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             _ = newWv.load(urlStr: viewModel.currentUrl)
         } else {
             // 1秒後にwillBeginEditingする
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                 guard let `self` = self else { return }
                 self.viewModel.notifyBeginEditing()
             }
@@ -409,7 +409,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
                     
                     // サムネイルを保存
                     DispatchQueue.mainSyncSafe {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { _ in
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                             guard let `self` = self else { return }
                             self.saveThumbnail(webView: webView)
                             // くるくるを更新する
@@ -578,7 +578,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             isDisplayedKeyBoard = true
             
             if let inputForm = FormDataModel.select(url: front.url?.absoluteString).first, !isDoneAutoInput {
-                NotificationManager.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: { [weak self] _ in
+                NotificationManager.presentAlert(title: "フォーム自動入力", message: "保存済みフォームが存在します。自動入力しますか？", completion: { [weak self] in
                     for input in inputForm.inputs {
                         let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: input.value)!
                         self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(value)\"") { (object, error) in
@@ -603,7 +603,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             if let beginEditingWorkItem = self.beginEditingWorkItem {
                 beginEditingWorkItem.cancel()
             }
-            beginEditingWorkItem = DispatchWorkItem() { [weak self] _  in
+            beginEditingWorkItem = DispatchWorkItem() { [weak self]  in
                 guard let `self` = self else { return }
                 self.viewModel.notifyBeginEditing()
                 self.beginEditingWorkItem = nil
@@ -739,7 +739,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
 
 // MARK: 自動スクロールタイマー通知
-    func updateAutoScrolling(sender: Timer) {
+    @objc func updateAutoScrolling(sender: Timer) {
         let bottomOffset = front.scrollView.contentSize.height - front.scrollView.bounds.size.height + front.scrollView.contentInset.bottom
         if (front.scrollView.contentOffset.y >= bottomOffset) {
             sender.invalidate()

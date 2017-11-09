@@ -58,7 +58,7 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
             self.addGestureRecognizer(self.tapRecognizer)
         }
         
-        registerForKeyboardWillHideNotification { [weak self] (notification) in
+        registerForKeyboardWillHideNotification { [weak self] (notification, size) in
             guard let `self` = self else {
                 return
             }
@@ -148,7 +148,7 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     }
     
 // MARK: Touch Event
-    func tapped(sender: UITapGestureRecognizer) {
+    @objc func tapped(sender: UITapGestureRecognizer) {
         delegate?.searchMenuDidEndEditing()
     }
     
@@ -173,7 +173,7 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         }
     }
     
-    func onTappedOverlay(_ sender: AnyObject) {
+    @objc func onTappedOverlay(_ sender: AnyObject) {
         delegate?.searchMenuDidClose()
         (sender as! UIButton).removeFromSuperview()
     }

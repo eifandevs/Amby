@@ -45,7 +45,7 @@ class HelpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func onTappedCloseButton(_ sender: AnyObject) {
+    @objc func onTappedCloseButton(_ sender: AnyObject) {
         dismiss(animated: true, completion: nil)
     }
 

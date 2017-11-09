@@ -26,7 +26,7 @@ extension UIView {
         })
     }
     
-    func registerForKeyboardWillHideNotification(usingBlock block: ((NSNotification, CGSize) -> Void)? = nil) {
+    func registerForKeyboardWillHideNotification(usingBlock block: ((NSNotification, CGSize) -> ())? = nil) {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: nil, using: { (notification) -> Void in
             let userInfo = notification.userInfo!
             let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue.size

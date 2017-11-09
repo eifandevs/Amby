@@ -311,7 +311,7 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     }
     
 // MARK: Button Event
-    func onTappedCircleMenuItem(_ sender: AnyObject) {
+    @objc func onTappedCircleMenuItem(_ sender: AnyObject) {
         if !isClosing {
             (sender as! CircleMenuItem).scheduledAction = true
             closeCircleMenuItems()

@@ -93,11 +93,11 @@ class FormDataModel {
 }
 
 class Form: Object {
-    dynamic var id: String = NSUUID().uuidString
-    dynamic var title: String = ""
-    dynamic var host: String = ""
-    dynamic var url: String = ""
-    dynamic var date: Date = Date()
+    @objc dynamic var id: String = NSUUID().uuidString
+    @objc dynamic var title: String = ""
+    @objc dynamic var host: String = ""
+    @objc dynamic var url: String = ""
+    @objc dynamic var date: Date = Date()
     let inputs = List<Input>()
     
     override static func primaryKey() -> String? {
@@ -106,8 +106,8 @@ class Form: Object {
 }
 
 class Input: Object {
-    dynamic var formIndex: Int = 0
-    dynamic var formInputIndex: Int = 0
-    dynamic var type: String = ""
-    dynamic var value: Data = Data()
+    @objc dynamic var formIndex: Int = 0
+    @objc dynamic var formInputIndex: Int = 0
+    @objc dynamic var type: String = ""
+    @objc dynamic var value: Data = Data()
 }

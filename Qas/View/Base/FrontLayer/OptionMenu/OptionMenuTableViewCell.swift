@@ -111,14 +111,14 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
 // MARK: UISwitch Event
-    func onChangedSwitchValue(_ sender: AnyObject) {
+    @objc func onChangedSwitchValue(_ sender: AnyObject) {
         if let menuItem = menuItem {
 //            menuItem.switchAction?(switchControl.isOn)
         }
     }
     
 // MARK: UISlider Event
-    func onChangedSliderValue(_ sender: AnyObject) {
+    @objc func onChangedSliderValue(_ sender: AnyObject) {
         if let menuItem = menuItem {
             menuItem.sliderAction?(slider.value)
         }

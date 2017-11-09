@@ -154,18 +154,17 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     
     private func attribute(text: String) -> NSMutableAttributedString? {
         let style = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-//        style.alignment = NSTextAlignment.left
         style.lineBreakMode = NSLineBreakMode.byClipping
         
-        let attr = [
-            NSForegroundColorAttributeName: UIColor.black,
-            NSFontAttributeName: UIFont(name: AppConst.appFont, size: frame.size.height / 2.5)!,
-            NSParagraphStyleAttributeName: style,
-            ] as [String : Any]
+        let attr: [NSAttributedStringKey : Any] = [
+            .foregroundColor : UIColor.black,
+            .font : UIFont(name: AppConst.appFont, size: frame.size.height / 2.5)!,
+            .paragraphStyle: style
+        ]
         
         let mString = NSMutableAttributedString(string: text, attributes: attr)
         mString.addAttribute(
-            NSForegroundColorAttributeName,
+            NSAttributedStringKey.foregroundColor,
             value: UIColor.lightGreen,
             range: (text as NSString).range(of: "https"))
 
@@ -176,7 +175,7 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
     }
-    func textFieldEditingChanged(sender: UITextField) {
+    @objc func textFieldEditingChanged(sender: UITextField) {
         // 表示している履歴情報の更新
         NotificationCenter.default.post(name: .searchMenuTableViewModelWillUpdateSearchToken, object: ["token": sender.text])
     }
@@ -186,7 +185,7 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     }
 
 // MARK: Button Event
-    func onTappedCloseMenuButton(_ sender: AnyObject) {
+    @objc func onTappedCloseMenuButton(_ sender: AnyObject) {
         delegate?.headerFieldDidEndEditing(text: nil)
     }
 }

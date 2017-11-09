@@ -10,11 +10,6 @@ import Foundation
 
 // 配列の重複を削除
 extension Array where Element: Equatable {
-    /// 重複を削除
-    var unique: [Element] {
-        return reduce([]) { $0.0.contains($0.1) ? $0.0 : $0.0 + [$0.1] }
-    }
-    
     /// オブジェクト指定で削除
     mutating func remove<T : Equatable>(obj : T) -> Array {
         self = self.filter({$0 as? T != obj})

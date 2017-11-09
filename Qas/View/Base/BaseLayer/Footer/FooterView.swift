@@ -119,7 +119,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
     }
     
     func footerViewModelDidRemoveThumbnail(index: Int) {
-        let completion: (() -> ()) = { [weak self] _ in
+        let completion: (() -> ()) = { [weak self] in
             guard let `self` = self else {
                 return
             }
@@ -161,7 +161,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
         })[0]
         let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
         if existIndicator {
-            DispatchQueue.mainSyncSafe { [weak self] _ in
+            DispatchQueue.mainSyncSafe { [weak self] in
                 if let image = CommonDao.s.getThumbnailImage(context: context) {
                     targetThumbnail.subviews.forEach({ (v) in
                         if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
@@ -223,7 +223,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
     }
 
 // MARK: Gesture Event
-    func longPressed(sender: UILongPressGestureRecognizer) {
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
         switch sender.state {
         case .began:
             for (index, thumbnail) in self.thumbnails.enumerated() {
@@ -237,7 +237,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
     }
     
 // MARK: Button Event
-    func onTappedThumbnail(_ sender: AnyObject) {
+    @objc func onTappedThumbnail(_ sender: AnyObject) {
         viewModel.notifyChangeWebView(index: thumbnails.index(of: (sender as! Thumbnail))!)
     }
 }

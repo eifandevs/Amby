@@ -22,7 +22,7 @@ class NotificationView: UIButton {
                 self.overlay.addTarget(self, action: #selector(self.onTappedOverlay(_:)), for: .touchDown)
                 (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.view.addSubview(self.overlay)
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
                     guard let `self` = self else { return }
                     self.overlay.removeFromSuperview()
                     UIView.animate(withDuration: 0.2, delay: 0, options: .curveLinear, animations: {
@@ -47,7 +47,7 @@ class NotificationView: UIButton {
         })
     }
 
-    func onTappedOverlay(_ sender: AnyObject) {
+    @objc func onTappedOverlay(_ sender: AnyObject) {
         dissmiss()
     }
 }

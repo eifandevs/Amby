@@ -232,23 +232,23 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     }
     
 // MARK: Button Event
-    func onTappedHistoryBackButton(_ sender: AnyObject) {
+    @objc func onTappedHistoryBackButton(_ sender: AnyObject) {
         viewModel.notifyHistoryBackWebView()
     }
 
-    func onTappedHistoryForwardButton(_ sender: AnyObject) {
+    @objc func onTappedHistoryForwardButton(_ sender: AnyObject) {
         viewModel.notifyHistoryForwardWebView()
     }
 
-    func onTappedFavoriteButton(_ sender: AnyObject) {
+    @objc func onTappedFavoriteButton(_ sender: AnyObject) {
         viewModel.notifyRegisterAsFavorite()
     }
 
-    func onTappedDeleteButton(_ sender: AnyObject) {
+    @objc func onTappedDeleteButton(_ sender: AnyObject) {
         viewModel.notifyRemoveWebView()
     }
     
-    func onTappedHeaderField(_ sender: AnyObject) {
+    @objc func onTappedHeaderField(_ sender: AnyObject) {
         startEditing()
     }
 }

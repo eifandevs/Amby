@@ -108,7 +108,7 @@ class EGWebView: WKWebView {
     }
     
     func loadHtml(code: NETWORK_ERROR) {
-        let path: String = { _ in
+        let path: String = { () -> String in
             if code == NETWORK_ERROR.TIMEOUT { return Bundle.main.path(forResource: "timeout", ofType: "html")! }
             if code == NETWORK_ERROR.DNS_NOT_FOUND { return Bundle.main.path(forResource: "dns", ofType: "html")! }
             if code == NETWORK_ERROR.OFFLINE { return Bundle.main.path(forResource: "offline", ofType: "html")! }
@@ -144,7 +144,7 @@ class EGWebView: WKWebView {
     }
 
 // MARK: Gesture Event
-    func panned(sender: UIPanGestureRecognizer) {
+    @objc func panned(sender: UIPanGestureRecognizer) {
         if sender.state == .began || sender.state == .changed {
             isSwiping = true
         } else {
