@@ -94,7 +94,7 @@ class FooterViewModel {
             let index = notification.object as! Int
             
             // 実データの削除
-            try! FileManager.default.removeItem(atPath: AppConst.thumbnailFolderUrl(folder: self.pageHistories[index].context).path)
+            try! FileManager.default.removeItem(atPath: Util.thumbnailFolderUrl(folder: self.pageHistories[index].context).path)
             
             if ((index != 0 && self.locationIndex == index && index == self.pageHistories.count - 1) || (index < self.locationIndex)) {
                 // フロントの削除

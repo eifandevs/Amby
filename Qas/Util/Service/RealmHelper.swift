@@ -20,9 +20,9 @@ final class RealmHelper {
     
     static func realmFileURL() -> URL? {
         // Databaseディレクトリがなかったら生成する
-        Util.createFolder(path: AppConst.realmPath)
+        Util.createFolder(path: AppConst.PATH_DB)
         
-        let realmPath = AppConst.realmPath + "/transaction.realm"
+        let realmPath = AppConst.PATH_DB + "/transaction.realm"
         
         return URL(fileURLWithPath: realmPath)
     }

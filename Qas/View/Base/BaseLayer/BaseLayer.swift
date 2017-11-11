@@ -16,8 +16,8 @@ protocol BaseLayerDelegate: class {
 class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableViewDelegate, EGApplicationDelegate {
     
     weak var delegate: BaseLayerDelegate?
-    let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.headerViewHeight - DeviceConst.statusBarHeight))
-    let baseViewOriginY: (max: CGFloat, min: CGFloat) = (AppConst.headerViewHeight, DeviceConst.statusBarHeight)
+    let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT))
+    let baseViewOriginY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER_HEADER_HEIGHT, DeviceConst.STATUS_BAR_HEIGHT)
     private var headerView: HeaderView
     private let footerView: FooterView
     private let baseView: BaseView
@@ -27,11 +27,11 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
 
     override init(frame: CGRect) {
         // ヘッダービュー
-        headerView = HeaderView(frame: CGRect(x: 0, y: headerViewOriginY.max, width: frame.size.width, height: AppConst.headerViewHeight))
+        headerView = HeaderView(frame: CGRect(x: 0, y: headerViewOriginY.max, width: frame.size.width, height: AppConst.BASE_LAYER_HEADER_HEIGHT))
         // フッタービュー
-        footerView = FooterView(frame: CGRect(x: 0, y: DeviceConst.displaySize.height - AppConst.thumbnailSize.height, width: frame.size.width, height: AppConst.thumbnailSize.height))
+        footerView = FooterView(frame: CGRect(x: 0, y: DeviceConst.DISPLAY_SIZE.height - AppConst.BASE_LAYER_THUMBNAIL_SIZE.height, width: frame.size.width, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height))
         // ベースビュー
-        baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: frame.size.width, height: frame.size.height - AppConst.thumbnailSize.height - DeviceConst.statusBarHeight))
+        baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: frame.size.width, height: frame.size.height - AppConst.BASE_LAYER_THUMBNAIL_SIZE.height - DeviceConst.STATUS_BAR_HEIGHT))
         super.init(frame: frame)
 
         // フォアグラウンド時にヘッダービューの位置をMaxにする

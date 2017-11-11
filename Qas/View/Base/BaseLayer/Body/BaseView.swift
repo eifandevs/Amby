@@ -83,11 +83,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 
     /// ベースビューがMaxポジションにあるかどうかのフラグ
     var isLocateMax: Bool {
-        return frame.origin.y == AppConst.headerViewHeight
+        return frame.origin.y == AppConst.BASE_LAYER_HEADER_HEIGHT
     }
     /// ベースビューがMinポジションにあるかどうかのフラグ
     var isLocateMin: Bool {
-        return frame.origin.y == DeviceConst.statusBarHeight
+        return frame.origin.y == DeviceConst.STATUS_BAR_HEIGHT
     }
     /// 逆順方向のスクロールが可能かどうかのフラグ
     var canPastScroll: Bool {
@@ -162,9 +162,9 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         delegate?.baseViewDidTouchBegan()
         touchBeganPoint = touch.location(in: self)
         isChangingFront = false
-        if touchBeganPoint.x < AppConst.edgeSwipeErea {
+        if touchBeganPoint.x < AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
             swipeDirection = .left
-        } else if touchBeganPoint.x > self.bounds.size.width - AppConst.edgeSwipeErea {
+        } else if touchBeganPoint.x > self.bounds.size.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
             swipeDirection = .right
         } else {
             swipeDirection = .none
@@ -174,8 +174,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     internal func screenTouchMoved(touch: UITouch) {
         if front.scrollView.isScrollEnabled {
             let touchPoint = touch.location(in: self)
-            if ((swipeDirection == .left && touchPoint.x > AppConst.edgeSwipeErea + 20) ||
-                (swipeDirection == .right && touchPoint.x < self.bounds.width - AppConst.edgeSwipeErea - 20)) {
+            if ((swipeDirection == .left && touchPoint.x > AppConst.FRONT_LAYER_EDGE_SWIPE_EREA + 20) ||
+                (swipeDirection == .right && touchPoint.x < self.bounds.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA - 20)) {
                 // エッジスワイプ検知
                 invalidateUserInteraction()
                 delegate?.baseViewDidEdgeSwiped(direction: swipeDirection)
@@ -458,11 +458,11 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
 
     func slideToMax() {
-        frame.origin.y = AppConst.headerViewHeight
+        frame.origin.y = AppConst.BASE_LAYER_HEADER_HEIGHT
     }
     
     func slideToMin() {
-        frame.origin.y = DeviceConst.statusBarHeight
+        frame.origin.y = DeviceConst.STATUS_BAR_HEIGHT
     }
     
     func validateUserInteraction() {
@@ -516,7 +516,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         newWv.uiDelegate = self;
         newWv.scrollView.delegate = self
         front = newWv
-        Util.createFolder(path: AppConst.thumbnailFolderPath(folder: newWv.context))
+        Util.createFolder(path: Util.thumbnailFolderPath(folder: newWv.context))
         addSubview(newWv)
 
         // プログレスバー
@@ -558,7 +558,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         let pngImageData = UIImagePNGRepresentation(img!)
         let context = webView.context
         do {
-            try pngImageData?.write(to: AppConst.thumbnailUrl(folder: context))
+            try pngImageData?.write(to: Util.thumbnailUrl(folder: context))
             let object: [String: Any]? = ["context": context, "url": webView.requestUrl, "title": webView.requestTitle]
             log.debug("save thumbnal. context: \(context)")
             self.viewModel.notifyEndLoadingWebView(object: object)
@@ -569,7 +569,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     private func deleteThumbnail(webView: EGWebView) {
         log.debug("delete thumbnail. context: \(webView.context)")
-        Util.deleteFolder(path: AppConst.thumbnailPath(folder: webView.context))
+        Util.deleteFolder(path: Util.thumbnailPath(folder: webView.context))
     }
     
 // MARK: BaseViewModel Delegate
@@ -674,7 +674,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             // 閲覧履歴を保存する
             CommonDao.s.storeSearchHistory(searchHistory: [SearchHistoryItem(title: text, date: Date())])
             let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-            _ = front.load(urlStr: "\(AppConst.searchPath)\(encodedText)")
+            _ = front.load(urlStr: "\(AppConst.PATH_SEARCH)\(encodedText)")
         }
     }
     

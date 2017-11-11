@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 public extension Int {
-    public var cgfloat: CGFloat {
-        get {
-            return CGFloat(self)
-        }
+    public var f: CGFloat {
+        return CGFloat(self)
     }
 }

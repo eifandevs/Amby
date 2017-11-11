@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 
+/// 共通ユーティリティクラス
+
 class Util {
-    
     /// フォアグラウンドビューコントローラー取得
     static func foregroundViewController() -> UIViewController {
         var vc = UIApplication.shared.keyWindow?.rootViewController;
@@ -75,9 +76,62 @@ class Util {
             return false
         }
     }
+    
+    // MARK: - フォルダパス
+    /// サムネイルフォルダ
+    static func thumbnailFolderPath(folder: String) -> String {
+        let path = AppConst.PATH_THUMBNAIL + "/\(folder)"
+        Util.createFolder(path: path)
+        return path
+    }
+    
+    /// サムネイルフォルダ(URL)
+    static func thumbnailFolderUrl(folder: String) -> URL {
+        let path = DeviceConst.CACHES_PATH + "/thumbnails/\(folder)"
+        return URL(fileURLWithPath: path)
+    }
+    
+    /// サムネイル画像
+    static func thumbnailPath(folder: String) -> String {
+        let path = AppConst.PATH_THUMBNAIL + "/\(folder)"
+        Util.createFolder(path: path)
+        return path + "/thumbnail.png"
+    }
+    
+    /// サムネイル画像(URL)
+    static func thumbnailUrl(folder: String) -> URL {
+        let path = AppConst.PATH_THUMBNAIL + "/\(folder)"
+        Util.createFolder(path: path)
+        return URL(fileURLWithPath: path + "/thumbnail.png")
+    }
+    
+    /// 閲覧履歴
+    static func commonHistoryPath(date: String) -> String {
+        return AppConst.PATH_COMMON_HISTORY + "/\(date).dat"
+    }
+    
+    /// 閲覧履歴(URL)
+    static func commonHistoryUrl(date: String) -> URL {
+        let path = AppConst.PATH_COMMON_HISTORY
+        Util.createFolder(path: path)
+        return URL(fileURLWithPath: path + "/\(date).dat")
+    }
+    
+    /// 検索履歴
+    static func searchHistoryPath(date: String) -> String {
+        return AppConst.PATH_SEARCH_HISTORY + "/\(date).dat"
+    }
+    
+    /// 検索履歴(URL)
+    static func searchHistoryUrl(date: String) -> URL {
+        let path = AppConst.PATH_SEARCH_HISTORY
+        Util.createFolder(path: path)
+        return URL(fileURLWithPath: path + "/\(date).dat")
+    }
 }
 
-/// 演算子拡張
+// MARK: -  演算子拡張
+
 func *(left: CGSize, right: CGFloat) -> CGSize {
     return CGSize(width: left.width * right, height: left.height * right)
 }

@@ -68,7 +68,7 @@ class BaseViewModel {
     
     // 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
-        return CGFloat(UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey))
+        return CGFloat(UserDefaults.standard.float(forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL))
     }
     
     let autoScrollSpeed: CGFloat = 0.6

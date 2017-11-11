@@ -17,7 +17,7 @@ class NotificationView: UIButton {
             self.frame.origin.y -= self.frame.size.height
         }) { (finished) in
             if finished {
-                self.overlay.frame = CGRect(x: 0, y: DeviceConst.displaySize.height - (AppConst.thumbnailSize.height * 0.9), width: DeviceConst.displaySize.width, height: AppConst.thumbnailSize.height * 0.9)
+                self.overlay.frame = CGRect(x: 0, y: DeviceConst.DISPLAY_SIZE.height - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.9), width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.9)
                 self.overlay.backgroundColor = UIColor.clear
                 self.overlay.addTarget(self, action: #selector(self.onTappedOverlay(_:)), for: .touchDown)
                 (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.view.addSubview(self.overlay)
@@ -55,10 +55,10 @@ class NotificationView: UIButton {
 class NotificationManager {
     
     static func presentNotification(message: String) {
-        let notificationView = NotificationView(frame: CGRect(x: 0, y: DeviceConst.displaySize.height, width: DeviceConst.displaySize.width, height: AppConst.thumbnailSize.height * 0.9))
+        let notificationView = NotificationView(frame: CGRect(x: 0, y: DeviceConst.DISPLAY_SIZE.height, width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.9))
         notificationView.setTitle(" 　\(message)", for: .normal)
         notificationView.titleLabel?.textColor = UIColor.white
-        notificationView.titleLabel?.font = UIFont(name: AppConst.appFont, size: notificationView.frame.size.height / 4)
+        notificationView.titleLabel?.font = UIFont(name: AppConst.APP_FONT, size: notificationView.frame.size.height / 4)
         notificationView.backgroundColor = UIColor.darkGray
         notificationView.contentHorizontalAlignment = .left
         (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.view.addSubview(notificationView)

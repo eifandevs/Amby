@@ -31,7 +31,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     }
     
     private var headerFieldOriginY: CGFloat {
-        return DeviceConst.statusBarHeight + ((frame.size.height - DeviceConst.statusBarHeight - (AppConst.headerViewHeight * 0.5)) / 2)
+        return DeviceConst.STATUS_BAR_HEIGHT + ((frame.size.height - DeviceConst.STATUS_BAR_HEIGHT - (AppConst.BASE_LAYER_HEADER_HEIGHT * 0.5)) / 2)
     }
 
     var fieldAlpha: CGFloat {
@@ -60,24 +60,24 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     /// ヘッダービューがMinポジションにあるかどうかのフラグ
     var isLocateMin: Bool {
         get {
-            return frame.origin.y == -(AppConst.headerViewHeight - DeviceConst.statusBarHeight)
+            return frame.origin.y == -(AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT)
         }
     }
     
     override init(frame: CGRect) {
-        let headerFieldOriginY = DeviceConst.statusBarHeight + ((frame.size.height - DeviceConst.statusBarHeight - (AppConst.headerViewHeight * 0.5)) / 2)
+        let headerFieldOriginY = DeviceConst.STATUS_BAR_HEIGHT + ((frame.size.height - DeviceConst.STATUS_BAR_HEIGHT - (AppConst.BASE_LAYER_HEADER_HEIGHT * 0.5)) / 2)
         // ヘッダーフィールド
-        headerField = HeaderField(frame: CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: headerFieldOriginY, width: AppConst.headerFieldWidth, height: AppConst.headerViewHeight * 0.5))
+        headerField = HeaderField(frame: CGRect(x: (DeviceConst.DISPLAY_SIZE.width - AppConst.BASE_LAYER_HEADER_FIELD_WIDTH) / 2, y: headerFieldOriginY, width: AppConst.BASE_LAYER_HEADER_FIELD_WIDTH, height: AppConst.BASE_LAYER_HEADER_HEIGHT * 0.5))
         // ヒストリーバックボタン
-        historyBackButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: DeviceConst.statusBarHeight), size: CGSize(width: (frame.size.width - AppConst.headerFieldWidth) / 4, height: frame.size.height - DeviceConst.statusBarHeight)))
+        historyBackButton = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: DeviceConst.STATUS_BAR_HEIGHT), size: CGSize(width: (frame.size.width - AppConst.BASE_LAYER_HEADER_FIELD_WIDTH) / 4, height: frame.size.height - DeviceConst.STATUS_BAR_HEIGHT)))
         // ヒストリーフォワードボタン
-        historyForwardButton = UIButton(frame: CGRect(origin: CGPoint(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4, y: DeviceConst.statusBarHeight), size: historyBackButton.frame.size))
+        historyForwardButton = UIButton(frame: CGRect(origin: CGPoint(x: (DeviceConst.DISPLAY_SIZE.width - AppConst.BASE_LAYER_HEADER_FIELD_WIDTH) / 4, y: DeviceConst.STATUS_BAR_HEIGHT), size: historyBackButton.frame.size))
         // ブックマークボタン
-        favoriteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: DeviceConst.statusBarHeight), size: historyBackButton.frame.size))
+        favoriteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.BASE_LAYER_HEADER_FIELD_WIDTH + (DeviceConst.DISPLAY_SIZE.width - AppConst.BASE_LAYER_HEADER_FIELD_WIDTH) / 2, y: DeviceConst.STATUS_BAR_HEIGHT), size: historyBackButton.frame.size))
         // 削除ボタン
-        deleteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.headerFieldWidth + (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 4 * 3, y: DeviceConst.statusBarHeight), size: historyBackButton.frame.size))
+        deleteButton = UIButton(frame: CGRect(origin: CGPoint(x: AppConst.BASE_LAYER_HEADER_FIELD_WIDTH + (DeviceConst.DISPLAY_SIZE.width - AppConst.BASE_LAYER_HEADER_FIELD_WIDTH) / 4 * 3, y: DeviceConst.STATUS_BAR_HEIGHT), size: historyBackButton.frame.size))
         // プログレスバー
-        progressBar = EGProgressBar(frame: CGRect(x: 0, y: frame.size.height - 2.1, width: DeviceConst.displaySize.width, height: 2.1))
+        progressBar = EGProgressBar(frame: CGRect(x: 0, y: frame.size.height - 2.1, width: DeviceConst.DISPLAY_SIZE.width, height: 2.1))
         
         super.init(frame: frame)
         headerField.delegate = self
@@ -136,7 +136,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     }
     
     func slideToMin() {
-        frame.origin.y = -(AppConst.headerViewHeight - DeviceConst.statusBarHeight)
+        frame.origin.y = -(AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT)
         headerItems.forEach { (button) in
             button.alpha = 0
         }
@@ -150,12 +150,12 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     func finishEditing(headerFieldUpdate: Bool) {
         let text = headerField.textField?.text
         headerField.removeInputForm()
-        headerField.frame = CGRect(x: (DeviceConst.displaySize.width - AppConst.headerFieldWidth) / 2, y: headerFieldOriginY, width: AppConst.headerFieldWidth, height: AppConst.headerViewHeight * 0.5)
+        headerField.frame = CGRect(x: (DeviceConst.DISPLAY_SIZE.width - AppConst.BASE_LAYER_HEADER_FIELD_WIDTH) / 2, y: headerFieldOriginY, width: AppConst.BASE_LAYER_HEADER_FIELD_WIDTH, height: AppConst.BASE_LAYER_HEADER_HEIGHT * 0.5)
         self.headerField.layer.shadowColor = UIColor.black.cgColor
         self.isEditing = false
         
         if let text = text, headerFieldUpdate && !text.isEmpty {
-            let restoreText = text.hasValidUrl ? text : "\(AppConst.searchPath)\(text)"
+            let restoreText = text.hasValidUrl ? text : "\(AppConst.PATH_SEARCH)\(text)"
             let encodedText = restoreText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
 
             self.headerField.makeContent(restore: true, restoreText: encodedText)
@@ -166,9 +166,9 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     
     func slide(value: CGFloat) {
         frame.origin.y += value
-        headerField.alpha += value / (AppConst.headerViewHeight - DeviceConst.statusBarHeight)
+        headerField.alpha += value / (AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT)
         headerItems.forEach { (button) in
-            button.alpha += value / (AppConst.headerViewHeight - DeviceConst.statusBarHeight)
+            button.alpha += value / (AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT)
         }
     }
     

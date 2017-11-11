@@ -15,7 +15,7 @@ final class PageHistoryDataModel {
     var locationIndex: Int {
         didSet {
             log.debug("location index changed. \(oldValue) -> \(locationIndex)")
-            UserDefaults.standard.set(locationIndex, forKey: AppConst.locationIndexKey)
+            UserDefaults.standard.set(locationIndex, forKey: AppConst.KEY_LOCATION_INDEX)
         }
     }
     // webViewそれぞれの履歴とカレントページインデックス
@@ -38,11 +38,11 @@ final class PageHistoryDataModel {
     
     private init() {
         // ロケーション情報取得
-        locationIndex = UserDefaults.standard.integer(forKey: AppConst.locationIndexKey)
+        locationIndex = UserDefaults.standard.integer(forKey: AppConst.KEY_LOCATION_INDEX)
         
         // pageHistory読み込み
         do {
-            let data = try Data(contentsOf: AppConst.pageHistoryUrl)
+            let data = try Data(contentsOf: AppConst.PATH_URL_PAGE_HISTORY)
             histories = NSKeyedUnarchiver.unarchiveObject(with: data) as! [PageHistory]
             log.debug("page history read.")
         } catch let error as NSError {
@@ -55,7 +55,7 @@ final class PageHistoryDataModel {
         if histories.count > 0 {
             let pageHistoryData = NSKeyedArchiver.archivedData(withRootObject: histories)
             do {
-                try pageHistoryData.write(to: AppConst.pageHistoryUrl)
+                try pageHistoryData.write(to: AppConst.PATH_URL_PAGE_HISTORY)
                 log.debug("store each history")
             } catch let error as NSError {
                 log.error("failed to write: \(error)")

@@ -9,72 +9,37 @@
 import Foundation
 import UIKit
 
+/// アプリ内定数クラス
 class AppConst {
-    static let headerViewHeight = AppConst.thumbnailSize.height * 1.3
-    static let headerFieldWidth = DeviceConst.displaySize.width / 1.8
-    static let edgeSwipeErea: CGFloat = 15.0
-    static let tableViewCellHeight: CGFloat = 50
-    static let tableViewSectionHeight: CGFloat = 17
-    static let optionMenuSize: CGSize = CGSize(width: 250, height: 450)
-    static let thumbnailSize = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
-    static let keychainRealmToken = "com.eifaniori.qas-realm-token"
-    static let keychainEncryptServiceToken = "com.eifaniori.qas-encrypt-service-token"
-    static let keychainEncryptIvToken = "com.eifaniori.qas-encrypt-Iv-token"
-    static let searchPath = "https://www.google.co.jp/search?q="
-    static let locationIndexKey = "locationIndex"
-    static let autoScrollIntervalKey = "autoScrollInterval"
-    static let historySaveTermKey = "historySaveTerm"
-    static let searchHistorySaveTermKey = "searchHistorySaveTerm"
-    static let appFont = "Avenir"
-    static let pageHistoryPath = DeviceConst.cachesPath + "/each_history.dat"
-    static let pageHistoryUrl = URL(fileURLWithPath: AppConst.pageHistoryPath)
-    static let commonHistoryPath = DeviceConst.cachesPath + "/common_history"
-    static let searchHistoryPath = DeviceConst.cachesPath + "/search_history"
-    static let thumbnailBaseFolderPath = DeviceConst.cachesPath + "/thumbnails"
-    static let realmPath = DeviceConst.cachesPath + "/database"
+    // MARK: - 共通
+    static let APP_FONT = "Avenir"
     
-    static func thumbnailFolderPath(folder: String) -> String {
-        let path = thumbnailBaseFolderPath + "/\(folder)"
-        Util.createFolder(path: path)
-        return path
-    }
+    // MARK: - フロントレイヤーの定数
+    static let FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT = 50.f
+    static let FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT = 17.f
+    static let FRONT_LAYER_EDGE_SWIPE_EREA = 15.f
+    static let FRONT_LAYER_OPTION_MENU_SIZE = CGSize(width: 250, height: 450)
     
-    static func thumbnailPath(folder: String) -> String {
-        let path = thumbnailBaseFolderPath + "/\(folder)"
-        Util.createFolder(path: path)
-        return path + "/thumbnail.png"
-    }
+    // MARK: - ベースレイヤーの定数
+    static let BASE_LAYER_HEADER_HEIGHT = AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 1.3
+    static let BASE_LAYER_HEADER_FIELD_WIDTH = DeviceConst.DISPLAY_SIZE.width / 1.8
+    static let BASE_LAYER_THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
+
+    // MARK: - キー情報
+    static let KEY_REALM_TOKEN = "com.eifaniori.qas-realm-token"
+    static let KEY_ENCRYPT_SERVICE_TOKEN = "com.eifaniori.qas-encrypt-service-token"
+    static let KEY_ENCRYPT_IV_TOKEN = "com.eifaniori.qas-encrypt-Iv-token"
+    static let KEY_LOCATION_INDEX = "locationIndex"
+    static let KEY_AUTO_SCROLL_INTERVAL = "autoScrollInterval"
+    static let KEY_HISTORY_SAVE_TERM = "historySaveTerm"
+    static let KEY_SEARCH_HISTORY_SAVE_TERM = "searchHistorySaveTerm"
     
-    static func thumbnailUrl(folder: String) -> URL {
-        let path = DeviceConst.cachesPath + "/thumbnails/\(folder)"
-        Util.createFolder(path: path)
-        return URL(fileURLWithPath: path + "/thumbnail.png")
-    }
-    
-    static func thumbnailFolderUrl(folder: String) -> URL {
-        let path = DeviceConst.cachesPath + "/thumbnails/\(folder)"
-        return URL(fileURLWithPath: path)
-    }
-    
-    static func commonHistoryUrl(date: String) -> URL {
-        let path = DeviceConst.cachesPath + "/common_history"
-        Util.createFolder(path: path)
-        return URL(fileURLWithPath: path + "/\(date).dat")
-    }
-    
-    static func commonHistoryFilePath(date: String) -> String {
-        let path = DeviceConst.cachesPath + "/common_history"
-        return path + "/\(date).dat"
-    }
-    
-    static func searchHistoryUrl(date: String) -> URL {
-        let path = DeviceConst.cachesPath + "/search_history"
-        Util.createFolder(path: path)
-        return URL(fileURLWithPath: path + "/\(date).dat")
-    }
-    
-    static func searchHistoryFilePath(date: String) -> String {
-        let path = DeviceConst.cachesPath + "/search_history"
-        return path + "/\(date).dat"
-    }
+    // MARK: - パス情報
+    static let PATH_SEARCH = "https://www.google.co.jp/search?q="
+    static let PATH_PAGE_HISTORY = DeviceConst.CACHES_PATH + "/each_history.dat"
+    static let PATH_COMMON_HISTORY = DeviceConst.CACHES_PATH + "/common_history"
+    static let PATH_SEARCH_HISTORY = DeviceConst.CACHES_PATH + "/search_history"
+    static let PATH_THUMBNAIL = DeviceConst.CACHES_PATH + "/thumbnails"
+    static let PATH_DB = DeviceConst.CACHES_PATH + "/database"
+    static let PATH_URL_PAGE_HISTORY = URL(fileURLWithPath: AppConst.PATH_PAGE_HISTORY)
 }

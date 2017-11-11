@@ -81,7 +81,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
         return viewModel.sectionItems.count > 0 ? viewModel.sectionItems.count : viewModel.menuItems.count > 0 ? 1 : 0
     }
 
-// MARK: ScrollView Delegate
+// MARK: - ScrollView Delegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 履歴表示で、コンテンツが残り２ページであれば、次の履歴を読みに行く
         if viewModel is HistoryMenuViewModel {
@@ -92,13 +92,13 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
         }
     }
     
-// MARK: TableView Delegate
+// MARK: - TableView Delegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return AppConst.tableViewCellHeight
+        return AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return viewModel.sectionItems.count > 0 ? AppConst.tableViewSectionHeight : 0
+        return viewModel.sectionItems.count > 0 ? AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT : 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,12 +113,12 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionItems.count > 0 ? AppConst.tableViewSectionHeight : 0)))
+        let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionItems.count > 0 ? AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT : 0)))
         label.backgroundColor = UIColor.black
         label.textAlignment = .left
         label.text = "   \(viewModel.sectionItems[safe: section] ?? "")"
         label.textColor = UIColor.white
-        label.font = UIFont(name: AppConst.appFont, size: 12)
+        label.font = UIFont(name: AppConst.APP_FONT, size: 12)
         return viewModel.sectionItems.count > 0 ? label : nil
     }
     
@@ -141,10 +141,10 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
                     let marginX = swipeDirection == .left ? 35 : -35
                     let marginY = 20
                     detailView = OptionMenuTableView(frame: frame, viewModel: detailViewModel!, direction: swipeDirection)
-                    detailView?.center += CGPoint(x: marginX.cgfloat, y: marginY.cgfloat)
+                    detailView?.center += CGPoint(x: marginX.f, y: marginY.f)
                     
-                    if (detailView?.frame.origin.y)! + AppConst.optionMenuSize.height > DeviceConst.displaySize.height {
-                        detailView?.frame.origin.y = DeviceConst.displaySize.height - AppConst.optionMenuSize.height
+                    if (detailView?.frame.origin.y)! + AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height > DeviceConst.DISPLAY_SIZE.height {
+                        detailView?.frame.origin.y = DeviceConst.DISPLAY_SIZE.height - AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height
                     }
                     
                     detailView?.delegate = self

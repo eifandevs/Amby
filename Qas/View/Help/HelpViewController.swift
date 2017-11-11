@@ -34,10 +34,10 @@ class HelpViewController: UIViewController {
         messageLabel.text = message
         closeButton.backgroundColor = UIColor.brilliantBlue
         closeButton.addTarget(self, action: #selector(self.onTappedCloseButton(_:)), for: .touchUpInside)
-        let widthDiffRate = DeviceConst.displaySize.width / contentSubView.frame.size.width
-        let heightDiffRate = DeviceConst.displaySize.height / contentSubView.frame.size.height
+        let widthDiffRate = DeviceConst.DISPLAY_SIZE.width / contentSubView.frame.size.width
+        let heightDiffRate = DeviceConst.DISPLAY_SIZE.height / contentSubView.frame.size.height
         contentSubView.transform = CGAffineTransform(scaleX: widthDiffRate, y: heightDiffRate)
-        contentSubView.center = CGPoint(x: DeviceConst.displaySize.width / 2, y: DeviceConst.displaySize.height / 2)
+        contentSubView.center = CGPoint(x: DeviceConst.DISPLAY_SIZE.width / 2, y: DeviceConst.DISPLAY_SIZE.height / 2)
     }
 
     override func didReceiveMemoryWarning() {

@@ -12,7 +12,7 @@ import UIKit
 
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
-        self.init(red: red.cgfloat/255, green: green.cgfloat/255, blue: blue.cgfloat/255, alpha: 1)
+        self.init(red: red.f/255, green: green.f/255, blue: blue.f/255, alpha: 1)
     }
     
     /// サークル画像を作成

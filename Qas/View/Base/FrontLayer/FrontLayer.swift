@@ -55,20 +55,20 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
             [
                 CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { [weak self] (initialPt: CGPoint) in
                     // オプションメニューの表示位置を計算
-                    let ptX = self!.swipeDirection == .left ? initialPt.x / 6 : DeviceConst.displaySize.width - 250  - (DeviceConst.displaySize.width - initialPt.x) / 6
+                    let ptX = self!.swipeDirection == .left ? initialPt.x / 6 : DeviceConst.DISPLAY_SIZE.width - 250  - (DeviceConst.DISPLAY_SIZE.width - initialPt.x) / 6
                     let ptY: CGFloat = { () -> CGFloat in
-                        let y = initialPt.y - AppConst.optionMenuSize.height / 2
+                        let y = initialPt.y - AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height / 2
                         if y < 0 {
                             return 0
                         }
-                        if y + AppConst.optionMenuSize.height > DeviceConst.displaySize.height {
-                            return DeviceConst.displaySize.height - AppConst.optionMenuSize.height
+                        if y + AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height > DeviceConst.DISPLAY_SIZE.height {
+                            return DeviceConst.DISPLAY_SIZE.height - AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height
                         }
                         return y
                     }()
                     let viewModel = BaseMenuViewModel()
                     viewModel.setup()
-                    self!.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppConst.optionMenuSize.width, height: AppConst.optionMenuSize.height), viewModel: viewModel, direction: self!.swipeDirection)
+                    self!.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height), viewModel: viewModel, direction: self!.swipeDirection)
                     self!.optionMenu?.delegate = self
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         guard let `self` = self else { return }

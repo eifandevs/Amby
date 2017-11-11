@@ -1,15 +1,15 @@
 //
-//  Double+Extend.swift
+//  Float+Extend.swift
 //  Qas
 //
-//  Created by User on 2017/06/12.
+//  Created by temma on 2017/11/11.
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-public extension Double {
+extension Float {
     public var f: CGFloat {
         return CGFloat(self)
     }

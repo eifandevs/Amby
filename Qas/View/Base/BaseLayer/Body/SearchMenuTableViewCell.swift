@@ -40,7 +40,7 @@ class SearchMenuTableViewCell: UITableViewCell {
         urlLabel.frame = CGRect(x: 20, y: frame.size.height / 2, width: frame.size.width - 20, height: frame.size.height / 2)
         titleLabel.text = title
         urlLabel.text = url.removingPercentEncoding
-        titleLabel.font = UIFont(name: AppConst.appFont, size: 13.5)
-        urlLabel.font = UIFont(name: AppConst.appFont, size: 11)
+        titleLabel.font = UIFont(name: AppConst.APP_FONT, size: 13.5)
+        urlLabel.font = UIFont(name: AppConst.APP_FONT, size: 11)
     }
 }

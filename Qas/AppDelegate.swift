@@ -52,20 +52,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         // 初回起動時のみキーチェーンにトークンを保存
-        if KeyChainHelper.getToken(key: AppConst.keychainRealmToken) == nil {
+        if KeyChainHelper.getToken(key: AppConst.KEY_REALM_TOKEN) == nil {
             let token = String.getRandomStringWithLength(length: 64)
             log.debug("Realmトークンを作成します。token: \(token)")
-            KeyChainHelper.saveToken(key: AppConst.keychainRealmToken, value: token)
+            KeyChainHelper.saveToken(key: AppConst.KEY_REALM_TOKEN, value: token)
         }
-        if KeyChainHelper.getToken(key: AppConst.keychainEncryptServiceToken) == nil {
+        if KeyChainHelper.getToken(key: AppConst.KEY_ENCRYPT_SERVICE_TOKEN) == nil {
             let token = String.getRandomStringWithLength(length: 32)
             log.debug("Encrypt Serviceトークンを作成します。token: \(token)")
-            KeyChainHelper.saveToken(key: AppConst.keychainEncryptServiceToken, value: token)
+            KeyChainHelper.saveToken(key: AppConst.KEY_ENCRYPT_SERVICE_TOKEN, value: token)
         }
-        if KeyChainHelper.getToken(key: AppConst.keychainEncryptIvToken) == nil {
+        if KeyChainHelper.getToken(key: AppConst.KEY_ENCRYPT_IV_TOKEN) == nil {
             let token = String.getRandomStringWithLength(length: 16)
             log.debug("Encrypt Ivトークンを作成します。token: \(token)")
-            KeyChainHelper.saveToken(key: AppConst.keychainEncryptIvToken, value: token)
+            KeyChainHelper.saveToken(key: AppConst.KEY_ENCRYPT_IV_TOKEN, value: token)
         }
 
         // ユーザーデフォルト初期値設定
@@ -79,10 +79,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func initialize() {
-        UserDefaults.standard.set(0, forKey: AppConst.locationIndexKey)
-        UserDefaults.standard.set(0.06, forKey: AppConst.autoScrollIntervalKey)
-        UserDefaults.standard.set(90, forKey: AppConst.historySaveTermKey)
-        UserDefaults.standard.set(90, forKey: AppConst.searchHistorySaveTermKey)
+        UserDefaults.standard.set(0, forKey: AppConst.KEY_LOCATION_INDEX)
+        UserDefaults.standard.set(0.06, forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL)
+        UserDefaults.standard.set(90, forKey: AppConst.KEY_HISTORY_SAVE_TERM)
+        UserDefaults.standard.set(90, forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_TERM)
         self.window!.rootViewController?.removeFromParentViewController()
         self.window!.rootViewController = BaseViewController()
     }

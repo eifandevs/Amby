@@ -19,13 +19,13 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
         menuItems = [
             [
                 OptionMenuItem(type: .slider, sliderAction: { (value: Float) -> Void in
-                    UserDefaults.standard.set(-value, forKey: AppConst.autoScrollIntervalKey)
-                }, defaultValue: -UserDefaults.standard.float(forKey: AppConst.autoScrollIntervalKey), minValue: Float(-0.07), maxValue: Float(-0.01))
+                    UserDefaults.standard.set(-value, forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL)
+                }, defaultValue: -UserDefaults.standard.float(forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL), minValue: Float(-0.07), maxValue: Float(-0.01))
             ],
             [
                 OptionMenuItem(type: .slider, sliderAction: { (value: Float) -> Void in
                     log.warning(value)
-                }, defaultValue: Float(UserDefaults.standard.integer(forKey: AppConst.historySaveTermKey)), minValue: Float(1), maxValue: Float(365))
+                }, defaultValue: Float(UserDefaults.standard.integer(forKey: AppConst.KEY_HISTORY_SAVE_TERM)), minValue: Float(1), maxValue: Float(365))
             ],
             [
                 OptionMenuItem(title: "閲覧履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in

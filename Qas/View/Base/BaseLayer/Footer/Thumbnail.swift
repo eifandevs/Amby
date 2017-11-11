@@ -31,7 +31,7 @@ class Thumbnail: UIButton {
 
         // サムネイルタイトル配置
         thumbnailInfo = UIButton()
-        thumbnailInfo.titleLabel?.font = UIFont(name: AppConst.appFont, size: frame.size.width / 9)
+        thumbnailInfo.titleLabel?.font = UIFont(name: AppConst.APP_FONT, size: frame.size.width / 9)
         thumbnailInfo.titleLabel?.textColor = UIColor.darkGray
         thumbnailInfo.titleLabel?.lineBreakMode = .byTruncatingTail
         thumbnailInfo.layer.anchorPoint = CGPoint.zero

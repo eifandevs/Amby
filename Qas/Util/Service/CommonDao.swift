@@ -20,9 +20,9 @@ final class CommonDao {
     
     private init() {
         // キーチェーンからトークン取得
-        realmEncryptionToken = KeyChainHelper.getToken(key: AppConst.keychainRealmToken)
-        keychainServiceToken = KeyChainHelper.getToken(key: AppConst.keychainEncryptServiceToken)
-        keychainIvToken = KeyChainHelper.getToken(key: AppConst.keychainEncryptIvToken)
+        realmEncryptionToken = KeyChainHelper.getToken(key: AppConst.KEY_REALM_TOKEN)
+        keychainServiceToken = KeyChainHelper.getToken(key: AppConst.KEY_ENCRYPT_SERVICE_TOKEN)
+        keychainIvToken = KeyChainHelper.getToken(key: AppConst.KEY_ENCRYPT_IV_TOKEN)
 
         do {
             realm = try Realm(configuration: RealmHelper.realmConfiguration(realmEncryptionToken: realmEncryptionToken))
@@ -50,12 +50,12 @@ final class CommonDao {
 
 // MARK: サムネイル取得
     func getThumbnailImage(context: String) -> UIImage? {
-        let image = UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: context).path)
-        return image?.crop(w: Int(AppConst.thumbnailSize.width * 2), h: Int((AppConst.thumbnailSize.width * 2) * DeviceConst.aspectRate))
+        let image = UIImage(contentsOfFile: Util.thumbnailUrl(folder: context).path)
+        return image?.crop(w: Int(AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2) * DeviceConst.ASPECT_RATE))
     }
     
     func getCaptureImage(context: String) -> UIImage? {
-        return UIImage(contentsOfFile: AppConst.thumbnailUrl(folder: context).path)
+        return UIImage(contentsOfFile: Util.thumbnailUrl(folder: context).path)
     }
 // MARK: キャッシュ管理
     /// 検索履歴の保存
@@ -76,7 +76,7 @@ final class CommonDao {
             }
             
             for (key, value) in searchHistoryByDate {
-                let searchHistoryUrl = AppConst.searchHistoryUrl(date: key)
+                let searchHistoryUrl = Util.searchHistoryUrl(date: key)
                 
                 let saveData: [SearchHistoryItem] = { () -> [SearchHistoryItem] in
                     do {
@@ -119,7 +119,7 @@ final class CommonDao {
             }
             
             for (key, value) in commonHistoryByDate {
-                let commonHistoryUrl = AppConst.commonHistoryUrl(date: key)
+                let commonHistoryUrl = Util.commonHistoryUrl(date: key)
                 
                 let saveData: [CommonHistory] = { () -> [CommonHistory] in
                     do {
@@ -146,13 +146,13 @@ final class CommonDao {
     
     /// サムネイルデータの削除
     func deleteAllThumbnail() {
-        Util.deleteFolder(path: AppConst.thumbnailBaseFolderPath)
-        Util.createFolder(path: AppConst.thumbnailBaseFolderPath)
+        Util.deleteFolder(path: AppConst.PATH_THUMBNAIL)
+        Util.createFolder(path: AppConst.PATH_THUMBNAIL)
     }
     
     /// 表示中ページ情報の削除
     func deleteAllHistory() {
-        Util.deleteFolder(path: AppConst.pageHistoryPath)
+        Util.deleteFolder(path: AppConst.PATH_PAGE_HISTORY)
     }
     
     /// 検索履歴の検索
@@ -161,7 +161,7 @@ final class CommonDao {
         var readFiles: [String] = []
         var result: [SearchHistoryItem] = []
         do {
-            let list = try manager.contentsOfDirectory(atPath: AppConst.searchHistoryPath)
+            let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_SEARCH_HISTORY)
             readFiles = list.map({ (path: String) -> String in
                 return path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).reversed()
@@ -171,7 +171,7 @@ final class CommonDao {
                 var allSearchHistory: [SearchHistoryItem] = []
                 latestFiles.forEach({ (keyStr: String) in
                     do {
-                        let data = try Data(contentsOf: AppConst.searchHistoryUrl(date: keyStr))
+                        let data = try Data(contentsOf: Util.searchHistoryUrl(date: keyStr))
                         let searchHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [SearchHistoryItem]
                         allSearchHistory = allSearchHistory + searchHistory
                     } catch let error as NSError {
@@ -207,9 +207,9 @@ final class CommonDao {
     func deleteSearchHistory() {
         let manager = FileManager.default
         var readFiles: [String] = []
-        let saveTerm = Int(UserDefaults.standard.float(forKey: AppConst.searchHistorySaveTermKey))
+        let saveTerm = Int(UserDefaults.standard.float(forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_TERM))
         do {
-            let list = try manager.contentsOfDirectory(atPath: AppConst.searchHistoryPath)
+            let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_SEARCH_HISTORY)
             readFiles = list.map({ (path: String) -> String in
                 return path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).reversed()
@@ -217,7 +217,7 @@ final class CommonDao {
             if readFiles.count > saveTerm {
                 let deleteFiles = readFiles.suffix(from: saveTerm)
                 deleteFiles.forEach({ (key) in
-                    try! FileManager.default.removeItem(atPath: AppConst.searchHistoryFilePath(date: key))
+                    try! FileManager.default.removeItem(atPath: Util.searchHistoryPath(date: key))
                 })
                 log.debug("deleteSearchHistory: \(deleteFiles)")
             }
@@ -233,7 +233,7 @@ final class CommonDao {
         var readFiles: [String] = []
         var result: [CommonHistory] = []
         do {
-            let list = try manager.contentsOfDirectory(atPath: AppConst.commonHistoryPath)
+            let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_COMMON_HISTORY)
             readFiles = list.map({ (path: String) -> String in
                 return path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).reversed()
@@ -243,7 +243,7 @@ final class CommonDao {
                 var allCommonHistory: [CommonHistory] = []
                 latestFiles.forEach({ (keyStr: String) in
                     do {
-                        let data = try Data(contentsOf: AppConst.commonHistoryUrl(date: keyStr))
+                        let data = try Data(contentsOf: Util.commonHistoryUrl(date: keyStr))
                         let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
                         allCommonHistory = allCommonHistory + commonHistory
                     } catch let error as NSError {
@@ -279,9 +279,9 @@ final class CommonDao {
     func deleteCommonHistory() {
         let manager = FileManager.default
         var readFiles: [String] = []
-        let saveTerm = Int(UserDefaults.standard.integer(forKey: AppConst.historySaveTermKey))
+        let saveTerm = Int(UserDefaults.standard.integer(forKey: AppConst.KEY_HISTORY_SAVE_TERM))
         do {
-            let list = try manager.contentsOfDirectory(atPath: AppConst.commonHistoryPath)
+            let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_COMMON_HISTORY)
             readFiles = list.map({ (path: String) -> String in
                 return path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).reversed()
@@ -289,7 +289,7 @@ final class CommonDao {
             if readFiles.count > saveTerm {
                 let deleteFiles = readFiles.suffix(from: saveTerm)
                 deleteFiles.forEach({ (key) in
-                    try! FileManager.default.removeItem(atPath: AppConst.commonHistoryFilePath(date: key))
+                    try! FileManager.default.removeItem(atPath: Util.commonHistoryPath(date: key))
                 })
                 log.debug("deleteCommonHistory: \(deleteFiles)")
             }
@@ -304,7 +304,7 @@ final class CommonDao {
     func deleteCommonHistory(deleteHistoryIds: [String: [String]]) {
         // 履歴
         for (key, value) in deleteHistoryIds {
-            let commonHistoryUrl = AppConst.commonHistoryUrl(date: key)
+            let commonHistoryUrl = Util.commonHistoryUrl(date: key)
             let saveData: [CommonHistory]? = { () -> [CommonHistory]? in
                 do {
                     let data = try Data(contentsOf: commonHistoryUrl)
@@ -329,7 +329,7 @@ final class CommonDao {
                         log.error("failed to write: \(error)")
                     }
                 } else {
-                    try! FileManager.default.removeItem(atPath: AppConst.commonHistoryFilePath(date: key))
+                    try! FileManager.default.removeItem(atPath: Util.commonHistoryPath(date: key))
                     log.debug("remove common history file. date: \(key)")
                 }
             }
@@ -338,21 +338,21 @@ final class CommonDao {
     
     /// 閲覧履歴を全て削除
     func deleteAllCommonHistory() {
-        Util.deleteFolder(path: AppConst.commonHistoryPath)
-        Util.createFolder(path: AppConst.commonHistoryPath)
+        Util.deleteFolder(path: AppConst.PATH_COMMON_HISTORY)
+        Util.createFolder(path: AppConst.PATH_COMMON_HISTORY)
     }
 
     /// 検索履歴を全て削除
     func deleteAllSearchHistory() {
-        Util.deleteFolder(path: AppConst.searchHistoryPath)
-        Util.createFolder(path: AppConst.searchHistoryPath)
+        Util.deleteFolder(path: AppConst.PATH_SEARCH_HISTORY)
+        Util.createFolder(path: AppConst.PATH_SEARCH_HISTORY)
     }
 
     /// UDデフォルト値登録
     func registerDefaultData() {
-        UserDefaults.standard.register(defaults: [AppConst.locationIndexKey: 0,
-                                                  AppConst.autoScrollIntervalKey: 0.06,
-                                                  AppConst.historySaveTermKey: 90,
-                                                  AppConst.searchHistorySaveTermKey: 90])
+        UserDefaults.standard.register(defaults: [AppConst.KEY_LOCATION_INDEX: 0,
+                                                  AppConst.KEY_AUTO_SCROLL_INTERVAL: 0.06,
+                                                  AppConst.KEY_HISTORY_SAVE_TERM: 90,
+                                                  AppConst.KEY_SEARCH_HISTORY_SAVE_TERM: 90])
     }
 }

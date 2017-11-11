@@ -22,8 +22,8 @@ class SplashViewController: UIViewController, LTMorphingLabelDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        splashLabel.frame.size = CGSize(width: DeviceConst.displaySize.width / 1.2, height: DeviceConst.displaySize.height / 18)
-        splashLabel.center = CGPoint(x: DeviceConst.displaySize.width / 2, y: DeviceConst.displaySize.height / 2)
+        splashLabel.frame.size = CGSize(width: DeviceConst.DISPLAY_SIZE.width / 1.2, height: DeviceConst.DISPLAY_SIZE.height / 18)
+        splashLabel.center = CGPoint(x: DeviceConst.DISPLAY_SIZE.width / 2, y: DeviceConst.DISPLAY_SIZE.height / 2)
         splashLabel.morphingEffect = .scale
         splashLabel.delegate = self
         splashLabel.font = UIFont(name: splashLabel.font.fontName, size: splashLabel.frame.size.height / 2)

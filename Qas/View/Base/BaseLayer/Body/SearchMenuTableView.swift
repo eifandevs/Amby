@@ -99,7 +99,7 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return AppConst.tableViewCellHeight
+        return AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -123,7 +123,7 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return AppConst.tableViewSectionHeight
+        return AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -131,7 +131,7 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         label.backgroundColor = UIColor.black
         label.text = "   \(viewModel.sectionItem[section])"
         label.textColor = UIColor.white
-        label.font = UIFont(name: AppConst.appFont, size: 12)
+        label.font = UIFont(name: AppConst.APP_FONT, size: 12)
         return label
     }
     

@@ -16,7 +16,7 @@ protocol HeaderFieldDelegate: class {
 class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     weak var delegate: HeaderFieldDelegate?
     private var icon: UIImageView?
-    private let iconSize: CGSize = CGSize(width: AppConst.headerViewHeight / 2, height: AppConst.headerViewHeight / 2)
+    private let iconSize: CGSize = CGSize(width: AppConst.BASE_LAYER_HEADER_HEIGHT / 2, height: AppConst.BASE_LAYER_HEADER_HEIGHT / 2)
     private var label: EGGradientLabel?
     private var pastLabelText: String?
     var textField: UITextField!
@@ -75,7 +75,7 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
 
         
         // 削除ボタン作成
-        let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width + 5, y: DeviceConst.statusBarHeight, width: closeMenuButtonWidth, height: self.frame.size.height - DeviceConst.statusBarHeight))
+        let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width + 5, y: DeviceConst.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: self.frame.size.height - DeviceConst.STATUS_BAR_HEIGHT))
         closeMenuButton.setImage(image: R.image.header_close(), color: UIColor.gray)
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
         closeMenuButton.imageView?.contentMode = .scaleAspectFit
@@ -158,7 +158,7 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
         
         let attr: [NSAttributedStringKey : Any] = [
             .foregroundColor : UIColor.black,
-            .font : UIFont(name: AppConst.appFont, size: frame.size.height / 2.5)!,
+            .font : UIFont(name: AppConst.APP_FONT, size: frame.size.height / 2.5)!,
             .paragraphStyle: style
         ]
         

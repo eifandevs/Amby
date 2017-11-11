@@ -40,9 +40,9 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             var marginX: CGFloat = 10
             
             if let unwrappedImage = menuItem.image {
-                marginX = AppConst.tableViewCellHeight + 10
-                thumbnail = UIButton(frame: CGRect(x: 0, y: 0, width: AppConst.tableViewCellHeight / 1.3, height: AppConst.tableViewCellHeight / 1.3))
-                thumbnail.center = CGPoint(x: marginX / 2, y: AppConst.tableViewCellHeight / 2)
+                marginX = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT + 10
+                thumbnail = UIButton(frame: CGRect(x: 0, y: 0, width: AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT / 1.3, height: AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT / 1.3))
+                thumbnail.center = CGPoint(x: marginX / 2, y: AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT / 2)
                 thumbnail.isUserInteractionEnabled = false
                 thumbnail.setImage(image: unwrappedImage, color: UIColor.black)
                 thumbnail.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
@@ -52,34 +52,34 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
             }
             
             if menuItem.url == nil {
-                titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - marginX, height: AppConst.tableViewCellHeight / 1.5))
+                titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width - marginX, height: AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT / 1.5))
                 titleLabel.center.y = frame.size.height / 2
             } else {
-                titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - marginX, height: AppConst.tableViewCellHeight / 1.5))
-                urlLabel.frame = CGRect(origin: CGPoint(x: marginX, y: AppConst.tableViewCellHeight / 1.5 - 3), size: CGSize(width: AppConst.optionMenuSize.width - marginX, height: AppConst.tableViewCellHeight - titleLabel.frame.size.height))
+                titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width - marginX, height: AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT / 1.5))
+                urlLabel.frame = CGRect(origin: CGPoint(x: marginX, y: AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT / 1.5 - 3), size: CGSize(width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width - marginX, height: AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT - titleLabel.frame.size.height))
                 
                 // urlを配置
                 urlLabel.textAlignment = .left
                 urlLabel.text = menuItem.url
-                urlLabel.font = UIFont(name: AppConst.appFont, size: 11)
+                urlLabel.font = UIFont(name: AppConst.APP_FONT, size: 11)
                 contentView.addSubview(urlLabel)
             }
             // titleを配置
             titleLabel.textAlignment = .left
             titleLabel.text = menuItem.title
-            titleLabel.font = UIFont(name: AppConst.appFont, size: 13.5)
+            titleLabel.font = UIFont(name: AppConst.APP_FONT, size: 13.5)
             contentView.addSubview(titleLabel)
         case .select:
             selectionStyle = .none
             let marginX: CGFloat = 10
-            titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.optionMenuSize.width / 1.5, height: AppConst.tableViewCellHeight / 1.5))
+            titleLabel.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width / 1.5, height: AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT / 1.5))
             titleLabel.center.y = frame.size.height / 2
             titleLabel.textAlignment = .left
             titleLabel.text = menuItem.title
-            titleLabel.font = UIFont(name: AppConst.appFont, size: 13.5)
+            titleLabel.font = UIFont(name: AppConst.APP_FONT, size: 13.5)
             contentView.addSubview(titleLabel)
             
-            switchControl.frame = CGRect(origin: CGPoint(x: marginX + titleLabel.frame.size.width, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - titleLabel.frame.size.width, height: AppConst.tableViewCellHeight / 3))
+            switchControl.frame = CGRect(origin: CGPoint(x: marginX + titleLabel.frame.size.width, y: 0), size: CGSize(width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width - titleLabel.frame.size.width, height: AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT / 3))
             switchControl.center.y = frame.size.height / 2
             switchControl.isOn = menuItem.defaultValue! as! Bool
             switchControl.onTintColor = UIColor.brilliantBlue
@@ -88,7 +88,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
         case .slider:
             selectionStyle = .none
             let marginX: CGFloat = 10
-            slider.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.optionMenuSize.width - marginX * 2, height: AppConst.tableViewCellHeight / 3))
+            slider.frame = CGRect(origin: CGPoint(x: marginX, y: 0), size: CGSize(width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width - marginX * 2, height: AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT / 3))
             slider.center.y = frame.size.height / 2
             slider.minimumValue = menuItem.minValue
             slider.maximumValue = menuItem.maxValue
