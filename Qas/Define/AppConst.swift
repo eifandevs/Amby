@@ -13,6 +13,7 @@ import UIKit
 class AppConst {
     // MARK: - 共通
     static let APP_FONT = "Avenir"
+    static let DATE_FORMAT = "yyyyMMdd"
     
     // MARK: - フロントレイヤーの定数
     static let FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT = 50.f

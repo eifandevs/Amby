@@ -62,6 +62,11 @@ final class PageHistoryDataModel {
             }
         }
     }
+    
+    /// 表示中ページ情報の削除
+    func delete() {
+        Util.deleteFolder(path: AppConst.PATH_PAGE_HISTORY)
+    }
 }
 
 class PageHistory: NSObject, NSCoding {

@@ -18,7 +18,7 @@ protocol FooterViewModelDelegate: class {
 }
 
 class FooterViewModel {
-    // 現在位置
+    /// 現在位置
     var locationIndex: Int  = 0
     private var pageHistories: [PageHistory] = []
     private var currentThumbnail: PageHistory {
@@ -27,7 +27,7 @@ class FooterViewModel {
     
     weak var delegate: FooterViewModelDelegate?
     
-    // 通知センター
+    /// 通知センター
     let center = NotificationCenter.default
     
     init(index: Int) {

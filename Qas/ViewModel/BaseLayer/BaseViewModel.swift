@@ -26,12 +26,12 @@ class BaseViewModel {
     var locationIndex: Int {
         return PageHistoryDataModel.s.locationIndex
     }
-    // リクエストURL(jsのURL)
+    /// リクエストURL(jsのURL)
     var currentUrl: String {
         return PageHistoryDataModel.s.currentUrl
     }
     
-    // 現在のコンテキスト
+    /// 現在のコンテキスト
     var currentContext: String? {
         return PageHistoryDataModel.s.currentContext
     }
@@ -48,31 +48,28 @@ class BaseViewModel {
     
     weak var delegate: BaseViewModelDelegate?
     
-    // 最新のリクエストURL(wv.url)。エラーが発生した時用
+    /// 最新のリクエストURL(wv.url)。エラーが発生した時用
     var latestRequestUrl: String = ""
     
-    // webviewの数
+    /// webviewの数
     var webViewCount: Int {
         return PageHistoryDataModel.s.histories.count
     }
     
-    // 全てのwebViewの履歴
-    private var commonHistory: [CommonHistory] = []
-    
-    // 通知センター
+    /// 通知センター
     private let center = NotificationCenter.default
     
     var isPrivateMode: Bool? {
         return PageHistoryDataModel.s.histories.count > locationIndex ? PageHistoryDataModel.s.histories[locationIndex].isPrivate == "true" : false
     }
     
-    // 自動スクロールのタイムインターバル
+    /// 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
         return CGFloat(UserDefaults.standard.float(forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL))
     }
     
     let autoScrollSpeed: CGFloat = 0.6
-    
+
     init() {
         // バックグラウンドに入るときに履歴を保存する
         center.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (notification) in
@@ -99,14 +96,14 @@ class BaseViewModel {
         center.addObserver(forName: .baseViewModelWillDeleteHistory, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillDeleteHistory")
-            self.commonHistory = []
+            CommonHistoryDataModel.s.histories = []
         }
         
         // 初期化
         center.addObserver(forName: .baseViewModelWillInitialize, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillInitialize")
-            self.commonHistory = []
+            CommonHistoryDataModel.s.histories = []
             PageHistoryDataModel.s.histories = []
         }
         
@@ -315,7 +312,7 @@ class BaseViewModel {
                     // Common History
                     let common = CommonHistory(url: requestUrl, title: requestTitle, date: Date())
                     // 配列の先頭に追加する
-                    commonHistory.insert(common, at: 0)
+                    CommonHistoryDataModel.s.histories.insert(common, at: 0)
                     log.debug("save history. url: \(common.url)")
                     
                     // Each History
@@ -332,9 +329,8 @@ class BaseViewModel {
     }
     
     func storeHistory() {
-        CommonDao.s.storeCommonHistory(commonHistory: commonHistory)
+        CommonHistoryDataModel.s.store()
         PageHistoryDataModel.s.store()
-        commonHistory = []
     }
     
     func storePageHistory() {

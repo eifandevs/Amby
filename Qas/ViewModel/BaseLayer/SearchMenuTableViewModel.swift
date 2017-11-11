@@ -48,7 +48,7 @@ class SearchMenuTableViewModel {
         if !isRequesting {
             isRequesting = true
             if let token = self.requestSearchQueue.removeFirst(), !token.isEmpty {
-                self.historyCellItem = CommonDao.s.selectCommonHistory(title: token, readNum: self.readCommonHistoryNum).objects(for: 4)
+                self.historyCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: 4)
                 self.searchHistoryCellItem = CommonDao.s.selectSearchHistory(title: token, readNum: self.readSearchHistoryNum).objects(for: 4)
                 SuggestGetAPIRequestExecuter.request(token: token, completion: { (response) in
                     if let response = response, response.data.count > 0 {

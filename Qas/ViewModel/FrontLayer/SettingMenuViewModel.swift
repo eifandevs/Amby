@@ -30,7 +30,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
             [
                 OptionMenuItem(title: "閲覧履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationManager.presentAlert(title: "データ削除", message: "閲覧履歴を全て削除します。よろしいですか？", completion: {
-                        CommonDao.s.deleteAllCommonHistory()
+                        CommonHistoryDataModel.s.delete()
                         NotificationCenter.default.post(name: .baseViewModelWillDeleteHistory, object: nil)
                     })
                     return nil
@@ -68,8 +68,8 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 }),
                 OptionMenuItem(title: "全てのデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationManager.presentAlert(title: "データ削除", message: "全てのデータを削除し、初期化します。よろしいですか？", completion: {
-                        CommonDao.s.deleteAllCommonHistory()
-                        CommonDao.s.deleteAllHistory()
+                        CommonHistoryDataModel.s.delete()
+                        PageHistoryDataModel.s.delete()
                         CommonDao.s.deleteAllSearchHistory()
                         FavoriteDataModel.delete()
                         FormDataModel.delete()

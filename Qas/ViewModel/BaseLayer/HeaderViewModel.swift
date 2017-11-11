@@ -17,7 +17,7 @@ protocol HeaderViewModelDelegate: class {
 }
 
 class HeaderViewModel {
-    // 通知センター
+    /// 通知センター
     private let center = NotificationCenter.default
     
     weak var delegate: HeaderViewModelDelegate?
