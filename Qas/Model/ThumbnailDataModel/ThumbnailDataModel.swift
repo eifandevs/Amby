@@ -20,6 +20,11 @@ final class ThumbnailDataModel {
     }
     
     /// サムネイルデータの削除
+    static func delete(context: String) {
+        Util.deleteFolder(path: Util.thumbnailPath(folder: context))
+    }
+    
+    /// サムネイルデータの全削除
     static func delete() {
         Util.deleteFolder(path: AppConst.PATH_THUMBNAIL)
         Util.createFolder(path: AppConst.PATH_THUMBNAIL)

@@ -46,7 +46,7 @@ final class AppConst {
     
     // MARK: - 設定画面
     static let SETTING_SECTION_AUTO_SCROLL = "自動スクロール設定"
-    static let SETTING_SECTION_HISTORY = "履歴保存件数(何日分)"
+    static let SETTING_SECTION_HISTORY = "履歴保存件数（何日分）"
     static let SETTING_SECTION_DELETE = "データ削除"
     static let SETTING_TITLE_COMMON_HISTORY = "閲覧履歴"
     static let SETTING_TITLE_SEARCH_HISTORY = "検索履歴"

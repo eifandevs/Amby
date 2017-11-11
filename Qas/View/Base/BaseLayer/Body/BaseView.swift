@@ -567,11 +567,6 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
         }
     }
     
-    private func deleteThumbnail(webView: EGWebView) {
-        log.debug("delete thumbnail. context: \(webView.context)")
-        Util.deleteFolder(path: Util.thumbnailPath(folder: webView.context))
-    }
-    
 // MARK: BaseViewModel Delegate
     func baseViewModelDidAutoInput() {
         if !isDisplayedKeyBoard {
@@ -637,7 +632,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     func baseViewModelDidRemoveWebView(index: Int, isFrontDelete: Bool) {
         if let webView = webViews[index] {
             // サムネイルの削除
-            deleteThumbnail(webView: webView)
+            viewModel.deleteThumbnail(webView: webView)
             
             webView.removeObserver(self, forKeyPath: "loading")
             if isFrontDelete {

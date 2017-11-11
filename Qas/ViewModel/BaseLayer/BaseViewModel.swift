@@ -274,6 +274,7 @@ class BaseViewModel {
         }
     }
     
+    /// 次webviewのキャプチャ取得
     func getNextCapture() -> UIImage {
         let targetIndex = locationIndex == PageHistoryDataModel.s.histories.count - 1 ? 0 : locationIndex + 1
         let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
@@ -328,17 +329,26 @@ class BaseViewModel {
         }
     }
     
+    /// 閲覧、ページ履歴の永続化
     func storeHistory() {
         CommonHistoryDataModel.s.store()
         PageHistoryDataModel.s.store()
     }
     
+    /// 検索履歴の永続化
     func storeSearchHistory(title: String) {
         SearchHistoryDataModel.s.store(histories: [SearchHistory(title: title, date: Date())])
     }
     
+    /// ページ履歴の永続化
     func storePageHistory() {
         PageHistoryDataModel.s.store()
+    }
+    
+    /// サムネイルの削除
+    func deleteThumbnail(webView: EGWebView) {
+        log.debug("delete thumbnail. context: \(webView.context)")
+        ThumbnailDataModel.delete(context: webView.context)
     }
     
 // MARK: Private Method
