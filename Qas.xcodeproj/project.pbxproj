@@ -14,8 +14,8 @@
 		A56983BA1FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */; };
 		A56983BC1FA52405000A585F /* PageHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */; };
 		A56983BD1FA52405000A585F /* PageHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */; };
-		A56983C11FA52490000A585F /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C01FA52490000A585F /* SearchHistoryModel.swift */; };
-		A56983C21FA52490000A585F /* SearchHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C01FA52490000A585F /* SearchHistoryModel.swift */; };
+		A56983C11FA52490000A585F /* SearchHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */; };
+		A56983C21FA52490000A585F /* SearchHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */; };
 		A56983C41FA5249C000A585F /* FormDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C31FA5249C000A585F /* FormDataModel.swift */; };
 		A56983C51FA5249C000A585F /* FormDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C31FA5249C000A585F /* FormDataModel.swift */; };
 		A56983C71FA524A8000A585F /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C61FA524A8000A585F /* FavoriteDataModel.swift */; };
@@ -24,6 +24,7 @@
 		A56983CC1FA527B5000A585F /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983CA1FA527B5000A585F /* SuggestDataModel.swift */; };
 		A599D7C61FB70A6100F7338B /* Float+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599D7C51FB70A6100F7338B /* Float+Extend.swift */; };
 		A599D7C71FB70A6100F7338B /* Float+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599D7C51FB70A6100F7338B /* Float+Extend.swift */; };
+		A5A137C31FB76AEE00158D61 /* OptionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A137C21FB76AEE00158D61 /* OptionMenuItem.swift */; };
 		A5A598F01FA51710000B56AE /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7831FA50BFA00E0C6E5 /* CircleMenu.swift */; };
 		A5A598F11FA51710000B56AE /* CommonDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F91FA501B800E0C6E5 /* CommonDao.swift */; };
 		A5A598F21FA51710000B56AE /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F81FA501B800E0C6E5 /* CacheHelper.swift */; };
@@ -56,7 +57,6 @@
 		A5A599101FA51710000B56AE /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE78C1FA50BFA00E0C6E5 /* HelpViewController.swift */; };
 		A5A599111FA51710000B56AE /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7031FA501B800E0C6E5 /* ShadowView.swift */; };
 		A5A599121FA51710000B56AE /* NSNotification+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E51FA501B800E0C6E5 /* NSNotification+Extend.swift */; };
-		A5A599141FA51710000B56AE /* OptionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7671FA50BFA00E0C6E5 /* OptionMenuItem.swift */; };
 		A5A599151FA51710000B56AE /* EGGradientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE77C1FA50BFA00E0C6E5 /* EGGradientLabel.swift */; };
 		A5A599161FA51710000B56AE /* SuggestGetApiRequestExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F61FA501B800E0C6E5 /* SuggestGetApiRequestExecuter.swift */; };
 		A5A599171FA51710000B56AE /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7971FA50BFA00E0C6E5 /* BaseViewModel.swift */; };
@@ -77,7 +77,6 @@
 		A5A599281FA51710000B56AE /* UIColor+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6EA1FA501B800E0C6E5 /* UIColor+Extend.swift */; };
 		A5A599291FA51710000B56AE /* Collection+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6DF1FA501B800E0C6E5 /* Collection+Extend.swift */; };
 		A5A5992A1FA51710000B56AE /* UIButton+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E91FA501B800E0C6E5 /* UIButton+Extend.swift */; };
-		A5A5992B1FA51710000B56AE /* SearchHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7681FA50BFA00E0C6E5 /* SearchHistoryItem.swift */; };
 		A5A5992C1FA51710000B56AE /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F51FA501B800E0C6E5 /* ApiManager.swift */; };
 		A5A5992D1FA51710000B56AE /* Int+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E41FA501B800E0C6E5 /* Int+Extend.swift */; };
 		A5A5992E1FA51710000B56AE /* DispatchQueue+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E21FA501B800E0C6E5 /* DispatchQueue+Extend.swift */; };
@@ -139,8 +138,6 @@
 		A5BCE7231FA501B900E0C6E5 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7011FA501B800E0C6E5 /* CircleView.swift */; };
 		A5BCE7241FA501B900E0C6E5 /* EnumEnumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7021FA501B800E0C6E5 /* EnumEnumerable.swift */; };
 		A5BCE7251FA501B900E0C6E5 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7031FA501B800E0C6E5 /* ShadowView.swift */; };
-		A5BCE7A51FA50BFA00E0C6E5 /* OptionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7671FA50BFA00E0C6E5 /* OptionMenuItem.swift */; };
-		A5BCE7A61FA50BFA00E0C6E5 /* SearchHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7681FA50BFA00E0C6E5 /* SearchHistoryItem.swift */; };
 		A5BCE7AA1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE76E1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift */; };
 		A5BCE7AB1FA50BFA00E0C6E5 /* BaseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7721FA50BFA00E0C6E5 /* BaseLayer.swift */; };
 		A5BCE7AC1FA50BFA00E0C6E5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7741FA50BFA00E0C6E5 /* BaseView.swift */; };
@@ -197,12 +194,13 @@
 		A5223E911F1F8EA20097E793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModel.swift; sourceTree = "<group>"; };
-		A56983C01FA52490000A585F /* SearchHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryModel.swift; sourceTree = "<group>"; };
+		A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983C31FA5249C000A585F /* FormDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataModel.swift; sourceTree = "<group>"; };
 		A56983C61FA524A8000A585F /* FavoriteDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataModel.swift; sourceTree = "<group>"; };
 		A56983CA1FA527B5000A585F /* SuggestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestDataModel.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A599D7C51FB70A6100F7338B /* Float+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extend.swift"; sourceTree = "<group>"; };
+		A5A137C21FB76AEE00158D61 /* OptionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuItem.swift; sourceTree = "<group>"; };
 		A5A5994F1FA51710000B56AE /* QasFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QasFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A599501FA51711000B56AE /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = info.plist; path = /Users/temma/dev/projects/Qas/Qas/Environment/Free/info.plist; sourceTree = "<absolute>"; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
@@ -240,8 +238,6 @@
 		A5BCE7011FA501B800E0C6E5 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		A5BCE7021FA501B800E0C6E5 /* EnumEnumerable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumEnumerable.swift; sourceTree = "<group>"; };
 		A5BCE7031FA501B800E0C6E5 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
-		A5BCE7671FA50BFA00E0C6E5 /* OptionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuItem.swift; sourceTree = "<group>"; };
-		A5BCE7681FA50BFA00E0C6E5 /* SearchHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryItem.swift; sourceTree = "<group>"; };
 		A5BCE76E1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestGetApiResponse.swift; sourceTree = "<group>"; };
 		A5BCE7721FA50BFA00E0C6E5 /* BaseLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLayer.swift; sourceTree = "<group>"; };
 		A5BCE7741FA50BFA00E0C6E5 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -354,7 +350,7 @@
 		A56983B61FA523D2000A585F /* SearchHistoryModel */ = {
 			isa = PBXGroup;
 			children = (
-				A56983C01FA52490000A585F /* SearchHistoryModel.swift */,
+				A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */,
 			);
 			path = SearchHistoryModel;
 			sourceTree = "<group>";
@@ -526,19 +522,9 @@
 				A56983B71FA523D3000A585F /* CommonHistoryDataModel */,
 				A56983B51FA523D2000A585F /* PageHistoryDataModel */,
 				A56983B61FA523D2000A585F /* SearchHistoryModel */,
-				A5BCE7641FA50BFA00E0C6E5 /* Class */,
 				A5BCE76D1FA50BFA00E0C6E5 /* Http */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		A5BCE7641FA50BFA00E0C6E5 /* Class */ = {
-			isa = PBXGroup;
-			children = (
-				A5BCE7671FA50BFA00E0C6E5 /* OptionMenuItem.swift */,
-				A5BCE7681FA50BFA00E0C6E5 /* SearchHistoryItem.swift */,
-			);
-			path = Class;
 			sourceTree = "<group>";
 		};
 		A5BCE76D1FA50BFA00E0C6E5 /* Http */ = {
@@ -635,6 +621,7 @@
 		A5BCE7871FA50BFA00E0C6E5 /* OptionMenu */ = {
 			isa = PBXGroup;
 			children = (
+				A5A137C21FB76AEE00158D61 /* OptionMenuItem.swift */,
 				A5BCE7881FA50BFA00E0C6E5 /* OptionMenuTableView.swift */,
 				A5BCE7891FA50BFA00E0C6E5 /* OptionMenuTableViewCell.swift */,
 				A5BCE78A1FA50BFA00E0C6E5 /* OptionMenuTextField.swift */,
@@ -988,13 +975,12 @@
 				A5BCE7BE1FA50BFA00E0C6E5 /* HelpViewController.swift in Sources */,
 				A5BCE7251FA501B900E0C6E5 /* ShadowView.swift in Sources */,
 				A5BCE70C1FA501B900E0C6E5 /* NSNotification+Extend.swift in Sources */,
-				A5BCE7A51FA50BFA00E0C6E5 /* OptionMenuItem.swift in Sources */,
 				A5BCE7B21FA50BFA00E0C6E5 /* EGGradientLabel.swift in Sources */,
 				A5BCE71A1FA501B900E0C6E5 /* SuggestGetApiRequestExecuter.swift in Sources */,
 				A5BCE7C21FA50BFA00E0C6E5 /* BaseViewModel.swift in Sources */,
 				A5BCE7131FA501B900E0C6E5 /* UIImageView+Extend.swift in Sources */,
 				A5BCE7151FA501B900E0C6E5 /* UIView+Extend.swift in Sources */,
-				A56983C11FA52490000A585F /* SearchHistoryModel.swift in Sources */,
+				A56983C11FA52490000A585F /* SearchHistoryDataModel.swift in Sources */,
 				A5BCE7B41FA50BFA00E0C6E5 /* HeaderField.swift in Sources */,
 				A5BCE7041FA501B900E0C6E5 /* Array+Extend.swift in Sources */,
 				A5BCE7C31FA50BFA00E0C6E5 /* FooterViewModel.swift in Sources */,
@@ -1011,7 +997,7 @@
 				A5BCE7111FA501B900E0C6E5 /* UIColor+Extend.swift in Sources */,
 				A5BCE7061FA501B900E0C6E5 /* Collection+Extend.swift in Sources */,
 				A5BCE7101FA501B900E0C6E5 /* UIButton+Extend.swift in Sources */,
-				A5BCE7A61FA50BFA00E0C6E5 /* SearchHistoryItem.swift in Sources */,
+				A5A137C31FB76AEE00158D61 /* OptionMenuItem.swift in Sources */,
 				A5BCE7191FA501B900E0C6E5 /* ApiManager.swift in Sources */,
 				A5BCE70B1FA501B900E0C6E5 /* Int+Extend.swift in Sources */,
 				A5BCE7091FA501B900E0C6E5 /* DispatchQueue+Extend.swift in Sources */,
@@ -1075,13 +1061,12 @@
 				A5F3C01A1FB75D2900B905CA /* MessageConst.swift in Sources */,
 				A5A599111FA51710000B56AE /* ShadowView.swift in Sources */,
 				A5A599121FA51710000B56AE /* NSNotification+Extend.swift in Sources */,
-				A5A599141FA51710000B56AE /* OptionMenuItem.swift in Sources */,
 				A5A599151FA51710000B56AE /* EGGradientLabel.swift in Sources */,
 				A5A599161FA51710000B56AE /* SuggestGetApiRequestExecuter.swift in Sources */,
 				A5A599171FA51710000B56AE /* BaseViewModel.swift in Sources */,
 				A5A599181FA51710000B56AE /* UIImageView+Extend.swift in Sources */,
 				A5A599191FA51710000B56AE /* UIView+Extend.swift in Sources */,
-				A56983C21FA52490000A585F /* SearchHistoryModel.swift in Sources */,
+				A56983C21FA52490000A585F /* SearchHistoryDataModel.swift in Sources */,
 				A5A5991A1FA51710000B56AE /* HeaderField.swift in Sources */,
 				A5A5991B1FA51710000B56AE /* Array+Extend.swift in Sources */,
 				A5A5991D1FA51710000B56AE /* FooterViewModel.swift in Sources */,
@@ -1098,7 +1083,6 @@
 				A5A599281FA51710000B56AE /* UIColor+Extend.swift in Sources */,
 				A5A599291FA51710000B56AE /* Collection+Extend.swift in Sources */,
 				A5A5992A1FA51710000B56AE /* UIButton+Extend.swift in Sources */,
-				A5A5992B1FA51710000B56AE /* SearchHistoryItem.swift in Sources */,
 				A5A5992C1FA51710000B56AE /* ApiManager.swift in Sources */,
 				A5A5992D1FA51710000B56AE /* Int+Extend.swift in Sources */,
 				A5A5992E1FA51710000B56AE /* DispatchQueue+Extend.swift in Sources */,

@@ -50,7 +50,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 }),
                 OptionMenuItem(title: AppConst.SETTING_TITLE_SEARCH_HISTORY, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_SEARCH_HISTORY, completion: {
-                        CommonDao.s.deleteAllSearchHistory()
+                        SearchHistoryDataModel.s.delete()
                     })
                     return nil
                 }),
@@ -70,7 +70,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                     NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_ALL, completion: {
                         CommonHistoryDataModel.s.delete()
                         PageHistoryDataModel.s.delete()
-                        CommonDao.s.deleteAllSearchHistory()
+                        SearchHistoryDataModel.s.delete()
                         FavoriteDataModel.delete()
                         FormDataModel.delete()
                         CacheHelper.deleteCookies()

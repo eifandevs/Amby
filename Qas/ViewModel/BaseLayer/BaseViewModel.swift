@@ -333,6 +333,10 @@ class BaseViewModel {
         PageHistoryDataModel.s.store()
     }
     
+    func storeSearchHistory(title: String) {
+        SearchHistoryDataModel.s.store(histories: [SearchHistory(title: title, date: Date())])
+    }
+    
     func storePageHistory() {
         PageHistoryDataModel.s.store()
     }

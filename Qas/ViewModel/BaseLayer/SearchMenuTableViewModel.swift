@@ -18,7 +18,7 @@ class SearchMenuTableViewModel {
     let sectionItem: [String] = ["Google検索", "検索履歴", "閲覧履歴"]
     weak var delegate: SearchMenuTableViewModelDelegate?
     var googleSearchCellItem: [String] = []
-    var searchHistoryCellItem: [SearchHistoryItem] = []
+    var searchHistoryCellItem: [SearchHistory] = []
     var historyCellItem: [CommonHistory] = []
     private let readCommonHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.KEY_HISTORY_SAVE_TERM)
     private let readSearchHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_TERM)
@@ -49,7 +49,7 @@ class SearchMenuTableViewModel {
             isRequesting = true
             if let token = self.requestSearchQueue.removeFirst(), !token.isEmpty {
                 self.historyCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: 4)
-                self.searchHistoryCellItem = CommonDao.s.selectSearchHistory(title: token, readNum: self.readSearchHistoryNum).objects(for: 4)
+                self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: 4)
                 SuggestGetAPIRequestExecuter.request(token: token, completion: { (response) in
                     if let response = response, response.data.count > 0 {
                         // suggestあり
