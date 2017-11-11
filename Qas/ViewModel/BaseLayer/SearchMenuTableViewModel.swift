@@ -50,10 +50,10 @@ class SearchMenuTableViewModel {
             if let token = self.requestSearchQueue.removeFirst(), !token.isEmpty {
                 self.historyCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: 4)
                 self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: 4)
-                SuggestGetAPIRequestExecuter.request(token: token, completion: { (response) in
-                    if let response = response, response.data.count > 0 {
+                SuggestDataModel.fetch(token: token, completion: { (suggest) in
+                    if let suggest = suggest, suggest.data.count > 0 {
                         // suggestあり
-                        self.googleSearchCellItem = response.data.objects(for: 4)
+                        self.googleSearchCellItem = suggest.data.objects(for: 4)
                     }
                     self.isRequesting = false
                     if self.requestSearchQueue.count > 0 {

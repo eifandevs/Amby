@@ -10,6 +10,10 @@
 		A5223EE71F1F8EA20097E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5223E8D1F1F8EA20097E793 /* Assets.xcassets */; };
 		A5223EE81F1F8EA20097E793 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223E8E1F1F8EA20097E793 /* EGApplication.swift */; };
 		A5223EEA1F1F8EA20097E793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5223E901F1F8EA20097E793 /* LaunchScreen.storyboard */; };
+		A53C0EBD1FB7729D00FD78FF /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EBC1FB7729D00FD78FF /* ApiManager.swift */; };
+		A53C0EC01FB7764500FD78FF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */; };
+		A53C0EC21FB7766A00FD78FF /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EC11FB7766A00FD78FF /* NotificationView.swift */; };
+		A53C0EC31FB7766A00FD78FF /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EC11FB7766A00FD78FF /* NotificationView.swift */; };
 		A56983B91FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */; };
 		A56983BA1FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */; };
 		A56983BC1FA52405000A585F /* PageHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */; };
@@ -29,7 +33,6 @@
 		A5A598F11FA51710000B56AE /* CommonDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F91FA501B800E0C6E5 /* CommonDao.swift */; };
 		A5A598F21FA51710000B56AE /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F81FA501B800E0C6E5 /* CacheHelper.swift */; };
 		A5A598F31FA51710000B56AE /* OptionMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7881FA50BFA00E0C6E5 /* OptionMenuTableView.swift */; };
-		A5A598F41FA51710000B56AE /* SuggestGetApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE76E1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift */; };
 		A5A598F61FA51710000B56AE /* SearchMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7771FA50BFA00E0C6E5 /* SearchMenuTableViewCell.swift */; };
 		A5A598F71FA51710000B56AE /* DeviceConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F11FA501B800E0C6E5 /* DeviceConst.swift */; };
 		A5A598F81FA51710000B56AE /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE77A1FA50BFA00E0C6E5 /* Thumbnail.swift */; };
@@ -58,7 +61,6 @@
 		A5A599111FA51710000B56AE /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7031FA501B800E0C6E5 /* ShadowView.swift */; };
 		A5A599121FA51710000B56AE /* NSNotification+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E51FA501B800E0C6E5 /* NSNotification+Extend.swift */; };
 		A5A599151FA51710000B56AE /* EGGradientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE77C1FA50BFA00E0C6E5 /* EGGradientLabel.swift */; };
-		A5A599161FA51710000B56AE /* SuggestGetApiRequestExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F61FA501B800E0C6E5 /* SuggestGetApiRequestExecuter.swift */; };
 		A5A599171FA51710000B56AE /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7971FA50BFA00E0C6E5 /* BaseViewModel.swift */; };
 		A5A599181FA51710000B56AE /* UIImageView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6EC1FA501B800E0C6E5 /* UIImageView+Extend.swift */; };
 		A5A599191FA51710000B56AE /* UIView+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6EE1FA501B800E0C6E5 /* UIView+Extend.swift */; };
@@ -77,7 +79,6 @@
 		A5A599281FA51710000B56AE /* UIColor+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6EA1FA501B800E0C6E5 /* UIColor+Extend.swift */; };
 		A5A599291FA51710000B56AE /* Collection+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6DF1FA501B800E0C6E5 /* Collection+Extend.swift */; };
 		A5A5992A1FA51710000B56AE /* UIButton+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E91FA501B800E0C6E5 /* UIButton+Extend.swift */; };
-		A5A5992C1FA51710000B56AE /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F51FA501B800E0C6E5 /* ApiManager.swift */; };
 		A5A5992D1FA51710000B56AE /* Int+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E41FA501B800E0C6E5 /* Int+Extend.swift */; };
 		A5A5992E1FA51710000B56AE /* DispatchQueue+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E21FA501B800E0C6E5 /* DispatchQueue+Extend.swift */; };
 		A5A5992F1FA51710000B56AE /* HistoryMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7A01FA50BFA00E0C6E5 /* HistoryMenuViewModel.swift */; };
@@ -89,7 +90,6 @@
 		A5A599351FA51710000B56AE /* OptionMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7891FA50BFA00E0C6E5 /* OptionMenuTableViewCell.swift */; };
 		A5A599361FA51710000B56AE /* BaseMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE79C1FA50BFA00E0C6E5 /* BaseMenuViewModel.swift */; };
 		A5A599371FA51710000B56AE /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6FE1FA501B800E0C6E5 /* RealmHelper.swift */; };
-		A5A599381FA51710000B56AE /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6FC1FA501B800E0C6E5 /* NotificationManager.swift */; };
 		A5A599391FA51710000B56AE /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7741FA50BFA00E0C6E5 /* BaseView.swift */; };
 		A5A5993A1FA51710000B56AE /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7751FA50BFA00E0C6E5 /* EGWebView.swift */; };
 		A5A5993B1FA51710000B56AE /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE77F1FA50BFA00E0C6E5 /* HeaderView.swift */; };
@@ -125,20 +125,16 @@
 		A5BCE7161FA501B900E0C6E5 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F01FA501B800E0C6E5 /* AppConst.swift */; };
 		A5BCE7171FA501B900E0C6E5 /* DeviceConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F11FA501B800E0C6E5 /* DeviceConst.swift */; };
 		A5BCE7181FA501B900E0C6E5 /* HttpConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F21FA501B800E0C6E5 /* HttpConst.swift */; };
-		A5BCE7191FA501B900E0C6E5 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F51FA501B800E0C6E5 /* ApiManager.swift */; };
-		A5BCE71A1FA501B900E0C6E5 /* SuggestGetApiRequestExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F61FA501B800E0C6E5 /* SuggestGetApiRequestExecuter.swift */; };
 		A5BCE71B1FA501B900E0C6E5 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F81FA501B800E0C6E5 /* CacheHelper.swift */; };
 		A5BCE71C1FA501B900E0C6E5 /* CommonDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F91FA501B800E0C6E5 /* CommonDao.swift */; };
 		A5BCE71D1FA501B900E0C6E5 /* EncryptHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6FA1FA501B800E0C6E5 /* EncryptHelper.swift */; };
 		A5BCE71E1FA501B900E0C6E5 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6FB1FA501B800E0C6E5 /* KeyChainHelper.swift */; };
-		A5BCE71F1FA501B900E0C6E5 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6FC1FA501B800E0C6E5 /* NotificationManager.swift */; };
 		A5BCE7201FA501B900E0C6E5 /* OnceExec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6FD1FA501B800E0C6E5 /* OnceExec.swift */; };
 		A5BCE7211FA501B900E0C6E5 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6FE1FA501B800E0C6E5 /* RealmHelper.swift */; };
 		A5BCE7221FA501B900E0C6E5 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6FF1FA501B800E0C6E5 /* Util.swift */; };
 		A5BCE7231FA501B900E0C6E5 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7011FA501B800E0C6E5 /* CircleView.swift */; };
 		A5BCE7241FA501B900E0C6E5 /* EnumEnumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7021FA501B800E0C6E5 /* EnumEnumerable.swift */; };
 		A5BCE7251FA501B900E0C6E5 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7031FA501B800E0C6E5 /* ShadowView.swift */; };
-		A5BCE7AA1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE76E1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift */; };
 		A5BCE7AB1FA50BFA00E0C6E5 /* BaseLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7721FA50BFA00E0C6E5 /* BaseLayer.swift */; };
 		A5BCE7AC1FA50BFA00E0C6E5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7741FA50BFA00E0C6E5 /* BaseView.swift */; };
 		A5BCE7AD1FA50BFA00E0C6E5 /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE7751FA50BFA00E0C6E5 /* EGWebView.swift */; };
@@ -192,6 +188,9 @@
 		A5223E8E1F1F8EA20097E793 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A5223E8F1F1F8EA20097E793 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5223E911F1F8EA20097E793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A53C0EBC1FB7729D00FD78FF /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		A53C0EC11FB7766A00FD78FF /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModel.swift; sourceTree = "<group>"; };
@@ -225,20 +224,16 @@
 		A5BCE6F01FA501B800E0C6E5 /* AppConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConst.swift; sourceTree = "<group>"; };
 		A5BCE6F11FA501B800E0C6E5 /* DeviceConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceConst.swift; sourceTree = "<group>"; };
 		A5BCE6F21FA501B800E0C6E5 /* HttpConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpConst.swift; sourceTree = "<group>"; };
-		A5BCE6F51FA501B800E0C6E5 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
-		A5BCE6F61FA501B800E0C6E5 /* SuggestGetApiRequestExecuter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestGetApiRequestExecuter.swift; sourceTree = "<group>"; };
 		A5BCE6F81FA501B800E0C6E5 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
 		A5BCE6F91FA501B800E0C6E5 /* CommonDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDao.swift; sourceTree = "<group>"; };
 		A5BCE6FA1FA501B800E0C6E5 /* EncryptHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptHelper.swift; sourceTree = "<group>"; };
 		A5BCE6FB1FA501B800E0C6E5 /* KeyChainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
-		A5BCE6FC1FA501B800E0C6E5 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A5BCE6FD1FA501B800E0C6E5 /* OnceExec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnceExec.swift; sourceTree = "<group>"; };
 		A5BCE6FE1FA501B800E0C6E5 /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		A5BCE6FF1FA501B800E0C6E5 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		A5BCE7011FA501B800E0C6E5 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		A5BCE7021FA501B800E0C6E5 /* EnumEnumerable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumEnumerable.swift; sourceTree = "<group>"; };
 		A5BCE7031FA501B800E0C6E5 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
-		A5BCE76E1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestGetApiResponse.swift; sourceTree = "<group>"; };
 		A5BCE7721FA50BFA00E0C6E5 /* BaseLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLayer.swift; sourceTree = "<group>"; };
 		A5BCE7741FA50BFA00E0C6E5 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A5BCE7751FA50BFA00E0C6E5 /* EGWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGWebView.swift; sourceTree = "<group>"; };
@@ -337,6 +332,15 @@
 				A5A598E91FA516E1000B56AE /* Environment */,
 			);
 			path = Qas;
+			sourceTree = "<group>";
+		};
+		A53C0EBE1FB7764500FD78FF /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */,
+				A53C0EC11FB7766A00FD78FF /* NotificationView.swift */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		A56983B51FA523D2000A585F /* PageHistoryDataModel */ = {
@@ -472,31 +476,22 @@
 		A5BCE6F31FA501B800E0C6E5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				A5BCE6F41FA501B800E0C6E5 /* Http */,
 				A5BCE6F71FA501B800E0C6E5 /* Service */,
 				A5BCE6FF1FA501B800E0C6E5 /* Util.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
 		};
-		A5BCE6F41FA501B800E0C6E5 /* Http */ = {
-			isa = PBXGroup;
-			children = (
-				A5BCE6F51FA501B800E0C6E5 /* ApiManager.swift */,
-				A5BCE6F61FA501B800E0C6E5 /* SuggestGetApiRequestExecuter.swift */,
-			);
-			path = Http;
-			sourceTree = "<group>";
-		};
 		A5BCE6F71FA501B800E0C6E5 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				A53C0EBE1FB7764500FD78FF /* Notification */,
+				A53C0EBC1FB7729D00FD78FF /* ApiManager.swift */,
 				A5223E8E1F1F8EA20097E793 /* EGApplication.swift */,
 				A5BCE6F81FA501B800E0C6E5 /* CacheHelper.swift */,
 				A5BCE6F91FA501B800E0C6E5 /* CommonDao.swift */,
 				A5BCE6FA1FA501B800E0C6E5 /* EncryptHelper.swift */,
 				A5BCE6FB1FA501B800E0C6E5 /* KeyChainHelper.swift */,
-				A5BCE6FC1FA501B800E0C6E5 /* NotificationManager.swift */,
 				A5BCE6FD1FA501B800E0C6E5 /* OnceExec.swift */,
 				A5BCE6FE1FA501B800E0C6E5 /* RealmHelper.swift */,
 			);
@@ -522,17 +517,8 @@
 				A56983B71FA523D3000A585F /* CommonHistoryDataModel */,
 				A56983B51FA523D2000A585F /* PageHistoryDataModel */,
 				A56983B61FA523D2000A585F /* SearchHistoryModel */,
-				A5BCE76D1FA50BFA00E0C6E5 /* Http */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		A5BCE76D1FA50BFA00E0C6E5 /* Http */ = {
-			isa = PBXGroup;
-			children = (
-				A5BCE76E1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift */,
-			);
-			path = Http;
 			sourceTree = "<group>";
 		};
 		A5BCE76F1FA50BFA00E0C6E5 /* View */ = {
@@ -942,7 +928,7 @@
 				A5BCE71C1FA501B900E0C6E5 /* CommonDao.swift in Sources */,
 				A5BCE71B1FA501B900E0C6E5 /* CacheHelper.swift in Sources */,
 				A5BCE7BB1FA50BFA00E0C6E5 /* OptionMenuTableView.swift in Sources */,
-				A5BCE7AA1FA50BFA00E0C6E5 /* SuggestGetApiResponse.swift in Sources */,
+				A53C0EC01FB7764500FD78FF /* NotificationManager.swift in Sources */,
 				A5BCE7AF1FA50BFA00E0C6E5 /* SearchMenuTableViewCell.swift in Sources */,
 				A5BCE7171FA501B900E0C6E5 /* DeviceConst.swift in Sources */,
 				A5BCE7B11FA50BFA00E0C6E5 /* Thumbnail.swift in Sources */,
@@ -967,16 +953,17 @@
 				A5BCE7231FA501B900E0C6E5 /* CircleView.swift in Sources */,
 				A56983B91FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */,
 				A5BCE7C51FA50BFA00E0C6E5 /* SearchMenuTableViewModel.swift in Sources */,
+				A53C0EC21FB7766A00FD78FF /* NotificationView.swift in Sources */,
 				A5BCE7181FA501B900E0C6E5 /* HttpConst.swift in Sources */,
 				A5BCE7161FA501B900E0C6E5 /* AppConst.swift in Sources */,
 				A5BCE7B61FA50BFA00E0C6E5 /* BaseViewController.swift in Sources */,
 				A56983CB1FA527B5000A585F /* SuggestDataModel.swift in Sources */,
 				A5BCE70E1FA501B900E0C6E5 /* Optional+Extend.swift in Sources */,
+				A53C0EBD1FB7729D00FD78FF /* ApiManager.swift in Sources */,
 				A5BCE7BE1FA50BFA00E0C6E5 /* HelpViewController.swift in Sources */,
 				A5BCE7251FA501B900E0C6E5 /* ShadowView.swift in Sources */,
 				A5BCE70C1FA501B900E0C6E5 /* NSNotification+Extend.swift in Sources */,
 				A5BCE7B21FA50BFA00E0C6E5 /* EGGradientLabel.swift in Sources */,
-				A5BCE71A1FA501B900E0C6E5 /* SuggestGetApiRequestExecuter.swift in Sources */,
 				A5BCE7C21FA50BFA00E0C6E5 /* BaseViewModel.swift in Sources */,
 				A5BCE7131FA501B900E0C6E5 /* UIImageView+Extend.swift in Sources */,
 				A5BCE7151FA501B900E0C6E5 /* UIView+Extend.swift in Sources */,
@@ -998,7 +985,6 @@
 				A5BCE7061FA501B900E0C6E5 /* Collection+Extend.swift in Sources */,
 				A5BCE7101FA501B900E0C6E5 /* UIButton+Extend.swift in Sources */,
 				A5A137C31FB76AEE00158D61 /* OptionMenuItem.swift in Sources */,
-				A5BCE7191FA501B900E0C6E5 /* ApiManager.swift in Sources */,
 				A5BCE70B1FA501B900E0C6E5 /* Int+Extend.swift in Sources */,
 				A5BCE7091FA501B900E0C6E5 /* DispatchQueue+Extend.swift in Sources */,
 				A5BCE7CA1FA50BFA00E0C6E5 /* HistoryMenuViewModel.swift in Sources */,
@@ -1011,7 +997,6 @@
 				A5BCE7C61FA50BFA00E0C6E5 /* BaseMenuViewModel.swift in Sources */,
 				A5F3C0171FB7570900B905CA /* AppDelegate.swift in Sources */,
 				A5BCE7211FA501B900E0C6E5 /* RealmHelper.swift in Sources */,
-				A5BCE71F1FA501B900E0C6E5 /* NotificationManager.swift in Sources */,
 				A56983C41FA5249C000A585F /* FormDataModel.swift in Sources */,
 				A5BCE7AC1FA50BFA00E0C6E5 /* BaseView.swift in Sources */,
 				A5BCE7AD1FA50BFA00E0C6E5 /* EGWebView.swift in Sources */,
@@ -1028,12 +1013,12 @@
 				A5A598F11FA51710000B56AE /* CommonDao.swift in Sources */,
 				A5A598F21FA51710000B56AE /* CacheHelper.swift in Sources */,
 				A5A598F31FA51710000B56AE /* OptionMenuTableView.swift in Sources */,
-				A5A598F41FA51710000B56AE /* SuggestGetApiResponse.swift in Sources */,
 				A5A598F61FA51710000B56AE /* SearchMenuTableViewCell.swift in Sources */,
 				A5A598F71FA51710000B56AE /* DeviceConst.swift in Sources */,
 				A5A598F81FA51710000B56AE /* Thumbnail.swift in Sources */,
 				A5A598F91FA51710000B56AE /* String+Extend.swift in Sources */,
 				A5A598FA1FA51710000B56AE /* NSObject+Extend.swift in Sources */,
+				A53C0EC31FB7766A00FD78FF /* NotificationView.swift in Sources */,
 				A5A598FB1FA51710000B56AE /* OptionMenuTextField.swift in Sources */,
 				A5A598FC1FA51710000B56AE /* SearchMenuTableView.swift in Sources */,
 				A5A598FD1FA51710000B56AE /* EncryptHelper.swift in Sources */,
@@ -1062,7 +1047,6 @@
 				A5A599111FA51710000B56AE /* ShadowView.swift in Sources */,
 				A5A599121FA51710000B56AE /* NSNotification+Extend.swift in Sources */,
 				A5A599151FA51710000B56AE /* EGGradientLabel.swift in Sources */,
-				A5A599161FA51710000B56AE /* SuggestGetApiRequestExecuter.swift in Sources */,
 				A5A599171FA51710000B56AE /* BaseViewModel.swift in Sources */,
 				A5A599181FA51710000B56AE /* UIImageView+Extend.swift in Sources */,
 				A5A599191FA51710000B56AE /* UIView+Extend.swift in Sources */,
@@ -1083,7 +1067,6 @@
 				A5A599281FA51710000B56AE /* UIColor+Extend.swift in Sources */,
 				A5A599291FA51710000B56AE /* Collection+Extend.swift in Sources */,
 				A5A5992A1FA51710000B56AE /* UIButton+Extend.swift in Sources */,
-				A5A5992C1FA51710000B56AE /* ApiManager.swift in Sources */,
 				A5A5992D1FA51710000B56AE /* Int+Extend.swift in Sources */,
 				A5A5992E1FA51710000B56AE /* DispatchQueue+Extend.swift in Sources */,
 				A5A5992F1FA51710000B56AE /* HistoryMenuViewModel.swift in Sources */,
@@ -1095,7 +1078,6 @@
 				A5A599351FA51710000B56AE /* OptionMenuTableViewCell.swift in Sources */,
 				A5A599361FA51710000B56AE /* BaseMenuViewModel.swift in Sources */,
 				A5A599371FA51710000B56AE /* RealmHelper.swift in Sources */,
-				A5A599381FA51710000B56AE /* NotificationManager.swift in Sources */,
 				A56983C51FA5249C000A585F /* FormDataModel.swift in Sources */,
 				A5A599391FA51710000B56AE /* BaseView.swift in Sources */,
 				A5A5993A1FA51710000B56AE /* EGWebView.swift in Sources */,
