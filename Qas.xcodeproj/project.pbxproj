@@ -14,6 +14,20 @@
 		A53C0EC01FB7764500FD78FF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */; };
 		A53C0EC21FB7766A00FD78FF /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EC11FB7766A00FD78FF /* NotificationView.swift */; };
 		A53C0EC31FB7766A00FD78FF /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EC11FB7766A00FD78FF /* NotificationView.swift */; };
+		A53C0EE21FB778ED00FD78FF /* CommonHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDB1FB778ED00FD78FF /* CommonHistory.swift */; };
+		A53C0EE31FB778ED00FD78FF /* CommonHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDB1FB778ED00FD78FF /* CommonHistory.swift */; };
+		A53C0EE41FB778ED00FD78FF /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDC1FB778ED00FD78FF /* Favorite.swift */; };
+		A53C0EE51FB778ED00FD78FF /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDC1FB778ED00FD78FF /* Favorite.swift */; };
+		A53C0EE61FB778ED00FD78FF /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDD1FB778ED00FD78FF /* Form.swift */; };
+		A53C0EE71FB778ED00FD78FF /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDD1FB778ED00FD78FF /* Form.swift */; };
+		A53C0EE81FB778ED00FD78FF /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDE1FB778ED00FD78FF /* Input.swift */; };
+		A53C0EE91FB778ED00FD78FF /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDE1FB778ED00FD78FF /* Input.swift */; };
+		A53C0EEA1FB778ED00FD78FF /* PageHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDF1FB778ED00FD78FF /* PageHistory.swift */; };
+		A53C0EEB1FB778ED00FD78FF /* PageHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDF1FB778ED00FD78FF /* PageHistory.swift */; };
+		A53C0EEC1FB778ED00FD78FF /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EE01FB778ED00FD78FF /* SearchHistory.swift */; };
+		A53C0EED1FB778ED00FD78FF /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EE01FB778ED00FD78FF /* SearchHistory.swift */; };
+		A53C0EEE1FB778ED00FD78FF /* Suggest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EE11FB778ED00FD78FF /* Suggest.swift */; };
+		A53C0EEF1FB778ED00FD78FF /* Suggest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EE11FB778ED00FD78FF /* Suggest.swift */; };
 		A56983B91FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */; };
 		A56983BA1FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */; };
 		A56983BC1FA52405000A585F /* PageHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */; };
@@ -191,6 +205,13 @@
 		A53C0EBC1FB7729D00FD78FF /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A53C0EC11FB7766A00FD78FF /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		A53C0EDB1FB778ED00FD78FF /* CommonHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistory.swift; sourceTree = "<group>"; };
+		A53C0EDC1FB778ED00FD78FF /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		A53C0EDD1FB778ED00FD78FF /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		A53C0EDE1FB778ED00FD78FF /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
+		A53C0EDF1FB778ED00FD78FF /* PageHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageHistory.swift; sourceTree = "<group>"; };
+		A53C0EE01FB778ED00FD78FF /* SearchHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistory.swift; sourceTree = "<group>"; };
+		A53C0EE11FB778ED00FD78FF /* Suggest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Suggest.swift; sourceTree = "<group>"; };
 		A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModel.swift; sourceTree = "<group>"; };
@@ -328,6 +349,7 @@
 				A5BCE76F1FA50BFA00E0C6E5 /* View */,
 				A5BCE7951FA50BFA00E0C6E5 /* ViewModel */,
 				A5BCE7631FA50BFA00E0C6E5 /* Model */,
+				A53C0EDA1FB778ED00FD78FF /* Entity */,
 				A5BCE7CD1FA50C3A00E0C6E5 /* Resources */,
 				A5A598E91FA516E1000B56AE /* Environment */,
 			);
@@ -341,6 +363,20 @@
 				A53C0EC11FB7766A00FD78FF /* NotificationView.swift */,
 			);
 			path = Notification;
+			sourceTree = "<group>";
+		};
+		A53C0EDA1FB778ED00FD78FF /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				A53C0EDB1FB778ED00FD78FF /* CommonHistory.swift */,
+				A53C0EDC1FB778ED00FD78FF /* Favorite.swift */,
+				A53C0EDD1FB778ED00FD78FF /* Form.swift */,
+				A53C0EDE1FB778ED00FD78FF /* Input.swift */,
+				A53C0EDF1FB778ED00FD78FF /* PageHistory.swift */,
+				A53C0EE01FB778ED00FD78FF /* SearchHistory.swift */,
+				A53C0EE11FB778ED00FD78FF /* Suggest.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		A56983B51FA523D2000A585F /* PageHistoryDataModel */ = {
@@ -934,6 +970,8 @@
 				A5BCE7B11FA50BFA00E0C6E5 /* Thumbnail.swift in Sources */,
 				A5BCE70F1FA501B900E0C6E5 /* String+Extend.swift in Sources */,
 				A5F3C0191FB75D2900B905CA /* MessageConst.swift in Sources */,
+				A53C0EEC1FB778ED00FD78FF /* SearchHistory.swift in Sources */,
+				A53C0EE81FB778ED00FD78FF /* Input.swift in Sources */,
 				A5BCE70D1FA501B900E0C6E5 /* NSObject+Extend.swift in Sources */,
 				A5BCE7BD1FA50BFA00E0C6E5 /* OptionMenuTextField.swift in Sources */,
 				A5BCE7AE1FA50BFA00E0C6E5 /* SearchMenuTableView.swift in Sources */,
@@ -947,11 +985,15 @@
 				A56983BC1FA52405000A585F /* PageHistoryDataModel.swift in Sources */,
 				A5BCE7BF1FA50BFA00E0C6E5 /* SplashViewController.swift in Sources */,
 				A5BCE7C91FA50BFA00E0C6E5 /* HelpMenuViewModel.swift in Sources */,
+				A53C0EE61FB778ED00FD78FF /* Form.swift in Sources */,
 				A5BCE7081FA501B900E0C6E5 /* Dictionary+Extend.swift in Sources */,
+				A53C0EEA1FB778ED00FD78FF /* PageHistory.swift in Sources */,
 				A5BCE7B31FA50BFA00E0C6E5 /* EGProgressBar.swift in Sources */,
+				A53C0EE41FB778ED00FD78FF /* Favorite.swift in Sources */,
 				A5BCE7201FA501B900E0C6E5 /* OnceExec.swift in Sources */,
 				A5BCE7231FA501B900E0C6E5 /* CircleView.swift in Sources */,
 				A56983B91FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */,
+				A53C0EEE1FB778ED00FD78FF /* Suggest.swift in Sources */,
 				A5BCE7C51FA50BFA00E0C6E5 /* SearchMenuTableViewModel.swift in Sources */,
 				A53C0EC21FB7766A00FD78FF /* NotificationView.swift in Sources */,
 				A5BCE7181FA501B900E0C6E5 /* HttpConst.swift in Sources */,
@@ -967,6 +1009,7 @@
 				A5BCE7C21FA50BFA00E0C6E5 /* BaseViewModel.swift in Sources */,
 				A5BCE7131FA501B900E0C6E5 /* UIImageView+Extend.swift in Sources */,
 				A5BCE7151FA501B900E0C6E5 /* UIView+Extend.swift in Sources */,
+				A53C0EE21FB778ED00FD78FF /* CommonHistory.swift in Sources */,
 				A56983C11FA52490000A585F /* SearchHistoryDataModel.swift in Sources */,
 				A5BCE7B41FA50BFA00E0C6E5 /* HeaderField.swift in Sources */,
 				A5BCE7041FA501B900E0C6E5 /* Array+Extend.swift in Sources */,
@@ -1031,8 +1074,10 @@
 				A56983BD1FA52405000A585F /* PageHistoryDataModel.swift in Sources */,
 				A5A599051FA51710000B56AE /* SplashViewController.swift in Sources */,
 				A5A599061FA51710000B56AE /* HelpMenuViewModel.swift in Sources */,
+				A53C0EED1FB778ED00FD78FF /* SearchHistory.swift in Sources */,
 				A5A599071FA51710000B56AE /* Dictionary+Extend.swift in Sources */,
 				A5A599081FA51710000B56AE /* EGProgressBar.swift in Sources */,
+				A53C0EE91FB778ED00FD78FF /* Input.swift in Sources */,
 				A5A599091FA51710000B56AE /* OnceExec.swift in Sources */,
 				A5A5990A1FA51710000B56AE /* CircleView.swift in Sources */,
 				A56983BA1FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */,
@@ -1058,10 +1103,14 @@
 				A5A5991F1FA51710000B56AE /* OptionMenuTableViewModel.swift in Sources */,
 				A5A599201FA51710000B56AE /* BaseLayer.swift in Sources */,
 				A5A599211FA51710000B56AE /* FooterView.swift in Sources */,
+				A53C0EEB1FB778ED00FD78FF /* PageHistory.swift in Sources */,
+				A53C0EE51FB778ED00FD78FF /* Favorite.swift in Sources */,
 				A5A599221FA51710000B56AE /* FrontLayer.swift in Sources */,
 				A599D7C71FB70A6100F7338B /* Float+Extend.swift in Sources */,
 				A5A599241FA51710000B56AE /* CGPoint+Extend.swift in Sources */,
+				A53C0EEF1FB778ED00FD78FF /* Suggest.swift in Sources */,
 				A5A599251FA51710000B56AE /* SettingMenuViewModel.swift in Sources */,
+				A53C0EE71FB778ED00FD78FF /* Form.swift in Sources */,
 				A5A599261FA51710000B56AE /* HeaderViewModel.swift in Sources */,
 				A5A599271FA51710000B56AE /* Double+Extend.swift in Sources */,
 				A5A599281FA51710000B56AE /* UIColor+Extend.swift in Sources */,
@@ -1072,6 +1121,7 @@
 				A5A5992F1FA51710000B56AE /* HistoryMenuViewModel.swift in Sources */,
 				A5A599301FA51710000B56AE /* R.generated.swift in Sources */,
 				A5A599311FA51710000B56AE /* FormMenuViewModel.swift in Sources */,
+				A53C0EE31FB778ED00FD78FF /* CommonHistory.swift in Sources */,
 				A5A599321FA51710000B56AE /* CircleMenuItem.swift in Sources */,
 				A5A599331FA51710000B56AE /* KeyChainHelper.swift in Sources */,
 				A5A599341FA51710000B56AE /* UIScrollView+Extend.swift in Sources */,

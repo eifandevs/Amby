@@ -91,23 +91,3 @@ class FormDataModel {
         }
     }
 }
-
-class Form: Object {
-    @objc dynamic var id: String = NSUUID().uuidString
-    @objc dynamic var title: String = ""
-    @objc dynamic var host: String = ""
-    @objc dynamic var url: String = ""
-    @objc dynamic var date: Date = Date()
-    let inputs = List<Input>()
-    
-    override static func primaryKey() -> String? {
-        return "id"
-    }
-}
-
-class Input: Object {
-    @objc dynamic var formIndex: Int = 0
-    @objc dynamic var formInputIndex: Int = 0
-    @objc dynamic var type: String = ""
-    @objc dynamic var value: Data = Data()
-}

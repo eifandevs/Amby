@@ -20,7 +20,3 @@ class SuggestDataModel {
         }
     }
 }
-
-struct Suggest {
-    var data: [String] = []
-}

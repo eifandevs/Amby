@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 class FavoriteDataModel {
     static func insert(favorites: [Favorite]) {
@@ -31,15 +30,5 @@ class FavoriteDataModel {
             // 削除対象が指定されていない場合は、すべて削除する
             CommonDao.s.delete(data: select())
         }
-    }
-}
-
-class Favorite: Object {
-    @objc dynamic var id: String = NSUUID().uuidString
-    @objc dynamic var title: String = ""
-    @objc dynamic var url: String = ""
-    
-    override static func primaryKey() -> String? {
-        return "id"
     }
 }
