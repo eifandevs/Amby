@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// アプリ内定数クラス
-class AppConst {
+final class AppConst {
     // MARK: - 共通
     static let APP_FONT = "Avenir"
     static let DATE_FORMAT = "yyyyMMdd"
@@ -43,4 +43,17 @@ class AppConst {
     static let PATH_THUMBNAIL = DeviceConst.CACHES_PATH + "/thumbnails"
     static let PATH_DB = DeviceConst.CACHES_PATH + "/database"
     static let PATH_URL_PAGE_HISTORY = URL(fileURLWithPath: AppConst.PATH_PAGE_HISTORY)
+    
+    // MARK: - 設定画面
+    static let SETTING_SECTION_AUTO_SCROLL = "自動スクロール設定"
+    static let SETTING_SECTION_HISTORY = "履歴保存件数(何日分)"
+    static let SETTING_SECTION_DELETE = "データ削除"
+    static let SETTING_TITLE_COMMON_HISTORY = "閲覧履歴"
+    static let SETTING_TITLE_SEARCH_HISTORY = "検索履歴"
+    static let SETTING_TITLE_BOOK_MARK = "ブックマーク"
+    static let SETTING_TITLE_FORM_DATA = "フォームデータ"
+    static let SETTING_TITLE_COOKIES = "Cookie"
+    static let SETTING_TITLE_SITE_DATA = "サイトデータ"
+    static let SETTING_TITLE_ALL = "全てのデータ"
+
 }

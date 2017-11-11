@@ -15,7 +15,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
     }
     
     override func setup() {
-        sectionItems = ["自動スクロール設定", "履歴保存期間", "データ削除"]
+        sectionItems = [AppConst.SETTING_SECTION_AUTO_SCROLL, AppConst.SETTING_SECTION_HISTORY, AppConst.SETTING_SECTION_DELETE]
         menuItems = [
             [
                 OptionMenuItem(type: .slider, sliderAction: { (value: Float) -> Void in
@@ -28,46 +28,46 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 }, defaultValue: Float(UserDefaults.standard.integer(forKey: AppConst.KEY_HISTORY_SAVE_TERM)), minValue: Float(1), maxValue: Float(365))
             ],
             [
-                OptionMenuItem(title: "閲覧履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    NotificationManager.presentAlert(title: "データ削除", message: "閲覧履歴を全て削除します。よろしいですか？", completion: {
+                OptionMenuItem(title: AppConst.SETTING_TITLE_COMMON_HISTORY, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_COMMON_HISTORY, completion: {
                         CommonHistoryDataModel.s.delete()
                         NotificationCenter.default.post(name: .baseViewModelWillDeleteHistory, object: nil)
                     })
                     return nil
                 }),
-                OptionMenuItem(title: "ブックマーク", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    NotificationManager.presentAlert(title: "データ削除", message: "ブックマークを全て削除します。よろしいですか？", completion: {
+                OptionMenuItem(title: AppConst.SETTING_TITLE_BOOK_MARK, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_BOOK_MARK, completion: {
                         FavoriteDataModel.delete()
                         NotificationCenter.default.post(name: .headerViewModelWillChangeFavorite, object: nil)
                     })
                     return nil
                 }),
-                OptionMenuItem(title: "フォームデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    NotificationManager.presentAlert(title: "データ削除", message: "フォームデータを全て削除します。よろしいですか？", completion: {
+                OptionMenuItem(title: AppConst.SETTING_TITLE_FORM_DATA, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_FORM, completion: {
                         FormDataModel.delete()
                     })
                     return nil
                 }),
-                OptionMenuItem(title: "検索履歴", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    NotificationManager.presentAlert(title: "データ削除", message: "検索履歴を全て削除します。よろしいですか？", completion: {
+                OptionMenuItem(title: AppConst.SETTING_TITLE_SEARCH_HISTORY, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_SEARCH_HISTORY, completion: {
                         CommonDao.s.deleteAllSearchHistory()
                     })
                     return nil
                 }),
-                OptionMenuItem(title: "Cookie", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    NotificationManager.presentAlert(title: "データ削除", message: "Cookieデータを全て削除します。よろしいですか？", completion: {
+                OptionMenuItem(title: AppConst.SETTING_TITLE_COOKIES, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_COOKIES, completion: {
                         CacheHelper.deleteCookies()
                     })
                     return nil
                 }),
-                OptionMenuItem(title: "サイトデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    NotificationManager.presentAlert(title: "データ削除", message: "サイトデータを全て削除します。よろしいですか？", completion: {
+                OptionMenuItem(title: AppConst.SETTING_TITLE_SITE_DATA, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_SITE_DATA, completion: {
                         CacheHelper.deleteCaches()
                     })
                     return nil
                 }),
-                OptionMenuItem(title: "全てのデータ", action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    NotificationManager.presentAlert(title: "データ削除", message: "全てのデータを削除し、初期化します。よろしいですか？", completion: {
+                OptionMenuItem(title: AppConst.SETTING_TITLE_ALL, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_ALL, completion: {
                         CommonHistoryDataModel.s.delete()
                         PageHistoryDataModel.s.delete()
                         CommonDao.s.deleteAllSearchHistory()

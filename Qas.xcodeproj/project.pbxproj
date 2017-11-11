@@ -182,6 +182,8 @@
 		A5BCE7D71FA50C3A00E0C6E5 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A5BCE7D21FA50C3A00E0C6E5 /* offline.html */; };
 		A5BCE7D81FA50C3A00E0C6E5 /* timeout.html in Resources */ = {isa = PBXBuildFile; fileRef = A5BCE7D31FA50C3A00E0C6E5 /* timeout.html */; };
 		A5F3C0171FB7570900B905CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3C0161FB7570900B905CA /* AppDelegate.swift */; };
+		A5F3C0191FB75D2900B905CA /* MessageConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3C0181FB75D2900B905CA /* MessageConst.swift */; };
+		A5F3C01A1FB75D2900B905CA /* MessageConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3C0181FB75D2900B905CA /* MessageConst.swift */; };
 		A9872C50D89BD4A2A7B139E5 /* Pods_Qas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */; };
 /* End PBXBuildFile section */
 
@@ -281,6 +283,7 @@
 		A5BCE7D21FA50C3A00E0C6E5 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
 		A5BCE7D31FA50C3A00E0C6E5 /* timeout.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = timeout.html; sourceTree = "<group>"; };
 		A5F3C0161FB7570900B905CA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A5F3C0181FB75D2900B905CA /* MessageConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageConst.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD35A55E11AD976AC8901FEA /* Pods-Qas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -465,6 +468,7 @@
 				A5BCE6F01FA501B800E0C6E5 /* AppConst.swift */,
 				A5BCE6F11FA501B800E0C6E5 /* DeviceConst.swift */,
 				A5BCE6F21FA501B800E0C6E5 /* HttpConst.swift */,
+				A5F3C0181FB75D2900B905CA /* MessageConst.swift */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -956,6 +960,7 @@
 				A5BCE7171FA501B900E0C6E5 /* DeviceConst.swift in Sources */,
 				A5BCE7B11FA50BFA00E0C6E5 /* Thumbnail.swift in Sources */,
 				A5BCE70F1FA501B900E0C6E5 /* String+Extend.swift in Sources */,
+				A5F3C0191FB75D2900B905CA /* MessageConst.swift in Sources */,
 				A5BCE70D1FA501B900E0C6E5 /* NSObject+Extend.swift in Sources */,
 				A5BCE7BD1FA50BFA00E0C6E5 /* OptionMenuTextField.swift in Sources */,
 				A5BCE7AE1FA50BFA00E0C6E5 /* SearchMenuTableView.swift in Sources */,
@@ -1067,6 +1072,7 @@
 				A56983CC1FA527B5000A585F /* SuggestDataModel.swift in Sources */,
 				A5A5990F1FA51710000B56AE /* Optional+Extend.swift in Sources */,
 				A5A599101FA51710000B56AE /* HelpViewController.swift in Sources */,
+				A5F3C01A1FB75D2900B905CA /* MessageConst.swift in Sources */,
 				A5A599111FA51710000B56AE /* ShadowView.swift in Sources */,
 				A5A599121FA51710000B56AE /* NSNotification+Extend.swift in Sources */,
 				A5A599141FA51710000B56AE /* OptionMenuItem.swift in Sources */,

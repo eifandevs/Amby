@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// 汎用定数クラス
-class DeviceConst {
+final class DeviceConst {
     static let STATUS_BAR_HEIGHT = UIApplication.shared.statusBarFrame.height
     static let DISPLAY_SIZE = UIScreen.main.bounds.size
     static let CACHES_PATH = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
