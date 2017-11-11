@@ -267,7 +267,7 @@ class BaseViewModel {
     func getPreviousCapture() -> UIImage {
         let targetIndex = locationIndex == 0 ? PageHistoryDataModel.s.histories.count - 1 : locationIndex - 1
         let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
-        if let image = CommonDao.s.getCaptureImage(context: targetContext) {
+        if let image = ThumbnailDataModel.getCapture(context: targetContext) {
             return image
         } else {
             return UIImage()
@@ -277,7 +277,7 @@ class BaseViewModel {
     func getNextCapture() -> UIImage {
         let targetIndex = locationIndex == PageHistoryDataModel.s.histories.count - 1 ? 0 : locationIndex + 1
         let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
-        if let image = CommonDao.s.getCaptureImage(context: targetContext) {
+        if let image = ThumbnailDataModel.getCapture(context: targetContext) {
             return image
         } else {
             return UIImage()

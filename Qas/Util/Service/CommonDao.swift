@@ -48,22 +48,6 @@ final class CommonDao {
         return realm.objects(type).map { $0 }
     }
 
-// MARK: サムネイル取得
-    func getThumbnailImage(context: String) -> UIImage? {
-        let image = UIImage(contentsOfFile: Util.thumbnailUrl(folder: context).path)
-        return image?.crop(w: Int(AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2) * DeviceConst.ASPECT_RATE))
-    }
-    
-    func getCaptureImage(context: String) -> UIImage? {
-        return UIImage(contentsOfFile: Util.thumbnailUrl(folder: context).path)
-    }
-
-    /// サムネイルデータの削除
-    func deleteAllThumbnail() {
-        Util.deleteFolder(path: AppConst.PATH_THUMBNAIL)
-        Util.createFolder(path: AppConst.PATH_THUMBNAIL)
-    }
-
     /// UDデフォルト値登録
     func registerDefaultData() {
         UserDefaults.standard.register(defaults: [AppConst.KEY_LOCATION_INDEX: 0,

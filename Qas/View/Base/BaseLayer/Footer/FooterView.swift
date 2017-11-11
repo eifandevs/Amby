@@ -162,7 +162,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
         let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
         if existIndicator {
             DispatchQueue.mainSyncSafe { [weak self] in
-                if let image = CommonDao.s.getThumbnailImage(context: context) {
+                if let image = ThumbnailDataModel.getThumbnail(context: context) {
                     targetThumbnail.subviews.forEach({ (v) in
                         if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
                             let indicator = v as! NVActivityIndicatorView
@@ -187,7 +187,7 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
                 let btn = createCaptureSpace(context: item.context, isPrivateMode: item.isPrivate == "true")
                 if !item.context.isEmpty {
                     // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合
-                    if let image = CommonDao.s.getThumbnailImage(context: item.context) {
+                    if let image = ThumbnailDataModel.getThumbnail(context: item.context) {
                         btn.setImage(nil, for: .normal)
                         btn.setBackgroundImage(image, for: .normal)
                         btn.setThumbnailTitle(title: item.title)

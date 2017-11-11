@@ -75,7 +75,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                         FormDataModel.delete()
                         CacheHelper.deleteCookies()
                         CacheHelper.deleteCaches()
-                        CommonDao.s.deleteAllThumbnail()
+                        ThumbnailDataModel.delete()
                         NotificationCenter.default.post(name: .baseViewModelWillInitialize, object: nil)
                         (UIApplication.shared.delegate as! AppDelegate).initialize()
                     })
