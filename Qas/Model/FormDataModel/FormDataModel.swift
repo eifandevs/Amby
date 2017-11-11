@@ -82,12 +82,12 @@ class FormDataModel {
                     FormDataModel.delete(forms: [savedForm])
                 }
                 FormDataModel.insert(forms: [form])
-                NotificationManager.presentNotification(message: "フォーム情報を登録しました")
+                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_FORM)
             } else {
-                NotificationManager.presentNotification(message: "フォーム情報の入力を確認できませんでした")
+                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_FORM_ERROR_INPUT)
             }
         } else {
-            NotificationManager.presentNotification(message: "ページ情報を取得できませんでした。")
+            NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_FORM_ERROR_CRAWL)
         }
     }
 }

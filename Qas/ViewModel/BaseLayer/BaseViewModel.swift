@@ -170,7 +170,7 @@ class BaseViewModel {
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillCopyUrl")
             UIPasteboard.general.string = self.currentUrl
-            NotificationManager.presentNotification(message: "URLをコピーしました")
+            NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_COPY_URL)
         }
         // webviewヒストリバック
         center.addObserver(forName: .baseViewModelWillHistoryBackWebView, object: nil, queue: nil) { [weak self] (notification) in
@@ -208,10 +208,10 @@ class BaseViewModel {
                     FavoriteDataModel.insert(favorites: [fd])
                     // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
                     self.center.post(name: .headerViewModelWillChangeFavorite, object: ["url": fd.url])
-                    NotificationManager.presentNotification(message: "お気に入りに登録しました")
+                    NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_BOOK_MARK)
                 }
             } else {
-                NotificationManager.presentNotification(message: "登録情報を取得できませんでした")
+                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_BOOK_MARK_ERROR)
             }
         }
         // webviewフォーム情報登録
