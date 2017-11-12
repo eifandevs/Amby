@@ -22,7 +22,7 @@ class HelpMenuViewModel: OptionMenuTableViewModel {
                 OptionMenuItem(title: "フォームについて", action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     guard let `self` = self else { return nil }
                     let subtitle = "フォームの自動入力"
-                    let message = "1. Webページ上のフォームを入力する\n\n2. フォーム登録ボタンを押下する\n\n3. 次回から自動入力が可能です"
+                    let message = "1. Webページ上のフォームを入力する\n\n2. フォーム登録ボタンを押下する\n\n3. 次回からキーボード表示時に、自動入力ダイアログが表示されます"
                     NotificationCenter.default.post(name: .baseViewControllerWillPresentHelp, object: [
                         self.objectKeySubTitle: subtitle,
                         self.objectKeyMessage : message
@@ -32,7 +32,7 @@ class HelpMenuViewModel: OptionMenuTableViewModel {
                 OptionMenuItem(title: "自動スクロールについて", action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     guard let `self` = self else { return nil }
                     let subtitle = "スクロール速度の調整"
-                    let message = "1. 設定メニューを開く\n\n2. 自動スクロール設定より、変更可能です"
+                    let message = "1. 設定メニューを開く\n\n2. 自動スクロール設定より、変更可能です\n\n3. 自動スクロールは、ページを更新または、再度自動スクロールボタン押下で停止します"
                     NotificationCenter.default.post(name: .baseViewControllerWillPresentHelp, object: [
                         self.objectKeySubTitle: subtitle,
                         self.objectKeyMessage : message
@@ -62,7 +62,7 @@ class HelpMenuViewModel: OptionMenuTableViewModel {
                 OptionMenuItem(title: "保存情報を個別で削除する", action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     guard let `self` = self else { return nil }
                     let subtitle = "保存情報の個別削除"
-                    let message = "1. フォーム一覧、または閲覧履歴一覧を表示する\n\n2. セルを長押しする"
+                    let message = "1. メインメニューを開き、一覧を表示する\n\n2. セルを長押しする"
                     NotificationCenter.default.post(name: .baseViewControllerWillPresentHelp, object: [
                         self.objectKeySubTitle: subtitle,
                         self.objectKeyMessage : message
