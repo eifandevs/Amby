@@ -287,14 +287,20 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
 // MARK: WebView Delegate
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        log.error("[error url]\(String(describing: webView.url))")
+        log.error("[error url]\((error as NSError).userInfo["NSErrorFailingURLKey"]). code: \((error as NSError).code)")
         
         let egWv: EGWebView = webView as! EGWebView
+        // 連打したら-999 "(null)"になる対応
         if (error as NSError).code == NSURLErrorCancelled {
-            // 連打したら-999 "(null)"になる対応
             return
         }
-        
+        // URLスキーム対応
+        if let errorUrl = (error as NSError).userInfo["NSErrorFailingURLKey"] {
+            let url = (errorUrl as! NSURL).absoluteString!
+            if !url.hasValidUrl {
+                return
+            }
+        }
         if webView.isLoading {
             viewModel.notifyChangeProgress(object: 0)
         }
@@ -341,24 +347,15 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
-        // リクエストURLはエラーが発生した時のため保持しておく
-        // エラー発生時は、リクエストしたURLを履歴に保持する
-        if let latest = navigationAction.request.url?.absoluteString, latest.hasValidUrl {
-            log.debug("[Request Url]: \(latest)")
-            viewModel.latestRequestUrl = latest
+        guard let url = navigationAction.request.url else {
+            decisionHandler(.cancel)
+            return
         }
         
-        saveMetaData(webView: webView as! EGWebView, completion: nil)
-
         // 自動スクロールを停止する
         if let autoScrollTimer = autoScrollTimer, autoScrollTimer.isValid {
             autoScrollTimer.invalidate()
             self.autoScrollTimer = nil
-        }
-        
-        guard let url = navigationAction.request.url else {
-            decisionHandler(.cancel)
-            return
         }
         
         if ((url.absoluteString.range(of: "//itunes.apple.com/") != nil) ||
@@ -367,6 +364,15 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
             decisionHandler(.cancel)
             return
         }
+        
+        // リクエストURLはエラーが発生した時のため保持しておく
+        // エラー発生時は、リクエストしたURLを履歴に保持する
+        if let latest = navigationAction.request.url?.absoluteString, latest.hasValidUrl {
+            log.debug("[Request Url]: \(latest)")
+            viewModel.latestRequestUrl = latest
+        }
+        
+        saveMetaData(webView: webView as! EGWebView, completion: nil)
 
         decisionHandler(.allow)
     }
