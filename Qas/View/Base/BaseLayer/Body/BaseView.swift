@@ -663,7 +663,7 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     }
     func baseViewModelDidSearchWebView(text: String) {
         if text.hasValidUrl {
-            let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+                let encodedText = text.contains("%") ? text : text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
             _ = front.load(urlStr: encodedText)
         } else {
             // 検索ワードによる検索

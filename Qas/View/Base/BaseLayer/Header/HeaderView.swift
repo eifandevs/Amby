@@ -189,7 +189,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     }
     
     func headerViewModelDidChangeField(text: String) {
-        headerField.text = text
+        headerField.text = text.hasValidUrl ? text.removingPercentEncoding! : text
     }
     
     func headerViewModelDidChangeFavorite(enable: Bool) {
