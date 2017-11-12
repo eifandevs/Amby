@@ -110,14 +110,14 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
         slider.removeFromSuperview()
     }
     
-// MARK: UISwitch Event
+// MARK: - UISwitch Event
     @objc func onChangedSwitchValue(_ sender: AnyObject) {
         if let menuItem = menuItem {
 //            menuItem.switchAction?(switchControl.isOn)
         }
     }
     
-// MARK: UISlider Event
+// MARK: - UISlider Event
     @objc func onChangedSliderValue(_ sender: AnyObject) {
         if let menuItem = menuItem {
             menuItem.sliderAction?(slider.value)

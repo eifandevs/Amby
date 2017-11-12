@@ -50,9 +50,9 @@ final class CommonDao {
 
     /// UDデフォルト値登録
     func registerDefaultData() {
-        UserDefaults.standard.register(defaults: [AppConst.KEY_LOCATION_INDEX: 0,
-                                                  AppConst.KEY_AUTO_SCROLL_INTERVAL: 0.06,
-                                                  AppConst.KEY_HISTORY_SAVE_TERM: 90,
-                                                  AppConst.KEY_SEARCH_HISTORY_SAVE_TERM: 90])
+        UserDefaults.standard.register(defaults: [AppConst.KEY_LOCATION_INDEX: AppConst.UD_LOCATION_INDEX,
+                                                  AppConst.KEY_AUTO_SCROLL_INTERVAL: AppConst.UD_AUTO_SCROLL,
+                                                  AppConst.KEY_HISTORY_SAVE_TERM: AppConst.UD_COMMON_HISTORY_SAVE_TERM,
+                                                  AppConst.KEY_SEARCH_HISTORY_SAVE_TERM: AppConst.UD_SEARCH_HISTORY_SAVE_TERM])
     }
 }

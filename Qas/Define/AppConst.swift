@@ -55,5 +55,11 @@ final class AppConst {
     static let SETTING_TITLE_COOKIES = "Cookie"
     static let SETTING_TITLE_SITE_DATA = "サイトデータ"
     static let SETTING_TITLE_ALL = "全てのデータ"
+    
+    // MARK: - UD初期値
+    static let UD_LOCATION_INDEX = 0
+    static let UD_AUTO_SCROLL = 0.06
+    static let UD_COMMON_HISTORY_SAVE_TERM = 90
+    static let UD_SEARCH_HISTORY_SAVE_TERM = 90
 
 }

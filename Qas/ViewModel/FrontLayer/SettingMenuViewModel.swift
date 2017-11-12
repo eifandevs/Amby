@@ -15,17 +15,13 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
     }
     
     override func setup() {
-        sectionItems = [AppConst.SETTING_SECTION_AUTO_SCROLL, AppConst.SETTING_SECTION_HISTORY, AppConst.SETTING_SECTION_DELETE]
+        sectionItems = [AppConst.SETTING_SECTION_AUTO_SCROLL, AppConst.SETTING_SECTION_DELETE]
         menuItems = [
             [
                 OptionMenuItem(type: .slider, sliderAction: { (value: Float) -> Void in
+                    log.warning(value)
                     UserDefaults.standard.set(-value, forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL)
                 }, defaultValue: -UserDefaults.standard.float(forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL), minValue: Float(-0.07), maxValue: Float(-0.01))
-            ],
-            [
-                OptionMenuItem(type: .slider, sliderAction: { (value: Float) -> Void in
-                    log.warning(value)
-                }, defaultValue: Float(UserDefaults.standard.integer(forKey: AppConst.KEY_HISTORY_SAVE_TERM)), minValue: Float(1), maxValue: Float(365))
             ],
             [
                 OptionMenuItem(title: AppConst.SETTING_TITLE_COMMON_HISTORY, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
