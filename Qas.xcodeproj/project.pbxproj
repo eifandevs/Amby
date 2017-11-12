@@ -190,6 +190,8 @@
 		A5BCE7D61FA50C3A00E0C6E5 /* invalid.html in Resources */ = {isa = PBXBuildFile; fileRef = A5BCE7D11FA50C3A00E0C6E5 /* invalid.html */; };
 		A5BCE7D71FA50C3A00E0C6E5 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A5BCE7D21FA50C3A00E0C6E5 /* offline.html */; };
 		A5BCE7D81FA50C3A00E0C6E5 /* timeout.html in Resources */ = {isa = PBXBuildFile; fileRef = A5BCE7D31FA50C3A00E0C6E5 /* timeout.html */; };
+		A5DBE7641FB84FDF009E4A12 /* CornerRadiusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DBE7631FB84FDF009E4A12 /* CornerRadiusButton.swift */; };
+		A5DBE7651FB84FDF009E4A12 /* CornerRadiusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DBE7631FB84FDF009E4A12 /* CornerRadiusButton.swift */; };
 		A5F3C0171FB7570900B905CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3C0161FB7570900B905CA /* AppDelegate.swift */; };
 		A5F3C0191FB75D2900B905CA /* MessageConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3C0181FB75D2900B905CA /* MessageConst.swift */; };
 		A5F3C01A1FB75D2900B905CA /* MessageConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F3C0181FB75D2900B905CA /* MessageConst.swift */; };
@@ -297,6 +299,7 @@
 		A5BCE7D11FA50C3A00E0C6E5 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
 		A5BCE7D21FA50C3A00E0C6E5 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
 		A5BCE7D31FA50C3A00E0C6E5 /* timeout.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = timeout.html; sourceTree = "<group>"; };
+		A5DBE7631FB84FDF009E4A12 /* CornerRadiusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusButton.swift; sourceTree = "<group>"; };
 		A5F3C0161FB7570900B905CA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5F3C0181FB75D2900B905CA /* MessageConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageConst.swift; sourceTree = "<group>"; };
 		DFF4CC3D69BCC19688AED03F /* Pods_Eiger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Eiger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -572,6 +575,7 @@
 		A5BCE76F1FA50BFA00E0C6E5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A5DBE7621FB84FC3009E4A12 /* Common */,
 				A5BCE7701FA50BFA00E0C6E5 /* Base */,
 				A5BCE78B1FA50BFA00E0C6E5 /* Help */,
 				A5BCE78D1FA50BFA00E0C6E5 /* Splash */,
@@ -766,6 +770,14 @@
 				A5BCE7D31FA50C3A00E0C6E5 /* timeout.html */,
 			);
 			path = www;
+			sourceTree = "<group>";
+		};
+		A5DBE7621FB84FC3009E4A12 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A5DBE7631FB84FDF009E4A12 /* CornerRadiusButton.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		A5F3C0151FB7570900B905CA /* Application */ = {
@@ -1017,6 +1029,7 @@
 				A5BCE7BE1FA50BFA00E0C6E5 /* HelpViewController.swift in Sources */,
 				A5BCE7251FA501B900E0C6E5 /* ShadowView.swift in Sources */,
 				A5BCE70C1FA501B900E0C6E5 /* NSNotification+Extend.swift in Sources */,
+				A5DBE7641FB84FDF009E4A12 /* CornerRadiusButton.swift in Sources */,
 				A5BCE7B21FA50BFA00E0C6E5 /* EGGradientLabel.swift in Sources */,
 				A5BCE7C21FA50BFA00E0C6E5 /* BaseViewModel.swift in Sources */,
 				A5BCE7131FA501B900E0C6E5 /* UIImageView+Extend.swift in Sources */,
@@ -1140,6 +1153,7 @@
 				A5A599331FA51710000B56AE /* KeyChainHelper.swift in Sources */,
 				A5A599341FA51710000B56AE /* UIScrollView+Extend.swift in Sources */,
 				A5A599351FA51710000B56AE /* OptionMenuTableViewCell.swift in Sources */,
+				A5DBE7651FB84FDF009E4A12 /* CornerRadiusButton.swift in Sources */,
 				A5A599361FA51710000B56AE /* BaseMenuViewModel.swift in Sources */,
 				A5A599371FA51710000B56AE /* RealmHelper.swift in Sources */,
 				A56983C51FA5249C000A585F /* FormDataModel.swift in Sources */,
