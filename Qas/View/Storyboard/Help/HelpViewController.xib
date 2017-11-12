@@ -14,8 +14,8 @@
             <connections>
                 <outlet property="closeButton" destination="pTc-B0-dmK" id="Sbb-tM-0f5"/>
                 <outlet property="contentView" destination="i5M-Pr-FkT" id="AeR-n1-MK6"/>
-                <outlet property="messageLabel" destination="CTm-Mx-PCX" id="2Zg-cs-gC0"/>
-                <outlet property="subtitleLabel" destination="r9K-fX-E2b" id="PBW-MY-Oqh"/>
+                <outlet property="messageLabel" destination="CTm-Mx-PCX" id="vG5-Ky-bAk"/>
+                <outlet property="subtitleLabel" destination="r9K-fX-E2b" id="vvu-8Q-VVk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,40 +28,43 @@
                     <rect key="frame" x="16" y="37" width="103" height="33"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="103" id="4dF-tH-Hya"/>
-                        <constraint firstAttribute="height" constant="33" id="JQK-hc-amu"/>
+                        <constraint firstAttribute="width" constant="103" id="FcF-yY-Jz6"/>
+                        <constraint firstAttribute="height" constant="33" id="Y2z-YL-6lx"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9K-fX-E2b">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9K-fX-E2b" customClass="VerticalAlignmentLabel" customModule="VerticalAlignmentLabel">
                     <rect key="frame" x="16" y="103" width="343" height="44"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="iZ8-sa-sCo"/>
+                        <constraint firstAttribute="height" constant="44" id="OCL-im-adG"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="top" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTc-B0-dmK" customClass="CornerRadiusButton" customModule="Qas" customModuleProvider="target">
-                    <rect key="frame" x="22" y="599" width="331" height="48"/>
+                    <rect key="frame" x="22" y="581" width="331" height="48"/>
                     <color key="backgroundColor" red="0.42418062744419305" green="0.55642033537069668" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="9bo-8X-k1B"/>
+                        <constraint firstAttribute="height" constant="48" id="Tcn-db-fIz"/>
                     </constraints>
                     <state key="normal" title="OK">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="5"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTm-Mx-PCX">
-                    <rect key="frame" x="16" y="206" width="343" height="337"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTm-Mx-PCX" customClass="VerticalAlignmentLabel" customModule="VerticalAlignmentLabel">
+                    <rect key="frame" x="16" y="157" width="343" height="406"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <attributedString key="attributedText">
                         <fragment content="Label">
@@ -72,22 +75,25 @@
                         </fragment>
                     </attributedString>
                     <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="top" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="xe4-v4-aDd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="05P-V4-cgr"/>
-                <constraint firstItem="r9K-fX-E2b" firstAttribute="leading" secondItem="CTm-Mx-PCX" secondAttribute="leading" id="25C-NV-SnU"/>
-                <constraint firstItem="r9K-fX-E2b" firstAttribute="top" secondItem="xe4-v4-aDd" secondAttribute="bottom" constant="33" id="I7t-jJ-Yfb"/>
-                <constraint firstAttribute="bottom" secondItem="pTc-B0-dmK" secondAttribute="bottom" constant="20" symbolic="YES" id="Lzt-eD-zLz"/>
-                <constraint firstItem="pTc-B0-dmK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="22" id="ZRp-PF-aA8"/>
-                <constraint firstItem="xe4-v4-aDd" firstAttribute="leading" secondItem="r9K-fX-E2b" secondAttribute="leading" id="aau-dG-BSs"/>
-                <constraint firstItem="xe4-v4-aDd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="37" id="dG8-cP-y86"/>
-                <constraint firstItem="pTc-B0-dmK" firstAttribute="top" secondItem="CTm-Mx-PCX" secondAttribute="bottom" constant="56" id="eer-hu-fdV"/>
-                <constraint firstItem="r9K-fX-E2b" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="h8x-3B-rx7"/>
-                <constraint firstItem="CTm-Mx-PCX" firstAttribute="centerX" secondItem="pTc-B0-dmK" secondAttribute="centerX" id="hk7-OO-cxu"/>
-                <constraint firstItem="r9K-fX-E2b" firstAttribute="trailing" secondItem="CTm-Mx-PCX" secondAttribute="trailing" id="htY-ee-d0V"/>
-                <constraint firstItem="CTm-Mx-PCX" firstAttribute="top" secondItem="r9K-fX-E2b" secondAttribute="bottom" constant="59" id="oSF-Uq-kEU"/>
+                <constraint firstItem="CTm-Mx-PCX" firstAttribute="centerX" secondItem="pTc-B0-dmK" secondAttribute="centerX" id="2DS-j0-tkP"/>
+                <constraint firstAttribute="bottom" secondItem="pTc-B0-dmK" secondAttribute="bottom" constant="38" id="2FV-cg-Gar"/>
+                <constraint firstItem="xe4-v4-aDd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="DH2-EI-zMx"/>
+                <constraint firstItem="r9K-fX-E2b" firstAttribute="leading" secondItem="CTm-Mx-PCX" secondAttribute="leading" id="IOe-mD-if1"/>
+                <constraint firstItem="r9K-fX-E2b" firstAttribute="top" secondItem="xe4-v4-aDd" secondAttribute="bottom" constant="33" id="LXW-UI-srd"/>
+                <constraint firstItem="pTc-B0-dmK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="22" id="Rol-WB-cyD"/>
+                <constraint firstItem="xe4-v4-aDd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="37" id="aON-MD-rd3"/>
+                <constraint firstItem="r9K-fX-E2b" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="bRl-Gl-2kq"/>
+                <constraint firstItem="xe4-v4-aDd" firstAttribute="leading" secondItem="r9K-fX-E2b" secondAttribute="leading" id="jzw-SA-Hta"/>
+                <constraint firstItem="pTc-B0-dmK" firstAttribute="top" secondItem="CTm-Mx-PCX" secondAttribute="bottom" constant="18" id="ocN-up-Iti"/>
+                <constraint firstItem="r9K-fX-E2b" firstAttribute="trailing" secondItem="CTm-Mx-PCX" secondAttribute="trailing" id="yGm-bi-lU1"/>
+                <constraint firstItem="CTm-Mx-PCX" firstAttribute="top" secondItem="r9K-fX-E2b" secondAttribute="bottom" constant="10" id="yaA-MC-J96"/>
             </constraints>
             <point key="canvasLocation" x="21.5" y="47.5"/>
         </view>

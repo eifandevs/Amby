@@ -7,16 +7,14 @@
 //
 
 import UIKit
+import VerticalAlignmentLabel
 
 class HelpViewController: UIViewController {
 
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var gifImageView: UIImageView!
-    @IBOutlet weak var contentSubView: UIView!
     @IBOutlet weak var closeButton: CornerRadiusButton!
-    
+    @IBOutlet weak var messageLabel: VerticalAlignmentLabel!
+    @IBOutlet weak var subtitleLabel: VerticalAlignmentLabel!
     private var subtitle: String = ""
     private var message: String = ""
     

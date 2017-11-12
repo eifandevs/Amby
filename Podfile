@@ -5,7 +5,7 @@ target 'Qas' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for one-hand-browsing
+  # Pods for Qas
   swift_version = "4.0"
   pod "PromiseKit", "~> 4.0"
   pod 'Realm', '~> 2.4'
@@ -18,4 +18,5 @@ target 'Qas' do
   pod 'LTMorphingLabel', '~> 0.5'
   pod 'CryptoSwift', '~> 0.8'
   pod 'KeychainAccess', '~> 3.1'
+  pod 'VerticalAlignmentLabel'
 end
