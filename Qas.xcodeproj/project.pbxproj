@@ -42,6 +42,8 @@
 		A56983CC1FA527B5000A585F /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983CA1FA527B5000A585F /* SuggestDataModel.swift */; };
 		A586CD8E1FB77B5300961B30 /* ThumbnailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A586CD8D1FB77B5300961B30 /* ThumbnailDataModel.swift */; };
 		A586CD8F1FB77B5800961B30 /* ThumbnailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A586CD8D1FB77B5300961B30 /* ThumbnailDataModel.swift */; };
+		A58F8ACD1FB89C89003632F7 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F8ACC1FB89C89003632F7 /* PaddingLabel.swift */; };
+		A58F8ACE1FB89C89003632F7 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F8ACC1FB89C89003632F7 /* PaddingLabel.swift */; };
 		A599D7C61FB70A6100F7338B /* Float+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599D7C51FB70A6100F7338B /* Float+Extend.swift */; };
 		A599D7C71FB70A6100F7338B /* Float+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599D7C51FB70A6100F7338B /* Float+Extend.swift */; };
 		A5A137C31FB76AEE00158D61 /* OptionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A137C21FB76AEE00158D61 /* OptionMenuItem.swift */; };
@@ -224,6 +226,7 @@
 		A56983CA1FA527B5000A585F /* SuggestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestDataModel.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A586CD8D1FB77B5300961B30 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
+		A58F8ACC1FB89C89003632F7 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		A599D7C51FB70A6100F7338B /* Float+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extend.swift"; sourceTree = "<group>"; };
 		A5A137C21FB76AEE00158D61 /* OptionMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuItem.swift; sourceTree = "<group>"; };
 		A5A5994F1FA51710000B56AE /* QasFree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QasFree.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -776,6 +779,7 @@
 			isa = PBXGroup;
 			children = (
 				A5DBE7631FB84FDF009E4A12 /* CornerRadiusButton.swift */,
+				A58F8ACC1FB89C89003632F7 /* PaddingLabel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1060,6 +1064,7 @@
 				A5BCE7C81FA50BFA00E0C6E5 /* FormMenuViewModel.swift in Sources */,
 				A5BCE7B81FA50BFA00E0C6E5 /* CircleMenuItem.swift in Sources */,
 				A586CD8E1FB77B5300961B30 /* ThumbnailDataModel.swift in Sources */,
+				A58F8ACD1FB89C89003632F7 /* PaddingLabel.swift in Sources */,
 				A5BCE71E1FA501B900E0C6E5 /* KeyChainHelper.swift in Sources */,
 				A5BCE7141FA501B900E0C6E5 /* UIScrollView+Extend.swift in Sources */,
 				A5BCE7BC1FA50BFA00E0C6E5 /* OptionMenuTableViewCell.swift in Sources */,
@@ -1114,6 +1119,7 @@
 				A5A5990E1FA51710000B56AE /* BaseViewController.swift in Sources */,
 				A56983CC1FA527B5000A585F /* SuggestDataModel.swift in Sources */,
 				A5A5990F1FA51710000B56AE /* Optional+Extend.swift in Sources */,
+				A58F8ACE1FB89C89003632F7 /* PaddingLabel.swift in Sources */,
 				A5A599101FA51710000B56AE /* HelpViewController.swift in Sources */,
 				A5F3C01A1FB75D2900B905CA /* MessageConst.swift in Sources */,
 				A5A599111FA51710000B56AE /* ShadowView.swift in Sources */,
