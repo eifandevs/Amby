@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class EGGradientLabel: UILabel {
+class EGGradientLabel: PaddingLabel {
     private let gradient = CAGradientLayer.init()
     
     init() {
