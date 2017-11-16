@@ -19,6 +19,8 @@ class CacheHelper {
         // Cookie, Cache, その他Webデータを端末内に残す
         configuration.websiteDataStore = isPrivate ? WKWebsiteDataStore.nonPersistent() : WKWebsiteDataStore.default()
         configuration.allowsPictureInPictureMediaPlayback = true
+        configuration.allowsInlineMediaPlayback = true
+        configuration.allowsAirPlayForMediaPlayback = true
         return configuration
     }
     
