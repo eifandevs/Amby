@@ -16,7 +16,7 @@ protocol HeaderFieldDelegate: class {
 class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     weak var delegate: HeaderFieldDelegate?
     private var icon: UIImageView?
-    private let iconSize: CGSize = CGSize(width: AppConst.BASE_LAYER_HEADER_HEIGHT / 2, height: AppConst.BASE_LAYER_HEADER_HEIGHT / 2)
+    private let iconSize: CGSize = CGSize(width: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT, height: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT)
     private var label: EGGradientLabel?
     private var pastLabelText: String?
     var textField: UITextField!
@@ -28,11 +28,6 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
         set {
             guard let value = newValue, let icon = icon, let _ = label else {
                 return
-            }
-            if let value = newValue, value.hasHttpsUrl {
-                icon.frame.size = iconSize
-            } else {
-                icon.frame.size = CGSize.zero
             }
             // テキストフィールドがちらつくので、ラベルを再生成する
             self.label!.removeFromSuperview()

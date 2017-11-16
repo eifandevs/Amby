@@ -27,11 +27,11 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
 
     override init(frame: CGRect) {
         // ヘッダービュー
-        headerView = HeaderView(frame: CGRect(x: 0, y: headerViewOriginY.max, width: frame.size.width, height: AppConst.BASE_LAYER_HEADER_HEIGHT))
+        headerView = HeaderView(frame: CGRect(x: 0, y: headerViewOriginY.max, width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_HEADER_HEIGHT))
         // フッタービュー
-        footerView = FooterView(frame: CGRect(x: 0, y: DeviceConst.DISPLAY_SIZE.height - AppConst.BASE_LAYER_THUMBNAIL_SIZE.height, width: frame.size.width, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height))
+        footerView = FooterView(frame: CGRect(x: 0, y: DeviceConst.DISPLAY_SIZE.height - AppConst.BASE_LAYER_FOOTER_HEIGHT, width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_FOOTER_HEIGHT))
         // ベースビュー
-        baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: frame.size.width, height: frame.size.height - AppConst.BASE_LAYER_THUMBNAIL_SIZE.height - DeviceConst.STATUS_BAR_HEIGHT))
+        baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_BASE_HEIGHT))
         super.init(frame: frame)
 
         // フォアグラウンド時にヘッダービューの位置をMaxにする

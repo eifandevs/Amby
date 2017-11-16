@@ -20,11 +20,17 @@ final class AppConst {
     static let FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT = 17.f
     static let FRONT_LAYER_EDGE_SWIPE_EREA = 15.f
     static let FRONT_LAYER_OPTION_MENU_SIZE = CGSize(width: 250, height: 450)
+    static let FRONT_LAYER_OPTION_MENU_MARGIN = CGSize(width: 38, height: 20)
     
     // MARK: - ベースレイヤーの定数
-    static let BASE_LAYER_HEADER_HEIGHT = AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 1.3
+    static var BASE_LAYER_HEADER_HEIGHT = AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 1.3
+    static var BASE_LAYER_HEADER_FIELD_HEIGHT = AppConst.BASE_LAYER_HEADER_HEIGHT / 2
+    static let BASE_LAYER_HEADER_PROGRESS_BAR_HEIGHT = 2.1.f
+    static var BASE_LAYER_HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER_HEADER_PROGRESS_BAR_HEIGHT
+    static var BASE_LAYER_FOOTER_HEIGHT = AppConst.BASE_LAYER_THUMBNAIL_SIZE.height
+    static let BASE_LAYER_BASE_HEIGHT = DeviceConst.DISPLAY_SIZE.height - AppConst.BASE_LAYER_FOOTER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT
     static let BASE_LAYER_HEADER_FIELD_WIDTH = DeviceConst.DISPLAY_SIZE.width / 1.8
-    static let BASE_LAYER_THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
+    static var BASE_LAYER_THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
 
     // MARK: - キー情報
     static let KEY_REALM_TOKEN = "com.eifaniori.qas-realm-token"

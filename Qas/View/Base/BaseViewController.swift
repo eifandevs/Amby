@@ -14,39 +14,62 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
     private var frontLayer: FrontLayer!
     
     private var splash: SplashViewController?
-    
+    private var onceExec = OnceExec()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        splash = SplashViewController()
-        splash?.delegate = self
-        splash!.view.frame.size = view.frame.size
-        splash!.view.frame.origin = CGPoint.zero
-        view.addSubview(splash!.view)
-        
-        let center = NotificationCenter.default
-        // ヘルプ画面の表示通知
-        center.addObserver(forName: .baseViewControllerWillPresentHelp, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseViewController Event]: baseViewControllerWillPresentHelp")
-            // ヘルプ画面を表示する
-            let subtitle = (notification.object as! [String: String])["subtitle"]!
-            let message = (notification.object as! [String: String])["message"]!
-            let vc = HelpViewController(subtitle: subtitle, message: message)
-            self.present(vc, animated: true)
-        }
-        // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
-        baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
-        baseLayer.delegate = self
-        view.addSubview(baseLayer)
-
-        view.bringSubview(toFront: splash!.view)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        onceExec.call {
+            // iPhoneX対応
+            if #available(iOS 11.0, *) {
+                let insets = self.view.safeAreaInsets
+                if Util.isiPhoneX() {
+                    AppConst.BASE_LAYER_HEADER_HEIGHT = AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 1.3 + insets.top
+                    AppConst.BASE_LAYER_HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER_HEADER_PROGRESS_BAR_HEIGHT * 2.2
+                    AppConst.BASE_LAYER_FOOTER_HEIGHT = AppConst.BASE_LAYER_THUMBNAIL_SIZE.height + insets.bottom
+                    AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT = AppConst.BASE_LAYER_HEADER_HEIGHT / 2.5
+                    AppConst.BASE_LAYER_THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 3.4) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
+                } else {
+                    AppConst.BASE_LAYER_HEADER_HEIGHT = AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 1.3
+                    AppConst.BASE_LAYER_HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER_HEADER_PROGRESS_BAR_HEIGHT
+                    AppConst.BASE_LAYER_FOOTER_HEIGHT = AppConst.BASE_LAYER_THUMBNAIL_SIZE.height
+                    AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT = AppConst.BASE_LAYER_HEADER_HEIGHT / 2
+                    AppConst.BASE_LAYER_THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
+                }
+            }
+
+            splash = SplashViewController()
+            splash?.delegate = self
+            splash!.view.frame.size = view.frame.size
+            splash!.view.frame.origin = CGPoint.zero
+            view.addSubview(splash!.view)
+
+            let center = NotificationCenter.default
+            // ヘルプ画面の表示通知
+            center.addObserver(forName: .baseViewControllerWillPresentHelp, object: nil, queue: nil) { [weak self] (notification) in
+                guard let `self` = self else { return }
+                log.debug("[BaseViewController Event]: baseViewControllerWillPresentHelp")
+                // ヘルプ画面を表示する
+                let subtitle = (notification.object as! [String: String])["subtitle"]!
+                let message = (notification.object as! [String: String])["message"]!
+                let vc = HelpViewController(subtitle: subtitle, message: message)
+                self.present(vc, animated: true)
+            }
+            // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
+            baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
+            baseLayer.delegate = self
+            view.addSubview(baseLayer)
+
+            view.bringSubview(toFront: splash!.view)
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -12,6 +12,7 @@ class OptionMenuTableViewModel {
     var sectionItems: [String] = []
     var menuItems: [[OptionMenuItem]] = []
     var commonAction: ((OptionMenuItem) -> (OptionMenuTableViewModel?))? = nil
+    let optionMenuMargin = AppConst.FRONT_LAYER_OPTION_MENU_MARGIN
     init() {
     }
     func setup() { /* setupコール時に上記Itemsに値を入れる */ }

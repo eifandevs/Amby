@@ -138,10 +138,10 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
                 let detailViewModel: OptionMenuTableViewModel? = action!((viewModel.menuItems[indexPath.section][indexPath.row]))
                 if detailViewModel != nil {
                     detailViewModel!.setup()
-                    let marginX = swipeDirection == .left ? 35 : -35
-                    let marginY = 20
+                    let marginX = swipeDirection == .left ? viewModel.optionMenuMargin.width : -viewModel.optionMenuMargin.width
+                    let marginY = viewModel.optionMenuMargin.height
                     detailView = OptionMenuTableView(frame: frame, viewModel: detailViewModel!, direction: swipeDirection)
-                    detailView?.center += CGPoint(x: marginX.f, y: marginY.f)
+                    detailView?.center += CGPoint(x: marginX, y: marginY)
                     
                     if (detailView?.frame.origin.y)! + AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height > DeviceConst.DISPLAY_SIZE.height {
                         detailView?.frame.origin.y = DeviceConst.DISPLAY_SIZE.height - AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height

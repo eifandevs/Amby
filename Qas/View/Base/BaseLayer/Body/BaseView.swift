@@ -379,7 +379,8 @@ class BaseView: UIView, WKNavigationDelegate, UIScrollViewDelegate, UIWebViewDel
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if navigationAction.targetFrame == nil {
-            webView.load(navigationAction.request)
+            log.debug("receive new window event.")
+            viewModel.addWebView(url: navigationAction.request.url?.absoluteString)
             return nil
         }
         return nil

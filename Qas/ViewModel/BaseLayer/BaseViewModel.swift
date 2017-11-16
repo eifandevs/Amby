@@ -247,11 +247,11 @@ class BaseViewModel {
         center.post(name: .headerViewModelWillChangeProgress, object: object)
     }
     
-    func addWebView(url: String? = nil, isPrivate: String = "false") {
+    func addWebView(url: String? = nil, isPrivate: String? = nil) {
         if let url = url {
-            PageHistoryDataModel.s.histories.append(PageHistory(url: url, isPrivate: isPrivate))
+            PageHistoryDataModel.s.histories.append(PageHistory(url: url, isPrivate: isPrivate ?? PageHistoryDataModel.s.histories[locationIndex].isPrivate))
         } else {
-            PageHistoryDataModel.s.histories.append(PageHistory(isPrivate: isPrivate))
+            PageHistoryDataModel.s.histories.append(PageHistory(isPrivate: isPrivate ?? PageHistoryDataModel.s.histories[locationIndex].isPrivate))
         }
         PageHistoryDataModel.s.locationIndex = PageHistoryDataModel.s.histories.count - 1
         self.reloadFavorite()
