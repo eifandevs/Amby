@@ -31,16 +31,30 @@ class CircleMenu: UIButton, ShadowView, CircleView {
         }
     }
     
-    private var circleMenuLocations: [CGPoint] {
-        let i = swipeDirection == .left ? 1 : -1
-        return [
-            CGPoint(x: 0, y: -130), // Upper
-            CGPoint(x: i*62, y: -98), // UpperRight
-            CGPoint(x: i*100, y: -40), // RightUpper
-            CGPoint(x: i*100, y:  40), // RightLower
-            CGPoint(x: i*62, y: 98), // LowerRight
-            CGPoint(x: 0, y: 130) // Lower
-        ]
+    enum CircleMenuLeftLocation: CGPoint, EnumEnumerable {
+        case Upper = "0,-130"
+        case UpperRight = "62,-100"
+        case RightUpper = "100,-40"
+        case RightLower = "100,40"
+        case LowerRight = "62,100"
+        case Lower = "0,130"
+        
+        static func locations() -> [CGPoint] {
+            return CircleMenuLeftLocation.cases.map({ $0.rawValue })
+        }
+    }
+    
+    enum CircleMenuRightLocation: CGPoint, EnumEnumerable {
+        case Upper = "0,-130"
+        case UpperRight = "-62,-100"
+        case RightUpper = "-100,-40"
+        case RightLower = "-100,40"
+        case LowerRight = "-62,100"
+        case Lower = "0,130"
+        
+        static func locations() -> [CGPoint] {
+            return CircleMenuRightLocation.cases.map({ $0.rawValue })
+        }
     }
     
     override init(frame: CGRect) {
@@ -306,13 +320,14 @@ extension CircleMenu: EGApplicationDelegate {
                 // サークルメニューが作成されることを伝える
                 delegate?.circleMenuDidActive()
                 initialPt = pt
+                let circleMenuLocations = swipeDirection == .left ? CircleMenuLeftLocation.locations() : CircleMenuRightLocation.locations()
                 for (index, circleMenuItem) in circleMenuItems.enumerated() {
                     circleMenuItem.frame.size = frame.size
                     circleMenuItem.center = initialPt!
                     circleMenuItem.addTarget(self, action: #selector(self.onTappedCircleMenuItem(_:)), for: .touchUpInside)
                     superview!.addSubview(circleMenuItem)
                     UIView.animate(withDuration: 0.18, animations: {
-                        circleMenuItem.center = self.center + self.circleMenuLocations[index]
+                        circleMenuItem.center = self.center + circleMenuLocations[index]
                     })
                 }
             }
