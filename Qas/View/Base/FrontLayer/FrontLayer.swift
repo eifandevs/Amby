@@ -65,52 +65,52 @@ class FrontLayer: UIView {
                     }
                 }),
                 CircleMenuItem(image: R.image.circlemenu_close(), tapAction: { _ in
-                    log.warning("デリート")
+                    log.debug("デリート")
                     NotificationCenter.default.post(name: .baseViewModelWillRemoveWebView, object: nil)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_historyback(), tapAction: { _ in
-                    log.warning("ヒストリーバック")
+                    log.debug("ヒストリーバック")
                     NotificationCenter.default.post(name: .baseViewModelWillHistoryBackWebView, object: nil)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_historyforward(), tapAction: { _ in
-                    log.warning("ヒストリーフォワード")
-                    NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
+                CircleMenuItem(image: R.image.circlemenu_copy(), tapAction: { _ in
+                    log.debug("コピー")
+                    NotificationCenter.default.post(name: .baseViewModelWillCopyWebView, object: nil)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_search(), tapAction: { _ in
-                    log.warning("検索")
+                    log.debug("検索")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                         guard let _ = self else { return }
                         NotificationCenter.default.post(name: .headerViewModelWillBeginEditing, object: true)
                     }
                 }),
                 CircleMenuItem(image: R.image.circlemenu_add(), tapAction: { _ in
-                    log.warning("アッド")
+                    log.debug("アッド")
                     NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: nil)
                 })
             ],
             [
                 CircleMenuItem(image: R.image.circlemenu_url(), tapAction: { _ in
-                    log.warning("URLコピー")
+                    log.debug("URLコピー")
                     NotificationCenter.default.post(name: .baseViewModelWillCopyUrl, object: nil)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_autoscroll(), tapAction: { _ in
-                    log.warning("自動スクロール")
+                    log.debug("自動スクロール")
                     NotificationCenter.default.post(name: .baseViewModelWillAutoScroll, object: nil)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_copy(), tapAction: { _ in
-                    log.warning("コピー")
-                    NotificationCenter.default.post(name: .baseViewModelWillCopyWebView, object: nil)
+                CircleMenuItem(image: R.image.circlemenu_historyforward(), tapAction: { _ in
+                    log.debug("ヒストリーフォワード")
+                    NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_form(), tapAction: { _ in
-                    log.warning("フォーム")
+                    log.debug("フォーム")
                     NotificationCenter.default.post(name: .baseViewModelWillRegisterAsForm, object: nil)
                 }),
                 CircleMenuItem(image: R.image.header_favorite(), tapAction: { _ in
-                    log.warning("お気に入り")
+                    log.debug("お気に入り")
                     NotificationCenter.default.post(name: .baseViewModelWillRegisterAsFavorite, object: nil)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_add_private(), tapAction: { _ in
-                    log.warning("プライベート")
+                    log.debug("プライベート")
                     NotificationCenter.default.post(name: .baseViewModelWillAddPrivateWebView, object: nil)
                 })
             ]

@@ -642,8 +642,8 @@
 		A5BCE7811FA50BFA00E0C6E5 /* FrontLayer */ = {
 			isa = PBXGroup;
 			children = (
-				A5BCE7821FA50BFA00E0C6E5 /* CircleMenu */,
 				A5BCE7861FA50BFA00E0C6E5 /* FrontLayer.swift */,
+				A5BCE7821FA50BFA00E0C6E5 /* CircleMenu */,
 				A5BCE7871FA50BFA00E0C6E5 /* OptionMenu */,
 			);
 			path = FrontLayer;
