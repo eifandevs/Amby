@@ -11,6 +11,7 @@ import UIKit
 
 protocol CircleMenuDelegate: class {
     func circleMenuDidClose()
+    func circleMenuDidActive()
 }
 
 class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
@@ -84,6 +85,8 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
 
             // CircleMenuItemを作成する
             if initialPt == nil {
+                // サークルメニューが作成されることを伝える
+                delegate?.circleMenuDidActive()
                 initialPt = pt
                 for (index, circleMenuItem) in circleMenuItems.enumerated() {
                     circleMenuItem.frame.size = frame.size
@@ -222,6 +225,11 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
                     self.closeCircleMenuItems()
                 }
             }
+        } else {
+            // エッジスワイプしたが、すぐに離したためMOVEまでイベントがいかないパターン
+            log.debug("edge swipe cancelled.")
+            isClosing = true
+            delegate?.circleMenuDidClose()
         }
     }
     

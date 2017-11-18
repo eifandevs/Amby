@@ -13,7 +13,7 @@ protocol FrontLayerDelegate: class {
     func frontLayerDidInvalidate()
 }
 
-class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
+class FrontLayer: UIView, OptionMenuTableViewDelegate {
     weak var delegate: FrontLayerDelegate?
     private var swipeDirection: EdgeSwipeDirection!
     private var optionMenu: OptionMenuTableView?
@@ -37,15 +37,6 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                 return
             }
             self.deleteStoreData()
-        }
-        
-        overlay = UIButton(frame: frame)
-        overlay.backgroundColor = UIColor.darkGray
-        self.overlay.alpha = 0
-        overlay.addTarget(self, action: #selector(self.onTappedOverlay(_:)), for: .touchUpInside)
-        addSubview(overlay)
-        UIView.animate(withDuration: 0.35) {
-            self.overlay.alpha = 0.2
         }
         
         // サークルメニューの作成
@@ -160,20 +151,6 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         deleteFavoriteIds = []
         deleteFormIds = []
     }
-
-// MARK: CircleMenuDelegate
-    func circleMenuDidClose() {
-        if self.optionMenu == nil {
-            UIView.animate(withDuration: 0.15, animations: {
-                // ここでおちる
-                self.overlay.alpha = 0
-            }, completion: { (finished) in
-                if finished {
-                    self.delegate?.frontLayerDidInvalidate()
-                }
-            })
-        }
-    }
     
 // MARK: OptionMenuTableViewDelegate
     func optionMenuDidClose() {
@@ -220,5 +197,39 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
 // MARK: Button Event
     @objc func onTappedOverlay(_ sender: AnyObject) {
         optionMenuDidClose()
+    }
+}
+
+// MARK: CircleMenuDelegate
+extension FrontLayer: CircleMenuDelegate {
+    func circleMenuDidActive() {
+        // オーバーレイの作成
+        overlay = UIButton(frame: frame)
+        overlay.backgroundColor = UIColor.darkGray
+        self.overlay.alpha = 0
+        overlay.addTarget(self, action: #selector(self.onTappedOverlay(_:)), for: .touchUpInside)
+        addSubview(overlay)
+        // addSubviewした段階だと、サークルメニューより前面に配置されているので、最背面に移動する
+        sendSubview(toBack: overlay)
+        UIView.animate(withDuration: 0.35) {
+            self.overlay.alpha = 0.2
+        }
+    }
+    
+    func circleMenuDidClose() {
+        if self.optionMenu == nil {
+            if let overlay = overlay {
+                UIView.animate(withDuration: 0.15, animations: {
+                    // ここでおちる
+                    overlay.alpha = 0
+                }, completion: { (finished) in
+                    if finished {
+                        self.delegate?.frontLayerDidInvalidate()
+                    }
+                })
+            } else {
+                self.delegate?.frontLayerDidInvalidate()
+            }
+        }
     }
 }
