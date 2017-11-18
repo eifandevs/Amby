@@ -29,6 +29,11 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
             guard let value = newValue, let icon = icon, let _ = label else {
                 return
             }
+            if let value = newValue, value.hasHttpsUrl {
+                icon.frame.size = iconSize
+            } else {
+                icon.frame.size = CGSize.zero
+            }
             // テキストフィールドがちらつくので、ラベルを再生成する
             self.label!.removeFromSuperview()
             self.label! = EGGradientLabel()
