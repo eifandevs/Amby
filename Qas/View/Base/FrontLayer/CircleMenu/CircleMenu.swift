@@ -34,12 +34,12 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     private var circleMenuLocations: [CGPoint] {
         let i = swipeDirection == .left ? 1 : -1
         return [
-            CGPoint(x: 0, y: -120), // Upper
-            CGPoint(x: i*60, y: -88), // UpperRight
-            CGPoint(x: i*95, y: -34), // RightUpper
-            CGPoint(x: i*95, y:  34), // RightLower
-            CGPoint(x: i*60, y: 88), // LowerRight
-            CGPoint(x: 0, y: 110) // Lower
+            CGPoint(x: 0, y: -130), // Upper
+            CGPoint(x: i*62, y: -98), // UpperRight
+            CGPoint(x: i*100, y: -40), // RightUpper
+            CGPoint(x: i*100, y:  40), // RightLower
+            CGPoint(x: i*62, y: 98), // LowerRight
+            CGPoint(x: 0, y: 130) // Lower
         ]
     }
     
