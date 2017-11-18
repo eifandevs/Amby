@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
+class OptionMenuTableViewCell: UITableViewCell {
     private var titleLabel: UILabel = UILabel()
     private var urlLabel: UILabel = UILabel()
     private var thumbnail: UIButton = UIButton()
@@ -112,7 +112,7 @@ class OptionMenuTableViewCell: UITableViewCell, UITextFieldDelegate {
     
 // MARK: - UISwitch Event
     @objc func onChangedSwitchValue(_ sender: AnyObject) {
-        if let menuItem = menuItem {
+        if let _ = menuItem {
 //            menuItem.switchAction?(switchControl.isOn)
         }
     }

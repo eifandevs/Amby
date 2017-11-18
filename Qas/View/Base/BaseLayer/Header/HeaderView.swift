@@ -15,7 +15,7 @@ protocol HeaderViewDelegate: class {
     func headerViewDidEndEditing(headerFieldUpdate: Bool)
 }
 
-class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowView {
+class HeaderView: UIView, ShadowView {
     weak var delegate: HeaderViewDelegate?
     private let headerField: HeaderField
     private var isEditing = false
@@ -174,49 +174,7 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
             button.alpha += value / (AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT)
         }
     }
-    
-// MARK: EGTextField Delegate
-    func headerFieldDidEndEditing(text: String?) {
-        if let text = text, !text.isEmpty {
-            self.delegate?.headerViewDidEndEditing(headerFieldUpdate: true)
-            viewModel.notifySearchWebView(text: text)
-        } else {
-            self.delegate?.headerViewDidEndEditing(headerFieldUpdate: false)
-        }
-    }
 
-// MARK: HeaderViewModel Delegate
-    
-    func headerViewModelDidChangeProgress(progress: CGFloat) {
-        progressBar.setProgress(progress)
-    }
-    
-    func headerViewModelDidChangeField(text: String) {
-        headerField.text = text
-    }
-    
-    func headerViewModelDidChangeFavorite(enable: Bool) {
-        if enable {
-            // すでに登録済みの場合は、お気に入りボタンの色を変更する
-            favoriteButton.setImage(image: R.image.header_favorite_selected(), color: UIColor.brilliantBlue)
-        } else {
-            favoriteButton.setImage(image: R.image.header_favorite(), color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
-        }
-    }
-    
-    func headerViewModelDidBeginEditing(forceEditFlg: Bool) {
-        if forceEditFlg {
-            // サークルメニューから検索を押下したとき
-            startEditing()
-        } else {
-            // 空のページを表示したとき
-            // 自動で編集状態にする
-            if headerField.text.isEmpty {
-                startEditing()
-            }
-        }
-    }
-    
     /// 検索開始
     func startEditing() {
         if !isEditing {
@@ -253,5 +211,50 @@ class HeaderView: UIView, HeaderViewModelDelegate, HeaderFieldDelegate, ShadowVi
     
     @objc func onTappedHeaderField(_ sender: AnyObject) {
         startEditing()
+    }
+}
+
+// MARK: HeaderViewModel Delegate
+extension HeaderView: HeaderViewModelDelegate {
+    func headerViewModelDidChangeProgress(progress: CGFloat) {
+        progressBar.setProgress(progress)
+    }
+    
+    func headerViewModelDidChangeField(text: String) {
+        headerField.text = text
+    }
+    
+    func headerViewModelDidChangeFavorite(enable: Bool) {
+        if enable {
+            // すでに登録済みの場合は、お気に入りボタンの色を変更する
+            favoriteButton.setImage(image: R.image.header_favorite_selected(), color: UIColor.brilliantBlue)
+        } else {
+            favoriteButton.setImage(image: R.image.header_favorite(), color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
+        }
+    }
+    
+    func headerViewModelDidBeginEditing(forceEditFlg: Bool) {
+        if forceEditFlg {
+            // サークルメニューから検索を押下したとき
+            startEditing()
+        } else {
+            // 空のページを表示したとき
+            // 自動で編集状態にする
+            if headerField.text.isEmpty {
+                startEditing()
+            }
+        }
+    }
+}
+
+// MARK: HeaderField Delegate
+extension HeaderView: HeaderFieldDelegate {
+    func headerFieldDidEndEditing(text: String?) {
+        if let text = text, !text.isEmpty {
+            self.delegate?.headerViewDidEndEditing(headerFieldUpdate: true)
+            viewModel.notifySearchWebView(text: text)
+        } else {
+            self.delegate?.headerViewDidEndEditing(headerFieldUpdate: false)
+        }
     }
 }

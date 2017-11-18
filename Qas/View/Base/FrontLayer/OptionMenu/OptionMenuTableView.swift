@@ -17,7 +17,7 @@ protocol OptionMenuTableViewDelegate: class {
     func optionMenuDidDeleteFormData(_id: String)
 }
 
-class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, ShadowView, OptionMenuTableViewDelegate {
+class OptionMenuTableView: UIView, ShadowView {
     weak var delegate: OptionMenuTableViewDelegate?
     private var tableView: UITableView = UITableView()
     private var detailView: OptionMenuTableView?
@@ -81,7 +81,64 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
         return viewModel.sectionItems.count > 0 ? viewModel.sectionItems.count : viewModel.menuItems.count > 0 ? 1 : 0
     }
 
+// MARK: Gesture Event
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            let point: CGPoint = sender.location(in: tableView)
+            let indexPath: IndexPath? = tableView.indexPathForRow(at: point)
+            if let indexPath = indexPath {
+                let menuItem = viewModel.menuItems[indexPath.section][indexPath.row]
+                if menuItem.type == .deletablePlain {
+                    tableView.beginUpdates()
+                    viewModel.menuItems[indexPath.section].remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    if viewModel.sectionItems.count > 0 && viewModel.menuItems[indexPath.section].count == 0 {
+                        viewModel.deleteSection(index: indexPath.section)
+                        tableView.deleteSections([indexPath.section], with: .automatic)
+                    }
+                    // 削除対象をFrontLayerに通知する
+                    // データの削除はフロントビューが閉じられた、もしくはBG遷移時に行う
+                    if viewModel is HistoryMenuViewModel {
+                        delegate?.optionMenuDidDeleteHistoryData(_id: menuItem._id!, date: menuItem.date!)
+                    } else if viewModel is FavoriteMenuViewModel {
+                        delegate?.optionMenuDidDeleteFavoriteData(_id: menuItem._id!)
+                    } else if viewModel is FormMenuViewModel {
+                        delegate?.optionMenuDidDeleteFormData(_id: menuItem._id!)
+                    }
+                    tableView.endUpdates()
+                }
+            }
+        default:
+            break
+        }
+    }
+    
+// MARK: Public Method
+    func closeKeyBoard() {
+        if let detailView = detailView {
+            detailView.endEditing(true)
+        }
+    }
+    
+// MARK: Button Event
+    @objc func onTappedOverlay(_ sender: AnyObject) {
+        // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
+        (sender as! UIButton).removeFromSuperview()
+        UIView.animate(withDuration: 0.15, animations: {
+            self.detailView?.alpha = 0
+        }, completion: { (finished) in
+            if finished {
+                self.detailView?.removeFromSuperview()
+                self.detailView = nil
+                self.delegate?.optionMenuDidCloseDetailMenu()
+            }
+        })
+    }
+}
+
 // MARK: - ScrollView Delegate
+extension OptionMenuTableView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 履歴表示で、コンテンツが残り２ページであれば、次の履歴を読みに行く
         if viewModel is HistoryMenuViewModel {
@@ -91,8 +148,10 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
             }
         }
     }
-    
+}
+
 // MARK: - TableView Delegate
+extension OptionMenuTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
     }
@@ -100,7 +159,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return viewModel.sectionItems.count > 0 ? AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT : 0
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(OptionMenuTableViewCell.self), for: indexPath) as! OptionMenuTableViewCell
         let menuItem: OptionMenuItem = viewModel.menuItems[indexPath.section][indexPath.row]
@@ -111,7 +170,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.sectionItems.count > 0 ? viewModel.sectionItems[section] : nil
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionItems.count > 0 ? AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT : 0)))
         label.backgroundColor = UIColor.black
@@ -161,41 +220,10 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
             }
         }
     }
+}
 
-// MARK: Gesture Event
-    @objc func longPressed(sender: UILongPressGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            let point: CGPoint = sender.location(in: tableView)
-            let indexPath: IndexPath? = tableView.indexPathForRow(at: point)
-            if let indexPath = indexPath {
-                let menuItem = viewModel.menuItems[indexPath.section][indexPath.row]
-                if menuItem.type == .deletablePlain {
-                    tableView.beginUpdates()
-                    viewModel.menuItems[indexPath.section].remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
-                    if viewModel.sectionItems.count > 0 && viewModel.menuItems[indexPath.section].count == 0 {
-                        viewModel.deleteSection(index: indexPath.section)
-                        tableView.deleteSections([indexPath.section], with: .automatic)
-                    }
-                    // 削除対象をFrontLayerに通知する
-                    // データの削除はフロントビューが閉じられた、もしくはBG遷移時に行う
-                    if viewModel is HistoryMenuViewModel {
-                        delegate?.optionMenuDidDeleteHistoryData(_id: menuItem._id!, date: menuItem.date!)
-                    } else if viewModel is FavoriteMenuViewModel {
-                        delegate?.optionMenuDidDeleteFavoriteData(_id: menuItem._id!)
-                    } else if viewModel is FormMenuViewModel {
-                        delegate?.optionMenuDidDeleteFormData(_id: menuItem._id!)
-                    }
-                    tableView.endUpdates()
-                }
-            }
-        default:
-            break
-        }
-    }
-    
-// MARK: OptionMenuTableViewDelegate
+// MARK: OptionMenuTableView Delegate
+extension OptionMenuTableView: OptionMenuTableViewDelegate {
     func optionMenuDidClose() {
         delegate?.optionMenuDidClose()
     }
@@ -203,7 +231,7 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
     func optionMenuDidCloseDetailMenu() {
         delegate?.optionMenuDidCloseDetailMenu()
     }
-
+    
     func optionMenuDidDeleteHistoryData(_id: String, date: Date) {
         delegate?.optionMenuDidDeleteHistoryData(_id: _id, date: date)
     }
@@ -214,27 +242,5 @@ class OptionMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, U
     
     func optionMenuDidDeleteFormData(_id: String) {
         delegate?.optionMenuDidDeleteFormData(_id: _id)
-    }
-    
-// MARK: Public Method
-    func closeKeyBoard() {
-        if let detailView = detailView {
-            detailView.endEditing(true)
-        }
-    }
-    
-// MARK: Button Event
-    @objc func onTappedOverlay(_ sender: AnyObject) {
-        // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
-        (sender as! UIButton).removeFromSuperview()
-        UIView.animate(withDuration: 0.15, animations: {
-            self.detailView?.alpha = 0
-        }, completion: { (finished) in
-            if finished {
-                self.detailView?.removeFromSuperview()
-                self.detailView = nil
-                self.delegate?.optionMenuDidCloseDetailMenu()
-            }
-        })
     }
 }

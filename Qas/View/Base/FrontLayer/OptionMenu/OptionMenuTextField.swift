@@ -9,6 +9,6 @@
 import Foundation
 import UIKit
 
-class OptionMenuTextField: UITextField{
+class OptionMenuTextField: UITextField {
     var edited: Bool = false
 }

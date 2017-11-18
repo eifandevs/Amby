@@ -13,7 +13,7 @@ protocol FrontLayerDelegate: class {
     func frontLayerDidInvalidate()
 }
 
-class FrontLayer: UIView, OptionMenuTableViewDelegate {
+class FrontLayer: UIView {
     weak var delegate: FrontLayerDelegate?
     private var swipeDirection: EdgeSwipeDirection!
     private var optionMenu: OptionMenuTableView?
@@ -152,7 +152,14 @@ class FrontLayer: UIView, OptionMenuTableViewDelegate {
         deleteFormIds = []
     }
     
-// MARK: OptionMenuTableViewDelegate
+// MARK: Button Event
+    @objc func onTappedOverlay(_ sender: AnyObject) {
+        optionMenuDidClose()
+    }
+}
+
+// MARK: OptionMenuTableView Delegate
+extension FrontLayer: OptionMenuTableViewDelegate {
     func optionMenuDidClose() {
         circleMenu.invalidate()
         deleteStoreData()
@@ -192,11 +199,6 @@ class FrontLayer: UIView, OptionMenuTableViewDelegate {
     
     func optionMenuDidDeleteFormData(_id: String) {
         deleteFormIds.append(_id)
-    }
-    
-// MARK: Button Event
-    @objc func onTappedOverlay(_ sender: AnyObject) {
-        optionMenuDidClose()
     }
 }
 

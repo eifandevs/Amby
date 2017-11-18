@@ -13,7 +13,7 @@ protocol HeaderFieldDelegate: class {
     func headerFieldDidEndEditing(text: String?)
 }
 
-class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
+class HeaderField: UIButton, ShadowView {
     weak var delegate: HeaderFieldDelegate?
     private var icon: UIImageView?
     private let iconSize: CGSize = CGSize(width: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT, height: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT)
@@ -175,8 +175,15 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
 
         return mString
     }
+    
+    // MARK: Button Event
+    @objc func onTappedCloseMenuButton(_ sender: AnyObject) {
+        delegate?.headerFieldDidEndEditing(text: nil)
+    }
+}
 
 // MARK: UITextField Delegate
+extension HeaderField: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
     }
@@ -187,10 +194,5 @@ class HeaderField: UIButton, ShadowView, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.delegate?.headerFieldDidEndEditing(text: textField.text)
         return true
-    }
-
-// MARK: Button Event
-    @objc func onTappedCloseMenuButton(_ sender: AnyObject) {
-        delegate?.headerFieldDidEndEditing(text: nil)
     }
 }

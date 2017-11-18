@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegate, SplashViewControllerDelegate {
+class BaseViewController: UIViewController {
     
     private var baseLayer: BaseLayer!
     private var frontLayer: FrontLayer!
@@ -78,35 +78,6 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
-// MARK: SplashViewController Delegate
-    func splashViewControllerDidEndDrawing() {
-        if let splash = splash {
-            UIView.animate(withDuration: 0.3, animations: {
-                splash.view.alpha = 0
-            }, completion: { (finished) in
-                if finished {
-                    splash.view.removeFromSuperview()
-                    splash.removeFromParentViewController()
-                    self.splash = nil
-                }
-            })
-        }
-    }
-
-// MARK: BaseLayer Delegate
-    func baseLayerDidInvalidate(direction: EdgeSwipeDirection) {
-        frontLayer = FrontLayer(frame: baseLayer.frame, swipeDirection: direction)
-        frontLayer.delegate = self
-        view.addSubview(frontLayer)
-    }
-    
-// MARK: FrontLayer Delegate
-    func frontLayerDidInvalidate() {
-        self.frontLayer.removeFromSuperview()
-        self.frontLayer = nil
-        self.baseLayer.validateUserInteraction()
-    }
 
 // MARK: WebView Touch
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
@@ -127,5 +98,40 @@ class BaseViewController: UIViewController, BaseLayerDelegate, FrontLayerDelegat
 // MARK: Button Event
     func closeHelpViewController() {
         log.debug("閉じる")
+    }
+}
+
+// MARK: BaseLayer Delegate
+extension BaseViewController: BaseLayerDelegate {
+    func baseLayerDidInvalidate(direction: EdgeSwipeDirection) {
+        frontLayer = FrontLayer(frame: baseLayer.frame, swipeDirection: direction)
+        frontLayer.delegate = self
+        view.addSubview(frontLayer)
+    }
+}
+
+// MARK: FrontLayer Delegate
+extension BaseViewController: FrontLayerDelegate {
+    func frontLayerDidInvalidate() {
+        self.frontLayer.removeFromSuperview()
+        self.frontLayer = nil
+        self.baseLayer.validateUserInteraction()
+    }
+}
+
+// MARK: SplashViewController Delegate
+extension BaseViewController: SplashViewControllerDelegate {
+    func splashViewControllerDidEndDrawing() {
+        if let splash = splash {
+            UIView.animate(withDuration: 0.3, animations: {
+                splash.view.alpha = 0
+            }, completion: { (finished) in
+                if finished {
+                    splash.view.removeFromSuperview()
+                    splash.removeFromParentViewController()
+                    self.splash = nil
+                }
+            })
+        }
     }
 }

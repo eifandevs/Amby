@@ -14,7 +14,7 @@ protocol CircleMenuDelegate: class {
     func circleMenuDidActive()
 }
 
-class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
+class CircleMenu: UIButton, ShadowView, CircleView {
     weak var delegate: CircleMenuDelegate?
     private var swipeDirection: EdgeSwipeDirection!
 
@@ -72,49 +72,6 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
 // MARK: Public Method
     func invalidate() {
         progress.invalidate()
-    }
-    
-// MARK: EGApplication Delegate
-    internal func screenTouchBegan(touch: UITouch) {
-    }
-    
-    internal func screenTouchMoved(touch: UITouch) {
-        if !isEdgeClosing && isEdgeSwiping {
-            let pt = touch.location(in: superview!)
-            center = pt
-
-            // CircleMenuItemを作成する
-            if initialPt == nil {
-                // サークルメニューが作成されることを伝える
-                delegate?.circleMenuDidActive()
-                initialPt = pt
-                for (index, circleMenuItem) in circleMenuItems.enumerated() {
-                    circleMenuItem.frame.size = frame.size
-                    circleMenuItem.center = initialPt!
-                    circleMenuItem.addTarget(self, action: #selector(self.onTappedCircleMenuItem(_:)), for: .touchUpInside)
-                    superview!.addSubview(circleMenuItem)
-                    UIView.animate(withDuration: 0.18, animations: {
-                        circleMenuItem.center = self.center + self.circleMenuLocations[index]
-                    })
-                }
-            }
-            
-            // CircleMenuとCircleMenuItemの重なり検知
-            collisionLoop()
-            // エッジクローズを検知する
-            edgeClose()
-        }
-    }
-    
-    internal func screenTouchEnded(touch: UITouch) {
-        if !isEdgeClosing && isEdgeSwiping {
-            isEdgeSwiping = false
-            startCloseAnimation()
-        }
-    }
-    
-    internal func screenTouchCancelled(touch: UITouch) {
-        screenTouchEnded(touch: touch)
     }
     
 // MARK: Touch Event
@@ -331,5 +288,50 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
             (sender as! CircleMenuItem).scheduledAction = true
             closeCircleMenuItems()
         }
+    }
+}
+
+// MARK: EGApplication Delegate
+extension CircleMenu: EGApplicationDelegate {
+    internal func screenTouchBegan(touch: UITouch) {
+    }
+    
+    internal func screenTouchMoved(touch: UITouch) {
+        if !isEdgeClosing && isEdgeSwiping {
+            let pt = touch.location(in: superview!)
+            center = pt
+            
+            // CircleMenuItemを作成する
+            if initialPt == nil {
+                // サークルメニューが作成されることを伝える
+                delegate?.circleMenuDidActive()
+                initialPt = pt
+                for (index, circleMenuItem) in circleMenuItems.enumerated() {
+                    circleMenuItem.frame.size = frame.size
+                    circleMenuItem.center = initialPt!
+                    circleMenuItem.addTarget(self, action: #selector(self.onTappedCircleMenuItem(_:)), for: .touchUpInside)
+                    superview!.addSubview(circleMenuItem)
+                    UIView.animate(withDuration: 0.18, animations: {
+                        circleMenuItem.center = self.center + self.circleMenuLocations[index]
+                    })
+                }
+            }
+            
+            // CircleMenuとCircleMenuItemの重なり検知
+            collisionLoop()
+            // エッジクローズを検知する
+            edgeClose()
+        }
+    }
+    
+    internal func screenTouchEnded(touch: UITouch) {
+        if !isEdgeClosing && isEdgeSwiping {
+            isEdgeSwiping = false
+            startCloseAnimation()
+        }
+    }
+    
+    internal func screenTouchCancelled(touch: UITouch) {
+        screenTouchEnded(touch: touch)
     }
 }

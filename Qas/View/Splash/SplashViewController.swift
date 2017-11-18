@@ -13,7 +13,7 @@ protocol SplashViewControllerDelegate: class {
     func splashViewControllerDidEndDrawing()
 }
 
-class SplashViewController: UIViewController, LTMorphingLabelDelegate {
+class SplashViewController: UIViewController {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var splashLabel: LTMorphingLabel!
@@ -34,20 +34,11 @@ class SplashViewController: UIViewController, LTMorphingLabelDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+}
+
+// MARK: LTMorphingLabel Delegate
+extension SplashViewController: LTMorphingLabelDelegate {
     func morphingDidComplete(_ label: LTMorphingLabel) {
         delegate?.splashViewControllerDidEndDrawing()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

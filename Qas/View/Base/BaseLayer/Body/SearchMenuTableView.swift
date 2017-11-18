@@ -14,7 +14,7 @@ protocol SearchMenuTableViewDelegate: class  {
     func searchMenuDidClose()
 }
 
-class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, SearchMenuTableViewModelDelegate {
+class SearchMenuTableView: UIView {
 
     weak var delegate: SearchMenuTableViewDelegate?
     private let viewModel: SearchMenuTableViewModel = SearchMenuTableViewModel()
@@ -79,8 +79,15 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     func getModelData() {
         
     }
+    
+// MARK: Touch Event
+    @objc func tapped(sender: UITapGestureRecognizer) {
+        delegate?.searchMenuDidEndEditing()
+    }
+}
 
-// MARK: TableView Delegate
+// MARK: UITableView Delegate
+extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -125,7 +132,7 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: 11)))
         label.backgroundColor = UIColor.black
@@ -146,13 +153,10 @@ class SearchMenuTableView: UIView, UITableViewDelegate, UITableViewDataSource, S
         }
         delegate?.searchMenuDidClose()
     }
-    
-// MARK: Touch Event
-    @objc func tapped(sender: UITapGestureRecognizer) {
-        delegate?.searchMenuDidEndEditing()
-    }
-    
-// MARK: SearchMenuTableViewModelDelegate
+}
+
+// MARK: SearchMenuTableViewModel Delegate
+extension SearchMenuTableView: SearchMenuTableViewModelDelegate {
     func searchMenuViewWillUpdateLayout() {
         tableView.reloadData()
         alpha = 1

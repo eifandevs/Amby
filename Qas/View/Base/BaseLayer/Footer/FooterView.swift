@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import NVActivityIndicatorView
 
-class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDelegate {
+class FooterView: UIView, ShadowView {
     
     private var viewModel = FooterViewModel(index: UserDefaults.standard.integer(forKey: AppConst.KEY_LOCATION_INDEX))
     private let scrollView = UIScrollView()
@@ -105,9 +105,48 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
             }
         }
     }
+    
+// MARK: Gesture Event
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            for (index, thumbnail) in self.thumbnails.enumerated() {
+                if sender.view == thumbnail {
+                    self.viewModel.notifyRemoveWebView(index: index)
+                    break
+                }
+            }
+        default:break
+        }
+    }
+    
+// MARK: Button Event
+    @objc func onTappedThumbnail(_ sender: AnyObject) {
+        viewModel.notifyChangeWebView(index: thumbnails.index(of: (sender as! Thumbnail))!)
+    }
+}
+
+// MARK: ScrollView Delegate
+extension FooterView: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        thumbnails.forEach { (thumbnail) in
+            UIView.animate(withDuration: 0.2, animations: {
+                thumbnail.thumbnailInfo.alpha = 1
+            })
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        thumbnails.forEach { (thumbnail) in
+            UIView.animate(withDuration: 0.2, animations: {
+                thumbnail.thumbnailInfo.alpha = 0
+            })
+        }
+    }
+}
 
 // MARK: FooterViewModel Delegate
-
+extension FooterView: FooterViewModelDelegate {
     func footerViewModelDidAddThumbnail(context: String, isPrivateMode: Bool) {
         // 新しいサムネイルスペースを作成
         let _ = createCaptureSpace(context: context, isPrivateMode: isPrivateMode)
@@ -203,41 +242,5 @@ class FooterView: UIView, ShadowView, FooterViewModelDelegate, UIScrollViewDeleg
         }
         let offset = CGPoint(x: ptX, y: scrollView.contentOffset.y)
         scrollView.setContentOffset(offset, animated: true)
-    }
-
-// MARK: ScrollView Delegate
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        thumbnails.forEach { (thumbnail) in
-            UIView.animate(withDuration: 0.2, animations: {
-                thumbnail.thumbnailInfo.alpha = 1
-            })
-        }
-    }
-
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        thumbnails.forEach { (thumbnail) in
-            UIView.animate(withDuration: 0.2, animations: {
-                thumbnail.thumbnailInfo.alpha = 0
-            })
-        }
-    }
-
-// MARK: Gesture Event
-    @objc func longPressed(sender: UILongPressGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            for (index, thumbnail) in self.thumbnails.enumerated() {
-                if sender.view == thumbnail {
-                    self.viewModel.notifyRemoveWebView(index: index)
-                    break
-                }
-            }
-        default:break
-        }
-    }
-    
-// MARK: Button Event
-    @objc func onTappedThumbnail(_ sender: AnyObject) {
-        viewModel.notifyChangeWebView(index: thumbnails.index(of: (sender as! Thumbnail))!)
     }
 }

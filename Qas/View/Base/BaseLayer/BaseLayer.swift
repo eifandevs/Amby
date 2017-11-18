@@ -13,7 +13,7 @@ protocol BaseLayerDelegate: class {
     func baseLayerDidInvalidate(direction: EdgeSwipeDirection)
 }
 
-class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableViewDelegate, EGApplicationDelegate {
+class BaseLayer: UIView {
     
     weak var delegate: BaseLayerDelegate?
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT))
@@ -75,23 +75,28 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     func validateUserInteraction() {
         baseView.validateUserInteraction()
     }
-// MARK: SearchMenuTableView Delegate
-    func searchMenuDidEndEditing() {
-        log.debug("[BaseLayer Event]: searchMenuDidEndEditing. close keyboard")
-        headerView.closeKeyBoard()
+}
+
+// MARK: EGApplication Delegate
+extension BaseLayer: EGApplicationDelegate {
+    // MARK: Screen Event
+    func screenTouchBegan(touch: UITouch) {
     }
-    
-    func searchMenuDidClose() {
-        log.debug("[BaseLayer Event]: searchMenuDidClose")
-        headerViewDidEndEditing(headerFieldUpdate: false)
+    func screenTouchEnded(touch: UITouch) {
     }
-    
+    func screenTouchMoved(touch: UITouch) {
+    }
+    func screenTouchCancelled(touch: UITouch) {
+    }
+}
+
 // MARK: HeaderView Delegate
+extension BaseLayer: HeaderViewDelegate {
     func headerViewDidBeginEditing() {
         log.debug("[BaseLayer Event]: headerViewDidBeginEditing")
         // 履歴検索を行うので、事前に永続化しておく
         NotificationCenter.default.post(name: .baseViewModelWillStoreHistory, object: nil)
-
+        
         // ディスプレイタップのイベントをベースビューから奪う
         // サークルメニューを表示させないため
         EGApplication.sharedMyApplication.egDelegate = self
@@ -109,18 +114,10 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
         searchMenuTableView = nil
         headerView.finishEditing(headerFieldUpdate: headerFieldUpdate)
     }
+}
 
-// MARK: Screen Event
-    func screenTouchBegan(touch: UITouch) {
-    }
-    func screenTouchEnded(touch: UITouch) {
-    }
-    func screenTouchMoved(touch: UITouch) {
-    }
-    func screenTouchCancelled(touch: UITouch) {
-    }
-    
 // MARK: BaseView Delegate
+extension BaseLayer: BaseViewDelegate {
     func baseViewWillAutoInput() {
         log.debug("[BaseLayer Event]: baseViewWillAutoInput")
         // ベースビューから自動入力したいと通知がきたので、判断する
@@ -142,7 +139,6 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
     }
     
     func baseViewDidTouchBegan() {
-        //
     }
     
     func baseViewDidTouchEnd() {
@@ -214,5 +210,18 @@ class BaseLayer: UIView, HeaderViewDelegate, BaseViewDelegate, SearchMenuTableVi
                 }
             }
         }
+    }
+}
+
+// MARK: SearchMenuTableView Delegate
+extension BaseLayer: SearchMenuTableViewDelegate {
+    func searchMenuDidEndEditing() {
+        log.debug("[BaseLayer Event]: searchMenuDidEndEditing. close keyboard")
+        headerView.closeKeyBoard()
+    }
+    
+    func searchMenuDidClose() {
+        log.debug("[BaseLayer Event]: searchMenuDidClose")
+        headerViewDidEndEditing(headerFieldUpdate: false)
     }
 }
