@@ -15,7 +15,7 @@ protocol FrontLayerDelegate: class {
 
 class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
     weak var delegate: FrontLayerDelegate?
-    var swipeDirection: EdgeSwipeDirection = .none
+    private var swipeDirection: EdgeSwipeDirection!
     private var optionMenu: OptionMenuTableView?
     private var overlay: UIButton!
     private var circleMenu: CircleMenu!
@@ -26,8 +26,11 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
 
     let kCircleButtonRadius = 43;
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    convenience init(frame: CGRect, swipeDirection: EdgeSwipeDirection) {
+        self.init(frame: frame)
+        // スワイプ方向の保持
+        self.swipeDirection = swipeDirection
+        
         // バックグラウンドに入るときに保持していた削除対象を削除する
         NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else {
@@ -44,13 +47,8 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
         UIView.animate(withDuration: 0.35) {
             self.overlay.alpha = 0.2
         }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func didMoveToSuperview() {
+        
+        // サークルメニューの作成
         let menuItems = [
             [
                 CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { [weak self] (initialPt: CGPoint) in
@@ -126,10 +124,16 @@ class FrontLayer: UIView, CircleMenuDelegate, OptionMenuTableViewDelegate {
                 })
             ]
         ]
-        circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: kCircleButtonRadius, height: kCircleButtonRadius)) ,menuItems: menuItems)
-        circleMenu.swipeDirection = swipeDirection
+        circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: kCircleButtonRadius, height: kCircleButtonRadius)) ,menuItems: menuItems, swipeDirection: swipeDirection)
         circleMenu.delegate = self
         addSubview(circleMenu)
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 // MARK: Private Method

@@ -15,7 +15,7 @@ protocol CircleMenuDelegate: class {
 
 class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     weak var delegate: CircleMenuDelegate?
-    var swipeDirection: EdgeSwipeDirection = .none
+    private var swipeDirection: EdgeSwipeDirection!
 
     private var initialPt: CGPoint?
     private var isEdgeSwiping = true
@@ -44,10 +44,19 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+    }
+    
+    convenience init(frame: CGRect, menuItems: [[CircleMenuItem]], swipeDirection: EdgeSwipeDirection) {
+        self.init(frame: frame)
+        circleMenuItemGroup = menuItems
+        self.swipeDirection = swipeDirection
+        // 陰影と角丸
         addCircleShadow()
         addCircle()
         setImage(UIColor.gray.circleImage(size: CGSize(width: 33, height: 33)), for: .normal)
         alpha = 0.4
+        
+        // 画面タッチイベントの検知
         EGApplication.sharedMyApplication.egDelegate = self
         
         // プログレス
@@ -55,10 +64,6 @@ class CircleMenu: UIButton, ShadowView, CircleView, EGApplicationDelegate {
         addSubview(progress)
     }
     
-    convenience init(frame: CGRect, menuItems: [[CircleMenuItem]]) {
-        self.init(frame: frame)
-        circleMenuItemGroup = menuItems
-    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
