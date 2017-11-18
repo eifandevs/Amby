@@ -143,8 +143,10 @@ extension OptionMenuTableView: UIScrollViewDelegate {
         // 履歴表示で、コンテンツが残り２ページであれば、次の履歴を読みに行く
         if viewModel is HistoryMenuViewModel {
             if scrollView.contentOffset.y < scrollView.contentSize.height - (frame.size.height * 2) {
-                (viewModel as! HistoryMenuViewModel).updateHistoryData()
-                tableView.reloadData()
+                if (viewModel as! HistoryMenuViewModel).updateHistoryData() {
+                    log.debug("reload history data.")
+                    tableView.reloadData()
+                }
             }
         }
     }

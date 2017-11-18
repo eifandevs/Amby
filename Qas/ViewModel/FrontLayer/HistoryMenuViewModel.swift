@@ -36,7 +36,7 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
         }
     }
     
-    func updateHistoryData() {
+    func updateHistoryData() -> Bool {
         if readFiles.count > 0 {
             let latestFiles = readFiles.prefix(readInterval)
             readFiles = Array(readFiles.dropFirst(readInterval))
@@ -55,6 +55,8 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
                     log.error("failed to read common history. error: \(error.localizedDescription)")
                 }
             })
+            return true
         }
+        return false
     }
 }
