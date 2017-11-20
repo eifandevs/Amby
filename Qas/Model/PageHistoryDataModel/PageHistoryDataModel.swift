@@ -36,6 +36,11 @@ final class PageHistoryDataModel {
         return PageHistoryDataModel.s.histories.count > locationIndex ? PageHistoryDataModel.s.histories[locationIndex].context : nil
     }
     
+    // 現在の保存モード
+    var currentIsPrivate: String? {
+        return PageHistoryDataModel.s.histories.count > locationIndex ? PageHistoryDataModel.s.histories[locationIndex].isPrivate : "false"
+    }
+    
     private init() {
         // ロケーション情報取得
         locationIndex = UserDefaults.standard.integer(forKey: AppConst.KEY_LOCATION_INDEX)

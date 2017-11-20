@@ -36,6 +36,11 @@ class BaseViewModel {
         return PageHistoryDataModel.s.currentContext
     }
     
+    /// 現在の履歴保存モード
+    var currentIsPrivate: String? {
+        return PageHistoryDataModel.s.currentIsPrivate
+    }
+    
     var headerFieldText: String = "" {
         didSet {
             center.post(name: .headerViewModelWillChangeField, object: headerFieldText)
@@ -60,7 +65,7 @@ class BaseViewModel {
     private let center = NotificationCenter.default
     
     var isPrivateMode: Bool? {
-        return PageHistoryDataModel.s.histories.count > locationIndex ? PageHistoryDataModel.s.histories[locationIndex].isPrivate == "true" : false
+        return currentIsPrivate == "true"
     }
     
     /// 自動スクロールのタイムインターバル
@@ -249,9 +254,9 @@ class BaseViewModel {
     
     func addWebView(url: String? = nil, isPrivate: String? = nil) {
         if let url = url {
-            PageHistoryDataModel.s.histories.append(PageHistory(url: url, isPrivate: isPrivate ?? PageHistoryDataModel.s.histories[locationIndex].isPrivate))
+            PageHistoryDataModel.s.histories.append(PageHistory(url: url, isPrivate: isPrivate ?? "false"))
         } else {
-            PageHistoryDataModel.s.histories.append(PageHistory(isPrivate: isPrivate ?? PageHistoryDataModel.s.histories[locationIndex].isPrivate))
+            PageHistoryDataModel.s.histories.append(PageHistory(isPrivate: isPrivate ?? "false"))
         }
         PageHistoryDataModel.s.locationIndex = PageHistoryDataModel.s.histories.count - 1
         self.reloadFavorite()

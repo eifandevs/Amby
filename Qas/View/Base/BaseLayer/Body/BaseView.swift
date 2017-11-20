@@ -565,23 +565,23 @@ extension BaseView: BaseViewModelDelegate {
                 front = nil
             }
             webView.removeFromSuperview()
-        }
-        webViews.remove(at: index)
-        
-        // くるくるを更新
-        updateNetworkActivityIndicator()
-        
-        if webViews.count == 0 {
-            viewModel.addWebView()
-        } else if isFrontDelete {
-            // フロントの削除で、削除後にwebviewが存在する場合
-            // 存在しない場合は、AddWebViewが呼ばれる
-            if let current = webViews[viewModel.locationIndex] {
-                current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
-                front = current
-                bringSubview(toFront: current)
-            } else {
-                loadWebView()
+            webViews.remove(at: index)
+            
+            // くるくるを更新
+            updateNetworkActivityIndicator()
+            
+            if webViews.count == 0 {
+                viewModel.addWebView()
+            } else if isFrontDelete {
+                // フロントの削除で、削除後にwebviewが存在する場合
+                // 存在しない場合は、AddWebViewが呼ばれる
+                if let current = webViews[viewModel.locationIndex] {
+                    current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
+                    front = current
+                    bringSubview(toFront: current)
+                } else {
+                    loadWebView()
+                }
             }
         }
     }
@@ -759,7 +759,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
                 log.debug("receive new window event. url: \(url)")
                 if url != AppConst.URL_BLANK {
                     // about:blankは無視する
-                    viewModel.addWebView(url: navigationAction.request.url?.absoluteString)
+                    viewModel.addWebView(url: navigationAction.request.url?.absoluteString, isPrivate: viewModel.currentIsPrivate)
                 }
                 return nil
             }
