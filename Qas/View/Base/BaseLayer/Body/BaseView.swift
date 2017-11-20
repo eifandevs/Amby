@@ -77,7 +77,7 @@ class BaseView: UIView {
     /// スワイプ方向
     private var swipeDirection: EdgeSwipeDirection = .none
     /// タッチ開始位置
-    private var touchBeganPoint: CGPoint = CGPoint.zero
+    private var touchBeganPoint: CGPoint?
     /// スワイプでページ切り替えを検知したかどうかのフラグ
     private var isChangingFront: Bool = false
 
@@ -267,6 +267,7 @@ class BaseView: UIView {
     }
     
     private func invalidateUserInteraction() {
+        touchBeganPoint = nil
         isUserInteractionEnabled = false
         front.scrollView.isScrollEnabled = false
         front.scrollView.bounces = false
@@ -364,9 +365,9 @@ extension BaseView: EGApplicationDelegate {
         delegate?.baseViewDidTouchBegan()
         touchBeganPoint = touch.location(in: self)
         isChangingFront = false
-        if touchBeganPoint.x < AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
+        if touchBeganPoint!.x < AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
             swipeDirection = .left
-        } else if touchBeganPoint.x > self.bounds.size.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
+        } else if touchBeganPoint!.x > self.bounds.size.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
             swipeDirection = .right
         } else {
             swipeDirection = .none
@@ -374,7 +375,7 @@ extension BaseView: EGApplicationDelegate {
     }
     
     internal func screenTouchMoved(touch: UITouch) {
-        if front.scrollView.isScrollEnabled {
+        if let touchBeganPoint = touchBeganPoint, front.scrollView.isScrollEnabled {
             let touchPoint = touch.location(in: self)
             if ((swipeDirection == .left && touchPoint.x > AppConst.FRONT_LAYER_EDGE_SWIPE_EREA + 20) ||
                 (swipeDirection == .right && touchPoint.x < self.bounds.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA - 20)) {
@@ -401,7 +402,7 @@ extension BaseView: EGApplicationDelegate {
                                 isChangingFront = true
                             }
                         } else {
-                            touchBeganPoint.y = -1
+                            self.touchBeganPoint!.y = -1
                         }
                     }
                 }

@@ -178,6 +178,7 @@ extension SearchMenuTableView: SearchMenuTableViewModelDelegate {
     }
     
     @objc func onTappedOverlay(_ sender: AnyObject) {
+        // サーチメニューが透明になっている時にタップ
         delegate?.searchMenuDidClose()
         (sender as! UIButton).removeFromSuperview()
     }

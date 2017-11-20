@@ -96,10 +96,7 @@ extension BaseLayer: HeaderViewDelegate {
         log.debug("[BaseLayer Event]: headerViewDidBeginEditing")
         // 履歴検索を行うので、事前に永続化しておく
         NotificationCenter.default.post(name: .baseViewModelWillStoreHistory, object: nil)
-        
-        // ディスプレイタップのイベントをベースビューから奪う
-        // サークルメニューを表示させないため
-        EGApplication.sharedMyApplication.egDelegate = self
+
         isHeaderViewEditing = true
         searchMenuTableView = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
         searchMenuTableView?.delegate = self
@@ -107,7 +104,7 @@ extension BaseLayer: HeaderViewDelegate {
     }
     
     func headerViewDidEndEditing(headerFieldUpdate: Bool) {
-        log.debug("[BaseLayer Event]: headerViewDidEndEditing")
+        log.debug("[BaseLayer Event]: headerViewDidEndEditing headerFieldUpdate: \(headerFieldUpdate)")
         EGApplication.sharedMyApplication.egDelegate = baseView
         isHeaderViewEditing = false
         searchMenuTableView!.removeFromSuperview()
@@ -128,7 +125,14 @@ extension BaseLayer: BaseViewDelegate {
     
     func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection) {
         log.debug("[BaseLayer Event]: baseViewDidEdgeSwiped")
-        delegate?.baseLayerDidInvalidate(direction: direction)
+        // 検索中の場合は、検索画面を閉じる
+        if let _ = searchMenuTableView {
+            log.debug("close search menu.")
+            headerViewDidEndEditing(headerFieldUpdate: false)
+            validateUserInteraction()
+        } else {
+            delegate?.baseLayerDidInvalidate(direction: direction)
+        }
     }
     
     func baseViewDidChangeFront() {
