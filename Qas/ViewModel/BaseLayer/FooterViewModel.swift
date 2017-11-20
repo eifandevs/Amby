@@ -62,7 +62,7 @@ class FooterViewModel {
         // webviewロード完了
         center.addObserver(forName: .footerViewModelWillEndLoading, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[Footer Event]: footerViewModelWillEndLoading")
+            log.debug("[Footer Event]: footerViewModelWillEndLoading notification: \(notification)")
             // FooterViewに通知をする
             let context = (notification.object as! [String: String])["context"]!
             let url = (notification.object as! [String: String])["url"]!

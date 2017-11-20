@@ -51,6 +51,9 @@ final class AppConst {
     static let PATH_DB = DeviceConst.CACHES_PATH + "/database"
     static let PATH_URL_PAGE_HISTORY = URL(fileURLWithPath: AppConst.PATH_PAGE_HISTORY)
     
+    // MARK: - URL
+    static let URL_BLANK = "about:blank"
+    static let URL_ITUNES_STORE = "//itunes.apple.com/"
     // MARK: - 設定画面
     static let SETTING_SECTION_AUTO_SCROLL = "自動スクロール設定"
     static let SETTING_SECTION_HISTORY = "履歴保存件数（何日分）"

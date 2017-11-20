@@ -734,7 +734,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             self.autoScrollTimer = nil
         }
         
-        if ((url.absoluteString.range(of: "//itunes.apple.com/") != nil) ||
+        if ((url.absoluteString.range(of: AppConst.URL_ITUNES_STORE) != nil) ||
             (!url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") && !url.absoluteString.hasPrefix("file://"))) {
             UIApplication.shared.openURL(url)
             decisionHandler(.cancel)
@@ -755,9 +755,14 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if navigationAction.targetFrame == nil {
-            log.debug("receive new window event.")
-            viewModel.addWebView(url: navigationAction.request.url?.absoluteString)
-            return nil
+            if let url = navigationAction.request.url?.absoluteString {
+                log.debug("receive new window event. url: \(url)")
+                if url != AppConst.URL_BLANK {
+                    // about:blankは無視する
+                    viewModel.addWebView(url: navigationAction.request.url?.absoluteString)
+                }
+                return nil
+            }
         }
         return nil
     }
