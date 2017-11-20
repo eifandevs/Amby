@@ -23,7 +23,7 @@ final class CommonHistoryDataModel {
             for item in histories {
                 let dateFormatter = DateFormatter()
                 dateFormatter.locale = Locale(identifier: NSLocale.current.identifier)
-                dateFormatter.dateFormat = AppConst.DATE_FORMAT
+                dateFormatter.dateFormat = AppConst.APP_DATE_FORMAT
                 let key = dateFormatter.string(from: item.date)
                 if commonHistoryByDate[key] == nil {
                     commonHistoryByDate[key] = [item]

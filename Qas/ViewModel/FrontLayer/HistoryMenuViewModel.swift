@@ -25,11 +25,11 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
             let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_COMMON_HISTORY)
             readFiles = list.map({ (path: String) -> String in
                 return path.substring(to: path.index(path.startIndex, offsetBy: 8))
-            }).reversed()
+            }).sorted(by: { $1.toDate() < $0.toDate() })
         } catch let error as NSError {
             log.error("failed to read common history. error: \(error.localizedDescription)")
         }
-        updateHistoryData()
+        _ = updateHistoryData()
         commonAction = { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
             NotificationCenter.default.post(name: .baseViewModelWillSearchWebView, object: menuItem.url!)
             return nil

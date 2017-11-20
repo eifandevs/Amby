@@ -60,6 +60,15 @@ extension String {
         }
     }
     
+    /// 文字列からDate型作成
+    func toDate(format: String = AppConst.APP_DATE_FORMAT) -> Date {
+        let formatter = DateFormatter()
+        let jaLocale = Locale(identifier: AppConst.APP_LOCALE)
+        formatter.locale = jaLocale
+        formatter.dateFormat = format
+        return formatter.date(from: self)!
+    }
+    
     func index(from: Int) -> Index {
         return self.index(startIndex, offsetBy: from)
     }
