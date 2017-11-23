@@ -19,40 +19,60 @@ class HelpMenuViewModel: OptionMenuTableViewModel {
     override func setup() {
         menuItems = [
             [
-                OptionMenuItem(title: "フォームについて", action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                OptionMenuItem(title: MessageConst.HELP_HISTORY_SAVE_TITLE, action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     guard let `self` = self else { return nil }
-                    let subtitle = "フォームの自動入力"
-                    let message = "1. Webページ上のフォームを入力する\n\n2. フォーム登録ボタンを押下する\n\n3. 次回からキーボード表示時に、自動入力ダイアログが表示されます"
+                    let subtitle = MessageConst.HELP_HISTORY_SAVE_SUBTITLE
+                    let message = MessageConst.HELP_HISTORY_SAVE_MESSAGE
+                    NotificationCenter.default.post(name: .baseViewControllerWillPresentHelp, object: [
+                        self.objectKeySubTitle: subtitle,
+                        self.objectKeyMessage : message
+                        ])
+                    return nil
+                }),
+                OptionMenuItem(title: MessageConst.HELP_SEARCH_CLOSE_TITLE, action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    guard let `self` = self else { return nil }
+                    let subtitle = MessageConst.HELP_SEARCH_CLOSE_SUBTITLE
+                    let message = MessageConst.HELP_SEARCH_CLOSE_MESSAGE
+                    NotificationCenter.default.post(name: .baseViewControllerWillPresentHelp, object: [
+                        self.objectKeySubTitle: subtitle,
+                        self.objectKeyMessage : message
+                        ])
+                    return nil
+                }),
+                OptionMenuItem(title: MessageConst.HELP_FORM_TITLE, action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                    guard let `self` = self else { return nil }
+                    let subtitle = MessageConst.HELP_FORM_SUB_TITLE
+                    let message = MessageConst.HELP_FORM_MESSAGE
                     NotificationCenter.default.post(name: .baseViewControllerWillPresentHelp, object: [
                         self.objectKeySubTitle: subtitle,
                         self.objectKeyMessage : message
                     ])
                     return nil
                 }),
-                OptionMenuItem(title: "自動スクロールについて", action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                OptionMenuItem(title: MessageConst.HELP_AUTO_SCROLL_TITLE, action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     guard let `self` = self else { return nil }
-                    let subtitle = "スクロール速度の調整"
-                    let message = "1. 設定メニューを開く\n\n2. 自動スクロール設定より、変更可能です\n\n3. 自動スクロールは、ページを更新または、再度自動スクロールボタン押下で停止します"
+                    let subtitle = MessageConst.HELP_AUTO_SCROLL_SUBTITLE
+                    let message = MessageConst.HELP_AUTO_SCROLL_MESSAGE
                     NotificationCenter.default.post(name: .baseViewControllerWillPresentHelp, object: [
                         self.objectKeySubTitle: subtitle,
                         self.objectKeyMessage : message
                     ])
                     return nil
                 }),
-                OptionMenuItem(title: "タブ間を移動する", action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                OptionMenuItem(title: MessageConst.HELP_TAB_TRANSITION_TITLE, action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     guard let `self` = self else { return nil }
-                    let subtitle = "タブの移動パターン"
-                    let message = "1. Webページ上を左右にスライドする\n\n2. フッターのサムネイルをタップする"
+                    let subtitle = MessageConst.HELP_TAB_TRANSITION_SUBTITLE
+                    let message = MessageConst.HELP_TAB_TRANSITION_MESSAGE
                     NotificationCenter.default.post(name: .baseViewControllerWillPresentHelp, object: [
                         self.objectKeySubTitle: subtitle,
                         self.objectKeyMessage : message
                     ])
                     return nil
                 }),
-                OptionMenuItem(title: "タブを削除する", action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
+                OptionMenuItem(title: MessageConst.HELP_TAB_DELETE_TITLE, action: { [weak self] (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     guard let `self` = self else { return nil }
-                    let subtitle = "タブの削除パターン"
-                    let message = "1. ヘッダー右上の削除ボタン(X)をタップする\n\n2. フッターのサムネイルを長押しする"
+                    let subtitle = MessageConst.HELP_TAB_DELETE_SUBTITLE
+                    let message = MessageConst.HELP_TAB_DELETE_MESSAGE
                     NotificationCenter.default.post(name: .baseViewControllerWillPresentHelp, object: [
                         self.objectKeySubTitle: subtitle,
                         self.objectKeyMessage : message
