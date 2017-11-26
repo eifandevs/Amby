@@ -80,6 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func initialize() {
         UserDefaults.standard.set(AppConst.UD_LOCATION_INDEX, forKey: AppConst.KEY_LOCATION_INDEX)
+        UserDefaults.standard.set(AppConst.UD_CURRENT_CONTEXT, forKey: AppConst.KEY_CURRENT_CONTEXT)
         UserDefaults.standard.set(AppConst.UD_AUTO_SCROLL, forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL)
         UserDefaults.standard.set(AppConst.UD_COMMON_HISTORY_SAVE_TERM, forKey: AppConst.KEY_HISTORY_SAVE_TERM)
         UserDefaults.standard.set(AppConst.UD_SEARCH_HISTORY_SAVE_TERM, forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_TERM)

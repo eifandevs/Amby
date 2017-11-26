@@ -11,13 +11,22 @@ import UIKit
 
 final class PageHistoryDataModel {
     static let s = PageHistoryDataModel()
-    // 現在表示しているwebviewのインデックス
+
+    // 現在表示しているwebviewのコンテキスト
+    var context: String = UserDefaults.standard.string(forKey: AppConst.KEY_CURRENT_CONTEXT)! {
+        didSet {
+            log.debug("current context changed. \(oldValue) -> \(context)")
+            UserDefaults.standard.set(currentContext, forKey: AppConst.KEY_CURRENT_CONTEXT)
+        }
+    }
+
     var locationIndex: Int {
         didSet {
             log.debug("location index changed. \(oldValue) -> \(locationIndex)")
             UserDefaults.standard.set(locationIndex, forKey: AppConst.KEY_LOCATION_INDEX)
         }
     }
+
     // webViewそれぞれの履歴とカレントページインデックス
     var histories: [PageHistory] = []
     
@@ -30,18 +39,22 @@ final class PageHistoryDataModel {
     var currentUrl: String {
         return histories[safe: locationIndex] != nil ? histories[locationIndex].url : ""
     }
-    
+
     // 現在のコンテキスト
     var currentContext: String? {
         return PageHistoryDataModel.s.histories.count > locationIndex ? PageHistoryDataModel.s.histories[locationIndex].context : nil
     }
-    
+
     // 現在の保存モード
     var currentIsPrivate: String? {
         return PageHistoryDataModel.s.histories.count > locationIndex ? PageHistoryDataModel.s.histories[locationIndex].isPrivate : "false"
     }
     
+    // 通知センター
+    private let center = NotificationCenter.default
+
     private init() {
+
         // ロケーション情報取得
         locationIndex = UserDefaults.standard.integer(forKey: AppConst.KEY_LOCATION_INDEX)
         

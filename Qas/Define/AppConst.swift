@@ -38,6 +38,7 @@ final class AppConst {
     static let KEY_ENCRYPT_SERVICE_TOKEN = "com.eifaniori.qas-encrypt-service-token"
     static let KEY_ENCRYPT_IV_TOKEN = "com.eifaniori.qas-encrypt-Iv-token"
     static let KEY_LOCATION_INDEX = "locationIndex"
+    static let KEY_CURRENT_CONTEXT = "currentContext"
     static let KEY_AUTO_SCROLL_INTERVAL = "autoScrollInterval"
     static let KEY_HISTORY_SAVE_TERM = "historySaveTerm"
     static let KEY_SEARCH_HISTORY_SAVE_TERM = "searchHistorySaveTerm"
@@ -68,6 +69,7 @@ final class AppConst {
     
     // MARK: - UD初期値
     static let UD_LOCATION_INDEX = 0
+    static let UD_CURRENT_CONTEXT = ""
     static let UD_AUTO_SCROLL = 0.06
     static let UD_COMMON_HISTORY_SAVE_TERM = 90
     static let UD_SEARCH_HISTORY_SAVE_TERM = 90

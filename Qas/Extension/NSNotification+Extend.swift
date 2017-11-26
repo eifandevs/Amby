@@ -9,7 +9,9 @@
 import Foundation
 
 extension NSNotification.Name {
+    // View
     static let baseViewControllerWillPresentHelp = NSNotification.Name("baseViewControllerWillPresentHelp")
+    // ViewModel
     static let headerViewModelWillChangeProgress = NSNotification.Name("headerViewModelWillChangeProgress")
     static let headerViewModelWillChangeField = NSNotification.Name("headerViewModelWillChangeField")
     static let headerViewModelWillChangeFavorite = NSNotification.Name("headerViewModelWillChangeFavorite")
@@ -39,4 +41,8 @@ extension NSNotification.Name {
     static let footerViewModelWillChangeWebView = NSNotification.Name("footerViewModelWillChangeWebView")
     static let footerViewModelWillStartLoading = NSNotification.Name("footerViewModelWillStartLoading")
     static let footerViewModelWillEndLoading = NSNotification.Name("footerViewModelWillEndLoading")
+    // Model
+    static let pageHistoryDataModelDidRemove = NSNotification.Name("pageHistoryDataModelDidRemove")
+    static let pageHistoryDataModelDidAdd = NSNotification.Name("pageHistoryDataModelDidAdd")
+    static let pageHistoryDataModelDidChange = NSNotification.Name("pageHistoryDataModelDidChange")
 }
