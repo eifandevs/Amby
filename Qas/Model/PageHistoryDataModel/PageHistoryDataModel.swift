@@ -58,7 +58,9 @@ final class PageHistoryDataModel {
             histories = NSKeyedUnarchiver.unarchiveObject(with: data) as! [PageHistory]
             log.debug("page history read.")
         } catch let error as NSError {
-            histories.append(PageHistory())
+            let pageHistory = PageHistory()
+            histories.append(pageHistory)
+            currentContext = pageHistory.context
             log.warning("failed to read page history: \(error)")
         }
     }
