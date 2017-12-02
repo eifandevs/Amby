@@ -37,7 +37,7 @@ final class AppConst {
     static let KEY_REALM_TOKEN = "com.eifaniori.qas-realm-token"
     static let KEY_ENCRYPT_SERVICE_TOKEN = "com.eifaniori.qas-encrypt-service-token"
     static let KEY_ENCRYPT_IV_TOKEN = "com.eifaniori.qas-encrypt-Iv-token"
-    static let KEY_LOCATION_INDEX = "locationIndex"
+    static let KEY_LOCATION_INDEX = "currentLocation"
     static let KEY_CURRENT_CONTEXT = "currentContext"
     static let KEY_AUTO_SCROLL_INTERVAL = "autoScrollInterval"
     static let KEY_HISTORY_SAVE_TERM = "historySaveTerm"

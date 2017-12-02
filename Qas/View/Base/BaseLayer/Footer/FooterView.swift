@@ -18,7 +18,7 @@ class FooterView: UIView, ShadowView {
     
     private var frontThumbnail: Thumbnail {
         get {
-            return thumbnails[viewModel.locationIndex]
+            return thumbnails[viewModel.currentLocation]
         }
     }
     
@@ -98,7 +98,7 @@ class FooterView: UIView, ShadowView {
     /// フロントバーの変更
     private func updateFrontBar() {
         for (index, thumbnail) in thumbnails.enumerated() {
-            if index == viewModel.locationIndex {
+            if index == viewModel.currentLocation {
                 thumbnail.isFront = true
             } else {
                 thumbnail.isFront = false
@@ -236,7 +236,7 @@ extension FooterView: FooterViewModelDelegate {
         }
         updateFrontBar()
         // スクロールする
-        var ptX = -scrollView.contentInset.left + (viewModel.locationIndex.f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width)
+        var ptX = -scrollView.contentInset.left + (viewModel.currentLocation.f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width)
         if ptX > scrollView.contentSize.width - frame.width + scrollView.contentInset.right {
             ptX = scrollView.contentSize.width - frame.width + scrollView.contentInset.right
         }

@@ -23,8 +23,8 @@ protocol BaseViewModelDelegate: class {
 }
 
 class BaseViewModel {
-    var locationIndex: Int {
-        return PageHistoryDataModel.s.locationIndex
+    var currentLocation: Int {
+        return PageHistoryDataModel.s.currentLocation
     }
     /// リクエストURL(jsのURL)
     var currentUrl: String {
@@ -107,9 +107,9 @@ class BaseViewModel {
         center.addObserver(forName: .baseViewModelWillCopyWebView, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillCopyWebView")
-            PageHistoryDataModel.s.histories.append(PageHistory(url: PageHistoryDataModel.s.histories[self.locationIndex].url, title: PageHistoryDataModel.s.histories[self.locationIndex].title))
-            PageHistoryDataModel.s.locationIndex = PageHistoryDataModel.s.histories.count - 1
-            self.center.post(name: .footerViewModelWillAddWebView, object: PageHistoryDataModel.s.histories[self.locationIndex])
+            PageHistoryDataModel.s.histories.append(PageHistory(url: PageHistoryDataModel.s.histories[self.currentLocation].url, title: PageHistoryDataModel.s.histories[self.currentLocation].title))
+            PageHistoryDataModel.s.currentLocation = PageHistoryDataModel.s.histories.count - 1
+            self.center.post(name: .footerViewModelWillAddWebView, object: PageHistoryDataModel.s.histories[self.currentLocation])
             self.delegate?.baseViewModelDidAddWebView()
         }
         
@@ -142,12 +142,12 @@ class BaseViewModel {
         center.addObserver(forName: .baseViewModelWillRemoveWebView, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillRemoveWebView")
-            let index = ((notification.object as? Int) != nil) ? notification.object as! Int : self.locationIndex
-            let isFrontDelete = self.locationIndex == index
+            let index = ((notification.object as? Int) != nil) ? notification.object as! Int : self.currentLocation
+            let isFrontDelete = self.currentLocation == index
             self.center.post(name: .footerViewModelWillRemoveWebView, object: index)
-            if ((index != 0 && self.locationIndex == index && index == PageHistoryDataModel.s.histories.count - 1) || (index < self.locationIndex)) {
+            if ((index != 0 && self.currentLocation == index && index == PageHistoryDataModel.s.histories.count - 1) || (index < self.currentLocation)) {
                 // indexの調整
-                PageHistoryDataModel.s.locationIndex = self.locationIndex - 1
+                PageHistoryDataModel.s.currentLocation = self.currentLocation - 1
             }
             PageHistoryDataModel.s.histories.remove(at: index)
             self.reloadFavorite()
@@ -191,10 +191,10 @@ class BaseViewModel {
         center.addObserver(forName: .baseViewModelWillRegisterAsFavorite, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillRegisterAsFavorite")
-            if (!PageHistoryDataModel.s.histories[self.locationIndex].url.isEmpty && !PageHistoryDataModel.s.histories[self.locationIndex].title.isEmpty) {
+            if (!PageHistoryDataModel.s.histories[self.currentLocation].url.isEmpty && !PageHistoryDataModel.s.histories[self.currentLocation].title.isEmpty) {
                 let fd = Favorite()
-                fd.title = PageHistoryDataModel.s.histories[self.locationIndex].title
-                fd.url = PageHistoryDataModel.s.histories[self.locationIndex].url
+                fd.title = PageHistoryDataModel.s.histories[self.currentLocation].title
+                fd.url = PageHistoryDataModel.s.histories[self.currentLocation].url
                 
                 if let favorite = FavoriteDataModel.select(url: fd.url).first {
                     // すでに登録済みの場合は、お気に入りから削除する
@@ -249,7 +249,7 @@ class BaseViewModel {
         } else {
             PageHistoryDataModel.s.histories.append(PageHistory())
         }
-        PageHistoryDataModel.s.locationIndex = PageHistoryDataModel.s.histories.count - 1
+        PageHistoryDataModel.s.currentLocation = PageHistoryDataModel.s.histories.count - 1
         self.reloadFavorite()
         self.center.post(name: .footerViewModelWillAddWebView, object: PageHistoryDataModel.s.histories.last!)
         self.delegate?.baseViewModelDidAddWebView()
@@ -261,7 +261,7 @@ class BaseViewModel {
     
     /// 前webviewのキャプチャ取得
     func getPreviousCapture() -> UIImage {
-        let targetIndex = locationIndex == 0 ? PageHistoryDataModel.s.histories.count - 1 : locationIndex - 1
+        let targetIndex = currentLocation == 0 ? PageHistoryDataModel.s.histories.count - 1 : currentLocation - 1
         let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
         if let image = ThumbnailDataModel.getCapture(context: targetContext) {
             return image
@@ -272,7 +272,7 @@ class BaseViewModel {
     
     /// 次webviewのキャプチャ取得
     func getNextCapture() -> UIImage {
-        let targetIndex = locationIndex == PageHistoryDataModel.s.histories.count - 1 ? 0 : locationIndex + 1
+        let targetIndex = currentLocation == PageHistoryDataModel.s.histories.count - 1 ? 0 : currentLocation + 1
         let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
         if let image = ThumbnailDataModel.getCapture(context: targetContext) {
             return image
@@ -288,12 +288,12 @@ class BaseViewModel {
     
     /// 前WebViewに切り替え
     func changePreviousWebView() {
-        changeWebView(index: locationIndex - 1)
+        changeWebView(index: currentLocation - 1)
     }
     
     /// 後WebViewに切り替え
     func changeNextWebView() {
-        changeWebView(index: locationIndex + 1)
+        changeWebView(index: currentLocation + 1)
     }
     
     func saveHistory(wv: EGWebView) {
@@ -357,8 +357,8 @@ class BaseViewModel {
             }
         }()
         self.center.post(name: .footerViewModelWillChangeWebView, object: targetIndex)
-        if self.locationIndex != targetIndex {
-            PageHistoryDataModel.s.locationIndex = targetIndex
+        if self.currentLocation != targetIndex {
+            PageHistoryDataModel.s.currentLocation = targetIndex
             self.reloadFavorite()
             self.delegate?.baseViewModelDidChangeWebView()
         } else {
@@ -368,7 +368,7 @@ class BaseViewModel {
     
     private func reloadFavorite() {
         // 現在表示しているURLがお気に入りかどうか調べる
-        if let history = PageHistoryDataModel.s.histories[safe: locationIndex] {
+        if let history = PageHistoryDataModel.s.histories[safe: currentLocation] {
             if (!history.url.isEmpty) {
                 self.center.post(name: .headerViewModelWillChangeFavorite, object: ["url": history.url])
             }

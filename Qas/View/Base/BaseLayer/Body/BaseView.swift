@@ -120,7 +120,7 @@ class BaseView: UIView {
         }
         
         let newWv = createWebView(size: frame.size, context: viewModel.currentContext)
-        webViews[viewModel.locationIndex] = newWv
+        webViews[viewModel.currentLocation] = newWv
         
         // 前後のページ
         previousImageView.frame = CGRect(origin: CGPoint(x: -frame.size.width, y: 0), size: frame.size)
@@ -306,7 +306,7 @@ class BaseView: UIView {
     // loadWebViewはwebviewスペースがある状態で新規作成するときにコールする
     private func loadWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
-        webViews[viewModel.locationIndex] = newWv
+        webViews[viewModel.currentLocation] = newWv
         if !viewModel.currentUrl.isEmpty {
             newWv.load(urlStr: viewModel.currentUrl)
         }
@@ -544,7 +544,7 @@ extension BaseView: BaseViewModelDelegate {
     func baseViewModelDidChangeWebView() {
         front.removeObserver(self, forKeyPath: "estimatedProgress")
         viewModel.notifyChangeProgress(object: 0)
-        if let current = webViews[viewModel.locationIndex] {
+        if let current = webViews[viewModel.currentLocation] {
             current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
             front = current
             bringSubview(toFront: current)
@@ -575,7 +575,7 @@ extension BaseView: BaseViewModelDelegate {
             } else if isFrontDelete {
                 // フロントの削除で、削除後にwebviewが存在する場合
                 // 存在しない場合は、AddWebViewが呼ばれる
-                if let current = webViews[viewModel.locationIndex] {
+                if let current = webViews[viewModel.currentLocation] {
                     current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
                     front = current
                     bringSubview(toFront: current)

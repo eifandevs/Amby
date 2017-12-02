@@ -13,36 +13,35 @@ final class PageHistoryDataModel {
     static let s = PageHistoryDataModel()
 
     // 現在表示しているwebviewのコンテキスト
-    var context: String = UserDefaults.standard.string(forKey: AppConst.KEY_CURRENT_CONTEXT)! {
+    var currentContext: String = UserDefaults.standard.string(forKey: AppConst.KEY_CURRENT_CONTEXT)! {
         didSet {
-            log.debug("current context changed. \(oldValue) -> \(context)")
+            log.debug("current context changed. \(oldValue) -> \(currentContext)")
+            previousContext = oldValue
             UserDefaults.standard.set(currentContext, forKey: AppConst.KEY_CURRENT_CONTEXT)
         }
     }
-
-    var locationIndex: Int {
+    var previousContext: String?
+    
+    var currentLocation: Int {
         didSet {
-            log.debug("location index changed. \(oldValue) -> \(locationIndex)")
-            UserDefaults.standard.set(locationIndex, forKey: AppConst.KEY_LOCATION_INDEX)
+            log.debug("location index changed. \(oldValue) -> \(currentLocation)")
+            previousLocation = oldValue
+            UserDefaults.standard.set(currentLocation, forKey: AppConst.KEY_LOCATION_INDEX)
         }
     }
+    var previousLocation: Int?
 
     // webViewそれぞれの履歴とカレントページインデックス
     var histories: [PageHistory] = []
     
     // 現在のページ情報
     var currentHistory: PageHistory? {
-        return histories[safe: locationIndex]
+        return histories[safe: currentLocation]
     }
     
     // 現在のURL(jsのURL)
     var currentUrl: String {
-        return histories[safe: locationIndex] != nil ? histories[locationIndex].url : ""
-    }
-
-    // 現在のコンテキスト
-    var currentContext: String? {
-        return PageHistoryDataModel.s.histories.count > locationIndex ? PageHistoryDataModel.s.histories[locationIndex].context : nil
+        return histories[safe: currentLocation] != nil ? histories[currentLocation].url : ""
     }
     
     // 通知センター
@@ -51,7 +50,7 @@ final class PageHistoryDataModel {
     private init() {
 
         // ロケーション情報取得
-        locationIndex = UserDefaults.standard.integer(forKey: AppConst.KEY_LOCATION_INDEX)
+        currentLocation = UserDefaults.standard.integer(forKey: AppConst.KEY_LOCATION_INDEX)
         
         // pageHistory読み込み
         do {
