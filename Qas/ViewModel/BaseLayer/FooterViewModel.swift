@@ -10,7 +10,7 @@ import Foundation
 
 protocol FooterViewModelDelegate: class {
     func footerViewModelDidLoadThumbnail(pageHistories: [PageHistory])
-    func footerViewModelDidAddThumbnail(context: String, isPrivateMode: Bool)
+    func footerViewModelDidAddThumbnail(context: String)
     func footerViewModelDidChangeThumbnail()
     func footerViewModelDidRemoveThumbnail(index: Int)
     func footerViewModelDidStartLoading(index: Int)
@@ -50,7 +50,7 @@ class FooterViewModel {
             // 新しいサムネイルを追加
             self.pageHistories.append(pageHistory)
             self.locationIndex = self.pageHistories.count - 1
-            self.delegate?.footerViewModelDidAddThumbnail(context: pageHistory.context, isPrivateMode: pageHistory.isPrivate == "true")
+            self.delegate?.footerViewModelDidAddThumbnail(context: pageHistory.context)
         }
         // webviewロード開始
         center.addObserver(forName: .footerViewModelWillStartLoading, object: nil, queue: nil) { [weak self] (notification) in

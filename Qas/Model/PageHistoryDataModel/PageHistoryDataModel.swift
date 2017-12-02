@@ -44,11 +44,6 @@ final class PageHistoryDataModel {
     var currentContext: String? {
         return PageHistoryDataModel.s.histories.count > locationIndex ? PageHistoryDataModel.s.histories[locationIndex].context : nil
     }
-
-    // 現在の保存モード
-    var currentIsPrivate: String? {
-        return PageHistoryDataModel.s.histories.count > locationIndex ? PageHistoryDataModel.s.histories[locationIndex].isPrivate : "false"
-    }
     
     // 通知センター
     private let center = NotificationCenter.default

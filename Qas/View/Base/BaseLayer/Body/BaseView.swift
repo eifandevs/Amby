@@ -288,7 +288,7 @@ class BaseView: UIView {
     
     /// webviewを新規作成
     private func createWebView(size: CGSize? = nil, context: String?) -> EGWebView {
-        let newWv = EGWebView(id: context, isPrivate: viewModel.isPrivateMode!)
+        let newWv = EGWebView(id: context)
         newWv.frame = CGRect(origin: CGPoint.zero, size: size ?? frame.size)
         newWv.navigationDelegate = self
         newWv.uiDelegate = self;
@@ -759,7 +759,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
                 log.debug("receive new window event. url: \(url)")
                 if url != AppConst.URL_BLANK {
                     // about:blankは無視する
-                    viewModel.addWebView(url: navigationAction.request.url?.absoluteString, isPrivate: viewModel.currentIsPrivate)
+                    viewModel.addWebView(url: navigationAction.request.url?.absoluteString)
                 }
                 return nil
             }

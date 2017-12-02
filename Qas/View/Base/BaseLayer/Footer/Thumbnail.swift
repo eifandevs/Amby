@@ -39,15 +39,16 @@ class Thumbnail: UIButton {
         addSubview(thumbnailInfo)
     }
     
-    convenience init(frame: CGRect, isPrivateMode: Bool = false) {
-        self.init(frame: frame)
-        if isPrivateMode {
-            let privateIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width / 4.5, height: frame.size.height / 2))
-            privateIcon.contentMode = .scaleAspectFit
-            privateIcon.setImage(image: R.image.footer_private(), color: UIColor.brilliantBlue)
-            addSubview(privateIcon)
-        }
-    }
+//    convenience init(frame: CGRect) {
+//        self.init(frame: frame)
+        // プライベートモードの削除
+//        if isPrivateMode {
+//            let privateIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width / 4.5, height: frame.size.height / 2))
+//            privateIcon.contentMode = .scaleAspectFit
+//            privateIcon.setImage(image: R.image.footer_private(), color: UIColor.brilliantBlue)
+//            addSubview(privateIcon)
+//        }
+//    }
 
 // MARK: Public Method
     func setThumbnailTitle(title: String) {

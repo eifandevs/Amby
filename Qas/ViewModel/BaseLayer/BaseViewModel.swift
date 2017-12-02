@@ -36,11 +36,6 @@ class BaseViewModel {
         return PageHistoryDataModel.s.currentContext
     }
     
-    /// 現在の履歴保存モード
-    var currentIsPrivate: String? {
-        return PageHistoryDataModel.s.currentIsPrivate
-    }
-    
     var headerFieldText: String = "" {
         didSet {
             center.post(name: .headerViewModelWillChangeField, object: headerFieldText)
@@ -63,10 +58,6 @@ class BaseViewModel {
     
     /// 通知センター
     private let center = NotificationCenter.default
-    
-    var isPrivateMode: Bool? {
-        return currentIsPrivate == "true"
-    }
     
     /// 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
@@ -94,7 +85,7 @@ class BaseViewModel {
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillAddPrivateWebView")
             let url = notification.object != nil ? (notification.object as! [String: String])["url"] : nil
-            self.addWebView(url: url, isPrivate: "true")
+            self.addWebView(url: url)
         }
         
         // 閲覧履歴の削除
@@ -252,11 +243,11 @@ class BaseViewModel {
         center.post(name: .headerViewModelWillChangeProgress, object: object)
     }
     
-    func addWebView(url: String? = nil, isPrivate: String? = nil) {
+    func addWebView(url: String? = nil) {
         if let url = url {
-            PageHistoryDataModel.s.histories.append(PageHistory(url: url, isPrivate: isPrivate ?? "false"))
+            PageHistoryDataModel.s.histories.append(PageHistory(url: url))
         } else {
-            PageHistoryDataModel.s.histories.append(PageHistory(isPrivate: isPrivate ?? "false"))
+            PageHistoryDataModel.s.histories.append(PageHistory())
         }
         PageHistoryDataModel.s.locationIndex = PageHistoryDataModel.s.histories.count - 1
         self.reloadFavorite()
@@ -312,22 +303,20 @@ class BaseViewModel {
                 // フロントページの保存の場合
                 center.post(name: .headerViewModelWillChangeFavorite, object: ["url": requestUrl])
             }
-            if !isPrivateMode! {
-                //　アプリ起動後の前回ページロード時は、履歴に保存しない
-                if requestUrl != self.currentUrl {
-                    // Common History
-                    let common = CommonHistory(url: requestUrl, title: requestTitle, date: Date())
-                    // 配列の先頭に追加する
-                    CommonHistoryDataModel.s.histories.insert(common, at: 0)
-                    log.debug("save history. url: \(common.url)")
-                    
-                    // Each History
-                    for history in PageHistoryDataModel.s.histories {
-                        if history.context == wv.context {
-                            history.url = common.url
-                            history.title = common.title
-                            break
-                        }
+            //　アプリ起動後の前回ページロード時は、履歴に保存しない
+            if requestUrl != self.currentUrl {
+                // Common History
+                let common = CommonHistory(url: requestUrl, title: requestTitle, date: Date())
+                // 配列の先頭に追加する
+                CommonHistoryDataModel.s.histories.insert(common, at: 0)
+                log.debug("save history. url: \(common.url)")
+                
+                // Each History
+                for history in PageHistoryDataModel.s.histories {
+                    if history.context == wv.context {
+                        history.url = common.url
+                        history.title = common.title
+                        break
                     }
                 }
             }

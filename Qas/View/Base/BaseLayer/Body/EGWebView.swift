@@ -33,12 +33,12 @@ class EGWebView: WKWebView {
     // スワイプ中かどうか
     var isSwiping: Bool = false
     
-    init(id: String?, isPrivate: Bool) {
+    init(id: String?) {
         if let id = id, !id.isEmpty {
             // コンテキストを復元
             context = id
         }
-        super.init(frame: CGRect.zero, configuration: CacheHelper.cacheConfiguration(isPrivate: isPrivate))
+        super.init(frame: CGRect.zero, configuration: CacheHelper.cacheConfiguration())
         isOpaque = true
         allowsLinkPreview = true
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panned))

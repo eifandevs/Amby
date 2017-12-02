@@ -13,11 +13,11 @@ class CacheHelper {
     // クッキーの共有
     static let processPool = WKProcessPool()
     
-    static func cacheConfiguration(isPrivate: Bool) -> WKWebViewConfiguration {
+    static func cacheConfiguration() -> WKWebViewConfiguration {
         let configuration = WKWebViewConfiguration()
         configuration.processPool = processPool
         // Cookie, Cache, その他Webデータを端末内に残す
-        configuration.websiteDataStore = isPrivate ? WKWebsiteDataStore.nonPersistent() : WKWebsiteDataStore.default()
+        configuration.websiteDataStore = WKWebsiteDataStore.default()
         configuration.allowsPictureInPictureMediaPlayback = true
         configuration.allowsInlineMediaPlayback = true
         configuration.allowsAirPlayForMediaPlayback = true

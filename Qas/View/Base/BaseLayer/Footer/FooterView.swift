@@ -50,9 +50,9 @@ class FooterView: UIView, ShadowView {
     
 // MARK: Private Method
     
-    private func createCaptureSpace(context: String, isPrivateMode: Bool) -> Thumbnail {
+    private func createCaptureSpace(context: String) -> Thumbnail {
         let additionalPointX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + additionalPointX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE), isPrivateMode: isPrivateMode)
+        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + additionalPointX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
         btn.backgroundColor = UIColor.darkGray
         btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
         let inset: CGFloat = btn.frame.size.width / 9
@@ -147,9 +147,9 @@ extension FooterView: UIScrollViewDelegate {
 
 // MARK: FooterViewModel Delegate
 extension FooterView: FooterViewModelDelegate {
-    func footerViewModelDidAddThumbnail(context: String, isPrivateMode: Bool) {
+    func footerViewModelDidAddThumbnail(context: String) {
         // 新しいサムネイルスペースを作成
-        let _ = createCaptureSpace(context: context, isPrivateMode: isPrivateMode)
+        let _ = createCaptureSpace(context: context)
         updateFrontBar()
     }
     
@@ -223,7 +223,7 @@ extension FooterView: FooterViewModelDelegate {
     func footerViewModelDidLoadThumbnail(pageHistories: [PageHistory]) {
         if pageHistories.count > 0 {
             pageHistories.forEach { (item) in
-                let btn = createCaptureSpace(context: item.context, isPrivateMode: item.isPrivate == "true")
+                let btn = createCaptureSpace(context: item.context)
                 if !item.context.isEmpty {
                     // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合
                     if let image = ThumbnailDataModel.getThumbnail(context: item.context) {
