@@ -8,8 +8,10 @@
 
 import UIKit
 import SwiftyBeaver
+import Dollar
 
 let log = SwiftyBeaver.self
+let D = `$`.self
 
 /// クラッシュ時にスタックトレースを表示する
 let uncaughtExceptionHandler : Void = NSSetUncaughtExceptionHandler { exception in
@@ -44,13 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         log.addDestination(console)
         log.addDestination(file)
-        
-        #if FREE
-            log.debug("this app is free version.")
-        #else
-            log.debug("this app is full version.")
-        #endif
-        
+
         // 初回起動時のみキーチェーンにトークンを保存
         if KeyChainHelper.getToken(key: AppConst.KEY_REALM_TOKEN) == nil {
             let token = String.getRandomStringWithLength(length: 64)

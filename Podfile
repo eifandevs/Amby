@@ -18,5 +18,6 @@ target 'Qas' do
   pod 'LTMorphingLabel', '~> 0.5'
   pod 'CryptoSwift', '~> 0.8'
   pod 'KeychainAccess', '~> 3.1'
-  pod 'VerticalAlignmentLabel'
+  pod 'VerticalAlignmentLabel', '~> 0.1'
+  pod 'Dollar', '~> 7.0'
 end

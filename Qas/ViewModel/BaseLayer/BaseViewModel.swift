@@ -35,7 +35,7 @@ class BaseViewModel {
     var currentContext: String? {
         return PageHistoryDataModel.s.currentContext
     }
-    
+
     var headerFieldText: String = "" {
         didSet {
             center.post(name: .headerViewModelWillChangeField, object: headerFieldText)
