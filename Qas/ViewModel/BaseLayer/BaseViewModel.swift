@@ -28,7 +28,7 @@ class BaseViewModel {
     }
     /// リクエストURL(jsのURL)
     var currentUrl: String {
-        return PageHistoryDataModel.s.currentUrl
+        return PageHistoryDataModel.s.currentHistory.url
     }
     
     /// 現在のコンテキスト

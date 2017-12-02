@@ -35,13 +35,8 @@ final class PageHistoryDataModel {
     var histories: [PageHistory] = []
     
     // 現在のページ情報
-    var currentHistory: PageHistory? {
-        return histories[safe: currentLocation]
-    }
-    
-    // 現在のURL(jsのURL)
-    var currentUrl: String {
-        return histories[safe: currentLocation] != nil ? histories[currentLocation].url : ""
+    var currentHistory: PageHistory {
+        return D.find(histories, callback: { $0.context == currentContext })!
     }
     
     // 通知センター
@@ -61,6 +56,7 @@ final class PageHistoryDataModel {
             let pageHistory = PageHistory()
             histories.append(pageHistory)
             currentContext = pageHistory.context
+            UserDefaults.standard.set(currentContext, forKey: AppConst.KEY_CURRENT_CONTEXT)
             log.warning("failed to read page history: \(error)")
         }
     }
