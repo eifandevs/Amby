@@ -571,10 +571,9 @@ extension BaseView: BaseViewModelDelegate {
             updateNetworkActivityIndicator()
             
             if webViews.count == 0 {
-                viewModel.addWebView()
+                viewModel.insertPageHistoryDataModel()
             } else if isFrontDelete {
                 // フロントの削除で、削除後にwebviewが存在する場合
-                // 存在しない場合は、AddWebViewが呼ばれる
                 if let current = webViews[viewModel.currentLocation] {
                     current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
                     front = current
@@ -759,7 +758,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
                 log.debug("receive new window event. url: \(url)")
                 if url != AppConst.URL_BLANK {
                     // about:blankは無視する
-                    viewModel.addWebView(url: navigationAction.request.url?.absoluteString)
+                    viewModel.insertPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
                 }
                 return nil
             }

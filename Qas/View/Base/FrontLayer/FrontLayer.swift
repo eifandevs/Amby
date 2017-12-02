@@ -15,6 +15,7 @@ protocol FrontLayerDelegate: class {
 
 class FrontLayer: UIView {
     weak var delegate: FrontLayerDelegate?
+    private let viewModel = FrontLayerViewModel()
     private var swipeDirection: EdgeSwipeDirection!
     private var optionMenu: OptionMenuTableView?
     private var overlay: UIButton!
@@ -85,7 +86,7 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.circlemenu_add(), tapAction: { _ in
                     log.debug("circle menu event. event: add")
-                    NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: nil)
+                    self.viewModel.insertPageHistoryDataMoel()
                 })
             ],
             [
@@ -109,9 +110,9 @@ class FrontLayer: UIView {
                     log.debug("circle menu event. event: favorite")
                     NotificationCenter.default.post(name: .baseViewModelWillRegisterAsFavorite, object: nil)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_add_private(), tapAction: { _ in
-                    log.debug("circle menu event. event: private")
-                    NotificationCenter.default.post(name: .baseViewModelWillAddPrivateWebView, object: nil)
+                CircleMenuItem(image: R.image.circlemenu_form(), tapAction: { _ in
+                    log.debug("circle menu event. event: form")
+                    NotificationCenter.default.post(name: .baseViewModelWillRegisterAsForm, object: nil)
                 })
             ]
         ]

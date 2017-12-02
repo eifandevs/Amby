@@ -21,15 +21,6 @@ final class PageHistoryDataModel {
         }
     }
     var previousContext: String?
-    
-    var currentLocation: Int {
-        didSet {
-            log.debug("location index changed. \(oldValue) -> \(currentLocation)")
-            previousLocation = oldValue
-            UserDefaults.standard.set(currentLocation, forKey: AppConst.KEY_LOCATION_INDEX)
-        }
-    }
-    var previousLocation: Int?
 
     // webViewそれぞれの履歴とカレントページインデックス
     var histories: [PageHistory] = []
@@ -39,14 +30,14 @@ final class PageHistoryDataModel {
         return D.find(histories, callback: { $0.context == currentContext })!
     }
     
+    // 現在の位置
+    var currentLocation: Int {
+        return D.findIndex(histories, callback: { $0.context == currentContext })!
+    }
     // 通知センター
     private let center = NotificationCenter.default
 
     private init() {
-
-        // ロケーション情報取得
-        currentLocation = UserDefaults.standard.integer(forKey: AppConst.KEY_LOCATION_INDEX)
-        
         // pageHistory読み込み
         do {
             let data = try Data(contentsOf: AppConst.PATH_URL_PAGE_HISTORY)
@@ -60,6 +51,32 @@ final class PageHistoryDataModel {
             log.warning("failed to read page history: \(error)")
         }
     }
+    
+    /// ロード開始
+    func startLoading(context: String) {
+        self.center.post(name: .pageHistoryDataModelDidStartLoading, object: context)
+    }
+    
+    func endLoading(context: String) {
+        self.center.post(name: .pageHistoryDataModelDidEndLoading, object: context)
+    }
+    
+    /// ページ追加
+    func insert(url: String?) {
+        if let url = url {
+            histories.append(PageHistory(url: url))
+        } else {
+            histories.append(PageHistory())
+        }
+        self.center.post(name: .pageHistoryDataModelDidInsert, object: histories.last!)
+    }
+    
+    /// 表示中ページの変更
+    func change(context: String) {
+        currentContext = context
+        self.center.post(name: .pageHistoryDataModelDidChange, object: nil)
+    }
+    
     /// 表示中ページの保存
     func store() {
         if histories.count > 0 {

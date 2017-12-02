@@ -10,6 +10,8 @@
 		A5223EE71F1F8EA20097E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5223E8D1F1F8EA20097E793 /* Assets.xcassets */; };
 		A5223EE81F1F8EA20097E793 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223E8E1F1F8EA20097E793 /* EGApplication.swift */; };
 		A5223EEA1F1F8EA20097E793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5223E901F1F8EA20097E793 /* LaunchScreen.storyboard */; };
+		A527CBAA1FD31844000DF901 /* BaseViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */; };
+		A527CBAC1FD31A90000DF901 /* FrontLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */; };
 		A53C0EBD1FB7729D00FD78FF /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EBC1FB7729D00FD78FF /* ApiManager.swift */; };
 		A53C0EC01FB7764500FD78FF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */; };
 		A53C0EC21FB7766A00FD78FF /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EC11FB7766A00FD78FF /* NotificationView.swift */; };
@@ -116,6 +118,8 @@
 		A5223E8E1F1F8EA20097E793 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A5223E8F1F1F8EA20097E793 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5223E911F1F8EA20097E793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerViewModel.swift; sourceTree = "<group>"; };
+		A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModel.swift; sourceTree = "<group>"; };
 		A53C0EBC1FB7729D00FD78FF /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A53C0EC11FB7766A00FD78FF /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -614,6 +618,8 @@
 		A5BCE7951FA50BFA00E0C6E5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */,
+				A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */,
 				A5BCE7961FA50BFA00E0C6E5 /* BaseLayer */,
 				A5BCE79B1FA50BFA00E0C6E5 /* FrontLayer */,
 			);
@@ -832,6 +838,7 @@
 				A5BCE71C1FA501B900E0C6E5 /* CommonDao.swift in Sources */,
 				A5BCE71B1FA501B900E0C6E5 /* CacheHelper.swift in Sources */,
 				A5BCE7BB1FA50BFA00E0C6E5 /* OptionMenuTableView.swift in Sources */,
+				A527CBAC1FD31A90000DF901 /* FrontLayerViewModel.swift in Sources */,
 				A53C0EC01FB7764500FD78FF /* NotificationManager.swift in Sources */,
 				A5BCE7AF1FA50BFA00E0C6E5 /* SearchMenuTableViewCell.swift in Sources */,
 				A5BCE7171FA501B900E0C6E5 /* DeviceConst.swift in Sources */,
@@ -916,6 +923,7 @@
 				A5BCE7AC1FA50BFA00E0C6E5 /* BaseView.swift in Sources */,
 				A5BCE7AD1FA50BFA00E0C6E5 /* EGWebView.swift in Sources */,
 				A5BCE7B51FA50BFA00E0C6E5 /* HeaderView.swift in Sources */,
+				A527CBAA1FD31844000DF901 /* BaseViewControllerViewModel.swift in Sources */,
 				A5BCE7C71FA50BFA00E0C6E5 /* FavoriteMenuViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,6 +12,7 @@ class BaseViewController: UIViewController {
     
     private var baseLayer: BaseLayer!
     private var frontLayer: FrontLayer!
+    private let viewModel = BaseViewControllerViewModel()
     
     private var splash: SplashViewController?
     private var onceExec = OnceExec()
@@ -86,7 +87,7 @@ class BaseViewController: UIViewController {
                 if ((orgActionSheet.preferredStyle == .actionSheet) && (orgActionSheet.title != nil)) {
                     // webviewを長押しされたら、そのURLで新しいタブを作成する
                     if url.hasValidUrl {
-                        NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: ["url": url])
+                        viewModel.insertPageHistoryDataModel(url: url)
                         return
                     }
                 }

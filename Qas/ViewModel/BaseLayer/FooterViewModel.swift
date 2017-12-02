@@ -9,20 +9,25 @@
 import Foundation
 
 protocol FooterViewModelDelegate: class {
-    func footerViewModelDidLoadThumbnail(pageHistories: [PageHistory])
-    func footerViewModelDidAddThumbnail(context: String)
+    func footerViewModelDidAddThumbnail(pageHistory: PageHistory)
     func footerViewModelDidChangeThumbnail()
     func footerViewModelDidRemoveThumbnail(index: Int)
-    func footerViewModelDidStartLoading(index: Int)
+    func footerViewModelDidStartLoading(context: String)
     func footerViewModelDidEndLoading(context: String, title: String, index: Int)
 }
 
 class FooterViewModel {
     /// 現在位置
-    var currentLocation: Int  = 0
-    private var pageHistories: [PageHistory] = []
-    private var currentThumbnail: PageHistory {
-        return pageHistories[currentLocation]
+    var pageHistories: [PageHistory] {
+        return PageHistoryDataModel.s.histories
+    }
+    
+    var currentHistory: PageHistory {
+        return PageHistoryDataModel.s.currentHistory
+    }
+    
+    var currentLocation: Int {
+        return PageHistoryDataModel.s.currentLocation
     }
     
     weak var delegate: FooterViewModelDelegate?
@@ -31,16 +36,6 @@ class FooterViewModel {
     let center = NotificationCenter.default
     
     init(index: Int) {
-        // Notification Center登録
-        currentLocation = index
-        // 初期ロード開始
-        center.addObserver(forName: .footerViewModelWillLoad, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[Footer Event]: footerViewModelWillLoad")
-            self.pageHistories = notification.object as! [PageHistory]
-            self.delegate?.footerViewModelDidLoadThumbnail(pageHistories: self.pageHistories)
-        }
-        
         // webview追加
         center.addObserver(forName: .footerViewModelWillAddWebView, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
@@ -48,16 +43,14 @@ class FooterViewModel {
             let pageHistory = notification.object as! PageHistory
             
             // 新しいサムネイルを追加
-            self.pageHistories.append(pageHistory)
-            self.currentLocation = self.pageHistories.count - 1
-            self.delegate?.footerViewModelDidAddThumbnail(context: pageHistory.context)
+            self.delegate?.footerViewModelDidAddThumbnail(pageHistory: pageHistory)
         }
         // webviewロード開始
-        center.addObserver(forName: .footerViewModelWillStartLoading, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .pageHistoryDataModelDidStartLoading, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[Footer Event]: footerViewModelWillStartLoading")
+            log.debug("[Footer Event]: pageHistoryDataModelDidStartLoading")
             // FooterViewに通知をする
-            self.delegate?.footerViewModelDidStartLoading(index: self.currentLocation)
+            self.delegate?.footerViewModelDidStartLoading(context: notification.object as! String)
         }
         // webviewロード完了
         center.addObserver(forName: .footerViewModelWillEndLoading, object: nil, queue: nil) { [weak self] (notification) in
@@ -81,28 +74,25 @@ class FooterViewModel {
         center.addObserver(forName: .footerViewModelWillChangeWebView, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[Footer Event]: footerViewModelWillChangeWebView")
-            let index = notification.object as! Int
-            if self.currentLocation != index {
-                self.currentLocation = index
-                self.delegate?.footerViewModelDidChangeThumbnail()
-            }
+            self.delegate?.footerViewModelDidChangeThumbnail()
         }
+        
         // webview削除
         center.addObserver(forName: .footerViewModelWillRemoveWebView, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[Footer Event]: footerViewModelWillRemoveWebView")
-            let index = notification.object as! Int
-            
-            // 実データの削除
-            try! FileManager.default.removeItem(atPath: Util.thumbnailFolderUrl(folder: self.pageHistories[index].context).path)
-            
-            if ((index != 0 && self.currentLocation == index && index == self.pageHistories.count - 1) || (index < self.currentLocation)) {
-                // フロントの削除
-                // 最後の要素を削除する場合
-                self.currentLocation = self.currentLocation - 1
-            }
-            self.pageHistories.remove(at: index)
-            self.delegate?.footerViewModelDidRemoveThumbnail(index: index)
+//            let index = notification.object as! Int
+//
+//            // 実データの削除
+//            try! FileManager.default.removeItem(atPath: Util.thumbnailFolderUrl(folder: self.pageHistories[index].context).path)
+//
+//            if ((index != 0 && self.currentLocation == index && index == self.pageHistories.count - 1) || (index < self.currentLocation)) {
+//                // フロントの削除
+//                // 最後の要素を削除する場合
+//                self.currentLocation = self.currentLocation - 1
+//            }
+//            self.pageHistories.remove(at: index)
+//            self.delegate?.footerViewModelDidRemoveThumbnail(index: index)
         }
     }
     
@@ -112,8 +102,8 @@ class FooterViewModel {
     
 // MARK: Public Method
     
-    func notifyChangeWebView(index: Int) {
-        center.post(name: .baseViewModelWillChangeWebView, object: index)
+    func changePageHistoryDataModel(context: String) {
+        PageHistoryDataModel.s.change(context: context)
     }
     
     func notifyRemoveWebView(index: Int) {

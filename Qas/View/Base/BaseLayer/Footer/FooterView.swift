@@ -16,12 +16,6 @@ class FooterView: UIView, ShadowView {
     private let scrollView = UIScrollView()
     private var thumbnails: [Thumbnail] = []
     
-    private var frontThumbnail: Thumbnail {
-        get {
-            return thumbnails[viewModel.currentLocation]
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         viewModel.delegate = self
@@ -42,6 +36,9 @@ class FooterView: UIView, ShadowView {
         addSubview(scrollView)
         // サムネイル説明用に、スクロールビューの領域外に配置できるようにする
         scrollView.clipsToBounds = false
+        
+        // 初期ロード
+        load()
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -49,6 +46,31 @@ class FooterView: UIView, ShadowView {
     }
     
 // MARK: Private Method
+    
+    private func load() {
+        let pageHistories = viewModel.pageHistories
+        if pageHistories.count > 0 {
+            pageHistories.forEach { (item) in
+                let btn = createCaptureSpace(context: item.context)
+                if !item.context.isEmpty {
+                    // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合
+                    if let image = ThumbnailDataModel.getThumbnail(context: item.context) {
+                        btn.setImage(nil, for: .normal)
+                        btn.setBackgroundImage(image, for: .normal)
+                        btn.setThumbnailTitle(title: item.title)
+                    }
+                }
+            }
+        }
+        updateFrontBar()
+        // スクロールする
+        var ptX = -scrollView.contentInset.left + (viewModel.currentLocation.f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width)
+        if ptX > scrollView.contentSize.width - frame.width + scrollView.contentInset.right {
+            ptX = scrollView.contentSize.width - frame.width + scrollView.contentInset.right
+        }
+        let offset = CGPoint(x: ptX, y: scrollView.contentOffset.y)
+        scrollView.setContentOffset(offset, animated: true)
+    }
     
     private func createCaptureSpace(context: String) -> Thumbnail {
         let additionalPointX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
@@ -82,15 +104,16 @@ class FooterView: UIView, ShadowView {
         return btn
     }
     
-    private func startIndicator() {
+    private func startIndicator(context: String) {
+        let targetThumbnail = D.find(thumbnails, callback: { $0.context == context })!
         // くるくるを表示する
-        let existIndicator = frontThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
+        let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
         if !existIndicator {
             let rect = CGRect(x: 0, y: 0, width: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.7, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.7)
             let indicator = NVActivityIndicatorView(frame: rect, type: NVActivityIndicatorType.ballClipRotate, color: UIColor.brilliantBlue, padding: 0)
-            indicator.center = CGPoint(x: frontThumbnail.bounds.size.width / 2, y: frontThumbnail.bounds.size.height / 2)
+            indicator.center = CGPoint(x: targetThumbnail.bounds.size.width / 2, y: targetThumbnail.bounds.size.height / 2)
             indicator.isUserInteractionEnabled = false
-            frontThumbnail.addSubview(indicator)
+            targetThumbnail.addSubview(indicator)
             indicator.startAnimating()
         }
     }
@@ -122,7 +145,7 @@ class FooterView: UIView, ShadowView {
     
 // MARK: Button Event
     @objc func onTappedThumbnail(_ sender: AnyObject) {
-        viewModel.notifyChangeWebView(index: thumbnails.index(of: (sender as! Thumbnail))!)
+        viewModel.changePageHistoryDataModel(context: (sender as! Thumbnail).context)
     }
 }
 
@@ -147,9 +170,9 @@ extension FooterView: UIScrollViewDelegate {
 
 // MARK: FooterViewModel Delegate
 extension FooterView: FooterViewModelDelegate {
-    func footerViewModelDidAddThumbnail(context: String) {
+    func footerViewModelDidAddThumbnail(pageHistory: PageHistory) {
         // 新しいサムネイルスペースを作成
-        let _ = createCaptureSpace(context: context)
+        let _ = createCaptureSpace(context: pageHistory.context)
         updateFrontBar()
     }
     
@@ -189,8 +212,8 @@ extension FooterView: FooterViewModelDelegate {
         }
     }
     
-    func footerViewModelDidStartLoading(index: Int) {
-        startIndicator()
+    func footerViewModelDidStartLoading(context: String) {
+        startIndicator(context: context)
     }
     
     func footerViewModelDidEndLoading(context: String, title: String, index: Int) {
@@ -218,29 +241,5 @@ extension FooterView: FooterViewModelDelegate {
                 }
             }
         }
-    }
-    
-    func footerViewModelDidLoadThumbnail(pageHistories: [PageHistory]) {
-        if pageHistories.count > 0 {
-            pageHistories.forEach { (item) in
-                let btn = createCaptureSpace(context: item.context)
-                if !item.context.isEmpty {
-                    // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合
-                    if let image = ThumbnailDataModel.getThumbnail(context: item.context) {
-                        btn.setImage(nil, for: .normal)
-                        btn.setBackgroundImage(image, for: .normal)
-                        btn.setThumbnailTitle(title: item.title)
-                    }
-                }
-            }
-        }
-        updateFrontBar()
-        // スクロールする
-        var ptX = -scrollView.contentInset.left + (viewModel.currentLocation.f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width)
-        if ptX > scrollView.contentSize.width - frame.width + scrollView.contentInset.right {
-            ptX = scrollView.contentSize.width - frame.width + scrollView.contentInset.right
-        }
-        let offset = CGPoint(x: ptX, y: scrollView.contentOffset.y)
-        scrollView.setContentOffset(offset, animated: true)
     }
 }

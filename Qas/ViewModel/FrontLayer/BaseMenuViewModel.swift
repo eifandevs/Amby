@@ -18,15 +18,11 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
         menuItems = [
             [
                 OptionMenuItem(title: "新しいタブ", image: UIImage(named: "option_menu_add"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    NotificationCenter.default.post(name: .baseViewModelWillAddWebView, object: nil)
+                    PageHistoryDataModel.s.insert(url: nil)
                     return nil
                 }),
                 OptionMenuItem(title: "新しいタブ(URLコピー)", image: UIImage(named: "option_menu_copy"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationCenter.default.post(name: .baseViewModelWillCopyWebView, object: nil)
-                    return nil
-                }),
-                OptionMenuItem(title: "新しいタブ(プライベート)", image: R.image.optionmenu_private(), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    NotificationCenter.default.post(name: .baseViewModelWillAddPrivateWebView, object: nil)
                     return nil
                 }),
                 OptionMenuItem(title: "履歴", image: UIImage(named: "option_menu_history"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
