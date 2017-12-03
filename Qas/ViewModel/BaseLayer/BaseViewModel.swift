@@ -209,15 +209,15 @@ class BaseViewModel {
     }
     
 // MARK: Public Method
-    
-    func notifyStartLoadingWebView(object: [String: Any]?) {
-        center.post(name: .footerViewModelWillStartLoading, object: object)
+
+    func startLoadingPageHistoryDataModel(context: String) {
+        PageHistoryDataModel.s.startLoading(context: context)
     }
     
-    func notifyEndLoadingWebView(object: [String: Any]?) {
-        center.post(name: .footerViewModelWillEndLoading, object: object)
+    func endLoadingPageHistoryDataModel(context: String) {
+        PageHistoryDataModel.s.endLoading(context: context)
     }
-    
+
     func notifyChangeProgress(object: CGFloat) {
         center.post(name: .headerViewModelWillChangeProgress, object: object)
     }

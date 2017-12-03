@@ -13,7 +13,7 @@ protocol FooterViewModelDelegate: class {
     func footerViewModelDidChangeThumbnail()
     func footerViewModelDidRemoveThumbnail(index: Int)
     func footerViewModelDidStartLoading(context: String)
-    func footerViewModelDidEndLoading(context: String, title: String, index: Int)
+    func footerViewModelDidEndLoading(context: String, title: String)
 }
 
 class FooterViewModel {
@@ -53,23 +53,15 @@ class FooterViewModel {
             self.delegate?.footerViewModelDidStartLoading(context: notification.object as! String)
         }
         // webviewロード完了
-        center.addObserver(forName: .footerViewModelWillEndLoading, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .pageHistoryDataModelDidEndLoading, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[Footer Event]: footerViewModelWillEndLoading notification: \(notification)")
+            log.debug("[Footer Event]: pageHistoryDataModelDidEndLoading")
             // FooterViewに通知をする
-            let context = (notification.object as! [String: String])["context"]!
-            let url = (notification.object as! [String: String])["url"]!
-            let title = (notification.object as! [String: String])["title"]!
-            
-            for (index, thumbnail) in self.pageHistories.enumerated() {
-                if thumbnail.context == context {
-                    thumbnail.url = url
-                    thumbnail.title = title
-                    self.delegate?.footerViewModelDidEndLoading(context: context, title: title, index: index)
-                    break
-                }
-            }
+            let context = notification.object as! String
+            let pageHistory = D.find(PageHistoryDataModel.s.histories, callback: { $0.context == context })!
+            self.delegate?.footerViewModelDidEndLoading(context: context, title: pageHistory.title)
         }
+
         // webview切り替え
         center.addObserver(forName: .footerViewModelWillChangeWebView, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }

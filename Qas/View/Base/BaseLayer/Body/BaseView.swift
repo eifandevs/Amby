@@ -199,7 +199,7 @@ class BaseView: UIView {
                 // フロントwebviewの通知なので、プログレスを更新する
                 //インジゲーターの表示、非表示をきりかえる。
                 if otherWv.isLoading == true {
-                    viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
+                    viewModel.startLoadingPageHistoryDataModel(context: otherWv.context)
                     viewModel.notifyChangeProgress(object: CGFloat(0.1))
                     // くるくるを更新する
                     updateNetworkActivityIndicator()
@@ -211,7 +211,7 @@ class BaseView: UIView {
             } else {
                 //インジゲーターの表示、非表示をきりかえる。
                 if otherWv.isLoading == true {
-                    viewModel.notifyStartLoadingWebView(object: ["context": otherWv.context])
+                    viewModel.startLoadingPageHistoryDataModel(context: otherWv.context)
                     // くるくるを更新する
                     updateNetworkActivityIndicator()
                 } else {
@@ -337,9 +337,8 @@ class BaseView: UIView {
         let context = webView.context
         do {
             try pngImageData?.write(to: Util.thumbnailUrl(folder: context))
-            let object: [String: Any]? = ["context": context, "url": webView.requestUrl, "title": webView.requestTitle]
             log.debug("save thumbnal. context: \(context)")
-            self.viewModel.notifyEndLoadingWebView(object: object)
+            self.viewModel.endLoadingPageHistoryDataModel(context: context)
         } catch let error as NSError {
             log.error("failed to store thumbnail: \(error)")
         }

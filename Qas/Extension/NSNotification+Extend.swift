@@ -36,8 +36,6 @@ extension NSNotification.Name {
     static let footerViewModelWillAddWebView = NSNotification.Name("footerViewModelWillAddWebView")
     static let footerViewModelWillRemoveWebView = NSNotification.Name("footerViewModelWillRemoveWebView")
     static let footerViewModelWillChangeWebView = NSNotification.Name("footerViewModelWillChangeWebView")
-    static let footerViewModelWillStartLoading = NSNotification.Name("footerViewModelWillStartLoading")
-    static let footerViewModelWillEndLoading = NSNotification.Name("footerViewModelWillEndLoading")
     // Model
     static let pageHistoryDataModelDidRemove = NSNotification.Name("pageHistoryDataModelDidRemove")
     static let pageHistoryDataModelDidInsert = NSNotification.Name("pageHistoryDataModelDidInsert")

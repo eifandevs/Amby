@@ -216,7 +216,7 @@ extension FooterView: FooterViewModelDelegate {
         startIndicator(context: context)
     }
     
-    func footerViewModelDidEndLoading(context: String, title: String, index: Int) {
+    func footerViewModelDidEndLoading(context: String, title: String) {
         // くるくるを止めて、サムネイルを表示する
         let targetThumbnail: Thumbnail = self.thumbnails.filter({ (thumbnail) -> Bool in
             return thumbnail.context == context
