@@ -47,6 +47,7 @@ class FooterView: UIView, ShadowView {
     
 // MARK: Private Method
     
+    /// 初期ロード
     private func load() {
         let pageHistories = viewModel.pageHistories
         if pageHistories.count > 0 {

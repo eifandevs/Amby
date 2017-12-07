@@ -34,7 +34,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 OptionMenuItem(title: AppConst.SETTING_TITLE_BOOK_MARK, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_BOOK_MARK, completion: {
                         FavoriteDataModel.delete()
-                        NotificationCenter.default.post(name: .headerViewModelWillChangeFavorite, object: nil)
+                        CommonPageDataModel.s.updateFavoriteUrl(url: nil) // 強制無効化
                     })
                     return nil
                 }),

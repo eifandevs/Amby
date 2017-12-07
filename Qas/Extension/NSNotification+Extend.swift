@@ -9,13 +9,9 @@
 import Foundation
 
 extension NSNotification.Name {
-    // View
+    // MARK: - View
     static let baseViewControllerWillPresentHelp = NSNotification.Name("baseViewControllerWillPresentHelp")
-    // ViewModel
-    static let headerViewModelWillChangeProgress = NSNotification.Name("headerViewModelWillChangeProgress")
-    static let headerViewModelWillChangeField = NSNotification.Name("headerViewModelWillChangeField")
-    static let headerViewModelWillChangeFavorite = NSNotification.Name("headerViewModelWillChangeFavorite")
-    static let headerViewModelWillBeginEditing = NSNotification.Name("headerViewModelWillBeginEditing")
+    // MARK: - ViewModel
     static let baseViewModelWillAutoInput = NSNotification.Name("baseViewModelWillAutoInput")
     static let baseViewModelWillCopyWebView = NSNotification.Name("baseViewModelWillCopyWebView")
     static let baseViewModelWillReloadWebView = NSNotification.Name("baseViewModelWillReloadWebView")
@@ -36,10 +32,16 @@ extension NSNotification.Name {
     static let footerViewModelWillAddWebView = NSNotification.Name("footerViewModelWillAddWebView")
     static let footerViewModelWillRemoveWebView = NSNotification.Name("footerViewModelWillRemoveWebView")
     static let footerViewModelWillChangeWebView = NSNotification.Name("footerViewModelWillChangeWebView")
-    // Model
+    // MARK: - Model
+    // PageHistoryDataModel
     static let pageHistoryDataModelDidRemove = NSNotification.Name("pageHistoryDataModelDidRemove")
     static let pageHistoryDataModelDidInsert = NSNotification.Name("pageHistoryDataModelDidInsert")
     static let pageHistoryDataModelDidChange = NSNotification.Name("pageHistoryDataModelDidChange")
     static let pageHistoryDataModelDidStartLoading = NSNotification.Name("pageHistoryDataModelDidStartLoading")
     static let pageHistoryDataModelDidEndLoading = NSNotification.Name("pageHistoryDataModelDidEndLoading")
+    // CommonPageDataModel
+    static let commonPageDataModelProgressDidUpdate = NSNotification.Name("commonPageDataModelDidUpdate")
+    static let commonPageDataModelHeaderFieldTextDidUpdate = NSNotification.Name("commonPageDataModelHeaderFieldTextDidUpdate")
+    static let commonPageDataModelFavoriteUrlDidUpdate = NSNotification.Name("commonPageDataModelFavoriteUrlDidUpdate")
+    static let commonPageDataModelDidBeginEditing = NSNotification.Name("commonPageDataModelDidBeginEditing")
 }

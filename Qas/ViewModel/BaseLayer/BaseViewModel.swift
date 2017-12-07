@@ -40,7 +40,8 @@ class BaseViewModel {
     
     var headerFieldText: String = "" {
         didSet {
-            center.post(name: .headerViewModelWillChangeField, object: headerFieldText)
+
+            center.post(name: .commonPageDataModelHeaderFieldTextDidUpdate, object: headerFieldText)
         }
     }
     
@@ -179,11 +180,11 @@ class BaseViewModel {
                 if let favorite = FavoriteDataModel.select(url: fd.url).first {
                     // すでに登録済みの場合は、お気に入りから削除する
                     FavoriteDataModel.delete(favorites: [favorite])
-                    self.center.post(name: .headerViewModelWillChangeFavorite, object: ["url": fd.url])
+                    CommonPageDataModel.s.updateFavoriteUrl(url: fd.url)
                 } else {
                     FavoriteDataModel.insert(favorites: [fd])
                     // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
-                    self.center.post(name: .headerViewModelWillChangeFavorite, object: ["url": fd.url])
+                    CommonPageDataModel.s.updateFavoriteUrl(url: fd.url)
                     NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_BOOK_MARK)
                 }
             } else {
@@ -218,8 +219,8 @@ class BaseViewModel {
         PageHistoryDataModel.s.endLoading(context: context)
     }
 
-    func notifyChangeProgress(object: CGFloat) {
-        center.post(name: .headerViewModelWillChangeProgress, object: object)
+    func updateProgressCommonPageDataModel(object: CGFloat) {
+        CommonPageDataModel.s.updateProgress(progress: object)
     }
     
     func insertPageHistoryDataModel(url: String? = nil) {
@@ -238,8 +239,8 @@ class BaseViewModel {
 //        self.delegate?.baseViewModelDidAddWebView()
 //    }
     
-    func notifyBeginEditing() {
-        center.post(name: .headerViewModelWillBeginEditing, object: false)
+    func beginEditingCommonPageDataModel() {
+        CommonPageDataModel.s.beginEditing(forceEditFlg: false)
     }
     
     /// 前webviewのキャプチャ取得
@@ -284,7 +285,7 @@ class BaseViewModel {
             // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
             if wv.context == currentContext {
                 // フロントページの保存の場合
-                center.post(name: .headerViewModelWillChangeFavorite, object: ["url": requestUrl])
+                CommonPageDataModel.s.updateFavoriteUrl(url: requestUrl)
             }
             //　アプリ起動後の前回ページロード時は、履歴に保存しない
             if requestUrl != self.currentUrl {
@@ -355,10 +356,9 @@ class BaseViewModel {
     
     private func reloadFavorite() {
         // 現在表示しているURLがお気に入りかどうか調べる
-        if let history = PageHistoryDataModel.s.histories[safe: currentLocation] {
-            if (!history.url.isEmpty) {
-                self.center.post(name: .headerViewModelWillChangeFavorite, object: ["url": history.url])
-            }
+        let history = PageHistoryDataModel.s.currentHistory
+        if (!history.url.isEmpty) {
+            CommonPageDataModel.s.updateFavoriteUrl(url: history.url)
         }
     }
 }

@@ -49,7 +49,7 @@ class BaseView: UIView {
                     }
                     beginEditingWorkItem = DispatchWorkItem() { [weak self] in
                         guard let `self` = self else { return }
-                        self.viewModel.notifyBeginEditing()
+                        self.viewModel.beginEditingCommonPageDataModel()
                         self.beginEditingWorkItem = nil
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
@@ -135,7 +135,7 @@ class BaseView: UIView {
             // 1秒後にwillBeginEditingする
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                 guard let `self` = self else { return }
-                self.viewModel.notifyBeginEditing()
+                self.viewModel.beginEditingCommonPageDataModel()
             }
         }
     }
@@ -161,7 +161,7 @@ class BaseView: UIView {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             //estimatedProgressが変更されたときに、プログレスバーの値を変更する。
-            viewModel.notifyChangeProgress(object: CGFloat(front.estimatedProgress))
+            viewModel.updateProgressCommonPageDataModel(object: CGFloat(front.estimatedProgress))
         } else if keyPath == "loading" {
             // 対象のwebviewを検索する
             let otherWv: EGWebView = webViews.filter({ (w) -> Bool in
@@ -200,11 +200,11 @@ class BaseView: UIView {
                 //インジゲーターの表示、非表示をきりかえる。
                 if otherWv.isLoading == true {
                     viewModel.startLoadingPageHistoryDataModel(context: otherWv.context)
-                    viewModel.notifyChangeProgress(object: CGFloat(0.1))
+                    viewModel.updateProgressCommonPageDataModel(object: CGFloat(0.1))
                     // くるくるを更新する
                     updateNetworkActivityIndicator()
                 } else {
-                    viewModel.notifyChangeProgress(object: 1.0)
+                    viewModel.updateProgressCommonPageDataModel(object: 1.0)
                     // 履歴とサムネイルを更新
                     updateHistoryAndThumbnail(otherWv)
                 }
@@ -281,7 +281,7 @@ class BaseView: UIView {
         //プログレスが変更されたことを取得
         target.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(target.context))
         if target.isLoading == true {
-            viewModel.notifyChangeProgress(object: CGFloat(target.estimatedProgress))
+            viewModel.updateProgressCommonPageDataModel(object: CGFloat(target.estimatedProgress))
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = target.isLoading
     }
@@ -513,7 +513,7 @@ extension BaseView: BaseViewModelDelegate {
             // 全てのwebviewが削除された場合
             front.removeObserver(self, forKeyPath: "estimatedProgress")
         }
-        viewModel.notifyChangeProgress(object: 0)
+        viewModel.updateProgressCommonPageDataModel(object: 0)
         let newWv = createWebView(context: viewModel.currentContext)
         webViews.append(newWv)
         if viewModel.currentUrl.isEmpty {
@@ -523,7 +523,7 @@ extension BaseView: BaseViewModelDelegate {
             }
             beginEditingWorkItem = DispatchWorkItem() { [weak self]  in
                 guard let `self` = self else { return }
-                self.viewModel.notifyBeginEditing()
+                self.viewModel.beginEditingCommonPageDataModel()
                 self.beginEditingWorkItem = nil
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
@@ -542,7 +542,7 @@ extension BaseView: BaseViewModelDelegate {
     
     func baseViewModelDidChangeWebView() {
         front.removeObserver(self, forKeyPath: "estimatedProgress")
-        viewModel.notifyChangeProgress(object: 0)
+        viewModel.updateProgressCommonPageDataModel(object: 0)
         if let current = webViews[viewModel.currentLocation] {
             current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
             front = current
@@ -560,7 +560,7 @@ extension BaseView: BaseViewModelDelegate {
             webView.removeObserver(self, forKeyPath: "loading")
             if isFrontDelete {
                 webView.removeObserver(self, forKeyPath: "estimatedProgress")
-                viewModel.notifyChangeProgress(object: 0)
+                viewModel.updateProgressCommonPageDataModel(object: 0)
                 front = nil
             }
             webView.removeFromSuperview()
@@ -676,7 +676,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             }
         }
         if webView.isLoading {
-            viewModel.notifyChangeProgress(object: 0)
+            viewModel.updateProgressCommonPageDataModel(object: 0)
         }
         
         if !egWv.hasLocalUrl {

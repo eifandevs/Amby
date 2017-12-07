@@ -81,7 +81,7 @@ class FrontLayer: UIView {
                     log.debug("circle menu event. event: search")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                         guard let _ = self else { return }
-                        NotificationCenter.default.post(name: .headerViewModelWillBeginEditing, object: true)
+                        CommonPageDataModel.s.beginEditing(forceEditFlg: true)
                     }
                 }),
                 CircleMenuItem(image: R.image.circlemenu_add(), tapAction: { _ in

@@ -23,21 +23,24 @@ class HeaderViewModel {
     weak var delegate: HeaderViewModelDelegate?
 
     init () {
+
         // プログレスバーの初期化
         center.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             self.delegate?.headerViewModelDidChangeProgress(progress: 0)
         }
+
         // プログレス更新
-        center.addObserver(forName: .headerViewModelWillChangeProgress, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .commonPageDataModelProgressDidUpdate, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             self.delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
         }
+
         // 読み込み終了
-        center.addObserver(forName: .headerViewModelWillChangeFavorite, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .commonPageDataModelFavoriteUrlDidUpdate, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[HeaderView Event]: headerViewModelWillChangeFavorite")
-            let url = notification.object != nil ? (notification.object as! [String: String])["url"] : nil
+            log.debug("[HeaderView Event]: commonPageDataModelFavoriteUrlDidUpdate")
+            let url = notification.object != nil ? (notification.object as! String) : nil
             let enable = { () -> Bool in
                 if url == nil {
                     return false
@@ -47,16 +50,18 @@ class HeaderViewModel {
             }()
             self.delegate?.headerViewModelDidChangeFavorite(enable: enable)
         }
+
         // ヘッダーURL更新
-        center.addObserver(forName: .headerViewModelWillChangeField, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .commonPageDataModelHeaderFieldTextDidUpdate, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[HeaderView Event]: headerViewModelWillChangeField")
+            log.debug("[HeaderView Event]: commonPageDataModelHeaderFieldTextDidUpdate")
             self.delegate?.headerViewModelDidChangeField(text: notification.object as! String)
         }
+
         // 検索開始
-        center.addObserver(forName: .headerViewModelWillBeginEditing, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .commonPageDataModelDidBeginEditing, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[HeaderView Event]: headerViewModelWillBeginEditing")
+            log.debug("[HeaderView Event]: commonPageDataModelDidBeginEditing")
             self.delegate?.headerViewModelDidBeginEditing(forceEditFlg: notification.object as! Bool)
         }
     }
