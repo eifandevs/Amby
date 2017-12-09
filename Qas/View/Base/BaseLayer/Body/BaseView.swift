@@ -554,7 +554,7 @@ extension BaseView: BaseViewModelDelegate {
     
     /// ページ削除通知
     /// context: 削除したコンテキスト
-    func baseViewModelDidRemoveWebView(context: String) {
+    func baseViewModelDidRemoveWebView(context: String, pageExist: Bool) {
         let deleteIndex = D.findIndex(webViews, callback: { $0!.context == context })!
         if let webView = webViews[deleteIndex] {
             // サムネイルの削除
@@ -573,9 +573,9 @@ extension BaseView: BaseViewModelDelegate {
             // くるくるを更新
             updateNetworkActivityIndicator()
             
-            if isFrontDelete {
+            if isFrontDelete && pageExist {
                 // フロントの削除で、削除後にwebviewが存在する場合
-                if let current = webViews[viewModel.currentLocation] {
+                if let current = D.find(webViews, callback: { $0?.context == PageHistoryDataModel.s.currentContext })! {
                     current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
                     front = current
                     bringSubview(toFront: current)

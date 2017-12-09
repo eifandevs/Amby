@@ -78,8 +78,16 @@ class HeaderViewModel {
         center.addObserver(forName: .pageHistoryDataModelDidRemove, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[HeaderView Event]: pageHistoryDataModelDidRemove")
-            let url = PageHistoryDataModel.s.currentHistory.url
-            self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+            
+            let context = (notification.object as! [String: Any])["context"] as! String
+            let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
+            if pageExist {
+                let url = PageHistoryDataModel.s.currentHistory.url
+                self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+            } else {
+                // ページが存在しない場合は、無条件でお気に入りボタンを無効化
+                self.delegate?.headerViewModelDidChangeFavorite(enable: false)
+            }
         }
     }
 
@@ -106,6 +114,6 @@ class HeaderViewModel {
     }
     
     func removePageHistoryDataModel() {
-        center.post(name: .pageHistoryDataModelDidRemove, object: PageHistoryDataModel.s.currentContext)
+        PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)
     }
 }

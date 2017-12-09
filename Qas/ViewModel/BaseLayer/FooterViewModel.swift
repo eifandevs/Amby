@@ -11,7 +11,7 @@ import Foundation
 protocol FooterViewModelDelegate: class {
     func footerViewModelDidAddThumbnail(pageHistory: PageHistory)
     func footerViewModelDidChangeThumbnail(context: String)
-    func footerViewModelDidRemoveThumbnail(context: String)
+    func footerViewModelDidRemoveThumbnail(context: String, pageExist: Bool)
     func footerViewModelDidStartLoading(context: String)
     func footerViewModelDidEndLoading(context: String, title: String)
 }
@@ -77,11 +77,12 @@ class FooterViewModel {
         center.addObserver(forName: .pageHistoryDataModelDidRemove, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[Footer Event]: pageHistoryDataModelDidRemove")
-            let context = notification.object as! String
+            let context = (notification.object as! [String: Any])["context"] as! String
+            let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
             
             // 実データの削除
             try! FileManager.default.removeItem(atPath: Util.thumbnailFolderUrl(folder: context).path)
-            self.delegate?.footerViewModelDidRemoveThumbnail(context: context)
+            self.delegate?.footerViewModelDidRemoveThumbnail(context: context, pageExist: pageExist)
         }
     }
     

@@ -13,7 +13,7 @@ protocol BaseViewModelDelegate: class {
     func baseViewModelDidAddWebView()
     func baseViewModelDidReloadWebView()
     func baseViewModelDidChangeWebView()
-    func baseViewModelDidRemoveWebView(context: String)
+    func baseViewModelDidRemoveWebView(context: String, pageExist: Bool)
     func baseViewModelDidHistoryBackWebView()
     func baseViewModelDidHistoryForwardWebView()
     func baseViewModelDidSearchWebView(text: String)
@@ -123,7 +123,9 @@ class BaseViewModel {
         center.addObserver(forName: .pageHistoryDataModelDidRemove, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: pageHistoryDataModelDidRemove")
-            self.delegate?.baseViewModelDidRemoveWebView(context: notification.object as! String)
+            let context = (notification.object as! [String: Any])["context"] as! String
+            let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
+            self.delegate?.baseViewModelDidRemoveWebView(context: context, pageExist: pageExist)
         }
         // webview検索
         center.addObserver(forName: .baseViewModelWillSearchWebView, object: nil, queue: nil) { [weak self] (notification) in

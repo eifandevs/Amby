@@ -181,7 +181,7 @@ extension FooterView: FooterViewModelDelegate {
         updateFrontBar()
     }
     
-    func footerViewModelDidRemoveThumbnail(context: String) {
+    func footerViewModelDidRemoveThumbnail(context: String, pageExist: Bool) {
         let deleteIndex = D.findIndex(thumbnails, callback: { $0.context == context })!
         let completion: (() -> ()) = { [weak self] in
             guard let `self` = self else {
