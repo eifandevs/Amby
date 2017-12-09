@@ -41,7 +41,7 @@ class BaseViewModel {
     var headerFieldText: String = "" {
         didSet {
 
-            center.post(name: .commonPageDataModelHeaderFieldTextDidUpdate, object: headerFieldText)
+            center.post(name: .headerViewDataModelHeaderFieldTextDidUpdate, object: headerFieldText)
         }
     }
     
@@ -205,8 +205,8 @@ class BaseViewModel {
         PageHistoryDataModel.s.endLoading(context: context)
     }
 
-    func updateProgressCommonPageDataModel(object: CGFloat) {
-        CommonPageDataModel.s.updateProgress(progress: object)
+    func updateProgressHeaderViewDataModel(object: CGFloat) {
+        HeaderViewDataModel.s.updateProgress(progress: object)
     }
     
     func insertPageHistoryDataModel(url: String? = nil) {
@@ -225,8 +225,8 @@ class BaseViewModel {
 //        self.delegate?.baseViewModelDidAddWebView()
 //    }
     
-    func beginEditingCommonPageDataModel() {
-        CommonPageDataModel.s.beginEditing(forceEditFlg: false)
+    func beginEditingHeaderViewDataModel() {
+        HeaderViewDataModel.s.beginEditing(forceEditFlg: false)
     }
     
     /// 前webviewのキャプチャ取得
@@ -258,12 +258,12 @@ class BaseViewModel {
     
     /// 前WebViewに切り替え
     func changePreviousWebView() {
-        changePageHistoryDataModel(context: PageHistoryDataModel.s.histories[currentLocation - 1].context)
+        PageHistoryDataModel.s.goBack()
     }
     
     /// 後WebViewに切り替え
     func changeNextWebView() {
-        changePageHistoryDataModel(context: PageHistoryDataModel.s.histories[currentLocation + 1].context)
+        PageHistoryDataModel.s.goNext()
     }
     
     func saveHistory(wv: EGWebView) {

@@ -81,7 +81,7 @@ class FrontLayer: UIView {
                     log.debug("circle menu event. event: search")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                         guard let _ = self else { return }
-                        CommonPageDataModel.s.beginEditing(forceEditFlg: true)
+                        HeaderViewDataModel.s.beginEditing(forceEditFlg: true)
                     }
                 }),
                 CircleMenuItem(image: R.image.circlemenu_add(), tapAction: { _ in
@@ -108,7 +108,7 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.header_favorite(), tapAction: { _ in
                     log.debug("circle menu event. event: favorite")
-                    NotificationCenter.default.post(name: .baseViewModelWillRegisterAsFavorite, object: nil)
+                    FavoriteDataModel.s.register()
                 }),
                 CircleMenuItem(image: R.image.circlemenu_form(), tapAction: { _ in
                     log.debug("circle menu event. event: form")

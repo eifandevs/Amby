@@ -12,7 +12,7 @@
 		A5223EEA1F1F8EA20097E793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5223E901F1F8EA20097E793 /* LaunchScreen.storyboard */; };
 		A527CBAA1FD31844000DF901 /* BaseViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */; };
 		A527CBAC1FD31A90000DF901 /* FrontLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */; };
-		A527CBAF1FD97D0C000DF901 /* CommonPageDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBAE1FD97D0C000DF901 /* CommonPageDataModel.swift */; };
+		A527CBAF1FD97D0C000DF901 /* HeaderViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBAE1FD97D0C000DF901 /* HeaderViewDataModel.swift */; };
 		A53C0EBD1FB7729D00FD78FF /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EBC1FB7729D00FD78FF /* ApiManager.swift */; };
 		A53C0EC01FB7764500FD78FF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */; };
 		A53C0EC21FB7766A00FD78FF /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EC11FB7766A00FD78FF /* NotificationView.swift */; };
@@ -121,7 +121,7 @@
 		A5223E911F1F8EA20097E793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModel.swift; sourceTree = "<group>"; };
-		A527CBAE1FD97D0C000DF901 /* CommonPageDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonPageDataModel.swift; sourceTree = "<group>"; };
+		A527CBAE1FD97D0C000DF901 /* HeaderViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewDataModel.swift; sourceTree = "<group>"; };
 		A53C0EBC1FB7729D00FD78FF /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A53C0EC11FB7766A00FD78FF /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -271,12 +271,12 @@
 			path = Qas;
 			sourceTree = "<group>";
 		};
-		A527CBAD1FD97CFD000DF901 /* CommonPageDataModel */ = {
+		A527CBAD1FD97CFD000DF901 /* HeaderViewDataModel */ = {
 			isa = PBXGroup;
 			children = (
-				A527CBAE1FD97D0C000DF901 /* CommonPageDataModel.swift */,
+				A527CBAE1FD97D0C000DF901 /* HeaderViewDataModel.swift */,
 			);
-			path = CommonPageDataModel;
+			path = HeaderViewDataModel;
 			sourceTree = "<group>";
 		};
 		A53C0EBE1FB7764500FD78FF /* Notification */ = {
@@ -469,7 +469,7 @@
 		A5BCE7631FA50BFA00E0C6E5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A527CBAD1FD97CFD000DF901 /* CommonPageDataModel */,
+				A527CBAD1FD97CFD000DF901 /* HeaderViewDataModel */,
 				A586CD8C1FB77B4400961B30 /* ThumbnailDataModel */,
 				A56983C91FA527AA000A585F /* SuggestDataModel */,
 				A56983BE1FA52482000A585F /* FavoriteDataModel */,
@@ -858,7 +858,7 @@
 				A5F3C0191FB75D2900B905CA /* MessageConst.swift in Sources */,
 				A53C0EEC1FB778ED00FD78FF /* SearchHistory.swift in Sources */,
 				A53C0EE81FB778ED00FD78FF /* Input.swift in Sources */,
-				A527CBAF1FD97D0C000DF901 /* CommonPageDataModel.swift in Sources */,
+				A527CBAF1FD97D0C000DF901 /* HeaderViewDataModel.swift in Sources */,
 				A5BCE70D1FA501B900E0C6E5 /* NSObject+Extend.swift in Sources */,
 				A5BCE7BD1FA50BFA00E0C6E5 /* OptionMenuTextField.swift in Sources */,
 				A5BCE7AE1FA50BFA00E0C6E5 /* SearchMenuTableView.swift in Sources */,

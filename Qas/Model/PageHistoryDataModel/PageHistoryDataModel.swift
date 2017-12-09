@@ -79,6 +79,24 @@ final class PageHistoryDataModel {
         self.center.post(name: .pageHistoryDataModelDidChange, object: currentContext)
     }
     
+    /// 前ページに変更
+    func goBack() {
+        if histories.count > 0 {
+            let targetContext = histories[0...histories.count - 1 ~= currentLocation - 1 ? currentLocation - 1 : histories.count - 1].context
+            currentContext = targetContext
+            self.center.post(name: .pageHistoryDataModelDidChange, object: currentContext)
+        }
+    }
+    
+    /// 次ページに変更
+    func goNext() {
+        if histories.count > 0 {
+            let targetContext = histories[0...histories.count - 1 ~= currentLocation + 1 ? currentLocation + 1 : 0].context
+            currentContext = targetContext
+            self.center.post(name: .pageHistoryDataModelDidChange, object: currentContext)
+        }
+    }
+    
     /// 表示中ページの保存
     func store() {
         if histories.count > 0 {

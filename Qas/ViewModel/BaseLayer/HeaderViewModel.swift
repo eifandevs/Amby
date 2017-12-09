@@ -31,7 +31,7 @@ class HeaderViewModel {
         }
 
         // プログレス更新
-        center.addObserver(forName: .commonPageDataModelProgressDidUpdate, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .headerViewDataModelProgressDidUpdate, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             self.delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
         }
@@ -45,16 +45,16 @@ class HeaderViewModel {
         }
 
         // ヘッダーURL更新
-        center.addObserver(forName: .commonPageDataModelHeaderFieldTextDidUpdate, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .headerViewDataModelHeaderFieldTextDidUpdate, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[HeaderView Event]: commonPageDataModelHeaderFieldTextDidUpdate")
+            log.debug("[HeaderView Event]: headerViewDataModelHeaderFieldTextDidUpdate")
             self.delegate?.headerViewModelDidChangeField(text: notification.object as! String)
         }
 
         // 検索開始
-        center.addObserver(forName: .commonPageDataModelDidBeginEditing, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .headerViewDataModelDidBeginEditing, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[HeaderView Event]: commonPageDataModelDidBeginEditing")
+            log.debug("[HeaderView Event]: headerViewDataModelDidBeginEditing")
             self.delegate?.headerViewModelDidBeginEditing(forceEditFlg: notification.object as! Bool)
         }
         
@@ -94,7 +94,7 @@ class HeaderViewModel {
     }
 
     func notifyRegisterAsFavorite() {
-        center.post(name: .baseViewModelWillRegisterAsFavorite, object: nil)
+        FavoriteDataModel.s.register()
     }
     
     func notifyRemoveWebView() {

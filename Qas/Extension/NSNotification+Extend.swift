@@ -23,7 +23,6 @@ extension NSNotification.Name {
     static let baseViewModelWillHistoryForwardWebView = NSNotification.Name("baseViewModelWillHistoryForwardWebView")
     static let baseViewModelWillCopyUrl = NSNotification.Name("baseViewModelWillCopyUrl")
     static let baseViewModelWillSearchWebView = NSNotification.Name("baseViewModelWillSearchWebView")
-    static let baseViewModelWillRegisterAsFavorite = NSNotification.Name("baseViewModelWillRegisterAsFavorite")
     static let baseViewModelWillRegisterAsForm = NSNotification.Name("baseViewModelWillRegisterAsForm")
     static let baseViewModelWillAutoScroll = NSNotification.Name("baseViewModelWillAutoScroll")
     static let searchMenuTableViewModelWillUpdateSearchToken = NSNotification.Name("searchMenuTableViewModelWillUpdateSearchToken")
@@ -35,10 +34,10 @@ extension NSNotification.Name {
     static let pageHistoryDataModelDidChange = NSNotification.Name("pageHistoryDataModelDidChange")
     static let pageHistoryDataModelDidStartLoading = NSNotification.Name("pageHistoryDataModelDidStartLoading")
     static let pageHistoryDataModelDidEndLoading = NSNotification.Name("pageHistoryDataModelDidEndLoading")
-    // CommonPageDataModel
-    static let commonPageDataModelProgressDidUpdate = NSNotification.Name("commonPageDataModelDidUpdate")
-    static let commonPageDataModelHeaderFieldTextDidUpdate = NSNotification.Name("commonPageDataModelHeaderFieldTextDidUpdate")
-    static let commonPageDataModelDidBeginEditing = NSNotification.Name("commonPageDataModelDidBeginEditing")
+    // HeaderViewDataModel
+    static let headerViewDataModelProgressDidUpdate = NSNotification.Name("headerViewDataModelDidUpdate")
+    static let headerViewDataModelHeaderFieldTextDidUpdate = NSNotification.Name("headerViewDataModelHeaderFieldTextDidUpdate")
+    static let headerViewDataModelDidBeginEditing = NSNotification.Name("headerViewDataModelDidBeginEditing")
     // FavoriteDataModel
     static let favoriteDataModelDidReload = NSNotification.Name("favoriteDataModelDidReload")
 }
