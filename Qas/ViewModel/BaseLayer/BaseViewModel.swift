@@ -108,11 +108,16 @@ class BaseViewModel {
         }
         
         // webviewの自動入力
-        center.addObserver(forName: .baseViewModelWillAutoInput, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .operationDataModelDidChange, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillAutoInput")
-            self.delegate?.baseViewModelDidAutoInput()
+            log.debug("[BaseView Event]: operationDataModelDidChange")
+            
+            let operation = notification.object as! UserOperation
+            if operation == .AUTO_INPUT {
+                self.delegate?.baseViewModelDidAutoInput()
+            }
         }
+        
         // 履歴の永続化
         center.addObserver(forName: .baseViewModelWillStoreHistory, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }

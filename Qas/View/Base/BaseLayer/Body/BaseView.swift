@@ -16,7 +16,6 @@ protocol BaseViewDelegate: class {
     func baseViewDidTouchBegan()
     func baseViewDidTouchEnd()
     func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection)
-    func baseViewWillAutoInput()
 }
 
 enum EdgeSwipeDirection: CGFloat {
@@ -66,8 +65,6 @@ class BaseView: UIView {
     private let viewModel = BaseViewModel()
     /// Y軸移動量を計算するための一時変数
     private var scrollMovingPointY: CGFloat = 0
-    /// キーボード表示中フラグ
-    var isDisplayedKeyBoard = false
     /// 自動入力ダイアログ表示済みフラグ
     private var isDoneAutoInput = false
     /// タッチ中フラグ
@@ -102,17 +99,6 @@ class BaseView: UIView {
         super.init(frame: frame)
         viewModel.delegate = self
         EGApplication.sharedMyApplication.egDelegate = self
-        
-        // キーボード表示の処理(フォームの自動設定)
-        registerForKeyboardDidShowNotification { [weak self] (notification, size) in
-            guard let `self` = self else { return }
-            self.delegate?.baseViewWillAutoInput()
-        }
-        
-        registerForKeyboardWillHideNotification { [weak self] (notification, size) in
-            guard let `self` = self else { return }
-            self.isDisplayedKeyBoard = false
-        }
         
         // webviewsに初期値を入れる
         for _ in 0...viewModel.webViewCount - 1 {
@@ -492,10 +478,8 @@ extension BaseView: UIScrollViewDelegate {
 // MARK: BaseViewModel Delegate
 extension BaseView: BaseViewModelDelegate {
     func baseViewModelDidAutoInput() {
-        if !isDisplayedKeyBoard {
-            isDisplayedKeyBoard = true
-            
-            if let inputForm = FormDataModel.select(url: front.url?.absoluteString).first, !isDoneAutoInput {
+        if !isDoneAutoInput {
+            if let inputForm = FormDataModel.select(url: front.url?.absoluteString).first {
                 NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_TITLE, message: MessageConst.ALERT_FORM_EXIST, completion: { [weak self] in
                     for input in inputForm.inputs {
                         let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: input.value)!

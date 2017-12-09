@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5117A511FDC48F600213E02 /* OperationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A501FDC48F600213E02 /* OperationDataModel.swift */; };
+		A5117A531FDC494000213E02 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A521FDC494000213E02 /* AppEnum.swift */; };
+		A5117A551FDC500B00213E02 /* BaseLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */; };
 		A5223EE71F1F8EA20097E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5223E8D1F1F8EA20097E793 /* Assets.xcassets */; };
 		A5223EE81F1F8EA20097E793 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223E8E1F1F8EA20097E793 /* EGApplication.swift */; };
 		A5223EEA1F1F8EA20097E793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5223E901F1F8EA20097E793 /* LaunchScreen.storyboard */; };
@@ -115,6 +118,9 @@
 		615FE5E3DFBC7266C29F3D82 /* Pods_Weasel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weasel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28BDCA0F081729C628CD5CE /* Pods-Qas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.release.xcconfig"; sourceTree = "<group>"; };
+		A5117A501FDC48F600213E02 /* OperationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataModel.swift; sourceTree = "<group>"; };
+		A5117A521FDC494000213E02 /* AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnum.swift; sourceTree = "<group>"; };
+		A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLayerViewModel.swift; sourceTree = "<group>"; };
 		A5223E8D1F1F8EA20097E793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5223E8E1F1F8EA20097E793 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A5223E8F1F1F8EA20097E793 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -251,6 +257,14 @@
 				A28BDCA0F081729C628CD5CE /* Pods-Qas.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A5117A4F1FDC48D900213E02 /* OperationDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				A5117A501FDC48F600213E02 /* OperationDataModel.swift */,
+			);
+			path = OperationDataModel;
 			sourceTree = "<group>";
 		};
 		A5223E8A1F1F8EA20097E793 /* Qas */ = {
@@ -427,6 +441,7 @@
 				A5BCE6F11FA501B800E0C6E5 /* DeviceConst.swift */,
 				A5BCE6F21FA501B800E0C6E5 /* HttpConst.swift */,
 				A5F3C0181FB75D2900B905CA /* MessageConst.swift */,
+				A5117A521FDC494000213E02 /* AppEnum.swift */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -469,6 +484,7 @@
 		A5BCE7631FA50BFA00E0C6E5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A5117A4F1FDC48D900213E02 /* OperationDataModel */,
 				A527CBAD1FD97CFD000DF901 /* HeaderViewDataModel */,
 				A586CD8C1FB77B4400961B30 /* ThumbnailDataModel */,
 				A56983C91FA527AA000A585F /* SuggestDataModel */,
@@ -631,6 +647,7 @@
 			children = (
 				A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */,
 				A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */,
+				A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */,
 				A5BCE7961FA50BFA00E0C6E5 /* BaseLayer */,
 				A5BCE79B1FA50BFA00E0C6E5 /* FrontLayer */,
 			);
@@ -861,6 +878,8 @@
 				A527CBAF1FD97D0C000DF901 /* HeaderViewDataModel.swift in Sources */,
 				A5BCE70D1FA501B900E0C6E5 /* NSObject+Extend.swift in Sources */,
 				A5BCE7BD1FA50BFA00E0C6E5 /* OptionMenuTextField.swift in Sources */,
+				A5117A511FDC48F600213E02 /* OperationDataModel.swift in Sources */,
+				A5117A551FDC500B00213E02 /* BaseLayerViewModel.swift in Sources */,
 				A5BCE7AE1FA50BFA00E0C6E5 /* SearchMenuTableView.swift in Sources */,
 				A5BCE71D1FA501B900E0C6E5 /* EncryptHelper.swift in Sources */,
 				A5BCE7241FA501B900E0C6E5 /* EnumEnumerable.swift in Sources */,
@@ -920,6 +939,7 @@
 				A5BCE70B1FA501B900E0C6E5 /* Int+Extend.swift in Sources */,
 				A5BCE7091FA501B900E0C6E5 /* DispatchQueue+Extend.swift in Sources */,
 				A5BCE7CA1FA50BFA00E0C6E5 /* HistoryMenuViewModel.swift in Sources */,
+				A5117A531FDC494000213E02 /* AppEnum.swift in Sources */,
 				A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */,
 				A5BCE7C81FA50BFA00E0C6E5 /* FormMenuViewModel.swift in Sources */,
 				A5BCE7B81FA50BFA00E0C6E5 /* CircleMenuItem.swift in Sources */,

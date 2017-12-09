@@ -86,7 +86,7 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.circlemenu_add(), tapAction: { _ in
                     log.debug("circle menu event. event: add")
-                    self.viewModel.insertPageHistoryDataMoel()
+                    self.viewModel.insertPageHistoryDataModel()
                 })
             ],
             [

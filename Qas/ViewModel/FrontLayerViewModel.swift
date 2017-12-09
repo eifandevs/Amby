@@ -9,7 +9,7 @@
 import Foundation
 
 class FrontLayerViewModel {
-    func insertPageHistoryDataMoel() {
+    func insertPageHistoryDataModel() {
         PageHistoryDataModel.s.insert(url: nil)
     }
 }

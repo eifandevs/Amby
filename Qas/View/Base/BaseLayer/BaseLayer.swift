@@ -16,6 +16,7 @@ protocol BaseLayerDelegate: class {
 class BaseLayer: UIView {
     
     weak var delegate: BaseLayerDelegate?
+    let viewModel = BaseLayerViewModel()
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT))
     let baseViewOriginY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER_HEADER_HEIGHT, DeviceConst.STATUS_BAR_HEIGHT)
     private var headerView: HeaderView
@@ -34,6 +35,15 @@ class BaseLayer: UIView {
         baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_BASE_HEIGHT))
         super.init(frame: frame)
 
+        // キーボード監視
+        // キーボード表示の処理(フォームの自動設定)
+        registerForKeyboardDidShowNotification { [weak self] (notification, size) in
+            guard let `self` = self else { return }
+            if !self.isHeaderViewEditing {
+                self.viewModel.changeOperationDataModel(operation: .AUTO_INPUT)
+            }
+        }
+        
         // フォアグラウンド時にヘッダービューの位置をMaxにする
         NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
@@ -115,13 +125,6 @@ extension BaseLayer: HeaderViewDelegate {
 
 // MARK: BaseView Delegate
 extension BaseLayer: BaseViewDelegate {
-    func baseViewWillAutoInput() {
-        log.debug("[BaseLayer Event]: baseViewWillAutoInput")
-        // ベースビューから自動入力したいと通知がきたので、判断する
-        if !isHeaderViewEditing {
-            NotificationCenter.default.post(name: .baseViewModelWillAutoInput, object: nil)
-        }
-    }
     
     func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection) {
         log.debug("[BaseLayer Event]: baseViewDidEdgeSwiped")
