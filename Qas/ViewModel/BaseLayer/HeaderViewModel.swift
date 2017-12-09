@@ -37,18 +37,11 @@ class HeaderViewModel {
         }
 
         // 読み込み終了
-        center.addObserver(forName: .commonPageDataModelFavoriteUrlDidUpdate, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .favoriteDataModelDidReload, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[HeaderView Event]: commonPageDataModelFavoriteUrlDidUpdate")
-            let url = notification.object != nil ? (notification.object as! String) : nil
-            let enable = { () -> Bool in
-                if url == nil {
-                    return false
-                } else {
-                    return FavoriteDataModel.select().map({ $0.url }).contains(url!)
-                }
-            }()
-            self.delegate?.headerViewModelDidChangeFavorite(enable: enable)
+            log.debug("[HeaderView Event]: favoriteDataModelDidReload")
+            let url = PageHistoryDataModel.s.currentHistory.url
+            self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
         }
 
         // ヘッダーURL更新
@@ -63,6 +56,22 @@ class HeaderViewModel {
             guard let `self` = self else { return }
             log.debug("[HeaderView Event]: commonPageDataModelDidBeginEditing")
             self.delegate?.headerViewModelDidBeginEditing(forceEditFlg: notification.object as! Bool)
+        }
+        
+        // ページ変更
+        center.addObserver(forName: .pageHistoryDataModelDidChange, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
+            log.debug("[HeaderView Event]: pageHistoryDataModelDidChange")
+            let url = PageHistoryDataModel.s.currentHistory.url
+            self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+        }
+        
+        // ページ追加
+        center.addObserver(forName: .pageHistoryDataModelDidInsert, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
+            log.debug("[HeaderView Event]: pageHistoryDataModelDidInsert")
+            let url = PageHistoryDataModel.s.currentHistory.url
+            self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
         }
     }
 

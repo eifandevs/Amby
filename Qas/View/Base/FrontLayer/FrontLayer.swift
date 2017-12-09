@@ -135,11 +135,11 @@ class FrontLayer: UIView {
         CommonHistoryDataModel.s.delete(historyIds: deleteHistoryIds)
         // お気に入り
         let deleteFavorites = deleteFavoriteIds.map { (id) -> Favorite in
-            return FavoriteDataModel.select(id: id).first!
+            return FavoriteDataModel.s.select(id: id).first!
         }
         if deleteFavorites.count > 0 {
             CommonDao.s.delete(data: deleteFavorites)
-            NotificationCenter.default.post(name: .baseViewModelWillChangeFavorite, object: nil)
+            FavoriteDataModel.s.reload()
         }
         // フォーム
         let deleteForms = deleteFormIds.map { (id) -> Form in

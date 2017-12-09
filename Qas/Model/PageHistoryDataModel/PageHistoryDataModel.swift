@@ -63,18 +63,20 @@ final class PageHistoryDataModel {
     
     /// ページ追加
     func insert(url: String?) {
-        if let url = url {
-            histories.append(PageHistory(url: url))
-        } else {
-            histories.append(PageHistory())
-        }
+        let newPage = PageHistory(url: url ?? "")
+        histories.append(newPage)
+        currentContext = newPage.context
         self.center.post(name: .pageHistoryDataModelDidInsert, object: histories.last!)
     }
     
+    /// 指定ページの削除
+    func remove(context: String) {
+        
+    }
     /// 表示中ページの変更
     func change(context: String) {
         currentContext = context
-        self.center.post(name: .pageHistoryDataModelDidChange, object: nil)
+        self.center.post(name: .pageHistoryDataModelDidChange, object: currentContext)
     }
     
     /// 表示中ページの保存

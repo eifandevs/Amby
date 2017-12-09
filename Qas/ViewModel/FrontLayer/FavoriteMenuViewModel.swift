@@ -14,7 +14,7 @@ class FavoriteMenuViewModel: OptionMenuTableViewModel {
     }
     
     override func setup() {
-        let items = FavoriteDataModel.select().map { (favorite) -> OptionMenuItem in
+        let items = FavoriteDataModel.s.select().map { (favorite) -> OptionMenuItem in
             return OptionMenuItem(_id: favorite.id, type: .deletablePlain, title: favorite.title, url: favorite.url)
         }
         

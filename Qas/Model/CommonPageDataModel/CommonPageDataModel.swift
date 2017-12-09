@@ -20,9 +20,6 @@ final class CommonPageDataModel {
     // ヘッダーテキスト
     private var headerFieldText = ""
     
-    // お気に入り登録URL
-    private var favoriteUrl: String?
-    
     /// プログレス情報の更新
     func updateProgress(progress: CGFloat) {
         self.progress = progress
@@ -33,12 +30,6 @@ final class CommonPageDataModel {
     func updateHeaderFieldText(text: String) {
         headerFieldText = text
         center.post(name: .commonPageDataModelHeaderFieldTextDidUpdate, object: text)
-    }
-    
-    /// お気に入り登録URLの更新
-    func updateFavoriteUrl(url: String?) {
-        self.favoriteUrl = url
-        center.post(name: .commonPageDataModelFavoriteUrlDidUpdate, object: url)
     }
     
     /// 編集開始通知

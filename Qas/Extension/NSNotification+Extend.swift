@@ -23,15 +23,11 @@ extension NSNotification.Name {
     static let baseViewModelWillHistoryForwardWebView = NSNotification.Name("baseViewModelWillHistoryForwardWebView")
     static let baseViewModelWillCopyUrl = NSNotification.Name("baseViewModelWillCopyUrl")
     static let baseViewModelWillSearchWebView = NSNotification.Name("baseViewModelWillSearchWebView")
-    static let baseViewModelWillChangeFavorite = NSNotification.Name("baseViewModelWillChangeFavorite")
     static let baseViewModelWillRegisterAsFavorite = NSNotification.Name("baseViewModelWillRegisterAsFavorite")
     static let baseViewModelWillRegisterAsForm = NSNotification.Name("baseViewModelWillRegisterAsForm")
     static let baseViewModelWillAutoScroll = NSNotification.Name("baseViewModelWillAutoScroll")
     static let searchMenuTableViewModelWillUpdateSearchToken = NSNotification.Name("searchMenuTableViewModelWillUpdateSearchToken")
-    static let footerViewModelWillLoad = NSNotification.Name("footerViewModelWillLoad")
-    static let footerViewModelWillAddWebView = NSNotification.Name("footerViewModelWillAddWebView")
     static let footerViewModelWillRemoveWebView = NSNotification.Name("footerViewModelWillRemoveWebView")
-    static let footerViewModelWillChangeWebView = NSNotification.Name("footerViewModelWillChangeWebView")
     // MARK: - Model
     // PageHistoryDataModel
     static let pageHistoryDataModelDidRemove = NSNotification.Name("pageHistoryDataModelDidRemove")
@@ -42,6 +38,7 @@ extension NSNotification.Name {
     // CommonPageDataModel
     static let commonPageDataModelProgressDidUpdate = NSNotification.Name("commonPageDataModelDidUpdate")
     static let commonPageDataModelHeaderFieldTextDidUpdate = NSNotification.Name("commonPageDataModelHeaderFieldTextDidUpdate")
-    static let commonPageDataModelFavoriteUrlDidUpdate = NSNotification.Name("commonPageDataModelFavoriteUrlDidUpdate")
     static let commonPageDataModelDidBeginEditing = NSNotification.Name("commonPageDataModelDidBeginEditing")
+    // FavoriteDataModel
+    static let favoriteDataModelDidReload = NSNotification.Name("favoriteDataModelDidReload")
 }

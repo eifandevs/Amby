@@ -10,7 +10,7 @@ import Foundation
 
 protocol FooterViewModelDelegate: class {
     func footerViewModelDidAddThumbnail(pageHistory: PageHistory)
-    func footerViewModelDidChangeThumbnail()
+    func footerViewModelDidChangeThumbnail(context: String)
     func footerViewModelDidRemoveThumbnail(index: Int)
     func footerViewModelDidStartLoading(context: String)
     func footerViewModelDidEndLoading(context: String, title: String)
@@ -26,6 +26,10 @@ class FooterViewModel {
         return PageHistoryDataModel.s.currentHistory
     }
     
+    var currentContext: String {
+        return PageHistoryDataModel.s.currentContext
+    }
+    
     var currentLocation: Int {
         return PageHistoryDataModel.s.currentLocation
     }
@@ -37,9 +41,9 @@ class FooterViewModel {
     
     init(index: Int) {
         // webview追加
-        center.addObserver(forName: .footerViewModelWillAddWebView, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .pageHistoryDataModelDidInsert, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[Footer Event]: footerViewModelWillAddWebView")
+            log.debug("[Footer Event]: pageHistoryDataModelDidInsert")
             let pageHistory = notification.object as! PageHistory
             
             // 新しいサムネイルを追加
@@ -63,10 +67,10 @@ class FooterViewModel {
         }
 
         // webview切り替え
-        center.addObserver(forName: .footerViewModelWillChangeWebView, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .pageHistoryDataModelDidChange, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[Footer Event]: footerViewModelWillChangeWebView")
-            self.delegate?.footerViewModelDidChangeThumbnail()
+            log.debug("[Footer Event]: pageHistoryDataModelDidChange")
+            self.delegate?.footerViewModelDidChangeThumbnail(context: notification.object as! String)
         }
         
         // webview削除

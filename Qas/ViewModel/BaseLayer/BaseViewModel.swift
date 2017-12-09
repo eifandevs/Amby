@@ -161,48 +161,34 @@ class BaseViewModel {
             log.debug("[BaseView Event]: baseViewModelWillHistoryForwardWebView")
             self.delegate?.baseViewModelDidHistoryForwardWebView()
         }
-        // webviewお気に入り更新
-        center.addObserver(forName: .baseViewModelWillChangeFavorite, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillChangeFavorite")
-            self.reloadFavorite()
-        }
-        
-        // webviewお気に入り登録
-        center.addObserver(forName: .baseViewModelWillRegisterAsFavorite, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillRegisterAsFavorite")
-            if (!PageHistoryDataModel.s.currentHistory.url.isEmpty && !PageHistoryDataModel.s.currentHistory.title.isEmpty) {
-                let fd = Favorite()
-                fd.title = PageHistoryDataModel.s.currentHistory.title
-                fd.url = PageHistoryDataModel.s.currentHistory.url
-                
-                if let favorite = FavoriteDataModel.select(url: fd.url).first {
-                    // すでに登録済みの場合は、お気に入りから削除する
-                    FavoriteDataModel.delete(favorites: [favorite])
-                    CommonPageDataModel.s.updateFavoriteUrl(url: fd.url)
-                } else {
-                    FavoriteDataModel.insert(favorites: [fd])
-                    // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
-                    CommonPageDataModel.s.updateFavoriteUrl(url: fd.url)
-                    NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_BOOK_MARK)
-                }
-            } else {
-                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_BOOK_MARK_ERROR)
-            }
-        }
         // webviewフォーム情報登録
         center.addObserver(forName: .baseViewModelWillRegisterAsForm, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillRegisterAsForm")
             self.delegate?.baseViewModelDidRegisterAsForm()
         }
+        
         // webview自動スクロール
         center.addObserver(forName: .baseViewModelWillAutoScroll, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: baseViewModelWillAutoScroll")
             self.delegate?.baseViewModelDidAutoScroll()
         }
+        
+        // ページ変更
+        center.addObserver(forName: .pageHistoryDataModelDidChange, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
+            log.debug("[BaseView Event]: pageHistoryDataModelDidChange")
+            self.delegate?.baseViewModelDidChangeWebView()
+        }
+        
+        // ページ追加
+        center.addObserver(forName: .pageHistoryDataModelDidInsert, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
+            log.debug("[BaseView Event]: pageHistoryDataModelDidInsert")
+            self.delegate?.baseViewModelDidAddWebView()
+        }
+        
     }
     
     deinit {
@@ -282,11 +268,6 @@ class BaseViewModel {
     
     func saveHistory(wv: EGWebView) {
         if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle, !requestTitle.isEmpty {
-            // ヘッダーのお気に入りアイコン更新。headerViewModelに通知する
-            if wv.context == currentContext {
-                // フロントページの保存の場合
-                CommonPageDataModel.s.updateFavoriteUrl(url: requestUrl)
-            }
             //　アプリ起動後の前回ページロード時は、履歴に保存しない
             if requestUrl != self.currentUrl {
                 // Common History
@@ -303,6 +284,11 @@ class BaseViewModel {
                         break
                     }
                 }
+            }
+            // ヘッダーのお気に入りアイコン更新
+            if wv.context == currentContext {
+                // フロントページの保存の場合
+                FavoriteDataModel.s.reload()
             }
         }
     }
@@ -353,12 +339,4 @@ class BaseViewModel {
 //            log.warning("selected current webView")
 //        }
 //    }
-    
-    private func reloadFavorite() {
-        // 現在表示しているURLがお気に入りかどうか調べる
-        let history = PageHistoryDataModel.s.currentHistory
-        if (!history.url.isEmpty) {
-            CommonPageDataModel.s.updateFavoriteUrl(url: history.url)
-        }
-    }
 }

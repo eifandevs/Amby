@@ -73,6 +73,7 @@ class FooterView: UIView, ShadowView {
         scrollView.setContentOffset(offset, animated: true)
     }
     
+    /// 新しいサムネイル作成
     private func createCaptureSpace(context: String) -> Thumbnail {
         let additionalPointX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + additionalPointX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
@@ -80,7 +81,7 @@ class FooterView: UIView, ShadowView {
         btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
         let inset: CGFloat = btn.frame.size.width / 9
         btn.imageEdgeInsets = UIEdgeInsetsMake(inset, inset, inset, inset)
-        btn.addTarget(self, action: #selector(self.onTappedThumbnail(_:)), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(self.tappedThumbnail(_:)), for: .touchUpInside)
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
         btn.addGestureRecognizer(longPressRecognizer)
         btn.context = context
@@ -121,13 +122,7 @@ class FooterView: UIView, ShadowView {
     
     /// フロントバーの変更
     private func updateFrontBar() {
-        for (index, thumbnail) in thumbnails.enumerated() {
-            if index == viewModel.currentLocation {
-                thumbnail.isFront = true
-            } else {
-                thumbnail.isFront = false
-            }
-        }
+        thumbnails.forEach({ $0.isFront = $0.context == viewModel.currentContext ? true : false })
     }
     
 // MARK: Gesture Event
@@ -145,8 +140,13 @@ class FooterView: UIView, ShadowView {
     }
     
 // MARK: Button Event
-    @objc func onTappedThumbnail(_ sender: AnyObject) {
-        viewModel.changePageHistoryDataModel(context: (sender as! Thumbnail).context)
+    @objc func tappedThumbnail(_ sender: AnyObject) {
+        let tappedContext = (sender as! Thumbnail).context
+        if tappedContext == viewModel.currentContext {
+            log.debug("selected same page.")
+        } else {
+            viewModel.changePageHistoryDataModel(context: (sender as! Thumbnail).context)
+        }
     }
 }
 
@@ -171,13 +171,13 @@ extension FooterView: UIScrollViewDelegate {
 
 // MARK: FooterViewModel Delegate
 extension FooterView: FooterViewModelDelegate {
-    func footerViewModelDidAddThumbnail(pageHistory: PageHistory) {
-        // 新しいサムネイルスペースを作成
-        let _ = createCaptureSpace(context: pageHistory.context)
+    func footerViewModelDidChangeThumbnail(context: String) {
         updateFrontBar()
     }
     
-    func footerViewModelDidChangeThumbnail() {
+    func footerViewModelDidAddThumbnail(pageHistory: PageHistory) {
+        // 新しいサムネイルスペースを作成
+        let _ = createCaptureSpace(context: pageHistory.context)
         updateFrontBar()
     }
     
@@ -225,6 +225,7 @@ extension FooterView: FooterViewModelDelegate {
         let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
         if existIndicator {
             DispatchQueue.mainSyncSafe { [weak self] in
+                guard let `self` = self else { return }
                 if let image = ThumbnailDataModel.getThumbnail(context: context) {
                     targetThumbnail.subviews.forEach({ (v) in
                         if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
