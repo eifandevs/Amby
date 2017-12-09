@@ -71,7 +71,32 @@ final class PageHistoryDataModel {
     
     /// 指定ページの削除
     func remove(context: String) {
-        
+        // フロントの削除かどうか
+        if context == currentContext {
+            let deleteLocation = currentLocation
+            histories.remove(at: deleteLocation)
+            // 削除した結果、ページが存在しない場合は作成する
+            if histories.count == 0 {
+                let pageHistory = PageHistory()
+                histories.append(pageHistory)
+                currentContext = pageHistory.context
+                UserDefaults.standard.set(currentContext, forKey: AppConst.KEY_CURRENT_CONTEXT)
+                self.center.post(name: .pageHistoryDataModelDidRemove, object: context)
+                self.center.post(name: .pageHistoryDataModelDidInsert, object: histories.last!)
+            } else {
+                // 最後の要素を削除した場合は、前のページに戻る
+                if deleteLocation == histories.count {
+                    currentContext = histories[deleteLocation - 1].context
+                } else {
+                    currentContext = histories[deleteLocation].context
+                }
+            }
+        }
+        self.center.post(name: .pageHistoryDataModelDidRemove, object: context)
+        //            if ((index != 0 && self.currentLocation == index && index == PageHistoryDataModel.s.histories.count - 1) || (index < self.currentLocation)) {
+        //                // indexの調整
+        //                PageHistoryDataModel.s.currentLocation = self.currentLocation - 1
+        //            }
     }
     /// 表示中ページの変更
     func change(context: String) {

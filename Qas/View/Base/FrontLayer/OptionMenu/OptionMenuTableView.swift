@@ -122,7 +122,7 @@ class OptionMenuTableView: UIView, ShadowView {
     }
     
 // MARK: Button Event
-    @objc func onTappedOverlay(_ sender: AnyObject) {
+    @objc func tappedOverlay(_ sender: AnyObject) {
         // オプションメニューとオプションディテールメニューが表示されている状態で、背面のオプションメニューをタップした際のルート
         (sender as! UIButton).removeFromSuperview()
         UIView.animate(withDuration: 0.15, animations: {
@@ -213,7 +213,7 @@ extension OptionMenuTableView: UITableViewDelegate, UITableViewDataSource {
                     
                     let overlay = UIButton(frame: CGRect(origin: CGPoint.zero, size: tableView.frame.size))
                     overlay.backgroundColor = UIColor.clear
-                    overlay.addTarget(self, action: #selector(self.onTappedOverlay(_:)), for: .touchUpInside)
+                    overlay.addTarget(self, action: #selector(self.tappedOverlay(_:)), for: .touchUpInside)
                     tableView.addSubview(overlay)
                 } else {
                     // メニューを全て閉じる

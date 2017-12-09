@@ -131,7 +131,7 @@ class FooterView: UIView, ShadowView {
         case .began:
             for (index, thumbnail) in self.thumbnails.enumerated() {
                 if sender.view == thumbnail {
-                    self.viewModel.notifyRemoveWebView(index: index)
+                    self.viewModel.removePageHistoryDataModel(context: thumbnail.context)
                     break
                 }
             }
@@ -181,22 +181,23 @@ extension FooterView: FooterViewModelDelegate {
         updateFrontBar()
     }
     
-    func footerViewModelDidRemoveThumbnail(index: Int) {
+    func footerViewModelDidRemoveThumbnail(context: String) {
+        let deleteIndex = D.findIndex(thumbnails, callback: { $0.context == context })!
         let completion: (() -> ()) = { [weak self] in
             guard let `self` = self else {
                 return
             }
-            self.thumbnails[index].removeFromSuperview()
-            self.thumbnails.remove(at: index)
+            self.thumbnails[deleteIndex].removeFromSuperview()
+            self.thumbnails.remove(at: deleteIndex)
             self.updateFrontBar()
         }
         if thumbnails.count > 1 {
-            thumbnails[index].alpha = 0
+            thumbnails[deleteIndex].alpha = 0
             UIView.animate(withDuration: 0.3, animations: {
                 for i in 0...self.thumbnails.count - 1 {
-                    if i < index {
+                    if i < deleteIndex {
                         self.thumbnails[i].center.x += self.thumbnails[i].frame.size.width / 2
-                    } else if i > index {
+                    } else if i > deleteIndex {
                         self.thumbnails[i].center.x -= self.thumbnails[i].frame.size.width / 2
                     }
                 }

@@ -11,7 +11,7 @@ import Foundation
 protocol FooterViewModelDelegate: class {
     func footerViewModelDidAddThumbnail(pageHistory: PageHistory)
     func footerViewModelDidChangeThumbnail(context: String)
-    func footerViewModelDidRemoveThumbnail(index: Int)
+    func footerViewModelDidRemoveThumbnail(context: String)
     func footerViewModelDidStartLoading(context: String)
     func footerViewModelDidEndLoading(context: String, title: String)
 }
@@ -74,21 +74,14 @@ class FooterViewModel {
         }
         
         // webview削除
-        center.addObserver(forName: .footerViewModelWillRemoveWebView, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .pageHistoryDataModelDidRemove, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[Footer Event]: footerViewModelWillRemoveWebView")
-//            let index = notification.object as! Int
-//
-//            // 実データの削除
-//            try! FileManager.default.removeItem(atPath: Util.thumbnailFolderUrl(folder: self.pageHistories[index].context).path)
-//
-//            if ((index != 0 && self.currentLocation == index && index == self.pageHistories.count - 1) || (index < self.currentLocation)) {
-//                // フロントの削除
-//                // 最後の要素を削除する場合
-//                self.currentLocation = self.currentLocation - 1
-//            }
-//            self.pageHistories.remove(at: index)
-//            self.delegate?.footerViewModelDidRemoveThumbnail(index: index)
+            log.debug("[Footer Event]: pageHistoryDataModelDidRemove")
+            let context = notification.object as! String
+            
+            // 実データの削除
+            try! FileManager.default.removeItem(atPath: Util.thumbnailFolderUrl(folder: context).path)
+            self.delegate?.footerViewModelDidRemoveThumbnail(context: context)
         }
     }
     
@@ -102,7 +95,7 @@ class FooterViewModel {
         PageHistoryDataModel.s.change(context: context)
     }
     
-    func notifyRemoveWebView(index: Int) {
-        center.post(name: .baseViewModelWillRemoveWebView, object: index)
+    func removePageHistoryDataModel(context: String) {
+        PageHistoryDataModel.s.remove(context: context)
     }
 }

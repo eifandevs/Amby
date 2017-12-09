@@ -20,7 +20,7 @@ class NotificationView: UIButton {
             if finished {
                 self.overlay.frame = CGRect(x: 0, y: DeviceConst.DISPLAY_SIZE.height - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.9), width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.9)
                 self.overlay.backgroundColor = UIColor.clear
-                self.overlay.addTarget(self, action: #selector(self.onTappedOverlay(_:)), for: .touchDown)
+                self.overlay.addTarget(self, action: #selector(self.tappedOverlay(_:)), for: .touchDown)
                 (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.view.addSubview(self.overlay)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
@@ -48,7 +48,7 @@ class NotificationView: UIButton {
         })
     }
     
-    @objc func onTappedOverlay(_ sender: AnyObject) {
+    @objc func tappedOverlay(_ sender: AnyObject) {
         dissmiss()
     }
 }

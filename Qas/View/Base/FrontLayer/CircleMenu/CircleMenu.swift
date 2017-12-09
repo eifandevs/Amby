@@ -121,7 +121,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                 menuIndex = menuIndex + 1 == circleMenuItemGroup.count ? 0 : menuIndex + 1
                 for (index, item) in currentCircleMenuItems.enumerated() {
                     circleMenuItems[index].frame = item.frame
-                    circleMenuItems[index].addTarget(self, action: #selector(self.onTappedCircleMenuItem(_:)), for: .touchUpInside)
+                    circleMenuItems[index].addTarget(self, action: #selector(self.tappedCircleMenuItem(_:)), for: .touchUpInside)
                     superview!.addSubview(circleMenuItems[index])
                     item.removeFromSuperview()
                 }
@@ -297,7 +297,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     }
     
 // MARK: Button Event
-    @objc func onTappedCircleMenuItem(_ sender: AnyObject) {
+    @objc func tappedCircleMenuItem(_ sender: AnyObject) {
         if !isClosing {
             (sender as! CircleMenuItem).scheduledAction = true
             closeCircleMenuItems()
@@ -324,7 +324,7 @@ extension CircleMenu: EGApplicationDelegate {
                 for (index, circleMenuItem) in circleMenuItems.enumerated() {
                     circleMenuItem.frame.size = frame.size
                     circleMenuItem.center = initialPt!
-                    circleMenuItem.addTarget(self, action: #selector(self.onTappedCircleMenuItem(_:)), for: .touchUpInside)
+                    circleMenuItem.addTarget(self, action: #selector(self.tappedCircleMenuItem(_:)), for: .touchUpInside)
                     superview!.addSubview(circleMenuItem)
                     UIView.animate(withDuration: 0.18, animations: {
                         circleMenuItem.center = self.center + circleMenuLocations[index]

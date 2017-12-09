@@ -13,7 +13,7 @@ protocol BaseViewModelDelegate: class {
     func baseViewModelDidAddWebView()
     func baseViewModelDidReloadWebView()
     func baseViewModelDidChangeWebView()
-    func baseViewModelDidRemoveWebView(index: Int, isFrontDelete: Bool)
+    func baseViewModelDidRemoveWebView(context: String)
     func baseViewModelDidHistoryBackWebView()
     func baseViewModelDidHistoryForwardWebView()
     func baseViewModelDidSearchWebView(text: String)
@@ -120,19 +120,10 @@ class BaseViewModel {
             self.storeHistory()
         }
         // webviewの削除
-        center.addObserver(forName: .baseViewModelWillRemoveWebView, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .pageHistoryDataModelDidRemove, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillRemoveWebView")
-//            let index = ((notification.object as? Int) != nil) ? notification.object as! Int : self.currentLocation
-//            let isFrontDelete = self.currentLocation == index
-//            self.center.post(name: .footerViewModelWillRemoveWebView, object: index)
-//            if ((index != 0 && self.currentLocation == index && index == PageHistoryDataModel.s.histories.count - 1) || (index < self.currentLocation)) {
-//                // indexの調整
-//                PageHistoryDataModel.s.currentLocation = self.currentLocation - 1
-//            }
-//            PageHistoryDataModel.s.histories.remove(at: index)
-//            self.reloadFavorite()
-//            self.delegate?.baseViewModelDidRemoveWebView(index: index, isFrontDelete: isFrontDelete)
+            log.debug("[BaseView Event]: pageHistoryDataModelDidRemove")
+            self.delegate?.baseViewModelDidRemoveWebView(context: notification.object as! String)
         }
         // webview検索
         center.addObserver(forName: .baseViewModelWillSearchWebView, object: nil, queue: nil) { [weak self] (notification) in
@@ -212,18 +203,6 @@ class BaseViewModel {
     func insertPageHistoryDataModel(url: String? = nil) {
         PageHistoryDataModel.s.insert(url: url)
     }
-    
-//    func addWebView(url: String? = nil) {
-//        if let url = url {
-//            PageHistoryDataModel.s.histories.append(PageHistory(url: url))
-//        } else {
-//            PageHistoryDataModel.s.histories.append(PageHistory())
-//        }
-//        PageHistoryDataModel.s.currentLocation = PageHistoryDataModel.s.histories.count - 1
-//        self.reloadFavorite()
-//        self.center.post(name: .footerViewModelWillAddWebView, object: PageHistoryDataModel.s.histories.last!)
-//        self.delegate?.baseViewModelDidAddWebView()
-//    }
     
     func beginEditingHeaderViewDataModel() {
         HeaderViewDataModel.s.beginEditing(forceEditFlg: false)

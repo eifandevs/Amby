@@ -552,11 +552,15 @@ extension BaseView: BaseViewModelDelegate {
         }
     }
     
-    func baseViewModelDidRemoveWebView(index: Int, isFrontDelete: Bool) {
-        if let webView = webViews[index] {
+    /// ページ削除通知
+    /// context: 削除したコンテキスト
+    func baseViewModelDidRemoveWebView(context: String) {
+        let deleteIndex = D.findIndex(webViews, callback: { $0!.context == context })!
+        if let webView = webViews[deleteIndex] {
             // サムネイルの削除
             viewModel.deleteThumbnail(webView: webView)
             
+            let isFrontDelete = context == front.context
             webView.removeObserver(self, forKeyPath: "loading")
             if isFrontDelete {
                 webView.removeObserver(self, forKeyPath: "estimatedProgress")
@@ -564,14 +568,12 @@ extension BaseView: BaseViewModelDelegate {
                 front = nil
             }
             webView.removeFromSuperview()
-            webViews.remove(at: index)
+            webViews.remove(at: deleteIndex)
             
             // くるくるを更新
             updateNetworkActivityIndicator()
             
-            if webViews.count == 0 {
-                viewModel.insertPageHistoryDataModel()
-            } else if isFrontDelete {
+            if isFrontDelete {
                 // フロントの削除で、削除後にwebviewが存在する場合
                 if let current = webViews[viewModel.currentLocation] {
                     current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))

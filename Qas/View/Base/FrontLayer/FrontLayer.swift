@@ -67,7 +67,7 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.circlemenu_close(), tapAction: { _ in
                     log.debug("circle menu event. event: close")
-                    NotificationCenter.default.post(name: .baseViewModelWillRemoveWebView, object: nil)
+                    PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_historyback(), tapAction: { _ in
                     log.debug("circle menu event. event: history back")
@@ -154,7 +154,7 @@ class FrontLayer: UIView {
     }
     
 // MARK: Button Event
-    @objc func onTappedOverlay(_ sender: AnyObject) {
+    @objc func tappedOverlay(_ sender: AnyObject) {
         optionMenuDidClose()
     }
 }
@@ -210,7 +210,7 @@ extension FrontLayer: CircleMenuDelegate {
         overlay = UIButton(frame: frame)
         overlay.backgroundColor = UIColor.darkGray
         self.overlay.alpha = 0
-        overlay.addTarget(self, action: #selector(self.onTappedOverlay(_:)), for: .touchUpInside)
+        overlay.addTarget(self, action: #selector(self.tappedOverlay(_:)), for: .touchUpInside)
         addSubview(overlay)
         // addSubviewした段階だと、サークルメニューより前面に配置されているので、最背面に移動する
         sendSubview(toBack: overlay)

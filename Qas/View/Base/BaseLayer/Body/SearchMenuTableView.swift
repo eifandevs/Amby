@@ -171,13 +171,13 @@ extension SearchMenuTableView: SearchMenuTableViewModelDelegate {
             alpha = 0
             let button = UIButton(frame: frame)
             button.backgroundColor = UIColor.clear
-            button.addTarget(self, action: #selector(self.onTappedOverlay(_:)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(self.tappedOverlay(_:)), for: .touchUpInside)
             overlay = button
             superview?.addSubview(button)
         }
     }
     
-    @objc func onTappedOverlay(_ sender: AnyObject) {
+    @objc func tappedOverlay(_ sender: AnyObject) {
         // サーチメニューが透明になっている時にタップ
         delegate?.searchMenuDidClose()
         (sender as! UIButton).removeFromSuperview()

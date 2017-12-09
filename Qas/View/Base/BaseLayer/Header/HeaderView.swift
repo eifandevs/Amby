@@ -99,23 +99,23 @@ class HeaderView: UIView, ShadowView {
         }
         
         // ヒストリバック
-        historyBackButton.addTarget(self, action: #selector(self.onTappedHistoryBackButton(_:)), for: .touchUpInside)
+        historyBackButton.addTarget(self, action: #selector(self.tappedHistoryBackButton(_:)), for: .touchUpInside)
         addButton(historyBackButton, R.image.circlemenu_historyback()!)
         
         // ヒストリフォアード
-        historyForwardButton.addTarget(self, action: #selector(self.onTappedHistoryForwardButton(_:)), for: .touchUpInside)
+        historyForwardButton.addTarget(self, action: #selector(self.tappedHistoryForwardButton(_:)), for: .touchUpInside)
         addButton(historyForwardButton, R.image.circlemenu_historyforward()!)
         
         // お気に入り登録
-        favoriteButton.addTarget(self, action: #selector(self.onTappedFavoriteButton(_:)), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(self.tappedFavoriteButton(_:)), for: .touchUpInside)
         addButton(favoriteButton, R.image.header_favorite()!)
         
         // 現在のWebView削除
-        deleteButton.addTarget(self, action: #selector(self.onTappedDeleteButton(_:)), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(self.tappedDeleteButton(_:)), for: .touchUpInside)
         addButton(deleteButton, R.image.circlemenu_close()!)
 
         // ヘッダーフィールド
-        headerField.addTarget(self, action: #selector(self.onTappedHeaderField(_:)), for: .touchUpInside)
+        headerField.addTarget(self, action: #selector(self.tappedHeaderField(_:)), for: .touchUpInside)
         
         addSubview(headerField)
         addSubview(progressBar)
@@ -193,23 +193,23 @@ class HeaderView: UIView, ShadowView {
     }
     
 // MARK: Button Event
-    @objc func onTappedHistoryBackButton(_ sender: AnyObject) {
+    @objc func tappedHistoryBackButton(_ sender: AnyObject) {
         viewModel.notifyHistoryBackWebView()
     }
 
-    @objc func onTappedHistoryForwardButton(_ sender: AnyObject) {
+    @objc func tappedHistoryForwardButton(_ sender: AnyObject) {
         viewModel.notifyHistoryForwardWebView()
     }
 
-    @objc func onTappedFavoriteButton(_ sender: AnyObject) {
-        viewModel.notifyRegisterAsFavorite()
+    @objc func tappedFavoriteButton(_ sender: AnyObject) {
+        viewModel.registerFavoriteDataModel()
     }
 
-    @objc func onTappedDeleteButton(_ sender: AnyObject) {
-        viewModel.notifyRemoveWebView()
+    @objc func tappedDeleteButton(_ sender: AnyObject) {
+        viewModel.removePageHistoryDataModel()
     }
     
-    @objc func onTappedHeaderField(_ sender: AnyObject) {
+    @objc func tappedHeaderField(_ sender: AnyObject) {
         startEditing()
     }
 }

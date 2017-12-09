@@ -16,7 +16,6 @@ extension NSNotification.Name {
     static let baseViewModelWillCopyWebView = NSNotification.Name("baseViewModelWillCopyWebView")
     static let baseViewModelWillReloadWebView = NSNotification.Name("baseViewModelWillReloadWebView")
     static let baseViewModelWillStoreHistory = NSNotification.Name("baseViewModelWillStoreHistory")
-    static let baseViewModelWillRemoveWebView = NSNotification.Name("baseViewModelWillRemoveWebView")
     static let baseViewModelWillHistoryBackWebView = NSNotification.Name("baseViewModelWillHistoryBackWebView")
     static let baseViewModelWillDeleteHistory = NSNotification.Name("baseViewModelWillDeleteHistory")
     static let baseViewModelWillInitialize = NSNotification.Name("baseViewModelWillInitialize")
@@ -26,7 +25,6 @@ extension NSNotification.Name {
     static let baseViewModelWillRegisterAsForm = NSNotification.Name("baseViewModelWillRegisterAsForm")
     static let baseViewModelWillAutoScroll = NSNotification.Name("baseViewModelWillAutoScroll")
     static let searchMenuTableViewModelWillUpdateSearchToken = NSNotification.Name("searchMenuTableViewModelWillUpdateSearchToken")
-    static let footerViewModelWillRemoveWebView = NSNotification.Name("footerViewModelWillRemoveWebView")
     // MARK: - Model
     // PageHistoryDataModel
     static let pageHistoryDataModelDidRemove = NSNotification.Name("pageHistoryDataModelDidRemove")

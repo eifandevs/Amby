@@ -85,7 +85,7 @@ class HeaderField: UIButton, ShadowView {
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
         closeMenuButton.imageView?.contentMode = .scaleAspectFit
         closeMenuButton.imageEdgeInsets = UIEdgeInsetsMake(edgeInset, edgeInset, edgeInset, edgeInset)
-        closeMenuButton.addTarget(self, action: #selector(self.onTappedCloseMenuButton(_:)), for: .touchUpInside)
+        closeMenuButton.addTarget(self, action: #selector(self.tappedCloseMenuButton(_:)), for: .touchUpInside)
         self.addSubview(closeMenuButton)
         
         textField.becomeFirstResponder()
@@ -177,7 +177,7 @@ class HeaderField: UIButton, ShadowView {
     }
     
     // MARK: Button Event
-    @objc func onTappedCloseMenuButton(_ sender: AnyObject) {
+    @objc func tappedCloseMenuButton(_ sender: AnyObject) {
         delegate?.headerFieldDidEndEditing(text: nil)
     }
 }

@@ -73,6 +73,14 @@ class HeaderViewModel {
             let url = PageHistoryDataModel.s.currentHistory.url
             self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
         }
+        
+        // ページ削除
+        center.addObserver(forName: .pageHistoryDataModelDidRemove, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
+            log.debug("[HeaderView Event]: pageHistoryDataModelDidRemove")
+            let url = PageHistoryDataModel.s.currentHistory.url
+            self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+        }
     }
 
     deinit {
@@ -93,11 +101,11 @@ class HeaderViewModel {
         center.post(name: .baseViewModelWillSearchWebView, object: text)
     }
 
-    func notifyRegisterAsFavorite() {
+    func registerFavoriteDataModel() {
         FavoriteDataModel.s.register()
     }
     
-    func notifyRemoveWebView() {
-        center.post(name: .baseViewModelWillRemoveWebView, object: nil)
+    func removePageHistoryDataModel() {
+        center.post(name: .pageHistoryDataModelDidRemove, object: PageHistoryDataModel.s.currentContext)
     }
 }

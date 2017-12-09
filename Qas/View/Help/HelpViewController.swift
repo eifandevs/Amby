@@ -31,7 +31,7 @@ class HelpViewController: UIViewController {
         subtitleLabel.text = subtitle
         messageLabel.text = message
         closeButton.backgroundColor = UIColor.brilliantBlue
-        closeButton.addTarget(self, action: #selector(self.onTappedCloseButton(_:)), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(self.tappedCloseButton(_:)), for: .touchUpInside)
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,7 +39,7 @@ class HelpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @objc func onTappedCloseButton(_ sender: AnyObject) {
+    @objc func tappedCloseButton(_ sender: AnyObject) {
         dismiss(animated: true, completion: nil)
     }
 
