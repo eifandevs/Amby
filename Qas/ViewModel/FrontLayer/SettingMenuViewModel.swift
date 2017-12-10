@@ -27,7 +27,6 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 OptionMenuItem(title: AppConst.SETTING_TITLE_COMMON_HISTORY, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_COMMON_HISTORY, completion: {
                         CommonHistoryDataModel.s.delete()
-                        NotificationCenter.default.post(name: .baseViewModelWillDeleteHistory, object: nil)
                     })
                     return nil
                 }),

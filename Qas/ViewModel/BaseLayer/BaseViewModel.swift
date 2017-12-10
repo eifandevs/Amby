@@ -77,9 +77,9 @@ class BaseViewModel {
         }
 
         // 閲覧履歴の削除
-        center.addObserver(forName: .baseViewModelWillDeleteHistory, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .commonHistoryDataModelDidDelete, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillDeleteHistory")
+            log.debug("[BaseView Event]: commonHistoryDataModelDidDelete")
             CommonHistoryDataModel.s.histories = []
         }
         
@@ -132,18 +132,21 @@ class BaseViewModel {
             UIPasteboard.general.string = self.currentUrl
             NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_COPY_URL)
         }
+        
         // webviewヒストリバック
-        center.addObserver(forName: .baseViewModelWillHistoryBackWebView, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .commonHistoryDataModelDidGoBack, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillHistoryBackWebView")
+            log.debug("[BaseView Event]: commonHistoryDataModelDidGoBack")
             self.delegate?.baseViewModelDidHistoryBackWebView()
         }
+        
         // webviewヒストリフォワード
-        center.addObserver(forName: .baseViewModelWillHistoryForwardWebView, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .commonHistoryDataModelDidGoForward, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillHistoryForwardWebView")
+            log.debug("[BaseView Event]: commonHistoryDataModelDidGoForward")
             self.delegate?.baseViewModelDidHistoryForwardWebView()
         }
+        
         // webviewフォーム情報登録
         center.addObserver(forName: .baseViewModelWillRegisterAsForm, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }

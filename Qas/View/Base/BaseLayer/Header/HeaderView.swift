@@ -194,11 +194,11 @@ class HeaderView: UIView, ShadowView {
     
 // MARK: Button Event
     @objc func tappedHistoryBackButton(_ sender: AnyObject) {
-        viewModel.notifyHistoryBackWebView()
+        viewModel.goBackCommonHistoryDataModel()
     }
 
     @objc func tappedHistoryForwardButton(_ sender: AnyObject) {
-        viewModel.notifyHistoryForwardWebView()
+        viewModel.goForwardCommonHistoryDataModel()
     }
 
     @objc func tappedFavoriteButton(_ sender: AnyObject) {

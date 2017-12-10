@@ -12,6 +12,9 @@ import UIKit
 final class PageHistoryDataModel {
     static let s = PageHistoryDataModel()
 
+    // 通知センター
+    private let center = NotificationCenter.default
+    
     // 現在表示しているwebviewのコンテキスト
     var currentContext: String = UserDefaults.standard.string(forKey: AppConst.KEY_CURRENT_CONTEXT)! {
         didSet {
@@ -34,8 +37,6 @@ final class PageHistoryDataModel {
     var currentLocation: Int {
         return D.findIndex(histories, callback: { $0.context == currentContext })!
     }
-    // 通知センター
-    private let center = NotificationCenter.default
 
     private init() {
         // pageHistory読み込み

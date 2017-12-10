@@ -71,7 +71,7 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.circlemenu_historyback(), tapAction: { _ in
                     log.debug("circle menu event. event: history back")
-                    NotificationCenter.default.post(name: .baseViewModelWillHistoryBackWebView, object: nil)
+                    CommonHistoryDataModel.s.goBack()
                 }),
                 CircleMenuItem(image: R.image.circlemenu_copy(), tapAction: { _ in
                     log.debug("circle menu event. event: copy")
@@ -100,7 +100,7 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.circlemenu_historyforward(), tapAction: { _ in
                     log.debug("circle menu event. event: history forward")
-                    NotificationCenter.default.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
+                    CommonHistoryDataModel.s.goForward()
                 }),
                 CircleMenuItem(image: R.image.circlemenu_form(), tapAction: { _ in
                     log.debug("circle menu event. event: form")

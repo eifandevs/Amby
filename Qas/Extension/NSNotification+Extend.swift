@@ -12,18 +12,17 @@ extension NSNotification.Name {
     // MARK: - View
     static let baseViewControllerWillPresentHelp = NSNotification.Name("baseViewControllerWillPresentHelp")
     // MARK: - ViewModel
-    static let baseViewModelWillHistoryBackWebView = NSNotification.Name("baseViewModelWillHistoryBackWebView")
-    static let baseViewModelWillDeleteHistory = NSNotification.Name("baseViewModelWillDeleteHistory")
     static let baseViewModelWillInitialize = NSNotification.Name("baseViewModelWillInitialize")
-    static let baseViewModelWillHistoryForwardWebView = NSNotification.Name("baseViewModelWillHistoryForwardWebView")
     static let baseViewModelWillCopyUrl = NSNotification.Name("baseViewModelWillCopyUrl")
     static let baseViewModelWillSearchWebView = NSNotification.Name("baseViewModelWillSearchWebView")
     static let baseViewModelWillRegisterAsForm = NSNotification.Name("baseViewModelWillRegisterAsForm")
     static let baseViewModelWillAutoScroll = NSNotification.Name("baseViewModelWillAutoScroll")
     static let searchMenuTableViewModelWillUpdateSearchToken = NSNotification.Name("searchMenuTableViewModelWillUpdateSearchToken")
+    
     // MARK: - Model
     // OperationDataModel
     static let operationDataModelDidChange = NSNotification.Name("operationDataModelDidChange")
+    
     // PageHistoryDataModel
     static let pageHistoryDataModelDidReload = NSNotification.Name("pageHistoryDataModelDidReload")
     static let pageHistoryDataModelDidRemove = NSNotification.Name("pageHistoryDataModelDidRemove")
@@ -31,10 +30,17 @@ extension NSNotification.Name {
     static let pageHistoryDataModelDidChange = NSNotification.Name("pageHistoryDataModelDidChange")
     static let pageHistoryDataModelDidStartLoading = NSNotification.Name("pageHistoryDataModelDidStartLoading")
     static let pageHistoryDataModelDidEndLoading = NSNotification.Name("pageHistoryDataModelDidEndLoading")
+    
+    // CommonHistoryDataModel
+    static let commonHistoryDataModelDidGoBack = NSNotification.Name("commonHistoryDataModelDidGoBack")
+    static let commonHistoryDataModelDidGoForward = NSNotification.Name("commonHistoryDataModelDidGoForward")
+    static let commonHistoryDataModelDidDelete = NSNotification.Name("commonHistoryDataModelDidDelete")
+
     // HeaderViewDataModel
     static let headerViewDataModelProgressDidUpdate = NSNotification.Name("headerViewDataModelDidUpdate")
     static let headerViewDataModelHeaderFieldTextDidUpdate = NSNotification.Name("headerViewDataModelHeaderFieldTextDidUpdate")
     static let headerViewDataModelDidBeginEditing = NSNotification.Name("headerViewDataModelDidBeginEditing")
+    
     // FavoriteDataModel
     static let favoriteDataModelDidReload = NSNotification.Name("favoriteDataModelDidReload")
 }

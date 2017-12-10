@@ -15,6 +15,19 @@ final class CommonHistoryDataModel {
     /// 閲覧履歴
     var histories = [CommonHistory]()
 
+    // 通知センター
+    private let center = NotificationCenter.default
+    
+    /// 前の履歴に移動
+    func goBack() {
+        center.post(name: .commonHistoryDataModelDidGoBack, object: nil)
+    }
+    
+    /// 次の履歴に移動
+    func goForward() {
+        center.post(name: .commonHistoryDataModelDidGoForward, object: nil)
+    }
+    
     /// 閲覧履歴の永続化
     func store() {
         if histories.count > 0 {
@@ -174,6 +187,7 @@ final class CommonHistoryDataModel {
     func delete() {
         Util.deleteFolder(path: AppConst.PATH_COMMON_HISTORY)
         Util.createFolder(path: AppConst.PATH_COMMON_HISTORY)
+        center.post(name: .commonHistoryDataModelDidDelete, object: nil)
     }
 
 }

@@ -97,12 +97,12 @@ class HeaderViewModel {
     
 // MARK: Public Method
 
-    func notifyHistoryBackWebView() {
-        center.post(name: .baseViewModelWillHistoryBackWebView, object: nil)
+    func goBackCommonHistoryDataModel() {
+        CommonHistoryDataModel.s.goBack()
     }
-
-    func notifyHistoryForwardWebView() {
-        center.post(name: .baseViewModelWillHistoryForwardWebView, object: nil)
+    
+    func goForwardCommonHistoryDataModel() {
+        CommonHistoryDataModel.s.goForward()
     }
     
     func notifySearchWebView(text: String) {
