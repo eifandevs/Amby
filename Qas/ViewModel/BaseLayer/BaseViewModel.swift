@@ -91,39 +91,24 @@ class BaseViewModel {
             PageHistoryDataModel.s.histories = []
         }
         
-        // webviewのコピー
-        center.addObserver(forName: .baseViewModelWillCopyWebView, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillCopyWebView")
-//            PageHistoryDataModel.s.histories.append(PageHistory(url: PageHistoryDataModel.s.histories[self.currentLocation].url, title: PageHistoryDataModel.s.histories[self.currentLocation].title))
-//            self.center.post(name: .footerViewModelWillAddWebView, object: PageHistoryDataModel.s.histories[self.currentLocation])
-//            self.delegate?.baseViewModelDidAddWebView()
-        }
-        
         // webviewのリロード
-        center.addObserver(forName: .baseViewModelWillReloadWebView, object: nil, queue: nil) { [weak self] (notification) in
+        center.addObserver(forName: .pageHistoryDataModelDidReload, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillReloadWebView")
+            log.debug("[BaseView Event]: pageHistoryDataModelDidReload")
             self.delegate?.baseViewModelDidReloadWebView()
         }
         
-        // webviewの自動入力
+        // オペレーション監視
         center.addObserver(forName: .operationDataModelDidChange, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: operationDataModelDidChange")
             
             let operation = notification.object as! UserOperation
-            if operation == .AUTO_INPUT {
+            if operation == .autoInput {
                 self.delegate?.baseViewModelDidAutoInput()
             }
         }
-        
-        // 履歴の永続化
-        center.addObserver(forName: .baseViewModelWillStoreHistory, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillStoreHistory")
-            self.storeHistory()
-        }
+
         // webviewの削除
         center.addObserver(forName: .pageHistoryDataModelDidRemove, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }

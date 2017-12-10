@@ -75,7 +75,7 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.circlemenu_copy(), tapAction: { _ in
                     log.debug("circle menu event. event: copy")
-                    NotificationCenter.default.post(name: .baseViewModelWillCopyWebView, object: nil)
+                    PageHistoryDataModel.s.copy()
                 }),
                 CircleMenuItem(image: R.image.circlemenu_search(), tapAction: { _ in
                     log.debug("circle menu event. event: search")

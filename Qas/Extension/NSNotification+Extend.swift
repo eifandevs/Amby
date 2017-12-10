@@ -12,9 +12,6 @@ extension NSNotification.Name {
     // MARK: - View
     static let baseViewControllerWillPresentHelp = NSNotification.Name("baseViewControllerWillPresentHelp")
     // MARK: - ViewModel
-    static let baseViewModelWillCopyWebView = NSNotification.Name("baseViewModelWillCopyWebView")
-    static let baseViewModelWillReloadWebView = NSNotification.Name("baseViewModelWillReloadWebView")
-    static let baseViewModelWillStoreHistory = NSNotification.Name("baseViewModelWillStoreHistory")
     static let baseViewModelWillHistoryBackWebView = NSNotification.Name("baseViewModelWillHistoryBackWebView")
     static let baseViewModelWillDeleteHistory = NSNotification.Name("baseViewModelWillDeleteHistory")
     static let baseViewModelWillInitialize = NSNotification.Name("baseViewModelWillInitialize")
@@ -28,6 +25,7 @@ extension NSNotification.Name {
     // OperationDataModel
     static let operationDataModelDidChange = NSNotification.Name("operationDataModelDidChange")
     // PageHistoryDataModel
+    static let pageHistoryDataModelDidReload = NSNotification.Name("pageHistoryDataModelDidReload")
     static let pageHistoryDataModelDidRemove = NSNotification.Name("pageHistoryDataModelDidRemove")
     static let pageHistoryDataModelDidInsert = NSNotification.Name("pageHistoryDataModelDidInsert")
     static let pageHistoryDataModelDidChange = NSNotification.Name("pageHistoryDataModelDidChange")

@@ -22,11 +22,12 @@ class BaseMenuViewModel: OptionMenuTableViewModel {
                     return nil
                 }),
                 OptionMenuItem(title: "新しいタブ(URLコピー)", image: UIImage(named: "option_menu_copy"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    NotificationCenter.default.post(name: .baseViewModelWillCopyWebView, object: nil)
+                    PageHistoryDataModel.s.copy()
                     return nil
                 }),
                 OptionMenuItem(title: "履歴", image: UIImage(named: "option_menu_history"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-                    NotificationCenter.default.post(name: .baseViewModelWillStoreHistory, object: nil)
+                    CommonHistoryDataModel.s.store()
+                    PageHistoryDataModel.s.store()
                     return HistoryMenuViewModel()
                 }),
                 OptionMenuItem(title: "フォーム", image: UIImage(named: "option_menu_form"), action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in return FormMenuViewModel()

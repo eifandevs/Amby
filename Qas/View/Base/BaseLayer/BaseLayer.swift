@@ -40,7 +40,8 @@ class BaseLayer: UIView {
         registerForKeyboardDidShowNotification { [weak self] (notification, size) in
             guard let `self` = self else { return }
             if !self.isHeaderViewEditing {
-                self.viewModel.changeOperationDataModel(operation: .AUTO_INPUT)
+                // 自動入力オペ要求
+                self.viewModel.changeOperationDataModel(operation: .autoInput)
             }
         }
         
@@ -105,7 +106,8 @@ extension BaseLayer: HeaderViewDelegate {
     func headerViewDidBeginEditing() {
         log.debug("[BaseLayer Event]: headerViewDidBeginEditing")
         // 履歴検索を行うので、事前に永続化しておく
-        NotificationCenter.default.post(name: .baseViewModelWillStoreHistory, object: nil)
+        CommonHistoryDataModel.s.store()
+        PageHistoryDataModel.s.store()
 
         isHeaderViewEditing = true
         searchMenuTableView = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))

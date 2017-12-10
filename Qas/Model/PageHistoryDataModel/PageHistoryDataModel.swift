@@ -69,6 +69,19 @@ final class PageHistoryDataModel {
         self.center.post(name: .pageHistoryDataModelDidInsert, object: histories.last!)
     }
     
+    /// ページコピー
+    func copy() {
+        let newPage = PageHistory(url: currentHistory.url)
+        histories.append(newPage)
+        currentContext = newPage.context
+        self.center.post(name: .pageHistoryDataModelDidInsert, object: histories.last!)
+    }
+    
+    /// ページリロード
+    func reload() {
+        self.center.post(name: .pageHistoryDataModelDidReload, object: nil)
+    }
+    
     /// 指定ページの削除
     func remove(context: String) {
         // フロントの削除かどうか
