@@ -75,21 +75,6 @@ class BaseViewModel {
             guard let `self` = self else { return }
             self.storeHistory()
         }
-
-        // 閲覧履歴の削除
-        center.addObserver(forName: .commonHistoryDataModelDidDelete, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: commonHistoryDataModelDidDelete")
-            CommonHistoryDataModel.s.histories = []
-        }
-        
-        // 初期化
-        center.addObserver(forName: .baseViewModelWillInitialize, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillInitialize")
-            CommonHistoryDataModel.s.histories = []
-            PageHistoryDataModel.s.histories = []
-        }
         
         // webviewのリロード
         center.addObserver(forName: .pageHistoryDataModelDidReload, object: nil, queue: nil) { [weak self] (notification) in
@@ -103,9 +88,17 @@ class BaseViewModel {
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: operationDataModelDidChange")
             
-            let operation = notification.object as! UserOperation
+            let operation = (notification.object as! [String: Any])["operation"] as! UserOperation
             if operation == .autoInput {
                 self.delegate?.baseViewModelDidAutoInput()
+            } else if operation == .urlCopy {
+                UIPasteboard.general.string = self.currentUrl
+                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_COPY_URL)
+            } else if operation == .search {
+                let text = (notification.object as! [String: Any])["object"] as! String
+                self.delegate?.baseViewModelDidSearchWebView(text: text)
+            } else if operation == .form {
+                self.delegate?.baseViewModelDidRegisterAsForm()
             }
         }
 
@@ -116,21 +109,6 @@ class BaseViewModel {
             let context = (notification.object as! [String: Any])["context"] as! String
             let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
             self.delegate?.baseViewModelDidRemoveWebView(context: context, pageExist: pageExist)
-        }
-        // webview検索
-        center.addObserver(forName: .baseViewModelWillSearchWebView, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillSearchWebView")
-            let text = notification.object as! String
-            self.delegate?.baseViewModelDidSearchWebView(text: text)
-        }
-        
-        // URLコピー
-        center.addObserver(forName: .baseViewModelWillCopyUrl, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillCopyUrl")
-            UIPasteboard.general.string = self.currentUrl
-            NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_COPY_URL)
         }
         
         // webviewヒストリバック
@@ -145,13 +123,6 @@ class BaseViewModel {
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: commonHistoryDataModelDidGoForward")
             self.delegate?.baseViewModelDidHistoryForwardWebView()
-        }
-        
-        // webviewフォーム情報登録
-        center.addObserver(forName: .baseViewModelWillRegisterAsForm, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillRegisterAsForm")
-            self.delegate?.baseViewModelDidRegisterAsForm()
         }
         
         // webview自動スクロール
@@ -203,11 +174,15 @@ class BaseViewModel {
         HeaderViewDataModel.s.beginEditing(forceEditFlg: false)
     }
     
+    func storeFromDataModel(webview: EGWebView) {
+        FormDataModel.s.store(webView: webview)
+    }
+
     /// 前webviewのキャプチャ取得
     func getPreviousCapture() -> UIImage {
         let targetIndex = currentLocation == 0 ? PageHistoryDataModel.s.histories.count - 1 : currentLocation - 1
         let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
-        if let image = ThumbnailDataModel.getCapture(context: targetContext) {
+        if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
             return image
         } else {
             return UIImage()
@@ -218,7 +193,7 @@ class BaseViewModel {
     func getNextCapture() -> UIImage {
         let targetIndex = currentLocation == PageHistoryDataModel.s.histories.count - 1 ? 0 : currentLocation + 1
         let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
-        if let image = ThumbnailDataModel.getCapture(context: targetContext) {
+        if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
             return image
         } else {
             return UIImage()
@@ -286,7 +261,7 @@ class BaseViewModel {
     /// サムネイルの削除
     func deleteThumbnail(webView: EGWebView) {
         log.debug("delete thumbnail. context: \(webView.context)")
-        ThumbnailDataModel.delete(context: webView.context)
+        ThumbnailDataModel.s.delete(context: webView.context)
     }
     
 // MARK: Private Method

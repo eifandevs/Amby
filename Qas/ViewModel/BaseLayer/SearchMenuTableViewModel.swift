@@ -75,4 +75,9 @@ class SearchMenuTableViewModel {
             }
         }
     }
+
+    /// ユーザーアクション実行
+    func executeOperationDataModel(operation: UserOperation, url: String) {
+        OperationDataModel.s.executeOperation(operation: operation, object: url)
+    }
 }

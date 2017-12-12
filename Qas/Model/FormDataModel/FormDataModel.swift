@@ -10,11 +10,13 @@ import Foundation
 import RealmSwift
 
 class FormDataModel {
-    static func insert(forms: [Form]) {
+    static let s = FormDataModel()
+
+    func insert(forms: [Form]) {
         CommonDao.s.insert(data: forms)
     }
     
-    static func select(id: String? = nil, url: String? = nil) -> [Form] {
+    func select(id: String? = nil, url: String? = nil) -> [Form] {
         let forms = CommonDao.s.select(type: Form.self) as! [Form]
         if let id = id {
             return forms.filter({ $0.id == id })
@@ -24,7 +26,7 @@ class FormDataModel {
         return forms
     }
     
-    static func delete(forms: [Form]? = nil) {
+    func delete(forms: [Form]? = nil) {
         if let forms = forms {
             CommonDao.s.delete(data: forms)
         } else {
@@ -33,7 +35,7 @@ class FormDataModel {
         }
     }
     /// フォーム情報の保存
-    static func store(webView: EGWebView) {
+    func store(webView: EGWebView) {
         if let title = webView.title, let host = webView.url?.host, let url = webView.url?.absoluteString {
             let form = Form()
             form.title = title
@@ -78,10 +80,10 @@ class FormDataModel {
             // 有効なフォーム情報かを判定
             // 入力済みのフォームが一つでもあれば保存する
             if form.inputs.count > 0 {
-                if let savedForm = FormDataModel.select(url: form.url).first {
-                    FormDataModel.delete(forms: [savedForm])
+                if let savedForm = FormDataModel.s.select(url: form.url).first {
+                    FormDataModel.s.delete(forms: [savedForm])
                 }
-                FormDataModel.insert(forms: [form])
+                FormDataModel.s.insert(forms: [form])
                 NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_FORM)
             } else {
                 NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_FORM_ERROR_INPUT)

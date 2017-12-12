@@ -67,11 +67,11 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.circlemenu_close(), tapAction: { _ in
                     log.debug("circle menu event. event: close")
-                    PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)
+                    self.viewModel.removePageHistoryDataModel()
                 }),
                 CircleMenuItem(image: R.image.circlemenu_historyback(), tapAction: { _ in
                     log.debug("circle menu event. event: history back")
-                    CommonHistoryDataModel.s.goBack()
+                    self.viewModel.goBackCommonHistoryDataModel()
                 }),
                 CircleMenuItem(image: R.image.circlemenu_copy(), tapAction: { _ in
                     log.debug("circle menu event. event: copy")
@@ -79,10 +79,7 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.circlemenu_search(), tapAction: { _ in
                     log.debug("circle menu event. event: search")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                        guard let _ = self else { return }
-                        HeaderViewDataModel.s.beginEditing(forceEditFlg: true)
-                    }
+                    self.viewModel.beginEditingHeaderViewDataModel()
                 }),
                 CircleMenuItem(image: R.image.circlemenu_add(), tapAction: { _ in
                     log.debug("circle menu event. event: add")
@@ -92,7 +89,7 @@ class FrontLayer: UIView {
             [
                 CircleMenuItem(image: R.image.circlemenu_url(), tapAction: { _ in
                     log.debug("circle menu event. event: url copy")
-                    NotificationCenter.default.post(name: .baseViewModelWillCopyUrl, object: nil)
+                    self.viewModel.executeOperationDataModel(operation: .urlCopy)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_autoscroll(), tapAction: { _ in
                     log.debug("circle menu event. event: auto scroll")
@@ -100,19 +97,19 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.circlemenu_historyforward(), tapAction: { _ in
                     log.debug("circle menu event. event: history forward")
-                    CommonHistoryDataModel.s.goForward()
+                    self.viewModel.goForwardCommonHistoryDataModel()
                 }),
                 CircleMenuItem(image: R.image.circlemenu_form(), tapAction: { _ in
                     log.debug("circle menu event. event: form")
-                    NotificationCenter.default.post(name: .baseViewModelWillRegisterAsForm, object: nil)
+                    self.viewModel.executeOperationDataModel(operation: .form)
                 }),
                 CircleMenuItem(image: R.image.header_favorite(), tapAction: { _ in
                     log.debug("circle menu event. event: favorite")
-                    FavoriteDataModel.s.register()
+                    self.viewModel.registerFavoriteDataModel()
                 }),
                 CircleMenuItem(image: R.image.circlemenu_form(), tapAction: { _ in
                     log.debug("circle menu event. event: form")
-                    NotificationCenter.default.post(name: .baseViewModelWillRegisterAsForm, object: nil)
+                    self.viewModel.executeOperationDataModel(operation: .form)
                 })
             ]
         ]
@@ -143,10 +140,10 @@ class FrontLayer: UIView {
         }
         // フォーム
         let deleteForms = deleteFormIds.map { (id) -> Form in
-            return FormDataModel.select(id: id).first!
+            return FormDataModel.s.select(id: id).first!
         }
         if deleteForms.count > 0 {
-            FormDataModel.delete(forms: deleteForms)
+            FormDataModel.s.delete(forms: deleteForms)
         }
         deleteHistoryIds = [:]
         deleteFavoriteIds = []

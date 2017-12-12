@@ -10,22 +10,24 @@ import Foundation
 import UIKit
 
 final class ThumbnailDataModel {
-    static func getThumbnail(context: String) -> UIImage? {
+    static let s = ThumbnailDataModel()
+
+    func getThumbnail(context: String) -> UIImage? {
         let image = UIImage(contentsOfFile: Util.thumbnailUrl(folder: context).path)
         return image?.crop(w: Int(AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2) * DeviceConst.ASPECT_RATE))
     }
     
-    static func getCapture(context: String) -> UIImage? {
+    func getCapture(context: String) -> UIImage? {
         return UIImage(contentsOfFile: Util.thumbnailUrl(folder: context).path)
     }
     
     /// サムネイルデータの削除
-    static func delete(context: String) {
+    func delete(context: String) {
         Util.deleteFolder(path: Util.thumbnailPath(folder: context))
     }
     
     /// サムネイルデータの全削除
-    static func delete() {
+    func delete() {
         Util.deleteFolder(path: AppConst.PATH_THUMBNAIL)
         Util.createFolder(path: AppConst.PATH_THUMBNAIL)
     }

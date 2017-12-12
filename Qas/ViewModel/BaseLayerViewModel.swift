@@ -10,6 +10,6 @@ import Foundation
 
 class BaseLayerViewModel {
     func changeOperationDataModel(operation: UserOperation) {
-        OperationDataModel.s.executeOperation(operation: operation)
+        OperationDataModel.s.executeOperation(operation: operation, object: nil)
     }
 }

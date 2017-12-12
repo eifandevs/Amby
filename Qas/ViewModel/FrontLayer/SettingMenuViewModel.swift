@@ -38,7 +38,7 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                 }),
                 OptionMenuItem(title: AppConst.SETTING_TITLE_FORM_DATA, action: { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
                     NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_FORM, completion: {
-                        FormDataModel.delete()
+                        FormDataModel.s.delete()
                     })
                     return nil
                 }),
@@ -66,11 +66,10 @@ class SettingMenuViewModel: OptionMenuTableViewModel {
                         PageHistoryDataModel.s.delete()
                         SearchHistoryDataModel.s.delete()
                         FavoriteDataModel.s.delete()
-                        FormDataModel.delete()
+                        FormDataModel.s.delete()
                         CacheHelper.deleteCookies()
                         CacheHelper.deleteCaches()
-                        ThumbnailDataModel.delete()
-                        NotificationCenter.default.post(name: .baseViewModelWillInitialize, object: nil)
+                        ThumbnailDataModel.s.delete()
                         (UIApplication.shared.delegate as! AppDelegate).initialize()
                     })
                     return nil

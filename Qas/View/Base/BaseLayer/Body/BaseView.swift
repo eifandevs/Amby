@@ -479,7 +479,7 @@ extension BaseView: UIScrollViewDelegate {
 extension BaseView: BaseViewModelDelegate {
     func baseViewModelDidAutoInput() {
         if !isDoneAutoInput {
-            if let inputForm = FormDataModel.select(url: front.url?.absoluteString).first {
+            if let inputForm = FormDataModel.s.select(url: front.url?.absoluteString).first {
                 NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_TITLE, message: MessageConst.ALERT_FORM_EXIST, completion: { [weak self] in
                     for input in inputForm.inputs {
                         let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: input.value)!
@@ -630,7 +630,7 @@ extension BaseView: BaseViewModelDelegate {
     }
     
     func baseViewModelDidRegisterAsForm() {
-        FormDataModel.store(webView: front)
+        self.viewModel.storeFromDataModel(webview: front)
     }
     
     func baseViewModelDidAutoScroll() {

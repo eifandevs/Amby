@@ -9,13 +9,14 @@
 import Foundation
 import UIKit
 
+// ユーザー操作用モデル
 final class OperationDataModel {
     static let s = OperationDataModel()
     var userOperation: UserOperation?
     private let center = NotificationCenter.default
 
-    func executeOperation(operation: UserOperation) {
+    func executeOperation(operation: UserOperation, object: Any?) {
         userOperation = operation
-        center.post(name: .operationDataModelDidChange, object: userOperation)
+        center.post(name: .operationDataModelDidChange, object: ["operation": operation, "object": object])
     }
 }

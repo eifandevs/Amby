@@ -13,11 +13,11 @@ import UIKit
 
 // MARK: - オペレーション
 enum UserOperation {
-    case pageGoBack
-    case pageGoForward
     case autoScroll
     case form
     case favorite
     case autoInput
-    case pageCopy
+    case urlCopy
+    case search
+    case help
 }

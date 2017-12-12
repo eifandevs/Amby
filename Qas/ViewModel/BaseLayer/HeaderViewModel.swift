@@ -106,7 +106,7 @@ class HeaderViewModel {
     }
     
     func notifySearchWebView(text: String) {
-        center.post(name: .baseViewModelWillSearchWebView, object: text)
+        OperationDataModel.s.executeOperation(operation: .search, object: text)
     }
 
     func registerFavoriteDataModel() {

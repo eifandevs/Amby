@@ -146,10 +146,10 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.cellForRow(at: indexPath)!
         if cell.className == SearchMenuTableViewCell.className {
             let text = (cell as! SearchMenuTableViewCell).urlLabel.text!
-            NotificationCenter.default.post(name: .baseViewModelWillSearchWebView, object: text)
+            viewModel.executeOperationDataModel(operation: .search, url: text)
         } else {
             let text = cell.textLabel!.text!
-            NotificationCenter.default.post(name: .baseViewModelWillSearchWebView, object: text)
+            viewModel.executeOperationDataModel(operation: .search, url: text)
         }
         delegate?.searchMenuDidClose()
     }

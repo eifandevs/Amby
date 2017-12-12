@@ -31,7 +31,7 @@ class HistoryMenuViewModel: OptionMenuTableViewModel {
         }
         _ = updateHistoryData()
         commonAction = { (menuItem: OptionMenuItem) -> OptionMenuTableViewModel? in
-            NotificationCenter.default.post(name: .baseViewModelWillSearchWebView, object: menuItem.url!)
+            OperationDataModel.s.executeOperation(operation: .search, object: menuItem.url)
             return nil
         }
     }

@@ -55,7 +55,7 @@ class FooterView: UIView, ShadowView {
                 let btn = createCaptureSpace(context: item.context)
                 if !item.context.isEmpty {
                     // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合
-                    if let image = ThumbnailDataModel.getThumbnail(context: item.context) {
+                    if let image = ThumbnailDataModel.s.getThumbnail(context: item.context) {
                         btn.setImage(nil, for: .normal)
                         btn.setBackgroundImage(image, for: .normal)
                         btn.setThumbnailTitle(title: item.title)
@@ -227,7 +227,7 @@ extension FooterView: FooterViewModelDelegate {
         if existIndicator {
             DispatchQueue.mainSyncSafe { [weak self] in
                 guard let `self` = self else { return }
-                if let image = ThumbnailDataModel.getThumbnail(context: context) {
+                if let image = ThumbnailDataModel.s.getThumbnail(context: context) {
                     targetThumbnail.subviews.forEach({ (v) in
                         if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
                             let indicator = v as! NVActivityIndicatorView

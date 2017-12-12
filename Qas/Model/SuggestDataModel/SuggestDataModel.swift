@@ -11,8 +11,8 @@ import Alamofire
 
 class SuggestDataModel {
     static func fetch(token: String, completion: ((Suggest?) -> ())?) {
-        let api = ApiManager(url: HttpConst.suggestApiUrl + token)
-        api.request(success: { (json: Dictionary) in
+        let api = ApiClient(url: HttpConst.HTTP_SERVER_DOMAIN + HttpConst.HTTP_SERVER_PATH + token)
+        api.get(success: { (json: Dictionary) in
             let data = (json["result"] as? [Any] ?? [String]())[safe: 1] as? [String] ?? [String]()
             completion?(Suggest(data: data))
         }) { (error: Error?) in

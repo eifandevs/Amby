@@ -73,6 +73,11 @@ final class CommonHistoryDataModel {
         }
     }
 
+    /// 初期化
+    func initialize() {
+        histories = []
+    }
+
     /// 閲覧履歴の検索
     /// 検索ワードと検索件数を指定する
     func select(title: String, readNum: Int) -> [CommonHistory] {
@@ -185,9 +190,9 @@ final class CommonHistoryDataModel {
     
     /// 閲覧履歴を全て削除
     func delete() {
+        histories = []
         Util.deleteFolder(path: AppConst.PATH_COMMON_HISTORY)
         Util.createFolder(path: AppConst.PATH_COMMON_HISTORY)
-        center.post(name: .commonHistoryDataModelDidDelete, object: nil)
     }
 
 }

@@ -10,13 +10,15 @@
 		A5117A511FDC48F600213E02 /* OperationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A501FDC48F600213E02 /* OperationDataModel.swift */; };
 		A5117A531FDC494000213E02 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A521FDC494000213E02 /* AppEnum.swift */; };
 		A5117A551FDC500B00213E02 /* BaseLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */; };
+		A5117A581FE0069300213E02 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A571FE0069300213E02 /* ApiRequest.swift */; };
+		A5117A5A1FE006AC00213E02 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A591FE006AC00213E02 /* ApiResponse.swift */; };
+		A5117A5C1FE006F400213E02 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A5B1FE006F400213E02 /* ApiClient.swift */; };
 		A5223EE71F1F8EA20097E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5223E8D1F1F8EA20097E793 /* Assets.xcassets */; };
 		A5223EE81F1F8EA20097E793 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223E8E1F1F8EA20097E793 /* EGApplication.swift */; };
 		A5223EEA1F1F8EA20097E793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5223E901F1F8EA20097E793 /* LaunchScreen.storyboard */; };
 		A527CBAA1FD31844000DF901 /* BaseViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */; };
 		A527CBAC1FD31A90000DF901 /* FrontLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */; };
 		A527CBAF1FD97D0C000DF901 /* HeaderViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBAE1FD97D0C000DF901 /* HeaderViewDataModel.swift */; };
-		A53C0EBD1FB7729D00FD78FF /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EBC1FB7729D00FD78FF /* ApiManager.swift */; };
 		A53C0EC01FB7764500FD78FF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */; };
 		A53C0EC21FB7766A00FD78FF /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EC11FB7766A00FD78FF /* NotificationView.swift */; };
 		A53C0EE21FB778ED00FD78FF /* CommonHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDB1FB778ED00FD78FF /* CommonHistory.swift */; };
@@ -121,6 +123,9 @@
 		A5117A501FDC48F600213E02 /* OperationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataModel.swift; sourceTree = "<group>"; };
 		A5117A521FDC494000213E02 /* AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnum.swift; sourceTree = "<group>"; };
 		A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLayerViewModel.swift; sourceTree = "<group>"; };
+		A5117A571FE0069300213E02 /* ApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
+		A5117A591FE006AC00213E02 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
+		A5117A5B1FE006F400213E02 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		A5223E8D1F1F8EA20097E793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5223E8E1F1F8EA20097E793 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A5223E8F1F1F8EA20097E793 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,7 +133,6 @@
 		A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModel.swift; sourceTree = "<group>"; };
 		A527CBAE1FD97D0C000DF901 /* HeaderViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewDataModel.swift; sourceTree = "<group>"; };
-		A53C0EBC1FB7729D00FD78FF /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A53C0EC11FB7766A00FD78FF /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		A53C0EDB1FB778ED00FD78FF /* CommonHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistory.swift; sourceTree = "<group>"; };
@@ -265,6 +269,16 @@
 				A5117A501FDC48F600213E02 /* OperationDataModel.swift */,
 			);
 			path = OperationDataModel;
+			sourceTree = "<group>";
+		};
+		A5117A561FE0067F00213E02 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				A5117A5B1FE006F400213E02 /* ApiClient.swift */,
+				A5117A571FE0069300213E02 /* ApiRequest.swift */,
+				A5117A591FE006AC00213E02 /* ApiResponse.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		A5223E8A1F1F8EA20097E793 /* Qas */ = {
@@ -458,8 +472,8 @@
 		A5BCE6F71FA501B800E0C6E5 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				A5117A561FE0067F00213E02 /* API */,
 				A53C0EBE1FB7764500FD78FF /* Notification */,
-				A53C0EBC1FB7729D00FD78FF /* ApiManager.swift */,
 				A5223E8E1F1F8EA20097E793 /* EGApplication.swift */,
 				A5BCE6F81FA501B800E0C6E5 /* CacheHelper.swift */,
 				A5BCE6F91FA501B800E0C6E5 /* CommonDao.swift */,
@@ -876,7 +890,9 @@
 				A53C0EEC1FB778ED00FD78FF /* SearchHistory.swift in Sources */,
 				A53C0EE81FB778ED00FD78FF /* Input.swift in Sources */,
 				A527CBAF1FD97D0C000DF901 /* HeaderViewDataModel.swift in Sources */,
+				A5117A581FE0069300213E02 /* ApiRequest.swift in Sources */,
 				A5BCE70D1FA501B900E0C6E5 /* NSObject+Extend.swift in Sources */,
+				A5117A5A1FE006AC00213E02 /* ApiResponse.swift in Sources */,
 				A5BCE7BD1FA50BFA00E0C6E5 /* OptionMenuTextField.swift in Sources */,
 				A5117A511FDC48F600213E02 /* OperationDataModel.swift in Sources */,
 				A5117A551FDC500B00213E02 /* BaseLayerViewModel.swift in Sources */,
@@ -907,7 +923,6 @@
 				A5BCE7B61FA50BFA00E0C6E5 /* BaseViewController.swift in Sources */,
 				A56983CB1FA527B5000A585F /* SuggestDataModel.swift in Sources */,
 				A5BCE70E1FA501B900E0C6E5 /* Optional+Extend.swift in Sources */,
-				A53C0EBD1FB7729D00FD78FF /* ApiManager.swift in Sources */,
 				A5BCE7BE1FA50BFA00E0C6E5 /* HelpViewController.swift in Sources */,
 				A5BCE7251FA501B900E0C6E5 /* ShadowView.swift in Sources */,
 				A5BCE70C1FA501B900E0C6E5 /* NSNotification+Extend.swift in Sources */,
@@ -951,6 +966,7 @@
 				A5BCE7C61FA50BFA00E0C6E5 /* BaseMenuViewModel.swift in Sources */,
 				A5F3C0171FB7570900B905CA /* AppDelegate.swift in Sources */,
 				A5BCE7211FA501B900E0C6E5 /* RealmHelper.swift in Sources */,
+				A5117A5C1FE006F400213E02 /* ApiClient.swift in Sources */,
 				A56983C41FA5249C000A585F /* FormDataModel.swift in Sources */,
 				A5BCE7AC1FA50BFA00E0C6E5 /* BaseView.swift in Sources */,
 				A5BCE7AD1FA50BFA00E0C6E5 /* EGWebView.swift in Sources */,

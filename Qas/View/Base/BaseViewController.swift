@@ -51,17 +51,6 @@ class BaseViewController: UIViewController {
             splash!.view.frame.origin = CGPoint.zero
             view.addSubview(splash!.view)
 
-            let center = NotificationCenter.default
-            // ヘルプ画面の表示通知
-            center.addObserver(forName: .baseViewControllerWillPresentHelp, object: nil, queue: nil) { [weak self] (notification) in
-                guard let `self` = self else { return }
-                log.debug("[BaseViewController Event]: baseViewControllerWillPresentHelp")
-                // ヘルプ画面を表示する
-                let subtitle = (notification.object as! [String: String])["subtitle"]!
-                let message = (notification.object as! [String: String])["message"]!
-                let vc = HelpViewController(subtitle: subtitle, message: message)
-                self.present(vc, animated: true)
-            }
             // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
             baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
             baseLayer.delegate = self
@@ -134,5 +123,13 @@ extension BaseViewController: SplashViewControllerDelegate {
                 }
             })
         }
+    }
+}
+
+// MARK: BaseViewControllerViewModel Delegate
+extension BaseViewController: BaseViewControllerViewModelDelegate {
+    func baseViewControllerViewModelDelegateDidPresentHelp(subtitle: String, message: String) {
+        let vc = HelpViewController(subtitle: subtitle, message: message)
+        self.present(vc, animated: true)
     }
 }

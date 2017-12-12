@@ -147,8 +147,9 @@ final class PageHistoryDataModel {
         }
     }
     
-    /// 表示中ページ情報の削除
+    /// 全データの削除
     func delete() {
+        histories = []
         Util.deleteFolder(path: AppConst.PATH_PAGE_HISTORY)
     }
 }
