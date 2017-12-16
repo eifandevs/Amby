@@ -56,7 +56,15 @@ final class AppConst {
     // MARK: - URL
     static let URL_BLANK = "about:blank"
     static let URL_ITUNES_STORE = "//itunes.apple.com/"
-    
+
+    // MARK: - メニュー画面
+    static let OPTION_MENU_HISTORY = "閲覧履歴"
+    static let OPTION_MENU_FORM = "フォーム"
+    static let OPTION_MENU_BOOKMARK = "ブックマーク"
+    static let OPTION_MENU_SETTING = "設定"
+    static let OPTION_MENU_HELP = "ヘルプ"
+    static let OPTION_MENU_APP_INFORMATION = "アプリ情報"
+
     // MARK: - 設定画面
     static let SETTING_SECTION_AUTO_SCROLL = "自動スクロール設定"
     static let SETTING_SECTION_HISTORY = "履歴保存件数（何日分）"

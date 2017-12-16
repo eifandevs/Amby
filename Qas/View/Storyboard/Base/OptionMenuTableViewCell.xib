@@ -22,12 +22,13 @@
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="W8a-xX-Z2D">
                         <rect key="frame" x="10" y="0.0" width="235" height="50"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jGd-u3-Ydk">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="StX-an-1V0">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="whx-we-MDr"/>
+                                    <constraint firstAttribute="width" constant="50" id="DMs-YO-fx3"/>
                                 </constraints>
-                            </imageView>
+                                <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLF-ek-MgJ">
                                 <rect key="frame" x="55" y="0.0" width="180" height="50"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -36,8 +37,8 @@
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="jGd-u3-Ydk" secondAttribute="bottom" id="JbB-zd-XfR"/>
-                            <constraint firstItem="jGd-u3-Ydk" firstAttribute="top" secondItem="W8a-xX-Z2D" secondAttribute="top" id="v5U-g4-hTl"/>
+                            <constraint firstItem="StX-an-1V0" firstAttribute="top" secondItem="W8a-xX-Z2D" secondAttribute="top" id="g0N-BX-X1c"/>
+                            <constraint firstAttribute="bottom" secondItem="StX-an-1V0" secondAttribute="bottom" id="nJf-ea-fe9"/>
                         </constraints>
                     </stackView>
                 </subviews>
@@ -49,6 +50,10 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="thumbnailButton" destination="StX-an-1V0" id="pPR-9b-973"/>
+                <outlet property="titleLabel" destination="bLF-ek-MgJ" id="bGM-oB-aCo"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

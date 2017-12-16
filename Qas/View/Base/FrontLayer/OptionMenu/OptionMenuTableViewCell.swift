@@ -10,6 +10,9 @@ import UIKit
 
 class OptionMenuTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var thumbnailButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +22,12 @@ class OptionMenuTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    /// ビューモデル情報設定
+    func setViewModelData(row: OptionMenuTableViewModel.Row) {
+        thumbnailButton.setImage(image: UIImage(named: row.imageName), color: UIColor.black)
+        titleLabel.text = row.title
     }
     
 }

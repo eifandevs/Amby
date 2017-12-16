@@ -40,6 +40,17 @@ class OptionMenuTableView: UIView, ShadowView {
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.isUserInteractionEnabled = true
+        tableView.separatorColor = UIColor.clear
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.showsHorizontalScrollIndicator = true
+        tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = UIColor.white
+        tableView.allowsSelection = true
+        tableView.tableFooterView = UIView()
+        tableView.layer.cornerRadius = 2.5
+
+        
         if #available(iOS 11.0, *) {
             // safe area対応
             tableView.contentInsetAdjustmentBehavior = .never
@@ -52,7 +63,7 @@ class OptionMenuTableView: UIView, ShadowView {
     }
 }
 
-// MARK: - TableView Delegate
+// MARK: - TableViewDataSourceDelegate
 extension OptionMenuTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return viewModel.cellHeight
@@ -60,7 +71,7 @@ extension OptionMenuTableView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuCell.identifier, for: indexPath) as! OptionMenuTableViewCell
-
+        cell.setViewModelData(row: viewModel.getRow(indexPath: indexPath))
         return cell
     }
     
@@ -69,6 +80,7 @@ extension OptionMenuTableView: UITableViewDataSource {
     }
 }
 
+// MARK: - TableViewDelegate
 extension OptionMenuTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let marginY = frame.origin.y + frame.size.height + viewModel.overViewMargin.y > DeviceConst.DISPLAY_SIZE.height ?
@@ -82,6 +94,7 @@ extension OptionMenuTableView: UITableViewDelegate {
     }
 }
 
+// MARK: OptionMenuHistoryTableViewDelegate
 extension OptionMenuTableView: OptionMenuHistoryTableViewDelegate {
     func optionMenuHistoryDidClose(view: UIView) {
     }
