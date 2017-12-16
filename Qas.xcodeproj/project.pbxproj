@@ -13,6 +13,7 @@
 		A5117A581FE0069300213E02 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A571FE0069300213E02 /* ApiRequest.swift */; };
 		A5117A5A1FE006AC00213E02 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A591FE006AC00213E02 /* ApiResponse.swift */; };
 		A5117A5C1FE006F400213E02 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A5B1FE006F400213E02 /* ApiClient.swift */; };
+		A5117A5E1FE537C200213E02 /* HeaderFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A5D1FE537C200213E02 /* HeaderFieldViewModel.swift */; };
 		A5223EE71F1F8EA20097E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5223E8D1F1F8EA20097E793 /* Assets.xcassets */; };
 		A5223EE81F1F8EA20097E793 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5223E8E1F1F8EA20097E793 /* EGApplication.swift */; };
 		A5223EEA1F1F8EA20097E793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5223E901F1F8EA20097E793 /* LaunchScreen.storyboard */; };
@@ -126,6 +127,7 @@
 		A5117A571FE0069300213E02 /* ApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		A5117A591FE006AC00213E02 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		A5117A5B1FE006F400213E02 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		A5117A5D1FE537C200213E02 /* HeaderFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFieldViewModel.swift; sourceTree = "<group>"; };
 		A5223E8D1F1F8EA20097E793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5223E8E1F1F8EA20097E793 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A5223E8F1F1F8EA20097E793 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -675,6 +677,7 @@
 				A5BCE7981FA50BFA00E0C6E5 /* FooterViewModel.swift */,
 				A5BCE7991FA50BFA00E0C6E5 /* HeaderViewModel.swift */,
 				A5BCE79A1FA50BFA00E0C6E5 /* SearchMenuTableViewModel.swift */,
+				A5117A5D1FE537C200213E02 /* HeaderFieldViewModel.swift */,
 			);
 			path = BaseLayer;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5117A5E1FE537C200213E02 /* HeaderFieldViewModel.swift in Sources */,
 				A5BCE7B71FA50BFA00E0C6E5 /* CircleMenu.swift in Sources */,
 				A5BCE71C1FA501B900E0C6E5 /* CommonDao.swift in Sources */,
 				A5BCE71B1FA501B900E0C6E5 /* CacheHelper.swift in Sources */,

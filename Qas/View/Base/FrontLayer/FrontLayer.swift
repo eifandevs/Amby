@@ -56,6 +56,7 @@ class FrontLayer: UIView {
                         }
                         return y
                     }()
+                    // TODO: オプションメニューをxibから表示
                     let viewModel = BaseMenuViewModel()
                     viewModel.setup()
                     self!.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height), viewModel: viewModel, direction: self!.swipeDirection)
@@ -93,7 +94,7 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.circlemenu_autoscroll(), tapAction: { _ in
                     log.debug("circle menu event. event: auto scroll")
-                    NotificationCenter.default.post(name: .baseViewModelWillAutoScroll, object: nil)
+                    self.viewModel.executeOperationDataModel(operation: .autoScroll)
                 }),
                 CircleMenuItem(image: R.image.circlemenu_historyforward(), tapAction: { _ in
                     log.debug("circle menu event. event: history forward")

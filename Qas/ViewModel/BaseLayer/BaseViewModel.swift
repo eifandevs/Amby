@@ -99,6 +99,8 @@ class BaseViewModel {
                 self.delegate?.baseViewModelDidSearchWebView(text: text)
             } else if operation == .form {
                 self.delegate?.baseViewModelDidRegisterAsForm()
+            } else if operation == .autoScroll {
+                self.delegate?.baseViewModelDidAutoScroll()
             }
         }
 
@@ -123,13 +125,6 @@ class BaseViewModel {
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: commonHistoryDataModelDidGoForward")
             self.delegate?.baseViewModelDidHistoryForwardWebView()
-        }
-        
-        // webview自動スクロール
-        center.addObserver(forName: .baseViewModelWillAutoScroll, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: baseViewModelWillAutoScroll")
-            self.delegate?.baseViewModelDidAutoScroll()
         }
         
         // ページ変更

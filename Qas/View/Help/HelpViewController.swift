@@ -11,7 +11,6 @@ import VerticalAlignmentLabel
 
 class HelpViewController: UIViewController {
 
-    @IBOutlet var contentView: UIView!
     @IBOutlet weak var closeButton: CornerRadiusButton!
     @IBOutlet weak var messageLabel: VerticalAlignmentLabel!
     @IBOutlet weak var subtitleLabel: VerticalAlignmentLabel!

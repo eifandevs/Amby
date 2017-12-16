@@ -19,5 +19,6 @@ enum UserOperation {
     case autoInput
     case urlCopy
     case search
+    case suggest
     case help
 }

@@ -79,7 +79,6 @@ class HeaderViewModel {
             guard let `self` = self else { return }
             log.debug("[HeaderView Event]: pageHistoryDataModelDidRemove")
             
-            let context = (notification.object as! [String: Any])["context"] as! String
             let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
             if pageExist {
                 let url = PageHistoryDataModel.s.currentHistory.url

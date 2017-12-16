@@ -19,6 +19,7 @@ class HeaderField: UIButton, ShadowView {
     private let iconSize: CGSize = CGSize(width: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT, height: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT)
     private var label: EGGradientLabel?
     private var pastLabelText: String?
+    private let viewModel = HeaderFieldViewModel()
     var textField: UITextField!
     
     var text: String? {
@@ -189,7 +190,7 @@ extension HeaderField: UITextFieldDelegate {
     }
     @objc func textFieldEditingChanged(sender: UITextField) {
         // 表示している履歴情報の更新
-        NotificationCenter.default.post(name: .searchMenuTableViewModelWillUpdateSearchToken, object: ["token": sender.text])
+        viewModel.executeOperationDataModel(operation: .suggest, object: sender.text!)
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.delegate?.headerFieldDidEndEditing(text: textField.text)

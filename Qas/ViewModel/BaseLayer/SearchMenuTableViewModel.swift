@@ -30,12 +30,18 @@ class SearchMenuTableViewModel {
 
     init() {
         // webview検索
-        NotificationCenter.default.addObserver(forName: .searchMenuTableViewModelWillUpdateSearchToken, object: nil, queue: nil) { [weak self] (notification) in
+        // オペレーション監視
+        NotificationCenter.default.addObserver(forName: .operationDataModelDidChange, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[SearchMenuTableView Event]: searchMenuTableViewModelWillUpdateSearchToken")
-            let token = notification.object != nil ? (notification.object as! [String: String])["token"] : nil
-            self.requestSearchQueue.append(token)
-            self.requestSearch()
+            log.debug("[SearchMenuTableView Event]: operationDataModelDidChange")
+
+            let operation = (notification.object as! [String: Any])["operation"] as! UserOperation
+            let token = (notification.object as! [String: Any])["object"] as! String
+
+            if operation == .suggest && !token.isEmpty {
+                self.requestSearchQueue.append(token)
+                self.requestSearch()
+            }
         }
     }
 

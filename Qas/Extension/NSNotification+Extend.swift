@@ -10,11 +10,6 @@ import Foundation
 
 /// モデルデータ変更通知用の拡張
 extension NSNotification.Name {
-    // MARK: - ViewModel
-    static let baseViewModelWillAutoScroll = NSNotification.Name("baseViewModelWillAutoScroll")
-    static let searchMenuTableViewModelWillUpdateSearchToken = NSNotification.Name("searchMenuTableViewModelWillUpdateSearchToken")
-    
-    // MARK: - Model
     // OperationDataModel
     static let operationDataModelDidChange = NSNotification.Name("operationDataModelDidChange")
     
