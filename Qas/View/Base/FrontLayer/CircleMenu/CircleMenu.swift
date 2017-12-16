@@ -34,8 +34,8 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     enum CircleMenuLeftLocation: CGPoint, EnumEnumerable {
         case Upper = "0,-130"
         case UpperRight = "62,-100"
-        case RightUpper = "100,-39"
-        case RightLower = "100,39"
+        case RightUpper = "100,-40"
+        case RightLower = "100,40"
         case LowerRight = "62,100"
         case Lower = "0,130"
         

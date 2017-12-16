@@ -31,21 +31,15 @@ class FrontLayer: UIView {
         self.init(frame: frame)
         // スワイプ方向の保持
         self.swipeDirection = swipeDirection
-        
-        // バックグラウンドに入るときに保持していた削除対象を削除する
-        NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else {
-                return
-            }
-            self.deleteStoreData()
-        }
-        
+
         // サークルメニューの作成
         let menuItems = [
             [
                 CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { [weak self] (initialPt: CGPoint) in
+                    guard let `self` = self else { return }
+                    
                     // オプションメニューの表示位置を計算
-                    let ptX = self!.swipeDirection == .left ? initialPt.x / 6 : DeviceConst.DISPLAY_SIZE.width - 250  - (DeviceConst.DISPLAY_SIZE.width - initialPt.x) / 6
+                    let ptX = self.swipeDirection == .left ? initialPt.x / 6 : DeviceConst.DISPLAY_SIZE.width - 250  - (DeviceConst.DISPLAY_SIZE.width - initialPt.x) / 6
                     let ptY: CGFloat = { () -> CGFloat in
                         let y = initialPt.y - AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height / 2
                         if y < 0 {
@@ -56,13 +50,10 @@ class FrontLayer: UIView {
                         }
                         return y
                     }()
-                    // TODO: オプションメニューをxibから表示
-                    let viewModel = BaseMenuViewModel()
-                    viewModel.setup()
-                    self!.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height), viewModel: viewModel, direction: self!.swipeDirection)
-                    self!.optionMenu?.delegate = self
+                    // オプションメニューを表示
+                    self.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height))
+                    self.optionMenu?.delegate = self
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        guard let `self` = self else { return }
                         self.addSubview(self.optionMenu!)
                     }
                 }),
@@ -126,42 +117,16 @@ class FrontLayer: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-// MARK: Private Method
-    /// 閲覧履歴、お気に入り、フォームデータを削除する
-    func deleteStoreData() {
-        // 履歴
-        CommonHistoryDataModel.s.delete(historyIds: deleteHistoryIds)
-        // お気に入り
-        let deleteFavorites = deleteFavoriteIds.map { (id) -> Favorite in
-            return FavoriteDataModel.s.select(id: id).first!
-        }
-        if deleteFavorites.count > 0 {
-            CommonDao.s.delete(data: deleteFavorites)
-            FavoriteDataModel.s.reload()
-        }
-        // フォーム
-        let deleteForms = deleteFormIds.map { (id) -> Form in
-            return FormDataModel.s.select(id: id).first!
-        }
-        if deleteForms.count > 0 {
-            FormDataModel.s.delete(forms: deleteForms)
-        }
-        deleteHistoryIds = [:]
-        deleteFavoriteIds = []
-        deleteFormIds = []
-    }
-    
 // MARK: Button Event
     @objc func tappedOverlay(_ sender: AnyObject) {
-        optionMenuDidClose()
+        optionMenuTableViewDidClose()
     }
 }
 
 // MARK: OptionMenuTableView Delegate
 extension FrontLayer: OptionMenuTableViewDelegate {
-    func optionMenuDidClose() {
+    func optionMenuTableViewDidClose() {
         circleMenu.invalidate()
-        deleteStoreData()
         UIView.animate(withDuration: 0.15, animations: {
             self.overlay.alpha = 0
             self.optionMenu?.alpha = 0
@@ -173,31 +138,6 @@ extension FrontLayer: OptionMenuTableViewDelegate {
                 self.delegate?.frontLayerDidInvalidate()
             }
         })
-    }
-    
-    func optionMenuDidCloseDetailMenu() {
-        deleteStoreData()
-    }
-    
-    func optionMenuDidDeleteHistoryData(_id: String, date: Date) {
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: NSLocale.current.identifier)
-        dateFormatter.dateFormat = "yyyyMMdd"
-        let key = dateFormatter.string(from: date)
-        if deleteHistoryIds[key] == nil {
-            deleteHistoryIds[key] = [_id]
-        } else {
-            deleteHistoryIds[key]?.append(_id)
-        }
-    }
-    
-    func optionMenuDidDeleteFavoriteData(_id: String) {
-        deleteFavoriteIds.append(_id)
-    }
-    
-    func optionMenuDidDeleteFormData(_id: String) {
-        deleteFormIds.append(_id)
     }
 }
 

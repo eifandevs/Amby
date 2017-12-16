@@ -1,5 +1,5 @@
 //
-//  OptionMenuTableViewCell.swift
+//  OptionMenuHistoryTableViewCell.swift
 //  Qas
 //
 //  Created by temma on 2017/12/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OptionMenuTableViewCell: UITableViewCell {
+class OptionMenuHistoryTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
