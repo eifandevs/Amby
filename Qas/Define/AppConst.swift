@@ -20,6 +20,7 @@ final class AppConst {
     static let FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT = 50.f
     static let FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT = 17.f
     static let FRONT_LAYER_EDGE_SWIPE_EREA = 15.f
+    static let FRONT_LAYER_OVER_VIEW_MARGIN = CGPoint(x: 20.f, y: 20.f)
     static let FRONT_LAYER_OPTION_MENU_SIZE = CGSize(width: 250, height: 450)
     static let FRONT_LAYER_OPTION_MENU_MARGIN = CGSize(width: 38, height: 20)
     
@@ -55,6 +56,7 @@ final class AppConst {
     // MARK: - URL
     static let URL_BLANK = "about:blank"
     static let URL_ITUNES_STORE = "//itunes.apple.com/"
+    
     // MARK: - 設定画面
     static let SETTING_SECTION_AUTO_SCROLL = "自動スクロール設定"
     static let SETTING_SECTION_HISTORY = "履歴保存件数（何日分）"

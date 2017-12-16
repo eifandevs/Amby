@@ -11,7 +11,7 @@ import UIKit
 import UIKit
 
 protocol OptionMenuHistoryTableViewDelegate: class {
-    func optionMenuHistoryDidClose()
+    func optionMenuHistoryDidClose(view: UIView)
 }
 
 class OptionMenuHistoryTableView: UIView, ShadowView {
@@ -61,7 +61,6 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuHistoryCell.identifier, for: indexPath) as! OptionMenuHistoryTableViewCell
-
         return cell
     }
 

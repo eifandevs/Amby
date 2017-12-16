@@ -71,7 +71,19 @@ extension OptionMenuTableView: UITableViewDataSource {
 
 extension OptionMenuTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        log.debug("select")
+        let marginY = frame.origin.y + frame.size.height + viewModel.overViewMargin.y > DeviceConst.DISPLAY_SIZE.height ?
+                      viewModel.overViewMargin.y - (frame.origin.y + frame.size.height + viewModel.overViewMargin.y - DeviceConst.DISPLAY_SIZE.height) :
+                      viewModel.overViewMargin.y
+        
+        let historyTableView = OptionMenuHistoryTableView(frame: CGRect(x: viewModel.overViewMargin.x, y: marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height))
+        historyTableView.delegate = self
+        
+        addSubview(historyTableView)
+    }
+}
+
+extension OptionMenuTableView: OptionMenuHistoryTableViewDelegate {
+    func optionMenuHistoryDidClose(view: UIView) {
     }
 }
 
