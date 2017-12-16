@@ -311,12 +311,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A5117A4F1FDC48D900213E02 /* OperationDataModel */ = {
+		A5117A4F1FDC48D900213E02 /* Operation */ = {
 			isa = PBXGroup;
 			children = (
 				A5117A501FDC48F600213E02 /* OperationDataModel.swift */,
 			);
-			path = OperationDataModel;
+			path = Operation;
 			sourceTree = "<group>";
 		};
 		A5117A561FE0067F00213E02 /* API */ = {
@@ -347,12 +347,12 @@
 			path = Qas;
 			sourceTree = "<group>";
 		};
-		A527CBAD1FD97CFD000DF901 /* HeaderViewDataModel */ = {
+		A527CBAD1FD97CFD000DF901 /* HeaderView */ = {
 			isa = PBXGroup;
 			children = (
 				A527CBAE1FD97D0C000DF901 /* HeaderViewDataModel.swift */,
 			);
-			path = HeaderViewDataModel;
+			path = HeaderView;
 			sourceTree = "<group>";
 		};
 		A53C0EBE1FB7764500FD78FF /* Notification */ = {
@@ -408,52 +408,52 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		A56983B51FA523D2000A585F /* PageHistoryDataModel */ = {
+		A56983B51FA523D2000A585F /* PageHistory */ = {
 			isa = PBXGroup;
 			children = (
 				A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */,
 			);
-			path = PageHistoryDataModel;
+			path = PageHistory;
 			sourceTree = "<group>";
 		};
-		A56983B61FA523D2000A585F /* SearchHistoryModel */ = {
+		A56983B61FA523D2000A585F /* SearchHistory */ = {
 			isa = PBXGroup;
 			children = (
 				A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */,
 			);
-			path = SearchHistoryModel;
+			path = SearchHistory;
 			sourceTree = "<group>";
 		};
-		A56983B71FA523D3000A585F /* CommonHistoryDataModel */ = {
+		A56983B71FA523D3000A585F /* CommonHistory */ = {
 			isa = PBXGroup;
 			children = (
 				A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */,
 			);
-			path = CommonHistoryDataModel;
+			path = CommonHistory;
 			sourceTree = "<group>";
 		};
-		A56983BE1FA52482000A585F /* FavoriteDataModel */ = {
+		A56983BE1FA52482000A585F /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
 				A56983C61FA524A8000A585F /* FavoriteDataModel.swift */,
 			);
-			path = FavoriteDataModel;
+			path = Favorite;
 			sourceTree = "<group>";
 		};
-		A56983BF1FA52483000A585F /* FormDataModel */ = {
+		A56983BF1FA52483000A585F /* Form */ = {
 			isa = PBXGroup;
 			children = (
 				A56983C31FA5249C000A585F /* FormDataModel.swift */,
 			);
-			path = FormDataModel;
+			path = Form;
 			sourceTree = "<group>";
 		};
-		A56983C91FA527AA000A585F /* SuggestDataModel */ = {
+		A56983C91FA527AA000A585F /* Suggest */ = {
 			isa = PBXGroup;
 			children = (
 				A56983CA1FA527B5000A585F /* SuggestDataModel.swift */,
 			);
-			path = SuggestDataModel;
+			path = Suggest;
 			sourceTree = "<group>";
 		};
 		A57EFE981E3E06D300B66701 = {
@@ -475,12 +475,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A586CD8C1FB77B4400961B30 /* ThumbnailDataModel */ = {
+		A586CD8C1FB77B4400961B30 /* Thumbnail */ = {
 			isa = PBXGroup;
 			children = (
 				A586CD8D1FB77B5300961B30 /* ThumbnailDataModel.swift */,
 			);
-			path = ThumbnailDataModel;
+			path = Thumbnail;
 			sourceTree = "<group>";
 		};
 		A5A598E91FA516E1000B56AE /* Environment */ = {
@@ -576,15 +576,15 @@
 		A5BCE7631FA50BFA00E0C6E5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A5117A4F1FDC48D900213E02 /* OperationDataModel */,
-				A527CBAD1FD97CFD000DF901 /* HeaderViewDataModel */,
-				A586CD8C1FB77B4400961B30 /* ThumbnailDataModel */,
-				A56983C91FA527AA000A585F /* SuggestDataModel */,
-				A56983BE1FA52482000A585F /* FavoriteDataModel */,
-				A56983BF1FA52483000A585F /* FormDataModel */,
-				A56983B71FA523D3000A585F /* CommonHistoryDataModel */,
-				A56983B51FA523D2000A585F /* PageHistoryDataModel */,
-				A56983B61FA523D2000A585F /* SearchHistoryModel */,
+				A5117A4F1FDC48D900213E02 /* Operation */,
+				A527CBAD1FD97CFD000DF901 /* HeaderView */,
+				A586CD8C1FB77B4400961B30 /* Thumbnail */,
+				A56983C91FA527AA000A585F /* Suggest */,
+				A56983BE1FA52482000A585F /* Favorite */,
+				A56983BF1FA52483000A585F /* Form */,
+				A56983B71FA523D3000A585F /* CommonHistory */,
+				A56983B51FA523D2000A585F /* PageHistory */,
+				A56983B61FA523D2000A585F /* SearchHistory */,
 			);
 			path = Model;
 			sourceTree = "<group>";
