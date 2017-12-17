@@ -13,7 +13,7 @@ protocol OptionMenuTableViewDelegate: class {
     func optionMenuTableViewDidClose()
 }
 
-class OptionMenuTableView: UIView, ShadowView {
+class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
     
     @IBOutlet weak var tableView: UITableView!
     let viewModel = OptionMenuTableViewModel()
@@ -40,21 +40,8 @@ class OptionMenuTableView: UIView, ShadowView {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.isUserInteractionEnabled = true
-        tableView.separatorColor = UIColor.clear
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        tableView.showsHorizontalScrollIndicator = true
-        tableView.showsVerticalScrollIndicator = false
-        tableView.backgroundColor = UIColor.white
-        tableView.allowsSelection = true
-        tableView.tableFooterView = UIView()
-        tableView.layer.cornerRadius = 2.5
-
-        
-        if #available(iOS 11.0, *) {
-            // safe area対応
-            tableView.contentInsetAdjustmentBehavior = .never
-        }
+        // OptionMenuProtocol
+        _ = setup(tableView: tableView)
 
         // カスタムビュー登録
         tableView.register(R.nib.optionMenuTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuCell.identifier)

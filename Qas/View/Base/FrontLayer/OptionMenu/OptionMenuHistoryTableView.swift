@@ -14,7 +14,7 @@ protocol OptionMenuHistoryTableViewDelegate: class {
     func optionMenuHistoryDidClose(view: UIView)
 }
 
-class OptionMenuHistoryTableView: UIView, ShadowView {
+class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
     
     let viewModel = OptionMenuHistoryTableViewModel()
     weak var delegate: OptionMenuHistoryTableViewDelegate?
@@ -41,10 +41,8 @@ class OptionMenuHistoryTableView: UIView, ShadowView {
         tableView.delegate = self
         tableView.dataSource = self
         
-        if #available(iOS 11.0, *) {
-            // safe area対応
-            tableView.contentInsetAdjustmentBehavior = .never
-        }
+        // OptionMenuProtocol
+        _ = setup(tableView: tableView)
         
         // カスタムビュー登録
         tableView.register(R.nib.optionMenuHistoryTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuHistoryCell.identifier)
