@@ -41,6 +41,9 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
         tableView.delegate = self
         tableView.dataSource = self
         
+        // ビューモデル通知
+        viewModel.delegate = self
+        
         // OptionMenuProtocol
         _ = setup(tableView: tableView)
         
@@ -51,7 +54,7 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
     }
 }
 
-// MARK: - TableView Delegate
+// MARK: - TableViewDataSourceDelegate
 extension OptionMenuHistoryTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return viewModel.cellHeight
@@ -67,9 +70,27 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
     }
 }
 
+// MARK: - TableViewDelegate
 extension OptionMenuHistoryTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         log.debug("select")
+    }
+}
+
+// MARK: - OptionMenuHistoryTableViewModelDelegate
+extension OptionMenuHistoryTableView: OptionMenuHistoryTableViewModelDelegate {
+    func optionMenuHistoryTableViewModelDidGetDataSuccessfull() {
+        tableView.reloadData()
+    }
+}
+
+// MARK: - ScrollViewDelegate
+extension OptionMenuHistoryTableView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // 履歴表示で、コンテンツが残り２ページであれば、次の履歴を読みに行く
+        if scrollView.contentOffset.y < scrollView.contentSize.height - (frame.size.height * 2) {
+            viewModel.getModelData()
+        }
     }
 }
 

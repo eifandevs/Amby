@@ -78,7 +78,34 @@ final class CommonHistoryDataModel {
         histories = []
     }
 
+    /// 保存済みリスト取得
+    func getList() -> [String] {
+        let manager = FileManager.default
+        do {
+            let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_COMMON_HISTORY)
+            return list.map({ (path: String) -> String in
+                return path.substring(to: path.index(path.startIndex, offsetBy: 8))
+            }).sorted(by: { $1.toDate() < $0.toDate() })
+        } catch let error as NSError {
+            log.error("failed to read common history. error: \(error.localizedDescription)")
+        }
+        return []
+    }
+    
     /// 閲覧履歴の検索
+    /// 日付指定
+    func select(dateString: String) -> [CommonHistory] {
+        do {
+            let data = try Data(contentsOf: Util.commonHistoryUrl(date: dateString))
+            let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
+            log.debug("common history read. key: \(dateString)")
+            return commonHistory
+        } catch let error as NSError {
+            log.error("failed to read common history. error: \(error.localizedDescription)")
+        }
+        return []
+    }
+    
     /// 検索ワードと検索件数を指定する
     func select(title: String, readNum: Int) -> [CommonHistory] {
         let manager = FileManager.default

@@ -18,7 +18,8 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
     @IBOutlet weak var tableView: UITableView!
     let viewModel = OptionMenuTableViewModel()
     weak var delegate: OptionMenuTableViewDelegate?
-
+    var detailView: UIView?
+    
     override init(frame: CGRect){
         super.init(frame: frame)
         loadNib()
@@ -70,14 +71,31 @@ extension OptionMenuTableView: UITableViewDataSource {
 // MARK: - TableViewDelegate
 extension OptionMenuTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let marginY = frame.origin.y + frame.size.height + viewModel.overViewMargin.y > DeviceConst.DISPLAY_SIZE.height ?
-                      viewModel.overViewMargin.y - (frame.origin.y + frame.size.height + viewModel.overViewMargin.y - DeviceConst.DISPLAY_SIZE.height) :
-                      viewModel.overViewMargin.y
+        if let detailView = detailView {
+            // 詳細ビューを表示していれば、削除する
+            UIView.animate(withDuration: 0.15, animations: {
+                detailView.alpha = 0
+            }, completion: { (finished) in
+                if finished {
+                    detailView.removeFromSuperview()
+                    self.detailView = nil
+                }
+            })
+        } else {
+            let marginY = frame.origin.y + frame.size.height + viewModel.overViewMargin.y > DeviceConst.DISPLAY_SIZE.height ?
+                          viewModel.overViewMargin.y - (frame.origin.y + frame.size.height + viewModel.overViewMargin.y - DeviceConst.DISPLAY_SIZE.height) :
+                          viewModel.overViewMargin.y
+            
+            // スーパービューに追加するので、自身の座標をたす
+            let historyTableView = OptionMenuHistoryTableView(frame: CGRect(x: frame.origin.x + viewModel.overViewMargin.x, y: frame.origin.y + marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height))
+            historyTableView.delegate = self
+            
+            // 詳細ビューは保持しておく
+            detailView = historyTableView
+            
+            superview!.addSubview(historyTableView)
+        }
         
-        let historyTableView = OptionMenuHistoryTableView(frame: CGRect(x: viewModel.overViewMargin.x, y: marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height))
-        historyTableView.delegate = self
-        
-        addSubview(historyTableView)
     }
 }
 

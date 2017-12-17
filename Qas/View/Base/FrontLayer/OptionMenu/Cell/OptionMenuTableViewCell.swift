@@ -27,6 +27,8 @@ class OptionMenuTableViewCell: UITableViewCell {
     /// ビューモデル情報設定
     func setViewModelData(row: OptionMenuTableViewModel.Row) {
         thumbnailButton.setImage(image: UIImage(named: row.imageName), color: UIColor.black)
+        thumbnailButton.imageEdgeInsets = UIEdgeInsetsMake(9, 9, 9, 9)
+        thumbnailButton.isUserInteractionEnabled = false
         titleLabel.text = row.title
     }
     
