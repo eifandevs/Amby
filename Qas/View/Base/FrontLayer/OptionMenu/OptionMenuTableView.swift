@@ -19,6 +19,7 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
     let viewModel = OptionMenuTableViewModel()
     weak var delegate: OptionMenuTableViewDelegate?
     var detailView: UIView?
+    private var selectedIndexPath: IndexPath?
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -71,6 +72,38 @@ extension OptionMenuTableView: UITableViewDataSource {
 // MARK: - TableViewDelegate
 extension OptionMenuTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath
+        let marginY = frame.origin.y + frame.size.height + viewModel.overViewMargin.y > DeviceConst.DISPLAY_SIZE.height ?
+                      viewModel.overViewMargin.y - (frame.origin.y + frame.size.height + viewModel.overViewMargin.y - DeviceConst.DISPLAY_SIZE.height) :
+                      viewModel.overViewMargin.y
+
+        // スーパービューに追加するので、自身の座標をたす
+        let historyTableView = OptionMenuHistoryTableView(frame: CGRect(x: frame.origin.x + viewModel.overViewMargin.x, y: frame.origin.y + marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height))
+        historyTableView.delegate = self
+
+        // 詳細ビューは保持しておく
+        detailView = historyTableView
+
+        superview!.addSubview(historyTableView)
+
+        // オーバーレイ表示
+        let overlay = UIButton(frame: CGRect(origin: CGPoint.zero, size: frame.size))
+        overlay.backgroundColor = UIColor.clear
+        overlay.addTarget(self, action: #selector(self.tappedOverlay(_:)), for: .touchDown)
+        addSubview(overlay)
+    }
+
+    // MARK: Button Event
+    @objc func tappedOverlay(_ sender: AnyObject) {
+        // overlay削除
+        (sender as! UIButton).removeFromSuperview()
+
+        // 選択状態解除
+        if let selectedIndexPath = selectedIndexPath {
+            tableView.deselectRow(at: selectedIndexPath, animated: false)
+            self.selectedIndexPath = nil
+        }
+
         if let detailView = detailView {
             // 詳細ビューを表示していれば、削除する
             UIView.animate(withDuration: 0.15, animations: {
@@ -81,21 +114,7 @@ extension OptionMenuTableView: UITableViewDelegate {
                     self.detailView = nil
                 }
             })
-        } else {
-            let marginY = frame.origin.y + frame.size.height + viewModel.overViewMargin.y > DeviceConst.DISPLAY_SIZE.height ?
-                          viewModel.overViewMargin.y - (frame.origin.y + frame.size.height + viewModel.overViewMargin.y - DeviceConst.DISPLAY_SIZE.height) :
-                          viewModel.overViewMargin.y
-            
-            // スーパービューに追加するので、自身の座標をたす
-            let historyTableView = OptionMenuHistoryTableView(frame: CGRect(x: frame.origin.x + viewModel.overViewMargin.x, y: frame.origin.y + marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height))
-            historyTableView.delegate = self
-            
-            // 詳細ビューは保持しておく
-            detailView = historyTableView
-            
-            superview!.addSubview(historyTableView)
         }
-        
     }
 }
 

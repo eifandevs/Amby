@@ -51,6 +51,9 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
         tableView.register(R.nib.optionMenuHistoryTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuHistoryCell.identifier)
         
         self.addSubview(view)
+
+        // モデルデータ取得
+        viewModel.getModelData()
     }
 }
 
