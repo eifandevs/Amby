@@ -52,9 +52,42 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
         
         self.addSubview(view)
 
+        // ロングプレスで削除
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed
+            ))
+        addGestureRecognizer(longPressRecognizer)
+
         // モデルデータ取得
         viewModel.getModelData()
     }
+
+    // MARK: Gesture Event
+    @objc func longPressed(sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            let point: CGPoint = sender.location(in: tableView)
+            let indexPath: IndexPath? = tableView.indexPathForRow(at: point)
+            if let indexPath = indexPath {
+                let row = viewModel.getRow(indexPath: indexPath)
+
+                tableView.beginUpdates()
+                let rowExist = viewModel.removeRow(indexPath: indexPath)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+
+                // モデルから削除
+                CommonHistoryDataModel.s.delete(historyIds: [viewModel.getSection(section: indexPath.section).dateString: [row.data._id]])
+
+                if !rowExist {
+                    viewModel.removeSection(section: indexPath.section)
+                    tableView.deleteSections([indexPath.section], with: .automatic)
+                }
+                tableView.endUpdates()
+            }
+        default:
+            break
+        }
+    }
+
 }
 
 // MARK: - TableViewDataSourceDelegate
@@ -65,11 +98,32 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuHistoryCell.identifier, for: indexPath) as! OptionMenuHistoryTableViewCell
+        let row = viewModel.getRow(indexPath: indexPath)
+        cell.setViewModelData(row: row)
+
         return cell
     }
 
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionHeight)))
+        label.backgroundColor = UIColor.black
+        label.textAlignment = .left
+        label.text = viewModel.getSection(section: section).dateString
+        label.textColor = UIColor.white
+        label.font = UIFont(name: AppConst.APP_FONT, size: viewModel.sectionFontSize)
+        return label
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return viewModel.sectionHeight
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.sectionCount
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.cellCount
+        return viewModel.cellCount(section: section)
     }
 }
 

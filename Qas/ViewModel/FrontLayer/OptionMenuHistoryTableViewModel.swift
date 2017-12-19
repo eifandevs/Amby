@@ -14,21 +14,48 @@ protocol OptionMenuHistoryTableViewModelDelegate: class {
 
 class OptionMenuHistoryTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
-    var cellCount: Int {
-        return rows.count
+    // セクション数
+    var sectionCount: Int {
+        return sections.count
     }
+    // セクションの高さ
+    let sectionHeight = AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
     // セル情報
-    var rows: [Row] = []
+    var sections: [Section] = []
     // 通知
     var delegate: OptionMenuHistoryTableViewModelDelegate?
     // 保持データリスト
     private var readFiles = CommonHistoryDataModel.s.getList()
     // ファイル読み込みインターバル
     private let readInterval = 6
+    // セクションフォントサイズ
+    let sectionFontSize = 12.f
+
+    /// セル数
+    func cellCount(section: Int) -> Int {
+        return sections[section].rows.count
+    }
 
     /// セル情報取得
-    func getRow(indexPath: IndexPath) -> Row {
-        return rows[indexPath.row]
+    func getRow(indexPath: IndexPath) -> Section.Row {
+        return sections[indexPath.section].rows[indexPath.row]
+    }
+
+    /// セル削除
+    /// セルの有無を返却する
+    func removeRow(indexPath: IndexPath) -> Bool {
+        sections[indexPath.section].rows.remove(at: indexPath.row)
+        return sections[indexPath.section].rows.count > 0
+    }
+
+    /// セクション削除
+    func removeSection(section: Int) {
+        sections.remove(at: section)
+    }
+
+    /// セクション情報取得
+    func getSection(section: Int) -> Section {
+        return sections[section]
     }
     
     /// モデルデータ(閲覧履歴)取得
@@ -37,9 +64,9 @@ class OptionMenuHistoryTableViewModel {
             let latestFiles = readFiles.prefix(readInterval)
             self.readFiles = Array(readFiles.dropFirst(readInterval))
             latestFiles.forEach({ (dateString: String) in
-                let commonHistory = CommonHistoryDataModel.s.select(dateString: dateString)
-                if commonHistory.count > 0 {
-                    rows.append(Row(dateString: dateString, histories: commonHistory))
+                let rows = CommonHistoryDataModel.s.select(dateString: dateString).map({ Section.Row(data: $0) })
+                if rows.count > 0 {
+                    sections.append(Section(dateString: dateString, rows: rows))
                 }
             })
         }
@@ -47,8 +74,12 @@ class OptionMenuHistoryTableViewModel {
     }
 
     /// セル情報
-    struct Row {
+    struct Section {
         let dateString: String
-        let histories: [CommonHistory]
+        var rows: [Row]
+
+        struct Row {
+            let data: CommonHistory
+        }
     }
 }
