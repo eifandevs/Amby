@@ -8,8 +8,6 @@
 
 import UIKit
 
-import UIKit
-
 protocol OptionMenuHistoryTableViewDelegate: class {
     func optionMenuHistoryDidClose(view: UIView)
 }
@@ -81,6 +79,7 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
                     viewModel.removeSection(section: indexPath.section)
                     tableView.deleteSections([indexPath.section], with: .automatic)
                 }
+
                 tableView.endUpdates()
             }
         default:
@@ -105,7 +104,7 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionHeight)))
+        let label : PaddingLabel = PaddingLabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionHeight)))
         label.backgroundColor = UIColor.black
         label.textAlignment = .left
         label.text = viewModel.getSection(section: section).dateString
@@ -130,7 +129,11 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
 // MARK: - TableViewDelegate
 extension OptionMenuHistoryTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        log.debug("select")
+        // セル情報取得
+        let row = viewModel.getRow(indexPath: indexPath)
+        // ページを表示
+        OperationDataModel.s.executeOperation(operation: .search, object: row.data.url)
+        delegate?.optionMenuHistoryDidClose(view: self)
     }
 }
 
@@ -144,8 +147,8 @@ extension OptionMenuHistoryTableView: OptionMenuHistoryTableViewModelDelegate {
 // MARK: - ScrollViewDelegate
 extension OptionMenuHistoryTableView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // 履歴表示で、コンテンツが残り２ページであれば、次の履歴を読みに行く
-        if scrollView.contentOffset.y < scrollView.contentSize.height - (frame.size.height * 2) {
+        //一番下までスクロールしたかどうか
+        if self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height) {
             viewModel.getModelData()
         }
     }

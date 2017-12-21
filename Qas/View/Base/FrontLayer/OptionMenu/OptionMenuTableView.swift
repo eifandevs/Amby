@@ -48,6 +48,9 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
         // カスタムビュー登録
         tableView.register(R.nib.optionMenuTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuCell.identifier)
 
+        // 履歴情報を永続化しておく
+        viewModel.storeHistory()
+
         self.addSubview(view)
     }
 }
@@ -121,6 +124,7 @@ extension OptionMenuTableView: UITableViewDelegate {
 // MARK: OptionMenuHistoryTableViewDelegate
 extension OptionMenuTableView: OptionMenuHistoryTableViewDelegate {
     func optionMenuHistoryDidClose(view: UIView) {
+        delegate?.optionMenuTableViewDidClose()
     }
 }
 

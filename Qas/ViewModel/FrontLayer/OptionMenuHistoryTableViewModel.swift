@@ -61,6 +61,7 @@ class OptionMenuHistoryTableViewModel {
     /// モデルデータ(閲覧履歴)取得
     func getModelData() {
         if readFiles.count > 0 {
+            log.debug("common history additional loaded.")
             let latestFiles = readFiles.prefix(readInterval)
             self.readFiles = Array(readFiles.dropFirst(readInterval))
             latestFiles.forEach({ (dateString: String) in
@@ -69,8 +70,8 @@ class OptionMenuHistoryTableViewModel {
                     sections.append(Section(dateString: dateString, rows: rows))
                 }
             })
+            delegate?.optionMenuHistoryTableViewModelDidGetDataSuccessfull()
         }
-        delegate?.optionMenuHistoryTableViewModelDidGetDataSuccessfull()
     }
 
     /// セル情報

@@ -27,6 +27,12 @@ class OptionMenuTableViewModel {
         return rows[indexPath.row]
     }
     
+    /// 履歴情報永続化
+    func storeHistory() {
+        CommonHistoryDataModel.s.store()
+        PageHistoryDataModel.s.store()
+    }
+    
     /// セル情報
     struct Row {
         let imageName: String

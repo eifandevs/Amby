@@ -96,9 +96,10 @@ final class CommonHistoryDataModel {
     /// 日付指定
     func select(dateString: String) -> [CommonHistory] {
         do {
-            let data = try Data(contentsOf: Util.commonHistoryUrl(date: dateString))
+            let url = Util.commonHistoryUrl(date: dateString)
+            let data = try Data(contentsOf: url)
             let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
-            log.debug("common history read. key: \(dateString)")
+            log.debug("common history read. url: \(url)")
             return commonHistory
         } catch let error as NSError {
             log.error("failed to read common history. error: \(error.localizedDescription)")
