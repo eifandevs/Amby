@@ -32,7 +32,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="DMs-YO-fx3"/>
                                 </constraints>
-                                <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <inset key="imageEdgeInsets" minX="9" minY="9" maxX="9" maxY="9"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLF-ek-MgJ">
                                 <rect key="frame" x="55" y="0.0" width="180" height="50"/>

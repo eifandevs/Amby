@@ -16,7 +16,7 @@ class FavoriteDataModel {
     
     func insert(favorites: [Favorite]) {
         CommonDao.s.insert(data: favorites)
-        reload()
+        center.post(name: .favoriteDataModelDidInsert, object: nil)
     }
     
     func select(id: String? = nil, url: String? = nil) -> [Favorite] {
@@ -36,7 +36,7 @@ class FavoriteDataModel {
             // 削除対象が指定されていない場合は、すべて削除する
             CommonDao.s.delete(data: select())
         }
-        reload()
+        center.post(name: .favoriteDataModelDidRemove, object: nil)
     }
     
     /// お気に入りの更新チェック

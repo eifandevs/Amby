@@ -36,7 +36,23 @@ class HeaderViewModel {
             self.delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
         }
 
-        // 読み込み終了
+        // お気に入り登録
+        center.addObserver(forName: .favoriteDataModelDidInsert, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
+            log.debug("[HeaderView Event]: favoriteDataModelDidInsert")
+            let url = PageHistoryDataModel.s.currentHistory.url
+            self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+        }
+        
+        // お気に入り削除
+        center.addObserver(forName: .favoriteDataModelDidRemove, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
+            log.debug("[HeaderView Event]: favoriteDataModelDidRemove")
+            let url = PageHistoryDataModel.s.currentHistory.url
+            self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+        }
+        
+        // お気に入り更新チェック
         center.addObserver(forName: .favoriteDataModelDidReload, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[HeaderView Event]: favoriteDataModelDidReload")

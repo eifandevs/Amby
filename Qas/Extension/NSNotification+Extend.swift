@@ -33,4 +33,6 @@ extension NSNotification.Name {
     
     // FavoriteDataModel
     static let favoriteDataModelDidReload = NSNotification.Name("favoriteDataModelDidReload")
+    static let favoriteDataModelDidRemove = NSNotification.Name("favoriteDataModelDidRemove")
+    static let favoriteDataModelDidInsert = NSNotification.Name("favoriteDataModelDidInsert")
 }

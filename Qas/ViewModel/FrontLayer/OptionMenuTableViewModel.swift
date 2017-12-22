@@ -9,18 +9,46 @@
 import Foundation
 
 class OptionMenuTableViewModel {
+    
+    // セル情報
+    enum Row: Int, EnumEnumerable {
+        case history
+        case form
+        case favorite
+        case setting
+        case app
+        
+        var imageName: String {
+            switch self {
+            case .history: return R.image.option_menu_history.name
+            case .form: return R.image.option_menu_form.name
+            case .favorite: return R.image.optionmenu_favorite.name
+            case .setting: return R.image.option_menu_setting.name
+            case .app: return R.image.optionmenu_app.name
+            }
+        }
+        
+        var title: String {
+            switch self {
+            case .history: return AppConst.OPTION_MENU_HISTORY
+            case .form: return AppConst.OPTION_MENU_FORM
+            case .favorite: return AppConst.OPTION_MENU_BOOKMARK
+            case .setting: return AppConst.OPTION_MENU_SETTING
+            case .app: return AppConst.OPTION_MENU_APP_INFORMATION
+            }
+        }
+    }
+    
+    // セル
+    let rows = Row.cases
+    // 高さ
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
+    // 数
     var cellCount: Int {
         return rows.count
     }
+    // 詳細ビューのマージン
     let overViewMargin = AppConst.FRONT_LAYER_OVER_VIEW_MARGIN
-    let rows: [Row] = [
-        Row(imageName: R.image.option_menu_history.name, title: AppConst.OPTION_MENU_HISTORY),
-        Row(imageName: R.image.option_menu_form.name, title: AppConst.OPTION_MENU_FORM),
-        Row(imageName: R.image.optionmenu_favorite.name, title: AppConst.OPTION_MENU_BOOKMARK),
-        Row(imageName: R.image.option_menu_setting.name, title: AppConst.OPTION_MENU_SETTING),
-        Row(imageName: R.image.optionmenu_app.name, title: AppConst.OPTION_MENU_APP_INFORMATION)
-    ]
     
     /// セル情報取得
     func getRow(indexPath: IndexPath) -> Row {
@@ -31,11 +59,5 @@ class OptionMenuTableViewModel {
     func storeHistory() {
         CommonHistoryDataModel.s.store()
         PageHistoryDataModel.s.store()
-    }
-    
-    /// セル情報
-    struct Row {
-        let imageName: String
-        let title: String
     }
 }

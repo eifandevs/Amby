@@ -81,14 +81,24 @@ extension OptionMenuTableView: UITableViewDelegate {
                       viewModel.overViewMargin.y
 
         // スーパービューに追加するので、自身の座標をたす
-        let historyTableView = OptionMenuHistoryTableView(frame: CGRect(x: frame.origin.x + viewModel.overViewMargin.x, y: frame.origin.y + marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height))
-        historyTableView.delegate = self
-
-        // 詳細ビューは保持しておく
-        detailView = historyTableView
-
-        superview!.addSubview(historyTableView)
-
+        let detailViewFrame = CGRect(x: frame.origin.x + viewModel.overViewMargin.x, y: frame.origin.y + marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height)
+        // 詳細ビュー作成
+        switch viewModel.getRow(indexPath: indexPath) {
+        case .history:
+            let historyTableView = OptionMenuHistoryTableView(frame: detailViewFrame)
+            historyTableView.delegate = self
+            // 詳細ビューは保持しておく
+            detailView = historyTableView
+            superview!.addSubview(historyTableView)
+        case .favorite:
+            let favoriteTableView = OptionMenuFavoriteTableView(frame: detailViewFrame)
+            favoriteTableView.delegate = self
+            detailView = favoriteTableView
+            superview!.addSubview(favoriteTableView)
+        default:
+            break
+        }
+        
         // オーバーレイ表示
         let overlay = UIButton(frame: CGRect(origin: CGPoint.zero, size: frame.size))
         overlay.backgroundColor = UIColor.clear
@@ -124,6 +134,13 @@ extension OptionMenuTableView: UITableViewDelegate {
 // MARK: OptionMenuHistoryTableViewDelegate
 extension OptionMenuTableView: OptionMenuHistoryTableViewDelegate {
     func optionMenuHistoryDidClose(view: UIView) {
+        delegate?.optionMenuTableViewDidClose()
+    }
+}
+
+// MARK: OptionMenuFavoriteTableViewDelegate
+extension OptionMenuTableView: OptionMenuFavoriteTableViewDelegate {
+    func optionMenuFavoriteDidClose(view: UIView) {
         delegate?.optionMenuTableViewDidClose()
     }
 }
