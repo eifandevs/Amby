@@ -43,8 +43,11 @@ class OptionMenuHistoryTableViewModel {
 
     /// セル削除
     /// セルの有無を返却する
-    func removeRow(indexPath: IndexPath) -> Bool {
+    func removeRow(indexPath: IndexPath, row: Section.Row) -> Bool {
         sections[indexPath.section].rows.remove(at: indexPath.row)
+        // モデルから削除
+        CommonHistoryDataModel.s.delete(historyIds: [getSection(section: indexPath.section).dateString: [row.data._id]])
+        
         return sections[indexPath.section].rows.count > 0
     }
 

@@ -1,14 +1,14 @@
 //
-//  OptionMenuFavoriteTableViewModel.swift
+//  OptionMenuFormTableViewModel.swift
 //  Qas
 //
-//  Created by temma on 2017/12/21.
+//  Created by temma on 2017/12/24.
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
 import Foundation
 
-class OptionMenuFavoriteTableViewModel {
+class OptionMenuFormTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
     /// セル情報
     var rows: [Row] = []
@@ -19,8 +19,9 @@ class OptionMenuFavoriteTableViewModel {
     }
     
     init() {
-        rows = FavoriteDataModel.s.select().map({ Row(data: $0) })
+        rows = FormDataModel.s.select().map({ Row(data: $0) })
     }
+    
     /// セル情報取得
     func getRow(indexPath: IndexPath) -> Row {
         return rows[indexPath.row]
@@ -31,11 +32,11 @@ class OptionMenuFavoriteTableViewModel {
     func removeRow(indexPath: IndexPath, row: Row) {
         rows.remove(at: indexPath.row)
         // モデルから削除
-        FavoriteDataModel.s.delete(favorites: [row.data])
+        FormDataModel.s.delete(forms: [row.data])
     }
     
     /// セル情報
     struct Row {
-        let data: Favorite
+        let data: Form
     }
 }

@@ -63,11 +63,8 @@ class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
                 let row = viewModel.getRow(indexPath: indexPath)
 
                 tableView.beginUpdates()
-                viewModel.removeRow(indexPath: indexPath)
+                viewModel.removeRow(indexPath: indexPath, row: row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
-
-                // モデルから削除
-                FavoriteDataModel.s.delete(favorites: [row.data])
 
                 tableView.endUpdates()
             }

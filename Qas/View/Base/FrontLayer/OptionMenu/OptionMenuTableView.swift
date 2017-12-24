@@ -95,6 +95,11 @@ extension OptionMenuTableView: UITableViewDelegate {
             favoriteTableView.delegate = self
             detailView = favoriteTableView
             superview!.addSubview(favoriteTableView)
+        case .form:
+            let formTableView = OptionMenuFormTableView(frame: detailViewFrame)
+            formTableView.delegate = self
+            detailView = formTableView
+            superview!.addSubview(formTableView)
         default:
             break
         }
@@ -141,6 +146,13 @@ extension OptionMenuTableView: OptionMenuHistoryTableViewDelegate {
 // MARK: OptionMenuFavoriteTableViewDelegate
 extension OptionMenuTableView: OptionMenuFavoriteTableViewDelegate {
     func optionMenuFavoriteDidClose(view: UIView) {
+        delegate?.optionMenuTableViewDidClose()
+    }
+}
+
+// MARK: OptionMenuFormTableViewDelegate
+extension OptionMenuTableView: OptionMenuFormTableViewDelegate {
+    func optionMenuFormDidClose(view: UIView) {
         delegate?.optionMenuTableViewDidClose()
     }
 }

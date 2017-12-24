@@ -69,11 +69,8 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
                 let row = viewModel.getRow(indexPath: indexPath)
 
                 tableView.beginUpdates()
-                let rowExist = viewModel.removeRow(indexPath: indexPath)
+                let rowExist = viewModel.removeRow(indexPath: indexPath, row: row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
-
-                // モデルから削除
-                CommonHistoryDataModel.s.delete(historyIds: [viewModel.getSection(section: indexPath.section).dateString: [row.data._id]])
 
                 if !rowExist {
                     viewModel.removeSection(section: indexPath.section)
