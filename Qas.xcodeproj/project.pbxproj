@@ -58,16 +58,13 @@
 		A5649A621FE59FBA00EA69E1 /* OptionMenuHelpTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5649A601FE59FBA00EA69E1 /* OptionMenuHelpTableViewCell.xib */; };
 		A5649A651FE59FFA00EA69E1 /* OptionMenuAppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A631FE59FFA00EA69E1 /* OptionMenuAppTableViewCell.swift */; };
 		A5649A661FE59FFA00EA69E1 /* OptionMenuAppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5649A641FE59FFA00EA69E1 /* OptionMenuAppTableViewCell.xib */; };
-		A5649A6A1FE5A1E600EA69E1 /* OptionMenuCopyrightTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A691FE5A1E600EA69E1 /* OptionMenuCopyrightTableView.swift */; };
-		A5649A6C1FE5A1FA00EA69E1 /* OptionMenuCopyrightTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5649A6B1FE5A1FA00EA69E1 /* OptionMenuCopyrightTableView.xib */; };
-		A5649A6F1FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A6D1FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.swift */; };
-		A5649A701FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5649A6E1FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.xib */; };
 		A5649A721FE62A6600EA69E1 /* OptionMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A711FE62A6600EA69E1 /* OptionMenuView.swift */; };
 		A5649A741FEBF83000EA69E1 /* OptionMenuFavoriteTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A731FEBF83000EA69E1 /* OptionMenuFavoriteTableViewModel.swift */; };
 		A5649A761FEF80FF00EA69E1 /* OptionMenuFormTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A751FEF80FF00EA69E1 /* OptionMenuFormTableViewModel.swift */; };
 		A5649A791FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A771FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.swift */; };
 		A5649A7A1FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5649A781FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib */; };
 		A5649A7C1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A7B1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift */; };
+		A5649A7E1FEF9C3D00EA69E1 /* OptionMenuAppTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A7D1FEF9C3D00EA69E1 /* OptionMenuAppTableViewModel.swift */; };
 		A56983B91FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */; };
 		A56983BC1FA52405000A585F /* PageHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */; };
 		A56983C11FA52490000A585F /* SearchHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */; };
@@ -202,16 +199,13 @@
 		A5649A601FE59FBA00EA69E1 /* OptionMenuHelpTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuHelpTableViewCell.xib; sourceTree = "<group>"; };
 		A5649A631FE59FFA00EA69E1 /* OptionMenuAppTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuAppTableViewCell.swift; sourceTree = "<group>"; };
 		A5649A641FE59FFA00EA69E1 /* OptionMenuAppTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuAppTableViewCell.xib; sourceTree = "<group>"; };
-		A5649A691FE5A1E600EA69E1 /* OptionMenuCopyrightTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuCopyrightTableView.swift; sourceTree = "<group>"; };
-		A5649A6B1FE5A1FA00EA69E1 /* OptionMenuCopyrightTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuCopyrightTableView.xib; sourceTree = "<group>"; };
-		A5649A6D1FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuCopyrightTableViewCell.swift; sourceTree = "<group>"; };
-		A5649A6E1FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuCopyrightTableViewCell.xib; sourceTree = "<group>"; };
 		A5649A711FE62A6600EA69E1 /* OptionMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuView.swift; sourceTree = "<group>"; };
 		A5649A731FEBF83000EA69E1 /* OptionMenuFavoriteTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuFavoriteTableViewModel.swift; sourceTree = "<group>"; };
 		A5649A751FEF80FF00EA69E1 /* OptionMenuFormTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuFormTableViewModel.swift; sourceTree = "<group>"; };
 		A5649A771FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingSliderTableViewCell.swift; sourceTree = "<group>"; };
 		A5649A781FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuSettingSliderTableViewCell.xib; sourceTree = "<group>"; };
 		A5649A7B1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingTableViewModel.swift; sourceTree = "<group>"; };
+		A5649A7D1FEF9C3D00EA69E1 /* OptionMenuAppTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuAppTableViewModel.swift; sourceTree = "<group>"; };
 		A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModel.swift; sourceTree = "<group>"; };
@@ -401,7 +395,6 @@
 				A5649A781FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib */,
 				A5649A601FE59FBA00EA69E1 /* OptionMenuHelpTableViewCell.xib */,
 				A5649A641FE59FFA00EA69E1 /* OptionMenuAppTableViewCell.xib */,
-				A5649A6E1FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -416,7 +409,6 @@
 				A5649A5B1FE59F8100EA69E1 /* OptionMenuSettingTableViewCell.swift */,
 				A5649A5F1FE59FBA00EA69E1 /* OptionMenuHelpTableViewCell.swift */,
 				A5649A631FE59FFA00EA69E1 /* OptionMenuAppTableViewCell.swift */,
-				A5649A6D1FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.swift */,
 				A5649A771FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.swift */,
 			);
 			path = Cell;
@@ -699,7 +691,6 @@
 				A5649A471FE59D1200EA69E1 /* OptionMenuSettingTableView.swift */,
 				A5649A4B1FE59D3200EA69E1 /* OptionMenuHelpTableView.swift */,
 				A5649A4F1FE59D5800EA69E1 /* OptionMenuAppTableView.swift */,
-				A5649A691FE5A1E600EA69E1 /* OptionMenuCopyrightTableView.swift */,
 			);
 			path = OptionMenu;
 			sourceTree = "<group>";
@@ -741,7 +732,6 @@
 				A5649A491FE59D1F00EA69E1 /* OptionMenuSettingTableView.xib */,
 				A5649A4D1FE59D4900EA69E1 /* OptionMenuHelpTableView.xib */,
 				A5649A511FE59D6A00EA69E1 /* OptionMenuAppTableView.xib */,
-				A5649A6B1FE5A1FA00EA69E1 /* OptionMenuCopyrightTableView.xib */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -795,6 +785,7 @@
 				A5649A731FEBF83000EA69E1 /* OptionMenuFavoriteTableViewModel.swift */,
 				A5649A751FEF80FF00EA69E1 /* OptionMenuFormTableViewModel.swift */,
 				A5649A7B1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift */,
+				A5649A7D1FEF9C3D00EA69E1 /* OptionMenuAppTableViewModel.swift */,
 			);
 			path = FrontLayer;
 			sourceTree = "<group>";
@@ -908,9 +899,7 @@
 				A5649A561FE59EAE00EA69E1 /* OptionMenuFormTableViewCell.xib in Resources */,
 				A5223EEA1F1F8EA20097E793 /* LaunchScreen.storyboard in Resources */,
 				A5117A641FE55E5800213E02 /* OptionMenuTableView.xib in Resources */,
-				A5649A6C1FE5A1FA00EA69E1 /* OptionMenuCopyrightTableView.xib in Resources */,
 				A5BCE7C11FA50BFA00E0C6E5 /* SplashViewController.xib in Resources */,
-				A5649A701FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.xib in Resources */,
 				A5BCE7C01FA50BFA00E0C6E5 /* HelpViewController.xib in Resources */,
 				A5649A3A1FE57F9200EA69E1 /* OptionMenuHistoryTableViewCell.xib in Resources */,
 				A5649A5A1FE59F4B00EA69E1 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
@@ -1002,7 +991,6 @@
 				A5117A5E1FE537C200213E02 /* HeaderFieldViewModel.swift in Sources */,
 				A5BCE7B71FA50BFA00E0C6E5 /* CircleMenu.swift in Sources */,
 				A5BCE71C1FA501B900E0C6E5 /* CommonDao.swift in Sources */,
-				A5649A6F1FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.swift in Sources */,
 				A5BCE71B1FA501B900E0C6E5 /* CacheHelper.swift in Sources */,
 				A5BCE7BB1FA50BFA00E0C6E5 /* OptionMenuTableView.swift in Sources */,
 				A527CBAC1FD31A90000DF901 /* FrontLayerViewModel.swift in Sources */,
@@ -1019,7 +1007,6 @@
 				A5117A581FE0069300213E02 /* ApiRequest.swift in Sources */,
 				A5649A591FE59F4B00EA69E1 /* OptionMenuFavoriteTableViewCell.swift in Sources */,
 				A5649A441FE59CF000EA69E1 /* OptionMenuFavoriteTableView.swift in Sources */,
-				A5649A6A1FE5A1E600EA69E1 /* OptionMenuCopyrightTableView.swift in Sources */,
 				A5BCE70D1FA501B900E0C6E5 /* NSObject+Extend.swift in Sources */,
 				A5117A5A1FE006AC00213E02 /* ApiResponse.swift in Sources */,
 				A5649A5D1FE59F8100EA69E1 /* OptionMenuSettingTableViewCell.swift in Sources */,
@@ -1034,6 +1021,7 @@
 				A5BCE7241FA501B900E0C6E5 /* EnumEnumerable.swift in Sources */,
 				A5BCE7121FA501B900E0C6E5 /* UIImage+Extend.swift in Sources */,
 				A5BCE7B91FA50BFA00E0C6E5 /* CircleProgress.swift in Sources */,
+				A5649A7E1FEF9C3D00EA69E1 /* OptionMenuAppTableViewModel.swift in Sources */,
 				A5223EE81F1F8EA20097E793 /* EGApplication.swift in Sources */,
 				A5BCE7221FA501B900E0C6E5 /* Util.swift in Sources */,
 				A56983C71FA524A8000A585F /* FavoriteDataModel.swift in Sources */,

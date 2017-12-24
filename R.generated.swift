@@ -281,7 +281,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 19 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 17 nibs.
   struct nib {
     /// Nib `HelpViewController`.
     static let helpViewController = _R.nib._HelpViewController()
@@ -289,10 +289,6 @@ struct R: Rswift.Validatable {
     static let optionMenuAppTableViewCell = _R.nib._OptionMenuAppTableViewCell()
     /// Nib `OptionMenuAppTableView`.
     static let optionMenuAppTableView = _R.nib._OptionMenuAppTableView()
-    /// Nib `OptionMenuCopyrightTableViewCell`.
-    static let optionMenuCopyrightTableViewCell = _R.nib._OptionMenuCopyrightTableViewCell()
-    /// Nib `OptionMenuCopyrightTableView`.
-    static let optionMenuCopyrightTableView = _R.nib._OptionMenuCopyrightTableView()
     /// Nib `OptionMenuFavoriteTableViewCell`.
     static let optionMenuFavoriteTableViewCell = _R.nib._OptionMenuFavoriteTableViewCell()
     /// Nib `OptionMenuFavoriteTableView`.
@@ -335,16 +331,6 @@ struct R: Rswift.Validatable {
     /// `UINib(name: "OptionMenuAppTableViewCell", in: bundle)`
     static func optionMenuAppTableViewCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.optionMenuAppTableViewCell)
-    }
-    
-    /// `UINib(name: "OptionMenuCopyrightTableView", in: bundle)`
-    static func optionMenuCopyrightTableView(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.optionMenuCopyrightTableView)
-    }
-    
-    /// `UINib(name: "OptionMenuCopyrightTableViewCell", in: bundle)`
-    static func optionMenuCopyrightTableViewCell(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.optionMenuCopyrightTableViewCell)
     }
     
     /// `UINib(name: "OptionMenuFavoriteTableView", in: bundle)`
@@ -511,28 +497,6 @@ struct _R {
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> OptionMenuAppTableViewCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? OptionMenuAppTableViewCell
-      }
-      
-      fileprivate init() {}
-    }
-    
-    struct _OptionMenuCopyrightTableView: Rswift.NibResourceType {
-      let bundle = R.hostingBundle
-      let name = "OptionMenuCopyrightTableView"
-      
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> UIKit.UIView? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
-      }
-      
-      fileprivate init() {}
-    }
-    
-    struct _OptionMenuCopyrightTableViewCell: Rswift.NibResourceType {
-      let bundle = R.hostingBundle
-      let name = "OptionMenuCopyrightTableViewCell"
-      
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> OptionMenuCopyrightTableViewCell? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? OptionMenuCopyrightTableViewCell
       }
       
       fileprivate init() {}

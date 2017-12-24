@@ -65,6 +65,10 @@ final class AppConst {
     static let OPTION_MENU_HELP = "ヘルプ"
     static let OPTION_MENU_APP_INFORMATION = "アプリ情報"
 
+    // MARK: - アプリ情報
+    static let APP_INFORMATION_APP = "アプリについて"
+    static let APP_INFORMATION_COPYRIGHT = "クレジット"
+    
     // MARK: - 設定画面
     static let SETTING_SECTION_AUTO_SCROLL = "自動スクロール設定"
     static let SETTING_SECTION_HISTORY = "履歴保存件数（何日分）"

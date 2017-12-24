@@ -8,14 +8,72 @@
 
 import UIKit
 
-class OptionMenuAppTableView: UIView {
+protocol OptionMenuAppTableViewDelegate: class {
+    func optionMenuAppDidClose(view: UIView)
+}
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+class OptionMenuAppTableView: UIView, ShadowView, OptionMenuView {
+    
+    let viewModel = OptionMenuAppTableViewModel()
+    weak var delegate: OptionMenuAppTableViewDelegate?
+    @IBOutlet weak var tableView: UITableView!
+    
+    override init(frame: CGRect){
+        super.init(frame: frame)
+        loadNib()
     }
-    */
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        loadNib()
+    }
+    
+    func loadNib() {
+        let view = Bundle.main.loadNibNamed(R.nib.optionMenuAppTableView.name, owner: self, options: nil)?.first as! UIView
+        view.frame = self.bounds
+        
+        // 影
+        addMenuShadow()
+        
+        // テーブルビュー監視
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        // OptionMenuProtocol
+        _ = setup(tableView: tableView)
+        
+        // カスタムビュー登録
+        tableView.register(R.nib.optionMenuAppTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuAppCell.identifier)
+        
+        self.addSubview(view)
+    }
+    
+}
 
+// MARK: - TableViewDataSourceDelegate
+extension OptionMenuAppTableView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return viewModel.cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuAppCell.identifier, for: indexPath) as! OptionMenuAppTableViewCell
+        let row = viewModel.getRow(indexPath: indexPath)
+        cell.setViewModelData(row: row)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.cellCount
+    }
+}
+
+// MARK: - TableViewDelegate
+extension OptionMenuAppTableView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // セル情報取得
+        let row = viewModel.getRow(indexPath: indexPath)
+        delegate?.optionMenuAppDidClose(view: self)
+    }
 }

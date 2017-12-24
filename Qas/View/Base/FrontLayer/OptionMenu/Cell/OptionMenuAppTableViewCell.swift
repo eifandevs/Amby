@@ -10,6 +10,8 @@ import UIKit
 
 class OptionMenuAppTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +21,11 @@ class OptionMenuAppTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    /// ビューモデルデータ反映
+    func setViewModelData(row: OptionMenuAppTableViewModel.Row) {
+        titleLabel.text = row.title
     }
     
 }

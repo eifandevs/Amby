@@ -105,6 +105,11 @@ extension OptionMenuTableView: UITableViewDelegate {
             settingTableView.delegate = self
             detailView = settingTableView
             superview!.addSubview(settingTableView)
+        case .app:
+            let appTableView = OptionMenuAppTableView(frame: detailViewFrame)
+            appTableView.delegate = self
+            detailView = appTableView
+            superview!.addSubview(appTableView)
         default:
             break
         }
@@ -165,6 +170,13 @@ extension OptionMenuTableView: OptionMenuFormTableViewDelegate {
 // MARK: OptionMenuSettingTableViewDelegate
 extension OptionMenuTableView: OptionMenuSettingTableViewDelegate {
     func optionMenuSettingDidClose(view: UIView) {
+        delegate?.optionMenuTableViewDidClose()
+    }
+}
+
+// MARK: OptionMenuAppTableViewDelegate
+extension OptionMenuTableView: OptionMenuAppTableViewDelegate {
+    func optionMenuAppDidClose(view: UIView) {
         delegate?.optionMenuTableViewDidClose()
     }
 }
