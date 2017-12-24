@@ -1,17 +1,15 @@
 //
-//  OptionMenuSettingTableViewCell.swift
+//  OptionMenuSettingSliderTableViewCell.swift
 //  Qas
 //
-//  Created by temma on 2017/12/17.
+//  Created by temma on 2017/12/24.
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
 import UIKit
 
-class OptionMenuSettingTableViewCell: UITableViewCell {
+class OptionMenuSettingSliderTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,8 +21,4 @@ class OptionMenuSettingTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    /// ビューモデルデータ反映
-    func setViewModelData(row: OptionMenuSettingTableViewModel.Section.Row) {
-        titleLabel.text = row.title ?? ""
-    }
 }

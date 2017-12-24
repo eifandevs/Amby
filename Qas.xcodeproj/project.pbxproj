@@ -65,6 +65,9 @@
 		A5649A721FE62A6600EA69E1 /* OptionMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A711FE62A6600EA69E1 /* OptionMenuView.swift */; };
 		A5649A741FEBF83000EA69E1 /* OptionMenuFavoriteTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A731FEBF83000EA69E1 /* OptionMenuFavoriteTableViewModel.swift */; };
 		A5649A761FEF80FF00EA69E1 /* OptionMenuFormTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A751FEF80FF00EA69E1 /* OptionMenuFormTableViewModel.swift */; };
+		A5649A791FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A771FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.swift */; };
+		A5649A7A1FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5649A781FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib */; };
+		A5649A7C1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A7B1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift */; };
 		A56983B91FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */; };
 		A56983BC1FA52405000A585F /* PageHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */; };
 		A56983C11FA52490000A585F /* SearchHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */; };
@@ -206,6 +209,9 @@
 		A5649A711FE62A6600EA69E1 /* OptionMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuView.swift; sourceTree = "<group>"; };
 		A5649A731FEBF83000EA69E1 /* OptionMenuFavoriteTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuFavoriteTableViewModel.swift; sourceTree = "<group>"; };
 		A5649A751FEF80FF00EA69E1 /* OptionMenuFormTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuFormTableViewModel.swift; sourceTree = "<group>"; };
+		A5649A771FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingSliderTableViewCell.swift; sourceTree = "<group>"; };
+		A5649A781FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuSettingSliderTableViewCell.xib; sourceTree = "<group>"; };
+		A5649A7B1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingTableViewModel.swift; sourceTree = "<group>"; };
 		A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModel.swift; sourceTree = "<group>"; };
@@ -392,6 +398,7 @@
 				A5649A541FE59EAE00EA69E1 /* OptionMenuFormTableViewCell.xib */,
 				A5649A581FE59F4B00EA69E1 /* OptionMenuFavoriteTableViewCell.xib */,
 				A5649A5C1FE59F8100EA69E1 /* OptionMenuSettingTableViewCell.xib */,
+				A5649A781FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib */,
 				A5649A601FE59FBA00EA69E1 /* OptionMenuHelpTableViewCell.xib */,
 				A5649A641FE59FFA00EA69E1 /* OptionMenuAppTableViewCell.xib */,
 				A5649A6E1FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.xib */,
@@ -410,6 +417,7 @@
 				A5649A5F1FE59FBA00EA69E1 /* OptionMenuHelpTableViewCell.swift */,
 				A5649A631FE59FFA00EA69E1 /* OptionMenuAppTableViewCell.swift */,
 				A5649A6D1FE5A22800EA69E1 /* OptionMenuCopyrightTableViewCell.swift */,
+				A5649A771FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -786,6 +794,7 @@
 				A5649A3D1FE5847D00EA69E1 /* OptionMenuHistoryTableViewModel.swift */,
 				A5649A731FEBF83000EA69E1 /* OptionMenuFavoriteTableViewModel.swift */,
 				A5649A751FEF80FF00EA69E1 /* OptionMenuFormTableViewModel.swift */,
+				A5649A7B1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift */,
 			);
 			path = FrontLayer;
 			sourceTree = "<group>";
@@ -908,6 +917,7 @@
 				A5BCE7D41FA50C3A00E0C6E5 /* authorize.html in Resources */,
 				A5649A661FE59FFA00EA69E1 /* OptionMenuAppTableViewCell.xib in Resources */,
 				A5649A341FE57BAF00EA69E1 /* OptionMenuTableViewCell.xib in Resources */,
+				A5649A7A1FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
 				A5649A5E1FE59F8100EA69E1 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A5649A421FE59CD400EA69E1 /* OptionMenuFormTableView.xib in Resources */,
 				A5BCE7D71FA50C3A00E0C6E5 /* offline.html in Resources */,
@@ -1035,11 +1045,13 @@
 				A53C0EEA1FB778ED00FD78FF /* PageHistory.swift in Sources */,
 				A5BCE7B31FA50BFA00E0C6E5 /* EGProgressBar.swift in Sources */,
 				A53C0EE41FB778ED00FD78FF /* Favorite.swift in Sources */,
+				A5649A7C1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift in Sources */,
 				A5BCE7201FA501B900E0C6E5 /* OnceExec.swift in Sources */,
 				A5BCE7231FA501B900E0C6E5 /* CircleView.swift in Sources */,
 				A5649A391FE57F9200EA69E1 /* OptionMenuHistoryTableViewCell.swift in Sources */,
 				A5649A611FE59FBA00EA69E1 /* OptionMenuHelpTableViewCell.swift in Sources */,
 				A56983B91FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */,
+				A5649A791FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.swift in Sources */,
 				A53C0EEE1FB778ED00FD78FF /* Suggest.swift in Sources */,
 				A5BCE7C51FA50BFA00E0C6E5 /* SearchMenuTableViewModel.swift in Sources */,
 				A53C0EC21FB7766A00FD78FF /* NotificationView.swift in Sources */,

@@ -100,6 +100,11 @@ extension OptionMenuTableView: UITableViewDelegate {
             formTableView.delegate = self
             detailView = formTableView
             superview!.addSubview(formTableView)
+        case .setting:
+            let settingTableView = OptionMenuSettingTableView(frame: detailViewFrame)
+            settingTableView.delegate = self
+            detailView = settingTableView
+            superview!.addSubview(settingTableView)
         default:
             break
         }
@@ -157,6 +162,12 @@ extension OptionMenuTableView: OptionMenuFormTableViewDelegate {
     }
 }
 
+// MARK: OptionMenuSettingTableViewDelegate
+extension OptionMenuTableView: OptionMenuSettingTableViewDelegate {
+    func optionMenuSettingDidClose(view: UIView) {
+        delegate?.optionMenuTableViewDidClose()
+    }
+}
 //
 //
 //class OptionMenuTableView: UIView, ShadowView {

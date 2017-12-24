@@ -281,7 +281,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 18 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 19 nibs.
   struct nib {
     /// Nib `HelpViewController`.
     static let helpViewController = _R.nib._HelpViewController()
@@ -309,6 +309,8 @@ struct R: Rswift.Validatable {
     static let optionMenuHistoryTableViewCell = _R.nib._OptionMenuHistoryTableViewCell()
     /// Nib `OptionMenuHistoryTableView`.
     static let optionMenuHistoryTableView = _R.nib._OptionMenuHistoryTableView()
+    /// Nib `OptionMenuSettingSliderTableViewCell`.
+    static let optionMenuSettingSliderTableViewCell = _R.nib._OptionMenuSettingSliderTableViewCell()
     /// Nib `OptionMenuSettingTableViewCell`.
     static let optionMenuSettingTableViewCell = _R.nib._OptionMenuSettingTableViewCell()
     /// Nib `OptionMenuSettingTableView`.
@@ -385,6 +387,11 @@ struct R: Rswift.Validatable {
       return UIKit.UINib(resource: R.nib.optionMenuHistoryTableViewCell)
     }
     
+    /// `UINib(name: "OptionMenuSettingSliderTableViewCell", in: bundle)`
+    static func optionMenuSettingSliderTableViewCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.optionMenuSettingSliderTableViewCell)
+    }
+    
     /// `UINib(name: "OptionMenuSettingTableView", in: bundle)`
     static func optionMenuSettingTableView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.optionMenuSettingTableView)
@@ -413,7 +420,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 7 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 8 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `OptionMenuAppCell`.
     static let optionMenuAppCell: Rswift.ReuseIdentifier<OptionMenuAppTableViewCell> = Rswift.ReuseIdentifier(identifier: "OptionMenuAppCell")
@@ -429,6 +436,8 @@ struct R: Rswift.Validatable {
     static let optionMenuHistoryCell: Rswift.ReuseIdentifier<OptionMenuHistoryTableViewCell> = Rswift.ReuseIdentifier(identifier: "OptionMenuHistoryCell")
     /// Reuse identifier `OptionMenuSettingCell`.
     static let optionMenuSettingCell: Rswift.ReuseIdentifier<OptionMenuSettingTableViewCell> = Rswift.ReuseIdentifier(identifier: "OptionMenuSettingCell")
+    /// Reuse identifier `OptionMenuSettingSliderCell`.
+    static let optionMenuSettingSliderCell: Rswift.ReuseIdentifier<OptionMenuSettingSliderTableViewCell> = Rswift.ReuseIdentifier(identifier: "OptionMenuSettingSliderCell")
     
     fileprivate init() {}
   }
@@ -624,6 +633,20 @@ struct _R {
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> OptionMenuHistoryTableViewCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? OptionMenuHistoryTableViewCell
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _OptionMenuSettingSliderTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = OptionMenuSettingSliderTableViewCell
+      
+      let bundle = R.hostingBundle
+      let identifier = "OptionMenuSettingSliderCell"
+      let name = "OptionMenuSettingSliderTableViewCell"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> OptionMenuSettingSliderTableViewCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? OptionMenuSettingSliderTableViewCell
       }
       
       fileprivate init() {}
