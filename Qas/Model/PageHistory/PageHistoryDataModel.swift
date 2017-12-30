@@ -39,6 +39,11 @@ final class PageHistoryDataModel {
     }
 
     private init() {
+        initialize()
+    }
+    
+    /// 初期化
+    func initialize() {
         // pageHistory読み込み
         do {
             let data = try Data(contentsOf: AppConst.PATH_URL_PAGE_HISTORY)
@@ -151,5 +156,7 @@ final class PageHistoryDataModel {
     func delete() {
         histories = []
         Util.deleteFolder(path: AppConst.PATH_PAGE_HISTORY)
+        // 全データ削除されたら初期化する
+        initialize()
     }
 }
