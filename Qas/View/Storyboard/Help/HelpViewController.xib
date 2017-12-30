@@ -13,14 +13,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HelpViewController" customModule="Qas" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="pTc-B0-dmK" id="Sbb-tM-0f5"/>
-                <outlet property="contentView" destination="i5M-Pr-FkT" id="AeR-n1-MK6"/>
+                <outlet property="contentView" destination="i5M-Pr-FkT" id="iA5-sm-v7R"/>
                 <outlet property="messageLabel" destination="CTm-Mx-PCX" id="vG5-Ky-bAk"/>
                 <outlet property="subtitleLabel" destination="r9K-fX-E2b" id="vvu-8Q-VVk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="HelpVC" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
