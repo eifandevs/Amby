@@ -88,14 +88,14 @@ class BaseViewModel {
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: operationDataModelDidChange")
             
-            let operation = (notification.object as! [String: Any])["operation"] as! UserOperation
+            let operation = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OPERATION] as! UserOperation
             if operation == .autoInput {
                 self.delegate?.baseViewModelDidAutoInput()
             } else if operation == .urlCopy {
                 UIPasteboard.general.string = self.currentUrl
                 NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_COPY_URL)
             } else if operation == .search {
-                let text = (notification.object as! [String: Any])["object"] as! String
+                let text = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
                 self.delegate?.baseViewModelDidSearchWebView(text: text)
             } else if operation == .form {
                 self.delegate?.baseViewModelDidRegisterAsForm()

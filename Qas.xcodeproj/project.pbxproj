@@ -65,6 +65,7 @@
 		A5649A7A1FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5649A781FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib */; };
 		A5649A7C1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A7B1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift */; };
 		A5649A7E1FEF9C3D00EA69E1 /* OptionMenuAppTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A7D1FEF9C3D00EA69E1 /* OptionMenuAppTableViewModel.swift */; };
+		A5649A801FF7F1FA00EA69E1 /* OptionMenuHelpTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A7F1FF7F1FA00EA69E1 /* OptionMenuHelpTableViewModel.swift */; };
 		A56983B91FA523F4000A585F /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */; };
 		A56983BC1FA52405000A585F /* PageHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */; };
 		A56983C11FA52490000A585F /* SearchHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */; };
@@ -206,6 +207,7 @@
 		A5649A781FEF925E00EA69E1 /* OptionMenuSettingSliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuSettingSliderTableViewCell.xib; sourceTree = "<group>"; };
 		A5649A7B1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingTableViewModel.swift; sourceTree = "<group>"; };
 		A5649A7D1FEF9C3D00EA69E1 /* OptionMenuAppTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuAppTableViewModel.swift; sourceTree = "<group>"; };
+		A5649A7F1FF7F1FA00EA69E1 /* OptionMenuHelpTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuHelpTableViewModel.swift; sourceTree = "<group>"; };
 		A56983B81FA523F4000A585F /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983BB1FA52405000A585F /* PageHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModel.swift; sourceTree = "<group>"; };
 		A56983C01FA52490000A585F /* SearchHistoryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModel.swift; sourceTree = "<group>"; };
@@ -786,6 +788,7 @@
 				A5649A751FEF80FF00EA69E1 /* OptionMenuFormTableViewModel.swift */,
 				A5649A7B1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift */,
 				A5649A7D1FEF9C3D00EA69E1 /* OptionMenuAppTableViewModel.swift */,
+				A5649A7F1FF7F1FA00EA69E1 /* OptionMenuHelpTableViewModel.swift */,
 			);
 			path = FrontLayer;
 			sourceTree = "<group>";
@@ -994,6 +997,7 @@
 				A5BCE71B1FA501B900E0C6E5 /* CacheHelper.swift in Sources */,
 				A5BCE7BB1FA50BFA00E0C6E5 /* OptionMenuTableView.swift in Sources */,
 				A527CBAC1FD31A90000DF901 /* FrontLayerViewModel.swift in Sources */,
+				A5649A801FF7F1FA00EA69E1 /* OptionMenuHelpTableViewModel.swift in Sources */,
 				A53C0EC01FB7764500FD78FF /* NotificationManager.swift in Sources */,
 				A5BCE7AF1FA50BFA00E0C6E5 /* SearchMenuTableViewCell.swift in Sources */,
 				A5BCE7171FA501B900E0C6E5 /* DeviceConst.swift in Sources */,

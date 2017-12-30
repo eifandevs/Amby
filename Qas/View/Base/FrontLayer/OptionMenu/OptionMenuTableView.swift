@@ -105,6 +105,11 @@ extension OptionMenuTableView: UITableViewDelegate {
             settingTableView.delegate = self
             detailView = settingTableView
             superview!.addSubview(settingTableView)
+        case .help:
+            let helpTableView = OptionMenuHelpTableView(frame: detailViewFrame)
+            helpTableView.delegate = self
+            detailView = helpTableView
+            superview!.addSubview(helpTableView)
         case .app:
             let appTableView = OptionMenuAppTableView(frame: detailViewFrame)
             appTableView.delegate = self
@@ -180,6 +185,14 @@ extension OptionMenuTableView: OptionMenuAppTableViewDelegate {
         delegate?.optionMenuTableViewDidClose()
     }
 }
+
+// MARK: OptionMenuAppTableViewDelegate
+extension OptionMenuTableView: OptionMenuHelpTableViewDelegate {
+    func optionMenuHelpDidClose(view: UIView) {
+        delegate?.optionMenuTableViewDidClose()
+    }
+}
+
 //
 //
 //class OptionMenuTableView: UIView, ShadowView {

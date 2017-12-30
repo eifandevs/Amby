@@ -17,6 +17,6 @@ final class OperationDataModel {
 
     func executeOperation(operation: UserOperation, object: Any?) {
         userOperation = operation
-        center.post(name: .operationDataModelDidChange, object: ["operation": operation, "object": object])
+        center.post(name: .operationDataModelDidChange, object: [AppConst.KEY_NOTIFICATION_OPERATION: operation, AppConst.KEY_NOTIFICATION_OBJECT: object])
     }
 }

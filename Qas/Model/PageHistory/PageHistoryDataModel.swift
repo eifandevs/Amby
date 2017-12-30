@@ -145,7 +145,7 @@ final class PageHistoryDataModel {
             let pageHistoryData = NSKeyedArchiver.archivedData(withRootObject: histories)
             do {
                 try pageHistoryData.write(to: AppConst.PATH_URL_PAGE_HISTORY)
-                log.debug("store each history")
+                log.debug("store page history")
             } catch let error as NSError {
                 log.error("failed to write: \(error)")
             }

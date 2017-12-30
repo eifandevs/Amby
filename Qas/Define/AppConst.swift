@@ -43,7 +43,10 @@ final class AppConst {
     static let KEY_AUTO_SCROLL_INTERVAL = "autoScrollInterval"
     static let KEY_HISTORY_SAVE_TERM = "historySaveTerm"
     static let KEY_SEARCH_HISTORY_SAVE_TERM = "searchHistorySaveTerm"
-    
+    static let KEY_NOTIFICATION_SUBTITLE = "subtitle"
+    static let KEY_NOTIFICATION_MESSAGE = "message"
+    static let KEY_NOTIFICATION_OPERATION = "operation"
+    static let KEY_NOTIFICATION_OBJECT = "object"
     // MARK: - パス情報
     static let PATH_SEARCH = "https://www.google.co.jp/search?q="
     static let PATH_PAGE_HISTORY = DeviceConst.CACHES_PATH + "/each_history.dat"

@@ -35,8 +35,8 @@ class SearchMenuTableViewModel {
             guard let `self` = self else { return }
             log.debug("[SearchMenuTableView Event]: operationDataModelDidChange")
 
-            let operation = (notification.object as! [String: Any])["operation"] as! UserOperation
-            let token = (notification.object as! [String: Any])["object"] as! String
+            let operation = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OPERATION] as! UserOperation
+            let token = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
 
             if operation == .suggest && !token.isEmpty {
                 self.requestSearchQueue.append(token)

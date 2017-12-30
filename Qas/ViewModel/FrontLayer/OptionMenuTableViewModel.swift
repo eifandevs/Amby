@@ -21,6 +21,7 @@ class OptionMenuTableViewModel {
         case form
         case favorite
         case setting
+        case help
         case app
         
         var imageName: String {
@@ -29,6 +30,7 @@ class OptionMenuTableViewModel {
             case .form: return R.image.option_menu_form.name
             case .favorite: return R.image.optionmenu_favorite.name
             case .setting: return R.image.option_menu_setting.name
+            case .help: return R.image.option_menu_help.name
             case .app: return R.image.optionmenu_app.name
             }
         }
@@ -39,6 +41,7 @@ class OptionMenuTableViewModel {
             case .form: return AppConst.OPTION_MENU_FORM
             case .favorite: return AppConst.OPTION_MENU_BOOKMARK
             case .setting: return AppConst.OPTION_MENU_SETTING
+            case .help: return AppConst.OPTION_MENU_HELP
             case .app: return AppConst.OPTION_MENU_APP_INFORMATION
             }
         }
@@ -50,6 +53,7 @@ class OptionMenuTableViewModel {
         Row(cellType: .form),
         Row(cellType: .favorite),
         Row(cellType: .setting),
+        Row(cellType: .help),
         Row(cellType: .app)
     ]
     // 高さ
