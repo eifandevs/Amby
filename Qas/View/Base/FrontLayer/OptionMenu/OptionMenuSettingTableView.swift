@@ -95,7 +95,25 @@ extension OptionMenuSettingTableView: UITableViewDataSource {
 // MARK: - TableViewDelegate
 extension OptionMenuSettingTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = viewModel.getRow(indexPath: indexPath)
+        switch row.cellType {
+        case .commonHistory:
+            viewModel.deleteCommonHistoryDataModel()
+        case .bookMark:
+            viewModel.deleteFavoriteDataModel()
+        case .form:
+            viewModel.deleteFormDataModel()
+        case .searchHistory:
+            viewModel.deleteSearchHistoryDataModel()
+        case .cookies:
+            viewModel.deleteCookies()
+        case .siteData:
+            viewModel.deleteCaches()
+        case .all:
+            viewModel.deleteAll()
+        default:
+            break
+        }
         delegate?.optionMenuSettingDidClose(view: self)
     }
 }
-

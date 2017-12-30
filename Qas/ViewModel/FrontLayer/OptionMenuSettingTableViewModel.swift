@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class OptionMenuSettingTableViewModel {
     /// セル情報
@@ -83,5 +84,69 @@ class OptionMenuSettingTableViewModel {
     /// セクション情報取得
     func getSection(section: Int) -> Section {
         return sections[section]
+    }
+    
+    /// 閲覧履歴削除
+    func deleteCommonHistoryDataModel() {
+        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_COMMON_HISTORY, completion: {
+                CommonHistoryDataModel.s.delete()
+            }
+        )
+    }
+            
+    /// お気に入り削除
+    func deleteFavoriteDataModel() {
+        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_BOOK_MARK, completion: {
+                FavoriteDataModel.s.delete()
+            }
+        )
+    }
+            
+    /// フォーム削除
+    func deleteFormDataModel() {
+        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_FORM, completion: {
+                FormDataModel.s.delete()
+            }
+        )
+    }
+
+    /// 検索履歴削除
+    func deleteSearchHistoryDataModel() {
+        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_SEARCH_HISTORY, completion: {
+                SearchHistoryDataModel.s.delete()
+            }
+        )
+    }
+    
+    /// クッキー削除
+    func deleteCookies() {
+        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_COOKIES, completion: {
+                CacheHelper.deleteCookies()
+            }
+        )
+    }
+
+    /// キャッシュ削除
+    func deleteCaches() {
+        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_SITE_DATA, completion: {
+                CacheHelper.deleteCaches()
+            }
+        )
+    }
+
+    /// 全て削除
+    func deleteAll() {
+        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_ALL, completion: {
+                CommonHistoryDataModel.s.delete()
+                SearchHistoryDataModel.s.delete()
+                FavoriteDataModel.s.delete(notify: false)
+                FormDataModel.s.delete()
+                CacheHelper.deleteCookies()
+                CacheHelper.deleteCaches()
+                ThumbnailDataModel.s.delete()
+                PageHistoryDataModel.s.delete()
+                (UIApplication.shared.delegate as! AppDelegate).initialize()
+            }
+        )
     }
 }

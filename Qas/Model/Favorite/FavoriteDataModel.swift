@@ -29,14 +29,18 @@ class FavoriteDataModel {
         return favorites
     }
     
-    func delete(favorites: [Favorite]? = nil) {
+    func delete(favorites: [Favorite]? = nil, notify: Bool = true) {
         if let favorites = favorites {
             CommonDao.s.delete(data: favorites)
         } else {
             // 削除対象が指定されていない場合は、すべて削除する
             CommonDao.s.delete(data: select())
         }
-        center.post(name: .favoriteDataModelDidRemove, object: nil)
+        
+        // 通知する
+        if notify {
+            center.post(name: .favoriteDataModelDidRemove, object: nil)
+        }
     }
     
     /// お気に入りの更新チェック
