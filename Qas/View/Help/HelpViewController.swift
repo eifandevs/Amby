@@ -14,6 +14,7 @@ class HelpViewController: UIViewController {
     @IBOutlet weak var closeButton: CornerRadiusButton!
     @IBOutlet weak var messageLabel: VerticalAlignmentLabel!
     @IBOutlet weak var subtitleLabel: VerticalAlignmentLabel!
+    
     private var subtitle: String = ""
     private var message: String = ""
     

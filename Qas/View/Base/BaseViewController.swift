@@ -26,6 +26,9 @@ class BaseViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        
+        viewModel.delegate = self
+        
         onceExec.call {
             // iPhoneX対応
             if #available(iOS 11.0, *) {
