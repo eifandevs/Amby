@@ -16,14 +16,32 @@ class OptionMenuSettingTableViewModel {
         
         struct Row {
             let cellType: CellType
-            let title: String?
         }
     }
     
     /// セルタイプ
     enum CellType {
         case autoScroll
-        case historyDelete
+        case commonHistory
+        case bookMark
+        case form
+        case searchHistory
+        case cookies
+        case siteData
+        case all
+        
+        var title: String {
+            switch self {
+            case .autoScroll: return ""
+            case .commonHistory: return AppConst.OPTION_MENU_HISTORY
+            case .form: return AppConst.SETTING_TITLE_FORM_DATA
+            case .bookMark: return AppConst.SETTING_TITLE_BOOK_MARK
+            case .searchHistory: return AppConst.SETTING_TITLE_SEARCH_HISTORY
+            case .cookies: return AppConst.SETTING_TITLE_COOKIES
+            case .siteData: return AppConst.SETTING_TITLE_SITE_DATA
+            case .all: return AppConst.SETTING_TITLE_ALL
+            }
+        }
     }
     
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
@@ -37,16 +55,16 @@ class OptionMenuSettingTableViewModel {
     // セル情報
     var sections: [Section] = [
         Section(title: AppConst.SETTING_SECTION_AUTO_SCROLL, rows: [
-            Section.Row(cellType: .autoScroll, title: nil)
+            Section.Row(cellType: .autoScroll)
         ]),
         Section(title: AppConst.SETTING_SECTION_DELETE, rows: [
-            Section.Row(cellType: .historyDelete, title: AppConst.SETTING_TITLE_COMMON_HISTORY),
-            Section.Row(cellType: .historyDelete, title: AppConst.SETTING_TITLE_BOOK_MARK),
-            Section.Row(cellType: .historyDelete, title: AppConst.SETTING_TITLE_FORM_DATA),
-            Section.Row(cellType: .historyDelete, title: AppConst.SETTING_TITLE_SEARCH_HISTORY),
-            Section.Row(cellType: .historyDelete, title: AppConst.SETTING_TITLE_COOKIES),
-            Section.Row(cellType: .historyDelete, title: AppConst.SETTING_TITLE_SITE_DATA),
-            Section.Row(cellType: .historyDelete, title: AppConst.SETTING_TITLE_ALL)
+            Section.Row(cellType: .commonHistory),
+            Section.Row(cellType: .form),
+            Section.Row(cellType: .bookMark),
+            Section.Row(cellType: .searchHistory),
+            Section.Row(cellType: .cookies),
+            Section.Row(cellType: .siteData),
+            Section.Row(cellType: .all)
         ])
     ]
     // セクションフォントサイズ

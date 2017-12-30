@@ -83,7 +83,7 @@ extension OptionMenuTableView: UITableViewDelegate {
         // スーパービューに追加するので、自身の座標をたす
         let detailViewFrame = CGRect(x: frame.origin.x + viewModel.overViewMargin.x, y: frame.origin.y + marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height)
         // 詳細ビュー作成
-        switch viewModel.getRow(indexPath: indexPath) {
+        switch viewModel.getRow(indexPath: indexPath).cellType {
         case .history:
             let historyTableView = OptionMenuHistoryTableView(frame: detailViewFrame)
             historyTableView.delegate = self

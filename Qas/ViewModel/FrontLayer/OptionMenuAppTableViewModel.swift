@@ -11,7 +11,11 @@ import Foundation
 class OptionMenuAppTableViewModel {
     
     // セル情報
-    enum Row: Int, EnumEnumerable {
+    struct Row {
+        let cellType: CellType
+    }
+    
+    enum CellType: Int {
         case app
         case copyright
         
@@ -24,7 +28,11 @@ class OptionMenuAppTableViewModel {
     }
     
     // セル
-    let rows = Row.cases
+    let rows = [
+        Row(cellType: .app),
+        Row(cellType: .copyright)
+    ]
+
     // 高さ
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
     // 数

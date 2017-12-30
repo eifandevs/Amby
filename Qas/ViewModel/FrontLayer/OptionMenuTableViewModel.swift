@@ -11,7 +11,12 @@ import Foundation
 class OptionMenuTableViewModel {
     
     // セル情報
-    enum Row: Int, EnumEnumerable {
+    struct Row {
+        let cellType: CellType
+    }
+    
+    /// セルタイプ
+    enum CellType {
         case history
         case form
         case favorite
@@ -40,7 +45,13 @@ class OptionMenuTableViewModel {
     }
     
     // セル
-    let rows = Row.cases
+    let rows = [
+        Row(cellType: .history),
+        Row(cellType: .form),
+        Row(cellType: .favorite),
+        Row(cellType: .setting),
+        Row(cellType: .app)
+    ]
     // 高さ
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
     // 数

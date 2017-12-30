@@ -15,8 +15,6 @@ class OptionMenuSettingSliderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        slider.minimumValue = Float(-0.07)
-        slider.maximumValue = Float(-0.01)
         slider.value = -UserDefaults.standard.float(forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL)
 
     }

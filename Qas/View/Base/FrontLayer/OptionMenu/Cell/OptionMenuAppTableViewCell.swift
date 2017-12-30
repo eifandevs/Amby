@@ -25,7 +25,7 @@ class OptionMenuAppTableViewCell: UITableViewCell {
     
     /// ビューモデルデータ反映
     func setViewModelData(row: OptionMenuAppTableViewModel.Row) {
-        titleLabel.text = row.title
+        titleLabel.text = row.cellType.title
     }
     
 }
