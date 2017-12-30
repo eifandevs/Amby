@@ -51,6 +51,9 @@ class BaseViewController: UIViewController {
             splash!.view.frame.origin = CGPoint.zero
             view.addSubview(splash!.view)
 
+            // ページ情報初期化
+            PageHistoryDataModel.s.initialize()
+            
             // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
             baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
             baseLayer.delegate = self
