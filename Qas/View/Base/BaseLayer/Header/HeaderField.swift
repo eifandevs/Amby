@@ -43,9 +43,9 @@ class HeaderField: UIButton, ShadowView {
             self.label!.frame = CGRect(x: 0, y: 0, width: frame.size.width - icon.frame.size.width, height: frame.size.height)
             let isHttpRequest = !value.isEmpty && icon.frame.size.width == 0
             if isHttpRequest {
-                self.label?.padding = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
+                self.label?.padding = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 3)
             } else {
-                self.label?.padding = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                self.label?.padding = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 3)
             }
             self.label!.attributedText = attribute(text: value)
             addSubview(self.label!)
