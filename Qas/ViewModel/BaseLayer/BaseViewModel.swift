@@ -13,7 +13,7 @@ protocol BaseViewModelDelegate: class {
     func baseViewModelDidAddWebView()
     func baseViewModelDidReloadWebView()
     func baseViewModelDidChangeWebView()
-    func baseViewModelDidRemoveWebView(context: String, pageExist: Bool)
+    func baseViewModelDidRemoveWebView(context: String, pageExist: Bool, deleteIndex: Int)
     func baseViewModelDidHistoryBackWebView()
     func baseViewModelDidHistoryForwardWebView()
     func baseViewModelDidSearchWebView(text: String)
@@ -110,7 +110,9 @@ class BaseViewModel {
             log.debug("[BaseView Event]: pageHistoryDataModelDidRemove")
             let context = (notification.object as! [String: Any])["context"] as! String
             let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
-            self.delegate?.baseViewModelDidRemoveWebView(context: context, pageExist: pageExist)
+            let deleteIndex = (notification.object as! [String: Any])["deleteIndex"] as! Int
+
+            self.delegate?.baseViewModelDidRemoveWebView(context: context, pageExist: pageExist, deleteIndex: deleteIndex)
         }
         
         // webviewヒストリバック

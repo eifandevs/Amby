@@ -538,8 +538,7 @@ extension BaseView: BaseViewModelDelegate {
     
     /// ページ削除通知
     /// context: 削除したコンテキスト
-    func baseViewModelDidRemoveWebView(context: String, pageExist: Bool) {
-        let deleteIndex = D.findIndex(webViews, callback: { $0!.context == context })!
+    func baseViewModelDidRemoveWebView(context: String, pageExist: Bool, deleteIndex: Int) {
         if let webView = webViews[deleteIndex] {
             // サムネイルの削除
             viewModel.deleteThumbnail(webView: webView)
@@ -742,6 +741,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             if let url = navigationAction.request.url?.absoluteString {
                 log.debug("receive new window event. url: \(url)")
                 if url != AppConst.URL_BLANK {
+                    log.warning("about blank event.")
                     // about:blankは無視する
                     viewModel.insertPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
                 }

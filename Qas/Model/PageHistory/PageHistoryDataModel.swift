@@ -65,7 +65,7 @@ final class PageHistoryDataModel {
     func endLoading(context: String) {
         self.center.post(name: .pageHistoryDataModelDidEndLoading, object: context)
     }
-    
+
     /// ページ追加
     func insert(url: String?) {
         let newPage = PageHistory(url: url ?? "")
@@ -89,13 +89,15 @@ final class PageHistoryDataModel {
     
     /// 指定ページの削除
     func remove(context: String) {
+        let deleteIndex = D.findIndex(histories, callback: { $0.context == context })!
+        
         // フロントの削除かどうか
         if context == currentContext {
             let deleteLocation = currentLocation
             histories.remove(at: deleteLocation)
             // 削除した結果、ページが存在しない場合は作成する
             if histories.count == 0 {
-                self.center.post(name: .pageHistoryDataModelDidRemove, object: ["context": context, "pageExist": false])
+                self.center.post(name: .pageHistoryDataModelDidRemove, object: ["context": context, "pageExist": false, "deleteIndex": deleteIndex])
                 let pageHistory = PageHistory()
                 histories.append(pageHistory)
                 currentContext = pageHistory.context
@@ -111,7 +113,7 @@ final class PageHistoryDataModel {
                 }
             }
         }
-        self.center.post(name: .pageHistoryDataModelDidRemove, object: ["context": context, "pageExist": true])
+        self.center.post(name: .pageHistoryDataModelDidRemove, object: ["context": context, "pageExist": true, "deleteIndex": deleteIndex])
     }
     
     /// 表示中ページの変更
