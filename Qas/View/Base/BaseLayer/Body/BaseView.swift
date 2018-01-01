@@ -277,7 +277,7 @@ class BaseView: UIView {
         let newWv = EGWebView(id: context)
         newWv.frame = CGRect(origin: CGPoint.zero, size: size ?? frame.size)
         newWv.navigationDelegate = self
-        newWv.uiDelegate = self;
+        newWv.uiDelegate = self
         newWv.scrollView.delegate = self
         front = newWv
         Util.createFolder(path: Util.thumbnailFolderPath(folder: newWv.context))
