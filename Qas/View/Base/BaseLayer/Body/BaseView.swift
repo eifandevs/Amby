@@ -299,7 +299,7 @@ class BaseView: UIView {
     }
     
     private func saveMetaData(webView: EGWebView, completion: ((_ url: String?) -> ())?) {
-        if let urlStr = webView.url?.absoluteString, let title = webView.title {
+        if let urlStr = webView.url?.absoluteString, let title = webView.title, !title.isEmpty {
             if urlStr.hasValidUrl {
                 webView.requestUrl = urlStr
                 webView.requestTitle = title

@@ -76,7 +76,7 @@ final class PageHistoryDataModel {
     
     /// ページコピー
     func copy() {
-        let newPage = PageHistory(url: currentHistory.url)
+        let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
         histories.append(newPage)
         currentContext = newPage.context
         self.center.post(name: .pageHistoryDataModelDidInsert, object: histories.last!)
