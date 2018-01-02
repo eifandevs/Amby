@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyBeaver
 import Dollar
+import SVProgressHUD
 
 let log = SwiftyBeaver.self
 let D = `$`.self
@@ -47,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.addDestination(console)
         log.addDestination(file)
 
+        // プログレス初期設定
+        SVProgressHUD.setForegroundColor(UIColor.brilliantBlue)
+        
         // 初回起動時のみキーチェーンにトークンを保存
         if KeyChainHelper.getToken(key: AppConst.KEY_REALM_TOKEN) == nil {
             let token = String.getRandomStringWithLength(length: 64)
@@ -68,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CommonDao.s.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window!.rootViewController = BaseViewController()
-        self.window!.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        self.window!.backgroundColor = UIColor.white
         self.window!.makeKeyAndVisible()
         
         return true
@@ -83,7 +87,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.rootViewController?.view.removeAllSubviews()
         self.window!.rootViewController?.view.removeFromSuperview()
         self.window!.rootViewController?.removeFromParentViewController()
-        self.window!.rootViewController = BaseViewController()
+        SVProgressHUD.show()
+        SVProgressHUD.dismiss(withDelay: 2.5) {
+            self.window!.rootViewController = BaseViewController()
+        }
     }
 
 // MARK: App Delegate
