@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-@objc protocol EGApplicationDelegate {
+@objc protocol EGApplicationDelegate: class {
     func screenTouchBegan(touch: UITouch)
     func screenTouchMoved(touch: UITouch)
     func screenTouchEnded(touch: UITouch)

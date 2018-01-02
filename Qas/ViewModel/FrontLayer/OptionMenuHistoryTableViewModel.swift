@@ -23,7 +23,7 @@ class OptionMenuHistoryTableViewModel {
     // セル情報
     var sections: [Section] = []
     // 通知
-    var delegate: OptionMenuHistoryTableViewModelDelegate?
+    weak var delegate: OptionMenuHistoryTableViewModelDelegate?
     // 保持データリスト
     private var readFiles = CommonHistoryDataModel.s.getList()
     // ファイル読み込みインターバル

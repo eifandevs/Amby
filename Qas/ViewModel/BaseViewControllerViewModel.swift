@@ -14,7 +14,7 @@ protocol BaseViewControllerViewModelDelegate: class {
 
 class BaseViewControllerViewModel {
 
-    var delegate: BaseViewControllerViewModelDelegate?
+    weak var delegate: BaseViewControllerViewModelDelegate?
 
     init() {
         // ヘルプ画面の表示通知

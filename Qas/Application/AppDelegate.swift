@@ -80,6 +80,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(AppConst.UD_AUTO_SCROLL, forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL)
         UserDefaults.standard.set(AppConst.UD_COMMON_HISTORY_SAVE_TERM, forKey: AppConst.KEY_HISTORY_SAVE_TERM)
         UserDefaults.standard.set(AppConst.UD_SEARCH_HISTORY_SAVE_TERM, forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_TERM)
+        self.window!.rootViewController?.view.removeAllSubviews()
+        self.window!.rootViewController?.view.removeFromSuperview()
         self.window!.rootViewController?.removeFromParentViewController()
         self.window!.rootViewController = BaseViewController()
     }
