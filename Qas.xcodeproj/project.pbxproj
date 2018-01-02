@@ -164,6 +164,7 @@
 		A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModel.swift; sourceTree = "<group>"; };
 		A527CBAE1FD97D0C000DF901 /* HeaderViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewDataModel.swift; sourceTree = "<group>"; };
+		A53574841FFC285F004F4440 /* Qas-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Qas-Bridging-Header.h"; sourceTree = "<group>"; };
 		A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A53C0EC11FB7766A00FD78FF /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		A53C0EDB1FB778ED00FD78FF /* CommonHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistory.swift; sourceTree = "<group>"; };
@@ -846,6 +847,7 @@
 			isa = PBXGroup;
 			children = (
 				A5F3C0161FB7570900B905CA /* AppDelegate.swift */,
+				A53574841FFC285F004F4440 /* Qas-Bridging-Header.h */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -887,7 +889,7 @@
 					A57EFEA01E3E06D300B66701 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = TBQA5RANYY;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1254,10 +1256,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TBQA5RANYY;
 				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Full/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qas.sw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Qas/Application/Qas-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
@@ -1271,11 +1274,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TBQA5RANYY;
 				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Full/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qas.sw;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Qas/Application/Qas-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

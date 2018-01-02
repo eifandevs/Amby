@@ -258,15 +258,20 @@ class BaseView: UIView {
     
     private func saveThumbnail(webView: EGWebView) {
         // サムネイルを保存
-        let img = webView.takeThumbnail()
-        let pngImageData = UIImagePNGRepresentation(img!)
-        let context = webView.context
-        do {
-            try pngImageData?.write(to: Util.thumbnailUrl(folder: context))
-            log.debug("save thumbnal. context: \(context)")
-            self.viewModel.endLoadingPageHistoryDataModel(context: context)
-        } catch let error as NSError {
-            log.error("failed to store thumbnail: \(error)")
+        webView.takeSnapshot(with: nil) { image, error in
+            if let img = image {
+                let pngImageData = UIImagePNGRepresentation(img)
+                let context = webView.context
+                do {
+                    try pngImageData?.write(to: Util.thumbnailUrl(folder: context))
+                    log.debug("save thumbnal. context: \(context)")
+                    self.viewModel.endLoadingPageHistoryDataModel(context: context)
+                } catch let error as NSError {
+                    log.error("failed to store thumbnail: \(error)")
+                }
+            } else {
+                log.error("failed taking snapshot. error: \(error?.localizedDescription)")
+            }
         }
     }
 
