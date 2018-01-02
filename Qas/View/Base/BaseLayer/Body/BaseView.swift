@@ -127,6 +127,7 @@ class BaseView: UIView {
     }
     
     deinit {
+        log.debug("deinit called.")
         webViews.forEach { (webView) in
             if let unwrappedWebView = webView {
                 if unwrappedWebView == front {

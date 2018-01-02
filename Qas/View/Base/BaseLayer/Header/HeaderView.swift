@@ -125,10 +125,6 @@ class HeaderView: UIView, ShadowView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     /// サイズの最大化。BG->FGにユーザにURLを見せる
     func slideToMax() {
         frame.origin.y = 0

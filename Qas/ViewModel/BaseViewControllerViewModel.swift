@@ -32,6 +32,11 @@ class BaseViewControllerViewModel {
         }
     }
 
+    deinit {
+        log.debug("deinit called.")
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func insertPageHistoryDataModel(url: String) {
         PageHistoryDataModel.s.insert(url: url)
     }

@@ -107,6 +107,7 @@ class HeaderViewModel {
     }
 
     deinit {
+        log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)
     }
     

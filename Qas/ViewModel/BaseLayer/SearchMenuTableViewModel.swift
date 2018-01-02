@@ -46,6 +46,7 @@ class SearchMenuTableViewModel {
     }
 
     deinit {
+        log.debug("deinit called.")
         requestSearchQueue.removeAll()
         NotificationCenter.default.removeObserver(self)
     }

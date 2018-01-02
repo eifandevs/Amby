@@ -66,6 +66,7 @@ class BaseLayer: UIView {
     }
     
     deinit {
+        log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)
     }
     

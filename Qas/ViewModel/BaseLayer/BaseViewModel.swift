@@ -146,6 +146,7 @@ class BaseViewModel {
     }
     
     deinit {
+        log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)
     }
     
