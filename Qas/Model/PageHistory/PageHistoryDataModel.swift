@@ -89,12 +89,12 @@ final class PageHistoryDataModel {
     
     /// 指定ページの削除
     func remove(context: String) {
+        // 削除インデックス取得
         let deleteIndex = D.findIndex(histories, callback: { $0.context == context })!
         
         // フロントの削除かどうか
         if context == currentContext {
-            let deleteLocation = currentLocation
-            histories.remove(at: deleteLocation)
+            histories.remove(at: deleteIndex)
             // 削除した結果、ページが存在しない場合は作成する
             if histories.count == 0 {
                 self.center.post(name: .pageHistoryDataModelDidRemove, object: ["context": context, "pageExist": false, "deleteIndex": deleteIndex])
@@ -106,12 +106,14 @@ final class PageHistoryDataModel {
                 return
             } else {
                 // 最後の要素を削除した場合は、前のページに戻る
-                if deleteLocation == histories.count {
-                    currentContext = histories[deleteLocation - 1].context
+                if deleteIndex == histories.count {
+                    currentContext = histories[deleteIndex - 1].context
                 } else {
-                    currentContext = histories[deleteLocation].context
+                    currentContext = histories[deleteIndex].context
                 }
             }
+        } else {
+            histories.remove(at: deleteIndex)
         }
         self.center.post(name: .pageHistoryDataModelDidRemove, object: ["context": context, "pageExist": true, "deleteIndex": deleteIndex])
     }
