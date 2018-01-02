@@ -87,6 +87,11 @@ final class PageHistoryDataModel {
         self.center.post(name: .pageHistoryDataModelDidReload, object: nil)
     }
     
+    /// ぺージインデックス取得
+    func getIndex(context: String) -> Int? {
+        return D.findIndex(histories, callback: { $0.context == context })
+    }
+    
     /// 指定ページの削除
     func remove(context: String) {
         // 削除インデックス取得

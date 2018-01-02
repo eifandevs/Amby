@@ -133,7 +133,6 @@ class BaseView: UIView {
                 if unwrappedWebView == front {
                     unwrappedWebView.removeObserver(self, forKeyPath: "estimatedProgress")
                 }
-                unwrappedWebView.removeObserver(self, forKeyPath: "loading")
             }
         }
         NotificationCenter.default.removeObserver(self)
@@ -149,64 +148,6 @@ class BaseView: UIView {
         if keyPath == "estimatedProgress" {
             //estimatedProgressが変更されたときに、プログレスバーの値を変更する。
             viewModel.updateProgressHeaderViewDataModel(object: CGFloat(front.estimatedProgress))
-        } else if keyPath == "loading" {
-            // 対象のwebviewを検索する
-            let otherWv: EGWebView = webViews.filter({ (w) -> Bool in
-                if let w = w {
-                    return context == &(w.context)
-                }
-                return false
-            }).first!!
-            
-            let updateHistoryAndThumbnail = { (webView: EGWebView) in
-                // ページ情報を取得
-                self.saveMetaData(webView: webView, completion: { [weak self] (url) in
-                    if webView.hasSavableUrl {
-                        self!.isDoneAutoInput = false
-                        // 有効なURLの場合は、履歴に保存する
-                        self!.viewModel.saveHistory(wv: webView)
-                        self!.viewModel.storePageHistory()
-                    }
-                    if webView.requestUrl != nil {
-                        webView.previousUrl = webView.requestUrl
-                    }
-                    
-                    // サムネイルを保存
-                    DispatchQueue.mainSyncSafe {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                            guard let `self` = self else { return }
-                            self.saveThumbnail(webView: webView)
-                            // くるくるを更新する
-                            self.updateNetworkActivityIndicator()
-                        }
-                    }
-                })
-            }
-            if otherWv.context == front.context {
-                // フロントwebviewの通知なので、プログレスを更新する
-                //インジゲーターの表示、非表示をきりかえる。
-                if otherWv.isLoading == true {
-                    viewModel.startLoadingPageHistoryDataModel(context: otherWv.context)
-                    viewModel.updateProgressHeaderViewDataModel(object: CGFloat(0.1))
-                    // くるくるを更新する
-                    updateNetworkActivityIndicator()
-                } else {
-                    viewModel.updateProgressHeaderViewDataModel(object: 1.0)
-                    // 履歴とサムネイルを更新
-                    updateHistoryAndThumbnail(otherWv)
-                }
-            } else {
-                //インジゲーターの表示、非表示をきりかえる。
-                if otherWv.isLoading == true {
-                    viewModel.startLoadingPageHistoryDataModel(context: otherWv.context)
-                    // くるくるを更新する
-                    updateNetworkActivityIndicator()
-                } else {
-                    // 履歴とサムネイルを更新
-                    updateHistoryAndThumbnail(otherWv)
-                }
-
-            }
         }
     }
     
@@ -263,8 +204,6 @@ class BaseView: UIView {
     private func startProgressObserving(target: EGWebView) {
         log.debug("start progress observe. target: \(target.context)")
 
-        //読み込み状態が変更されたことを取得
-        target.addObserver(self, forKeyPath: "loading", options: .new, context: &(target.context))
         //プログレスが変更されたことを取得
         target.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(target.context))
         if target.isLoading == true {
@@ -545,12 +484,17 @@ extension BaseView: BaseViewModelDelegate {
             viewModel.deleteThumbnail(webView: webView)
             
             let isFrontDelete = context == front.context
-            webView.removeObserver(self, forKeyPath: "loading")
             if isFrontDelete {
                 webView.removeObserver(self, forKeyPath: "estimatedProgress")
                 viewModel.updateProgressHeaderViewDataModel(object: 0)
                 front = nil
             }
+            
+            // ローディングキャンセル
+            if webView.isLoading {
+                webView.stopLoading()
+            }
+            
             webView.removeFromSuperview()
             webViews.remove(at: deleteIndex)
             
@@ -646,6 +590,64 @@ extension BaseView: BaseViewModelDelegate {
 
 // MARK: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate
 extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        let wv = webView as! EGWebView
+        log.debug("loading start. context: \(wv.context)")
+
+        if wv.context == front.context {
+            // フロントwebviewの通知なので、プログレスを更新する
+            //インジゲーターの表示、非表示をきりかえる。
+            viewModel.startLoadingPageHistoryDataModel(context: wv.context)
+            viewModel.updateProgressHeaderViewDataModel(object: CGFloat(0.1))
+            // くるくるを更新する
+            updateNetworkActivityIndicator()
+        } else {
+            //インジゲーターの表示、非表示をきりかえる。
+            viewModel.startLoadingPageHistoryDataModel(context: wv.context)
+            // くるくるを更新する
+            updateNetworkActivityIndicator()
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        let wv = webView as! EGWebView
+        log.debug("loading finish. context: \(wv.context)")
+        
+        // フロントの場合プログレスの更新をする
+        if wv.context == front.context {
+            viewModel.updateProgressHeaderViewDataModel(object: 1.0)
+        }
+        
+        // ページ情報を取得
+        self.saveMetaData(webView: wv, completion: { [weak self] (url) in
+            if wv.hasSavableUrl {
+                self!.isDoneAutoInput = false
+                // 有効なURLの場合は、履歴に保存する
+                self!.viewModel.saveHistory(wv: wv)
+                self!.viewModel.storePageHistory()
+            }
+            if wv.requestUrl != nil {
+                wv.previousUrl = wv.requestUrl
+            }
+            
+            // サムネイルを保存
+            DispatchQueue.mainSyncSafe {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                    // 削除済みチェック
+                    guard let `self` = self, let _ = self.viewModel.getIndex(context: wv.context) else {
+                        log.warning("loading finish on deleted page.")
+                        return
+                    }
+
+                    self.saveThumbnail(webView: wv)
+                    // くるくるを更新する
+                    self.updateNetworkActivityIndicator()
+                }
+            }
+        })
+    }
+    
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         log.error("[error url]\((error as NSError).userInfo["NSErrorFailingURLKey"]). code: \((error as NSError).code)")
         

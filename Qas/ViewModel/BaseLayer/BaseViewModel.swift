@@ -152,6 +152,11 @@ class BaseViewModel {
     
 // MARK: Public Method
 
+    /// ページインデックス取得
+    func getIndex(context: String) -> Int? {
+        return PageHistoryDataModel.s.getIndex(context: context)
+    }
+    
     func startLoadingPageHistoryDataModel(context: String) {
         PageHistoryDataModel.s.startLoading(context: context)
     }
@@ -266,24 +271,4 @@ class BaseViewModel {
     private func changePageHistoryDataModel(context: String) {
         PageHistoryDataModel.s.change(context: context)
     }
-    
-//    private func changeWebView(index: Int) {
-//        let targetIndex = {() -> Int in
-//            if index < 0 {
-//                return PageHistoryDataModel.s.histories.count - 1
-//            } else if index >= PageHistoryDataModel.s.histories.count {
-//                return 0
-//            } else {
-//                return index
-//            }
-//        }()
-//        self.center.post(name: .footerViewModelWillChangeWebView, object: targetIndex)
-//        if self.currentLocation != targetIndex {
-//            PageHistoryDataModel.s.currentLocation = targetIndex
-//            self.reloadFavorite()
-//            self.delegate?.baseViewModelDidChangeWebView()
-//        } else {
-//            log.warning("selected current webView")
-//        }
-//    }
 }
