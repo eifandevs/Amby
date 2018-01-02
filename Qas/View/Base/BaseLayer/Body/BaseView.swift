@@ -172,7 +172,7 @@ class BaseView: UIView {
                     
                     // サムネイルを保存
                     DispatchQueue.mainSyncSafe {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                             guard let `self` = self else { return }
                             self.saveThumbnail(webView: webView)
                             // くるくるを更新する
