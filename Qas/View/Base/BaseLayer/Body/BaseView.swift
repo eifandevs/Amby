@@ -638,17 +638,15 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             
             // サムネイルを保存
             DispatchQueue.mainSyncSafe {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                    // 削除済みチェック
-                    guard let `self` = self, let _ = self.viewModel.getIndex(context: wv.context) else {
-                        log.warning("loading finish on deleted page.")
-                        return
-                    }
-
-                    self.saveThumbnail(webView: wv)
-                    // くるくるを更新する
-                    self.updateNetworkActivityIndicator()
+                // 削除済みチェック
+                guard let `self` = self, let _ = self.viewModel.getIndex(context: wv.context) else {
+                    log.warning("loading finish on deleted page.")
+                    return
                 }
+                
+                self.saveThumbnail(webView: wv)
+                // くるくるを更新する
+                self.updateNetworkActivityIndicator()
             }
         })
     }
