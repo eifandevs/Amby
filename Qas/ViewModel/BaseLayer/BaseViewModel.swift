@@ -67,6 +67,10 @@ class BaseViewModel {
         return CGFloat(UserDefaults.standard.float(forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL))
     }
     
+    /// ページヒストリー保存件数
+    let pageHistorySaveCount = UserDefaults.standard.integer(forKey: AppConst.KEY_PAGE_HISTORY_SAVE_COUNT)
+    
+    /// 自動スクロールスピード
     let autoScrollSpeed: CGFloat = 0.6
 
     init() {
@@ -233,6 +237,13 @@ class BaseViewModel {
                     if history.context == wv.context {
                         history.url = common.url
                         history.title = common.title
+                        history.backForwardList.append(history.url)
+                        
+                        // 保存件数を超えた場合は、削除する
+                        if history.backForwardList.count > pageHistorySaveCount {
+                            history.backForwardList = Array(history.backForwardList.suffix(pageHistorySaveCount))
+                        }
+
                         break
                     }
                 }

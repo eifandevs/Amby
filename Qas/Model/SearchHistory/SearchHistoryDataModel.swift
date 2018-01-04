@@ -73,58 +73,51 @@ final class SearchHistoryDataModel {
     /// 検索履歴の検索
     /// 検索ワードと検索件数を指定する
     func select(title: String, readNum: Int) -> [SearchHistory] {
-        let manager = FileManager.default
         var result: [SearchHistory] = []
-        do {
-            let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_SEARCH_HISTORY)
-            let readFiles = getList().reversed()
+        let readFiles = getList().reversed()
+        
+        if readFiles.count > 0 {
+            let latestFiles = readFiles.prefix(readNum)
+            var allSearchHistory: [SearchHistory] = []
+            latestFiles.forEach({ (keyStr: String) in
+                do {
+                    let data = try Data(contentsOf: Util.searchHistoryUrl(date: keyStr))
+                    let searchHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [SearchHistory]
+                    allSearchHistory = allSearchHistory + searchHistory
+                } catch let error as NSError {
+                    log.error("failed to read search history. error: \(error.localizedDescription)")
+                }
+            })
+            let hitSearchHistory = allSearchHistory.filter({ (searchHistoryItem) -> Bool in
+                return searchHistoryItem.title.lowercased().contains(title.lowercased())
+            })
             
-            if readFiles.count > 0 {
-                let latestFiles = readFiles.prefix(readNum)
-                var allSearchHistory: [SearchHistory] = []
-                latestFiles.forEach({ (keyStr: String) in
-                    do {
-                        let data = try Data(contentsOf: Util.searchHistoryUrl(date: keyStr))
-                        let searchHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [SearchHistory]
-                        allSearchHistory = allSearchHistory + searchHistory
-                    } catch let error as NSError {
-                        log.error("failed to read search history. error: \(error.localizedDescription)")
-                    }
-                })
-                let hitSearchHistory = allSearchHistory.filter({ (searchHistoryItem) -> Bool in
-                    return searchHistoryItem.title.lowercased().contains(title.lowercased())
-                })
-                
-                // 重複の削除
-                hitSearchHistory.forEach({ (item) in
-                    if result.count == 0 {
+            // 重複の削除
+            hitSearchHistory.forEach({ (item) in
+                if result.count == 0 {
+                    result.append(item)
+                } else {
+                    let resultTitles: [String] = result.map({ (item) -> String in
+                        return item.title
+                    })
+                    if !resultTitles.contains(item.title) {
                         result.append(item)
-                    } else {
-                        let resultTitles: [String] = result.map({ (item) -> String in
-                            return item.title
-                        })
-                        if !resultTitles.contains(item.title) {
-                            result.append(item)
-                        }
                     }
-                })
-            }
-            
-        } catch let error as NSError {
-            log.error("failed to read search history. error: \(error.localizedDescription)")
+                }
+            })
         }
+
         histories = result
         return result
     }
     
     /// 閲覧履歴の期限切れ削除
     func expireCheck() {
-        let manager = FileManager.default
         let saveTerm = Int(UserDefaults.standard.float(forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT))
         let readFiles = getList().reversed()
         
         if readFiles.count > saveTerm {
-            let deleteFiles = readFiles.suffix(saveTerm)
+            let deleteFiles = readFiles.prefix(readFiles.count - saveTerm)
             deleteFiles.forEach({ (key) in
                 do {
                     try FileManager.default.removeItem(atPath: Util.searchHistoryPath(date: key))

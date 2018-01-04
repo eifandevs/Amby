@@ -79,6 +79,7 @@ final class CommonHistoryDataModel {
     }
 
     /// 保存済みリスト取得
+    /// 降順で返す。[20170909, 20170908, ...]
     func getList() -> [String] {
         let manager = FileManager.default
         do {
@@ -156,7 +157,7 @@ final class CommonHistoryDataModel {
         let readFiles = getList().reversed()
         
         if readFiles.count > saveTerm {
-            let deleteFiles = readFiles.suffix(saveTerm)
+            let deleteFiles = readFiles.prefix(readFiles.count - saveTerm)
             deleteFiles.forEach({ (key) in
                 do {
                     try FileManager.default.removeItem(atPath: Util.commonHistoryPath(date: key))

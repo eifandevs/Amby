@@ -41,12 +41,14 @@ final class AppConst {
     static let KEY_LOCATION_INDEX = "currentLocation"
     static let KEY_CURRENT_CONTEXT = "currentContext"
     static let KEY_AUTO_SCROLL_INTERVAL = "autoScrollInterval"
-    static let KEY_HISTORY_SAVE_TERM = "historySaveTerm"
-    static let KEY_SEARCH_HISTORY_SAVE_TERM = "searchHistorySaveTerm"
+    static let KEY_COMMON_HISTORY_SAVE_COUNT = "historySaveCount"
+    static let KEY_SEARCH_HISTORY_SAVE_COUNT = "searchHistorySaveCount"
+    static let KEY_PAGE_HISTORY_SAVE_COUNT = "pageHistorySaveCount"
     static let KEY_NOTIFICATION_SUBTITLE = "subtitle"
     static let KEY_NOTIFICATION_MESSAGE = "message"
     static let KEY_NOTIFICATION_OPERATION = "operation"
     static let KEY_NOTIFICATION_OBJECT = "object"
+    
     // MARK: - パス情報
     static let PATH_SEARCH = "https://www.google.co.jp/search?q="
     static let PATH_PAGE_HISTORY = DeviceConst.CACHES_PATH + "/each_history.dat"
@@ -88,7 +90,7 @@ final class AppConst {
     static let UD_LOCATION_INDEX = 0
     static let UD_CURRENT_CONTEXT = ""
     static let UD_AUTO_SCROLL = 0.06
-    static let UD_COMMON_HISTORY_SAVE_TERM = 90
-    static let UD_SEARCH_HISTORY_SAVE_TERM = 90
-
+    static let UD_COMMON_HISTORY_SAVE_COUNT = 90
+    static let UD_SEARCH_HISTORY_SAVE_COUNT = 90
+    static let UD_PAGE_HISTORY_SAVE_COUNT = 50
 }

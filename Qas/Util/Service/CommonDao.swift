@@ -53,7 +53,8 @@ final class CommonDao {
         UserDefaults.standard.register(defaults: [AppConst.KEY_LOCATION_INDEX: AppConst.UD_LOCATION_INDEX,
                                                   AppConst.KEY_CURRENT_CONTEXT: AppConst.UD_CURRENT_CONTEXT,
                                                   AppConst.KEY_AUTO_SCROLL_INTERVAL: AppConst.UD_AUTO_SCROLL,
-                                                  AppConst.KEY_HISTORY_SAVE_TERM: AppConst.UD_COMMON_HISTORY_SAVE_TERM,
-                                                  AppConst.KEY_SEARCH_HISTORY_SAVE_TERM: AppConst.UD_SEARCH_HISTORY_SAVE_TERM])
+                                                  AppConst.KEY_COMMON_HISTORY_SAVE_COUNT: AppConst.UD_COMMON_HISTORY_SAVE_COUNT,
+                                                  AppConst.KEY_PAGE_HISTORY_SAVE_COUNT: AppConst.UD_PAGE_HISTORY_SAVE_COUNT,
+                                                  AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT: AppConst.UD_SEARCH_HISTORY_SAVE_COUNT])
     }
 }

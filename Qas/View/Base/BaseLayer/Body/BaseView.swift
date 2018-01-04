@@ -533,48 +533,36 @@ extension BaseView: BaseViewModelDelegate {
     }
     
     func baseViewModelDidHistoryBackWebView() {
-        if front.canGoBack {
-            if (front.backForwardList.backItem?.url.absoluteString.hasValidUrl)! == true {
-                front.goBack()
-            } else {
-                // 有効なURLを探す
-                let backUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
-                    for item in front.backForwardList.backList.reversed() {
-                        if item.url.absoluteString.hasValidUrl {
-                            return item
-                        }
-                    }
-                    // nilが返る事は運用上あり得ない
-                    log.error("webview go back error")
-                    return nil
-                }()
-                if let item = backUrl {
-                    front.go(to: item)
+        // 有効なURLを探す
+        let backUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
+            for item in front.backForwardList.backList.reversed() {
+                if item.url.absoluteString.hasValidUrl {
+                    return item
                 }
             }
+            // nilが返る事は運用上あり得ない
+            log.error("webview go back error")
+            return nil
+        }()
+        if let item = backUrl {
+            _ = front.load(urlStr: item.url.absoluteString)
         }
     }
     
     func baseViewModelDidHistoryForwardWebView() {
-        if front.canGoForward {
-            if (front.backForwardList.forwardItem?.url.absoluteString.hasValidUrl)! == true {
-                front.goForward()
-            } else {
-                // 有効なURLを探す
-                let forwardUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
-                    for item in front.backForwardList.forwardList {
-                        if item.url.absoluteString.hasValidUrl {
-                            return item
-                        }
-                    }
-                    // nilが返る事は運用上あり得ない
-                    log.error("webview go back error")
-                    return nil
-                }()
-                if let item = forwardUrl {
-                    front.go(to: item)
+        // 有効なURLを探す
+        let forwardUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
+            for item in front.backForwardList.forwardList {
+                if item.url.absoluteString.hasValidUrl {
+                    return item
                 }
             }
+            // nilが返る事は運用上あり得ない
+            log.error("webview go back error")
+            return nil
+        }()
+        if let item = forwardUrl {
+            _ = front.load(urlStr: item.url.absoluteString)
         }
     }
     
@@ -613,6 +601,10 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             // くるくるを更新する
             updateNetworkActivityIndicator()
         }
+    }
+    
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        log.warning("did commit")
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

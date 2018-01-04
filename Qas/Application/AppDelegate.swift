@@ -82,12 +82,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(AppConst.UD_LOCATION_INDEX, forKey: AppConst.KEY_LOCATION_INDEX)
         UserDefaults.standard.set(AppConst.UD_CURRENT_CONTEXT, forKey: AppConst.KEY_CURRENT_CONTEXT)
         UserDefaults.standard.set(AppConst.UD_AUTO_SCROLL, forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL)
-        UserDefaults.standard.set(AppConst.UD_COMMON_HISTORY_SAVE_TERM, forKey: AppConst.KEY_HISTORY_SAVE_TERM)
-        UserDefaults.standard.set(AppConst.UD_SEARCH_HISTORY_SAVE_TERM, forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_TERM)
+        UserDefaults.standard.set(AppConst.UD_COMMON_HISTORY_SAVE_COUNT, forKey: AppConst.KEY_COMMON_HISTORY_SAVE_COUNT)
+        UserDefaults.standard.set(AppConst.UD_PAGE_HISTORY_SAVE_COUNT, forKey: AppConst.KEY_PAGE_HISTORY_SAVE_COUNT)
+        UserDefaults.standard.set(AppConst.UD_SEARCH_HISTORY_SAVE_COUNT, forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT)
         self.window!.rootViewController?.view.removeAllSubviews()
         self.window!.rootViewController?.view.removeFromSuperview()
         self.window!.rootViewController?.removeFromParentViewController()
+        
+        // プログレス表示
         SVProgressHUD.show()
+        
+        // 各サブビューのdismissがコールされるのを待つ
         SVProgressHUD.dismiss(withDelay: 2.5) {
             self.window!.rootViewController = BaseViewController()
         }
