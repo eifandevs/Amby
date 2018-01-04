@@ -533,10 +533,20 @@ extension BaseView: BaseViewModelDelegate {
     }
     
     func baseViewModelDidHistoryBackWebView() {
-        // 有効なURLを探す
-        if let url = viewModel.getBackUrlPageHistoryDataModel(context: front.context) {
-            front.operation = .back
-            _ = front.load(urlStr: url)
+        if front.isLoading && front.operation == .normal && !(viewModel.getPastViewingPageHistoryDataModel(context: front.context)) {
+            // 新規ページ表示中に戻るを押下したルート
+            log.debug("go back on loading.")
+            
+            if let url = viewModel.getMostForwardUrlPageHistoryDataModel(context: front.context) {
+                front.operation = .back
+                _ = front.load(urlStr: url)
+            }
+        } else {
+            // 有効なURLを探す
+            if let url = viewModel.getBackUrlPageHistoryDataModel(context: front.context) {
+                front.operation = .back
+                _ = front.load(urlStr: url)
+            }
         }
     }
     

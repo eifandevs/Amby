@@ -37,7 +37,7 @@ final class PageHistoryDataModel {
     var currentLocation: Int {
         return D.findIndex(histories, callback: { $0.context == currentContext })!
     }
-
+    
     /// ページヒストリー保存件数
     private let pageHistorySaveCount = UserDefaults.standard.integer(forKey: AppConst.KEY_PAGE_HISTORY_SAVE_COUNT)
     
@@ -69,6 +69,20 @@ final class PageHistoryDataModel {
         self.center.post(name: .pageHistoryDataModelDidEndLoading, object: context)
     }
 
+    /// 過去のページを閲覧しているかのフラグ
+    func isPastViewing(context: String) -> Bool {
+        let history = D.find(histories, callback: { $0.context == context })!
+        return history.backForwardList.count != 0 && history.listIndex != history.backForwardList.count - 1
+    }
+    
+    /// 直近URL取得
+    func getMostForwardUrl(context: String) -> String? {
+        if let history = D.find(histories, callback: { $0.context == context }), let url = history.backForwardList.last, !url.isEmpty {
+            return url
+        }
+        return nil
+    }
+    
     /// 前回URL取得
     func getBackUrl(context: String) -> String? {
         if let history = D.find(histories, callback: { $0.context == context }), history.listIndex > 0 {
@@ -97,11 +111,10 @@ final class PageHistoryDataModel {
             if $0.context == context {
                 $0.url = url
                 $0.title = title
-                $0.operation = operation.rawValue
 
-                if $0.operation == PageHistory.Operation.normal.rawValue {
+                if operation == .normal {
                     // リスト更新
-                    if $0.backForwardList.count == 0 || $0.listIndex == $0.backForwardList.count - 1 {
+                    if !isPastViewing(context: context) {
                         $0.backForwardList.append($0.url)
                     } else {
                         // ヒストリーバック -> 通常遷移の場合は、履歴リストを再構築する
