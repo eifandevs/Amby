@@ -534,37 +534,17 @@ extension BaseView: BaseViewModelDelegate {
     
     func baseViewModelDidHistoryBackWebView() {
         // 有効なURLを探す
-        let backUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
-            for item in front.backForwardList.backList.reversed() {
-                if item.url.absoluteString.hasValidUrl {
-                    return item
-                }
-            }
-            // nilが返る事は運用上あり得ない
-            log.error("webview go back error")
-            return nil
-        }()
-        if let item = backUrl {
+        if let url = viewModel.getBackUrlPageHistoryDataModel(context: front.context) {
             front.operation = .back
-            _ = front.load(urlStr: item.url.absoluteString)
+            _ = front.load(urlStr: url)
         }
     }
     
     func baseViewModelDidHistoryForwardWebView() {
         // 有効なURLを探す
-        let forwardUrl: WKBackForwardListItem? = { () -> WKBackForwardListItem? in
-            for item in front.backForwardList.forwardList {
-                if item.url.absoluteString.hasValidUrl {
-                    return item
-                }
-            }
-            // nilが返る事は運用上あり得ない
-            log.error("webview go back error")
-            return nil
-        }()
-        if let item = forwardUrl {
+        if let url = viewModel.getForwardUrlPageHistoryDataModel(context: front.context) {
             front.operation = .forward
-            _ = front.load(urlStr: item.url.absoluteString)
+            _ = front.load(urlStr: url)
         }
     }
     

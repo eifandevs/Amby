@@ -158,6 +158,16 @@ class BaseViewModel {
         return PageHistoryDataModel.s.getIndex(context: context)
     }
     
+    /// 前回URL取得
+    func getBackUrlPageHistoryDataModel(context: String) -> String? {
+        return PageHistoryDataModel.s.getBackUrl(context:context)
+    }
+    
+    /// 次URL取得
+    func getForwardUrlPageHistoryDataModel(context: String) -> String? {
+        return PageHistoryDataModel.s.getForwardUrl(context:context)
+    }
+    
     func startLoadingPageHistoryDataModel(context: String) {
         PageHistoryDataModel.s.startLoading(context: context)
     }

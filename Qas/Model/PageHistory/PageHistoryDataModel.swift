@@ -69,6 +69,28 @@ final class PageHistoryDataModel {
         self.center.post(name: .pageHistoryDataModelDidEndLoading, object: context)
     }
 
+    /// 前回URL取得
+    func getBackUrl(context: String) -> String? {
+        if let history = D.find(histories, callback: { $0.context == context }), history.listIndex > 0 {
+            // インデックス調整
+            history.listIndex = history.listIndex - 1
+            
+            return history.backForwardList[history.listIndex]
+        }
+        return nil
+    }
+    
+    /// 次URL取得
+    func getForwardUrl(context: String) -> String? {
+        if let history = D.find(histories, callback: { $0.context == context }), history.listIndex < pageHistorySaveCount - 1 {
+            // インデックス調整
+            history.listIndex = history.listIndex + 1
+            
+            return history.backForwardList[history.listIndex]
+        }
+        return nil
+    }
+    
     /// ページ更新
     func update(context: String, url: String, title: String, operation: PageHistory.Operation) {
         histories.forEach({
@@ -79,7 +101,13 @@ final class PageHistoryDataModel {
 
                 if $0.operation == PageHistory.Operation.normal.rawValue {
                     // リスト更新
-                    $0.backForwardList.append($0.url)
+                    if $0.backForwardList.count == 0 || $0.listIndex == $0.backForwardList.count - 1 {
+                        $0.backForwardList.append($0.url)
+                    } else {
+                        // ヒストリーバック -> 通常遷移の場合は、履歴リストを再構築する
+                        $0.backForwardList = Array($0.backForwardList.prefix($0.listIndex + 1))
+                        $0.backForwardList.append($0.url)
+                    }
 
                     // 保存件数を超えた場合は、削除する
                     if $0.backForwardList.count > pageHistorySaveCount {
@@ -89,16 +117,6 @@ final class PageHistoryDataModel {
                     // インデックス調整
                     $0.listIndex = $0.backForwardList.count - 1
                     
-                } else if $0.operation == PageHistory.Operation.back.rawValue {
-                    // インデックス調整
-                    if $0.listIndex > 0 {
-                        $0.listIndex = $0.listIndex - 1
-                    }
-                } else if $0.operation == PageHistory.Operation.forward.rawValue {
-                    // インデックス調整
-                    if $0.listIndex < pageHistorySaveCount - 1 {
-                        $0.listIndex = $0.listIndex + 1
-                    }
                 }
                 
                 return
