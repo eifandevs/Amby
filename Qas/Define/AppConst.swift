@@ -92,5 +92,5 @@ final class AppConst {
     static let UD_AUTO_SCROLL = 0.06
     static let UD_COMMON_HISTORY_SAVE_COUNT = 90
     static let UD_SEARCH_HISTORY_SAVE_COUNT = 90
-    static let UD_PAGE_HISTORY_SAVE_COUNT = 50
+    static let UD_PAGE_HISTORY_SAVE_COUNT = 30
 }
