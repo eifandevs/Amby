@@ -10,20 +10,31 @@ import Foundation
 import UIKit
 
 class PageHistory: NSObject, NSCoding {
+    /// 操作種別
+    enum Operation: Int {
+        case normal = 0
+        case back = 1
+        case forward = 2
+    }
+    
     var context: String = NSUUID().uuidString
     var url: String = ""
     var title: String = ""
     var backForwardList = [String]()
+    var listIndex: Int = 0
+    var operation: Int = 0
     
     override init() {
         super.init()
     }
     
-    init(context: String = NSUUID().uuidString, url: String = "", title: String = "", backForwardList: [String] = []) {
+    init(context: String = NSUUID().uuidString, url: String = "", title: String = "", backForwardList: [String] = [], listIndex: Int = 0, operation: Int = 0) {
         self.context = context
         self.url = url
         self.title = title
         self.backForwardList = backForwardList
+        self.listIndex = listIndex
+        self.operation = operation
     }
     
     required convenience init?(coder decoder: NSCoder) {
@@ -31,7 +42,9 @@ class PageHistory: NSObject, NSCoding {
         let url = decoder.decodeObject(forKey: "url") as! String
         let title = decoder.decodeObject(forKey: "title") as! String
         let backForwardList = decoder.decodeObject(forKey: "backForwardList") as! [String]
-        self.init(context: context, url: url, title: title, backForwardList: backForwardList)
+        let listIndex = decoder.decodeObject(forKey: "listIndex") as! Int
+        let operation = decoder.decodeObject(forKey: "operation") as! Int
+        self.init(context: context, url: url, title: title, backForwardList: backForwardList, listIndex: listIndex, operation: operation)
     }
     
     public func encode(with aCoder: NSCoder) {
@@ -39,5 +52,7 @@ class PageHistory: NSObject, NSCoding {
         aCoder.encode(url, forKey: "url")
         aCoder.encode(title, forKey: "title")
         aCoder.encode(backForwardList, forKey: "backForwardList")
+        aCoder.encode(listIndex, forKey: "listIndex")
+        aCoder.encode(operation, forKey: "operation")
     }
 }

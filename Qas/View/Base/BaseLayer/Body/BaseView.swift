@@ -526,7 +526,7 @@ extension BaseView: BaseViewModelDelegate {
         } else {
             // 検索ワードによる検索
             // 閲覧履歴を保存する
-            viewModel.storeSearchHistory(title: text)
+            viewModel.storeSearchHistoryDataModel(title: text)
             let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
             _ = front.load(urlStr: "\(AppConst.PATH_SEARCH)\(encodedText)")
         }
@@ -545,6 +545,7 @@ extension BaseView: BaseViewModelDelegate {
             return nil
         }()
         if let item = backUrl {
+            front.operation = .back
             _ = front.load(urlStr: item.url.absoluteString)
         }
     }
@@ -562,6 +563,7 @@ extension BaseView: BaseViewModelDelegate {
             return nil
         }()
         if let item = forwardUrl {
+            front.operation = .forward
             _ = front.load(urlStr: item.url.absoluteString)
         }
     }
@@ -587,7 +589,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         let wv = webView as! EGWebView
         log.debug("loading start. context: \(wv.context)")
-
+        
         if wv.context == front.context {
             // フロントwebviewの通知なので、プログレスを更新する
             //インジゲーターの表示、非表示をきりかえる。
@@ -601,10 +603,6 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             // くるくるを更新する
             updateNetworkActivityIndicator()
         }
-    }
-    
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        log.warning("did commit")
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -621,8 +619,14 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             if wv.hasSavableUrl {
                 self!.isDoneAutoInput = false
                 // 有効なURLの場合は、履歴に保存する
-                self!.viewModel.saveHistory(wv: wv)
-                self!.viewModel.storePageHistory()
+                self!.viewModel.updateHistoryDataModel(context: wv.context, url: wv.requestUrl, title: wv.requestTitle, operation: wv.operation)
+                
+                // 操作種別はnormalに戻しておく
+                if wv.operation != .normal {
+                    wv.operation = .normal
+                }
+                
+                self!.viewModel.storePageHistoryDataModel()
             }
             if wv.requestUrl != nil {
                 wv.previousUrl = wv.requestUrl

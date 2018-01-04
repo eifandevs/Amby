@@ -33,6 +33,9 @@ class EGWebView: WKWebView {
     // スワイプ中かどうか
     var isSwiping: Bool = false
     
+    /// オペレーション
+    var operation: PageHistory.Operation = .normal
+    
     init(id: String?) {
         if let id = id, !id.isEmpty {
             // コンテキストを復元

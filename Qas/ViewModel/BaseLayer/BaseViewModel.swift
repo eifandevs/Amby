@@ -67,9 +67,6 @@ class BaseViewModel {
         return CGFloat(UserDefaults.standard.float(forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL))
     }
     
-    /// ページヒストリー保存件数
-    let pageHistorySaveCount = UserDefaults.standard.integer(forKey: AppConst.KEY_PAGE_HISTORY_SAVE_COUNT)
-    
     /// 自動スクロールスピード
     let autoScrollSpeed: CGFloat = 0.6
 
@@ -77,7 +74,7 @@ class BaseViewModel {
         // バックグラウンドに入るときに履歴を保存する
         center.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            self.storeHistory()
+            self.storeHistoryDataModel()
         }
         
         // webviewのリロード
@@ -222,53 +219,42 @@ class BaseViewModel {
         PageHistoryDataModel.s.goNext()
     }
     
-    func saveHistory(wv: EGWebView) {
-        if let requestUrl = wv.requestUrl, let requestTitle = wv.requestTitle, !requestTitle.isEmpty {
+    /// 履歴保存
+    func updateHistoryDataModel(context: String, url: String, title: String, operation: PageHistory.Operation) {
+        if !url.isEmpty && !title.isEmpty {
             //　アプリ起動後の前回ページロード時は、履歴に保存しない
-            if requestUrl != self.currentUrl {
+            if url != self.currentUrl {
                 // Common History
-                let common = CommonHistory(url: requestUrl, title: requestTitle, date: Date())
+                let common = CommonHistory(url: url, title: title, date: Date())
                 // 配列の先頭に追加する
                 CommonHistoryDataModel.s.histories.insert(common, at: 0)
                 log.debug("save history. url: \(common.url)")
                 
                 // Each History
-                for history in PageHistoryDataModel.s.histories {
-                    if history.context == wv.context {
-                        history.url = common.url
-                        history.title = common.title
-                        history.backForwardList.append(history.url)
-                        
-                        // 保存件数を超えた場合は、削除する
-                        if history.backForwardList.count > pageHistorySaveCount {
-                            history.backForwardList = Array(history.backForwardList.suffix(pageHistorySaveCount))
-                        }
-
-                        break
-                    }
-                }
+                PageHistoryDataModel.s.update(context: context, url: url, title: title, operation: operation)
             }
-            // ヘッダーのお気に入りアイコン更新
-            if wv.context == currentContext {
-                // フロントページの保存の場合
-                FavoriteDataModel.s.reload()
-            }
+        }
+        
+        // ヘッダーのお気に入りアイコン更新
+        if context == currentContext {
+            // フロントページの保存の場合
+            FavoriteDataModel.s.reload()
         }
     }
     
     /// 閲覧、ページ履歴の永続化
-    func storeHistory() {
+    func storeHistoryDataModel() {
         CommonHistoryDataModel.s.store()
         PageHistoryDataModel.s.store()
     }
     
     /// 検索履歴の永続化
-    func storeSearchHistory(title: String) {
+    func storeSearchHistoryDataModel(title: String) {
         SearchHistoryDataModel.s.store(histories: [SearchHistory(title: title, date: Date())])
     }
     
     /// ページ履歴の永続化
-    func storePageHistory() {
+    func storePageHistoryDataModel() {
         PageHistoryDataModel.s.store()
     }
     

@@ -12,10 +12,10 @@ import UIKit
 final class PageHistoryDataModel {
     static let s = PageHistoryDataModel()
 
-    // 通知センター
+    /// 通知センター
     private let center = NotificationCenter.default
     
-    // 現在表示しているwebviewのコンテキスト
+    /// 現在表示しているwebviewのコンテキスト
     var currentContext: String = UserDefaults.standard.string(forKey: AppConst.KEY_CURRENT_CONTEXT)! {
         didSet {
             log.debug("current context changed. \(oldValue) -> \(currentContext)")
@@ -25,19 +25,22 @@ final class PageHistoryDataModel {
     }
     var previousContext: String?
 
-    // webViewそれぞれの履歴とカレントページインデックス
+    /// webViewそれぞれの履歴とカレントページインデックス
     var histories: [PageHistory] = []
     
-    // 現在のページ情報
+    /// 現在のページ情報
     var currentHistory: PageHistory {
         return D.find(histories, callback: { $0.context == currentContext })!
     }
     
-    // 現在の位置
+    /// 現在の位置
     var currentLocation: Int {
         return D.findIndex(histories, callback: { $0.context == currentContext })!
     }
 
+    /// ページヒストリー保存件数
+    private let pageHistorySaveCount = UserDefaults.standard.integer(forKey: AppConst.KEY_PAGE_HISTORY_SAVE_COUNT)
+    
     private init() {
     }
     
@@ -66,6 +69,43 @@ final class PageHistoryDataModel {
         self.center.post(name: .pageHistoryDataModelDidEndLoading, object: context)
     }
 
+    /// ページ更新
+    func update(context: String, url: String, title: String, operation: PageHistory.Operation) {
+        histories.forEach({
+            if $0.context == context {
+                $0.url = url
+                $0.title = title
+                $0.operation = operation.rawValue
+
+                if $0.operation == PageHistory.Operation.normal.rawValue {
+                    // リスト更新
+                    $0.backForwardList.append($0.url)
+
+                    // 保存件数を超えた場合は、削除する
+                    if $0.backForwardList.count > pageHistorySaveCount {
+                        $0.backForwardList = Array($0.backForwardList.suffix(pageHistorySaveCount))
+                    }
+                    
+                    // インデックス調整
+                    $0.listIndex = $0.backForwardList.count - 1
+                    
+                } else if $0.operation == PageHistory.Operation.back.rawValue {
+                    // インデックス調整
+                    if $0.listIndex > 0 {
+                        $0.listIndex = $0.listIndex - 1
+                    }
+                } else if $0.operation == PageHistory.Operation.forward.rawValue {
+                    // インデックス調整
+                    if $0.listIndex < pageHistorySaveCount - 1 {
+                        $0.listIndex = $0.listIndex + 1
+                    }
+                }
+                
+                return
+            }
+        })
+    }
+    
     /// ページ追加
     func insert(url: String?) {
         let newPage = PageHistory(url: url ?? "")
