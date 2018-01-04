@@ -13,6 +13,20 @@ final class SearchHistoryDataModel {
     static let s = SearchHistoryDataModel()
     var histories = [SearchHistory]()
     
+    /// 保存済みリスト取得
+    func getList() -> [String] {
+        let manager = FileManager.default
+        do {
+            let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_SEARCH_HISTORY)
+            return list.map({ (path: String) -> String in
+                return path.substring(to: path.index(path.startIndex, offsetBy: 8))
+            }).sorted(by: { $1.toDate() < $0.toDate() })
+        } catch let error as NSError {
+            log.error("failed to read search history. error: \(error.localizedDescription)")
+        }
+        return []
+    }
+    
     /// 検索履歴の保存
     func store(histories: [SearchHistory]) {
         if histories.count > 0 {
@@ -60,13 +74,10 @@ final class SearchHistoryDataModel {
     /// 検索ワードと検索件数を指定する
     func select(title: String, readNum: Int) -> [SearchHistory] {
         let manager = FileManager.default
-        var readFiles: [String] = []
         var result: [SearchHistory] = []
         do {
             let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_SEARCH_HISTORY)
-            readFiles = list.map({ (path: String) -> String in
-                return path.substring(to: path.index(path.startIndex, offsetBy: 8))
-            }).reversed()
+            let readFiles = getList().reversed()
             
             if readFiles.count > 0 {
                 let latestFiles = readFiles.prefix(readNum)
@@ -109,24 +120,19 @@ final class SearchHistoryDataModel {
     /// 閲覧履歴の期限切れ削除
     func expireCheck() {
         let manager = FileManager.default
-        var readFiles: [String] = []
-        let saveTerm = Int(UserDefaults.standard.float(forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_TERM))
-        do {
-            let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_SEARCH_HISTORY)
-            readFiles = list.map({ (path: String) -> String in
-                return path.substring(to: path.index(path.startIndex, offsetBy: 8))
-            }).reversed()
-            
-            if readFiles.count > saveTerm {
-                let deleteFiles = readFiles.suffix(from: saveTerm)
-                deleteFiles.forEach({ (key) in
-                    try! FileManager.default.removeItem(atPath: Util.searchHistoryPath(date: key))
-                })
-                log.debug("deleteSearchHistory: \(deleteFiles)")
-            }
-            
-        } catch let error as NSError {
-            log.error("failed to read common history. error: \(error.localizedDescription)")
+        let saveTerm = Int(UserDefaults.standard.float(forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT))
+        let readFiles = getList().reversed()
+        
+        if readFiles.count > saveTerm {
+            let deleteFiles = readFiles.suffix(saveTerm)
+            deleteFiles.forEach({ (key) in
+                do {
+                    try FileManager.default.removeItem(atPath: Util.searchHistoryPath(date: key))
+                } catch let error as NSError {
+                    log.error("failed to read common history. error: \(error.localizedDescription)")
+                }
+            })
+            log.debug("deleteSearchHistory: \(deleteFiles)")
         }
     }
     
