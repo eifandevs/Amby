@@ -82,7 +82,7 @@ final class PageHistoryDataModel {
     
     /// 次URL取得
     func getForwardUrl(context: String) -> String? {
-        if let history = D.find(histories, callback: { $0.context == context }), history.listIndex < pageHistorySaveCount - 1 {
+        if let history = D.find(histories, callback: { $0.context == context }), history.listIndex < history.backForwardList.count - 1 {
             // インデックス調整
             history.listIndex = history.listIndex + 1
             

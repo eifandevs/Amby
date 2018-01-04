@@ -42,8 +42,8 @@ class PageHistory: NSObject, NSCoding {
         let url = decoder.decodeObject(forKey: "url") as! String
         let title = decoder.decodeObject(forKey: "title") as! String
         let backForwardList = decoder.decodeObject(forKey: "backForwardList") as! [String]
-        let listIndex = decoder.decodeObject(forKey: "listIndex") as! Int
-        let operation = decoder.decodeObject(forKey: "operation") as! Int
+        let listIndex = decoder.decodeInteger(forKey: "listIndex")
+        let operation = decoder.decodeInteger(forKey: "operation")
         self.init(context: context, url: url, title: title, backForwardList: backForwardList, listIndex: listIndex, operation: operation)
     }
     
