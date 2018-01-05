@@ -129,7 +129,7 @@ class FooterView: UIView, ShadowView {
     @objc func longPressed(sender: UILongPressGestureRecognizer) {
         switch sender.state {
         case .began:
-            for (index, thumbnail) in self.thumbnails.enumerated() {
+            for (_, thumbnail) in self.thumbnails.enumerated() {
                 if sender.view == thumbnail {
                     self.viewModel.removePageHistoryDataModel(context: thumbnail.context)
                     break
