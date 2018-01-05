@@ -183,34 +183,26 @@ extension FooterView: FooterViewModelDelegate {
     
     func footerViewModelDidRemoveThumbnail(context: String, pageExist: Bool) {
         let deleteIndex = D.findIndex(thumbnails, callback: { $0.context == context })!
-        let completion: (() -> ()) = { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            self.thumbnails[deleteIndex].removeFromSuperview()
-            self.thumbnails.remove(at: deleteIndex)
-            self.updateFrontBar()
+
+        if ((self.thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
+            self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
+            self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
         }
-        if thumbnails.count > 1 {
-            thumbnails[deleteIndex].alpha = 0
+        
+        thumbnails[deleteIndex].removeFromSuperview()
+        thumbnails.remove(at: deleteIndex)
+        updateFrontBar()
+        
+        if thumbnails.count > 0 {
             UIView.animate(withDuration: 0.3, animations: {
                 for i in 0...self.thumbnails.count - 1 {
                     if i < deleteIndex {
                         self.thumbnails[i].center.x += self.thumbnails[i].frame.size.width / 2
-                    } else if i > deleteIndex {
+                    } else if i >= deleteIndex {
                         self.thumbnails[i].center.x -= self.thumbnails[i].frame.size.width / 2
                     }
                 }
-                if ((self.thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
-                    self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-                    self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
-                }
-            }, completion: { (isFinish) in
-                completion()
             })
-        } else {
-            // 最後のwebview削除の場合は、速攻削除する
-            completion()
         }
     }
     
