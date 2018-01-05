@@ -522,13 +522,15 @@ extension BaseView: BaseViewModelDelegate {
     func baseViewModelDidSearchWebView(text: String) {
         if text.hasValidUrl {
             let encodedText = text.contains("%") ? text : text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+            viewModel.headerFieldText = encodedText
             _ = front.load(urlStr: encodedText)
         } else {
             // 検索ワードによる検索
             // 閲覧履歴を保存する
             viewModel.storeSearchHistoryDataModel(title: text)
-            let encodedText = text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-            _ = front.load(urlStr: "\(AppConst.PATH_SEARCH)\(encodedText)")
+            let encodedText = "\(AppConst.PATH_SEARCH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)"
+            viewModel.headerFieldText = encodedText
+            _ = front.load(urlStr: encodedText)
         }
     }
     

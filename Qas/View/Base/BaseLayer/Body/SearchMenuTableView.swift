@@ -144,6 +144,9 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // とりあえずメニューを閉じる
+        delegate?.searchMenuDidClose()
+
         let cell = tableView.cellForRow(at: indexPath)!
         if cell.className == SearchMenuTableViewCell.className {
             let text = (cell as! SearchMenuTableViewCell).urlLabel.text!
@@ -152,7 +155,6 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
             let text = cell.textLabel!.text!
             viewModel.executeOperationDataModel(operation: .search, url: text)
         }
-        delegate?.searchMenuDidClose()
     }
 }
 
