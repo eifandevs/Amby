@@ -105,13 +105,14 @@ final class PageHistoryDataModel {
         return nil
     }
     
-    /// ページ更新
+    /// ページ読み込み完了後のページ更新
     func update(context: String, url: String, title: String, operation: PageHistory.Operation) {
         histories.forEach({
             if $0.context == context {
                 $0.url = url
                 $0.title = title
 
+                /// 通常の遷移の場合（ヒストリバックやフォワードではない）
                 if operation == .normal {
                     // リスト更新
                     if !isPastViewing(context: context) {

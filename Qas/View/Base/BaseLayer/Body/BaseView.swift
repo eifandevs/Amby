@@ -542,6 +542,7 @@ extension BaseView: BaseViewModelDelegate {
                 _ = front.load(urlStr: url)
             }
         } else {
+            log.debug("go back.")
             // 有効なURLを探す
             if let url = viewModel.getBackUrlPageHistoryDataModel(context: front.context) {
                 front.operation = .back
@@ -604,18 +605,20 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             viewModel.updateProgressHeaderViewDataModel(object: 1.0)
         }
         
+        // 操作種別の保持
+        let operation = wv.operation
+        
+        // 操作種別はnormalに戻しておく
+        if wv.operation != .normal {
+            wv.operation = .normal
+        }
+        
         // ページ情報を取得
         self.saveMetaData(webView: wv, completion: { [weak self] (url) in
             if wv.hasSavableUrl {
                 self!.isDoneAutoInput = false
                 // 有効なURLの場合は、履歴に保存する
-                self!.viewModel.updateHistoryDataModel(context: wv.context, url: wv.requestUrl, title: wv.requestTitle, operation: wv.operation)
-                
-                // 操作種別はnormalに戻しておく
-                if wv.operation != .normal {
-                    wv.operation = .normal
-                }
-                
+                self!.viewModel.updateHistoryDataModel(context: wv.context, url: wv.requestUrl, title: wv.requestTitle, operation: operation)
                 self!.viewModel.storePageHistoryDataModel()
             }
             if wv.requestUrl != nil {
