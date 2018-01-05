@@ -659,11 +659,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             viewModel.updateProgressHeaderViewDataModel(object: 0)
         }
         
-        if !egWv.hasLocalUrl {
-            egWv.loadHtml(error: (error as NSError))
-        } else {
-            log.warning("already load error html")
-        }
+        egWv.loadHtml(error: (error as NSError))
     }
     
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
