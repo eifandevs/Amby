@@ -733,11 +733,15 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         if navigationAction.targetFrame == nil {
             if let url = navigationAction.request.url?.absoluteString {
                 log.debug("receive new window event. url: \(url)")
-                if url != AppConst.URL_BLANK {
-                    log.warning("about blank event.")
-                    // about:blankは無視する
-                    viewModel.insertPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
-                }
+                
+                viewModel.insertPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
+
+//                if url != AppConst.URL_BLANK {
+//                    // about:blankは無視する
+//                    viewModel.insertPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
+//                } else {
+//                    log.warning("about blank event.")
+//                }
                 return nil
             }
         }
