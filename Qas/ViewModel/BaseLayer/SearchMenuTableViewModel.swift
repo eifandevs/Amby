@@ -36,11 +36,13 @@ class SearchMenuTableViewModel {
             log.debug("[SearchMenuTableView Event]: operationDataModelDidChange")
 
             let operation = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OPERATION] as! UserOperation
-            let token = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
 
-            if operation == .suggest && !token.isEmpty {
-                self.requestSearchQueue.append(token)
-                self.requestSearch()
+            if operation == .suggest {
+                let token = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
+                if !token.isEmpty {
+                    self.requestSearchQueue.append(token)
+                    self.requestSearch()
+                }
             }
         }
     }

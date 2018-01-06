@@ -258,16 +258,25 @@ class BaseView: UIView {
     
     private func saveThumbnail(webView: EGWebView, completion: @escaping (() -> ())) {
         // サムネイルを保存
-        if let img = webView.takeThumbnail() {
-            let pngImageData = UIImagePNGRepresentation(img)
-            let context = webView.context
-            do {
-                try pngImageData?.write(to: Util.thumbnailUrl(folder: context))
-                log.debug("save thumbnal. context: \(context)")
-                completion()
-            } catch let error as NSError {
-                log.error("failed to store thumbnail: \(error)")
-                completion()
+        DispatchQueue.mainSyncSafe {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                webView.takeSnapshot(with: nil) { image, error in
+                    if let img = image {
+                        let pngImageData = UIImagePNGRepresentation(img)
+                        let context = webView.context
+                        do {
+                            try pngImageData?.write(to: Util.thumbnailUrl(folder: context))
+                            log.debug("save thumbnal. context: \(context)")
+                            completion()
+                        } catch let error as NSError {
+                            log.error("failed to store thumbnail: \(error)")
+                            completion()
+                        }
+                    } else {
+                        log.error("failed taking snapshot. error: \(error?.localizedDescription)")
+                        completion()
+                    }
+                }
             }
         }
     }
@@ -725,7 +734,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         
         // 外部アプリ起動要求
         if ((url.absoluteString.range(of: AppConst.URL_ITUNES_STORE) != nil) ||
-            (url.absoluteString != AppConst.URL_BLANK && !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") && !url.absoluteString.hasPrefix("file://"))) {
+            (!url.absoluteString.hasPrefix("about:") && !url.absoluteString.hasPrefix("http:") && !url.absoluteString.hasPrefix("https:") && !url.absoluteString.hasPrefix("file:"))) {
             log.warning("open url. url: \(url)")
             NotificationManager.presentActionSheet(title: "", message: MessageConst.ALERT_OPEN_COMFIRM, completion: {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)

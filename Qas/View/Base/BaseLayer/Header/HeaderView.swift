@@ -247,6 +247,7 @@ extension HeaderView: HeaderViewModelDelegate {
 extension HeaderView: HeaderFieldDelegate {
     func headerFieldDidEndEditing(text: String?) {
         if let text = text, !text.isEmpty {
+            log.debug("suggest word: \(text)")
             self.delegate?.headerViewDidEndEditing(headerFieldUpdate: true)
             viewModel.notifySearchWebView(text: text)
         } else {
