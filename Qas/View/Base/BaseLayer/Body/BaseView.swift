@@ -473,6 +473,9 @@ extension BaseView: BaseViewModelDelegate {
         viewModel.updateProgressHeaderViewDataModel(object: 0)
         if let current = webViews[viewModel.currentLocation] {
             current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
+            if current.isLoading == true {
+                viewModel.updateProgressHeaderViewDataModel(object: CGFloat(current.estimatedProgress))
+            }
             front = current
             bringSubview(toFront: current)
         } else {
