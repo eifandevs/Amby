@@ -218,19 +218,19 @@ extension FooterView: FooterViewModelDelegate {
         let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
         if existIndicator {
             DispatchQueue.mainSyncSafe { [weak self] in
-                guard let `self` = self else { return }
+                guard let _ = self else { return }
+                targetThumbnail.subviews.forEach({ (v) in
+                    if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
+                        let indicator = v as! NVActivityIndicatorView
+                        indicator.stopAnimating()
+                        indicator.alpha = 0
+                        indicator.removeFromSuperview()
+                    }
+                })
+                targetThumbnail.setThumbnailTitle(title: title)
                 if let image = ThumbnailDataModel.s.getThumbnail(context: context) {
-                    targetThumbnail.subviews.forEach({ (v) in
-                        if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
-                            let indicator = v as! NVActivityIndicatorView
-                            indicator.stopAnimating()
-                            indicator.alpha = 0
-                            indicator.removeFromSuperview()
-                        }
-                    })
                     targetThumbnail.setImage(nil, for: .normal)
                     targetThumbnail.setBackgroundImage(image, for: .normal)
-                    targetThumbnail.setThumbnailTitle(title: title)
                 } else {
                     log.error("missing thumbnail image")
                 }
