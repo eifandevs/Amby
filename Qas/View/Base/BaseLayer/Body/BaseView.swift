@@ -256,7 +256,7 @@ class BaseView: UIView {
         }
     }
     
-    private func saveThumbnail(webView: EGWebView) {
+    private func saveThumbnail(webView: EGWebView, completion: @escaping (() -> ())) {
         // サムネイルを保存
         webView.takeSnapshot(with: nil) { image, error in
             if let img = image {
@@ -265,11 +265,14 @@ class BaseView: UIView {
                 do {
                     try pngImageData?.write(to: Util.thumbnailUrl(folder: context))
                     log.debug("save thumbnal. context: \(context)")
+                    completion()
                 } catch let error as NSError {
                     log.error("failed to store thumbnail: \(error)")
+                    completion()
                 }
             } else {
                 log.error("failed taking snapshot. error: \(error?.localizedDescription)")
+                completion()
             }
         }
     }
@@ -627,23 +630,19 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         }
         
         // サムネイルを保存
-        DispatchQueue.mainSyncSafe {
-            
+        self.saveThumbnail(webView: wv, completion: {
             // プログレス更新
-            if wv.context == front.context {
-                viewModel.updateProgressHeaderViewDataModel(object: 1.0)
+            if wv.context == self.front.context {
+                self.viewModel.updateProgressHeaderViewDataModel(object: 1.0)
             }
             self.updateNetworkActivityIndicator()
-            self.viewModel.endLoadingPageHistoryDataModel(context: wv.context)
-            
             // 削除済みチェック
             guard let _ = self.viewModel.getIndex(context: wv.context) else {
                 log.warning("loading finish on deleted page.")
                 return
             }
-            
-            self.saveThumbnail(webView: wv)
-        }
+            self.viewModel.endLoadingPageHistoryDataModel(context: wv.context)
+        })
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
