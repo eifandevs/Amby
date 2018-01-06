@@ -238,7 +238,8 @@ class BaseView: UIView {
         }
     }
     
-    private func saveMetaData(webView: EGWebView, completion: ((_ url: String?) -> ())?) {
+    /// ページ情報保存
+    private func saveMetaData(webView: EGWebView) {
         if let urlStr = webView.url?.absoluteString, let title = webView.title, !title.isEmpty {
             if urlStr.hasValidUrl {
                 webView.requestUrl = urlStr
@@ -252,7 +253,6 @@ class BaseView: UIView {
                     viewModel.headerFieldText = viewModel.latestRequestUrl
                 }
             }
-            completion?(urlStr)
         }
     }
     
@@ -265,7 +265,6 @@ class BaseView: UIView {
                 do {
                     try pngImageData?.write(to: Util.thumbnailUrl(folder: context))
                     log.debug("save thumbnal. context: \(context)")
-                    self.viewModel.endLoadingPageHistoryDataModel(context: context)
                 } catch let error as NSError {
                     log.error("failed to store thumbnail: \(error)")
                 }
@@ -602,11 +601,6 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         let wv = webView as! EGWebView
         log.debug("loading finish. context: \(wv.context)")
         
-        // フロントの場合プログレスの更新をする
-        if wv.context == front.context {
-            viewModel.updateProgressHeaderViewDataModel(object: 1.0)
-        }
-        
         // 操作種別の保持
         let operation = wv.operation
         
@@ -616,49 +610,66 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         }
         
         // ページ情報を取得
-        self.saveMetaData(webView: wv, completion: { [weak self] (url) in
-            if wv.hasSavableUrl {
-                self!.isDoneAutoInput = false
-                // 有効なURLの場合は、履歴に保存する
-                self!.viewModel.updateHistoryDataModel(context: wv.context, url: wv.requestUrl, title: wv.requestTitle, operation: operation)
-                self!.viewModel.storePageHistoryDataModel()
+        saveMetaData(webView: wv)
+        
+        if wv.hasSavableUrl {
+            isDoneAutoInput = false
+            // 有効なURLの場合は、履歴に保存する
+            viewModel.updateHistoryDataModel(context: wv.context, url: wv.requestUrl, title: wv.requestTitle, operation: operation)
+            viewModel.storePageHistoryDataModel()
+        }
+        
+        if wv.requestUrl != nil {
+            wv.previousUrl = wv.requestUrl
+        }
+        
+        // サムネイルを保存
+        DispatchQueue.mainSyncSafe {
+            
+            // プログレス更新
+            if wv.context == front.context {
+                viewModel.updateProgressHeaderViewDataModel(object: 1.0)
             }
-            if wv.requestUrl != nil {
-                wv.previousUrl = wv.requestUrl
+            self.updateNetworkActivityIndicator()
+            self.viewModel.endLoadingPageHistoryDataModel(context: wv.context)
+            
+            // 削除済みチェック
+            guard let _ = self.viewModel.getIndex(context: wv.context) else {
+                log.warning("loading finish on deleted page.")
+                return
             }
             
-            // サムネイルを保存
-            DispatchQueue.mainSyncSafe {
-                // 削除済みチェック
-                guard let `self` = self, let _ = self.viewModel.getIndex(context: wv.context) else {
-                    log.warning("loading finish on deleted page.")
-                    return
-                }
-                
-                self.saveThumbnail(webView: wv)
-                // くるくるを更新する
-                self.updateNetworkActivityIndicator()
-            }
-        })
+            self.saveThumbnail(webView: wv)
+        }
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         log.error("[error url]\((error as NSError).userInfo["NSErrorFailingURLKey"]). code: \((error as NSError).code)")
         
         let egWv: EGWebView = webView as! EGWebView
+        
         // 連打したら-999 "(null)"になる対応
         if (error as NSError).code == NSURLErrorCancelled {
             return
         }
+        
+        // プログレス更新
+        DispatchQueue.mainSyncSafe {
+            // プログレス更新
+            if egWv.context == front.context {
+                viewModel.updateProgressHeaderViewDataModel(object: 0)
+            }
+            self.updateNetworkActivityIndicator()
+            self.viewModel.endLoadingPageHistoryDataModel(context: egWv.context)
+        }
+        
         // URLスキーム対応
         if let errorUrl = (error as NSError).userInfo["NSErrorFailingURLKey"] {
             let url = (errorUrl as! NSURL).absoluteString!
-            if !url.hasValidUrl {
+            if !url.hasValidUrl || url.range(of: AppConst.URL_ITUNES_STORE) != nil {
+                log.warning("load error. [open url event]")
                 return
             }
-        }
-        if webView.isLoading {
-            viewModel.updateProgressHeaderViewDataModel(object: 0)
         }
         
         egWv.loadHtml(error: (error as NSError))
@@ -712,7 +723,8 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         
         if ((url.absoluteString.range(of: AppConst.URL_ITUNES_STORE) != nil) ||
             (!url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") && !url.absoluteString.hasPrefix("file://"))) {
-            UIApplication.shared.openURL(url)
+            log.warning("open url. url: \(url)")
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
             decisionHandler(.cancel)
             return
         }
@@ -724,7 +736,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             viewModel.latestRequestUrl = latest
         }
         
-        saveMetaData(webView: webView as! EGWebView, completion: nil)
+        saveMetaData(webView: webView as! EGWebView)
         
         decisionHandler(.allow)
     }
