@@ -584,6 +584,11 @@ extension BaseView: BaseViewModelDelegate {
 // MARK: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate
 extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
     
+    /// force touchを無効にする
+    func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKPreviewElementInfo) -> Bool {
+        return false
+    }
+    
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         let wv = webView as! EGWebView
         log.debug("loading start. context: \(wv.context)")
