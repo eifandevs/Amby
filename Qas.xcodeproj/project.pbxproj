@@ -73,6 +73,7 @@
 		A56983C41FA5249C000A585F /* FormDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C31FA5249C000A585F /* FormDataModel.swift */; };
 		A56983C71FA524A8000A585F /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983C61FA524A8000A585F /* FavoriteDataModel.swift */; };
 		A56983CB1FA527B5000A585F /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56983CA1FA527B5000A585F /* SuggestDataModel.swift */; };
+		A56B2B12200168270033F2EF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A56B2B11200168270033F2EF /* Info.plist */; };
 		A57131A41FC26B8700BA07E0 /* Date+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57131A31FC26B8700BA07E0 /* Date+Extend.swift */; };
 		A586CD8E1FB77B5300961B30 /* ThumbnailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A586CD8D1FB77B5300961B30 /* ThumbnailDataModel.swift */; };
 		A58F8ACD1FB89C89003632F7 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F8ACC1FB89C89003632F7 /* PaddingLabel.swift */; };
@@ -159,7 +160,6 @@
 		A5117A651FE56C2100213E02 /* OptionMenuTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewModel.swift; sourceTree = "<group>"; };
 		A5223E8D1F1F8EA20097E793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5223E8E1F1F8EA20097E793 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
-		A5223E8F1F1F8EA20097E793 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5223E911F1F8EA20097E793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModel.swift; sourceTree = "<group>"; };
@@ -217,6 +217,7 @@
 		A56983C31FA5249C000A585F /* FormDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataModel.swift; sourceTree = "<group>"; };
 		A56983C61FA524A8000A585F /* FavoriteDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataModel.swift; sourceTree = "<group>"; };
 		A56983CA1FA527B5000A585F /* SuggestDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestDataModel.swift; sourceTree = "<group>"; };
+		A56B2B11200168270033F2EF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A57131A31FC26B8700BA07E0 /* Date+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extend.swift"; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A586CD8D1FB77B5300961B30 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
@@ -499,6 +500,14 @@
 			path = Suggest;
 			sourceTree = "<group>";
 		};
+		A56B2B10200168270033F2EF /* Develop */ = {
+			isa = PBXGroup;
+			children = (
+				A56B2B11200168270033F2EF /* Info.plist */,
+			);
+			path = Develop;
+			sourceTree = "<group>";
+		};
 		A57EFE981E3E06D300B66701 = {
 			isa = PBXGroup;
 			children = (
@@ -529,17 +538,9 @@
 		A5A598E91FA516E1000B56AE /* Environment */ = {
 			isa = PBXGroup;
 			children = (
-				A5A598EB1FA516E1000B56AE /* Full */,
+				A56B2B10200168270033F2EF /* Develop */,
 			);
 			path = Environment;
-			sourceTree = "<group>";
-		};
-		A5A598EB1FA516E1000B56AE /* Full */ = {
-			isa = PBXGroup;
-			children = (
-				A5223E8F1F1F8EA20097E793 /* Info.plist */,
-			);
-			path = Full;
 			sourceTree = "<group>";
 		};
 		A5BCE6DC1FA501B800E0C6E5 /* Extension */ = {
@@ -929,6 +930,7 @@
 				A5649A951FF8051500EA69E1 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
 				A5649A991FF8051500EA69E1 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
 				A5223EEA1F1F8EA20097E793 /* LaunchScreen.storyboard in Resources */,
+				A56B2B12200168270033F2EF /* Info.plist in Resources */,
 				A5649A9D1FF8051500EA69E1 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A5649A971FF8051500EA69E1 /* OptionMenuHelpTableViewCell.xib in Resources */,
 				A5BCE7C11FA50BFA00E0C6E5 /* SplashViewController.xib in Resources */,
@@ -1255,7 +1257,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TBQA5RANYY;
-				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Full/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Develop/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qas.sw;
@@ -1273,7 +1275,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TBQA5RANYY;
-				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Full/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Develop/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qas.sw;

@@ -21,8 +21,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 5 files.
+  /// This `R.file` struct is generated, and contains static references to 6 files.
   struct file {
+    /// Resource file `Info.plist`.
+    static let infoPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "Info", pathExtension: "plist")
     /// Resource file `authorize.html`.
     static let authorizeHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "authorize", pathExtension: "html")
     /// Resource file `dns.html`.
@@ -33,6 +35,12 @@ struct R: Rswift.Validatable {
     static let offlineHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "offline", pathExtension: "html")
     /// Resource file `timeout.html`.
     static let timeoutHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "timeout", pathExtension: "html")
+    
+    /// `bundle.url(forResource: "Info", withExtension: "plist")`
+    static func infoPlist(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.infoPlist
+      return fileResource.bundle.url(forResource: fileResource)
+    }
     
     /// `bundle.url(forResource: "authorize", withExtension: "html")`
     static func authorizeHtml(_: Void = ()) -> Foundation.URL? {
