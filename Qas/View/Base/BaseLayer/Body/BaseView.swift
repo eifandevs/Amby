@@ -723,10 +723,13 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             self.autoScrollTimer = nil
         }
         
+        // 外部アプリ起動要求
         if ((url.absoluteString.range(of: AppConst.URL_ITUNES_STORE) != nil) ||
-            (!url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") && !url.absoluteString.hasPrefix("file://"))) {
+            (url.absoluteString != AppConst.URL_BLANK && !url.absoluteString.hasPrefix("http://") && !url.absoluteString.hasPrefix("https://") && !url.absoluteString.hasPrefix("file://"))) {
             log.warning("open url. url: \(url)")
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            NotificationManager.presentActionSheet(title: "", message: MessageConst.ALERT_OPEN_COMFIRM, completion: {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            })
             decisionHandler(.cancel)
             return
         }

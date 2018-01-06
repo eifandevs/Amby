@@ -25,15 +25,35 @@ class NotificationManager {
     
     static func presentAlert(title: String, message: String, completion: @escaping (() -> ())) {
         let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler:{
+        let defaultAction: UIAlertAction = UIAlertAction(title: MessageConst.COMMON_OK, style: .default, handler:{
             (action: UIAlertAction!) -> Void in
             completion()
         })
-        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: .cancel, handler:{
+        let cancelAction: UIAlertAction = UIAlertAction(title: MessageConst.COMMON_CANCEL, style: .cancel, handler:{
             (action: UIAlertAction!) -> Void in
         })
         alert.addAction(cancelAction)
         alert.addAction(defaultAction)
         Util.foregroundViewController().present(alert, animated: true, completion: nil)
+    }
+    
+    static func presentActionSheet(title: String, message: String, completion: (() -> ())?) {
+        // styleをActionSheetに設定
+        let alertSheet = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        // 自分の選択肢を生成
+        let action1 = UIAlertAction(title: MessageConst.COMMON_OK, style: UIAlertActionStyle.default, handler: {
+            (action: UIAlertAction!) in
+            completion?()
+        })
+        let action2 = UIAlertAction(title: MessageConst.COMMON_CANCEL, style: UIAlertActionStyle.cancel, handler: {
+            (action: UIAlertAction!) in
+        })
+        
+        // アクションを追加.
+        alertSheet.addAction(action1)
+        alertSheet.addAction(action2)
+        
+        Util.foregroundViewController().present(alertSheet, animated: true, completion: nil)
     }
 }
