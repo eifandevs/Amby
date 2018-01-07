@@ -27,6 +27,7 @@ let uncaughtExceptionHandler : Void = NSSetUncaughtExceptionHandler { exception 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var baseViewController: BaseViewController?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -71,7 +72,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ユーザーデフォルト初期値設定
         CommonDao.s.registerDefaultData()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window!.rootViewController = BaseViewController()
+        baseViewController = BaseViewController()
+        self.window!.rootViewController = baseViewController!
         self.window!.backgroundColor = UIColor.white
         self.window!.makeKeyAndVisible()
         

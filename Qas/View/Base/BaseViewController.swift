@@ -15,9 +15,20 @@ class BaseViewController: UIViewController {
     private let viewModel = BaseViewControllerViewModel()
     
     private var splash: SplashViewController?
+    var isActive = true
     private var onceExec = OnceExec()
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isActive = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        isActive = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {

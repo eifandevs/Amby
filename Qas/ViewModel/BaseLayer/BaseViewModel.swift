@@ -202,6 +202,14 @@ class BaseViewModel {
         FormDataModel.s.store(webView: webview)
     }
 
+    /// baseViewControllerの状態取得
+    /// ヘルプ画面表示中はfalseとなる
+    func getBaseViewControllerStatus() -> Bool {
+        if let baseViewController = (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController {
+            return (baseViewController as! BaseViewController).isActive
+        }
+        return false
+    }
     /// 前webviewのキャプチャ取得
     func getPreviousCapture() -> UIImage {
         let targetIndex = currentLocation == 0 ? PageHistoryDataModel.s.histories.count - 1 : currentLocation - 1
