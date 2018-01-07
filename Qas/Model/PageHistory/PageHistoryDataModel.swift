@@ -26,7 +26,7 @@ final class PageHistoryDataModel {
     var previousContext: String?
 
     /// webViewそれぞれの履歴とカレントページインデックス
-    var histories: [PageHistory] = []
+    var histories = [PageHistory]()
     
     /// 現在のページ情報
     var currentHistory: PageHistory {
@@ -67,12 +67,20 @@ final class PageHistoryDataModel {
     
     /// ロード終了
     func endLoading(context: String) {
-        self.center.post(name: .pageHistoryDataModelDidEndLoading, object: context)
+        if let _ = D.find(histories, callback: { $0.context == context }) {
+            self.center.post(name: .pageHistoryDataModelDidEndLoading, object: context)
+        } else {
+            log.warning("pageHistoryDataModelDidEndRendering not fired. history is deleted.")
+        }
     }
 
     /// 描画終了
     func endRendering(context: String) {
-        self.center.post(name: .pageHistoryDataModelDidEndRendering, object: context)
+        if let _ = D.find(histories, callback: { $0.context == context }) {
+            self.center.post(name: .pageHistoryDataModelDidEndRendering, object: context)
+        } else {
+            log.warning("pageHistoryDataModelDidEndRendering not fired. history is deleted.")
+        }
     }
     
     /// 過去のページを閲覧しているかのフラグ

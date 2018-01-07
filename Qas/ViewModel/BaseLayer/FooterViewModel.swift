@@ -62,8 +62,9 @@ class FooterViewModel {
             log.debug("[Footer Event]: pageHistoryDataModelDidEndRendering")
             // FooterViewに通知をする
             let context = notification.object as! String
-            let pageHistory = D.find(PageHistoryDataModel.s.histories, callback: { $0.context == context })!
-            self.delegate?.footerViewModelDidEndLoading(context: context, title: pageHistory.title)
+            if let pageHistory = D.find(PageHistoryDataModel.s.histories, callback: { $0.context == context }) {
+                self.delegate?.footerViewModelDidEndLoading(context: context, title: pageHistory.title)
+            }
         }
 
         // webview切り替え
