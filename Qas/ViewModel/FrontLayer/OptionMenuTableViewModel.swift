@@ -62,12 +62,26 @@ class OptionMenuTableViewModel {
     var cellCount: Int {
         return rows.count
     }
-    // 詳細ビューのマージン
-    let overViewMargin = AppConst.FRONT_LAYER_OVER_VIEW_MARGIN
     
+    /// スワイプ方向
+    var swipeDirection: EdgeSwipeDirection?
+
     /// セル情報取得
     func getRow(indexPath: IndexPath) -> Row {
         return rows[indexPath.row]
+    }
+    
+    /// 詳細ビューのマージン取得
+    func getOverViewMargin() -> CGPoint {
+        if let swipeDirection = swipeDirection {
+            if swipeDirection == .left {
+                return AppConst.FRONT_LAYER_OVER_VIEW_MARGIN
+            } else {
+                return CGPoint(x: -AppConst.FRONT_LAYER_OVER_VIEW_MARGIN.x, y: AppConst.FRONT_LAYER_OVER_VIEW_MARGIN.y)
+            }
+        } else {
+            return AppConst.FRONT_LAYER_OVER_VIEW_MARGIN
+        }
     }
     
     /// 履歴情報永続化

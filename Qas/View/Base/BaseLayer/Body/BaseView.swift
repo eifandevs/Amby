@@ -318,6 +318,11 @@ extension BaseView: EGApplicationDelegate {
             if ((swipeDirection == .left && touchPoint.x > AppConst.FRONT_LAYER_EDGE_SWIPE_EREA + 20) ||
                 (swipeDirection == .right && touchPoint.x < self.bounds.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA - 20)) {
                 // エッジスワイプ検知
+                // TODO: 動画DL
+//                self.front.evaluateJavaScript("document.querySelector('video').currentSrc") { (object, error) in
+//                    log.warning("object: \(object)")
+//                }
+                
                 if viewModel.getBaseViewControllerStatus() {
                     invalidateUserInteraction()
                     delegate?.baseViewDidEdgeSwiped(direction: swipeDirection)

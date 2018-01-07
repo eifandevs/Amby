@@ -21,6 +21,12 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
     var detailView: UIView?
     private var selectedIndexPath: IndexPath?
     
+    convenience init(frame: CGRect, swipeDirection: EdgeSwipeDirection) {
+        self.init(frame: frame)
+        viewModel.swipeDirection = swipeDirection
+        loadNib()
+    }
+    
     override init(frame: CGRect){
         super.init(frame: frame)
         loadNib()
@@ -76,12 +82,14 @@ extension OptionMenuTableView: UITableViewDataSource {
 extension OptionMenuTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
-        let marginY = frame.origin.y + frame.size.height + viewModel.overViewMargin.y > DeviceConst.DISPLAY_SIZE.height ?
-                      viewModel.overViewMargin.y - (frame.origin.y + frame.size.height + viewModel.overViewMargin.y - DeviceConst.DISPLAY_SIZE.height) :
-                      viewModel.overViewMargin.y
+        let overViewMargin = viewModel.getOverViewMargin()
+
+        let marginY = frame.origin.y + frame.size.height + overViewMargin.y > DeviceConst.DISPLAY_SIZE.height ?
+                      overViewMargin.y - (frame.origin.y + frame.size.height + overViewMargin.y - DeviceConst.DISPLAY_SIZE.height) :
+                      overViewMargin.y
 
         // スーパービューに追加するので、自身の座標をたす
-        let detailViewFrame = CGRect(x: frame.origin.x + viewModel.overViewMargin.x, y: frame.origin.y + marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height)
+        let detailViewFrame = CGRect(x: frame.origin.x + overViewMargin.x, y: frame.origin.y + marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height)
         // 詳細ビュー作成
         switch viewModel.getRow(indexPath: indexPath).cellType {
         case .history:

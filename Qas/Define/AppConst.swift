@@ -20,7 +20,7 @@ final class AppConst {
     static let FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT = 50.f
     static let FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT = 19.f
     static let FRONT_LAYER_EDGE_SWIPE_EREA = 15.f
-    static let FRONT_LAYER_OVER_VIEW_MARGIN = CGPoint(x: 20.f, y: 20.f)
+    static let FRONT_LAYER_OVER_VIEW_MARGIN = CGPoint(x: 30.f, y: 30.f)
     static let FRONT_LAYER_OPTION_MENU_SIZE = CGSize(width: 250, height: 450)
     static let FRONT_LAYER_OPTION_MENU_MARGIN = CGSize(width: 38, height: 20)
     

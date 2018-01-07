@@ -51,7 +51,7 @@ class FrontLayer: UIView {
                         return y
                     }()
                     // オプションメニューを表示
-                    self.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height))
+                    self.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height), swipeDirection: swipeDirection)
                     self.optionMenu?.delegate = self
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.addSubview(self.optionMenu!)
