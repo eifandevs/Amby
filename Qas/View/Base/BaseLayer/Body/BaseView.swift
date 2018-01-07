@@ -259,7 +259,7 @@ class BaseView: UIView {
     private func saveThumbnail(webView: EGWebView, completion: @escaping (() -> ())) {
         // サムネイルを保存
         DispatchQueue.mainSyncSafe {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 webView.takeSnapshot(with: nil) { image, error in
                     if let img = image {
                         let pngImageData = UIImagePNGRepresentation(img)
@@ -277,7 +277,7 @@ class BaseView: UIView {
                         completion()
                     }
                 }
-//            }
+            }
         }
     }
 
@@ -632,6 +632,12 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         let wv = webView as! EGWebView
         log.debug("loading finish. context: \(wv.context)")
         
+        // 削除済みチェック
+        guard let _ = self.viewModel.getIndex(context: wv.context) else {
+            log.warning("loading finish on deleted page.")
+            return
+        }
+        
         // 操作種別の保持
         let operation = wv.operation
         
@@ -654,19 +660,17 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             wv.previousUrl = wv.requestUrl
         }
         
+        // プログレス更新
+        if wv.context == front.context {
+            viewModel.updateProgressHeaderViewDataModel(object: 1.0)
+        }
+        updateNetworkActivityIndicator()
+        viewModel.endLoadingPageHistoryDataModel(context: wv.context)
+        
         // サムネイルを保存
         self.saveThumbnail(webView: wv, completion: {
             // プログレス更新
-            if wv.context == self.front.context {
-                self.viewModel.updateProgressHeaderViewDataModel(object: 1.0)
-            }
-            self.updateNetworkActivityIndicator()
-            // 削除済みチェック
-            guard let _ = self.viewModel.getIndex(context: wv.context) else {
-                log.warning("loading finish on deleted page.")
-                return
-            }
-            self.viewModel.endLoadingPageHistoryDataModel(context: wv.context)
+            self.viewModel.endRenderingPageHistoryDataModel(context: wv.context)
         })
     }
     

@@ -186,6 +186,10 @@ class BaseViewModel {
         PageHistoryDataModel.s.endLoading(context: context)
     }
 
+    func endRenderingPageHistoryDataModel(context: String) {
+        PageHistoryDataModel.s.endRendering(context: context)
+    }
+    
     func updateProgressHeaderViewDataModel(object: CGFloat) {
         HeaderViewDataModel.s.updateProgress(progress: object)
     }

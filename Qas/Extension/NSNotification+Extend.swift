@@ -18,9 +18,9 @@ extension NSNotification.Name {
     static let pageHistoryDataModelDidRemove = NSNotification.Name("pageHistoryDataModelDidRemove")
     static let pageHistoryDataModelDidInsert = NSNotification.Name("pageHistoryDataModelDidInsert")
     static let pageHistoryDataModelDidChange = NSNotification.Name("pageHistoryDataModelDidChange")
-
     static let pageHistoryDataModelDidStartLoading = NSNotification.Name("pageHistoryDataModelDidStartLoading")
     static let pageHistoryDataModelDidEndLoading = NSNotification.Name("pageHistoryDataModelDidEndLoading")
+    static let pageHistoryDataModelDidEndRendering = NSNotification.Name("pageHistoryDataModelDidEndRendering")
     
     // CommonHistoryDataModel
     static let commonHistoryDataModelDidGoBack = NSNotification.Name("commonHistoryDataModelDidGoBack")

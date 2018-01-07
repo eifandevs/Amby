@@ -56,10 +56,10 @@ class FooterViewModel {
             // FooterViewに通知をする
             self.delegate?.footerViewModelDidStartLoading(context: notification.object as! String)
         }
-        // webviewロード完了
-        center.addObserver(forName: .pageHistoryDataModelDidEndLoading, object: nil, queue: nil) { [weak self] (notification) in
+        // webviewレンダリング完了
+        center.addObserver(forName: .pageHistoryDataModelDidEndRendering, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
-            log.debug("[Footer Event]: pageHistoryDataModelDidEndLoading")
+            log.debug("[Footer Event]: pageHistoryDataModelDidEndRendering")
             // FooterViewに通知をする
             let context = notification.object as! String
             let pageHistory = D.find(PageHistoryDataModel.s.histories, callback: { $0.context == context })!

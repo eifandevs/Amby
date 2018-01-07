@@ -65,10 +65,16 @@ final class PageHistoryDataModel {
         self.center.post(name: .pageHistoryDataModelDidStartLoading, object: context)
     }
     
+    /// ロード終了
     func endLoading(context: String) {
         self.center.post(name: .pageHistoryDataModelDidEndLoading, object: context)
     }
 
+    /// 描画終了
+    func endRendering(context: String) {
+        self.center.post(name: .pageHistoryDataModelDidEndRendering, object: context)
+    }
+    
     /// 過去のページを閲覧しているかのフラグ
     func isPastViewing(context: String) -> Bool {
         let history = D.find(histories, callback: { $0.context == context })!
