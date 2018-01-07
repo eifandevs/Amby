@@ -283,13 +283,15 @@ class BaseView: UIView {
 
 // MARK: 自動スクロールタイマー通知
     @objc func updateAutoScrolling(sender: Timer) {
-        let bottomOffset = front.scrollView.contentSize.height - front.scrollView.bounds.size.height + front.scrollView.contentInset.bottom
-        if (front.scrollView.contentOffset.y >= bottomOffset) {
-            sender.invalidate()
-            autoScrollTimer = nil
-            front.scrollView.scroll(to: .bottom, animated: false)
-        } else {
-            front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y + viewModel.autoScrollSpeed), animated: false)
+        if let front = front {
+            let bottomOffset = front.scrollView.contentSize.height - front.scrollView.bounds.size.height + front.scrollView.contentInset.bottom
+            if (front.scrollView.contentOffset.y >= bottomOffset) {
+                sender.invalidate()
+                autoScrollTimer = nil
+                front.scrollView.scroll(to: .bottom, animated: false)
+            } else {
+                front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y + viewModel.autoScrollSpeed), animated: false)
+            }
         }
     }
 }
@@ -411,20 +413,24 @@ extension BaseView: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         // フロントのみ通知する
-        if front.scrollView == scrollView {
-            if velocity.y == 0 && !isTouching {
-                delegate?.baseViewDidTouchEnd()
-                scrollMovingPointY = 0
+        if let front = front {
+            if front.scrollView == scrollView {
+                if velocity.y == 0 && !isTouching {
+                    delegate?.baseViewDidTouchEnd()
+                    scrollMovingPointY = 0
+                }
             }
         }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // フロントのみ通知する
-        if front.scrollView == scrollView {
-            if !isTouching {
-                delegate?.baseViewDidTouchEnd()
-                scrollMovingPointY = 0
+        if let front = front {
+            if front.scrollView == scrollView {
+                if !isTouching {
+                    delegate?.baseViewDidTouchEnd()
+                    scrollMovingPointY = 0
+                }
             }
         }
     }
