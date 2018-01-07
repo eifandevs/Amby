@@ -519,10 +519,11 @@ extension BaseView: BaseViewModelDelegate {
             
             if isFrontDelete && pageExist {
                 // フロントの削除で、削除後にwebviewが存在する場合
-                if let current = D.find(webViews, callback: { $0?.context == PageHistoryDataModel.s.currentContext })! {
-                    current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
+                
+                if let current = D.find(webViews, callback: { $0?.context == PageHistoryDataModel.s.currentContext }) {
+                    current!.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current!.context))
                     front = current
-                    bringSubview(toFront: current)
+                    bringSubview(toFront: current!)
                 } else {
                     loadWebView()
                 }
