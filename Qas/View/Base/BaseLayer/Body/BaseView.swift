@@ -395,15 +395,17 @@ extension BaseView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // フロントのみ通知する
-        if front.scrollView == scrollView {
-            if scrollMovingPointY != 0 {
-                let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
-                let speed = scrollView.contentOffset.y - scrollMovingPointY
-                if (scrollMovingPointY != 0 && !isOverScrolling || (canForwardScroll && isOverScrolling && speed < 0) || (isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0)) {
-                    delegate?.baseViewDidScroll(speed: -1 * speed)
+        if let front = front {
+            if front.scrollView == scrollView {
+                if scrollMovingPointY != 0 {
+                    let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
+                    let speed = scrollView.contentOffset.y - scrollMovingPointY
+                    if (scrollMovingPointY != 0 && !isOverScrolling || (canForwardScroll && isOverScrolling && speed < 0) || (isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0)) {
+                        delegate?.baseViewDidScroll(speed: -1 * speed)
+                    }
                 }
+                scrollMovingPointY = scrollView.contentOffset.y
             }
-            scrollMovingPointY = scrollView.contentOffset.y
         }
     }
     
