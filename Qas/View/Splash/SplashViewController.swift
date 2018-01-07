@@ -22,12 +22,14 @@ class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        splashLabel.frame.size = CGSize(width: DeviceConst.DISPLAY_SIZE.width / 1.2, height: DeviceConst.DISPLAY_SIZE.height / 18)
-        splashLabel.center = CGPoint(x: DeviceConst.DISPLAY_SIZE.width / 2, y: DeviceConst.DISPLAY_SIZE.height / 2)
-        splashLabel.morphingEffect = .scale
-        splashLabel.delegate = self
-        splashLabel.font = UIFont(name: splashLabel.font.fontName, size: splashLabel.frame.size.height / 2)
-        splashLabel.text = "Quick AcceSs browser"
+        delegate?.splashViewControllerDidEndDrawing()
+
+//        splashLabel.frame.size = CGSize(width: DeviceConst.DISPLAY_SIZE.width / 1.2, height: DeviceConst.DISPLAY_SIZE.height / 18)
+//        splashLabel.center = CGPoint(x: DeviceConst.DISPLAY_SIZE.width / 2, y: DeviceConst.DISPLAY_SIZE.height / 2)
+//        splashLabel.morphingEffect = .scale
+//        splashLabel.delegate = self
+//        splashLabel.font = UIFont(name: splashLabel.font.fontName, size: splashLabel.frame.size.height / 2)
+//        splashLabel.text = "Quick AcceSs browser"
     }
 
     override func didReceiveMemoryWarning() {
