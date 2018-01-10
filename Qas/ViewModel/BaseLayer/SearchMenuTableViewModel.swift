@@ -39,10 +39,8 @@ class SearchMenuTableViewModel {
 
             if operation == .suggest {
                 let token = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
-                if !token.isEmpty {
-                    self.requestSearchQueue.append(token)
-                    self.requestSearch()
-                }
+                self.requestSearchQueue.append(token)
+                self.requestSearch()
             }
         }
     }
