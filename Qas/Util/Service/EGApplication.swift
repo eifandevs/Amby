@@ -18,6 +18,7 @@ import UIKit
 
 @objc(EGApplication) class EGApplication: UIApplication {
     weak var egDelegate: EGApplicationDelegate?
+    private let movieClassName = "AVPlaybackControlsView"
     static let sharedMyApplication = UIApplication.shared as! EGApplication
     
     override func sendEvent(_ event: UIEvent) {
@@ -25,16 +26,19 @@ import UIKit
         // タッチイベントをフックする
         if event.type == .touches {
             if let touches = event.allTouches, let touch = touches.first, touches.count == 1 {
-                switch touch.phase {
-                    case .began:
-                        self.egDelegate?.screenTouchBegan(touch: touch)
-                    case .moved:
-                        self.egDelegate?.screenTouchMoved(touch: touch)
-                    case .ended:
-                        self.egDelegate?.screenTouchEnded(touch: touch)
-                    case .cancelled:
-                        self.egDelegate?.screenTouchCancelled(touch: touch)
-                    default: break
+                // 動画を全画面表示しているときは、無効
+                if touch.view?.className != movieClassName {
+                    switch touch.phase {
+                        case .began:
+                            self.egDelegate?.screenTouchBegan(touch: touch)
+                        case .moved:
+                            self.egDelegate?.screenTouchMoved(touch: touch)
+                        case .ended:
+                            self.egDelegate?.screenTouchEnded(touch: touch)
+                        case .cancelled:
+                            self.egDelegate?.screenTouchCancelled(touch: touch)
+                        default: break
+                    }
                 }
             }
         }
