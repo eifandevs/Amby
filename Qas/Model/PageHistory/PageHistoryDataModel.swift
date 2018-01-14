@@ -152,12 +152,20 @@ final class PageHistoryDataModel {
         })
     }
     
+    /// ページ追加(new window event)
+    func insertByEvent(url: String) {
+        let newPage = PageHistory(url: url ?? "")
+        histories.insert(newPage, at: currentLocation + 1)
+        currentContext = newPage.context
+        self.center.post(name: .pageHistoryDataModelDidInsert, object: newPage)
+    }
+    
     /// ページ追加
     func insert(url: String?) {
         let newPage = PageHistory(url: url ?? "")
         histories.append(newPage)
         currentContext = newPage.context
-        self.center.post(name: .pageHistoryDataModelDidInsert, object: histories.last!)
+        self.center.post(name: .pageHistoryDataModelDidInsert, object: newPage)
     }
     
     /// ページコピー
