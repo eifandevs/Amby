@@ -143,9 +143,11 @@ extension BaseLayer: BaseViewDelegate {
     
     func baseViewDidChangeFront() {
         log.debug("[BaseLayer Event]: baseViewDidChangeFront. headerView slideToMax")
-        UIView.animate(withDuration: 0.35, animations: {
-            self.headerView.slideToMax()
-        }, completion: nil)
+        if !headerView.isLocateMax {
+            UIView.animate(withDuration: 0.35, animations: {
+                self.headerView.slideToMax()
+            }, completion: nil)
+        }
     }
     
     func baseViewDidTouchBegan() {
