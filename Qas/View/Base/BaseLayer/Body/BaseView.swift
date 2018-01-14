@@ -33,8 +33,16 @@ class BaseView: UIView {
     
     /// 最前面のWebView
     private var front: EGWebView! {
+        willSet {
+            if let _ = front {
+                // 高さの初期化
+                front.frame.size.height = frame.size.height
+            }
+        }
         didSet {
             if let _ = front {
+                // 高さの初期化
+                front.frame.size.height = frame.size.height
                 // 移動量の初期化
                 scrollMovingPointY = 0
                 // プライベートモードならデザインを変更する
@@ -94,6 +102,10 @@ class BaseView: UIView {
     var canForwardScroll: Bool {
         return front.scrollView.contentOffset.y < front.scrollView.contentSize.height - front.frame.size.height
     }
+    /// スクロールすべきかどうかのフラグ
+    var shouldScroll: Bool {
+        return front.scrollView.contentSize.height > AppConst.BASE_LAYER_BASE_HEIGHT
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -152,22 +164,38 @@ class BaseView: UIView {
     }
     
 // MARK: Public Method
+    
     func getFrontUrl() -> String? {
         return front.url?.absoluteString
     }
     
     func slide(value: CGFloat) {
         frame.origin.y += value
+        front.frame.size.height -= value
         // スライドと同時にスクロールが発生しているので、逆方向にスクロールし、スクロールを無効化する
         front.scrollView.setContentOffset(CGPoint(x: front.scrollView.contentOffset.x, y: front.scrollView.contentOffset.y + value), animated: false)
     }
 
+    /// サイズの最大化
+    func scaleToMax() {
+        frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT
+        front.frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT
+    }
+    
+    /// サイズの最小化
+    func scaleToMin() {
+        frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT - AppConst.BASE_LAYER_HEADER_HEIGHT + DeviceConst.STATUS_BAR_HEIGHT
+        front.frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT - AppConst.BASE_LAYER_HEADER_HEIGHT + DeviceConst.STATUS_BAR_HEIGHT
+    }
+    
     func slideToMax() {
         frame.origin.y = AppConst.BASE_LAYER_HEADER_HEIGHT
+        scaleToMin()
     }
     
     func slideToMin() {
         frame.origin.y = DeviceConst.STATUS_BAR_HEIGHT
+        scaleToMax()
     }
     
     func validateUserInteraction() {

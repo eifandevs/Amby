@@ -32,7 +32,7 @@ class BaseLayer: UIView {
         // フッタービュー
         footerView = FooterView(frame: CGRect(x: 0, y: DeviceConst.DISPLAY_SIZE.height - AppConst.BASE_LAYER_FOOTER_HEIGHT, width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_FOOTER_HEIGHT))
         // ベースビュー
-        baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_BASE_HEIGHT))
+        baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_BASE_HEIGHT - AppConst.BASE_LAYER_HEADER_HEIGHT + DeviceConst.STATUS_BAR_HEIGHT))
         super.init(frame: frame)
 
         // キーボード監視
@@ -72,12 +72,23 @@ class BaseLayer: UIView {
     
 // MARK: Private Method
     private func slideHeaderView(val: CGFloat) {
+        /// コンテンツサイズが画面より小さい場合は、過去スクロールしない
+        if val < 0 && !baseView.shouldScroll {
+            return
+        }
+        
         if !isTouchEndAnimating {
             headerView.slide(value: val)
         }
     }
     
     private func slideBaseView(val: CGFloat) {
+        
+        /// コンテンツサイズが画面より小さい場合は、過去スクロールしない
+        if val < 0 && !baseView.shouldScroll {
+            return
+        }
+        
         if !isTouchEndAnimating {
             baseView.slide(value: val)
         }
