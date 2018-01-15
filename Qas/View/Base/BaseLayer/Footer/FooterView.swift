@@ -51,8 +51,8 @@ class FooterView: UIView, ShadowView {
     private func load() {
         let pageHistories = viewModel.pageHistories
         if pageHistories.count > 0 {
-            pageHistories.forEach { (item) in
-                let btn = createCaptureSpace(context: item.context)
+            for (index, item) in pageHistories.enumerated() {
+                let btn = insert(at: index, context: item.context)
                 if !item.context.isEmpty {
                     // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合
                     if let image = ThumbnailDataModel.s.getThumbnail(context: item.context) {
@@ -74,7 +74,7 @@ class FooterView: UIView, ShadowView {
     }
     
     /// 新しいサムネイル作成
-    private func createCaptureSpace(context: String) -> Thumbnail {
+    private func insert(at: Int, context: String) -> Thumbnail {
         let additionalPointX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + additionalPointX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
         btn.backgroundColor = UIColor.darkGray
@@ -175,9 +175,9 @@ extension FooterView: FooterViewModelDelegate {
         updateFrontBar()
     }
     
-    func footerViewModelDidAddThumbnail(pageHistory: PageHistory) {
+    func footerViewModelDidInsertThumbnail(at: Int, pageHistory: PageHistory) {
         // 新しいサムネイルスペースを作成
-        let _ = createCaptureSpace(context: pageHistory.context)
+        let _ = insert(at: at, context: pageHistory.context)
         updateFrontBar()
     }
     

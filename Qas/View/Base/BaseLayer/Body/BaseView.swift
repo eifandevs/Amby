@@ -486,7 +486,7 @@ extension BaseView: BaseViewModelDelegate {
         }
     }
     
-    func baseViewModelDidAddWebView() {
+    func baseViewModelDidInsertWebView(at: Int) {
         if let front = front {
             // 全てのwebviewが削除された場合
             front.removeObserver(self, forKeyPath: "estimatedProgress")

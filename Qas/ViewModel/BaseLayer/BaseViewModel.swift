@@ -10,7 +10,7 @@ import Foundation
 import WebKit
 
 protocol BaseViewModelDelegate: class {
-    func baseViewModelDidAddWebView()
+    func baseViewModelDidInsertWebView(at: Int)
     func baseViewModelDidReloadWebView()
     func baseViewModelDidChangeWebView()
     func baseViewModelDidRemoveWebView(context: String, pageExist: Bool, deleteIndex: Int)
@@ -141,7 +141,9 @@ class BaseViewModel {
         center.addObserver(forName: .pageHistoryDataModelDidInsert, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: pageHistoryDataModelDidInsert")
-            self.delegate?.baseViewModelDidAddWebView()
+            let at = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_AT] as! Int
+
+            self.delegate?.baseViewModelDidInsertWebView(at: at)
         }
         
     }
