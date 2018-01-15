@@ -157,7 +157,7 @@ final class PageHistoryDataModel {
         let newPage = PageHistory(url: url ?? "")
         histories.insert(newPage, at: currentLocation + 1)
         currentContext = newPage.context
-        self.center.post(name: .pageHistoryDataModelDidInsert, object: newPage)
+        self.center.post(name: .pageHistoryDataModelDidInsert, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage, AppConst.KEY_NOTIFICATION_AT: currentLocation])
     }
     
     /// ページ追加
@@ -165,7 +165,7 @@ final class PageHistoryDataModel {
         let newPage = PageHistory(url: url ?? "")
         histories.append(newPage)
         currentContext = newPage.context
-        self.center.post(name: .pageHistoryDataModelDidInsert, object: newPage)
+        self.center.post(name: .pageHistoryDataModelDidInsert, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage, AppConst.KEY_NOTIFICATION_AT: currentLocation])
     }
     
     /// ページコピー
@@ -173,7 +173,7 @@ final class PageHistoryDataModel {
         let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
         histories.append(newPage)
         currentContext = newPage.context
-        self.center.post(name: .pageHistoryDataModelDidInsert, object: histories.last!)
+        self.center.post(name: .pageHistoryDataModelDidInsert, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage, AppConst.KEY_NOTIFICATION_AT: currentLocation])
     }
     
     /// ページリロード
