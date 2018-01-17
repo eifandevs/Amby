@@ -38,6 +38,6 @@ class BaseViewControllerViewModel {
     }
     
     func insertPageHistoryDataModel(url: String) {
-        PageHistoryDataModel.s.insert(url: url)
+        PageHistoryDataModel.s.append(url: url)
     }
 }

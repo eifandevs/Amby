@@ -9,6 +9,7 @@
 import Foundation
 
 protocol FooterViewModelDelegate: class {
+    func footerViewModelDidAppendThumbnail(pageHistory: PageHistory)
     func footerViewModelDidInsertThumbnail(at: Int, pageHistory: PageHistory)
     func footerViewModelDidChangeThumbnail(context: String)
     func footerViewModelDidRemoveThumbnail(context: String, pageExist: Bool)
@@ -41,6 +42,15 @@ class FooterViewModel {
     
     init(index: Int) {
         // webview追加
+        center.addObserver(forName: .pageHistoryDataModelDidAppend, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
+            log.debug("[Footer Event]: pageHistoryDataModelDidAppend")
+            let pageHistory = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! PageHistory
+            
+            // 新しいサムネイルを追加
+            self.delegate?.footerViewModelDidAppendThumbnail(pageHistory: pageHistory)
+        }
+        // webview挿入
         center.addObserver(forName: .pageHistoryDataModelDidInsert, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[Footer Event]: pageHistoryDataModelDidInsert")

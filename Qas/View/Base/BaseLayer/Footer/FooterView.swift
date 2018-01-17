@@ -52,7 +52,7 @@ class FooterView: UIView, ShadowView {
         let pageHistories = viewModel.pageHistories
         if pageHistories.count > 0 {
             for (index, item) in pageHistories.enumerated() {
-                let btn = insert(at: index, context: item.context)
+                let btn = append(context: item.context)
                 if !item.context.isEmpty {
                     // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合
                     if let image = ThumbnailDataModel.s.getThumbnail(context: item.context) {
@@ -73,8 +73,43 @@ class FooterView: UIView, ShadowView {
         scrollView.setContentOffset(offset, animated: true)
     }
     
-    /// 新しいサムネイル作成
+    /// 新しいサムネイル追加
+    private func append(context: String) -> Thumbnail {
+        let additionalPointX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
+        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + additionalPointX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
+        btn.backgroundColor = UIColor.darkGray
+        btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
+        let inset: CGFloat = btn.frame.size.width / 9
+        btn.imageEdgeInsets = UIEdgeInsetsMake(inset, inset, inset, inset)
+        btn.addTarget(self, action: #selector(self.tappedThumbnail(_:)), for: .touchUpInside)
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
+        btn.addGestureRecognizer(longPressRecognizer)
+        btn.context = context
+        thumbnails.append(btn)
+        
+        if ((thumbnails.count).f * btn.frame.size.width > scrollView.frame.size.width) {
+            // スクロールビューのコンテンツサイズを大きくする
+            scrollView.contentSize.width += btn.frame.size.width / 2
+            scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
+        }
+        
+        scrollView.addSubview(btn)
+        
+        if thumbnails.count > 1 {
+            for thumbnail in thumbnails {
+                UIView.animate(withDuration: 0.3, animations: {
+                    thumbnail.center.x -= thumbnail.frame.size.width / 2
+                })
+            }
+        }
+        scrollView.scroll(to: .right, animated: true)
+        return btn
+    }
+    
+    /// 新しいサムネイル挿入
     private func insert(at: Int, context: String) -> Thumbnail {
+        // TODO: 挿入する
+        log.warning("at: \(at)")
         let additionalPointX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + additionalPointX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
         btn.backgroundColor = UIColor.darkGray
@@ -96,10 +131,16 @@ class FooterView: UIView, ShadowView {
         scrollView.addSubview(btn)
 
         if thumbnails.count > 1 {
-            for thumbnail in thumbnails {
-                UIView.animate(withDuration: 0.3, animations: { 
-                    thumbnail.center.x -= thumbnail.frame.size.width / 2
-                })
+            for (index, thumbnail) in thumbnails.enumerated() {
+                if index < at {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        thumbnail.center.x -= thumbnail.frame.size.width / 2
+                    })
+                } else {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        thumbnail.center.x += thumbnail.frame.size.width / 2
+                    })
+                }
             }
         }
         scrollView.scroll(to: .right, animated: true)
@@ -172,6 +213,12 @@ extension FooterView: UIScrollViewDelegate {
 // MARK: FooterViewModel Delegate
 extension FooterView: FooterViewModelDelegate {
     func footerViewModelDidChangeThumbnail(context: String) {
+        updateFrontBar()
+    }
+    
+    func footerViewModelDidAppendThumbnail(pageHistory: PageHistory) {
+        // 新しいサムネイルスペースを作成
+        let _ = append(context: pageHistory.context)
         updateFrontBar()
     }
     

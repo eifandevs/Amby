@@ -17,6 +17,7 @@ extension NSNotification.Name {
     static let pageHistoryDataModelDidReload = NSNotification.Name("pageHistoryDataModelDidReload")
     static let pageHistoryDataModelDidRemove = NSNotification.Name("pageHistoryDataModelDidRemove")
     static let pageHistoryDataModelDidInsert = NSNotification.Name("pageHistoryDataModelDidInsert")
+    static let pageHistoryDataModelDidAppend = NSNotification.Name("pageHistoryDataModelDidAppend")
     static let pageHistoryDataModelDidChange = NSNotification.Name("pageHistoryDataModelDidChange")
     static let pageHistoryDataModelDidStartLoading = NSNotification.Name("pageHistoryDataModelDidStartLoading")
     static let pageHistoryDataModelDidEndLoading = NSNotification.Name("pageHistoryDataModelDidEndLoading")

@@ -152,8 +152,8 @@ final class PageHistoryDataModel {
         })
     }
     
-    /// ページ追加(new window event)
-    func insertByEvent(url: String?) {
+    /// ページ挿入(new window event)
+    func insert(url: String?) {
         let newPage = PageHistory(url: url ?? "")
         histories.insert(newPage, at: currentLocation + 1)
         currentContext = newPage.context
@@ -161,11 +161,11 @@ final class PageHistoryDataModel {
     }
     
     /// ページ追加
-    func insert(url: String?) {
+    func append(url: String?) {
         let newPage = PageHistory(url: url ?? "")
         histories.append(newPage)
         currentContext = newPage.context
-        self.center.post(name: .pageHistoryDataModelDidInsert, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage, AppConst.KEY_NOTIFICATION_AT: currentLocation])
+        self.center.post(name: .pageHistoryDataModelDidAppend, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage])
     }
     
     /// ページコピー

@@ -12,6 +12,7 @@ import WebKit
 protocol BaseViewModelDelegate: class {
     func baseViewModelDidInsertWebView(at: Int)
     func baseViewModelDidReloadWebView()
+    func baseViewModelDidAppendWebView()
     func baseViewModelDidChangeWebView()
     func baseViewModelDidRemoveWebView(context: String, pageExist: Bool, deleteIndex: Int)
     func baseViewModelDidHistoryBackWebView()
@@ -137,15 +138,22 @@ class BaseViewModel {
             self.delegate?.baseViewModelDidChangeWebView()
         }
         
+        // ページ挿入
+        center.addObserver(forName: .pageHistoryDataModelDidAppend, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
+            log.debug("[BaseView Event]: pageHistoryDataModelDidAppend")
+
+            self.delegate?.baseViewModelDidAppendWebView()
+        }
+        
         // ページ追加
         center.addObserver(forName: .pageHistoryDataModelDidInsert, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[BaseView Event]: pageHistoryDataModelDidInsert")
             let at = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_AT] as! Int
-
+            
             self.delegate?.baseViewModelDidInsertWebView(at: at)
         }
-        
     }
     
     deinit {
@@ -197,11 +205,11 @@ class BaseViewModel {
     }
     
     func insertPageHistoryDataModel(url: String? = nil) {
-        PageHistoryDataModel.s.insert(url: url)
+        PageHistoryDataModel.s.append(url: url)
     }
     
     func insertByEventPageHistoryDataModel(url: String? = nil) {
-        PageHistoryDataModel.s.insertByEvent(url: url)
+        PageHistoryDataModel.s.insert(url: url)
     }
     
     func beginEditingHeaderViewDataModel() {

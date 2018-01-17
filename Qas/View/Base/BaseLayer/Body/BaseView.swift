@@ -486,7 +486,32 @@ extension BaseView: BaseViewModelDelegate {
         }
     }
     
+    func baseViewModelDidAppendWebView() {
+        if let front = front {
+            // 全てのwebviewが削除された場合
+            front.removeObserver(self, forKeyPath: "estimatedProgress")
+        }
+        viewModel.updateProgressHeaderViewDataModel(object: 0)
+        let newWv = createWebView(context: viewModel.currentContext)
+        webViews.append(newWv)
+        if viewModel.currentUrl.isEmpty {
+            // 編集状態にする
+            if let beginEditingWorkItem = self.beginEditingWorkItem {
+                beginEditingWorkItem.cancel()
+            }
+            beginEditingWorkItem = DispatchWorkItem() { [weak self]  in
+                guard let `self` = self else { return }
+                self.viewModel.beginEditingHeaderViewDataModel()
+                self.beginEditingWorkItem = nil
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
+        } else {
+            _ = newWv.load(urlStr: viewModel.currentUrl)
+        }
+    }
+    
     func baseViewModelDidInsertWebView(at: Int) {
+        // TOFO: 挿入する
         if let front = front {
             // 全てのwebviewが削除された場合
             front.removeObserver(self, forKeyPath: "estimatedProgress")

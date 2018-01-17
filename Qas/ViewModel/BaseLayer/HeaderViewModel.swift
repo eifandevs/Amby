@@ -83,6 +83,14 @@ class HeaderViewModel {
         }
         
         // ページ追加
+        center.addObserver(forName: .pageHistoryDataModelDidAppend, object: nil, queue: nil) { [weak self] (notification) in
+            guard let `self` = self else { return }
+            log.debug("[HeaderView Event]: pageHistoryDataModelDidAppend")
+            let url = PageHistoryDataModel.s.currentHistory.url
+            self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+        }
+        
+        // ページ挿入
         center.addObserver(forName: .pageHistoryDataModelDidInsert, object: nil, queue: nil) { [weak self] (notification) in
             guard let `self` = self else { return }
             log.debug("[HeaderView Event]: pageHistoryDataModelDidInsert")
