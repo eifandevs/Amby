@@ -200,6 +200,10 @@ class BaseViewModel {
         PageHistoryDataModel.s.insert(url: url)
     }
     
+    func insertByEventPageHistoryDataModel(url: String? = nil) {
+        PageHistoryDataModel.s.insertByEvent(url: url)
+    }
+    
     func beginEditingHeaderViewDataModel() {
         HeaderViewDataModel.s.beginEditing(forceEditFlg: false)
     }

@@ -153,7 +153,7 @@ final class PageHistoryDataModel {
     }
     
     /// ページ追加(new window event)
-    func insertByEvent(url: String) {
+    func insertByEvent(url: String?) {
         let newPage = PageHistory(url: url ?? "")
         histories.insert(newPage, at: currentLocation + 1)
         currentContext = newPage.context

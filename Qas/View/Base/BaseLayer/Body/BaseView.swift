@@ -812,7 +812,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             if let url = navigationAction.request.url?.absoluteString {
                 log.debug("receive new window event. url: \(url)")
                 
-                viewModel.insertPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
+                viewModel.insertByEventPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
 
 //                if url != AppConst.URL_BLANK {
 //                    // about:blankは無視する
