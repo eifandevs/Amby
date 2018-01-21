@@ -152,7 +152,7 @@ class FooterView: UIView, ShadowView {
         scrollView.addSubview(btn)
 
         // 挿入アニメーション
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0.2, options: .curveLinear, animations: {
             btn.frame.origin.y = 0
         }, completion: nil)
         
