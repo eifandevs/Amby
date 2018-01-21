@@ -38,6 +38,11 @@ final class PageHistoryDataModel {
         return D.findIndex(histories, callback: { $0.context == currentContext })!
     }
     
+    /// 最新ページを見ているかフラグ
+    var isViewingLatest: Bool {
+        return currentLocation == histories.count - 1
+    }
+    
     /// ページヒストリー保存件数
     private let pageHistorySaveCount = UserDefaults.standard.integer(forKey: AppConst.KEY_PAGE_HISTORY_SAVE_COUNT)
     
@@ -154,10 +159,15 @@ final class PageHistoryDataModel {
     
     /// ページ挿入(new window event)
     func insert(url: String?) {
-        let newPage = PageHistory(url: url ?? "")
-        histories.insert(newPage, at: currentLocation + 1)
-        currentContext = newPage.context
-        self.center.post(name: .pageHistoryDataModelDidInsert, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage, AppConst.KEY_NOTIFICATION_AT: currentLocation])
+        if isViewingLatest {
+            // 最新ページを見ているなら、insertではないので、appendに切り替える
+            append(url: url)
+        } else {
+            let newPage = PageHistory(url: url ?? "")
+            histories.insert(newPage, at: currentLocation + 1)
+            currentContext = newPage.context
+            self.center.post(name: .pageHistoryDataModelDidInsert, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage, AppConst.KEY_NOTIFICATION_AT: currentLocation])
+        }
     }
     
     /// ページ追加
