@@ -182,7 +182,10 @@ final class PageHistoryDataModel {
     func copy() {
         if isViewingLatest {
             // 最新ページを見ているなら、insertではないので、appendに切り替える
-            append(url: currentHistory.url)
+            let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
+            histories.append(newPage)
+            currentContext = newPage.context
+            self.center.post(name: .pageHistoryDataModelDidAppend, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage])
         } else {
             let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
             histories.insert(newPage, at: currentLocation + 1)
