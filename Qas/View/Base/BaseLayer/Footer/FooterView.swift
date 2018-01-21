@@ -47,6 +47,16 @@ class FooterView: UIView, ShadowView {
     
 // MARK: Private Method
     
+    /// 現在地にスクロール
+    private func scrollAtCurrent() {
+        var ptX = -scrollView.contentInset.left + (viewModel.currentLocation.f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width)
+        if ptX > scrollView.contentSize.width - frame.width + scrollView.contentInset.right {
+            ptX = scrollView.contentSize.width - frame.width + scrollView.contentInset.right
+        }
+        let offset = CGPoint(x: ptX, y: scrollView.contentOffset.y)
+        scrollView.setContentOffset(offset, animated: true)
+    }
+    
     /// 初期ロード
     private func load() {
         let pageHistories = viewModel.pageHistories
@@ -65,16 +75,12 @@ class FooterView: UIView, ShadowView {
         }
         updateFrontBar()
         // スクロールする
-        var ptX = -scrollView.contentInset.left + (viewModel.currentLocation.f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width)
-        if ptX > scrollView.contentSize.width - frame.width + scrollView.contentInset.right {
-            ptX = scrollView.contentSize.width - frame.width + scrollView.contentInset.right
-        }
-        let offset = CGPoint(x: ptX, y: scrollView.contentOffset.y)
-        scrollView.setContentOffset(offset, animated: true)
+        scrollAtCurrent()
     }
     
     /// 新しいサムネイル追加
     private func append(context: String) -> Thumbnail {
+        // 後ろに追加
         let additionalPointX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + additionalPointX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
         btn.backgroundColor = UIColor.darkGray
@@ -87,8 +93,8 @@ class FooterView: UIView, ShadowView {
         btn.context = context
         thumbnails.append(btn)
         
+        // スクロールビューのコンテンツサイズを大きくする
         if ((thumbnails.count).f * btn.frame.size.width > scrollView.frame.size.width) {
-            // スクロールビューのコンテンツサイズを大きくする
             scrollView.contentSize.width += btn.frame.size.width / 2
             scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
         }
@@ -108,28 +114,8 @@ class FooterView: UIView, ShadowView {
     
     /// 新しいサムネイル挿入
     private func insert(at: Int, context: String) -> Thumbnail {
-        // TODO: 挿入する
-        log.warning("at: \(at)")
-        let additionalPointX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + additionalPointX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
-        btn.backgroundColor = UIColor.darkGray
-        btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
-        let inset: CGFloat = btn.frame.size.width / 9
-        btn.imageEdgeInsets = UIEdgeInsetsMake(inset, inset, inset, inset)
-        btn.addTarget(self, action: #selector(self.tappedThumbnail(_:)), for: .touchUpInside)
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
-        btn.addGestureRecognizer(longPressRecognizer)
-        btn.context = context
-        thumbnails.append(btn)
-        
-        if ((thumbnails.count).f * btn.frame.size.width > scrollView.frame.size.width) {
-            // スクロールビューのコンテンツサイズを大きくする
-            scrollView.contentSize.width += btn.frame.size.width / 2
-            scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
-        }
-        
-        scrollView.addSubview(btn)
 
+        // スペースを空けるアニメーション
         if thumbnails.count > 1 {
             for (index, thumbnail) in thumbnails.enumerated() {
                 if index < at {
@@ -143,7 +129,35 @@ class FooterView: UIView, ShadowView {
                 }
             }
         }
-        scrollView.scroll(to: .right, animated: true)
+        
+        // 間に挿入
+        let preBtn = thumbnails[at - 1] // 左隣のボタン
+        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: preBtn.frame.origin.x + AppConst.BASE_LAYER_THUMBNAIL_SIZE.width, y: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
+        btn.backgroundColor = UIColor.darkGray
+        btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
+        let inset: CGFloat = btn.frame.size.width / 9
+        btn.imageEdgeInsets = UIEdgeInsetsMake(inset, inset, inset, inset)
+        btn.addTarget(self, action: #selector(self.tappedThumbnail(_:)), for: .touchUpInside)
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
+        btn.addGestureRecognizer(longPressRecognizer)
+        btn.context = context
+        thumbnails.insert(btn, at: at)
+
+        // スクロールビューのコンテンツサイズを大きくする
+        if ((thumbnails.count).f * btn.frame.size.width > scrollView.frame.size.width) {
+            scrollView.contentSize.width += btn.frame.size.width / 2
+            scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
+        }
+        
+        scrollView.addSubview(btn)
+
+        // 挿入アニメーション
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+            btn.frame.origin.y = 0
+        }, completion: nil)
+        
+        scrollAtCurrent()
+        
         return btn
     }
     

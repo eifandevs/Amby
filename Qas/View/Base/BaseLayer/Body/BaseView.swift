@@ -487,8 +487,8 @@ extension BaseView: BaseViewModelDelegate {
     }
     
     func baseViewModelDidAppendWebView() {
+        // 現フロントのプログレス監視を削除
         if let front = front {
-            // 全てのwebviewが削除された場合
             front.removeObserver(self, forKeyPath: "estimatedProgress")
         }
         viewModel.updateProgressHeaderViewDataModel(object: 0)
@@ -511,14 +511,13 @@ extension BaseView: BaseViewModelDelegate {
     }
     
     func baseViewModelDidInsertWebView(at: Int) {
-        // TOFO: 挿入する
+        // 現フロントのプログレス監視を削除
         if let front = front {
-            // 全てのwebviewが削除された場合
             front.removeObserver(self, forKeyPath: "estimatedProgress")
         }
         viewModel.updateProgressHeaderViewDataModel(object: 0)
         let newWv = createWebView(context: viewModel.currentContext)
-        webViews.append(newWv)
+        webViews.insert(newWv, at: at)
         if viewModel.currentUrl.isEmpty {
             // 編集状態にする
             if let beginEditingWorkItem = self.beginEditingWorkItem {

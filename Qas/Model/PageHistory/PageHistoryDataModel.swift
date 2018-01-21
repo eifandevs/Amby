@@ -180,10 +180,15 @@ final class PageHistoryDataModel {
     
     /// ページコピー
     func copy() {
-        let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
-        histories.append(newPage)
-        currentContext = newPage.context
-        self.center.post(name: .pageHistoryDataModelDidInsert, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage, AppConst.KEY_NOTIFICATION_AT: currentLocation])
+        if isViewingLatest {
+            // 最新ページを見ているなら、insertではないので、appendに切り替える
+            append(url: currentHistory.url)
+        } else {
+            let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
+            histories.insert(newPage, at: currentLocation + 1)
+            currentContext = newPage.context
+            self.center.post(name: .pageHistoryDataModelDidInsert, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage, AppConst.KEY_NOTIFICATION_AT: currentLocation])
+        }
     }
     
     /// ページリロード
