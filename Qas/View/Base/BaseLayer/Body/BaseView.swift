@@ -287,7 +287,7 @@ class BaseView: UIView {
     private func saveThumbnail(webView: EGWebView, completion: @escaping (() -> ())) {
         // サムネイルを保存
         DispatchQueue.mainSyncSafe {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
                 webView.takeSnapshot(with: nil) { image, error in
                     if let img = image {
                         let pngImageData = UIImagePNGRepresentation(img)
