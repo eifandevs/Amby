@@ -214,12 +214,12 @@ final class PageHistoryDataModel {
             histories.remove(at: deleteIndex)
             // 削除した結果、ページが存在しない場合は作成する
             if histories.count == 0 {
-                self.center.post(name: .pageHistoryDataModelDidRemove, object: ["context": context, "pageExist": false, "deleteIndex": deleteIndex])
+                self.center.post(name: .pageHistoryDataModelDidRemove, object: [AppConst.KEY_NOTIFICATION_CONTEXT: context, AppConst.KEY_NOTIFICATION_PAGE_EXIST: false, AppConst.KEY_NOTIFICATION_DELETE_INDEX: deleteIndex])
                 let pageHistory = PageHistory()
                 histories.append(pageHistory)
                 currentContext = pageHistory.context
-                UserDefaults.standard.set(currentContext, forKey: AppConst.KEY_CURRENT_CONTEXT)
-                self.center.post(name: .pageHistoryDataModelDidInsert, object: histories.last!)
+                self.center.post(name: .pageHistoryDataModelDidAppend, object: [AppConst.KEY_NOTIFICATION_OBJECT: pageHistory])
+                
                 return
             } else {
                 // 最後の要素を削除した場合は、前のページに戻る
