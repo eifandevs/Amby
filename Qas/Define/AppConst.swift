@@ -48,6 +48,9 @@ final class AppConst {
     static let KEY_NOTIFICATION_MESSAGE = "message"
     static let KEY_NOTIFICATION_OPERATION = "operation"
     static let KEY_NOTIFICATION_OBJECT = "object"
+    static let KEY_NOTIFICATION_CONTEXT = "context"
+    static let KEY_NOTIFICATION_PAGE_EXIST = "pageExist"
+    static let KEY_NOTIFICATION_DELETE_INDEX = "deleteIndex"
     static let KEY_NOTIFICATION_AT = "at"
     
     // MARK: - パス情報
