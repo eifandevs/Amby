@@ -89,7 +89,7 @@ class BaseViewController: UIViewController {
                 if ((orgActionSheet.preferredStyle == .actionSheet) && (orgActionSheet.title != nil)) {
                     // webviewを長押しされたら、そのURLで新しいタブを作成する
                     if url.hasValidUrl {
-                        viewModel.insertPageHistoryDataModel(url: url)
+                        viewModel.insertByEventPageHistoryDataModel(url: url)
                         return
                     }
                 }

@@ -37,7 +37,7 @@ class BaseViewControllerViewModel {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func insertPageHistoryDataModel(url: String) {
-        PageHistoryDataModel.s.append(url: url)
+    func insertByEventPageHistoryDataModel(url: String) {
+        PageHistoryDataModel.s.insert(url: url)
     }
 }
