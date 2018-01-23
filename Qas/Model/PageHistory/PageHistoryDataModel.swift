@@ -60,7 +60,6 @@ final class PageHistoryDataModel {
             let pageHistory = PageHistory()
             histories.append(pageHistory)
             currentContext = pageHistory.context
-            UserDefaults.standard.set(currentContext, forKey: AppConst.KEY_CURRENT_CONTEXT)
             log.warning("failed to read page history: \(error)")
         }
     }
