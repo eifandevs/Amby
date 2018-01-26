@@ -22,7 +22,7 @@ class SearchMenuTableView: UIView {
     private var overlay: UIButton?
     
     private var tableView: UITableView = UITableView()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         isUserInteractionEnabled = true
@@ -70,6 +70,10 @@ class SearchMenuTableView: UIView {
     
     deinit {
         log.debug("deinit called.")
+        if let overlay = overlay {
+            overlay.removeFromSuperview()
+            self.overlay = nil
+        }
         NotificationCenter.default.removeObserver(self)
     }
     
