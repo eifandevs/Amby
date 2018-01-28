@@ -7,12 +7,14 @@ target 'Qas' do
 
   # Pods for Qas
   swift_version = "4.0"
-  pod "PromiseKit", "~> 4.0"
   pod 'Realm', '~> 2.4'
   pod 'SwiftyBeaver', '~> 1.1'
   pod 'SVProgressHUD', '2.1.2'
   pod 'RealmSwift', '~> 2.4'
   pod 'NVActivityIndicatorView', '~> 4.0.0'
+  pod 'RxSwift', '~> 4.0'
+  pod 'RxCocoa', '~> 4.0'
+  pod 'NSObject+Rx', '~> 4.2'
   pod 'R.swift', '~> 3.3'
   pod 'Alamofire', '~> 4.4'
   pod 'LTMorphingLabel', '~> 0.5'
