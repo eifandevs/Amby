@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 /// 通知ビュークラス
 class NotificationView: UIButton {
@@ -20,7 +23,15 @@ class NotificationView: UIButton {
             if finished {
                 self.overlay.frame = CGRect(x: 0, y: DeviceConst.DISPLAY_SIZE.height - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.9), width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.9)
                 self.overlay.backgroundColor = UIColor.clear
-                self.overlay.addTarget(self, action: #selector(self.tappedOverlay(_:)), for: .touchDown)
+                
+                // オーバーレイタップ
+                self.overlay.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        guard let `self` = self else { return }
+                        self.dissmiss()
+                    })
+                    .disposed(by: self.rx.disposeBag)
+                
                 (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.view.addSubview(self.overlay)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
@@ -32,7 +43,8 @@ class NotificationView: UIButton {
                         if finished {
                             self.removeFromSuperview()
                         }
-                    })                }
+                    })
+                }
             }
         }
     }
@@ -46,9 +58,5 @@ class NotificationView: UIButton {
                 self.removeFromSuperview()
             }
         })
-    }
-    
-    @objc func tappedOverlay(_ sender: AnyObject) {
-        dissmiss()
     }
 }

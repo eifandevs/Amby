@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 import NVActivityIndicatorView
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 class FooterView: UIView, ShadowView {
     
@@ -87,7 +90,20 @@ class FooterView: UIView, ShadowView {
         btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
         let inset: CGFloat = btn.frame.size.width / 9
         btn.imageEdgeInsets = UIEdgeInsetsMake(inset, inset, inset, inset)
-        btn.addTarget(self, action: #selector(self.tappedThumbnail(_:)), for: .touchUpInside)
+        
+        // ボタンタップ
+        btn.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                let tappedContext = btn.context
+                if tappedContext == self.viewModel.currentContext {
+                    log.debug("selected same page.")
+                } else {
+                    self.viewModel.changePageHistoryDataModel(context: btn.context)
+                }
+            })
+            .disposed(by: rx.disposeBag)
+        
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
         btn.addGestureRecognizer(longPressRecognizer)
         btn.context = context
@@ -137,7 +153,20 @@ class FooterView: UIView, ShadowView {
         btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
         let inset: CGFloat = btn.frame.size.width / 9
         btn.imageEdgeInsets = UIEdgeInsetsMake(inset, inset, inset, inset)
-        btn.addTarget(self, action: #selector(self.tappedThumbnail(_:)), for: .touchUpInside)
+
+        // ボタンタップ
+        btn.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                let tappedContext = btn.context
+                if tappedContext == self.viewModel.currentContext {
+                    log.debug("selected same page.")
+                } else {
+                    self.viewModel.changePageHistoryDataModel(context: btn.context)
+                }
+            })
+            .disposed(by: rx.disposeBag)
+        
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
         btn.addGestureRecognizer(longPressRecognizer)
         btn.context = context
@@ -191,16 +220,6 @@ class FooterView: UIView, ShadowView {
                 }
             }
         default:break
-        }
-    }
-    
-// MARK: Button Event
-    @objc func tappedThumbnail(_ sender: AnyObject) {
-        let tappedContext = (sender as! Thumbnail).context
-        if tappedContext == viewModel.currentContext {
-            log.debug("selected same page.")
-        } else {
-            viewModel.changePageHistoryDataModel(context: (sender as! Thumbnail).context)
         }
     }
 }

@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 protocol SearchMenuTableViewDelegate: class  {
     func searchMenuDidEndEditing()
@@ -178,15 +181,19 @@ extension SearchMenuTableView: SearchMenuTableViewModelDelegate {
             alpha = 0
             let button = UIButton(frame: frame)
             button.backgroundColor = UIColor.clear
-            button.addTarget(self, action: #selector(self.tappedOverlay(_:)), for: .touchUpInside)
+            
+            // ボタンタップ
+            button.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    guard let `self` = self else { return }
+                    // サーチメニューが透明になっている時にタップ
+                    self.delegate?.searchMenuDidClose()
+                    button.removeFromSuperview()
+                })
+                .disposed(by: rx.disposeBag)
+            
             overlay = button
             superview?.addSubview(button)
         }
-    }
-    
-    @objc func tappedOverlay(_ sender: AnyObject) {
-        // サーチメニューが透明になっている時にタップ
-        delegate?.searchMenuDidClose()
-        (sender as! UIButton).removeFromSuperview()
     }
 }
