@@ -1,0 +1,6 @@
+framework module VerticalAlignmentLabel {
+  umbrella header "VerticalAlignmentLabel-umbrella.h"
+
+  export *
+  module * { export * }
+}

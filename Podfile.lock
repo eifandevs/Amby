@@ -1,0 +1,64 @@
+PODS:
+  - Alamofire (4.5.1)
+  - CryptoSwift (0.8.0)
+  - Dollar (7.0.0)
+  - KeychainAccess (3.1.0)
+  - LTMorphingLabel (0.5.5)
+  - NSObject+Rx (4.2.0):
+    - RxSwift (~> 4.0)
+  - NVActivityIndicatorView (4.0.0):
+    - NVActivityIndicatorView/Presenter (= 4.0.0)
+  - NVActivityIndicatorView/Presenter (4.0.0)
+  - R.swift (3.3.0):
+    - R.swift.Library (~> 3.0.2)
+  - R.swift.Library (3.0.2)
+  - Realm (2.10.2):
+    - Realm/Headers (= 2.10.2)
+  - Realm/Headers (2.10.2)
+  - RealmSwift (2.10.2):
+    - Realm (= 2.10.2)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.0.0)
+  - SVProgressHUD (2.1.2)
+  - SwiftyBeaver (1.4.3)
+  - VerticalAlignmentLabel (0.1.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.4)
+  - CryptoSwift (~> 0.8)
+  - Dollar (~> 7.0)
+  - KeychainAccess (~> 3.1)
+  - LTMorphingLabel (~> 0.5)
+  - NSObject+Rx
+  - NVActivityIndicatorView (~> 4.0.0)
+  - R.swift (~> 3.3)
+  - Realm (~> 2.4)
+  - RealmSwift (~> 2.4)
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
+  - SVProgressHUD (= 2.1.2)
+  - SwiftyBeaver (~> 1.1)
+  - VerticalAlignmentLabel (~> 0.1)
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
+  Dollar: b052b910c711bed91c26caeaec85aa22bccf1655
+  KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
+  LTMorphingLabel: 86464e41c3394dbf1ad098442ed4dcf8891ba975
+  NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
+  NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
+  R.swift: bde9704d50ff36820f49e266bc88ef545e1e9b36
+  R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
+  Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
+  RealmSwift: 07a9ae0505091eda6b2ee7c190c3786d6e90a7b0
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SwiftyBeaver: e10b1668e0512229c36c34769b97eed3dfae2ca3
+  VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
+
+PODFILE CHECKSUM: c5bf9f3166e59e64fd6c678175f5173d22008b37
+
+COCOAPODS: 1.2.1
