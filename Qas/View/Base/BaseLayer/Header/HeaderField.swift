@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 protocol HeaderFieldDelegate: class {
     func headerFieldDidEndEditing(text: String?)
@@ -77,8 +80,15 @@ class HeaderField: UIButton, ShadowView {
         textField.placeholder = "検索ワードまたは、URLを入力"
         textField.text = pastLabelText
         textField.clearButtonMode = .always
-        textField.addTarget(self, action: #selector(HeaderField.textFieldEditingChanged), for: .editingChanged)
-
+        
+        // テキストフィールドの監視
+        textField.rx.text.asDriver()
+         .drive(onNext: { [weak self] text in
+            guard let `self` = self else { return }
+            // 表示している履歴情報の更新
+            self.viewModel.executeOperationDataModel(operation: .suggest, object: text!)
+         })
+         .disposed(by: rx.disposeBag)
         
         // 削除ボタン作成
         let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width + 5, y: DeviceConst.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: self.frame.size.height - DeviceConst.STATUS_BAR_HEIGHT))
@@ -86,7 +96,16 @@ class HeaderField: UIButton, ShadowView {
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
         closeMenuButton.imageView?.contentMode = .scaleAspectFit
         closeMenuButton.imageEdgeInsets = UIEdgeInsetsMake(edgeInset, edgeInset, edgeInset, edgeInset)
-        closeMenuButton.addTarget(self, action: #selector(self.tappedCloseMenuButton(_:)), for: .touchUpInside)
+        
+        // ボタンタップ
+        closeMenuButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.delegate?.headerFieldDidEndEditing(text: nil)
+
+            })
+            .disposed(by: rx.disposeBag)
+        
         self.addSubview(closeMenuButton)
         
         textField.becomeFirstResponder()
@@ -96,7 +115,6 @@ class HeaderField: UIButton, ShadowView {
     // テキストフィールドの削除
     func removeInputForm() {
         closeKeyBoard()
-        textField.removeTarget(self, action: #selector(HeaderField.textFieldEditingChanged), for: .editingChanged)
         textField.removeFromSuperview()
         textField = nil
     }
@@ -176,11 +194,6 @@ class HeaderField: UIButton, ShadowView {
 
         return mString
     }
-    
-    // MARK: Button Event
-    @objc func tappedCloseMenuButton(_ sender: AnyObject) {
-        delegate?.headerFieldDidEndEditing(text: nil)
-    }
 }
 
 // MARK: UITextField Delegate
@@ -188,10 +201,7 @@ extension HeaderField: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
     }
-    @objc func textFieldEditingChanged(sender: UITextField) {
-        // 表示している履歴情報の更新
-        viewModel.executeOperationDataModel(operation: .suggest, object: sender.text!)
-    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.delegate?.headerFieldDidEndEditing(text: textField.text)
         return true
