@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 import CoreLocation
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 protocol HeaderViewDelegate: class {
     func headerViewDidBeginEditing()
@@ -99,25 +102,61 @@ class HeaderView: UIView, ShadowView {
         }
         
         // ヒストリバック
-        historyBackButton.addTarget(self, action: #selector(self.tappedHistoryBackButton(_:)), for: .touchUpInside)
+        // ボタンタップ
+        historyBackButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                // サーチメニューが透明になっている時にタップ
+                self.viewModel.goBackCommonHistoryDataModel()
+            })
+            .disposed(by: rx.disposeBag)
+        // ボタン追加
         addButton(historyBackButton, R.image.circlemenu_historyback()!)
         
         // ヒストリフォアード
-        historyForwardButton.addTarget(self, action: #selector(self.tappedHistoryForwardButton(_:)), for: .touchUpInside)
+        // ボタンタップ
+        historyForwardButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.viewModel.goForwardCommonHistoryDataModel()
+            })
+            .disposed(by: rx.disposeBag)
+        // ボタン追加
         addButton(historyForwardButton, R.image.circlemenu_historyforward()!)
         
         // お気に入り登録
-        favoriteButton.addTarget(self, action: #selector(self.tappedFavoriteButton(_:)), for: .touchUpInside)
+        // ボタンタップ
+        favoriteButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.viewModel.registerFavoriteDataModel()
+            })
+            .disposed(by: rx.disposeBag)
+        // ボタン追加
         addButton(favoriteButton, R.image.header_favorite()!)
         
         // 現在のWebView削除
-        deleteButton.addTarget(self, action: #selector(self.tappedDeleteButton(_:)), for: .touchUpInside)
+        // ボタンタップ
+        deleteButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.viewModel.removePageHistoryDataModel()
+            })
+            .disposed(by: rx.disposeBag)
+        // ボタン追加
         addButton(deleteButton, R.image.circlemenu_close()!)
 
         // ヘッダーフィールド
-        headerField.addTarget(self, action: #selector(self.tappedHeaderField(_:)), for: .touchUpInside)
-        
+        headerField.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.startEditing()
+            })
+            .disposed(by: rx.disposeBag)
+        // ボタン追加
         addSubview(headerField)
+
+        // プログレスバー追加
         addSubview(progressBar)
     }
     
@@ -186,27 +225,6 @@ class HeaderView: UIView, ShadowView {
                 self.headerField.makeInputForm(height: self.headerFieldOriginY)
             })
         }
-    }
-    
-// MARK: Button Event
-    @objc func tappedHistoryBackButton(_ sender: AnyObject) {
-        viewModel.goBackCommonHistoryDataModel()
-    }
-
-    @objc func tappedHistoryForwardButton(_ sender: AnyObject) {
-        viewModel.goForwardCommonHistoryDataModel()
-    }
-
-    @objc func tappedFavoriteButton(_ sender: AnyObject) {
-        viewModel.registerFavoriteDataModel()
-    }
-
-    @objc func tappedDeleteButton(_ sender: AnyObject) {
-        viewModel.removePageHistoryDataModel()
-    }
-    
-    @objc func tappedHeaderField(_ sender: AnyObject) {
-        startEditing()
     }
 }
 
