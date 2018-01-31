@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 protocol OptionMenuTableViewDelegate: class {
     func optionMenuTableViewDidClose()
@@ -130,32 +133,35 @@ extension OptionMenuTableView: UITableViewDelegate {
         // オーバーレイ表示
         let overlay = UIButton(frame: CGRect(origin: CGPoint.zero, size: frame.size))
         overlay.backgroundColor = UIColor.clear
-        overlay.addTarget(self, action: #selector(self.tappedOverlay(_:)), for: .touchDown)
-        addSubview(overlay)
-    }
 
-    // MARK: Button Event
-    @objc func tappedOverlay(_ sender: AnyObject) {
-        // overlay削除
-        (sender as! UIButton).removeFromSuperview()
+        // ボタンタップ
+        overlay.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                // overlay削除
+                overlay.removeFromSuperview()
 
-        // 選択状態解除
-        if let selectedIndexPath = selectedIndexPath {
-            tableView.deselectRow(at: selectedIndexPath, animated: false)
-            self.selectedIndexPath = nil
-        }
+                // 選択状態解除
+                if let selectedIndexPath = self.selectedIndexPath {
+                    tableView.deselectRow(at: selectedIndexPath, animated: false)
+                    self.selectedIndexPath = nil
+                }
 
-        if let detailView = detailView {
-            // 詳細ビューを表示していれば、削除する
-            UIView.animate(withDuration: 0.15, animations: {
-                detailView.alpha = 0
-            }, completion: { (finished) in
-                if finished {
-                    detailView.removeFromSuperview()
-                    self.detailView = nil
+                if let detailView = self.detailView {
+                    // 詳細ビューを表示していれば、削除する
+                    UIView.animate(withDuration: 0.15, animations: {
+                        detailView.alpha = 0
+                    }, completion: { (finished) in
+                        if finished {
+                            detailView.removeFromSuperview()
+                            self.detailView = nil
+                        }
+                    })
                 }
             })
-        }
+            .disposed(by: rx.disposeBag)
+
+        addSubview(overlay)
     }
 }
 

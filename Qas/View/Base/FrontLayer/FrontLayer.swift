@@ -8,6 +8,10 @@
 
 import Foundation
 import UIKit
+import CoreLocation
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 protocol FrontLayerDelegate: class {
     func frontLayerDidInvalidate()
@@ -116,11 +120,6 @@ class FrontLayer: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-// MARK: Button Event
-    @objc func tappedOverlay(_ sender: AnyObject) {
-        optionMenuTableViewDidClose()
-    }
 }
 
 // MARK: OptionMenuTableView Delegate
@@ -148,7 +147,15 @@ extension FrontLayer: CircleMenuDelegate {
         overlay = UIButton(frame: frame)
         overlay.backgroundColor = UIColor.darkGray
         self.overlay.alpha = 0
-        overlay.addTarget(self, action: #selector(self.tappedOverlay(_:)), for: .touchUpInside)
+
+        // ボタンタップ
+        overlay.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.optionMenuTableViewDidClose()
+            })
+            .disposed(by: rx.disposeBag)
+
         addSubview(overlay)
         // addSubviewした段階だと、サークルメニューより前面に配置されているので、最背面に移動する
         sendSubview(toBack: overlay)

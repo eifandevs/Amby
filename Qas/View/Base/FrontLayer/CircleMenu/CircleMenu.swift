@@ -8,6 +8,10 @@
 
 import Foundation
 import UIKit
+import CoreLocation
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 protocol CircleMenuDelegate: class {
     func circleMenuDidClose()
@@ -119,10 +123,22 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                 // サークルメニューアイテムを切り替える
                 let currentCircleMenuItems = circleMenuItems
                 menuIndex = menuIndex + 1 == circleMenuItemGroup.count ? 0 : menuIndex + 1
+                let nextCircleMenuItems = circleMenuItems
                 for (index, item) in currentCircleMenuItems.enumerated() {
-                    circleMenuItems[index].frame = item.frame
-                    circleMenuItems[index].addTarget(self, action: #selector(self.tappedCircleMenuItem(_:)), for: .touchUpInside)
-                    superview!.addSubview(circleMenuItems[index])
+                    nextCircleMenuItems[index].frame = item.frame
+
+                    // ボタンタップ
+                    nextCircleMenuItems[index].rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            guard let `self` = self else { return }
+                            if !self.isClosing {
+                                nextCircleMenuItems[index].scheduledAction = true
+                                self.closeCircleMenuItems()
+                            }
+                        })
+                        .disposed(by: rx.disposeBag)
+
+                    superview!.addSubview(nextCircleMenuItems[index])
                     item.removeFromSuperview()
                 }
             }
@@ -295,14 +311,6 @@ class CircleMenu: UIButton, ShadowView, CircleView {
         }
         return false
     }
-    
-// MARK: Button Event
-    @objc func tappedCircleMenuItem(_ sender: AnyObject) {
-        if !isClosing {
-            (sender as! CircleMenuItem).scheduledAction = true
-            closeCircleMenuItems()
-        }
-    }
 }
 
 // MARK: EGApplication Delegate
@@ -324,7 +332,18 @@ extension CircleMenu: EGApplicationDelegate {
                 for (index, circleMenuItem) in circleMenuItems.enumerated() {
                     circleMenuItem.frame.size = frame.size
                     circleMenuItem.center = initialPt!
-                    circleMenuItem.addTarget(self, action: #selector(self.tappedCircleMenuItem(_:)), for: .touchUpInside)
+
+                    // ボタンタップ
+                    circleMenuItem.rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            guard let `self` = self else { return }
+                            if !self.isClosing {
+                                circleMenuItem.scheduledAction = true
+                                self.closeCircleMenuItems()
+                            }
+                        })
+                        .disposed(by: rx.disposeBag)
+
                     superview!.addSubview(circleMenuItem)
                     UIView.animate(withDuration: 0.18, animations: {
                         circleMenuItem.center = self.center + circleMenuLocations[index]
