@@ -8,6 +8,9 @@
 
 import UIKit
 import VerticalAlignmentLabel
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 class HelpViewController: UIViewController {
 
@@ -32,16 +35,18 @@ class HelpViewController: UIViewController {
         subtitleLabel.text = subtitle
         messageLabel.text = message
         closeButton.backgroundColor = UIColor.brilliantBlue
-        closeButton.addTarget(self, action: #selector(self.tappedCloseButton(_:)), for: .touchUpInside)
+
+        // ボタンタップ
+        closeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: rx.disposeBag)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @objc func tappedCloseButton(_ sender: AnyObject) {
-        dismiss(animated: true, completion: nil)
-    }
-
 }
