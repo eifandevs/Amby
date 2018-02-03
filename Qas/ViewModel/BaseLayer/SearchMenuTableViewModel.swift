@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 protocol SearchMenuTableViewModelDelegate: class {
     func searchMenuViewWillUpdateLayout()
@@ -24,6 +26,8 @@ class SearchMenuTableViewModel {
     private let readSearchHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT)
     private var requestSearchQueue = [String?]()
     private var isRequesting = false
+    /// Observable自動解放
+    let disposeBag = DisposeBag()
     var existDisplayData: Bool {
         return googleSearchCellItem.count > 0 || historyCellItem.count > 0 || searchHistoryCellItem.count > 0
     }
@@ -31,18 +35,21 @@ class SearchMenuTableViewModel {
     init() {
         // webview検索
         // オペレーション監視
-        NotificationCenter.default.addObserver(forName: .operationDataModelDidChange, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[SearchMenuTableView Event]: operationDataModelDidChange")
-
-            let operation = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OPERATION] as! UserOperation
-
-            if operation == .suggest {
-                let token = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
-                self.requestSearchQueue.append(token)
-                self.requestSearch()
+        NotificationCenter.default.rx.notification(.operationDataModelDidChange, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[SearchMenuTableViewModel Event]: operationDataModelDidChange")
+                if let notification = notification.element {
+                    let operation = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OPERATION] as! UserOperation
+                    
+                    if operation == .suggest {
+                        let token = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
+                        self.requestSearchQueue.append(token)
+                        self.requestSearch()
+                    }
+                }
             }
-        }
+            .disposed(by: disposeBag)
     }
 
     deinit {
