@@ -89,7 +89,7 @@ class BaseViewModel {
         center.rx.notification(.pageHistoryDataModelDidReload, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[BaseView Event]: pageHistoryDataModelDidReload")
+                log.debug("[BaseViewModel Event]: pageHistoryDataModelDidReload")
                 self.delegate?.baseViewModelDidReloadWebView()
             }
             .disposed(by: disposeBag)
@@ -98,7 +98,7 @@ class BaseViewModel {
         center.rx.notification(.operationDataModelDidChange, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[BaseView Event]: operationDataModelDidChange")
+                log.debug("[BaseViewModel Event]: operationDataModelDidChange")
                 if let notification = notification.element {
                     let operation = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OPERATION] as! UserOperation
                     if operation == .autoInput {
@@ -122,7 +122,7 @@ class BaseViewModel {
         center.rx.notification(.pageHistoryDataModelDidRemove, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[BaseView Event]: pageHistoryDataModelDidRemove")
+                log.debug("[BaseViewModel Event]: pageHistoryDataModelDidRemove")
                 if let notification = notification.element {
                     let context = (notification.object as! [String: Any])["context"] as! String
                     let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
@@ -137,10 +137,8 @@ class BaseViewModel {
         center.rx.notification(.commonHistoryDataModelDidGoBack, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[BaseView Event]: commonHistoryDataModelDidGoBack")
-                if let notification = notification.element {
-                    self.delegate?.baseViewModelDidHistoryBackWebView()
-                }
+                log.debug("[BaseViewModel Event]: commonHistoryDataModelDidGoBack")
+                self.delegate?.baseViewModelDidHistoryBackWebView()
             }
             .disposed(by: disposeBag)
         
@@ -148,10 +146,8 @@ class BaseViewModel {
         center.rx.notification(.commonHistoryDataModelDidGoForward, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[BaseView Event]: commonHistoryDataModelDidGoForward")
-                if let notification = notification.element {
-                    self.delegate?.baseViewModelDidHistoryForwardWebView()
-                }
+                log.debug("[BaseViewModel Event]: commonHistoryDataModelDidGoForward")
+                self.delegate?.baseViewModelDidHistoryForwardWebView()
             }
             .disposed(by: disposeBag)
         
@@ -159,10 +155,8 @@ class BaseViewModel {
         center.rx.notification(.pageHistoryDataModelDidChange, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[BaseView Event]: pageHistoryDataModelDidChange")
-                if let notification = notification.element {
-                    self.delegate?.baseViewModelDidChangeWebView()
-                }
+                log.debug("[BaseViewModel Event]: pageHistoryDataModelDidChange")
+                self.delegate?.baseViewModelDidChangeWebView()
             }
             .disposed(by: disposeBag)
         
@@ -170,10 +164,8 @@ class BaseViewModel {
         center.rx.notification(.pageHistoryDataModelDidAppend, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[BaseView Event]: pageHistoryDataModelDidAppend")
-                if let notification = notification.element {
-                    self.delegate?.baseViewModelDidAppendWebView()
-                }
+                log.debug("[BaseViewModel Event]: pageHistoryDataModelDidAppend")
+                self.delegate?.baseViewModelDidAppendWebView()
             }
             .disposed(by: disposeBag)
 
@@ -181,7 +173,7 @@ class BaseViewModel {
         center.rx.notification(.pageHistoryDataModelDidInsert, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[BaseView Event]: pageHistoryDataModelDidInsert")
+                log.debug("[BaseViewModel Event]: pageHistoryDataModelDidInsert")
                 if let notification = notification.element {
                     let at = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_AT] as! Int
                     self.delegate?.baseViewModelDidInsertWebView(at: at)
