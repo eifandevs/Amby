@@ -8,13 +8,15 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 protocol BaseLayerDelegate: class {
     func baseLayerDidInvalidate(direction: EdgeSwipeDirection)
 }
 
 class BaseLayer: UIView {
-    
     weak var delegate: BaseLayerDelegate?
     let viewModel = BaseLayerViewModel()
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT))
@@ -37,22 +39,28 @@ class BaseLayer: UIView {
 
         // キーボード監視
         // キーボード表示の処理(フォームの自動設定)
-        registerForKeyboardDidShowNotification { [weak self] (notification, size) in
-            guard let `self` = self else { return }
-            if !self.isHeaderViewEditing {
-                // 自動入力オペ要求
-                self.viewModel.changeOperationDataModel(operation: .autoInput)
+        NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[BaseLayer Event]: NSNotification.Name.UIKeyboardDidShow")
+                if !self.isHeaderViewEditing {
+                    // 自動入力オペ要求
+                    self.viewModel.changeOperationDataModel(operation: .autoInput)
+                }
             }
-        }
+            .disposed(by: self.rx.disposeBag)
         
         // フォアグラウンド時にヘッダービューの位置をMaxにする
-        NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            UIView.animate(withDuration: 0.35, animations: {
-                self.headerView.slideToMax()
-            }, completion: nil)
-        }
-        
+        NotificationCenter.default.rx.notification(.UIApplicationWillEnterForeground, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[BaseLayer Event]: UIApplicationWillEnterForeground")
+                UIView.animate(withDuration: 0.35, animations: {
+                    self.headerView.slideToMax()
+                }, completion: nil)
+            }
+            .disposed(by: self.rx.disposeBag)
+
         baseView.delegate = self
         headerView.delegate = self
         

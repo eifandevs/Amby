@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 extension UIView {
     func registerForKeyboardWillShowNotification(usingBlock block: ((NSNotification, CGSize) -> Void)? = nil) {
