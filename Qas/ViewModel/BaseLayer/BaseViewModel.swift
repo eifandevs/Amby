@@ -8,6 +8,8 @@
 
 import Foundation
 import WebKit
+import RxSwift
+import RxCocoa
 
 protocol BaseViewModelDelegate: class {
     func baseViewModelDidInsertWebView(at: Int)
@@ -71,89 +73,121 @@ class BaseViewModel {
     /// 自動スクロールスピード
     let autoScrollSpeed: CGFloat = 0.6
 
+    /// Observable自動解放
+    let disposeBag = DisposeBag()
+
     init() {
         // バックグラウンドに入るときに履歴を保存する
-        center.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            self.storeHistoryDataModel()
+        center.rx.notification(.UIApplicationWillResignActive, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                self.storeHistoryDataModel()
         }
+        .disposed(by: disposeBag)
         
         // webviewのリロード
-        center.addObserver(forName: .pageHistoryDataModelDidReload, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: pageHistoryDataModelDidReload")
-            self.delegate?.baseViewModelDidReloadWebView()
-        }
+        center.rx.notification(.pageHistoryDataModelDidReload, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[BaseView Event]: pageHistoryDataModelDidReload")
+                self.delegate?.baseViewModelDidReloadWebView()
+            }
+            .disposed(by: disposeBag)
         
         // オペレーション監視
-        center.addObserver(forName: .operationDataModelDidChange, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: operationDataModelDidChange")
-            
-            let operation = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OPERATION] as! UserOperation
-            if operation == .autoInput {
-                self.delegate?.baseViewModelDidAutoInput()
-            } else if operation == .urlCopy {
-                UIPasteboard.general.string = self.currentUrl
-                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_COPY_URL)
-            } else if operation == .search {
-                let text = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
-                self.delegate?.baseViewModelDidSearchWebView(text: text)
-            } else if operation == .form {
-                self.delegate?.baseViewModelDidRegisterAsForm()
-            } else if operation == .autoScroll {
-                self.delegate?.baseViewModelDidAutoScroll()
+        center.rx.notification(.operationDataModelDidChange, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[BaseView Event]: operationDataModelDidChange")
+                if let notification = notification.element {
+                    let operation = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OPERATION] as! UserOperation
+                    if operation == .autoInput {
+                        self.delegate?.baseViewModelDidAutoInput()
+                    } else if operation == .urlCopy {
+                        UIPasteboard.general.string = self.currentUrl
+                        NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_COPY_URL)
+                    } else if operation == .search {
+                        let text = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
+                        self.delegate?.baseViewModelDidSearchWebView(text: text)
+                    } else if operation == .form {
+                        self.delegate?.baseViewModelDidRegisterAsForm()
+                    } else if operation == .autoScroll {
+                        self.delegate?.baseViewModelDidAutoScroll()
+                    }
+                }
             }
-        }
+            .disposed(by: disposeBag)
 
         // webviewの削除
-        center.addObserver(forName: .pageHistoryDataModelDidRemove, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: pageHistoryDataModelDidRemove")
-            let context = (notification.object as! [String: Any])["context"] as! String
-            let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
-            let deleteIndex = (notification.object as! [String: Any])["deleteIndex"] as! Int
-
-            self.delegate?.baseViewModelDidRemoveWebView(context: context, pageExist: pageExist, deleteIndex: deleteIndex)
-        }
+        center.rx.notification(.pageHistoryDataModelDidRemove, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[BaseView Event]: pageHistoryDataModelDidRemove")
+                if let notification = notification.element {
+                    let context = (notification.object as! [String: Any])["context"] as! String
+                    let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
+                    let deleteIndex = (notification.object as! [String: Any])["deleteIndex"] as! Int
+                    
+                    self.delegate?.baseViewModelDidRemoveWebView(context: context, pageExist: pageExist, deleteIndex: deleteIndex)
+                }
+            }
+            .disposed(by: disposeBag)
         
         // webviewヒストリバック
-        center.addObserver(forName: .commonHistoryDataModelDidGoBack, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: commonHistoryDataModelDidGoBack")
-            self.delegate?.baseViewModelDidHistoryBackWebView()
-        }
+        center.rx.notification(.commonHistoryDataModelDidGoBack, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[BaseView Event]: commonHistoryDataModelDidGoBack")
+                if let notification = notification.element {
+                    self.delegate?.baseViewModelDidHistoryBackWebView()
+                }
+            }
+            .disposed(by: disposeBag)
         
         // webviewヒストリフォワード
-        center.addObserver(forName: .commonHistoryDataModelDidGoForward, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: commonHistoryDataModelDidGoForward")
-            self.delegate?.baseViewModelDidHistoryForwardWebView()
-        }
+        center.rx.notification(.commonHistoryDataModelDidGoForward, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[BaseView Event]: commonHistoryDataModelDidGoForward")
+                if let notification = notification.element {
+                    self.delegate?.baseViewModelDidHistoryForwardWebView()
+                }
+            }
+            .disposed(by: disposeBag)
         
         // ページ変更
-        center.addObserver(forName: .pageHistoryDataModelDidChange, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: pageHistoryDataModelDidChange")
-            self.delegate?.baseViewModelDidChangeWebView()
-        }
+        center.rx.notification(.pageHistoryDataModelDidChange, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[BaseView Event]: pageHistoryDataModelDidChange")
+                if let notification = notification.element {
+                    self.delegate?.baseViewModelDidChangeWebView()
+                }
+            }
+            .disposed(by: disposeBag)
         
         // ページ挿入
-        center.addObserver(forName: .pageHistoryDataModelDidAppend, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: pageHistoryDataModelDidAppend")
+        center.rx.notification(.pageHistoryDataModelDidAppend, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[BaseView Event]: pageHistoryDataModelDidAppend")
+                if let notification = notification.element {
+                    self.delegate?.baseViewModelDidAppendWebView()
+                }
+            }
+            .disposed(by: disposeBag)
 
-            self.delegate?.baseViewModelDidAppendWebView()
-        }
-        
         // ページ追加
-        center.addObserver(forName: .pageHistoryDataModelDidInsert, object: nil, queue: nil) { [weak self] (notification) in
-            guard let `self` = self else { return }
-            log.debug("[BaseView Event]: pageHistoryDataModelDidInsert")
-            let at = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_AT] as! Int
-            
-            self.delegate?.baseViewModelDidInsertWebView(at: at)
-        }
+        center.rx.notification(.pageHistoryDataModelDidInsert, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[BaseView Event]: pageHistoryDataModelDidInsert")
+                if let notification = notification.element {
+                    let at = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_AT] as! Int
+                    self.delegate?.baseViewModelDidInsertWebView(at: at)
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     deinit {
