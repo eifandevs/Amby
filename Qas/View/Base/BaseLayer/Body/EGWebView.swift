@@ -9,6 +9,9 @@
 import Foundation
 import WebKit
 import UIKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 class EGWebView: WKWebView {
     enum NETWORK_ERROR {
@@ -44,7 +47,23 @@ class EGWebView: WKWebView {
         super.init(frame: CGRect.zero, configuration: CacheHelper.cacheConfiguration())
         isOpaque = true
         allowsLinkPreview = true
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panned))
+
+        let panGesture = UIPanGestureRecognizer()
+
+        // Panジェスチャー
+        panGesture.rx.event
+            .subscribe{ [weak self] sender in
+                guard let `self` = self else { return }
+                if let sender = sender.element {
+                    if sender.state == .began || sender.state == .changed {
+                        self.isSwiping = true
+                    } else {
+                        self.isSwiping = false
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
+
         addGestureRecognizer(panGesture)
     }
     
@@ -145,14 +164,5 @@ class EGWebView: WKWebView {
         let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return snapshotImage
-    }
-
-// MARK: Gesture Event
-    @objc func panned(sender: UIPanGestureRecognizer) {
-        if sender.state == .began || sender.state == .changed {
-            isSwiping = true
-        } else {
-            isSwiping = false
-        }
     }
 }

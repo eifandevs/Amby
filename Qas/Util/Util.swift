@@ -231,6 +231,10 @@ class Util {
     }
 }
 
+// MARK: - グローバル定義
+/// rxswift用
+public func void<T>(_: T) {}
+
 // MARK: -  演算子拡張
 
 func *(left: CGSize, right: CGFloat) -> CGSize {

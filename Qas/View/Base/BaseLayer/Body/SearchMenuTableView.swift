@@ -49,25 +49,29 @@ class SearchMenuTableView: UIView {
         viewModel.delegate = self
         
         // ジェスチャーを登録する
+        // ジェスチャーの付け替えをするのでRX化しない
         tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
         addGestureRecognizer(tapRecognizer)
         
         // キーボード表示の処理
-        registerForKeyboardDidShowNotification { [weak self] (notification, size) in
-            guard let `self` = self else {
-                return
+        NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[SearchMenuTableView Event]: NSNotification.Name.UIKeyboardDidShow")
+                // ジェスチャーを登録する
+                self.addGestureRecognizer(self.tapRecognizer)
             }
-            // ジェスチャーを登録する
-            self.addGestureRecognizer(self.tapRecognizer)
-        }
-        
-        registerForKeyboardWillHideNotification { [weak self] (notification, size) in
-            guard let `self` = self else {
-                return
+            .disposed(by: rx.disposeBag)
+
+        NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillHide, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[SearchMenuTableView Event]: NSNotification.Name.UIKeyboardWillHide")
+                // ジェスチャーを解除する
+                self.removeGestureRecognizer(self.tapRecognizer)
             }
-            // ジェスチャーを解除する
-            self.removeGestureRecognizer(self.tapRecognizer)
-        }
+            .disposed(by: rx.disposeBag)
+
         addSubview(tableView)
     }
     
