@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 protocol OptionMenuHistoryTableViewDelegate: class {
     func optionMenuHistoryDidClose(view: UIView)
@@ -51,39 +54,39 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
         self.addSubview(view)
 
         // ロングプレスで削除
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed
-            ))
+        let longPressRecognizer = UILongPressGestureRecognizer()
+        
+        longPressRecognizer.rx.event
+            .subscribe{ [weak self] sender in
+                guard let `self` = self else { return }
+                if let sender = sender.element {
+                    if sender.state == .began {
+                        let point: CGPoint = sender.location(in: self.tableView)
+                        let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
+                        if let indexPath = indexPath {
+                            let row = self.viewModel.getRow(indexPath: indexPath)
+                            
+                            self.tableView.beginUpdates()
+                            let rowExist = self.viewModel.removeRow(indexPath: indexPath, row: row)
+                            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                            
+                            if !rowExist {
+                                self.viewModel.removeSection(section: indexPath.section)
+                                self.tableView.deleteSections([indexPath.section], with: .automatic)
+                            }
+                            
+                            self.tableView.endUpdates()
+                        }
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
+        
         addGestureRecognizer(longPressRecognizer)
 
         // モデルデータ取得
         viewModel.getModelData()
     }
-
-    // MARK: Gesture Event
-    @objc func longPressed(sender: UILongPressGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            let point: CGPoint = sender.location(in: tableView)
-            let indexPath: IndexPath? = tableView.indexPathForRow(at: point)
-            if let indexPath = indexPath {
-                let row = viewModel.getRow(indexPath: indexPath)
-
-                tableView.beginUpdates()
-                let rowExist = viewModel.removeRow(indexPath: indexPath, row: row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-
-                if !rowExist {
-                    viewModel.removeSection(section: indexPath.section)
-                    tableView.deleteSections([indexPath.section], with: .automatic)
-                }
-
-                tableView.endUpdates()
-            }
-        default:
-            break
-        }
-    }
-
 }
 
 // MARK: - TableViewDataSourceDelegate

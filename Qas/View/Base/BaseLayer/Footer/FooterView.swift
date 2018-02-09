@@ -104,8 +104,27 @@ class FooterView: UIView, ShadowView {
             })
             .disposed(by: rx.disposeBag)
         
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
+        let longPressRecognizer = UILongPressGestureRecognizer()
+
+        // ロングプレス
+        longPressRecognizer.rx.event
+            .subscribe{ [weak self] sender in
+                guard let `self` = self else { return }
+                if let sender = sender.element {
+                    if sender.state == .began {
+                        for (_, thumbnail) in self.thumbnails.enumerated() {
+                            if sender.view == thumbnail {
+                                self.viewModel.removePageHistoryDataModel(context: thumbnail.context)
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
+
         btn.addGestureRecognizer(longPressRecognizer)
+
         btn.context = context
         thumbnails.append(btn)
         
@@ -167,7 +186,25 @@ class FooterView: UIView, ShadowView {
             })
             .disposed(by: rx.disposeBag)
         
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
+        let longPressRecognizer = UILongPressGestureRecognizer()
+
+        // ロングプレス
+        longPressRecognizer.rx.event
+            .subscribe{ [weak self] sender in
+                guard let `self` = self else { return }
+                if let sender = sender.element {
+                    if sender.state == .began {
+                        for (_, thumbnail) in self.thumbnails.enumerated() {
+                            if sender.view == thumbnail {
+                                self.viewModel.removePageHistoryDataModel(context: thumbnail.context)
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
+
         btn.addGestureRecognizer(longPressRecognizer)
         btn.context = context
         thumbnails.insert(btn, at: at)
@@ -207,20 +244,6 @@ class FooterView: UIView, ShadowView {
     /// フロントバーの変更
     private func updateFrontBar() {
         thumbnails.forEach({ $0.isFront = $0.context == viewModel.currentContext ? true : false })
-    }
-    
-// MARK: Gesture Event
-    @objc func longPressed(sender: UILongPressGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            for (_, thumbnail) in self.thumbnails.enumerated() {
-                if sender.view == thumbnail {
-                    self.viewModel.removePageHistoryDataModel(context: thumbnail.context)
-                    break
-                }
-            }
-        default:break
-        }
     }
 }
 
