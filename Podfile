@@ -17,7 +17,6 @@ target 'Qas' do
   pod 'NSObject+Rx', '~> 4.2'
   pod 'R.swift', '~> 3.3'
   pod 'Alamofire', '~> 4.4'
-  pod 'LTMorphingLabel', '~> 0.5'
   pod 'CryptoSwift', '~> 0.8'
   pod 'KeychainAccess', '~> 3.1'
   pod 'VerticalAlignmentLabel', '~> 0.1'

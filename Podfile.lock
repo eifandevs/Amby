@@ -3,7 +3,6 @@ PODS:
   - CryptoSwift (0.8.0)
   - Dollar (7.0.0)
   - KeychainAccess (3.1.0)
-  - LTMorphingLabel (0.5.5)
   - NSObject+Rx (4.2.0):
     - RxSwift (~> 4.0)
   - NVActivityIndicatorView (4.0.0):
@@ -29,8 +28,7 @@ DEPENDENCIES:
   - CryptoSwift (~> 0.8)
   - Dollar (~> 7.0)
   - KeychainAccess (~> 3.1)
-  - LTMorphingLabel (~> 0.5)
-  - NSObject+Rx
+  - NSObject+Rx (~> 4.2)
   - NVActivityIndicatorView (~> 4.0.0)
   - R.swift (~> 3.3)
   - Realm (~> 2.4)
@@ -46,7 +44,6 @@ SPEC CHECKSUMS:
   CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
   Dollar: b052b910c711bed91c26caeaec85aa22bccf1655
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
-  LTMorphingLabel: 86464e41c3394dbf1ad098442ed4dcf8891ba975
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
   NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
   R.swift: bde9704d50ff36820f49e266bc88ef545e1e9b36
@@ -59,6 +56,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: e10b1668e0512229c36c34769b97eed3dfae2ca3
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: c5bf9f3166e59e64fd6c678175f5173d22008b37
+PODFILE CHECKSUM: afb5c73fa61b83aa6229e596a41c1cebd470423d
 
 COCOAPODS: 1.2.1
