@@ -21,6 +21,7 @@
 		A527CBAA1FD31844000DF901 /* BaseViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */; };
 		A527CBAC1FD31A90000DF901 /* FrontLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */; };
 		A527CBAF1FD97D0C000DF901 /* HeaderViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A527CBAE1FD97D0C000DF901 /* HeaderViewDataModel.swift */; };
+		A52C3DD62039A70B002CD9BD /* ArticleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52C3DD52039A70B002CD9BD /* ArticleDataModel.swift */; };
 		A53C0EC01FB7764500FD78FF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */; };
 		A53C0EC21FB7766A00FD78FF /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EC11FB7766A00FD78FF /* NotificationView.swift */; };
 		A53C0EE21FB778ED00FD78FF /* CommonHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDB1FB778ED00FD78FF /* CommonHistory.swift */; };
@@ -164,6 +165,7 @@
 		A527CBA91FD31844000DF901 /* BaseViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A527CBAB1FD31A90000DF901 /* FrontLayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModel.swift; sourceTree = "<group>"; };
 		A527CBAE1FD97D0C000DF901 /* HeaderViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewDataModel.swift; sourceTree = "<group>"; };
+		A52C3DD52039A70B002CD9BD /* ArticleDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataModel.swift; sourceTree = "<group>"; };
 		A53574841FFC285F004F4440 /* Qas-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Qas-Bridging-Header.h"; sourceTree = "<group>"; };
 		A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A53C0EC11FB7766A00FD78FF /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -365,6 +367,14 @@
 				A527CBAE1FD97D0C000DF901 /* HeaderViewDataModel.swift */,
 			);
 			path = HeaderView;
+			sourceTree = "<group>";
+		};
+		A52C3DD42039A6D2002CD9BD /* Article */ = {
+			isa = PBXGroup;
+			children = (
+				A52C3DD52039A70B002CD9BD /* ArticleDataModel.swift */,
+			);
+			path = Article;
 			sourceTree = "<group>";
 		};
 		A53C0EBE1FB7764500FD78FF /* Notification */ = {
@@ -621,6 +631,7 @@
 		A5BCE7631FA50BFA00E0C6E5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A52C3DD42039A6D2002CD9BD /* Article */,
 				A5117A4F1FDC48D900213E02 /* Operation */,
 				A527CBAD1FD97CFD000DF901 /* HeaderView */,
 				A586CD8C1FB77B4400961B30 /* Thumbnail */,
@@ -1088,6 +1099,7 @@
 				A5BCE7151FA501B900E0C6E5 /* UIView+Extend.swift in Sources */,
 				A53C0EE21FB778ED00FD78FF /* CommonHistory.swift in Sources */,
 				A57131A41FC26B8700BA07E0 /* Date+Extend.swift in Sources */,
+				A52C3DD62039A70B002CD9BD /* ArticleDataModel.swift in Sources */,
 				A56983C11FA52490000A585F /* SearchHistoryDataModel.swift in Sources */,
 				A5649A3E1FE5847D00EA69E1 /* OptionMenuHistoryTableViewModel.swift in Sources */,
 				A5649A4C1FE59D3200EA69E1 /* OptionMenuHelpTableView.swift in Sources */,
