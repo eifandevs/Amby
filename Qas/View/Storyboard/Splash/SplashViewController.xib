@@ -17,7 +17,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashViewController" customModule="Qas" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="i5M-Pr-FkT" id="zuq-cQ-4oA"/>
-                <outlet property="splashLabel" destination="X4w-tT-4KB" id="ovD-Zr-eRe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,17 +26,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N2g-ow-wGh">
-                    <rect key="frame" x="0.0" y="284" width="375" height="100"/>
+                    <rect key="frame" x="0.0" y="286" width="375" height="96"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="FoF-z9-hAG">
-                            <rect key="frame" x="155.5" y="0.0" width="64" height="64"/>
+                            <rect key="frame" x="157.5" y="0.0" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="SYl-XR-1SC"/>
                                 <constraint firstAttribute="width" constant="60" id="zci-jv-cUo"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4w-tT-4KB" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
-                            <rect key="frame" x="56.5" y="74" width="262.5" height="26"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4w-tT-4KB">
+                            <rect key="frame" x="56.5" y="70" width="262.5" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="26" id="YUt-u6-Nor"/>
                             </constraints>
