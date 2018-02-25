@@ -76,12 +76,11 @@ class HeaderField: UIButton, ShadowView {
         textField.borderStyle = .none
         textField.keyboardType = .default
         textField.returnKeyType = .search
-        textField.delegate = self
-        textField.placeholder = "検索ワードまたは、URLを入力"
+        textField.placeholder = MessageConst.HEADER_SEARCH_PLACEHOLDER
         textField.text = pastLabelText
         textField.clearButtonMode = .always
         
-        // テキストフィールドの監視
+        // テキストフィールドの変更監視
         textField.rx.text.asDriver()
          .drive(onNext: { [weak self] text in
             guard let `self` = self else { return }
@@ -89,6 +88,22 @@ class HeaderField: UIButton, ShadowView {
             self.viewModel.executeOperationDataModel(operation: .suggest, object: text!)
          })
          .disposed(by: rx.disposeBag)
+        
+        // テキストフィールドの編集開始を監視
+        textField.rx.controlEvent(UIControlEvents.editingDidBegin)
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.textField.selectedTextRange = self.textField.textRange(from: self.textField.beginningOfDocument, to: self.textField.endOfDocument)
+            })
+            .disposed(by: rx.disposeBag)
+        
+        // テキストフィールドの編集終了を監視
+        textField.rx.controlEvent(UIControlEvents.editingDidEndOnExit)
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.delegate?.headerFieldDidEndEditing(text: self.textField.text)
+            })
+            .disposed(by: rx.disposeBag)
         
         // 削除ボタン作成
         let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width + 5, y: DeviceConst.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: self.frame.size.height - DeviceConst.STATUS_BAR_HEIGHT))
@@ -193,17 +208,5 @@ class HeaderField: UIButton, ShadowView {
             range: (text as NSString).range(of: "https"))
 
         return mString
-    }
-}
-
-// MARK: UITextField Delegate
-extension HeaderField: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.delegate?.headerFieldDidEndEditing(text: textField.text)
-        return true
     }
 }
