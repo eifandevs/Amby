@@ -36,6 +36,9 @@ final class MessageConst {
     static let NOTIFICATION_REGISTER_FORM_ERROR_INPUT = "フォーム情報の入力を確認できませんでした"
     static let NOTIFICATION_REGISTER_FORM_ERROR_CRAWL = "ページ情報を取得できませんでした"
 
+    // MARK: - ヘッダー
+    static let HEADER_SEARCH_PLACEHOLDER = "検索ワードまたは、URLを入力"
+    
     // MARK: - ヘルプ
     // 履歴
     static let HELP_HISTORY_SAVE_TITLE = "閲覧履歴、検索履歴の保存日数"
