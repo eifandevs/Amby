@@ -12,7 +12,6 @@ import RxSwift
 import RxCocoa
 
 protocol BaseViewModelDelegate: class {
-    func baseViewModelDidInsertWebView(at: Int)
     func baseViewModelDidReloadWebView()
     func baseViewModelDidAppendWebView()
     func baseViewModelDidChangeWebView()
@@ -26,6 +25,9 @@ protocol BaseViewModelDelegate: class {
 }
 
 class BaseViewModel {
+    /// インサート通知用RX
+    let rx_baseViewModelDidInsertWebView = PublishSubject<Int>()
+
     /// リクエストURL(jsのURL)
     var currentUrl: String {
         return PageHistoryDataModel.s.currentHistory.url
@@ -176,7 +178,7 @@ class BaseViewModel {
                 log.debug("[BaseViewModel Event]: pageHistoryDataModelDidInsert")
                 if let notification = notification.element {
                     let at = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_AT] as! Int
-                    self.delegate?.baseViewModelDidInsertWebView(at: at)
+                    self.rx_baseViewModelDidInsertWebView.onNext(at)
                 }
             }
             .disposed(by: disposeBag)

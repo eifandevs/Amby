@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 import WebKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 protocol BaseViewDelegate: class {
     func baseViewDidScroll(speed: CGFloat)
@@ -136,6 +139,35 @@ class BaseView: UIView {
                 self.viewModel.beginEditingHeaderViewDataModel()
             }
         }
+        
+        // インサート監視
+        viewModel.rx_baseViewModelDidInsertWebView.subscribe{ [weak self] at in
+            guard let `self` = self else { return }
+            if let at = at.element {
+                // 現フロントのプログレス監視を削除
+                if let front = self.front {
+                    front.removeObserver(self, forKeyPath: "estimatedProgress")
+                }
+                self.viewModel.updateProgressHeaderViewDataModel(object: 0)
+                let newWv = self.createWebView(context: self.viewModel.currentContext)
+                self.webViews.insert(newWv, at: at)
+                if self.viewModel.currentUrl.isEmpty {
+                    // 編集状態にする
+                    if let beginEditingWorkItem = self.beginEditingWorkItem {
+                        beginEditingWorkItem.cancel()
+                    }
+                    self.beginEditingWorkItem = DispatchWorkItem() { [weak self]  in
+                        guard let `self` = self else { return }
+                        self.viewModel.beginEditingHeaderViewDataModel()
+                        self.beginEditingWorkItem = nil
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: self.beginEditingWorkItem!)
+                } else {
+                    _ = newWv.load(urlStr: self.viewModel.currentUrl)
+                }
+            }
+        }
+        .disposed(by: rx.disposeBag)
     }
     
     deinit {
@@ -494,30 +526,6 @@ extension BaseView: BaseViewModelDelegate {
         viewModel.updateProgressHeaderViewDataModel(object: 0)
         let newWv = createWebView(context: viewModel.currentContext)
         webViews.append(newWv)
-        if viewModel.currentUrl.isEmpty {
-            // 編集状態にする
-            if let beginEditingWorkItem = self.beginEditingWorkItem {
-                beginEditingWorkItem.cancel()
-            }
-            beginEditingWorkItem = DispatchWorkItem() { [weak self]  in
-                guard let `self` = self else { return }
-                self.viewModel.beginEditingHeaderViewDataModel()
-                self.beginEditingWorkItem = nil
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
-        } else {
-            _ = newWv.load(urlStr: viewModel.currentUrl)
-        }
-    }
-    
-    func baseViewModelDidInsertWebView(at: Int) {
-        // 現フロントのプログレス監視を削除
-        if let front = front {
-            front.removeObserver(self, forKeyPath: "estimatedProgress")
-        }
-        viewModel.updateProgressHeaderViewDataModel(object: 0)
-        let newWv = createWebView(context: viewModel.currentContext)
-        webViews.insert(newWv, at: at)
         if viewModel.currentUrl.isEmpty {
             // 編集状態にする
             if let beginEditingWorkItem = self.beginEditingWorkItem {
