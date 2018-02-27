@@ -11,22 +11,30 @@ import WebKit
 import RxSwift
 import RxCocoa
 
-protocol BaseViewModelDelegate: class {
-    func baseViewModelDidReloadWebView()
-    func baseViewModelDidAppendWebView()
-    func baseViewModelDidChangeWebView()
-    func baseViewModelDidRemoveWebView(context: String, pageExist: Bool, deleteIndex: Int)
-    func baseViewModelDidHistoryBackWebView()
-    func baseViewModelDidHistoryForwardWebView()
-    func baseViewModelDidSearchWebView(text: String)
-    func baseViewModelDidRegisterAsForm()
-    func baseViewModelDidAutoScroll()
-    func baseViewModelDidAutoInput()
-}
-
 class BaseViewModel {
-    /// インサート通知用RX
+    /// ページインサート通知用RX
     let rx_baseViewModelDidInsertWebView = PublishSubject<Int>()
+    /// ページリロード通知用RX
+    let rx_baseViewModelDidReloadWebView = PublishSubject<Void>()
+    /// ページ追加通知用RX
+    let rx_baseViewModelDidAppendWebView = PublishSubject<Void>()
+    /// ページ変更通知用RX
+    let rx_baseViewModelDidChangeWebView = PublishSubject<Void>()
+    /// ページ削除通知用RX
+    let rx_baseViewModelDidRemoveWebView = PublishSubject<(context: String, pageExist: Bool, deleteIndex: Int)>()
+    /// ヒストリーバック通知用RX
+    let rx_baseViewModelDidHistoryBackWebView = PublishSubject<Void>()
+    /// ヒストリーフォワード通知用RX
+    let rx_baseViewModelDidHistoryForwardWebView = PublishSubject<Void>()
+    /// 検索通知用RX
+    let rx_baseViewModelDidSearchWebView = PublishSubject<String>()
+    /// フォーム登録通知用RX
+    let rx_baseViewModelDidRegisterAsForm = PublishSubject<Void>()
+    /// 自動スクロール通知用RX
+    let rx_baseViewModelDidAutoScroll = PublishSubject<Void>()
+    /// 自動入力通知用RX
+    let rx_baseViewModelDidAutoInput = PublishSubject<Void>()
+
 
     /// リクエストURL(jsのURL)
     var currentUrl: String {
@@ -53,8 +61,6 @@ class BaseViewModel {
     var reloadUrl: String {
         return headerFieldText
     }
-    
-    weak var delegate: BaseViewModelDelegate?
     
     /// 最新のリクエストURL(wv.url)。エラーが発生した時用
     var latestRequestUrl: String = ""
@@ -92,7 +98,7 @@ class BaseViewModel {
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
                 log.debug("[BaseViewModel Event]: pageHistoryDataModelDidReload")
-                self.delegate?.baseViewModelDidReloadWebView()
+                self.rx_baseViewModelDidReloadWebView.onNext(())
             }
             .disposed(by: disposeBag)
         
@@ -104,17 +110,17 @@ class BaseViewModel {
                 if let notification = notification.element {
                     let operation = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OPERATION] as! UserOperation
                     if operation == .autoInput {
-                        self.delegate?.baseViewModelDidAutoInput()
+                        self.rx_baseViewModelDidAutoInput.onNext(())
                     } else if operation == .urlCopy {
                         UIPasteboard.general.string = self.currentUrl
                         NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_COPY_URL)
                     } else if operation == .search {
                         let text = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
-                        self.delegate?.baseViewModelDidSearchWebView(text: text)
+                        self.rx_baseViewModelDidSearchWebView.onNext(text)
                     } else if operation == .form {
-                        self.delegate?.baseViewModelDidRegisterAsForm()
+                        self.rx_baseViewModelDidRegisterAsForm.onNext(())
                     } else if operation == .autoScroll {
-                        self.delegate?.baseViewModelDidAutoScroll()
+                        self.rx_baseViewModelDidAutoScroll.onNext(())
                     }
                 }
             }
@@ -130,7 +136,7 @@ class BaseViewModel {
                     let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
                     let deleteIndex = (notification.object as! [String: Any])["deleteIndex"] as! Int
                     
-                    self.delegate?.baseViewModelDidRemoveWebView(context: context, pageExist: pageExist, deleteIndex: deleteIndex)
+                    self.rx_baseViewModelDidRemoveWebView.onNext((context: context, pageExist: pageExist, deleteIndex: deleteIndex))
                 }
             }
             .disposed(by: disposeBag)
@@ -140,7 +146,7 @@ class BaseViewModel {
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
                 log.debug("[BaseViewModel Event]: commonHistoryDataModelDidGoBack")
-                self.delegate?.baseViewModelDidHistoryBackWebView()
+                self.rx_baseViewModelDidHistoryBackWebView.onNext(())
             }
             .disposed(by: disposeBag)
         
@@ -149,7 +155,7 @@ class BaseViewModel {
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
                 log.debug("[BaseViewModel Event]: commonHistoryDataModelDidGoForward")
-                self.delegate?.baseViewModelDidHistoryForwardWebView()
+                self.rx_baseViewModelDidHistoryForwardWebView.onNext(())
             }
             .disposed(by: disposeBag)
         
@@ -158,7 +164,7 @@ class BaseViewModel {
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
                 log.debug("[BaseViewModel Event]: pageHistoryDataModelDidChange")
-                self.delegate?.baseViewModelDidChangeWebView()
+                self.rx_baseViewModelDidChangeWebView.onNext(())
             }
             .disposed(by: disposeBag)
         
@@ -167,7 +173,7 @@ class BaseViewModel {
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
                 log.debug("[BaseViewModel Event]: pageHistoryDataModelDidAppend")
-                self.delegate?.baseViewModelDidAppendWebView()
+                self.rx_baseViewModelDidAppendWebView.onNext(())
             }
             .disposed(by: disposeBag)
 
