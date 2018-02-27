@@ -109,7 +109,6 @@ class BaseLayer: UIView {
         .disposed(by: rx.disposeBag)
         
         // BaseViewスクロール監視
-        
         baseView.rx_baseViewDidScroll
             .map({ -$0 })
             .observeOn(MainScheduler.asyncInstance)
