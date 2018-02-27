@@ -61,7 +61,106 @@ class BaseLayer: UIView {
             }
             .disposed(by: self.rx.disposeBag)
 
-        baseView.delegate = self
+        // BaseViewスワイプ監視
+        baseView.rx_baseViewDidEdgeSwiped.subscribe{ [weak self] object in
+            guard let `self` = self else { return }
+            if let swipeDirection = object.element {
+                log.debug("[BaseLayer Event]: baseViewDidEdgeSwiped")
+                // 検索中の場合は、検索画面を閉じる
+                if let _ = self.searchMenuTableView {
+                    log.debug("close search menu.")
+                    self.headerViewDidEndEditing(headerFieldUpdate: false)
+                    self.validateUserInteraction()
+                } else {
+                    self.delegate?.baseLayerDidInvalidate(direction: swipeDirection)
+                }
+            }
+        }
+        .disposed(by: rx.disposeBag)
+        
+        // BaseViewタッチ終了検知
+        baseView.rx_baseViewDidTouchEnd.subscribe{ [weak self] _ in
+            guard let `self` = self else { return }
+            log.debug("[BaseLayer Event]: baseViewDidTouchEnd. adjust header location")
+            // タッチ終了時にヘッダービューとベースビューの高さを調整する
+            if self.headerView.isMoving {
+                self.isTouchEndAnimating = true
+                if self.headerView.frame.origin.y > self.headerViewOriginY.min / 2 {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.headerView.slideToMax()
+                        self.baseView.slideToMax()
+                    }, completion: { (finished) in
+                        if finished {
+                            self.isTouchEndAnimating = false
+                        }
+                    })
+                } else {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.headerView.slideToMin()
+                        self.baseView.slideToMin()
+                    }, completion: { (finished) in
+                        if finished {
+                            self.isTouchEndAnimating = false
+                        }
+                    })
+                }
+            }
+        }
+        .disposed(by: rx.disposeBag)
+        
+        // BaseViewスクロール監視
+        
+        baseView.rx_baseViewDidScroll
+            .map({ -$0 })
+            .observeOn(MainScheduler.asyncInstance)
+            .subscribe { [weak self] object in
+                guard let `self` = self else { return }
+                if let speed = object.element {
+                    if speed > 0 {
+                        // 逆順方向(過去)のスクロール
+                        // ヘッダービューがスライド可能の場合にスライドさせる
+                        if !self.headerView.isLocateMax {
+                            if self.headerView.frame.origin.y + speed > self.headerViewOriginY.max {
+                                // スライドした結果、Maxを超える場合は、調整する
+                                self.headerView.slideToMax()
+                            } else {
+                                self.slideHeaderView(val: speed)
+                            }
+                        }
+                        // ベースビューがスライド可能な場合にスライドさせる
+                        if !self.baseView.isLocateMax {
+                            if self.baseView.frame.origin.y + speed > self.baseViewOriginY.max {
+                                // スライドした結果、Maxを超える場合は、調整する
+                                self.baseView.slideToMax()
+                            } else {
+                                self.slideBaseView(val: speed)
+                            }
+                        }
+                    } else if speed < 0 {
+                        // 順方向(未来)のスクロール
+                        // ヘッダービューがスライド可能の場合にスライドさせる
+                        if !self.headerView.isLocateMin {
+                            if self.headerView.frame.origin.y + speed < self.headerViewOriginY.min {
+                                // スライドした結果、Minを下回る場合は、調整する
+                                self.headerView.slideToMin()
+                            } else {
+                                self.slideHeaderView(val: speed)
+                            }
+                        }
+                        // ベースビューがスライド可能な場合にスライドさせる
+                        if !self.baseView.isLocateMin {
+                            if self.baseView.frame.origin.y + speed < self.baseViewOriginY.min {
+                                // スライドした結果、Minを下回る場合は、調整する
+                                self.baseView.slideToMin()
+                            } else {
+                                self.slideBaseView(val: speed)
+                            }
+                        }
+                    }
+                }
+        }
+        .disposed(by: rx.disposeBag)
+
         headerView.delegate = self
         
         addSubview(baseView)
@@ -142,106 +241,6 @@ extension BaseLayer: HeaderViewDelegate {
         searchMenuTableView!.removeFromSuperview()
         searchMenuTableView = nil
         headerView.finishEditing(headerFieldUpdate: headerFieldUpdate)
-    }
-}
-
-// MARK: BaseView Delegate
-extension BaseLayer: BaseViewDelegate {
-    
-    func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection) {
-        log.debug("[BaseLayer Event]: baseViewDidEdgeSwiped")
-        // 検索中の場合は、検索画面を閉じる
-        if let _ = searchMenuTableView {
-            log.debug("close search menu.")
-            headerViewDidEndEditing(headerFieldUpdate: false)
-            validateUserInteraction()
-        } else {
-            delegate?.baseLayerDidInvalidate(direction: direction)
-        }
-    }
-    
-    func baseViewDidChangeFront() {
-        log.debug("[BaseLayer Event]: baseViewDidChangeFront. headerView slideToMax")
-        // ページ切り替え時のヘッダー表示はやめる
-//        if !headerView.isLocateMax {
-//            UIView.animate(withDuration: 0.35, animations: {
-//                self.headerView.slideToMax()
-//            }, completion: nil)
-//        }
-    }
-    
-    func baseViewDidTouchBegan() {
-    }
-    
-    func baseViewDidTouchEnd() {
-        log.debug("[BaseLayer Event]: baseViewDidTouchEnd. adjust header location")
-        // タッチ終了時にヘッダービューとベースビューの高さを調整する
-        if headerView.isMoving {
-            isTouchEndAnimating = true
-            if headerView.frame.origin.y > headerViewOriginY.min / 2 {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.headerView.slideToMax()
-                    self.baseView.slideToMax()
-                }, completion: { (finished) in
-                    if finished {
-                        self.isTouchEndAnimating = false
-                    }
-                })
-            } else {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.headerView.slideToMin()
-                    self.baseView.slideToMin()
-                }, completion: { (finished) in
-                    if finished {
-                        self.isTouchEndAnimating = false
-                    }
-                })
-            }
-        }
-    }
-    
-    func baseViewDidScroll(speed: CGFloat) {
-        if speed > 0 {
-            // 逆順方向(過去)のスクロール
-            // ヘッダービューがスライド可能の場合にスライドさせる
-            if !headerView.isLocateMax {
-                if headerView.frame.origin.y + speed > headerViewOriginY.max {
-                    // スライドした結果、Maxを超える場合は、調整する
-                    headerView.slideToMax()
-                } else {
-                    slideHeaderView(val: speed)
-                }
-            }
-            // ベースビューがスライド可能な場合にスライドさせる
-            if !baseView.isLocateMax {
-                if baseView.frame.origin.y + speed > baseViewOriginY.max {
-                    // スライドした結果、Maxを超える場合は、調整する
-                    baseView.slideToMax()
-                } else {
-                    slideBaseView(val: speed)
-                }
-            }
-        } else if speed < 0 {
-            // 順方向(未来)のスクロール
-            // ヘッダービューがスライド可能の場合にスライドさせる
-            if !headerView.isLocateMin {
-                if headerView.frame.origin.y + speed < headerViewOriginY.min {
-                    // スライドした結果、Minを下回る場合は、調整する
-                    headerView.slideToMin()
-                } else {
-                    slideHeaderView(val: speed)
-                }
-            }
-            // ベースビューがスライド可能な場合にスライドさせる
-            if !baseView.isLocateMin {
-                if baseView.frame.origin.y + speed < baseViewOriginY.min {
-                    // スライドした結果、Minを下回る場合は、調整する
-                    baseView.slideToMin()
-                } else {
-                    slideBaseView(val: speed)
-                }
-            }
-        }
     }
 }
 

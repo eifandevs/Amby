@@ -13,14 +13,6 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol BaseViewDelegate: class {
-    func baseViewDidScroll(speed: CGFloat)
-    func baseViewDidChangeFront()
-    func baseViewDidTouchBegan()
-    func baseViewDidTouchEnd()
-    func baseViewDidEdgeSwiped(direction: EdgeSwipeDirection)
-}
-
 enum EdgeSwipeDirection: CGFloat {
     case right = 1
     case left = -1
@@ -29,7 +21,16 @@ enum EdgeSwipeDirection: CGFloat {
 
 class BaseView: UIView {
     
-    weak var delegate: BaseViewDelegate?
+    /// スクロール通知用RX
+    let rx_baseViewDidScroll = PublishSubject<CGFloat>()
+    /// フロント変更通知用RX
+    let rx_baseViewDidChangeFront = PublishSubject<Void>()
+    /// タッチ開始通知用RX
+    let rx_baseViewDidTouchBegan = PublishSubject<Void>()
+    /// タッチ終了通知用RX
+    let rx_baseViewDidTouchEnd = PublishSubject<Void>()
+    /// ページスワイプ通知用RX
+    let rx_baseViewDidEdgeSwiped = PublishSubject<EdgeSwipeDirection>()
 
     /// 編集状態にするクロージャ
     private var beginEditingWorkItem: DispatchWorkItem?
@@ -49,7 +50,7 @@ class BaseView: UIView {
                 // 移動量の初期化
                 scrollMovingPointY = 0
                 // プライベートモードならデザインを変更する
-                delegate?.baseViewDidChangeFront()
+                rx_baseViewDidChangeFront.onNext(())
                 // ヘッダーフィールドを更新する
                 viewModel.reloadHeaderText()
                 // 空ページの場合は、編集状態にする
@@ -547,7 +548,7 @@ class BaseView: UIView {
 extension BaseView: EGApplicationDelegate {
     internal func screenTouchBegan(touch: UITouch) {
         isTouching = true
-        delegate?.baseViewDidTouchBegan()
+        rx_baseViewDidTouchBegan.onNext(())
         touchBeganPoint = touch.location(in: self)
         isChangingFront = false
         if touchBeganPoint!.x < AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
@@ -572,7 +573,7 @@ extension BaseView: EGApplicationDelegate {
                 
                 if viewModel.getBaseViewControllerStatus() {
                     invalidateUserInteraction()
-                    delegate?.baseViewDidEdgeSwiped(direction: swipeDirection)
+                    rx_baseViewDidEdgeSwiped.onNext(swipeDirection)
                 }
             }
             
@@ -655,7 +656,7 @@ extension BaseView: UIScrollViewDelegate {
                     let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
                     let speed = scrollView.contentOffset.y - scrollMovingPointY
                     if (scrollMovingPointY != 0 && !isOverScrolling || (canForwardScroll && isOverScrolling && speed < 0) || (isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0)) {
-                        delegate?.baseViewDidScroll(speed: -1 * speed)
+                        self.rx_baseViewDidScroll.onNext(speed)
                     }
                 }
                 scrollMovingPointY = scrollView.contentOffset.y
@@ -668,7 +669,7 @@ extension BaseView: UIScrollViewDelegate {
         if let front = front {
             if front.scrollView == scrollView {
                 if velocity.y == 0 && !isTouching {
-                    delegate?.baseViewDidTouchEnd()
+                    rx_baseViewDidTouchEnd.onNext(())
                     scrollMovingPointY = 0
                 }
             }
@@ -680,7 +681,7 @@ extension BaseView: UIScrollViewDelegate {
         if let front = front {
             if front.scrollView == scrollView {
                 if !isTouching {
-                    delegate?.baseViewDidTouchEnd()
+                    rx_baseViewDidTouchEnd.onNext(())
                     scrollMovingPointY = 0
                 }
             }
