@@ -12,12 +12,10 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol BaseLayerDelegate: class {
-    func baseLayerDidInvalidate(direction: EdgeSwipeDirection)
-}
-
 class BaseLayer: UIView {
-    weak var delegate: BaseLayerDelegate?
+    /// 無効化通知用RX
+    let rx_baseLayerDidInvalidate = PublishSubject<EdgeSwipeDirection>()
+    
     let viewModel = BaseLayerViewModel()
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT))
     let baseViewOriginY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER_HEADER_HEIGHT, DeviceConst.STATUS_BAR_HEIGHT)
@@ -72,7 +70,7 @@ class BaseLayer: UIView {
                     self.headerViewDidEndEditing(headerFieldUpdate: false)
                     self.validateUserInteraction()
                 } else {
-                    self.delegate?.baseLayerDidInvalidate(direction: swipeDirection)
+                    self.rx_baseLayerDidInvalidate.onNext(swipeDirection)
                 }
             }
         }

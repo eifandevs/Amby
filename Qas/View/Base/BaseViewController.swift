@@ -70,7 +70,18 @@ class BaseViewController: UIViewController {
             
             // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
             baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
-            baseLayer.delegate = self
+
+            // ベースレイヤー無効化監視
+            baseLayer.rx_baseLayerDidInvalidate.subscribe{ [weak self] object in
+                guard let `self` = self else { return }
+                if let direction = object.element {
+                    self.frontLayer = FrontLayer(frame: self.baseLayer.frame, swipeDirection: direction)
+                    self.frontLayer.delegate = self
+                    self.view.addSubview(self.frontLayer)
+                }
+            }
+            .disposed(by: rx.disposeBag)
+            
             view.addSubview(baseLayer)
 
             view.bringSubview(toFront: splash!.view)
@@ -101,15 +112,6 @@ class BaseViewController: UIViewController {
 // MARK: Button Event
     func closeHelpViewController() {
         log.debug("閉じる")
-    }
-}
-
-// MARK: BaseLayer Delegate
-extension BaseViewController: BaseLayerDelegate {
-    func baseLayerDidInvalidate(direction: EdgeSwipeDirection) {
-        frontLayer = FrontLayer(frame: baseLayer.frame, swipeDirection: direction)
-        frontLayer.delegate = self
-        view.addSubview(frontLayer)
     }
 }
 
