@@ -236,6 +236,7 @@ extension BaseLayer: HeaderViewDelegate {
         isHeaderViewEditing = false
         searchMenuTableView!.removeFromSuperview()
         searchMenuTableView = nil
+        // TODO: 循環を修正する
         headerView.finishEditing(headerFieldUpdate: headerFieldUpdate)
     }
 }
