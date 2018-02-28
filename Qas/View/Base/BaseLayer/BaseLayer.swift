@@ -109,7 +109,6 @@ class BaseLayer: UIView {
         // BaseViewスクロール監視
         baseView.rx_baseViewDidScroll
             .map({ -$0 })
-            .observeOn(MainScheduler.asyncInstance)
             .subscribe { [weak self] object in
                 guard let `self` = self else { return }
                 if let speed = object.element {
