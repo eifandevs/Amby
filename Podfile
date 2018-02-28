@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'Qas' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
@@ -17,6 +17,7 @@ target 'Qas' do
   pod 'NSObject+Rx', '~> 4.2'
   pod 'R.swift', '~> 3.3'
   pod 'Alamofire', '~> 4.4'
+  pod 'SwiftLint', '~> 0.23'
   pod 'CryptoSwift', '~> 0.8'
   pod 'KeychainAccess', '~> 3.1'
   pod 'VerticalAlignmentLabel', '~> 0.1'

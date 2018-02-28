@@ -20,6 +20,7 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.0.0)
   - SVProgressHUD (2.1.2)
+  - SwiftLint (0.23.1)
   - SwiftyBeaver (1.4.3)
   - VerticalAlignmentLabel (0.1.0)
 
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - SVProgressHUD (= 2.1.2)
+  - SwiftLint (~> 0.23)
   - SwiftyBeaver (~> 1.1)
   - VerticalAlignmentLabel (~> 0.1)
 
@@ -53,9 +55,10 @@ SPEC CHECKSUMS:
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SwiftLint: 1b670ce79284c76520f84060e87d645078fd32fa
   SwiftyBeaver: e10b1668e0512229c36c34769b97eed3dfae2ca3
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: afb5c73fa61b83aa6229e596a41c1cebd470423d
+PODFILE CHECKSUM: 8681e447613002a1e51c10be999995a39ec287a5
 
 COCOAPODS: 1.2.1
