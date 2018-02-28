@@ -124,6 +124,7 @@ class BaseLayer: UIView {
                             }
                         }
                         // ベースビューがスライド可能な場合にスライドさせる
+                        // TODO: 削除
                         if !self.baseView.isLocateMax {
                             if self.baseView.frame.origin.y + speed > self.baseViewOriginY.max {
                                 // スライドした結果、Maxを超える場合は、調整する
@@ -144,6 +145,7 @@ class BaseLayer: UIView {
                             }
                         }
                         // ベースビューがスライド可能な場合にスライドさせる
+                        // TODO: 削除
                         if !self.baseView.isLocateMin {
                             if self.baseView.frame.origin.y + speed < self.baseViewOriginY.min {
                                 // スライドした結果、Minを下回る場合は、調整する
