@@ -3,6 +3,11 @@
 #
 excluded:
 - Pods
+- Podfile
+- Podfile.lock
+- R.generated.swift
+
 disabled_rules:
 - trailing_whitespace
 - line_length
+- nesting
