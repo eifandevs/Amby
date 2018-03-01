@@ -107,7 +107,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
             let newPt = touch.location(in: superview!)
             let oldPt = touch.previousLocation(in: superview!)
             let diff = newPt - oldPt
-            center = center + diff
+            center += diff
             // CircleMenuとCircleMenuItemの重なり検知
             collisionLoop()
             // エッジクローズ検知
@@ -122,7 +122,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
             if  center == initialPt! {
                 // サークルメニューアイテムを切り替える
                 let currentCircleMenuItems = circleMenuItems
-                menuIndex = menuIndex + 1 == circleMenuItemGroup.count ? 0 : menuIndex + 1
+                menuIndex = (menuIndex + 1 == circleMenuItemGroup.count) ? 0 : (menuIndex + 1)
                 let nextCircleMenuItems = circleMenuItems
                 for (index, item) in currentCircleMenuItems.enumerated() {
                     nextCircleMenuItems[index].frame = item.frame

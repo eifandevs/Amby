@@ -66,7 +66,7 @@ class HeaderField: UIButton, ShadowView {
     
     func reduction(frame: CGRect) {
         self.frame = frame
-        textField.frame.size.width = textField.frame.size.width + 40
+        textField.frame.size.width += 40
     }
     // ヘッダービューをタップしたらコールされる
     // それまで、テキストフィールドは表示しない
