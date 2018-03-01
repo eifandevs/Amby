@@ -105,7 +105,7 @@ final class PageHistoryDataModel {
     func getBackUrl(context: String) -> String? {
         if let history = D.find(histories, callback: { $0.context == context }), history.listIndex > 0 {
             // インデックス調整
-            history.listIndex = history.listIndex - 1
+            history.listIndex -= 1
             
             return history.backForwardList[history.listIndex]
         }
@@ -116,7 +116,7 @@ final class PageHistoryDataModel {
     func getForwardUrl(context: String) -> String? {
         if let history = D.find(histories, callback: { $0.context == context }), history.listIndex < history.backForwardList.count - 1 {
             // インデックス調整
-            history.listIndex = history.listIndex + 1
+            history.listIndex += 1
             
             return history.backForwardList[history.listIndex]
         }

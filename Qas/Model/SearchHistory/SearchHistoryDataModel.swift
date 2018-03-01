@@ -83,7 +83,7 @@ final class SearchHistoryDataModel {
                 do {
                     let data = try Data(contentsOf: Util.searchHistoryUrl(date: keyStr))
                     let searchHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [SearchHistory]
-                    allSearchHistory = allSearchHistory + searchHistory
+                    allSearchHistory += searchHistory
                 } catch let error as NSError {
                     log.error("failed to read search history. error: \(error.localizedDescription)")
                 }

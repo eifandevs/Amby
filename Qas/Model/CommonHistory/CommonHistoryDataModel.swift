@@ -121,7 +121,7 @@ final class CommonHistoryDataModel {
                     do {
                         let data = try Data(contentsOf: Util.commonHistoryUrl(date: keyStr))
                         let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
-                        allCommonHistory = allCommonHistory + commonHistory
+                        allCommonHistory += commonHistory
                     } catch let error as NSError {
                         log.error("failed to read common history. error: \(error.localizedDescription)")
                     }
