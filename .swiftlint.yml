@@ -14,3 +14,6 @@ disabled_rules:
 - variable_name
 - force_cast
 - force_try
+- cyclomatic_complexity
+- type_name
+- function_body_length
