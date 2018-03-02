@@ -12,6 +12,8 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
+/// ヘッダーとボディとフッターの管理
+/// BaseViewからの通知をHeaderViewに伝える
 class BaseLayer: UIView {
     /// 無効化通知用RX
     let rx_baseLayerDidInvalidate = PublishSubject<EdgeSwipeDirection>()
@@ -76,70 +78,32 @@ class BaseLayer: UIView {
         }
         .disposed(by: rx.disposeBag)
         
-        // BaseViewタッチ終了検知
-        baseView.rx_baseViewDidTouchEnd.subscribe { [weak self] object in
-            guard let `self` = self else { return }
-            log.debug("[BaseLayer Event]: baseViewDidTouchEnd. adjust location")
-            if let direction = object.element {
-                self.headerView.slideWithAnimation(direction: direction)
-            }
-            
-        }
-        .disposed(by: rx.disposeBag)
-        
-        // BaseViewスクロール監視
-        baseView.rx_baseViewDidScroll
-            .map({ -$0 })
+        // BaseViewスライド監視
+        baseView.rx_baseViewDidSlide
             .subscribe { [weak self] object in
                 guard let `self` = self else { return }
                 if let speed = object.element {
-                    if speed > 0 {
-                        // 逆順方向(過去)のスクロール
-                        // ヘッダービューがスライド可能の場合にスライドさせる
-                        if !self.headerView.isLocateMax {
-                            if self.headerView.frame.origin.y + speed > self.headerViewOriginY.max {
-                                // スライドした結果、Maxを超える場合は、調整する
-                                self.headerView.slideToMax()
-                            } else {
-                                self.slideHeaderView(val: speed)
-                            }
-                        }
-                        // ベースビューがスライド可能な場合にスライドさせる
-                        // TODO: 削除
-                        if !self.baseView.isLocateMax {
-                            if self.baseView.frame.origin.y + speed > self.baseViewOriginY.max {
-                                // スライドした結果、Maxを超える場合は、調整する
-                                self.baseView.slideToMax()
-                            } else {
-                                self.slideBaseView(val: speed)
-                            }
-                        }
-                    } else if speed < 0 {
-                        // 順方向(未来)のスクロール
-                        // ヘッダービューがスライド可能の場合にスライドさせる
-                        if !self.headerView.isLocateMin {
-                            if self.headerView.frame.origin.y + speed < self.headerViewOriginY.min {
-                                // スライドした結果、Minを下回る場合は、調整する
-                                self.headerView.slideToMin()
-                            } else {
-                                self.slideHeaderView(val: speed)
-                            }
-                        }
-                        // ベースビューがスライド可能な場合にスライドさせる
-                        // TODO: 削除
-                        if !self.baseView.isLocateMin {
-                            if self.baseView.frame.origin.y + speed < self.baseViewOriginY.min {
-                                // スライドした結果、Minを下回る場合は、調整する
-                                self.baseView.slideToMin()
-                            } else {
-                                self.slideBaseView(val: speed)
-                            }
-                        }
-                    }
+                    self.headerView.slide(value: speed)
                 }
         }
         .disposed(by: rx.disposeBag)
 
+        // BaseViewスライドMax監視
+        baseView.rx_baseViewDidSlideToMax
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                self.headerView.slideToMax()
+            }
+            .disposed(by: rx.disposeBag)
+        
+        // BaseViewスライドMin監視
+        baseView.rx_baseViewDidSlideToMin
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                self.headerView.slideToMin()
+            }
+            .disposed(by: rx.disposeBag)
+        
         headerView.delegate = self
         
         addSubview(baseView)
@@ -154,30 +118,6 @@ class BaseLayer: UIView {
     deinit {
         log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)
-    }
-    
-// MARK: Private Method
-    private func slideHeaderView(val: CGFloat) {
-        /// コンテンツサイズが画面より小さい場合は、過去スクロールしない
-        if val < 0 && !baseView.shouldScroll {
-            return
-        }
-        
-        if !isTouchEndAnimating {
-            headerView.slide(value: val)
-        }
-    }
-    
-    private func slideBaseView(val: CGFloat) {
-        
-        /// コンテンツサイズが画面より小さい場合は、過去スクロールしない
-        if val < 0 && !baseView.shouldScroll {
-            return
-        }
-        
-        if !isTouchEndAnimating {
-            baseView.slide(value: val)
-        }
     }
     
 // MARK: Public Method

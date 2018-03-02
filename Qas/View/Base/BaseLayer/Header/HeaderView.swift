@@ -48,24 +48,6 @@ class HeaderView: UIView, ShadowView {
         }
     }
     
-    /// アニメーション中フラグ
-    var isAnimating = false
-    
-    /// ヘッダービューがスライド中かどうかのフラグ
-    var isMoving: Bool {
-        return !isLocateMax && !isLocateMin
-    }
-    
-    /// ヘッダービューがMaxポジションにあるかどうかのフラグ
-    var isLocateMax: Bool {
-        return frame.origin.y == positionY.max
-    }
-    
-    /// ヘッダービューがMinポジションにあるかどうかのフラグ
-    var isLocateMin: Bool {
-        return frame.origin.y == positionY.min
-    }
-    
     override init(frame: CGRect) {
         // ヘッダーフィールド
         let headerFieldOriginY = DeviceConst.STATUS_BAR_HEIGHT + ((frame.size.height - DeviceConst.STATUS_BAR_HEIGHT - (AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT)) / 2) - (AppConst.BASE_LAYER_HEADER_PROGRESS_MARGIN)
@@ -198,29 +180,6 @@ class HeaderView: UIView, ShadowView {
             self.headerField.makeContent(restore: true, restoreText: encodedText)
         } else {
             self.headerField.makeContent(restore: true, restoreText: nil)
-        }
-    }
-    
-    /// タッチ終了時のアニメーション
-    func slideWithAnimation(direction: TouchEndAnimationDirection) {
-        isAnimating = true
-        // タッチ終了時にヘッダービューの高さを調整する
-        if direction == TouchEndAnimationDirection.up {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.slideToMax()
-            }, completion: { (finished) in
-                if finished {
-                    self.isAnimating = false
-                }
-            })
-        } else {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.slideToMin()
-            }, completion: { (finished) in
-                if finished {
-                    self.isAnimating = false
-                }
-            })
         }
     }
     

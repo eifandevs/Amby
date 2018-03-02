@@ -19,21 +19,18 @@ enum EdgeSwipeDirection: CGFloat {
     case none = 0
 }
 
-enum TouchEndAnimationDirection {
-    case up
-    case down
-}
-
 class BaseView: UIView {
     
     /// スクロール通知用RX
     let rx_baseViewDidScroll = PublishSubject<CGFloat>()
     /// フロント変更通知用RX
     let rx_baseViewDidChangeFront = PublishSubject<Void>()
-    /// タッチ開始通知用RX
-    let rx_baseViewDidTouchBegan = PublishSubject<Void>()
-    /// タッチ終了通知用RX
-    let rx_baseViewDidTouchEnd = PublishSubject<TouchEndAnimationDirection>()
+    /// スライド通知用RX
+    let rx_baseViewDidSlide = PublishSubject<CGFloat>()
+    /// Maxスライド通知用RX
+    let rx_baseViewDidSlideToMax = PublishSubject<Void>()
+    /// Minスライド通知用RX
+    let rx_baseViewDidSlideToMin = PublishSubject<Void>()
     /// ページスワイプ通知用RX
     let rx_baseViewDidEdgeSwiped = PublishSubject<EdgeSwipeDirection>()
 
@@ -405,6 +402,7 @@ class BaseView: UIView {
     }
     
     func slide(value: CGFloat) {
+        rx_baseViewDidSlide.onNext(value)
         frame.origin.y += value
         front.frame.size.height -= value
         // スライドと同時にスクロールが発生しているので、逆方向にスクロールし、スクロールを無効化する
@@ -424,11 +422,13 @@ class BaseView: UIView {
     }
     
     func slideToMax() {
+        rx_baseViewDidSlideToMax.onNext(())
         frame.origin.y = AppConst.BASE_LAYER_HEADER_HEIGHT
         scaleToMin()
     }
     
     func slideToMin() {
+        rx_baseViewDidSlideToMin.onNext(())
         frame.origin.y = DeviceConst.STATUS_BAR_HEIGHT
         scaleToMax()
     }
@@ -563,7 +563,6 @@ class BaseView: UIView {
 extension BaseView: EGApplicationDelegate {
     internal func screenTouchBegan(touch: UITouch) {
         isTouching = true
-        rx_baseViewDidTouchBegan.onNext(())
         touchBeganPoint = touch.location(in: self)
         isChangingFront = false
         if touchBeganPoint!.x < AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
@@ -669,9 +668,42 @@ extension BaseView: UIScrollViewDelegate {
             if front.scrollView == scrollView {
                 if scrollMovingPointY != 0 {
                     let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
-                    let speed = scrollView.contentOffset.y - scrollMovingPointY
+                    var speed = scrollView.contentOffset.y - scrollMovingPointY
                     if (scrollMovingPointY != 0 && !isOverScrolling || (canForwardScroll && isOverScrolling && speed < 0) || (isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0)) {
-                        self.rx_baseViewDidScroll.onNext(speed)
+                        speed = -speed
+                        // スライド処理
+                        if speed > 0 {
+                            // ベースビューがスライド可能な場合にスライドさせる
+                            if !isLocateMax {
+                                if frame.origin.y + speed > positionY.max {
+                                    // スライドした結果、Maxを超える場合は、調整する
+                                    slideToMax()
+                                } else {
+                                    // コンテンツサイズが画面より小さい場合は、過去スクロールしない
+                                    if speed >= 0 || shouldScroll {
+                                        if !isAnimating {
+                                            slide(value: speed)
+                                        }
+                                    }
+                                }
+                            }
+                        } else if speed < 0 {
+                            // 順方向(未来)のスクロール
+                            // ベースビューがスライド可能な場合にスライドさせる
+                            if !isLocateMin {
+                                if frame.origin.y + speed < positionY.min {
+                                    // スライドした結果、Minを下回る場合は、調整する
+                                    slideToMin()
+                                } else {
+                                    // コンテンツサイズが画面より小さい場合は、過去スクロールしない
+                                    if speed >= 0 || shouldScroll {
+                                        if !isAnimating {
+                                            slide(value: speed)
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 scrollMovingPointY = scrollView.contentOffset.y
@@ -688,7 +720,6 @@ extension BaseView: UIScrollViewDelegate {
                     if isMoving && !isAnimating {
                         isAnimating = true
                         if frame.origin.y > positionY.max / 2 {
-                            rx_baseViewDidTouchEnd.onNext((TouchEndAnimationDirection.up))
                             UIView.animate(withDuration: 0.2, animations: {
                                 self.slideToMax()
                             }, completion: { (finished) in
@@ -697,7 +728,6 @@ extension BaseView: UIScrollViewDelegate {
                                 }
                             })
                         } else {
-                            rx_baseViewDidTouchEnd.onNext((TouchEndAnimationDirection.down))
                             UIView.animate(withDuration: 0.2, animations: {
                                 self.slideToMin()
                             }, completion: { (finished) in
@@ -722,7 +752,6 @@ extension BaseView: UIScrollViewDelegate {
                     if isMoving && !isAnimating {
                         isAnimating = true
                         if frame.origin.y > positionY.max / 2 {
-                            rx_baseViewDidTouchEnd.onNext((TouchEndAnimationDirection.up))
                             UIView.animate(withDuration: 0.2, animations: {
                                 self.slideToMax()
                             }, completion: { (finished) in
@@ -731,7 +760,6 @@ extension BaseView: UIScrollViewDelegate {
                                 }
                             })
                         } else {
-                            rx_baseViewDidTouchEnd.onNext((TouchEndAnimationDirection.down))
                             UIView.animate(withDuration: 0.2, animations: {
                                 self.slideToMin()
                             }, completion: { (finished) in
