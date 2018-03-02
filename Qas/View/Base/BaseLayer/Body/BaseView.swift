@@ -35,6 +35,9 @@ class BaseView: UIView {
     /// 編集状態にするクロージャ
     private var beginEditingWorkItem: DispatchWorkItem?
     
+    /// yポジションの最大最小値
+    private let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER_HEADER_HEIGHT, DeviceConst.STATUS_BAR_HEIGHT)
+
     /// 最前面のWebView
     private var front: EGWebView! {
         willSet {
@@ -90,13 +93,18 @@ class BaseView: UIView {
     /// スワイプでページ切り替えを検知したかどうかのフラグ
     private var isChangingFront: Bool = false
 
+    /// ヘッダービューがスライド中かどうかのフラグ
+    var isMoving: Bool {
+        return !isLocateMax && !isLocateMin
+    }
+    
     /// ベースビューがMaxポジションにあるかどうかのフラグ
     var isLocateMax: Bool {
-        return frame.origin.y == AppConst.BASE_LAYER_HEADER_HEIGHT
+        return frame.origin.y == positionY.max
     }
     /// ベースビューがMinポジションにあるかどうかのフラグ
     var isLocateMin: Bool {
-        return frame.origin.y == DeviceConst.STATUS_BAR_HEIGHT
+        return frame.origin.y == positionY.min
     }
     /// 逆順方向のスクロールが可能かどうかのフラグ
     var canPastScroll: Bool {
