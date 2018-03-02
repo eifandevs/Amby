@@ -9,6 +9,7 @@
 
 import Foundation
 import UIKit
+import ChameleonFramework
 
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
@@ -39,37 +40,40 @@ extension UIColor {
         self.init(red: r, green: g, blue: b, alpha: CGFloat(alpha))
     }
     
-    static var deepOrange: UIColor {
-        return UIColor(red: 255/255, green: 127/255, blue: 0/255, alpha: 1)
+    static var colorList: [UIColor] {
+        return ColorSchemeOf(.analogous, color: .flatPurple, isFlatScheme: true)
     }
     
-    /// 青系
-    static var limoges: UIColor {
-        return UIColor(red: 100/255, green: 94/255, blue: 127/255, alpha: 1)
+    static var firstColor: UIColor {
+        return UIColor.colorList[0]
+    }
+    
+    static var secondColor: UIColor {
+        return UIColor.colorList[1]
+    }
+    
+    static var thirdColor: UIColor {
+        return UIColor.colorList[2]
+    }
+    
+    static var fourthColor: UIColor {
+        return UIColor.colorList[3]
+    }
+    
+    static var fifthColor: UIColor {
+        return UIColor.colorList[4]
     }
     
     static var frenchBlue: UIColor {
-        return UIColor(red: 0/255, green: 175/255, blue: 240/255, alpha: 1)
+        return UIColor.flatPurple
     }
     
     static var brilliantBlue: UIColor {
-        return UIColor(red: 0/255, green: 103/255, blue: 173/255, alpha: 1)
+        return UIColor.flatPurpleDark
     }
     
     static var lightBlue: UIColor {
-        return UIColor(red: 173/255, green: 225/255, blue: 247/255, alpha: 1)
-    }
-    
-    static var blueGray: UIColor {
-        return UIColor(red: 44/255, green: 71/255, blue: 98/255, alpha: 1)
-    }
-    
-    static var rasberry: UIColor {
-        return UIColor(red: 219 / 255, green: 74 / 255, blue: 57 / 255, alpha: 1)
-    }
-    
-    static var blazingYellow: UIColor {
-        return UIColor(red: 255/255, green: 195/255, blue: 0/255, alpha: 1)
+        return UIColor.flatPurple.withAlphaComponent(0.4)
     }
     
     static var pastelLightGray: UIColor {
@@ -80,27 +84,7 @@ extension UIColor {
         return UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1)
     }
     
-    static var blind: UIColor {
-        return UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1)
-    }
-    
-    static var oasis: UIColor {
-        return UIColor(red: 227 / 255, green: 227 / 255, blue: 227 / 255, alpha: 1)
-    }
-    
-    static var placid: UIColor {
-        return UIColor(red: 0 / 255, green: 114 / 255, blue: 181 / 255, alpha: 1)
-    }
-    
-    static var magenta: UIColor {
-        return UIColor(red: 127 / 255, green: 39 / 255, blue: 127 / 255, alpha: 1)
-    }
-    
     static var lightGreen: UIColor {
         return UIColor(red: 29/255, green: 205/255, blue: 0/255, alpha: 1)
-    }
-    
-    static var popOrange: UIColor {
-        return UIColor(red: 255/255, green: 121/255, blue: 19/255, alpha: 1)
     }
 }

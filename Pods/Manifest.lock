@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (4.5.1)
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
   - CryptoSwift (0.8.0)
   - Dollar (7.0.0)
   - KeychainAccess (3.1.0)
@@ -26,6 +29,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
+  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - CryptoSwift (~> 0.8)
   - Dollar (~> 7.0)
   - KeychainAccess (~> 3.1)
@@ -41,8 +45,18 @@ DEPENDENCIES:
   - SwiftyBeaver (~> 1.1)
   - VerticalAlignmentLabel (~> 0.1)
 
+EXTERNAL SOURCES:
+  ChameleonFramework:
+    :git: https://github.com/ViccAlexander/Chameleon.git
+
+CHECKOUT OPTIONS:
+  ChameleonFramework:
+    :commit: 6dd284bde21ea2e7f9fd89bc36f40df16e16369d
+    :git: https://github.com/ViccAlexander/Chameleon.git
+
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
   Dollar: b052b910c711bed91c26caeaec85aa22bccf1655
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
@@ -59,6 +73,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: e10b1668e0512229c36c34769b97eed3dfae2ca3
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: 8681e447613002a1e51c10be999995a39ec287a5
+PODFILE CHECKSUM: 6670e596aca54121a055dad7dbeb122be21c7e10
 
 COCOAPODS: 1.2.1

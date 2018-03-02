@@ -22,4 +22,5 @@ target 'Qas' do
   pod 'KeychainAccess', '~> 3.1'
   pod 'VerticalAlignmentLabel', '~> 0.1'
   pod 'Dollar', '~> 7.0'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 end
