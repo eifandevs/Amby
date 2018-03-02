@@ -38,13 +38,13 @@ class BaseView: UIView {
     /// 最前面のWebView
     private var front: EGWebView! {
         willSet {
-            if let _ = front {
+            if front != nil {
                 // 高さの初期化
                 front.frame.size.height = frame.size.height
             }
         }
         didSet {
-            if let _ = front {
+            if front != nil {
                 // 高さの初期化
                 front.frame.size.height = frame.size.height
                 // 移動量の初期化
@@ -286,7 +286,7 @@ class BaseView: UIView {
         .disposed(by: rx.disposeBag)
 
         // 検索監視
-        viewModel.rx_baseViewModelDidSearchWebView.subscribe{ [weak self] object in
+        viewModel.rx_baseViewModelDidSearchWebView.subscribe { [weak self] object in
             guard let `self` = self else { return }
             if let text = object.element {
                 if text.hasValidUrl {
@@ -306,7 +306,7 @@ class BaseView: UIView {
         .disposed(by: rx.disposeBag)
 
         // ヒストリーバック監視
-        viewModel.rx_baseViewModelDidHistoryBackWebView.subscribe{ [weak self] _ in
+        viewModel.rx_baseViewModelDidHistoryBackWebView.subscribe { [weak self] _ in
             guard let `self` = self else { return }
             if self.front.isLoading && self.front.operation == .normal && !(self.viewModel.getPastViewingPageHistoryDataModel(context: self.front.context)) {
                 // 新規ページ表示中に戻るを押下したルート
@@ -436,7 +436,7 @@ class BaseView: UIView {
             if let wv = wv {
                 return wv.isLoading
             }
-            return false;
+            return false
         })
         // 他にローディング中のwebviewがなければ、くるくるを停止する
         UIApplication.shared.isNetworkActivityIndicatorVisible = loadingWebViews.count < 1 ? false : true
@@ -504,7 +504,7 @@ class BaseView: UIView {
         }
     }
     
-    private func saveThumbnail(webView: EGWebView, completion: @escaping (() -> ())) {
+    private func saveThumbnail(webView: EGWebView, completion: @escaping (() -> Void)) {
         // サムネイルを保存
         DispatchQueue.mainSyncSafe {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
@@ -721,7 +721,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         log.debug("loading finish. context: \(wv.context)")
         
         // 削除済みチェック
-        guard let _ = self.viewModel.getIndex(context: wv.context) else {
+        if self.viewModel.getIndex(context: wv.context) == nil {
             log.warning("loading finish on deleted page.")
             return
         }
