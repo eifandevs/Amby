@@ -275,25 +275,25 @@ func *(left: CGPoint, right: CGFloat) -> CGPoint {
 }
 
 func *= ( left: inout CGSize, right: CGSize) {
-    left *= right
+    left = left * right
 }
 
 func *= (left: inout CGSize, right: CGFloat) {
-    left *= right
+    left = left * right
 }
 
 func += (left: inout CGSize, right: CGSize) {
-    left += right
+    left = left + right
 }
 
 func *= (left: inout CGPoint, right: CGPoint) {
-    left *= right
+    left = left * right
 }
 
 func *= (left: inout CGPoint, right: CGFloat) {
-    left *= right
+    left = left * right
 }
 
 func += (left: inout CGPoint, right: CGPoint) {
-    left += right
+    left = left + right
 }
