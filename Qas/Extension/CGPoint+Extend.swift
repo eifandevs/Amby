@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension CGPoint {
-    func distance(pt: CGPoint)  -> CGFloat {
+    func distance(pt: CGPoint) -> CGFloat {
         let x = pow(pt.x - self.x, 2)
         let y = pow(pt.y - self.y, 2)
         return sqrt(x + y)
@@ -23,14 +23,14 @@ extension CGPoint: ExpressibleByStringLiteral {
     public init(stringLiteral value: StringLiteralType) {
         self.init()
         
-        let point:CGPoint;
+        let point:CGPoint
         if value[value.startIndex] != "{" {
             point = CGPointFromString("{\(value)}")
         } else {
             point = CGPointFromString(value)
         }
-        self.x = point.x;
-        self.y = point.y;
+        self.x = point.x
+        self.y = point.y
     }
     
     public init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
