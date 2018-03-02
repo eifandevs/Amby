@@ -141,7 +141,7 @@ class BaseView: UIView {
         }
         
         // ページインサート監視
-        viewModel.rx_baseViewModelDidInsertWebView.subscribe{ [weak self] object in
+        viewModel.rx_baseViewModelDidInsertWebView.subscribe { [weak self] object in
             guard let `self` = self else { return }
             if let at = object.element {
                 // 現フロントのプログレス監視を削除
@@ -170,7 +170,7 @@ class BaseView: UIView {
         .disposed(by: rx.disposeBag)
 
         // 自動入力監視
-        viewModel.rx_baseViewModelDidAutoInput.subscribe{ [weak self] _ in
+        viewModel.rx_baseViewModelDidAutoInput.subscribe { [weak self] _ in
             guard let `self` = self else { return }
             if !self.isDoneAutoInput {
                 if let inputForm = FormDataModel.s.select(url: self.front.url?.absoluteString).first {
@@ -188,7 +188,7 @@ class BaseView: UIView {
         .disposed(by: rx.disposeBag)
 
         // ページ追加監視
-        viewModel.rx_baseViewModelDidAppendWebView.subscribe{ [weak self] _ in
+        viewModel.rx_baseViewModelDidAppendWebView.subscribe { [weak self] _ in
             guard let `self` = self else { return }
             // 現フロントのプログレス監視を削除
             if let front = self.front {
@@ -215,7 +215,7 @@ class BaseView: UIView {
         .disposed(by: rx.disposeBag)
 
         // リロード監視
-        viewModel.rx_baseViewModelDidReloadWebView.subscribe{ [weak self] _ in
+        viewModel.rx_baseViewModelDidReloadWebView.subscribe { [weak self] _ in
             guard let `self` = self else { return }
             if self.front.hasValidUrl {
                 self.front.reload()
@@ -226,7 +226,7 @@ class BaseView: UIView {
         .disposed(by: rx.disposeBag)
 
         // ページ変更監視
-        viewModel.rx_baseViewModelDidChangeWebView.subscribe{ [weak self] _ in
+        viewModel.rx_baseViewModelDidChangeWebView.subscribe { [weak self] _ in
             guard let `self` = self else { return }
             self.front.removeObserver(self, forKeyPath: "estimatedProgress")
             self.viewModel.updateProgressHeaderViewDataModel(object: 0)
@@ -244,7 +244,7 @@ class BaseView: UIView {
         .disposed(by: rx.disposeBag)
 
         // ページ削除監視
-        viewModel.rx_baseViewModelDidRemoveWebView.subscribe{ [weak self] object in
+        viewModel.rx_baseViewModelDidRemoveWebView.subscribe { [weak self] object in
             guard let `self` = self else { return }
             if let object = object.element {
                 if let webView = self.webViews[object.deleteIndex] {
@@ -328,7 +328,7 @@ class BaseView: UIView {
         .disposed(by: rx.disposeBag)
 
         // ヒストリーフォワード監視
-        viewModel.rx_baseViewModelDidHistoryForwardWebView.subscribe{ [weak self] _ in
+        viewModel.rx_baseViewModelDidHistoryForwardWebView.subscribe { [weak self] _ in
             guard let `self` = self else { return }
             if let url = self.viewModel.getForwardUrlPageHistoryDataModel(context: self.front.context) {
                 self.front.operation = .forward
@@ -338,14 +338,14 @@ class BaseView: UIView {
         .disposed(by: rx.disposeBag)
 
         // フォーム登録監視
-        viewModel.rx_baseViewModelDidRegisterAsForm.subscribe{ [weak self] _ in
+        viewModel.rx_baseViewModelDidRegisterAsForm.subscribe { [weak self] _ in
             guard let `self` = self else { return }
             self.viewModel.storeFromDataModel(webview: self.front)
         }
         .disposed(by: rx.disposeBag)
 
         // 自動スクロール監視
-        viewModel.rx_baseViewModelDidAutoScroll.subscribe{ [weak self] _ in
+        viewModel.rx_baseViewModelDidAutoScroll.subscribe { [weak self] _ in
             guard let `self` = self else { return }
             if self.autoScrollTimer != nil || self.autoScrollTimer?.isValid == true {
                 self.autoScrollTimer?.invalidate()
@@ -800,7 +800,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
             // SSL認証
             let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
-            completionHandler(URLSession.AuthChallengeDisposition.useCredential, credential);
+            completionHandler(URLSession.AuthChallengeDisposition.useCredential, credential)
         } else if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodHTTPBasic {
             // Basic認証
             let alertController = UIAlertController(title: "Authentication Required", message: webView.url!.host, preferredStyle: .alert)
