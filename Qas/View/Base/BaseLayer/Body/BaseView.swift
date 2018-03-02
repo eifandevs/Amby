@@ -19,6 +19,11 @@ enum EdgeSwipeDirection: CGFloat {
     case none = 0
 }
 
+enum TouchEndAnimationDirection {
+    case up
+    case down
+}
+
 class BaseView: UIView {
     
     /// スクロール通知用RX
@@ -28,7 +33,7 @@ class BaseView: UIView {
     /// タッチ開始通知用RX
     let rx_baseViewDidTouchBegan = PublishSubject<Void>()
     /// タッチ終了通知用RX
-    let rx_baseViewDidTouchEnd = PublishSubject<Void>()
+    let rx_baseViewDidTouchEnd = PublishSubject<TouchEndAnimationDirection>()
     /// ページスワイプ通知用RX
     let rx_baseViewDidEdgeSwiped = PublishSubject<EdgeSwipeDirection>()
 
@@ -84,6 +89,8 @@ class BaseView: UIView {
     private var isDoneAutoInput = false
     /// タッチ中フラグ
     private var isTouching = false
+    /// アニメーション中フラグ
+    private var isAnimating = false
     /// 自動スクロール
     private var autoScrollTimer: Timer? = nil
     /// スワイプ方向
@@ -677,7 +684,29 @@ extension BaseView: UIScrollViewDelegate {
         if let front = front {
             if front.scrollView == scrollView {
                 if velocity.y == 0 && !isTouching {
-                    rx_baseViewDidTouchEnd.onNext(())
+                    // タッチ終了時にベースビューの高さを調整する
+                    if isMoving && !isAnimating {
+                        isAnimating = true
+                        if frame.origin.y > positionY.max / 2 {
+                            rx_baseViewDidTouchEnd.onNext((TouchEndAnimationDirection.up))
+                            UIView.animate(withDuration: 0.2, animations: {
+                                self.slideToMax()
+                            }, completion: { (finished) in
+                                if finished {
+                                    self.isAnimating = false
+                                }
+                            })
+                        } else {
+                            rx_baseViewDidTouchEnd.onNext((TouchEndAnimationDirection.down))
+                            UIView.animate(withDuration: 0.2, animations: {
+                                self.slideToMin()
+                            }, completion: { (finished) in
+                                if finished {
+                                    self.isAnimating = false
+                                }
+                            })
+                        }
+                    }
                     scrollMovingPointY = 0
                 }
             }
@@ -688,8 +717,30 @@ extension BaseView: UIScrollViewDelegate {
         // フロントのみ通知する
         if let front = front {
             if front.scrollView == scrollView {
-                if !isTouching {
-                    rx_baseViewDidTouchEnd.onNext(())
+                if !isTouching && !isAnimating {
+                    // タッチ終了時にベースビューの高さを調整する
+                    if isMoving && !isAnimating {
+                        isAnimating = true
+                        if frame.origin.y > positionY.max / 2 {
+                            rx_baseViewDidTouchEnd.onNext((TouchEndAnimationDirection.up))
+                            UIView.animate(withDuration: 0.2, animations: {
+                                self.slideToMax()
+                            }, completion: { (finished) in
+                                if finished {
+                                    self.isAnimating = false
+                                }
+                            })
+                        } else {
+                            rx_baseViewDidTouchEnd.onNext((TouchEndAnimationDirection.down))
+                            UIView.animate(withDuration: 0.2, animations: {
+                                self.slideToMin()
+                            }, completion: { (finished) in
+                                if finished {
+                                    self.isAnimating = false
+                                }
+                            })
+                        }
+                    }
                     scrollMovingPointY = 0
                 }
             }

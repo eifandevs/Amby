@@ -60,12 +60,12 @@ class BaseLayer: UIView {
             .disposed(by: self.rx.disposeBag)
 
         // BaseViewスワイプ監視
-        baseView.rx_baseViewDidEdgeSwiped.subscribe{ [weak self] object in
+        baseView.rx_baseViewDidEdgeSwiped.subscribe { [weak self] object in
             guard let `self` = self else { return }
             if let swipeDirection = object.element {
                 log.debug("[BaseLayer Event]: baseViewDidEdgeSwiped")
                 // 検索中の場合は、検索画面を閉じる
-                if let _ = self.searchMenuTableView {
+                if self.searchMenuTableView != nil {
                     log.debug("close search menu.")
                     self.headerViewDidEndEditing(headerFieldUpdate: false)
                     self.validateUserInteraction()
@@ -77,32 +77,13 @@ class BaseLayer: UIView {
         .disposed(by: rx.disposeBag)
         
         // BaseViewタッチ終了検知
-        baseView.rx_baseViewDidTouchEnd.subscribe{ [weak self] _ in
+        baseView.rx_baseViewDidTouchEnd.subscribe { [weak self] object in
             guard let `self` = self else { return }
-            log.debug("[BaseLayer Event]: baseViewDidTouchEnd. adjust header location")
-            // タッチ終了時にヘッダービューとベースビューの高さを調整する
-            if self.headerView.isMoving {
-                self.isTouchEndAnimating = true
-                if self.headerView.frame.origin.y > self.headerViewOriginY.min / 2 {
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.headerView.slideToMax()
-                        self.baseView.slideToMax()
-                    }, completion: { (finished) in
-                        if finished {
-                            self.isTouchEndAnimating = false
-                        }
-                    })
-                } else {
-                    UIView.animate(withDuration: 0.2, animations: {
-                        self.headerView.slideToMin()
-                        self.baseView.slideToMin()
-                    }, completion: { (finished) in
-                        if finished {
-                            self.isTouchEndAnimating = false
-                        }
-                    })
-                }
+            log.debug("[BaseLayer Event]: baseViewDidTouchEnd. adjust location")
+            if let direction = object.element {
+                self.headerView.slideWithAnimation(direction: direction)
             }
+            
         }
         .disposed(by: rx.disposeBag)
         
