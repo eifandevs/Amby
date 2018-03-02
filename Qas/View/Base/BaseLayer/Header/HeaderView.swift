@@ -50,23 +50,17 @@ class HeaderView: UIView, ShadowView {
     
     /// ヘッダービューがスライド中かどうかのフラグ
     var isMoving: Bool {
-        get {
-            return !isLocateMax && !isLocateMin
-        }
+        return !isLocateMax && !isLocateMin
     }
     
     /// ヘッダービューがMaxポジションにあるかどうかのフラグ
     var isLocateMax: Bool {
-        get {
-            return frame.origin.y == 0
-        }
+        return frame.origin.y == positionY.max
     }
     
     /// ヘッダービューがMinポジションにあるかどうかのフラグ
     var isLocateMin: Bool {
-        get {
-            return frame.origin.y == -(AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT)
-        }
+        return frame.origin.y == positionY.min
     }
     
     override init(frame: CGRect) {
