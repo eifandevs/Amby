@@ -49,17 +49,6 @@ class BaseLayer: UIView {
                 }
             }
             .disposed(by: self.rx.disposeBag)
-        
-        // フォアグラウンド時にヘッダービューの位置をMaxにする
-        NotificationCenter.default.rx.notification(.UIApplicationWillEnterForeground, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[BaseLayer Event]: UIApplicationWillEnterForeground")
-                UIView.animate(withDuration: 0.35, animations: {
-                    self.headerView.slideToMax()
-                }, completion: nil)
-            }
-            .disposed(by: self.rx.disposeBag)
 
         // BaseViewスワイプ監視
         baseView.rx_baseViewDidEdgeSwiped.subscribe { [weak self] object in
