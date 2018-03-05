@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
-
-protocol SearchMenuTableViewModelDelegate: class {
-    func searchMenuViewWillUpdateLayout()
-    func searchMenuViewWillHide()
-}
+import NSObject_Rx
 
 class SearchMenuTableViewModel {
+    /// 画面更新通知用RX
+    let rx_searchMenuViewWillUpdateLayout = PublishSubject<Void>()
+    /// 画面無効化通知用RX
+    let rx_searchMenuViewWillHide = PublishSubject<Void>()
+    
     let sectionItem: [String] = ["Google検索", "検索履歴", "閲覧履歴"]
-    weak var delegate: SearchMenuTableViewModelDelegate?
     var googleSearchCellItem: [String] = []
     var searchHistoryCellItem: [SearchHistory] = []
     var historyCellItem: [CommonHistory] = []
@@ -73,7 +73,7 @@ class SearchMenuTableViewModel {
                     if self.requestSearchQueue.count > 0 {
                         self.requestSearch()
                     } else {
-                        self.delegate?.searchMenuViewWillUpdateLayout()
+                        self.rx_searchMenuViewWillUpdateLayout.onNext(())
                     }
                 })
             } else {
@@ -84,7 +84,7 @@ class SearchMenuTableViewModel {
                 if self.requestSearchQueue.count > 0 {
                     self.requestSearch()
                 } else {
-                    self.delegate?.searchMenuViewWillHide()
+                    self.rx_searchMenuViewWillHide.onNext(())
                 }
             }
         }
