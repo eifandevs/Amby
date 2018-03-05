@@ -340,14 +340,14 @@ class BaseView: UIView {
         .disposed(by: rx.disposeBag)
 
         // ヒストリーフォワード監視
-        viewModel.rx_baseViewModelDidHistoryForwardWebView.subscribe { [weak self] _ in
-            guard let `self` = self else { return }
-            if let url = self.viewModel.getForwardUrlPageHistoryDataModel(context: self.front.context) {
-                self.front.operation = .forward
-                _ = self.front.load(urlStr: url)
-            }
-        }
-        .disposed(by: rx.disposeBag)
+        viewModel.rx_baseViewModelDidHistoryForwardWebView
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                if let url = self.viewModel.getForwardUrlPageHistoryDataModel(context: self.front.context) {
+                    self.front.operation = .forward
+                    _ = self.front.load(urlStr: url)
+                }
+            }.disposed(by: rx.disposeBag)
 
         // フォーム登録監視
         viewModel.rx_baseViewModelDidRegisterAsForm.subscribe { [weak self] _ in
@@ -421,16 +421,22 @@ class BaseView: UIView {
         front.frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT - AppConst.BASE_LAYER_HEADER_HEIGHT + DeviceConst.STATUS_BAR_HEIGHT
     }
     
+    /// 高さの最大位置までスライド
     func slideToMax() {
-        rx_baseViewDidSlideToMax.onNext(())
-        frame.origin.y = AppConst.BASE_LAYER_HEADER_HEIGHT
-        scaleToMin()
+        if !isLocateMax {
+            rx_baseViewDidSlideToMax.onNext(())
+            frame.origin.y = AppConst.BASE_LAYER_HEADER_HEIGHT
+            scaleToMin()
+        }
     }
-    
+
+    /// 高さの最小位置までスライド
     func slideToMin() {
-        rx_baseViewDidSlideToMin.onNext(())
-        frame.origin.y = DeviceConst.STATUS_BAR_HEIGHT
-        scaleToMax()
+        if !isLocateMin {
+            rx_baseViewDidSlideToMin.onNext(())
+            frame.origin.y = DeviceConst.STATUS_BAR_HEIGHT
+            scaleToMax()
+        }
     }
     
     func validateUserInteraction() {
