@@ -264,6 +264,7 @@ class HeaderView: UIView, ShadowView {
     /// 検索開始
     private func startEditing() {
         if !isEditing {
+            slideToMax()
             isEditing = true
             headerField.removeContent()
             rx_headerViewDidBeginEditing.onNext(())
