@@ -12,14 +12,12 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol SearchMenuTableViewDelegate: class  {
-    func searchMenuDidEndEditing()
-    func searchMenuDidClose()
-}
-
 class SearchMenuTableView: UIView {
-
-    weak var delegate: SearchMenuTableViewDelegate?
+    /// 編集終了通知用RX
+    let rx_searchMenuDidEndEditing = PublishSubject<Void>()
+    /// メニュークローズ通知用RX
+    let rx_searchMenuDidClose = PublishSubject<Void>()
+    
     private let viewModel: SearchMenuTableViewModel = SearchMenuTableViewModel()
     private var tapRecognizer: UITapGestureRecognizer!
     private var overlay: UIButton?
@@ -46,7 +44,6 @@ class SearchMenuTableView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SearchMenuTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(SearchMenuTableViewCell.self))
-        viewModel.delegate = self
         
         // ジェスチャーを登録する
         // ジェスチャーの付け替えをするのでRX化しない
@@ -73,6 +70,42 @@ class SearchMenuTableView: UIView {
             .disposed(by: rx.disposeBag)
 
         addSubview(tableView)
+        
+        // 画面更新通知監視
+        viewModel.rx_searchMenuViewWillUpdateLayout
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                self.tableView.reloadData()
+                self.alpha = 1
+                if let overlay = self.overlay {
+                    overlay.removeFromSuperview()
+                    self.overlay = nil
+                }
+            }.disposed(by: rx.disposeBag)
+        
+        // 画面無効化監視
+        viewModel.rx_searchMenuViewWillHide
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                if self.overlay == nil {
+                    self.alpha = 0
+                    let button = UIButton(frame: frame)
+                    button.backgroundColor = UIColor.clear
+                    
+                    // ボタンタップ
+                    button.rx.tap
+                        .subscribe(onNext: { [weak self] in
+                            guard let `self` = self else { return }
+                            // サーチメニューが透明になっている時にタップ
+                            self.rx_searchMenuDidClose.onNext(())
+                            button.removeFromSuperview()
+                        })
+                        .disposed(by: self.rx.disposeBag)
+                    
+                    self.overlay = button
+                    self.superview?.addSubview(button)
+                }
+            }.disposed(by: rx.disposeBag)
     }
     
     deinit {
@@ -94,7 +127,7 @@ class SearchMenuTableView: UIView {
     
 // MARK: Touch Event
     @objc func tapped(sender: UITapGestureRecognizer) {
-        delegate?.searchMenuDidEndEditing()
+        self.rx_searchMenuDidEndEditing.onNext(())
     }
 }
 
@@ -156,7 +189,7 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // とりあえずメニューを閉じる
-        delegate?.searchMenuDidClose()
+        rx_searchMenuDidClose.onNext(())
 
         let cell = tableView.cellForRow(at: indexPath)!
         if cell.className == SearchMenuTableViewCell.className {
@@ -165,39 +198,6 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
         } else {
             let text = cell.textLabel!.text!
             viewModel.executeOperationDataModel(operation: .search, url: text)
-        }
-    }
-}
-
-// MARK: SearchMenuTableViewModel Delegate
-extension SearchMenuTableView: SearchMenuTableViewModelDelegate {
-    func searchMenuViewWillUpdateLayout() {
-        tableView.reloadData()
-        alpha = 1
-        if let overlay = overlay {
-            overlay.removeFromSuperview()
-            self.overlay = nil
-        }
-    }
-    
-    func searchMenuViewWillHide() {
-        if overlay == nil {
-            alpha = 0
-            let button = UIButton(frame: frame)
-            button.backgroundColor = UIColor.clear
-            
-            // ボタンタップ
-            button.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    guard let `self` = self else { return }
-                    // サーチメニューが透明になっている時にタップ
-                    self.delegate?.searchMenuDidClose()
-                    button.removeFromSuperview()
-                })
-                .disposed(by: rx.disposeBag)
-            
-            overlay = button
-            superview?.addSubview(button)
         }
     }
 }

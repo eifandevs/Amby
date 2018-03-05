@@ -67,7 +67,7 @@ class BaseLayer: UIView {
                 // 検索中の場合は、検索画面を閉じる
                 if self.searchMenuTableView != nil {
                     log.debug("close search menu.")
-                    self.headerViewDidEndEditing(headerFieldUpdate: false)
+                    self.endEditing()
                     self.validateUserInteraction()
                 } else {
                     self.rx_baseLayerDidInvalidate.onNext(swipeDirection)
@@ -102,7 +102,50 @@ class BaseLayer: UIView {
             }
             .disposed(by: rx.disposeBag)
         
-        headerView.delegate = self
+        // HeaderView編集開始監視
+        headerView.rx_headerViewDidBeginEditing
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                log.debug("[BaseLayer Event]: headerViewDidBeginEditing")
+                // 履歴検索を行うので、事前に永続化しておく
+                CommonHistoryDataModel.s.store()
+                PageHistoryDataModel.s.store()
+                
+                self.isHeaderViewEditing = true
+                self.searchMenuTableView = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
+                // サーチメニュー編集終了監視
+                self.searchMenuTableView!.rx_searchMenuDidEndEditing
+                    .subscribe { [weak self] _ in
+                        guard let `self` = self else { return }
+                        log.debug("[BaseLayer Event]: searchMenuDidEndEditing. close keyboard")
+                        self.headerView.closeKeyBoard()
+                    }
+                    .disposed(by: self.rx.disposeBag)
+                
+                // サーチメニュークローズ監視
+                self.searchMenuTableView!.rx_searchMenuDidClose
+                    .subscribe { [weak self] _ in
+                        guard let `self` = self else { return }
+                        log.debug("[BaseLayer Event]: searchMenuDidClose")
+                        self.endEditing()
+                    }
+                    .disposed(by: self.rx.disposeBag)
+
+                self.addSubview(self.searchMenuTableView!)
+            }
+            .disposed(by: rx.disposeBag)
+        
+        // HeaderView編集終了監視
+        headerView.rx_headerViewDidEndEditing
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                log.debug("[BaseLayer Event]: headerViewDidEndEditing")
+                EGApplication.sharedMyApplication.egDelegate = self.baseView
+                self.isHeaderViewEditing = false
+                self.searchMenuTableView!.removeFromSuperview()
+                self.searchMenuTableView = nil
+            }
+            .disposed(by: rx.disposeBag)
         
         addSubview(baseView)
         addSubview(headerView)
@@ -118,9 +161,19 @@ class BaseLayer: UIView {
         NotificationCenter.default.removeObserver(self)
     }
     
-// MARK: Public Method
+    // MARK: Public Method
     func validateUserInteraction() {
         baseView.validateUserInteraction()
+    }
+    
+    // MARK: Private Method
+    /// 編集モード終了
+    private func endEditing() {
+        EGApplication.sharedMyApplication.egDelegate = baseView
+        isHeaderViewEditing = false
+        searchMenuTableView!.removeFromSuperview()
+        searchMenuTableView = nil
+        headerView.finishEditing(headerFieldUpdate: false)
     }
 }
 
@@ -134,43 +187,5 @@ extension BaseLayer: EGApplicationDelegate {
     func screenTouchMoved(touch: UITouch) {
     }
     func screenTouchCancelled(touch: UITouch) {
-    }
-}
-
-// MARK: HeaderView Delegate
-extension BaseLayer: HeaderViewDelegate {
-    func headerViewDidBeginEditing() {
-        log.debug("[BaseLayer Event]: headerViewDidBeginEditing")
-        // 履歴検索を行うので、事前に永続化しておく
-        CommonHistoryDataModel.s.store()
-        PageHistoryDataModel.s.store()
-
-        isHeaderViewEditing = true
-        searchMenuTableView = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
-        searchMenuTableView?.delegate = self
-        addSubview(searchMenuTableView!)
-    }
-    
-    func headerViewDidEndEditing(headerFieldUpdate: Bool) {
-        log.debug("[BaseLayer Event]: headerViewDidEndEditing headerFieldUpdate: \(headerFieldUpdate)")
-        EGApplication.sharedMyApplication.egDelegate = baseView
-        isHeaderViewEditing = false
-        searchMenuTableView!.removeFromSuperview()
-        searchMenuTableView = nil
-        // TODO: 循環を修正する
-        headerView.finishEditing(headerFieldUpdate: headerFieldUpdate)
-    }
-}
-
-// MARK: SearchMenuTableView Delegate
-extension BaseLayer: SearchMenuTableViewDelegate {
-    func searchMenuDidEndEditing() {
-        log.debug("[BaseLayer Event]: searchMenuDidEndEditing. close keyboard")
-        headerView.closeKeyBoard()
-    }
-    
-    func searchMenuDidClose() {
-        log.debug("[BaseLayer Event]: searchMenuDidClose")
-        headerViewDidEndEditing(headerFieldUpdate: false)
     }
 }
