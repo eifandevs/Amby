@@ -23,41 +23,29 @@ extension String {
     }
 
     var hasValidUrl: Bool {
-        get {
-            return self != "http://" &&
-                   self != "https://" &&
-                   !isEmpty &&
-                   (hasPrefix("http://") == true || hasPrefix("https://") == true)
-        }
-    }    
+        return self != "http://" &&
+               self != "https://" &&
+               !isEmpty &&
+               (hasPrefix("http://") == true || hasPrefix("https://") == true)
+    }
     var hasLocalUrl: Bool {
-        get {
-            return hasPrefix("file://")
-        }
+        return hasPrefix("file://")
     }
     
     var hasHttpsUrl: Bool {
-        get {
-            return hasPrefix("https://")
-        }
+        return hasPrefix("https://")
     }
     
     var domainAndPath: String {
-        get {
-            return self.components(separatedBy: "?").first!
-        }
+        return self.components(separatedBy: "?").first!
     }
     
     var toInt: Int {
-        get {
-            return Int(self)!
-        }
+        return Int(self)!
     }
     
     var tofloat: CGFloat {
-        get {
-            return CGFloat(Double(self)!)
-        }
+        return CGFloat(Double(self)!)
     }
     
     /// 文字列からDate型作成
