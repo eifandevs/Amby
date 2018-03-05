@@ -49,6 +49,15 @@ class BaseLayer: UIView {
                 }
             }
             .disposed(by: self.rx.disposeBag)
+        
+        // フォアグラウンド時にベースビューの位置をMinにする
+        NotificationCenter.default.rx.notification(.UIApplicationWillEnterForeground, object: nil)
+            .subscribe { [weak self] notification in
+                guard let `self` = self else { return }
+                log.debug("[BaseLayer Event]: UIApplicationWillEnterForeground")
+                self.baseView.slideToMax()
+            }
+            .disposed(by: self.rx.disposeBag)
 
         // BaseViewスワイプ監視
         baseView.rx_baseViewDidEdgeSwiped.subscribe { [weak self] object in
