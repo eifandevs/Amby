@@ -12,12 +12,10 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol HeaderFieldDelegate: class {
-    func headerFieldDidEndEditing(text: String?)
-}
-
 class HeaderField: UIButton, ShadowView {
-    weak var delegate: HeaderFieldDelegate?
+    /// 編集終了通知用RX
+    let rx_headerFieldDidEndEditing = PublishSubject<String?>()
+    
     private var icon: UIImageView?
     private let iconSize: CGSize = CGSize(width: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT, height: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT)
     private var label: EGGradientLabel?
@@ -101,7 +99,7 @@ class HeaderField: UIButton, ShadowView {
         textField.rx.controlEvent(UIControlEvents.editingDidEndOnExit)
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
-                self.delegate?.headerFieldDidEndEditing(text: self.textField.text)
+                self.rx_headerFieldDidEndEditing.onNext(self.textField.text)
             })
             .disposed(by: rx.disposeBag)
         
@@ -116,8 +114,7 @@ class HeaderField: UIButton, ShadowView {
         closeMenuButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
-                self.delegate?.headerFieldDidEndEditing(text: nil)
-
+                self.rx_headerFieldDidEndEditing.onNext(nil)
             })
             .disposed(by: rx.disposeBag)
         

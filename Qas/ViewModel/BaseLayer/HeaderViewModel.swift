@@ -10,19 +10,21 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
-
-protocol HeaderViewModelDelegate: class {
-    func headerViewModelDidChangeProgress(progress: CGFloat)
-    func headerViewModelDidChangeField(text: String)
-    func headerViewModelDidChangeFavorite(enable: Bool)
-    func headerViewModelDidBeginEditing(forceEditFlg: Bool)
-}
+import NSObject_Rx
 
 class HeaderViewModel {
+    /// プログレス更新通知用RX
+    let rx_headerViewModelDidChangeProgress = PublishSubject<CGFloat>()
+    /// テキストフィールド更新通知用RX
+    let rx_headerViewModelDidChangeField = PublishSubject<String>()
+    /// お気に入り変更通知用RX
+    let rx_headerViewModelDidChangeFavorite = PublishSubject<Bool>()
+    /// 編集開始通知用RX
+    let rx_headerViewModelDidBeginEditing = PublishSubject<Bool>()
+    
+    
     /// 通知センター
     private let center = NotificationCenter.default
-    
-    weak var delegate: HeaderViewModelDelegate?
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -34,7 +36,7 @@ class HeaderViewModel {
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
                 log.debug("[HeaderViewModel Event]: UIApplicationDidBecomeActive")
-                self.delegate?.headerViewModelDidChangeProgress(progress: 0)
+                self.rx_headerViewModelDidChangeProgress.onNext(0)
             }
             .disposed(by: disposeBag)
         
@@ -44,7 +46,7 @@ class HeaderViewModel {
                 guard let `self` = self else { return }
                 log.debug("[HeaderViewModel Event]: headerViewDataModelProgressDidUpdate")
                 if let notification = notification.element {
-                    self.delegate?.headerViewModelDidChangeProgress(progress: notification.object as! CGFloat)
+                    self.rx_headerViewModelDidChangeProgress.onNext(notification.object as! CGFloat)
                 }
             }
             .disposed(by: disposeBag)
@@ -55,7 +57,7 @@ class HeaderViewModel {
                 guard let `self` = self else { return }
                 log.debug("[HeaderViewModel Event]: favoriteDataModelDidInsert")
                 let url = PageHistoryDataModel.s.currentHistory.url
-                self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
             }
             .disposed(by: disposeBag)
         
@@ -65,7 +67,7 @@ class HeaderViewModel {
                 guard let `self` = self else { return }
                 log.debug("[HeaderViewModel Event]: favoriteDataModelDidRemove")
                 let url = PageHistoryDataModel.s.currentHistory.url
-                self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
             }
             .disposed(by: disposeBag)
         
@@ -75,7 +77,7 @@ class HeaderViewModel {
                 guard let `self` = self else { return }
                 log.debug("[HeaderViewModel Event]: favoriteDataModelDidReload")
                 let url = PageHistoryDataModel.s.currentHistory.url
-                self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
             }
             .disposed(by: disposeBag)
         
@@ -85,7 +87,7 @@ class HeaderViewModel {
                 guard let `self` = self else { return }
                 log.debug("[HeaderViewModel Event]: headerViewDataModelHeaderFieldTextDidUpdate")
                 if let notification = notification.element {
-                    self.delegate?.headerViewModelDidChangeField(text: notification.object as! String)
+                    self.rx_headerViewModelDidChangeField.onNext(notification.object as! String)
                 }
             }
             .disposed(by: disposeBag)
@@ -96,7 +98,7 @@ class HeaderViewModel {
                 guard let `self` = self else { return }
                 log.debug("[HeaderViewModel Event]: headerViewDataModelDidBeginEditing")
                 if let notification = notification.element {
-                    self.delegate?.headerViewModelDidBeginEditing(forceEditFlg: notification.object as! Bool)
+                    self.rx_headerViewModelDidBeginEditing.onNext(notification.object as! Bool)
                 }
             }
             .disposed(by: disposeBag)
@@ -107,7 +109,7 @@ class HeaderViewModel {
                 guard let `self` = self else { return }
                 log.debug("[HeaderViewModel Event]: pageHistoryDataModelDidChange")
                 let url = PageHistoryDataModel.s.currentHistory.url
-                self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
             }
             .disposed(by: disposeBag)
 
@@ -117,7 +119,7 @@ class HeaderViewModel {
                 guard let `self` = self else { return }
                 log.debug("[HeaderViewModel Event]: pageHistoryDataModelDidAppend")
                 let url = PageHistoryDataModel.s.currentHistory.url
-                self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
             }
             .disposed(by: disposeBag)
         
@@ -127,7 +129,7 @@ class HeaderViewModel {
                 guard let `self` = self else { return }
                 log.debug("[HeaderViewModel Event]: pageHistoryDataModelDidInsert")
                 let url = PageHistoryDataModel.s.currentHistory.url
-                self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
             }
             .disposed(by: disposeBag)
         
@@ -140,10 +142,10 @@ class HeaderViewModel {
                     let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
                     if pageExist {
                         let url = PageHistoryDataModel.s.currentHistory.url
-                        self.delegate?.headerViewModelDidChangeFavorite(enable: FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+                        self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
                     } else {
                         // ページが存在しない場合は、無条件でお気に入りボタンを無効化
-                        self.delegate?.headerViewModelDidChangeFavorite(enable: false)
+                        self.rx_headerViewModelDidChangeFavorite.onNext(false)
                     }
                 }
             }
