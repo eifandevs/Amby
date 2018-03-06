@@ -23,7 +23,7 @@ class BaseViewModel {
     /// ページ削除通知用RX
     let rx_baseViewModelDidRemoveWebView = PublishSubject<(context: String, pageExist: Bool, deleteIndex: Int)>()
     /// ヒストリーバック通知用RX
-    let rx_baseViewModelDidHistoryBackWebView = PublishSubject<Void>()
+    let rx_baseViewModelDidHistoryBackWebView = CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoBack.flatMap { _ in Observable.just(()) }
     /// ヒストリーフォワード通知用RX
     let rx_baseViewModelDidHistoryForwardWebView = PublishSubject<Void>()
     /// 検索通知用RX
@@ -138,15 +138,6 @@ class BaseViewModel {
                     
                     self.rx_baseViewModelDidRemoveWebView.onNext((context: context, pageExist: pageExist, deleteIndex: deleteIndex))
                 }
-            }
-            .disposed(by: disposeBag)
-        
-        // webviewヒストリバック
-        center.rx.notification(.commonHistoryDataModelDidGoBack, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[BaseViewModel Event]: commonHistoryDataModelDidGoBack")
-                self.rx_baseViewModelDidHistoryBackWebView.onNext(())
             }
             .disposed(by: disposeBag)
         

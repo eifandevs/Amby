@@ -8,9 +8,17 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class CommonHistoryDataModel {
+    
+    let disposeBag = DisposeBag()
+    
     static let s = CommonHistoryDataModel()
+    
+    /// Maxスライド通知用RX
+    let rx_commonHistoryDataModelDidGoBack = PublishSubject<Void>()
     
     /// 閲覧履歴
     var histories = [CommonHistory]()
@@ -20,7 +28,7 @@ final class CommonHistoryDataModel {
     
     /// 前の履歴に移動
     func goBack() {
-        center.post(name: .commonHistoryDataModelDidGoBack, object: nil)
+        rx_commonHistoryDataModelDidGoBack.onNext(())
     }
     
     /// 次の履歴に移動

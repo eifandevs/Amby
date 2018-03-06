@@ -24,7 +24,6 @@ extension NSNotification.Name {
     static let pageHistoryDataModelDidEndRendering = NSNotification.Name("pageHistoryDataModelDidEndRendering")
     
     // CommonHistoryDataModel
-    static let commonHistoryDataModelDidGoBack = NSNotification.Name("commonHistoryDataModelDidGoBack")
     static let commonHistoryDataModelDidGoForward = NSNotification.Name("commonHistoryDataModelDidGoForward")
 
     // HeaderViewDataModel
