@@ -728,25 +728,27 @@ extension BaseView: UIScrollViewDelegate {
             if front.scrollView == scrollView {
                 if velocity.y == 0 && !isTouching {
                     // タッチ終了時にベースビューの高さを調整する
-                    if isScrolling && isMoving && !isAnimating {
+                    if isScrolling && !isAnimating {
                         isScrolling = false
-                        isAnimating = true
-                        if frame.origin.y > positionY.max / 2 {
-                            UIView.animate(withDuration: 0.2, animations: {
-                                self.slideToMax()
-                            }, completion: { (finished) in
-                                if finished {
-                                    self.isAnimating = false
-                                }
-                            })
-                        } else {
-                            UIView.animate(withDuration: 0.2, animations: {
-                                self.slideToMin()
-                            }, completion: { (finished) in
-                                if finished {
-                                    self.isAnimating = false
-                                }
-                            })
+                        if isMoving {
+                            isAnimating = true
+                            if frame.origin.y > positionY.max / 2 {
+                                UIView.animate(withDuration: 0.2, animations: {
+                                    self.slideToMax()
+                                }, completion: { (finished) in
+                                    if finished {
+                                        self.isAnimating = false
+                                    }
+                                })
+                            } else {
+                                UIView.animate(withDuration: 0.2, animations: {
+                                    self.slideToMin()
+                                }, completion: { (finished) in
+                                    if finished {
+                                        self.isAnimating = false
+                                    }
+                                })
+                            }
                         }
                     }
                     scrollMovingPointY = 0
@@ -762,25 +764,27 @@ extension BaseView: UIScrollViewDelegate {
             if front.scrollView == scrollView {
                 if !isTouching && !isAnimating {
                     // タッチ終了時にベースビューの高さを調整する
-                    if isScrolling && isMoving && !isAnimating {
+                    if isScrolling && !isAnimating {
                         isScrolling = false
-                        isAnimating = true
-                        if frame.origin.y > positionY.max / 2 {
-                            UIView.animate(withDuration: 0.2, animations: {
-                                self.slideToMax()
-                            }, completion: { (finished) in
-                                if finished {
-                                    self.isAnimating = false
-                                }
-                            })
-                        } else {
-                            UIView.animate(withDuration: 0.2, animations: {
-                                self.slideToMin()
-                            }, completion: { (finished) in
-                                if finished {
-                                    self.isAnimating = false
-                                }
-                            })
+                        if isMoving {
+                            isAnimating = true
+                            if frame.origin.y > positionY.max / 2 {
+                                UIView.animate(withDuration: 0.2, animations: {
+                                    self.slideToMax()
+                                }, completion: { (finished) in
+                                    if finished {
+                                        self.isAnimating = false
+                                    }
+                                })
+                            } else {
+                                UIView.animate(withDuration: 0.2, animations: {
+                                    self.slideToMin()
+                                }, completion: { (finished) in
+                                    if finished {
+                                        self.isAnimating = false
+                                    }
+                                })
+                            }
                         }
                     }
                     scrollMovingPointY = 0
