@@ -20,9 +20,6 @@ enum EdgeSwipeDirection: CGFloat {
 }
 
 class BaseView: UIView {
-    
-    /// スクロール通知用RX
-    let rx_baseViewDidScroll = PublishSubject<CGFloat>()
     /// フロント変更通知用RX
     let rx_baseViewDidChangeFront = PublishSubject<Void>()
     /// スライド通知用RX
@@ -404,7 +401,7 @@ class BaseView: UIView {
         return front.url?.absoluteString
     }
     
-    func slide(value: CGFloat) {
+    private func slide(value: CGFloat) {
         rx_baseViewDidSlide.onNext(value)
         frame.origin.y += value
         front.frame.size.height -= value
@@ -444,6 +441,7 @@ class BaseView: UIView {
     
     func validateUserInteraction() {
         isUserInteractionEnabled = true
+        // グローバル画面タッチイベントを奪う
         EGApplication.sharedMyApplication.egDelegate = self
         webViews.forEach { (wv: EGWebView?) in
             if let wv = wv, !wv.scrollView.isScrollEnabled {
