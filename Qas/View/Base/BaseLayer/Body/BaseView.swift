@@ -97,10 +97,13 @@ class BaseView: UIView {
     /// スワイプでページ切り替えを検知したかどうかのフラグ
     private var isChangingFront: Bool = false
 
-    /// ヘッダービューがスライド中かどうかのフラグ
+    /// スライド中かどうかのフラグ
     var isMoving: Bool {
         return !isLocateMax && !isLocateMin
     }
+    
+    /// スクロール中フラグ
+    var isScrolling: Bool = false
     
     /// ベースビューがMaxポジションにあるかどうかのフラグ
     var isLocateMax: Bool {
@@ -665,12 +668,13 @@ extension BaseView: EGApplicationDelegate {
 // MARK: ScrollView Delegate
 extension BaseView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isScrolling = true
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // フロントのみ通知する
-        if let front = front {
+        if let front = front, isScrolling {
             if front.scrollView == scrollView {
                 if scrollMovingPointY != 0 {
                     let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
@@ -717,13 +721,15 @@ extension BaseView: UIScrollViewDelegate {
         }
     }
     
+    /// スクロールさせずに、その場で手を離した場合
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         // フロントのみ通知する
         if let front = front {
             if front.scrollView == scrollView {
                 if velocity.y == 0 && !isTouching {
                     // タッチ終了時にベースビューの高さを調整する
-                    if isMoving && !isAnimating {
+                    if isScrolling && isMoving && !isAnimating {
+                        isScrolling = false
                         isAnimating = true
                         if frame.origin.y > positionY.max / 2 {
                             UIView.animate(withDuration: 0.2, animations: {
@@ -749,13 +755,15 @@ extension BaseView: UIScrollViewDelegate {
         }
     }
     
+    /// 慣性スクロールをした場合
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // フロントのみ通知する
         if let front = front {
             if front.scrollView == scrollView {
                 if !isTouching && !isAnimating {
                     // タッチ終了時にベースビューの高さを調整する
-                    if isMoving && !isAnimating {
+                    if isScrolling && isMoving && !isAnimating {
+                        isScrolling = false
                         isAnimating = true
                         if frame.origin.y > positionY.max / 2 {
                             UIView.animate(withDuration: 0.2, animations: {
