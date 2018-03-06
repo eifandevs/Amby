@@ -108,7 +108,7 @@ class FooterView: UIView, ShadowView {
 
         // ロングプレス
         longPressRecognizer.rx.event
-            .subscribe{ [weak self] sender in
+            .subscribe { [weak self] sender in
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
