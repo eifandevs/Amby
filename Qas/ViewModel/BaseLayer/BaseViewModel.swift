@@ -141,15 +141,6 @@ class BaseViewModel {
             }
             .disposed(by: disposeBag)
         
-        // webviewヒストリフォワード
-        center.rx.notification(.commonHistoryDataModelDidGoForward, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[BaseViewModel Event]: commonHistoryDataModelDidGoForward")
-                self.rx_baseViewModelDidHistoryForwardWebView.onNext(())
-            }
-            .disposed(by: disposeBag)
-        
         // ページ変更
         center.rx.notification(.pageHistoryDataModelDidChange, object: nil)
             .subscribe { [weak self] notification in

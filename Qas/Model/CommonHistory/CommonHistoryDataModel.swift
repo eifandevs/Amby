@@ -33,7 +33,12 @@ final class CommonHistoryDataModel {
     func goBack() {
         rx_commonHistoryDataModelDidGoBack.onNext(())
     }
-    
+
+    /// 次の履歴に移動
+    func goForward() {
+        rx_commonHistoryDataModelDidGoForward.onNext(())
+    }
+
     /// 閲覧履歴の永続化
     func store() {
         if histories.count > 0 {
