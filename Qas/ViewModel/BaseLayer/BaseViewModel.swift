@@ -25,7 +25,7 @@ class BaseViewModel {
     /// ヒストリーバック通知用RX
     let rx_baseViewModelDidHistoryBackWebView = CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoBack.flatMap { _ in Observable.just(()) }
     /// ヒストリーフォワード通知用RX
-    let rx_baseViewModelDidHistoryForwardWebView = PublishSubject<Void>()
+    let rx_baseViewModelDidHistoryForwardWebView = CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoForward.flatMap { _ in Observable.just(()) }
     /// 検索通知用RX
     let rx_baseViewModelDidSearchWebView = PublishSubject<String>()
     /// フォーム登録通知用RX

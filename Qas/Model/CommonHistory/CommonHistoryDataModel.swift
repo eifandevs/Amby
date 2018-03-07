@@ -17,8 +17,11 @@ final class CommonHistoryDataModel {
     
     static let s = CommonHistoryDataModel()
     
-    /// Maxスライド通知用RX
+    /// ヒストリーバック通知用RX
     let rx_commonHistoryDataModelDidGoBack = PublishSubject<Void>()
+
+    /// ヒストリーフォワード通知用RX
+    let rx_commonHistoryDataModelDidGoForward = PublishSubject<Void>()
     
     /// 閲覧履歴
     var histories = [CommonHistory]()
@@ -29,11 +32,6 @@ final class CommonHistoryDataModel {
     /// 前の履歴に移動
     func goBack() {
         rx_commonHistoryDataModelDidGoBack.onNext(())
-    }
-    
-    /// 次の履歴に移動
-    func goForward() {
-        center.post(name: .commonHistoryDataModelDidGoForward, object: nil)
     }
     
     /// 閲覧履歴の永続化
