@@ -543,7 +543,7 @@ class BaseView: UIView {
                             completion()
                         }
                     } else {
-                        log.error("failed taking snapshot. error: \(error?.localizedDescription)")
+                        log.error("failed taking snapshot. error: \(String(describing: error?.localizedDescription))")
                         completion()
                     }
                 }
