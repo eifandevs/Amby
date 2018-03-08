@@ -555,7 +555,7 @@ class BaseView: UIView {
     @objc func updateAutoScrolling(sender: Timer) {
         if let front = front {
             let bottomOffset = front.scrollView.contentSize.height - front.scrollView.bounds.size.height + front.scrollView.contentInset.bottom
-            if (front.scrollView.contentOffset.y >= bottomOffset) {
+            if front.scrollView.contentOffset.y >= bottomOffset {
                 sender.invalidate()
                 autoScrollTimer = nil
                 front.scrollView.scroll(to: .bottom, animated: false)
