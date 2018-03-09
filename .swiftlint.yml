@@ -18,3 +18,5 @@ disabled_rules:
 - type_name
 - function_body_length
 - shorthand_operator
+- file_length
+- type_body_length

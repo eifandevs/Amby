@@ -495,6 +495,7 @@ class BaseView: UIView {
     private func createWebView(size: CGSize? = nil, context: String?) -> EGWebView {
         let newWv = EGWebView(id: context)
         newWv.frame = CGRect(origin: CGPoint.zero, size: size ?? frame.size)
+        // RXで自身をもらえず循環参照になるので、RX化しない
         newWv.navigationDelegate = self
         newWv.uiDelegate = self
         newWv.scrollView.delegate = self
