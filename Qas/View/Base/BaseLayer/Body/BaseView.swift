@@ -86,7 +86,7 @@ class BaseView: UIView {
     /// アニメーション中フラグ
     private var isAnimating = false
     /// 自動スクロール
-    private var autoScrollTimer: Timer? = nil
+    private var autoScrollTimer: Timer?
     /// スワイプ方向
     private var swipeDirection: EdgeSwipeDirection = .none
     /// タッチ開始位置
@@ -153,16 +153,65 @@ class BaseView: UIView {
         }
         
         // ページインサート監視
-        viewModel.rx_baseViewModelDidInsertWebView.subscribe { [weak self] object in
-            guard let `self` = self else { return }
-            if let at = object.element {
+        viewModel.rx_baseViewModelDidInsertWebView
+            .subscribe { [weak self] object in
+                guard let `self` = self else { return }
+                if let at = object.element {
+                    // 現フロントのプログレス監視を削除
+                    if let front = self.front {
+                        front.removeObserver(self, forKeyPath: "estimatedProgress")
+                    }
+                    self.viewModel.updateProgressHeaderViewDataModel(object: 0)
+                    let newWv = self.createWebView(context: self.viewModel.currentContext)
+                    self.webViews.insert(newWv, at: at)
+                    if self.viewModel.currentUrl.isEmpty {
+                        // 編集状態にする
+                        if let beginEditingWorkItem = self.beginEditingWorkItem {
+                            beginEditingWorkItem.cancel()
+                        }
+                        self.beginEditingWorkItem = DispatchWorkItem() { [weak self]  in
+                            guard let `self` = self else { return }
+                            self.viewModel.beginEditingHeaderViewDataModel()
+                            self.beginEditingWorkItem = nil
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: self.beginEditingWorkItem!)
+                    } else {
+                        _ = newWv.load(urlStr: self.viewModel.currentUrl)
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
+
+        // 自動入力監視
+        viewModel.rx_baseViewModelDidAutoInput
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                if !self.isDoneAutoInput {
+                    if let inputForm = FormDataModel.s.select(url: self.front.url?.absoluteString).first {
+                        NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_TITLE, message: MessageConst.ALERT_FORM_EXIST, completion: { [weak self] in
+                            for input in inputForm.inputs {
+                                let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: input.value)!
+                                self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(value)\"") { (object, error) in
+                                }
+                            }
+                        })
+                        self.isDoneAutoInput = true
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
+
+        // ページ追加監視
+        viewModel.rx_baseViewModelDidAppendWebView
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
                 // 現フロントのプログレス監視を削除
                 if let front = self.front {
                     front.removeObserver(self, forKeyPath: "estimatedProgress")
                 }
                 self.viewModel.updateProgressHeaderViewDataModel(object: 0)
                 let newWv = self.createWebView(context: self.viewModel.currentContext)
-                self.webViews.insert(newWv, at: at)
+                self.webViews.append(newWv)
                 if self.viewModel.currentUrl.isEmpty {
                     // 編集状態にする
                     if let beginEditingWorkItem = self.beginEditingWorkItem {
@@ -178,166 +227,125 @@ class BaseView: UIView {
                     _ = newWv.load(urlStr: self.viewModel.currentUrl)
                 }
             }
-        }
-        .disposed(by: rx.disposeBag)
-
-        // 自動入力監視
-        viewModel.rx_baseViewModelDidAutoInput.subscribe { [weak self] _ in
-            guard let `self` = self else { return }
-            if !self.isDoneAutoInput {
-                if let inputForm = FormDataModel.s.select(url: self.front.url?.absoluteString).first {
-                    NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_TITLE, message: MessageConst.ALERT_FORM_EXIST, completion: { [weak self] in
-                        for input in inputForm.inputs {
-                            let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: input.value)!
-                            self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(value)\"") { (object, error) in
-                            }
-                        }
-                    })
-                    self.isDoneAutoInput = true
-                }
-            }
-        }
-        .disposed(by: rx.disposeBag)
-
-        // ページ追加監視
-        viewModel.rx_baseViewModelDidAppendWebView.subscribe { [weak self] _ in
-            guard let `self` = self else { return }
-            // 現フロントのプログレス監視を削除
-            if let front = self.front {
-                front.removeObserver(self, forKeyPath: "estimatedProgress")
-            }
-            self.viewModel.updateProgressHeaderViewDataModel(object: 0)
-            let newWv = self.createWebView(context: self.viewModel.currentContext)
-            self.webViews.append(newWv)
-            if self.viewModel.currentUrl.isEmpty {
-                // 編集状態にする
-                if let beginEditingWorkItem = self.beginEditingWorkItem {
-                    beginEditingWorkItem.cancel()
-                }
-                self.beginEditingWorkItem = DispatchWorkItem() { [weak self]  in
-                    guard let `self` = self else { return }
-                    self.viewModel.beginEditingHeaderViewDataModel()
-                    self.beginEditingWorkItem = nil
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: self.beginEditingWorkItem!)
-            } else {
-                _ = newWv.load(urlStr: self.viewModel.currentUrl)
-            }
-        }
-        .disposed(by: rx.disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // リロード監視
-        viewModel.rx_baseViewModelDidReloadWebView.subscribe { [weak self] _ in
-            guard let `self` = self else { return }
-            if self.front.hasValidUrl {
-                self.front.reload()
-            } else {
-                _ = self.front.load(urlStr: self.viewModel.reloadUrl)
+        viewModel.rx_baseViewModelDidReloadWebView
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                if self.front.hasValidUrl {
+                    self.front.reload()
+                } else {
+                    _ = self.front.load(urlStr: self.viewModel.reloadUrl)
+                }
             }
-        }
-        .disposed(by: rx.disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ページ変更監視
-        viewModel.rx_baseViewModelDidChangeWebView.subscribe { [weak self] _ in
-            guard let `self` = self else { return }
-            self.front.removeObserver(self, forKeyPath: "estimatedProgress")
-            self.viewModel.updateProgressHeaderViewDataModel(object: 0)
-            if let current = self.webViews[self.viewModel.currentLocation] {
-                current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
-                if current.isLoading == true {
-                    self.viewModel.updateProgressHeaderViewDataModel(object: CGFloat(current.estimatedProgress))
+        viewModel.rx_baseViewModelDidChangeWebView
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                self.front.removeObserver(self, forKeyPath: "estimatedProgress")
+                self.viewModel.updateProgressHeaderViewDataModel(object: 0)
+                if let current = self.webViews[self.viewModel.currentLocation] {
+                    current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
+                    if current.isLoading == true {
+                        self.viewModel.updateProgressHeaderViewDataModel(object: CGFloat(current.estimatedProgress))
+                    }
+                    self.front = current
+                    self.bringSubview(toFront: current)
+                } else {
+                    self.loadWebView()
                 }
-                self.front = current
-                self.bringSubview(toFront: current)
-            } else {
-                self.loadWebView()
             }
-        }
-        .disposed(by: rx.disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ページ削除監視
-        viewModel.rx_baseViewModelDidRemoveWebView.subscribe { [weak self] object in
-            guard let `self` = self else { return }
-            if let object = object.element {
-                if let webView = self.webViews[object.deleteIndex] {
-                    // サムネイルの削除
-                    self.viewModel.deleteThumbnail(webView: webView)
+        viewModel.rx_baseViewModelDidRemoveWebView
+            .subscribe { [weak self] object in
+                guard let `self` = self else { return }
+                if let object = object.element {
+                    if let webView = self.webViews[object.deleteIndex] {
+                        // サムネイルの削除
+                        self.viewModel.deleteThumbnail(webView: webView)
 
-                    let isFrontDelete = object.context == self.front.context
-                    if isFrontDelete {
-                        webView.removeObserver(self, forKeyPath: "estimatedProgress")
-                        self.viewModel.updateProgressHeaderViewDataModel(object: 0)
-                        self.front = nil
-                    }
+                        let isFrontDelete = object.context == self.front.context
+                        if isFrontDelete {
+                            webView.removeObserver(self, forKeyPath: "estimatedProgress")
+                            self.viewModel.updateProgressHeaderViewDataModel(object: 0)
+                            self.front = nil
+                        }
 
-                    // ローディングキャンセル
-                    if webView.isLoading {
-                        webView.stopLoading()
-                    }
+                        // ローディングキャンセル
+                        if webView.isLoading {
+                            webView.stopLoading()
+                        }
 
-                    webView.removeFromSuperview()
-                    self.webViews.remove(at: object.deleteIndex)
+                        webView.removeFromSuperview()
+                        self.webViews.remove(at: object.deleteIndex)
 
-                    // くるくるを更新
-                    self.updateNetworkActivityIndicator()
+                        // くるくるを更新
+                        self.updateNetworkActivityIndicator()
 
-                    if isFrontDelete && object.pageExist {
-                        // フロントの削除で、削除後にwebviewが存在する場合
+                        if isFrontDelete && object.pageExist {
+                            // フロントの削除で、削除後にwebviewが存在する場合
 
-                        if let current = D.find(self.webViews, callback: { $0?.context == PageHistoryDataModel.s.currentContext }) {
-                            current!.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current!.context))
-                            self.front = current
-                            self.bringSubview(toFront: current!)
-                        } else {
-                            self.loadWebView()
+                            if let current = D.find(self.webViews, callback: { $0?.context == PageHistoryDataModel.s.currentContext }) {
+                                current!.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current!.context))
+                                self.front = current
+                                self.bringSubview(toFront: current!)
+                            } else {
+                                self.loadWebView()
+                            }
                         }
                     }
                 }
             }
-        }
-        .disposed(by: rx.disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // 検索監視
-        viewModel.rx_baseViewModelDidSearchWebView.subscribe { [weak self] object in
-            guard let `self` = self else { return }
-            if let text = object.element {
-                if text.hasValidUrl {
-                    let encodedText = text.contains("%") ? text : text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-                    self.viewModel.headerFieldText = encodedText
-                    _ = self.front.load(urlStr: encodedText)
-                } else {
-                    // 検索ワードによる検索
-                    // 閲覧履歴を保存する
-                    self.viewModel.storeSearchHistoryDataModel(title: text)
-                    let encodedText = "\(AppConst.PATH_SEARCH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)"
-                    self.viewModel.headerFieldText = encodedText
-                    _ = self.front.load(urlStr: encodedText)
+        viewModel.rx_baseViewModelDidSearchWebView
+            .subscribe { [weak self] object in
+                guard let `self` = self else { return }
+                if let text = object.element {
+                    if text.hasValidUrl {
+                        let encodedText = text.contains("%") ? text : text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+                        self.viewModel.headerFieldText = encodedText
+                        _ = self.front.load(urlStr: encodedText)
+                    } else {
+                        // 検索ワードによる検索
+                        // 閲覧履歴を保存する
+                        self.viewModel.storeSearchHistoryDataModel(title: text)
+                        let encodedText = "\(AppConst.PATH_SEARCH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)"
+                        self.viewModel.headerFieldText = encodedText
+                        _ = self.front.load(urlStr: encodedText)
+                    }
                 }
             }
-        }
-        .disposed(by: rx.disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ヒストリーバック監視
-        viewModel.rx_baseViewModelDidHistoryBackWebView.subscribe { [weak self] _ in
-            guard let `self` = self else { return }
-            if self.front.isLoading && self.front.operation == .normal && !(self.viewModel.getPastViewingPageHistoryDataModel(context: self.front.context)) {
-                // 新規ページ表示中に戻るを押下したルート
-                log.debug("go back on loading.")
+        viewModel.rx_baseViewModelDidHistoryBackWebView
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                if self.front.isLoading && self.front.operation == .normal && !(self.viewModel.getPastViewingPageHistoryDataModel(context: self.front.context)) {
+                    // 新規ページ表示中に戻るを押下したルート
+                    log.debug("go back on loading.")
 
-                if let url = self.viewModel.getMostForwardUrlPageHistoryDataModel(context: self.front.context) {
-                    self.front.operation = .back
-                    _ = self.front.load(urlStr: url)
-                }
-            } else {
-                log.debug("go back.")
-                // 有効なURLを探す
-                if let url = self.viewModel.getBackUrlPageHistoryDataModel(context: self.front.context) {
-                    self.front.operation = .back
-                    _ = self.front.load(urlStr: url)
+                    if let url = self.viewModel.getMostForwardUrlPageHistoryDataModel(context: self.front.context) {
+                        self.front.operation = .back
+                        _ = self.front.load(urlStr: url)
+                    }
+                } else {
+                    log.debug("go back.")
+                    // 有効なURLを探す
+                    if let url = self.viewModel.getBackUrlPageHistoryDataModel(context: self.front.context) {
+                        self.front.operation = .back
+                        _ = self.front.load(urlStr: url)
+                    }
                 }
             }
-        }
-        .disposed(by: rx.disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ヒストリーフォワード監視
         viewModel.rx_baseViewModelDidHistoryForwardWebView
@@ -357,17 +365,18 @@ class BaseView: UIView {
         .disposed(by: rx.disposeBag)
 
         // 自動スクロール監視
-        viewModel.rx_baseViewModelDidAutoScroll.subscribe { [weak self] _ in
-            guard let `self` = self else { return }
-            if self.autoScrollTimer != nil || self.autoScrollTimer?.isValid == true {
-                self.autoScrollTimer?.invalidate()
-                self.autoScrollTimer = nil
-            } else {
-                self.autoScrollTimer = Timer.scheduledTimer(timeInterval: Double(self.viewModel.autoScrollInterval), target: self, selector: #selector(self.updateAutoScrolling), userInfo: nil, repeats: true)
-                self.autoScrollTimer?.fire()
+        viewModel.rx_baseViewModelDidAutoScroll
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                if self.autoScrollTimer != nil || self.autoScrollTimer?.isValid == true {
+                    self.autoScrollTimer?.invalidate()
+                    self.autoScrollTimer = nil
+                } else {
+                    self.autoScrollTimer = Timer.scheduledTimer(timeInterval: Double(self.viewModel.autoScrollInterval), target: self, selector: #selector(self.updateAutoScrolling), userInfo: nil, repeats: true)
+                    self.autoScrollTimer?.fire()
+                }
             }
-        }
-        .disposed(by: rx.disposeBag)
+            .disposed(by: rx.disposeBag)
     }
     
     deinit {
