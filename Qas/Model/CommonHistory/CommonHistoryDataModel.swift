@@ -156,8 +156,6 @@ final class CommonHistoryDataModel {
                 })
             }
             
-        } catch let error as NSError {
-            log.error("failed to read common history. error: \(error.localizedDescription)")
         }
         return result
     }
