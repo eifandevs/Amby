@@ -21,13 +21,12 @@ class FooterView: UIView, ShadowView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        viewModel.delegate = self
         
         addAreaShadow()
         
         backgroundColor = UIColor.pastelLightGray
         scrollView.frame = CGRect(origin: CGPoint(x: 0, y:0), size: frame.size)
-        scrollView.delegate = self
+        scrollView.delegate = self // スクロールビューはなんか怖いのでrx化しない
         scrollView.contentSize = CGSize(width: frame.size.width + 1, height: frame.size.height)
         scrollView.bounces = true
         scrollView.backgroundColor = UIColor.clear
@@ -40,6 +39,112 @@ class FooterView: UIView, ShadowView {
         // サムネイル説明用に、スクロールビューの領域外に配置できるようにする
         scrollView.clipsToBounds = false
         
+        // サムネイル追加監視
+        viewModel.rx_footerViewModelDidAppendThumbnail
+            .subscribe { [weak self] object in
+                guard let `self` = self else { return }
+                if let pageHistory = object.element {
+                    // 新しいサムネイルスペースを作成
+                    let _ = self.append(context: pageHistory.context)
+                    self.updateFrontBar()
+                }
+            }
+            .disposed(by: rx.disposeBag)
+        
+        // サムネイル変更監視
+        viewModel.rx_footerViewModelDidChangeThumbnail
+            .subscribe { [weak self] object in
+                guard let `self` = self else { return }
+                self.updateFrontBar()
+            }
+            .disposed(by: rx.disposeBag)
+        
+        // サムネイルインサート監視
+        viewModel.rx_footerViewModelDidInsertThumbnail
+            .subscribe { [weak self] object in
+                guard let `self` = self else { return }
+                if let tuple = object.element {
+                    // 新しいサムネイルスペースを作成
+                    let _ = self.insert(at: tuple.at, context: tuple.pageHistory.context)
+                    self.updateFrontBar()
+                }
+            }
+            .disposed(by: rx.disposeBag)
+        
+        // サムネイル削除監視
+        viewModel.rx_footerViewModelDidRemoveThumbnail
+            .subscribe { [weak self] object in
+                guard let `self` = self else { return }
+                if let tuple = object.element {
+                    let deleteIndex = D.findIndex(self.thumbnails, callback: { $0.context == tuple.context })!
+                    
+                    if ((self.thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
+                        self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
+                        self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
+                    }
+                    
+                    self.thumbnails[deleteIndex].removeFromSuperview()
+                    self.thumbnails.remove(at: deleteIndex)
+                    self.updateFrontBar()
+                    
+                    if self.thumbnails.count > 0 {
+                        UIView.animate(withDuration: 0.3, animations: {
+                            for i in 0...self.thumbnails.count - 1 {
+                                if i < deleteIndex {
+                                    self.thumbnails[i].center.x += self.thumbnails[i].frame.size.width / 2
+                                } else if i >= deleteIndex {
+                                    self.thumbnails[i].center.x -= self.thumbnails[i].frame.size.width / 2
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
+        
+        // ローディングスタート監視
+        viewModel.rx_footerViewModelDidStartLoading
+            .subscribe { [weak self] object in
+                guard let `self` = self else { return }
+                if let context = object.element {
+                    self.startIndicator(context: context)
+                }
+            }
+            .disposed(by: rx.disposeBag)
+        
+        // ローティング終了監視
+        viewModel.rx_footerViewModelDidEndLoading
+            .subscribe { [weak self] object in
+                guard let `self` = self else { return }
+                if let tuple = object.element {
+                    // くるくるを止めて、サムネイルを表示する
+                    let targetThumbnail: Thumbnail = self.thumbnails.filter({ (thumbnail) -> Bool in
+                        return thumbnail.context == tuple.context
+                    })[0]
+                    let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
+                    if existIndicator {
+                        DispatchQueue.mainSyncSafe { [weak self] in
+                            guard let _ = self else { return }
+                            targetThumbnail.subviews.forEach({ (v) in
+                                if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
+                                    let indicator = v as! NVActivityIndicatorView
+                                    indicator.stopAnimating()
+                                    indicator.alpha = 0
+                                    indicator.removeFromSuperview()
+                                }
+                            })
+                            targetThumbnail.setThumbnailTitle(title: tuple.title)
+                            if let image = ThumbnailDataModel.s.getThumbnail(context: tuple.context) {
+                                targetThumbnail.setImage(nil, for: .normal)
+                                targetThumbnail.setBackgroundImage(image, for: .normal)
+                            } else {
+                                log.error("missing thumbnail image")
+                            }
+                        }
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
         // 初期ロード
         load()
     }
@@ -262,82 +367,6 @@ extension FooterView: UIScrollViewDelegate {
             UIView.animate(withDuration: 0.2, animations: {
                 thumbnail.thumbnailInfo.alpha = 0
             })
-        }
-    }
-}
-
-// MARK: FooterViewModel Delegate
-extension FooterView: FooterViewModelDelegate {
-    func footerViewModelDidChangeThumbnail(context: String) {
-        updateFrontBar()
-    }
-    
-    func footerViewModelDidAppendThumbnail(pageHistory: PageHistory) {
-        // 新しいサムネイルスペースを作成
-        let _ = append(context: pageHistory.context)
-        updateFrontBar()
-    }
-    
-    func footerViewModelDidInsertThumbnail(at: Int, pageHistory: PageHistory) {
-        // 新しいサムネイルスペースを作成
-        let _ = insert(at: at, context: pageHistory.context)
-        updateFrontBar()
-    }
-    
-    func footerViewModelDidRemoveThumbnail(context: String, pageExist: Bool) {
-        let deleteIndex = D.findIndex(thumbnails, callback: { $0.context == context })!
-
-        if ((self.thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
-            self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-            self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
-        }
-        
-        thumbnails[deleteIndex].removeFromSuperview()
-        thumbnails.remove(at: deleteIndex)
-        updateFrontBar()
-        
-        if thumbnails.count > 0 {
-            UIView.animate(withDuration: 0.3, animations: {
-                for i in 0...self.thumbnails.count - 1 {
-                    if i < deleteIndex {
-                        self.thumbnails[i].center.x += self.thumbnails[i].frame.size.width / 2
-                    } else if i >= deleteIndex {
-                        self.thumbnails[i].center.x -= self.thumbnails[i].frame.size.width / 2
-                    }
-                }
-            })
-        }
-    }
-    
-    func footerViewModelDidStartLoading(context: String) {
-        startIndicator(context: context)
-    }
-    
-    func footerViewModelDidEndLoading(context: String, title: String) {
-        // くるくるを止めて、サムネイルを表示する
-        let targetThumbnail: Thumbnail = self.thumbnails.filter({ (thumbnail) -> Bool in
-            return thumbnail.context == context
-        })[0]
-        let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
-        if existIndicator {
-            DispatchQueue.mainSyncSafe { [weak self] in
-                guard let _ = self else { return }
-                targetThumbnail.subviews.forEach({ (v) in
-                    if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
-                        let indicator = v as! NVActivityIndicatorView
-                        indicator.stopAnimating()
-                        indicator.alpha = 0
-                        indicator.removeFromSuperview()
-                    }
-                })
-                targetThumbnail.setThumbnailTitle(title: title)
-                if let image = ThumbnailDataModel.s.getThumbnail(context: context) {
-                    targetThumbnail.setImage(nil, for: .normal)
-                    targetThumbnail.setBackgroundImage(image, for: .normal)
-                } else {
-                    log.error("missing thumbnail image")
-                }
-            }
         }
     }
 }
