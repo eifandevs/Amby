@@ -18,10 +18,10 @@ final class CommonHistoryDataModel {
     static let s = CommonHistoryDataModel()
     
     /// ヒストリーバック通知用RX
-    let rx_commonHistoryDataModelDidGoBack = PublishSubject<Void>()
+    let rx_commonHistoryDataModelDidGoBack = PublishSubject<()>()
 
     /// ヒストリーフォワード通知用RX
-    let rx_commonHistoryDataModelDidGoForward = PublishSubject<Void>()
+    let rx_commonHistoryDataModelDidGoForward = PublishSubject<()>()
     
     /// 閲覧履歴
     var histories = [CommonHistory]()

@@ -14,9 +14,9 @@ import NSObject_Rx
 
 class SearchMenuTableView: UIView {
     /// 編集終了通知用RX
-    let rx_searchMenuDidEndEditing = PublishSubject<Void>()
+    let rx_searchMenuDidEndEditing = PublishSubject<()>()
     /// メニュークローズ通知用RX
-    let rx_searchMenuDidClose = PublishSubject<Void>()
+    let rx_searchMenuDidClose = PublishSubject<()>()
     
     private let viewModel: SearchMenuTableViewModel = SearchMenuTableViewModel()
     private var tapRecognizer: UITapGestureRecognizer!

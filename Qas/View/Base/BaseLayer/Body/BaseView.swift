@@ -21,13 +21,13 @@ enum EdgeSwipeDirection: CGFloat {
 
 class BaseView: UIView {
     /// フロント変更通知用RX
-    let rx_baseViewDidChangeFront = PublishSubject<Void>()
+    let rx_baseViewDidChangeFront = PublishSubject<()>()
     /// スライド通知用RX
     let rx_baseViewDidSlide = PublishSubject<CGFloat>()
     /// Maxスライド通知用RX
-    let rx_baseViewDidSlideToMax = PublishSubject<Void>()
+    let rx_baseViewDidSlideToMax = PublishSubject<()>()
     /// Minスライド通知用RX
-    let rx_baseViewDidSlideToMin = PublishSubject<Void>()
+    let rx_baseViewDidSlideToMin = PublishSubject<()>()
     /// ページスワイプ通知用RX
     let rx_baseViewDidEdgeSwiped = PublishSubject<EdgeSwipeDirection>()
 

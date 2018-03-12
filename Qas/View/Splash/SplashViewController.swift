@@ -13,7 +13,7 @@ import NSObject_Rx
 
 class SplashViewController: UIViewController {
     // スプラッシュ終了通知用RX
-    let rx_splashViewControllerDidEndDrawing = PublishSubject<Void>()
+    let rx_splashViewControllerDidEndDrawing = PublishSubject<()>()
     
     @IBOutlet var contentView: UIView!
     

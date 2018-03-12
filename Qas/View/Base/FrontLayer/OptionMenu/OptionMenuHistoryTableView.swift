@@ -14,7 +14,7 @@ import NSObject_Rx
 class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
     
     // メニュークローズ通知用RX
-    let rx_optionMenuHistoryDidClose = PublishSubject<Void>()
+    let rx_optionMenuHistoryDidClose = PublishSubject<()>()
     
     let viewModel = OptionMenuHistoryTableViewModel()
     @IBOutlet weak var tableView: UITableView!

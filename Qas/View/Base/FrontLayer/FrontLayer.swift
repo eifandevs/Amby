@@ -15,7 +15,7 @@ import NSObject_Rx
 
 class FrontLayer: UIView {
     // 無効化通知用RX
-    let rx_frontLayerDidInvalidate = PublishSubject<Void>()
+    let rx_frontLayerDidInvalidate = PublishSubject<()>()
     
     private let viewModel = FrontLayerViewModel()
     private var swipeDirection: EdgeSwipeDirection!

@@ -15,9 +15,9 @@ import NSObject_Rx
 
 class CircleMenu: UIButton, ShadowView, CircleView {
     // メニュークローズ通知用RX
-    let rx_circleMenuDidClose = PublishSubject<Void>()
+    let rx_circleMenuDidClose = PublishSubject<()>()
     // メニューアクティブ通知用RX
-    let rx_circleMenuDidActive = PublishSubject<Void>()
+    let rx_circleMenuDidActive = PublishSubject<()>()
     
     private var swipeDirection: EdgeSwipeDirection!
 

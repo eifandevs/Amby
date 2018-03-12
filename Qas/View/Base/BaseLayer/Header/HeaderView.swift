@@ -15,9 +15,9 @@ import NSObject_Rx
 
 class HeaderView: UIView, ShadowView {
     /// 編集開始監視用RX
-    let rx_headerViewDidBeginEditing = PublishSubject<Void>()
+    let rx_headerViewDidBeginEditing = PublishSubject<()>()
     /// 編集終了監視用RX
-    let rx_headerViewDidEndEditing = PublishSubject<Void>()
+    let rx_headerViewDidEndEditing = PublishSubject<()>()
     
     private let headerField: HeaderField
     private var isEditing = false

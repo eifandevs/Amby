@@ -14,9 +14,9 @@ import NSObject_Rx
 
 class SearchMenuTableViewModel {
     /// 画面更新通知用RX
-    let rx_searchMenuViewWillUpdateLayout = PublishSubject<Void>()
+    let rx_searchMenuViewWillUpdateLayout = PublishSubject<()>()
     /// 画面無効化通知用RX
-    let rx_searchMenuViewWillHide = PublishSubject<Void>()
+    let rx_searchMenuViewWillHide = PublishSubject<()>()
     
     let sectionItem: [String] = ["Google検索", "検索履歴", "閲覧履歴"]
     var googleSearchCellItem: [String] = []

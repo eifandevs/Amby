@@ -15,11 +15,11 @@ class BaseViewModel {
     /// ページインサート通知用RX
     let rx_baseViewModelDidInsertWebView = PublishSubject<Int>()
     /// ページリロード通知用RX
-    let rx_baseViewModelDidReloadWebView = PublishSubject<Void>()
+    let rx_baseViewModelDidReloadWebView = PublishSubject<()>()
     /// ページ追加通知用RX
-    let rx_baseViewModelDidAppendWebView = PublishSubject<Void>()
+    let rx_baseViewModelDidAppendWebView = PublishSubject<()>()
     /// ページ変更通知用RX
-    let rx_baseViewModelDidChangeWebView = PublishSubject<Void>()
+    let rx_baseViewModelDidChangeWebView = PublishSubject<()>()
     /// ページ削除通知用RX
     let rx_baseViewModelDidRemoveWebView = PublishSubject<(context: String, pageExist: Bool, deleteIndex: Int)>()
     /// ヒストリーバック通知用RX
@@ -29,11 +29,11 @@ class BaseViewModel {
     /// 検索通知用RX
     let rx_baseViewModelDidSearchWebView = PublishSubject<String>()
     /// フォーム登録通知用RX
-    let rx_baseViewModelDidRegisterAsForm = PublishSubject<Void>()
+    let rx_baseViewModelDidRegisterAsForm = PublishSubject<()>()
     /// 自動スクロール通知用RX
-    let rx_baseViewModelDidAutoScroll = PublishSubject<Void>()
+    let rx_baseViewModelDidAutoScroll = PublishSubject<()>()
     /// 自動入力通知用RX
-    let rx_baseViewModelDidAutoInput = PublishSubject<Void>()
+    let rx_baseViewModelDidAutoInput = PublishSubject<()>()
 
 
     /// リクエストURL(jsのURL)

@@ -13,7 +13,7 @@ import NSObject_Rx
 
 class OptionMenuAppTableView: UIView, ShadowView, OptionMenuView {
     // メニュークローズ通知用RX
-    let rx_optionMenuAppDidClose = PublishSubject<Void>()
+    let rx_optionMenuAppDidClose = PublishSubject<()>()
     
     let viewModel = OptionMenuAppTableViewModel()
     @IBOutlet weak var tableView: UITableView!

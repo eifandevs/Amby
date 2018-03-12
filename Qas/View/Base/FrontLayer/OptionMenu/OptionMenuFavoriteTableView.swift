@@ -14,7 +14,7 @@ import NSObject_Rx
 class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
 
     // メニュークローズ通知用RX
-    let rx_optionMenuFavoriteDidClose = PublishSubject<Void>()
+    let rx_optionMenuFavoriteDidClose = PublishSubject<()>()
     
     let viewModel = OptionMenuFavoriteTableViewModel()
     @IBOutlet weak var tableView: UITableView!
