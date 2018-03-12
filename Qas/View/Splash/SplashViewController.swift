@@ -7,22 +7,24 @@
 //
 
 import UIKit
-
-protocol SplashViewControllerDelegate: class {
-    func splashViewControllerDidEndDrawing()
-}
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 class SplashViewController: UIViewController {
-
-    @IBOutlet var contentView: UIView!
+    // スプラッシュ終了通知用RX
+    let rx_splashViewControllerDidEndDrawing = PublishSubject<Void>()
     
-    weak var delegate: SplashViewControllerDelegate?
+    @IBOutlet var contentView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        delegate?.splashViewControllerDidEndDrawing()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rx_splashViewControllerDidEndDrawing.onNext(())
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

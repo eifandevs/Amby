@@ -15,8 +15,9 @@ protocol BaseViewControllerViewModelDelegate: class {
 }
 
 class BaseViewControllerViewModel {
-
-    weak var delegate: BaseViewControllerViewModelDelegate?
+    
+    // ヘルプ表示通知用RX
+    let rx_baseViewControllerViewModelDidPresentHelp = PublishSubject<(subtitle: String, message: String)>()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -34,7 +35,7 @@ class BaseViewControllerViewModel {
                         // ヘルプ画面を表示する
                         let subtitle = object[AppConst.KEY_NOTIFICATION_SUBTITLE]!
                         let message = object[AppConst.KEY_NOTIFICATION_MESSAGE]!
-                        self.delegate?.baseViewControllerViewModelDelegateDidPresentHelp(subtitle: subtitle, message: message)
+                        self.rx_baseViewControllerViewModelDidPresentHelp.onNext((subtitle: subtitle, message: message))
                     }
                 }
             }
