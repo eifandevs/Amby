@@ -13,13 +13,12 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol CircleMenuDelegate: class {
-    func circleMenuDidClose()
-    func circleMenuDidActive()
-}
-
 class CircleMenu: UIButton, ShadowView, CircleView {
-    weak var delegate: CircleMenuDelegate?
+    // メニュークローズ通知用RX
+    let rx_circleMenuDidClose = PublishSubject<Void>()
+    // メニューアクティブ通知用RX
+    let rx_circleMenuDidActive = PublishSubject<Void>()
+    
     private var swipeDirection: EdgeSwipeDirection!
 
     private var initialPt: CGPoint?
@@ -176,7 +175,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                                 menuItem.alpha = 0
                             }, completion: { (finished) in
                                 if finished {
-                                    self.delegate?.circleMenuDidClose()
+                                    self.rx_circleMenuDidClose.onNext(())
                                 }
                             })
                         } else {
@@ -195,7 +194,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                     })
                 }, completion: { (finished) in
                     if finished {
-                        self.delegate?.circleMenuDidClose()
+                        self.rx_circleMenuDidClose.onNext(())
                     }
                 })
             }
@@ -216,7 +215,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
             // エッジスワイプしたが、すぐに離したためMOVEまでイベントがいかないパターン
             log.debug("edge swipe cancelled.")
             isClosing = true
-            delegate?.circleMenuDidClose()
+            rx_circleMenuDidClose.onNext(())
         }
     }
     
@@ -232,7 +231,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                 })
             }, completion: { (finished) in
                 if finished {
-                    self.delegate?.circleMenuDidClose()
+                    self.rx_circleMenuDidClose.onNext(())
                 }
             })
         } else if center.x > DeviceConst.DISPLAY_SIZE.width * 0.98 {
@@ -245,7 +244,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                 })
             }, completion: { (finished) in
                 if finished {
-                    self.delegate?.circleMenuDidClose()
+                    self.rx_circleMenuDidClose.onNext(())
                 }
             })
         }
@@ -326,7 +325,7 @@ extension CircleMenu: EGApplicationDelegate {
             // CircleMenuItemを作成する
             if initialPt == nil {
                 // サークルメニューが作成されることを伝える
-                delegate?.circleMenuDidActive()
+                rx_circleMenuDidActive.onNext(())
                 initialPt = pt
                 let circleMenuLocations = swipeDirection == .left ? CircleMenuLeftLocation.locations() : CircleMenuRightLocation.locations()
                 for (index, circleMenuItem) in circleMenuItems.enumerated() {
