@@ -27,9 +27,8 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
         loadNib()
     }
     
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
-        loadNib()
     }
     
     required init(coder aDecoder: NSCoder) {
