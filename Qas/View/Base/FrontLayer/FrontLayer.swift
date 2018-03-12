@@ -13,12 +13,10 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol FrontLayerDelegate: class {
-    func frontLayerDidInvalidate()
-}
-
 class FrontLayer: UIView {
-    weak var delegate: FrontLayerDelegate?
+    // 無効化通知用RX
+    let rx_frontLayerDidInvalidate = PublishSubject<Void>()
+    
     private let viewModel = FrontLayerViewModel()
     private var swipeDirection: EdgeSwipeDirection!
     private var optionMenu: OptionMenuTableView?
@@ -29,7 +27,7 @@ class FrontLayer: UIView {
     private var deleteFavoriteIds: [String] = []
     private var deleteFormIds: [String] = []
 
-    let kCircleButtonRadius = 43;
+    let circleButtonRadius = 43
     
     convenience init(frame: CGRect, swipeDirection: EdgeSwipeDirection) {
         self.init(frame: frame)
@@ -56,7 +54,13 @@ class FrontLayer: UIView {
                     }()
                     // オプションメニューを表示
                     self.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height), swipeDirection: swipeDirection)
-                    self.optionMenu?.delegate = self
+                    // クローズ監視
+                    self.optionMenu?.rx_optionMenuTableViewDidClose
+                        .subscribe({ [weak self] _ in
+                            guard let `self` = self else { return }
+                            self.close()
+                        })
+                        .disposed(by: self.rx.disposeBag)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.addSubview(self.optionMenu!)
                     }
@@ -109,8 +113,55 @@ class FrontLayer: UIView {
                 })
             ]
         ]
-        circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: kCircleButtonRadius, height: kCircleButtonRadius)) ,menuItems: menuItems, swipeDirection: swipeDirection)
-        circleMenu.delegate = self
+        circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: circleButtonRadius, height: circleButtonRadius)), menuItems: menuItems, swipeDirection: swipeDirection)
+        
+        // 有効化監視
+        circleMenu.rx_circleMenuDidActive
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                // オーバーレイの作成
+                self.overlay = UIButton(frame: frame)
+                self.overlay.backgroundColor = UIColor.darkGray
+                self.overlay.alpha = 0
+                
+                // ボタンタップ
+                self.overlay.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        guard let `self` = self else { return }
+                        self.close()
+                    })
+                    .disposed(by: self.rx.disposeBag)
+                
+                self.addSubview(self.overlay)
+                // addSubviewした段階だと、サークルメニューより前面に配置されているので、最背面に移動する
+                self.sendSubview(toBack: self.overlay)
+                UIView.animate(withDuration: 0.35) {
+                    self.overlay.alpha = 0.2
+                }
+            }
+            .disposed(by: rx.disposeBag)
+        
+        // クローズ監視
+        circleMenu.rx_circleMenuDidClose
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                if self.optionMenu == nil {
+                    if let overlay = self.overlay {
+                        UIView.animate(withDuration: 0.15, animations: {
+                            // ここでおちる
+                            overlay.alpha = 0
+                        }, completion: { (finished) in
+                            if finished {
+                                self.rx_frontLayerDidInvalidate.onNext(())
+                            }
+                        })
+                    } else {
+                        self.rx_frontLayerDidInvalidate.onNext(())
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
+        
         addSubview(circleMenu)
     }
     override init(frame: CGRect) {
@@ -120,11 +171,9 @@ class FrontLayer: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-// MARK: OptionMenuTableView Delegate
-extension FrontLayer: OptionMenuTableViewDelegate {
-    func optionMenuTableViewDidClose() {
+    
+    // MARK: Private Method
+    func close() {
         circleMenu.invalidate()
         UIView.animate(withDuration: 0.15, animations: {
             self.overlay.alpha = 0
@@ -134,50 +183,8 @@ extension FrontLayer: OptionMenuTableViewDelegate {
             if finished {
                 self.optionMenu?.removeFromSuperview()
                 self.optionMenu = nil
-                self.delegate?.frontLayerDidInvalidate()
+                self.rx_frontLayerDidInvalidate.onNext(())
             }
         })
-    }
-}
-
-// MARK: CircleMenuDelegate
-extension FrontLayer: CircleMenuDelegate {
-    func circleMenuDidActive() {
-        // オーバーレイの作成
-        overlay = UIButton(frame: frame)
-        overlay.backgroundColor = UIColor.darkGray
-        self.overlay.alpha = 0
-
-        // ボタンタップ
-        overlay.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let `self` = self else { return }
-                self.optionMenuTableViewDidClose()
-            })
-            .disposed(by: rx.disposeBag)
-
-        addSubview(overlay)
-        // addSubviewした段階だと、サークルメニューより前面に配置されているので、最背面に移動する
-        sendSubview(toBack: overlay)
-        UIView.animate(withDuration: 0.35) {
-            self.overlay.alpha = 0.2
-        }
-    }
-    
-    func circleMenuDidClose() {
-        if self.optionMenu == nil {
-            if let overlay = overlay {
-                UIView.animate(withDuration: 0.15, animations: {
-                    // ここでおちる
-                    overlay.alpha = 0
-                }, completion: { (finished) in
-                    if finished {
-                        self.delegate?.frontLayerDidInvalidate()
-                    }
-                })
-            } else {
-                self.delegate?.frontLayerDidInvalidate()
-            }
-        }
     }
 }

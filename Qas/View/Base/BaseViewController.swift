@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 class BaseViewController: UIViewController {
     
@@ -72,15 +75,23 @@ class BaseViewController: UIViewController {
             baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
 
             // ベースレイヤー無効化監視
-            baseLayer.rx_baseLayerDidInvalidate.subscribe{ [weak self] object in
-                guard let `self` = self else { return }
-                if let direction = object.element {
-                    self.frontLayer = FrontLayer(frame: self.baseLayer.frame, swipeDirection: direction)
-                    self.frontLayer.delegate = self
-                    self.view.addSubview(self.frontLayer)
+            baseLayer.rx_baseLayerDidInvalidate
+                .subscribe{ [weak self] object in
+                    guard let `self` = self else { return }
+                    if let direction = object.element {
+                        self.frontLayer = FrontLayer(frame: self.baseLayer.frame, swipeDirection: direction)
+                        self.frontLayer.rx_frontLayerDidInvalidate
+                            .subscribe({ [weak self] _ in
+                                guard let `self` = self else { return }
+                                self.frontLayer.removeFromSuperview()
+                                self.frontLayer = nil
+                                self.baseLayer.validateUserInteraction()
+                            })
+                            .disposed(by: self.rx.disposeBag)
+                        self.view.addSubview(self.frontLayer)
+                    }
                 }
-            }
-            .disposed(by: rx.disposeBag)
+                .disposed(by: rx.disposeBag)
             
             view.addSubview(baseLayer)
 
@@ -107,20 +118,6 @@ class BaseViewController: UIViewController {
             }
         }
         super.present(viewControllerToPresent, animated: flag, completion: completion)
-    }
-    
-// MARK: Button Event
-    func closeHelpViewController() {
-        log.debug("閉じる")
-    }
-}
-
-// MARK: FrontLayer Delegate
-extension BaseViewController: FrontLayerDelegate {
-    func frontLayerDidInvalidate() {
-        self.frontLayer.removeFromSuperview()
-        self.frontLayer = nil
-        self.baseLayer.validateUserInteraction()
     }
 }
 
