@@ -12,15 +12,12 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol OptionMenuTableViewDelegate: class {
-    func optionMenuTableViewDidClose()
-}
-
 class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
+    // クローズ通知用RX
+    let rx_optionMenuTableViewDidClose = PublishSubject<Void>()
     
     @IBOutlet weak var tableView: UITableView!
     let viewModel = OptionMenuTableViewModel()
-    weak var delegate: OptionMenuTableViewDelegate?
     var detailView: UIView?
     private var selectedIndexPath: IndexPath?
     
@@ -97,37 +94,65 @@ extension OptionMenuTableView: UITableViewDelegate {
         switch viewModel.getRow(indexPath: indexPath).cellType {
         case .history:
             let historyTableView = OptionMenuHistoryTableView(frame: detailViewFrame)
-            historyTableView.delegate = self
+            historyTableView.rx_optionMenuHistoryDidClose
+                .subscribe({ [weak self] _ in
+                    guard let `self` = self else { return }
+                    self.rx_optionMenuTableViewDidClose.onNext(())
+                })
+                .disposed(by: rx.disposeBag)
             // 詳細ビューは保持しておく
             detailView = historyTableView
             superview!.addSubview(historyTableView)
         case .favorite:
             let favoriteTableView = OptionMenuFavoriteTableView(frame: detailViewFrame)
-            favoriteTableView.delegate = self
+            favoriteTableView.rx_optionMenuFavoriteDidClose
+                .subscribe({ [weak self] _ in
+                    guard let `self` = self else { return }
+                    self.rx_optionMenuTableViewDidClose.onNext(())
+                })
+                .disposed(by: rx.disposeBag)
             detailView = favoriteTableView
             superview!.addSubview(favoriteTableView)
         case .form:
             let formTableView = OptionMenuFormTableView(frame: detailViewFrame)
-            formTableView.delegate = self
+            formTableView.rx_optionMenuFormDidClose
+                .subscribe({ [weak self] _ in
+                    guard let `self` = self else { return }
+                    self.rx_optionMenuTableViewDidClose.onNext(())
+                })
+                .disposed(by: rx.disposeBag)
             detailView = formTableView
             superview!.addSubview(formTableView)
         case .setting:
             let settingTableView = OptionMenuSettingTableView(frame: detailViewFrame)
-            settingTableView.delegate = self
+            settingTableView.rx_optionMenuSettingDidClose
+                .subscribe({ [weak self] _ in
+                    guard let `self` = self else { return }
+                    self.rx_optionMenuTableViewDidClose.onNext(())
+                })
+                .disposed(by: rx.disposeBag)
             detailView = settingTableView
             superview!.addSubview(settingTableView)
         case .help:
             let helpTableView = OptionMenuHelpTableView(frame: detailViewFrame)
-            helpTableView.delegate = self
+            helpTableView.rx_optionMenuHelpDidClose
+                .subscribe({ [weak self] _ in
+                    guard let `self` = self else { return }
+                    self.rx_optionMenuTableViewDidClose.onNext(())
+                })
+                .disposed(by: rx.disposeBag)
             detailView = helpTableView
             superview!.addSubview(helpTableView)
         case .app:
             let appTableView = OptionMenuAppTableView(frame: detailViewFrame)
-            appTableView.delegate = self
+            appTableView.rx_optionMenuAppDidClose
+                .subscribe({ [weak self] _ in
+                    guard let `self` = self else { return }
+                    self.rx_optionMenuTableViewDidClose.onNext(())
+                })
+                .disposed(by: rx.disposeBag)
             detailView = appTableView
             superview!.addSubview(appTableView)
-        default:
-            break
         }
         
         // オーバーレイ表示
@@ -162,47 +187,5 @@ extension OptionMenuTableView: UITableViewDelegate {
             .disposed(by: rx.disposeBag)
 
         addSubview(overlay)
-    }
-}
-
-// MARK: OptionMenuHistoryTableViewDelegate
-extension OptionMenuTableView: OptionMenuHistoryTableViewDelegate {
-    func optionMenuHistoryDidClose(view: UIView) {
-        delegate?.optionMenuTableViewDidClose()
-    }
-}
-
-// MARK: OptionMenuFavoriteTableViewDelegate
-extension OptionMenuTableView: OptionMenuFavoriteTableViewDelegate {
-    func optionMenuFavoriteDidClose(view: UIView) {
-        delegate?.optionMenuTableViewDidClose()
-    }
-}
-
-// MARK: OptionMenuFormTableViewDelegate
-extension OptionMenuTableView: OptionMenuFormTableViewDelegate {
-    func optionMenuFormDidClose(view: UIView) {
-        delegate?.optionMenuTableViewDidClose()
-    }
-}
-
-// MARK: OptionMenuSettingTableViewDelegate
-extension OptionMenuTableView: OptionMenuSettingTableViewDelegate {
-    func optionMenuSettingDidClose(view: UIView) {
-        delegate?.optionMenuTableViewDidClose()
-    }
-}
-
-// MARK: OptionMenuAppTableViewDelegate
-extension OptionMenuTableView: OptionMenuAppTableViewDelegate {
-    func optionMenuAppDidClose(view: UIView) {
-        delegate?.optionMenuTableViewDidClose()
-    }
-}
-
-// MARK: OptionMenuAppTableViewDelegate
-extension OptionMenuTableView: OptionMenuHelpTableViewDelegate {
-    func optionMenuHelpDidClose(view: UIView) {
-        delegate?.optionMenuTableViewDidClose()
     }
 }

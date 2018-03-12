@@ -11,14 +11,12 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol OptionMenuHistoryTableViewDelegate: class {
-    func optionMenuHistoryDidClose(view: UIView)
-}
-
 class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
     
+    // メニュークローズ通知用RX
+    let rx_optionMenuHistoryDidClose = PublishSubject<Void>()
+    
     let viewModel = OptionMenuHistoryTableViewModel()
-    weak var delegate: OptionMenuHistoryTableViewDelegate?
     @IBOutlet weak var tableView: UITableView!
     
     override init(frame: CGRect){
@@ -133,7 +131,7 @@ extension OptionMenuHistoryTableView: UITableViewDelegate {
         let row = viewModel.getRow(indexPath: indexPath)
         // ページを表示
         OperationDataModel.s.executeOperation(operation: .search, object: row.data.url)
-        delegate?.optionMenuHistoryDidClose(view: self)
+        rx_optionMenuHistoryDidClose.onNext(())
     }
 }
 

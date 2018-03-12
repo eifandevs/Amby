@@ -7,15 +7,15 @@
 //
 
 import UIKit
-
-protocol OptionMenuAppTableViewDelegate: class {
-    func optionMenuAppDidClose(view: UIView)
-}
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 class OptionMenuAppTableView: UIView, ShadowView, OptionMenuView {
+    // メニュークローズ通知用RX
+    let rx_optionMenuAppDidClose = PublishSubject<Void>()
     
     let viewModel = OptionMenuAppTableViewModel()
-    weak var delegate: OptionMenuAppTableViewDelegate?
     @IBOutlet weak var tableView: UITableView!
     
     override init(frame: CGRect){
@@ -74,6 +74,6 @@ extension OptionMenuAppTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セル情報取得
         let row = viewModel.getRow(indexPath: indexPath)
-        delegate?.optionMenuAppDidClose(view: self)
+        rx_optionMenuAppDidClose.onNext(())
     }
 }

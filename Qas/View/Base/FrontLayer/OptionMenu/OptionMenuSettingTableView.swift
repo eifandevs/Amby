@@ -7,16 +7,16 @@
 //
 
 import UIKit
-
-protocol OptionMenuSettingTableViewDelegate: class {
-    func optionMenuSettingDidClose(view: UIView)
-}
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 class OptionMenuSettingTableView: UIView, ShadowView, OptionMenuView {
+    // メニュークローズ通知用RX
+    let rx_optionMenuSettingDidClose = PublishSubject<Void>()
     
     let viewModel = OptionMenuSettingTableViewModel()
     @IBOutlet weak var tableView: UITableView!
-    weak var delegate: OptionMenuSettingTableViewDelegate?
 
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -114,6 +114,6 @@ extension OptionMenuSettingTableView: UITableViewDelegate {
         default:
             break
         }
-        delegate?.optionMenuSettingDidClose(view: self)
+        rx_optionMenuSettingDidClose.onNext(())
     }
 }

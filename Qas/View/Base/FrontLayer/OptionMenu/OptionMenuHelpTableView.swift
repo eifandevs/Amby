@@ -7,15 +7,15 @@
 //
 
 import UIKit
-
-protocol OptionMenuHelpTableViewDelegate: class {
-    func optionMenuHelpDidClose(view: UIView)
-}
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 class OptionMenuHelpTableView: UIView, ShadowView, OptionMenuView {
+    // メニュークローズ通知用RX
+    let rx_optionMenuHelpDidClose = PublishSubject<Void>()
     
     let viewModel = OptionMenuHelpTableViewModel()
-    weak var delegate: OptionMenuHelpTableViewDelegate?
     @IBOutlet weak var tableView: UITableView!
     
     override init(frame: CGRect){
@@ -72,7 +72,7 @@ extension OptionMenuHelpTableView: UITableViewDataSource {
 // MARK: - TableViewDelegate
 extension OptionMenuHelpTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.optionMenuHelpDidClose(view: self)
+        rx_optionMenuHelpDidClose.onNext(())
         viewModel.executeOperationDataModel(indexPath: indexPath)
     }
 }

@@ -11,14 +11,12 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol OptionMenuFavoriteTableViewDelegate: class {
-    func optionMenuFavoriteDidClose(view: UIView)
-}
-
 class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
 
+    // メニュークローズ通知用RX
+    let rx_optionMenuFavoriteDidClose = PublishSubject<Void>()
+    
     let viewModel = OptionMenuFavoriteTableViewModel()
-    weak var delegate: OptionMenuFavoriteTableViewDelegate?
     @IBOutlet weak var tableView: UITableView!
 
     override init(frame: CGRect){
@@ -104,6 +102,7 @@ extension OptionMenuFavoriteTableView: UITableViewDelegate {
         let row = viewModel.getRow(indexPath: indexPath)
         // ページを表示
         OperationDataModel.s.executeOperation(operation: .search, object: row.data.url)
-        delegate?.optionMenuFavoriteDidClose(view: self)
+        // 通知
+        rx_optionMenuFavoriteDidClose.onNext(())
     }
 }

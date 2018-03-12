@@ -11,14 +11,11 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-protocol OptionMenuFormTableViewDelegate: class {
-    func optionMenuFormDidClose(view: UIView)
-}
-
 class OptionMenuFormTableView: UIView, ShadowView, OptionMenuView {
+    // メニュークローズ通知用RX
+    let rx_optionMenuFormDidClose = PublishSubject<Void>()
     
     let viewModel = OptionMenuFormTableViewModel()
-    weak var delegate: OptionMenuFormTableViewDelegate?
     @IBOutlet weak var tableView: UITableView!
     
     override init(frame: CGRect){
@@ -104,6 +101,6 @@ extension OptionMenuFormTableView: UITableViewDelegate {
         let row = viewModel.getRow(indexPath: indexPath)
         // ページを表示
         OperationDataModel.s.executeOperation(operation: .search, object: row.data.url)
-        delegate?.optionMenuFormDidClose(view: self)
+        rx_optionMenuFormDidClose.onNext(())
     }
 }
