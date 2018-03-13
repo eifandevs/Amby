@@ -39,7 +39,7 @@ final class PageHistoryDataModel {
     }
     
     /// 最新ページを見ているかフラグ
-    var isViewingLatest: Bool {
+    private var isViewingLatest: Bool {
         return currentLocation == histories.count - 1
     }
     
