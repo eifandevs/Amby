@@ -90,6 +90,7 @@ class BaseViewController: UIViewController {
         
         // スプラッシュ終了監視
         splash!.rx_splashViewControllerDidEndDrawing
+            .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
                 if let splash = self.splash {

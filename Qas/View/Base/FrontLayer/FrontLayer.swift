@@ -117,6 +117,7 @@ class FrontLayer: UIView {
         
         // 有効化監視
         circleMenu.rx_circleMenuDidActive
+            .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
                 // オーバーレイの作成
@@ -143,6 +144,7 @@ class FrontLayer: UIView {
         
         // クローズ監視
         circleMenu.rx_circleMenuDidClose
+            .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
                 if self.optionMenu == nil {

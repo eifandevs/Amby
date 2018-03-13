@@ -160,6 +160,7 @@ extension OptionMenuTableView: UITableViewDelegate {
 
         // ボタンタップ
         overlay.rx.tap
+            .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
                 // overlay削除

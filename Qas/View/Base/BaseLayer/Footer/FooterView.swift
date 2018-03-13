@@ -73,6 +73,7 @@ class FooterView: UIView, ShadowView {
         
         // サムネイル削除監視
         viewModel.rx_footerViewModelDidRemoveThumbnail
+            .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe { [weak self] object in
                 guard let `self` = self else { return }
                 if let tuple = object.element {
