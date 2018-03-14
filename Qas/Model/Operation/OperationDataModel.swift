@@ -8,15 +8,20 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 // ユーザー操作用モデル
 final class OperationDataModel {
+    /// オペレーション通知用RX
+    let rx_operationDataModelDidChange = PublishSubject<(operation: UserOperation, object: Any?)>()
+    
     static let s = OperationDataModel()
     var userOperation: UserOperation?
     private let center = NotificationCenter.default
 
     func executeOperation(operation: UserOperation, object: Any?) {
         userOperation = operation
-        center.post(name: .operationDataModelDidChange, object: [AppConst.KEY_NOTIFICATION_OPERATION: operation, AppConst.KEY_NOTIFICATION_OBJECT: object])
+        rx_operationDataModelDidChange.onNext((operation: operation, object: object))
     }
 }

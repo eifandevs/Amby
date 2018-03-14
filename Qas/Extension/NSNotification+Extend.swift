@@ -10,9 +10,6 @@ import Foundation
 
 /// モデルデータ変更通知用の拡張
 extension NSNotification.Name {
-    // OperationDataModel
-    static let operationDataModelDidChange = NSNotification.Name("operationDataModelDidChange")
-    
     // PageHistoryDataModel
     static let pageHistoryDataModelDidReload = NSNotification.Name("pageHistoryDataModelDidReload")
     static let pageHistoryDataModelDidStartLoading = NSNotification.Name("pageHistoryDataModelDidStartLoading")

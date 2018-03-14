@@ -17,7 +17,6 @@ class BaseViewModel {
         .flatMap { object -> Observable<Int> in
             return Observable.just(object.at)
         }
-
     /// ページリロード通知用RX
     let rx_baseViewModelDidReloadWebView = PublishSubject<()>()
     /// ページ追加通知用RX
@@ -34,13 +33,42 @@ class BaseViewModel {
     /// ヒストリーフォワード通知用RX
     let rx_baseViewModelDidHistoryForwardWebView = CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoForward.flatMap { _ in Observable.just(()) }
     /// 検索通知用RX
-    let rx_baseViewModelDidSearchWebView = PublishSubject<String>()
+    let rx_baseViewModelDidSearchWebView = OperationDataModel.s.rx_operationDataModelDidChange
+        .flatMap { object -> Observable<String> in
+            if object.operation == .search {
+                let text = object.object as! String
+                return Observable.just(text)
+            } else {
+                return Observable.empty()
+            }
+        }
     /// フォーム登録通知用RX
-    let rx_baseViewModelDidRegisterAsForm = PublishSubject<()>()
+    let rx_baseViewModelDidRegisterAsForm = OperationDataModel.s.rx_operationDataModelDidChange
+        .flatMap { object -> Observable<()> in
+            if object.operation == .form {
+                return Observable.just(())
+            } else {
+                return Observable.empty()
+            }
+    }
     /// 自動スクロール通知用RX
-    let rx_baseViewModelDidAutoScroll = PublishSubject<()>()
+    let rx_baseViewModelDidAutoScroll = OperationDataModel.s.rx_operationDataModelDidChange
+        .flatMap { object -> Observable<()> in
+            if object.operation == .autoScroll {
+                return Observable.just(())
+            } else {
+                return Observable.empty()
+            }
+    }
     /// 自動入力通知用RX
-    let rx_baseViewModelDidAutoInput = PublishSubject<()>()
+    let rx_baseViewModelDidAutoInput = OperationDataModel.s.rx_operationDataModelDidChange
+        .flatMap { object -> Observable<()> in
+            if object.operation == .autoInput {
+                return Observable.just(())
+            } else {
+                return Observable.empty()
+            }
+        }
 
     /// リクエストURL(jsのURL)
     var currentUrl: String {
@@ -109,24 +137,14 @@ class BaseViewModel {
             .disposed(by: disposeBag)
         
         // オペレーション監視
-        center.rx.notification(.operationDataModelDidChange, object: nil)
-            .subscribe { [weak self] notification in
+        OperationDataModel.s.rx_operationDataModelDidChange
+            .subscribe { [weak self] object in
                 guard let `self` = self else { return }
                 log.debug("[BaseViewModel Event]: operationDataModelDidChange")
-                if let notification = notification.element {
-                    let operation = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OPERATION] as! UserOperation
-                    if operation == .autoInput {
-                        self.rx_baseViewModelDidAutoInput.onNext(())
-                    } else if operation == .urlCopy {
+                if let object = object.element {
+                    if object.operation == .urlCopy {
                         UIPasteboard.general.string = self.currentUrl
                         NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_COPY_URL)
-                    } else if operation == .search {
-                        let text = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
-                        self.rx_baseViewModelDidSearchWebView.onNext(text)
-                    } else if operation == .form {
-                        self.rx_baseViewModelDidRegisterAsForm.onNext(())
-                    } else if operation == .autoScroll {
-                        self.rx_baseViewModelDidAutoScroll.onNext(())
                     }
                 }
             }

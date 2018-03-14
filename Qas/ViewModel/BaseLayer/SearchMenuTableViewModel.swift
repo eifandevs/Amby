@@ -35,15 +35,14 @@ class SearchMenuTableViewModel {
     init() {
         // webview検索
         // オペレーション監視
-        NotificationCenter.default.rx.notification(.operationDataModelDidChange, object: nil)
-            .subscribe { [weak self] notification in
+        OperationDataModel.s.rx_operationDataModelDidChange
+            .subscribe { [weak self] object in
                 guard let `self` = self else { return }
                 log.debug("[SearchMenuTableViewModel Event]: operationDataModelDidChange")
-                if let notification = notification.element {
-                    let operation = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OPERATION] as! UserOperation
+                if let object = object.element {
                     
-                    if operation == .suggest {
-                        let token = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_OBJECT] as! String
+                    if object.operation == .suggest {
+                        let token = object.object as! String
                         self.requestSearchQueue.append(token)
                         self.requestSearch()
                     }
