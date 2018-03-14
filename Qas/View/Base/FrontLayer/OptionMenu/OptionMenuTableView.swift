@@ -101,7 +101,6 @@ extension OptionMenuTableView: UITableViewDelegate {
                 .disposed(by: rx.disposeBag)
             // 詳細ビューは保持しておく
             detailView = historyTableView
-            superview!.addSubview(historyTableView)
         case .favorite:
             let favoriteTableView = OptionMenuFavoriteTableView(frame: detailViewFrame)
             favoriteTableView.rx_optionMenuFavoriteDidClose
@@ -111,7 +110,6 @@ extension OptionMenuTableView: UITableViewDelegate {
                 })
                 .disposed(by: rx.disposeBag)
             detailView = favoriteTableView
-            superview!.addSubview(favoriteTableView)
         case .form:
             let formTableView = OptionMenuFormTableView(frame: detailViewFrame)
             formTableView.rx_optionMenuFormDidClose
@@ -121,7 +119,6 @@ extension OptionMenuTableView: UITableViewDelegate {
                 })
                 .disposed(by: rx.disposeBag)
             detailView = formTableView
-            superview!.addSubview(formTableView)
         case .setting:
             let settingTableView = OptionMenuSettingTableView(frame: detailViewFrame)
             settingTableView.rx_optionMenuSettingDidClose
@@ -131,7 +128,6 @@ extension OptionMenuTableView: UITableViewDelegate {
                 })
                 .disposed(by: rx.disposeBag)
             detailView = settingTableView
-            superview!.addSubview(settingTableView)
         case .help:
             let helpTableView = OptionMenuHelpTableView(frame: detailViewFrame)
             helpTableView.rx_optionMenuHelpDidClose
@@ -141,7 +137,6 @@ extension OptionMenuTableView: UITableViewDelegate {
                 })
                 .disposed(by: rx.disposeBag)
             detailView = helpTableView
-            superview!.addSubview(helpTableView)
         case .app:
             let appTableView = OptionMenuAppTableView(frame: detailViewFrame)
             appTableView.rx_optionMenuAppDidClose
@@ -151,9 +146,10 @@ extension OptionMenuTableView: UITableViewDelegate {
                 })
                 .disposed(by: rx.disposeBag)
             detailView = appTableView
-            superview!.addSubview(appTableView)
         }
         
+        superview!.addSubview(detailView!)
+
         // オーバーレイ表示
         let overlay = UIButton(frame: CGRect(origin: CGPoint.zero, size: frame.size))
         overlay.backgroundColor = UIColor.clear

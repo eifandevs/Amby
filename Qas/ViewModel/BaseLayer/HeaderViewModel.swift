@@ -18,7 +18,24 @@ class HeaderViewModel {
     /// テキストフィールド更新通知用RX
     let rx_headerViewModelDidChangeField = PublishSubject<String>()
     /// お気に入り変更通知用RX
-    let rx_headerViewModelDidChangeFavorite = PublishSubject<Bool>()
+    let rx_headerViewModelDidChangeFavorite = Observable
+        .merge([
+            PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend.flatMap { _ in Observable.just(()) },
+            PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange.flatMap { _ in Observable.just(()) },
+            PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert.flatMap { _ in Observable.just(()) },
+            PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove.flatMap { _ in Observable.just(()) },
+            FavoriteDataModel.s.rx_favoriteDataModelDidInsert.flatMap { _ in Observable.just(()) },
+            FavoriteDataModel.s.rx_favoriteDataModelDidRemove.flatMap { _ in Observable.just(()) },
+            FavoriteDataModel.s.rx_favoriteDataModelDidReload.flatMap { _ in Observable.just(()) }
+        ])
+        .flatMap { notification -> Observable<Bool> in
+            let url = PageHistoryDataModel.s.currentHistory.url
+            if url.isEmpty {
+                return Observable.just(false)
+            } else {
+                return Observable.just(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+            }
+        }
     /// 編集開始通知用RX
     let rx_headerViewModelDidBeginEditing = PublishSubject<Bool>()
     
@@ -50,36 +67,6 @@ class HeaderViewModel {
                 }
             }
             .disposed(by: disposeBag)
-
-        // お気に入り登録
-        center.rx.notification(.favoriteDataModelDidInsert, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[HeaderViewModel Event]: favoriteDataModelDidInsert")
-                let url = PageHistoryDataModel.s.currentHistory.url
-                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
-            }
-            .disposed(by: disposeBag)
-        
-        // お気に入り削除
-        center.rx.notification(.favoriteDataModelDidRemove, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[HeaderViewModel Event]: favoriteDataModelDidRemove")
-                let url = PageHistoryDataModel.s.currentHistory.url
-                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
-            }
-            .disposed(by: disposeBag)
-        
-        // お気に入り更新チェック
-        center.rx.notification(.favoriteDataModelDidReload, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[HeaderViewModel Event]: favoriteDataModelDidReload")
-                let url = PageHistoryDataModel.s.currentHistory.url
-                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
-            }
-            .disposed(by: disposeBag)
         
         // ヘッダーURL更新
         center.rx.notification(.headerViewDataModelHeaderFieldTextDidUpdate, object: nil)
@@ -99,54 +86,6 @@ class HeaderViewModel {
                 log.debug("[HeaderViewModel Event]: headerViewDataModelDidBeginEditing")
                 if let notification = notification.element {
                     self.rx_headerViewModelDidBeginEditing.onNext(notification.object as! Bool)
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        // ページ変更
-        center.rx.notification(.pageHistoryDataModelDidChange, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[HeaderViewModel Event]: pageHistoryDataModelDidChange")
-                let url = PageHistoryDataModel.s.currentHistory.url
-                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
-            }
-            .disposed(by: disposeBag)
-
-        // ページ追加
-        center.rx.notification(.pageHistoryDataModelDidAppend, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[HeaderViewModel Event]: pageHistoryDataModelDidAppend")
-                let url = PageHistoryDataModel.s.currentHistory.url
-                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
-            }
-            .disposed(by: disposeBag)
-        
-        // ページ挿入
-        center.rx.notification(.pageHistoryDataModelDidInsert, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[HeaderViewModel Event]: pageHistoryDataModelDidInsert")
-                let url = PageHistoryDataModel.s.currentHistory.url
-                self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
-            }
-            .disposed(by: disposeBag)
-        
-        // ページ削除
-        center.rx.notification(.pageHistoryDataModelDidRemove, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[HeaderViewModel Event]: pageHistoryDataModelDidRemove")
-                if let notification = notification.element {
-                    let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
-                    if pageExist {
-                        let url = PageHistoryDataModel.s.currentHistory.url
-                        self.rx_headerViewModelDidChangeFavorite.onNext(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
-                    } else {
-                        // ページが存在しない場合は、無条件でお気に入りボタンを無効化
-                        self.rx_headerViewModelDidChangeFavorite.onNext(false)
-                    }
                 }
             }
             .disposed(by: disposeBag)

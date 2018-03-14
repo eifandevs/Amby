@@ -8,8 +8,21 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class PageHistoryDataModel {
+    /// ページインサート通知用RX
+    let rx_pageHistoryDataModelDidInsert = PublishSubject<(pageHistory: PageHistory, at: Int)>()
+    /// ページ追加通知用RX
+    let rx_pageHistoryDataModelDidAppend = PublishSubject<PageHistory>()
+    /// ページ変更通知用RX
+    let rx_pageHistoryDataModelDidChange = PublishSubject<String>()
+    /// ページ削除通知用RX
+    let rx_pageHistoryDataModelDidRemove = PublishSubject<(context: String, pageExist: Bool, deleteIndex: Int)>()
+    /// Observable自動解放
+    let disposeBag = DisposeBag()
+    
     static let s = PageHistoryDataModel()
 
     /// 通知センター
@@ -165,7 +178,7 @@ final class PageHistoryDataModel {
             let newPage = PageHistory(url: url ?? "")
             histories.insert(newPage, at: currentLocation + 1)
             currentContext = newPage.context
-            self.center.post(name: .pageHistoryDataModelDidInsert, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage, AppConst.KEY_NOTIFICATION_AT: currentLocation])
+            rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation))
         }
     }
     
@@ -174,7 +187,7 @@ final class PageHistoryDataModel {
         let newPage = PageHistory(url: url ?? "")
         histories.append(newPage)
         currentContext = newPage.context
-        self.center.post(name: .pageHistoryDataModelDidAppend, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage])
+        rx_pageHistoryDataModelDidAppend.onNext(newPage)
     }
     
     /// ページコピー
@@ -184,12 +197,12 @@ final class PageHistoryDataModel {
             let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
             histories.append(newPage)
             currentContext = newPage.context
-            self.center.post(name: .pageHistoryDataModelDidAppend, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage])
+            rx_pageHistoryDataModelDidAppend.onNext(newPage)
         } else {
             let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
             histories.insert(newPage, at: currentLocation + 1)
             currentContext = newPage.context
-            self.center.post(name: .pageHistoryDataModelDidInsert, object: [AppConst.KEY_NOTIFICATION_OBJECT: newPage, AppConst.KEY_NOTIFICATION_AT: currentLocation])
+            rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation))
         }
     }
     
@@ -213,11 +226,11 @@ final class PageHistoryDataModel {
             histories.remove(at: deleteIndex)
             // 削除した結果、ページが存在しない場合は作成する
             if histories.count == 0 {
-                self.center.post(name: .pageHistoryDataModelDidRemove, object: [AppConst.KEY_NOTIFICATION_CONTEXT: context, AppConst.KEY_NOTIFICATION_PAGE_EXIST: false, AppConst.KEY_NOTIFICATION_DELETE_INDEX: deleteIndex])
+                rx_pageHistoryDataModelDidRemove.onNext((context: context, pageExist: false, deleteIndex: deleteIndex))
                 let pageHistory = PageHistory()
                 histories.append(pageHistory)
                 currentContext = pageHistory.context
-                self.center.post(name: .pageHistoryDataModelDidAppend, object: [AppConst.KEY_NOTIFICATION_OBJECT: pageHistory])
+                rx_pageHistoryDataModelDidAppend.onNext(pageHistory)
                 
                 return
             } else {
@@ -231,13 +244,13 @@ final class PageHistoryDataModel {
         } else {
             histories.remove(at: deleteIndex)
         }
-        self.center.post(name: .pageHistoryDataModelDidRemove, object: ["context": context, "pageExist": true, "deleteIndex": deleteIndex])
+        rx_pageHistoryDataModelDidRemove.onNext((context: context, pageExist: true, deleteIndex: deleteIndex))
     }
     
     /// 表示中ページの変更
     func change(context: String) {
         currentContext = context
-        self.center.post(name: .pageHistoryDataModelDidChange, object: currentContext)
+        rx_pageHistoryDataModelDidChange.onNext(currentContext)
     }
     
     /// 前ページに変更
@@ -245,7 +258,7 @@ final class PageHistoryDataModel {
         if histories.count > 0 {
             let targetContext = histories[0...histories.count - 1 ~= currentLocation - 1 ? currentLocation - 1 : histories.count - 1].context
             currentContext = targetContext
-            self.center.post(name: .pageHistoryDataModelDidChange, object: currentContext)
+            rx_pageHistoryDataModelDidChange.onNext(currentContext)
         }
     }
     
@@ -254,7 +267,7 @@ final class PageHistoryDataModel {
         if histories.count > 0 {
             let targetContext = histories[0...histories.count - 1 ~= currentLocation + 1 ? currentLocation + 1 : 0].context
             currentContext = targetContext
-            self.center.post(name: .pageHistoryDataModelDidChange, object: currentContext)
+            rx_pageHistoryDataModelDidChange.onNext(currentContext)
         }
     }
     

@@ -13,15 +13,22 @@ import RxCocoa
 
 class BaseViewModel {
     /// ページインサート通知用RX
-    let rx_baseViewModelDidInsertWebView = PublishSubject<Int>()
+    let rx_baseViewModelDidInsertWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert
+        .flatMap { object -> Observable<Int> in
+            return Observable.just(object.at)
+        }
+
     /// ページリロード通知用RX
     let rx_baseViewModelDidReloadWebView = PublishSubject<()>()
     /// ページ追加通知用RX
-    let rx_baseViewModelDidAppendWebView = PublishSubject<()>()
+    let rx_baseViewModelDidAppendWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend.flatMap { _ in Observable.just(()) }
     /// ページ変更通知用RX
-    let rx_baseViewModelDidChangeWebView = PublishSubject<()>()
+    let rx_baseViewModelDidChangeWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange.flatMap { _ in Observable.just(()) }
     /// ページ削除通知用RX
-    let rx_baseViewModelDidRemoveWebView = PublishSubject<(context: String, pageExist: Bool, deleteIndex: Int)>()
+    let rx_baseViewModelDidRemoveWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
+        .flatMap { object -> Observable<(context: String, pageExist: Bool, deleteIndex: Int)> in
+            return Observable.just((context: object.context, pageExist: object.pageExist, deleteIndex: object.deleteIndex))
+        }
     /// ヒストリーバック通知用RX
     let rx_baseViewModelDidHistoryBackWebView = CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoBack.flatMap { _ in Observable.just(()) }
     /// ヒストリーフォワード通知用RX
@@ -122,51 +129,6 @@ class BaseViewModel {
                     } else if operation == .autoScroll {
                         self.rx_baseViewModelDidAutoScroll.onNext(())
                     }
-                }
-            }
-            .disposed(by: disposeBag)
-
-        // webviewの削除
-        center.rx.notification(.pageHistoryDataModelDidRemove, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[BaseViewModel Event]: pageHistoryDataModelDidRemove")
-                if let notification = notification.element {
-                    let context = (notification.object as! [String: Any])["context"] as! String
-                    let pageExist = (notification.object as! [String: Any])["pageExist"] as! Bool
-                    let deleteIndex = (notification.object as! [String: Any])["deleteIndex"] as! Int
-                    
-                    self.rx_baseViewModelDidRemoveWebView.onNext((context: context, pageExist: pageExist, deleteIndex: deleteIndex))
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        // ページ変更
-        center.rx.notification(.pageHistoryDataModelDidChange, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[BaseViewModel Event]: pageHistoryDataModelDidChange")
-                self.rx_baseViewModelDidChangeWebView.onNext(())
-            }
-            .disposed(by: disposeBag)
-        
-        // ページ挿入
-        center.rx.notification(.pageHistoryDataModelDidAppend, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[BaseViewModel Event]: pageHistoryDataModelDidAppend")
-                self.rx_baseViewModelDidAppendWebView.onNext(())
-            }
-            .disposed(by: disposeBag)
-
-        // ページ追加
-        center.rx.notification(.pageHistoryDataModelDidInsert, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[BaseViewModel Event]: pageHistoryDataModelDidInsert")
-                if let notification = notification.element {
-                    let at = (notification.object as! [String: Any])[AppConst.KEY_NOTIFICATION_AT] as! Int
-                    self.rx_baseViewModelDidInsertWebView.onNext(at)
                 }
             }
             .disposed(by: disposeBag)

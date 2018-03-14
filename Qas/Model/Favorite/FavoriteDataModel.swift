@@ -7,8 +7,16 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 class FavoriteDataModel {
+    /// お気に入り追加通知用RX
+    let rx_favoriteDataModelDidInsert = PublishSubject<()>()
+    /// お気に入り削除通知用RX
+    let rx_favoriteDataModelDidRemove = PublishSubject<()>()
+    /// お気に入り更新通知用RX
+    let rx_favoriteDataModelDidReload = PublishSubject<String>()
     
     static let s = FavoriteDataModel()
     /// 通知センター
@@ -16,7 +24,7 @@ class FavoriteDataModel {
     
     func insert(favorites: [Favorite]) {
         CommonDao.s.insert(data: favorites)
-        center.post(name: .favoriteDataModelDidInsert, object: nil)
+        rx_favoriteDataModelDidInsert.onNext(())
     }
     
     func select(id: String? = nil, url: String? = nil) -> [Favorite] {
@@ -39,14 +47,14 @@ class FavoriteDataModel {
         
         // 通知する
         if notify {
-            center.post(name: .favoriteDataModelDidRemove, object: nil)
+            rx_favoriteDataModelDidRemove.onNext(())
         }
     }
     
     /// お気に入りの更新チェック
     func reload() {
         let history = PageHistoryDataModel.s.currentHistory
-        center.post(name: .favoriteDataModelDidReload, object: history.url)
+        rx_favoriteDataModelDidReload.onNext(history.url)
     }
     
     /// お気に入り登録

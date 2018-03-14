@@ -15,10 +15,6 @@ extension NSNotification.Name {
     
     // PageHistoryDataModel
     static let pageHistoryDataModelDidReload = NSNotification.Name("pageHistoryDataModelDidReload")
-    static let pageHistoryDataModelDidRemove = NSNotification.Name("pageHistoryDataModelDidRemove")
-    static let pageHistoryDataModelDidInsert = NSNotification.Name("pageHistoryDataModelDidInsert")
-    static let pageHistoryDataModelDidAppend = NSNotification.Name("pageHistoryDataModelDidAppend")
-    static let pageHistoryDataModelDidChange = NSNotification.Name("pageHistoryDataModelDidChange")
     static let pageHistoryDataModelDidStartLoading = NSNotification.Name("pageHistoryDataModelDidStartLoading")
     static let pageHistoryDataModelDidEndLoading = NSNotification.Name("pageHistoryDataModelDidEndLoading")
     static let pageHistoryDataModelDidEndRendering = NSNotification.Name("pageHistoryDataModelDidEndRendering")
@@ -30,9 +26,4 @@ extension NSNotification.Name {
     static let headerViewDataModelProgressDidUpdate = NSNotification.Name("headerViewDataModelDidUpdate")
     static let headerViewDataModelHeaderFieldTextDidUpdate = NSNotification.Name("headerViewDataModelHeaderFieldTextDidUpdate")
     static let headerViewDataModelDidBeginEditing = NSNotification.Name("headerViewDataModelDidBeginEditing")
-    
-    // FavoriteDataModel
-    static let favoriteDataModelDidReload = NSNotification.Name("favoriteDataModelDidReload")
-    static let favoriteDataModelDidRemove = NSNotification.Name("favoriteDataModelDidRemove")
-    static let favoriteDataModelDidInsert = NSNotification.Name("favoriteDataModelDidInsert")
 }
