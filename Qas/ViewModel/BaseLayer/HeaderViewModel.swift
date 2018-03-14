@@ -29,11 +29,10 @@ class HeaderViewModel {
             FavoriteDataModel.s.rx_favoriteDataModelDidReload.flatMap { _ in Observable.just(()) }
         ])
         .flatMap { notification -> Observable<Bool> in
-            let url = PageHistoryDataModel.s.currentHistory.url
-            if url.isEmpty {
-                return Observable.just(false)
+            if let currentHistory = PageHistoryDataModel.s.currentHistory, !currentHistory.url.isEmpty {
+                return Observable.just(FavoriteDataModel.s.select().map({ $0.url }).contains(currentHistory.url))
             } else {
-                return Observable.just(FavoriteDataModel.s.select().map({ $0.url }).contains(url))
+                return Observable.just(false)
             }
         }
     /// 編集開始通知用RX

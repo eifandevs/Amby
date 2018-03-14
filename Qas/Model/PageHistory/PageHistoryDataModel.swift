@@ -42,8 +42,8 @@ final class PageHistoryDataModel {
     var histories = [PageHistory]()
     
     /// 現在のページ情報
-    var currentHistory: PageHistory {
-        return D.find(histories, callback: { $0.context == currentContext })!
+    var currentHistory: PageHistory? {
+        return D.find(histories, callback: { $0.context == currentContext })
     }
     
     /// 現在の位置
@@ -192,17 +192,19 @@ final class PageHistoryDataModel {
     
     /// ページコピー
     func copy() {
-        if isViewingLatest {
-            // 最新ページを見ているなら、insertではないので、appendに切り替える
-            let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
-            histories.append(newPage)
-            currentContext = newPage.context
-            rx_pageHistoryDataModelDidAppend.onNext(newPage)
-        } else {
-            let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
-            histories.insert(newPage, at: currentLocation + 1)
-            currentContext = newPage.context
-            rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation))
+        if let currentHistory = currentHistory {
+            if isViewingLatest {
+                // 最新ページを見ているなら、insertではないので、appendに切り替える
+                let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
+                histories.append(newPage)
+                currentContext = newPage.context
+                rx_pageHistoryDataModelDidAppend.onNext(newPage)
+            } else {
+                let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
+                histories.insert(newPage, at: currentLocation + 1)
+                currentContext = newPage.context
+                rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation))
+            }
         }
     }
     

@@ -53,27 +53,30 @@ class FavoriteDataModel {
     
     /// お気に入りの更新チェック
     func reload() {
-        let history = PageHistoryDataModel.s.currentHistory
-        rx_favoriteDataModelDidReload.onNext(history.url)
+        if let currentHistory = PageHistoryDataModel.s.currentHistory {
+            rx_favoriteDataModelDidReload.onNext(currentHistory.url)
+        }
     }
     
     /// お気に入り登録
     func register() {
-        if (!PageHistoryDataModel.s.currentHistory.url.isEmpty && !PageHistoryDataModel.s.currentHistory.title.isEmpty) {
-            let fd = Favorite()
-            fd.title = PageHistoryDataModel.s.currentHistory.title
-            fd.url = PageHistoryDataModel.s.currentHistory.url
-            
-            if let favorite = select(url: fd.url).first {
-                // すでに登録済みの場合は、お気に入りから削除する
-                delete(favorites: [favorite])
+        if let currentHistory = PageHistoryDataModel.s.currentHistory {
+            if (!currentHistory.url.isEmpty && !currentHistory.title.isEmpty) {
+                let fd = Favorite()
+                fd.title = currentHistory.title
+                fd.url = currentHistory.url
+                
+                if let favorite = select(url: fd.url).first {
+                    // すでに登録済みの場合は、お気に入りから削除する
+                    delete(favorites: [favorite])
+                } else {
+                    insert(favorites: [fd])
+                    // ヘッダーのお気に入りアイコン更新
+                    NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_BOOK_MARK)
+                }
             } else {
-                insert(favorites: [fd])
-                // ヘッダーのお気に入りアイコン更新
-                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_BOOK_MARK)
+                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_BOOK_MARK_ERROR)
             }
-        } else {
-            NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_BOOK_MARK_ERROR)
         }
     }
 }

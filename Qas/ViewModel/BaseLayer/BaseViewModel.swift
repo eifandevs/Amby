@@ -42,10 +42,9 @@ class BaseViewModel {
     /// 自動入力通知用RX
     let rx_baseViewModelDidAutoInput = PublishSubject<()>()
 
-
     /// リクエストURL(jsのURL)
     var currentUrl: String {
-        return PageHistoryDataModel.s.currentHistory.url
+        return PageHistoryDataModel.s.currentHistory!.url
     }
     
     /// 現在のコンテキスト

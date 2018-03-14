@@ -46,7 +46,7 @@ class FooterViewModel {
     }
     
     var currentHistory: PageHistory {
-        return PageHistoryDataModel.s.currentHistory
+        return PageHistoryDataModel.s.currentHistory!
     }
     
     var currentContext: String {
