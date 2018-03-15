@@ -40,8 +40,13 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
         tableView.delegate = self
         tableView.dataSource = self
         
-        // ビューモデル通知
-        viewModel.delegate = self
+        // データ更新監視
+        viewModel.rx_optionMenuHistoryTableViewModelDidGetData
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                self.tableView.reloadData()
+            }
+            .disposed(by: rx.disposeBag)
         
         // OptionMenuProtocol
         _ = setup(tableView: tableView)
@@ -132,13 +137,6 @@ extension OptionMenuHistoryTableView: UITableViewDelegate {
         // ページを表示
         OperationDataModel.s.executeOperation(operation: .search, object: row.data.url)
         rx_optionMenuHistoryDidClose.onNext(())
-    }
-}
-
-// MARK: - OptionMenuHistoryTableViewModelDelegate
-extension OptionMenuHistoryTableView: OptionMenuHistoryTableViewModelDelegate {
-    func optionMenuHistoryTableViewModelDidGetDataSuccessfull() {
-        tableView.reloadData()
     }
 }
 

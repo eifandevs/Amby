@@ -7,28 +7,27 @@
 //
 
 import Foundation
-
-protocol OptionMenuHistoryTableViewModelDelegate: class {
-    func optionMenuHistoryTableViewModelDidGetDataSuccessfull()
-}
+import RxSwift
+import RxCocoa
 
 final class OptionMenuHistoryTableViewModel {
+    /// データ取得通知用RX
+    let rx_optionMenuHistoryTableViewModelDidGetData = PublishSubject<()>()
+    /// セルの高さ
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
-    // セクション数
+    /// セクション数
     var sectionCount: Int {
         return sections.count
     }
-    // セクションの高さ
+    /// セクションの高さ
     let sectionHeight = AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
-    // セル情報
+    /// セル情報
     var sections: [Section] = []
-    // 通知
-    weak var delegate: OptionMenuHistoryTableViewModelDelegate?
-    // 保持データリスト
+    /// 保持データリスト
     private var readFiles = CommonHistoryDataModel.s.getList()
-    // ファイル読み込みインターバル
+    /// ファイル読み込みインターバル
     private let readInterval = 6
-    // セクションフォントサイズ
+    /// セクションフォントサイズ
     let sectionFontSize = 12.f
 
     /// セル数
@@ -73,7 +72,7 @@ final class OptionMenuHistoryTableViewModel {
                     sections.append(Section(dateString: dateString, rows: rows))
                 }
             })
-            delegate?.optionMenuHistoryTableViewModelDidGetDataSuccessfull()
+            rx_optionMenuHistoryTableViewModelDidGetData.onNext(())
         }
     }
 
