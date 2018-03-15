@@ -17,6 +17,8 @@ final class HeaderViewDataModel {
     let rx_headerViewDataModelDidUpdateProgress = PublishSubject<CGFloat>()
     /// ヘッダーテキストの更新通知用RX
     let rx_headerViewDataModelDidUpdateHeaderFieldText = PublishSubject<String>()
+    /// 編集開始通知用RX
+    let rx_headerViewDataModelDidBeginEditing = PublishSubject<Bool>()
     
     static let s = HeaderViewDataModel()
     let center = NotificationCenter.default
@@ -41,6 +43,6 @@ final class HeaderViewDataModel {
     
     /// 編集開始通知
     func beginEditing(forceEditFlg: Bool) {
-        center.post(name: .headerViewDataModelDidBeginEditing, object: forceEditFlg)
+        rx_headerViewDataModelDidBeginEditing.onNext(forceEditFlg)
     }
 }

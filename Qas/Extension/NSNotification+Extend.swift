@@ -18,7 +18,4 @@ extension NSNotification.Name {
     
     // CommonHistoryDataModel
     static let commonHistoryDataModelDidGoForward = NSNotification.Name("commonHistoryDataModelDidGoForward")
-
-    // HeaderViewDataModel
-    static let headerViewDataModelDidBeginEditing = NSNotification.Name("headerViewDataModelDidBeginEditing")
 }

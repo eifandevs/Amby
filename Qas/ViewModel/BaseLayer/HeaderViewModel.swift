@@ -38,35 +38,18 @@ class HeaderViewModel {
             } else {
                 return Observable.just(false)
             }
-    }
+        }
     /// テキストフィールド更新通知用RX
     let rx_headerViewModelDidChangeField = HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateHeaderFieldText
         .flatMap { text -> Observable<String> in
             return Observable.just(text)
         }
     /// 編集開始通知用RX
-    let rx_headerViewModelDidBeginEditing = PublishSubject<Bool>()
+    let rx_headerViewModelDidBeginEditing = HeaderViewDataModel.s.rx_headerViewDataModelDidBeginEditing
+        .flatMap { forceEditFlg -> Observable<Bool> in
+            return Observable.just(forceEditFlg)
+        }
     
-    /// 通知センター
-    private let center = NotificationCenter.default
-
-    /// Observable自動解放
-    let disposeBag = DisposeBag()
-    
-    init () {
-
-        // 検索開始
-        center.rx.notification(.headerViewDataModelDidBeginEditing, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[HeaderViewModel Event]: headerViewDataModelDidBeginEditing")
-                if let notification = notification.element {
-                    self.rx_headerViewModelDidBeginEditing.onNext(notification.object as! Bool)
-                }
-            }
-            .disposed(by: disposeBag)
-    }
-
     deinit {
         log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)
