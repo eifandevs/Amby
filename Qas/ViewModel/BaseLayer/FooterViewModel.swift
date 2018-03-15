@@ -7,10 +7,8 @@
 //
 
 import Foundation
-import UIKit
 import RxSwift
 import RxCocoa
-import NSObject_Rx
 
 class FooterViewModel {
     /// サムネイル追加通知用RX

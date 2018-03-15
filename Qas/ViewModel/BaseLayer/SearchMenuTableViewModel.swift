@@ -7,10 +7,8 @@
 //
 
 import Foundation
-import UIKit
 import RxSwift
 import RxCocoa
-import NSObject_Rx
 
 class SearchMenuTableViewModel {
     /// 画面更新通知用RX
