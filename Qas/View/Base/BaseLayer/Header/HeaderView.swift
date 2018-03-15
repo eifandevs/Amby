@@ -194,7 +194,7 @@ class HeaderView: UIView, ShadowView {
                         log.debug("suggest word: \(text)")
                         self.rx_headerViewDidEndEditing.onNext(())
                         self.finishEditing(headerFieldUpdate: true)
-                        self.viewModel.notifySearchWebView(text: text)
+                        self.viewModel.searchOperationDataModel(text: text)
                     } else {
                         self.rx_headerViewDidEndEditing.onNext(())
                         self.finishEditing(headerFieldUpdate: false)

@@ -87,8 +87,7 @@ class BaseViewModel {
     
     var headerFieldText: String = "" {
         didSet {
-
-            center.post(name: .headerViewDataModelHeaderFieldTextDidUpdate, object: headerFieldText)
+            HeaderViewDataModel.s.updateHeaderFieldText(text: headerFieldText)
         }
     }
     

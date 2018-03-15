@@ -10,13 +10,17 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
-import NSObject_Rx
 
 class HeaderViewModel {
     /// プログレス更新通知用RX
-    let rx_headerViewModelDidChangeProgress = PublishSubject<CGFloat>()
-    /// テキストフィールド更新通知用RX
-    let rx_headerViewModelDidChangeField = PublishSubject<String>()
+    let rx_headerViewModelDidChangeProgress = Observable
+        .merge([
+            HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateProgress,
+            NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) }
+            ])
+        .flatMap { progress -> Observable<CGFloat> in
+            return Observable.just(progress)
+        }
     /// お気に入り変更通知用RX
     let rx_headerViewModelDidChangeFavorite = Observable
         .merge([
@@ -24,20 +28,24 @@ class HeaderViewModel {
             PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange.flatMap { _ in Observable.just(()) },
             PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert.flatMap { _ in Observable.just(()) },
             PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove.flatMap { _ in Observable.just(()) },
-            FavoriteDataModel.s.rx_favoriteDataModelDidInsert.flatMap { _ in Observable.just(()) },
-            FavoriteDataModel.s.rx_favoriteDataModelDidRemove.flatMap { _ in Observable.just(()) },
+            FavoriteDataModel.s.rx_favoriteDataModelDidInsert,
+            FavoriteDataModel.s.rx_favoriteDataModelDidRemove,
             FavoriteDataModel.s.rx_favoriteDataModelDidReload.flatMap { _ in Observable.just(()) }
-        ])
-        .flatMap { notification -> Observable<Bool> in
+            ])
+        .flatMap { _ -> Observable<Bool> in
             if let currentHistory = PageHistoryDataModel.s.currentHistory, !currentHistory.url.isEmpty {
                 return Observable.just(FavoriteDataModel.s.select().map({ $0.url }).contains(currentHistory.url))
             } else {
                 return Observable.just(false)
             }
+    }
+    /// テキストフィールド更新通知用RX
+    let rx_headerViewModelDidChangeField = HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateHeaderFieldText
+        .flatMap { text -> Observable<String> in
+            return Observable.just(text)
         }
     /// 編集開始通知用RX
     let rx_headerViewModelDidBeginEditing = PublishSubject<Bool>()
-    
     
     /// 通知センター
     private let center = NotificationCenter.default
@@ -46,37 +54,6 @@ class HeaderViewModel {
     let disposeBag = DisposeBag()
     
     init () {
-
-        // プログレスバーの初期化
-        center.rx.notification(.UIApplicationDidBecomeActive, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[HeaderViewModel Event]: UIApplicationDidBecomeActive")
-                self.rx_headerViewModelDidChangeProgress.onNext(0)
-            }
-            .disposed(by: disposeBag)
-        
-        // プログレス更新
-        center.rx.notification(.headerViewDataModelProgressDidUpdate, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[HeaderViewModel Event]: headerViewDataModelProgressDidUpdate")
-                if let notification = notification.element {
-                    self.rx_headerViewModelDidChangeProgress.onNext(notification.object as! CGFloat)
-                }
-            }
-            .disposed(by: disposeBag)
-        
-        // ヘッダーURL更新
-        center.rx.notification(.headerViewDataModelHeaderFieldTextDidUpdate, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[HeaderViewModel Event]: headerViewDataModelHeaderFieldTextDidUpdate")
-                if let notification = notification.element {
-                    self.rx_headerViewModelDidChangeField.onNext(notification.object as! String)
-                }
-            }
-            .disposed(by: disposeBag)
 
         // 検索開始
         center.rx.notification(.headerViewDataModelDidBeginEditing, object: nil)
@@ -105,7 +82,7 @@ class HeaderViewModel {
         CommonHistoryDataModel.s.goForward()
     }
     
-    func notifySearchWebView(text: String) {
+    func searchOperationDataModel(text: String) {
         OperationDataModel.s.executeOperation(operation: .search, object: text)
     }
 

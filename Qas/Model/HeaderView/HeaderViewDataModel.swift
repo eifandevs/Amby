@@ -8,9 +8,16 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 /// ページ共通データモデル
 final class HeaderViewDataModel {
+    /// プログレス更新通知用RX
+    let rx_headerViewDataModelDidUpdateProgress = PublishSubject<CGFloat>()
+    /// ヘッダーテキストの更新通知用RX
+    let rx_headerViewDataModelDidUpdateHeaderFieldText = PublishSubject<String>()
+    
     static let s = HeaderViewDataModel()
     let center = NotificationCenter.default
     
@@ -23,13 +30,13 @@ final class HeaderViewDataModel {
     /// プログレス情報の更新
     func updateProgress(progress: CGFloat) {
         self.progress = progress
-        center.post(name: .headerViewDataModelProgressDidUpdate, object: progress)
+        rx_headerViewDataModelDidUpdateProgress.onNext(progress)
     }
     
     /// ヘッダーテキストの更新
     func updateHeaderFieldText(text: String) {
         headerFieldText = text
-        center.post(name: .headerViewDataModelHeaderFieldTextDidUpdate, object: text)
+        rx_headerViewDataModelDidUpdateHeaderFieldText.onNext(text)
     }
     
     /// 編集開始通知
