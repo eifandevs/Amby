@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OptionMenuFavoriteTableViewModel {
+final class OptionMenuFavoriteTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
     /// セル情報
     var rows: [Row] = []

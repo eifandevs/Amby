@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OptionMenuFormTableViewModel {
+final class OptionMenuFormTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
     /// セル情報
     var rows: [Row] = []

@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class BaseViewModel {
+final class BaseViewModel {
     /// ページインサート通知用RX
     let rx_baseViewModelDidInsertWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert
         .flatMap { object -> Observable<Int> in

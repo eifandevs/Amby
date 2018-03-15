@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OptionMenuTableViewModel {
+final class OptionMenuTableViewModel {
     
     // セル情報
     struct Row {

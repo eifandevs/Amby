@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HeaderFieldViewModel {
+final class HeaderFieldViewModel {
     func executeOperationDataModel(operation: UserOperation, object: String) {
         OperationDataModel.s.executeOperation(operation: operation, object: object)
     }

@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class HeaderViewModel {
+final class HeaderViewModel {
     /// プログレス更新通知用RX
     let rx_headerViewModelDidChangeProgress = Observable
         .merge([

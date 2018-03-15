@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class FormDataModel {
+final class FormDataModel {
     static let s = FormDataModel()
 
     func insert(forms: [Form]) {

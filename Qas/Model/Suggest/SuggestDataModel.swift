@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class SuggestDataModel {
+final class SuggestDataModel {
     static func fetch(token: String, completion: ((Suggest?) -> ())?) {
         let api = ApiClient(url: HttpConst.HTTP_SERVER_DOMAIN + HttpConst.HTTP_SERVER_PATH + token)
         api.get(success: { (json: Dictionary) in

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BaseLayerViewModel {
+final class BaseLayerViewModel {
     func changeOperationDataModel(operation: UserOperation) {
         OperationDataModel.s.executeOperation(operation: operation, object: nil)
     }

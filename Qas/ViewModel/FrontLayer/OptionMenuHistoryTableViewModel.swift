@@ -12,7 +12,7 @@ protocol OptionMenuHistoryTableViewModelDelegate: class {
     func optionMenuHistoryTableViewModelDidGetDataSuccessfull()
 }
 
-class OptionMenuHistoryTableViewModel {
+final class OptionMenuHistoryTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
     // セクション数
     var sectionCount: Int {

@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class BaseViewControllerViewModel {
+final class BaseViewControllerViewModel {
     
     // ヘルプ表示通知用RX
     let rx_baseViewControllerViewModelDidPresentHelp = OperationDataModel.s.rx_operationDataModelDidChange

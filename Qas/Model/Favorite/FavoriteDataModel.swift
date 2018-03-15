@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class FavoriteDataModel {
+final class FavoriteDataModel {
     /// お気に入り追加通知用RX
     let rx_favoriteDataModelDidInsert = PublishSubject<()>()
     /// お気に入り削除通知用RX

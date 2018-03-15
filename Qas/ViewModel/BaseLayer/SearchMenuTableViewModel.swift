@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SearchMenuTableViewModel {
+final class SearchMenuTableViewModel {
     /// 画面更新通知用RX
     let rx_searchMenuViewWillUpdateLayout = PublishSubject<()>()
     /// 画面無効化通知用RX

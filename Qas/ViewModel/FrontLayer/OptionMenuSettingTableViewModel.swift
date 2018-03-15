@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class OptionMenuSettingTableViewModel {
+final class OptionMenuSettingTableViewModel {
     /// セル情報
     struct Section {
         let title: String
