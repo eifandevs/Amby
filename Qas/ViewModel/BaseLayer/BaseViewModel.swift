@@ -252,16 +252,17 @@ class BaseViewModel {
     /// 履歴保存
     func updateHistoryDataModel(context: String, url: String, title: String, operation: PageHistory.Operation) {
         if !url.isEmpty && !title.isEmpty {
+            let currentUrl = self.currentUrl
             // Each History
             PageHistoryDataModel.s.update(context: context, url: url, title: title, operation: operation)
             log.debug("save page history. url: \(url)")
 
             //　アプリ起動後の前回ページロード時は、履歴に保存しない
-            if url != self.currentUrl {
+            if url != currentUrl {
                 // Common History
                 let common = CommonHistory(url: url, title: title, date: Date())
                 // 配列の先頭に追加する
-                CommonHistoryDataModel.s.histories.insert(common, at: 0)
+                CommonHistoryDataModel.s.insert(history: common)
                 log.debug("save common history. url: \(common.url)")
             }
         }

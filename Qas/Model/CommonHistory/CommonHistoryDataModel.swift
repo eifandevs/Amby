@@ -24,7 +24,7 @@ final class CommonHistoryDataModel {
     let rx_commonHistoryDataModelDidGoForward = PublishSubject<()>()
     
     /// 閲覧履歴
-    var histories = [CommonHistory]()
+    private var histories = [CommonHistory]()
 
     // 通知センター
     private let center = NotificationCenter.default
@@ -39,6 +39,11 @@ final class CommonHistoryDataModel {
         rx_commonHistoryDataModelDidGoForward.onNext(())
     }
 
+    /// 履歴追加
+    func insert(history: CommonHistory) {
+        histories.insert(history, at: 0)
+    }
+    
     /// 閲覧履歴の永続化
     func store() {
         if histories.count > 0 {
