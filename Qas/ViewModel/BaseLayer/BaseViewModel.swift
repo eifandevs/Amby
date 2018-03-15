@@ -18,7 +18,7 @@ class BaseViewModel {
             return Observable.just(object.at)
         }
     /// ページリロード通知用RX
-    let rx_baseViewModelDidReloadWebView = PublishSubject<()>()
+    let rx_baseViewModelDidReloadWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidReload.flatMap { _ in Observable.just(()) }
     /// ページ追加通知用RX
     let rx_baseViewModelDidAppendWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend.flatMap { _ in Observable.just(()) }
     /// ページ変更通知用RX
@@ -126,20 +126,10 @@ class BaseViewModel {
         }
         .disposed(by: disposeBag)
         
-        // webviewのリロード
-        center.rx.notification(.pageHistoryDataModelDidReload, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[BaseViewModel Event]: pageHistoryDataModelDidReload")
-                self.rx_baseViewModelDidReloadWebView.onNext(())
-            }
-            .disposed(by: disposeBag)
-        
         // オペレーション監視
         OperationDataModel.s.rx_operationDataModelDidChange
             .subscribe { [weak self] object in
                 guard let `self` = self else { return }
-                log.debug("[BaseViewModel Event]: operationDataModelDidChange")
                 if let object = object.element {
                     if object.operation == .urlCopy {
                         UIPasteboard.general.string = self.currentUrl

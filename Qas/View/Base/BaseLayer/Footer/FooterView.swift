@@ -15,7 +15,7 @@ import NSObject_Rx
 
 class FooterView: UIView, ShadowView {
     
-    private var viewModel = FooterViewModel(index: UserDefaults.standard.integer(forKey: AppConst.KEY_LOCATION_INDEX))
+    private var viewModel = FooterViewModel()
     private let scrollView = UIScrollView()
     private var thumbnails: [Thumbnail] = []
     
@@ -75,14 +75,10 @@ class FooterView: UIView, ShadowView {
         viewModel.rx_footerViewModelDidRemoveThumbnail
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe { [weak self] object in
+                // TODO: キュー管理する
                 guard let `self` = self else { return }
                 if let tuple = object.element {
                     let deleteIndex = D.findIndex(self.thumbnails, callback: { $0.context == tuple.context })!
-                    
-                    if ((self.thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
-                        self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-                        self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
-                    }
                     
                     self.thumbnails[deleteIndex].removeFromSuperview()
                     self.thumbnails.remove(at: deleteIndex)
@@ -90,6 +86,11 @@ class FooterView: UIView, ShadowView {
                     
                     if self.thumbnails.count > 0 {
                         UIView.animate(withDuration: 0.3, animations: {
+                            if ((self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
+                                self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
+                                self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
+                            }
+                            
                             for i in 0...self.thumbnails.count - 1 {
                                 if i < deleteIndex {
                                     self.thumbnails[i].center.x += self.thumbnails[i].frame.size.width / 2

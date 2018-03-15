@@ -20,8 +20,14 @@ final class PageHistoryDataModel {
     let rx_pageHistoryDataModelDidChange = PublishSubject<String>()
     /// ページ削除通知用RX
     let rx_pageHistoryDataModelDidRemove = PublishSubject<(context: String, pageExist: Bool, deleteIndex: Int)>()
-    /// Observable自動解放
-    let disposeBag = DisposeBag()
+    /// ページリロード通知用RX
+    let rx_pageHistoryDataModelDidReload = PublishSubject<()>()
+    /// ページロード開始通知用RX
+    let rx_pageHistoryDataModelDidStartLoading = PublishSubject<String>()
+    /// ページロード終了通知用RX
+    let rx_pageHistoryDataModelDidEndLoading = PublishSubject<String>()
+    /// ページレンダリング終了通知用RX
+    let rx_pageHistoryDataModelDidEndRendering = PublishSubject<String>()
     
     static let s = PageHistoryDataModel()
 
@@ -79,22 +85,22 @@ final class PageHistoryDataModel {
     
     /// ロード開始
     func startLoading(context: String) {
-        self.center.post(name: .pageHistoryDataModelDidStartLoading, object: context)
+        rx_pageHistoryDataModelDidStartLoading.onNext(context)
     }
     
     /// ロード終了
     func endLoading(context: String) {
         if let _ = D.find(histories, callback: { $0.context == context }) {
-            self.center.post(name: .pageHistoryDataModelDidEndLoading, object: context)
+            rx_pageHistoryDataModelDidEndLoading.onNext(context)
         } else {
-            log.warning("pageHistoryDataModelDidEndRendering not fired. history is deleted.")
+            log.warning("pageHistoryDataModelDidEndLoading not fired. history is deleted.")
         }
     }
 
     /// 描画終了
     func endRendering(context: String) {
         if let _ = D.find(histories, callback: { $0.context == context }) {
-            self.center.post(name: .pageHistoryDataModelDidEndRendering, object: context)
+            rx_pageHistoryDataModelDidEndRendering.onNext(context)
         } else {
             log.warning("pageHistoryDataModelDidEndRendering not fired. history is deleted.")
         }
@@ -210,7 +216,7 @@ final class PageHistoryDataModel {
     
     /// ページリロード
     func reload() {
-        self.center.post(name: .pageHistoryDataModelDidReload, object: nil)
+        rx_pageHistoryDataModelDidReload.onNext(())
     }
     
     /// ぺージインデックス取得

@@ -36,9 +36,19 @@ class FooterViewModel {
             return Observable.just((context: object.context, pageExist: object.pageExist))
         }
     /// ローディング開始通知用RX
-    let rx_footerViewModelDidStartLoading = PublishSubject<String>()
+    let rx_footerViewModelDidStartLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidStartLoading
+        .flatMap { context -> Observable<String> in
+            return Observable.just(context)
+        }
     /// ローディング終了通知用RX
-    let rx_footerViewModelDidEndLoading = PublishSubject<(context: String, title: String)>()
+    let rx_footerViewModelDidEndLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidEndRendering
+        .flatMap { context -> Observable<(context: String, title: String)> in
+                if let pageHistory = D.find(PageHistoryDataModel.s.histories, callback: { $0.context == context }) {
+                    return Observable.just((context: context, title: pageHistory.title))
+                } else {
+                    return Observable.empty()
+            }
+        }
     
     /// 現在位置
     var pageHistories: [PageHistory] {
@@ -62,35 +72,6 @@ class FooterViewModel {
     
     /// Observable自動解放
     let disposeBag = DisposeBag()
-    
-    init(index: Int) {
-        // webviewロード開始
-        center.rx.notification(.pageHistoryDataModelDidStartLoading, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[FooterViewModel Event]: pageHistoryDataModelDidStartLoading")
-                if let notification = notification.element {
-                    // FooterViewに通知をする
-                    self.rx_footerViewModelDidStartLoading.onNext(notification.object as! String)
-                }
-            }
-            .disposed(by: disposeBag)
-
-        // webviewレンダリング完了
-        center.rx.notification(.pageHistoryDataModelDidEndRendering, object: nil)
-            .subscribe { [weak self] notification in
-                guard let `self` = self else { return }
-                log.debug("[FooterViewModel Event]: pageHistoryDataModelDidEndRendering")
-                if let notification = notification.element {
-                    // FooterViewに通知をする
-                    let context = notification.object as! String
-                    if let pageHistory = D.find(PageHistoryDataModel.s.histories, callback: { $0.context == context }) {
-                        self.rx_footerViewModelDidEndLoading.onNext((context: context, title: pageHistory.title))
-                    }
-                }
-            }
-            .disposed(by: disposeBag)
-    }
     
     deinit {
         log.debug("deinit called.")
