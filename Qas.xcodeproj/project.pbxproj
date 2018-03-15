@@ -87,7 +87,6 @@
 		A5BCE7091FA501B900E0C6E5 /* DispatchQueue+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E21FA501B800E0C6E5 /* DispatchQueue+Extend.swift */; };
 		A5BCE70A1FA501B900E0C6E5 /* Double+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E31FA501B800E0C6E5 /* Double+Extend.swift */; };
 		A5BCE70B1FA501B900E0C6E5 /* Int+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E41FA501B800E0C6E5 /* Int+Extend.swift */; };
-		A5BCE70C1FA501B900E0C6E5 /* NSNotification+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E51FA501B800E0C6E5 /* NSNotification+Extend.swift */; };
 		A5BCE70D1FA501B900E0C6E5 /* NSObject+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E61FA501B800E0C6E5 /* NSObject+Extend.swift */; };
 		A5BCE70E1FA501B900E0C6E5 /* Optional+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E71FA501B800E0C6E5 /* Optional+Extend.swift */; };
 		A5BCE70F1FA501B900E0C6E5 /* String+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E81FA501B800E0C6E5 /* String+Extend.swift */; };
@@ -233,7 +232,6 @@
 		A5BCE6E21FA501B800E0C6E5 /* DispatchQueue+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extend.swift"; sourceTree = "<group>"; };
 		A5BCE6E31FA501B800E0C6E5 /* Double+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extend.swift"; sourceTree = "<group>"; };
 		A5BCE6E41FA501B800E0C6E5 /* Int+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extend.swift"; sourceTree = "<group>"; };
-		A5BCE6E51FA501B800E0C6E5 /* NSNotification+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extend.swift"; sourceTree = "<group>"; };
 		A5BCE6E61FA501B800E0C6E5 /* NSObject+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+Extend.swift"; sourceTree = "<group>"; };
 		A5BCE6E71FA501B800E0C6E5 /* Optional+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Extend.swift"; sourceTree = "<group>"; };
 		A5BCE6E81FA501B800E0C6E5 /* String+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extend.swift"; sourceTree = "<group>"; };
@@ -563,7 +561,6 @@
 				A5BCE6E21FA501B800E0C6E5 /* DispatchQueue+Extend.swift */,
 				A5BCE6E31FA501B800E0C6E5 /* Double+Extend.swift */,
 				A5BCE6E41FA501B800E0C6E5 /* Int+Extend.swift */,
-				A5BCE6E51FA501B800E0C6E5 /* NSNotification+Extend.swift */,
 				A5BCE6E61FA501B800E0C6E5 /* NSObject+Extend.swift */,
 				A5BCE6E71FA501B800E0C6E5 /* Optional+Extend.swift */,
 				A5BCE6E81FA501B800E0C6E5 /* String+Extend.swift */,
@@ -1136,7 +1133,6 @@
 				A5BCE7BE1FA50BFA00E0C6E5 /* HelpViewController.swift in Sources */,
 				A5649A551FE59EAE00EA69E1 /* OptionMenuFormTableViewCell.swift in Sources */,
 				A5BCE7251FA501B900E0C6E5 /* ShadowView.swift in Sources */,
-				A5BCE70C1FA501B900E0C6E5 /* NSNotification+Extend.swift in Sources */,
 				A5DBE7641FB84FDF009E4A12 /* CornerRadiusButton.swift in Sources */,
 				A5BCE7B21FA50BFA00E0C6E5 /* EGGradientLabel.swift in Sources */,
 				A5BCE7C21FA50BFA00E0C6E5 /* BaseViewModel.swift in Sources */,
