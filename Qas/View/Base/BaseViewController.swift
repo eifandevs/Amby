@@ -23,9 +23,6 @@ class BaseViewController: UIViewController {
     /// 初回実行用
     private var onceExec = OnceExec()
     
-    /// Observable自動解放
-    let disposeBag = DisposeBag()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -53,6 +50,10 @@ class BaseViewController: UIViewController {
         }
     }
 
+    deinit {
+        log.debug("deinit called.")
+    }
+    
     private func setup() {
 
         // iPhoneX対応

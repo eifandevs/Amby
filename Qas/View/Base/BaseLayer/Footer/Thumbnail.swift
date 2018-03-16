@@ -50,6 +50,10 @@ class Thumbnail: UIButton {
 //        }
 //    }
 
+    deinit {
+        log.debug("deinit called.")
+    }
+    
 // MARK: Public Method
     func setThumbnailTitle(title: String) {
         thumbnailInfo.transform = CGAffineTransform.identity

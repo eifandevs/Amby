@@ -24,6 +24,10 @@ class SearchMenuTableViewCell: UITableViewCell {
         fatalError("init(coder: ) has not been implemented")
     }
     
+    deinit {
+        log.debug("deinit called.")
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

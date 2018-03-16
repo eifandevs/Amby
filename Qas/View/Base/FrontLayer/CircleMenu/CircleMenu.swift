@@ -86,6 +86,10 @@ class CircleMenu: UIButton, ShadowView, CircleView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        log.debug("deinit called.")
+    }
+    
 // MARK: Public Method
     func invalidate() {
         progress.invalidate()

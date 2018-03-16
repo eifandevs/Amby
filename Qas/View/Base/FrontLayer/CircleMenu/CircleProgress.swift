@@ -30,6 +30,10 @@ class CircleProgress: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        log.debug("deinit called.")
+    }
+    
     // MARK: Public Method
     func start(complition: (() -> ())?) {
         invalidate()

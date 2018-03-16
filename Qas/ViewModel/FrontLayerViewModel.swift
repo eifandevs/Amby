@@ -9,6 +9,11 @@
 import Foundation
 
 final class FrontLayerViewModel {
+    
+    deinit {
+        log.debug("deinit called.")
+    }
+    
     func insertPageHistoryDataModel() {
         PageHistoryDataModel.s.append(url: nil)
     }

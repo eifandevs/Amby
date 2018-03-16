@@ -26,12 +26,8 @@ final class BaseViewControllerViewModel {
             }
         }
 
-    /// Observable自動解放
-    let disposeBag = DisposeBag()
-
     deinit {
         log.debug("deinit called.")
-        NotificationCenter.default.removeObserver(self)
     }
     
     func insertByEventPageHistoryDataModel(url: String) {

@@ -155,6 +155,9 @@ class FooterView: UIView, ShadowView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        log.debug("deinit called.")
+    }
 // MARK: Private Method
     
     /// 現在地にスクロール

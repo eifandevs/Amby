@@ -37,4 +37,8 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    deinit {
+        log.debug("deinit called.")
+    }
 }

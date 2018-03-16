@@ -22,6 +22,10 @@ class EGGradientLabel: PaddingLabel {
         layer.addSublayer(gradient)
     }
     
+    deinit {
+        log.debug("deinit called.")
+    }
+    
     override func layoutSubviews() {
         gradient.frame = CGRect(x: 0.0, y: 0.0, width: frame.size.width, height: frame.size.height)
     }

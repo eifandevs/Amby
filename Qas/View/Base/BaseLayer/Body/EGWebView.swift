@@ -71,6 +71,10 @@ class EGWebView: WKWebView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        log.debug("deinit called.")
+    }
+    
     func evaluate(script: String, completion: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) {
         var finished = false
         

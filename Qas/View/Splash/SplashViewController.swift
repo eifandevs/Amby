@@ -29,4 +29,8 @@ class SplashViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    deinit {
+        log.debug("deinit called.")
+    }
 }

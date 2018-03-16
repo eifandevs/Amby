@@ -62,6 +62,10 @@ class HeaderField: UIButton, ShadowView {
         makeContent(restore: false, restoreText: nil)
     }
     
+    deinit {
+        log.debug("deinit called.")
+    }
+    
     func reduction(frame: CGRect) {
         self.frame = frame
         textField.frame.size.width += 40

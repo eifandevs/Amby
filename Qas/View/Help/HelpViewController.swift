@@ -28,6 +28,10 @@ class HelpViewController: UIViewController {
         self.message = message
     }
     
+    deinit {
+        log.debug("deinit called.")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
