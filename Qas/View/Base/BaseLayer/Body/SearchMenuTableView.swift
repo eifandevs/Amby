@@ -54,7 +54,6 @@ class SearchMenuTableView: UIView {
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[SearchMenuTableView Event]: NSNotification.Name.UIKeyboardDidShow")
                 // ジェスチャーを登録する
                 self.addGestureRecognizer(self.tapRecognizer)
             }
@@ -63,7 +62,6 @@ class SearchMenuTableView: UIView {
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillHide, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[SearchMenuTableView Event]: NSNotification.Name.UIKeyboardWillHide")
                 // ジェスチャーを解除する
                 self.removeGestureRecognizer(self.tapRecognizer)
             }

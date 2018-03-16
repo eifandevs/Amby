@@ -42,7 +42,6 @@ class BaseLayer: UIView {
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[BaseLayer Event]: NSNotification.Name.UIKeyboardDidShow")
                 if !self.isHeaderViewEditing {
                     // 自動入力オペ要求
                     self.viewModel.changeOperationDataModel(operation: .autoInput)
@@ -54,7 +53,6 @@ class BaseLayer: UIView {
         NotificationCenter.default.rx.notification(.UIApplicationWillEnterForeground, object: nil)
             .subscribe { [weak self] notification in
                 guard let `self` = self else { return }
-                log.debug("[BaseLayer Event]: UIApplicationWillEnterForeground")
                 self.baseView.slideToMax()
             }
             .disposed(by: self.rx.disposeBag)
@@ -63,7 +61,6 @@ class BaseLayer: UIView {
         baseView.rx_baseViewDidEdgeSwiped.subscribe { [weak self] object in
             guard let `self` = self else { return }
             if let swipeDirection = object.element {
-                log.debug("[BaseLayer Event]: baseViewDidEdgeSwiped")
                 // 検索中の場合は、検索画面を閉じる
                 if self.searchMenuTableView != nil {
                     log.debug("close search menu.")
@@ -106,7 +103,6 @@ class BaseLayer: UIView {
         headerView.rx_headerViewDidBeginEditing
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
-                log.debug("[BaseLayer Event]: headerViewDidBeginEditing")
                 // 履歴検索を行うので、事前に永続化しておく
                 CommonHistoryDataModel.s.store()
                 PageHistoryDataModel.s.store()
@@ -117,7 +113,6 @@ class BaseLayer: UIView {
                 self.searchMenuTableView!.rx_searchMenuDidEndEditing
                     .subscribe { [weak self] _ in
                         guard let `self` = self else { return }
-                        log.debug("[BaseLayer Event]: searchMenuDidEndEditing. close keyboard")
                         self.headerView.closeKeyBoard()
                     }
                     .disposed(by: self.rx.disposeBag)
@@ -126,7 +121,6 @@ class BaseLayer: UIView {
                 self.searchMenuTableView!.rx_searchMenuDidClose
                     .subscribe { [weak self] _ in
                         guard let `self` = self else { return }
-                        log.debug("[BaseLayer Event]: searchMenuDidClose")
                         self.endEditing()
                     }
                     .disposed(by: self.rx.disposeBag)
@@ -139,7 +133,6 @@ class BaseLayer: UIView {
         headerView.rx_headerViewDidEndEditing
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
-                log.debug("[BaseLayer Event]: headerViewDidEndEditing")
                 EGApplication.sharedMyApplication.egDelegate = self.baseView
                 self.isHeaderViewEditing = false
                 self.searchMenuTableView!.removeFromSuperview()

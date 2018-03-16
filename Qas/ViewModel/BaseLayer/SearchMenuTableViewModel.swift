@@ -36,7 +36,6 @@ final class SearchMenuTableViewModel {
         OperationDataModel.s.rx_operationDataModelDidChange
             .subscribe { [weak self] object in
                 guard let `self` = self else { return }
-                log.debug("[SearchMenuTableViewModel Event]: operationDataModelDidChange")
                 if let object = object.element {
                     
                     if object.operation == .suggest {
