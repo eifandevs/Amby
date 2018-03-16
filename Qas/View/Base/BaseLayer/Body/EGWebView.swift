@@ -91,28 +91,21 @@ class EGWebView: WKWebView {
     }
     
     var hasSavableUrl: Bool {
-        get {
-            return  previousUrl != requestUrl &&
-                requestUrl.hasValidUrl
-        }
+        return  previousUrl != requestUrl && requestUrl.hasValidUrl
     }
     
     var hasValidUrl: Bool {
-        get {
-            if let url = url {
-                return url.absoluteString.hasValidUrl
-            }
-            return false
+        if let url = url {
+            return url.absoluteString.hasValidUrl
         }
+        return false
     }
     
     var hasLocalUrl: Bool {
-        get {
-            if let url = url {
-                return url.absoluteString.hasLocalUrl
-            }
-            return false
+        if let url = url {
+            return url.absoluteString.hasLocalUrl
         }
+        return false
     }
     
     @discardableResult
