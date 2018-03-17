@@ -90,6 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.rootViewController?.view.removeAllSubviews()
         self.window!.rootViewController?.view.removeFromSuperview()
         self.window!.rootViewController?.removeFromParentViewController()
+        self.window!.rootViewController = nil
         
         // プログレス表示
         SVProgressHUD.show()
