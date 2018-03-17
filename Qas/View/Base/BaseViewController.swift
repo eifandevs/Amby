@@ -13,8 +13,8 @@ import NSObject_Rx
 
 class BaseViewController: UIViewController {
     
-    private var baseLayer: BaseLayer!
-    private var frontLayer: FrontLayer!
+    private var baseLayer: BaseLayer?
+    private var frontLayer: FrontLayer?
     private let viewModel = BaseViewControllerViewModel()
     
     private var splash: SplashViewController?
@@ -117,25 +117,25 @@ class BaseViewController: UIViewController {
         baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
         
         // ベースレイヤー無効化監視
-        baseLayer.rx_baseLayerDidInvalidate
+        baseLayer!.rx_baseLayerDidInvalidate
             .subscribe{ [weak self] object in
                 guard let `self` = self else { return }
                 if let direction = object.element {
-                    self.frontLayer = FrontLayer(frame: self.baseLayer.frame, swipeDirection: direction)
-                    self.frontLayer.rx_frontLayerDidInvalidate
+                    self.frontLayer = FrontLayer(frame: self.baseLayer!.frame, swipeDirection: direction)
+                    self.frontLayer!.rx_frontLayerDidInvalidate
                         .subscribe({ [weak self] _ in
                             guard let `self` = self else { return }
-                            self.frontLayer.removeFromSuperview()
+                            self.frontLayer!.removeFromSuperview()
                             self.frontLayer = nil
-                            self.baseLayer.validateUserInteraction()
+                            self.baseLayer!.validateUserInteraction()
                         })
                         .disposed(by: self.rx.disposeBag)
-                    self.view.addSubview(self.frontLayer)
+                    self.view.addSubview(self.frontLayer!)
                 }
             }
             .disposed(by: rx.disposeBag)
         
-        view.addSubview(baseLayer)
+        view.addSubview(baseLayer!)
         
         view.bringSubview(toFront: splash!.view)
     }
@@ -145,6 +145,26 @@ class BaseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    /// 解放処理
+    func mRelease() {
+        // 何故かマニュアルで解放しないとdeinitが呼ばれない
+        if baseLayer != nil {
+            baseLayer!.removeFromSuperview()
+            baseLayer = nil
+        }
+        
+        if frontLayer != nil {
+            frontLayer!.removeFromSuperview()
+            frontLayer = nil
+        }
+        
+        if splash != nil {
+            splash!.view.removeFromSuperview()
+            splash!.removeFromParentViewController()
+            splash = nil
+        }
+    }
+    
 // MARK: WebView Touch
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         if Bundle(for: type(of: viewControllerToPresent)).bundleIdentifier == "com.apple.WebKit" {
