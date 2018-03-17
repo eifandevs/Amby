@@ -340,6 +340,7 @@ extension CircleMenu: EGApplicationDelegate {
                     circleMenuItem.rx.tap
                         .subscribe { [weak self] in
                             log.eventIn(chain: "rx_tap")
+                            // TODO: 反応しない。修正する。
                             guard let `self` = self else { return }
                             if !self.isClosing {
                                 circleMenuItem.scheduledAction = true

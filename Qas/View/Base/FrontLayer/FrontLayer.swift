@@ -127,6 +127,7 @@ class FrontLayer: UIView {
                 // ボタンタップ
                 self.overlay.rx.tap
                     .subscribe { [weak self] in
+                        // TODO: 反応しない。要修正。
                         log.eventIn(chain: "rx_tap")
                         guard let `self` = self else { return }
                         self.close()
