@@ -53,8 +53,10 @@ class FrontLayer: UIView {
                     // クローズ監視
                     self.optionMenu?.rx_optionMenuTableViewDidClose
                         .subscribe({ [weak self] _ in
+                            log.eventIn(chain: "rx_optionMenuTableViewDidClose")
                             guard let `self` = self else { return }
                             self.close()
+                            log.eventOut(chain: "rx_optionMenuTableViewDidClose")
                         })
                         .disposed(by: self.rx.disposeBag)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -115,6 +117,7 @@ class FrontLayer: UIView {
         circleMenu.rx_circleMenuDidActive
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_circleMenuDidActive")
                 guard let `self` = self else { return }
                 // オーバーレイの作成
                 self.overlay = UIButton(frame: frame)
@@ -123,10 +126,12 @@ class FrontLayer: UIView {
                 
                 // ボタンタップ
                 self.overlay.rx.tap
-                    .subscribe(onNext: { [weak self] in
+                    .subscribe { [weak self] in
+                        log.eventIn(chain: "rx_tap")
                         guard let `self` = self else { return }
                         self.close()
-                    })
+                        log.eventOut(chain: "rx_tap")
+                    }
                     .disposed(by: self.rx.disposeBag)
                 
                 self.addSubview(self.overlay)
@@ -135,6 +140,7 @@ class FrontLayer: UIView {
                 UIView.animate(withDuration: 0.35) {
                     self.overlay.alpha = 0.2
                 }
+                log.eventOut(chain: "rx_circleMenuDidActive")
             }
             .disposed(by: rx.disposeBag)
         
@@ -142,6 +148,7 @@ class FrontLayer: UIView {
         circleMenu.rx_circleMenuDidClose
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_circleMenuDidClose")
                 guard let `self` = self else { return }
                 if self.optionMenu == nil {
                     if let overlay = self.overlay {
@@ -157,6 +164,7 @@ class FrontLayer: UIView {
                         self.rx_frontLayerDidInvalidate.onNext(())
                     }
                 }
+                log.eventOut(chain: "rx_circleMenuDidClose")
             }
             .disposed(by: rx.disposeBag)
         

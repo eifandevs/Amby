@@ -53,7 +53,8 @@ class EGWebView: WKWebView {
         // Panジェスチャー
         panGesture.rx.event
             .subscribe{ [weak self] sender in
-                log.eventIn(chain: "rx_pan")
+                // ログが大量に出るので、コメントアウト
+//                log.eventIn(chain: "rx_pan")
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began || sender.state == .changed {
@@ -62,7 +63,7 @@ class EGWebView: WKWebView {
                         self.isSwiping = false
                     }
                 }
-                log.eventOut(chain: "rx_pan")
+//                log.eventOut(chain: "rx_pan")
             }
             .disposed(by: rx.disposeBag)
 

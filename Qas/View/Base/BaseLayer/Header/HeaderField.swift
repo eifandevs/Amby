@@ -94,16 +94,20 @@ class HeaderField: UIButton, ShadowView {
         // テキストフィールドの編集開始を監視
         textField.rx.controlEvent(UIControlEvents.editingDidBegin)
             .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_editingDidBegin")
                 guard let `self` = self else { return }
                 self.textField.selectedTextRange = self.textField.textRange(from: self.textField.beginningOfDocument, to: self.textField.endOfDocument)
+                log.eventOut(chain: "rx_editingDidBegin")
             })
             .disposed(by: rx.disposeBag)
         
         // テキストフィールドの編集終了を監視
         textField.rx.controlEvent(UIControlEvents.editingDidEndOnExit)
             .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_editingDidEndOnExit")
                 guard let `self` = self else { return }
                 self.rx_headerFieldDidEndEditing.onNext(self.textField.text)
+                log.eventOut(chain: "rx_editingDidEndOnExit")
             })
             .disposed(by: rx.disposeBag)
         
@@ -117,8 +121,10 @@ class HeaderField: UIButton, ShadowView {
         // ボタンタップ
         closeMenuButton.rx.tap
             .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.rx_headerFieldDidEndEditing.onNext(nil)
+                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
         

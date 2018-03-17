@@ -119,15 +119,18 @@ final class BaseViewModel {
     init() {
         // バックグラウンドに入るときに履歴を保存する
         center.rx.notification(.UIApplicationWillResignActive, object: nil)
-            .subscribe { [weak self] notification in
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_UIApplicationWillResignActive")
                 guard let `self` = self else { return }
                 self.storeHistoryDataModel()
+                log.eventOut(chain: "rx_UIApplicationWillResignActive")
         }
         .disposed(by: disposeBag)
         
         // オペレーション監視
         OperationDataModel.s.rx_operationDataModelDidChange
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_operationDataModelDidChange")
                 guard let `self` = self else { return }
                 if let object = object.element {
                     if object.operation == .urlCopy {
@@ -135,6 +138,7 @@ final class BaseViewModel {
                         NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_COPY_URL)
                     }
                 }
+                log.eventOut(chain: "rx_operationDataModelDidChange")
             }
             .disposed(by: disposeBag)
     }

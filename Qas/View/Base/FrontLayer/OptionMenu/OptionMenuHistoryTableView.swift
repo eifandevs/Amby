@@ -47,8 +47,10 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
         // データ更新監視
         viewModel.rx_optionMenuHistoryTableViewModelDidGetData
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_optionMenuHistoryTableViewModelDidGetData")
                 guard let `self` = self else { return }
                 self.tableView.reloadData()
+                log.eventOut(chain: "rx_optionMenuHistoryTableViewModelDidGetData")
             }
             .disposed(by: rx.disposeBag)
         
@@ -64,7 +66,8 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
         let longPressRecognizer = UILongPressGestureRecognizer()
         
         longPressRecognizer.rx.event
-            .subscribe{ [weak self] sender in
+            .subscribe { [weak self] sender in
+                log.eventIn(chain: "rx_longPress")
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
@@ -86,6 +89,7 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
                         }
                     }
                 }
+                log.eventOut(chain: "rx_longPress")
             }
             .disposed(by: rx.disposeBag)
         

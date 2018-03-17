@@ -83,9 +83,11 @@ class HeaderView: UIView, ShadowView {
         // ボタンタップ
         historyBackButton.rx.tap
             .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_historyBackTap")
                 guard let `self` = self else { return }
                 // サーチメニューが透明になっている時にタップ
                 self.viewModel.goBackCommonHistoryDataModel()
+                log.eventOut(chain: "rx_historyBackTap")
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
@@ -95,8 +97,10 @@ class HeaderView: UIView, ShadowView {
         // ボタンタップ
         historyForwardButton.rx.tap
             .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_historyForwardTap")
                 guard let `self` = self else { return }
                 self.viewModel.goForwardCommonHistoryDataModel()
+                log.eventOut(chain: "rx_historyForwardTap")
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
@@ -106,8 +110,10 @@ class HeaderView: UIView, ShadowView {
         // ボタンタップ
         favoriteButton.rx.tap
             .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_favoriteTap")
                 guard let `self` = self else { return }
                 self.viewModel.registerFavoriteDataModel()
+                log.eventOut(chain: "rx_favoriteTap")
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
@@ -117,8 +123,10 @@ class HeaderView: UIView, ShadowView {
         // ボタンタップ
         deleteButton.rx.tap
             .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_deleteTap")
                 guard let `self` = self else { return }
                 self.viewModel.removePageHistoryDataModel()
+                log.eventOut(chain: "rx_deleteTap")
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
@@ -127,33 +135,41 @@ class HeaderView: UIView, ShadowView {
         // ヘッダーフィールド
         headerField.rx.tap
             .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_headerTap")
                 guard let `self` = self else { return }
                 self.startEditing()
+                log.eventOut(chain: "rx_headerTap")
             })
             .disposed(by: rx.disposeBag)
         
         // プログレス更新監視
         viewModel.rx_headerViewModelDidChangeProgress
             .subscribe { [weak self] object in
+                // ログが大量に表示されるので、コメントアウト
+//                log.eventIn(chain: "rx_headerViewModelDidChangeProgress")
                 guard let `self` = self else { return }
                 if let progress = object.element {
                     self.progressBar.setProgress(progress)
                 }
+//                log.eventOut(chain: "rx_headerViewModelDidChangeProgress")
             }.disposed(by: rx.disposeBag)
         
         // テキストフィールド監視
         viewModel.rx_headerViewModelDidChangeField
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_headerViewModelDidChangeField")
                 guard let `self` = self else { return }
                 if let text = object.element {
                     self.headerField.text = text
                 }
+                log.eventOut(chain: "rx_headerViewModelDidChangeField")
             }
             .disposed(by: rx.disposeBag)
         
         // お気に入り監視
         viewModel.rx_headerViewModelDidChangeFavorite
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_headerViewModelDidChangeFavorite")
                 guard let `self` = self else { return }
                 if let enable = object.element {
                     if enable {
@@ -163,12 +179,14 @@ class HeaderView: UIView, ShadowView {
                         self.favoriteButton.setImage(image: R.image.header_favorite(), color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
                     }
                 }
+                log.eventOut(chain: "rx_headerViewModelDidChangeFavorite")
             }
             .disposed(by: rx.disposeBag)
         
         // 編集開始監視
         viewModel.rx_headerViewModelDidBeginEditing
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_headerViewModelDidBeginEditing")
                 guard let `self` = self else { return }
                 if let forceEditFlg = object.element {
                     if forceEditFlg {
@@ -182,12 +200,14 @@ class HeaderView: UIView, ShadowView {
                         }
                     }
                 }
+                log.eventOut(chain: "rx_headerViewModelDidBeginEditing")
             }
             .disposed(by: rx.disposeBag)
         
         // ヘッダーフィールド編集終了監視
         headerField.rx_headerFieldDidEndEditing
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_headerFieldDidEndEditing")
                 guard let `self` = self else { return }
                 if let text = object.element {
                     if let text = text, !text.isEmpty {
@@ -200,6 +220,7 @@ class HeaderView: UIView, ShadowView {
                         self.finishEditing(headerFieldUpdate: false)
                     }
                 }
+                log.eventOut(chain: "rx_headerFieldDidEndEditing")
             }
             .disposed(by: rx.disposeBag)
 

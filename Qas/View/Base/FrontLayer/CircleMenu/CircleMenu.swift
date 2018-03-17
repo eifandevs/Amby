@@ -132,13 +132,15 @@ class CircleMenu: UIButton, ShadowView, CircleView {
 
                     // ボタンタップ
                     nextCircleMenuItems[index].rx.tap
-                        .subscribe(onNext: { [weak self] in
+                        .subscribe { [weak self] in
+                            log.eventIn(chain: "rx_tap")
                             guard let `self` = self else { return }
                             if !self.isClosing {
                                 nextCircleMenuItems[index].scheduledAction = true
                                 self.closeCircleMenuItems()
                             }
-                        })
+                            log.eventOut(chain: "rx_tap")
+                        }
                         .disposed(by: rx.disposeBag)
 
                     superview!.addSubview(nextCircleMenuItems[index])
@@ -338,13 +340,15 @@ extension CircleMenu: EGApplicationDelegate {
 
                     // ボタンタップ
                     circleMenuItem.rx.tap
-                        .subscribe(onNext: { [weak self] in
+                        .subscribe { [weak self] in
+                            log.eventIn(chain: "rx_tap")
                             guard let `self` = self else { return }
                             if !self.isClosing {
                                 circleMenuItem.scheduledAction = true
                                 self.closeCircleMenuItems()
                             }
-                        })
+                            log.eventOut(chain: "rx_tap")
+                        }
                         .disposed(by: rx.disposeBag)
 
                     superview!.addSubview(circleMenuItem)

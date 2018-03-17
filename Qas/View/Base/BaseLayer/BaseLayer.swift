@@ -83,32 +83,35 @@ class BaseLayer: UIView {
         // BaseViewスライド監視
         baseView.rx_baseViewDidSlide
             .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_baseViewDidSlide")
+                // ログが大量に出るので、コメントアウト
+//                log.eventIn(chain: "rx_baseViewDidSlide")
                 guard let `self` = self else { return }
                 if let speed = object.element {
                     self.headerView.slide(value: speed)
                 }
-                log.eventOut(chain: "rx_baseViewDidSlide")
+//                log.eventOut(chain: "rx_baseViewDidSlide")
             }
             .disposed(by: rx.disposeBag)
 
         // BaseViewスライドMax監視
         baseView.rx_baseViewDidSlideToMax
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_baseViewDidSlideToMax")
+                // ログが大量に出るので、コメントアウト
+//                log.eventIn(chain: "rx_baseViewDidSlideToMax")
                 guard let `self` = self else { return }
                 self.headerView.slideToMax()
-                log.eventOut(chain: "rx_baseViewDidSlideToMax")
+//                log.eventOut(chain: "rx_baseViewDidSlideToMax")
             }
             .disposed(by: rx.disposeBag)
         
         // BaseViewスライドMin監視
         baseView.rx_baseViewDidSlideToMin
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_baseViewDidSlideToMin")
+                // ログが大量に出るので、コメントアウト
+//                log.eventIn(chain: "rx_baseViewDidSlideToMin")
                 guard let `self` = self else { return }
                 self.headerView.slideToMin()
-                log.eventOut(chain: "rx_baseViewDidSlideToMin")
+//                log.eventOut(chain: "rx_baseViewDidSlideToMin")
             }
             .disposed(by: rx.disposeBag)
         

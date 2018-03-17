@@ -35,6 +35,7 @@ final class SearchMenuTableViewModel {
         // オペレーション監視
         OperationDataModel.s.rx_operationDataModelDidChange
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_operationDataModelDidChange")
                 guard let `self` = self else { return }
                 if let object = object.element {
                     
@@ -44,6 +45,7 @@ final class SearchMenuTableViewModel {
                         self.requestSearch()
                     }
                 }
+                log.eventOut(chain: "rx_operationDataModelDidChange")
             }
             .disposed(by: disposeBag)
     }

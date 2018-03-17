@@ -55,7 +55,8 @@ class OptionMenuFormTableView: UIView, ShadowView, OptionMenuView {
         let longPressRecognizer = UILongPressGestureRecognizer()
         
         longPressRecognizer.rx.event
-            .subscribe{ [weak self] sender in
+            .subscribe { [weak self] sender in
+                log.eventIn(chain: "rx_longPress")
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
@@ -72,6 +73,7 @@ class OptionMenuFormTableView: UIView, ShadowView, OptionMenuView {
                         }
                     }
                 }
+                log.eventOut(chain: "rx_longPress")
             }
             .disposed(by: rx.disposeBag)
         
