@@ -173,7 +173,7 @@ extension OptionMenuTableView: UITableViewDelegate {
         // ボタンタップ
         overlay.rx.tap
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
-            .subscribe { [weak self] in
+            .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 // overlay削除
@@ -197,7 +197,7 @@ extension OptionMenuTableView: UITableViewDelegate {
                     })
                 }
                 log.eventOut(chain: "rx_tap")
-            }
+            })
             .disposed(by: rx.disposeBag)
 
         addSubview(overlay)

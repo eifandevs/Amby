@@ -220,7 +220,7 @@ class FooterView: UIView, ShadowView {
         
         // ボタンタップ
         btn.rx.tap
-            .subscribe { [weak self] in
+            .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 let tappedContext = btn.context
@@ -230,7 +230,7 @@ class FooterView: UIView, ShadowView {
                     self.viewModel.changePageHistoryDataModel(context: btn.context)
                 }
                 log.eventIn(chain: "rx_tap")
-            }
+            })
             .disposed(by: rx.disposeBag)
         
         let longPressRecognizer = UILongPressGestureRecognizer()
@@ -306,7 +306,7 @@ class FooterView: UIView, ShadowView {
 
         // ボタンタップ
         btn.rx.tap
-            .subscribe { [weak self] in
+            .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 let tappedContext = btn.context
@@ -316,7 +316,7 @@ class FooterView: UIView, ShadowView {
                     self.viewModel.changePageHistoryDataModel(context: btn.context)
                 }
                 log.eventOut(chain: "rx_tap")
-            }
+            })
             .disposed(by: rx.disposeBag)
         
         let longPressRecognizer = UILongPressGestureRecognizer()
