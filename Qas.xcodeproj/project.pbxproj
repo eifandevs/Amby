@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1D4DB0C205D2B180099BE44 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D4DB0B205D2B180099BE44 /* Logger.swift */; };
 		A5117A511FDC48F600213E02 /* OperationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A501FDC48F600213E02 /* OperationDataModel.swift */; };
 		A5117A531FDC494000213E02 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A521FDC494000213E02 /* AppEnum.swift */; };
 		A5117A551FDC500B00213E02 /* BaseLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */; };
@@ -148,6 +149,7 @@
 /* Begin PBXFileReference section */
 		615FE5E3DFBC7266C29F3D82 /* Pods_Weasel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weasel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1D4DB0B205D2B180099BE44 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A28BDCA0F081729C628CD5CE /* Pods-Qas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.release.xcconfig"; sourceTree = "<group>"; };
 		A5117A501FDC48F600213E02 /* OperationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataModel.swift; sourceTree = "<group>"; };
 		A5117A521FDC494000213E02 /* AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnum.swift; sourceTree = "<group>"; };
@@ -609,6 +611,7 @@
 				A5BCE6FB1FA501B800E0C6E5 /* KeyChainHelper.swift */,
 				A5BCE6FD1FA501B800E0C6E5 /* OnceExec.swift */,
 				A5BCE6FE1FA501B800E0C6E5 /* RealmHelper.swift */,
+				A1D4DB0B205D2B180099BE44 /* Logger.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1169,6 +1172,7 @@
 				A5BCE7B81FA50BFA00E0C6E5 /* CircleMenuItem.swift in Sources */,
 				A586CD8E1FB77B5300961B30 /* ThumbnailDataModel.swift in Sources */,
 				A58F8ACD1FB89C89003632F7 /* PaddingLabel.swift in Sources */,
+				A1D4DB0C205D2B180099BE44 /* Logger.swift in Sources */,
 				A5BCE71E1FA501B900E0C6E5 /* KeyChainHelper.swift in Sources */,
 				A5BCE7141FA501B900E0C6E5 /* UIScrollView+Extend.swift in Sources */,
 				A5F3C0171FB7570900B905CA /* AppDelegate.swift in Sources */,
