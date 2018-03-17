@@ -84,7 +84,12 @@ class FooterView: UIView, ShadowView {
                     self.thumbnails.remove(at: deleteIndex)
                     self.updateFrontBar()
                     
-                    if self.thumbnails.count > 0 {
+                    if self.thumbnails.count == 0 {
+                        if ((self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
+                            self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
+                            self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
+                        }
+                    } else {
                         UIView.animate(withDuration: 0.3, animations: {
                             if ((self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
                                 self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
