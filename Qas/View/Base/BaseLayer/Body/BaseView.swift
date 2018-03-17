@@ -155,6 +155,7 @@ class BaseView: UIView {
         // ページインサート監視
         viewModel.rx_baseViewModelDidInsertWebView
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_baseViewModelDidInsertWebView")
                 guard let `self` = self else { return }
                 if let at = object.element {
                     // 現フロントのプログレス監視を削除
@@ -179,12 +180,14 @@ class BaseView: UIView {
                         _ = newWv.load(urlStr: self.viewModel.currentUrl)
                     }
                 }
+                log.eventOut(chain: "rx_baseViewModelDidInsertWebView")
             }
             .disposed(by: rx.disposeBag)
 
         // 自動入力監視
         viewModel.rx_baseViewModelDidAutoInput
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidAutoInput")
                 guard let `self` = self else { return }
                 if !self.isDoneAutoInput {
                     if let inputForm = FormDataModel.s.select(url: self.front.url?.absoluteString).first {
@@ -198,12 +201,14 @@ class BaseView: UIView {
                         self.isDoneAutoInput = true
                     }
                 }
+                log.eventOut(chain: "rx_baseViewModelDidAutoInput")
             }
             .disposed(by: rx.disposeBag)
 
         // ページ追加監視
         viewModel.rx_baseViewModelDidAppendWebView
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidAppendWebView")
                 guard let `self` = self else { return }
                 // 現フロントのプログレス監視を削除
                 if let front = self.front {
@@ -226,24 +231,28 @@ class BaseView: UIView {
                 } else {
                     _ = newWv.load(urlStr: self.viewModel.currentUrl)
                 }
+                log.eventOut(chain: "rx_baseViewModelDidAppendWebView")
             }
             .disposed(by: rx.disposeBag)
 
         // リロード監視
         viewModel.rx_baseViewModelDidReloadWebView
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidReloadWebView")
                 guard let `self` = self else { return }
                 if self.front.hasValidUrl {
                     self.front.reload()
                 } else {
                     _ = self.front.load(urlStr: self.viewModel.reloadUrl)
                 }
+                log.eventOut(chain: "rx_baseViewModelDidReloadWebView")
             }
             .disposed(by: rx.disposeBag)
 
         // ページ変更監視
         viewModel.rx_baseViewModelDidChangeWebView
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidChangeWebView")
                 guard let `self` = self else { return }
                 self.front.removeObserver(self, forKeyPath: "estimatedProgress")
                 self.viewModel.updateProgressHeaderViewDataModel(object: 0)
@@ -257,12 +266,14 @@ class BaseView: UIView {
                 } else {
                     self.loadWebView()
                 }
+                log.eventOut(chain: "rx_baseViewModelDidChangeWebView")
             }
             .disposed(by: rx.disposeBag)
 
         // ページ削除監視
         viewModel.rx_baseViewModelDidRemoveWebView
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_baseViewModelDidRemoveWebView")
                 guard let `self` = self else { return }
                 if let object = object.element {
                     if let webView = self.webViews[object.deleteIndex] {
@@ -300,12 +311,14 @@ class BaseView: UIView {
                         }
                     }
                 }
+                log.eventOut(chain: "rx_baseViewModelDidRemoveWebView")
             }
             .disposed(by: rx.disposeBag)
 
         // 検索監視
         viewModel.rx_baseViewModelDidSearchWebView
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_baseViewModelDidSearchWebView")
                 guard let `self` = self else { return }
                 if let text = object.element {
                     if text.hasValidUrl {
@@ -321,12 +334,14 @@ class BaseView: UIView {
                         _ = self.front.load(urlStr: encodedText)
                     }
                 }
+                log.eventOut(chain: "rx_baseViewModelDidSearchWebView")
             }
             .disposed(by: rx.disposeBag)
 
         // ヒストリーバック監視
         viewModel.rx_baseViewModelDidHistoryBackWebView
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidHistoryBackWebView")
                 guard let `self` = self else { return }
                 if self.front.isLoading && self.front.operation == .normal && !(self.viewModel.getPastViewingPageHistoryDataModel(context: self.front.context)) {
                     // 新規ページ表示中に戻るを押下したルート
@@ -344,29 +359,36 @@ class BaseView: UIView {
                         _ = self.front.load(urlStr: url)
                     }
                 }
+                log.eventOut(chain: "rx_baseViewModelDidHistoryBackWebView")
             }
             .disposed(by: rx.disposeBag)
 
         // ヒストリーフォワード監視
         viewModel.rx_baseViewModelDidHistoryForwardWebView
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidHistoryForwardWebView")
                 guard let `self` = self else { return }
                 if let url = self.viewModel.getForwardUrlPageHistoryDataModel(context: self.front.context) {
                     self.front.operation = .forward
                     _ = self.front.load(urlStr: url)
                 }
+                log.eventOut(chain: "rx_baseViewModelDidHistoryForwardWebView")
             }.disposed(by: rx.disposeBag)
 
         // フォーム登録監視
-        viewModel.rx_baseViewModelDidRegisterAsForm.subscribe { [weak self] _ in
-            guard let `self` = self else { return }
-            self.viewModel.storeFromDataModel(webview: self.front)
-        }
-        .disposed(by: rx.disposeBag)
+        viewModel.rx_baseViewModelDidRegisterAsForm
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidRegisterAsForm")
+                guard let `self` = self else { return }
+                self.viewModel.storeFromDataModel(webview: self.front)
+                log.eventOut(chain: "rx_baseViewModelDidRegisterAsForm")
+            }
+            .disposed(by: rx.disposeBag)
 
         // 自動スクロール監視
         viewModel.rx_baseViewModelDidAutoScroll
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidAutoScroll")
                 guard let `self` = self else { return }
                 if self.autoScrollTimer != nil || self.autoScrollTimer?.isValid == true {
                     self.autoScrollTimer?.invalidate()
@@ -375,6 +397,7 @@ class BaseView: UIView {
                     self.autoScrollTimer = Timer.scheduledTimer(timeInterval: Double(self.viewModel.autoScrollInterval), target: self, selector: #selector(self.updateAutoScrolling), userInfo: nil, repeats: true)
                     self.autoScrollTimer?.fire()
                 }
+                log.eventOut(chain: "rx_baseViewModelDidAutoScroll")
             }
             .disposed(by: rx.disposeBag)
     }

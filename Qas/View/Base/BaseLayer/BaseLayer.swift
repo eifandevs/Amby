@@ -41,67 +41,81 @@ class BaseLayer: UIView {
         // キーボード表示の処理(フォームの自動設定)
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
             .subscribe { [weak self] notification in
+                log.eventIn(chain: "UIKeyboardDidShow")
                 guard let `self` = self else { return }
                 if !self.isHeaderViewEditing {
                     // 自動入力オペ要求
                     self.viewModel.changeOperationDataModel(operation: .autoInput)
                 }
+                log.eventOut(chain: "UIKeyboardDidShow")
             }
             .disposed(by: self.rx.disposeBag)
         
         // フォアグラウンド時にベースビューの位置をMinにする
         NotificationCenter.default.rx.notification(.UIApplicationWillEnterForeground, object: nil)
             .subscribe { [weak self] notification in
+                log.eventIn(chain: "UIApplicationWillEnterForeground")
                 guard let `self` = self else { return }
                 self.baseView.slideToMax()
+                log.eventOut(chain: "UIApplicationWillEnterForeground")
             }
             .disposed(by: self.rx.disposeBag)
 
         // BaseViewスワイプ監視
-        baseView.rx_baseViewDidEdgeSwiped.subscribe { [weak self] object in
-            guard let `self` = self else { return }
-            if let swipeDirection = object.element {
-                // 検索中の場合は、検索画面を閉じる
-                if self.searchMenuTableView != nil {
-                    log.debug("close search menu.")
-                    self.endEditing()
-                    self.validateUserInteraction()
-                } else {
-                    self.rx_baseLayerDidInvalidate.onNext(swipeDirection)
+        baseView.rx_baseViewDidEdgeSwiped
+            .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_baseViewDidEdgeSwiped")
+                guard let `self` = self else { return }
+                if let swipeDirection = object.element {
+                    // 検索中の場合は、検索画面を閉じる
+                    if self.searchMenuTableView != nil {
+                        log.debug("close search menu.")
+                        self.endEditing()
+                        self.validateUserInteraction()
+                    } else {
+                        self.rx_baseLayerDidInvalidate.onNext(swipeDirection)
+                    }
                 }
+                log.eventOut(chain: "rx_baseViewDidEdgeSwiped")
             }
-        }
-        .disposed(by: rx.disposeBag)
+            .disposed(by: rx.disposeBag)
         
         // BaseViewスライド監視
         baseView.rx_baseViewDidSlide
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_baseViewDidSlide")
                 guard let `self` = self else { return }
                 if let speed = object.element {
                     self.headerView.slide(value: speed)
                 }
-        }
-        .disposed(by: rx.disposeBag)
+                log.eventOut(chain: "rx_baseViewDidSlide")
+            }
+            .disposed(by: rx.disposeBag)
 
         // BaseViewスライドMax監視
         baseView.rx_baseViewDidSlideToMax
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewDidSlideToMax")
                 guard let `self` = self else { return }
                 self.headerView.slideToMax()
+                log.eventOut(chain: "rx_baseViewDidSlideToMax")
             }
             .disposed(by: rx.disposeBag)
         
         // BaseViewスライドMin監視
         baseView.rx_baseViewDidSlideToMin
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewDidSlideToMin")
                 guard let `self` = self else { return }
                 self.headerView.slideToMin()
+                log.eventOut(chain: "rx_baseViewDidSlideToMin")
             }
             .disposed(by: rx.disposeBag)
         
         // HeaderView編集開始監視
         headerView.rx_headerViewDidBeginEditing
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_headerViewDidBeginEditing")
                 guard let `self` = self else { return }
                 // 履歴検索を行うので、事前に永続化しておく
                 CommonHistoryDataModel.s.store()
@@ -112,31 +126,38 @@ class BaseLayer: UIView {
                 // サーチメニュー編集終了監視
                 self.searchMenuTableView!.rx_searchMenuDidEndEditing
                     .subscribe { [weak self] _ in
+                        log.eventIn(chain: "rx_searchMenuDidEndEditing")
                         guard let `self` = self else { return }
                         self.headerView.closeKeyBoard()
+                        log.eventOut(chain: "rx_searchMenuDidEndEditing")
                     }
                     .disposed(by: self.rx.disposeBag)
                 
                 // サーチメニュークローズ監視
                 self.searchMenuTableView!.rx_searchMenuDidClose
                     .subscribe { [weak self] _ in
+                        log.eventIn(chain: "rx_searchMenuDidClose")
                         guard let `self` = self else { return }
                         self.endEditing()
+                        log.eventOut(chain: "rx_searchMenuDidClose")
                     }
                     .disposed(by: self.rx.disposeBag)
 
                 self.addSubview(self.searchMenuTableView!)
+                log.eventOut(chain: "rx_headerViewDidBeginEditing")
             }
             .disposed(by: rx.disposeBag)
         
         // HeaderView編集終了監視
         headerView.rx_headerViewDidEndEditing
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_headerViewDidEndEditing")
                 guard let `self` = self else { return }
                 EGApplication.sharedMyApplication.egDelegate = self.baseView
                 self.isHeaderViewEditing = false
                 self.searchMenuTableView!.removeFromSuperview()
                 self.searchMenuTableView = nil
+                log.eventOut(chain: "rx_headerViewDidEndEditing")
             }
             .disposed(by: rx.disposeBag)
         

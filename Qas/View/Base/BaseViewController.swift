@@ -77,11 +77,13 @@ class BaseViewController: UIViewController {
         // ヘルプ表示監視
         viewModel.rx_baseViewControllerViewModelDidPresentHelp
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentHelp")
                 guard let `self` = self else { return }
                 if let element = object.element {
                     let vc = HelpViewController(subtitle: element.subtitle, message: element.message)
                     self.present(vc, animated: true)
                 }
+                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentHelp")
             }
             .disposed(by: rx.disposeBag)
         
@@ -93,6 +95,7 @@ class BaseViewController: UIViewController {
         splash!.rx_splashViewControllerDidEndDrawing
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_splashViewControllerDidEndDrawing")
                 guard let `self` = self else { return }
                 if let splash = self.splash {
                     UIView.animate(withDuration: 0.3, animations: {
@@ -105,6 +108,7 @@ class BaseViewController: UIViewController {
                         }
                     })
                 }
+                log.eventOut(chain: "rx_splashViewControllerDidEndDrawing")
             }
             .disposed(by: rx.disposeBag)
         
@@ -119,19 +123,23 @@ class BaseViewController: UIViewController {
         // ベースレイヤー無効化監視
         baseLayer!.rx_baseLayerDidInvalidate
             .subscribe{ [weak self] object in
+                log.eventIn(chain: "rx_baseLayerDidInvalidate")
                 guard let `self` = self else { return }
                 if let direction = object.element {
                     self.frontLayer = FrontLayer(frame: self.baseLayer!.frame, swipeDirection: direction)
                     self.frontLayer!.rx_frontLayerDidInvalidate
                         .subscribe({ [weak self] _ in
+                            log.eventIn(chain: "rx_frontLayerDidInvalidate")
                             guard let `self` = self else { return }
                             self.frontLayer!.removeFromSuperview()
                             self.frontLayer = nil
                             self.baseLayer!.validateUserInteraction()
+                            log.eventOut(chain: "rx_frontLayerDidInvalidate")
                         })
                         .disposed(by: self.rx.disposeBag)
                     self.view.addSubview(self.frontLayer!)
                 }
+                log.eventOut(chain: "rx_baseLayerDidInvalidate")
             }
             .disposed(by: rx.disposeBag)
         
