@@ -42,32 +42,38 @@ class FooterView: UIView, ShadowView {
         // サムネイル追加監視
         viewModel.rx_footerViewModelDidAppendThumbnail
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_footerViewModelDidAppendThumbnail")
                 guard let `self` = self else { return }
                 if let pageHistory = object.element {
                     // 新しいサムネイルスペースを作成
                     let _ = self.append(context: pageHistory.context)
                     self.updateFrontBar()
                 }
+                log.eventOut(chain: "rx_footerViewModelDidAppendThumbnail")
             }
             .disposed(by: rx.disposeBag)
         
         // サムネイル変更監視
         viewModel.rx_footerViewModelDidChangeThumbnail
-            .subscribe { [weak self] object in
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_footerViewModelDidChangeThumbnail")
                 guard let `self` = self else { return }
                 self.updateFrontBar()
+                log.eventOut(chain: "rx_footerViewModelDidChangeThumbnail")
             }
             .disposed(by: rx.disposeBag)
         
         // サムネイルインサート監視
         viewModel.rx_footerViewModelDidInsertThumbnail
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_footerViewModelDidInsertThumbnail")
                 guard let `self` = self else { return }
                 if let tuple = object.element {
                     // 新しいサムネイルスペースを作成
                     let _ = self.insert(at: tuple.at, context: tuple.pageHistory.context)
                     self.updateFrontBar()
                 }
+                log.eventOut(chain: "rx_footerViewModelDidInsertThumbnail")
             }
             .disposed(by: rx.disposeBag)
         
@@ -75,6 +81,7 @@ class FooterView: UIView, ShadowView {
         viewModel.rx_footerViewModelDidRemoveThumbnail
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_footerViewModelDidRemoveThumbnail")
                 // TODO: キュー管理する
                 guard let `self` = self else { return }
                 if let tuple = object.element {
@@ -106,22 +113,26 @@ class FooterView: UIView, ShadowView {
                         })
                     }
                 }
+                log.eventOut(chain: "rx_footerViewModelDidRemoveThumbnail")
             }
             .disposed(by: rx.disposeBag)
         
         // ローディングスタート監視
         viewModel.rx_footerViewModelDidStartLoading
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_footerViewModelDidStartLoading")
                 guard let `self` = self else { return }
                 if let context = object.element {
                     self.startIndicator(context: context)
                 }
+                log.eventOut(chain: "rx_footerViewModelDidStartLoading")
             }
             .disposed(by: rx.disposeBag)
         
         // ローティング終了監視
         viewModel.rx_footerViewModelDidEndLoading
             .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_footerViewModelDidEndLoading")
                 guard let `self` = self else { return }
                 if let tuple = object.element {
                     // くるくるを止めて、サムネイルを表示する
@@ -150,6 +161,7 @@ class FooterView: UIView, ShadowView {
                         }
                     }
                 }
+                log.eventOut(chain: "rx_footerViewModelDidEndLoading")
             }
             .disposed(by: rx.disposeBag)
         // 初期ロード
@@ -208,7 +220,8 @@ class FooterView: UIView, ShadowView {
         
         // ボタンタップ
         btn.rx.tap
-            .subscribe(onNext: { [weak self] in
+            .subscribe { [weak self] in
+                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 let tappedContext = btn.context
                 if tappedContext == self.viewModel.currentContext {
@@ -216,7 +229,8 @@ class FooterView: UIView, ShadowView {
                 } else {
                     self.viewModel.changePageHistoryDataModel(context: btn.context)
                 }
-            })
+                log.eventIn(chain: "rx_tap")
+            }
             .disposed(by: rx.disposeBag)
         
         let longPressRecognizer = UILongPressGestureRecognizer()
@@ -224,6 +238,7 @@ class FooterView: UIView, ShadowView {
         // ロングプレス
         longPressRecognizer.rx.event
             .subscribe { [weak self] sender in
+                log.eventIn(chain: "rx_longPress")
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
@@ -235,6 +250,7 @@ class FooterView: UIView, ShadowView {
                         }
                     }
                 }
+                log.eventOut(chain: "rx_longPress")
             }
             .disposed(by: rx.disposeBag)
 
@@ -291,6 +307,7 @@ class FooterView: UIView, ShadowView {
         // ボタンタップ
         btn.rx.tap
             .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 let tappedContext = btn.context
                 if tappedContext == self.viewModel.currentContext {
@@ -298,6 +315,7 @@ class FooterView: UIView, ShadowView {
                 } else {
                     self.viewModel.changePageHistoryDataModel(context: btn.context)
                 }
+                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
         
@@ -306,6 +324,7 @@ class FooterView: UIView, ShadowView {
         // ロングプレス
         longPressRecognizer.rx.event
             .subscribe{ [weak self] sender in
+                log.eventIn(chain: "rx_longPress")
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
@@ -317,6 +336,7 @@ class FooterView: UIView, ShadowView {
                         }
                     }
                 }
+                log.eventOut(chain: "rx_longPress")
             }
             .disposed(by: rx.disposeBag)
 

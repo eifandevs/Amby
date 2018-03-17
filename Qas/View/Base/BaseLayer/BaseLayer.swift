@@ -41,23 +41,23 @@ class BaseLayer: UIView {
         // キーボード表示の処理(フォームの自動設定)
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
             .subscribe { [weak self] notification in
-                log.eventIn(chain: "UIKeyboardDidShow")
+                log.eventIn(chain: "rx_UIKeyboardDidShow")
                 guard let `self` = self else { return }
                 if !self.isHeaderViewEditing {
                     // 自動入力オペ要求
                     self.viewModel.changeOperationDataModel(operation: .autoInput)
                 }
-                log.eventOut(chain: "UIKeyboardDidShow")
+                log.eventOut(chain: "rx_UIKeyboardDidShow")
             }
             .disposed(by: self.rx.disposeBag)
         
         // フォアグラウンド時にベースビューの位置をMinにする
         NotificationCenter.default.rx.notification(.UIApplicationWillEnterForeground, object: nil)
             .subscribe { [weak self] notification in
-                log.eventIn(chain: "UIApplicationWillEnterForeground")
+                log.eventIn(chain: "rx_UIApplicationWillEnterForeground")
                 guard let `self` = self else { return }
                 self.baseView.slideToMax()
-                log.eventOut(chain: "UIApplicationWillEnterForeground")
+                log.eventOut(chain: "rx_UIApplicationWillEnterForeground")
             }
             .disposed(by: self.rx.disposeBag)
 

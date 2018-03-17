@@ -27,10 +27,10 @@ class NotificationView: UIButton {
                 // オーバーレイタップ
                 self.overlay.rx.tap
                     .subscribe(onNext: { [weak self] in
-                        log.eventIn(chain: "tap")
+                        log.eventIn(chain: "rx_tap")
                         guard let `self` = self else { return }
                         self.dissmiss()
-                        log.eventOut(chain: "tap")
+                        log.eventOut(chain: "rx_tap")
                     })
                     .disposed(by: self.rx.disposeBag)
                 

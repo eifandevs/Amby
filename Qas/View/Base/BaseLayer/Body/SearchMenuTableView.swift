@@ -52,18 +52,22 @@ class SearchMenuTableView: UIView {
         
         // キーボード表示の処理
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
-            .subscribe { [weak self] notification in
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_UIKeyboardDidShow")
                 guard let `self` = self else { return }
                 // ジェスチャーを登録する
                 self.addGestureRecognizer(self.tapRecognizer)
+                log.eventOut(chain: "rx_UIKeyboardDidShow")
             }
             .disposed(by: rx.disposeBag)
 
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillHide, object: nil)
-            .subscribe { [weak self] notification in
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_UIKeyboardWillHide")
                 guard let `self` = self else { return }
                 // ジェスチャーを解除する
                 self.removeGestureRecognizer(self.tapRecognizer)
+                log.eventIn(chain: "rx_UIKeyboardWillHide")
             }
             .disposed(by: rx.disposeBag)
 
@@ -72,6 +76,7 @@ class SearchMenuTableView: UIView {
         // 画面更新通知監視
         viewModel.rx_searchMenuViewWillUpdateLayout
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_searchMenuViewWillUpdateLayout")
                 guard let `self` = self else { return }
                 self.tableView.reloadData()
                 self.alpha = 1
@@ -79,11 +84,13 @@ class SearchMenuTableView: UIView {
                     overlay.removeFromSuperview()
                     self.overlay = nil
                 }
+                log.eventOut(chain: "rx_searchMenuViewWillUpdateLayout")
             }.disposed(by: rx.disposeBag)
         
         // 画面無効化監視
         viewModel.rx_searchMenuViewWillHide
             .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_searchMenuViewWillHide")
                 guard let `self` = self else { return }
                 if self.overlay == nil {
                     self.alpha = 0
@@ -92,17 +99,20 @@ class SearchMenuTableView: UIView {
                     
                     // ボタンタップ
                     button.rx.tap
-                        .subscribe(onNext: { [weak self] in
+                        .subscribe { [weak self] in
+                            log.eventIn(chain: "rx_tap")
                             guard let `self` = self else { return }
                             // サーチメニューが透明になっている時にタップ
                             self.rx_searchMenuDidClose.onNext(())
                             button.removeFromSuperview()
-                        })
+                            log.eventOut(chain: "rx_tap")
+                        }
                         .disposed(by: self.rx.disposeBag)
                     
                     self.overlay = button
                     self.superview?.addSubview(button)
                 }
+                log.eventOut(chain: "rx_searchMenuViewWillHide")
             }.disposed(by: rx.disposeBag)
     }
     
