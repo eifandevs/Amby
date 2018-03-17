@@ -149,11 +149,13 @@ class BaseViewController: UIViewController {
     func mRelease() {
         // 何故かマニュアルで解放しないとdeinitが呼ばれない
         if baseLayer != nil {
+            baseLayer!.mRelease()
             baseLayer!.removeFromSuperview()
             baseLayer = nil
         }
         
         if frontLayer != nil {
+            frontLayer!.mRelease()
             frontLayer!.removeFromSuperview()
             frontLayer = nil
         }

@@ -22,12 +22,8 @@ class FrontLayer: UIView {
     private var optionMenu: OptionMenuTableView?
     private var overlay: UIButton!
     private var circleMenu: CircleMenu!
-    /// ["20170625": ["123456", "234567"], "20170626": ["123456", "234567"]]の形式
-    private var deleteHistoryIds: [String: [String]] = [:]
-    private var deleteFavoriteIds: [String] = []
-    private var deleteFormIds: [String] = []
 
-    let circleButtonRadius = 43
+    private let circleButtonRadius = 43
     
     convenience init(frame: CGRect, swipeDirection: EdgeSwipeDirection) {
         self.init(frame: frame)
@@ -175,12 +171,31 @@ class FrontLayer: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// 解放処理
+    func mRelease() {
+        // マニュアルで解放しないと何故かdeinitが呼ばれない
+        if self.optionMenu != nil {
+            self.optionMenu!.removeFromSuperview()
+            self.optionMenu = nil
+        }
+        
+        if self.overlay != nil {
+            self.overlay!.removeFromSuperview()
+            self.overlay = nil
+        }
+        
+        if self.circleMenu != nil {
+            self.circleMenu!.removeFromSuperview()
+            self.circleMenu = nil
+        }
+    }
+    
     deinit {
         log.debug("deinit called.")
     }
     
     // MARK: Private Method
-    func close() {
+    private func close() {
         circleMenu.invalidate()
         UIView.animate(withDuration: 0.15, animations: {
             self.overlay.alpha = 0

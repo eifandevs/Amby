@@ -87,6 +87,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(AppConst.UD_COMMON_HISTORY_SAVE_COUNT, forKey: AppConst.KEY_COMMON_HISTORY_SAVE_COUNT)
         UserDefaults.standard.set(AppConst.UD_PAGE_HISTORY_SAVE_COUNT, forKey: AppConst.KEY_PAGE_HISTORY_SAVE_COUNT)
         UserDefaults.standard.set(AppConst.UD_SEARCH_HISTORY_SAVE_COUNT, forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT)
+        if let baseViewController = self.window!.rootViewController as? BaseViewController {
+            baseViewController.mRelease()
+        }
         self.window!.rootViewController?.view.removeAllSubviews()
         self.window!.rootViewController?.view.removeFromSuperview()
         self.window!.rootViewController?.removeFromParentViewController()

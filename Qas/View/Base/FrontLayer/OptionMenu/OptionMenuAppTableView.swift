@@ -18,7 +18,7 @@ class OptionMenuAppTableView: UIView, ShadowView, OptionMenuView {
     let viewModel = OptionMenuAppTableViewModel()
     @IBOutlet weak var tableView: UITableView!
     
-    override init(frame: CGRect){
+    override init(frame: CGRect) {
         super.init(frame: frame)
         loadNib()
     }
@@ -26,6 +26,10 @@ class OptionMenuAppTableView: UIView, ShadowView, OptionMenuView {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         loadNib()
+    }
+    
+    deinit {
+        log.debug("deinit called.")
     }
     
     func loadNib() {

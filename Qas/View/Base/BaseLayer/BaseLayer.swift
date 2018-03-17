@@ -159,6 +159,13 @@ class BaseLayer: UIView {
         baseView.validateUserInteraction()
     }
     
+    /// 解放処理
+    func mRelease() {
+        baseView.removeFromSuperview()
+        headerView.removeFromSuperview()
+        footerView.removeFromSuperview()
+    }
+    
     // MARK: Private Method
     /// 編集モード終了
     private func endEditing() {

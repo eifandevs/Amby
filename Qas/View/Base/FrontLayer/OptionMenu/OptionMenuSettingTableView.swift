@@ -28,6 +28,10 @@ class OptionMenuSettingTableView: UIView, ShadowView, OptionMenuView {
         loadNib()
     }
     
+    deinit {
+        log.debug("deinit called.")
+    }
+    
     func loadNib() {
         let view = Bundle.main.loadNibNamed(R.nib.optionMenuSettingTableView.name, owner: self, options: nil)?.first as! UIView
         view.frame = self.bounds
