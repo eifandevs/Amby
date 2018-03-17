@@ -29,9 +29,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     private var circleMenuItemGroup: [[CircleMenuItem]] = []
     private var menuIndex: Int = 0
     private var circleMenuItems: [CircleMenuItem] {
-        get {
-            return circleMenuItemGroup[menuIndex]
-        }
+        return circleMenuItemGroup[menuIndex]
     }
     
     enum CircleMenuLeftLocation: CGPoint, EnumEnumerable {
