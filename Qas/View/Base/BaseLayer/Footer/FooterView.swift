@@ -18,7 +18,8 @@ class FooterView: UIView, ShadowView {
     private var viewModel = FooterViewModel()
     private let scrollView = UIScrollView()
     private var thumbnails: [Thumbnail] = []
-    
+    /// 削除アニメーションは、連続で実行されるので制御する
+    private var deleteAnimator: UIViewPropertyAnimator?
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -87,7 +88,6 @@ class FooterView: UIView, ShadowView {
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_footerViewModelDidRemoveThumbnail")
-                // TODO: キュー管理する
                 guard let `self` = self else { return }
                 if let object = object.element {
                     let deleteIndex = D.findIndex(self.thumbnails, callback: { $0.context == object.deleteContext })!
@@ -102,7 +102,11 @@ class FooterView: UIView, ShadowView {
                             self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
                         }
                     } else {
-                        UIView.animate(withDuration: 0.3, animations: {
+                        if let deleteAnimator = self.deleteAnimator {
+                            // アニメーション実行中であれば、強制的に完了にする
+                            deleteAnimator.fractionComplete = 1
+                        }
+                        self.deleteAnimator = UIViewPropertyAnimator(duration: 0.25, curve: .linear) {
                             if ((self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
                                 self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
                                 self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
@@ -115,7 +119,11 @@ class FooterView: UIView, ShadowView {
                                     self.thumbnails[i].center.x -= self.thumbnails[i].frame.size.width / 2
                                 }
                             }
-                        })
+                        }
+                        self.deleteAnimator!.addCompletion { _ in
+                            self.deleteAnimator = nil
+                        }
+                        self.deleteAnimator!.startAnimation()
                     }
                 }
                 log.eventOut(chain: "rx_footerViewModelDidRemoveThumbnail")
