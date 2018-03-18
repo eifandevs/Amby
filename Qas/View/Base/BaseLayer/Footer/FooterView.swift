@@ -41,6 +41,7 @@ class FooterView: UIView, ShadowView {
         
         // サムネイル追加監視
         viewModel.rx_footerViewModelDidAppendThumbnail
+            .observeOn(MainScheduler.asyncInstance)
             .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_footerViewModelDidAppendThumbnail")
                 guard let `self` = self else { return }
@@ -55,6 +56,7 @@ class FooterView: UIView, ShadowView {
         
         // サムネイル変更監視
         viewModel.rx_footerViewModelDidChangeThumbnail
+            .observeOn(MainScheduler.asyncInstance)
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_footerViewModelDidChangeThumbnail")
                 guard let `self` = self else { return }
@@ -65,6 +67,7 @@ class FooterView: UIView, ShadowView {
         
         // サムネイルインサート監視
         viewModel.rx_footerViewModelDidInsertThumbnail
+            .observeOn(MainScheduler.asyncInstance)
             .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_footerViewModelDidInsertThumbnail")
                 guard let `self` = self else { return }
@@ -119,6 +122,7 @@ class FooterView: UIView, ShadowView {
         
         // ローディングスタート監視
         viewModel.rx_footerViewModelDidStartLoading
+            .observeOn(MainScheduler.asyncInstance)
             .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_footerViewModelDidStartLoading")
                 guard let `self` = self else { return }
@@ -131,6 +135,7 @@ class FooterView: UIView, ShadowView {
         
         // ローティング終了監視
         viewModel.rx_footerViewModelDidEndLoading
+            .observeOn(MainScheduler.asyncInstance)
             .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_footerViewModelDidEndLoading")
                 guard let `self` = self else { return }
