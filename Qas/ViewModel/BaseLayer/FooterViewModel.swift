@@ -28,10 +28,10 @@ final class FooterViewModel {
         }
     /// サムネイル削除用RX
     let rx_footerViewModelDidRemoveThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
-        .flatMap { object -> Observable<(context: String, pageExist: Bool)> in
+        .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
             // 実データの削除
-            try! FileManager.default.removeItem(atPath: Util.thumbnailFolderUrl(folder: object.context).path)
-            return Observable.just((context: object.context, pageExist: object.pageExist))
+            try! FileManager.default.removeItem(atPath: Util.thumbnailFolderUrl(folder: object.deleteContext).path)
+            return Observable.just(object)
         }
     /// ローディング開始通知用RX
     let rx_footerViewModelDidStartLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidStartLoading

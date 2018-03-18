@@ -88,7 +88,7 @@ class FooterView: UIView, ShadowView {
                 // TODO: キュー管理する
                 guard let `self` = self else { return }
                 if let tuple = object.element {
-                    let deleteIndex = D.findIndex(self.thumbnails, callback: { $0.context == tuple.context })!
+                    let deleteIndex = D.findIndex(self.thumbnails, callback: { $0.context == tuple.deleteContext })!
                     
                     self.thumbnails[deleteIndex].removeFromSuperview()
                     self.thumbnails.remove(at: deleteIndex)

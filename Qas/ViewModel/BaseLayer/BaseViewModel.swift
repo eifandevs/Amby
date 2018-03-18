@@ -24,8 +24,8 @@ final class BaseViewModel {
     let rx_baseViewModelDidChangeWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange.flatMap { _ in Observable.just(()) }
     /// ページ削除通知用RX
     let rx_baseViewModelDidRemoveWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
-        .flatMap { object -> Observable<(context: String, pageExist: Bool, deleteIndex: Int)> in
-            return Observable.just((context: object.context, pageExist: object.pageExist, deleteIndex: object.deleteIndex))
+        .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
+            return Observable.just(object)
         }
     /// ヒストリーバック通知用RX
     let rx_baseViewModelDidHistoryBackWebView = CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoBack.flatMap { _ in Observable.just(()) }

@@ -280,7 +280,7 @@ class BaseView: UIView {
                         // サムネイルの削除
                         self.viewModel.deleteThumbnail(webView: webView)
 
-                        let isFrontDelete = object.context == self.front.context
+                        let isFrontDelete = object.deleteContext == self.front.context
                         if isFrontDelete {
                             webView.removeObserver(self, forKeyPath: "estimatedProgress")
                             self.viewModel.updateProgressHeaderViewDataModel(object: 0)
@@ -298,7 +298,7 @@ class BaseView: UIView {
                         // くるくるを更新
                         self.updateNetworkActivityIndicator()
 
-                        if isFrontDelete && object.pageExist {
+                        if isFrontDelete && object.currentContext != nil {
                             // フロントの削除で、削除後にwebviewが存在する場合
 
                             if let current = D.find(self.webViews, callback: { $0?.context == PageHistoryDataModel.s.currentContext }) {

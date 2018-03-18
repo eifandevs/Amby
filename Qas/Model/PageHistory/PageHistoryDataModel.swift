@@ -18,7 +18,7 @@ final class PageHistoryDataModel {
     /// ページ変更通知用RX
     let rx_pageHistoryDataModelDidChange = PublishSubject<String>()
     /// ページ削除通知用RX
-    let rx_pageHistoryDataModelDidRemove = PublishSubject<(context: String, pageExist: Bool, deleteIndex: Int)>()
+    let rx_pageHistoryDataModelDidRemove = PublishSubject<(deleteContext: String, currentContext: String?, deleteIndex: Int)>()
     /// ページリロード通知用RX
     let rx_pageHistoryDataModelDidReload = PublishSubject<()>()
     /// ページロード開始通知用RX
@@ -233,7 +233,7 @@ final class PageHistoryDataModel {
             histories.remove(at: deleteIndex)
             // 削除した結果、ページが存在しない場合は作成する
             if histories.count == 0 {
-                rx_pageHistoryDataModelDidRemove.onNext((context: context, pageExist: false, deleteIndex: deleteIndex))
+                rx_pageHistoryDataModelDidRemove.onNext((deleteContext: context, currentContext: nil, deleteIndex: deleteIndex))
                 let pageHistory = PageHistory()
                 histories.append(pageHistory)
                 currentContext = pageHistory.context
@@ -251,7 +251,7 @@ final class PageHistoryDataModel {
         } else {
             histories.remove(at: deleteIndex)
         }
-        rx_pageHistoryDataModelDidRemove.onNext((context: context, pageExist: true, deleteIndex: deleteIndex))
+        rx_pageHistoryDataModelDidRemove.onNext((deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
     }
     
     /// 表示中ページの変更
