@@ -48,7 +48,7 @@ class FooterView: UIView, ShadowView {
                 if let pageHistory = object.element {
                     // 新しいサムネイルスペースを作成
                     let _ = self.append(context: pageHistory.context)
-                    self.updateFrontBar()
+                    self.updateFrontBar(to: pageHistory.context)
                 }
                 log.eventOut(chain: "rx_footerViewModelDidAppendThumbnail")
             }
@@ -57,10 +57,12 @@ class FooterView: UIView, ShadowView {
         // サムネイル変更監視
         viewModel.rx_footerViewModelDidChangeThumbnail
             .observeOn(MainScheduler.asyncInstance)
-            .subscribe { [weak self] _ in
+            .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_footerViewModelDidChangeThumbnail")
                 guard let `self` = self else { return }
-                self.updateFrontBar()
+                if let context = object.element {
+                    self.updateFrontBar(to: context)
+                }
                 log.eventOut(chain: "rx_footerViewModelDidChangeThumbnail")
             }
             .disposed(by: rx.disposeBag)
@@ -71,10 +73,10 @@ class FooterView: UIView, ShadowView {
             .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_footerViewModelDidInsertThumbnail")
                 guard let `self` = self else { return }
-                if let tuple = object.element {
+                if let object = object.element {
                     // 新しいサムネイルスペースを作成
-                    let _ = self.insert(at: tuple.at, context: tuple.pageHistory.context)
-                    self.updateFrontBar()
+                    let _ = self.insert(at: object.at, context: object.pageHistory.context)
+                    self.updateFrontBar(to: object.pageHistory.context)
                 }
                 log.eventOut(chain: "rx_footerViewModelDidInsertThumbnail")
             }
@@ -87,12 +89,12 @@ class FooterView: UIView, ShadowView {
                 log.eventIn(chain: "rx_footerViewModelDidRemoveThumbnail")
                 // TODO: キュー管理する
                 guard let `self` = self else { return }
-                if let tuple = object.element {
-                    let deleteIndex = D.findIndex(self.thumbnails, callback: { $0.context == tuple.deleteContext })!
+                if let object = object.element {
+                    let deleteIndex = D.findIndex(self.thumbnails, callback: { $0.context == object.deleteContext })!
                     
                     self.thumbnails[deleteIndex].removeFromSuperview()
                     self.thumbnails.remove(at: deleteIndex)
-                    self.updateFrontBar()
+                    self.updateFrontBar(to: object.currentContext)
                     
                     if self.thumbnails.count == 0 {
                         if ((self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
@@ -208,7 +210,7 @@ class FooterView: UIView, ShadowView {
                 }
             }
         }
-        updateFrontBar()
+        updateFrontBar(to: viewModel.currentContext)
         // スクロールする
         scrollAtCurrent()
     }
@@ -382,8 +384,8 @@ class FooterView: UIView, ShadowView {
     }
     
     /// フロントバーの変更
-    private func updateFrontBar() {
-        thumbnails.forEach({ $0.isFront = $0.context == viewModel.currentContext ? true : false })
+    private func updateFrontBar(to: String?) {
+        thumbnails.forEach({ $0.isFront = $0.context == to })
     }
 }
 
