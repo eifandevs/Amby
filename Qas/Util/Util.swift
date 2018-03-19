@@ -165,14 +165,14 @@ class Util {
 
         if let deviceName = deviceCodeDic[code] {
             return deviceName
-        }else{
+        } else {
             if code.range(of: "iPod") != nil {
                 return "iPod Touch"
-            }else if code.range(of: "iPad") != nil {
+            } else if code.range(of: "iPad") != nil {
                 return "iPad"
-            }else if code.range(of: "iPhone") != nil {
+            } else if code.range(of: "iPhone") != nil {
                 return "iPhone"
-            }else{
+            } else {
                 return "unknownDevice"
             }
         }
