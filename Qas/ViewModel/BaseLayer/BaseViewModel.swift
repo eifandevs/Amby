@@ -172,7 +172,7 @@ final class BaseViewModel {
     
     /// 次URL取得
     func getForwardUrlPageHistoryDataModel(context: String) -> String? {
-        return PageHistoryDataModel.s.getForwardUrl(context:context)
+        return PageHistoryDataModel.s.getForwardUrl(context: context)
     }
     
     func startLoadingPageHistoryDataModel(context: String) {
