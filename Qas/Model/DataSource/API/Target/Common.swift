@@ -9,22 +9,24 @@
 import Foundation
 import Moya
 
-enum ApiTarget {
-    // パスごとにcaseを切り分ける
+enum Common {
     case suggest(token: String)
 }
 
-extension ApiTarget: TargetType {
+extension Common: TargetType {
     // ベースのURL
     var baseURL: URL {
-        return URL(string: "https://hogehoge.com")!
+        switch self {
+        case .suggest:
+            return URL(string: HttpConst.SUGGEST_SERVER_DOMAIN)!
+        }
     }
     
     // パス
     var path: String {
         switch self {
         case .suggest:
-            return "/login"
+            return HttpConst.SUGGEST_SERVER_PATH
         }
     }
     
@@ -32,13 +34,18 @@ extension ApiTarget: TargetType {
     var method: Moya.Method {
         switch self {
         case .suggest:
-            return .post
+            return .get
         }
     }
     
     // スタブデータ
     var sampleData: Data {
-        let path = Bundle.main.path(forResource: "suggest_stub", ofType: "json")!
+        let path = { () -> String in
+            switch self {
+            case .suggest:
+                return Bundle.main.path(forResource: "suggest_stub", ofType: "json")!
+            }
+        }()
         return FileHandle(forReadingAtPath: path)!.readDataToEndOfFile()
     }
     
@@ -46,7 +53,7 @@ extension ApiTarget: TargetType {
     var task: Task {
         switch self {
         case .suggest(let token):
-            return .requestParameters(parameters: ["token" : token], encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["token": token], encoding: URLEncoding.default)
         }
     }
     

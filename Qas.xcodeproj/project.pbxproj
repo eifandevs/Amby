@@ -20,12 +20,14 @@
 		A15F42DE205FF50B00228553 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42D5205FF50B00228553 /* ApiClient.swift */; };
 		A15F42DF205FF50B00228553 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42D6205FF50B00228553 /* ApiRequest.swift */; };
 		A15F42E0205FF50B00228553 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42D7205FF50B00228553 /* ApiResponse.swift */; };
-		A15F42E1205FF50B00228553 /* ApiTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42D8205FF50B00228553 /* ApiTarget.swift */; };
 		A15F42E2205FF50B00228553 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42D9205FF50B00228553 /* CacheHelper.swift */; };
 		A15F42E3205FF50B00228553 /* CommonDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DA205FF50B00228553 /* CommonDao.swift */; };
 		A15F42E4205FF50B00228553 /* EncryptHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DB205FF50B00228553 /* EncryptHelper.swift */; };
 		A15F42E5205FF50B00228553 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DC205FF50B00228553 /* KeyChainHelper.swift */; };
 		A15F42E6205FF50B00228553 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DD205FF50B00228553 /* RealmHelper.swift */; };
+		A15F42EA2062664500228553 /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42E92062664500228553 /* ApiProvider.swift */; };
+		A15F42EF20626C1F00228553 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EC20626C1F00228553 /* Common.swift */; };
+		A15F42F020626C1F00228553 /* SuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EE20626C1F00228553 /* SuggestResponse.swift */; };
 		A1D4DB0C205D2B180099BE44 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D4DB0B205D2B180099BE44 /* Logger.swift */; };
 		A5117A531FDC494000213E02 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A521FDC494000213E02 /* AppEnum.swift */; };
 		A5117A551FDC500B00213E02 /* BaseLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */; };
@@ -163,12 +165,14 @@
 		A15F42D5205FF50B00228553 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		A15F42D6205FF50B00228553 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		A15F42D7205FF50B00228553 /* ApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
-		A15F42D8205FF50B00228553 /* ApiTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiTarget.swift; sourceTree = "<group>"; };
 		A15F42D9205FF50B00228553 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
 		A15F42DA205FF50B00228553 /* CommonDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDao.swift; sourceTree = "<group>"; };
 		A15F42DB205FF50B00228553 /* EncryptHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptHelper.swift; sourceTree = "<group>"; };
 		A15F42DC205FF50B00228553 /* KeyChainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
 		A15F42DD205FF50B00228553 /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		A15F42E92062664500228553 /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
+		A15F42EC20626C1F00228553 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		A15F42EE20626C1F00228553 /* SuggestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestResponse.swift; sourceTree = "<group>"; };
 		A1D4DB0B205D2B180099BE44 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A28BDCA0F081729C628CD5CE /* Pods-Qas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.release.xcconfig"; sourceTree = "<group>"; };
 		A5117A521FDC494000213E02 /* AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnum.swift; sourceTree = "<group>"; };
@@ -439,12 +443,30 @@
 		A15F42D4205FF50B00228553 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				A15F42ED20626C1F00228553 /* Response */,
+				A15F42EB20626C1F00228553 /* Target */,
 				A15F42D5205FF50B00228553 /* ApiClient.swift */,
 				A15F42D6205FF50B00228553 /* ApiRequest.swift */,
 				A15F42D7205FF50B00228553 /* ApiResponse.swift */,
-				A15F42D8205FF50B00228553 /* ApiTarget.swift */,
+				A15F42E92062664500228553 /* ApiProvider.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		A15F42EB20626C1F00228553 /* Target */ = {
+			isa = PBXGroup;
+			children = (
+				A15F42EC20626C1F00228553 /* Common.swift */,
+			);
+			path = Target;
+			sourceTree = "<group>";
+		};
+		A15F42ED20626C1F00228553 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				A15F42EE20626C1F00228553 /* SuggestResponse.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 		A5223E8A1F1F8EA20097E793 /* Qas */ = {
@@ -1110,10 +1132,10 @@
 				A5BCE7B11FA50BFA00E0C6E5 /* Thumbnail.swift in Sources */,
 				A5117A661FE56C2100213E02 /* OptionMenuTableViewModel.swift in Sources */,
 				A5BCE70F1FA501B900E0C6E5 /* String+Extend.swift in Sources */,
+				A15F42EA2062664500228553 /* ApiProvider.swift in Sources */,
 				A15F42C9205FF33A00228553 /* CommonHistoryDataModel.swift in Sources */,
 				A15F42CC205FF33A00228553 /* HeaderViewDataModel.swift in Sources */,
 				A5F3C0191FB75D2900B905CA /* MessageConst.swift in Sources */,
-				A15F42E1205FF50B00228553 /* ApiTarget.swift in Sources */,
 				A53C0EEC1FB778ED00FD78FF /* SearchHistory.swift in Sources */,
 				A53C0EE81FB778ED00FD78FF /* Input.swift in Sources */,
 				A5649A591FE59F4B00EA69E1 /* OptionMenuFavoriteTableViewCell.swift in Sources */,
@@ -1170,6 +1192,8 @@
 				A5BCE7151FA501B900E0C6E5 /* UIView+Extend.swift in Sources */,
 				A53C0EE21FB778ED00FD78FF /* CommonHistory.swift in Sources */,
 				A15F42DF205FF50B00228553 /* ApiRequest.swift in Sources */,
+				A15F42F020626C1F00228553 /* SuggestResponse.swift in Sources */,
+				A15F42EF20626C1F00228553 /* Common.swift in Sources */,
 				A57131A41FC26B8700BA07E0 /* Date+Extend.swift in Sources */,
 				A5649A3E1FE5847D00EA69E1 /* OptionMenuHistoryTableViewModel.swift in Sources */,
 				A5649A4C1FE59D3200EA69E1 /* OptionMenuHelpTableView.swift in Sources */,
