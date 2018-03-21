@@ -84,11 +84,11 @@ class Util {
 
     /// デバイス名取得
     static func getDeviceInfo () -> String {
-        var size : Int = 0
+        var size: Int = 0
         sysctlbyname("hw.machine", nil, &size, nil, 0)
         var machine = [CChar](repeating: 0, count: Int(size))
         sysctlbyname("hw.machine", &machine, &size, nil, 0)
-        let code:String = String(cString:machine)
+        let code: String = String(cString:machine)
 
         let deviceCodeDic:[String:String] = [
             /* Simulator */
