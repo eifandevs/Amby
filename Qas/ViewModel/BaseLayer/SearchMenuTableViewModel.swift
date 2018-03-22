@@ -48,6 +48,36 @@ final class SearchMenuTableViewModel {
                 log.eventOut(chain: "rx_operationDataModelDidChange")
             }
             .disposed(by: disposeBag)
+        
+        // サジェスト検索監視
+        SuggestDataModel.s.rx_suggestDataModelDidUpdate
+            .observeOn(MainScheduler.asyncInstance)
+            .map { [weak self] (suggest) -> Suggest in
+                guard let `self` = self else { return suggest }
+                self.historyCellItem = CommonHistoryDataModel.s.select(title: suggest.token, readNum: self.readCommonHistoryNum).objects(for: 4)
+                self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: suggest.token, readNum: self.readSearchHistoryNum).objects(for: 4)
+                return suggest
+            }
+            .subscribe { [weak self] (suggest) in
+                log.eventIn(chain: "rx_suggestDataModelDidUpdate")
+
+                guard let `self` = self else { return }
+                if let suggest = suggest.element, let data = suggest.data, data.count > 0 {
+                    // suggestあり
+                    self.googleSearchCellItem = data.objects(for: 4)
+                } else {
+                    self.googleSearchCellItem = []
+                }
+                self.isRequesting = false
+                if self.requestSearchQueue.count > 0 {
+                    self.requestSearch()
+                } else {
+                    self.rx_searchMenuViewWillUpdateLayout.onNext(())
+                }
+                
+                log.eventOut(chain: "rx_suggestDataModelDidUpdate")
+            }
+            .disposed(by: disposeBag)
     }
 
     deinit {
@@ -60,20 +90,7 @@ final class SearchMenuTableViewModel {
         if !isRequesting {
             isRequesting = true
             if let token = self.requestSearchQueue.removeFirst(), !token.isEmpty {
-                self.historyCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: 4)
-                self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: 4)
-                SuggestDataModel.fetch(token: token, completion: { (suggest) in
-                    if let suggest = suggest, suggest.data.count > 0 {
-                        // suggestあり
-                        self.googleSearchCellItem = suggest.data.objects(for: 4)
-                    }
-                    self.isRequesting = false
-                    if self.requestSearchQueue.count > 0 {
-                        self.requestSearch()
-                    } else {
-                        self.rx_searchMenuViewWillUpdateLayout.onNext(())
-                    }
-                })
+                SuggestDataModel.s.fetch(token: token)
             } else {
                 self.googleSearchCellItem = []
                 self.historyCellItem = []

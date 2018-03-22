@@ -9,5 +9,6 @@
 import Foundation
 
 struct Suggest {
-    var data: [String] = []
+    var token: String
+    var data: [String]?
 }

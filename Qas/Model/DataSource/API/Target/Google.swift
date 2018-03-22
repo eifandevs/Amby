@@ -1,5 +1,5 @@
 //
-//  ApiTarget.swift
+//  Google.swift
 //  Qas
 //
 //  Created by tenma on 2018/03/19.
@@ -9,18 +9,13 @@
 import Foundation
 import Moya
 
-enum Common {
+enum Google {
     case suggest(token: String)
 }
 
-extension Common: TargetType {
+extension Google: TargetType {
     // ベースのURL
-    var baseURL: URL {
-        switch self {
-        case .suggest:
-            return URL(string: HttpConst.SUGGEST_SERVER_DOMAIN)!
-        }
-    }
+    var baseURL: URL { return URL(string: HttpConst.SUGGEST_SERVER_DOMAIN)! }
     
     // パス
     var path: String {
@@ -53,7 +48,7 @@ extension Common: TargetType {
     var task: Task {
         switch self {
         case .suggest(let token):
-            return .requestParameters(parameters: ["token": token], encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["hl": "en", "client": "firefox", "q": token], encoding: URLEncoding.default)
         }
     }
     

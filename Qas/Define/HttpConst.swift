@@ -10,7 +10,7 @@ import Foundation
 
 final class HttpConst {
     static let SUGGEST_SERVER_DOMAIN = "https://www.google.com"
-    static let SUGGEST_SERVER_PATH = "/complete/search?hl=en&client=firefox&q="
+    static let SUGGEST_SERVER_PATH = "/complete/search"
 }
 
 /// APIリザルト(ApiClientのレスポンス)

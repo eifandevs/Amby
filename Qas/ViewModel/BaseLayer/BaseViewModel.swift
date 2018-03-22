@@ -124,8 +124,8 @@ final class BaseViewModel {
                 guard let `self` = self else { return }
                 self.storeHistoryDataModel()
                 log.eventOut(chain: "rx_UIApplicationWillResignActive")
-        }
-        .disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
         
         // オペレーション監視
         OperationDataModel.s.rx_operationDataModelDidChange

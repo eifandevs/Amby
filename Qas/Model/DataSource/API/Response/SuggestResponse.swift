@@ -8,7 +8,9 @@
 
 import Foundation
 
-struct SuggestResponse: Decodable {
-    let suggests: [String]
+/// サジェストAPIレスポンス
+struct SuggestResponse {
+    // レスポンスがjsonではないので、codableを使用せず、マニュアルでマッピングする
+    let data: [Any]
 }
 

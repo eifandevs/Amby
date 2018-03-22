@@ -14,33 +14,38 @@ import Moya
 
 final class SuggestDataModel {
 
+    /// サジェスト通知用RX
+    let rx_suggestDataModelDidUpdate = PublishSubject<Suggest>()
+    
     static let s = SuggestDataModel()
     private let disposeBag = DisposeBag()
 
-    static func fetch(token: String, completion: ((Suggest?) -> ())?) {
-        let api = ApiClient(url: HttpConst.SUGGEST_SERVER_DOMAIN + HttpConst.SUGGEST_SERVER_PATH + token)
-        api.get(success: { (json: Dictionary) in
-            let data = (json["result"] as? [Any] ?? [String]())[safe: 1] as? [String] ?? [String]()
-            completion?(Suggest(data: data))
-        }) { (error: Error?) in
-            completion?(nil)
-        }
-    }
-    
     func fetch(token: String) {
-        let suggestProvider = ApiProvider<Common>()
-        suggestProvider.rx.request(.suggest(token: "aaa"))
+        let provider = MoyaProvider<Google>()
+        
+        provider.rx.request(.suggest(token: token))
+            .observeOn(MainScheduler.asyncInstance)
             .map { (response) -> SuggestResponse? in
-                return try? JSONDecoder().decode(SuggestResponse.self, from: response.data)
+                return SuggestResponse(data: (try? JSONSerialization.jsonObject(with: response.data)) as! [Any])
             }
-            .subscribe(onSuccess: { (response) in
-                if let unwrappedResponse = response {
-                    print(unwrappedResponse)
+            .subscribe(onSuccess: { [weak self] (response) in
+                log.eventIn(chain: "rx_suggest")
+                
+                guard let `self` = self else { return }
+                if let unwrappedResponse = response, let suggests = unwrappedResponse.data[safe: 1] {
+                    self.rx_suggestDataModelDidUpdate.onNext(Suggest(token: token, data: suggests as? [String]))
                 } else {
-                    print("error")
+                    self.rx_suggestDataModelDidUpdate.onNext(Suggest(token: token, data: nil))
                 }
-            }, onError: { (error) in
-                print("error")
+                
+                log.eventOut(chain: "rx_suggest")
+            }, onError: { error in
+                log.eventIn(chain: "rx_suggest")
+                
+                log.error("get suggest error. error: \(error.localizedDescription)")
+                self.rx_suggestDataModelDidUpdate.onNext(Suggest(token: token, data: nil))
+                
+                log.eventOut(chain: "rx_suggest")
             })
             .disposed(by: disposeBag)
     }
