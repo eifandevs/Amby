@@ -21,7 +21,7 @@ final class SuggestDataModel {
     private let disposeBag = DisposeBag()
 
     func fetch(token: String) {
-        let provider = MoyaProvider<Google>()
+        let provider = ApiProvider<Google>()
         
         provider.rx.request(.suggest(token: token))
             .observeOn(MainScheduler.asyncInstance)
