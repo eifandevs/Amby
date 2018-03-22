@@ -17,9 +17,6 @@
 		A15F42CF205FF33A00228553 /* SearchHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42C3205FF33A00228553 /* SearchHistoryDataModel.swift */; };
 		A15F42D0205FF33A00228553 /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42C5205FF33A00228553 /* SuggestDataModel.swift */; };
 		A15F42D1205FF33A00228553 /* ThumbnailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42C7205FF33A00228553 /* ThumbnailDataModel.swift */; };
-		A15F42DE205FF50B00228553 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42D5205FF50B00228553 /* ApiClient.swift */; };
-		A15F42DF205FF50B00228553 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42D6205FF50B00228553 /* ApiRequest.swift */; };
-		A15F42E0205FF50B00228553 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42D7205FF50B00228553 /* ApiResponse.swift */; };
 		A15F42E2205FF50B00228553 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42D9205FF50B00228553 /* CacheHelper.swift */; };
 		A15F42E3205FF50B00228553 /* CommonDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DA205FF50B00228553 /* CommonDao.swift */; };
 		A15F42E4205FF50B00228553 /* EncryptHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DB205FF50B00228553 /* EncryptHelper.swift */; };
@@ -162,9 +159,6 @@
 		A15F42C3205FF33A00228553 /* SearchHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModel.swift; sourceTree = "<group>"; };
 		A15F42C5205FF33A00228553 /* SuggestDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestDataModel.swift; sourceTree = "<group>"; };
 		A15F42C7205FF33A00228553 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
-		A15F42D5205FF50B00228553 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
-		A15F42D6205FF50B00228553 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
-		A15F42D7205FF50B00228553 /* ApiResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		A15F42D9205FF50B00228553 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
 		A15F42DA205FF50B00228553 /* CommonDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDao.swift; sourceTree = "<group>"; };
 		A15F42DB205FF50B00228553 /* EncryptHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptHelper.swift; sourceTree = "<group>"; };
@@ -445,9 +439,6 @@
 			children = (
 				A15F42ED20626C1F00228553 /* Response */,
 				A15F42EB20626C1F00228553 /* Target */,
-				A15F42D5205FF50B00228553 /* ApiClient.swift */,
-				A15F42D6205FF50B00228553 /* ApiRequest.swift */,
-				A15F42D7205FF50B00228553 /* ApiResponse.swift */,
 				A15F42E92062664500228553 /* ApiProvider.swift */,
 			);
 			path = API;
@@ -1175,7 +1166,6 @@
 				A53C0EEE1FB778ED00FD78FF /* Suggest.swift in Sources */,
 				A5BCE7C51FA50BFA00E0C6E5 /* SearchMenuTableViewModel.swift in Sources */,
 				A53C0EC21FB7766A00FD78FF /* NotificationView.swift in Sources */,
-				A15F42E0205FF50B00228553 /* ApiResponse.swift in Sources */,
 				A5BCE7181FA501B900E0C6E5 /* HttpConst.swift in Sources */,
 				A5BCE7161FA501B900E0C6E5 /* AppConst.swift in Sources */,
 				A5BCE7B61FA50BFA00E0C6E5 /* BaseViewController.swift in Sources */,
@@ -1191,7 +1181,6 @@
 				A5649A401FE59CC400EA69E1 /* OptionMenuFormTableView.swift in Sources */,
 				A5BCE7151FA501B900E0C6E5 /* UIView+Extend.swift in Sources */,
 				A53C0EE21FB778ED00FD78FF /* CommonHistory.swift in Sources */,
-				A15F42DF205FF50B00228553 /* ApiRequest.swift in Sources */,
 				A15F42F020626C1F00228553 /* SuggestResponse.swift in Sources */,
 				A15F42EF20626C1F00228553 /* Google.swift in Sources */,
 				A57131A41FC26B8700BA07E0 /* Date+Extend.swift in Sources */,
@@ -1225,7 +1214,6 @@
 				A5BCE7141FA501B900E0C6E5 /* UIScrollView+Extend.swift in Sources */,
 				A5F3C0171FB7570900B905CA /* AppDelegate.swift in Sources */,
 				A15F42CD205FF33A00228553 /* OperationDataModel.swift in Sources */,
-				A15F42DE205FF50B00228553 /* ApiClient.swift in Sources */,
 				A5BCE7AC1FA50BFA00E0C6E5 /* BaseView.swift in Sources */,
 				A5BCE7AD1FA50BFA00E0C6E5 /* EGWebView.swift in Sources */,
 				A15F42E6205FF50B00228553 /* RealmHelper.swift in Sources */,

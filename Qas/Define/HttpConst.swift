@@ -12,15 +12,3 @@ final class HttpConst {
     static let SUGGEST_SERVER_DOMAIN = "https://www.google.com"
     static let SUGGEST_SERVER_PATH = "/complete/search"
 }
-
-/// APIリザルト(ApiClientのレスポンス)
-enum ApiResult {
-    case success(ApiResponse)
-    case failure(ApiResponse)
-}
-
-/// リザルト(各Modelクラスのレスポンス)
-enum Result<T> {
-    case success(T)
-    case failure(ApiResponse)
-}
