@@ -14,7 +14,6 @@ final class ApiProvider<T: TargetType>: MoyaProvider<T> {
     
     public init(endpointClosure: @escaping EndpointClosure = ApiProvider.defaultEndpointMapping,
                 requestClosure: @escaping RequestClosure = ApiProvider.defaultRequestMapping,
-                stubClosure: @escaping StubClosure = ApiProvider.neverStub,
                 callbackQueue: DispatchQueue? = nil,
                 trackInflights: Bool = false) {
         
@@ -30,6 +29,13 @@ final class ApiProvider<T: TargetType>: MoyaProvider<T> {
         var plugins = [PluginType]()
         #if DEBUG
             plugins = [NetworkLoggerPlugin(verbose: true, responseDataFormatter: ApiProvider.formatJsonResponseData)]
+        #endif
+        
+        var stubClosure: (Target) -> Moya.StubBehavior
+        #if LOCAL
+            stubClosure = ApiProvider.immediatelyStub
+        #else
+            stubClosure = ApiProvider.neverStub
         #endif
         
         super.init(endpointClosure: endpointClosure,

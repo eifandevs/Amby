@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A57EFEA01E3E06D300B66701"
-               BuildableName = "Qas.app"
-               BlueprintName = "Qas"
+               BuildableName = "Qas-Develop.app"
+               BlueprintName = "Qas-Develop"
                ReferencedContainer = "container:Qas.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A57EFEA01E3E06D300B66701"
-            BuildableName = "Qas.app"
-            BlueprintName = "Qas"
+            BuildableName = "Qas-Develop.app"
+            BlueprintName = "Qas-Develop"
             ReferencedContainer = "container:Qas.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -58,8 +58,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A57EFEA01E3E06D300B66701"
-            BuildableName = "Qas.app"
-            BlueprintName = "Qas"
+            BuildableName = "Qas-Develop.app"
+            BlueprintName = "Qas-Develop"
             ReferencedContainer = "container:Qas.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -77,8 +77,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A57EFEA01E3E06D300B66701"
-            BuildableName = "Qas.app"
-            BlueprintName = "Qas"
+            BuildableName = "Qas-Develop.app"
+            BlueprintName = "Qas-Develop"
             ReferencedContainer = "container:Qas.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

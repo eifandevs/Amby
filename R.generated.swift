@@ -21,7 +21,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 5 files.
+  /// This `R.file` struct is generated, and contains static references to 6 files.
   struct file {
     /// Resource file `authorize.html`.
     static let authorizeHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "authorize", pathExtension: "html")
@@ -31,6 +31,8 @@ struct R: Rswift.Validatable {
     static let invalidHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "invalid", pathExtension: "html")
     /// Resource file `offline.html`.
     static let offlineHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "offline", pathExtension: "html")
+    /// Resource file `suggest_stub.json`.
+    static let suggest_stubJson = Rswift.FileResource(bundle: R.hostingBundle, name: "suggest_stub", pathExtension: "json")
     /// Resource file `timeout.html`.
     static let timeoutHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "timeout", pathExtension: "html")
     
@@ -55,6 +57,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "offline", withExtension: "html")`
     static func offlineHtml(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.offlineHtml
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "suggest_stub", withExtension: "json")`
+    static func suggest_stubJson(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.suggest_stubJson
       return fileResource.bundle.url(forResource: fileResource)
     }
     
