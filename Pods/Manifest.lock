@@ -40,7 +40,7 @@ DEPENDENCIES:
   - CryptoSwift (~> 0.8)
   - Dollar (~> 7.0)
   - KeychainAccess (~> 3.1)
-  - Moya/RxSwift
+  - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
   - NVActivityIndicatorView (~> 4.0.0)
   - R.swift (~> 3.3)
@@ -83,6 +83,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: e10b1668e0512229c36c34769b97eed3dfae2ca3
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: 70cdbdf38c6566d465700b2256889c6ea778c827
+PODFILE CHECKSUM: 07eb1c3a2b4f9cd49895e3bd544e62c29a3bbd21
 
 COCOAPODS: 1.4.0

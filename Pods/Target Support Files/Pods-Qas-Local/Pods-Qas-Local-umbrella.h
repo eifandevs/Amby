@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_QasVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_QasVersionString[];
+FOUNDATION_EXPORT double Pods_Qas_LocalVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_Qas_LocalVersionString[];
 

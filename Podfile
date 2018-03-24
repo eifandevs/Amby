@@ -1,11 +1,7 @@
-# Uncomment this line to define a global platform for your project
+# Uncomment the next line to define a global platform for your project
 platform :ios, '11.0'
 
-target 'Qas' do
-  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for Qas
+def common_pods
   swift_version = "4.0"
   pod 'Realm', '~> 2.4'
   pod 'SwiftyBeaver', '~> 1.1'
@@ -24,4 +20,22 @@ target 'Qas' do
   pod 'Dollar', '~> 7.0'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
   pod 'Moya/RxSwift', '~> 11.0'
+end
+
+target 'Qas-Develop' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Qas-Develop
+  common_pods
+
+end
+
+target 'Qas-Local' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Qas-Local
+  common_pods
+
 end
