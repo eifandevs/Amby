@@ -164,7 +164,10 @@
 		A15F42EA2062664500228553 /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42E92062664500228553 /* ApiProvider.swift */; };
 		A15F42EF20626C1F00228553 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EC20626C1F00228553 /* Google.swift */; };
 		A15F42F020626C1F00228553 /* SuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EE20626C1F00228553 /* SuggestResponse.swift */; };
+		A16206482066695500DF356A /* CommonHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16206472066695400DF356A /* CommonHistoryDataModelTests.swift */; };
 		A1D4DB0C205D2B180099BE44 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D4DB0B205D2B180099BE44 /* Logger.swift */; };
+		A1DC612C20666DAA00E1B56D /* PageHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DC612B20666DAA00E1B56D /* PageHistoryDataModelTests.swift */; };
+		A1DC612D20666FC500E1B56D /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42B7205FF33A00228553 /* CommonHistoryDataModel.swift */; };
 		A5117A531FDC494000213E02 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A521FDC494000213E02 /* AppEnum.swift */; };
 		A5117A551FDC500B00213E02 /* BaseLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */; };
 		A5117A5E1FE537C200213E02 /* HeaderFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A5D1FE537C200213E02 /* HeaderFieldViewModel.swift */; };
@@ -285,12 +288,24 @@
 		A9872C50D89BD4A2A7B139E5 /* Pods_Qas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A14A9E0C2066666200E4D5FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A57EFEA01E3E06D300B66701;
+			remoteInfo = "Qas-Develop";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		615FE5E3DFBC7266C29F3D82 /* Pods_Weasel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weasel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14A9D2C2066578600E4D5FF /* suggest_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = suggest_stub.json; sourceTree = "<group>"; };
 		A14A9DC620665F4600E4D5FF /* Qas-Local.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qas-Local.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14A9DC720665F4600E4D5FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = /Users/tenma/dev/projects/Qas/Qas/Environment/Local/Info.plist; sourceTree = "<absolute>"; };
+		A14A9E072066666200E4D5FF /* Qas-DevelopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qas-DevelopTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A14A9E0B2066666200E4D5FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A15F42B5205FF33A00228553 /* ArticleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleDataModel.swift; sourceTree = "<group>"; };
 		A15F42B7205FF33A00228553 /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
 		A15F42B9205FF33A00228553 /* FavoriteDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteDataModel.swift; sourceTree = "<group>"; };
@@ -309,7 +324,9 @@
 		A15F42E92062664500228553 /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 		A15F42EC20626C1F00228553 /* Google.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Google.swift; sourceTree = "<group>"; };
 		A15F42EE20626C1F00228553 /* SuggestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestResponse.swift; sourceTree = "<group>"; };
+		A16206472066695400DF356A /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A1D4DB0B205D2B180099BE44 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		A1DC612B20666DAA00E1B56D /* PageHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A28BDCA0F081729C628CD5CE /* Pods-Qas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.release.xcconfig"; sourceTree = "<group>"; };
 		A5117A521FDC494000213E02 /* AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnum.swift; sourceTree = "<group>"; };
 		A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLayerViewModel.swift; sourceTree = "<group>"; };
@@ -444,6 +461,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A14A9E042066666200E4D5FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A57EFE9E1E3E06D300B66701 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -488,6 +512,17 @@
 				A14A9DC720665F4600E4D5FF /* Info.plist */,
 			);
 			path = Local;
+			sourceTree = "<group>";
+		};
+		A14A9E082066666200E4D5FF /* Qas-DevelopTests */ = {
+			isa = PBXGroup;
+			children = (
+				A16206442066693D00DF356A /* Model */,
+				A16206452066693D00DF356A /* View */,
+				A16206462066693D00DF356A /* ViewModel */,
+				A14A9E0B2066666200E4D5FF /* Info.plist */,
+			);
+			path = "Qas-DevelopTests";
 			sourceTree = "<group>";
 		};
 		A15F42B3205FF33A00228553 /* Data */ = {
@@ -626,6 +661,29 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		A16206442066693D00DF356A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A16206472066695400DF356A /* CommonHistoryDataModelTests.swift */,
+				A1DC612B20666DAA00E1B56D /* PageHistoryDataModelTests.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A16206452066693D00DF356A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A16206462066693D00DF356A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		A5223E8A1F1F8EA20097E793 /* Qas */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,6 +800,7 @@
 			children = (
 				A5A6F2C51F1F92DD00A4620C /* R.generated.swift */,
 				A5223E8A1F1F8EA20097E793 /* Qas */,
+				A14A9E082066666200E4D5FF /* Qas-DevelopTests */,
 				A57EFEA21E3E06D300B66701 /* Products */,
 				2D6EC82ACCDEE92B54408E2F /* Pods */,
 				1BAE9B5DD71F0DF92296651C /* Frameworks */,
@@ -753,6 +812,7 @@
 			children = (
 				A57EFEA11E3E06D300B66701 /* Qas-Develop.app */,
 				A14A9DC620665F4600E4D5FF /* Qas-Local.app */,
+				A14A9E072066666200E4D5FF /* Qas-DevelopTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1089,6 +1149,24 @@
 			productReference = A14A9DC620665F4600E4D5FF /* Qas-Local.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A14A9E062066666200E4D5FF /* Qas-DevelopTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A14A9E0E2066666200E4D5FF /* Build configuration list for PBXNativeTarget "Qas-DevelopTests" */;
+			buildPhases = (
+				A14A9E032066666200E4D5FF /* Sources */,
+				A14A9E042066666200E4D5FF /* Frameworks */,
+				A14A9E052066666200E4D5FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A14A9E0D2066666200E4D5FF /* PBXTargetDependency */,
+			);
+			name = "Qas-DevelopTests";
+			productName = "Qas-DevelopTests";
+			productReference = A14A9E072066666200E4D5FF /* Qas-DevelopTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A57EFEA01E3E06D300B66701 /* Qas-Develop */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A57EFEB31E3E06D300B66701 /* Build configuration list for PBXNativeTarget "Qas-Develop" */;
@@ -1117,12 +1195,18 @@
 		A57EFE991E3E06D300B66701 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0810;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = eifaniori;
+				ORGANIZATIONNAME = eifandevs;
 				TargetAttributes = {
 					A14A9D3020665F4600E4D5FF = {
 						DevelopmentTeam = TBQA5RANYY;
+					};
+					A14A9E062066666200E4D5FF = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = TBQA5RANYY;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A57EFEA01E3E06D300B66701;
 					};
 					A57EFEA01E3E06D300B66701 = {
 						CreatedOnToolsVersion = 8.1;
@@ -1147,6 +1231,7 @@
 			targets = (
 				A57EFEA01E3E06D300B66701 /* Qas-Develop */,
 				A14A9D3020665F4600E4D5FF /* Qas-Local */,
+				A14A9E062066666200E4D5FF /* Qas-DevelopTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1182,6 +1267,13 @@
 				A14A9DBD20665F4600E4D5FF /* offline.html in Resources */,
 				A14A9DBE20665F4600E4D5FF /* invalid.html in Resources */,
 				A14A9DBF20665F4600E4D5FF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A14A9E052066666200E4D5FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1560,6 +1652,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A14A9E032066666200E4D5FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A16206482066695500DF356A /* CommonHistoryDataModelTests.swift in Sources */,
+				A1DC612C20666DAA00E1B56D /* PageHistoryDataModelTests.swift in Sources */,
+				A1DC612D20666FC500E1B56D /* CommonHistoryDataModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A57EFE9D1E3E06D300B66701 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1680,6 +1782,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A14A9E0D2066666200E4D5FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A57EFEA01E3E06D300B66701 /* Qas-Develop */;
+			targetProxy = A14A9E0C2066666200E4D5FF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		A5223E901F1F8EA20097E793 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1726,6 +1836,50 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE LOCAL";
 				SWIFT_OBJC_BRIDGING_HEADER = "Qas/Application/Qas-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		A14A9E0F2066666200E4D5FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Qas-DevelopTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qas-Develop.app/Qas-Develop";
+			};
+			name = Debug;
+		};
+		A14A9E102066666200E4D5FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Qas-DevelopTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qas-Develop.app/Qas-Develop";
 			};
 			name = Release;
 		};
@@ -1882,6 +2036,15 @@
 			buildConfigurations = (
 				A14A9DC420665F4600E4D5FF /* Debug */,
 				A14A9DC520665F4600E4D5FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A14A9E0E2066666200E4D5FF /* Build configuration list for PBXNativeTarget "Qas-DevelopTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A14A9E0F2066666200E4D5FF /* Debug */,
+				A14A9E102066666200E4D5FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

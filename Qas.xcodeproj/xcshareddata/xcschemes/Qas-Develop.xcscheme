@@ -29,6 +29,16 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A14A9E062066666200E4D5FF"
+               BuildableName = "Qas-DevelopTests.xctest"
+               BlueprintName = "Qas-DevelopTests"
+               ReferencedContainer = "container:Qas.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
