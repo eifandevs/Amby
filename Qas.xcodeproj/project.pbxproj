@@ -164,6 +164,7 @@
 		A15F42EA2062664500228553 /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42E92062664500228553 /* ApiProvider.swift */; };
 		A15F42EF20626C1F00228553 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EC20626C1F00228553 /* Google.swift */; };
 		A15F42F020626C1F00228553 /* SuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EE20626C1F00228553 /* SuggestResponse.swift */; };
+		A168382E2066960B00182028 /* Qas_DevelopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168382D2066960B00182028 /* Qas_DevelopTests.swift */; };
 		A1D4DB0C205D2B180099BE44 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D4DB0B205D2B180099BE44 /* Logger.swift */; };
 		A5117A531FDC494000213E02 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A521FDC494000213E02 /* AppEnum.swift */; };
 		A5117A551FDC500B00213E02 /* BaseLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */; };
@@ -285,6 +286,16 @@
 		AB9A131C3DC3E34A18F8871D /* Pods_Qas_Local.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC752C81E51147BFA13BC542 /* Pods_Qas_Local.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A16838302066960B00182028 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A57EFEA01E3E06D300B66701;
+			remoteInfo = "Qas-Develop";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		142A9FA88A32403AA27058A4 /* Pods-Qas-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Develop/Pods-Qas-Develop.debug.xcconfig"; sourceTree = "<group>"; };
 		4FCFD23E3BF094AACAE5B23D /* Pods-Qas-Local.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Local.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Local/Pods-Qas-Local.release.xcconfig"; sourceTree = "<group>"; };
@@ -314,6 +325,9 @@
 		A15F42E92062664500228553 /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 		A15F42EC20626C1F00228553 /* Google.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Google.swift; sourceTree = "<group>"; };
 		A15F42EE20626C1F00228553 /* SuggestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestResponse.swift; sourceTree = "<group>"; };
+		A168382B2066960B00182028 /* Qas-DevelopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qas-DevelopTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A168382D2066960B00182028 /* Qas_DevelopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Qas_DevelopTests.swift; sourceTree = "<group>"; };
+		A168382F2066960B00182028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1D4DB0B205D2B180099BE44 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A28BDCA0F081729C628CD5CE /* Pods-Qas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.release.xcconfig"; sourceTree = "<group>"; };
 		A5117A521FDC494000213E02 /* AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnum.swift; sourceTree = "<group>"; };
@@ -450,6 +464,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB9A131C3DC3E34A18F8871D /* Pods_Qas_Local.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A16838282066960B00182028 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +665,15 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		A168382C2066960B00182028 /* Qas-DevelopTests */ = {
+			isa = PBXGroup;
+			children = (
+				A168382D2066960B00182028 /* Qas_DevelopTests.swift */,
+				A168382F2066960B00182028 /* Info.plist */,
+			);
+			path = "Qas-DevelopTests";
+			sourceTree = "<group>";
+		};
 		A5223E8A1F1F8EA20097E793 /* Qas */ = {
 			isa = PBXGroup;
 			children = (
@@ -760,6 +790,7 @@
 			children = (
 				A5A6F2C51F1F92DD00A4620C /* R.generated.swift */,
 				A5223E8A1F1F8EA20097E793 /* Qas */,
+				A168382C2066960B00182028 /* Qas-DevelopTests */,
 				A57EFEA21E3E06D300B66701 /* Products */,
 				2D6EC82ACCDEE92B54408E2F /* Pods */,
 				1BAE9B5DD71F0DF92296651C /* Frameworks */,
@@ -771,6 +802,7 @@
 			children = (
 				A57EFEA11E3E06D300B66701 /* Qas-Develop.app */,
 				A14A9DC620665F4600E4D5FF /* Qas-Local.app */,
+				A168382B2066960B00182028 /* Qas-DevelopTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1107,6 +1139,24 @@
 			productReference = A14A9DC620665F4600E4D5FF /* Qas-Local.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A168382A2066960B00182028 /* Qas-DevelopTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A16838342066960B00182028 /* Build configuration list for PBXNativeTarget "Qas-DevelopTests" */;
+			buildPhases = (
+				A16838272066960B00182028 /* Sources */,
+				A16838282066960B00182028 /* Frameworks */,
+				A16838292066960B00182028 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A16838312066960B00182028 /* PBXTargetDependency */,
+			);
+			name = "Qas-DevelopTests";
+			productName = "Qas-DevelopTests";
+			productReference = A168382B2066960B00182028 /* Qas-DevelopTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A57EFEA01E3E06D300B66701 /* Qas-Develop */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A57EFEB31E3E06D300B66701 /* Build configuration list for PBXNativeTarget "Qas-Develop" */;
@@ -1142,6 +1192,12 @@
 					A14A9D3020665F4600E4D5FF = {
 						DevelopmentTeam = TBQA5RANYY;
 					};
+					A168382A2066960B00182028 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = TBQA5RANYY;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A57EFEA01E3E06D300B66701;
+					};
 					A57EFEA01E3E06D300B66701 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = TBQA5RANYY;
@@ -1165,6 +1221,7 @@
 			targets = (
 				A57EFEA01E3E06D300B66701 /* Qas-Develop */,
 				A14A9D3020665F4600E4D5FF /* Qas-Local */,
+				A168382A2066960B00182028 /* Qas-DevelopTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1200,6 +1257,13 @@
 				A14A9DBD20665F4600E4D5FF /* offline.html in Resources */,
 				A14A9DBE20665F4600E4D5FF /* invalid.html in Resources */,
 				A14A9DBF20665F4600E4D5FF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A16838292066960B00182028 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1578,6 +1642,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A16838272066960B00182028 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A168382E2066960B00182028 /* Qas_DevelopTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A57EFE9D1E3E06D300B66701 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1698,6 +1770,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A16838312066960B00182028 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A57EFEA01E3E06D300B66701 /* Qas-Develop */;
+			targetProxy = A16838302066960B00182028 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		A5223E901F1F8EA20097E793 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1744,6 +1824,50 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE LOCAL";
 				SWIFT_OBJC_BRIDGING_HEADER = "Qas/Application/Qas-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		A16838322066960B00182028 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Qas-DevelopTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qas-Develop.app/Qas-Develop";
+			};
+			name = Debug;
+		};
+		A16838332066960B00182028 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Qas-DevelopTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qas-Develop.app/Qas-Develop";
 			};
 			name = Release;
 		};
@@ -1900,6 +2024,15 @@
 			buildConfigurations = (
 				A14A9DC420665F4600E4D5FF /* Debug */,
 				A14A9DC520665F4600E4D5FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A16838342066960B00182028 /* Build configuration list for PBXNativeTarget "Qas-DevelopTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A16838322066960B00182028 /* Debug */,
+				A16838332066960B00182028 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
