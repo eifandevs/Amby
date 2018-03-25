@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Qas_Develop
 
 class CommonHistoryDataModelTests: XCTestCase {
     
@@ -23,6 +24,10 @@ class CommonHistoryDataModelTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testGoBack() {
+        CommonHistoryDataModel.s.goBack()
     }
     
     func testPerformanceExample() {
