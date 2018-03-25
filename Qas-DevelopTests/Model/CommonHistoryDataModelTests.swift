@@ -1,14 +1,14 @@
 //
-//  Qas_DevelopTests.swift
+//  CommonHistoryDataModelTests.swift
 //  Qas-DevelopTests
 //
-//  Created by tenma on 2018/03/24.
+//  Created by tenma on 2018/03/25.
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
 import XCTest
 
-class Qas_DevelopTests: XCTestCase {
+class CommonHistoryDataModelTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
