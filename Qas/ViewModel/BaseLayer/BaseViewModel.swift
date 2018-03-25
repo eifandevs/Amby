@@ -167,7 +167,7 @@ final class BaseViewModel {
     
     /// 前回URL取得
     func getBackUrlPageHistoryDataModel(context: String) -> String? {
-        return PageHistoryDataModel.s.getBackUrl(context:context)
+        return PageHistoryDataModel.s.getBackUrl(context: context)
     }
     
     /// 次URL取得
