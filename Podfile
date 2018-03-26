@@ -29,6 +29,12 @@ target 'Qas-Develop' do
   # Pods for Qas-Develop
   common_pods
 
+  target 'Qas-DevelopTests' do
+    inherit! :search_paths
+    # Pods for testing
+    pod 'RxSwift', '~> 4.0'
+  end
+
 end
 
 target 'Qas-Local' do

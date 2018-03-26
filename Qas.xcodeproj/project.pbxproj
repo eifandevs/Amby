@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DFA714BC5CF66D2049F6D08 /* Pods_Qas_DevelopTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57BD500430F1B347ECA1F85 /* Pods_Qas_DevelopTests.framework */; };
 		331410E23B570ABC28901B17 /* Pods_Qas_Develop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D63580A9A213BC3CA3C3A1A /* Pods_Qas_Develop.framework */; };
 		A14A9D2D2066578700E4D5FF /* suggest_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A14A9D2C2066578600E4D5FF /* suggest_stub.json */; };
 		A14A9D3420665F4600E4D5FF /* HeaderFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A5D1FE537C200213E02 /* HeaderFieldViewModel.swift */; };
@@ -471,6 +472,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DFA714BC5CF66D2049F6D08 /* Pods_Qas_DevelopTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1167,9 +1169,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A16838342066960B00182028 /* Build configuration list for PBXNativeTarget "Qas-DevelopTests" */;
 			buildPhases = (
+				6DD6D2287CFAD38BD10EAFD2 /* [CP] Check Pods Manifest.lock */,
 				A16838272066960B00182028 /* Sources */,
 				A16838282066960B00182028 /* Frameworks */,
 				A16838292066960B00182028 /* Resources */,
+				B9B79E097FCC6A8AF6D356DB /* [CP] Embed Pods Frameworks */,
+				BDF517A0E2A458EC3D53C977 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1410,6 +1415,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6DD6D2287CFAD38BD10EAFD2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Qas-DevelopTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A14A9D3120665F4600E4D5FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1544,6 +1567,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
+		};
+		B9B79E097FCC6A8AF6D356DB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Qas-DevelopTests/Pods-Qas-DevelopTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qas-DevelopTests/Pods-Qas-DevelopTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BDF517A0E2A458EC3D53C977 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qas-DevelopTests/Pods-Qas-DevelopTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1853,6 +1909,7 @@
 		};
 		A16838322066960B00182028 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 864490C49B44E38091C994D2 /* Pods-Qas-DevelopTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1875,6 +1932,7 @@
 		};
 		A16838332066960B00182028 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6E7582035707F0631304AD8 /* Pods-Qas-DevelopTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;

@@ -7,10 +7,15 @@
 //
 
 import XCTest
+import RxSwift
+import RxCocoa
+
 @testable import Qas_Develop
 
 class CommonHistoryDataModelTests: XCTestCase {
     
+    let disposeBag = DisposeBag()
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -27,7 +32,17 @@ class CommonHistoryDataModelTests: XCTestCase {
     }
     
     func testGoBack() {
+        let expectation = self.expectation(description: "goBack")
+
+        CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoBack
+            .subscribe { _ in
+                expectation.fulfill()
+            }
+            .disposed(by: disposeBag)
+
         CommonHistoryDataModel.s.goBack()
+
+        self.waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testPerformanceExample() {

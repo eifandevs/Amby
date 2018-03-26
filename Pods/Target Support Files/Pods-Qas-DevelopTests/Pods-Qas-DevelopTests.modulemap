@@ -1,0 +1,6 @@
+framework module Pods_Qas_DevelopTests {
+  umbrella header "Pods-Qas-DevelopTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
