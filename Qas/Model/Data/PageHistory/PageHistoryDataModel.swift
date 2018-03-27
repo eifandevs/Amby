@@ -44,7 +44,7 @@ final class PageHistoryDataModel {
     var previousContext: String?
 
     /// webViewそれぞれの履歴とカレントページインデックス
-    var histories = [PageHistory]()
+    public private(set) var histories = [PageHistory]()
     
     /// 現在のページ情報
     var currentHistory: PageHistory? {

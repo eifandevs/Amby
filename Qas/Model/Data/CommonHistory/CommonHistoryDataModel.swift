@@ -23,7 +23,7 @@ final class CommonHistoryDataModel {
     let rx_commonHistoryDataModelDidGoForward = PublishSubject<()>()
     
     /// 閲覧履歴
-    private var histories = [CommonHistory]()
+    public private(set) var histories = [CommonHistory]()
 
     // 通知センター
     private let center = NotificationCenter.default

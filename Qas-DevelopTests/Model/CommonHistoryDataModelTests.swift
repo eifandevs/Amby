@@ -45,6 +45,26 @@ class CommonHistoryDataModelTests: XCTestCase {
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
+    func testGoForward() {
+        let expectation = self.expectation(description: "goForward")
+        
+        CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoForward
+            .subscribe { _ in
+                expectation.fulfill()
+            }
+            .disposed(by: disposeBag)
+        
+        CommonHistoryDataModel.s.goForward()
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testInsert() {
+        let history = CommonHistory(url: "test", title: "test", date: Date())
+        CommonHistoryDataModel.s.insert(history: history)
+        XCTAssertTrue(CommonHistoryDataModel.s.histories.first!.title == "test")
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
