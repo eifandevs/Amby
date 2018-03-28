@@ -43,7 +43,7 @@ final class FormDataModel {
             form.url = url
             
             webView.evaluate(script: "document.forms.length") { (object, error) in
-                if ((object != nil) && (error == nil)) {
+                if object != nil && error == nil {
                     let formLength = Int((object as? NSNumber)!)
                     if formLength > 0 {
                         for i in 0...(formLength - 1) {
