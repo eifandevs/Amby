@@ -36,12 +36,3 @@ target 'Qas-Develop' do
   end
 
 end
-
-target 'Qas-Local' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for Qas-Local
-  common_pods
-
-end
