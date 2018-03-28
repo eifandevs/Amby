@@ -17,7 +17,7 @@ extension UIImage {
         let origHeight = Int(origRef!.height)
         var resizeWidth:Int = 0, resizeHeight:Int = 0
         
-        if (origWidth < origHeight) {
+        if origWidth < origHeight {
             resizeWidth = w
             resizeHeight = origHeight * resizeWidth / origWidth
         } else {
