@@ -61,7 +61,7 @@ final class FavoriteDataModel {
     /// お気に入り登録
     func register() {
         if let currentHistory = PageHistoryDataModel.s.currentHistory {
-            if (!currentHistory.url.isEmpty && !currentHistory.title.isEmpty) {
+            if !currentHistory.url.isEmpty && !currentHistory.title.isEmpty {
                 let fd = Favorite()
                 fd.title = currentHistory.title
                 fd.url = currentHistory.url
