@@ -48,7 +48,7 @@ final class FormDataModel {
                     if formLength > 0 {
                         for i in 0...(formLength - 1) {
                             webView.evaluate(script: "document.forms[\(i)].elements.length") { (object, error) in
-                                if ((object != nil) && (error == nil)) {
+                                if (object != nil) && (error == nil) {
                                     let elementLength = Int((object as? NSNumber)!)
                                     for j in 0...elementLength {
                                         webView.evaluate(script: "document.forms[\(i)].elements[\(j)].type") { (object, error) in
