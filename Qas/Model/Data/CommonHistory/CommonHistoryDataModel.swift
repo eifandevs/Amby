@@ -142,7 +142,7 @@ final class CommonHistoryDataModel {
                     }
                 })
                 let hitCommonHistory = allCommonHistory.filter({ (commonHistoryItem) -> Bool in
-                    return commonHistoryItem.title.lowercased().contains(title)
+                    return commonHistoryItem.title.lowercased().contains(title.lowercased())
                 })
                 
                 // 重複の削除
@@ -164,13 +164,14 @@ final class CommonHistoryDataModel {
         return result
     }
     
-    /// 閲覧履歴の期限切れチェック
+    /// 閲覧履歴の件数チェック
+    // デフォルトで90日分の履歴を超えたら削除する
     func expireCheck() {
-        let saveTerm = Int(UserDefaults.standard.integer(forKey: AppConst.KEY_COMMON_HISTORY_SAVE_COUNT))
+        let historySaveCount = Int(UserDefaults.standard.integer(forKey: AppConst.KEY_COMMON_HISTORY_SAVE_COUNT))
         let readFiles = getList().reversed()
         
-        if readFiles.count > saveTerm {
-            let deleteFiles = readFiles.prefix(readFiles.count - saveTerm)
+        if readFiles.count > historySaveCount {
+            let deleteFiles = readFiles.prefix(readFiles.count - historySaveCount)
             deleteFiles.forEach({ (key) in
                 do {
                     try FileManager.default.removeItem(atPath: Util.commonHistoryPath(date: key))
