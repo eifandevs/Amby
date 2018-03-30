@@ -132,6 +132,25 @@ class CommonHistoryDataModelTests: XCTestCase {
         XCTAssertTrue(CommonHistoryDataModel.s.getList().count == historySaveCount)
     }
     
+    func testDeleteWithIds() {
+        let history = CommonHistory(url: "testStore", title: "testStore", date: Date())
+        CommonHistoryDataModel.s.insert(history: history)
+        CommonHistoryDataModel.s.store()
+        CommonHistoryDataModel.s.delete(historyIds: [Date().toString(): [history._id]])
+        
+        XCTAssertTrue(CommonHistoryDataModel.s.getList().count == 0)
+    }
+    
+    func testDelete() {
+        let history = CommonHistory(url: "testStore", title: "testStore", date: Date())
+        CommonHistoryDataModel.s.insert(history: history)
+        CommonHistoryDataModel.s.store()
+        CommonHistoryDataModel.s.delete()
+        
+        XCTAssertTrue(CommonHistoryDataModel.s.getList().count == 0)
+        XCTAssertTrue(CommonHistoryDataModel.s.histories.count == 0)
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

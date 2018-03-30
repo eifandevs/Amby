@@ -21,10 +21,10 @@ class Util {
         return vc!;
     }
     
-    /// フォルダー削除
+    /// フォルダー作成
     static func createFolder(path: String) {
         let fileManager = FileManager.default
-        var isDir : ObjCBool = false
+        var isDir: ObjCBool = false
         
         fileManager.fileExists(atPath: path, isDirectory: &isDir)
         
@@ -36,7 +36,7 @@ class Util {
     /// フォルダー削除
     static func deleteFolder(path: String) {
         let fileManager = FileManager.default
-        var isDir : ObjCBool = false
+        var isDir: ObjCBool = false
         
         if fileManager.fileExists(atPath: path, isDirectory: &isDir) {
             try! fileManager.removeItem(atPath: path)
