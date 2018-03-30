@@ -107,16 +107,16 @@ class FooterView: UIView, ShadowView {
                             deleteAnimator.fractionComplete = 1
                         }
                         self.deleteAnimator = UIViewPropertyAnimator(duration: 0.25, curve: .linear) {
-                            if ((self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
+                            if (self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width {
                                 self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
                                 self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
                             }
                             
-                            for i in 0...self.thumbnails.count - 1 {
-                                if i < deleteIndex {
-                                    self.thumbnails[i].center.x += self.thumbnails[i].frame.size.width / 2
-                                } else if i >= deleteIndex {
-                                    self.thumbnails[i].center.x -= self.thumbnails[i].frame.size.width / 2
+                            (0...self.thumbnails.count - 1).forEach {
+                                if $0 < deleteIndex {
+                                    self.thumbnails[$0].center.x += self.thumbnails[$0].frame.size.width / 2
+                                } else if $0 >= deleteIndex {
+                                    self.thumbnails[$0].center.x -= self.thumbnails[$0].frame.size.width / 2
                                 }
                             }
                         }
@@ -257,7 +257,7 @@ class FooterView: UIView, ShadowView {
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
-                        for (_, thumbnail) in self.thumbnails.enumerated() {
+                        for thumbnail in self.thumbnails {
                             if sender.view == thumbnail {
                                 self.viewModel.removePageHistoryDataModel(context: thumbnail.context)
                                 break
@@ -275,7 +275,7 @@ class FooterView: UIView, ShadowView {
         thumbnails.append(btn)
         
         // スクロールビューのコンテンツサイズを大きくする
-        if ((thumbnails.count).f * btn.frame.size.width > scrollView.frame.size.width) {
+        if (thumbnails.count).f * btn.frame.size.width > scrollView.frame.size.width {
             scrollView.contentSize.width += btn.frame.size.width / 2
             scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
         }
@@ -343,7 +343,7 @@ class FooterView: UIView, ShadowView {
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
-                        for (_, thumbnail) in self.thumbnails.enumerated() {
+                        for thumbnail in self.thumbnails {
                             if sender.view == thumbnail {
                                 self.viewModel.removePageHistoryDataModel(context: thumbnail.context)
                                 break

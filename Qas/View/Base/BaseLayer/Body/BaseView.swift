@@ -128,7 +128,7 @@ class BaseView: UIView {
         EGApplication.sharedMyApplication.egDelegate = self
         
         // webviewsに初期値を入れる
-        for _ in 0...viewModel.webViewCount - 1 {
+        (0...viewModel.webViewCount - 1).forEach { _ in
             webViews.append(nil)
         }
         
@@ -192,9 +192,9 @@ class BaseView: UIView {
                 if !self.isDoneAutoInput {
                     if let inputForm = FormDataModel.s.select(url: self.front.url?.absoluteString).first {
                         NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_TITLE, message: MessageConst.ALERT_FORM_EXIST, completion: { [weak self] in
-                            for input in inputForm.inputs {
-                                let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: input.value)!
-                                self!.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value=\"\(value)\"") { (object, error) in
+                            inputForm.inputs.forEach {
+                                let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: $0.value)!
+                                self!.front.evaluateJavaScript("document.forms[\($0.formIndex)].elements[\($0.formInputIndex)].value=\"\(value)\"") { (object, error) in
                                 }
                             }
                         })

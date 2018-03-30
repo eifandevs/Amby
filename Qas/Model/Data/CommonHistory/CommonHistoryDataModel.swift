@@ -48,15 +48,15 @@ final class CommonHistoryDataModel {
         if histories.count > 0 {
             // commonHistoryを日付毎に分ける
             var commonHistoryByDate: [String: [CommonHistory]] = [:]
-            for item in histories {
+            histories.forEach {
                 let dateFormatter = DateFormatter()
                 dateFormatter.locale = Locale(identifier: NSLocale.current.identifier)
                 dateFormatter.dateFormat = AppConst.APP_DATE_FORMAT
-                let key = dateFormatter.string(from: item.date)
+                let key = dateFormatter.string(from: $0.date)
                 if commonHistoryByDate[key] == nil {
-                    commonHistoryByDate[key] = [item]
+                    commonHistoryByDate[key] = [$0]
                 } else {
-                    commonHistoryByDate[key]?.append(item)
+                    commonHistoryByDate[key]?.append($0)
                 }
             }
             
