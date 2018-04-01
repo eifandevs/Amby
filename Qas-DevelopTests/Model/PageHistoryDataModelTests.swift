@@ -53,4 +53,49 @@ class PageHistoryDataModelTests: XCTestCase {
         
         self.waitForExpectations(timeout: 10, handler: nil)
     }
+    
+//    func testEndLoading(context: String) {
+//        if let _ = D.find(histories, callback: { $0.context == context }) {
+//            rx_pageHistoryDataModelDidEndLoading.onNext(context)
+//        } else {
+//            log.warning("pageHistoryDataModelDidEndLoading not fired. history is deleted.")
+//        }
+//    }
+    
+    func testInsert() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testInsert")
+        PageHistoryDataModel.s.append(url: "testInsert")
+        PageHistoryDataModel.s.change(context: PageHistoryDataModel.s.histories[1].context)
+        PageHistoryDataModel.s.store()
+        
+        let expectation = self.expectation(description: "testInsert")
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert
+            .subscribe { object in
+                XCTAssertTrue(object.element!.pageHistory.url == "testInsert")
+                expectation.fulfill()
+            }
+            .disposed(by: disposeBag)
+        PageHistoryDataModel.s.insert(url: "testInsert")
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testInsertToAppend() {
+        PageHistoryDataModel.s.initialize()        
+        PageHistoryDataModel.s.store()
+        
+        let expectation = self.expectation(description: "testInsertToAppend")
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
+            .subscribe { object in
+                XCTAssertTrue(object.element!.url == "testInsertToAppend")
+                expectation.fulfill()
+            }
+            .disposed(by: disposeBag)
+        PageHistoryDataModel.s.insert(url: "testInsertToAppend")
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
 }
