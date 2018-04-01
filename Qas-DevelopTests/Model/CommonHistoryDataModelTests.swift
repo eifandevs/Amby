@@ -36,11 +36,13 @@ class CommonHistoryDataModelTests: XCTestCase {
     }
     
     func testGoBack() {
-        let expectation = self.expectation(description: "goBack")
+        weak var expectation = self.expectation(description: "goBack")
 
         CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoBack
             .subscribe { _ in
-                expectation.fulfill()
+                if let expectation = expectation {
+                    expectation.fulfill()
+                }
             }
             .disposed(by: disposeBag)
 
@@ -50,11 +52,13 @@ class CommonHistoryDataModelTests: XCTestCase {
     }
     
     func testGoForward() {
-        let expectation = self.expectation(description: "goForward")
+        weak var expectation = self.expectation(description: "goForward")
         
         CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoForward
             .subscribe { _ in
-                expectation.fulfill()
+                if let expectation = expectation {
+                    expectation.fulfill()
+                }
             }
             .disposed(by: disposeBag)
         
@@ -150,12 +154,4 @@ class CommonHistoryDataModelTests: XCTestCase {
         XCTAssertTrue(CommonHistoryDataModel.s.getList().count == 0)
         XCTAssertTrue(CommonHistoryDataModel.s.histories.count == 0)
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
