@@ -378,16 +378,17 @@ class FooterView: UIView, ShadowView {
     }
     
     private func startIndicator(context: String) {
-        let targetThumbnail = D.find(thumbnails, callback: { $0.context == context })!
-        // くるくるを表示する
-        let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
-        if !existIndicator {
-            let rect = CGRect(x: 0, y: 0, width: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.7, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.7)
-            let indicator = NVActivityIndicatorView(frame: rect, type: NVActivityIndicatorType.ballClipRotate, color: UIColor.brilliantBlue, padding: 0)
-            indicator.center = CGPoint(x: targetThumbnail.bounds.size.width / 2, y: targetThumbnail.bounds.size.height / 2)
-            indicator.isUserInteractionEnabled = false
-            targetThumbnail.addSubview(indicator)
-            indicator.startAnimating()
+        if let targetThumbnail = D.find(thumbnails, callback: { $0.context == context }) {
+            // くるくるを表示する
+            let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
+            if !existIndicator {
+                let rect = CGRect(x: 0, y: 0, width: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.7, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.7)
+                let indicator = NVActivityIndicatorView(frame: rect, type: NVActivityIndicatorType.ballClipRotate, color: UIColor.brilliantBlue, padding: 0)
+                indicator.center = CGPoint(x: targetThumbnail.bounds.size.width / 2, y: targetThumbnail.bounds.size.height / 2)
+                indicator.isUserInteractionEnabled = false
+                targetThumbnail.addSubview(indicator)
+                indicator.startAnimating()
+            }
         }
     }
     
