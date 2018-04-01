@@ -133,7 +133,7 @@ class BaseView: UIView {
         }
         
         let newWv = createWebView(size: frame.size, context: viewModel.currentContext)
-        webViews[viewModel.currentLocation] = newWv
+        webViews[viewModel.currentLocation!] = newWv
         
         // 前後のページ
         previousImageView.frame = CGRect(origin: CGPoint(x: -frame.size.width, y: 0), size: frame.size)
@@ -256,7 +256,7 @@ class BaseView: UIView {
                 guard let `self` = self else { return }
                 self.front.removeObserver(self, forKeyPath: "estimatedProgress")
                 self.viewModel.updateProgressHeaderViewDataModel(object: 0)
-                if let current = self.webViews[self.viewModel.currentLocation] {
+                if let current = self.webViews[self.viewModel.currentLocation!] {
                     current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
                     if current.isLoading == true {
                         self.viewModel.updateProgressHeaderViewDataModel(object: CGFloat(current.estimatedProgress))
@@ -535,7 +535,7 @@ class BaseView: UIView {
     // loadWebViewはwebviewスペースがある状態で新規作成するときにコールする
     private func loadWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
-        webViews[viewModel.currentLocation] = newWv
+        webViews[viewModel.currentLocation!] = newWv
         if !viewModel.currentUrl.isEmpty {
             newWv.load(urlStr: viewModel.currentUrl)
         }

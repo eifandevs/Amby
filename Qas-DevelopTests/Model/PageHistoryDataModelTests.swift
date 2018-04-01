@@ -54,13 +54,56 @@ class PageHistoryDataModelTests: XCTestCase {
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
-//    func testEndLoading(context: String) {
-//        if let _ = D.find(histories, callback: { $0.context == context }) {
-//            rx_pageHistoryDataModelDidEndLoading.onNext(context)
-//        } else {
-//            log.warning("pageHistoryDataModelDidEndLoading not fired. history is deleted.")
-//        }
-//    }
+    func testEndLoading(context: String) {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testEndLoading")
+        PageHistoryDataModel.s.append(url: "testEndLoading")
+        
+        let expectation = self.expectation(description: "testEndLoading")
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidEndLoading
+            .subscribe { object in
+                XCTAssertTrue(object.element! == PageHistoryDataModel.s.histories[1].context)
+                expectation.fulfill()
+            }
+            .disposed(by: disposeBag)
+        
+        PageHistoryDataModel.s.endLoading(context: PageHistoryDataModel.s.histories[1].context)
+    }
+    
+    func testEndRendering(context: String) {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testEndRendering")
+        
+        let expectation = self.expectation(description: "testEndRendering")
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidEndRendering
+            .subscribe { object in
+                XCTAssertTrue(object.element! == PageHistoryDataModel.s.histories[1].context)
+                expectation.fulfill()
+            }
+            .disposed(by: disposeBag)
+        
+        PageHistoryDataModel.s.endRendering(context: PageHistoryDataModel.s.histories[1].context)
+    }
+    
+    func testIsPastViewing() {
+        PageHistoryDataModel.s.initialize()
+        let isPastViewing = PageHistoryDataModel.s.isPastViewing(context: PageHistoryDataModel.s.histories[0].context)
+        
+        XCTAssertFalse(isPastViewing)
+    }
+    
+    func testGetMostForwardUrl() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testGetMostForwardUrl")
+        PageHistoryDataModel.s.append(url: "testGetMostForwardUrl")
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetMostForwardUrl", title: "testGetMostForwardUrl", operation: .normal)
+        PageHistoryDataModel.s.store()
+        
+        let url = PageHistoryDataModel.s.getMostForwardUrl(context: PageHistoryDataModel.s.histories[1].context)
+        XCTAssertTrue(url == "testGetMostForwardUrl")
+    }
     
     func testInsert() {
         PageHistoryDataModel.s.initialize()
@@ -83,11 +126,10 @@ class PageHistoryDataModelTests: XCTestCase {
     }
     
     func testInsertToAppend() {
-        PageHistoryDataModel.s.initialize()        
-        PageHistoryDataModel.s.store()
-        
+        PageHistoryDataModel.s.initialize()
+
         let expectation = self.expectation(description: "testInsertToAppend")
-        
+
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
             .subscribe { object in
                 XCTAssertTrue(object.element!.url == "testInsertToAppend")
@@ -95,7 +137,7 @@ class PageHistoryDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
         PageHistoryDataModel.s.insert(url: "testInsertToAppend")
-        
+
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 }

@@ -61,7 +61,7 @@ final class FooterViewModel {
         return PageHistoryDataModel.s.currentContext
     }
     
-    var currentLocation: Int {
+    var currentLocation: Int? {
         return PageHistoryDataModel.s.currentLocation
     }
         

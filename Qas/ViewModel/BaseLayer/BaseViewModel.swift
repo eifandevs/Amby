@@ -80,7 +80,7 @@ final class BaseViewModel {
     }
 
     /// 現在の位置
-    var currentLocation: Int {
+    var currentLocation: Int? {
         return PageHistoryDataModel.s.currentLocation
     }
     
@@ -216,25 +216,33 @@ final class BaseViewModel {
         return false
     }
     /// 前webviewのキャプチャ取得
-    func getPreviousCapture() -> UIImage {
-        let targetIndex = currentLocation == 0 ? PageHistoryDataModel.s.histories.count - 1 : currentLocation - 1
-        let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
-        if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
-            return image
-        } else {
-            return UIImage()
+    func getPreviousCapture() -> UIImage? {
+        if let currentLocation = currentLocation {
+            let targetIndex = currentLocation == 0 ? PageHistoryDataModel.s.histories.count - 1 : currentLocation - 1
+            let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
+            if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
+                return image
+            } else {
+                return UIImage()
+            }
         }
+        
+        return nil
     }
     
     /// 次webviewのキャプチャ取得
-    func getNextCapture() -> UIImage {
-        let targetIndex = currentLocation == PageHistoryDataModel.s.histories.count - 1 ? 0 : currentLocation + 1
-        let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
-        if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
-            return image
-        } else {
-            return UIImage()
+    func getNextCapture() -> UIImage? {
+        if let currentLocation = currentLocation {
+            let targetIndex = currentLocation == PageHistoryDataModel.s.histories.count - 1 ? 0 : currentLocation + 1
+            let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
+            if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
+                return image
+            } else {
+                return UIImage()
+            }
         }
+        
+        return nil
     }
     
     /// ヘッダーフィールドの更新

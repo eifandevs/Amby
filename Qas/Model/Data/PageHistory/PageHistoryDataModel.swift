@@ -52,8 +52,8 @@ final class PageHistoryDataModel {
     }
     
     /// 現在の位置
-    var currentLocation: Int {
-        return D.findIndex(histories, callback: { $0.context == currentContext })!
+    var currentLocation: Int? {
+        return D.findIndex(histories, callback: { $0.context == currentContext })
     }
     
     /// 最新ページを見ているかフラグ
@@ -180,10 +180,12 @@ final class PageHistoryDataModel {
             // 最新ページを見ているなら、insertではないので、appendに切り替える
             append(url: url)
         } else {
-            let newPage = PageHistory(url: url ?? "")
-            histories.insert(newPage, at: currentLocation + 1)
-            currentContext = newPage.context
-            rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation))
+            if let currentLocation = currentLocation {
+                let newPage = PageHistory(url: url ?? "")
+                histories.insert(newPage, at: currentLocation + 1)
+                currentContext = newPage.context
+                rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation))
+            }
         }
     }
     
@@ -205,10 +207,12 @@ final class PageHistoryDataModel {
                 currentContext = newPage.context
                 rx_pageHistoryDataModelDidAppend.onNext(newPage)
             } else {
-                let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
-                histories.insert(newPage, at: currentLocation + 1)
-                currentContext = newPage.context
-                rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation))
+                if let currentLocation = currentLocation {
+                    let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
+                    histories.insert(newPage, at: currentLocation + 1)
+                    currentContext = newPage.context
+                    rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation))
+                }
             }
         }
     }
@@ -262,7 +266,7 @@ final class PageHistoryDataModel {
     
     /// 前ページに変更
     func goBack() {
-        if histories.count > 0 {
+        if let currentLocation = currentLocation, histories.count > 0 {
             let targetContext = histories[0...histories.count - 1 ~= currentLocation - 1 ? currentLocation - 1 : histories.count - 1].context
             currentContext = targetContext
             rx_pageHistoryDataModelDidChange.onNext(currentContext)
@@ -271,7 +275,7 @@ final class PageHistoryDataModel {
     
     /// 次ページに変更
     func goNext() {
-        if histories.count > 0 {
+        if let currentLocation = currentLocation, histories.count > 0 {
             let targetContext = histories[0...histories.count - 1 ~= currentLocation + 1 ? currentLocation + 1 : 0].context
             currentContext = targetContext
             rx_pageHistoryDataModelDidChange.onNext(currentContext)

@@ -194,12 +194,14 @@ class FooterView: UIView, ShadowView {
     
     /// 現在地にスクロール
     private func scrollAtCurrent() {
-        var ptX = -scrollView.contentInset.left + (viewModel.currentLocation.f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width)
-        if ptX > scrollView.contentSize.width - frame.width + scrollView.contentInset.right {
-            ptX = scrollView.contentSize.width - frame.width + scrollView.contentInset.right
+        if let currentLocation = viewModel.currentLocation {
+            var ptX = -scrollView.contentInset.left + (currentLocation.f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width)
+            if ptX > scrollView.contentSize.width - frame.width + scrollView.contentInset.right {
+                ptX = scrollView.contentSize.width - frame.width + scrollView.contentInset.right
+            }
+            let offset = CGPoint(x: ptX, y: scrollView.contentOffset.y)
+            scrollView.setContentOffset(offset, animated: true)
         }
-        let offset = CGPoint(x: ptX, y: scrollView.contentOffset.y)
-        scrollView.setContentOffset(offset, animated: true)
     }
     
     /// 初期ロード
