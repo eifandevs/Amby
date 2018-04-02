@@ -251,12 +251,12 @@ final class BaseViewModel {
     }
     
     /// 前WebViewに切り替え
-    func changePreviousWebView() {
+    func goBackPageHistoryDataModel() {
         PageHistoryDataModel.s.goBack()
     }
     
     /// 後WebViewに切り替え
-    func changeNextWebView() {
+    func goNextPageHistoryDataModel() {
         PageHistoryDataModel.s.goNext()
     }
     

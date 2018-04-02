@@ -677,9 +677,9 @@ extension BaseView: EGApplicationDelegate {
                     // 入れ替える
                     if targetOriginX == self.frame.size.width {
                         // 前のwebviewに遷移
-                        self.viewModel.changePreviousWebView()
+                        self.viewModel.goBackPageHistoryDataModel()
                     } else if targetOriginX == -self.frame.size.width {
-                        self.viewModel.changeNextWebView()
+                        self.viewModel.goNextPageHistoryDataModel()
                     }
                     // baseViewの位置を元に戻す
                     self.frame.origin.x = 0
