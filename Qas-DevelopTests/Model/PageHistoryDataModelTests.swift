@@ -204,4 +204,201 @@ class PageHistoryDataModelTests: XCTestCase {
         
         self.waitForExpectations(timeout: 10, handler: nil)
     }
+    
+    func testCopyWithInsert() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testCopyWithInsert")
+        PageHistoryDataModel.s.append(url: "testCopyWithInsert")
+        PageHistoryDataModel.s.change(context: PageHistoryDataModel.s.histories[1].context)
+        PageHistoryDataModel.s.store()
+        
+        weak var expectation = self.expectation(description: "testCopyWithInsert")
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert
+            .subscribe { object in
+                if let expectation = expectation {
+                    XCTAssertTrue(object.element!.pageHistory.url == "testCopyWithInsert")
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        PageHistoryDataModel.s.copy()
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testCopyWithAppend() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testCopyWithAppend")
+
+        weak var expectation = self.expectation(description: "testCopyWithAppend")
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
+            .subscribe { object in
+                if let expectation = expectation {
+                    XCTAssertTrue(object.element!.url == "testCopyWithAppend")
+                    XCTAssertTrue(PageHistoryDataModel.s.histories.last!.url == "testCopyWithAppend")
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        PageHistoryDataModel.s.copy()
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testReload() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testReload")
+        
+        weak var expectation = self.expectation(description: "testReload")
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidReload
+            .subscribe { _ in
+                if let expectation = expectation {
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        PageHistoryDataModel.s.reload()
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testGetIndex() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testReload")
+        
+        let index = PageHistoryDataModel.s.getIndex(context: PageHistoryDataModel.s.histories[1].context)
+        XCTAssertTrue(index == 1)
+    }
+    
+    func testRemoveAndEmpty() {
+        PageHistoryDataModel.s.initialize()
+
+        let deleteContext = PageHistoryDataModel.s.histories.first!.context
+
+        weak var expectation = self.expectation(description: "testRemoveAndEmpty")
+
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
+            .subscribe { object in
+                XCTAssertTrue(object.element?.deleteContext == deleteContext)
+            }
+            .disposed(by: disposeBag)
+
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
+            .subscribe { _ in
+                if let expectation = expectation {
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+
+        PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.histories.first!.context)
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testRemove() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testRemove")
+
+        let deleteContext = PageHistoryDataModel.s.histories.first!.context
+
+        weak var expectation = self.expectation(description: "testRemove")
+
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
+            .subscribe { object in
+                if let expectation = expectation {
+                    XCTAssertTrue(object.element?.deleteContext == deleteContext)
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+
+        PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.histories.first!.context)
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testChange() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testChange")
+        PageHistoryDataModel.s.append(url: "testChange")
+        
+        weak var expectation = self.expectation(description: "testChange")
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange
+            .subscribe { object in
+                if let expectation = expectation {
+                    XCTAssertTrue(object.element! == PageHistoryDataModel.s.histories[1].context)
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        PageHistoryDataModel.s.change(context: PageHistoryDataModel.s.histories[1].context)
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testGoBack() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testGoBack")
+        PageHistoryDataModel.s.append(url: "testGoBack")
+        
+        weak var expectation = self.expectation(description: "testChange")
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange
+            .subscribe { object in
+                if let expectation = expectation {
+                    XCTAssertTrue(object.element! == PageHistoryDataModel.s.histories[1].context)
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        PageHistoryDataModel.s.goBack()
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testGoNext() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testGoNext")
+        PageHistoryDataModel.s.append(url: "testGoNext")
+        
+        weak var expectation = self.expectation(description: "testGoNext")
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange
+            .subscribe { object in
+                if let expectation = expectation {
+                    XCTAssertTrue(object.element! == PageHistoryDataModel.s.histories.first!.context)
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        PageHistoryDataModel.s.goNext()
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testStore() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testGoNext")
+        PageHistoryDataModel.s.append(url: "testGoNext")
+        PageHistoryDataModel.s.store()
+        PageHistoryDataModel.s.initialize()
+    }
+    
+    func testDelete() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testGoNext")
+        PageHistoryDataModel.s.append(url: "testGoNext")
+        PageHistoryDataModel.s.delete()
+        XCTAssertTrue(PageHistoryDataModel.s.histories.count == 0)
+    }
 }
