@@ -92,7 +92,7 @@ class Util {
 
         let deviceCodeDic:[String:String] = [
             /* Simulator */
-            "i386"      :"Simulator",
+            "i386": "Simulator",
             "x86_64"    :"Simulator",
             /* iPod */
             "iPod1,1"   :"iPod Touch 1th",            // iPod Touch 1th Generation
