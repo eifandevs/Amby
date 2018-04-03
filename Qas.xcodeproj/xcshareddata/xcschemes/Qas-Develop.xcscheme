@@ -33,9 +33,19 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A14A9E062066666200E4D5FF"
+               BlueprintIdentifier = "A168382A2066960B00182028"
                BuildableName = "Qas-DevelopTests.xctest"
                BlueprintName = "Qas-DevelopTests"
+               ReferencedContainer = "container:Qas.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A19880722073A5E20067EC4F"
+               BuildableName = "Qas-DevelopUITests.xctest"
+               BlueprintName = "Qas-DevelopUITests"
                ReferencedContainer = "container:Qas.xcodeproj">
             </BuildableReference>
          </TestableReference>

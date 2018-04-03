@@ -70,8 +70,8 @@ final class BaseViewModel {
         }
 
     /// リクエストURL(jsのURL)
-    var currentUrl: String {
-        return PageHistoryDataModel.s.currentHistory!.url
+    var currentUrl: String? {
+        return PageHistoryDataModel.s.currentHistory?.url
     }
     
     /// 現在のコンテキスト
@@ -247,7 +247,9 @@ final class BaseViewModel {
     
     /// ヘッダーフィールドの更新
     func reloadHeaderText() {
-        headerFieldText = currentUrl
+        if let url = currentUrl {
+            headerFieldText = url
+        }
     }
     
     /// 前WebViewに切り替え

@@ -31,6 +31,7 @@
 		A16838392067ACD400182028 /* CommonHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16838382067ACD400182028 /* CommonHistoryDataModelTests.swift */; };
 		A198806C206E651E0067EC4F /* PageHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */; };
 		A198806E2072ED1F0067EC4F /* BaseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */; };
+		A19880762073A5E20067EC4F /* Qas_DevelopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19880752073A5E20067EC4F /* Qas_DevelopUITests.swift */; };
 		A1D4DB0C205D2B180099BE44 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D4DB0B205D2B180099BE44 /* Logger.swift */; };
 		A5117A531FDC494000213E02 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A521FDC494000213E02 /* AppEnum.swift */; };
 		A5117A551FDC500B00213E02 /* BaseLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */; };
@@ -159,6 +160,13 @@
 			remoteGlobalIDString = A57EFEA01E3E06D300B66701;
 			remoteInfo = "Qas-Develop";
 		};
+		A19880782073A5E20067EC4F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A57EFEA01E3E06D300B66701;
+			remoteInfo = "Qas-Develop";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -195,6 +203,9 @@
 		A16838382067ACD400182028 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelTests.swift; sourceTree = "<group>"; };
+		A19880732073A5E20067EC4F /* Qas-DevelopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qas-DevelopUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A19880752073A5E20067EC4F /* Qas_DevelopUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Qas_DevelopUITests.swift; sourceTree = "<group>"; };
+		A19880772073A5E20067EC4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1D4DB0B205D2B180099BE44 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A28BDCA0F081729C628CD5CE /* Pods-Qas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.release.xcconfig"; sourceTree = "<group>"; };
 		A5117A521FDC494000213E02 /* AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnum.swift; sourceTree = "<group>"; };
@@ -331,6 +342,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DFA714BC5CF66D2049F6D08 /* Pods_Qas_DevelopTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A19880702073A5E20067EC4F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +564,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		A19880742073A5E20067EC4F /* Qas-DevelopUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A19880752073A5E20067EC4F /* Qas_DevelopUITests.swift */,
+				A19880772073A5E20067EC4F /* Info.plist */,
+			);
+			path = "Qas-DevelopUITests";
+			sourceTree = "<group>";
+		};
 		A5223E8A1F1F8EA20097E793 /* Qas */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,6 +690,7 @@
 				A5A6F2C51F1F92DD00A4620C /* R.generated.swift */,
 				A5223E8A1F1F8EA20097E793 /* Qas */,
 				A168382C2066960B00182028 /* Qas-DevelopTests */,
+				A19880742073A5E20067EC4F /* Qas-DevelopUITests */,
 				A57EFEA21E3E06D300B66701 /* Products */,
 				2D6EC82ACCDEE92B54408E2F /* Pods */,
 				1BAE9B5DD71F0DF92296651C /* Frameworks */,
@@ -674,6 +702,7 @@
 			children = (
 				A57EFEA11E3E06D300B66701 /* Qas-Develop.app */,
 				A168382B2066960B00182028 /* Qas-DevelopTests.xctest */,
+				A19880732073A5E20067EC4F /* Qas-DevelopUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1008,6 +1037,24 @@
 			productReference = A168382B2066960B00182028 /* Qas-DevelopTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		A19880722073A5E20067EC4F /* Qas-DevelopUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A198807A2073A5E20067EC4F /* Build configuration list for PBXNativeTarget "Qas-DevelopUITests" */;
+			buildPhases = (
+				A198806F2073A5E20067EC4F /* Sources */,
+				A19880702073A5E20067EC4F /* Frameworks */,
+				A19880712073A5E20067EC4F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A19880792073A5E20067EC4F /* PBXTargetDependency */,
+			);
+			name = "Qas-DevelopUITests";
+			productName = "Qas-DevelopUITests";
+			productReference = A19880732073A5E20067EC4F /* Qas-DevelopUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		A57EFEA01E3E06D300B66701 /* Qas-Develop */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A57EFEB31E3E06D300B66701 /* Build configuration list for PBXNativeTarget "Qas-Develop" */;
@@ -1046,6 +1093,12 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = A57EFEA01E3E06D300B66701;
 					};
+					A19880722073A5E20067EC4F = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = TBQA5RANYY;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A57EFEA01E3E06D300B66701;
+					};
 					A57EFEA01E3E06D300B66701 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = TBQA5RANYY;
@@ -1069,12 +1122,20 @@
 			targets = (
 				A57EFEA01E3E06D300B66701 /* Qas-Develop */,
 				A168382A2066960B00182028 /* Qas-DevelopTests */,
+				A19880722073A5E20067EC4F /* Qas-DevelopUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A16838292066960B00182028 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A19880712073A5E20067EC4F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1290,6 +1351,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A198806F2073A5E20067EC4F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A19880762073A5E20067EC4F /* Qas_DevelopUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A57EFE9D1E3E06D300B66701 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1415,6 +1484,11 @@
 			isa = PBXTargetDependency;
 			target = A57EFEA01E3E06D300B66701 /* Qas-Develop */;
 			targetProxy = A16838302066960B00182028 /* PBXContainerItemProxy */;
+		};
+		A19880792073A5E20067EC4F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A57EFEA01E3E06D300B66701 /* Qas-Develop */;
+			targetProxy = A19880782073A5E20067EC4F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1576,6 +1650,69 @@
 			};
 			name = Release;
 		};
+		A198807B2073A5E20067EC4F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Qas-DevelopUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Qas-Develop";
+			};
+			name = Debug;
+		};
+		A198807C2073A5E20067EC4F /* Debug-Local */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Qas-DevelopUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Qas-Develop";
+			};
+			name = "Debug-Local";
+		};
+		A198807D2073A5E20067EC4F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Qas-DevelopUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Qas-Develop";
+			};
+			name = Release;
+		};
 		A57EFEB11E3E06D300B66701 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1730,6 +1867,16 @@
 				A16838322066960B00182028 /* Debug */,
 				A11050C8206BD9BE00C07CB8 /* Debug-Local */,
 				A16838332066960B00182028 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A198807A2073A5E20067EC4F /* Build configuration list for PBXNativeTarget "Qas-DevelopUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A198807B2073A5E20067EC4F /* Debug */,
+				A198807C2073A5E20067EC4F /* Debug-Local */,
+				A198807D2073A5E20067EC4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

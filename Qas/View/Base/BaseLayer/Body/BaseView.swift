@@ -133,7 +133,11 @@ class BaseView: UIView {
         }
         
         let newWv = createWebView(size: frame.size, context: viewModel.currentContext)
-        webViews[viewModel.currentLocation!] = newWv
+        if let currentLocation = viewModel.currentLocation {
+            webViews[currentLocation] = newWv
+        } else {
+            log.error("cannot get currentLocation.")
+        }
         
         // 前後のページ
         previousImageView.frame = CGRect(origin: CGPoint(x: -frame.size.width, y: 0), size: frame.size)
@@ -143,7 +147,11 @@ class BaseView: UIView {
         
         // ロードする
         if !viewModel.currentUrl.isEmpty {
-            _ = newWv.load(urlStr: viewModel.currentUrl)
+            if let url = viewModel.currentUrl {
+                _ = newWv.load(urlStr: url)
+            } else {
+                log.error("cannot get currentUrl.")
+            }
         } else {
             // 1秒後にwillBeginEditingする
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
@@ -177,7 +185,11 @@ class BaseView: UIView {
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: self.beginEditingWorkItem!)
                     } else {
-                        _ = newWv.load(urlStr: self.viewModel.currentUrl)
+                        if let url = self.viewModel.currentUrl {
+                            _ = newWv.load(urlStr: url)
+                        } else {
+                            log.error("cannot get currentUrl.")
+                        }
                     }
                 }
                 log.eventOut(chain: "rx_baseViewModelDidInsertWebView")
@@ -229,7 +241,11 @@ class BaseView: UIView {
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: self.beginEditingWorkItem!)
                 } else {
-                    _ = newWv.load(urlStr: self.viewModel.currentUrl)
+                    if let url = self.viewModel.currentUrl {
+                        _ = newWv.load(urlStr: url)
+                    } else {
+                        log.error("cannot get currentUrl.")
+                    }
                 }
                 log.eventOut(chain: "rx_baseViewModelDidAppendWebView")
             }
@@ -536,8 +552,10 @@ class BaseView: UIView {
     private func loadWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
         webViews[viewModel.currentLocation!] = newWv
-        if !viewModel.currentUrl.isEmpty {
-            newWv.load(urlStr: viewModel.currentUrl)
+        if let url = viewModel.currentUrl, !url.isEmpty {
+            newWv.load(urlStr: url)
+        } else {
+            log.error("cannot get currentUrl.")
         }
     }
     
