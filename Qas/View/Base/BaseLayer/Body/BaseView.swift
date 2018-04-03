@@ -278,7 +278,7 @@ class BaseView: UIView {
                 if let object = object.element {
                     if let webView = self.webViews[object.deleteIndex] {
                         // サムネイルの削除
-                        self.viewModel.deleteThumbnail(webView: webView)
+                        self.viewModel.deleteThumbnailDataModel(webView: webView)
 
                         let isFrontDelete = object.deleteContext == self.front.context
                         if isFrontDelete {
@@ -343,7 +343,7 @@ class BaseView: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidHistoryBackWebView")
                 guard let `self` = self else { return }
-                if self.front.isLoading && self.front.operation == .normal && !(self.viewModel.getPastViewingPageHistoryDataModel(context: self.front.context)) {
+                if self.front.isLoading && self.front.operation == .normal && !(self.viewModel.getIsPastViewingPageHistoryDataModel(context: self.front.context)) {
                     // 新規ページ表示中に戻るを押下したルート
                     log.debug("go back on loading.")
 

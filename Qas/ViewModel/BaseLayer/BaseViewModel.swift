@@ -161,7 +161,7 @@ final class BaseViewModel {
     }
     
     /// 過去ページ閲覧中フラグ取得
-    func getPastViewingPageHistoryDataModel(context: String) -> Bool {
+    func getIsPastViewingPageHistoryDataModel(context: String) -> Bool {
         return PageHistoryDataModel.s.isPastViewing(context:context)
     }
     
@@ -302,7 +302,7 @@ final class BaseViewModel {
     }
     
     /// サムネイルの削除
-    func deleteThumbnail(webView: EGWebView) {
+    func deleteThumbnailDataModel(webView: EGWebView) {
         log.debug("delete thumbnail. context: \(webView.context)")
         ThumbnailDataModel.s.delete(context: webView.context)
     }
