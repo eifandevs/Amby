@@ -42,7 +42,34 @@ class BaseViewModelTests: XCTestCase {
     
     func testGetIsPastViewingPageHistoryDataModel() {
         PageHistoryDataModel.s.initialize()
-        let isPastViewing = PageHistoryDataModel.s.isPastViewing(context: PageHistoryDataModel.s.histories[0].context)
+        let isPastViewing = viewModel.getIsPastViewingPageHistoryDataModel(context: PageHistoryDataModel.s.histories[0].context)
         XCTAssertFalse(isPastViewing)
+    }
+    
+    func testGetBackUrlPageHistoryDataModel() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testGetBackUrlPageHistoryDataModel")
+        PageHistoryDataModel.s.append(url: "testGetBackUrlPageHistoryDataModel")
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetBackUrlPageHistoryDataModel", title: "testGetBackUrlPageHistoryDataModel", operation: .normal)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetBackUrlPageHistoryDataModel", title: "testGetBackUrlPageHistoryDataModel", operation: .normal)
+        
+        PageHistoryDataModel.s.store()
+        let backUrl = viewModel.getBackUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context)
+        
+        XCTAssertTrue(backUrl == "testGetBackUrlPageHistoryDataModel")
+    }
+    
+    func testGetForwardUrlPageHistoryDataModel() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "testGetForwardUrlPageHistoryDataModel")
+        PageHistoryDataModel.s.append(url: "testGetForwardUrlPageHistoryDataModel")
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetForwardUrlPageHistoryDataModel", title: "testGetForwardUrlPageHistoryDataModel", operation: .normal)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetForwardUrlPageHistoryDataModel", title: "testGetForwardUrlPageHistoryDataModel", operation: .normal)
+        
+        PageHistoryDataModel.s.store()
+        let backUrl = viewModel.getBackUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context)
+        let forwardUrl = viewModel.getForwardUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context)
+        
+        XCTAssertTrue(forwardUrl == "testGetForwardUrlPageHistoryDataModel")
     }
 }
