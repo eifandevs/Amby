@@ -29,10 +29,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var baseViewController: BaseViewController?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         // ログ設定
         log.setup()
 
+        #if DEVELOP
+            log.info("DEVELOP TARGET")
+        #else
+            log.info("PRODUCTION TARGET")
+        #endif
+
+        #if DEBUG
+            #if LOCAL
+                log.info("DEBUG LOCAL BUILD")
+            #elseif UT
+                log.info("DEBUG UT BUILD")
+            #else
+                log.info("DEBUG BUILD")
+            #endif
+        #endif
+
+        #if RELEASE
+            log.info("RELEASE BUILD")
+        #endif
+        
         // プログレス初期設定
         SVProgressHUD.setForegroundColor(UIColor.brilliantBlue)
         

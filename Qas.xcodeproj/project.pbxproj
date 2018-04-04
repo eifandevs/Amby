@@ -170,7 +170,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A03E6587F9F5F0321E95657 /* Pods-Qas-Develop.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Develop.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Develop/Pods-Qas-Develop.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		142A9FA88A32403AA27058A4 /* Pods-Qas-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Develop/Pods-Qas-Develop.debug.xcconfig"; sourceTree = "<group>"; };
+		260F3D76F0B107560CAE70E8 /* Pods-Qas-DevelopTests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-DevelopTests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-DevelopTests/Pods-Qas-DevelopTests.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		4FCFD23E3BF094AACAE5B23D /* Pods-Qas-Local.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Local.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Local/Pods-Qas-Local.release.xcconfig"; sourceTree = "<group>"; };
 		4FD41C7994A687E2D931946E /* Pods-Qas-DevelopTests.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-DevelopTests.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-DevelopTests/Pods-Qas-DevelopTests.debug-local.xcconfig"; sourceTree = "<group>"; };
 		615FE5E3DFBC7266C29F3D82 /* Pods_Weasel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weasel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -389,6 +391,8 @@
 				4FCFD23E3BF094AACAE5B23D /* Pods-Qas-Local.release.xcconfig */,
 				8093F02229A95D450B618077 /* Pods-Qas-Develop.debug-local.xcconfig */,
 				4FD41C7994A687E2D931946E /* Pods-Qas-DevelopTests.debug-local.xcconfig */,
+				0A03E6587F9F5F0321E95657 /* Pods-Qas-Develop.debug-ut.xcconfig */,
+				260F3D76F0B107560CAE70E8 /* Pods-Qas-DevelopTests.debug-ut.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1598,6 +1602,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEVELOP LOCAL";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qas-Develop.app/Qas-Develop";
@@ -1621,6 +1626,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEVELOP";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qas-Develop.app/Qas-Develop";
@@ -1644,6 +1650,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE DEVELOP";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qas-Develop.app/Qas-Develop";
@@ -1665,6 +1672,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEVELOP";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "Qas-Develop";
@@ -1686,6 +1694,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEVELOP LOCAL";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "Qas-Develop";
@@ -1707,11 +1716,135 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE DEVELOP";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "Qas-Develop";
 			};
 			name = Release;
+		};
+		A1EA9D922074F8E70058D073 /* Debug-UT */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+			};
+			name = "Debug-UT";
+		};
+		A1EA9D932074F8E70058D073 /* Debug-UT */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A03E6587F9F5F0321E95657 /* Pods-Qas-Develop.debug-ut.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Develop/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qas.sw;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEVELOP UT";
+				SWIFT_OBJC_BRIDGING_HEADER = "Qas/Application/Qas-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+			};
+			name = "Debug-UT";
+		};
+		A1EA9D942074F8E70058D073 /* Debug-UT */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 260F3D76F0B107560CAE70E8 /* Pods-Qas-DevelopTests.debug-ut.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Qas-DevelopTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEVELOP UT";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qas-Develop.app/Qas-Develop";
+			};
+			name = "Debug-UT";
+		};
+		A1EA9D952074F8E70058D073 /* Debug-UT */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Qas-DevelopUITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEVELOP UT";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Qas-Develop";
+			};
+			name = "Debug-UT";
 		};
 		A57EFEB11E3E06D300B66701 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1865,6 +1998,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A16838322066960B00182028 /* Debug */,
+				A1EA9D942074F8E70058D073 /* Debug-UT */,
 				A11050C8206BD9BE00C07CB8 /* Debug-Local */,
 				A16838332066960B00182028 /* Release */,
 			);
@@ -1875,6 +2009,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A198807B2073A5E20067EC4F /* Debug */,
+				A1EA9D952074F8E70058D073 /* Debug-UT */,
 				A198807C2073A5E20067EC4F /* Debug-Local */,
 				A198807D2073A5E20067EC4F /* Release */,
 			);
@@ -1885,6 +2020,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A57EFEB11E3E06D300B66701 /* Debug */,
+				A1EA9D922074F8E70058D073 /* Debug-UT */,
 				A11050C6206BD9BD00C07CB8 /* Debug-Local */,
 				A57EFEB21E3E06D300B66701 /* Release */,
 			);
@@ -1895,6 +2031,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A57EFEB41E3E06D300B66701 /* Debug */,
+				A1EA9D932074F8E70058D073 /* Debug-UT */,
 				A11050C7206BD9BD00C07CB8 /* Debug-Local */,
 				A57EFEB51E3E06D300B66701 /* Release */,
 			);
