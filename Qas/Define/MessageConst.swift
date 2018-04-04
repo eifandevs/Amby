@@ -68,7 +68,4 @@ final class MessageConst {
     static let HELP_DATA_DELETE_TITLE = "保存情報を個別で削除する"
     static let HELP_DATA_DELETE_SUBTITLE = "保存情報の個別削除"
     static let HELP_DATA_DELETE_MESSAGE = "1. メインメニューを開き、一覧を表示する\n\n2. セルを長押しする"
-
-
-
 }

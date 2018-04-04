@@ -11,7 +11,7 @@ import Foundation
 // 配列の重複を削除
 extension Array where Element: Equatable {
     /// オブジェクト指定で削除
-    mutating func remove<T : Equatable>(obj : T) -> Array {
+    mutating func remove<T: Equatable>(obj : T) -> Array {
         self = self.filter({$0 as? T != obj})
         return self
     }
