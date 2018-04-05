@@ -29,6 +29,7 @@
 		A15F42EF20626C1F00228553 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EC20626C1F00228553 /* Google.swift */; };
 		A15F42F020626C1F00228553 /* SuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EE20626C1F00228553 /* SuggestResponse.swift */; };
 		A16838392067ACD400182028 /* CommonHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16838382067ACD400182028 /* CommonHistoryDataModelTests.swift */; };
+		A1871DF320765725000B08FA /* UIViewController+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1871DF220765725000B08FA /* UIViewController+Extend.swift */; };
 		A198806C206E651E0067EC4F /* PageHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */; };
 		A198806E2072ED1F0067EC4F /* BaseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */; };
 		A19880762073A5E20067EC4F /* Qas_DevelopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19880752073A5E20067EC4F /* Qas_DevelopUITests.swift */; };
@@ -203,6 +204,7 @@
 		A168382B2066960B00182028 /* Qas-DevelopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qas-DevelopTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A168382F2066960B00182028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A16838382067ACD400182028 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
+		A1871DF220765725000B08FA /* UIViewController+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extend.swift"; sourceTree = "<group>"; };
 		A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelTests.swift; sourceTree = "<group>"; };
 		A19880732073A5E20067EC4F /* Qas-DevelopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qas-DevelopUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -741,6 +743,7 @@
 				A5BCE6EE1FA501B800E0C6E5 /* UIView+Extend.swift */,
 				A599D7C51FB70A6100F7338B /* Float+Extend.swift */,
 				A57131A31FC26B8700BA07E0 /* Date+Extend.swift */,
+				A1871DF220765725000B08FA /* UIViewController+Extend.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1471,6 +1474,7 @@
 				A58F8ACD1FB89C89003632F7 /* PaddingLabel.swift in Sources */,
 				A1D4DB0C205D2B180099BE44 /* Logger.swift in Sources */,
 				A5BCE7141FA501B900E0C6E5 /* UIScrollView+Extend.swift in Sources */,
+				A1871DF320765725000B08FA /* UIViewController+Extend.swift in Sources */,
 				A5F3C0171FB7570900B905CA /* AppDelegate.swift in Sources */,
 				A15F42CD205FF33A00228553 /* OperationDataModel.swift in Sources */,
 				A5BCE7AC1FA50BFA00E0C6E5 /* BaseView.swift in Sources */,
