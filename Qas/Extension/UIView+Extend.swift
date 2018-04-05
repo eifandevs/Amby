@@ -13,30 +13,31 @@ import RxCocoa
 import NSObject_Rx
 
 extension UIView {
-    func registerForKeyboardWillShowNotification(usingBlock block: ((NSNotification, CGSize) -> Void)? = nil) {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: nil, using: { (notification) -> Void in
-            let userInfo = notification.userInfo!
-            let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue.size
-            block?(notification as NSNotification, keyboardSize)
-        })
-    }
-
-    func registerForKeyboardDidShowNotification(usingBlock block: ((NSNotification, CGSize) -> Void)? = nil) {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: nil, using: { (notification) -> Void in
-            let userInfo = notification.userInfo!
-            let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue.size
-            block?(notification as NSNotification, keyboardSize)
-        })
+    // ログ出力用
+    @objc func proj_didMoveToSuperview() {
+        self.proj_didMoveToSuperview()
+        let viewName = NSStringFromClass(type(of: self))
+        // TODO: UT設定
     }
     
-    func registerForKeyboardWillHideNotification(usingBlock block: ((NSNotification, CGSize) -> ())? = nil) {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: nil, using: { (notification) -> Void in
-            let userInfo = notification.userInfo!
-            let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue.size
-            block?(notification as NSNotification, keyboardSize)
-        })
+    private static let swizzling: (UIView.Type) -> () = { view in
+        
+        let originalSelector = #selector(view.didMoveToSuperview)
+        let swizzledSelector = #selector(view.proj_didMoveToSuperview)
+        
+        let originalMethod = class_getInstanceMethod(view, originalSelector)
+        let swizzledMethod = class_getInstanceMethod(view, swizzledSelector)
+        
+        if let originalMethod = originalMethod, let swizzledMethod = swizzledMethod {
+            method_exchangeImplementations(originalMethod, swizzledMethod)
+        }
     }
     
+    public static func swizzle() {
+        _ = self.swizzling(self)
+    }
+    
+    /// 全てのサブビュー削除
     func removeAllSubviews() {
         subviews.forEach {
             $0.removeFromSuperview()

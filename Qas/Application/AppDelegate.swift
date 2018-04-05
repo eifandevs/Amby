@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             #if LOCAL
                 log.info("DEBUG LOCAL BUILD")
             #elseif UT
+                UIView.swizzle() // UT設定
                 log.info("DEBUG UT BUILD")
             #else
                 log.info("DEBUG BUILD")
