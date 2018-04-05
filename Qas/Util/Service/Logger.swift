@@ -31,18 +31,18 @@ class Logger: SwiftyBeaver {
     class func eventIn(fileName: String = #file, functionName: String = #function, chain: String = "") {
         let fname = fileName.components(separatedBy: "/").last!.components(separatedBy: ".").first!
         if chain.isEmpty {
-            log.verbose(" ------> \(fname).\(functionName)")
+            log.verbose(" >>> \(fname).\(functionName)")
         } else {
-            log.verbose(" ------> \(fname).\(functionName).\(chain)")
+            log.verbose(" >>> \(fname).\(functionName).\(chain)")
         }
     }
     
     class func eventOut(fileName: String = #file, functionName: String = #function, chain: String = "") {
         let fname = fileName.components(separatedBy: "/").last!.components(separatedBy: ".").first!
         if chain.isEmpty {
-            log.verbose("\(fname).\(functionName) <------")
+            log.verbose("\(fname).\(functionName) <<<")
         } else {
-            log.verbose("\(fname).\(functionName).\(chain) <------")
+            log.verbose("\(fname).\(functionName).\(chain) <<<")
         }
     }
 }
