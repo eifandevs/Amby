@@ -18,7 +18,7 @@ class Util {
         while ((vc!.presentedViewController) != nil) {
             vc = vc!.presentedViewController;
         }
-        return vc!;
+        return vc!
     }
     
     /// フォルダー作成
