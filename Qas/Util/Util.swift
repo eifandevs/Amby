@@ -16,7 +16,7 @@ class Util {
     static func foregroundViewController() -> UIViewController {
         var vc = UIApplication.shared.keyWindow?.rootViewController;
         while ((vc!.presentedViewController) != nil) {
-            vc = vc!.presentedViewController;
+            vc = vc!.presentedViewController
         }
         return vc!
     }
