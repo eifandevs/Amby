@@ -17,7 +17,8 @@ extension UIView {
     @objc func proj_didMoveToSuperview() {
         self.proj_didMoveToSuperview()
         let viewName = NSStringFromClass(type(of: self))
-        // TODO: UT設定
+        // UT設定
+        accessibilityIdentifier = viewName
     }
     
     private static let swizzling: (UIView.Type) -> () = { view in
