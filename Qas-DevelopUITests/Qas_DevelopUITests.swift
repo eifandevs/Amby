@@ -33,10 +33,20 @@ class Qas_DevelopUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         let app = XCUIApplication()
-        sleep(2)
-        app.keys["A"].tap()
-        app.keys["a"].tap()
-        app.keys["a"].tap()
+        sleep(5)
+        if app.keyboards.count > 0 {
+            app.keys["A"].tap()
+            app.keys["a"].tap()
+            app.keys["a"].tap()
+            app.buttons["Search"].tap()
+            sleep(6)
+    //        waitForExpectations(timeout: 5, handler: nil)
+            let launguageLink = app.links.element(boundBy: 1)
+            launguageLink.tap()
+        }
+        app.links.element(boundBy: 30).tap()
+//        app.links["WAY OF GLORY"].tap()
+        sleep(6)
     }
     
 }
