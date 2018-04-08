@@ -14,6 +14,7 @@ import UIKit
 // MARK: - オペレーション
 enum UserOperation {
     case autoScroll
+    case home
     case form
     case favorite
     case autoInput

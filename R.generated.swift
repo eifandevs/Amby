@@ -80,42 +80,40 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 29 images.
+  /// This `R.image` struct is generated, and contains static references to 28 images.
   struct image {
-    /// Image `circlemenu_add_private`.
-    static let circlemenu_add_private = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_add_private")
-    /// Image `circlemenu_add`.
-    static let circlemenu_add = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_add")
-    /// Image `circlemenu_autoscroll`.
-    static let circlemenu_autoscroll = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_autoscroll")
-    /// Image `circlemenu_close`.
-    static let circlemenu_close = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_close")
-    /// Image `circlemenu_copy`.
-    static let circlemenu_copy = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_copy")
-    /// Image `circlemenu_form`.
-    static let circlemenu_form = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_form")
-    /// Image `circlemenu_historyback`.
-    static let circlemenu_historyback = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_historyback")
-    /// Image `circlemenu_historyforward`.
-    static let circlemenu_historyforward = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_historyforward")
-    /// Image `circlemenu_menu`.
-    static let circlemenu_menu = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_menu")
-    /// Image `circlemenu_search`.
-    static let circlemenu_search = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_search")
-    /// Image `circlemenu_url`.
-    static let circlemenu_url = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu_url")
+    /// Image `circlemenu-add`.
+    static let circlemenuAdd = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-add")
+    /// Image `circlemenu-autoscroll`.
+    static let circlemenuAutoscroll = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-autoscroll")
+    /// Image `circlemenu-close`.
+    static let circlemenuClose = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-close")
+    /// Image `circlemenu-copy`.
+    static let circlemenuCopy = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-copy")
+    /// Image `circlemenu-form`.
+    static let circlemenuForm = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-form")
+    /// Image `circlemenu-historyback`.
+    static let circlemenuHistoryback = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-historyback")
+    /// Image `circlemenu-historyforward`.
+    static let circlemenuHistoryforward = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-historyforward")
+    /// Image `circlemenu-menu`.
+    static let circlemenuMenu = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-menu")
+    /// Image `circlemenu-search`.
+    static let circlemenuSearch = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-search")
+    /// Image `circlemenu-url`.
+    static let circlemenuUrl = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-url")
     /// Image `footer_back`.
     static let footer_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "footer_back")
     /// Image `footer_private`.
     static let footer_private = Rswift.ImageResource(bundle: R.hostingBundle, name: "footer_private")
-    /// Image `header_close`.
-    static let header_close = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_close")
-    /// Image `header_favorite_selected`.
-    static let header_favorite_selected = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_favorite_selected")
-    /// Image `header_favorite`.
-    static let header_favorite = Rswift.ImageResource(bundle: R.hostingBundle, name: "header_favorite")
-    /// Image `key`.
-    static let key = Rswift.ImageResource(bundle: R.hostingBundle, name: "key")
+    /// Image `header-close`.
+    static let headerClose = Rswift.ImageResource(bundle: R.hostingBundle, name: "header-close")
+    /// Image `header-favorite-selected`.
+    static let headerFavoriteSelected = Rswift.ImageResource(bundle: R.hostingBundle, name: "header-favorite-selected")
+    /// Image `header-favorite`.
+    static let headerFavorite = Rswift.ImageResource(bundle: R.hostingBundle, name: "header-favorite")
+    /// Image `header-key`.
+    static let headerKey = Rswift.ImageResource(bundle: R.hostingBundle, name: "header-key")
     /// Image `logo`.
     static let logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo")
     /// Image `option_menu_add`.
@@ -141,59 +139,54 @@ struct R: Rswift.Validatable {
     /// Image `optionmenu_private`.
     static let optionmenu_private = Rswift.ImageResource(bundle: R.hostingBundle, name: "optionmenu_private")
     
-    /// `UIImage(named: "circlemenu_add", bundle: ..., traitCollection: ...)`
-    static func circlemenu_add(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenu_add, compatibleWith: traitCollection)
+    /// `UIImage(named: "circlemenu-add", bundle: ..., traitCollection: ...)`
+    static func circlemenuAdd(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuAdd, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "circlemenu_add_private", bundle: ..., traitCollection: ...)`
-    static func circlemenu_add_private(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenu_add_private, compatibleWith: traitCollection)
+    /// `UIImage(named: "circlemenu-autoscroll", bundle: ..., traitCollection: ...)`
+    static func circlemenuAutoscroll(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuAutoscroll, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "circlemenu_autoscroll", bundle: ..., traitCollection: ...)`
-    static func circlemenu_autoscroll(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenu_autoscroll, compatibleWith: traitCollection)
+    /// `UIImage(named: "circlemenu-close", bundle: ..., traitCollection: ...)`
+    static func circlemenuClose(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuClose, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "circlemenu_close", bundle: ..., traitCollection: ...)`
-    static func circlemenu_close(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenu_close, compatibleWith: traitCollection)
+    /// `UIImage(named: "circlemenu-copy", bundle: ..., traitCollection: ...)`
+    static func circlemenuCopy(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuCopy, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "circlemenu_copy", bundle: ..., traitCollection: ...)`
-    static func circlemenu_copy(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenu_copy, compatibleWith: traitCollection)
+    /// `UIImage(named: "circlemenu-form", bundle: ..., traitCollection: ...)`
+    static func circlemenuForm(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuForm, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "circlemenu_form", bundle: ..., traitCollection: ...)`
-    static func circlemenu_form(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenu_form, compatibleWith: traitCollection)
+    /// `UIImage(named: "circlemenu-historyback", bundle: ..., traitCollection: ...)`
+    static func circlemenuHistoryback(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuHistoryback, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "circlemenu_historyback", bundle: ..., traitCollection: ...)`
-    static func circlemenu_historyback(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenu_historyback, compatibleWith: traitCollection)
+    /// `UIImage(named: "circlemenu-historyforward", bundle: ..., traitCollection: ...)`
+    static func circlemenuHistoryforward(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuHistoryforward, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "circlemenu_historyforward", bundle: ..., traitCollection: ...)`
-    static func circlemenu_historyforward(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenu_historyforward, compatibleWith: traitCollection)
+    /// `UIImage(named: "circlemenu-menu", bundle: ..., traitCollection: ...)`
+    static func circlemenuMenu(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuMenu, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "circlemenu_menu", bundle: ..., traitCollection: ...)`
-    static func circlemenu_menu(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenu_menu, compatibleWith: traitCollection)
+    /// `UIImage(named: "circlemenu-search", bundle: ..., traitCollection: ...)`
+    static func circlemenuSearch(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuSearch, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "circlemenu_search", bundle: ..., traitCollection: ...)`
-    static func circlemenu_search(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenu_search, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "circlemenu_url", bundle: ..., traitCollection: ...)`
-    static func circlemenu_url(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenu_url, compatibleWith: traitCollection)
+    /// `UIImage(named: "circlemenu-url", bundle: ..., traitCollection: ...)`
+    static func circlemenuUrl(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuUrl, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "footer_back", bundle: ..., traitCollection: ...)`
@@ -206,24 +199,24 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.footer_private, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "header_close", bundle: ..., traitCollection: ...)`
-    static func header_close(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.header_close, compatibleWith: traitCollection)
+    /// `UIImage(named: "header-close", bundle: ..., traitCollection: ...)`
+    static func headerClose(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.headerClose, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "header_favorite", bundle: ..., traitCollection: ...)`
-    static func header_favorite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.header_favorite, compatibleWith: traitCollection)
+    /// `UIImage(named: "header-favorite", bundle: ..., traitCollection: ...)`
+    static func headerFavorite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.headerFavorite, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "header_favorite_selected", bundle: ..., traitCollection: ...)`
-    static func header_favorite_selected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.header_favorite_selected, compatibleWith: traitCollection)
+    /// `UIImage(named: "header-favorite-selected", bundle: ..., traitCollection: ...)`
+    static func headerFavoriteSelected(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.headerFavoriteSelected, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "key", bundle: ..., traitCollection: ...)`
-    static func key(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.key, compatibleWith: traitCollection)
+    /// `UIImage(named: "header-key", bundle: ..., traitCollection: ...)`
+    static func headerKey(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.headerKey, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "logo", bundle: ..., traitCollection: ...)`

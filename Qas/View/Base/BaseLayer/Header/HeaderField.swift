@@ -113,7 +113,7 @@ class HeaderField: UIButton, ShadowView {
         
         // 削除ボタン作成
         let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width + 5, y: DeviceConst.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: self.frame.size.height - DeviceConst.STATUS_BAR_HEIGHT))
-        closeMenuButton.setImage(image: R.image.header_close(), color: UIColor.gray)
+        closeMenuButton.setImage(image: R.image.headerClose(), color: UIColor.gray)
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
         closeMenuButton.imageView?.contentMode = .scaleAspectFit
         closeMenuButton.imageEdgeInsets = UIEdgeInsetsMake(edgeInset, edgeInset, edgeInset, edgeInset)
@@ -149,7 +149,7 @@ class HeaderField: UIButton, ShadowView {
     // ヘッダービューのコンテンツを作成(テキストフィールドではない)
     func makeContent(restore: Bool, restoreText: String?) {
         icon = UIImageView()
-        icon?.setImage(image: R.image.key(), color: UIColor.lightGreen)
+        icon?.setImage(image: R.image.headerKey(), color: UIColor.lightGreen)
         icon?.isUserInteractionEnabled = false
         addSubview(icon!)
         

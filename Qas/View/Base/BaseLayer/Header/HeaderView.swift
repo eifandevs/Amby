@@ -91,7 +91,7 @@ class HeaderView: UIView, ShadowView {
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
-        addButton(historyBackButton, R.image.circlemenu_historyback()!)
+        addButton(historyBackButton, R.image.circlemenuHistoryback()!)
         
         // ヒストリフォアード
         // ボタンタップ
@@ -104,7 +104,7 @@ class HeaderView: UIView, ShadowView {
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
-        addButton(historyForwardButton, R.image.circlemenu_historyforward()!)
+        addButton(historyForwardButton, R.image.circlemenuHistoryforward()!)
         
         // お気に入り登録
         // ボタンタップ
@@ -117,7 +117,7 @@ class HeaderView: UIView, ShadowView {
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
-        addButton(favoriteButton, R.image.header_favorite()!)
+        addButton(favoriteButton, R.image.headerFavorite()!)
         
         // 現在のWebView削除
         // ボタンタップ
@@ -130,7 +130,7 @@ class HeaderView: UIView, ShadowView {
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
-        addButton(deleteButton, R.image.circlemenu_close()!)
+        addButton(deleteButton, R.image.circlemenuClose()!)
 
         // ヘッダーフィールド
         headerField.rx.tap
@@ -174,9 +174,9 @@ class HeaderView: UIView, ShadowView {
                 if let enable = object.element {
                     if enable {
                         // すでに登録済みの場合は、お気に入りボタンの色を変更する
-                        self.favoriteButton.setImage(image: R.image.header_favorite_selected(), color: UIColor.brilliantBlue)
+                        self.favoriteButton.setImage(image: R.image.headerFavoriteSelected(), color: UIColor.brilliantBlue)
                     } else {
-                        self.favoriteButton.setImage(image: R.image.header_favorite(), color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
+                        self.favoriteButton.setImage(image: R.image.headerFavorite(), color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
                     }
                 }
                 log.eventOut(chain: "rx_headerViewModelDidChangeFavorite")

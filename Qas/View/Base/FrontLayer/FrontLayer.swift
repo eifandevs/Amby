@@ -33,7 +33,7 @@ class FrontLayer: UIView {
         // サークルメニューの作成
         let menuItems = [
             [
-                CircleMenuItem(image: R.image.circlemenu_menu(), tapAction: { [weak self] (initialPt: CGPoint) in
+                CircleMenuItem(image: R.image.circlemenuMenu(), tapAction: { [weak self] (initialPt: CGPoint) in
                     guard let `self` = self else { return }
                     
                     // オプションメニューの表示位置を計算
@@ -63,51 +63,51 @@ class FrontLayer: UIView {
                         self.addSubview(self.optionMenu!)
                     }
                 }),
-                CircleMenuItem(image: R.image.circlemenu_close(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenuClose(), tapAction: { _ in
                     log.debug("circle menu event. event: close")
                     self.viewModel.removePageHistoryDataModel()
                 }),
-                CircleMenuItem(image: R.image.circlemenu_historyback(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenuHistoryback(), tapAction: { _ in
                     log.debug("circle menu event. event: history back")
                     self.viewModel.goBackCommonHistoryDataModel()
                 }),
-                CircleMenuItem(image: R.image.circlemenu_copy(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenuCopy(), tapAction: { _ in
                     log.debug("circle menu event. event: copy")
                     PageHistoryDataModel.s.copy()
                 }),
-                CircleMenuItem(image: R.image.circlemenu_search(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenuSearch(), tapAction: { _ in
                     log.debug("circle menu event. event: search")
                     self.viewModel.beginEditingHeaderViewDataModel()
                 }),
-                CircleMenuItem(image: R.image.circlemenu_add(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenuAdd(), tapAction: { _ in
                     log.debug("circle menu event. event: add")
                     self.viewModel.insertPageHistoryDataModel()
                 })
             ],
             [
-                CircleMenuItem(image: R.image.circlemenu_url(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenuUrl(), tapAction: { _ in
                     log.debug("circle menu event. event: url copy")
                     self.viewModel.executeOperationDataModel(operation: .urlCopy)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_autoscroll(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenuAutoscroll(), tapAction: { _ in
                     log.debug("circle menu event. event: auto scroll")
                     self.viewModel.executeOperationDataModel(operation: .autoScroll)
                 }),
-                CircleMenuItem(image: R.image.circlemenu_historyforward(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenuHistoryforward(), tapAction: { _ in
                     log.debug("circle menu event. event: history forward")
                     self.viewModel.goForwardCommonHistoryDataModel()
                 }),
-                CircleMenuItem(image: R.image.circlemenu_form(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenuForm(), tapAction: { _ in
                     log.debug("circle menu event. event: form")
                     self.viewModel.executeOperationDataModel(operation: .form)
                 }),
-                CircleMenuItem(image: R.image.header_favorite(), tapAction: { _ in
+                CircleMenuItem(image: R.image.headerFavorite(), tapAction: { _ in
                     log.debug("circle menu event. event: favorite")
                     self.viewModel.registerFavoriteDataModel()
                 }),
-                CircleMenuItem(image: R.image.circlemenu_form(), tapAction: { _ in
-                    log.debug("circle menu event. event: form")
-                    self.viewModel.executeOperationDataModel(operation: .form)
+                CircleMenuItem(image: R.image.circlemenuForm(), tapAction: { _ in
+                    log.debug("circle menu event. event: home")
+//                    self.viewModel.executeOperationDataModel(operation: .home)
                 })
             ]
         ]
