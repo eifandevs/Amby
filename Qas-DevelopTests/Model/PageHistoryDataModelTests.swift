@@ -131,7 +131,7 @@ class PageHistoryDataModelTests: XCTestCase {
         PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetForwardURL", title: "testGetForwardURL", operation: .normal)
         
         PageHistoryDataModel.s.store()
-        let backUrl = PageHistoryDataModel.s.getBackUrl(context: PageHistoryDataModel.s.histories[1].context)
+        let _ = PageHistoryDataModel.s.getBackUrl(context: PageHistoryDataModel.s.histories[1].context)
         let forwardUrl = PageHistoryDataModel.s.getForwardUrl(context: PageHistoryDataModel.s.histories[1].context)
         
         XCTAssertTrue(forwardUrl == "testGetForwardURL")
