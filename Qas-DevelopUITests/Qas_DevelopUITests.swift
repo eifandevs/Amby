@@ -8,6 +8,8 @@
 
 import XCTest
 
+@testable import Qas_Develop
+
 class Qas_DevelopUITests: XCTestCase {
         
     override func setUp() {
@@ -45,8 +47,9 @@ class Qas_DevelopUITests: XCTestCase {
             launguageLink.tap()
         }
         app.links.element(boundBy: 30).tap()
-//        app.links["WAY OF GLORY"].tap()
         sleep(6)
+        // TODO: マニュアルでsendEventする
+//        EGApplication.sharedMyApplication.sendEvent()
     }
     
 }
