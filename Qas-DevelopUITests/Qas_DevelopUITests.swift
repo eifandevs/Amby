@@ -40,18 +40,36 @@ class Qas_DevelopUITests: XCTestCase {
             app.keys["A"].tap()
             app.keys["a"].tap()
             app.keys["a"].tap()
+            
+            // 検索してくるくるがいなくなるまで10秒間処理を中断する
+            let indicator = app.otherElements["NVActivityIndicatorView.NVActivityIndicatorView"]
+            let notExists = NSPredicate(format: "exists == false")
+            expectation(for: notExists, evaluatedWith: indicator, handler: { () -> Bool in
+                print("search loading finish.")
+                return true
+            })
+            // 検索タップ
             app.buttons["Search"].tap()
-            sleep(1)
-            print(app.otherElements["EGProgressBar"])
-            sleep(6)
-//            let exists = NSPredicate(format: "exists == 1")
-    //        waitForExpectations(timeout: 5, handler: nil)
+            sleep(5)
+            waitForExpectations(timeout: 10, handler: nil)
+
+            // 初回google検索結果表示時は、言語設定のモーダルが表示されるので、タップして削除する
             let launguageLink = app.links.element(boundBy: 1)
             launguageLink.tap()
         }
+        sleep(2)
+        // 検索してくるくるがいなくなるまで10秒間処理を中断する
+        let indicator = app.otherElements["NVActivityIndicatorView.NVActivityIndicatorView"]
+        let notExists = NSPredicate(format: "exists == false")
+        expectation(for: notExists, evaluatedWith: indicator, handler: { () -> Bool in
+            print("link loading finish.")
+            return true
+        })
+        // 適当にリンクタップ
         app.links.element(boundBy: 30).tap()
-        sleep(6)
-        
+        sleep(5)
+        waitForExpectations(timeout: 10, handler: nil)
+
         // 左エッジスワイプ
         let coord1: XCUICoordinate = app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.15))
         let coord2 = coord1.withOffset(CGVector(dx: 40, dy: 100))
