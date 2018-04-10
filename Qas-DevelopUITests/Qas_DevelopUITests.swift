@@ -41,15 +41,23 @@ class Qas_DevelopUITests: XCTestCase {
             app.keys["a"].tap()
             app.keys["a"].tap()
             app.buttons["Search"].tap()
+            sleep(1)
+            print(app.otherElements["EGProgressBar"])
             sleep(6)
+//            let exists = NSPredicate(format: "exists == 1")
     //        waitForExpectations(timeout: 5, handler: nil)
             let launguageLink = app.links.element(boundBy: 1)
             launguageLink.tap()
         }
         app.links.element(boundBy: 30).tap()
         sleep(6)
-        // TODO: マニュアルでsendEventする
-//        EGApplication.sharedMyApplication.sendEvent()
+        
+        // 左エッジスワイプ
+        let coord1: XCUICoordinate = app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.15))
+        let coord2 = coord1.withOffset(CGVector(dx: 40, dy: 100))
+
+        coord1.press(forDuration: 0.1, thenDragTo: coord2)
+        sleep(6)
     }
     
 }
