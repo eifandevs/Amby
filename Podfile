@@ -35,4 +35,8 @@ target 'Qas-Develop' do
     pod 'RxSwift', '~> 4.0'
   end
 
+  target 'Qas-DevelopUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 end

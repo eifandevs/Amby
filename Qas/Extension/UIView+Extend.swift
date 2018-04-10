@@ -17,6 +17,7 @@ extension UIView {
     @objc func proj_didMoveToSuperview() {
         self.proj_didMoveToSuperview()
         let viewName = NSStringFromClass(type(of: self))
+        log.debug("set accessibility. identifier: \(viewName)")
         // UT設定
         accessibilityIdentifier = viewName
     }
