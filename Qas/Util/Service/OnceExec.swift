@@ -10,7 +10,7 @@ import Foundation
 
 class OnceExec {
     var isExec = false
-    func call(onceExec: ()->()){
+    func call(onceExec: ()->()) {
         if !isExec {
             onceExec()
             isExec = true
