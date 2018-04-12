@@ -14,10 +14,10 @@ def common_pods
   pod 'R.swift', '~> 3.3'
   pod 'Alamofire', '~> 4.4'
   pod 'SwiftLint', '~> 0.23'
+  pod 'SwiftFormat/CLI', '~> 0.33'
   pod 'CryptoSwift', '~> 0.8'
   pod 'KeychainAccess', '~> 3.1'
   pod 'VerticalAlignmentLabel', '~> 0.1'
-  pod 'Dollar', '~> 7.0'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
   pod 'Moya/RxSwift', '~> 11.0'
 end

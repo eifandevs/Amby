@@ -4,7 +4,6 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - CryptoSwift (0.8.0)
-  - Dollar (7.0.0)
   - KeychainAccess (3.1.0)
   - Moya/Core (11.0.1):
     - Alamofire (~> 4.1)
@@ -30,6 +29,7 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.0.0)
   - SVProgressHUD (2.1.2)
+  - SwiftFormat/CLI (0.33.4)
   - SwiftLint (0.23.1)
   - SwiftyBeaver (1.4.3)
   - VerticalAlignmentLabel (0.1.0)
@@ -38,7 +38,6 @@ DEPENDENCIES:
   - Alamofire (~> 4.4)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - CryptoSwift (~> 0.8)
-  - Dollar (~> 7.0)
   - KeychainAccess (~> 3.1)
   - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
@@ -49,6 +48,7 @@ DEPENDENCIES:
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
   - SVProgressHUD (= 2.1.2)
+  - SwiftFormat/CLI (~> 0.33)
   - SwiftLint (~> 0.23)
   - SwiftyBeaver (~> 1.1)
   - VerticalAlignmentLabel (~> 0.1)
@@ -66,7 +66,6 @@ SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
-  Dollar: b052b910c711bed91c26caeaec85aa22bccf1655
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
   Moya: 3d594ada51a21cc02b18739ab578a1984f900c8a
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
@@ -79,10 +78,11 @@ SPEC CHECKSUMS:
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SwiftFormat: f39044d75d5e58dbbc7c436c089104ec9c8f717a
   SwiftLint: 1b670ce79284c76520f84060e87d645078fd32fa
   SwiftyBeaver: e10b1668e0512229c36c34769b97eed3dfae2ca3
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: f8ee0c7589d90160070cb41ea59a8c69054fe6eb
+PODFILE CHECKSUM: 952de8b2c30f3344f9f8ed896173af73f96d8611
 
 COCOAPODS: 1.4.0

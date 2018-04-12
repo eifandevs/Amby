@@ -316,8 +316,7 @@ class BaseView: UIView {
 
                         if isFrontDelete && object.currentContext != nil {
                             // フロントの削除で、削除後にwebviewが存在する場合
-
-                            if let current = D.find(self.webViews, callback: { $0?.context == PageHistoryDataModel.s.currentContext }) {
+                            if let current = self.webViews.find({ $0?.context == PageHistoryDataModel.s.currentContext }) {
                                 current!.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current!.context))
                                 self.front = current
                                 self.bringSubview(toFront: current!)

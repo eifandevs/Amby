@@ -90,7 +90,7 @@ class FooterView: UIView, ShadowView {
                 log.eventIn(chain: "rx_footerViewModelDidRemoveThumbnail")
                 guard let `self` = self else { return }
                 if let object = object.element {
-                    let deleteIndex = D.findIndex(self.thumbnails, callback: { $0.context == object.deleteContext })!
+                    let deleteIndex = self.thumbnails.index(where: { $0.context == object.deleteContext })!
                     
                     self.thumbnails[deleteIndex].removeFromSuperview()
                     self.thumbnails.remove(at: deleteIndex)
@@ -380,7 +380,7 @@ class FooterView: UIView, ShadowView {
     }
     
     private func startIndicator(context: String) {
-        if let targetThumbnail = D.find(thumbnails, callback: { $0.context == context }) {
+        if let targetThumbnail = thumbnails.find({ $0.context == context }) {
             // くるくるを表示する
             let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
             if !existIndicator {

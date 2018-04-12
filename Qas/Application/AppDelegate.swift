@@ -7,11 +7,9 @@
 //
 
 import UIKit
-import Dollar
 import SVProgressHUD
 
 let log = Logger.self
-let D = `$`.self
 
 /// クラッシュ時にスタックトレースを表示する
 let uncaughtExceptionHandler: Void = NSSetUncaughtExceptionHandler { exception in

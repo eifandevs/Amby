@@ -48,12 +48,12 @@ final class PageHistoryDataModel {
     
     /// 現在のページ情報
     var currentHistory: PageHistory? {
-        return D.find(histories, callback: { $0.context == currentContext })
+        return histories.find({ $0.context == currentContext })
     }
     
     /// 現在の位置
     var currentLocation: Int? {
-        return D.findIndex(histories, callback: { $0.context == currentContext })
+        return histories.index(where: { $0.context == currentContext })
     }
     
     /// 最新ページを見ているかフラグ
@@ -82,6 +82,11 @@ final class PageHistoryDataModel {
         }
     }
     
+    /// 特定の履歴取得
+    func getHistory(context: String) -> PageHistory? {
+        return histories.find({ $0.context == context })
+    }
+
     /// ロード開始
     func startLoading(context: String) {
         rx_pageHistoryDataModelDidStartLoading.onNext(context)
@@ -89,31 +94,31 @@ final class PageHistoryDataModel {
     
     /// ロード終了
     func endLoading(context: String) {
-        if let _ = D.find(histories, callback: { $0.context == context }) {
+        if let _ = histories.find({ $0.context == context }) {
             rx_pageHistoryDataModelDidEndLoading.onNext(context)
         } else {
-            log.warning("pageHistoryDataModelDidEndLoading not fired. history is deleted.")
+            log.error("pageHistoryDataModelDidEndLoading not fired. history is deleted.")
         }
     }
 
     /// 描画終了
     func endRendering(context: String) {
-        if let _ = D.find(histories, callback: { $0.context == context }) {
+        if let _ = histories.find({ $0.context == context }) {
             rx_pageHistoryDataModelDidEndRendering.onNext(context)
         } else {
-            log.warning("pageHistoryDataModelDidEndRendering not fired. history is deleted.")
+            log.error("pageHistoryDataModelDidEndRendering not fired. history is deleted.")
         }
     }
     
     /// 過去のページを閲覧しているかのフラグ
     func isPastViewing(context: String) -> Bool {
-        let history = D.find(histories, callback: { $0.context == context })!
+        let history = histories.find({ $0.context == context })!
         return history.backForwardList.count != 0 && history.listIndex != history.backForwardList.count - 1
     }
     
     /// 直近URL取得
     func getMostForwardUrl(context: String) -> String? {
-        if let history = D.find(histories, callback: { $0.context == context }), let url = history.backForwardList.last, !url.isEmpty {
+        if let history = histories.find({ $0.context == context }), let url = history.backForwardList.last, !url.isEmpty {
             return url
         }
         return nil
@@ -121,7 +126,7 @@ final class PageHistoryDataModel {
     
     /// 前回URL取得
     func getBackUrl(context: String) -> String? {
-        if let history = D.find(histories, callback: { $0.context == context }), history.listIndex > 0 {
+        if let history = histories.find({ $0.context == context }), history.listIndex > 0 {
             // インデックス調整
             history.listIndex -= 1
             
@@ -132,7 +137,7 @@ final class PageHistoryDataModel {
     
     /// 次URL取得
     func getForwardUrl(context: String) -> String? {
-        if let history = D.find(histories, callback: { $0.context == context }), history.listIndex < history.backForwardList.count - 1 {
+        if let history = histories.find({ $0.context == context }), history.listIndex < history.backForwardList.count - 1 {
             // インデックス調整
             history.listIndex += 1
             
@@ -224,13 +229,13 @@ final class PageHistoryDataModel {
     
     /// ぺージインデックス取得
     func getIndex(context: String) -> Int? {
-        return D.findIndex(histories, callback: { $0.context == context })
+        return histories.index(where: { $0.context == context })
     }
     
     /// 指定ページの削除
     func remove(context: String) {
         // 削除インデックス取得
-        let deleteIndex = D.findIndex(histories, callback: { $0.context == context })!
+        let deleteIndex = histories.index(where: { $0.context == context })!
         
         // フロントの削除かどうか
         if context == currentContext {

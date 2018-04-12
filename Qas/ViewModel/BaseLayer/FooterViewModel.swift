@@ -47,7 +47,7 @@ final class FooterViewModel {
     /// ローディング終了通知用RX
     let rx_footerViewModelDidEndLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidEndRendering
         .flatMap { context -> Observable<(context: String, title: String)> in
-                if let pageHistory = D.find(PageHistoryDataModel.s.histories, callback: { $0.context == context }) {
+                if let pageHistory = PageHistoryDataModel.s.getHistory(context: context) {
                     return Observable.just((context: context, title: pageHistory.title))
                 } else {
                     return Observable.empty()
