@@ -6,44 +6,43 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import NSObject_Rx
+import RxCocoa
+import RxSwift
+import UIKit
 
 class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
-    
     // メニュークローズ通知用RX
     let rx_optionMenuHistoryDidClose = PublishSubject<()>()
-    
+
     let viewModel = OptionMenuHistoryTableViewModel()
-    @IBOutlet weak var tableView: UITableView!
-    
-    override init(frame: CGRect){
+    @IBOutlet var tableView: UITableView!
+
+    override init(frame: CGRect) {
         super.init(frame: frame)
         loadNib()
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         loadNib()
     }
-    
+
     deinit {
         log.debug("deinit called.")
     }
-    
+
     func loadNib() {
         let view = Bundle.main.loadNibNamed(R.nib.optionMenuHistoryTableView.name, owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        
+        view.frame = bounds
+
         // 影
         addMenuShadow()
-        
+
         // テーブルビュー監視
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         // データ更新監視
         viewModel.rx_optionMenuHistoryTableViewModelDidGetData
             .subscribe { [weak self] _ in
@@ -53,18 +52,18 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
                 log.eventOut(chain: "rx_optionMenuHistoryTableViewModelDidGetData")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // OptionMenuProtocol
         _ = setup(tableView: tableView)
-        
+
         // カスタムビュー登録
         tableView.register(R.nib.optionMenuHistoryTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuHistoryCell.identifier)
-        
-        self.addSubview(view)
+
+        addSubview(view)
 
         // ロングプレスで削除
         let longPressRecognizer = UILongPressGestureRecognizer()
-        
+
         longPressRecognizer.rx.event
             .subscribe { [weak self] sender in
                 log.eventIn(chain: "rx_longPress")
@@ -75,16 +74,16 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
                         let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
                         if let indexPath = indexPath {
                             let row = self.viewModel.getRow(indexPath: indexPath)
-                            
+
                             self.tableView.beginUpdates()
                             let rowExist = self.viewModel.removeRow(indexPath: indexPath, row: row)
                             self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                            
+
                             if !rowExist {
                                 self.viewModel.removeSection(section: indexPath.section)
                                 self.tableView.deleteSections([indexPath.section], with: .automatic)
                             }
-                            
+
                             self.tableView.endUpdates()
                         }
                     }
@@ -92,7 +91,7 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
                 log.eventOut(chain: "rx_longPress")
             }
             .disposed(by: rx.disposeBag)
-        
+
         addGestureRecognizer(longPressRecognizer)
 
         // モデルデータ取得
@@ -101,8 +100,9 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
 }
 
 // MARK: - TableViewDataSourceDelegate
+
 extension OptionMenuHistoryTableView: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return viewModel.cellHeight
     }
 
@@ -114,8 +114,8 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label : PaddingLabel = PaddingLabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionHeight)))
+    func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label: PaddingLabel = PaddingLabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionHeight)))
         label.backgroundColor = UIColor.black
         label.textAlignment = .left
         label.text = viewModel.getSection(section: section).dateString
@@ -124,22 +124,23 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
         return label
     }
 
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         return viewModel.sectionHeight
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return viewModel.sectionCount
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.cellCount(section: section)
     }
 }
 
 // MARK: - TableViewDelegate
+
 extension OptionMenuHistoryTableView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セル情報取得
         let row = viewModel.getRow(indexPath: indexPath)
         // ページを表示
@@ -149,12 +150,12 @@ extension OptionMenuHistoryTableView: UITableViewDelegate {
 }
 
 // MARK: - ScrollViewDelegate
+
 extension OptionMenuHistoryTableView: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //一番下までスクロールしたかどうか
-        if self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height) {
+    func scrollViewDidScroll(_: UIScrollView) {
+        // 一番下までスクロールしたかどうか
+        if tableView.contentOffset.y >= (tableView.contentSize.height - tableView.bounds.size.height) {
             viewModel.getModelData()
         }
     }
 }
-

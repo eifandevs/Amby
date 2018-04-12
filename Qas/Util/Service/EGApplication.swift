@@ -20,7 +20,7 @@ import UIKit
     weak var egDelegate: EGApplicationDelegate?
     private let movieClassName = "AVPlaybackControlsView"
     static let sharedMyApplication = UIApplication.shared as! EGApplication
-    
+
     override func sendEvent(_ event: UIEvent) {
         // webviewでタッチイベントを検知するため
         // タッチイベントをフックする
@@ -29,15 +29,15 @@ import UIKit
                 // 動画を全画面表示しているときは、無効
                 if touch.view?.className != movieClassName {
                     switch touch.phase {
-                        case .began:
-                            self.egDelegate?.screenTouchBegan(touch: touch)
-                        case .moved:
-                            self.egDelegate?.screenTouchMoved(touch: touch)
-                        case .ended:
-                            self.egDelegate?.screenTouchEnded(touch: touch)
-                        case .cancelled:
-                            self.egDelegate?.screenTouchCancelled(touch: touch)
-                        default: break
+                    case .began:
+                        egDelegate?.screenTouchBegan(touch: touch)
+                    case .moved:
+                        egDelegate?.screenTouchMoved(touch: touch)
+                    case .ended:
+                        egDelegate?.screenTouchEnded(touch: touch)
+                    case .cancelled:
+                        egDelegate?.screenTouchCancelled(touch: touch)
+                    default: break
                     }
                 }
             }

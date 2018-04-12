@@ -6,63 +6,64 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import NSObject_Rx
+import RxCocoa
+import RxSwift
+import UIKit
 
 class OptionMenuSettingTableView: UIView, ShadowView, OptionMenuView {
     // メニュークローズ通知用RX
     let rx_optionMenuSettingDidClose = PublishSubject<()>()
-    
-    let viewModel = OptionMenuSettingTableViewModel()
-    @IBOutlet weak var tableView: UITableView!
 
-    override init(frame: CGRect){
+    let viewModel = OptionMenuSettingTableViewModel()
+    @IBOutlet var tableView: UITableView!
+
+    override init(frame: CGRect) {
         super.init(frame: frame)
         loadNib()
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         loadNib()
     }
-    
+
     deinit {
         log.debug("deinit called.")
     }
-    
+
     func loadNib() {
         let view = Bundle.main.loadNibNamed(R.nib.optionMenuSettingTableView.name, owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        
+        view.frame = bounds
+
         // 影
         addMenuShadow()
-        
+
         // テーブルビュー監視
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         // OptionMenuProtocol
         _ = setup(tableView: tableView)
-        
+
         // カスタムビュー登録
         tableView.register(R.nib.optionMenuSettingSliderTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingSliderCell.identifier)
         tableView.register(R.nib.optionMenuSettingTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingCell.identifier)
-        
-        self.addSubview(view)
+
+        addSubview(view)
     }
 }
 
 // MARK: - TableViewDataSourceDelegate
+
 extension OptionMenuSettingTableView: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return viewModel.cellHeight
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = viewModel.getRow(indexPath: indexPath)
-        
+
         if row.cellType == .autoScroll {
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuSettingSliderCell.identifier, for: indexPath) as! OptionMenuSettingSliderTableViewCell
             return cell
@@ -72,9 +73,9 @@ extension OptionMenuSettingTableView: UITableViewDataSource {
             return cell
         }
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label : PaddingLabel = PaddingLabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionHeight)))
+
+    func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label: PaddingLabel = PaddingLabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionHeight)))
         label.backgroundColor = UIColor.black
         label.textAlignment = .left
         label.text = viewModel.getSection(section: section).title
@@ -82,23 +83,24 @@ extension OptionMenuSettingTableView: UITableViewDataSource {
         label.font = UIFont(name: AppConst.APP_FONT, size: viewModel.sectionFontSize)
         return label
     }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+    func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         return viewModel.sectionHeight
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
+
+    func numberOfSections(in _: UITableView) -> Int {
         return viewModel.sectionCount
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.cellCount(section: section)
     }
 }
 
 // MARK: - TableViewDelegate
+
 extension OptionMenuSettingTableView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = viewModel.getRow(indexPath: indexPath)
         switch row.cellType {
         case .commonHistory:

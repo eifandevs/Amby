@@ -7,11 +7,11 @@
 //
 
 import Foundation
-import WebKit
-import UIKit
-import RxSwift
-import RxCocoa
 import NSObject_Rx
+import RxCocoa
+import RxSwift
+import UIKit
+import WebKit
 
 class EGWebView: WKWebView {
     enum NETWORK_ERROR {
@@ -21,24 +21,24 @@ class EGWebView: WKWebView {
         case INVALID_URL
         case UNAUTHORIZED
     }
-    
+
     var context = "" // 監視ID
-    
+
     // 最新のリクエストURLを常に保持しておく
     // 履歴保存時やリロード時に使用する
     var previousUrl: String!
-    
+
     // 最新のリクエストURL
     // 不正なリクエストは入らない
     var requestUrl: String!
     var requestTitle: String!
-    
+
     // スワイプ中かどうか
     var isSwiping: Bool = false
-    
+
     /// オペレーション
     var operation: PageHistory.Operation = .normal
-    
+
     init(id: String?) {
         if let id = id, !id.isEmpty {
             // コンテキストを復元
@@ -52,7 +52,7 @@ class EGWebView: WKWebView {
 
         // Panジェスチャー
         panGesture.rx.event
-            .subscribe{ [weak self] sender in
+            .subscribe { [weak self] sender in
                 // ログが大量に出るので、コメントアウト
 //                log.eventIn(chain: "rx_pan")
                 guard let `self` = self else { return }
@@ -69,19 +69,19 @@ class EGWebView: WKWebView {
 
         addGestureRecognizer(panGesture)
     }
-    
-    required init?(coder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         log.debug("deinit called.")
     }
-    
+
     func evaluate(script: String, completion: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) {
         var finished = false
-        
-        evaluateJavaScript(script) { (result, error) in
+
+        evaluateJavaScript(script) { result, error in
             if error == nil {
                 if result != nil {
                     completion(result as AnyObject?, nil)
@@ -91,33 +91,33 @@ class EGWebView: WKWebView {
             }
             finished = true
         }
-        
+
         while !finished {
             RunLoop.current.run(mode: RunLoopMode(rawValue: "NSDefaultRunLoopMode"), before: NSDate.distantFuture)
         }
     }
-    
+
     var hasSavableUrl: Bool {
-        return  previousUrl != requestUrl && requestUrl.hasValidUrl
+        return previousUrl != requestUrl && requestUrl.hasValidUrl
     }
-    
+
     var hasValidUrl: Bool {
         if let url = url {
             return url.absoluteString.hasValidUrl
         }
         return false
     }
-    
+
     var hasLocalUrl: Bool {
         if let url = url {
             return url.absoluteString.hasLocalUrl
         }
         return false
     }
-    
+
     @discardableResult
     func load(urlStr: String) -> Bool {
-        if  urlStr.hasValidUrl {
+        if urlStr.hasValidUrl {
             let encodedUrlStr = urlStr.contains("%") ? urlStr : urlStr.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
             guard let url = URL(string: encodedUrlStr) else {
                 log.error("invalud url load. url: \(encodedUrlStr)")
@@ -129,7 +129,7 @@ class EGWebView: WKWebView {
         loadHtml(code: NETWORK_ERROR.INVALID_URL)
         return false
     }
-    
+
     func loadHtml(code: NETWORK_ERROR) {
         let path: String = { () -> String in
             if code == NETWORK_ERROR.TIMEOUT { return Bundle.main.path(forResource: "timeout", ofType: "html")! }
@@ -140,7 +140,7 @@ class EGWebView: WKWebView {
         }()
         loadFileURL(URL(fileURLWithPath: path), allowingReadAccessTo: URL(fileURLWithPath: path))
     }
-    
+
     func loadHtml(error: NSError) {
         let errorType = { () -> EGWebView.NETWORK_ERROR in
             log.error("webview load error. code: \(error.code)")
@@ -157,10 +157,10 @@ class EGWebView: WKWebView {
         }()
         loadHtml(code: errorType)
     }
-    
+
     func takeThumbnail() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(frame.size, true, 0)
-        self.drawHierarchy(in: self.bounds, afterScreenUpdates: false)
+        drawHierarchy(in: bounds, afterScreenUpdates: false)
         let snapshotImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return snapshotImage

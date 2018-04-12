@@ -13,7 +13,7 @@ class Favorite: Object {
     @objc dynamic var id: String = NSUUID().uuidString
     @objc dynamic var title: String = ""
     @objc dynamic var url: String = ""
-    
+
     override static func primaryKey() -> String? {
         return "id"
     }

@@ -17,25 +17,25 @@ public extension EnumEnumerable where Case: Hashable {
         var n = 0
         return AnyIterator {
             defer { n += 1 }
-            
+
             let next = withUnsafePointer(to: &n) {
                 UnsafeRawPointer($0).assumingMemoryBound(to: Case.self).pointee
             }
             return next.hashValue == n ? next : nil
         }
     }
-    
+
     public static func enumerate() -> EnumeratedSequence<AnySequence<Case>> {
-        return AnySequence(self.iterator).enumerated()
+        return AnySequence(iterator).enumerated()
     }
-    
+
     /// enumのcaseを配列で返す
     public static var cases: [Case] {
-        return Array(self.iterator)
+        return Array(iterator)
     }
-    
+
     /// enumのcase数を返す
     public static var count: Int {
-        return self.cases.count
+        return cases.count
     }
 }

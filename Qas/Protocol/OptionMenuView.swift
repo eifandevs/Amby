@@ -24,12 +24,12 @@ extension OptionMenuView where Self: UIView {
         tableView.allowsSelection = true
         tableView.tableFooterView = UIView()
         tableView.layer.cornerRadius = 2.5
-        
+
         if #available(iOS 11.0, *) {
             // safe area対応
             tableView.contentInsetAdjustmentBehavior = .never
         }
-        
+
         return tableView
     }
 }

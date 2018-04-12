@@ -6,44 +6,43 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import NSObject_Rx
+import RxCocoa
+import RxSwift
+import UIKit
 
 class BaseViewController: UIViewController {
-    
     private var baseLayer: BaseLayer?
     private var frontLayer: FrontLayer?
     private let viewModel = BaseViewControllerViewModel()
-    
+
     private var splash: SplashViewController?
     var isActive = true
-    
+
     /// 初回実行用
     private var onceExec = OnceExec()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         isActive = false
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         isActive = true
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
+
         onceExec.call {
             // iPhoneX対応を入れたいので、Lauout時にセットアップする
             setup()
@@ -53,9 +52,8 @@ class BaseViewController: UIViewController {
     deinit {
         log.debug("deinit called.")
     }
-    
-    private func setup() {
 
+    private func setup() {
         // iPhoneX対応
         if #available(iOS 11.0, *) {
             let insets = self.view.safeAreaInsets
@@ -73,7 +71,7 @@ class BaseViewController: UIViewController {
                 AppConst.BASE_LAYER_THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
             }
         }
-        
+
         // ヘルプ表示監視
         viewModel.rx_baseViewControllerViewModelDidPresentHelp
             .subscribe { [weak self] object in
@@ -86,11 +84,11 @@ class BaseViewController: UIViewController {
                 log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentHelp")
             }
             .disposed(by: rx.disposeBag)
-        
+
         splash = SplashViewController()
         splash!.view.frame.size = view.frame.size
         splash!.view.frame.origin = CGPoint.zero
-        
+
         // スプラッシュ終了監視
         splash!.rx_splashViewControllerDidEndDrawing
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
@@ -100,7 +98,7 @@ class BaseViewController: UIViewController {
                 if let splash = self.splash {
                     UIView.animate(withDuration: 0.3, animations: {
                         splash.view.alpha = 0
-                    }, completion: { (finished) in
+                    }, completion: { finished in
                         if finished {
                             splash.view.removeFromSuperview()
                             splash.removeFromParentViewController()
@@ -111,18 +109,18 @@ class BaseViewController: UIViewController {
                 log.eventOut(chain: "rx_splashViewControllerDidEndDrawing")
             }
             .disposed(by: rx.disposeBag)
-        
+
         view.addSubview(splash!.view)
-        
+
         // ページ情報初期化
         PageHistoryDataModel.s.initialize()
-        
+
         // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
-        baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: self.view.bounds.size))
-        
+        baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: view.bounds.size))
+
         // ベースレイヤー無効化監視
         baseLayer!.rx_baseLayerDidInvalidate
-            .subscribe{ [weak self] object in
+            .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_baseLayerDidInvalidate")
                 guard let `self` = self else { return }
                 if let direction = object.element {
@@ -142,12 +140,12 @@ class BaseViewController: UIViewController {
                 log.eventOut(chain: "rx_baseLayerDidInvalidate")
             }
             .disposed(by: rx.disposeBag)
-        
+
         view.addSubview(baseLayer!)
-        
+
         view.bringSubview(toFront: splash!.view)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -161,25 +159,26 @@ class BaseViewController: UIViewController {
             baseLayer!.removeFromSuperview()
             baseLayer = nil
         }
-        
+
         if frontLayer != nil {
             frontLayer!.mRelease()
             frontLayer!.removeFromSuperview()
             frontLayer = nil
         }
-        
+
         if splash != nil {
             splash!.view.removeFromSuperview()
             splash!.removeFromParentViewController()
             splash = nil
         }
     }
-    
-// MARK: WebView Touch
+
+    // MARK: WebView Touch
+
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         if Bundle(for: type(of: viewControllerToPresent)).bundleIdentifier == "com.apple.WebKit" {
             if let orgActionSheet = viewControllerToPresent as? UIAlertController, let url = orgActionSheet.title {
-                if ((orgActionSheet.preferredStyle == .actionSheet) && (orgActionSheet.title != nil)) {
+                if (orgActionSheet.preferredStyle == .actionSheet) && (orgActionSheet.title != nil) {
                     // webviewを長押しされたら、そのURLで新しいタブを作成する
                     if url.hasValidUrl {
                         viewModel.insertByEventPageHistoryDataModel(url: url)

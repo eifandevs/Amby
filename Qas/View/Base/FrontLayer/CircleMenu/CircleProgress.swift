@@ -10,41 +10,41 @@ import Foundation
 import UIKit
 
 class CircleProgress: UIView {
-    
     private var circle: UIView
     private var progress: CAShapeLayer!
     private var progressTimer: Timer!
-    private var animationFinishAction: (() -> ())?
-    
+    private var animationFinishAction: (() -> Void)?
+
     override init(frame: CGRect) {
         circle = UIView()
         circle.layoutIfNeeded()
-        
+
         super.init(frame: frame)
         createProgress()
         circle.layer.addSublayer(progress)
-        addSubview(self.circle)
+        addSubview(circle)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         log.debug("deinit called.")
     }
-    
+
     // MARK: Public Method
-    func start(complition: (() -> ())?) {
+
+    func start(complition: (() -> Void)?) {
         invalidate()
         if let _complition = complition {
             animationFinishAction = _complition
         }
         createProgress()
-        progressTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(self.updateProgress), userInfo: nil, repeats: true)
+        progressTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
         progressTimer.fire()
     }
-    
+
     func invalidate() {
         if progressTimer != nil && progressTimer.isValid {
             progressTimer.invalidate()
@@ -54,11 +54,12 @@ class CircleProgress: UIView {
             progress = nil
         }
     }
-    
-// MARK: Private Method
+
+    // MARK: Private Method
+
     func createProgress() {
-        let centerPoint = CGPoint(x: self.bounds.size.width / 2, y: self.bounds.size.height / 2)
-        let circleRadius : CGFloat = self.bounds.size.width / 4
+        let centerPoint = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
+        let circleRadius: CGFloat = bounds.size.width / 4
         let circlePath = UIBezierPath(arcCenter: centerPoint, radius: circleRadius, startAngle: CGFloat(-0.5 * .pi), endAngle: CGFloat(1.5 * .pi), clockwise: true)
         progress = CAShapeLayer()
         progress.path = circlePath.cgPath
@@ -69,15 +70,15 @@ class CircleProgress: UIView {
         progress.strokeEnd = 0
         circle.layer.addSublayer(progress)
     }
-    
-    @objc func updateProgress(tiemr: Timer) {
+
+    @objc func updateProgress(tiemr _: Timer) {
         progress.strokeEnd += 0.01
-        
+
         if progress.strokeEnd >= 1.15 {
             // アニメーション終了前
             superview?.isUserInteractionEnabled = false
         }
-        
+
         if progress.strokeEnd >= 1.25 {
             // アニメーション終了
             log.debug("circle animation stop")
@@ -86,5 +87,4 @@ class CircleProgress: UIView {
             animationFinishAction?()
         }
     }
-    
 }

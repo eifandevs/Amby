@@ -16,7 +16,7 @@ extension DispatchQueue {
             DispatchQueue.main.sync(execute: work)
         }
     }
-    
+
     class func mainSyncSafe<T>(execute work: () throws -> T) rethrows -> T {
         if Thread.isMainThread {
             return try work()

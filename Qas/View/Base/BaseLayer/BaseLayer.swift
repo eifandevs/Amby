@@ -7,17 +7,17 @@
 //
 
 import Foundation
-import UIKit
-import RxSwift
-import RxCocoa
 import NSObject_Rx
+import RxCocoa
+import RxSwift
+import UIKit
 
 /// ヘッダーとボディとフッターの管理
 /// BaseViewからの通知をHeaderViewに伝える
 class BaseLayer: UIView {
     /// 無効化通知用RX
     let rx_baseLayerDidInvalidate = PublishSubject<EdgeSwipeDirection>()
-    
+
     let viewModel = BaseLayerViewModel()
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT))
     let baseViewOriginY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER_HEADER_HEIGHT, DeviceConst.STATUS_BAR_HEIGHT)
@@ -40,7 +40,7 @@ class BaseLayer: UIView {
         // キーボード監視
         // キーボード表示の処理(フォームの自動設定)
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
-            .subscribe { [weak self] notification in
+            .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_UIKeyboardDidShow")
                 guard let `self` = self else { return }
                 if !self.isHeaderViewEditing {
@@ -49,17 +49,17 @@ class BaseLayer: UIView {
                 }
                 log.eventOut(chain: "rx_UIKeyboardDidShow")
             }
-            .disposed(by: self.rx.disposeBag)
-        
+            .disposed(by: rx.disposeBag)
+
         // フォアグラウンド時にベースビューの位置をMinにする
         NotificationCenter.default.rx.notification(.UIApplicationWillEnterForeground, object: nil)
-            .subscribe { [weak self] notification in
+            .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_UIApplicationWillEnterForeground")
                 guard let `self` = self else { return }
                 self.baseView.slideToMax()
                 log.eventOut(chain: "rx_UIApplicationWillEnterForeground")
             }
-            .disposed(by: self.rx.disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // BaseViewスワイプ監視
         baseView.rx_baseViewDidEdgeSwiped
@@ -79,7 +79,7 @@ class BaseLayer: UIView {
                 log.eventOut(chain: "rx_baseViewDidEdgeSwiped")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // BaseViewスライド監視
         baseView.rx_baseViewDidSlide
             .subscribe { [weak self] object in
@@ -103,7 +103,7 @@ class BaseLayer: UIView {
 //                log.eventOut(chain: "rx_baseViewDidSlideToMax")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // BaseViewスライドMin監視
         baseView.rx_baseViewDidSlideToMin
             .subscribe { [weak self] _ in
@@ -114,7 +114,7 @@ class BaseLayer: UIView {
 //                log.eventOut(chain: "rx_baseViewDidSlideToMin")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // HeaderView編集開始監視
         headerView.rx_headerViewDidBeginEditing
             .subscribe { [weak self] _ in
@@ -123,7 +123,7 @@ class BaseLayer: UIView {
                 // 履歴検索を行うので、事前に永続化しておく
                 CommonHistoryDataModel.s.store()
                 PageHistoryDataModel.s.store()
-                
+
                 self.isHeaderViewEditing = true
                 self.searchMenuTableView = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
                 // サーチメニュー編集終了監視
@@ -135,7 +135,7 @@ class BaseLayer: UIView {
                         log.eventOut(chain: "rx_searchMenuDidEndEditing")
                     }
                     .disposed(by: self.rx.disposeBag)
-                
+
                 // サーチメニュークローズ監視
                 self.searchMenuTableView!.rx_searchMenuDidClose
                     .subscribe { [weak self] _ in
@@ -150,7 +150,7 @@ class BaseLayer: UIView {
                 log.eventOut(chain: "rx_headerViewDidBeginEditing")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // HeaderView編集終了監視
         headerView.rx_headerViewDidEndEditing
             .subscribe { [weak self] _ in
@@ -163,34 +163,36 @@ class BaseLayer: UIView {
                 log.eventOut(chain: "rx_headerViewDidEndEditing")
             }
             .disposed(by: rx.disposeBag)
-        
+
         addSubview(baseView)
         addSubview(headerView)
         addSubview(footerView)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     // MARK: Public Method
+
     func validateUserInteraction() {
         baseView.validateUserInteraction()
     }
-    
+
     /// 解放処理
     func mRelease() {
         baseView.removeFromSuperview()
         headerView.removeFromSuperview()
         footerView.removeFromSuperview()
     }
-    
+
     // MARK: Private Method
+
     /// 編集モード終了
     private func endEditing() {
         EGApplication.sharedMyApplication.egDelegate = baseView
@@ -202,14 +204,20 @@ class BaseLayer: UIView {
 }
 
 // MARK: EGApplication Delegate
+
 extension BaseLayer: EGApplicationDelegate {
+
     // MARK: Screen Event
-    func screenTouchBegan(touch: UITouch) {
+
+    func screenTouchBegan(touch _: UITouch) {
     }
-    func screenTouchEnded(touch: UITouch) {
+
+    func screenTouchEnded(touch _: UITouch) {
     }
-    func screenTouchMoved(touch: UITouch) {
+
+    func screenTouchMoved(touch _: UITouch) {
     }
-    func screenTouchCancelled(touch: UITouch) {
+
+    func screenTouchCancelled(touch _: UITouch) {
     }
 }

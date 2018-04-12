@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class BaseViewControllerViewModel {
-    
     // ヘルプ表示通知用RX
     let rx_baseViewControllerViewModelDidPresentHelp = OperationDataModel.s.rx_operationDataModelDidChange
         .flatMap { object -> Observable<(subtitle: String, message: String)> in
@@ -29,7 +28,7 @@ final class BaseViewControllerViewModel {
     deinit {
         log.debug("deinit called.")
     }
-    
+
     func insertByEventPageHistoryDataModel(url: String) {
         PageHistoryDataModel.s.insert(url: url)
     }

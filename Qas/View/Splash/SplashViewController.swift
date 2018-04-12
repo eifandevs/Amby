@@ -6,17 +6,17 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import NSObject_Rx
+import RxCocoa
+import RxSwift
+import UIKit
 
 class SplashViewController: UIViewController {
     // スプラッシュ終了通知用RX
     let rx_splashViewControllerDidEndDrawing = PublishSubject<()>()
-    
+
     @IBOutlet var contentView: UIView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -25,11 +25,12 @@ class SplashViewController: UIViewController {
         super.viewWillAppear(animated)
         rx_splashViewControllerDidEndDrawing.onNext(())
     }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     deinit {
         log.debug("deinit called.")
     }

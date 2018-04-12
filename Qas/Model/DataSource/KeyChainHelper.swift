@@ -14,7 +14,7 @@ class KeyChainHelper {
         let keychain = Keychain(service: key)
         keychain[key] = value
     }
-    
+
     static func getToken(key: String) -> String? {
         let keychain = Keychain(service: key)
         return keychain[key]

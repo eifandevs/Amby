@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import UIKit
-import RealmSwift
 import Realm
+import RealmSwift
+import UIKit
 
 final class CommonDao {
     static let s = CommonDao()
@@ -17,7 +17,7 @@ final class CommonDao {
     let realmEncryptionToken: String!
     let keychainServiceToken: String!
     let keychainIvToken: String!
-    
+
     private init() {
         // キーチェーンからトークン取得
         realmEncryptionToken = KeyChainHelper.getToken(key: AppConst.KEY_REALM_TOKEN)
@@ -37,24 +37,26 @@ final class CommonDao {
             realm.add(data, update: true)
         }
     }
-    
+
     func delete(data: [Object]) {
         try! realm.write {
             realm.delete(data)
         }
     }
-    
+
     func select(type: Object.Type) -> [Object] {
         return realm.objects(type).map { $0 }
     }
 
     /// UDデフォルト値登録
     func registerDefaultData() {
-        UserDefaults.standard.register(defaults: [AppConst.KEY_LOCATION_INDEX: AppConst.UD_LOCATION_INDEX,
-                                                  AppConst.KEY_CURRENT_CONTEXT: AppConst.UD_CURRENT_CONTEXT,
-                                                  AppConst.KEY_AUTO_SCROLL_INTERVAL: AppConst.UD_AUTO_SCROLL,
-                                                  AppConst.KEY_COMMON_HISTORY_SAVE_COUNT: AppConst.UD_COMMON_HISTORY_SAVE_COUNT,
-                                                  AppConst.KEY_PAGE_HISTORY_SAVE_COUNT: AppConst.UD_PAGE_HISTORY_SAVE_COUNT,
-                                                  AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT: AppConst.UD_SEARCH_HISTORY_SAVE_COUNT])
+        UserDefaults.standard.register(defaults: [
+            AppConst.KEY_LOCATION_INDEX: AppConst.UD_LOCATION_INDEX,
+            AppConst.KEY_CURRENT_CONTEXT: AppConst.UD_CURRENT_CONTEXT,
+            AppConst.KEY_AUTO_SCROLL_INTERVAL: AppConst.UD_AUTO_SCROLL,
+            AppConst.KEY_COMMON_HISTORY_SAVE_COUNT: AppConst.UD_COMMON_HISTORY_SAVE_COUNT,
+            AppConst.KEY_PAGE_HISTORY_SAVE_COUNT: AppConst.UD_PAGE_HISTORY_SAVE_COUNT,
+            AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT: AppConst.UD_SEARCH_HISTORY_SAVE_COUNT,
+        ])
     }
 }

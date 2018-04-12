@@ -16,7 +16,7 @@ class Form: Object {
     @objc dynamic var url: String = ""
     @objc dynamic var date: Date = Date()
     let inputs = List<Input>()
-    
+
     override static func primaryKey() -> String? {
         return "id"
     }

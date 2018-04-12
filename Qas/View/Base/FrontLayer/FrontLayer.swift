@@ -6,17 +6,17 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
-import Foundation
-import UIKit
 import CoreLocation
-import RxSwift
-import RxCocoa
+import Foundation
 import NSObject_Rx
+import RxCocoa
+import RxSwift
+import UIKit
 
 class FrontLayer: UIView {
     // 無効化通知用RX
     let rx_frontLayerDidInvalidate = PublishSubject<()>()
-    
+
     private let viewModel = FrontLayerViewModel()
     private var swipeDirection: EdgeSwipeDirection!
     private var optionMenu: OptionMenuTableView?
@@ -24,7 +24,7 @@ class FrontLayer: UIView {
     private var circleMenu: CircleMenu!
 
     private let circleButtonRadius = 43
-    
+
     convenience init(frame: CGRect, swipeDirection: EdgeSwipeDirection) {
         self.init(frame: frame)
         // スワイプ方向の保持
@@ -35,9 +35,9 @@ class FrontLayer: UIView {
             [
                 CircleMenuItem(image: R.image.circlemenuMenu(), tapAction: { [weak self] (initialPt: CGPoint) in
                     guard let `self` = self else { return }
-                    
+
                     // オプションメニューの表示位置を計算
-                    let ptX = self.swipeDirection == .left ? initialPt.x / 6 : DeviceConst.DISPLAY_SIZE.width - 250  - (DeviceConst.DISPLAY_SIZE.width - initialPt.x) / 6
+                    let ptX = self.swipeDirection == .left ? initialPt.x / 6 : DeviceConst.DISPLAY_SIZE.width - 250 - (DeviceConst.DISPLAY_SIZE.width - initialPt.x) / 6
                     let ptY: CGFloat = { () -> CGFloat in
                         let y = initialPt.y - AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height / 2
                         if y < 0 {
@@ -82,7 +82,7 @@ class FrontLayer: UIView {
                 CircleMenuItem(image: R.image.circlemenuAdd(), tapAction: { _ in
                     log.debug("circle menu event. event: add")
                     self.viewModel.insertPageHistoryDataModel()
-                })
+                }),
             ],
             [
                 CircleMenuItem(image: R.image.circlemenuUrl(), tapAction: { _ in
@@ -108,11 +108,11 @@ class FrontLayer: UIView {
                 CircleMenuItem(image: R.image.circlemenuForm(), tapAction: { _ in
                     log.debug("circle menu event. event: home")
 //                    self.viewModel.executeOperationDataModel(operation: .home)
-                })
-            ]
+                }),
+            ],
         ]
         circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: circleButtonRadius, height: circleButtonRadius)), menuItems: menuItems, swipeDirection: swipeDirection)
-        
+
         // 有効化監視
         circleMenu.rx_circleMenuDidActive
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
@@ -123,7 +123,7 @@ class FrontLayer: UIView {
                 self.overlay = UIButton(frame: frame)
                 self.overlay.backgroundColor = UIColor.darkGray
                 self.overlay.alpha = 0
-                
+
                 // ボタンタップ
                 self.overlay.rx.tap
                     .subscribe(onNext: { [weak self] in
@@ -133,7 +133,7 @@ class FrontLayer: UIView {
                         log.eventOut(chain: "rx_tap")
                     })
                     .disposed(by: self.rx.disposeBag)
-                
+
                 self.addSubview(self.overlay)
                 // addSubviewした段階だと、サークルメニューより前面に配置されているので、最背面に移動する
                 self.sendSubview(toBack: self.overlay)
@@ -143,7 +143,7 @@ class FrontLayer: UIView {
                 log.eventOut(chain: "rx_circleMenuDidActive")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // クローズ監視
         circleMenu.rx_circleMenuDidClose
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
@@ -155,7 +155,7 @@ class FrontLayer: UIView {
                         UIView.animate(withDuration: 0.15, animations: {
                             // ここでおちる
                             overlay.alpha = 0
-                        }, completion: { (finished) in
+                        }, completion: { finished in
                             if finished {
                                 self.rx_frontLayerDidInvalidate.onNext(())
                             }
@@ -167,49 +167,50 @@ class FrontLayer: UIView {
                 log.eventOut(chain: "rx_circleMenuDidClose")
             }
             .disposed(by: rx.disposeBag)
-        
+
         addSubview(circleMenu)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     /// 解放処理
     func mRelease() {
         // マニュアルで解放しないと何故かdeinitが呼ばれない
-        if self.optionMenu != nil {
-            self.optionMenu!.removeFromSuperview()
-            self.optionMenu = nil
+        if optionMenu != nil {
+            optionMenu!.removeFromSuperview()
+            optionMenu = nil
         }
-        
-        if self.overlay != nil {
-            self.overlay!.removeFromSuperview()
-            self.overlay = nil
+
+        if overlay != nil {
+            overlay!.removeFromSuperview()
+            overlay = nil
         }
-        
-        if self.circleMenu != nil {
-            self.circleMenu!.removeFromSuperview()
-            self.circleMenu = nil
+
+        if circleMenu != nil {
+            circleMenu!.removeFromSuperview()
+            circleMenu = nil
         }
     }
-    
+
     deinit {
         log.debug("deinit called.")
     }
-    
+
     // MARK: Private Method
+
     private func close() {
         circleMenu.invalidate()
         UIView.animate(withDuration: 0.15, animations: {
             self.overlay.alpha = 0
             self.optionMenu?.alpha = 0
             self.alpha = 0
-        }, completion: { (finished) in
+        }, completion: { finished in
             if finished {
                 self.optionMenu?.removeFromSuperview()
                 self.optionMenu = nil

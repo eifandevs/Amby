@@ -12,6 +12,7 @@ import UIKit
 /// アプリ内Enumクラス
 
 // MARK: - オペレーション
+
 enum UserOperation {
     case autoScroll
     case home

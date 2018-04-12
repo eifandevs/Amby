@@ -16,25 +16,25 @@ class PageHistory: NSObject, NSCoding {
         case back = 1
         case forward = 2
     }
-    
+
     var context: String = NSUUID().uuidString
     var url: String = ""
     var title: String = ""
     var backForwardList = [String]()
     var listIndex: Int = 0
-    
+
     override init() {
         super.init()
     }
-    
-    init(context: String = NSUUID().uuidString, url: String = "", title: String = "", backForwardList: [String] = [], listIndex: Int = 0, operation: Int = 0) {
+
+    init(context: String = NSUUID().uuidString, url: String = "", title: String = "", backForwardList: [String] = [], listIndex: Int = 0, operation _: Int = 0) {
         self.context = context
         self.url = url
         self.title = title
         self.backForwardList = backForwardList
         self.listIndex = listIndex
     }
-    
+
     required convenience init?(coder decoder: NSCoder) {
         let context = decoder.decodeObject(forKey: "context") as! String
         let url = decoder.decodeObject(forKey: "url") as! String
@@ -43,7 +43,7 @@ class PageHistory: NSObject, NSCoding {
         let listIndex = decoder.decodeInteger(forKey: "listIndex")
         self.init(context: context, url: url, title: title, backForwardList: backForwardList, listIndex: listIndex)
     }
-    
+
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(context, forKey: "context")
         aCoder.encode(url, forKey: "url")

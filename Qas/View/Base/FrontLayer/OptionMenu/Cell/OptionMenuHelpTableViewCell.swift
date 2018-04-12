@@ -9,9 +9,8 @@
 import UIKit
 
 class OptionMenuHelpTableViewCell: UITableViewCell {
+    @IBOutlet var titleLabel: UILabel!
 
-    @IBOutlet weak var titleLabel: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,7 +21,7 @@ class OptionMenuHelpTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     /// ビューモデルデータ反映
     func setViewModelData(row: OptionMenuHelpTableViewModel.Row) {
         titleLabel.text = row.title

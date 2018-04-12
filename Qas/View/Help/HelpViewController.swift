@@ -6,32 +6,31 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import NSObject_Rx
+import RxCocoa
+import RxSwift
 import UIKit
 import VerticalAlignmentLabel
-import RxSwift
-import RxCocoa
-import NSObject_Rx
 
 class HelpViewController: UIViewController {
-
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var closeButton: CornerRadiusButton!
-    @IBOutlet weak var messageLabel: VerticalAlignmentLabel!
-    @IBOutlet weak var subtitleLabel: VerticalAlignmentLabel!
-    
+    @IBOutlet var closeButton: CornerRadiusButton!
+    @IBOutlet var messageLabel: VerticalAlignmentLabel!
+    @IBOutlet var subtitleLabel: VerticalAlignmentLabel!
+
     private var subtitle: String = ""
     private var message: String = ""
-    
+
     convenience init(subtitle: String, message: String) {
         self.init(nibName: R.nib.helpViewController.name, bundle: nil)
         self.subtitle = subtitle
         self.message = message
     }
-    
+
     deinit {
         log.debug("deinit called.")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

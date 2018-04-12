@@ -15,7 +15,7 @@ final class FormDataModel {
     func insert(forms: [Form]) {
         CommonDao.s.insert(data: forms)
     }
-    
+
     func select(id: String? = nil, url: String? = nil) -> [Form] {
         let forms = CommonDao.s.select(type: Form.self) as! [Form]
         if let id = id {
@@ -25,7 +25,7 @@ final class FormDataModel {
         }
         return forms
     }
-    
+
     func delete(forms: [Form]? = nil) {
         if let forms = forms {
             CommonDao.s.delete(data: forms)
@@ -34,6 +34,7 @@ final class FormDataModel {
             CommonDao.s.delete(data: select())
         }
     }
+
     /// フォーム情報の保存
     func store(webView: EGWebView) {
         if let title = webView.title, let host = webView.url?.host, let url = webView.url?.absoluteString {
@@ -41,22 +42,22 @@ final class FormDataModel {
             form.title = title
             form.host = host
             form.url = url
-            
-            webView.evaluate(script: "document.forms.length") { (object, error) in
+
+            webView.evaluate(script: "document.forms.length") { object, error in
                 if object != nil && error == nil {
                     let formLength = Int((object as? NSNumber)!)
                     if formLength > 0 {
-                        for i in 0...(formLength - 1) {
-                            webView.evaluate(script: "document.forms[\(i)].elements.length") { (object, error) in
+                        for i in 0 ... (formLength - 1) {
+                            webView.evaluate(script: "document.forms[\(i)].elements.length") { object, error in
                                 if (object != nil) && (error == nil) {
                                     let elementLength = Int((object as? NSNumber)!)
-                                    for j in 0...elementLength {
-                                        webView.evaluate(script: "document.forms[\(i)].elements[\(j)].type") { (object, error) in
-                                            if ((object != nil) && (error == nil)) {
+                                    for j in 0 ... elementLength {
+                                        webView.evaluate(script: "document.forms[\(i)].elements[\(j)].type") { object, error in
+                                            if (object != nil) && (error == nil) {
                                                 let type = object as? String
-                                                if ((type != "hidden") && (type != "submit") && (type != "checkbox")) {
+                                                if (type != "hidden") && (type != "submit") && (type != "checkbox") {
                                                     let input = Input()
-                                                    webView.evaluate(script: "document.forms[\(i)].elements[\(j)].value") { (object, error) in
+                                                    webView.evaluate(script: "document.forms[\(i)].elements[\(j)].value") { object, _ in
                                                         let value = object as! String
                                                         if value.characters.count > 0 {
                                                             input.type = type!
@@ -76,7 +77,7 @@ final class FormDataModel {
                     }
                 }
             }
-            
+
             // 有効なフォーム情報かを判定
             // 入力済みのフォームが一つでもあれば保存する
             if form.inputs.count > 0 {

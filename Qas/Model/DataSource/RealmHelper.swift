@@ -6,24 +6,23 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
-import RealmSwift
 import Realm
+import RealmSwift
 
 final class RealmHelper {
-    
     static func realmConfiguration(realmEncryptionToken: String) -> Realm.Configuration {
         var config = Realm.Configuration()
         config.encryptionKey = realmEncryptionToken.data(using: String.Encoding.utf8, allowLossyConversion: false)
         config.fileURL = RealmHelper.realmFileURL()
         return config
     }
-    
+
     static func realmFileURL() -> URL? {
         // Databaseディレクトリがなかったら生成する
         Util.createFolder(path: AppConst.PATH_DB)
-        
+
         let realmPath = AppConst.PATH_DB + "/transaction.realm"
-        
+
         return URL(fileURLWithPath: realmPath)
     }
 }

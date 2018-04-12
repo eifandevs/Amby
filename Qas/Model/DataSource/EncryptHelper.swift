@@ -6,8 +6,8 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
-import Foundation
 import CryptoSwift
+import Foundation
 
 class EncryptHelper {
     static func encrypt(serviceToken: String, ivToken: String, value: String) -> Data? {
@@ -21,13 +21,13 @@ class EncryptHelper {
             return nil
         }
     }
-    
+
     static func decrypt(serviceToken: String, ivToken: String, data: Data) -> String? {
         let input = data.toArray(type: UInt8.self)
         do {
             let aes = try AES(key: serviceToken, iv: ivToken)
             let decrypted = try aes.decrypt(input)
-            return decrypted.reduce("", { $0 + String(format: "%c", $1)})
+            return decrypted.reduce("", { $0 + String(format: "%c", $1) })
         } catch {
             log.error("decrypted error.")
             return nil

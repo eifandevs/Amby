@@ -9,12 +9,11 @@
 import Foundation
 
 final class OptionMenuTableViewModel {
-    
     // セル情報
     struct Row {
         let cellType: CellType
     }
-    
+
     /// セルタイプ
     enum CellType {
         case history
@@ -23,7 +22,7 @@ final class OptionMenuTableViewModel {
         case setting
         case help
         case app
-        
+
         var imageName: String {
             switch self {
             case .history: return R.image.option_menu_history.name
@@ -34,7 +33,7 @@ final class OptionMenuTableViewModel {
             case .app: return R.image.optionmenu_app.name
             }
         }
-        
+
         var title: String {
             switch self {
             case .history: return AppConst.OPTION_MENU_HISTORY
@@ -46,7 +45,7 @@ final class OptionMenuTableViewModel {
             }
         }
     }
-    
+
     // セル
     let rows = [
         Row(cellType: .history),
@@ -54,7 +53,7 @@ final class OptionMenuTableViewModel {
         Row(cellType: .favorite),
         Row(cellType: .setting),
         Row(cellType: .help),
-        Row(cellType: .app)
+        Row(cellType: .app),
     ]
     // 高さ
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
@@ -62,7 +61,7 @@ final class OptionMenuTableViewModel {
     var cellCount: Int {
         return rows.count
     }
-    
+
     /// スワイプ方向
     var swipeDirection: EdgeSwipeDirection?
 
@@ -70,7 +69,7 @@ final class OptionMenuTableViewModel {
     func getRow(indexPath: IndexPath) -> Row {
         return rows[indexPath.row]
     }
-    
+
     /// 詳細ビューのマージン取得
     func getOverViewMargin() -> CGPoint {
         if let swipeDirection = swipeDirection {
@@ -83,7 +82,7 @@ final class OptionMenuTableViewModel {
             return AppConst.FRONT_LAYER_OVER_VIEW_MARGIN
         }
     }
-    
+
     /// 履歴情報永続化
     func storeHistory() {
         CommonHistoryDataModel.s.store()

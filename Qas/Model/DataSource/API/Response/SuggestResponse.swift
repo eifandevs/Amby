@@ -13,4 +13,3 @@ struct SuggestResponse {
     // レスポンスがjsonではないので、codableを使用せず、マニュアルでマッピングする
     let data: [Any]
 }
-

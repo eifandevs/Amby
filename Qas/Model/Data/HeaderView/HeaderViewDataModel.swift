@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 /// ページ共通データモデル
 final class HeaderViewDataModel {
@@ -18,28 +18,28 @@ final class HeaderViewDataModel {
     let rx_headerViewDataModelDidUpdateHeaderFieldText = PublishSubject<String>()
     /// 編集開始通知用RX
     let rx_headerViewDataModelDidBeginEditing = PublishSubject<Bool>()
-    
+
     static let s = HeaderViewDataModel()
     let center = NotificationCenter.default
-    
+
     // プログレス
     private var progress = 0.f
-    
+
     // ヘッダーテキスト
     private var headerFieldText = ""
-    
+
     /// プログレス情報の更新
     func updateProgress(progress: CGFloat) {
         self.progress = progress
         rx_headerViewDataModelDidUpdateProgress.onNext(progress)
     }
-    
+
     /// ヘッダーテキストの更新
     func updateHeaderFieldText(text: String) {
         headerFieldText = text
         rx_headerViewDataModelDidUpdateHeaderFieldText.onNext(text)
     }
-    
+
     /// 編集開始通知
     func beginEditing(forceEditFlg: Bool) {
         rx_headerViewDataModelDidBeginEditing.onNext(forceEditFlg)

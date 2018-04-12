@@ -6,20 +6,19 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import NSObject_Rx
+import RxCocoa
+import RxSwift
+import UIKit
 
 class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
-
     // メニュークローズ通知用RX
     let rx_optionMenuFavoriteDidClose = PublishSubject<()>()
-    
-    let viewModel = OptionMenuFavoriteTableViewModel()
-    @IBOutlet weak var tableView: UITableView!
 
-    override init(frame: CGRect){
+    let viewModel = OptionMenuFavoriteTableViewModel()
+    @IBOutlet var tableView: UITableView!
+
+    override init(frame: CGRect) {
         super.init(frame: frame)
         loadNib()
     }
@@ -32,10 +31,10 @@ class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
     deinit {
         log.debug("deinit called.")
     }
-    
+
     func loadNib() {
         let view = Bundle.main.loadNibNamed(R.nib.optionMenuFavoriteTableView.name, owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
+        view.frame = bounds
 
         // 影
         addMenuShadow()
@@ -50,11 +49,11 @@ class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
         // カスタムビュー登録
         tableView.register(R.nib.optionMenuFavoriteTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuFavoriteCell.identifier)
 
-        self.addSubview(view)
+        addSubview(view)
 
         // ロングプレスで削除
         let longPressRecognizer = UILongPressGestureRecognizer()
-        
+
         longPressRecognizer.rx.event
             .subscribe { [weak self] sender in
                 log.eventIn(chain: "rx_longPress")
@@ -65,11 +64,11 @@ class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
                         let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
                         if let indexPath = indexPath {
                             let row = self.viewModel.getRow(indexPath: indexPath)
-                            
+
                             self.tableView.beginUpdates()
                             self.viewModel.removeRow(indexPath: indexPath, row: row)
                             self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                            
+
                             self.tableView.endUpdates()
                         }
                     }
@@ -77,14 +76,15 @@ class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
                 log.eventOut(chain: "rx_longPress")
             }
             .disposed(by: rx.disposeBag)
-        
+
         addGestureRecognizer(longPressRecognizer)
     }
 }
 
 // MARK: - TableViewDataSourceDelegate
+
 extension OptionMenuFavoriteTableView: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return viewModel.cellHeight
     }
 
@@ -96,14 +96,15 @@ extension OptionMenuFavoriteTableView: UITableViewDataSource {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return viewModel.cellCount
     }
 }
 
 // MARK: - TableViewDelegate
+
 extension OptionMenuFavoriteTableView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セル情報取得
         let row = viewModel.getRow(indexPath: indexPath)
         // ページを表示

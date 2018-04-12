@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class FavoriteDataModel {
     /// お気に入り追加通知用RX
@@ -17,16 +17,16 @@ final class FavoriteDataModel {
     let rx_favoriteDataModelDidRemove = PublishSubject<()>()
     /// お気に入り更新通知用RX
     let rx_favoriteDataModelDidReload = PublishSubject<String>()
-    
+
     static let s = FavoriteDataModel()
     /// 通知センター
     private let center = NotificationCenter.default
-    
+
     func insert(favorites: [Favorite]) {
         CommonDao.s.insert(data: favorites)
         rx_favoriteDataModelDidInsert.onNext(())
     }
-    
+
     func select(id: String? = nil, url: String? = nil) -> [Favorite] {
         let favorites = CommonDao.s.select(type: Favorite.self) as! [Favorite]
         if let id = id {
@@ -36,7 +36,7 @@ final class FavoriteDataModel {
         }
         return favorites
     }
-    
+
     func delete(favorites: [Favorite]? = nil, notify: Bool = true) {
         if let favorites = favorites {
             CommonDao.s.delete(data: favorites)
@@ -44,20 +44,20 @@ final class FavoriteDataModel {
             // 削除対象が指定されていない場合は、すべて削除する
             CommonDao.s.delete(data: select())
         }
-        
+
         // 通知する
         if notify {
             rx_favoriteDataModelDidRemove.onNext(())
         }
     }
-    
+
     /// お気に入りの更新チェック
     func reload() {
         if let currentHistory = PageHistoryDataModel.s.currentHistory {
             rx_favoriteDataModelDidReload.onNext(currentHistory.url)
         }
     }
-    
+
     /// お気に入り登録
     func register() {
         if let currentHistory = PageHistoryDataModel.s.currentHistory {
@@ -65,7 +65,7 @@ final class FavoriteDataModel {
                 let fd = Favorite()
                 fd.title = currentHistory.title
                 fd.url = currentHistory.url
-                
+
                 if let favorite = select(url: fd.url).first {
                     // すでに登録済みの場合は、お気に入りから削除する
                     delete(favorites: [favorite])

@@ -11,19 +11,19 @@ import Foundation
 // 配列の重複を削除
 extension Array where Element: Equatable {
     /// オブジェクト指定で削除
-    mutating func remove<T: Equatable>(obj : T) -> Array {
-        self = self.filter({$0 as? T != obj})
+    mutating func remove<T: Equatable>(obj: T) -> Array {
+        self = filter({ $0 as? T != obj })
         return self
     }
-    
+
     /// 複数のオブジェクトを安全にとりだす
     func objects(for: Int) -> Array {
-        if self.count == 0 {
+        if count == 0 {
             return self
         }
-        guard 0...self.count-1 ~= `for` else {
-            return objects(for: self.count - 1)
+        guard 0 ... count - 1 ~= `for` else {
+            return objects(for: count - 1)
         }
-        return Array(self[0...`for`])
+        return Array(self[0 ... `for`])
     }
 }

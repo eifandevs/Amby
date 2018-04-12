@@ -7,32 +7,32 @@
 //
 
 import Foundation
-import UIKit
-import RxSwift
-import RxCocoa
 import NSObject_Rx
+import RxCocoa
+import RxSwift
+import UIKit
 
 class SearchMenuTableView: UIView {
     /// 編集終了通知用RX
     let rx_searchMenuDidEndEditing = PublishSubject<()>()
     /// メニュークローズ通知用RX
     let rx_searchMenuDidClose = PublishSubject<()>()
-    
+
     private let viewModel: SearchMenuTableViewModel = SearchMenuTableViewModel()
     private var tapRecognizer: UITapGestureRecognizer!
     private var overlay: UIButton?
-    
+
     private var tableView: UITableView = UITableView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         isUserInteractionEnabled = true
-        
+
         backgroundColor = UIColor.white
-        
+
         tableView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        
+
         tableView.isUserInteractionEnabled = true
         tableView.separatorColor = UIColor.clear
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -44,12 +44,12 @@ class SearchMenuTableView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SearchMenuTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(SearchMenuTableViewCell.self))
-        
+
         // ジェスチャーを登録する
         // ジェスチャーの付け替えをするのでRX化しない
         tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
         addGestureRecognizer(tapRecognizer)
-        
+
         // キーボード表示の処理
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
             .subscribe { [weak self] _ in
@@ -72,7 +72,7 @@ class SearchMenuTableView: UIView {
             .disposed(by: rx.disposeBag)
 
         addSubview(tableView)
-        
+
         // 画面更新通知監視
         viewModel.rx_searchMenuViewWillUpdateLayout
             .subscribe { [weak self] _ in
@@ -86,7 +86,7 @@ class SearchMenuTableView: UIView {
                 }
                 log.eventOut(chain: "rx_searchMenuViewWillUpdateLayout")
             }.disposed(by: rx.disposeBag)
-        
+
         // 画面無効化監視
         viewModel.rx_searchMenuViewWillHide
             .subscribe { [weak self] _ in
@@ -96,7 +96,7 @@ class SearchMenuTableView: UIView {
                     self.alpha = 0
                     let button = UIButton(frame: frame)
                     button.backgroundColor = UIColor.clear
-                    
+
                     // ボタンタップ
                     button.rx.tap
                         .subscribe(onNext: { [weak self] in
@@ -108,14 +108,14 @@ class SearchMenuTableView: UIView {
                             log.eventOut(chain: "rx_tap")
                         })
                         .disposed(by: self.rx.disposeBag)
-                    
+
                     self.overlay = button
                     self.superview?.addSubview(button)
                 }
                 log.eventOut(chain: "rx_searchMenuViewWillHide")
             }.disposed(by: rx.disposeBag)
     }
-    
+
     deinit {
         log.debug("deinit called.")
         if let overlay = overlay {
@@ -124,24 +124,25 @@ class SearchMenuTableView: UIView {
         }
         NotificationCenter.default.removeObserver(self)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func getModelData() {
-        
     }
-    
-// MARK: Touch Event
-    @objc func tapped(sender: UITapGestureRecognizer) {
-        self.rx_searchMenuDidEndEditing.onNext(())
+
+    // MARK: Touch Event
+
+    @objc func tapped(sender _: UITapGestureRecognizer) {
+        rx_searchMenuDidEndEditing.onNext(())
     }
 }
 
 // MARK: UITableView Delegate
+
 extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return viewModel.googleSearchCellItem.count
@@ -153,15 +154,15 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
+
+    func numberOfSections(in _: UITableView) -> Int {
         return viewModel.sectionItem.count
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -177,24 +178,24 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+
+    func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.sectionItem[section]
     }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+    func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         return AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label : UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: 11)))
+
+    func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label: UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: 11)))
         label.backgroundColor = UIColor.black
         label.text = "   \(viewModel.sectionItem[section])"
         label.textColor = UIColor.white
         label.font = UIFont(name: AppConst.APP_FONT, size: 12)
         return label
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // とりあえずメニューを閉じる
         rx_searchMenuDidClose.onNext(())

@@ -20,7 +20,7 @@ class Thumbnail: UIButton {
     var thumbnailInfo: UIButton!
 
     private let frontBar = UILabel()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         // フロントバーを配置
@@ -38,10 +38,10 @@ class Thumbnail: UIButton {
         thumbnailInfo.alpha = 0
         addSubview(thumbnailInfo)
     }
-    
+
 //    convenience init(frame: CGRect) {
 //        self.init(frame: frame)
-        // プライベートモードの削除
+    // プライベートモードの削除
 //        if isPrivateMode {
 //            let privateIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width / 4.5, height: frame.size.height / 2))
 //            privateIcon.contentMode = .scaleAspectFit
@@ -53,8 +53,9 @@ class Thumbnail: UIButton {
     deinit {
         log.debug("deinit called.")
     }
-    
-// MARK: Public Method
+
+    // MARK: Public Method
+
     func setThumbnailTitle(title: String) {
         thumbnailInfo.transform = CGAffineTransform.identity
         thumbnailInfo.setTitle(title, for: .normal)
@@ -63,11 +64,11 @@ class Thumbnail: UIButton {
             width = frame.size.width * 2.2
         }
         thumbnailInfo.frame = CGRect(x: frame.size.width / 2, y: -30, width: width, height: frame.size.width / 3)
-        let angle2:CGFloat = CGFloat((-45.0 * Double.pi) / 180.0)
+        let angle2: CGFloat = CGFloat((-45.0 * Double.pi) / 180.0)
         thumbnailInfo.transform = CGAffineTransform(rotationAngle: angle2)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

@@ -7,27 +7,26 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class CommonHistoryDataModel {
-    
     let disposeBag = DisposeBag()
-    
+
     static let s = CommonHistoryDataModel()
-    
+
     /// ヒストリーバック通知用RX
     let rx_commonHistoryDataModelDidGoBack = PublishSubject<()>()
 
     /// ヒストリーフォワード通知用RX
     let rx_commonHistoryDataModelDidGoForward = PublishSubject<()>()
-    
+
     /// 閲覧履歴
     public private(set) var histories = [CommonHistory]()
 
     // 通知センター
     private let center = NotificationCenter.default
-    
+
     /// 前の履歴に移動
     func goBack() {
         rx_commonHistoryDataModelDidGoBack.onNext(())
@@ -42,7 +41,7 @@ final class CommonHistoryDataModel {
     func insert(history: CommonHistory) {
         histories.insert(history, at: 0)
     }
-    
+
     /// 閲覧履歴の永続化
     func store() {
         if histories.count > 0 {
@@ -59,11 +58,11 @@ final class CommonHistoryDataModel {
                     commonHistoryByDate[key]?.append($0)
                 }
             }
-            
+
             // 日付毎に分けた閲覧履歴を日付毎に保存していく
             for (key, value) in commonHistoryByDate {
                 let commonHistoryUrl = Util.commonHistoryUrl(date: key)
-                
+
                 let saveData: [CommonHistory] = { () -> [CommonHistory] in
                     do {
                         let data = try Data(contentsOf: commonHistoryUrl)
@@ -75,7 +74,7 @@ final class CommonHistoryDataModel {
                         return value
                     }
                 }()
-                
+
                 let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
                 do {
                     try commonHistoryData.write(to: commonHistoryUrl)
@@ -100,14 +99,14 @@ final class CommonHistoryDataModel {
         do {
             let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_COMMON_HISTORY)
             return list.map({ (path: String) -> String in
-                return path.substring(to: path.index(path.startIndex, offsetBy: 8))
+                path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).sorted(by: { $1.toDate() < $0.toDate() })
         } catch let error as NSError {
             log.error("failed to read common history. error: \(error.localizedDescription)")
         }
         return []
     }
-    
+
     /// 閲覧履歴の検索
     /// 日付指定
     func select(dateString: String) -> [CommonHistory] {
@@ -122,13 +121,13 @@ final class CommonHistoryDataModel {
         }
         return []
     }
-    
+
     /// 検索ワードと検索件数を指定する
     func select(title: String, readNum: Int) -> [CommonHistory] {
         var result: [CommonHistory] = []
         do {
             let readFiles = getList().reversed()
-            
+
             if readFiles.count > 0 {
                 let latestFiles = readFiles.prefix(readNum)
                 var allCommonHistory: [CommonHistory] = []
@@ -142,16 +141,16 @@ final class CommonHistoryDataModel {
                     }
                 })
                 let hitCommonHistory = allCommonHistory.filter({ (commonHistoryItem) -> Bool in
-                    return commonHistoryItem.title.lowercased().contains(title.lowercased())
+                    commonHistoryItem.title.lowercased().contains(title.lowercased())
                 })
-                
+
                 // 重複の削除
-                hitCommonHistory.forEach({ (item) in
+                hitCommonHistory.forEach({ item in
                     if result.count == 0 {
                         result.append(item)
                     } else {
                         let resultTitles: [String] = result.map({ (item) -> String in
-                            return item.title
+                            item.title
                         })
                         if !resultTitles.contains(item.title) {
                             result.append(item)
@@ -159,20 +158,19 @@ final class CommonHistoryDataModel {
                     }
                 })
             }
-            
         }
         return result
     }
-    
+
     /// 閲覧履歴の件数チェック
     // デフォルトで90日分の履歴を超えたら削除する
     func expireCheck() {
         let historySaveCount = Int(UserDefaults.standard.integer(forKey: AppConst.KEY_COMMON_HISTORY_SAVE_COUNT))
         let readFiles = getList().reversed()
-        
+
         if readFiles.count > historySaveCount {
             let deleteFiles = readFiles.prefix(readFiles.count - historySaveCount)
-            deleteFiles.forEach({ (key) in
+            deleteFiles.forEach({ key in
                 do {
                     try FileManager.default.removeItem(atPath: Util.commonHistoryPath(date: key))
                 } catch let error as NSError {
@@ -182,7 +180,7 @@ final class CommonHistoryDataModel {
             log.debug("deleteCommonHistory: \(deleteFiles)")
         }
     }
-    
+
     /// 特定の閲覧履歴を削除する
     /// [日付: [id, id, ...]]
     func delete(historyIds: [String: [String]]) {
@@ -194,7 +192,7 @@ final class CommonHistoryDataModel {
                     let data = try Data(contentsOf: commonHistoryUrl)
                     let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
                     let saveData = old.filter({ (historyItem) -> Bool in
-                        return !value.contains(historyItem._id)
+                        !value.contains(historyItem._id)
                     })
                     return saveData
                 } catch let error as NSError {
@@ -202,7 +200,7 @@ final class CommonHistoryDataModel {
                     return nil
                 }
             }()
-            
+
             if let saveData = saveData {
                 if saveData.count > 0 {
                     let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
@@ -219,12 +217,11 @@ final class CommonHistoryDataModel {
             }
         }
     }
-    
+
     /// 閲覧履歴を全て削除
     func delete() {
         histories = []
         Util.deleteFolder(path: AppConst.PATH_COMMON_HISTORY)
         Util.createFolder(path: AppConst.PATH_COMMON_HISTORY)
     }
-
 }

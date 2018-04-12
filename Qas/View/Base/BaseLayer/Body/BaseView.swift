@@ -7,11 +7,11 @@
 //
 
 import Foundation
+import NSObject_Rx
+import RxCocoa
+import RxSwift
 import UIKit
 import WebKit
-import RxSwift
-import RxCocoa
-import NSObject_Rx
 
 enum EdgeSwipeDirection: CGFloat {
     case right = 1
@@ -33,7 +33,7 @@ class BaseView: UIView {
 
     /// 編集状態にするクロージャ
     private var beginEditingWorkItem: DispatchWorkItem?
-    
+
     /// yポジションの最大最小値
     private let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER_HEADER_HEIGHT, DeviceConst.STATUS_BAR_HEIGHT)
 
@@ -70,6 +70,7 @@ class BaseView: UIView {
             }
         }
     }
+
     /// 現在表示中の全てのWebView。アプリを殺して、起動した後などは、WebViewインスタンスは入っていないが、配列のスペースは作成される
     private var webViews: [EGWebView?] = []
     /// 前後ページ
@@ -98,53 +99,57 @@ class BaseView: UIView {
     var isMoving: Bool {
         return !isLocateMax && !isLocateMin
     }
-    
+
     /// スクロール中フラグ
     var isScrolling: Bool = false
-    
+
     /// ベースビューがMaxポジションにあるかどうかのフラグ
     var isLocateMax: Bool {
         return frame.origin.y == positionY.max
     }
+
     /// ベースビューがMinポジションにあるかどうかのフラグ
     var isLocateMin: Bool {
         return frame.origin.y == positionY.min
     }
+
     /// 逆順方向のスクロールが可能かどうかのフラグ
     var canPastScroll: Bool {
         return front.scrollView.contentOffset.y > 0
     }
-    ///順方向のスクロールが可能かどうかのフラグ
+
+    /// 順方向のスクロールが可能かどうかのフラグ
     var canForwardScroll: Bool {
         return front.scrollView.contentOffset.y < front.scrollView.contentSize.height - front.frame.size.height
     }
+
     /// スクロールすべきかどうかのフラグ
     var shouldScroll: Bool {
         return front.scrollView.contentSize.height > AppConst.BASE_LAYER_BASE_HEIGHT
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         EGApplication.sharedMyApplication.egDelegate = self
-        
+
         // webviewsに初期値を入れる
-        (0...viewModel.webViewCount - 1).forEach { _ in
+        (0 ... viewModel.webViewCount - 1).forEach { _ in
             webViews.append(nil)
         }
-        
+
         let newWv = createWebView(size: frame.size, context: viewModel.currentContext)
         if let currentLocation = viewModel.currentLocation {
             webViews[currentLocation] = newWv
         } else {
             log.error("cannot get currentLocation.")
         }
-        
+
         // 前後のページ
         previousImageView.frame = CGRect(origin: CGPoint(x: -frame.size.width, y: 0), size: frame.size)
         nextImageView.frame = CGRect(origin: CGPoint(x: frame.size.width, y: 0), size: frame.size)
         addSubview(previousImageView)
         addSubview(nextImageView)
-        
+
         // ロードする
         if !viewModel.currentUrl.isEmpty {
             if let url = viewModel.currentUrl {
@@ -159,7 +164,7 @@ class BaseView: UIView {
                 self.viewModel.beginEditingHeaderViewDataModel()
             }
         }
-        
+
         // ページインサート監視
         viewModel.rx_baseViewModelDidInsertWebView
             .subscribe { [weak self] object in
@@ -178,7 +183,7 @@ class BaseView: UIView {
                         if let beginEditingWorkItem = self.beginEditingWorkItem {
                             beginEditingWorkItem.cancel()
                         }
-                        self.beginEditingWorkItem = DispatchWorkItem() { [weak self]  in
+                        self.beginEditingWorkItem = DispatchWorkItem() { [weak self] in
                             guard let `self` = self else { return }
                             self.viewModel.beginEditingHeaderViewDataModel()
                             self.beginEditingWorkItem = nil
@@ -206,7 +211,7 @@ class BaseView: UIView {
                         NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_TITLE, message: MessageConst.ALERT_FORM_EXIST, completion: { [weak self] in
                             inputForm.inputs.forEach {
                                 let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: $0.value)!
-                                self!.front.evaluateJavaScript("document.forms[\($0.formIndex)].elements[\($0.formInputIndex)].value=\"\(value)\"") { (object, error) in
+                                self!.front.evaluateJavaScript("document.forms[\($0.formIndex)].elements[\($0.formInputIndex)].value=\"\(value)\"") { _, _ in
                                 }
                             }
                         })
@@ -234,7 +239,7 @@ class BaseView: UIView {
                     if let beginEditingWorkItem = self.beginEditingWorkItem {
                         beginEditingWorkItem.cancel()
                     }
-                    self.beginEditingWorkItem = DispatchWorkItem() { [weak self]  in
+                    self.beginEditingWorkItem = DispatchWorkItem() { [weak self] in
                         guard let `self` = self else { return }
                         self.viewModel.beginEditingHeaderViewDataModel()
                         self.beginEditingWorkItem = nil
@@ -416,10 +421,10 @@ class BaseView: UIView {
             }
             .disposed(by: rx.disposeBag)
     }
-    
+
     deinit {
         log.debug("deinit called.")
-        webViews.forEach { (webView) in
+        webViews.forEach { webView in
             if let unwrappedWebView = webView {
                 if unwrappedWebView == front {
                     unwrappedWebView.removeObserver(self, forKeyPath: "estimatedProgress")
@@ -428,26 +433,26 @@ class BaseView: UIView {
         }
         NotificationCenter.default.removeObserver(self)
     }
-    
-    required init(coder aDecoder: NSCoder) {
+
+    required init(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-// MARK: KVO(Progress)
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
+    // MARK: KVO(Progress)
+
+    override func observeValue(forKeyPath keyPath: String?, of _: Any?, change _: [NSKeyValueChangeKey: Any]?, context _: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
-            //estimatedProgressが変更されたときに、プログレスバーの値を変更する。
+            // estimatedProgressが変更されたときに、プログレスバーの値を変更する。
             viewModel.updateProgressHeaderViewDataModel(object: CGFloat(front.estimatedProgress))
         }
     }
-    
-// MARK: Public Method
-    
+
+    // MARK: Public Method
+
     func getFrontUrl() -> String? {
         return front.url?.absoluteString
     }
-    
+
     private func slide(value: CGFloat) {
         rx_baseViewDidSlide.onNext(value)
         frame.origin.y += value
@@ -461,13 +466,13 @@ class BaseView: UIView {
         frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT
         front.frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT
     }
-    
+
     /// サイズの最小化
     func scaleToMin() {
         frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT - AppConst.BASE_LAYER_HEADER_HEIGHT + DeviceConst.STATUS_BAR_HEIGHT
         front.frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT - AppConst.BASE_LAYER_HEADER_HEIGHT + DeviceConst.STATUS_BAR_HEIGHT
     }
-    
+
     /// 高さの最大位置までスライド
     func slideToMax() {
         if !isLocateMax {
@@ -485,7 +490,7 @@ class BaseView: UIView {
             scaleToMax()
         }
     }
-    
+
     func validateUserInteraction() {
         isUserInteractionEnabled = true
         // グローバル画面タッチイベントを奪う
@@ -497,9 +502,9 @@ class BaseView: UIView {
             }
         }
     }
-    
-// MARK: Private Method
-    
+
+    // MARK: Private Method
+
     private func updateNetworkActivityIndicator() {
         let loadingWebViews: [EGWebView?] = webViews.filter({ (wv) -> Bool in
             if let wv = wv {
@@ -510,25 +515,25 @@ class BaseView: UIView {
         // 他にローディング中のwebviewがなければ、くるくるを停止する
         UIApplication.shared.isNetworkActivityIndicatorVisible = loadingWebViews.count < 1 ? false : true
     }
-    
+
     private func invalidateUserInteraction() {
         touchBeganPoint = nil
         isUserInteractionEnabled = false
         front.scrollView.isScrollEnabled = false
         front.scrollView.bounces = false
     }
-    
+
     private func startProgressObserving(target: EGWebView) {
         log.debug("start progress observe. target: \(target.context)")
 
-        //プログレスが変更されたことを取得
+        // プログレスが変更されたことを取得
         target.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(target.context))
         if target.isLoading == true {
             viewModel.updateProgressHeaderViewDataModel(object: CGFloat(target.estimatedProgress))
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = target.isLoading
     }
-    
+
     /// webviewを新規作成
     private func createWebView(size: CGSize? = nil, context: String?) -> EGWebView {
         let newWv = EGWebView(id: context)
@@ -543,10 +548,10 @@ class BaseView: UIView {
 
         // プログレスバー
         startProgressObserving(target: newWv)
-        
+
         return newWv
     }
-    
+
     // loadWebViewはwebviewスペースがある状態で新規作成するときにコールする
     private func loadWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
@@ -557,7 +562,7 @@ class BaseView: UIView {
             log.error("cannot get currentUrl.")
         }
     }
-    
+
     /// ページ情報保存
     private func saveMetaData(webView: EGWebView) {
         if let urlStr = webView.url?.absoluteString, let title = webView.title, !title.isEmpty {
@@ -575,7 +580,7 @@ class BaseView: UIView {
             }
         }
     }
-    
+
     private func saveThumbnail(webView: EGWebView, completion: @escaping (() -> Void)) {
         // サムネイルを保存
         DispatchQueue.mainSyncSafe {
@@ -601,7 +606,8 @@ class BaseView: UIView {
         }
     }
 
-// MARK: 自動スクロールタイマー通知
+    // MARK: 自動スクロールタイマー通知
+
     @objc func updateAutoScrolling(sender: Timer) {
         if let front = front {
             let bottomOffset = front.scrollView.contentSize.height - front.scrollView.bounds.size.height + front.scrollView.contentInset.bottom
@@ -617,6 +623,7 @@ class BaseView: UIView {
 }
 
 // MARK: EGApplication Delegate
+
 extension BaseView: EGApplicationDelegate {
     internal func screenTouchBegan(touch: UITouch) {
         isTouching = true
@@ -624,30 +631,30 @@ extension BaseView: EGApplicationDelegate {
         isChangingFront = false
         if touchBeganPoint!.x < AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
             swipeDirection = .left
-        } else if touchBeganPoint!.x > self.bounds.size.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
+        } else if touchBeganPoint!.x > bounds.size.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
             swipeDirection = .right
         } else {
             swipeDirection = .none
         }
     }
-    
+
     internal func screenTouchMoved(touch: UITouch) {
         if let touchBeganPoint = touchBeganPoint, front.scrollView.isScrollEnabled {
             let touchPoint = touch.location(in: self)
-            if ((swipeDirection == .left && touchPoint.x > AppConst.FRONT_LAYER_EDGE_SWIPE_EREA + 20) ||
-                (swipeDirection == .right && touchPoint.x < self.bounds.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA - 20)) {
+            if (swipeDirection == .left && touchPoint.x > AppConst.FRONT_LAYER_EDGE_SWIPE_EREA + 20) ||
+                (swipeDirection == .right && touchPoint.x < bounds.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA - 20) {
                 // エッジスワイプ検知
                 // 動画DL
 //                self.front.evaluateJavaScript("document.querySelector('video').currentSrc") { (object, error) in
 //                    log.warning("object: \(object)")
 //                }
-                
+
                 if viewModel.getBaseViewControllerStatus() {
                     invalidateUserInteraction()
                     rx_baseViewDidEdgeSwiped.onNext(swipeDirection)
                 }
             }
-            
+
             if webViews.count > 1 && swipeDirection == .none && front.isSwiping {
                 // フロントの左右に切り替え後のページを表示しとく
                 if previousImageView.image == nil && nextImageView.image == nil {
@@ -673,13 +680,13 @@ extension BaseView: EGApplicationDelegate {
             }
         }
     }
-    
-    internal func screenTouchEnded(touch: UITouch) {
+
+    internal func screenTouchEnded(touch _: UITouch) {
         isTouching = false
         if isChangingFront {
             isChangingFront = false
-            let targetOriginX = {() -> CGFloat in
-                if frame.origin.x  > frame.size.width / 3 {
+            let targetOriginX = { () -> CGFloat in
+                if frame.origin.x > frame.size.width / 3 {
                     return frame.size.width
                 } else if frame.origin.x < -(frame.size.width / 3) {
                     return -frame.size.width
@@ -689,7 +696,7 @@ extension BaseView: EGApplicationDelegate {
             }()
             UIView.animate(withDuration: 0.3, animations: {
                 self.frame.origin.x = targetOriginX
-            }, completion: { (finished) in
+            }, completion: { finished in
                 if finished {
                     // 入れ替える
                     if targetOriginX == self.frame.size.width {
@@ -706,7 +713,7 @@ extension BaseView: EGApplicationDelegate {
             })
         }
     }
-    
+
     internal func screenTouchCancelled(touch: UITouch) {
         isTouching = false
         screenTouchEnded(touch: touch)
@@ -714,12 +721,13 @@ extension BaseView: EGApplicationDelegate {
 }
 
 // MARK: ScrollView Delegate
+
 extension BaseView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         isScrolling = true
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
     }
-    
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // フロントのみ通知する
         if let front = front, isScrolling {
@@ -727,7 +735,7 @@ extension BaseView: UIScrollViewDelegate {
                 if scrollMovingPointY != 0 {
                     let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
                     var speed = scrollView.contentOffset.y - scrollMovingPointY
-                    if (scrollMovingPointY != 0 && !isOverScrolling || (canForwardScroll && isOverScrolling && speed < 0) || (isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0)) {
+                    if scrollMovingPointY != 0 && !isOverScrolling || (canForwardScroll && isOverScrolling && speed < 0) || (isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0) {
                         speed = -speed
                         // スライド処理
                         if speed > 0 {
@@ -768,9 +776,9 @@ extension BaseView: UIScrollViewDelegate {
             }
         }
     }
-    
+
     /// スクロールさせずに、その場で手を離した場合
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset _: UnsafeMutablePointer<CGPoint>) {
         // フロントのみ通知する
         if let front = front {
             if front.scrollView == scrollView {
@@ -783,7 +791,7 @@ extension BaseView: UIScrollViewDelegate {
                             if frame.origin.y > positionY.max / 2 {
                                 UIView.animate(withDuration: 0.2, animations: {
                                     self.slideToMax()
-                                }, completion: { (finished) in
+                                }, completion: { finished in
                                     if finished {
                                         self.isAnimating = false
                                     }
@@ -791,7 +799,7 @@ extension BaseView: UIScrollViewDelegate {
                             } else {
                                 UIView.animate(withDuration: 0.2, animations: {
                                     self.slideToMin()
-                                }, completion: { (finished) in
+                                }, completion: { finished in
                                     if finished {
                                         self.isAnimating = false
                                     }
@@ -804,7 +812,7 @@ extension BaseView: UIScrollViewDelegate {
             }
         }
     }
-    
+
     /// 慣性スクロールをした場合
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // フロントのみ通知する
@@ -819,7 +827,7 @@ extension BaseView: UIScrollViewDelegate {
                             if frame.origin.y > positionY.max / 2 {
                                 UIView.animate(withDuration: 0.2, animations: {
                                     self.slideToMax()
-                                }, completion: { (finished) in
+                                }, completion: { finished in
                                     if finished {
                                         self.isAnimating = false
                                     }
@@ -827,7 +835,7 @@ extension BaseView: UIScrollViewDelegate {
                             } else {
                                 UIView.animate(withDuration: 0.2, animations: {
                                     self.slideToMin()
-                                }, completion: { (finished) in
+                                }, completion: { finished in
                                     if finished {
                                         self.isAnimating = false
                                     }
@@ -843,88 +851,88 @@ extension BaseView: UIScrollViewDelegate {
 }
 
 // MARK: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate
+
 extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
-    
     /// force touchを無効にする
-    func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKPreviewElementInfo) -> Bool {
+    func webView(_: WKWebView, shouldPreviewElement _: WKPreviewElementInfo) -> Bool {
         return false
     }
-    
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
         let wv = webView as! EGWebView
         log.debug("loading start. context: \(wv.context)")
-        
+
         if wv.context == front.context {
             // フロントwebviewの通知なので、プログレスを更新する
-            //インジゲーターの表示、非表示をきりかえる。
+            // インジゲーターの表示、非表示をきりかえる。
             viewModel.startLoadingPageHistoryDataModel(context: wv.context)
             viewModel.updateProgressHeaderViewDataModel(object: CGFloat(0.1))
             // くるくるを更新する
             updateNetworkActivityIndicator()
         } else {
-            //インジゲーターの表示、非表示をきりかえる。
+            // インジゲーターの表示、非表示をきりかえる。
             viewModel.startLoadingPageHistoryDataModel(context: wv.context)
             // くるくるを更新する
             updateNetworkActivityIndicator()
         }
     }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+
+    func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
         let wv = webView as! EGWebView
         log.debug("loading finish. context: \(wv.context)")
-        
+
         // 削除済みチェック
-        if self.viewModel.getIndex(context: wv.context) == nil {
+        if viewModel.getIndex(context: wv.context) == nil {
             log.warning("loading finish on deleted page.")
             return
         }
-        
+
         // 操作種別の保持
         let operation = wv.operation
-        
+
         // 操作種別はnormalに戻しておく
         if wv.operation != .normal {
             wv.operation = .normal
         }
-        
+
         // ページ情報を取得
         saveMetaData(webView: wv)
-        
+
         if wv.hasSavableUrl {
             isDoneAutoInput = false
             // 有効なURLの場合は、履歴に保存する
             viewModel.updateHistoryDataModel(context: wv.context, url: wv.requestUrl, title: wv.requestTitle, operation: operation)
             viewModel.storePageHistoryDataModel()
         }
-        
+
         if wv.requestUrl != nil {
             wv.previousUrl = wv.requestUrl
         }
-        
+
         // プログレス更新
         if wv.context == front.context {
             viewModel.updateProgressHeaderViewDataModel(object: 1.0)
         }
         updateNetworkActivityIndicator()
         viewModel.endLoadingPageHistoryDataModel(context: wv.context)
-        
+
         // サムネイルを保存
-        self.saveThumbnail(webView: wv, completion: {
+        saveThumbnail(webView: wv, completion: {
             // プログレス更新
             self.viewModel.endRenderingPageHistoryDataModel(context: wv.context)
         })
     }
-    
-    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: Error) {
         log.error("[error url]\((error as NSError).userInfo["NSErrorFailingURLKey"]). code: \((error as NSError).code)")
-        
+
         let egWv: EGWebView = webView as! EGWebView
-        
+
         // 連打したら-999 "(null)"になる対応
         if (error as NSError).code == NSURLErrorCancelled {
             return
         }
-        
+
         // プログレス更新
         DispatchQueue.mainSyncSafe {
             // プログレス更新
@@ -934,7 +942,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             self.updateNetworkActivityIndicator()
             self.viewModel.endLoadingPageHistoryDataModel(context: egWv.context)
         }
-        
+
         // URLスキーム対応
         if let errorUrl = (error as NSError).userInfo["NSErrorFailingURLKey"] {
             let url = (errorUrl as! NSURL).absoluteString!
@@ -943,13 +951,13 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
                 return
             }
         }
-        
+
         egWv.loadHtml(error: (error as NSError))
     }
-    
+
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         let egWv: EGWebView = webView as! EGWebView
-        
+
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
             // SSL認証
             let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
@@ -968,34 +976,33 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
                 textField.isSecureTextEntry = true
                 passwordTextField = textField
             }
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
                 completionHandler(.cancelAuthenticationChallenge, nil)
                 egWv.loadHtml(code: .UNAUTHORIZED)
             }))
-            alertController.addAction(UIAlertAction(title: "Log In", style: .default, handler: { action in
+            alertController.addAction(UIAlertAction(title: "Log In", style: .default, handler: { _ in
                 let credential = URLCredential(user: usernameTextField.text!, password: passwordTextField.text!, persistence: URLCredential.Persistence.forSession)
                 completionHandler(.useCredential, credential)
             }))
             Util.foregroundViewController().present(alertController, animated: true, completion: nil)
         }
     }
-    
+
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
         guard let url = navigationAction.request.url else {
             decisionHandler(.cancel)
             return
         }
-        
+
         // 自動スクロールを停止する
         if let autoScrollTimer = autoScrollTimer, autoScrollTimer.isValid {
             autoScrollTimer.invalidate()
             self.autoScrollTimer = nil
         }
-        
+
         // 外部アプリ起動要求
-        if ((url.absoluteString.range(of: AppConst.URL_ITUNES_STORE) != nil) ||
-            (!url.absoluteString.hasPrefix("about:") && !url.absoluteString.hasPrefix("http:") && !url.absoluteString.hasPrefix("https:") && !url.absoluteString.hasPrefix("file:"))) {
+        if (url.absoluteString.range(of: AppConst.URL_ITUNES_STORE) != nil) ||
+            (!url.absoluteString.hasPrefix("about:") && !url.absoluteString.hasPrefix("http:") && !url.absoluteString.hasPrefix("https:") && !url.absoluteString.hasPrefix("file:")) {
             log.warning("open url. url: \(url)")
             if UIApplication.shared.canOpenURL(url) {
                 NotificationManager.presentActionSheet(title: "", message: MessageConst.ALERT_OPEN_COMFIRM, completion: {
@@ -1007,24 +1014,24 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             decisionHandler(.cancel)
             return
         }
-        
+
         // リクエストURLはエラーが発生した時のため保持しておく
         // エラー発生時は、リクエストしたURLを履歴に保持する
         if let latest = navigationAction.request.url?.absoluteString, latest.hasValidUrl {
             log.debug("[Request Url]: \(latest)")
             viewModel.latestRequestUrl = latest
         }
-        
+
         saveMetaData(webView: webView as! EGWebView)
-        
+
         decisionHandler(.allow)
     }
-    
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+
+    func webView(_: WKWebView, createWebViewWith _: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures _: WKWindowFeatures) -> WKWebView? {
         if navigationAction.targetFrame == nil {
             if let url = navigationAction.request.url?.absoluteString {
                 log.debug("receive new window event. url: \(url)")
-                
+
                 viewModel.insertByEventPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
 
 //                if url != AppConst.URL_BLANK {

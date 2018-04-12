@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class OptionMenuHistoryTableViewModel {
     /// データ取得通知用RX
@@ -19,6 +19,7 @@ final class OptionMenuHistoryTableViewModel {
     var sectionCount: Int {
         return sections.count
     }
+
     /// セクションの高さ
     let sectionHeight = AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
     /// セル情報
@@ -46,7 +47,7 @@ final class OptionMenuHistoryTableViewModel {
         sections[indexPath.section].rows.remove(at: indexPath.row)
         // モデルから削除
         CommonHistoryDataModel.s.delete(historyIds: [getSection(section: indexPath.section).dateString: [row.data._id]])
-        
+
         return sections[indexPath.section].rows.count > 0
     }
 
@@ -59,13 +60,13 @@ final class OptionMenuHistoryTableViewModel {
     func getSection(section: Int) -> Section {
         return sections[section]
     }
-    
+
     /// モデルデータ(閲覧履歴)取得
     func getModelData() {
         if readFiles.count > 0 {
             log.debug("common history additional loaded.")
             let latestFiles = readFiles.prefix(readInterval)
-            self.readFiles = Array(readFiles.dropFirst(readInterval))
+            readFiles = Array(readFiles.dropFirst(readInterval))
             latestFiles.forEach({ (dateString: String) in
                 let rows = CommonHistoryDataModel.s.select(dateString: dateString).map({ Section.Row(data: $0) })
                 if rows.count > 0 {

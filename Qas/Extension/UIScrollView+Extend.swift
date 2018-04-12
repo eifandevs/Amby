@@ -16,7 +16,7 @@ extension UIScrollView {
         case left
         case right
     }
-    
+
     public func scroll(to direction: ScrollDirection, animated: Bool) {
         let offset: CGPoint
         switch direction {

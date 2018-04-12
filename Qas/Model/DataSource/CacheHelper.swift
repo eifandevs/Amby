@@ -12,7 +12,7 @@ import WebKit
 class CacheHelper {
     // クッキーの共有
     static let processPool = WKProcessPool()
-    
+
     static func cacheConfiguration() -> WKWebViewConfiguration {
         let configuration = WKWebViewConfiguration()
         configuration.processPool = processPool
@@ -23,7 +23,7 @@ class CacheHelper {
         configuration.allowsAirPlayForMediaPlayback = true
         return configuration
     }
-    
+
     /// Cacheの削除
     static func deleteCaches() {
         let dateFrom = Date(timeIntervalSince1970: 0)
@@ -34,10 +34,10 @@ class CacheHelper {
             WKWebsiteDataTypeSessionStorage,
             WKWebsiteDataTypeLocalStorage,
             WKWebsiteDataTypeWebSQLDatabases,
-            WKWebsiteDataTypeIndexedDBDatabases
+            WKWebsiteDataTypeIndexedDBDatabases,
         ], modifiedSince: dateFrom) {}
     }
-    
+
     /// Cookieの削除
     static func deleteCookies() {
         let dateFrom = Date(timeIntervalSince1970: 0)

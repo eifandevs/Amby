@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class BaseViewModel {
     /// ページインサート通知用RX
@@ -16,6 +16,7 @@ final class BaseViewModel {
         .flatMap { object -> Observable<Int> in
             return Observable.just(object.at)
         }
+
     /// ページリロード通知用RX
     let rx_baseViewModelDidReloadWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidReload.flatMap { _ in Observable.just(()) }
     /// ページ追加通知用RX
@@ -49,7 +50,7 @@ final class BaseViewModel {
             } else {
                 return Observable.empty()
             }
-    }
+        }
     /// 自動スクロール通知用RX
     let rx_baseViewModelDidAutoScroll = OperationDataModel.s.rx_operationDataModelDidChange
         .flatMap { object -> Observable<()> in
@@ -58,7 +59,7 @@ final class BaseViewModel {
             } else {
                 return Observable.empty()
             }
-    }
+        }
     /// 自動入力通知用RX
     let rx_baseViewModelDidAutoInput = OperationDataModel.s.rx_operationDataModelDidChange
         .flatMap { object -> Observable<()> in
@@ -73,7 +74,7 @@ final class BaseViewModel {
     var currentUrl: String? {
         return PageHistoryDataModel.s.currentHistory?.url
     }
-    
+
     /// 現在のコンテキスト
     var currentContext: String? {
         return PageHistoryDataModel.s.currentContext
@@ -83,33 +84,33 @@ final class BaseViewModel {
     var currentLocation: Int? {
         return PageHistoryDataModel.s.currentLocation
     }
-    
+
     var headerFieldText: String = "" {
         didSet {
             HeaderViewDataModel.s.updateHeaderFieldText(text: headerFieldText)
         }
     }
-    
+
     var reloadUrl: String {
         return headerFieldText
     }
-    
+
     /// 最新のリクエストURL(wv.url)。エラーが発生した時用
     var latestRequestUrl: String = ""
-    
+
     /// webviewの数
     var webViewCount: Int {
         return PageHistoryDataModel.s.histories.count
     }
-    
+
     /// 通知センター
     private let center = NotificationCenter.default
-    
+
     /// 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
         return CGFloat(UserDefaults.standard.float(forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL))
     }
-    
+
     /// 自動スクロールスピード
     let autoScrollSpeed: CGFloat = 0.6
 
@@ -126,7 +127,7 @@ final class BaseViewModel {
                 log.eventOut(chain: "rx_UIApplicationWillResignActive")
             }
             .disposed(by: disposeBag)
-        
+
         // オペレーション監視
         OperationDataModel.s.rx_operationDataModelDidChange
             .subscribe { [weak self] object in
@@ -142,43 +143,43 @@ final class BaseViewModel {
             }
             .disposed(by: disposeBag)
     }
-    
+
     deinit {
         log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)
     }
-    
-// MARK: Public Method
+
+    // MARK: Public Method
 
     /// ページインデックス取得
     func getIndex(context: String) -> Int? {
         return PageHistoryDataModel.s.getIndex(context: context)
     }
-    
+
     /// 直近URL取得
     func getMostForwardUrlPageHistoryDataModel(context: String) -> String? {
-        return PageHistoryDataModel.s.getMostForwardUrl(context:context)
+        return PageHistoryDataModel.s.getMostForwardUrl(context: context)
     }
-    
+
     /// 過去ページ閲覧中フラグ取得
     func getIsPastViewingPageHistoryDataModel(context: String) -> Bool {
-        return PageHistoryDataModel.s.isPastViewing(context:context)
+        return PageHistoryDataModel.s.isPastViewing(context: context)
     }
-    
+
     /// 前回URL取得
     func getBackUrlPageHistoryDataModel(context: String) -> String? {
         return PageHistoryDataModel.s.getBackUrl(context: context)
     }
-    
+
     /// 次URL取得
     func getForwardUrlPageHistoryDataModel(context: String) -> String? {
         return PageHistoryDataModel.s.getForwardUrl(context: context)
     }
-    
+
     func startLoadingPageHistoryDataModel(context: String) {
         PageHistoryDataModel.s.startLoading(context: context)
     }
-    
+
     func endLoadingPageHistoryDataModel(context: String) {
         PageHistoryDataModel.s.endLoading(context: context)
     }
@@ -186,23 +187,23 @@ final class BaseViewModel {
     func endRenderingPageHistoryDataModel(context: String) {
         PageHistoryDataModel.s.endRendering(context: context)
     }
-    
+
     func updateProgressHeaderViewDataModel(object: CGFloat) {
         HeaderViewDataModel.s.updateProgress(progress: object)
     }
-    
+
     func insertPageHistoryDataModel(url: String? = nil) {
         PageHistoryDataModel.s.append(url: url)
     }
-    
+
     func insertByEventPageHistoryDataModel(url: String? = nil) {
         PageHistoryDataModel.s.insert(url: url)
     }
-    
+
     func beginEditingHeaderViewDataModel() {
         HeaderViewDataModel.s.beginEditing(forceEditFlg: false)
     }
-    
+
     func storeFromDataModel(webview: EGWebView) {
         FormDataModel.s.store(webView: webview)
     }
@@ -226,10 +227,10 @@ final class BaseViewModel {
                 return UIImage()
             }
         }
-        
+
         return nil
     }
-    
+
     /// 次webviewのキャプチャ取得
     func getNextCapture() -> UIImage? {
         if let currentLocation = currentLocation {
@@ -241,27 +242,27 @@ final class BaseViewModel {
                 return UIImage()
             }
         }
-        
+
         return nil
     }
-    
+
     /// ヘッダーフィールドの更新
     func reloadHeaderText() {
         if let url = currentUrl {
             headerFieldText = url
         }
     }
-    
+
     /// 前WebViewに切り替え
     func goBackPageHistoryDataModel() {
         PageHistoryDataModel.s.goBack()
     }
-    
+
     /// 後WebViewに切り替え
     func goNextPageHistoryDataModel() {
         PageHistoryDataModel.s.goNext()
     }
-    
+
     /// 履歴保存
     func updateHistoryDataModel(context: String, url: String, title: String, operation: PageHistory.Operation) {
         if !url.isEmpty && !title.isEmpty {
@@ -270,7 +271,7 @@ final class BaseViewModel {
             PageHistoryDataModel.s.update(context: context, url: url, title: title, operation: operation)
             log.debug("save page history. url: \(url)")
 
-            //　アプリ起動後の前回ページロード時は、履歴に保存しない
+            // 　アプリ起動後の前回ページロード時は、履歴に保存しない
             if url != currentUrl {
                 // Common History
                 let common = CommonHistory(url: url, title: title, date: Date())
@@ -279,37 +280,38 @@ final class BaseViewModel {
                 log.debug("save common history. url: \(common.url)")
             }
         }
-        
+
         // ヘッダーのお気に入りアイコン更新
         if context == currentContext {
             // フロントページの保存の場合
             FavoriteDataModel.s.reload()
         }
     }
-    
+
     /// 閲覧、ページ履歴の永続化
     func storeHistoryDataModel() {
         CommonHistoryDataModel.s.store()
         PageHistoryDataModel.s.store()
     }
-    
+
     /// 検索履歴の永続化
     func storeSearchHistoryDataModel(title: String) {
         SearchHistoryDataModel.s.store(histories: [SearchHistory(title: title, date: Date())])
     }
-    
+
     /// ページ履歴の永続化
     func storePageHistoryDataModel() {
         PageHistoryDataModel.s.store()
     }
-    
+
     /// サムネイルの削除
     func deleteThumbnailDataModel(webView: EGWebView) {
         log.debug("delete thumbnail. context: \(webView.context)")
         ThumbnailDataModel.s.delete(context: webView.context)
     }
-    
-// MARK: Private Method
+
+    // MARK: Private Method
+
     private func changePageHistoryDataModel(context: String) {
         PageHistoryDataModel.s.change(context: context)
     }

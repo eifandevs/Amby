@@ -9,16 +9,15 @@
 import Foundation
 
 final class OptionMenuAppTableViewModel {
-    
     // セル情報
     struct Row {
         let cellType: CellType
     }
-    
+
     enum CellType: Int {
         case app
         case copyright
-        
+
         var title: String {
             switch self {
             case .app: return AppConst.APP_INFORMATION_APP
@@ -26,11 +25,11 @@ final class OptionMenuAppTableViewModel {
             }
         }
     }
-    
+
     // セル
     let rows = [
         Row(cellType: .app),
-        Row(cellType: .copyright)
+        Row(cellType: .copyright),
     ]
 
     // 高さ
@@ -39,7 +38,7 @@ final class OptionMenuAppTableViewModel {
     var cellCount: Int {
         return rows.count
     }
-    
+
     /// セル情報取得
     func getRow(indexPath: IndexPath) -> Row {
         return rows[indexPath.row]

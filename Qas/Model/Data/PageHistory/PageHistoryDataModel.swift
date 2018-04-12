@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class PageHistoryDataModel {
     /// ページインサート通知用RX
@@ -27,12 +27,12 @@ final class PageHistoryDataModel {
     let rx_pageHistoryDataModelDidEndLoading = PublishSubject<String>()
     /// ページレンダリング終了通知用RX
     let rx_pageHistoryDataModelDidEndRendering = PublishSubject<String>()
-    
+
     static let s = PageHistoryDataModel()
 
     /// 通知センター
     private let center = NotificationCenter.default
-    
+
     /// 現在表示しているwebviewのコンテキスト
     var currentContext: String = UserDefaults.standard.string(forKey: AppConst.KEY_CURRENT_CONTEXT)! {
         didSet {
@@ -41,32 +41,33 @@ final class PageHistoryDataModel {
             UserDefaults.standard.set(currentContext, forKey: AppConst.KEY_CURRENT_CONTEXT)
         }
     }
+
     var previousContext: String?
 
     /// webViewそれぞれの履歴とカレントページインデックス
     public private(set) var histories = [PageHistory]()
-    
+
     /// 現在のページ情報
     var currentHistory: PageHistory? {
         return histories.find({ $0.context == currentContext })
     }
-    
+
     /// 現在の位置
     var currentLocation: Int? {
         return histories.index(where: { $0.context == currentContext })
     }
-    
+
     /// 最新ページを見ているかフラグ
     private var isViewingLatest: Bool {
         return currentLocation == histories.count - 1
     }
-    
+
     /// ページヒストリー保存件数
     private let pageHistorySaveCount = UserDefaults.standard.integer(forKey: AppConst.KEY_PAGE_HISTORY_SAVE_COUNT)
-    
+
     private init() {
     }
-    
+
     /// 初期化
     func initialize() {
         // pageHistory読み込み
@@ -81,7 +82,7 @@ final class PageHistoryDataModel {
             log.warning("failed to read page history: \(error)")
         }
     }
-    
+
     /// 特定の履歴取得
     func getHistory(context: String) -> PageHistory? {
         return histories.find({ $0.context == context })
@@ -91,7 +92,7 @@ final class PageHistoryDataModel {
     func startLoading(context: String) {
         rx_pageHistoryDataModelDidStartLoading.onNext(context)
     }
-    
+
     /// ロード終了
     func endLoading(context: String) {
         if let _ = histories.find({ $0.context == context }) {
@@ -109,13 +110,13 @@ final class PageHistoryDataModel {
             log.error("pageHistoryDataModelDidEndRendering not fired. history is deleted.")
         }
     }
-    
+
     /// 過去のページを閲覧しているかのフラグ
     func isPastViewing(context: String) -> Bool {
         let history = histories.find({ $0.context == context })!
         return history.backForwardList.count != 0 && history.listIndex != history.backForwardList.count - 1
     }
-    
+
     /// 直近URL取得
     func getMostForwardUrl(context: String) -> String? {
         if let history = histories.find({ $0.context == context }), let url = history.backForwardList.last, !url.isEmpty {
@@ -123,29 +124,29 @@ final class PageHistoryDataModel {
         }
         return nil
     }
-    
+
     /// 前回URL取得
     func getBackUrl(context: String) -> String? {
         if let history = histories.find({ $0.context == context }), history.listIndex > 0 {
             // インデックス調整
             history.listIndex -= 1
-            
+
             return history.backForwardList[history.listIndex]
         }
         return nil
     }
-    
+
     /// 次URL取得
     func getForwardUrl(context: String) -> String? {
         if let history = histories.find({ $0.context == context }), history.listIndex < history.backForwardList.count - 1 {
             // インデックス調整
             history.listIndex += 1
-            
+
             return history.backForwardList[history.listIndex]
         }
         return nil
     }
-    
+
     /// ページ読み込み完了後のページ更新
     func update(context: String, url: String, title: String, operation: PageHistory.Operation) {
         histories.forEach({
@@ -168,17 +169,16 @@ final class PageHistoryDataModel {
                     if $0.backForwardList.count > pageHistorySaveCount {
                         $0.backForwardList = Array($0.backForwardList.suffix(pageHistorySaveCount))
                     }
-                    
+
                     // インデックス調整
                     $0.listIndex = $0.backForwardList.count - 1
-                    
                 }
-                
+
                 return
             }
         })
     }
-    
+
     /// ページ挿入(new window event)
     func insert(url: String?) {
         if isViewingLatest {
@@ -193,7 +193,7 @@ final class PageHistoryDataModel {
             }
         }
     }
-    
+
     /// ページ追加
     func append(url: String?) {
         let newPage = PageHistory(url: url ?? "")
@@ -201,7 +201,7 @@ final class PageHistoryDataModel {
         currentContext = newPage.context
         rx_pageHistoryDataModelDidAppend.onNext(newPage)
     }
-    
+
     /// ページコピー
     func copy() {
         if let currentHistory = currentHistory {
@@ -221,22 +221,22 @@ final class PageHistoryDataModel {
             }
         }
     }
-    
+
     /// ページリロード
     func reload() {
         rx_pageHistoryDataModelDidReload.onNext(())
     }
-    
+
     /// ぺージインデックス取得
     func getIndex(context: String) -> Int? {
         return histories.index(where: { $0.context == context })
     }
-    
+
     /// 指定ページの削除
     func remove(context: String) {
         // 削除インデックス取得
         let deleteIndex = histories.index(where: { $0.context == context })!
-        
+
         // フロントの削除かどうか
         if context == currentContext {
             histories.remove(at: deleteIndex)
@@ -247,7 +247,7 @@ final class PageHistoryDataModel {
                 histories.append(pageHistory)
                 currentContext = pageHistory.context
                 rx_pageHistoryDataModelDidAppend.onNext(pageHistory)
-                
+
                 return
             } else {
                 // 最後の要素を削除した場合は、前のページに戻る
@@ -262,31 +262,31 @@ final class PageHistoryDataModel {
         }
         rx_pageHistoryDataModelDidRemove.onNext((deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
     }
-    
+
     /// 表示中ページの変更
     func change(context: String) {
         currentContext = context
         rx_pageHistoryDataModelDidChange.onNext(currentContext)
     }
-    
+
     /// 前ページに変更
     func goBack() {
         if let currentLocation = currentLocation, histories.count > 0 {
-            let targetContext = histories[0...histories.count - 1 ~= currentLocation - 1 ? currentLocation - 1 : histories.count - 1].context
+            let targetContext = histories[0 ... histories.count - 1 ~= currentLocation - 1 ? currentLocation - 1 : histories.count - 1].context
             currentContext = targetContext
             rx_pageHistoryDataModelDidChange.onNext(currentContext)
         }
     }
-    
+
     /// 次ページに変更
     func goNext() {
         if let currentLocation = currentLocation, histories.count > 0 {
-            let targetContext = histories[0...histories.count - 1 ~= currentLocation + 1 ? currentLocation + 1 : 0].context
+            let targetContext = histories[0 ... histories.count - 1 ~= currentLocation + 1 ? currentLocation + 1 : 0].context
             currentContext = targetContext
             rx_pageHistoryDataModelDidChange.onNext(currentContext)
         }
     }
-    
+
     /// 表示中ページの保存
     func store() {
         if histories.count > 0 {
@@ -299,7 +299,7 @@ final class PageHistoryDataModel {
             }
         }
     }
-    
+
     /// 全データの削除
     func delete() {
         histories = []

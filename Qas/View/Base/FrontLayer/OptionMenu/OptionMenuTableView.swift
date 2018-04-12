@@ -7,50 +7,50 @@
 //
 
 import Foundation
-import UIKit
-import RxSwift
-import RxCocoa
 import NSObject_Rx
+import RxCocoa
+import RxSwift
+import UIKit
 
 class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
     // クローズ通知用RX
     let rx_optionMenuTableViewDidClose = PublishSubject<()>()
-    
-    @IBOutlet weak var tableView: UITableView!
+
+    @IBOutlet var tableView: UITableView!
     let viewModel = OptionMenuTableViewModel()
     var detailView: UIView?
     private var selectedIndexPath: IndexPath?
-    
+
     convenience init(frame: CGRect, swipeDirection: EdgeSwipeDirection) {
         self.init(frame: frame)
         viewModel.swipeDirection = swipeDirection
         loadNib()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         loadNib()
     }
-    
+
     deinit {
         log.debug("deinit called.")
     }
-    
+
     func loadNib() {
         let view = Bundle.main.loadNibNamed(R.nib.optionMenuTableView.name, owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        
+        view.frame = bounds
+
         // 影
         addMenuShadow()
-        
+
         // テーブルビュー監視
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         // OptionMenuProtocol
         _ = setup(tableView: tableView)
 
@@ -60,13 +60,14 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
         // 履歴情報を永続化しておく
         viewModel.storeHistory()
 
-        self.addSubview(view)
+        addSubview(view)
     }
 }
 
 // MARK: - TableViewDataSourceDelegate
+
 extension OptionMenuTableView: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return viewModel.cellHeight
     }
 
@@ -75,21 +76,22 @@ extension OptionMenuTableView: UITableViewDataSource {
         cell.setViewModelData(row: viewModel.getRow(indexPath: indexPath))
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return viewModel.cellCount
     }
 }
 
 // MARK: - TableViewDelegate
+
 extension OptionMenuTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         let overViewMargin = viewModel.getOverViewMargin()
 
         let marginY = frame.origin.y + frame.size.height + overViewMargin.y > DeviceConst.DISPLAY_SIZE.height ?
-                      overViewMargin.y - (frame.origin.y + frame.size.height + overViewMargin.y - DeviceConst.DISPLAY_SIZE.height) :
-                      overViewMargin.y
+            overViewMargin.y - (frame.origin.y + frame.size.height + overViewMargin.y - DeviceConst.DISPLAY_SIZE.height) :
+            overViewMargin.y
 
         // スーパービューに追加するので、自身の座標をたす
         let detailViewFrame = CGRect(x: frame.origin.x + overViewMargin.x, y: frame.origin.y + marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height)
@@ -163,7 +165,7 @@ extension OptionMenuTableView: UITableViewDelegate {
                 .disposed(by: rx.disposeBag)
             detailView = appTableView
         }
-        
+
         superview!.addSubview(detailView!)
 
         // オーバーレイ表示
@@ -189,7 +191,7 @@ extension OptionMenuTableView: UITableViewDelegate {
                     // 詳細ビューを表示していれば、削除する
                     UIView.animate(withDuration: 0.15, animations: {
                         detailView.alpha = 0
-                    }, completion: { (finished) in
+                    }, completion: { finished in
                         if finished {
                             detailView.removeFromSuperview()
                             self.detailView = nil

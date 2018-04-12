@@ -7,14 +7,13 @@
 //
 
 import Foundation
-import UIKit
-import NVActivityIndicatorView
-import RxSwift
-import RxCocoa
 import NSObject_Rx
+import NVActivityIndicatorView
+import RxCocoa
+import RxSwift
+import UIKit
 
 class FooterView: UIView, ShadowView {
-    
     private var viewModel = FooterViewModel()
     private let scrollView = UIScrollView()
     private var thumbnails: [Thumbnail] = []
@@ -22,11 +21,11 @@ class FooterView: UIView, ShadowView {
     private var deleteAnimator: UIViewPropertyAnimator?
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         addAreaShadow()
-        
+
         backgroundColor = UIColor.pastelLightGray
-        scrollView.frame = CGRect(origin: CGPoint(x: 0, y:0), size: frame.size)
+        scrollView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: frame.size)
         scrollView.delegate = self // スクロールビューはなんか怖いのでrx化しない
         scrollView.contentSize = CGSize(width: frame.size.width + 1, height: frame.size.height)
         scrollView.bounces = true
@@ -39,7 +38,7 @@ class FooterView: UIView, ShadowView {
         addSubview(scrollView)
         // サムネイル説明用に、スクロールビューの領域外に配置できるようにする
         scrollView.clipsToBounds = false
-        
+
         // サムネイル追加監視
         viewModel.rx_footerViewModelDidAppendThumbnail
             .observeOn(MainScheduler.asyncInstance)
@@ -48,13 +47,13 @@ class FooterView: UIView, ShadowView {
                 guard let `self` = self else { return }
                 if let pageHistory = object.element {
                     // 新しいサムネイルスペースを作成
-                    let _ = self.append(context: pageHistory.context)
+                    _ = self.append(context: pageHistory.context)
                     self.updateFrontBar(to: pageHistory.context)
                 }
                 log.eventOut(chain: "rx_footerViewModelDidAppendThumbnail")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // サムネイル変更監視
         viewModel.rx_footerViewModelDidChangeThumbnail
             .observeOn(MainScheduler.asyncInstance)
@@ -67,7 +66,7 @@ class FooterView: UIView, ShadowView {
                 log.eventOut(chain: "rx_footerViewModelDidChangeThumbnail")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // サムネイルインサート監視
         viewModel.rx_footerViewModelDidInsertThumbnail
             .observeOn(MainScheduler.asyncInstance)
@@ -76,13 +75,13 @@ class FooterView: UIView, ShadowView {
                 guard let `self` = self else { return }
                 if let object = object.element {
                     // 新しいサムネイルスペースを作成
-                    let _ = self.insert(at: object.at, context: object.pageHistory.context)
+                    _ = self.insert(at: object.at, context: object.pageHistory.context)
                     self.updateFrontBar(to: object.pageHistory.context)
                 }
                 log.eventOut(chain: "rx_footerViewModelDidInsertThumbnail")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // サムネイル削除監視
         viewModel.rx_footerViewModelDidRemoveThumbnail
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
@@ -91,15 +90,15 @@ class FooterView: UIView, ShadowView {
                 guard let `self` = self else { return }
                 if let object = object.element {
                     let deleteIndex = self.thumbnails.index(where: { $0.context == object.deleteContext })!
-                    
+
                     self.thumbnails[deleteIndex].removeFromSuperview()
                     self.thumbnails.remove(at: deleteIndex)
                     self.updateFrontBar(to: object.currentContext)
-                    
+
                     if self.thumbnails.count == 0 {
-                        if ((self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width) {
+                        if (self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width {
                             self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-                            self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
+                            self.scrollView.contentInset = UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
                         }
                     } else {
                         if let deleteAnimator = self.deleteAnimator {
@@ -109,10 +108,10 @@ class FooterView: UIView, ShadowView {
                         self.deleteAnimator = UIViewPropertyAnimator(duration: 0.25, curve: .linear) {
                             if (self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width {
                                 self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-                                self.scrollView.contentInset =  UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
+                                self.scrollView.contentInset = UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
                             }
-                            
-                            (0...self.thumbnails.count - 1).forEach {
+
+                            (0 ... self.thumbnails.count - 1).forEach {
                                 if $0 < deleteIndex {
                                     self.thumbnails[$0].center.x += self.thumbnails[$0].frame.size.width / 2
                                 } else if $0 >= deleteIndex {
@@ -129,7 +128,7 @@ class FooterView: UIView, ShadowView {
                 log.eventOut(chain: "rx_footerViewModelDidRemoveThumbnail")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // ローディングスタート監視
         viewModel.rx_footerViewModelDidStartLoading
             .observeOn(MainScheduler.asyncInstance)
@@ -142,7 +141,7 @@ class FooterView: UIView, ShadowView {
                 log.eventOut(chain: "rx_footerViewModelDidStartLoading")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // ローティング終了監視
         viewModel.rx_footerViewModelDidEndLoading
             .observeOn(MainScheduler.asyncInstance)
@@ -152,13 +151,13 @@ class FooterView: UIView, ShadowView {
                 if let tuple = object.element {
                     // くるくるを止めて、サムネイルを表示する
                     let targetThumbnail: Thumbnail = self.thumbnails.filter({ (thumbnail) -> Bool in
-                        return thumbnail.context == tuple.context
+                        thumbnail.context == tuple.context
                     })[0]
                     let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
                     if existIndicator {
                         DispatchQueue.mainSyncSafe { [weak self] in
                             guard let _ = self else { return }
-                            targetThumbnail.subviews.forEach({ (v) in
+                            targetThumbnail.subviews.forEach({ v in
                                 if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
                                     let indicator = v as! NVActivityIndicatorView
                                     indicator.stopAnimating()
@@ -182,16 +181,17 @@ class FooterView: UIView, ShadowView {
         // 初期ロード
         load()
     }
-    
-    required init(coder aDecoder: NSCoder) {
+
+    required init(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         log.debug("deinit called.")
     }
-// MARK: Private Method
-    
+
+    // MARK: Private Method
+
     /// 現在地にスクロール
     private func scrollAtCurrent() {
         if let currentLocation = viewModel.currentLocation {
@@ -203,7 +203,7 @@ class FooterView: UIView, ShadowView {
             scrollView.setContentOffset(offset, animated: true)
         }
     }
-    
+
     /// 初期ロード
     private func load() {
         let pageHistories = viewModel.pageHistories
@@ -224,7 +224,7 @@ class FooterView: UIView, ShadowView {
         // スクロールする
         scrollAtCurrent()
     }
-    
+
     /// 新しいサムネイル追加
     private func append(context: String) -> Thumbnail {
         // 後ろに追加
@@ -234,7 +234,7 @@ class FooterView: UIView, ShadowView {
         btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
         let inset: CGFloat = btn.frame.size.width / 9
         btn.imageEdgeInsets = UIEdgeInsetsMake(inset, inset, inset, inset)
-        
+
         // ボタンタップ
         btn.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -249,7 +249,7 @@ class FooterView: UIView, ShadowView {
                 log.eventIn(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
-        
+
         let longPressRecognizer = UILongPressGestureRecognizer()
 
         // ロングプレス
@@ -275,15 +275,15 @@ class FooterView: UIView, ShadowView {
 
         btn.context = context
         thumbnails.append(btn)
-        
+
         // スクロールビューのコンテンツサイズを大きくする
         if (thumbnails.count).f * btn.frame.size.width > scrollView.frame.size.width {
             scrollView.contentSize.width += btn.frame.size.width / 2
-            scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
+            scrollView.contentInset = UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
         }
-        
+
         scrollView.addSubview(btn)
-        
+
         if thumbnails.count > 1 {
             for thumbnail in thumbnails {
                 UIView.animate(withDuration: 0.3, animations: {
@@ -294,10 +294,9 @@ class FooterView: UIView, ShadowView {
         scrollView.scroll(to: .right, animated: true)
         return btn
     }
-    
+
     /// 新しいサムネイル挿入
     private func insert(at: Int, context: String) -> Thumbnail {
-
         // スペースを空けるアニメーション
         if thumbnails.count > 1 {
             for (index, thumbnail) in thumbnails.enumerated() {
@@ -312,7 +311,7 @@ class FooterView: UIView, ShadowView {
                 }
             }
         }
-        
+
         // 間に挿入
         let preBtn = thumbnails[at - 1] // 左隣のボタン
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: preBtn.frame.origin.x + AppConst.BASE_LAYER_THUMBNAIL_SIZE.width, y: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
@@ -335,7 +334,7 @@ class FooterView: UIView, ShadowView {
                 log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
-        
+
         let longPressRecognizer = UILongPressGestureRecognizer()
 
         // ロングプレス
@@ -362,23 +361,23 @@ class FooterView: UIView, ShadowView {
         thumbnails.insert(btn, at: at)
 
         // スクロールビューのコンテンツサイズを大きくする
-        if ((thumbnails.count).f * btn.frame.size.width > scrollView.frame.size.width) {
+        if (thumbnails.count).f * btn.frame.size.width > scrollView.frame.size.width {
             scrollView.contentSize.width += btn.frame.size.width / 2
-            scrollView.contentInset =  UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
+            scrollView.contentInset = UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
         }
-        
+
         scrollView.addSubview(btn)
 
         // 挿入アニメーション
         UIView.animate(withDuration: 0.2, delay: 0.2, options: .curveLinear, animations: {
             btn.frame.origin.y = 0
         }, completion: nil)
-        
+
         scrollAtCurrent()
-        
+
         return btn
     }
-    
+
     private func startIndicator(context: String) {
         if let targetThumbnail = thumbnails.find({ $0.context == context }) {
             // くるくるを表示する
@@ -393,7 +392,7 @@ class FooterView: UIView, ShadowView {
             }
         }
     }
-    
+
     /// フロントバーの変更
     private func updateFrontBar(to: String?) {
         thumbnails.forEach({ $0.isFront = $0.context == to })
@@ -401,17 +400,18 @@ class FooterView: UIView, ShadowView {
 }
 
 // MARK: ScrollView Delegate
+
 extension FooterView: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        thumbnails.forEach { (thumbnail) in
+    func scrollViewWillBeginDragging(_: UIScrollView) {
+        thumbnails.forEach { thumbnail in
             UIView.animate(withDuration: 0.2, animations: {
                 thumbnail.thumbnailInfo.alpha = 1
             })
         }
     }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        thumbnails.forEach { (thumbnail) in
+
+    func scrollViewDidEndDragging(_: UIScrollView, willDecelerate _: Bool) {
+        thumbnails.forEach { thumbnail in
             UIView.animate(withDuration: 0.2, animations: {
                 thumbnail.thumbnailInfo.alpha = 0
             })

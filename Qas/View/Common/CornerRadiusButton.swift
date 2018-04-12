@@ -12,10 +12,10 @@ import UIKit
 @IBDesignable
 
 class CornerRadiusButton: UIButton {
-    @IBInspectable var cornerRadius : CGFloat = 5.0
-    
-    override func draw(_ rect: CGRect) {
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = cornerRadius
+    @IBInspectable var cornerRadius: CGFloat = 5.0
+
+    override func draw(_: CGRect) {
+        layer.masksToBounds = true
+        layer.cornerRadius = cornerRadius
     }
 }

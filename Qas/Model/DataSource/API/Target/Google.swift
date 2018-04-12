@@ -16,7 +16,7 @@ enum Google {
 extension Google: TargetType {
     // ベースのURL
     var baseURL: URL { return URL(string: HttpConst.SUGGEST_SERVER_DOMAIN)! }
-    
+
     // パス
     var path: String {
         switch self {
@@ -24,7 +24,7 @@ extension Google: TargetType {
             return HttpConst.SUGGEST_SERVER_PATH
         }
     }
-    
+
     // HTTPメソッド
     var method: Moya.Method {
         switch self {
@@ -32,7 +32,7 @@ extension Google: TargetType {
             return .get
         }
     }
-    
+
     // スタブデータ
     var sampleData: Data {
         let path = { () -> String in
@@ -43,15 +43,15 @@ extension Google: TargetType {
         }()
         return FileHandle(forReadingAtPath: path)!.readDataToEndOfFile()
     }
-    
+
     // リクエストパラメータ等
     var task: Task {
         switch self {
-        case .suggest(let token):
+        case let .suggest(token):
             return .requestParameters(parameters: ["hl": "en", "client": "firefox", "q": token], encoding: URLEncoding.default)
         }
     }
-    
+
     // ヘッダー
     var headers: [String: String]? {
         return nil

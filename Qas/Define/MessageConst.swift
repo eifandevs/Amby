@@ -10,12 +10,14 @@ import Foundation
 
 /// メッセージ定数クラス
 final class MessageConst {
-    
+
     // MARK: - 汎用
+
     static let COMMON_OK = "OK"
     static let COMMON_CANCEL = "キャンセル"
-    
+
     // MARK: - アラート
+
     static let ALERT_FORM_TITLE = "フォーム自動入力"
     static let ALERT_FORM_EXIST = "保存済みフォームが存在します。自動入力しますか？"
     static let ALERT_DELETE_TITLE = "データ削除"
@@ -27,8 +29,9 @@ final class MessageConst {
     static let ALERT_DELETE_SITE_DATA = "サイトデータを全て削除します。よろしいですか？"
     static let ALERT_DELETE_ALL = "全てのデータを削除し、初期化します。よろしいですか？"
     static let ALERT_OPEN_COMFIRM = "外部アプリで開いてもよろしいですか？"
-    
+
     // MARK: - 通知
+
     static let NOTIFICATION_COPY_URL = "URLをコピーしました"
     static let NOTIFICATION_REGISTER_BOOK_MARK = "お気に入りに登録しました"
     static let NOTIFICATION_REGISTER_BOOK_MARK_ERROR = "ページ情報を取得できませんでした"
@@ -37,9 +40,11 @@ final class MessageConst {
     static let NOTIFICATION_REGISTER_FORM_ERROR_CRAWL = "ページ情報を取得できませんでした"
 
     // MARK: - ヘッダー
+
     static let HEADER_SEARCH_PLACEHOLDER = "検索ワードまたは、URLを入力"
-    
+
     // MARK: - ヘルプ
+
     // 履歴
     static let HELP_HISTORY_SAVE_TITLE = "閲覧履歴、検索履歴の保存日数"
     static let HELP_HISTORY_SAVE_SUBTITLE = "閲覧履歴、検索履歴の保存日数"

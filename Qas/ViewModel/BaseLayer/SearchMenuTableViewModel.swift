@@ -7,15 +7,15 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class SearchMenuTableViewModel {
     /// 画面更新通知用RX
     let rx_searchMenuViewWillUpdateLayout = PublishSubject<()>()
     /// 画面無効化通知用RX
     let rx_searchMenuViewWillHide = PublishSubject<()>()
-    
+
     let sectionItem: [String] = ["Google検索", "検索履歴", "閲覧履歴"]
     var googleSearchCellItem: [String] = []
     var searchHistoryCellItem: [SearchHistory] = []
@@ -38,7 +38,6 @@ final class SearchMenuTableViewModel {
                 log.eventIn(chain: "rx_operationDataModelDidChange")
                 guard let `self` = self else { return }
                 if let object = object.element {
-                    
                     if object.operation == .suggest {
                         let token = object.object as! String
                         self.requestSearchQueue.append(token)
@@ -48,7 +47,7 @@ final class SearchMenuTableViewModel {
                 log.eventOut(chain: "rx_operationDataModelDidChange")
             }
             .disposed(by: disposeBag)
-        
+
         // サジェスト検索監視
         SuggestDataModel.s.rx_suggestDataModelDidUpdate
             .observeOn(MainScheduler.asyncInstance)
@@ -58,7 +57,7 @@ final class SearchMenuTableViewModel {
                 self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: suggest.token, readNum: self.readSearchHistoryNum).objects(for: 4)
                 return suggest
             }
-            .subscribe { [weak self] (suggest) in
+            .subscribe { [weak self] suggest in
                 log.eventIn(chain: "rx_suggestDataModelDidUpdate")
 
                 guard let `self` = self else { return }
@@ -74,7 +73,7 @@ final class SearchMenuTableViewModel {
                 } else {
                     self.rx_searchMenuViewWillUpdateLayout.onNext(())
                 }
-                
+
                 log.eventOut(chain: "rx_suggestDataModelDidUpdate")
             }
             .disposed(by: disposeBag)
@@ -92,14 +91,14 @@ final class SearchMenuTableViewModel {
             if let token = self.requestSearchQueue.removeFirst(), !token.isEmpty {
                 SuggestDataModel.s.fetch(token: token)
             } else {
-                self.googleSearchCellItem = []
-                self.historyCellItem = []
-                self.searchHistoryCellItem = []
+                googleSearchCellItem = []
+                historyCellItem = []
+                searchHistoryCellItem = []
                 isRequesting = false
-                if self.requestSearchQueue.count > 0 {
-                    self.requestSearch()
+                if requestSearchQueue.count > 0 {
+                    requestSearch()
                 } else {
-                    self.rx_searchMenuViewWillHide.onNext(())
+                    rx_searchMenuViewWillHide.onNext(())
                 }
             }
         }

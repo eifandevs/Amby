@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 extension UIButton {
-
     /// ボタンの画像に色をつける
     func setImage(image: UIImage?, color: UIColor, contentMode: UIViewContentMode = .scaleAspectFit) {
         let tintedImage = image?.withRenderingMode(.alwaysTemplate)
@@ -18,7 +17,7 @@ extension UIButton {
         imageView?.contentMode = contentMode
         setImage(tintedImage, for: .normal)
     }
-    
+
     func setBackgroundImage(image: UIImage?, color: UIColor, contentMode: UIViewContentMode = .scaleAspectFit) {
         let tintedImage = image?.withRenderingMode(.alwaysTemplate)
         tintColor = color
