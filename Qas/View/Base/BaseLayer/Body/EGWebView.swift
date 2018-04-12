@@ -39,6 +39,9 @@ class EGWebView: WKWebView {
     /// オペレーション
     var operation: PageHistory.Operation = .normal
 
+    // TODO: submit検知
+//    var form: Form?
+
     init(id: String?) {
         if let id = id, !id.isEmpty {
             // コンテキストを復元
@@ -98,26 +101,26 @@ class EGWebView: WKWebView {
     }
 
     var hasSavableUrl: Bool {
-        return previousUrl != requestUrl && requestUrl.hasValidUrl
+        return previousUrl != requestUrl && requestUrl.isValidUrl
     }
 
-    var hasValidUrl: Bool {
+    var isValidUrl: Bool {
         if let url = url {
-            return url.absoluteString.hasValidUrl
+            return url.absoluteString.isValidUrl
         }
         return false
     }
 
-    var hasLocalUrl: Bool {
+    var isLocalUrl: Bool {
         if let url = url {
-            return url.absoluteString.hasLocalUrl
+            return url.absoluteString.isLocalUrl
         }
         return false
     }
 
     @discardableResult
     func load(urlStr: String) -> Bool {
-        if urlStr.hasValidUrl {
+        if urlStr.isValidUrl {
             let encodedUrlStr = urlStr.contains("%") ? urlStr : urlStr.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
             guard let url = URL(string: encodedUrlStr) else {
                 log.error("invalud url load. url: \(encodedUrlStr)")

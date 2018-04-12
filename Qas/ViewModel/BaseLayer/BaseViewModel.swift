@@ -204,8 +204,8 @@ final class BaseViewModel {
         HeaderViewDataModel.s.beginEditing(forceEditFlg: false)
     }
 
-    func storeFromDataModel(webview: EGWebView) {
-        FormDataModel.s.store(webView: webview)
+    func storeFormDataModel(form: Form) {
+        FormDataModel.s.store(form: form)
     }
 
     /// baseViewControllerの状態取得

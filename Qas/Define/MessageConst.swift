@@ -19,7 +19,9 @@ final class MessageConst {
     // MARK: - アラート
 
     static let ALERT_FORM_TITLE = "フォーム自動入力"
+    static let ALERT_FORM_SAVE_TITLE = "フォームデータ保存"
     static let ALERT_FORM_EXIST = "保存済みフォームが存在します。自動入力しますか？"
+    static let ALERT_FORM_SAVE_MESSAGE = "入力したフォームデータを保存しますか？"
     static let ALERT_DELETE_TITLE = "データ削除"
     static let ALERT_DELETE_COMMON_HISTORY = "閲覧履歴を全て削除します。よろしいですか？"
     static let ALERT_DELETE_BOOK_MARK = "ブックマークを全て削除します。よろしいですか？"

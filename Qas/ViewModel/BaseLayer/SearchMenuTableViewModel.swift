@@ -89,7 +89,11 @@ final class SearchMenuTableViewModel {
         if !isRequesting {
             isRequesting = true
             if let token = self.requestSearchQueue.removeFirst(), !token.isEmpty {
-                SuggestDataModel.s.fetch(token: token)
+                if token.isUrl {
+                    isRequesting = false
+                } else {
+                    SuggestDataModel.s.fetch(token: token)
+                }
             } else {
                 googleSearchCellItem = []
                 historyCellItem = []

@@ -261,7 +261,7 @@ class BaseView: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidReloadWebView")
                 guard let `self` = self else { return }
-                if self.front.hasValidUrl {
+                if self.front.isValidUrl {
                     self.front.reload()
                 } else {
                     _ = self.front.load(urlStr: self.viewModel.reloadUrl)
@@ -341,7 +341,7 @@ class BaseView: UIView {
                 log.eventIn(chain: "rx_baseViewModelDidSearchWebView")
                 guard let `self` = self else { return }
                 if let text = object.element {
-                    if text.hasValidUrl {
+                    if text.isValidUrl {
                         let encodedText = text.contains("%") ? text : text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
                         self.viewModel.headerFieldText = encodedText
                         _ = self.front.load(urlStr: encodedText)
@@ -400,7 +400,11 @@ class BaseView: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidRegisterAsForm")
                 guard let `self` = self else { return }
-                self.viewModel.storeFromDataModel(webview: self.front)
+                if let form = self.takeForm(webView: self.front) {
+                    self.viewModel.storeFormDataModel(form: form)
+                } else {
+                    NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_FORM_ERROR_CRAWL)
+                }
                 log.eventOut(chain: "rx_baseViewModelDidRegisterAsForm")
             }
             .disposed(by: rx.disposeBag)
@@ -505,6 +509,52 @@ class BaseView: UIView {
 
     // MARK: Private Method
 
+    private func takeForm(webView: EGWebView) -> Form? {
+        if let title = webView.title, let host = webView.url?.host, let url = webView.url?.absoluteString {
+            let form = Form()
+            form.title = title
+            form.host = host
+            form.url = url
+
+            webView.evaluate(script: "document.forms.length") { object, error in
+                if object != nil && error == nil {
+                    let formLength = Int((object as? NSNumber)!)
+                    if formLength > 0 {
+                        for i in 0 ... (formLength - 1) {
+                            webView.evaluate(script: "document.forms[\(i)].elements.length") { object, error in
+                                if (object != nil) && (error == nil) {
+                                    let elementLength = Int((object as? NSNumber)!)
+                                    for j in 0 ... elementLength {
+                                        webView.evaluate(script: "document.forms[\(i)].elements[\(j)].type") { object, error in
+                                            if (object != nil) && (error == nil) {
+                                                let type = object as? String
+                                                if (type != "hidden") && (type != "submit") && (type != "checkbox") {
+                                                    let input = Input()
+                                                    webView.evaluate(script: "document.forms[\(i)].elements[\(j)].value") { object, _ in
+                                                        let value = object as! String
+                                                        if value.characters.count > 0 {
+                                                            input.type = type!
+                                                            input.formIndex = i
+                                                            input.formInputIndex = j
+                                                            input.value = EncryptHelper.encrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, value: value)!
+                                                            form.inputs.append(input)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return form
+        }
+        return nil
+    }
+
     private func updateNetworkActivityIndicator() {
         let loadingWebViews: [EGWebView?] = webViews.filter({ (wv) -> Bool in
             if let wv = wv {
@@ -566,13 +616,13 @@ class BaseView: UIView {
     /// ページ情報保存
     private func saveMetaData(webView: EGWebView) {
         if let urlStr = webView.url?.absoluteString, let title = webView.title, !title.isEmpty {
-            if urlStr.hasValidUrl {
+            if urlStr.isValidUrl {
                 webView.requestUrl = urlStr
                 webView.requestTitle = title
                 if webView == front {
                     viewModel.headerFieldText = webView.requestUrl
                 }
-            } else if urlStr.hasLocalUrl {
+            } else if urlStr.isLocalUrl {
                 // エラーが発生した時のheaderField更新
                 if webView == front {
                     viewModel.headerFieldText = viewModel.latestRequestUrl
@@ -921,6 +971,16 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             // プログレス更新
             self.viewModel.endRenderingPageHistoryDataModel(context: wv.context)
         })
+
+        // TODO: submit検知。フォーム情報確認
+//        if let form = wv.form {
+//            wv.form = nil
+//            NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_SAVE_TITLE, message: MessageConst.ALERT_FORM_SAVE_MESSAGE, completion: { [weak self] in
+//                guard let `self` = self else { return }
+//                self.viewModel.storeFormDataModel(form: form)
+//
+//            })
+//        }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: Error) {
@@ -946,11 +1006,16 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         // URLスキーム対応
         if let errorUrl = (error as NSError).userInfo["NSErrorFailingURLKey"] {
             let url = (errorUrl as! NSURL).absoluteString!
-            if !url.hasValidUrl || url.range(of: AppConst.URL_ITUNES_STORE) != nil {
+            if !url.isValidUrl || url.range(of: AppConst.URL_ITUNES_STORE) != nil {
                 log.warning("load error. [open url event]")
                 return
             }
         }
+
+        // TODO: submit検知
+//        if let _ = egWv.form {
+//            egWv.form = nil
+//        }
 
         egWv.loadHtml(error: (error as NSError))
     }
@@ -989,6 +1054,8 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        let webView = webView as! EGWebView
+
         guard let url = navigationAction.request.url else {
             decisionHandler(.cancel)
             return
@@ -999,6 +1066,13 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             autoScrollTimer.invalidate()
             self.autoScrollTimer = nil
         }
+
+        // TODO: Submit検知
+//        if navigationAction.navigationType == .formSubmitted || navigationAction.navigationType == .formResubmitted {
+//            DispatchQueue.mainSyncSafe {
+//                webView.form = takeForm(webView: webView)
+//            }
+//        }
 
         // 外部アプリ起動要求
         if (url.absoluteString.range(of: AppConst.URL_ITUNES_STORE) != nil) ||
@@ -1017,12 +1091,12 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
 
         // リクエストURLはエラーが発生した時のため保持しておく
         // エラー発生時は、リクエストしたURLを履歴に保持する
-        if let latest = navigationAction.request.url?.absoluteString, latest.hasValidUrl {
+        if let latest = navigationAction.request.url?.absoluteString, latest.isValidUrl {
             log.debug("[Request Url]: \(latest)")
             viewModel.latestRequestUrl = latest
         }
 
-        saveMetaData(webView: webView as! EGWebView)
+        saveMetaData(webView: webView)
 
         decisionHandler(.allow)
     }

@@ -20,18 +20,22 @@ extension String {
         })
     }
 
-    var hasValidUrl: Bool {
+    var isValidUrl: Bool {
         return self != "http://" &&
             self != "https://" &&
             !isEmpty &&
             (hasPrefix("http://") == true || hasPrefix("https://") == true)
     }
 
-    var hasLocalUrl: Bool {
+    var isLocalUrl: Bool {
         return hasPrefix("file://")
     }
 
-    var hasHttpsUrl: Bool {
+    var isUrl: Bool {
+        return contains("://")
+    }
+
+    var isHttpsUrl: Bool {
         return hasPrefix("https://")
     }
 

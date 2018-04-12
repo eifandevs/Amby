@@ -180,7 +180,7 @@ class BaseViewController: UIViewController {
             if let orgActionSheet = viewControllerToPresent as? UIAlertController, let url = orgActionSheet.title {
                 if (orgActionSheet.preferredStyle == .actionSheet) && (orgActionSheet.title != nil) {
                     // webviewを長押しされたら、そのURLで新しいタブを作成する
-                    if url.hasValidUrl {
+                    if url.isValidUrl {
                         viewModel.insertByEventPageHistoryDataModel(url: url)
                         return
                     }

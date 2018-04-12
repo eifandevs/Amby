@@ -31,7 +31,7 @@ class HeaderField: UIButton, ShadowView {
             guard let value = newValue, let icon = icon, let _ = label else {
                 return
             }
-            if let value = newValue, value.hasHttpsUrl {
+            if let value = newValue, value.isHttpsUrl {
                 icon.frame.size = iconSize
             } else {
                 icon.frame.size = CGSize.zero
@@ -191,7 +191,7 @@ class HeaderField: UIButton, ShadowView {
         guard let icon = icon, let label = label else {
             return
         }
-        if let text = text, text.hasHttpsUrl {
+        if let text = text, text.isHttpsUrl {
             icon.frame.size = iconSize
         } else {
             icon.frame.size = CGSize.zero
