@@ -424,6 +424,19 @@ class BaseView: UIView {
                 log.eventOut(chain: "rx_baseViewModelDidAutoScroll")
             }
             .disposed(by: rx.disposeBag)
+
+        // スクロールアップ監視
+        viewModel.rx_baseViewModelDidScrollUp
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidScrollUp")
+                guard let `self` = self else { return }
+                // スクロールアップ
+                DispatchQueue.mainSyncSafe {
+                    self.front.scrollView.scroll(to: .top, animated: true)
+                }
+                log.eventOut(chain: "rx_baseViewModelDidScrollUp")
+            }
+            .disposed(by: rx.disposeBag)
     }
 
     deinit {

@@ -86,8 +86,8 @@ class FrontLayer: UIView {
             ],
             [
                 CircleMenuItem(image: R.image.circlemenuUrl(), tapAction: { _ in
-                    log.debug("circle menu event. event: url copy")
-                    self.viewModel.executeOperationDataModel(operation: .urlCopy)
+                    log.debug("circle menu event. event: scroll up")
+                    self.viewModel.executeOperationDataModel(operation: .scrollUp)
                 }),
                 CircleMenuItem(image: R.image.circlemenuAutoscroll(), tapAction: { _ in
                     log.debug("circle menu event. event: auto scroll")

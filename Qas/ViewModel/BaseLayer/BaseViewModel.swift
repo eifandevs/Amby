@@ -69,6 +69,15 @@ final class BaseViewModel {
                 return Observable.empty()
             }
         }
+    /// 通知用RXスクロールアップ通知用RX
+    let rx_baseViewModelDidScrollUp = OperationDataModel.s.rx_operationDataModelDidChange
+        .flatMap { object -> Observable<()> in
+            if object.operation == .scrollUp {
+                return Observable.just(())
+            } else {
+                return Observable.empty()
+            }
+        }
 
     /// リクエストURL(jsのURL)
     var currentUrl: String? {
@@ -125,21 +134,6 @@ final class BaseViewModel {
                 guard let `self` = self else { return }
                 self.storeHistoryDataModel()
                 log.eventOut(chain: "rx_UIApplicationWillResignActive")
-            }
-            .disposed(by: disposeBag)
-
-        // オペレーション監視
-        OperationDataModel.s.rx_operationDataModelDidChange
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_operationDataModelDidChange")
-                guard let `self` = self else { return }
-                if let object = object.element {
-                    if object.operation == .urlCopy {
-                        UIPasteboard.general.string = self.currentUrl
-                        NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_COPY_URL)
-                    }
-                }
-                log.eventOut(chain: "rx_operationDataModelDidChange")
             }
             .disposed(by: disposeBag)
     }
