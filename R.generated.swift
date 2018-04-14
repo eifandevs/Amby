@@ -27,8 +27,8 @@ struct R: Rswift.Validatable {
     static let authorizeHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "authorize", pathExtension: "html")
     /// Resource file `dns.html`.
     static let dnsHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "dns", pathExtension: "html")
-    /// Resource file `domain.plist`.
-    static let domainPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "domain", pathExtension: "plist")
+    /// Resource file `env.plist`.
+    static let envPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "env", pathExtension: "plist")
     /// Resource file `invalid.html`.
     static let invalidHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "invalid", pathExtension: "html")
     /// Resource file `offline.html`.
@@ -50,9 +50,9 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
     
-    /// `bundle.url(forResource: "domain", withExtension: "plist")`
-    static func domainPlist(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.domainPlist
+    /// `bundle.url(forResource: "env", withExtension: "plist")`
+    static func envPlist(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.envPlist
       return fileResource.bundle.url(forResource: fileResource)
     }
     

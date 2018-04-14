@@ -31,7 +31,7 @@
 		A15F42EF20626C1F00228553 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EC20626C1F00228553 /* Google.swift */; };
 		A15F42F020626C1F00228553 /* SuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EE20626C1F00228553 /* SuggestResponse.swift */; };
 		A16838392067ACD400182028 /* CommonHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16838382067ACD400182028 /* CommonHistoryDataModelTests.swift */; };
-		A183410A208246E100071BE9 /* domain.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1834109208246E100071BE9 /* domain.plist */; };
+		A183410C20827F4300071BE9 /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A183410B20827F4200071BE9 /* env.plist */; };
 		A1871DF320765725000B08FA /* UIViewController+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1871DF220765725000B08FA /* UIViewController+Extend.swift */; };
 		A198806C206E651E0067EC4F /* PageHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */; };
 		A198806E2072ED1F0067EC4F /* BaseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */; };
@@ -352,7 +352,7 @@
 		A168382B2066960B00182028 /* Qas-DevelopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qas-DevelopTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A168382F2066960B00182028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A16838382067ACD400182028 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
-		A1834109208246E100071BE9 /* domain.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = domain.plist; sourceTree = "<group>"; };
+		A183410B20827F4200071BE9 /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
 		A1871DF220765725000B08FA /* UIViewController+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extend.swift"; sourceTree = "<group>"; };
 		A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelTests.swift; sourceTree = "<group>"; };
@@ -1172,6 +1172,7 @@
 		A5BCE7CD1FA50C3A00E0C6E5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A183410B20827F4200071BE9 /* env.plist */,
 				A14A9D2B2066514400E4D5FF /* stub */,
 				A5223E8D1F1F8EA20097E793 /* Assets.xcassets */,
 				A5BCE7CE1FA50C3A00E0C6E5 /* www */,
@@ -1187,7 +1188,6 @@
 				A5BCE7D11FA50C3A00E0C6E5 /* invalid.html */,
 				A5BCE7D21FA50C3A00E0C6E5 /* offline.html */,
 				A5BCE7D31FA50C3A00E0C6E5 /* timeout.html */,
-				A1834109208246E100071BE9 /* domain.plist */,
 			);
 			path = www;
 			sourceTree = "<group>";
@@ -1379,6 +1379,7 @@
 				A1EF0093208238190079E1DF /* timeout.html in Resources */,
 				A1EF0094208238190079E1DF /* OptionMenuHelpTableView.xib in Resources */,
 				A1EF0095208238190079E1DF /* OptionMenuFormTableViewCell.xib in Resources */,
+				A183410C20827F4300071BE9 /* env.plist in Resources */,
 				A1EF0096208238190079E1DF /* OptionMenuAppTableViewCell.xib in Resources */,
 				A1EF0097208238190079E1DF /* dns.html in Resources */,
 				A1EF0098208238190079E1DF /* OptionMenuFormTableView.xib in Resources */,
@@ -1396,7 +1397,6 @@
 				A1EF00A4208238190079E1DF /* OptionMenuTableView.xib in Resources */,
 				A1EF00A5208238190079E1DF /* OptionMenuHistoryTableView.xib in Resources */,
 				A1EF00A6208238190079E1DF /* OptionMenuAppTableView.xib in Resources */,
-				A183410A208246E100071BE9 /* domain.plist in Resources */,
 				A1EF00A7208238190079E1DF /* authorize.html in Resources */,
 				A1EF00A8208238190079E1DF /* offline.html in Resources */,
 				A1EF00A9208238190079E1DF /* invalid.html in Resources */,
