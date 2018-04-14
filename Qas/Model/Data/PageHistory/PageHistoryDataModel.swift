@@ -95,7 +95,7 @@ final class PageHistoryDataModel {
 
     /// ロード終了
     func endLoading(context: String) {
-        if let _ = histories.find({ $0.context == context }) {
+        if histories.find({ $0.context == context }) != nil {
             rx_pageHistoryDataModelDidEndLoading.onNext(context)
         } else {
             log.error("pageHistoryDataModelDidEndLoading not fired. history is deleted.")
