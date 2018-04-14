@@ -21,12 +21,14 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 6 files.
+  /// This `R.file` struct is generated, and contains static references to 7 files.
   struct file {
     /// Resource file `authorize.html`.
     static let authorizeHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "authorize", pathExtension: "html")
     /// Resource file `dns.html`.
     static let dnsHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "dns", pathExtension: "html")
+    /// Resource file `domain.plist`.
+    static let domainPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "domain", pathExtension: "plist")
     /// Resource file `invalid.html`.
     static let invalidHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "invalid", pathExtension: "html")
     /// Resource file `offline.html`.
@@ -45,6 +47,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "dns", withExtension: "html")`
     static func dnsHtml(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.dnsHtml
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "domain", withExtension: "plist")`
+    static func domainPlist(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.domainPlist
       return fileResource.bundle.url(forResource: fileResource)
     }
     

@@ -30,9 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.setup()
 
         #if DEVELOP
+            // developターゲットは通信しない
             log.info("DEVELOP TARGET")
         #else
             log.info("PRODUCTION TARGET")
+            // エンドポイント初期化
+            let domainPath = Bundle.main.path(forResource: "domain", ofType: "plist")
+            let plist = NSDictionary(contentsOfFile: domainPath!)!
+            HttpConst.SUGGEST_SERVER_DOMAIN = plist["SUGGEST_SERVER_DOMAIN"] as! String
+            HttpConst.SUGGEST_SERVER_PATH = plist["SUGGEST_SERVER_PATH"] as! String
         #endif
 
         #if DEBUG

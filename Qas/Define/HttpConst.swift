@@ -9,6 +9,6 @@
 import Foundation
 
 final class HttpConst {
-    static let SUGGEST_SERVER_DOMAIN = "https://www.google.com"
-    static let SUGGEST_SERVER_PATH = "/complete/search"
+    static var SUGGEST_SERVER_DOMAIN = ""
+    static var SUGGEST_SERVER_PATH = ""
 }
