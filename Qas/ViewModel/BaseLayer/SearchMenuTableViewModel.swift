@@ -40,6 +40,14 @@ final class SearchMenuTableViewModel {
                 if let object = object.element {
                     if object.operation == .suggest {
                         let token = object.object as! String
+                        // 閲覧履歴と検索履歴の検索
+                        self.historyCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: 4)
+                        self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: 4)
+
+                        // とりあえずここで画面更新
+                        self.rx_searchMenuViewWillUpdateLayout.onNext(())
+
+                        // オートサジェスト
                         self.requestSearchQueue.append(token)
                         self.requestSearch()
                     }
@@ -51,12 +59,6 @@ final class SearchMenuTableViewModel {
         // サジェスト検索監視
         SuggestDataModel.s.rx_suggestDataModelDidUpdate
             .observeOn(MainScheduler.asyncInstance)
-            .map { [weak self] (suggest) -> Suggest in
-                guard let `self` = self else { return suggest }
-                self.historyCellItem = CommonHistoryDataModel.s.select(title: suggest.token, readNum: self.readCommonHistoryNum).objects(for: 4)
-                self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: suggest.token, readNum: self.readSearchHistoryNum).objects(for: 4)
-                return suggest
-            }
             .subscribe { [weak self] suggest in
                 log.eventIn(chain: "rx_suggestDataModelDidUpdate")
 
@@ -68,6 +70,7 @@ final class SearchMenuTableViewModel {
                     self.googleSearchCellItem = []
                 }
                 self.isRequesting = false
+                // キューに積まれている場合は、再度検索にいく
                 if self.requestSearchQueue.count > 0 {
                     self.requestSearch()
                 } else {
