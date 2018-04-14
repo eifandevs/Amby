@@ -2063,107 +2063,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A11050C6206BD9BD00C07CB8 /* Debug-Local */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "-DDEBUG";
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-			};
-			name = "Debug-Local";
-		};
-		A11050C7206BD9BD00C07CB8 /* Debug-Local */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8093F02229A95D450B618077 /* Pods-Qas-Develop.debug-local.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = TBQA5RANYY;
-				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Develop/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qas.sw;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEVELOP LOCAL";
-				SWIFT_OBJC_BRIDGING_HEADER = "Qas/Application/Qas-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-			};
-			name = "Debug-Local";
-		};
-		A11050C8206BD9BE00C07CB8 /* Debug-Local */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FD41C7994A687E2D931946E /* Pods-Qas-DevelopTests.debug-local.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TBQA5RANYY;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "Qas-DevelopTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEVELOP LOCAL";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qas-Develop.app/Qas-Develop";
-			};
-			name = "Debug-Local";
-		};
 		A16838322066960B00182028 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 864490C49B44E38091C994D2 /* Pods-Qas-DevelopTests.debug.xcconfig */;
@@ -2234,29 +2133,6 @@
 				TEST_TARGET_NAME = "Qas-Develop";
 			};
 			name = Debug;
-		};
-		A198807C2073A5E20067EC4F /* Debug-Local */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F8A6AD36C957CDB01D24BFB /* Pods-Qas-DevelopUITests.debug-local.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TBQA5RANYY;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "Qas-DevelopUITests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eifandevs.Qas-DevelopUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DEVELOP LOCAL";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Qas-Develop";
-			};
-			name = "Debug-Local";
 		};
 		A198807D2073A5E20067EC4F /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2443,25 +2319,6 @@
 			};
 			name = "Debug-UT";
 		};
-		A1EF00B2208238190079E1DF /* Debug-Local */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 19CC00F13CFA491596CF4649 /* Pods-Qas-Production.debug-local.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = TBQA5RANYY;
-				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Production/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.qas;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG PRODUCTION LOCAL";
-				SWIFT_OBJC_BRIDGING_HEADER = "Qas/Application/Qas-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-			};
-			name = "Debug-Local";
-		};
 		A1EF00B3208238190079E1DF /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F5B1162E026750ACA6E88451 /* Pods-Qas-Production.release.xcconfig */;
@@ -2633,7 +2490,6 @@
 			buildConfigurations = (
 				A16838322066960B00182028 /* Debug */,
 				A1EA9D942074F8E70058D073 /* Debug-UT */,
-				A11050C8206BD9BE00C07CB8 /* Debug-Local */,
 				A16838332066960B00182028 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2644,7 +2500,6 @@
 			buildConfigurations = (
 				A198807B2073A5E20067EC4F /* Debug */,
 				A1EA9D952074F8E70058D073 /* Debug-UT */,
-				A198807C2073A5E20067EC4F /* Debug-Local */,
 				A198807D2073A5E20067EC4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2655,7 +2510,6 @@
 			buildConfigurations = (
 				A1EF00B0208238190079E1DF /* Debug */,
 				A1EF00B1208238190079E1DF /* Debug-UT */,
-				A1EF00B2208238190079E1DF /* Debug-Local */,
 				A1EF00B3208238190079E1DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2666,7 +2520,6 @@
 			buildConfigurations = (
 				A57EFEB11E3E06D300B66701 /* Debug */,
 				A1EA9D922074F8E70058D073 /* Debug-UT */,
-				A11050C6206BD9BD00C07CB8 /* Debug-Local */,
 				A57EFEB21E3E06D300B66701 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -2677,7 +2530,6 @@
 			buildConfigurations = (
 				A57EFEB41E3E06D300B66701 /* Debug */,
 				A1EA9D932074F8E70058D073 /* Debug-UT */,
-				A11050C7206BD9BD00C07CB8 /* Debug-Local */,
 				A57EFEB51E3E06D300B66701 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
