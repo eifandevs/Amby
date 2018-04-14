@@ -11,4 +11,5 @@ import Foundation
 final class HttpConst {
     static var SUGGEST_SERVER_DOMAIN = ""
     static var SUGGEST_SERVER_PATH = ""
+    static var HOME_URL = "https://google.com"
 }

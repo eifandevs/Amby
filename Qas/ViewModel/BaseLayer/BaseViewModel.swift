@@ -69,10 +69,19 @@ final class BaseViewModel {
                 return Observable.empty()
             }
         }
-    /// 通知用RXスクロールアップ通知用RX
+    /// スクロールアップ通知用RX
     let rx_baseViewModelDidScrollUp = OperationDataModel.s.rx_operationDataModelDidChange
         .flatMap { object -> Observable<()> in
             if object.operation == .scrollUp {
+                return Observable.just(())
+            } else {
+                return Observable.empty()
+            }
+        }
+    /// ホーム表示通知用RX
+    let rx_baseViewModelDidGoHome = OperationDataModel.s.rx_operationDataModelDidChange
+        .flatMap { object -> Observable<()> in
+            if object.operation == .home {
                 return Observable.just(())
             } else {
                 return Observable.empty()

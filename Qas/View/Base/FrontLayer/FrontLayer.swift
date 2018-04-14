@@ -107,7 +107,7 @@ class FrontLayer: UIView {
                 }),
                 CircleMenuItem(image: R.image.circlemenuForm(), tapAction: { _ in
                     log.debug("circle menu event. event: home")
-//                    self.viewModel.executeOperationDataModel(operation: .home)
+                    self.viewModel.executeOperationDataModel(operation: .home)
                 }),
             ],
         ]

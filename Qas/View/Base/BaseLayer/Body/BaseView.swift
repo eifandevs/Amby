@@ -438,6 +438,17 @@ class BaseView: UIView {
                 log.eventOut(chain: "rx_baseViewModelDidScrollUp")
             }
             .disposed(by: rx.disposeBag)
+
+        // ホーム監視
+        viewModel.rx_baseViewModelDidGoHome
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidGoHome")
+                guard let `self` = self else { return }
+                // スクロールアップ
+                self.front.load(urlStr: HttpConst.HOME_URL)
+                log.eventOut(chain: "rx_baseViewModelDidGoHome")
+            }
+            .disposed(by: rx.disposeBag)
     }
 
     deinit {

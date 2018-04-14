@@ -34,11 +34,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             log.info("DEVELOP TARGET")
         #else
             log.info("PRODUCTION TARGET")
-            // エンドポイント初期化
+            // プロダクション用環境設定取得
             let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
             let plist = NSDictionary(contentsOfFile: domainPath!)!
+
+            // エンドポイント初期化
             HttpConst.SUGGEST_SERVER_DOMAIN = plist["SUGGEST_SERVER_DOMAIN"] as! String
             HttpConst.SUGGEST_SERVER_PATH = plist["SUGGEST_SERVER_PATH"] as! String
+
+            // ホームURL初期化
+            HttpConst.HOME_URL = plist["HOME_URL"] as! String
 
             // 暗号キー初期化
             AppConst.KEY_REALM_TOKEN = plist["KEY_REALM_TOKEN"] as! String
