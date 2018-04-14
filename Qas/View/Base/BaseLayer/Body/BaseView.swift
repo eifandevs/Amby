@@ -432,7 +432,8 @@ class BaseView: UIView {
                 guard let `self` = self else { return }
                 // スクロールアップ
                 DispatchQueue.mainSyncSafe {
-                    self.front.scrollView.scroll(to: .top, animated: true)
+                    self.front.evaluateJavaScript("window.scrollTo(0, 0)") { _, _ in
+                    }
                 }
                 log.eventOut(chain: "rx_baseViewModelDidScrollUp")
             }
