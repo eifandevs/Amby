@@ -40,3 +40,12 @@ target 'Qas-Develop' do
     # Pods for testing
   end
 end
+
+target 'Qas-Production' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Qas-Production
+  common_pods
+  
+end

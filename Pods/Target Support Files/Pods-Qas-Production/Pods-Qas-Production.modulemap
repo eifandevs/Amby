@@ -1,0 +1,6 @@
+framework module Pods_Qas_Production {
+  umbrella header "Pods-Qas-Production-umbrella.h"
+
+  export *
+  module * { export * }
+}
