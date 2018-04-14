@@ -26,11 +26,12 @@ final class ApiProvider<T: TargetType>: MoyaProvider<T> {
 
         var plugins = [PluginType]()
         #if DEBUG
+            // デバッグ時は通信ログを出す
             plugins = [NetworkLoggerPlugin(verbose: true, responseDataFormatter: ApiProvider.formatJsonResponseData)]
         #endif
 
         var stubClosure: (Target) -> Moya.StubBehavior
-        #if LOCAL
+        #if DEVELOP
             stubClosure = ApiProvider.immediatelyStub
         #else
             stubClosure = ApiProvider.neverStub

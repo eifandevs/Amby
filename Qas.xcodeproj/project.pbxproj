@@ -360,7 +360,7 @@
 		A1D4DB0B205D2B180099BE44 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A1EF0016207F771F0079E1DF /* CollectionType+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionType+Extend.swift"; sourceTree = "<group>"; };
 		A1EF00B4208238190079E1DF /* Qas-Production.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qas-Production.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1EF00B52082381A0079E1DF /* Qas-Develop copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Qas-Develop copy-Info.plist"; path = "/Users/tenma/dev/projects/Qas/Qas-Develop copy-Info.plist"; sourceTree = "<absolute>"; };
+		A1EF00B52082381A0079E1DF /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = info.plist; path = /Users/tenma/dev/projects/Qas/Qas/Environment/Production/info.plist; sourceTree = "<absolute>"; };
 		A28BDCA0F081729C628CD5CE /* Pods-Qas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.release.xcconfig"; sourceTree = "<group>"; };
 		A5117A521FDC494000213E02 /* AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnum.swift; sourceTree = "<group>"; };
 		A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLayerViewModel.swift; sourceTree = "<group>"; };
@@ -573,6 +573,14 @@
 				F5B1162E026750ACA6E88451 /* Pods-Qas-Production.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A12ADC2F20823D3700521C0F /* Production */ = {
+			isa = PBXGroup;
+			children = (
+				A1EF00B52082381A0079E1DF /* info.plist */,
+			);
+			path = Production;
 			sourceTree = "<group>";
 		};
 		A14A9D2B2066514400E4D5FF /* stub */ = {
@@ -876,7 +884,6 @@
 				A57EFEA21E3E06D300B66701 /* Products */,
 				2D6EC82ACCDEE92B54408E2F /* Pods */,
 				1BAE9B5DD71F0DF92296651C /* Frameworks */,
-				A1EF00B52082381A0079E1DF /* Qas-Develop copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -894,6 +901,7 @@
 		A5A598E91FA516E1000B56AE /* Environment */ = {
 			isa = PBXGroup;
 			children = (
+				A12ADC2F20823D3700521C0F /* Production */,
 				A56B2B10200168270033F2EF /* Develop */,
 			);
 			path = Environment;
@@ -2404,10 +2412,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TBQA5RANYY;
-				INFOPLIST_FILE = "Qas-Develop copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Production/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qas.sw;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.qas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "PRODUCTION DEBUG";
 				SWIFT_OBJC_BRIDGING_HEADER = "Qas/Application/Qas-Bridging-Header.h";
@@ -2423,10 +2431,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TBQA5RANYY;
-				INFOPLIST_FILE = "Qas-Develop copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Production/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qas.sw;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.qas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG PRODUCTION UT";
 				SWIFT_OBJC_BRIDGING_HEADER = "Qas/Application/Qas-Bridging-Header.h";
@@ -2442,10 +2450,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TBQA5RANYY;
-				INFOPLIST_FILE = "Qas-Develop copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Production/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qas.sw;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.qas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG PRODUCTION LOCAL";
 				SWIFT_OBJC_BRIDGING_HEADER = "Qas/Application/Qas-Bridging-Header.h";
@@ -2461,10 +2469,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TBQA5RANYY;
-				INFOPLIST_FILE = "Qas-Develop copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Qas/Environment/Production/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qas.sw;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.qas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "PRODUCTION RELEASE";
 				SWIFT_OBJC_BRIDGING_HEADER = "Qas/Application/Qas-Bridging-Header.h";
