@@ -18,7 +18,7 @@ enum UserOperation {
     case home
     case form
     case favorite
-    case autoInput
+    case autoFill
     case urlCopy
     case search
     case scrollUp

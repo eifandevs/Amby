@@ -45,7 +45,7 @@ class BaseLayer: UIView {
                 guard let `self` = self else { return }
                 if !self.isHeaderViewEditing {
                     // 自動入力オペ要求
-                    self.viewModel.changeOperationDataModel(operation: .autoInput)
+                    self.viewModel.changeOperationDataModel(operation: .autoFill)
                 }
                 log.eventOut(chain: "rx_UIKeyboardDidShow")
             }

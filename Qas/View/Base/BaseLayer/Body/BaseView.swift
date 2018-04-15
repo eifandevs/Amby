@@ -81,7 +81,7 @@ class BaseView: UIView {
     /// Y軸移動量を計算するための一時変数
     private var scrollMovingPointY: CGFloat = 0
     /// 自動入力ダイアログ表示済みフラグ
-    private var isDoneAutoInput = false
+    private var isDoneAutoFill = false
     /// タッチ中フラグ
     private var isTouching = false
     /// アニメーション中フラグ
@@ -202,11 +202,11 @@ class BaseView: UIView {
             .disposed(by: rx.disposeBag)
 
         // 自動入力監視
-        viewModel.rx_baseViewModelDidAutoInput
+        viewModel.rx_baseViewModelDidAutoFill
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_baseViewModelDidAutoInput")
+                log.eventIn(chain: "rx_baseViewModelDidAutoFill")
                 guard let `self` = self else { return }
-                if !self.isDoneAutoInput {
+                if !self.isDoneAutoFill {
                     if let inputForm = FormDataModel.s.select(url: self.front.url?.absoluteString).first {
                         NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_TITLE, message: MessageConst.ALERT_FORM_EXIST, completion: { [weak self] in
                             inputForm.inputs.forEach {
@@ -215,10 +215,10 @@ class BaseView: UIView {
                                 }
                             }
                         })
-                        self.isDoneAutoInput = true
+                        self.isDoneAutoFill = true
                     }
                 }
-                log.eventOut(chain: "rx_baseViewModelDidAutoInput")
+                log.eventOut(chain: "rx_baseViewModelDidAutoFill")
             }
             .disposed(by: rx.disposeBag)
 
@@ -974,7 +974,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         saveMetaData(webView: wv)
 
         if wv.hasSavableUrl {
-            isDoneAutoInput = false
+            isDoneAutoFill = false
             // 有効なURLの場合は、履歴に保存する
             viewModel.updateHistoryDataModel(context: wv.context, url: wv.requestUrl, title: wv.requestTitle, operation: operation)
             viewModel.storePageHistoryDataModel()

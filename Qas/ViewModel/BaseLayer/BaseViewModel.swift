@@ -61,9 +61,9 @@ final class BaseViewModel {
             }
         }
     /// 自動入力通知用RX
-    let rx_baseViewModelDidAutoInput = OperationDataModel.s.rx_operationDataModelDidChange
+    let rx_baseViewModelDidAutoFill = OperationDataModel.s.rx_operationDataModelDidChange
         .flatMap { object -> Observable<()> in
-            if object.operation == .autoInput {
+            if object.operation == .autoFill {
                 return Observable.just(())
             } else {
                 return Observable.empty()
