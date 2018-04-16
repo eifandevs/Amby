@@ -32,6 +32,14 @@
 		A15F42F020626C1F00228553 /* SuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EE20626C1F00228553 /* SuggestResponse.swift */; };
 		A16838392067ACD400182028 /* CommonHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16838382067ACD400182028 /* CommonHistoryDataModelTests.swift */; };
 		A183410C20827F4300071BE9 /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A183410B20827F4200071BE9 /* env.plist */; };
+		A183410E2084BE7A00071BE9 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = A183410D2084BE7A00071BE9 /* Article.swift */; };
+		A183410F2084BE7A00071BE9 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = A183410D2084BE7A00071BE9 /* Article.swift */; };
+		A18341112084BEA300071BE9 /* ArticleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18341102084BEA300071BE9 /* ArticleResponse.swift */; };
+		A18341122084BEA300071BE9 /* ArticleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18341102084BEA300071BE9 /* ArticleResponse.swift */; };
+		A18341142084BEBF00071BE9 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18341132084BEBF00071BE9 /* App.swift */; };
+		A18341152084BEBF00071BE9 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18341132084BEBF00071BE9 /* App.swift */; };
+		A18341172084BF0700071BE9 /* article_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A18341162084BF0700071BE9 /* article_stub.json */; };
+		A18341182084BF0700071BE9 /* article_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A18341162084BF0700071BE9 /* article_stub.json */; };
 		A1871DF320765725000B08FA /* UIViewController+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1871DF220765725000B08FA /* UIViewController+Extend.swift */; };
 		A198806C206E651E0067EC4F /* PageHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */; };
 		A198806E2072ED1F0067EC4F /* BaseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */; };
@@ -353,6 +361,10 @@
 		A168382F2066960B00182028 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A16838382067ACD400182028 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A183410B20827F4200071BE9 /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
+		A183410D2084BE7A00071BE9 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		A18341102084BEA300071BE9 /* ArticleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleResponse.swift; sourceTree = "<group>"; };
+		A18341132084BEBF00071BE9 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		A18341162084BF0700071BE9 /* article_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = article_stub.json; sourceTree = "<group>"; };
 		A1871DF220765725000B08FA /* UIViewController+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extend.swift"; sourceTree = "<group>"; };
 		A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelTests.swift; sourceTree = "<group>"; };
@@ -588,6 +600,7 @@
 		A14A9D2B2066514400E4D5FF /* stub */ = {
 			isa = PBXGroup;
 			children = (
+				A18341162084BF0700071BE9 /* article_stub.json */,
 				A14A9D2C2066578600E4D5FF /* suggest_stub.json */,
 			);
 			path = stub;
@@ -717,6 +730,7 @@
 			isa = PBXGroup;
 			children = (
 				A15F42EC20626C1F00228553 /* Google.swift */,
+				A18341132084BEBF00071BE9 /* App.swift */,
 			);
 			path = Target;
 			sourceTree = "<group>";
@@ -725,6 +739,7 @@
 			isa = PBXGroup;
 			children = (
 				A15F42EE20626C1F00228553 /* SuggestResponse.swift */,
+				A18341102084BEA300071BE9 /* ArticleResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -802,6 +817,7 @@
 				A53C0EDF1FB778ED00FD78FF /* PageHistory.swift */,
 				A53C0EE01FB778ED00FD78FF /* SearchHistory.swift */,
 				A53C0EE11FB778ED00FD78FF /* Suggest.swift */,
+				A183410D2084BE7A00071BE9 /* Article.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1376,6 +1392,7 @@
 			files = (
 				A1EF0091208238190079E1DF /* OptionMenuHistoryTableViewCell.xib in Resources */,
 				A1EF0092208238190079E1DF /* HeaderView.xib in Resources */,
+				A18341182084BF0700071BE9 /* article_stub.json in Resources */,
 				A1EF0093208238190079E1DF /* timeout.html in Resources */,
 				A1EF0094208238190079E1DF /* OptionMenuHelpTableView.xib in Resources */,
 				A1EF0095208238190079E1DF /* OptionMenuFormTableViewCell.xib in Resources */,
@@ -1417,6 +1434,7 @@
 				A5BCE7D51FA50C3A00E0C6E5 /* dns.html in Resources */,
 				A5649A9E1FF8051500EA69E1 /* OptionMenuFormTableView.xib in Resources */,
 				A5649A9B1FF8051500EA69E1 /* OptionMenuTableViewCell.xib in Resources */,
+				A18341172084BF0700071BE9 /* article_stub.json in Resources */,
 				A5649A951FF8051500EA69E1 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
 				A5649A991FF8051500EA69E1 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
 				A5223EEA1F1F8EA20097E793 /* LaunchScreen.storyboard in Resources */,
@@ -1865,6 +1883,7 @@
 				A1EF0057208238190079E1DF /* NotificationView.swift in Sources */,
 				A1EF0058208238190079E1DF /* HttpConst.swift in Sources */,
 				A1EF0059208238190079E1DF /* AppConst.swift in Sources */,
+				A18341152084BEBF00071BE9 /* App.swift in Sources */,
 				A1EF005A208238190079E1DF /* BaseViewController.swift in Sources */,
 				A1EF005B208238190079E1DF /* PageHistoryDataModel.swift in Sources */,
 				A1EF005C208238190079E1DF /* Optional+Extend.swift in Sources */,
@@ -1872,6 +1891,7 @@
 				A1EF005E208238190079E1DF /* OptionMenuFormTableViewCell.swift in Sources */,
 				A1EF005F208238190079E1DF /* ShadowView.swift in Sources */,
 				A1EF0060208238190079E1DF /* CornerRadiusButton.swift in Sources */,
+				A183410F2084BE7A00071BE9 /* Article.swift in Sources */,
 				A1EF0061208238190079E1DF /* EGGradientLabel.swift in Sources */,
 				A1EF0062208238190079E1DF /* BaseViewModel.swift in Sources */,
 				A1EF0063208238190079E1DF /* UIImageView+Extend.swift in Sources */,
@@ -1892,6 +1912,7 @@
 				A1EF0072208238190079E1DF /* FrontLayer.swift in Sources */,
 				A1EF0073208238190079E1DF /* OptionMenuHistoryTableView.swift in Sources */,
 				A1EF0074208238190079E1DF /* Float+Extend.swift in Sources */,
+				A18341122084BEA300071BE9 /* ArticleResponse.swift in Sources */,
 				A1EF0075208238190079E1DF /* CGPoint+Extend.swift in Sources */,
 				A1EF0076208238190079E1DF /* OptionMenuFavoriteTableViewModel.swift in Sources */,
 				A1EF0077208238190079E1DF /* HeaderViewModel.swift in Sources */,
@@ -1985,6 +2006,7 @@
 				A53C0EC21FB7766A00FD78FF /* NotificationView.swift in Sources */,
 				A5BCE7181FA501B900E0C6E5 /* HttpConst.swift in Sources */,
 				A5BCE7161FA501B900E0C6E5 /* AppConst.swift in Sources */,
+				A18341142084BEBF00071BE9 /* App.swift in Sources */,
 				A5BCE7B61FA50BFA00E0C6E5 /* BaseViewController.swift in Sources */,
 				A15F42CE205FF33A00228553 /* PageHistoryDataModel.swift in Sources */,
 				A5BCE70E1FA501B900E0C6E5 /* Optional+Extend.swift in Sources */,
@@ -1992,6 +2014,7 @@
 				A5649A551FE59EAE00EA69E1 /* OptionMenuFormTableViewCell.swift in Sources */,
 				A5BCE7251FA501B900E0C6E5 /* ShadowView.swift in Sources */,
 				A5DBE7641FB84FDF009E4A12 /* CornerRadiusButton.swift in Sources */,
+				A183410E2084BE7A00071BE9 /* Article.swift in Sources */,
 				A5BCE7B21FA50BFA00E0C6E5 /* EGGradientLabel.swift in Sources */,
 				A5BCE7C21FA50BFA00E0C6E5 /* BaseViewModel.swift in Sources */,
 				A5BCE7131FA501B900E0C6E5 /* UIImageView+Extend.swift in Sources */,
@@ -2012,6 +2035,7 @@
 				A5BCE7BA1FA50BFA00E0C6E5 /* FrontLayer.swift in Sources */,
 				A5649A361FE57F6300EA69E1 /* OptionMenuHistoryTableView.swift in Sources */,
 				A599D7C61FB70A6100F7338B /* Float+Extend.swift in Sources */,
+				A18341112084BEA300071BE9 /* ArticleResponse.swift in Sources */,
 				A5BCE7051FA501B900E0C6E5 /* CGPoint+Extend.swift in Sources */,
 				A5649A741FEBF83000EA69E1 /* OptionMenuFavoriteTableViewModel.swift in Sources */,
 				A5BCE7C41FA50BFA00E0C6E5 /* HeaderViewModel.swift in Sources */,
