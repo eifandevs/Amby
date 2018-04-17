@@ -709,12 +709,9 @@
 		A15F42D3205FF50B00228553 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				A18341242086124600071BE9 /* DB */,
+				A18341252086124600071BE9 /* Keychain */,
 				A15F42D4205FF50B00228553 /* API */,
-				A15F42D9205FF50B00228553 /* CacheHelper.swift */,
-				A15F42DA205FF50B00228553 /* CommonDao.swift */,
-				A15F42DB205FF50B00228553 /* EncryptHelper.swift */,
-				A15F42DC205FF50B00228553 /* KeyChainHelper.swift */,
-				A15F42DD205FF50B00228553 /* RealmHelper.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -789,6 +786,24 @@
 				A183411F20860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		A18341242086124600071BE9 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				A15F42DA205FF50B00228553 /* CommonDao.swift */,
+				A15F42DD205FF50B00228553 /* RealmHelper.swift */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		A18341252086124600071BE9 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				A15F42DB205FF50B00228553 /* EncryptHelper.swift */,
+				A15F42DC205FF50B00228553 /* KeyChainHelper.swift */,
+			);
+			path = Keychain;
 			sourceTree = "<group>";
 		};
 		A19880742073A5E20067EC4F /* Qas-DevelopUITests */ = {
@@ -988,6 +1003,7 @@
 		A5BCE6F31FA501B800E0C6E5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				A15F42D9205FF50B00228553 /* CacheHelper.swift */,
 				A5BCE6F71FA501B800E0C6E5 /* Service */,
 				A5BCE6FF1FA501B800E0C6E5 /* Util.swift */,
 			);
