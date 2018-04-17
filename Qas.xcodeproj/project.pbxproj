@@ -46,6 +46,10 @@
 		A183412120860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A183411E20860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.swift */; };
 		A183412220860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A183411F20860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.xib */; };
 		A183412320860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A183411F20860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.xib */; };
+		A1834128208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1834126208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift */; };
+		A1834129208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1834126208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift */; };
+		A183412A208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1834127208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib */; };
+		A183412B208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1834127208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib */; };
 		A1871DF320765725000B08FA /* UIViewController+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1871DF220765725000B08FA /* UIViewController+Extend.swift */; };
 		A198806C206E651E0067EC4F /* PageHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */; };
 		A198806E2072ED1F0067EC4F /* BaseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */; };
@@ -370,6 +374,8 @@
 		A18341192086054500071BE9 /* SearchMenuNewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenuNewsTableViewCell.swift; sourceTree = "<group>"; };
 		A183411E20860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenuCommonHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		A183411F20860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchMenuCommonHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		A1834126208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenuSearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		A1834127208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchMenuSearchHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		A1871DF220765725000B08FA /* UIViewController+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extend.swift"; sourceTree = "<group>"; };
 		A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelTests.swift; sourceTree = "<group>"; };
@@ -774,6 +780,7 @@
 		A183411C2086094200071BE9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				A1834126208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift */,
 				A183411E20860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.swift */,
 				A18341192086054500071BE9 /* SearchMenuNewsTableViewCell.swift */,
 			);
@@ -784,6 +791,7 @@
 			isa = PBXGroup;
 			children = (
 				A183411F20860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.xib */,
+				A1834127208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1446,6 +1454,7 @@
 				A1EF00A0208238190079E1DF /* SplashViewController.xib in Resources */,
 				A1EF00A1208238190079E1DF /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A1EF00A2208238190079E1DF /* HelpViewController.xib in Resources */,
+				A183412B208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
 				A1EF00A3208238190079E1DF /* OptionMenuSettingTableView.xib in Resources */,
 				A1EF00A4208238190079E1DF /* OptionMenuTableView.xib in Resources */,
 				A1EF00A5208238190079E1DF /* OptionMenuHistoryTableView.xib in Resources */,
@@ -1464,6 +1473,7 @@
 				A5649A981FF8051500EA69E1 /* OptionMenuHistoryTableViewCell.xib in Resources */,
 				A5BCE7D81FA50C3A00E0C6E5 /* timeout.html in Resources */,
 				A5649A9F1FF8051500EA69E1 /* OptionMenuHelpTableView.xib in Resources */,
+				A183412A208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
 				A5649A961FF8051500EA69E1 /* OptionMenuFormTableViewCell.xib in Resources */,
 				A5649A941FF8051500EA69E1 /* OptionMenuAppTableViewCell.xib in Resources */,
 				A5BCE7D51FA50C3A00E0C6E5 /* dns.html in Resources */,
@@ -1929,6 +1939,7 @@
 				A1EF0060208238190079E1DF /* CornerRadiusButton.swift in Sources */,
 				A183410F2084BE7A00071BE9 /* Article.swift in Sources */,
 				A1EF0061208238190079E1DF /* EGGradientLabel.swift in Sources */,
+				A1834129208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */,
 				A1EF0062208238190079E1DF /* BaseViewModel.swift in Sources */,
 				A1EF0063208238190079E1DF /* UIImageView+Extend.swift in Sources */,
 				A1EF0064208238190079E1DF /* OptionMenuFormTableView.swift in Sources */,
@@ -2053,6 +2064,7 @@
 				A5DBE7641FB84FDF009E4A12 /* CornerRadiusButton.swift in Sources */,
 				A183410E2084BE7A00071BE9 /* Article.swift in Sources */,
 				A5BCE7B21FA50BFA00E0C6E5 /* EGGradientLabel.swift in Sources */,
+				A1834128208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */,
 				A5BCE7C21FA50BFA00E0C6E5 /* BaseViewModel.swift in Sources */,
 				A5BCE7131FA501B900E0C6E5 /* UIImageView+Extend.swift in Sources */,
 				A5649A401FE59CC400EA69E1 /* OptionMenuFormTableView.swift in Sources */,
