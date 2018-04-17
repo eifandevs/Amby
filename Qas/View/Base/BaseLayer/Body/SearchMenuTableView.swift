@@ -43,7 +43,9 @@ class SearchMenuTableView: UIView {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(SearchMenuCommonHistoryTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(SearchMenuCommonHistoryTableViewCell.self))
+
+        // カスタムビュー登録
+        tableView.register(R.nib.searchMenuCommonHistoryTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.searchMenuCommonHistoryCell.identifier)
         tableView.register(SearchMenuNewsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(SearchMenuNewsTableViewCell.self))
 
         // ジェスチャーを登録する
@@ -179,7 +181,7 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else if indexPath.section == 2 {
             // 閲覧履歴表示
-            let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(SearchMenuCommonHistoryTableViewCell.self), for: indexPath) as! SearchMenuCommonHistoryTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuCommonHistoryCell.identifier, for: indexPath) as! SearchMenuCommonHistoryTableViewCell
             cell.setHistory(history: viewModel.historyCellItem[indexPath.row])
             return cell
         } else {
