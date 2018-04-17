@@ -149,11 +149,11 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return viewModel.googleSearchCellItem.count
+            return viewModel.suggestCellItem.count
         case 1:
             return viewModel.searchHistoryCellItem.count
         case 2:
-            return viewModel.historyCellItem.count
+            return viewModel.commonHistoryCellItem.count
         case 3:
             return viewModel.newsItem.count
         default:
@@ -173,7 +173,7 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             // オートコンプリート表示
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.textLabel?.text = viewModel.googleSearchCellItem.count > 0 ? viewModel.googleSearchCellItem[indexPath.row] : ""
+            cell.textLabel?.text = viewModel.suggestCellItem.count > 0 ? viewModel.suggestCellItem[indexPath.row] : ""
             return cell
         } else if indexPath.section == 1 {
             // 検索履歴表示
@@ -183,7 +183,7 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 2 {
             // 閲覧履歴表示
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuCommonHistoryCell.identifier, for: indexPath) as! SearchMenuCommonHistoryTableViewCell
-            cell.setHistory(history: viewModel.historyCellItem[indexPath.row])
+            cell.setHistory(history: viewModel.commonHistoryCellItem[indexPath.row])
             return cell
         } else {
             // 記事表示

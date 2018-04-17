@@ -17,9 +17,9 @@ final class SearchMenuTableViewModel {
     let rx_searchMenuViewWillHide = PublishSubject<()>()
 
     let sectionItem: [String] = ["Google検索", "検索履歴", "閲覧履歴", "Top News"]
-    var googleSearchCellItem: [String] = []
+    var suggestCellItem: [String] = []
     var searchHistoryCellItem: [SearchHistory] = []
-    var historyCellItem: [CommonHistory] = []
+    var commonHistoryCellItem: [CommonHistory] = []
     var newsItem: [Article] = []
     private let readCommonHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.KEY_COMMON_HISTORY_SAVE_COUNT)
     private let readSearchHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT)
@@ -39,7 +39,7 @@ final class SearchMenuTableViewModel {
                     if object.operation == .suggest {
                         let token = object.object as! String
                         // 閲覧履歴と検索履歴の検索
-                        self.historyCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: 4)
+                        self.commonHistoryCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: 4)
                         self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: 4)
 
                         // とりあえずここで画面更新
@@ -62,9 +62,9 @@ final class SearchMenuTableViewModel {
                 guard let `self` = self else { return }
                 if let suggest = suggest.element, let data = suggest.data, data.count > 0 {
                     // suggestあり
-                    self.googleSearchCellItem = data.objects(for: 4)
+                    self.suggestCellItem = data.objects(for: 4)
                 } else {
-                    self.googleSearchCellItem = []
+                    self.suggestCellItem = []
                 }
                 self.isRequesting = false
                 // キューに積まれている場合は、再度検索にいく
@@ -116,8 +116,8 @@ final class SearchMenuTableViewModel {
                     SuggestDataModel.s.fetch(token: token)
                 }
             } else {
-                googleSearchCellItem = []
-                historyCellItem = []
+                suggestCellItem = []
+                commonHistoryCellItem = []
                 searchHistoryCellItem = []
                 isRequesting = false
                 if requestSearchQueue.count > 0 {
