@@ -43,7 +43,8 @@ class SearchMenuTableView: UIView {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(SearchMenuTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(SearchMenuTableViewCell.self))
+        tableView.register(SearchMenuCommonHistoryTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(SearchMenuCommonHistoryTableViewCell.self))
+        tableView.register(SearchMenuNewsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(SearchMenuNewsTableViewCell.self))
 
         // ジェスチャーを登録する
         // ジェスチャーの付け替えをするのでRX化しない
@@ -150,6 +151,8 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
             return viewModel.searchHistoryCellItem.count
         case 2:
             return viewModel.historyCellItem.count
+        case 3:
+            return viewModel.newsItem.count
         default:
             return 0
         }
@@ -165,16 +168,24 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
+            // オートコンプリート表示
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             cell.textLabel?.text = viewModel.googleSearchCellItem.count > 0 ? viewModel.googleSearchCellItem[indexPath.row] : ""
             return cell
         } else if indexPath.section == 1 {
+            // 検索履歴表示
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             cell.textLabel?.text = viewModel.searchHistoryCellItem.count > 0 ? viewModel.searchHistoryCellItem[indexPath.row].title : ""
             return cell
+        } else if indexPath.section == 2 {
+            // 閲覧履歴表示
+            let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(SearchMenuCommonHistoryTableViewCell.self), for: indexPath) as! SearchMenuCommonHistoryTableViewCell
+            cell.setHistory(history: viewModel.historyCellItem[indexPath.row])
+            return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(SearchMenuTableViewCell.self), for: indexPath) as! SearchMenuTableViewCell
-            cell.setTitle(title: viewModel.historyCellItem[indexPath.row].title, url: viewModel.historyCellItem[indexPath.row].url)
+            // 記事表示
+            let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(SearchMenuNewsTableViewCell.self), for: indexPath) as! SearchMenuNewsTableViewCell
+            cell.setArticle(article: viewModel.newsItem[indexPath.row])
             return cell
         }
     }
@@ -201,8 +212,8 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
         rx_searchMenuDidClose.onNext(())
 
         let cell = tableView.cellForRow(at: indexPath)!
-        if cell.className == SearchMenuTableViewCell.className {
-            let text = (cell as! SearchMenuTableViewCell).urlLabel.text!
+        if cell.className == SearchMenuCommonHistoryTableViewCell.className {
+            let text = (cell as! SearchMenuCommonHistoryTableViewCell).urlLabel.text!
             viewModel.executeOperationDataModel(operation: .search, url: text)
         } else {
             let text = cell.textLabel!.text!

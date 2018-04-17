@@ -87,6 +87,7 @@ class HeaderField: UIButton, ShadowView {
         textField.rx.text.asDriver()
             .drive(onNext: { [weak self] text in
                 guard let `self` = self else { return }
+                // TODO: テキストフィールドの起動時に反応するので、修正する
                 // 表示している履歴情報の更新
                 self.viewModel.executeOperationDataModel(operation: .suggest, object: text!)
             })

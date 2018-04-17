@@ -16,19 +16,17 @@ final class SearchMenuTableViewModel {
     /// 画面無効化通知用RX
     let rx_searchMenuViewWillHide = PublishSubject<()>()
 
-    let sectionItem: [String] = ["Google検索", "検索履歴", "閲覧履歴"]
+    let sectionItem: [String] = ["Google検索", "検索履歴", "閲覧履歴", "Top News"]
     var googleSearchCellItem: [String] = []
     var searchHistoryCellItem: [SearchHistory] = []
     var historyCellItem: [CommonHistory] = []
+    var newsItem: [Article] = []
     private let readCommonHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.KEY_COMMON_HISTORY_SAVE_COUNT)
     private let readSearchHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT)
     private var requestSearchQueue = [String?]()
     private var isRequesting = false
     /// Observable自動解放
     let disposeBag = DisposeBag()
-    var existDisplayData: Bool {
-        return googleSearchCellItem.count > 0 || historyCellItem.count > 0 || searchHistoryCellItem.count > 0
-    }
 
     init() {
         // webview検索
@@ -58,7 +56,6 @@ final class SearchMenuTableViewModel {
 
         // サジェスト検索監視
         SuggestDataModel.s.rx_suggestDataModelDidUpdate
-            .observeOn(MainScheduler.asyncInstance)
             .subscribe { [weak self] suggest in
                 log.eventIn(chain: "rx_suggestDataModelDidUpdate")
 
@@ -80,6 +77,26 @@ final class SearchMenuTableViewModel {
                 log.eventOut(chain: "rx_suggestDataModelDidUpdate")
             }
             .disposed(by: disposeBag)
+
+        // 記事取得監視
+        ArticleDataModel.s.rx_articleDataModelDidUpdate
+            .subscribe { [weak self] element in
+                log.eventIn(chain: "rx_articleDataModelDidUpdate")
+
+                guard let `self` = self else { return }
+                if let articles = element.element, articles.count > 0 {
+                    // suggestあり
+                    self.newsItem = articles
+                } else {
+                    self.newsItem = []
+                }
+
+                log.eventOut(chain: "rx_articleDataModelDidUpdate")
+            }
+            .disposed(by: disposeBag)
+
+        // 記事取得
+        ArticleDataModel.s.fetch()
     }
 
     deinit {
@@ -88,6 +105,7 @@ final class SearchMenuTableViewModel {
         NotificationCenter.default.removeObserver(self)
     }
 
+    /// 検索開始
     private func requestSearch() {
         if !isRequesting {
             isRequesting = true
