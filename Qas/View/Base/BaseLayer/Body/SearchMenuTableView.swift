@@ -48,7 +48,7 @@ class SearchMenuTableView: UIView {
         tableView.register(R.nib.searchMenuCommonHistoryTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.searchMenuCommonHistoryCell.identifier)
         tableView.register(R.nib.searchMenuSearchHistoryTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.searchMenuSearchHistoryCell.identifier)
         tableView.register(R.nib.searchMenuSuggestTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.searchMenuSuggestCell.identifier)
-        tableView.register(SearchMenuNewsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(SearchMenuNewsTableViewCell.self))
+        tableView.register(R.nib.searchMenuNewsTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.searchMenuNewsCell.identifier)
 
         // ジェスチャーを登録する
         // ジェスチャーの付け替えをするのでRX化しない
@@ -188,7 +188,7 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             // 記事表示
-            let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(SearchMenuNewsTableViewCell.self), for: indexPath) as! SearchMenuNewsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuNewsCell.identifier, for: indexPath) as! SearchMenuNewsTableViewCell
             cell.setArticle(article: viewModel.newsItem[indexPath.row])
             return cell
         }
