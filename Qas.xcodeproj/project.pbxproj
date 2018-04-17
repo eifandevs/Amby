@@ -50,6 +50,10 @@
 		A1834129208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1834126208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift */; };
 		A183412A208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1834127208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib */; };
 		A183412B208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1834127208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib */; };
+		A183412E20861DA600071BE9 /* SearchMenuSuggestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A183412C20861DA600071BE9 /* SearchMenuSuggestTableViewCell.swift */; };
+		A183412F20861DA600071BE9 /* SearchMenuSuggestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A183412C20861DA600071BE9 /* SearchMenuSuggestTableViewCell.swift */; };
+		A183413020861DA600071BE9 /* SearchMenuSuggestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A183412D20861DA600071BE9 /* SearchMenuSuggestTableViewCell.xib */; };
+		A183413120861DA600071BE9 /* SearchMenuSuggestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A183412D20861DA600071BE9 /* SearchMenuSuggestTableViewCell.xib */; };
 		A1871DF320765725000B08FA /* UIViewController+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1871DF220765725000B08FA /* UIViewController+Extend.swift */; };
 		A198806C206E651E0067EC4F /* PageHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */; };
 		A198806E2072ED1F0067EC4F /* BaseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */; };
@@ -376,6 +380,8 @@
 		A183411F20860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchMenuCommonHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		A1834126208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenuSearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		A1834127208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchMenuSearchHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		A183412C20861DA600071BE9 /* SearchMenuSuggestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenuSuggestTableViewCell.swift; sourceTree = "<group>"; };
+		A183412D20861DA600071BE9 /* SearchMenuSuggestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchMenuSuggestTableViewCell.xib; sourceTree = "<group>"; };
 		A1871DF220765725000B08FA /* UIViewController+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extend.swift"; sourceTree = "<group>"; };
 		A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelTests.swift; sourceTree = "<group>"; };
@@ -780,6 +786,7 @@
 		A183411C2086094200071BE9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				A183412C20861DA600071BE9 /* SearchMenuSuggestTableViewCell.swift */,
 				A1834126208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift */,
 				A183411E20860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.swift */,
 				A18341192086054500071BE9 /* SearchMenuNewsTableViewCell.swift */,
@@ -792,6 +799,7 @@
 			children = (
 				A183411F20860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.xib */,
 				A1834127208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.xib */,
+				A183412D20861DA600071BE9 /* SearchMenuSuggestTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1439,6 +1447,7 @@
 				A183412320860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
 				A1EF0093208238190079E1DF /* timeout.html in Resources */,
 				A1EF0094208238190079E1DF /* OptionMenuHelpTableView.xib in Resources */,
+				A183413120861DA600071BE9 /* SearchMenuSuggestTableViewCell.xib in Resources */,
 				A1EF0095208238190079E1DF /* OptionMenuFormTableViewCell.xib in Resources */,
 				A183410C20827F4300071BE9 /* env.plist in Resources */,
 				A1EF0096208238190079E1DF /* OptionMenuAppTableViewCell.xib in Resources */,
@@ -1487,6 +1496,7 @@
 				A5649A9D1FF8051500EA69E1 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A5649A971FF8051500EA69E1 /* OptionMenuHelpTableViewCell.xib in Resources */,
 				A5BCE7C11FA50BFA00E0C6E5 /* SplashViewController.xib in Resources */,
+				A183413020861DA600071BE9 /* SearchMenuSuggestTableViewCell.xib in Resources */,
 				A5649A9A1FF8051500EA69E1 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A5BCE7C01FA50BFA00E0C6E5 /* HelpViewController.xib in Resources */,
 				A5649AA11FF8051500EA69E1 /* OptionMenuSettingTableView.xib in Resources */,
@@ -1918,6 +1928,7 @@
 				A1EF004C208238190079E1DF /* PageHistory.swift in Sources */,
 				A1EF004D208238190079E1DF /* EGProgressBar.swift in Sources */,
 				A1EF004E208238190079E1DF /* Favorite.swift in Sources */,
+				A183412F20861DA600071BE9 /* SearchMenuSuggestTableViewCell.swift in Sources */,
 				A1EF004F208238190079E1DF /* OptionMenuSettingTableViewModel.swift in Sources */,
 				A1EF0050208238190079E1DF /* OnceExec.swift in Sources */,
 				A1EF0051208238190079E1DF /* CircleView.swift in Sources */,
@@ -2043,6 +2054,7 @@
 				A53C0EEA1FB778ED00FD78FF /* PageHistory.swift in Sources */,
 				A5BCE7B31FA50BFA00E0C6E5 /* EGProgressBar.swift in Sources */,
 				A53C0EE41FB778ED00FD78FF /* Favorite.swift in Sources */,
+				A183412E20861DA600071BE9 /* SearchMenuSuggestTableViewCell.swift in Sources */,
 				A5649A7C1FEF945800EA69E1 /* OptionMenuSettingTableViewModel.swift in Sources */,
 				A5BCE7201FA501B900E0C6E5 /* OnceExec.swift in Sources */,
 				A5BCE7231FA501B900E0C6E5 /* CircleView.swift in Sources */,

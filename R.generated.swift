@@ -290,7 +290,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.nib` struct is generated, and contains static references to 19 nibs.
+  /// This `R.nib` struct is generated, and contains static references to 20 nibs.
   struct nib {
     /// Nib `HelpViewController`.
     static let helpViewController = _R.nib._HelpViewController()
@@ -328,6 +328,8 @@ struct R: Rswift.Validatable {
     static let searchMenuCommonHistoryTableViewCell = _R.nib._SearchMenuCommonHistoryTableViewCell()
     /// Nib `SearchMenuSearchHistoryTableViewCell`.
     static let searchMenuSearchHistoryTableViewCell = _R.nib._SearchMenuSearchHistoryTableViewCell()
+    /// Nib `SearchMenuSuggestTableViewCell`.
+    static let searchMenuSuggestTableViewCell = _R.nib._SearchMenuSuggestTableViewCell()
     /// Nib `SplashViewController`.
     static let splashViewController = _R.nib._SplashViewController()
     
@@ -421,6 +423,11 @@ struct R: Rswift.Validatable {
       return UIKit.UINib(resource: R.nib.searchMenuSearchHistoryTableViewCell)
     }
     
+    /// `UINib(name: "SearchMenuSuggestTableViewCell", in: bundle)`
+    static func searchMenuSuggestTableViewCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.searchMenuSuggestTableViewCell)
+    }
+    
     /// `UINib(name: "SplashViewController", in: bundle)`
     static func splashViewController(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.splashViewController)
@@ -429,7 +436,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 10 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 11 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `OptionMenuAppCell`.
     static let optionMenuAppCell: Rswift.ReuseIdentifier<OptionMenuAppTableViewCell> = Rswift.ReuseIdentifier(identifier: "OptionMenuAppCell")
@@ -451,6 +458,8 @@ struct R: Rswift.Validatable {
     static let searchMenuCommonHistoryCell: Rswift.ReuseIdentifier<SearchMenuCommonHistoryTableViewCell> = Rswift.ReuseIdentifier(identifier: "SearchMenuCommonHistoryCell")
     /// Reuse identifier `SearchMenuSearchHistoryCell`.
     static let searchMenuSearchHistoryCell: Rswift.ReuseIdentifier<SearchMenuSearchHistoryTableViewCell> = Rswift.ReuseIdentifier(identifier: "SearchMenuSearchHistoryCell")
+    /// Reuse identifier `SearchMenuSuggestCell`.
+    static let searchMenuSuggestCell: Rswift.ReuseIdentifier<SearchMenuSuggestTableViewCell> = Rswift.ReuseIdentifier(identifier: "SearchMenuSuggestCell")
     
     fileprivate init() {}
   }
@@ -725,6 +734,20 @@ struct _R: Rswift.Validatable {
       
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> SearchMenuSearchHistoryTableViewCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SearchMenuSearchHistoryTableViewCell
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _SearchMenuSuggestTableViewCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = SearchMenuSuggestTableViewCell
+      
+      let bundle = R.hostingBundle
+      let identifier = "SearchMenuSuggestCell"
+      let name = "SearchMenuSuggestTableViewCell"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [NSObject : AnyObject]? = nil) -> SearchMenuSuggestTableViewCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? SearchMenuSuggestTableViewCell
       }
       
       fileprivate init() {}

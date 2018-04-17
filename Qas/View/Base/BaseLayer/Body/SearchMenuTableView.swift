@@ -47,6 +47,7 @@ class SearchMenuTableView: UIView {
         // カスタムビュー登録
         tableView.register(R.nib.searchMenuCommonHistoryTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.searchMenuCommonHistoryCell.identifier)
         tableView.register(R.nib.searchMenuSearchHistoryTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.searchMenuSearchHistoryCell.identifier)
+        tableView.register(R.nib.searchMenuSuggestTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.searchMenuSuggestCell.identifier)
         tableView.register(SearchMenuNewsTableViewCell.self, forCellReuseIdentifier: NSStringFromClass(SearchMenuNewsTableViewCell.self))
 
         // ジェスチャーを登録する
@@ -172,13 +173,13 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             // オートコンプリート表示
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.textLabel?.text = viewModel.suggestCellItem.count > 0 ? viewModel.suggestCellItem[indexPath.row] : ""
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuSuggestCell.identifier, for: indexPath) as! SearchMenuSuggestTableViewCell
+            cell.setSuggest(suggest: viewModel.suggestCellItem[indexPath.row])
             return cell
         } else if indexPath.section == 1 {
             // 検索履歴表示
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuSearchHistoryCell.identifier, for: indexPath) as! SearchMenuSearchHistoryTableViewCell
-            cell.textLabel?.text = viewModel.searchHistoryCellItem.count > 0 ? viewModel.searchHistoryCellItem[indexPath.row].title : ""
+            cell.setHistory(history: viewModel.searchHistoryCellItem[indexPath.row])
             return cell
         } else if indexPath.section == 2 {
             // 閲覧履歴表示
