@@ -166,30 +166,35 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
         return viewModel.sectionItem.count
     }
 
-    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
-        return AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
+    func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 3 {
+            // 記事セル
+            return viewModel.newsCellHeight
+        }
+
+        return viewModel.cellHeight
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             // オートコンプリート表示
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuSuggestCell.identifier, for: indexPath) as! SearchMenuSuggestTableViewCell
-            cell.setSuggest(suggest: viewModel.suggestCellItem[indexPath.row])
+            cell.setSuggest(suggest: viewModel.suggestCellItem[safe: indexPath.row])
             return cell
         } else if indexPath.section == 1 {
             // 検索履歴表示
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuSearchHistoryCell.identifier, for: indexPath) as! SearchMenuSearchHistoryTableViewCell
-            cell.setHistory(history: viewModel.searchHistoryCellItem[indexPath.row])
+            cell.setHistory(history: viewModel.searchHistoryCellItem[safe: indexPath.row])
             return cell
         } else if indexPath.section == 2 {
             // 閲覧履歴表示
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuCommonHistoryCell.identifier, for: indexPath) as! SearchMenuCommonHistoryTableViewCell
-            cell.setHistory(history: viewModel.commonHistoryCellItem[indexPath.row])
+            cell.setHistory(history: viewModel.commonHistoryCellItem[safe: indexPath.row])
             return cell
         } else {
             // 記事表示
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuNewsCell.identifier, for: indexPath) as! SearchMenuNewsTableViewCell
-            cell.setArticle(article: viewModel.newsItem[indexPath.row])
+            cell.setArticle(article: viewModel.newsItem[safe: indexPath.row])
             return cell
         }
     }
@@ -199,7 +204,7 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
-        return AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
+        return viewModel.sectionHeight
     }
 
     func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {

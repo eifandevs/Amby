@@ -22,7 +22,7 @@ class SearchMenuSuggestTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setSuggest(suggest: String) {
-        titleLabel.text = suggest
+    func setSuggest(suggest: String?) {
+        titleLabel.text = suggest ?? ""
     }
 }

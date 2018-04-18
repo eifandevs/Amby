@@ -23,8 +23,8 @@ class SearchMenuCommonHistoryTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setHistory(history: CommonHistory) {
-        titleLabel.text = history.title
-        urlLabel.text = history.url
+    func setHistory(history: CommonHistory?) {
+        titleLabel.text = history?.title ?? ""
+        urlLabel.text = history?.url ?? ""
     }
 }

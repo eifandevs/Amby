@@ -22,7 +22,7 @@ class SearchMenuSearchHistoryTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setHistory(history: SearchHistory) {
-        titleLabel.text = history.title
+    func setHistory(history: SearchHistory?) {
+        titleLabel.text = history?.title ?? ""
     }
 }

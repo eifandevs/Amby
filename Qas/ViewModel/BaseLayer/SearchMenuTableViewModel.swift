@@ -16,14 +16,30 @@ final class SearchMenuTableViewModel {
     /// 画面無効化通知用RX
     let rx_searchMenuViewWillHide = PublishSubject<()>()
 
+    /// ニュースセル高さ
+    let newsCellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_NEWS_CELL_HEIGHT
+    /// 通常セル高さ
+    let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
+    /// セクション高さ
+    let sectionHeight = AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
+
+    /// セクション
     let sectionItem: [String] = ["Google検索", "検索履歴", "閲覧履歴", "Top News"]
+    /// オートコンプリートアイテム
     var suggestCellItem: [String] = []
+    /// 検索履歴アイテム
     var searchHistoryCellItem: [SearchHistory] = []
+    /// 閲覧履歴アイテム
     var commonHistoryCellItem: [CommonHistory] = []
+    /// 記事アイテム
     var newsItem: [Article] = []
+    /// 閲覧履歴読み込み数
     private let readCommonHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.KEY_COMMON_HISTORY_SAVE_COUNT)
+    /// 検索履歴読み込み数
     private let readSearchHistoryNum: Int = UserDefaults.standard.integer(forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT)
+    /// サジェスト取得キュー
     private var requestSearchQueue = [String?]()
+    /// サジェスト取得中フラグ
     private var isRequesting = false
     /// Observable自動解放
     let disposeBag = DisposeBag()

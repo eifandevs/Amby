@@ -84,12 +84,15 @@ class HeaderField: UIButton, ShadowView {
         textField.clearButtonMode = .always
 
         // テキストフィールドの変更監視
-        textField.rx.text.asDriver()
-            .drive(onNext: { [weak self] text in
+        textField.rx.controlEvent(UIControlEvents.editingChanged)
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_editingDidChanged")
                 guard let `self` = self else { return }
-                // TODO: テキストフィールドの起動時に反応するので、修正する
                 // 表示している履歴情報の更新
-                self.viewModel.executeOperationDataModel(operation: .suggest, object: text!)
+                if let text = self.textField.text {
+                    self.viewModel.executeOperationDataModel(operation: .suggest, object: text)
+                }
+                log.eventOut(chain: "rx_editingDidChanged")
             })
             .disposed(by: rx.disposeBag)
 

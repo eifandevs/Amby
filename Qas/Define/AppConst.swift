@@ -21,6 +21,7 @@ final class AppConst {
     // MARK: - フロントレイヤーの定数
 
     static let FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT = 50.f
+    static let FRONT_LAYER_TABLE_VIEW_NEWS_CELL_HEIGHT = 85.f
     static let FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT = 19.f
     static let FRONT_LAYER_EDGE_SWIPE_EREA = 15.f
     static let FRONT_LAYER_OVER_VIEW_MARGIN = CGPoint(x: 30.f, y: 18.f)

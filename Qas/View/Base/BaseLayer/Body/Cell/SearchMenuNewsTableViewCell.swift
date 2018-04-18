@@ -11,6 +11,7 @@ import UIKit
 class SearchMenuNewsTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var authorLabel: UILabel!
+    @IBOutlet var descriptionLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,8 +24,9 @@ class SearchMenuNewsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setArticle(article: Article) {
-        titleLabel.text = article.title
-        authorLabel.text = article.author
+    func setArticle(article: Article?) {
+        titleLabel.text = article?.title ?? ""
+        authorLabel.text = article?.author ?? ""
+        descriptionLabel.text = article?.description ?? ""
     }
 }
