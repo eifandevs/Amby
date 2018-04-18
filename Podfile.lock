@@ -5,6 +5,7 @@ PODS:
     - ChameleonFramework/Default
   - CryptoSwift (0.8.0)
   - KeychainAccess (3.1.0)
+  - Kingfisher (4.6.3)
   - Moya/Core (11.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - CryptoSwift (~> 0.8)
   - KeychainAccess (~> 3.1)
+  - Kingfisher
   - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
   - NVActivityIndicatorView (~> 4.0.0)
@@ -67,6 +69,7 @@ SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
+  Kingfisher: 98e6d5b5e807645743e8ed5ececd25d688d38452
   Moya: 3d594ada51a21cc02b18739ab578a1984f900c8a
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
   NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
@@ -83,6 +86,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: e10b1668e0512229c36c34769b97eed3dfae2ca3
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: 1c2496b16a4e7d4d8a139974fa89044711cbdcac
+PODFILE CHECKSUM: dbdbecd8ef4ede7c2732cd83f73cae8d52d3c72b
 
 COCOAPODS: 1.4.0
