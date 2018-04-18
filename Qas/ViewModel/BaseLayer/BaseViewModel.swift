@@ -313,6 +313,16 @@ final class BaseViewModel {
         ThumbnailDataModel.s.delete(context: webView.context)
     }
 
+    /// 暗号化
+    func encrypt(value: String) -> Data {
+        return EncryptHelper.encrypt(serviceToken: AuthTokenDataModel.s.keychainServiceToken, ivToken: AuthTokenDataModel.s.keychainIvToken, value: value)!
+    }
+
+    /// 複合化
+    func decrypt(value: Data) -> String {
+        return EncryptHelper.decrypt(serviceToken: AuthTokenDataModel.s.keychainServiceToken, ivToken: AuthTokenDataModel.s.keychainIvToken, data: value) ?? ""
+    }
+
     // MARK: Private Method
 
     private func changePageHistoryDataModel(context: String) {

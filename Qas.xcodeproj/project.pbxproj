@@ -23,9 +23,9 @@
 		A15F42D0205FF33A00228553 /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42C5205FF33A00228553 /* SuggestDataModel.swift */; };
 		A15F42D1205FF33A00228553 /* ThumbnailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42C7205FF33A00228553 /* ThumbnailDataModel.swift */; };
 		A15F42E2205FF50B00228553 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42D9205FF50B00228553 /* CacheHelper.swift */; };
-		A15F42E3205FF50B00228553 /* CommonDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DA205FF50B00228553 /* CommonDao.swift */; };
+		A15F42E3205FF50B00228553 /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DA205FF50B00228553 /* DBProvider.swift */; };
 		A15F42E4205FF50B00228553 /* EncryptHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DB205FF50B00228553 /* EncryptHelper.swift */; };
-		A15F42E5205FF50B00228553 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DC205FF50B00228553 /* KeyChainHelper.swift */; };
+		A15F42E5205FF50B00228553 /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DC205FF50B00228553 /* KeychainProvider.swift */; };
 		A15F42E6205FF50B00228553 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DD205FF50B00228553 /* RealmHelper.swift */; };
 		A15F42EA2062664500228553 /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42E92062664500228553 /* ApiProvider.swift */; };
 		A15F42EF20626C1F00228553 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42EC20626C1F00228553 /* Google.swift */; };
@@ -57,6 +57,8 @@
 		A1834136208621B500071BE9 /* SearchMenuNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1834133208621B500071BE9 /* SearchMenuNewsTableViewCell.xib */; };
 		A1834137208621B500071BE9 /* SearchMenuNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1834133208621B500071BE9 /* SearchMenuNewsTableViewCell.xib */; };
 		A18341392086B1EA00071BE9 /* FavoriteDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18341382086B1EA00071BE9 /* FavoriteDataModelTests.swift */; };
+		A183413C2087730A00071BE9 /* AuthTokenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A183413B2087730A00071BE9 /* AuthTokenDataModel.swift */; };
+		A183413D2087730A00071BE9 /* AuthTokenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A183413B2087730A00071BE9 /* AuthTokenDataModel.swift */; };
 		A1871DF320765725000B08FA /* UIViewController+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1871DF220765725000B08FA /* UIViewController+Extend.swift */; };
 		A198806C206E651E0067EC4F /* PageHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */; };
 		A198806E2072ED1F0067EC4F /* BaseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */; };
@@ -74,7 +76,7 @@
 		A1EF0025208238190079E1DF /* OptionMenuHelpTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5649A7F1FF7F1FA00EA69E1 /* OptionMenuHelpTableViewModel.swift */; };
 		A1EF0026208238190079E1DF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EBF1FB7764500FD78FF /* NotificationManager.swift */; };
 		A1EF0028208238190079E1DF /* DeviceConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6F11FA501B800E0C6E5 /* DeviceConst.swift */; };
-		A1EF0029208238190079E1DF /* CommonDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DA205FF50B00228553 /* CommonDao.swift */; };
+		A1EF0029208238190079E1DF /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DA205FF50B00228553 /* DBProvider.swift */; };
 		A1EF002A208238190079E1DF /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE77A1FA50BFA00E0C6E5 /* Thumbnail.swift */; };
 		A1EF002B208238190079E1DF /* OptionMenuTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5117A651FE56C2100213E02 /* OptionMenuTableViewModel.swift */; };
 		A1EF002C208238190079E1DF /* String+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E81FA501B800E0C6E5 /* String+Extend.swift */; };
@@ -108,7 +110,7 @@
 		A1EF0048208238190079E1DF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE78E1FA50BFA00E0C6E5 /* SplashViewController.swift */; };
 		A1EF0049208238190079E1DF /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDD1FB778ED00FD78FF /* Form.swift */; };
 		A1EF004A208238190079E1DF /* Dictionary+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE6E11FA501B800E0C6E5 /* Dictionary+Extend.swift */; };
-		A1EF004B208238190079E1DF /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DC205FF50B00228553 /* KeyChainHelper.swift */; };
+		A1EF004B208238190079E1DF /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42DC205FF50B00228553 /* KeychainProvider.swift */; };
 		A1EF004C208238190079E1DF /* PageHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDF1FB778ED00FD78FF /* PageHistory.swift */; };
 		A1EF004D208238190079E1DF /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BCE77D1FA50BFA00E0C6E5 /* EGProgressBar.swift */; };
 		A1EF004E208238190079E1DF /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C0EDC1FB778ED00FD78FF /* Favorite.swift */; };
@@ -363,9 +365,9 @@
 		A15F42C5205FF33A00228553 /* SuggestDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestDataModel.swift; sourceTree = "<group>"; };
 		A15F42C7205FF33A00228553 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
 		A15F42D9205FF50B00228553 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
-		A15F42DA205FF50B00228553 /* CommonDao.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDao.swift; sourceTree = "<group>"; };
+		A15F42DA205FF50B00228553 /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
 		A15F42DB205FF50B00228553 /* EncryptHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptHelper.swift; sourceTree = "<group>"; };
-		A15F42DC205FF50B00228553 /* KeyChainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
+		A15F42DC205FF50B00228553 /* KeychainProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
 		A15F42DD205FF50B00228553 /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		A15F42E92062664500228553 /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 		A15F42EC20626C1F00228553 /* Google.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Google.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 		A1834132208621B500071BE9 /* SearchMenuNewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenuNewsTableViewCell.swift; sourceTree = "<group>"; };
 		A1834133208621B500071BE9 /* SearchMenuNewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchMenuNewsTableViewCell.xib; sourceTree = "<group>"; };
 		A18341382086B1EA00071BE9 /* FavoriteDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataModelTests.swift; sourceTree = "<group>"; };
+		A183413B2087730A00071BE9 /* AuthTokenDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenDataModel.swift; sourceTree = "<group>"; };
 		A1871DF220765725000B08FA /* UIViewController+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extend.swift"; sourceTree = "<group>"; };
 		A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A198806D2072ED1F0067EC4F /* BaseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelTests.swift; sourceTree = "<group>"; };
@@ -629,6 +632,7 @@
 		A15F42B3205FF33A00228553 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				A183413A2087730000071BE9 /* Auth */,
 				A15F42B4205FF33A00228553 /* Article */,
 				A15F42B6205FF33A00228553 /* CommonHistory */,
 				A15F42B8205FF33A00228553 /* Favorite */,
@@ -814,7 +818,7 @@
 		A18341242086124600071BE9 /* DB */ = {
 			isa = PBXGroup;
 			children = (
-				A15F42DA205FF50B00228553 /* CommonDao.swift */,
+				A15F42DA205FF50B00228553 /* DBProvider.swift */,
 				A15F42DD205FF50B00228553 /* RealmHelper.swift */,
 			);
 			path = DB;
@@ -824,9 +828,17 @@
 			isa = PBXGroup;
 			children = (
 				A15F42DB205FF50B00228553 /* EncryptHelper.swift */,
-				A15F42DC205FF50B00228553 /* KeyChainHelper.swift */,
+				A15F42DC205FF50B00228553 /* KeychainProvider.swift */,
 			);
 			path = Keychain;
+			sourceTree = "<group>";
+		};
+		A183413A2087730000071BE9 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A183413B2087730A00071BE9 /* AuthTokenDataModel.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		A19880742073A5E20067EC4F /* Qas-DevelopUITests */ = {
@@ -1899,7 +1911,7 @@
 				A1EF0025208238190079E1DF /* OptionMenuHelpTableViewModel.swift in Sources */,
 				A1EF0026208238190079E1DF /* NotificationManager.swift in Sources */,
 				A1EF0028208238190079E1DF /* DeviceConst.swift in Sources */,
-				A1EF0029208238190079E1DF /* CommonDao.swift in Sources */,
+				A1EF0029208238190079E1DF /* DBProvider.swift in Sources */,
 				A1EF002A208238190079E1DF /* Thumbnail.swift in Sources */,
 				A183412120860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.swift in Sources */,
 				A1EF002B208238190079E1DF /* OptionMenuTableViewModel.swift in Sources */,
@@ -1934,7 +1946,7 @@
 				A1EF0048208238190079E1DF /* SplashViewController.swift in Sources */,
 				A1EF0049208238190079E1DF /* Form.swift in Sources */,
 				A1EF004A208238190079E1DF /* Dictionary+Extend.swift in Sources */,
-				A1EF004B208238190079E1DF /* KeyChainHelper.swift in Sources */,
+				A1EF004B208238190079E1DF /* KeychainProvider.swift in Sources */,
 				A1EF004C208238190079E1DF /* PageHistory.swift in Sources */,
 				A1EF004D208238190079E1DF /* EGProgressBar.swift in Sources */,
 				A1EF004E208238190079E1DF /* Favorite.swift in Sources */,
@@ -1993,6 +2005,7 @@
 				A1EF007E208238190079E1DF /* AppEnum.swift in Sources */,
 				A1EF007F208238190079E1DF /* SuggestDataModel.swift in Sources */,
 				A1EF0080208238190079E1DF /* OptionMenuTableViewCell.swift in Sources */,
+				A183413D2087730A00071BE9 /* AuthTokenDataModel.swift in Sources */,
 				A1EF0081208238190079E1DF /* R.generated.swift in Sources */,
 				A1EF0082208238190079E1DF /* CircleMenuItem.swift in Sources */,
 				A1EF0083208238190079E1DF /* PaddingLabel.swift in Sources */,
@@ -2025,7 +2038,7 @@
 				A5649A801FF7F1FA00EA69E1 /* OptionMenuHelpTableViewModel.swift in Sources */,
 				A53C0EC01FB7764500FD78FF /* NotificationManager.swift in Sources */,
 				A5BCE7171FA501B900E0C6E5 /* DeviceConst.swift in Sources */,
-				A15F42E3205FF50B00228553 /* CommonDao.swift in Sources */,
+				A15F42E3205FF50B00228553 /* DBProvider.swift in Sources */,
 				A5BCE7B11FA50BFA00E0C6E5 /* Thumbnail.swift in Sources */,
 				A183412020860C5D00071BE9 /* SearchMenuCommonHistoryTableViewCell.swift in Sources */,
 				A5117A661FE56C2100213E02 /* OptionMenuTableViewModel.swift in Sources */,
@@ -2060,7 +2073,7 @@
 				A5BCE7BF1FA50BFA00E0C6E5 /* SplashViewController.swift in Sources */,
 				A53C0EE61FB778ED00FD78FF /* Form.swift in Sources */,
 				A5BCE7081FA501B900E0C6E5 /* Dictionary+Extend.swift in Sources */,
-				A15F42E5205FF50B00228553 /* KeyChainHelper.swift in Sources */,
+				A15F42E5205FF50B00228553 /* KeychainProvider.swift in Sources */,
 				A53C0EEA1FB778ED00FD78FF /* PageHistory.swift in Sources */,
 				A5BCE7B31FA50BFA00E0C6E5 /* EGProgressBar.swift in Sources */,
 				A53C0EE41FB778ED00FD78FF /* Favorite.swift in Sources */,
@@ -2119,6 +2132,7 @@
 				A5117A531FDC494000213E02 /* AppEnum.swift in Sources */,
 				A15F42D0205FF33A00228553 /* SuggestDataModel.swift in Sources */,
 				A5649A331FE57BAF00EA69E1 /* OptionMenuTableViewCell.swift in Sources */,
+				A183413C2087730A00071BE9 /* AuthTokenDataModel.swift in Sources */,
 				A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */,
 				A5BCE7B81FA50BFA00E0C6E5 /* CircleMenuItem.swift in Sources */,
 				A58F8ACD1FB89C89003632F7 /* PaddingLabel.swift in Sources */,

@@ -68,25 +68,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // プログレス初期設定
         SVProgressHUD.setForegroundColor(UIColor.brilliantBlue)
 
-        // 初回起動時のみキーチェーンにトークンを保存
-        if KeyChainHelper.getToken(key: AppConst.KEY_REALM_TOKEN) == nil {
-            let token = String.getRandomStringWithLength(length: 64)
-            log.debug("Realmトークンを作成します。token: \(token)")
-            KeyChainHelper.saveToken(key: AppConst.KEY_REALM_TOKEN, value: token)
-        }
-        if KeyChainHelper.getToken(key: AppConst.KEY_ENCRYPT_SERVICE_TOKEN) == nil {
-            let token = String.getRandomStringWithLength(length: 32)
-            log.debug("Encrypt Serviceトークンを作成します。token: \(token)")
-            KeyChainHelper.saveToken(key: AppConst.KEY_ENCRYPT_SERVICE_TOKEN, value: token)
-        }
-        if KeyChainHelper.getToken(key: AppConst.KEY_ENCRYPT_IV_TOKEN) == nil {
-            let token = String.getRandomStringWithLength(length: 16)
-            log.debug("Encrypt Ivトークンを作成します。token: \(token)")
-            KeyChainHelper.saveToken(key: AppConst.KEY_ENCRYPT_IV_TOKEN, value: token)
-        }
-
         // ユーザーデフォルト初期値設定
-        CommonDao.s.registerDefaultData()
+        UserDefaults.standard.register(defaults: [
+            AppConst.KEY_LOCATION_INDEX: AppConst.UD_LOCATION_INDEX,
+            AppConst.KEY_CURRENT_CONTEXT: AppConst.UD_CURRENT_CONTEXT,
+            AppConst.KEY_AUTO_SCROLL_INTERVAL: AppConst.UD_AUTO_SCROLL,
+            AppConst.KEY_COMMON_HISTORY_SAVE_COUNT: AppConst.UD_COMMON_HISTORY_SAVE_COUNT,
+            AppConst.KEY_PAGE_HISTORY_SAVE_COUNT: AppConst.UD_PAGE_HISTORY_SAVE_COUNT,
+            AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT: AppConst.UD_SEARCH_HISTORY_SAVE_COUNT,
+        ])
+
         window = UIWindow(frame: UIScreen.main.bounds)
         baseViewController = BaseViewController()
         window!.rootViewController = baseViewController!

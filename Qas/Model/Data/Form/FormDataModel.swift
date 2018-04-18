@@ -12,12 +12,15 @@ import RealmSwift
 final class FormDataModel {
     static let s = FormDataModel()
 
+    /// DBプロバイダー
+    let dbProvider = DBProvider()
+
     func insert(forms: [Form]) {
-        CommonDao.s.insert(data: forms)
+        dbProvider.insert(data: forms)
     }
 
     func select(id: String? = nil, url: String? = nil) -> [Form] {
-        let forms = CommonDao.s.select(type: Form.self) as! [Form]
+        let forms = dbProvider.select(type: Form.self) as! [Form]
         if let id = id {
             return forms.filter({ $0.id == id })
         } else if let url = url {
@@ -28,10 +31,10 @@ final class FormDataModel {
 
     func delete(forms: [Form]? = nil) {
         if let forms = forms {
-            CommonDao.s.delete(data: forms)
+            dbProvider.delete(data: forms)
         } else {
             // 削除対象が指定されていない場合は、すべて削除する
-            CommonDao.s.delete(data: select())
+            dbProvider.delete(data: select())
         }
     }
 

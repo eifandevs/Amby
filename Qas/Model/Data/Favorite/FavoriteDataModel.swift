@@ -21,14 +21,16 @@ final class FavoriteDataModel {
     static let s = FavoriteDataModel()
     /// 通知センター
     private let center = NotificationCenter.default
+    /// DBプロバイダー
+    let dbProvider = DBProvider()
 
     func insert(favorites: [Favorite]) {
-        CommonDao.s.insert(data: favorites)
+        dbProvider.insert(data: favorites)
         rx_favoriteDataModelDidInsert.onNext(())
     }
 
     func select(id: String? = nil, url: String? = nil) -> [Favorite] {
-        let favorites = CommonDao.s.select(type: Favorite.self) as! [Favorite]
+        let favorites = dbProvider.select(type: Favorite.self) as! [Favorite]
         if let id = id {
             return favorites.filter({ $0.id == id })
         } else if let url = url {
@@ -39,10 +41,10 @@ final class FavoriteDataModel {
 
     func delete(favorites: [Favorite]? = nil, notify: Bool = true) {
         if let favorites = favorites {
-            CommonDao.s.delete(data: favorites)
+            dbProvider.delete(data: favorites)
         } else {
             // 削除対象が指定されていない場合は、すべて削除する
-            CommonDao.s.delete(data: select())
+            dbProvider.delete(data: select())
         }
 
         // 通知する

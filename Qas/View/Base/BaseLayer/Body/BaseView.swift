@@ -210,7 +210,7 @@ class BaseView: UIView {
                     if let inputForm = FormDataModel.s.select(url: self.front.url?.absoluteString).first {
                         NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_TITLE, message: MessageConst.ALERT_FORM_EXIST, completion: { [weak self] in
                             inputForm.inputs.forEach {
-                                let value = EncryptHelper.decrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, data: $0.value)!
+                                let value = self?.viewModel.decrypt(value: $0.value)
                                 self!.front.evaluateJavaScript("document.forms[\($0.formIndex)].elements[\($0.formInputIndex)].value=\"\(value)\"") { _, _ in
                                 }
                             }
@@ -561,7 +561,7 @@ class BaseView: UIView {
                                                             input.type = type!
                                                             input.formIndex = i
                                                             input.formInputIndex = j
-                                                            input.value = EncryptHelper.encrypt(serviceToken: CommonDao.s.keychainServiceToken, ivToken: CommonDao.s.keychainIvToken, value: value)!
+                                                            input.value = self.viewModel.encrypt(value: value)
                                                             form.inputs.append(input)
                                                         }
                                                     }
