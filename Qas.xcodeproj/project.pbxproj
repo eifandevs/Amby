@@ -11,6 +11,7 @@
 		331410E23B570ABC28901B17 /* Pods_Qas_Develop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D63580A9A213BC3CA3C3A1A /* Pods_Qas_Develop.framework */; };
 		761CCBDB5E1594830D6F28D8 /* Pods_Qas_DevelopUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7992F42225818564A479DF1 /* Pods_Qas_DevelopUITests.framework */; };
 		813C30187E1D45469D227088 /* Pods_Qas_Production.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA5F4607AB8952505B32784 /* Pods_Qas_Production.framework */; };
+		A1417CBC20880AB2003FF651 /* FormDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1417CBB20880AB2003FF651 /* FormDataModelTests.swift */; };
 		A14A9D2D2066578700E4D5FF /* suggest_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A14A9D2C2066578600E4D5FF /* suggest_stub.json */; };
 		A15F42C8205FF33A00228553 /* ArticleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42B5205FF33A00228553 /* ArticleDataModel.swift */; };
 		A15F42C9205FF33A00228553 /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42B7205FF33A00228553 /* CommonHistoryDataModel.swift */; };
@@ -353,6 +354,7 @@
 		864490C49B44E38091C994D2 /* Pods-Qas-DevelopTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-DevelopTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-DevelopTests/Pods-Qas-DevelopTests.debug.xcconfig"; sourceTree = "<group>"; };
 		90F4C7CD31673EA3D9016D1D /* Pods-Qas-Production.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Production.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Production/Pods-Qas-Production.debug.xcconfig"; sourceTree = "<group>"; };
 		9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1417CBB20880AB2003FF651 /* FormDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataModelTests.swift; sourceTree = "<group>"; };
 		A14A9D2C2066578600E4D5FF /* suggest_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = suggest_stub.json; sourceTree = "<group>"; };
 		A15F42B5205FF33A00228553 /* ArticleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleDataModel.swift; sourceTree = "<group>"; };
 		A15F42B7205FF33A00228553 /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
@@ -781,6 +783,7 @@
 				A16838382067ACD400182028 /* CommonHistoryDataModelTests.swift */,
 				A198806B206E651E0067EC4F /* PageHistoryDataModelTests.swift */,
 				A18341382086B1EA00071BE9 /* FavoriteDataModelTests.swift */,
+				A1417CBB20880AB2003FF651 /* FormDataModelTests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1887,6 +1890,7 @@
 			files = (
 				A16838392067ACD400182028 /* CommonHistoryDataModelTests.swift in Sources */,
 				A18341392086B1EA00071BE9 /* FavoriteDataModelTests.swift in Sources */,
+				A1417CBC20880AB2003FF651 /* FormDataModelTests.swift in Sources */,
 				A198806C206E651E0067EC4F /* PageHistoryDataModelTests.swift in Sources */,
 				A198806E2072ED1F0067EC4F /* BaseViewModelTests.swift in Sources */,
 			);
