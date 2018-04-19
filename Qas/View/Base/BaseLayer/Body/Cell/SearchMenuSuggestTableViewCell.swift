@@ -11,6 +11,9 @@ import UIKit
 class SearchMenuSuggestTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
 
+    /// 表示内容
+    var suggest: String?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,6 +26,8 @@ class SearchMenuSuggestTableViewCell: UITableViewCell {
     }
 
     func setSuggest(suggest: String?) {
+        self.suggest = suggest
+
         titleLabel.text = suggest ?? ""
     }
 }

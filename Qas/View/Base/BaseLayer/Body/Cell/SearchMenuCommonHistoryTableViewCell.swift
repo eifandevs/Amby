@@ -12,6 +12,9 @@ class SearchMenuCommonHistoryTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var urlLabel: UILabel!
 
+    /// 表示内容
+    var history: CommonHistory?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,6 +27,7 @@ class SearchMenuCommonHistoryTableViewCell: UITableViewCell {
     }
 
     func setHistory(history: CommonHistory?) {
+        self.history = history
         titleLabel.text = history?.title ?? ""
         urlLabel.text = history?.url ?? ""
     }

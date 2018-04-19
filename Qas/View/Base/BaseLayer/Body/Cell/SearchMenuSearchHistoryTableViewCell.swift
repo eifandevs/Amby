@@ -11,6 +11,9 @@ import UIKit
 class SearchMenuSearchHistoryTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
 
+    /// 表示内容
+    var history: SearchHistory?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,6 +26,7 @@ class SearchMenuSearchHistoryTableViewCell: UITableViewCell {
     }
 
     func setHistory(history: SearchHistory?) {
+        self.history = history
         titleLabel.text = history?.title ?? ""
     }
 }
