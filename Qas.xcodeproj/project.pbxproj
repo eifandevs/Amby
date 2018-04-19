@@ -12,6 +12,8 @@
 		761CCBDB5E1594830D6F28D8 /* Pods_Qas_DevelopUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7992F42225818564A479DF1 /* Pods_Qas_DevelopUITests.framework */; };
 		813C30187E1D45469D227088 /* Pods_Qas_Production.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA5F4607AB8952505B32784 /* Pods_Qas_Production.framework */; };
 		A1417CBC20880AB2003FF651 /* FormDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1417CBB20880AB2003FF651 /* FormDataModelTests.swift */; };
+		A1417CBF2088C499003FF651 /* SettingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1417CBE2088C499003FF651 /* SettingDataModel.swift */; };
+		A1417CC02088C499003FF651 /* SettingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1417CBE2088C499003FF651 /* SettingDataModel.swift */; };
 		A14A9D2D2066578700E4D5FF /* suggest_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A14A9D2C2066578600E4D5FF /* suggest_stub.json */; };
 		A15F42C8205FF33A00228553 /* ArticleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42B5205FF33A00228553 /* ArticleDataModel.swift */; };
 		A15F42C9205FF33A00228553 /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F42B7205FF33A00228553 /* CommonHistoryDataModel.swift */; };
@@ -355,6 +357,7 @@
 		90F4C7CD31673EA3D9016D1D /* Pods-Qas-Production.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Production.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Production/Pods-Qas-Production.debug.xcconfig"; sourceTree = "<group>"; };
 		9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1417CBB20880AB2003FF651 /* FormDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataModelTests.swift; sourceTree = "<group>"; };
+		A1417CBE2088C499003FF651 /* SettingDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDataModel.swift; sourceTree = "<group>"; };
 		A14A9D2C2066578600E4D5FF /* suggest_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = suggest_stub.json; sourceTree = "<group>"; };
 		A15F42B5205FF33A00228553 /* ArticleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleDataModel.swift; sourceTree = "<group>"; };
 		A15F42B7205FF33A00228553 /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
@@ -622,6 +625,14 @@
 			path = Production;
 			sourceTree = "<group>";
 		};
+		A1417CBD2088C480003FF651 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A1417CBE2088C499003FF651 /* SettingDataModel.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		A14A9D2B2066514400E4D5FF /* stub */ = {
 			isa = PBXGroup;
 			children = (
@@ -634,6 +645,7 @@
 		A15F42B3205FF33A00228553 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				A1417CBD2088C480003FF651 /* Setting */,
 				A183413A2087730000071BE9 /* Auth */,
 				A15F42B4205FF33A00228553 /* Article */,
 				A15F42B6205FF33A00228553 /* CommonHistory */,
@@ -1981,6 +1993,7 @@
 				A183410F2084BE7A00071BE9 /* Article.swift in Sources */,
 				A1EF0061208238190079E1DF /* EGGradientLabel.swift in Sources */,
 				A1834129208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */,
+				A1417CC02088C499003FF651 /* SettingDataModel.swift in Sources */,
 				A1EF0062208238190079E1DF /* BaseViewModel.swift in Sources */,
 				A1EF0063208238190079E1DF /* UIImageView+Extend.swift in Sources */,
 				A1EF0064208238190079E1DF /* OptionMenuFormTableView.swift in Sources */,
@@ -2108,6 +2121,7 @@
 				A183410E2084BE7A00071BE9 /* Article.swift in Sources */,
 				A5BCE7B21FA50BFA00E0C6E5 /* EGGradientLabel.swift in Sources */,
 				A1834128208616DC00071BE9 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */,
+				A1417CBF2088C499003FF651 /* SettingDataModel.swift in Sources */,
 				A5BCE7C21FA50BFA00E0C6E5 /* BaseViewModel.swift in Sources */,
 				A5BCE7131FA501B900E0C6E5 /* UIImageView+Extend.swift in Sources */,
 				A5649A401FE59CC400EA69E1 /* OptionMenuFormTableView.swift in Sources */,
