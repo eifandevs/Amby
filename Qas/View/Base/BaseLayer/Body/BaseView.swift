@@ -724,9 +724,20 @@ extension BaseView: EGApplicationDelegate {
 //                    log.warning("object: \(object)")
 //                }
 
-                if viewModel.getBaseViewControllerStatus() {
-                    invalidateUserInteraction()
-                    rx_baseViewDidEdgeSwiped.onNext(swipeDirection)
+                if viewModel.isActiveBaseViewController() {
+                    if viewModel.isHistorySwipe(touchPoint: touchBeganPoint) {
+                        // 画面上半分のスワイプの場合は、履歴移動
+                        if swipeDirection == .left {
+                            viewModel.goBackCommonHistoryDataModel()
+                        } else {
+                            viewModel.goForwardCommonHistoryDataModel()
+                        }
+                    } else {
+                        // 操作を無効化
+                        invalidateUserInteraction()
+
+                        rx_baseViewDidEdgeSwiped.onNext(swipeDirection)
+                    }
                 }
             }
 

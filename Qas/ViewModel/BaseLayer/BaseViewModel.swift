@@ -211,9 +211,14 @@ final class BaseViewModel {
         FormDataModel.s.store(form: form)
     }
 
+    /// スワイプが履歴移動スワイプかを判定
+    func isHistorySwipe(touchPoint: CGPoint) -> Bool {
+        return touchPoint.y < DeviceConst.DISPLAY_SIZE.height / 2
+    }
+
     /// baseViewControllerの状態取得
     /// ヘルプ画面表示中はfalseとなる
-    func getBaseViewControllerStatus() -> Bool {
+    func isActiveBaseViewController() -> Bool {
         if let baseViewController = (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController {
             return (baseViewController as! BaseViewController).isActive
         }
@@ -264,6 +269,16 @@ final class BaseViewModel {
     /// 後WebViewに切り替え
     func goNextPageHistoryDataModel() {
         PageHistoryDataModel.s.goNext()
+    }
+
+    /// 前ページに戻る
+    func goBackCommonHistoryDataModel() {
+        CommonHistoryDataModel.s.goBack()
+    }
+
+    /// 次ページに進む
+    func goForwardCommonHistoryDataModel() {
+        CommonHistoryDataModel.s.goForward()
     }
 
     /// 履歴保存
