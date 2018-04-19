@@ -47,13 +47,16 @@ extension App: TargetType {
     // リクエストパラメータ等
     var task: Task {
         switch self {
-        case let .article:
+        case .article:
             return .requestPlain
         }
     }
 
     // ヘッダー
     var headers: [String: String]? {
-        return nil
+        switch self {
+        case .article:
+            return nil
+        }
     }
 }
