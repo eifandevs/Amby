@@ -68,15 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // プログレス初期設定
         SVProgressHUD.setForegroundColor(UIColor.brilliantBlue)
 
-        // ユーザーデフォルト初期値設定
-        UserDefaults.standard.register(defaults: [
-            AppConst.KEY_LOCATION_INDEX: AppConst.UD_LOCATION_INDEX,
-            AppConst.KEY_CURRENT_CONTEXT: AppConst.UD_CURRENT_CONTEXT,
-            AppConst.KEY_AUTO_SCROLL_INTERVAL: AppConst.UD_AUTO_SCROLL,
-            AppConst.KEY_COMMON_HISTORY_SAVE_COUNT: AppConst.UD_COMMON_HISTORY_SAVE_COUNT,
-            AppConst.KEY_PAGE_HISTORY_SAVE_COUNT: AppConst.UD_PAGE_HISTORY_SAVE_COUNT,
-            AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT: AppConst.UD_SEARCH_HISTORY_SAVE_COUNT,
-        ])
+        // 設定データセットアップ
+        SettingDataModel.s.setup()
 
         window = UIWindow(frame: UIScreen.main.bounds)
         baseViewController = BaseViewController()
@@ -90,12 +83,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func initialize() {
-        UserDefaults.standard.set(AppConst.UD_LOCATION_INDEX, forKey: AppConst.KEY_LOCATION_INDEX)
-        UserDefaults.standard.set(AppConst.UD_CURRENT_CONTEXT, forKey: AppConst.KEY_CURRENT_CONTEXT)
-        UserDefaults.standard.set(AppConst.UD_AUTO_SCROLL, forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL)
-        UserDefaults.standard.set(AppConst.UD_COMMON_HISTORY_SAVE_COUNT, forKey: AppConst.KEY_COMMON_HISTORY_SAVE_COUNT)
-        UserDefaults.standard.set(AppConst.UD_PAGE_HISTORY_SAVE_COUNT, forKey: AppConst.KEY_PAGE_HISTORY_SAVE_COUNT)
-        UserDefaults.standard.set(AppConst.UD_SEARCH_HISTORY_SAVE_COUNT, forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT)
+        SettingDataModel.s.initialize()
+
         if let baseViewController = self.window!.rootViewController as? BaseViewController {
             baseViewController.mRelease()
         }

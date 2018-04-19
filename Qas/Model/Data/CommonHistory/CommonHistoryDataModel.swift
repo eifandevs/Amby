@@ -165,7 +165,7 @@ final class CommonHistoryDataModel {
     /// 閲覧履歴の件数チェック
     // デフォルトで90日分の履歴を超えたら削除する
     func expireCheck() {
-        let historySaveCount = Int(UserDefaults.standard.integer(forKey: AppConst.KEY_COMMON_HISTORY_SAVE_COUNT))
+        let historySaveCount = SettingDataModel.s.commonHistorySaveCount
         let readFiles = getList().reversed()
 
         if readFiles.count > historySaveCount {

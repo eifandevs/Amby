@@ -126,7 +126,7 @@ final class BaseViewModel {
 
     /// 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
-        return CGFloat(UserDefaults.standard.float(forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL))
+        return CGFloat(SettingDataModel.s.autoScrollInterval)
     }
 
     /// 自動スクロールスピード

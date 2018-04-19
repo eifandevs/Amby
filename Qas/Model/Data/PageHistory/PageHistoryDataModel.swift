@@ -34,11 +34,11 @@ final class PageHistoryDataModel {
     private let center = NotificationCenter.default
 
     /// 現在表示しているwebviewのコンテキスト
-    var currentContext: String = UserDefaults.standard.string(forKey: AppConst.KEY_CURRENT_CONTEXT)! {
+    var currentContext = SettingDataModel.s.currentContext {
         didSet {
             log.debug("current context changed. \(oldValue) -> \(currentContext)")
             previousContext = oldValue
-            UserDefaults.standard.set(currentContext, forKey: AppConst.KEY_CURRENT_CONTEXT)
+            SettingDataModel.s.currentContext = currentContext
         }
     }
 
@@ -63,7 +63,7 @@ final class PageHistoryDataModel {
     }
 
     /// ページヒストリー保存件数
-    private let pageHistorySaveCount = UserDefaults.standard.integer(forKey: AppConst.KEY_PAGE_HISTORY_SAVE_COUNT)
+    private let pageHistorySaveCount = SettingDataModel.s.pageHistorySaveCount
 
     private init() {
     }

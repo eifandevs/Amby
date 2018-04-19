@@ -14,7 +14,7 @@ class OptionMenuSettingSliderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        slider.value = -UserDefaults.standard.float(forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL)
+        slider.value = -(SettingDataModel.s.autoScrollInterval)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,6 +24,6 @@ class OptionMenuSettingSliderTableViewCell: UITableViewCell {
     }
 
     @IBAction func changedValue(_: Any) {
-        UserDefaults.standard.set(-(slider.value), forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL)
+        SettingDataModel.s.autoScrollInterval = -(slider.value)
     }
 }

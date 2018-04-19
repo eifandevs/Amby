@@ -112,7 +112,7 @@ final class SearchHistoryDataModel {
 
     /// 閲覧履歴の期限切れ削除
     func expireCheck() {
-        let saveTerm = Int(UserDefaults.standard.float(forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT))
+        let saveTerm = SettingDataModel.s.searchHistorySaveCount
         let readFiles = getList().reversed()
 
         if readFiles.count > saveTerm {
