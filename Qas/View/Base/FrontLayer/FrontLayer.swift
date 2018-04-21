@@ -85,7 +85,7 @@ class FrontLayer: UIView {
                 }),
             ],
             [
-                CircleMenuItem(image: R.image.circlemenuUrl(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenuScrollup(), tapAction: { _ in
                     log.debug("circle menu event. event: scroll up")
                     self.viewModel.executeOperationDataModel(operation: .scrollUp)
                 }),

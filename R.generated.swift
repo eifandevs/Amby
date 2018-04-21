@@ -106,10 +106,10 @@ struct R: Rswift.Validatable {
     static let circlemenuHistoryforward = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-historyforward")
     /// Image `circlemenu-menu`.
     static let circlemenuMenu = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-menu")
+    /// Image `circlemenu-scrollup`.
+    static let circlemenuScrollup = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-scrollup")
     /// Image `circlemenu-search`.
     static let circlemenuSearch = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-search")
-    /// Image `circlemenu-url`.
-    static let circlemenuUrl = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-url")
     /// Image `footer_back`.
     static let footer_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "footer_back")
     /// Image `footer_private`.
@@ -187,14 +187,14 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.circlemenuMenu, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "circlemenu-scrollup", bundle: ..., traitCollection: ...)`
+    static func circlemenuScrollup(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuScrollup, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "circlemenu-search", bundle: ..., traitCollection: ...)`
     static func circlemenuSearch(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.circlemenuSearch, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "circlemenu-url", bundle: ..., traitCollection: ...)`
-    static func circlemenuUrl(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.circlemenuUrl, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "footer_back", bundle: ..., traitCollection: ...)`
