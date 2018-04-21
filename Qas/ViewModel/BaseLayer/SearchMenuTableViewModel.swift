@@ -22,6 +22,8 @@ final class SearchMenuTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
     /// セクション高さ
     let sectionHeight = AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
+    /// 表示セル数
+    let cellNum = AppConst.FRONT_LAYER_SEARCH_TABLE_VIEW_ROW_NUM
 
     /// セクション
     let sectionItem: [String] = ["Google検索", "検索履歴", "閲覧履歴", "Top News"]
@@ -55,8 +57,8 @@ final class SearchMenuTableViewModel {
                     if object.operation == .suggest {
                         let token = object.object as! String
                         // 閲覧履歴と検索履歴の検索
-                        self.commonHistoryCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: 4)
-                        self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: 4)
+                        self.commonHistoryCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
+                        self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
 
                         // とりあえずここで画面更新
                         self.rx_searchMenuViewWillUpdateLayout.onNext(())
@@ -78,7 +80,7 @@ final class SearchMenuTableViewModel {
                 guard let `self` = self else { return }
                 if let suggest = suggest.element, let data = suggest.data, data.count > 0 {
                     // suggestあり
-                    self.suggestCellItem = data.objects(for: 4)
+                    self.suggestCellItem = data.objects(for: self.cellNum)
                 } else {
                     self.suggestCellItem = []
                 }
