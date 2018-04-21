@@ -88,7 +88,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 29 images.
+  /// This `R.image` struct is generated, and contains static references to 28 images.
   struct image {
     /// Image `circlemenu-add`.
     static let circlemenuAdd = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-add")
@@ -112,10 +112,8 @@ struct R: Rswift.Validatable {
     static let circlemenuScrollup = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-scrollup")
     /// Image `circlemenu-search`.
     static let circlemenuSearch = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-search")
-    /// Image `footer_back`.
-    static let footer_back = Rswift.ImageResource(bundle: R.hostingBundle, name: "footer_back")
-    /// Image `footer_private`.
-    static let footer_private = Rswift.ImageResource(bundle: R.hostingBundle, name: "footer_private")
+    /// Image `footer-thumbnail-back`.
+    static let footerThumbnailBack = Rswift.ImageResource(bundle: R.hostingBundle, name: "footer-thumbnail-back")
     /// Image `header-close`.
     static let headerClose = Rswift.ImageResource(bundle: R.hostingBundle, name: "header-close")
     /// Image `header-favorite-selected`.
@@ -204,14 +202,9 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.circlemenuSearch, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "footer_back", bundle: ..., traitCollection: ...)`
-    static func footer_back(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.footer_back, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "footer_private", bundle: ..., traitCollection: ...)`
-    static func footer_private(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.footer_private, compatibleWith: traitCollection)
+    /// `UIImage(named: "footer-thumbnail-back", bundle: ..., traitCollection: ...)`
+    static func footerThumbnailBack(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.footerThumbnailBack, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "header-close", bundle: ..., traitCollection: ...)`

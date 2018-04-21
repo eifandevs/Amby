@@ -231,7 +231,7 @@ class FooterView: UIView, ShadowView {
         let additionalPointX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + additionalPointX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
         btn.backgroundColor = UIColor.darkGray
-        btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
+        btn.setImage(image: R.image.footerThumbnailBack(), color: UIColor.gray)
         let inset: CGFloat = btn.frame.size.width / 9
         btn.imageEdgeInsets = UIEdgeInsetsMake(inset, inset, inset, inset)
 
@@ -316,7 +316,7 @@ class FooterView: UIView, ShadowView {
         let preBtn = thumbnails[at - 1] // 左隣のボタン
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: preBtn.frame.origin.x + AppConst.BASE_LAYER_THUMBNAIL_SIZE.width, y: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
         btn.backgroundColor = UIColor.darkGray
-        btn.setImage(image: R.image.footer_back(), color: UIColor.gray)
+        btn.setImage(image: R.image.footerThumbnailBack(), color: UIColor.gray)
         let inset: CGFloat = btn.frame.size.width / 9
         btn.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
 
