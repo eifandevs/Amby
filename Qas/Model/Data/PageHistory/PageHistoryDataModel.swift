@@ -104,7 +104,7 @@ final class PageHistoryDataModel {
 
     /// 描画終了
     func endRendering(context: String) {
-        if let _ = histories.find({ $0.context == context }) {
+        if histories.find({ $0.context == context }) != nil {
             rx_pageHistoryDataModelDidEndRendering.onNext(context)
         } else {
             log.error("pageHistoryDataModelDidEndRendering not fired. history is deleted.")
