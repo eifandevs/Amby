@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,10 +24,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XbC-Tq-RBX">
-                        <rect key="frame" x="26" y="16" width="203" height="18"/>
+                        <rect key="frame" x="10" y="5" width="235" height="39.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFQ-Le-dbD">
-                                <rect key="frame" x="0.0" y="0.0" width="203" height="18"/>
+                                <rect key="frame" x="0.0" y="0.0" width="235" height="39.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -37,10 +36,10 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="XbC-Tq-RBX" secondAttribute="trailing" constant="5" id="2wY-iy-Efy"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="XbC-Tq-RBX" secondAttribute="bottom" constant="5" id="56S-uF-d86"/>
-                    <constraint firstItem="XbC-Tq-RBX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="OXq-wb-dFQ"/>
-                    <constraint firstItem="XbC-Tq-RBX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="iZI-l7-WQB"/>
+                    <constraint firstAttribute="bottom" secondItem="XbC-Tq-RBX" secondAttribute="bottom" constant="5" id="2QU-f6-IE6"/>
+                    <constraint firstAttribute="trailing" secondItem="XbC-Tq-RBX" secondAttribute="trailing" constant="5" id="8ea-NE-vL0"/>
+                    <constraint firstItem="XbC-Tq-RBX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="NpT-OU-uGz"/>
+                    <constraint firstItem="XbC-Tq-RBX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="hTw-8W-jnO"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
