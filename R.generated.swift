@@ -88,7 +88,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 28 images.
+  /// This `R.image` struct is generated, and contains static references to 29 images.
   struct image {
     /// Image `circlemenu-add`.
     static let circlemenuAdd = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-add")
@@ -104,6 +104,8 @@ struct R: Rswift.Validatable {
     static let circlemenuHistoryback = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-historyback")
     /// Image `circlemenu-historyforward`.
     static let circlemenuHistoryforward = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-historyforward")
+    /// Image `circlemenu-home`.
+    static let circlemenuHome = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-home")
     /// Image `circlemenu-menu`.
     static let circlemenuMenu = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-menu")
     /// Image `circlemenu-scrollup`.
@@ -180,6 +182,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "circlemenu-historyforward", bundle: ..., traitCollection: ...)`
     static func circlemenuHistoryforward(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.circlemenuHistoryforward, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "circlemenu-home", bundle: ..., traitCollection: ...)`
+    static func circlemenuHome(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.circlemenuHome, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "circlemenu-menu", bundle: ..., traitCollection: ...)`

@@ -105,7 +105,7 @@ class FrontLayer: UIView {
                     log.debug("circle menu event. event: favorite")
                     self.viewModel.registerFavoriteDataModel()
                 }),
-                CircleMenuItem(image: R.image.circlemenuForm(), tapAction: { _ in
+                CircleMenuItem(image: R.image.circlemenuHome(), tapAction: { _ in
                     log.debug("circle menu event. event: home")
                     self.viewModel.executeOperationDataModel(operation: .home)
                 }),
