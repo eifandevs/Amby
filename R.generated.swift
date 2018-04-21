@@ -88,7 +88,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 28 images.
+  /// This `R.image` struct is generated, and contains static references to 29 images.
   struct image {
     /// Image `circlemenu-add`.
     static let circlemenuAdd = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-add")
@@ -146,6 +146,8 @@ struct R: Rswift.Validatable {
     static let optionmenu_favorite = Rswift.ImageResource(bundle: R.hostingBundle, name: "optionmenu_favorite")
     /// Image `optionmenu_private`.
     static let optionmenu_private = Rswift.ImageResource(bundle: R.hostingBundle, name: "optionmenu_private")
+    /// Image `searchmenu-noimage`.
+    static let searchmenuNoimage = Rswift.ImageResource(bundle: R.hostingBundle, name: "searchmenu-noimage")
     
     /// `UIImage(named: "circlemenu-add", bundle: ..., traitCollection: ...)`
     static func circlemenuAdd(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
@@ -285,6 +287,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "optionmenu_private", bundle: ..., traitCollection: ...)`
     static func optionmenu_private(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.optionmenu_private, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "searchmenu-noimage", bundle: ..., traitCollection: ...)`
+    static func searchmenuNoimage(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.searchmenuNoimage, compatibleWith: traitCollection)
     }
     
     fileprivate init() {}

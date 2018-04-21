@@ -36,8 +36,8 @@ class SearchMenuNewsTableViewCell: UITableViewCell {
             thumbnailImageView.kf.indicatorType = .activity
             thumbnailImageView.kf.setImage(with: URL(string: urlToImage))
         } else {
-            // TODO: サムネイルがない場合は、NO IMAGEで表示する
-            thumbnailImageView.setImage(image: R.image.circlemenuClose(), color: .black)
+            // サムネイルがない場合は、NO IMAGEで表示する
+            thumbnailImageView.image = R.image.searchmenuNoimage()
         }
         titleLabel.text = article?.title ?? ""
         authorLabel.text = article?.author ?? ""
