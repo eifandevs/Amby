@@ -308,11 +308,9 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     }
 
     private func executeCircleMenuAction() -> Bool {
-        for item in circleMenuItems {
-            if item.scheduledAction {
-                item.action?(initialPt!)
-                return true
-            }
+        for item in circleMenuItems where item.scheduledAction {
+            item.action?(initialPt!)
+            return true
         }
         return false
     }
