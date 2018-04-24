@@ -63,10 +63,8 @@ class Util {
     /// キーボードが表示されているか
     static func displayedKeyboard() -> Bool {
         let window: UIWindow? = {
-            for w in UIApplication.shared.windows {
-                if w.className == "UIRemoteKeyboardWindow" {
-                    return w
-                }
+            for w in UIApplication.shared.windows where w.className == "UIRemoteKeyboardWindow" {
+                return w
             }
             return nil
         }()
