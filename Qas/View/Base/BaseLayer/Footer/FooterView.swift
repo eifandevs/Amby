@@ -342,11 +342,9 @@ class FooterView: UIView, ShadowView {
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
-                        for thumbnail in self.thumbnails {
-                            if sender.view == thumbnail {
-                                self.viewModel.removePageHistoryDataModel(context: thumbnail.context)
-                                break
-                            }
+                        for thumbnail in self.thumbnails where sender.view == thumbnail {
+                            self.viewModel.removePageHistoryDataModel(context: thumbnail.context)
+                            break
                         }
                     }
                 }
