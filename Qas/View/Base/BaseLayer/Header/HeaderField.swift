@@ -121,7 +121,7 @@ class HeaderField: UIButton, ShadowView {
         closeMenuButton.setImage(image: R.image.headerClose(), color: UIColor.gray)
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
         closeMenuButton.imageView?.contentMode = .scaleAspectFit
-        closeMenuButton.imageEdgeInsets = UIEdgeInsetsMake(edgeInset, edgeInset, edgeInset, edgeInset)
+        closeMenuButton.imageEdgeInsets = UIEdgeInsets(top: edgeInset, left: edgeInset, bottom: edgeInset, right: edgeInset)
 
         // ボタンタップ
         closeMenuButton.rx.tap
