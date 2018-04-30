@@ -213,7 +213,7 @@ final class BaseViewModel {
 
     /// スワイプが履歴移動スワイプかを判定
     func isHistorySwipe(touchPoint: CGPoint) -> Bool {
-        return touchPoint.y < DeviceConst.DISPLAY_SIZE.height / 2
+        return touchPoint.y < (DeviceConst.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER_HEADER_HEIGHT
     }
 
     /// baseViewControllerの状態取得
