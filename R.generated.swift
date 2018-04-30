@@ -88,7 +88,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 28 images.
+  /// This `R.image` struct is generated, and contains static references to 24 images.
   struct image {
     /// Image `circlemenu-add`.
     static let circlemenuAdd = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-add")
@@ -124,20 +124,12 @@ struct R: Rswift.Validatable {
     static let headerKey = Rswift.ImageResource(bundle: R.hostingBundle, name: "header-key")
     /// Image `logo`.
     static let logo = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo")
-    /// Image `option_menu_add`.
-    static let option_menu_add = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_add")
-    /// Image `option_menu_copy`.
-    static let option_menu_copy = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_copy")
-    /// Image `option_menu_form`.
-    static let option_menu_form = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_form")
     /// Image `option_menu_help`.
     static let option_menu_help = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_help")
-    /// Image `option_menu_initialize`.
-    static let option_menu_initialize = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_initialize")
-    /// Image `option_menu_mail`.
-    static let option_menu_mail = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_mail")
     /// Image `option_menu_setting`.
     static let option_menu_setting = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_setting")
+    /// Image `optionmenu-form`.
+    static let optionmenuForm = Rswift.ImageResource(bundle: R.hostingBundle, name: "optionmenu-form")
     /// Image `optionmenu-history`.
     static let optionmenuHistory = Rswift.ImageResource(bundle: R.hostingBundle, name: "optionmenu-history")
     /// Image `optionmenu_app`.
@@ -232,39 +224,19 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.logo, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "option_menu_add", bundle: ..., traitCollection: ...)`
-    static func option_menu_add(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.option_menu_add, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "option_menu_copy", bundle: ..., traitCollection: ...)`
-    static func option_menu_copy(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.option_menu_copy, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "option_menu_form", bundle: ..., traitCollection: ...)`
-    static func option_menu_form(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.option_menu_form, compatibleWith: traitCollection)
-    }
-    
     /// `UIImage(named: "option_menu_help", bundle: ..., traitCollection: ...)`
     static func option_menu_help(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.option_menu_help, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "option_menu_initialize", bundle: ..., traitCollection: ...)`
-    static func option_menu_initialize(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.option_menu_initialize, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "option_menu_mail", bundle: ..., traitCollection: ...)`
-    static func option_menu_mail(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.option_menu_mail, compatibleWith: traitCollection)
-    }
-    
     /// `UIImage(named: "option_menu_setting", bundle: ..., traitCollection: ...)`
     static func option_menu_setting(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.option_menu_setting, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "optionmenu-form", bundle: ..., traitCollection: ...)`
+    static func optionmenuForm(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.optionmenuForm, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "optionmenu-history", bundle: ..., traitCollection: ...)`
