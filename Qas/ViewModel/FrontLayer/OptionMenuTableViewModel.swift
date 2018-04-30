@@ -27,7 +27,7 @@ final class OptionMenuTableViewModel {
             switch self {
             case .history: return R.image.optionmenuHistory.name
             case .form: return R.image.optionmenuForm.name
-            case .favorite: return R.image.optionmenu_favorite.name
+            case .favorite: return R.image.optionmenuFavorite.name
             case .setting: return R.image.optionmenuSetting.name
             case .help: return R.image.optionmenuHelp.name
             case .app: return R.image.optionmenu_app.name
