@@ -30,7 +30,7 @@ final class OptionMenuTableViewModel {
             case .favorite: return R.image.optionmenuFavorite.name
             case .setting: return R.image.optionmenuSetting.name
             case .help: return R.image.optionmenuHelp.name
-            case .app: return R.image.optionmenu_app.name
+            case .app: return R.image.optionmenuApp.name
             }
         }
 
