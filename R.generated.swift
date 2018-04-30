@@ -88,7 +88,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 29 images.
+  /// This `R.image` struct is generated, and contains static references to 28 images.
   struct image {
     /// Image `circlemenu-add`.
     static let circlemenuAdd = Rswift.ImageResource(bundle: R.hostingBundle, name: "circlemenu-add")
@@ -132,20 +132,18 @@ struct R: Rswift.Validatable {
     static let option_menu_form = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_form")
     /// Image `option_menu_help`.
     static let option_menu_help = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_help")
-    /// Image `option_menu_history`.
-    static let option_menu_history = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_history")
     /// Image `option_menu_initialize`.
     static let option_menu_initialize = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_initialize")
     /// Image `option_menu_mail`.
     static let option_menu_mail = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_mail")
     /// Image `option_menu_setting`.
     static let option_menu_setting = Rswift.ImageResource(bundle: R.hostingBundle, name: "option_menu_setting")
+    /// Image `optionmenu-history`.
+    static let optionmenuHistory = Rswift.ImageResource(bundle: R.hostingBundle, name: "optionmenu-history")
     /// Image `optionmenu_app`.
     static let optionmenu_app = Rswift.ImageResource(bundle: R.hostingBundle, name: "optionmenu_app")
     /// Image `optionmenu_favorite`.
     static let optionmenu_favorite = Rswift.ImageResource(bundle: R.hostingBundle, name: "optionmenu_favorite")
-    /// Image `optionmenu_private`.
-    static let optionmenu_private = Rswift.ImageResource(bundle: R.hostingBundle, name: "optionmenu_private")
     /// Image `searchmenu-noimage`.
     static let searchmenuNoimage = Rswift.ImageResource(bundle: R.hostingBundle, name: "searchmenu-noimage")
     
@@ -254,11 +252,6 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.option_menu_help, compatibleWith: traitCollection)
     }
     
-    /// `UIImage(named: "option_menu_history", bundle: ..., traitCollection: ...)`
-    static func option_menu_history(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.option_menu_history, compatibleWith: traitCollection)
-    }
-    
     /// `UIImage(named: "option_menu_initialize", bundle: ..., traitCollection: ...)`
     static func option_menu_initialize(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.option_menu_initialize, compatibleWith: traitCollection)
@@ -274,6 +267,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.option_menu_setting, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "optionmenu-history", bundle: ..., traitCollection: ...)`
+    static func optionmenuHistory(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.optionmenuHistory, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "optionmenu_app", bundle: ..., traitCollection: ...)`
     static func optionmenu_app(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.optionmenu_app, compatibleWith: traitCollection)
@@ -282,11 +280,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "optionmenu_favorite", bundle: ..., traitCollection: ...)`
     static func optionmenu_favorite(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.optionmenu_favorite, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "optionmenu_private", bundle: ..., traitCollection: ...)`
-    static func optionmenu_private(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.optionmenu_private, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "searchmenu-noimage", bundle: ..., traitCollection: ...)`
