@@ -400,17 +400,13 @@ class FooterView: UIView, ShadowView {
 extension FooterView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_: UIScrollView) {
         thumbnails.forEach { thumbnail in
-            UIView.animate(withDuration: 0.2, animations: {
-                thumbnail.displayTitle()
-            })
+            thumbnail.displayTitle()
         }
     }
 
     func scrollViewDidEndDragging(_: UIScrollView, willDecelerate _: Bool) {
         thumbnails.forEach { thumbnail in
-            UIView.animate(withDuration: 0.2, animations: {
-                thumbnail.undisplayTitle()
-            })
+            thumbnail.undisplayTitle()
         }
     }
 }

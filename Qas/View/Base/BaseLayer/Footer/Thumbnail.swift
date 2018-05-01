@@ -19,6 +19,8 @@ class Thumbnail: UIButton {
 
     private let thumbnailInfo = UIButton()
 
+    private let underLine = UIView()
+
     private let frontBar = UIView()
 
     override init(frame: CGRect) {
@@ -66,8 +68,9 @@ class Thumbnail: UIButton {
         }
         thumbnailInfo.frame = CGRect(x: frame.size.width / 2, y: -30, width: width, height: frame.size.width / 3)
 
+        // アンダーライン初期化
         // ライン初期化
-        let underLine = UIView(frame: CGRect(x: -5, y: thumbnailInfo.frame.size.height - 1, width: thumbnailInfo.frame.size.width + 18, height: 1))
+        underLine.frame = CGRect(x: -5, y: (frame.size.width / 3) - 1, width: width + 18, height: 1)
         underLine.backgroundColor = UIColor.brilliantBlue
         thumbnailInfo.addSubview(underLine)
 
@@ -78,12 +81,24 @@ class Thumbnail: UIButton {
 
     // タイトル表示
     func displayTitle() {
-        thumbnailInfo.alpha = 1
+        // アンダーラインを横幅を保持しておく
+        let width = underLine.frame.size.width
+        underLine.frame.size.width = 0
+
+        UIView.animate(withDuration: 0.2, animations: {
+            self.thumbnailInfo.alpha = 1
+        })
+
+        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseOut, animations: {
+            self.underLine.frame.size.width = width
+        }, completion: nil)
     }
 
     // タイトル非表示
     func undisplayTitle() {
-        thumbnailInfo.alpha = 0
+        UIView.animate(withDuration: 0.2, animations: {
+            self.thumbnailInfo.alpha = 0
+        })
     }
 
     required init?(coder _: NSCoder) {
