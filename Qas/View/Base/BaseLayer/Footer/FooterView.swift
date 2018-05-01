@@ -401,7 +401,7 @@ extension FooterView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_: UIScrollView) {
         thumbnails.forEach { thumbnail in
             UIView.animate(withDuration: 0.2, animations: {
-                thumbnail.thumbnailInfo.alpha = 1
+                thumbnail.displayTitle()
             })
         }
     }
@@ -409,7 +409,7 @@ extension FooterView: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_: UIScrollView, willDecelerate _: Bool) {
         thumbnails.forEach { thumbnail in
             UIView.animate(withDuration: 0.2, animations: {
-                thumbnail.thumbnailInfo.alpha = 0
+                thumbnail.undisplayTitle()
             })
         }
     }

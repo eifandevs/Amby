@@ -59,6 +59,7 @@ class Thumbnail: UIButton {
     func setThumbnailTitle(title: String) {
         thumbnailInfo.transform = CGAffineTransform.identity
         thumbnailInfo.setTitle(title, for: .normal)
+        // タイトルの横幅を調整
         var width = (thumbnailInfo.titleLabel?.sizeThatFits(frame.size).width)!
         if width > frame.size.width * 2.2 {
             width = frame.size.width * 2.2
@@ -66,6 +67,16 @@ class Thumbnail: UIButton {
         thumbnailInfo.frame = CGRect(x: frame.size.width / 2, y: -30, width: width, height: frame.size.width / 3)
         let angle2: CGFloat = CGFloat((-45.0 * Double.pi) / 180.0)
         thumbnailInfo.transform = CGAffineTransform(rotationAngle: angle2)
+    }
+
+    // タイトル表示
+    func displayTitle() {
+        thumbnailInfo.alpha = 1
+    }
+
+    // タイトル非表示
+    func undisplayTitle() {
+        thumbnailInfo.alpha = 0
     }
 
     required init?(coder _: NSCoder) {
