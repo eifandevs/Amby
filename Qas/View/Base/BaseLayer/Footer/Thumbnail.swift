@@ -17,9 +17,9 @@ class Thumbnail: UIButton {
         }
     }
 
-    var thumbnailInfo: UIButton!
+    private let thumbnailInfo = UIButton()
 
-    private let frontBar = UILabel()
+    private let frontBar = UIView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,7 +30,6 @@ class Thumbnail: UIButton {
         addSubview(frontBar)
 
         // サムネイルタイトル配置
-        thumbnailInfo = UIButton()
         thumbnailInfo.titleLabel?.font = UIFont(name: AppConst.APP_FONT, size: frame.size.width / 9)
         thumbnailInfo.setTitleColor(UIColor.darkGray, for: .normal)
         thumbnailInfo.titleLabel?.lineBreakMode = .byTruncatingTail
@@ -57,6 +56,7 @@ class Thumbnail: UIButton {
     // MARK: Public Method
 
     func setThumbnailTitle(title: String) {
+        // タイトル初期化
         thumbnailInfo.transform = CGAffineTransform.identity
         thumbnailInfo.setTitle(title, for: .normal)
         // タイトルの横幅を調整
@@ -65,8 +65,15 @@ class Thumbnail: UIButton {
             width = frame.size.width * 2.2
         }
         thumbnailInfo.frame = CGRect(x: frame.size.width / 2, y: -30, width: width, height: frame.size.width / 3)
-        let angle2: CGFloat = CGFloat((-45.0 * Double.pi) / 180.0)
-        thumbnailInfo.transform = CGAffineTransform(rotationAngle: angle2)
+
+        // ライン初期化
+        let underLine = UIView(frame: CGRect(x: -5, y: thumbnailInfo.frame.size.height - 1, width: thumbnailInfo.frame.size.width + 18, height: 1))
+        underLine.backgroundColor = UIColor.brilliantBlue
+        thumbnailInfo.addSubview(underLine)
+
+        // 回転
+        let angle: CGFloat = CGFloat((-45.0 * Double.pi) / 180.0)
+        thumbnailInfo.transform = CGAffineTransform(rotationAngle: angle)
     }
 
     // タイトル表示
