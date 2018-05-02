@@ -206,17 +206,14 @@ class FooterView: UIView, ShadowView {
 
     /// 初期ロード
     private func load() {
-        let pageHistories = viewModel.pageHistories
-        if pageHistories.count > 0 {
-            for (index, item) in pageHistories.enumerated() {
-                let btn = append(context: item.context)
-                if !item.context.isEmpty {
-                    // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合
-                    if let image = ThumbnailDataModel.s.getThumbnail(context: item.context) {
-                        btn.setImage(nil, for: .normal)
-                        btn.setBackgroundImage(image, for: .normal)
-                        btn.setThumbnailTitle(title: item.title)
-                    }
+        viewModel.pageHistories.forEach {
+            let btn = append(context: $0.context)
+            if !$0.context.isEmpty {
+                // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合
+                if let image = ThumbnailDataModel.s.getThumbnail(context: $0.context) {
+                    btn.setImage(nil, for: .normal)
+                    btn.setBackgroundImage(image, for: .normal)
+                    btn.setThumbnailTitle(title: $0.title)
                 }
             }
         }
