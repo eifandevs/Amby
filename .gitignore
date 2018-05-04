@@ -24,3 +24,4 @@ DerivedData
 *.swp
 !.gitkeep
 .DS_Store
+env.plist
