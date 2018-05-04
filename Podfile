@@ -23,30 +23,30 @@ def common_pods
   pod 'Kingfisher'
 end
 
-target 'Qas-Develop' do
+target 'Qass-Develop' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Qas-Develop
+  # Pods for Qass-Develop
   common_pods
 
-  target 'Qas-DevelopTests' do
+  target 'Qass-DevelopTests' do
     inherit! :search_paths
     # Pods for testing
     pod 'RxSwift', '~> 4.0'
   end
 
-  target 'Qas-DevelopUITests' do
+  target 'Qass-DevelopUITests' do
     inherit! :search_paths
     # Pods for testing
   end
 end
 
-target 'Qas-Production' do
+target 'Qass-Production' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Qas-Production
+  # Pods for Qass-Production
   common_pods
   
 end
