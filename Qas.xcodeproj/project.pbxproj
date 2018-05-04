@@ -345,14 +345,12 @@
 		142A9FA88A32403AA27058A4 /* Pods-Qas-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Develop/Pods-Qas-Develop.debug.xcconfig"; sourceTree = "<group>"; };
 		19CC00F13CFA491596CF4649 /* Pods-Qas-Production.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Production.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Production/Pods-Qas-Production.debug-local.xcconfig"; sourceTree = "<group>"; };
 		260F3D76F0B107560CAE70E8 /* Pods-Qas-DevelopTests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-DevelopTests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-DevelopTests/Pods-Qas-DevelopTests.debug-ut.xcconfig"; sourceTree = "<group>"; };
-		4FCFD23E3BF094AACAE5B23D /* Pods-Qas-Local.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Local.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Local/Pods-Qas-Local.release.xcconfig"; sourceTree = "<group>"; };
 		4FD41C7994A687E2D931946E /* Pods-Qas-DevelopTests.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-DevelopTests.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-DevelopTests/Pods-Qas-DevelopTests.debug-local.xcconfig"; sourceTree = "<group>"; };
 		615FE5E3DFBC7266C29F3D82 /* Pods_Weasel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weasel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8A6AD36C957CDB01D24BFB /* Pods-Qas-DevelopUITests.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-DevelopUITests.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-DevelopUITests/Pods-Qas-DevelopUITests.debug-local.xcconfig"; sourceTree = "<group>"; };
 		7BA5F4607AB8952505B32784 /* Pods_Qas_Production.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qas_Production.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D63580A9A213BC3CA3C3A1A /* Pods_Qas_Develop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qas_Develop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8093F02229A95D450B618077 /* Pods-Qas-Develop.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Develop.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Develop/Pods-Qas-Develop.debug-local.xcconfig"; sourceTree = "<group>"; };
-		847E1F31AB9E1872FAA94A6F /* Pods-Qas-Local.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Local.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Local/Pods-Qas-Local.debug.xcconfig"; sourceTree = "<group>"; };
 		864490C49B44E38091C994D2 /* Pods-Qas-DevelopTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-DevelopTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-DevelopTests/Pods-Qas-DevelopTests.debug.xcconfig"; sourceTree = "<group>"; };
 		90F4C7CD31673EA3D9016D1D /* Pods-Qas-Production.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Production.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Production/Pods-Qas-Production.debug.xcconfig"; sourceTree = "<group>"; };
 		9C0BE15CF6C9081CD7431C45 /* Pods_Qas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -405,7 +403,6 @@
 		A1EF0016207F771F0079E1DF /* CollectionType+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionType+Extend.swift"; sourceTree = "<group>"; };
 		A1EF00B4208238190079E1DF /* Qas-Production.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qas-Production.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EF00B52082381A0079E1DF /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = info.plist; path = /Users/tenma/dev/projects/Qas/Qas/Environment/Production/info.plist; sourceTree = "<absolute>"; };
-		A28BDCA0F081729C628CD5CE /* Pods-Qas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.release.xcconfig"; sourceTree = "<group>"; };
 		A5117A521FDC494000213E02 /* AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnum.swift; sourceTree = "<group>"; };
 		A5117A541FDC500B00213E02 /* BaseLayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLayerViewModel.swift; sourceTree = "<group>"; };
 		A5117A5D1FE537C200213E02 /* HeaderFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFieldViewModel.swift; sourceTree = "<group>"; };
@@ -535,7 +532,6 @@
 		F01FFB17911F0068CB493191 /* Pods-Qas-Production.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Production.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Production/Pods-Qas-Production.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		F5B1162E026750ACA6E88451 /* Pods-Qas-Production.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-Production.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-Production/Pods-Qas-Production.release.xcconfig"; sourceTree = "<group>"; };
 		F6A3493196BEA39625F23890 /* Pods-Qas-DevelopUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas-DevelopUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas-DevelopUITests/Pods-Qas-DevelopUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		FD35A55E11AD976AC8901FEA /* Pods-Qas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qas/Pods-Qas.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -593,14 +589,10 @@
 		2D6EC82ACCDEE92B54408E2F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FD35A55E11AD976AC8901FEA /* Pods-Qas.debug.xcconfig */,
-				A28BDCA0F081729C628CD5CE /* Pods-Qas.release.xcconfig */,
 				142A9FA88A32403AA27058A4 /* Pods-Qas-Develop.debug.xcconfig */,
 				C3E77FE33D528793064D4E74 /* Pods-Qas-Develop.release.xcconfig */,
 				864490C49B44E38091C994D2 /* Pods-Qas-DevelopTests.debug.xcconfig */,
 				A6E7582035707F0631304AD8 /* Pods-Qas-DevelopTests.release.xcconfig */,
-				847E1F31AB9E1872FAA94A6F /* Pods-Qas-Local.debug.xcconfig */,
-				4FCFD23E3BF094AACAE5B23D /* Pods-Qas-Local.release.xcconfig */,
 				8093F02229A95D450B618077 /* Pods-Qas-Develop.debug-local.xcconfig */,
 				4FD41C7994A687E2D931946E /* Pods-Qas-DevelopTests.debug-local.xcconfig */,
 				0A03E6587F9F5F0321E95657 /* Pods-Qas-Develop.debug-ut.xcconfig */,
