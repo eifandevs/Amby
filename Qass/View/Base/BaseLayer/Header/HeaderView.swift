@@ -75,7 +75,7 @@ class HeaderView: UIView, ShadowView {
             button.alpha = 1
             let edgeInset: CGFloat = button.frame.size.width / 7.0769
             button.imageView?.contentMode = .scaleAspectFit
-            button.imageEdgeInsets = UIEdgeInsetsMake(edgeInset, edgeInset, edgeInset, edgeInset)
+            button.imageEdgeInsets = UIEdgeInsets(top: edgeInset, left: edgeInset, bottom: edgeInset, right: edgeInset)
             self.addSubview(button)
         }
 
