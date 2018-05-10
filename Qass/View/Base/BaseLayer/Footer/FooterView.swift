@@ -356,7 +356,7 @@ class FooterView: UIView, ShadowView {
         // スクロールビューのコンテンツサイズを大きくする
         if (thumbnails.count).f * btn.frame.size.width > scrollView.frame.size.width {
             scrollView.contentSize.width += btn.frame.size.width / 2
-            scrollView.contentInset = UIEdgeInsetsMake(0, scrollView.contentInset.left + (btn.frame.size.width / 2), 0, 0)
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: scrollView.contentInset.left + (btn.frame.size.width / 2), bottom: 0, right: 0)
         }
 
         scrollView.addSubview(btn)
