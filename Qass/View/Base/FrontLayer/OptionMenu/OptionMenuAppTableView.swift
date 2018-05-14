@@ -78,6 +78,7 @@ extension OptionMenuAppTableView: UITableViewDataSource {
 extension OptionMenuAppTableView: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セル情報取得
+        // TODO: 処理
         let row = viewModel.getRow(indexPath: indexPath)
         rx_optionMenuAppDidClose.onNext(())
     }
