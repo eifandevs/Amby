@@ -108,7 +108,7 @@ class FooterView: UIView, ShadowView {
                         self.deleteAnimator = UIViewPropertyAnimator(duration: 0.25, curve: .linear) {
                             if (self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width {
                                 self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-                                self.scrollView.contentInset = UIEdgeInsetsMake(0, self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), 0, 0)
+                                self.scrollView.contentInset = UIEdgeInsets(top: 0, left: self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), bottom: 0, right: 0)
                             }
 
                             (0 ... self.thumbnails.count - 1).forEach {
