@@ -230,7 +230,7 @@ class FooterView: UIView, ShadowView {
         btn.backgroundColor = UIColor.darkGray
         btn.setImage(image: R.image.footerThumbnailBack(), color: UIColor.gray)
         let inset: CGFloat = btn.frame.size.width / 9
-        btn.imageEdgeInsets = UIEdgeInsetsMake(inset, inset, inset, inset)
+        btn.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
 
         // ボタンタップ
         btn.rx.tap
