@@ -1008,7 +1008,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             self.viewModel.endRenderingPageHistoryDataModel(context: wv.context)
         })
 
-        // TODO: submit検知。フォーム情報確認
+        // TODO: submit検知
 //        if let form = wv.form {
 //            wv.form = nil
 //            NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_SAVE_TITLE, message: MessageConst.ALERT_FORM_SAVE_MESSAGE, completion: { [weak self] in
