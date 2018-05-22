@@ -70,7 +70,6 @@
 		A1903052209CF978004F1EA5 /* OptionMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F90209CF976004F1EA5 /* OptionMenuView.swift */; };
 		A1903053209CF978004F1EA5 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F91209CF976004F1EA5 /* ShadowView.swift */; };
 		A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1902F93209CF976004F1EA5 /* Assets.xcassets */; };
-		A1903055209CF978004F1EA5 /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1902F94209CF976004F1EA5 /* env.plist */; };
 		A1903056209CF978004F1EA5 /* article_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A1902F96209CF976004F1EA5 /* article_stub.json */; };
 		A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A1902F97209CF976004F1EA5 /* suggest_stub.json */; };
 		A1903058209CF978004F1EA5 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A1902F99209CF976004F1EA5 /* authorize.html */; };
@@ -285,7 +284,6 @@
 		A1B5F421209D0C8700DF1AE3 /* OptionMenuAppTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FEE209CF977004F1EA5 /* OptionMenuAppTableView.xib */; };
 		A1B5F422209D0C8700DF1AE3 /* OptionMenuFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FE8209CF977004F1EA5 /* OptionMenuFormTableViewCell.xib */; };
 		A1B5F423209D0C8700DF1AE3 /* OptionMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FED209CF977004F1EA5 /* OptionMenuTableViewCell.xib */; };
-		A1B5F424209D0C8700DF1AE3 /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1902F94209CF976004F1EA5 /* env.plist */; };
 		A1B5F425209D0C8700DF1AE3 /* OptionMenuHelpTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FF1209CF977004F1EA5 /* OptionMenuHelpTableView.xib */; };
 		A1B5F426209D0C8700DF1AE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1902F93209CF976004F1EA5 /* Assets.xcassets */; };
 		A1B5F427209D0C8700DF1AE3 /* suggest_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A1902F97209CF976004F1EA5 /* suggest_stub.json */; };
@@ -423,7 +421,6 @@
 		A1902F90209CF976004F1EA5 /* OptionMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuView.swift; sourceTree = "<group>"; };
 		A1902F91209CF976004F1EA5 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		A1902F93209CF976004F1EA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A1902F94209CF976004F1EA5 /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
 		A1902F96209CF976004F1EA5 /* article_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = article_stub.json; sourceTree = "<group>"; };
 		A1902F97209CF976004F1EA5 /* suggest_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = suggest_stub.json; sourceTree = "<group>"; };
 		A1902F99209CF976004F1EA5 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
@@ -925,7 +922,6 @@
 			isa = PBXGroup;
 			children = (
 				A1902F93209CF976004F1EA5 /* Assets.xcassets */,
-				A1902F94209CF976004F1EA5 /* env.plist */,
 				A1902F95209CF976004F1EA5 /* stub */,
 				A1902F98209CF976004F1EA5 /* www */,
 			);
@@ -1456,7 +1452,6 @@
 				A1B5F421209D0C8700DF1AE3 /* OptionMenuAppTableView.xib in Resources */,
 				A1B5F422209D0C8700DF1AE3 /* OptionMenuFormTableViewCell.xib in Resources */,
 				A1B5F423209D0C8700DF1AE3 /* OptionMenuTableViewCell.xib in Resources */,
-				A1B5F424209D0C8700DF1AE3 /* env.plist in Resources */,
 				A1B5F425209D0C8700DF1AE3 /* OptionMenuHelpTableView.xib in Resources */,
 				A1B5F426209D0C8700DF1AE3 /* Assets.xcassets in Resources */,
 				A1B5F427209D0C8700DF1AE3 /* suggest_stub.json in Resources */,
@@ -1494,7 +1489,6 @@
 				A1903096209CF978004F1EA5 /* OptionMenuAppTableView.xib in Resources */,
 				A1903090209CF978004F1EA5 /* OptionMenuFormTableViewCell.xib in Resources */,
 				A1903095209CF978004F1EA5 /* OptionMenuTableViewCell.xib in Resources */,
-				A1903055209CF978004F1EA5 /* env.plist in Resources */,
 				A1903099209CF978004F1EA5 /* OptionMenuHelpTableView.xib in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
