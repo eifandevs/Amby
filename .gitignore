@@ -24,6 +24,8 @@ DerivedData
 *.swp
 !.gitkeep
 .DS_Store
+
+# production env
 env.plist
 
 # r.swift
@@ -31,3 +33,8 @@ env.plist
 
 # gemfile
 /vendor
+
+# fastlane
+fastlane/report.xml
+fastlane/screenshots
+fastlane/test_output
