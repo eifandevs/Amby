@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E5E575750E6293FCFC43F4E /* Pods_Qass_Develop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8AC3C84A925C26AE61ACEF /* Pods_Qass_Develop.framework */; };
 		6C9DF6C868BDCF40D4DA265D /* Pods_Qass_Production.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C7D9CDCF1ED1584806D133 /* Pods_Qass_Production.framework */; };
+		A14266C120B5878D006E811A /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A14266C020B5878C006E811A /* env.plist */; };
 		A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F38209CF976004F1EA5 /* AppDelegate.swift */; };
 		A1903017209CF977004F1EA5 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3B209CF976004F1EA5 /* AppConst.swift */; };
 		A1903018209CF977004F1EA5 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3C209CF976004F1EA5 /* AppEnum.swift */; };
@@ -350,6 +351,7 @@
 		733E755ECE71F442A64C6908 /* Pods-Qass-DevelopTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopTests/Pods-Qass-DevelopTests.debug.xcconfig"; sourceTree = "<group>"; };
 		79E42E2E4E116138B394AA57 /* Pods-Qass-DevelopUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8DD8D05F664AB7906F830747 /* Pods-Qass-DevelopUITests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		A14266C020B5878C006E811A /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
 		A168382B2066960B00182028 /* Qass-DevelopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-DevelopTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1902F2E209CF976004F1EA5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
@@ -921,6 +923,7 @@
 		A1902F92209CF976004F1EA5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A14266C020B5878C006E811A /* env.plist */,
 				A1902F93209CF976004F1EA5 /* Assets.xcassets */,
 				A1902F95209CF976004F1EA5 /* stub */,
 				A1902F98209CF976004F1EA5 /* www */,
@@ -1470,6 +1473,7 @@
 				A1B5F434209D0C8700DF1AE3 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A1B5F435209D0C8700DF1AE3 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
 				A1B5F436209D0C8700DF1AE3 /* dns.html in Resources */,
+				A14266C120B5878D006E811A /* env.plist in Resources */,
 				A1B5F437209D0C8700DF1AE3 /* timeout.html in Resources */,
 				A1B5F438209D0C8700DF1AE3 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A1B5F439209D0C8700DF1AE3 /* offline.html in Resources */,
