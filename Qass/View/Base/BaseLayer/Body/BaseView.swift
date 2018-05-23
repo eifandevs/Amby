@@ -541,6 +541,7 @@ class BaseView: UIView {
             form.host = host
             form.url = url
 
+            // take form
             webView.evaluate(script: "document.forms.length") { object, error in
                 if object != nil && error == nil {
                     let formLength = Int((object as? NSNumber)!)
