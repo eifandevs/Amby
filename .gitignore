@@ -25,4 +25,9 @@ DerivedData
 !.gitkeep
 .DS_Store
 env.plist
-R.generated.swift
+
+# r.swift
+/R.generated.swift
+
+# gemfile
+/vendor
