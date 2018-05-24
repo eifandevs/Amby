@@ -32,7 +32,7 @@ env.plist
 /R.generated.swift
 
 # gemfile
-/vendor
+/vendor/bundle
 
 # fastlane
 fastlane/report.xml
