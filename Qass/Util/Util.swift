@@ -299,4 +299,3 @@ func += (left: inout CGPoint, right: CGPoint) {
     left = left + right
 }
 // swiftlint:enable shorthand_operator
-
