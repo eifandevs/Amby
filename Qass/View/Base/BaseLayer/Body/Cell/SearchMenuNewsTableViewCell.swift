@@ -32,7 +32,7 @@ class SearchMenuNewsTableViewCell: UITableViewCell {
     func setArticle(article: Article?) {
         self.article = article
 
-        if let urlToImage = article?.urlToImage, !urlToImage.isEmpty {
+        if let urlToImage = article?.image_url, !urlToImage.isEmpty {
             thumbnailImageView.kf.indicatorType = .activity
             thumbnailImageView.kf.setImage(with: URL(string: urlToImage))
         } else {

@@ -9,10 +9,14 @@
 import Foundation
 
 struct Article: Codable {
+    var id: Int?
+    var source_name: String?
     var author: String?
     var title: String?
     var description: String?
     var url: String?
-    var urlToImage: String?
-    var publishedAt: String?
+    var image_url: String?
+    var published_time: String?
+    var created_at: String?
+    var updated_at: String?
 }

@@ -12,5 +12,5 @@ import Foundation
 struct ArticleResponse: Codable {
     // レスポンスがjsonではないので、codableを使用せず、マニュアルでマッピングする
     let code: String
-    let articles: [Article]
+    let data: [Article]
 }

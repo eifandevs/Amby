@@ -36,7 +36,7 @@ final class ArticleDataModel {
                         let articleResponse: ArticleResponse = try decoder.decode(ArticleResponse.self, from: response.data)
                         return articleResponse
                     } catch {
-                        return ArticleResponse(code: HttpConst.APP_STATUS_CODE.PARSE_ERROR.rawValue, articles: [])
+                        return ArticleResponse(code: HttpConst.APP_STATUS_CODE.PARSE_ERROR.rawValue, data: [])
                     }
                 }
                 .subscribe(
@@ -46,8 +46,8 @@ final class ArticleDataModel {
                         guard let `self` = self else { return }
                         if response.code == HttpConst.APP_STATUS_CODE.NORMAL.rawValue {
                             log.debug("get article success.")
-                            self.articles = response.articles
-                            self.rx_articleDataModelDidUpdate.onNext(response.articles)
+                            self.articles = response.data
+                            self.rx_articleDataModelDidUpdate.onNext(response.data)
                         } else {
                             log.error("get article error. code: \(response.code)")
                             self.rx_articleDataModelDidUpdate.onNext([])
