@@ -17,6 +17,6 @@ disabled_rules:
 - cyclomatic_complexity
 - type_name
 - function_body_length
-- shorthand_operator
 - file_length
 - type_body_length
+- trailing_comma

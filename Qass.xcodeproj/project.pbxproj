@@ -1734,7 +1734,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/Qas\"";
+			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/Qass\"";
 		};
 		A1B5F443209D0C8700DF1AE3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

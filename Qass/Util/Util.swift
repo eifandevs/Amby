@@ -274,6 +274,7 @@ func * (left: CGPoint, right: CGFloat) -> CGPoint {
     return CGPoint(x: left.x * right, y: left.y * right)
 }
 
+// swiftlint:disable shorthand_operator
 func *= (left: inout CGSize, right: CGSize) {
     left = left * right
 }
@@ -297,3 +298,5 @@ func *= (left: inout CGPoint, right: CGFloat) {
 func += (left: inout CGPoint, right: CGPoint) {
     left = left + right
 }
+// swiftlint:enable shorthand_operator
+
