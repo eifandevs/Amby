@@ -27,7 +27,7 @@ final class HeaderViewModel {
             PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange.flatMap { _ in Observable.just(()) },
             PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert.flatMap { _ in Observable.just(()) },
             PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove.flatMap { _ in Observable.just(()) },
-            FavoriteDataModel.s.rx_favoriteDataModelDidInsert,
+            FavoriteDataModel.s.rx_favoriteDataModelDidInsert.flatMap { _ in Observable.just(()) },
             FavoriteDataModel.s.rx_favoriteDataModelDidRemove,
             FavoriteDataModel.s.rx_favoriteDataModelDidReload.flatMap { _ in Observable.just(()) },
         ])

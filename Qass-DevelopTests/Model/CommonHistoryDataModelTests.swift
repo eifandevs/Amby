@@ -20,21 +20,13 @@ class CommonHistoryDataModelTests: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         CommonHistoryDataModel.s.delete()
-        CommonHistoryDataModel.s.initialize()
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-        CommonHistoryDataModel.s.delete()
-        CommonHistoryDataModel.s.initialize()
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
+
     func testGoBack() {
         weak var expectation = self.expectation(description: "goBack")
 
@@ -81,13 +73,6 @@ class CommonHistoryDataModelTests: XCTestCase {
         let storedHistory = CommonHistoryDataModel.s.select(title: "testStore", readNum: 10).first!
         XCTAssertTrue(storedHistory.title == "testStore")
         XCTAssertTrue(storedHistory.url == "testStore")
-    }
-    
-    func testInitialize() {
-        let history = CommonHistory(url: "testInsert", title: "testInsert", date: Date())
-        CommonHistoryDataModel.s.insert(history: history)
-        CommonHistoryDataModel.s.initialize()
-        XCTAssertTrue(CommonHistoryDataModel.s.histories.count == 0)
     }
     
     func testGetList() {

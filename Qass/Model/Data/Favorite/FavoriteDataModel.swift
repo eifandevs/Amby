@@ -12,7 +12,7 @@ import RxSwift
 
 final class FavoriteDataModel {
     /// お気に入り追加通知用RX
-    let rx_favoriteDataModelDidInsert = PublishSubject<()>()
+    let rx_favoriteDataModelDidInsert = PublishSubject<([Favorite])>()
     /// お気に入り削除通知用RX
     let rx_favoriteDataModelDidRemove = PublishSubject<()>()
     /// お気に入り更新通知用RX
@@ -26,7 +26,7 @@ final class FavoriteDataModel {
 
     func insert(favorites: [Favorite]) {
         dbProvider.insert(data: favorites)
-        rx_favoriteDataModelDidInsert.onNext(())
+        rx_favoriteDataModelDidInsert.onNext(favorites)
     }
 
     func select(id: String? = nil, url: String? = nil) -> [Favorite] {

@@ -87,11 +87,6 @@ final class CommonHistoryDataModel {
         }
     }
 
-    /// 初期化
-    func initialize() {
-        histories = []
-    }
-
     /// 保存済みリスト取得
     /// 降順で返す。[20170909, 20170908, ...]
     func getList() -> [String] {
