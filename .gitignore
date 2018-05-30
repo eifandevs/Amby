@@ -38,3 +38,6 @@ env.plist
 fastlane/report.xml
 fastlane/screenshots
 fastlane/test_output
+
+# slather
+slather/reports

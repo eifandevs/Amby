@@ -16,9 +16,22 @@
 default_platform(:ios)
 
 platform :ios do
-  lane :tests do
-    run_tests(workspace: "Qass.xcworkspace",
-              devices: ["iPhone 6s"],
-              scheme: "Qass-Develop[UT]")
-end
+  lane :test do
+    scan(
+      workspace: "Qass.xcworkspace",
+      devices: ["iPhone 6s"],
+      scheme: "Qass-Develop[UT]",
+      code_coverage: true,
+      output_types: "html",
+      clean: true
+    )
+
+    slather(
+      cobertura_xml: true,
+      output_directory: "./slather/reports",
+      proj: "Qass.xcodeproj",
+      workspace: "Qass.xcworkspace",
+      scheme: "Qass-Develop[UT]"
+    )
+  end
 end
