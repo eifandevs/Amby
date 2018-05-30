@@ -10,6 +10,8 @@
 		1E5E575750E6293FCFC43F4E /* Pods_Qass_Develop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8AC3C84A925C26AE61ACEF /* Pods_Qass_Develop.framework */; };
 		6C9DF6C868BDCF40D4DA265D /* Pods_Qass_Production.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C7D9CDCF1ED1584806D133 /* Pods_Qass_Production.framework */; };
 		A14266C120B5878D006E811A /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A14266C020B5878C006E811A /* env.plist */; };
+		A150625020BE39F000ACCF78 /* EnvDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A150624F20BE39F000ACCF78 /* EnvDataModel.swift */; };
+		A150625120BE39F000ACCF78 /* EnvDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A150624F20BE39F000ACCF78 /* EnvDataModel.swift */; };
 		A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F38209CF976004F1EA5 /* AppDelegate.swift */; };
 		A1903017209CF977004F1EA5 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3B209CF976004F1EA5 /* AppConst.swift */; };
 		A1903018209CF977004F1EA5 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3C209CF976004F1EA5 /* AppEnum.swift */; };
@@ -352,6 +354,7 @@
 		79E42E2E4E116138B394AA57 /* Pods-Qass-DevelopUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8DD8D05F664AB7906F830747 /* Pods-Qass-DevelopUITests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		A14266C020B5878C006E811A /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
+		A150624F20BE39F000ACCF78 /* EnvDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvDataModel.swift; sourceTree = "<group>"; };
 		A168382B2066960B00182028 /* Qass-DevelopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-DevelopTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1902F2E209CF976004F1EA5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
@@ -593,6 +596,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A150624E20BE39E100ACCF78 /* Env */ = {
+			isa = PBXGroup;
+			children = (
+				A150624F20BE39F000ACCF78 /* EnvDataModel.swift */,
+			);
+			path = Env;
+			sourceTree = "<group>";
+		};
 		A1902F2D209CF976004F1EA5 /* Qass-DevelopTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -741,6 +752,7 @@
 		A1902F65209CF976004F1EA5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				A150624E20BE39E100ACCF78 /* Env */,
 				A1902F66209CF976004F1EA5 /* Article */,
 				A1902F68209CF976004F1EA5 /* Auth */,
 				A1902F6A209CF976004F1EA5 /* CommonHistory */,
@@ -2011,6 +2023,7 @@
 				A1B5F415209D0C8700DF1AE3 /* UIButton+Extend.swift in Sources */,
 				A1B5F416209D0C8700DF1AE3 /* Google.swift in Sources */,
 				A1B5F417209D0C8700DF1AE3 /* OptionMenuView.swift in Sources */,
+				A150625120BE39F000ACCF78 /* EnvDataModel.swift in Sources */,
 				A1B5F418209D0C8700DF1AE3 /* PageHistory.swift in Sources */,
 				A1B5F419209D0C8700DF1AE3 /* Double+Extend.swift in Sources */,
 				A1B5F41A209D0C8700DF1AE3 /* PageHistoryDataModel.swift in Sources */,
@@ -2139,6 +2152,7 @@
 				A1903034209CF977004F1EA5 /* UIButton+Extend.swift in Sources */,
 				A190304B209CF978004F1EA5 /* Google.swift in Sources */,
 				A1903052209CF978004F1EA5 /* OptionMenuView.swift in Sources */,
+				A150625020BE39F000ACCF78 /* EnvDataModel.swift in Sources */,
 				A1903021209CF977004F1EA5 /* PageHistory.swift in Sources */,
 				A190302E209CF977004F1EA5 /* Double+Extend.swift in Sources */,
 				A1903042209CF977004F1EA5 /* PageHistoryDataModel.swift in Sources */,

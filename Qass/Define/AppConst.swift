@@ -42,9 +42,9 @@ final class AppConst {
 
     // MARK: - キー情報
 
-    static var KEY_REALM_TOKEN = "com.eifaniori.qass-realm-token"
-    static var KEY_ENCRYPT_SERVICE_TOKEN = "com.eifaniori.qass-encrypt-service-token"
-    static var KEY_ENCRYPT_IV_TOKEN = "com.eifaniori.qass-encrypt-Iv-token"
+    static let KEY_REALM_TOKEN = EnvDataModel.s.getEnv(key: "KEY_REALM_TOKEN") ?? ""
+    static let KEY_ENCRYPT_SERVICE_TOKEN = EnvDataModel.s.getEnv(key: "KEY_ENCRYPT_SERVICE_TOKEN") ?? ""
+    static let KEY_ENCRYPT_IV_TOKEN = EnvDataModel.s.getEnv(key: "KEY_ENCRYPT_IV_TOKEN") ?? ""
     static let KEY_CURRENT_CONTEXT = "currentContext"
     static let KEY_AUTO_SCROLL_INTERVAL = "autoScrollInterval"
     static let KEY_COMMON_HISTORY_SAVE_COUNT = "historySaveCount"

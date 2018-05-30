@@ -134,14 +134,14 @@ class EGWebView: WKWebView {
     }
 
     func loadHtml(code: NETWORK_ERROR) {
-        let path: String = { () -> String in
-            if code == NETWORK_ERROR.TIMEOUT { return Bundle.main.path(forResource: "timeout", ofType: "html")! }
-            if code == NETWORK_ERROR.DNS_NOT_FOUND { return Bundle.main.path(forResource: "dns", ofType: "html")! }
-            if code == NETWORK_ERROR.OFFLINE { return Bundle.main.path(forResource: "offline", ofType: "html")! }
-            if code == NETWORK_ERROR.UNAUTHORIZED { return Bundle.main.path(forResource: "authorize", ofType: "html")! }
-            return Bundle.main.path(forResource: "invalid", ofType: "html")!
+        let url: URL = { () -> URL in
+            if code == NETWORK_ERROR.TIMEOUT { return R.file.timeoutHtml()! }
+            if code == NETWORK_ERROR.DNS_NOT_FOUND { return R.file.dnsHtml()! }
+            if code == NETWORK_ERROR.OFFLINE { return R.file.offlineHtml()! }
+            if code == NETWORK_ERROR.UNAUTHORIZED { return R.file.authorizeHtml()! }
+            return R.file.invalidHtml()!
         }()
-        loadFileURL(URL(fileURLWithPath: path), allowingReadAccessTo: URL(fileURLWithPath: path))
+        loadFileURL(url, allowingReadAccessTo: url)
     }
 
     func loadHtml(error: NSError) {

@@ -34,21 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             log.info("DEVELOP TARGET")
         #else
             log.info("PRODUCTION TARGET")
-            // プロダクション用環境設定取得
-            let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
-            let plist = NSDictionary(contentsOfFile: domainPath!)!
-
-            // エンドポイント初期化
-            HttpConst.SUGGEST_SERVER_DOMAIN = plist["SUGGEST_SERVER_DOMAIN"] as! String
-            HttpConst.SUGGEST_SERVER_PATH = plist["SUGGEST_SERVER_PATH"] as! String
-
-            // ホームURL初期化
-            HttpConst.HOME_URL = plist["HOME_URL"] as! String
-
-            // 暗号キー初期化
-            AppConst.KEY_REALM_TOKEN = plist["KEY_REALM_TOKEN"] as! String
-            AppConst.KEY_ENCRYPT_SERVICE_TOKEN = plist["KEY_ENCRYPT_SERVICE_TOKEN"] as! String
-            AppConst.KEY_ENCRYPT_IV_TOKEN = plist["KEY_ENCRYPT_IV_TOKEN"] as! String
         #endif
 
         #if DEBUG
@@ -76,8 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = baseViewController!
         window!.backgroundColor = UIColor.white
         window!.makeKeyAndVisible()
-
-        ArticleDataModel.s.fetch()
 
         return true
     }

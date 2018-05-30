@@ -10,15 +10,15 @@ import Foundation
 
 final class HttpConst {
     // オートコンプリートAPI
-    static var SUGGEST_SERVER_DOMAIN = "https://"
-    static var SUGGEST_SERVER_PATH = ""
+    static let SUGGEST_SERVER_DOMAIN = EnvDataModel.s.getEnv(key: "SUGGEST_SERVER_DOMAIN") ?? "https://"
+    static let SUGGEST_SERVER_PATH = EnvDataModel.s.getEnv(key: "SUGGEST_SERVER_PATH") ?? ""
 
     // アプリAPI
-    static var APP_SERVER_DOMAIN = "https://"
-    static var APP_SERVER_PATH = ""
+    static let APP_SERVER_DOMAIN = EnvDataModel.s.getEnv(key: "APP_SERVER_DOMAIN") ?? "https://"
+    static let APP_SERVER_PATH = EnvDataModel.s.getEnv(key: "APP_SERVER_PATH") ?? ""
 
     // ニュースホーム
-    static var HOME_URL = "https://google.com"
+    static let HOME_URL = EnvDataModel.s.getEnv(key: "HOME_URL") ?? "https://"
 
     // Appステータスコード
     enum APP_STATUS_CODE: String {
