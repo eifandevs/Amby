@@ -13,7 +13,7 @@ extension String {
     /// ランダム文字列作成
     static func getRandomStringWithLength(length: Int) -> String {
         let alphabet = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        let upperBound = UInt32(alphabet.characters.count)
+        let upperBound = UInt32(alphabet.count)
 
         return String((0 ..< length).map { _ -> Character in
             alphabet[alphabet.index(alphabet.startIndex, offsetBy: Int(arc4random_uniform(upperBound)))]
