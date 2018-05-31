@@ -558,7 +558,7 @@ class BaseView: UIView {
                                                     let input = Input()
                                                     webView.evaluate(script: "document.forms[\(i)].elements[\(j)].value") { object, _ in
                                                         let value = object as! String
-                                                        if value.characters.count > 0 {
+                                                        if value.count > 0 {
                                                             input.type = type!
                                                             input.formIndex = i
                                                             input.formInputIndex = j
