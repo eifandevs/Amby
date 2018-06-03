@@ -6,6 +6,11 @@ excluded:
 - Podfile
 - Podfile.lock
 - R.generated.swift
+- fastlane
+- slather
+- vendor
+- Gemfile
+- Gemfile.lock
 
 disabled_rules:
 - trailing_whitespace
