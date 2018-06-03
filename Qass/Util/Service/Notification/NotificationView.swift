@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-/// 通知ビュークラス
+/// CustomeToastNotification Class
 class NotificationView: UIButton {
     var overlay = UIButton()
 
