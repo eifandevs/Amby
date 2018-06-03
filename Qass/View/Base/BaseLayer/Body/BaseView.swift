@@ -60,7 +60,7 @@ class BaseView: UIView {
                     if let beginEditingWorkItem = self.beginEditingWorkItem {
                         beginEditingWorkItem.cancel()
                     }
-                    beginEditingWorkItem = DispatchWorkItem() { [weak self] in
+                    beginEditingWorkItem = DispatchWorkItem { [weak self] in
                         guard let `self` = self else { return }
                         self.viewModel.beginEditingHeaderViewDataModel()
                         self.beginEditingWorkItem = nil
@@ -183,7 +183,7 @@ class BaseView: UIView {
                         if let beginEditingWorkItem = self.beginEditingWorkItem {
                             beginEditingWorkItem.cancel()
                         }
-                        self.beginEditingWorkItem = DispatchWorkItem() { [weak self] in
+                        self.beginEditingWorkItem = DispatchWorkItem { [weak self] in
                             guard let `self` = self else { return }
                             self.viewModel.beginEditingHeaderViewDataModel()
                             self.beginEditingWorkItem = nil
@@ -239,7 +239,7 @@ class BaseView: UIView {
                     if let beginEditingWorkItem = self.beginEditingWorkItem {
                         beginEditingWorkItem.cancel()
                     }
-                    self.beginEditingWorkItem = DispatchWorkItem() { [weak self] in
+                    self.beginEditingWorkItem = DispatchWorkItem { [weak self] in
                         guard let `self` = self else { return }
                         self.viewModel.beginEditingHeaderViewDataModel()
                         self.beginEditingWorkItem = nil
