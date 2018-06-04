@@ -3,7 +3,6 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
-  - CryptoSwift (0.8.0)
   - KeychainAccess (3.1.0)
   - Kingfisher (4.6.3)
   - Moya/Core (11.0.1):
@@ -38,7 +37,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
-  - CryptoSwift (~> 0.8)
   - KeychainAccess (~> 3.1)
   - Kingfisher
   - Moya/RxSwift (~> 11.0)
@@ -67,7 +65,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
   Kingfisher: 98e6d5b5e807645743e8ed5ececd25d688d38452
   Moya: 3d594ada51a21cc02b18739ab578a1984f900c8a
@@ -86,6 +83,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: e10b1668e0512229c36c34769b97eed3dfae2ca3
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: 8f5b4eb36b95c7293892ed439c4c0a1cb0ec683f
+PODFILE CHECKSUM: 2eae9d3e22c9e3c12cbd2660cf291299b440173e
 
 COCOAPODS: 1.4.0

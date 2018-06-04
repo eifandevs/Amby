@@ -20,12 +20,16 @@ DerivedData
 # Pods/*
 # Podfile.lock
 
+# Carthage
+Carthage/Checkouts
+!Carthage/Build
+
 # others
 *.swp
 !.gitkeep
 .DS_Store
 
-# production env
+# env
 env.plist
 
 # r.swift

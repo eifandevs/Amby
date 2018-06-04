@@ -11,6 +11,7 @@ excluded:
 - vendor
 - Gemfile
 - Gemfile.lock
+- Carthage
 
 disabled_rules:
 - trailing_whitespace
