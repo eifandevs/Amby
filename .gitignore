@@ -44,4 +44,4 @@ fastlane/screenshots
 fastlane/test_output
 
 # slather
-slather/reports
+# slather/reports
