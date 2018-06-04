@@ -12,6 +12,8 @@
 		A14266C120B5878D006E811A /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A14266C020B5878C006E811A /* env.plist */; };
 		A150625020BE39F000ACCF78 /* EnvDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A150624F20BE39F000ACCF78 /* EnvDataModel.swift */; };
 		A150625120BE39F000ACCF78 /* EnvDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A150624F20BE39F000ACCF78 /* EnvDataModel.swift */; };
+		A152086020C5543B00201B30 /* env-sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = A152085F20C5543B00201B30 /* env-sample.plist */; };
+		A152086120C5543B00201B30 /* env-sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = A152085F20C5543B00201B30 /* env-sample.plist */; };
 		A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F38209CF976004F1EA5 /* AppDelegate.swift */; };
 		A1903017209CF977004F1EA5 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3B209CF976004F1EA5 /* AppConst.swift */; };
 		A1903018209CF977004F1EA5 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3C209CF976004F1EA5 /* AppEnum.swift */; };
@@ -355,6 +357,7 @@
 		8DD8D05F664AB7906F830747 /* Pods-Qass-DevelopUITests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		A14266C020B5878C006E811A /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
 		A150624F20BE39F000ACCF78 /* EnvDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvDataModel.swift; sourceTree = "<group>"; };
+		A152085F20C5543B00201B30 /* env-sample.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "env-sample.plist"; sourceTree = "<group>"; };
 		A168382B2066960B00182028 /* Qass-DevelopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-DevelopTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1902F2E209CF976004F1EA5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
@@ -935,6 +938,7 @@
 		A1902F92209CF976004F1EA5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A152085F20C5543B00201B30 /* env-sample.plist */,
 				A14266C020B5878C006E811A /* env.plist */,
 				A1902F93209CF976004F1EA5 /* Assets.xcassets */,
 				A1902F95209CF976004F1EA5 /* stub */,
@@ -1466,6 +1470,7 @@
 			files = (
 				A1B5F421209D0C8700DF1AE3 /* OptionMenuAppTableView.xib in Resources */,
 				A1B5F422209D0C8700DF1AE3 /* OptionMenuFormTableViewCell.xib in Resources */,
+				A152086120C5543B00201B30 /* env-sample.plist in Resources */,
 				A1B5F423209D0C8700DF1AE3 /* OptionMenuTableViewCell.xib in Resources */,
 				A1B5F425209D0C8700DF1AE3 /* OptionMenuHelpTableView.xib in Resources */,
 				A1B5F426209D0C8700DF1AE3 /* Assets.xcassets in Resources */,
@@ -1502,6 +1507,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A152086020C5543B00201B30 /* env-sample.plist in Resources */,
 				A1903096209CF978004F1EA5 /* OptionMenuAppTableView.xib in Resources */,
 				A1903090209CF978004F1EA5 /* OptionMenuFormTableViewCell.xib in Resources */,
 				A1903095209CF978004F1EA5 /* OptionMenuTableViewCell.xib in Resources */,
