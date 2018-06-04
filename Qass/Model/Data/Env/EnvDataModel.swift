@@ -22,12 +22,8 @@ final class EnvDataModel {
     static let s = EnvDataModel()
     
     func getEnv(key: String) -> String? {
-        #if PRODUCTION
-            let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
-            let plist = NSDictionary(contentsOfFile: domainPath!)
-            return plist?[key] as? String
-        #else
-            return nil
-        #endif
+        let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
+        let plist = NSDictionary(contentsOfFile: domainPath!)
+        return plist?[key] as? String
     }
 }
