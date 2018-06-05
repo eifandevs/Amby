@@ -209,9 +209,17 @@ class BaseView: UIView {
                 if !self.isDoneAutoFill {
                     if let inputForm = FormDataModel.s.select(url: self.front.url?.absoluteString).first {
                         NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_TITLE, message: MessageConst.ALERT_FORM_EXIST, completion: { [weak self] in
+                            guard let `self` = self else { return }
                             inputForm.inputs.forEach {
-                                let value = self?.viewModel.decrypt(value: $0.value)
-                                self!.front.evaluateJavaScript("document.forms[\($0.formIndex)].elements[\($0.formInputIndex)].value=\"\(value)\"") { _, _ in
+                                let value = self.viewModel.decrypt(value: $0.value)
+                                let input = $0
+                                // set form
+                                DispatchQueue.mainSyncSafe {
+                                    self.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value='\(value)'") { (_: Any?, error: Error?) in
+                                        if error != nil {
+                                            log.error("set form error: \(error!)")
+                                        }
+                                    }
                                 }
                             }
                         })

@@ -335,7 +335,10 @@ final class BaseViewModel {
 
     /// 複合化
     func decrypt(value: Data) -> String {
-        return EncryptHelper.decrypt(serviceToken: AuthTokenDataModel.s.keychainServiceToken, ivToken: AuthTokenDataModel.s.keychainIvToken, data: value) ?? ""
+        if let value = EncryptHelper.decrypt(serviceToken: AuthTokenDataModel.s.keychainServiceToken, ivToken: AuthTokenDataModel.s.keychainIvToken, data: value) {
+            return value
+        }
+        return ""
     }
 
     // MARK: Private Method
