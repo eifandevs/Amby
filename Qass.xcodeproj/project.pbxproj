@@ -708,6 +708,7 @@
 		A1902F4A209CF976004F1EA5 /* Develop */ = {
 			isa = PBXGroup;
 			children = (
+				A152085F20C5543B00201B30 /* env-dev.plist */,
 				A1902F4B209CF976004F1EA5 /* Info.plist */,
 			);
 			path = Develop;
@@ -716,6 +717,7 @@
 		A1902F4C209CF976004F1EA5 /* Production */ = {
 			isa = PBXGroup;
 			children = (
+				A14266C020B5878C006E811A /* env.plist */,
 				A1902F4D209CF976004F1EA5 /* info.plist */,
 			);
 			path = Production;
@@ -944,8 +946,6 @@
 		A1902F92209CF976004F1EA5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A152085F20C5543B00201B30 /* env-dev.plist */,
-				A14266C020B5878C006E811A /* env.plist */,
 				A1902F93209CF976004F1EA5 /* Assets.xcassets */,
 				A1902F95209CF976004F1EA5 /* stub */,
 				A1902F98209CF976004F1EA5 /* www */,
