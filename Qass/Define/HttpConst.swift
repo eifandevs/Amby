@@ -18,7 +18,7 @@ final class HttpConst {
     static let APP_SERVER_PATH = EnvDataModel.s.getEnv(key: "APP_SERVER_PATH")
 
     // ニュースホーム
-    static let HOME_URL = EnvDataModel.s.getEnv(key: "HOME_URL") ?? "https://"
+    static let HOME_URL = EnvDataModel.s.getEnv(key: "HOME_URL")
 
     // Appステータスコード
     enum APP_STATUS_CODE: String {
