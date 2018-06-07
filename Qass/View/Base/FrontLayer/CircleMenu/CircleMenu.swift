@@ -213,11 +213,11 @@ class CircleMenu: UIButton, ShadowView, CircleView {
         if initialPt != nil {
             UIView.animate(withDuration: 0.15, animations: {
                 self.center = self.initialPt!
-            }) { finished in
+            }, completion: { finished in
                 if finished {
                     self.closeCircleMenuItems()
                 }
-            }
+            })
         } else {
             // エッジスワイプしたが、すぐに離したためMOVEまでイベントがいかないパターン
             log.debug("edge swipe cancelled.")
