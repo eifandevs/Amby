@@ -19,7 +19,6 @@ def common_pods
   pod 'VerticalAlignmentLabel', '~> 0.1'
   pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
   pod 'Moya/RxSwift', '~> 11.0'
-  pod 'Kingfisher'
 end
 
 target 'Qass-Develop' do
