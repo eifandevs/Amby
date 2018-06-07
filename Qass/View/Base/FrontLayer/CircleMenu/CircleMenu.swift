@@ -167,7 +167,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                     if menuItem.scheduledAction {
                         menuItem.transform = CGAffineTransform(scaleX: 2, y: 2)
                         menuItem.setImage(image: menuItem.imageView?.image, color: UIColor.white)
-                        menuItem.backgroundColor = UIColor.brilliantBlue
+                        menuItem.backgroundColor = UIColor.ultraOrange
                     } else {
                         menuItem.center = self.initialPt!
                         menuItem.alpha = 0
@@ -272,7 +272,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                     item.scheduledAction = true
                     item.isValid = true
                     item.setImage(image: item.imageView?.image, color: UIColor.white)
-                    item.backgroundColor = UIColor.brilliantBlue
+                    item.backgroundColor = UIColor.ultraOrange
                     UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseIn, animations: {
                         item.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
                     }, completion: nil)
@@ -287,7 +287,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                         for v in circleMenuItems where v.isValid {
                             v.scheduledAction = true
                             v.setImage(image: v.imageView?.image, color: UIColor.white)
-                            v.backgroundColor = UIColor.brilliantBlue
+                            v.backgroundColor = UIColor.ultraOrange
                         }
                     }
                     item.scheduledAction = false

@@ -27,7 +27,7 @@ class Thumbnail: UIButton {
         super.init(frame: frame)
         // フロントバーを配置
         frontBar.frame = CGRect(origin: CGPoint(x: 0, y: frame.size.height - 4), size: CGSize(width: frame.size.width, height: 4))
-        frontBar.backgroundColor = UIColor.brilliantBlue
+        frontBar.backgroundColor = UIColor.ultraOrange
         frontBar.alpha = 0
         addSubview(frontBar)
 
@@ -46,7 +46,7 @@ class Thumbnail: UIButton {
 //        if isPrivateMode {
 //            let privateIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width / 4.5, height: frame.size.height / 2))
 //            privateIcon.contentMode = .scaleAspectFit
-//            privateIcon.setImage(image: R.image.footer_private(), color: UIColor.brilliantBlue)
+//            privateIcon.setImage(image: R.image.footer_private(), color: UIColor.ultraOrange)
 //            addSubview(privateIcon)
 //        }
 //    }
@@ -71,7 +71,7 @@ class Thumbnail: UIButton {
         // アンダーライン初期化
         // ライン初期化
         underLine.frame = CGRect(x: -5, y: (frame.size.width / 3) - 1, width: width + 18, height: 1)
-        underLine.backgroundColor = UIColor.brilliantBlue
+        underLine.backgroundColor = UIColor.ultraOrange
         thumbnailInfo.addSubview(underLine)
 
         // 回転

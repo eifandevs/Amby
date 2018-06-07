@@ -1,8 +1,5 @@
 PODS:
   - Alamofire (4.5.1)
-  - ChameleonFramework/Default (2.1.0)
-  - ChameleonFramework/Swift (2.1.0):
-    - ChameleonFramework/Default
   - KeychainAccess (3.1.0)
   - Moya/Core (11.0.1):
     - Alamofire (~> 4.1)
@@ -35,7 +32,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
-  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - KeychainAccess (~> 3.1)
   - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
@@ -51,18 +47,8 @@ DEPENDENCIES:
   - SwiftyBeaver (~> 1.1)
   - VerticalAlignmentLabel (~> 0.1)
 
-EXTERNAL SOURCES:
-  ChameleonFramework:
-    :git: https://github.com/ViccAlexander/Chameleon.git
-
-CHECKOUT OPTIONS:
-  ChameleonFramework:
-    :commit: 6dd284bde21ea2e7f9fd89bc36f40df16e16369d
-    :git: https://github.com/ViccAlexander/Chameleon.git
-
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
   Moya: 3d594ada51a21cc02b18739ab578a1984f900c8a
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
@@ -80,6 +66,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: e10b1668e0512229c36c34769b97eed3dfae2ca3
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: 446b803d72556a7583c23df474a73033ce9d11db
+PODFILE CHECKSUM: 3951ecaed6a00aebc78d4c1cf9c703aae372eea2
 
 COCOAPODS: 1.4.0

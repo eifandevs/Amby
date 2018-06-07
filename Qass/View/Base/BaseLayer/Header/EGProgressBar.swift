@@ -16,8 +16,8 @@ class EGProgressBar: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.lightBlue
-        bar.backgroundColor = UIColor.frenchBlue
+        backgroundColor = UIColor.lightUltraViolet
+        bar.backgroundColor = UIColor.ultraViolet
         alpha = 0
 
         addSubview(bar)

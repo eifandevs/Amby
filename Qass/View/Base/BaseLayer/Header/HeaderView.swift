@@ -67,7 +67,7 @@ class HeaderView: UIView, ShadowView {
 
         super.init(frame: frame)
         addShadow()
-        backgroundColor = UIColor.pastelLightGray
+        backgroundColor = UIColor.lightGray
 
         // ヘッダーアイテム
         let addButton = { (button: UIButton, image: UIImage) -> Void in
@@ -174,7 +174,7 @@ class HeaderView: UIView, ShadowView {
                 if let enable = object.element {
                     if enable {
                         // すでに登録済みの場合は、お気に入りボタンの色を変更する
-                        self.favoriteButton.setImage(image: R.image.headerFavoriteSelected(), color: UIColor.brilliantBlue)
+                        self.favoriteButton.setImage(image: R.image.headerFavoriteSelected(), color: UIColor.ultraOrange)
                     } else {
                         self.favoriteButton.setImage(image: R.image.headerFavorite(), color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
                     }

@@ -17,7 +17,6 @@ def common_pods
   pod 'SwiftFormat/CLI', '~> 0.33'
   pod 'KeychainAccess', '~> 3.1'
   pod 'VerticalAlignmentLabel', '~> 0.1'
-  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
   pod 'Moya/RxSwift', '~> 11.0'
 end
 

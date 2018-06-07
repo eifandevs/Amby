@@ -63,7 +63,7 @@ class CircleProgress: UIView {
         let circlePath = UIBezierPath(arcCenter: centerPoint, radius: circleRadius, startAngle: CGFloat(-0.5 * .pi), endAngle: CGFloat(1.5 * .pi), clockwise: true)
         progress = CAShapeLayer()
         progress.path = circlePath.cgPath
-        progress.strokeColor = UIColor.dandilionSeeds.cgColor
+        progress.strokeColor = UIColor.pasteLightGray.cgColor
         progress.fillColor = UIColor.clear.cgColor
         progress.lineWidth = 2.5
         progress.strokeStart = 0

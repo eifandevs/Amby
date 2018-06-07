@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
 
         // プログレス初期設定
-        SVProgressHUD.setForegroundColor(UIColor.brilliantBlue)
+        SVProgressHUD.setForegroundColor(UIColor.ultraOrange)
 
         // 設定データセットアップ
         SettingDataModel.s.setup()
