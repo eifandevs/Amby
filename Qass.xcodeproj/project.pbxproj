@@ -332,6 +332,8 @@
 		A1ED0C0520CC097B00DFC55B /* UserDefaultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C0320CC097B00DFC55B /* UserDefaultRepository.swift */; };
 		A1ED0C0C20CC21F100DFC55B /* ResourceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C0B20CC21F100DFC55B /* ResourceRepository.swift */; };
 		A1ED0C0D20CC21F100DFC55B /* ResourceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C0B20CC21F100DFC55B /* ResourceRepository.swift */; };
+		A1ED0C1020CC288600DFC55B /* HtmlDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C0F20CC288600DFC55B /* HtmlDataModel.swift */; };
+		A1ED0C1120CC288600DFC55B /* HtmlDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C0F20CC288600DFC55B /* HtmlDataModel.swift */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		D736BE5FF823758B8C789E24 /* Pods_Qass_DevelopTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B413E23BA3E71FBD1B8F8C0 /* Pods_Qass_DevelopTests.framework */; };
 		DE4C57BC3F52EBBFED9237FB /* Pods_Qass_DevelopUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBD3443FFA620E93997B544 /* Pods_Qass_DevelopUITests.framework */; };
@@ -537,6 +539,7 @@
 		A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		A1ED0C0320CC097B00DFC55B /* UserDefaultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultRepository.swift; sourceTree = "<group>"; };
 		A1ED0C0B20CC21F100DFC55B /* ResourceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceRepository.swift; sourceTree = "<group>"; };
+		A1ED0C0F20CC288600DFC55B /* HtmlDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlDataModel.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass-Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qass-Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		CC8AC3C84A925C26AE61ACEF /* Pods_Qass_Develop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qass_Develop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -773,6 +776,7 @@
 		A1902F64209CF976004F1EA5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A1ED0C0E20CC280B00DFC55B /* Html */,
 				A150624E20BE39E100ACCF78 /* Env */,
 				A1902F66209CF976004F1EA5 /* Article */,
 				A1902F68209CF976004F1EA5 /* Auth */,
@@ -1312,6 +1316,14 @@
 				A1ED0C0B20CC21F100DFC55B /* ResourceRepository.swift */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		A1ED0C0E20CC280B00DFC55B /* Html */ = {
+			isa = PBXGroup;
+			children = (
+				A1ED0C0F20CC288600DFC55B /* HtmlDataModel.swift */,
+			);
+			path = Html;
 			sourceTree = "<group>";
 		};
 		A57EFE981E3E06D300B66701 = {
@@ -1986,6 +1998,7 @@
 				A1B5F3B5209D0C8700DF1AE3 /* BaseView.swift in Sources */,
 				A1B5F3B6209D0C8700DF1AE3 /* Date+Extend.swift in Sources */,
 				A1B5F3B7209D0C8700DF1AE3 /* SuggestDataModel.swift in Sources */,
+				A1ED0C1120CC288600DFC55B /* HtmlDataModel.swift in Sources */,
 				A1B5F3B8209D0C8700DF1AE3 /* PaddingLabel.swift in Sources */,
 				A1B5F3B9209D0C8700DF1AE3 /* ThumbnailDataModel.swift in Sources */,
 				A1B5F3BA209D0C8700DF1AE3 /* Optional+Extend.swift in Sources */,
@@ -2117,6 +2130,7 @@
 				A1903065209CF978004F1EA5 /* BaseView.swift in Sources */,
 				A190302B209CF977004F1EA5 /* Date+Extend.swift in Sources */,
 				A1903045209CF977004F1EA5 /* SuggestDataModel.swift in Sources */,
+				A1ED0C1020CC288600DFC55B /* HtmlDataModel.swift in Sources */,
 				A1903087209CF978004F1EA5 /* PaddingLabel.swift in Sources */,
 				A1903046209CF977004F1EA5 /* ThumbnailDataModel.swift in Sources */,
 				A1903032209CF977004F1EA5 /* Optional+Extend.swift in Sources */,
