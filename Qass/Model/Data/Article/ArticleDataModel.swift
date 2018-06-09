@@ -23,7 +23,7 @@ final class ArticleDataModel {
 
     /// 記事取得
     func fetch() {
-        /// 記事の取得が必要かをチェック
+        /// TODO: 記事の取得が必要かをチェック
         if articles.count == 0 {
             let provider = ApiProvider<App>()
 

@@ -134,7 +134,9 @@ class SearchMenuTableView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// モデルデータ取得
     func getModelData() {
+        viewModel.getArticle()
     }
 
     // MARK: Touch Event

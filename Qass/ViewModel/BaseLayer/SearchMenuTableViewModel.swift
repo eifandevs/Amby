@@ -103,18 +103,18 @@ final class SearchMenuTableViewModel {
 
                 guard let `self` = self else { return }
                 if let articles = element.element, articles.count > 0 {
-                    // suggestあり
+                    // exist article
                     self.newsItem = articles
                 } else {
                     self.newsItem = []
                 }
 
+                // 画面更新
+                self.rx_searchMenuViewWillUpdateLayout.onNext(())
+                
                 log.eventOut(chain: "rx_articleDataModelDidUpdate")
             }
             .disposed(by: disposeBag)
-
-        // 記事取得
-        ArticleDataModel.s.fetch()
     }
 
     deinit {
@@ -123,6 +123,12 @@ final class SearchMenuTableViewModel {
         NotificationCenter.default.removeObserver(self)
     }
 
+    /// 記事取得
+    public func getArticle() {
+        // 記事取得
+        ArticleDataModel.s.fetch()
+    }
+    
     /// 検索開始
     private func requestSearch() {
         if !isRequesting {

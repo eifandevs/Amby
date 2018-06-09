@@ -147,6 +147,7 @@ class BaseLayer: UIView {
                     .disposed(by: self.rx.disposeBag)
 
                 self.addSubview(self.searchMenuTableView!)
+                self.searchMenuTableView!.getModelData()
                 log.eventOut(chain: "rx_headerViewDidBeginEditing")
             }
             .disposed(by: rx.disposeBag)
