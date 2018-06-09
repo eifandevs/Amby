@@ -1,5 +1,5 @@
 //
-//  KeychainProvider.swift
+//  KeychainRepository.swift
 //  Qas
 //
 //  Created by temma on 2017/09/28.
@@ -9,7 +9,7 @@
 import Foundation
 import KeychainAccess
 
-final class KeychainProvider {
+final class KeychainRepository {
     init() {
     }
 

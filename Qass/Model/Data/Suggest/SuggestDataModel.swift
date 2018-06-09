@@ -20,7 +20,7 @@ final class SuggestDataModel {
     private let disposeBag = DisposeBag()
 
     func fetch(token: String) {
-        let provider = ApiProvider<Google>()
+        let provider = ApiRepository<Google>()
 
         provider.rx.request(.suggest(token: token))
             .observeOn(MainScheduler.asyncInstance)

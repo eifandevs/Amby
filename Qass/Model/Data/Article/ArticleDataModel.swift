@@ -25,9 +25,9 @@ final class ArticleDataModel {
     func fetch() {
         /// TODO: 前回の取得から3時間経過していたら取得する
         if articles.count == 0 {
-            let provider = ApiProvider<App>()
+            let repository = ApiRepository<App>()
 
-            provider.rx.request(.article)
+            repository.rx.request(.article)
                 .observeOn(MainScheduler.asyncInstance)
                 .map { (response) -> ArticleResponse in
 

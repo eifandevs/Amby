@@ -1,5 +1,5 @@
 //
-//  ApiProvider.swift
+//  ApiRepository.swift
 //  Qas
 //
 //  Created by tenma on 2018/03/21.
@@ -10,9 +10,9 @@ import Alamofire
 import Foundation
 import Moya
 
-final class ApiProvider<T: TargetType>: MoyaProvider<T> {
-    public init(endpointClosure: @escaping EndpointClosure = ApiProvider.defaultEndpointMapping,
-                requestClosure: @escaping RequestClosure = ApiProvider.defaultRequestMapping,
+final class ApiRepository<T: TargetType>: MoyaProvider<T> {
+    public init(endpointClosure: @escaping EndpointClosure = ApiRepository.defaultEndpointMapping,
+                requestClosure: @escaping RequestClosure = ApiRepository.defaultRequestMapping,
                 callbackQueue: DispatchQueue? = nil,
                 trackInflights: Bool = false) {
         let sessionManager: SessionManager = {
@@ -27,14 +27,14 @@ final class ApiProvider<T: TargetType>: MoyaProvider<T> {
         var plugins = [PluginType]()
         #if DEBUG
             // デバッグ時は通信ログを出す
-            plugins = [NetworkLoggerPlugin(verbose: true, responseDataFormatter: ApiProvider.formatJsonResponseData)]
+            plugins = [NetworkLoggerPlugin(verbose: true, responseDataFormatter: ApiRepository.formatJsonResponseData)]
         #endif
 
         var stubClosure: (Target) -> Moya.StubBehavior
         #if DEVELOP
-            stubClosure = ApiProvider.immediatelyStub
+            stubClosure = ApiRepository.immediatelyStub
         #else
-            stubClosure = ApiProvider.neverStub
+            stubClosure = ApiRepository.neverStub
         #endif
 
         super.init(endpointClosure: endpointClosure,

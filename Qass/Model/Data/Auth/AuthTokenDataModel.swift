@@ -19,26 +19,26 @@ final class AuthTokenDataModel {
     let keychainIvToken: String!
 
     private init() {
-        let keychainProvider = KeychainProvider()
+        let repository = KeychainRepository()
 
-        if let realmEncryptionToken = keychainProvider.get(key: AppConst.KEY_REALM_TOKEN) {
+        if let realmEncryptionToken = repository.get(key: AppConst.KEY_REALM_TOKEN) {
             self.realmEncryptionToken = realmEncryptionToken
         } else {
             realmEncryptionToken = String.getRandomStringWithLength(length: 64)
-            keychainProvider.save(key: AppConst.KEY_REALM_TOKEN, value: realmEncryptionToken)
+            repository.save(key: AppConst.KEY_REALM_TOKEN, value: realmEncryptionToken)
         }
 
-        if let keychainServiceToken = keychainProvider.get(key: AppConst.KEY_ENCRYPT_SERVICE_TOKEN) {
+        if let keychainServiceToken = repository.get(key: AppConst.KEY_ENCRYPT_SERVICE_TOKEN) {
             self.keychainServiceToken = keychainServiceToken
         } else {
             keychainServiceToken = String.getRandomStringWithLength(length: 32)
-            keychainProvider.save(key: AppConst.KEY_ENCRYPT_SERVICE_TOKEN, value: keychainServiceToken)
+            repository.save(key: AppConst.KEY_ENCRYPT_SERVICE_TOKEN, value: keychainServiceToken)
         }
 
-        if let keychainIvToken = keychainProvider.get(key: AppConst.KEY_ENCRYPT_IV_TOKEN) {
+        if let keychainIvToken = repository.get(key: AppConst.KEY_ENCRYPT_IV_TOKEN) {
             self.keychainIvToken = keychainIvToken
         } else {
             keychainIvToken = String.getRandomStringWithLength(length: 16)
-            keychainProvider.save(key: AppConst.KEY_ENCRYPT_IV_TOKEN, value: keychainIvToken)
+            repository.save(key: AppConst.KEY_ENCRYPT_IV_TOKEN, value: keychainIvToken)
     } }
 }

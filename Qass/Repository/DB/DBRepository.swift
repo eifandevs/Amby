@@ -1,5 +1,5 @@
 //
-//  DBProviderwift
+//  DBRepositorywift
 //  one-hand-browsing
 //
 //  Created by user1 on 2016/07/19.
@@ -11,7 +11,7 @@ import Realm
 import RealmSwift
 import UIKit
 
-final class DBProvider {
+final class DBRepository {
     private let realm: Realm!
 
     init() {

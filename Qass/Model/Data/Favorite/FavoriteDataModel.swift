@@ -22,15 +22,15 @@ final class FavoriteDataModel {
     /// 通知センター
     private let center = NotificationCenter.default
     /// DBプロバイダー
-    let dbProvider = DBProvider()
+    let repository = DBRepository()
 
     func insert(favorites: [Favorite]) {
-        dbProvider.insert(data: favorites)
+        repository.insert(data: favorites)
         rx_favoriteDataModelDidInsert.onNext(favorites)
     }
 
     func select(id: String? = nil, url: String? = nil) -> [Favorite] {
-        let favorites = dbProvider.select(type: Favorite.self) as! [Favorite]
+        let favorites = repository.select(type: Favorite.self) as! [Favorite]
         if let id = id {
             return favorites.filter({ $0.id == id })
         } else if let url = url {
@@ -41,10 +41,10 @@ final class FavoriteDataModel {
 
     func delete(favorites: [Favorite]? = nil, notify: Bool = true) {
         if let favorites = favorites {
-            dbProvider.delete(data: favorites)
+            repository.delete(data: favorites)
         } else {
             // 削除対象が指定されていない場合は、すべて削除する
-            dbProvider.delete(data: select())
+            repository.delete(data: select())
         }
 
         // 通知する

@@ -63,15 +63,15 @@
 		A1903044209CF977004F1EA5 /* SettingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F79209CF976004F1EA5 /* SettingDataModel.swift */; };
 		A1903045209CF977004F1EA5 /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F7B209CF976004F1EA5 /* SuggestDataModel.swift */; };
 		A1903046209CF977004F1EA5 /* ThumbnailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F7D209CF976004F1EA5 /* ThumbnailDataModel.swift */; };
-		A1903047209CF977004F1EA5 /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F80209CF976004F1EA5 /* ApiProvider.swift */; };
+		A1903047209CF977004F1EA5 /* ApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F80209CF976004F1EA5 /* ApiRepository.swift */; };
 		A1903048209CF978004F1EA5 /* ArticleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F82209CF976004F1EA5 /* ArticleResponse.swift */; };
 		A1903049209CF978004F1EA5 /* SuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F83209CF976004F1EA5 /* SuggestResponse.swift */; };
 		A190304A209CF978004F1EA5 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F85209CF976004F1EA5 /* App.swift */; };
 		A190304B209CF978004F1EA5 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F86209CF976004F1EA5 /* Google.swift */; };
-		A190304C209CF978004F1EA5 /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F88209CF976004F1EA5 /* DBProvider.swift */; };
+		A190304C209CF978004F1EA5 /* DBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F88209CF976004F1EA5 /* DBRepository.swift */; };
 		A190304D209CF978004F1EA5 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F89209CF976004F1EA5 /* RealmHelper.swift */; };
 		A190304E209CF978004F1EA5 /* EncryptHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F8B209CF976004F1EA5 /* EncryptHelper.swift */; };
-		A190304F209CF978004F1EA5 /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F8C209CF976004F1EA5 /* KeychainProvider.swift */; };
+		A190304F209CF978004F1EA5 /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F8C209CF976004F1EA5 /* KeychainRepository.swift */; };
 		A1903050209CF978004F1EA5 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F8E209CF976004F1EA5 /* CircleView.swift */; };
 		A1903051209CF978004F1EA5 /* EnumEnumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F8F209CF976004F1EA5 /* EnumEnumerable.swift */; };
 		A1903052209CF978004F1EA5 /* OptionMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F90209CF976004F1EA5 /* OptionMenuView.swift */; };
@@ -209,7 +209,7 @@
 		A1B5F3CD209D0C8700DF1AE3 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3C209CF976004F1EA5 /* AppEnum.swift */; };
 		A1B5F3CE209D0C8700DF1AE3 /* OptionMenuSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FCC209CF976004F1EA5 /* OptionMenuSettingTableViewCell.swift */; };
 		A1B5F3CF209D0C8700DF1AE3 /* HeaderFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FFF209CF977004F1EA5 /* HeaderFieldViewModel.swift */; };
-		A1B5F3D0209D0C8700DF1AE3 /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F80209CF976004F1EA5 /* ApiProvider.swift */; };
+		A1B5F3D0209D0C8700DF1AE3 /* ApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F80209CF976004F1EA5 /* ApiRepository.swift */; };
 		A1B5F3D1209D0C8700DF1AE3 /* SettingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F79209CF976004F1EA5 /* SettingDataModel.swift */; };
 		A1B5F3D2209D0C8700DF1AE3 /* CircleMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FC1209CF976004F1EA5 /* CircleMenuItem.swift */; };
 		A1B5F3D3209D0C8700DF1AE3 /* Suggest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F48209CF976004F1EA5 /* Suggest.swift */; };
@@ -227,8 +227,8 @@
 		A1B5F3DF209D0C8700DF1AE3 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FB1209CF976004F1EA5 /* SearchMenuSearchHistoryTableViewCell.swift */; };
 		A1B5F3E0209D0C8700DF1AE3 /* DispatchQueue+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F56209CF976004F1EA5 /* DispatchQueue+Extend.swift */; };
 		A1B5F3E1209D0C8700DF1AE3 /* String+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F5C209CF976004F1EA5 /* String+Extend.swift */; };
-		A1B5F3E2209D0C8700DF1AE3 /* DBProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F88209CF976004F1EA5 /* DBProvider.swift */; };
-		A1B5F3E3209D0C8700DF1AE3 /* KeychainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F8C209CF976004F1EA5 /* KeychainProvider.swift */; };
+		A1B5F3E2209D0C8700DF1AE3 /* DBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F88209CF976004F1EA5 /* DBRepository.swift */; };
+		A1B5F3E3209D0C8700DF1AE3 /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F8C209CF976004F1EA5 /* KeychainRepository.swift */; };
 		A1B5F3E4209D0C8700DF1AE3 /* Collection+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F51209CF976004F1EA5 /* Collection+Extend.swift */; };
 		A1B5F3E5209D0C8700DF1AE3 /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FBA209CF976004F1EA5 /* EGProgressBar.swift */; };
 		A1B5F3E6209D0C8700DF1AE3 /* SuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F83209CF976004F1EA5 /* SuggestResponse.swift */; };
@@ -422,15 +422,15 @@
 		A1902F79209CF976004F1EA5 /* SettingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDataModel.swift; sourceTree = "<group>"; };
 		A1902F7B209CF976004F1EA5 /* SuggestDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestDataModel.swift; sourceTree = "<group>"; };
 		A1902F7D209CF976004F1EA5 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
-		A1902F80209CF976004F1EA5 /* ApiProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
+		A1902F80209CF976004F1EA5 /* ApiRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRepository.swift; sourceTree = "<group>"; };
 		A1902F82209CF976004F1EA5 /* ArticleResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleResponse.swift; sourceTree = "<group>"; };
 		A1902F83209CF976004F1EA5 /* SuggestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestResponse.swift; sourceTree = "<group>"; };
 		A1902F85209CF976004F1EA5 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		A1902F86209CF976004F1EA5 /* Google.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Google.swift; sourceTree = "<group>"; };
-		A1902F88209CF976004F1EA5 /* DBProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBProvider.swift; sourceTree = "<group>"; };
+		A1902F88209CF976004F1EA5 /* DBRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBRepository.swift; sourceTree = "<group>"; };
 		A1902F89209CF976004F1EA5 /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		A1902F8B209CF976004F1EA5 /* EncryptHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptHelper.swift; sourceTree = "<group>"; };
-		A1902F8C209CF976004F1EA5 /* KeychainProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainProvider.swift; sourceTree = "<group>"; };
+		A1902F8C209CF976004F1EA5 /* KeychainRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainRepository.swift; sourceTree = "<group>"; };
 		A1902F8E209CF976004F1EA5 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		A1902F8F209CF976004F1EA5 /* EnumEnumerable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumEnumerable.swift; sourceTree = "<group>"; };
 		A1902F90209CF976004F1EA5 /* OptionMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuView.swift; sourceTree = "<group>"; };
@@ -659,15 +659,16 @@
 			children = (
 				A1902F37209CF976004F1EA5 /* Application */,
 				A1902F3A209CF976004F1EA5 /* Define */,
-				A1902F40209CF976004F1EA5 /* Entity */,
-				A1902F49209CF976004F1EA5 /* Environment */,
 				A1902F4E209CF976004F1EA5 /* Extension */,
-				A1902F64209CF976004F1EA5 /* Model */,
 				A1902F8D209CF976004F1EA5 /* Protocol */,
-				A1902F92209CF976004F1EA5 /* Resources */,
-				A1902F9E209CF976004F1EA5 /* Util */,
 				A1902FA8209CF976004F1EA5 /* View */,
 				A1902FFB209CF977004F1EA5 /* ViewModel */,
+				A1902F64209CF976004F1EA5 /* Model */,
+				A1902F7E209CF976004F1EA5 /* Repository */,
+				A1902F40209CF976004F1EA5 /* Entity */,
+				A1902F9E209CF976004F1EA5 /* Util */,
+				A1902F49209CF976004F1EA5 /* Environment */,
+				A1902F92209CF976004F1EA5 /* Resources */,
 			);
 			path = Qass;
 			sourceTree = "<group>";
@@ -767,7 +768,6 @@
 			isa = PBXGroup;
 			children = (
 				A1902F65209CF976004F1EA5 /* Data */,
-				A1902F7E209CF976004F1EA5 /* DataSource */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -888,20 +888,20 @@
 			path = Thumbnail;
 			sourceTree = "<group>";
 		};
-		A1902F7E209CF976004F1EA5 /* DataSource */ = {
+		A1902F7E209CF976004F1EA5 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
 				A1902F7F209CF976004F1EA5 /* API */,
 				A1902F87209CF976004F1EA5 /* DB */,
 				A1902F8A209CF976004F1EA5 /* Keychain */,
 			);
-			path = DataSource;
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		A1902F7F209CF976004F1EA5 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				A1902F80209CF976004F1EA5 /* ApiProvider.swift */,
+				A1902F80209CF976004F1EA5 /* ApiRepository.swift */,
 				A1902F81209CF976004F1EA5 /* Response */,
 				A1902F84209CF976004F1EA5 /* Target */,
 			);
@@ -929,7 +929,7 @@
 		A1902F87209CF976004F1EA5 /* DB */ = {
 			isa = PBXGroup;
 			children = (
-				A1902F88209CF976004F1EA5 /* DBProvider.swift */,
+				A1902F88209CF976004F1EA5 /* DBRepository.swift */,
 				A1902F89209CF976004F1EA5 /* RealmHelper.swift */,
 			);
 			path = DB;
@@ -939,7 +939,7 @@
 			isa = PBXGroup;
 			children = (
 				A1902F8B209CF976004F1EA5 /* EncryptHelper.swift */,
-				A1902F8C209CF976004F1EA5 /* KeychainProvider.swift */,
+				A1902F8C209CF976004F1EA5 /* KeychainRepository.swift */,
 			);
 			path = Keychain;
 			sourceTree = "<group>";
@@ -1993,7 +1993,7 @@
 				A1B5F3CD209D0C8700DF1AE3 /* AppEnum.swift in Sources */,
 				A1B5F3CE209D0C8700DF1AE3 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A1B5F3CF209D0C8700DF1AE3 /* HeaderFieldViewModel.swift in Sources */,
-				A1B5F3D0209D0C8700DF1AE3 /* ApiProvider.swift in Sources */,
+				A1B5F3D0209D0C8700DF1AE3 /* ApiRepository.swift in Sources */,
 				A1B5F3D1209D0C8700DF1AE3 /* SettingDataModel.swift in Sources */,
 				A1B5F3D2209D0C8700DF1AE3 /* CircleMenuItem.swift in Sources */,
 				A1B5F3D3209D0C8700DF1AE3 /* Suggest.swift in Sources */,
@@ -2011,8 +2011,8 @@
 				A1B5F3DF209D0C8700DF1AE3 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */,
 				A1B5F3E0209D0C8700DF1AE3 /* DispatchQueue+Extend.swift in Sources */,
 				A1B5F3E1209D0C8700DF1AE3 /* String+Extend.swift in Sources */,
-				A1B5F3E2209D0C8700DF1AE3 /* DBProvider.swift in Sources */,
-				A1B5F3E3209D0C8700DF1AE3 /* KeychainProvider.swift in Sources */,
+				A1B5F3E2209D0C8700DF1AE3 /* DBRepository.swift in Sources */,
+				A1B5F3E3209D0C8700DF1AE3 /* KeychainRepository.swift in Sources */,
 				A1B5F3E4209D0C8700DF1AE3 /* Collection+Extend.swift in Sources */,
 				A1B5F3E5209D0C8700DF1AE3 /* EGProgressBar.swift in Sources */,
 				A1B5F3E6209D0C8700DF1AE3 /* SuggestResponse.swift in Sources */,
@@ -2122,7 +2122,7 @@
 				A1903018209CF977004F1EA5 /* AppEnum.swift in Sources */,
 				A190307D209CF978004F1EA5 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A19030A2209CF978004F1EA5 /* HeaderFieldViewModel.swift in Sources */,
-				A1903047209CF977004F1EA5 /* ApiProvider.swift in Sources */,
+				A1903047209CF977004F1EA5 /* ApiRepository.swift in Sources */,
 				A1903044209CF977004F1EA5 /* SettingDataModel.swift in Sources */,
 				A1903074209CF978004F1EA5 /* CircleMenuItem.swift in Sources */,
 				A1903023209CF977004F1EA5 /* Suggest.swift in Sources */,
@@ -2140,8 +2140,8 @@
 				A1903068209CF978004F1EA5 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */,
 				A190302D209CF977004F1EA5 /* DispatchQueue+Extend.swift in Sources */,
 				A1903033209CF977004F1EA5 /* String+Extend.swift in Sources */,
-				A190304C209CF978004F1EA5 /* DBProvider.swift in Sources */,
-				A190304F209CF978004F1EA5 /* KeychainProvider.swift in Sources */,
+				A190304C209CF978004F1EA5 /* DBRepository.swift in Sources */,
+				A190304F209CF978004F1EA5 /* KeychainRepository.swift in Sources */,
 				A1903028209CF977004F1EA5 /* Collection+Extend.swift in Sources */,
 				A190306F209CF978004F1EA5 /* EGProgressBar.swift in Sources */,
 				A1903049209CF978004F1EA5 /* SuggestResponse.swift in Sources */,
