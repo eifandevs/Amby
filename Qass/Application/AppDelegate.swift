@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setForegroundColor(UIColor.ultraOrange)
 
         // 設定データセットアップ
-        SettingDataModel.s.setup()
+        AppDataModel.s.setup()
 
         window = UIWindow(frame: UIScreen.main.bounds)
         baseViewController = BaseViewController()
@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func initialize() {
-        SettingDataModel.s.initialize()
+        AppDataModel.s.initialize()
 
         if let baseViewController = self.window!.rootViewController as? BaseViewController {
             baseViewController.mRelease()

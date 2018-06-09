@@ -21,6 +21,9 @@ final class CommonHistoryDataModel {
     /// ヒストリーフォワード通知用RX
     let rx_commonHistoryDataModelDidGoForward = PublishSubject<()>()
 
+    /// local storage repository
+    private let repository = UserDefaultRepository()
+    
     /// 閲覧履歴
     public private(set) var histories = [CommonHistory]()
 
@@ -160,7 +163,7 @@ final class CommonHistoryDataModel {
     /// 閲覧履歴の件数チェック
     // デフォルトで90日分の履歴を超えたら削除する
     func expireCheck() {
-        let historySaveCount = SettingDataModel.s.commonHistorySaveCount
+        let historySaveCount = repository.commonHistorySaveCount
         let readFiles = getList().reversed()
 
         if readFiles.count > historySaveCount {

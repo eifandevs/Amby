@@ -11,7 +11,7 @@ import Foundation
 final class EnvDataModel {
     static let s = EnvDataModel()
 
-    func getEnv(key: String) -> String {
+    func get(key: String) -> String {
         #if PRODUCTION
             let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
             let plist = NSDictionary(contentsOfFile: domainPath!)

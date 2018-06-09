@@ -12,6 +12,9 @@ final class SearchHistoryDataModel {
     static let s = SearchHistoryDataModel()
     var histories = [SearchHistory]()
 
+    /// local storage repository
+    private let repository = UserDefaultRepository()
+    
     /// 保存済みリスト取得
     func getList() -> [String] {
         let manager = FileManager.default
@@ -112,7 +115,7 @@ final class SearchHistoryDataModel {
 
     /// 閲覧履歴の期限切れ削除
     func expireCheck() {
-        let saveTerm = SettingDataModel.s.searchHistorySaveCount
+        let saveTerm = repository.searchHistorySaveCount
         let readFiles = getList().reversed()
 
         if readFiles.count > saveTerm {

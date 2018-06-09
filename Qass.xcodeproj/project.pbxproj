@@ -60,7 +60,7 @@
 		A1903041209CF977004F1EA5 /* OperationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F73209CF976004F1EA5 /* OperationDataModel.swift */; };
 		A1903042209CF977004F1EA5 /* PageHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F75209CF976004F1EA5 /* PageHistoryDataModel.swift */; };
 		A1903043209CF977004F1EA5 /* SearchHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F77209CF976004F1EA5 /* SearchHistoryDataModel.swift */; };
-		A1903044209CF977004F1EA5 /* SettingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F79209CF976004F1EA5 /* SettingDataModel.swift */; };
+		A1903044209CF977004F1EA5 /* AppDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F79209CF976004F1EA5 /* AppDataModel.swift */; };
 		A1903045209CF977004F1EA5 /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F7B209CF976004F1EA5 /* SuggestDataModel.swift */; };
 		A1903046209CF977004F1EA5 /* ThumbnailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F7D209CF976004F1EA5 /* ThumbnailDataModel.swift */; };
 		A1903047209CF977004F1EA5 /* ApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F80209CF976004F1EA5 /* ApiRepository.swift */; };
@@ -210,7 +210,7 @@
 		A1B5F3CE209D0C8700DF1AE3 /* OptionMenuSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FCC209CF976004F1EA5 /* OptionMenuSettingTableViewCell.swift */; };
 		A1B5F3CF209D0C8700DF1AE3 /* HeaderFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FFF209CF977004F1EA5 /* HeaderFieldViewModel.swift */; };
 		A1B5F3D0209D0C8700DF1AE3 /* ApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F80209CF976004F1EA5 /* ApiRepository.swift */; };
-		A1B5F3D1209D0C8700DF1AE3 /* SettingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F79209CF976004F1EA5 /* SettingDataModel.swift */; };
+		A1B5F3D1209D0C8700DF1AE3 /* AppDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F79209CF976004F1EA5 /* AppDataModel.swift */; };
 		A1B5F3D2209D0C8700DF1AE3 /* CircleMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FC1209CF976004F1EA5 /* CircleMenuItem.swift */; };
 		A1B5F3D3209D0C8700DF1AE3 /* Suggest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F48209CF976004F1EA5 /* Suggest.swift */; };
 		A1B5F3D4209D0C8700DF1AE3 /* CommonHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F42209CF976004F1EA5 /* CommonHistory.swift */; };
@@ -328,6 +328,8 @@
 		A1ED0BFE20C94DFE00DFC55B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */; };
 		A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
 		A1ED0C0120CBCABF00DFC55B /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
+		A1ED0C0420CC097B00DFC55B /* UserDefaultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C0320CC097B00DFC55B /* UserDefaultRepository.swift */; };
+		A1ED0C0520CC097B00DFC55B /* UserDefaultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C0320CC097B00DFC55B /* UserDefaultRepository.swift */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		D736BE5FF823758B8C789E24 /* Pods_Qass_DevelopTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B413E23BA3E71FBD1B8F8C0 /* Pods_Qass_DevelopTests.framework */; };
 		DE4C57BC3F52EBBFED9237FB /* Pods_Qass_DevelopUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBD3443FFA620E93997B544 /* Pods_Qass_DevelopUITests.framework */; };
@@ -419,7 +421,7 @@
 		A1902F73209CF976004F1EA5 /* OperationDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationDataModel.swift; sourceTree = "<group>"; };
 		A1902F75209CF976004F1EA5 /* PageHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModel.swift; sourceTree = "<group>"; };
 		A1902F77209CF976004F1EA5 /* SearchHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModel.swift; sourceTree = "<group>"; };
-		A1902F79209CF976004F1EA5 /* SettingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDataModel.swift; sourceTree = "<group>"; };
+		A1902F79209CF976004F1EA5 /* AppDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataModel.swift; sourceTree = "<group>"; };
 		A1902F7B209CF976004F1EA5 /* SuggestDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestDataModel.swift; sourceTree = "<group>"; };
 		A1902F7D209CF976004F1EA5 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
 		A1902F80209CF976004F1EA5 /* ApiRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRepository.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 		A1B5F448209D0C8700DF1AE3 /* Qass-Production.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qass-Production.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
+		A1ED0C0320CC097B00DFC55B /* UserDefaultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultRepository.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass-Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qass-Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		CC8AC3C84A925C26AE61ACEF /* Pods_Qass_Develop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qass_Develop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -767,14 +770,6 @@
 		A1902F64209CF976004F1EA5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A1902F65209CF976004F1EA5 /* Data */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		A1902F65209CF976004F1EA5 /* Data */ = {
-			isa = PBXGroup;
-			children = (
 				A150624E20BE39E100ACCF78 /* Env */,
 				A1902F66209CF976004F1EA5 /* Article */,
 				A1902F68209CF976004F1EA5 /* Auth */,
@@ -785,11 +780,11 @@
 				A1902F72209CF976004F1EA5 /* Operation */,
 				A1902F74209CF976004F1EA5 /* PageHistory */,
 				A1902F76209CF976004F1EA5 /* SearchHistory */,
-				A1902F78209CF976004F1EA5 /* Setting */,
+				A1902F78209CF976004F1EA5 /* App */,
 				A1902F7A209CF976004F1EA5 /* Suggest */,
 				A1902F7C209CF976004F1EA5 /* Thumbnail */,
 			);
-			path = Data;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A1902F66209CF976004F1EA5 /* Article */ = {
@@ -864,12 +859,12 @@
 			path = SearchHistory;
 			sourceTree = "<group>";
 		};
-		A1902F78209CF976004F1EA5 /* Setting */ = {
+		A1902F78209CF976004F1EA5 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				A1902F79209CF976004F1EA5 /* SettingDataModel.swift */,
+				A1902F79209CF976004F1EA5 /* AppDataModel.swift */,
 			);
-			path = Setting;
+			path = App;
 			sourceTree = "<group>";
 		};
 		A1902F7A209CF976004F1EA5 /* Suggest */ = {
@@ -891,6 +886,7 @@
 		A1902F7E209CF976004F1EA5 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				A1ED0C0220CC093F00DFC55B /* UserDefault */,
 				A1902F7F209CF976004F1EA5 /* API */,
 				A1902F87209CF976004F1EA5 /* DB */,
 				A1902F8A209CF976004F1EA5 /* Keychain */,
@@ -1296,6 +1292,14 @@
 				A190300F209CF977004F1EA5 /* Qass_DevelopUITests.swift */,
 			);
 			path = "Qass-DevelopUITests";
+			sourceTree = "<group>";
+		};
+		A1ED0C0220CC093F00DFC55B /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				A1ED0C0320CC097B00DFC55B /* UserDefaultRepository.swift */,
+			);
+			path = UserDefault;
 			sourceTree = "<group>";
 		};
 		A57EFE981E3E06D300B66701 = {
@@ -1960,6 +1964,7 @@
 				A1B5F3AC209D0C8700DF1AE3 /* BaseViewController.swift in Sources */,
 				A1B5F3AD209D0C8700DF1AE3 /* OptionMenuSettingTableView.swift in Sources */,
 				A1B5F3AE209D0C8700DF1AE3 /* EncryptHelper.swift in Sources */,
+				A1ED0C0520CC097B00DFC55B /* UserDefaultRepository.swift in Sources */,
 				A1B5F3AF209D0C8700DF1AE3 /* UIScrollView+Extend.swift in Sources */,
 				A1B5F3B0209D0C8700DF1AE3 /* NSObject+Extend.swift in Sources */,
 				A1B5F3B1209D0C8700DF1AE3 /* OptionMenuTableViewModel.swift in Sources */,
@@ -1994,7 +1999,7 @@
 				A1B5F3CE209D0C8700DF1AE3 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A1B5F3CF209D0C8700DF1AE3 /* HeaderFieldViewModel.swift in Sources */,
 				A1B5F3D0209D0C8700DF1AE3 /* ApiRepository.swift in Sources */,
-				A1B5F3D1209D0C8700DF1AE3 /* SettingDataModel.swift in Sources */,
+				A1B5F3D1209D0C8700DF1AE3 /* AppDataModel.swift in Sources */,
 				A1B5F3D2209D0C8700DF1AE3 /* CircleMenuItem.swift in Sources */,
 				A1B5F3D3209D0C8700DF1AE3 /* Suggest.swift in Sources */,
 				A1B5F3D4209D0C8700DF1AE3 /* CommonHistory.swift in Sources */,
@@ -2089,6 +2094,7 @@
 				A1903072209CF978004F1EA5 /* BaseViewController.swift in Sources */,
 				A1903084209CF978004F1EA5 /* OptionMenuSettingTableView.swift in Sources */,
 				A190304E209CF978004F1EA5 /* EncryptHelper.swift in Sources */,
+				A1ED0C0420CC097B00DFC55B /* UserDefaultRepository.swift in Sources */,
 				A1903038209CF977004F1EA5 /* UIScrollView+Extend.swift in Sources */,
 				A1903031209CF977004F1EA5 /* NSObject+Extend.swift in Sources */,
 				A19030AD209CF978004F1EA5 /* OptionMenuTableViewModel.swift in Sources */,
@@ -2123,7 +2129,7 @@
 				A190307D209CF978004F1EA5 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A19030A2209CF978004F1EA5 /* HeaderFieldViewModel.swift in Sources */,
 				A1903047209CF977004F1EA5 /* ApiRepository.swift in Sources */,
-				A1903044209CF977004F1EA5 /* SettingDataModel.swift in Sources */,
+				A1903044209CF977004F1EA5 /* AppDataModel.swift in Sources */,
 				A1903074209CF978004F1EA5 /* CircleMenuItem.swift in Sources */,
 				A1903023209CF977004F1EA5 /* Suggest.swift in Sources */,
 				A190301D209CF977004F1EA5 /* CommonHistory.swift in Sources */,

@@ -29,16 +29,16 @@ final class PageHistoryDataModel {
     let rx_pageHistoryDataModelDidEndRendering = PublishSubject<String>()
 
     static let s = PageHistoryDataModel()
-
+    
     /// 通知センター
     private let center = NotificationCenter.default
 
     /// 現在表示しているwebviewのコンテキスト
-    var currentContext = SettingDataModel.s.currentContext {
+    var currentContext = UserDefaultRepository().currentContext {
         didSet {
             log.debug("current context changed. \(oldValue) -> \(currentContext)")
             previousContext = oldValue
-            SettingDataModel.s.currentContext = currentContext
+            UserDefaultRepository().currentContext = currentContext
         }
     }
 
@@ -63,7 +63,7 @@ final class PageHistoryDataModel {
     }
 
     /// ページヒストリー保存件数
-    private let pageHistorySaveCount = SettingDataModel.s.pageHistorySaveCount
+    private let pageHistorySaveCount = UserDefaultRepository().pageHistorySaveCount
 
     private init() {
     }

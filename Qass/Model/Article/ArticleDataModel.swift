@@ -22,7 +22,7 @@ final class ArticleDataModel {
     private let disposeBag = DisposeBag()
 
     /// 記事取得
-    func fetch() {
+    func get() {
         /// TODO: 前回の取得から3時間経過していたら取得する
         if articles.count == 0 {
             let repository = ApiRepository<App>()

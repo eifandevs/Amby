@@ -105,7 +105,7 @@ class CommonHistoryDataModelTests: XCTestCase {
         let calendar = Calendar.current
         let date = Date()
         
-        let historySaveCount = SettingDataModel.s.commonHistorySaveCount
+        let historySaveCount = UserDefaultRepository().commonHistorySaveCount
         (0...historySaveCount).forEach {
             let expiredDate = calendar.date(byAdding: .day, value: -($0 + 1), to: calendar.startOfDay(for: date))!
             

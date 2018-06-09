@@ -19,10 +19,10 @@ final class SuggestDataModel {
     static let s = SuggestDataModel()
     private let disposeBag = DisposeBag()
 
-    func fetch(token: String) {
-        let provider = ApiRepository<Google>()
+    func get(token: String) {
+        let repository = ApiRepository<Google>()
 
-        provider.rx.request(.suggest(token: token))
+        repository.rx.request(.suggest(token: token))
             .observeOn(MainScheduler.asyncInstance)
             .map { (response) -> SuggestResponse? in
                 return SuggestResponse(data: (try? JSONSerialization.jsonObject(with: response.data)) as? [Any] ?? [])
