@@ -10,16 +10,11 @@ import Foundation
 
 final class EnvDataModel {
     static let s = EnvDataModel()
-
+    
+    /// resource repository
+    let repository = ResourceRepository()
+    
     func get(key: String) -> String {
-        #if PRODUCTION
-            let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
-            let plist = NSDictionary(contentsOfFile: domainPath!)
-            return plist?[key] as! String
-        #else
-            let domainPath = Bundle.main.path(forResource: "env-dev", ofType: "plist")
-            let plist = NSDictionary(contentsOfFile: domainPath!)
-            return plist?[key] as! String
-        #endif
+        return repository.envList[key] as! String
     }
 }

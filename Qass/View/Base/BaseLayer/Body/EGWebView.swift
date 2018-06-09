@@ -39,6 +39,9 @@ class EGWebView: WKWebView {
     /// オペレーション
     var operation: PageHistory.Operation = .normal
 
+    /// resource repository
+    private let repository = ResourceRepository()
+    
     // TODO: submit検知
 //    var form: Form?
 
@@ -135,11 +138,11 @@ class EGWebView: WKWebView {
 
     func loadHtml(code: NETWORK_ERROR) {
         let url: URL = { () -> URL in
-            if code == NETWORK_ERROR.TIMEOUT { return R.file.timeoutHtml()! }
-            if code == NETWORK_ERROR.DNS_NOT_FOUND { return R.file.dnsHtml()! }
-            if code == NETWORK_ERROR.OFFLINE { return R.file.offlineHtml()! }
-            if code == NETWORK_ERROR.UNAUTHORIZED { return R.file.authorizeHtml()! }
-            return R.file.invalidHtml()!
+            if code == NETWORK_ERROR.TIMEOUT { return repository.timeoutHtml }
+            if code == NETWORK_ERROR.DNS_NOT_FOUND { return repository.dnsHtml }
+            if code == NETWORK_ERROR.OFFLINE { return repository.offlineHtml }
+            if code == NETWORK_ERROR.UNAUTHORIZED { return repository.authorizeHtml }
+            return repository.invalidHtml
         }()
         loadFileURL(url, allowingReadAccessTo: url)
     }
