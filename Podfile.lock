@@ -27,7 +27,6 @@ PODS:
   - SVProgressHUD (2.1.2)
   - SwiftFormat/CLI (0.33.4)
   - SwiftLint (0.23.1)
-  - SwiftyBeaver (1.4.3)
   - VerticalAlignmentLabel (0.1.0)
 
 DEPENDENCIES:
@@ -44,7 +43,6 @@ DEPENDENCIES:
   - SVProgressHUD (= 2.1.2)
   - SwiftFormat/CLI (~> 0.33)
   - SwiftLint (~> 0.23)
-  - SwiftyBeaver (~> 1.1)
   - VerticalAlignmentLabel (~> 0.1)
 
 SPEC CHECKSUMS:
@@ -63,9 +61,8 @@ SPEC CHECKSUMS:
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftFormat: f39044d75d5e58dbbc7c436c089104ec9c8f717a
   SwiftLint: 1b670ce79284c76520f84060e87d645078fd32fa
-  SwiftyBeaver: e10b1668e0512229c36c34769b97eed3dfae2ca3
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: 3951ecaed6a00aebc78d4c1cf9c703aae372eea2
+PODFILE CHECKSUM: 3d7e8d0b80b170adb4d292d1607f4b7bef5c1d27
 
 COCOAPODS: 1.4.0

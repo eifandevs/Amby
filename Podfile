@@ -4,7 +4,6 @@ platform :ios, '11.0'
 def common_pods
   swift_version = "4.0"
   pod 'Realm', '~> 2.4'
-  pod 'SwiftyBeaver', '~> 1.1'
   pod 'SVProgressHUD', '2.1.2'
   pod 'RealmSwift', '~> 2.4'
   pod 'NVActivityIndicatorView', '~> 4.0.0'

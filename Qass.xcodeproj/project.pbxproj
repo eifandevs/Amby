@@ -326,6 +326,8 @@
 		A1DF4B44209D03BF00196E0F /* Qass_DevelopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190300F209CF977004F1EA5 /* Qass_DevelopUITests.swift */; };
 		A1ED0BFD20C94DDD00DFC55B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */; };
 		A1ED0BFE20C94DFE00DFC55B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */; };
+		A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
+		A1ED0C0120CBCABF00DFC55B /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		D736BE5FF823758B8C789E24 /* Pods_Qass_DevelopTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B413E23BA3E71FBD1B8F8C0 /* Pods_Qass_DevelopTests.framework */; };
 		DE4C57BC3F52EBBFED9237FB /* Pods_Qass_DevelopUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBD3443FFA620E93997B544 /* Pods_Qass_DevelopUITests.framework */; };
@@ -528,6 +530,7 @@
 		A19880732073A5E20067EC4F /* Qass-DevelopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-DevelopUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B5F448209D0C8700DF1AE3 /* Qass-Production.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qass-Production.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass-Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qass-Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		CC8AC3C84A925C26AE61ACEF /* Pods_Qass_Develop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qass_Develop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -559,6 +562,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1ED0C0120CBCABF00DFC55B /* SwiftyBeaver.framework in Frameworks */,
 				A1ED0BFE20C94DFE00DFC55B /* Kingfisher.framework in Frameworks */,
 				A101649920C56599007A3CC7 /* CryptoSwift.framework in Frameworks */,
 				A1B5F41F209D0C8700DF1AE3 /* Pods_Qass_Develop.framework in Frameworks */,
@@ -570,6 +574,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */,
 				A1ED0BFD20C94DDD00DFC55B /* Kingfisher.framework in Frameworks */,
 				A101649720C56376007A3CC7 /* CryptoSwift.framework in Frameworks */,
 				1E5E575750E6293FCFC43F4E /* Pods_Qass_Develop.framework in Frameworks */,
@@ -582,6 +587,7 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */,
 				A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */,
 				A101649620C56376007A3CC7 /* CryptoSwift.framework */,
 				CC8AC3C84A925C26AE61ACEF /* Pods_Qass_Develop.framework */,
@@ -1577,7 +1583,6 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/VerticalAlignmentLabel/VerticalAlignmentLabel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1594,7 +1599,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VerticalAlignmentLabel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1661,6 +1665,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
 			);
 			outputPaths = (
 			);
@@ -1676,6 +1681,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
 			);
 			outputPaths = (
 			);
@@ -1733,7 +1739,6 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/VerticalAlignmentLabel/VerticalAlignmentLabel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1750,7 +1755,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VerticalAlignmentLabel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
