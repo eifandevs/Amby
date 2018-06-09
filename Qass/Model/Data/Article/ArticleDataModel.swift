@@ -23,7 +23,7 @@ final class ArticleDataModel {
 
     /// 記事取得
     func fetch() {
-        /// TODO: 記事の取得が必要かをチェック
+        /// TODO: 前回の取得から3時間経過していたら取得する
         if articles.count == 0 {
             let provider = ApiProvider<App>()
 
