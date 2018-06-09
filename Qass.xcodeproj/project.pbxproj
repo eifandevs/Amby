@@ -334,6 +334,12 @@
 		A1ED0C0D20CC21F100DFC55B /* ResourceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C0B20CC21F100DFC55B /* ResourceRepository.swift */; };
 		A1ED0C1020CC288600DFC55B /* HtmlDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C0F20CC288600DFC55B /* HtmlDataModel.swift */; };
 		A1ED0C1120CC288600DFC55B /* HtmlDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C0F20CC288600DFC55B /* HtmlDataModel.swift */; };
+		A1ED0C1420CC2AC100DFC55B /* LocalStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C1320CC2AC100DFC55B /* LocalStorageRepository.swift */; };
+		A1ED0C1520CC2AC100DFC55B /* LocalStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C1320CC2AC100DFC55B /* LocalStorageRepository.swift */; };
+		A1ED0C1820CC2EC800DFC55B /* LocalStorageTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C1720CC2EC800DFC55B /* LocalStorageTargetType.swift */; };
+		A1ED0C1920CC2EC800DFC55B /* LocalStorageTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C1720CC2EC800DFC55B /* LocalStorageTargetType.swift */; };
+		A1ED0C1B20CC303500DFC55B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C1A20CC303500DFC55B /* Cache.swift */; };
+		A1ED0C1C20CC303500DFC55B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED0C1A20CC303500DFC55B /* Cache.swift */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		D736BE5FF823758B8C789E24 /* Pods_Qass_DevelopTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B413E23BA3E71FBD1B8F8C0 /* Pods_Qass_DevelopTests.framework */; };
 		DE4C57BC3F52EBBFED9237FB /* Pods_Qass_DevelopUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBD3443FFA620E93997B544 /* Pods_Qass_DevelopUITests.framework */; };
@@ -540,6 +546,9 @@
 		A1ED0C0320CC097B00DFC55B /* UserDefaultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultRepository.swift; sourceTree = "<group>"; };
 		A1ED0C0B20CC21F100DFC55B /* ResourceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceRepository.swift; sourceTree = "<group>"; };
 		A1ED0C0F20CC288600DFC55B /* HtmlDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlDataModel.swift; sourceTree = "<group>"; };
+		A1ED0C1320CC2AC100DFC55B /* LocalStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageRepository.swift; sourceTree = "<group>"; };
+		A1ED0C1720CC2EC800DFC55B /* LocalStorageTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageTargetType.swift; sourceTree = "<group>"; };
+		A1ED0C1A20CC303500DFC55B /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass-Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qass-Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		CC8AC3C84A925C26AE61ACEF /* Pods_Qass_Develop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qass_Develop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -893,6 +902,7 @@
 		A1902F7E209CF976004F1EA5 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				A1ED0C1220CC2A8E00DFC55B /* LocalStorage */,
 				A1ED0C0A20CC21C000DFC55B /* Resource */,
 				A1ED0C0220CC093F00DFC55B /* UserDefault */,
 				A1902F7F209CF976004F1EA5 /* API */,
@@ -1324,6 +1334,24 @@
 				A1ED0C0F20CC288600DFC55B /* HtmlDataModel.swift */,
 			);
 			path = Html;
+			sourceTree = "<group>";
+		};
+		A1ED0C1220CC2A8E00DFC55B /* LocalStorage */ = {
+			isa = PBXGroup;
+			children = (
+				A1ED0C1320CC2AC100DFC55B /* LocalStorageRepository.swift */,
+				A1ED0C1620CC2E1D00DFC55B /* Target */,
+			);
+			path = LocalStorage;
+			sourceTree = "<group>";
+		};
+		A1ED0C1620CC2E1D00DFC55B /* Target */ = {
+			isa = PBXGroup;
+			children = (
+				A1ED0C1720CC2EC800DFC55B /* LocalStorageTargetType.swift */,
+				A1ED0C1A20CC303500DFC55B /* Cache.swift */,
+			);
+			path = Target;
 			sourceTree = "<group>";
 		};
 		A57EFE981E3E06D300B66701 = {
@@ -2021,6 +2049,7 @@
 				A1B5F3CB209D0C8700DF1AE3 /* OptionMenuFormTableViewModel.swift in Sources */,
 				A1B5F3CC209D0C8700DF1AE3 /* HeaderViewDataModel.swift in Sources */,
 				A1B5F3CD209D0C8700DF1AE3 /* AppEnum.swift in Sources */,
+				A1ED0C1520CC2AC100DFC55B /* LocalStorageRepository.swift in Sources */,
 				A1B5F3CE209D0C8700DF1AE3 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A1B5F3CF209D0C8700DF1AE3 /* HeaderFieldViewModel.swift in Sources */,
 				A1B5F3D0209D0C8700DF1AE3 /* ApiRepository.swift in Sources */,
@@ -2035,6 +2064,7 @@
 				A1B5F3D9209D0C8700DF1AE3 /* NotificationManager.swift in Sources */,
 				A1B5F3DA209D0C8700DF1AE3 /* OptionMenuTableViewCell.swift in Sources */,
 				A1B5F3DB209D0C8700DF1AE3 /* Article.swift in Sources */,
+				A1ED0C1C20CC303500DFC55B /* Cache.swift in Sources */,
 				A1B5F3DC209D0C8700DF1AE3 /* UIImageView+Extend.swift in Sources */,
 				A1B5F3DD209D0C8700DF1AE3 /* Form.swift in Sources */,
 				A1B5F3DE209D0C8700DF1AE3 /* Data+Extend.swift in Sources */,
@@ -2087,6 +2117,7 @@
 				A1B5F40D209D0C8700DF1AE3 /* CollectionType+Extend.swift in Sources */,
 				A1B5F40E209D0C8700DF1AE3 /* CircleView.swift in Sources */,
 				A1ED0C0D20CC21F100DFC55B /* ResourceRepository.swift in Sources */,
+				A1ED0C1920CC2EC800DFC55B /* LocalStorageTargetType.swift in Sources */,
 				A1B5F40F209D0C8700DF1AE3 /* BaseViewModel.swift in Sources */,
 				A1B5F410209D0C8700DF1AE3 /* Float+Extend.swift in Sources */,
 				A1B5F411209D0C8700DF1AE3 /* MessageConst.swift in Sources */,
@@ -2153,6 +2184,7 @@
 				A19030A9209CF978004F1EA5 /* OptionMenuFormTableViewModel.swift in Sources */,
 				A1903040209CF977004F1EA5 /* HeaderViewDataModel.swift in Sources */,
 				A1903018209CF977004F1EA5 /* AppEnum.swift in Sources */,
+				A1ED0C1420CC2AC100DFC55B /* LocalStorageRepository.swift in Sources */,
 				A190307D209CF978004F1EA5 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A19030A2209CF978004F1EA5 /* HeaderFieldViewModel.swift in Sources */,
 				A1903047209CF977004F1EA5 /* ApiRepository.swift in Sources */,
@@ -2167,6 +2199,7 @@
 				A1903060209CF978004F1EA5 /* NotificationManager.swift in Sources */,
 				A190307E209CF978004F1EA5 /* OptionMenuTableViewCell.swift in Sources */,
 				A190301C209CF977004F1EA5 /* Article.swift in Sources */,
+				A1ED0C1B20CC303500DFC55B /* Cache.swift in Sources */,
 				A1903037209CF977004F1EA5 /* UIImageView+Extend.swift in Sources */,
 				A190301F209CF977004F1EA5 /* Form.swift in Sources */,
 				A190302A209CF977004F1EA5 /* Data+Extend.swift in Sources */,
@@ -2219,6 +2252,7 @@
 				A1903029209CF977004F1EA5 /* CollectionType+Extend.swift in Sources */,
 				A1903050209CF978004F1EA5 /* CircleView.swift in Sources */,
 				A1ED0C0C20CC21F100DFC55B /* ResourceRepository.swift in Sources */,
+				A1ED0C1820CC2EC800DFC55B /* LocalStorageTargetType.swift in Sources */,
 				A19030A0209CF978004F1EA5 /* BaseViewModel.swift in Sources */,
 				A190302F209CF977004F1EA5 /* Float+Extend.swift in Sources */,
 				A190301B209CF977004F1EA5 /* MessageConst.swift in Sources */,
