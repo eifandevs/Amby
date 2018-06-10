@@ -11,27 +11,27 @@ import Foundation
 final class HtmlDataModel {
     static let s = HtmlDataModel()
     
-    /// タイムアウトページ
+    /// timeout page
     var timeoutHtml: Foundation.URL {
         return ResourceRepository().timeoutHtml
     }
     
-    /// DNSエラーページ
+    /// dns error page
     var dnsHtml: Foundation.URL {
         return ResourceRepository().timeoutHtml
     }
     
-    /// オフラインエラーページ
+    /// offline error page
     var offlineHtml: Foundation.URL {
         return ResourceRepository().timeoutHtml
     }
     
-    /// 認証エラーページ
+    /// authorize error page
     var authorizeHtml: Foundation.URL {
         return ResourceRepository().timeoutHtml
     }
     
-    /// 汎用エラーページ
+    /// common error page
     var invalidHtml: Foundation.URL {
         return ResourceRepository().timeoutHtml
     }
