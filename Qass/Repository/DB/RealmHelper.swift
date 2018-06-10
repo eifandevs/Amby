@@ -13,16 +13,7 @@ final class RealmHelper {
     static func realmConfiguration(realmEncryptionToken: String) -> Realm.Configuration {
         var config = Realm.Configuration()
         config.encryptionKey = realmEncryptionToken.data(using: String.Encoding.utf8, allowLossyConversion: false)
-        config.fileURL = RealmHelper.realmFileURL()
+        config.fileURL = Cache.database(resource: "transaction.realm").url
         return config
-    }
-
-    static func realmFileURL() -> URL? {
-        // Databaseディレクトリがなかったら生成する
-        Util.createFolder(path: AppConst.PATH_DB)
-
-        let realmPath = AppConst.PATH_DB + "/transaction.realm"
-
-        return URL(fileURLWithPath: realmPath)
     }
 }

@@ -59,14 +59,11 @@ final class AppConst {
     static let KEY_NOTIFICATION_DELETE_INDEX = "deleteIndex"
     static let KEY_NOTIFICATION_AT = "at"
 
-    // MARK: - パス情報
-
-    static let PATH_DB = DeviceConst.CACHES_PATH + "/database"
-
     // MARK: - URL
 
     static let URL_BLANK = "about:blank"
     static let URL_ITUNES_STORE = "//itunes.apple.com/"
+    static let PATH_DB = DeviceConst.CACHES_PATH + "/database"
 
     // MARK: - メニュー画面
 

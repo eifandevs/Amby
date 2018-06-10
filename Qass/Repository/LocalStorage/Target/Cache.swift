@@ -13,7 +13,7 @@ enum Cache {
     case commonHistory(resource: String?)
     case searchHistory(resource: String?)
     case thumbnails(additionalPath: String?, resource: String?)
-    case database
+    case database(resource: String?)
 }
 
 extension Cache: LocalStorageTargetType {
@@ -60,8 +60,16 @@ extension Cache: LocalStorageTargetType {
                 }
             }()
             return resourcePath
-        case .database:
-            return "/database"
+        case let .database(resource):
+            let path: String = {
+                if let resource = resource {
+                    return "/database/\(resource)"
+                } else {
+                    return "/database"
+                }
+            }()
+            
+            return path
         }
     }
 }
