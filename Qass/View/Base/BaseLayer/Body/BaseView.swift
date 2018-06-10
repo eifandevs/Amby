@@ -94,7 +94,7 @@ class BaseView: UIView {
     private var touchBeganPoint: CGPoint?
     /// スワイプでページ切り替えを検知したかどうかのフラグ
     private var isChangingFront: Bool = false
-
+    
     /// スライド中かどうかのフラグ
     var isMoving: Bool {
         return !isLocateMax && !isLocateMin
@@ -627,7 +627,7 @@ class BaseView: UIView {
         newWv.uiDelegate = self
         newWv.scrollView.delegate = self
         front = newWv
-        Util.createFolder(path: Util.thumbnailFolderPath(folder: newWv.context))
+        LocalStorageRepository<Cache>().create(.thumbnails(additionalPath: newWv.context, resource: nil))
         addSubview(newWv)
 
         // プログレスバー
@@ -673,14 +673,13 @@ class BaseView: UIView {
                     if let img = image {
                         let pngImageData = UIImagePNGRepresentation(img)
                         let context = webView.context
-                        do {
-                            try pngImageData?.write(to: Util.thumbnailUrl(folder: context))
-                            log.debug("save thumbnal. context: \(context)")
-                            completion()
-                        } catch let error as NSError {
-                            log.error("failed to store thumbnail: \(error)")
-                            completion()
+                        
+                        if let pngImageData = pngImageData {
+                            LocalStorageRepository<Cache>().write(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"), data: pngImageData)
+                        } else {
+                            log.error("image representation error.")
                         }
+                        completion()
                     } else {
                         log.error("failed taking snapshot. error: \(String(describing: error?.localizedDescription))")
                         completion()

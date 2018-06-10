@@ -16,6 +16,9 @@ public protocol LocalStorageTargetType {
     /// The target's base `URL`.
     var url: URL { get }
     
-    /// The path to be appended to `baseURL` to form the full `URL`.
+    /// path
     var path: String { get }
+    
+    /// absolutePath
+    var absolutePath: String { get }
 }

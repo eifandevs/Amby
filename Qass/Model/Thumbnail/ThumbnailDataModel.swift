@@ -12,23 +12,26 @@ import UIKit
 final class ThumbnailDataModel {
     static let s = ThumbnailDataModel()
 
+    /// local storage repository
+    private let localStorageRepository = LocalStorageRepository<Cache>()
+    
     func getThumbnail(context: String) -> UIImage? {
-        let image = UIImage(contentsOfFile: Util.thumbnailUrl(folder: context).path)
+        let image = localStorageRepository.getImage(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"))
         return image?.crop(w: Int(AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2) * DeviceConst.ASPECT_RATE))
     }
 
     func getCapture(context: String) -> UIImage? {
-        return UIImage(contentsOfFile: Util.thumbnailUrl(folder: context).path)
+        return localStorageRepository.getImage(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"))
     }
 
     /// サムネイルデータの削除
     func delete(context: String) {
-        Util.deleteFolder(path: Util.thumbnailPath(folder: context))
+        localStorageRepository.delete(.thumbnails(additionalPath: context, resource: nil))
     }
 
     /// サムネイルデータの全削除
     func delete() {
-        Util.deleteFolder(path: AppConst.PATH_THUMBNAIL)
-        Util.createFolder(path: AppConst.PATH_THUMBNAIL)
+        localStorageRepository.delete(.thumbnails(additionalPath: nil, resource: nil))
+        localStorageRepository.create(.thumbnails(additionalPath: nil, resource: nil))
     }
 }

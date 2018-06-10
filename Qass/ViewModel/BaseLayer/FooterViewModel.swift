@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 final class FooterViewModel {
+    
     /// サムネイル追加通知用RX
     let rx_footerViewModelDidAppendThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
         .flatMap { pageHistory -> Observable<PageHistory> in
@@ -33,14 +34,8 @@ final class FooterViewModel {
     let rx_footerViewModelDidRemoveThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
         .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
             // 実データの削除
-            do {
-                try FileManager.default.removeItem(atPath: Util.thumbnailFolderUrl(folder: object.deleteContext).path)
-                return Observable.just(object)
-            } catch let error as NSError {
-                // エラー処理
-                log.error("removeItem failed. error: \(error.localizedDescription)")
-                return Observable.empty()
-            }
+            LocalStorageRepository<Cache>().delete(.thumbnails(additionalPath: object.deleteContext, resource: nil))
+            return Observable.just(object)
         }
 
     /// ローディング開始通知用RX

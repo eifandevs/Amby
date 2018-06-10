@@ -12,25 +12,21 @@ enum Cache {
     case pageHistory
     case commonHistory
     case searchHistory
-    case thumbnails(folder: String)
+    case thumbnails(additionalPath: String?, resource: String?)
     case database
 }
 
 extension Cache: LocalStorageTargetType {
     /// The target's base
-    var base: String {
-        switch self {
-        case let .thumbnails(folder):
-            return DeviceConst.CACHES_PATH + "/\(folder)"
-        default:
-            return DeviceConst.CACHES_PATH
-        }
-    }
+    var base: String { return DeviceConst.CACHES_PATH }
     
     /// The target's base `URL`.
     var url: URL { return URL(fileURLWithPath: self.base + self.path) }
     
-    /// The path to be appended to `baseURL` to form the full `URL`.
+    /// absolute path
+    var absolutePath: String { return self.base + self.path }
+    
+    /// path
     var path: String {
         switch self {
         case .pageHistory:
@@ -39,8 +35,23 @@ extension Cache: LocalStorageTargetType {
             return "/common_history"
         case .searchHistory:
             return "/search_history"
-        case .thumbnails:
-            return "/thumbnails"
+        case let .thumbnails(additionalPath, resource):
+            let path: String = {
+                if let additionalPath = additionalPath {
+                    return "/thumbnails/\(additionalPath)"
+                } else {
+                    return "/thumbnails"
+                }
+            }()
+            
+            let resourcePath: String = {
+                if let resource = resource {
+                    return "\(path)/\(resource)"
+                } else {
+                    return path
+                }
+            }()
+            return resourcePath
         case .database:
             return "/database"
         }

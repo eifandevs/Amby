@@ -178,34 +178,6 @@ class Util {
     }
 
     // MARK: - フォルダパス
-
-    /// サムネイルフォルダ
-    static func thumbnailFolderPath(folder: String) -> String {
-        let path = AppConst.PATH_THUMBNAIL + "/\(folder)"
-        Util.createFolder(path: path)
-        return path
-    }
-
-    /// サムネイルフォルダ(URL)
-    static func thumbnailFolderUrl(folder: String) -> URL {
-        let path = DeviceConst.CACHES_PATH + "/thumbnails/\(folder)"
-        return URL(fileURLWithPath: path)
-    }
-
-    /// サムネイル画像
-    static func thumbnailPath(folder: String) -> String {
-        let path = AppConst.PATH_THUMBNAIL + "/\(folder)"
-        Util.createFolder(path: path)
-        return path + "/thumbnail.png"
-    }
-
-    /// サムネイル画像(URL)
-    static func thumbnailUrl(folder: String) -> URL {
-        let path = AppConst.PATH_THUMBNAIL + "/\(folder)"
-        Util.createFolder(path: path)
-        return URL(fileURLWithPath: path + "/thumbnail.png")
-    }
-
     /// 閲覧履歴
     static func commonHistoryPath(date: String) -> String {
         return AppConst.PATH_COMMON_HISTORY + "/\(date).dat"

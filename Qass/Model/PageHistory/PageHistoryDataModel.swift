@@ -72,7 +72,7 @@ final class PageHistoryDataModel {
     }
 
     /// 初期化
-    func initialize() {
+    func initialize() {        
         // pageHistory読み込み
         if let data = localStorageRepository.getData(.pageHistory) {
             histories = NSKeyedUnarchiver.unarchiveObject(with: data) as! [PageHistory]

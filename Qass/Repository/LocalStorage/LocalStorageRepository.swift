@@ -32,6 +32,11 @@ final class LocalStorageRepository<Target: LocalStorageTargetType> {
         }
     }
     
+    /// get image data
+    public func getImage(_ target: Target) -> UIImage? {
+        return UIImage(contentsOfFile: target.absolutePath)
+    }
+    
     /// write
     public func write(_ target: Target, data: Data) {
         do {
@@ -42,8 +47,13 @@ final class LocalStorageRepository<Target: LocalStorageTargetType> {
         }
     }
     
+    /// create folder
+    public func create(_ target: Target) {
+        Util.createFolder(path: target.absolutePath)
+    }
+    
     /// delete
     public func delete(_ target: Target) {
-        Util.deleteFolder(path: target.path)
+        Util.deleteFolder(path: target.absolutePath)
     }
 }

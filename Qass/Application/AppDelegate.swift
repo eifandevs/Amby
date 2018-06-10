@@ -56,6 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 設定データセットアップ
         AppDataModel.s.setup()
 
+        // local storage setup
+        let repository = LocalStorageRepository<Cache>()
+        repository.create(.commonHistory)
+        repository.create(.database)
+        repository.create(.searchHistory)
+        repository.create(.thumbnails(additionalPath: nil, resource: nil))
+
         window = UIWindow(frame: UIScreen.main.bounds)
         baseViewController = BaseViewController()
         window!.rootViewController = baseViewController!
