@@ -627,7 +627,7 @@ class BaseView: UIView {
         newWv.uiDelegate = self
         newWv.scrollView.delegate = self
         front = newWv
-        LocalStorageRepository<Cache>().create(.thumbnails(additionalPath: newWv.context, resource: nil))
+        viewModel.createThumbnailDataModel(context: newWv.context)
         addSubview(newWv)
 
         // プログレスバー
@@ -669,13 +669,14 @@ class BaseView: UIView {
         // サムネイルを保存
         DispatchQueue.mainSyncSafe {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                webView.takeSnapshot(with: nil) { image, error in
+                webView.takeSnapshot(with: nil) { [weak self] image, error in
+                    guard let `self` = self else { return }
                     if let img = image {
                         let pngImageData = UIImagePNGRepresentation(img)
                         let context = webView.context
                         
                         if let pngImageData = pngImageData {
-                            LocalStorageRepository<Cache>().write(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"), data: pngImageData)
+                            self.viewModel.writeThumbnailDataModel(context: context, data: pngImageData)
                         } else {
                             log.error("image representation error.")
                         }

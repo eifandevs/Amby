@@ -281,6 +281,16 @@ final class BaseViewModel {
         CommonHistoryDataModel.s.goForward()
     }
 
+    /// create thumbnail folder
+    func createThumbnailDataModel(context: String) {
+        ThumbnailDataModel.s.create(context: context)
+    }
+    
+    /// write thumbnail data
+    func writeThumbnailDataModel(context: String, data: Data) {
+        ThumbnailDataModel.s.write(context: context, data: data)
+    }
+    
     /// 履歴保存
     func updateHistoryDataModel(context: String, url: String, title: String, operation: PageHistory.Operation) {
         if !url.isEmpty && !title.isEmpty {

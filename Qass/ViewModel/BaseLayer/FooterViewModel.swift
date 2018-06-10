@@ -34,7 +34,7 @@ final class FooterViewModel {
     let rx_footerViewModelDidRemoveThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
         .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
             // 実データの削除
-            LocalStorageRepository<Cache>().delete(.thumbnails(additionalPath: object.deleteContext, resource: nil))
+            ThumbnailDataModel.s.delete(context: object.deleteContext)
             return Observable.just(object)
         }
 

@@ -34,4 +34,14 @@ final class ThumbnailDataModel {
         localStorageRepository.delete(.thumbnails(additionalPath: nil, resource: nil))
         localStorageRepository.create(.thumbnails(additionalPath: nil, resource: nil))
     }
+    
+    /// create folder
+    func create(context: String) {
+        localStorageRepository.create(.thumbnails(additionalPath: context, resource: nil))
+    }
+    
+    /// write
+    func write(context: String, data: Data) {
+        localStorageRepository.write(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"), data: data)
+    }
 }
