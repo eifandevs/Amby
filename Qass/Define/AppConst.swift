@@ -62,12 +62,10 @@ final class AppConst {
     // MARK: - パス情報
 
     static let PATH_SEARCH = "https://www.google.co.jp/search?q="
-    static let PATH_PAGE_HISTORY = DeviceConst.CACHES_PATH + "/each_history.dat"
     static let PATH_COMMON_HISTORY = DeviceConst.CACHES_PATH + "/common_history"
     static let PATH_SEARCH_HISTORY = DeviceConst.CACHES_PATH + "/search_history"
     static let PATH_THUMBNAIL = DeviceConst.CACHES_PATH + "/thumbnails"
     static let PATH_DB = DeviceConst.CACHES_PATH + "/database"
-    static let PATH_URL_PAGE_HISTORY = URL(fileURLWithPath: AppConst.PATH_PAGE_HISTORY)
 
     // MARK: - URL
 

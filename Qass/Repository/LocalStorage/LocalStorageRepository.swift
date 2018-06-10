@@ -31,4 +31,19 @@ final class LocalStorageRepository<Target: LocalStorageTargetType> {
             return nil
         }
     }
+    
+    /// write
+    public func write(_ target: Target, data: Data) {
+        do {
+            try data.write(to: target.url)
+            log.debug("store data. url: \(target.url)")
+        } catch let error as NSError {
+            log.error("failed to store: \(error.localizedDescription)")
+        }
+    }
+    
+    /// delete
+    public func delete(_ target: Target) {
+        Util.deleteFolder(path: target.path)
+    }
 }

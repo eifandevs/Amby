@@ -9,7 +9,7 @@
 import Foundation
 
 enum Cache {
-    case eachHistory
+    case pageHistory
     case commonHistory
     case searchHistory
     case thumbnails(folder: String)
@@ -33,8 +33,8 @@ extension Cache: LocalStorageTargetType {
     /// The path to be appended to `baseURL` to form the full `URL`.
     var path: String {
         switch self {
-        case .eachHistory:
-            return "/each_history.dat"
+        case .pageHistory:
+            return "/page_history.dat"
         case .commonHistory:
             return "/common_history"
         case .searchHistory:

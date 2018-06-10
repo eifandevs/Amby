@@ -65,21 +65,21 @@ final class PageHistoryDataModel {
     /// ページヒストリー保存件数
     private let pageHistorySaveCount = UserDefaultRepository().pageHistorySaveCount
 
+    /// local storage repository
+    private let localStorageRepository = LocalStorageRepository<Cache>()
+    
     private init() {
     }
 
     /// 初期化
     func initialize() {
         // pageHistory読み込み
-        do {
-            let data = try Data(contentsOf: AppConst.PATH_URL_PAGE_HISTORY)
+        if let data = localStorageRepository.getData(.pageHistory) {
             histories = NSKeyedUnarchiver.unarchiveObject(with: data) as! [PageHistory]
-            log.debug("page history read.")
-        } catch let error as NSError {
+        } else {
             let pageHistory = PageHistory()
             histories.append(pageHistory)
             currentContext = pageHistory.context
-            log.warning("failed to read page history: \(error)")
         }
     }
 
@@ -291,18 +291,13 @@ final class PageHistoryDataModel {
     func store() {
         if histories.count > 0 {
             let pageHistoryData = NSKeyedArchiver.archivedData(withRootObject: histories)
-            do {
-                try pageHistoryData.write(to: AppConst.PATH_URL_PAGE_HISTORY)
-                log.debug("store page history.")
-            } catch let error as NSError {
-                log.error("failed to write: \(error)")
-            }
+            localStorageRepository.write(.pageHistory, data: pageHistoryData)
         }
     }
 
     /// 全データの削除
     func delete() {
         histories = []
-        Util.deleteFolder(path: AppConst.PATH_PAGE_HISTORY)
+        localStorageRepository.delete(.pageHistory)
     }
 }
