@@ -12,20 +12,20 @@ final class SearchHistoryDataModel {
     static let s = SearchHistoryDataModel()
     var histories = [SearchHistory]()
 
+    /// userdefault repository
+    private let userDefaultRepository = UserDefaultRepository()
+    
     /// local storage repository
-    private let repository = UserDefaultRepository()
+    private let localStorageRepository = LocalStorageRepository<Cache>()
     
     /// 保存済みリスト取得
     func getList() -> [String] {
-        let manager = FileManager.default
-        do {
-            let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_SEARCH_HISTORY)
+        if let list = localStorageRepository.getList(.searchHistory(resource: nil)) {
             return list.map({ (path: String) -> String in
                 path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).sorted(by: { $1.toDate() < $0.toDate() })
-        } catch let error as NSError {
-            log.error("failed to read search history. error: \(error.localizedDescription)")
         }
+        
         return []
     }
 
@@ -47,27 +47,20 @@ final class SearchHistoryDataModel {
             }
 
             for (key, value) in searchHistoryByDate {
-                let searchHistoryUrl = Util.searchHistoryUrl(date: key)
+                let filename = "/\(key).dat"
 
                 let saveData: [SearchHistory] = { () -> [SearchHistory] in
-                    do {
-                        let data = try Data(contentsOf: searchHistoryUrl)
+                    if let data = localStorageRepository.getData(.searchHistory(resource: filename)) {
                         let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [SearchHistory]
                         let saveData: [SearchHistory] = value + old
                         return saveData
-                    } catch let error as NSError {
-                        log.error("failed to read search history: \(error)")
-                        return value
                     }
+                    
+                    return value
                 }()
 
                 let searchHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                do {
-                    try searchHistoryData.write(to: searchHistoryUrl)
-                    log.debug("store search history")
-                } catch let error as NSError {
-                    log.error("failed to write search history: \(error)")
-                }
+                localStorageRepository.write(.searchHistory(resource: filename), data: searchHistoryData)
             }
         }
     }
@@ -82,12 +75,11 @@ final class SearchHistoryDataModel {
             let latestFiles = readFiles.prefix(readNum)
             var allSearchHistory: [SearchHistory] = []
             latestFiles.forEach({ (keyStr: String) in
-                do {
-                    let data = try Data(contentsOf: Util.searchHistoryUrl(date: keyStr))
+                let filename = "/\(keyStr).dat"
+
+                if let data = localStorageRepository.getData(.searchHistory(resource: filename)) {
                     let searchHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [SearchHistory]
                     allSearchHistory += searchHistory
-                } catch let error as NSError {
-                    log.error("failed to read search history. error: \(error.localizedDescription)")
                 }
             })
             let hitSearchHistory = allSearchHistory.filter({ (searchHistoryItem) -> Bool in
@@ -115,17 +107,14 @@ final class SearchHistoryDataModel {
 
     /// 閲覧履歴の期限切れ削除
     func expireCheck() {
-        let saveTerm = repository.searchHistorySaveCount
+        let saveTerm = userDefaultRepository.searchHistorySaveCount
         let readFiles = getList().reversed()
 
         if readFiles.count > saveTerm {
             let deleteFiles = readFiles.prefix(readFiles.count - saveTerm)
             deleteFiles.forEach({ key in
-                do {
-                    try FileManager.default.removeItem(atPath: Util.searchHistoryPath(date: key))
-                } catch let error as NSError {
-                    log.error("failed to read common history. error: \(error.localizedDescription)")
-                }
+                let filename = "/\(key).dat"
+                localStorageRepository.delete(.searchHistory(resource: filename))
             })
             log.debug("deleteSearchHistory: \(deleteFiles)")
         }
@@ -133,7 +122,7 @@ final class SearchHistoryDataModel {
 
     /// 検索履歴を全て削除
     func delete() {
-        Util.deleteFolder(path: AppConst.PATH_SEARCH_HISTORY)
-        Util.createFolder(path: AppConst.PATH_SEARCH_HISTORY)
+        localStorageRepository.delete(.searchHistory(resource: nil))
+        localStorageRepository.create(.searchHistory(resource: nil))
     }
 }

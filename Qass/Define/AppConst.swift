@@ -61,8 +61,6 @@ final class AppConst {
 
     // MARK: - パス情報
 
-    static let PATH_COMMON_HISTORY = DeviceConst.CACHES_PATH + "/common_history"
-    static let PATH_SEARCH_HISTORY = DeviceConst.CACHES_PATH + "/search_history"
     static let PATH_DB = DeviceConst.CACHES_PATH + "/database"
 
     // MARK: - URL

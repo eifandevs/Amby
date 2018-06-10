@@ -176,20 +176,6 @@ class Util {
             }
         }
     }
-
-    // MARK: - フォルダパス
-
-    /// 検索履歴
-    static func searchHistoryPath(date: String) -> String {
-        return AppConst.PATH_SEARCH_HISTORY + "/\(date).dat"
-    }
-
-    /// 検索履歴(URL)
-    static func searchHistoryUrl(date: String) -> URL {
-        let path = AppConst.PATH_SEARCH_HISTORY
-        Util.createFolder(path: path)
-        return URL(fileURLWithPath: path + "/\(date).dat")
-    }
 }
 
 // MARK: - グローバル定義

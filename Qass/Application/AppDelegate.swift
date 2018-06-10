@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let repository = LocalStorageRepository<Cache>()
         repository.create(.commonHistory(resource: nil))
         repository.create(.database)
-        repository.create(.searchHistory)
+        repository.create(.searchHistory(resource: nil))
         repository.create(.thumbnails(additionalPath: nil, resource: nil))
 
         window = UIWindow(frame: UIScreen.main.bounds)

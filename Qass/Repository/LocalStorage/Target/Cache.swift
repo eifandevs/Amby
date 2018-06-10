@@ -11,7 +11,7 @@ import Foundation
 enum Cache {
     case pageHistory
     case commonHistory(resource: String?)
-    case searchHistory
+    case searchHistory(resource: String?)
     case thumbnails(additionalPath: String?, resource: String?)
     case database
 }
