@@ -20,6 +20,8 @@ final class HttpConst {
     // ニュースホーム
     static let HOME_URL = EnvDataModel.s.get(key: "HOME_URL")
 
+    static let PATH_SEARCH = "https://www.google.co.jp/search?q="
+
     // Appステータスコード
     enum APP_STATUS_CODE: String {
         case NORMAL = "0000"

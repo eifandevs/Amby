@@ -357,7 +357,7 @@ class BaseView: UIView {
                         // 検索ワードによる検索
                         // 閲覧履歴を保存する
                         self.viewModel.storeSearchHistoryDataModel(title: text)
-                        let encodedText = "\(AppConst.PATH_SEARCH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)"
+                        let encodedText = "\(HttpConst.PATH_SEARCH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)"
                         self.viewModel.headerFieldText = encodedText
                         _ = self.front.load(urlStr: encodedText)
                     }
