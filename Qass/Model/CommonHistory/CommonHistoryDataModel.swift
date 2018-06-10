@@ -21,8 +21,11 @@ final class CommonHistoryDataModel {
     /// ヒストリーフォワード通知用RX
     let rx_commonHistoryDataModelDidGoForward = PublishSubject<()>()
 
+    /// userdefault storage repository
+    private let userDefaultRepository = UserDefaultRepository()
+
     /// local storage repository
-    private let repository = UserDefaultRepository()
+    private let localStorageRepository = LocalStorageRepository<Cache>()
     
     /// 閲覧履歴
     public private(set) var histories = [CommonHistory]()
@@ -64,27 +67,20 @@ final class CommonHistoryDataModel {
 
             // 日付毎に分けた閲覧履歴を日付毎に保存していく
             for (key, value) in commonHistoryByDate {
-                let commonHistoryUrl = Util.commonHistoryUrl(date: key)
-
+                let filename = "/\(key).dat"
+                
                 let saveData: [CommonHistory] = { () -> [CommonHistory] in
-                    do {
-                        let data = try Data(contentsOf: commonHistoryUrl)
+                    if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
                         let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
                         let saveData: [CommonHistory] = value + old
                         return saveData
-                    } catch let error as NSError {
-                        log.error("failed to read common history: \(error)")
+                    } else {
                         return value
                     }
                 }()
 
                 let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                do {
-                    try commonHistoryData.write(to: commonHistoryUrl)
-                    log.debug("store common history")
-                } catch let error as NSError {
-                    log.error("failed to write common history: \(error)")
-                }
+                localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
             }
             histories = []
         }
@@ -93,30 +89,27 @@ final class CommonHistoryDataModel {
     /// 保存済みリスト取得
     /// 降順で返す。[20170909, 20170908, ...]
     func getList() -> [String] {
-        let manager = FileManager.default
-        do {
-            let list = try manager.contentsOfDirectory(atPath: AppConst.PATH_COMMON_HISTORY)
+        if let list = localStorageRepository.getList(.commonHistory(resource: nil)) {
             return list.map({ (path: String) -> String in
                 path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).sorted(by: { $1.toDate() < $0.toDate() })
-        } catch let error as NSError {
-            log.error("failed to read common history. error: \(error.localizedDescription)")
         }
+        
+        log.debug("not exist common history.")
+        
         return []
     }
 
     /// 閲覧履歴の検索
     /// 日付指定
     func select(dateString: String) -> [CommonHistory] {
-        do {
-            let url = Util.commonHistoryUrl(date: dateString)
-            let data = try Data(contentsOf: url)
+        let filename = "/\(dateString).dat"
+        
+        if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
             let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
-            log.debug("common history read. url: \(url)")
             return commonHistory
-        } catch let error as NSError {
-            log.error("failed to read common history. error: \(error.localizedDescription)")
         }
+        
         return []
     }
 
@@ -130,12 +123,10 @@ final class CommonHistoryDataModel {
                 let latestFiles = readFiles.prefix(readNum)
                 var allCommonHistory: [CommonHistory] = []
                 latestFiles.forEach({ (keyStr: String) in
-                    do {
-                        let data = try Data(contentsOf: Util.commonHistoryUrl(date: keyStr))
+                    let filename = "/\(keyStr).dat"
+                    if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
                         let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
                         allCommonHistory += commonHistory
-                    } catch let error as NSError {
-                        log.error("failed to read common history. error: \(error.localizedDescription)")
                     }
                 })
                 let hitCommonHistory = allCommonHistory.filter({ (commonHistoryItem) -> Bool in
@@ -163,17 +154,13 @@ final class CommonHistoryDataModel {
     /// 閲覧履歴の件数チェック
     // デフォルトで90日分の履歴を超えたら削除する
     func expireCheck() {
-        let historySaveCount = repository.commonHistorySaveCount
+        let historySaveCount = userDefaultRepository.commonHistorySaveCount
         let readFiles = getList().reversed()
 
         if readFiles.count > historySaveCount {
             let deleteFiles = readFiles.prefix(readFiles.count - historySaveCount)
             deleteFiles.forEach({ key in
-                do {
-                    try FileManager.default.removeItem(atPath: Util.commonHistoryPath(date: key))
-                } catch let error as NSError {
-                    log.error("failed to delete common history. error: \(error.localizedDescription)")
-                }
+                localStorageRepository.delete(.commonHistory(resource: "/\(key).dat"))
             })
             log.debug("deleteCommonHistory: \(deleteFiles)")
         }
@@ -184,32 +171,25 @@ final class CommonHistoryDataModel {
     func delete(historyIds: [String: [String]]) {
         // 履歴
         for (key, value) in historyIds {
-            let commonHistoryUrl = Util.commonHistoryUrl(date: key)
+            let filename = "/\(key).dat"
+
             let saveData: [CommonHistory]? = { () -> [CommonHistory]? in
-                do {
-                    let data = try Data(contentsOf: commonHistoryUrl)
+                if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
                     let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
                     let saveData = old.filter({ (historyItem) -> Bool in
                         !value.contains(historyItem._id)
                     })
                     return saveData
-                } catch let error as NSError {
-                    log.error("failed to read: \(error)")
-                    return nil
                 }
+                return nil
             }()
 
             if let saveData = saveData {
                 if saveData.count > 0 {
                     let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                    do {
-                        try commonHistoryData.write(to: commonHistoryUrl)
-                        log.debug("store common history")
-                    } catch let error as NSError {
-                        log.error("failed to write: \(error)")
-                    }
+                    localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
                 } else {
-                    try! FileManager.default.removeItem(atPath: Util.commonHistoryPath(date: key))
+                    localStorageRepository.delete(.commonHistory(resource: filename))
                     log.debug("remove common history file. date: \(key)")
                 }
             }
@@ -219,7 +199,7 @@ final class CommonHistoryDataModel {
     /// 閲覧履歴を全て削除
     func delete() {
         histories = []
-        Util.deleteFolder(path: AppConst.PATH_COMMON_HISTORY)
-        Util.createFolder(path: AppConst.PATH_COMMON_HISTORY)
+        localStorageRepository.delete(.commonHistory(resource: nil))
+        localStorageRepository.create(.commonHistory(resource: nil))
     }
 }

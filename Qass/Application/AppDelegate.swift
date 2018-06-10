@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // local storage setup
         let repository = LocalStorageRepository<Cache>()
-        repository.create(.commonHistory)
+        repository.create(.commonHistory(resource: nil))
         repository.create(.database)
         repository.create(.searchHistory)
         repository.create(.thumbnails(additionalPath: nil, resource: nil))

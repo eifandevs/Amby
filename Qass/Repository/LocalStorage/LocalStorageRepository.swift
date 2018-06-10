@@ -13,7 +13,7 @@ final class LocalStorageRepository<Target: LocalStorageTargetType> {
     /// get file list
     public func getList(_ target: Target) -> [String]? {
         do {
-            let list = try FileManager.default.contentsOfDirectory(atPath: target.base)
+            let list = try FileManager.default.contentsOfDirectory(atPath: target.absolutePath)
             return list
         } catch let error as NSError {
             log.error("failed to getList. base: \(target.base) error: \(error.localizedDescription)")

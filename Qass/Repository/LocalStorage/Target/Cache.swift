@@ -10,7 +10,7 @@ import Foundation
 
 enum Cache {
     case pageHistory
-    case commonHistory
+    case commonHistory(resource: String?)
     case searchHistory
     case thumbnails(additionalPath: String?, resource: String?)
     case database
@@ -31,8 +31,16 @@ extension Cache: LocalStorageTargetType {
         switch self {
         case .pageHistory:
             return "/page_history.dat"
-        case .commonHistory:
-            return "/common_history"
+        case let .commonHistory(resource):
+            let path: String = {
+                if let resource = resource {
+                    return "/common_history/\(resource)"
+                } else {
+                    return "/common_history"
+                }
+            }()
+            
+            return path
         case .searchHistory:
             return "/search_history"
         case let .thumbnails(additionalPath, resource):
