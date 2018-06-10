@@ -14,12 +14,12 @@ import UIKit
 import WebKit
 
 class EGWebView: WKWebView {
-    enum NETWORK_ERROR {
-        case DNS_NOT_FOUND
-        case OFFLINE
-        case TIMEOUT
-        case INVALID_URL
-        case UNAUTHORIZED
+    enum NetWorkError {
+        case dnsNotFound
+        case offline
+        case timeout
+        case invalidUrl
+        case unauthorized
     }
 
     var context = "" // 監視ID
@@ -129,33 +129,33 @@ class EGWebView: WKWebView {
             load(URLRequest(url: url))
             return true
         }
-        loadHtml(code: NETWORK_ERROR.INVALID_URL)
+        loadHtml(code: NetWorkError.invalidUrl)
         return false
     }
 
-    func loadHtml(code: NETWORK_ERROR) {
+    func loadHtml(code: NetWorkError) {
         let url: URL = { () -> URL in
-            if code == NETWORK_ERROR.TIMEOUT { return HtmlDataModel.s.timeoutHtml }
-            if code == NETWORK_ERROR.DNS_NOT_FOUND { return HtmlDataModel.s.dnsHtml }
-            if code == NETWORK_ERROR.OFFLINE { return HtmlDataModel.s.offlineHtml }
-            if code == NETWORK_ERROR.UNAUTHORIZED { return HtmlDataModel.s.authorizeHtml }
+            if code == NetWorkError.timeout { return HtmlDataModel.s.timeoutHtml }
+            if code == NetWorkError.dnsNotFound { return HtmlDataModel.s.dnsHtml }
+            if code == NetWorkError.offline { return HtmlDataModel.s.offlineHtml }
+            if code == NetWorkError.unauthorized { return HtmlDataModel.s.authorizeHtml }
             return HtmlDataModel.s.invalidHtml
         }()
         loadFileURL(url, allowingReadAccessTo: url)
     }
 
     func loadHtml(error: NSError) {
-        let errorType = { () -> EGWebView.NETWORK_ERROR in
+        let errorType = { () -> EGWebView.NetWorkError in
             log.error("webview load error. code: \(error.code)")
             switch error.code {
             case NSURLErrorCannotFindHost:
-                return NETWORK_ERROR.DNS_NOT_FOUND
+                return NetWorkError.dnsNotFound
             case NSURLErrorTimedOut:
-                return NETWORK_ERROR.TIMEOUT
+                return NetWorkError.timeout
             case NSURLErrorNotConnectedToInternet:
-                return NETWORK_ERROR.OFFLINE
+                return NetWorkError.offline
             default:
-                return NETWORK_ERROR.INVALID_URL
+                return NetWorkError.invalidUrl
             }
         }()
         loadHtml(code: errorType)

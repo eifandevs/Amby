@@ -1088,7 +1088,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             }
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
                 completionHandler(.cancelAuthenticationChallenge, nil)
-                egWv.loadHtml(code: .UNAUTHORIZED)
+                egWv.loadHtml(code: .unauthorized)
             }))
             alertController.addAction(UIAlertAction(title: "Log In", style: .default, handler: { _ in
                 let credential = URLCredential(user: usernameTextField.text!, password: passwordTextField.text!, persistence: URLCredential.Persistence.forSession)
