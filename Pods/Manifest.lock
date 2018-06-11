@@ -8,9 +8,6 @@ PODS:
     - RxSwift (~> 4.0)
   - NSObject+Rx (4.2.0):
     - RxSwift (~> 4.0)
-  - NVActivityIndicatorView (4.0.0):
-    - NVActivityIndicatorView/Presenter (= 4.0.0)
-  - NVActivityIndicatorView/Presenter (4.0.0)
   - R.swift (3.3.0):
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
@@ -31,7 +28,6 @@ DEPENDENCIES:
   - Alamofire (~> 4.4)
   - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
-  - NVActivityIndicatorView (~> 4.0.0)
   - R.swift (~> 3.3)
   - Realm (~> 2.4)
   - RealmSwift (~> 2.4)
@@ -45,7 +41,6 @@ SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Moya: 3d594ada51a21cc02b18739ab578a1984f900c8a
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
-  NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
   R.swift: bde9704d50ff36820f49e266bc88ef545e1e9b36
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
@@ -57,6 +52,6 @@ SPEC CHECKSUMS:
   SwiftLint: 1b670ce79284c76520f84060e87d645078fd32fa
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: bc2eb4ba7f4e0bfa2b549ea810e7b344adb7cce1
+PODFILE CHECKSUM: b77d70eaab6bf704e4b5bafe1d909e22c867a2f6
 
 COCOAPODS: 1.4.0

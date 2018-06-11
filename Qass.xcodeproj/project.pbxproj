@@ -15,6 +15,8 @@
 		A12A9C9820CE95D300146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
 		A12A9C9B20CE9A0000146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
+		A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */; };
+		A12A9C9E20CE9D5F00146010 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */; };
 		A14266C120B5878D006E811A /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A14266C020B5878C006E811A /* env.plist */; };
 		A150625020BE39F000ACCF78 /* EnvDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A150624F20BE39F000ACCF78 /* EnvDataModel.swift */; };
 		A150625120BE39F000ACCF78 /* EnvDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A150624F20BE39F000ACCF78 /* EnvDataModel.swift */; };
@@ -380,6 +382,7 @@
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
+		A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
 		A14266C020B5878C006E811A /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
 		A150624F20BE39F000ACCF78 /* EnvDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvDataModel.swift; sourceTree = "<group>"; };
 		A152085F20C5543B00201B30 /* env-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "env-dev.plist"; sourceTree = "<group>"; };
@@ -586,6 +589,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A12A9C9E20CE9D5F00146010 /* NVActivityIndicatorView.framework in Frameworks */,
 				A12A9C9B20CE9A0000146010 /* SVProgressHUD.framework in Frameworks */,
 				A12A9C9820CE95D300146010 /* KeychainAccess.framework in Frameworks */,
 				A1ED0C0120CBCABF00DFC55B /* SwiftyBeaver.framework in Frameworks */,
@@ -600,6 +604,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */,
 				A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */,
 				A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */,
 				A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */,
@@ -615,6 +620,7 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */,
 				A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */,
 				A12A9C9620CE955200146010 /* KeychainAccess.framework */,
 				A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */,
@@ -1642,7 +1648,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -1656,7 +1661,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -1732,6 +1736,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
 			);
 			outputPaths = (
 			);
@@ -1750,6 +1755,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
 			);
 			outputPaths = (
 			);
@@ -1798,7 +1804,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -1812,7 +1817,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",

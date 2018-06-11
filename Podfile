@@ -5,7 +5,6 @@ def common_pods
   swift_version = "4.0"
   pod 'Realm', '~> 2.4'
   pod 'RealmSwift', '~> 2.4'
-  pod 'NVActivityIndicatorView', '~> 4.0.0'
   pod 'RxSwift', '~> 4.0'
   pod 'RxCocoa', '~> 4.0'
   pod 'NSObject+Rx', '~> 4.2'

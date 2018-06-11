@@ -3,3 +3,4 @@ github "onevcat/Kingfisher" ~> 4.0
 github "SwiftyBeaver/SwiftyBeaver" ~> 1.1
 github "kishikawakatsumi/KeychainAccess" ~> 3.1
 github "SVProgressHUD/SVProgressHUD" ~> 2.1.2
+github "ninjaprox/NVActivityIndicatorView" ~> 4.0.0
