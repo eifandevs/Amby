@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (4.5.1)
-  - KeychainAccess (3.1.0)
   - Moya/Core (11.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
@@ -31,7 +30,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
-  - KeychainAccess (~> 3.1)
   - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
   - NVActivityIndicatorView (~> 4.0.0)
@@ -47,7 +45,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
   Moya: 3d594ada51a21cc02b18739ab578a1984f900c8a
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
   NVActivityIndicatorView: 54c9b93b6f25a4f467512680c0c90c09a1095cf2
@@ -63,6 +60,6 @@ SPEC CHECKSUMS:
   SwiftLint: 1b670ce79284c76520f84060e87d645078fd32fa
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: 3d7e8d0b80b170adb4d292d1607f4b7bef5c1d27
+PODFILE CHECKSUM: c885b37b2088ac122f3c0711c26369c4dabb69ad
 
 COCOAPODS: 1.4.0

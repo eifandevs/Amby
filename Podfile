@@ -14,7 +14,6 @@ def common_pods
   pod 'Alamofire', '~> 4.4'
   pod 'SwiftLint', '~> 0.23'
   pod 'SwiftFormat/CLI', '~> 0.33'
-  pod 'KeychainAccess', '~> 3.1'
   pod 'VerticalAlignmentLabel', '~> 0.1'
   pod 'Moya/RxSwift', '~> 11.0'
 end

@@ -11,6 +11,8 @@
 		6C9DF6C868BDCF40D4DA265D /* Pods_Qass_Production.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C7D9CDCF1ED1584806D133 /* Pods_Qass_Production.framework */; };
 		A101649720C56376007A3CC7 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
 		A101649920C56599007A3CC7 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
+		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
+		A12A9C9820CE95D300146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A14266C120B5878D006E811A /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A14266C020B5878C006E811A /* env.plist */; };
 		A150625020BE39F000ACCF78 /* EnvDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A150624F20BE39F000ACCF78 /* EnvDataModel.swift */; };
 		A150625120BE39F000ACCF78 /* EnvDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A150624F20BE39F000ACCF78 /* EnvDataModel.swift */; };
@@ -374,6 +376,7 @@
 		79E42E2E4E116138B394AA57 /* Pods-Qass-DevelopUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8DD8D05F664AB7906F830747 /* Pods-Qass-DevelopUITests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A14266C020B5878C006E811A /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
 		A150624F20BE39F000ACCF78 /* EnvDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvDataModel.swift; sourceTree = "<group>"; };
 		A152085F20C5543B00201B30 /* env-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "env-dev.plist"; sourceTree = "<group>"; };
@@ -580,6 +583,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A12A9C9820CE95D300146010 /* KeychainAccess.framework in Frameworks */,
 				A1ED0C0120CBCABF00DFC55B /* SwiftyBeaver.framework in Frameworks */,
 				A1ED0BFE20C94DFE00DFC55B /* Kingfisher.framework in Frameworks */,
 				A101649920C56599007A3CC7 /* CryptoSwift.framework in Frameworks */,
@@ -592,6 +596,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */,
 				A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */,
 				A1ED0BFD20C94DDD00DFC55B /* Kingfisher.framework in Frameworks */,
 				A101649720C56376007A3CC7 /* CryptoSwift.framework in Frameworks */,
@@ -605,6 +610,7 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A12A9C9620CE955200146010 /* KeychainAccess.framework */,
 				A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */,
 				A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */,
 				A101649620C56376007A3CC7 /* CryptoSwift.framework */,
@@ -1628,7 +1634,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Qass-Develop/Pods-Qass-Develop-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
@@ -1644,7 +1649,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
@@ -1722,6 +1726,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 			);
 			outputPaths = (
 			);
@@ -1738,6 +1743,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 			);
 			outputPaths = (
 			);
@@ -1784,7 +1790,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Qass-Production/Pods-Qass-Production-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
@@ -1800,7 +1805,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
