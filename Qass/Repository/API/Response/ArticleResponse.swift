@@ -10,7 +10,6 @@ import Foundation
 
 /// 記事取得APIレスポンス
 struct ArticleResponse: Codable {
-    // レスポンスがjsonではないので、codableを使用せず、マニュアルでマッピングする
     let code: String
     let data: [Article]
 }

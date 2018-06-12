@@ -19,4 +19,5 @@ struct Article: Codable {
     var published_time: String?
     var created_at: String?
     var updated_at: String?
+    var next_update: String?
 }
