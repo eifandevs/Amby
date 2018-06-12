@@ -15,7 +15,7 @@ import RxCocoa
 class CommonHistoryDataModelTests: XCTestCase {
     
     let disposeBag = DisposeBag()
-
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -26,10 +26,10 @@ class CommonHistoryDataModelTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-
+    
     func testGoBack() {
         weak var expectation = self.expectation(description: "goBack")
-
+        
         CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoBack
             .subscribe { _ in
                 if let expectation = expectation {
@@ -37,9 +37,9 @@ class CommonHistoryDataModelTests: XCTestCase {
                 }
             }
             .disposed(by: disposeBag)
-
+        
         CommonHistoryDataModel.s.goBack()
-
+        
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
@@ -60,23 +60,23 @@ class CommonHistoryDataModelTests: XCTestCase {
     }
     
     func testInsert() {
-        let history = CommonHistory(url: "testInsert", title: "testInsert", date: Date())
+        let history = CommonHistory(url: #function, title: #function, date: Date())
         CommonHistoryDataModel.s.insert(history: history)
-        XCTAssertTrue(CommonHistoryDataModel.s.histories.first!.title == "testInsert")
-        XCTAssertTrue(CommonHistoryDataModel.s.histories.first!.url == "testInsert")
+        XCTAssertTrue(CommonHistoryDataModel.s.histories.first!.title == #function)
+        XCTAssertTrue(CommonHistoryDataModel.s.histories.first!.url == #function)
     }
     
     func testStore() {
-        let history = CommonHistory(url: "testStore", title: "testStore", date: Date())
+        let history = CommonHistory(url: #function, title: #function, date: Date())
         CommonHistoryDataModel.s.insert(history: history)
         CommonHistoryDataModel.s.store()
-        let storedHistory = CommonHistoryDataModel.s.select(title: "testStore", readNum: 10).first!
-        XCTAssertTrue(storedHistory.title == "testStore")
-        XCTAssertTrue(storedHistory.url == "testStore")
+        let storedHistory = CommonHistoryDataModel.s.select(title: #function, readNum: 10).first!
+        XCTAssertTrue(storedHistory.title == #function)
+        XCTAssertTrue(storedHistory.url == #function)
     }
     
     func testGetList() {
-        let history = CommonHistory(url: "testGetList", title: "testGetList", date: Date())
+        let history = CommonHistory(url: #function, title: #function, date: Date())
         CommonHistoryDataModel.s.insert(history: history)
         CommonHistoryDataModel.s.store()
         let list = CommonHistoryDataModel.s.getList()
@@ -84,7 +84,7 @@ class CommonHistoryDataModelTests: XCTestCase {
     }
     
     func testSelect() {
-        let history = CommonHistory(url: "testSelect", title: "testSelect", date: Date())
+        let history = CommonHistory(url: #function, title: #function, date: Date())
         CommonHistoryDataModel.s.insert(history: history)
         CommonHistoryDataModel.s.store()
         let storedHistory = CommonHistoryDataModel.s.select(dateString: Date().toString()).first!
@@ -93,10 +93,10 @@ class CommonHistoryDataModelTests: XCTestCase {
     }
     
     func testSelectWithTitle() {
-        let history = CommonHistory(url: "testSelect", title: "testSelect", date: Date())
+        let history = CommonHistory(url: #function, title: #function, date: Date())
         CommonHistoryDataModel.s.insert(history: history)
         CommonHistoryDataModel.s.store()
-        let storedHistory = CommonHistoryDataModel.s.select(title: "testSelect", readNum: 10).first!
+        let storedHistory = CommonHistoryDataModel.s.select(title: #function, readNum: 10).first!
         XCTAssertTrue(history.title == storedHistory.title)
         XCTAssertTrue(history.url == storedHistory.url)
     }
@@ -109,20 +109,20 @@ class CommonHistoryDataModelTests: XCTestCase {
         (0...historySaveCount).forEach {
             let expiredDate = calendar.date(byAdding: .day, value: -($0 + 1), to: calendar.startOfDay(for: date))!
             
-            let history = CommonHistory(url: "testSelect", title: "testSelect", date: expiredDate)
+            let history = CommonHistory(url: #function, title: #function, date: expiredDate)
             CommonHistoryDataModel.s.insert(history: history)
             CommonHistoryDataModel.s.store()
         }
         
         XCTAssertTrue(CommonHistoryDataModel.s.getList().count == historySaveCount + 1)
-
+        
         CommonHistoryDataModel.s.expireCheck()
         
         XCTAssertTrue(CommonHistoryDataModel.s.getList().count == historySaveCount)
     }
     
     func testDeleteWithIds() {
-        let history = CommonHistory(url: "testStore", title: "testStore", date: Date())
+        let history = CommonHistory(url: #function, title: #function, date: Date())
         CommonHistoryDataModel.s.insert(history: history)
         CommonHistoryDataModel.s.store()
         CommonHistoryDataModel.s.delete(historyIds: [Date().toString(): [history._id]])
@@ -131,7 +131,7 @@ class CommonHistoryDataModelTests: XCTestCase {
     }
     
     func testDelete() {
-        let history = CommonHistory(url: "testStore", title: "testStore", date: Date())
+        let history = CommonHistory(url: #function, title: #function, date: Date())
         CommonHistoryDataModel.s.insert(history: history)
         CommonHistoryDataModel.s.store()
         CommonHistoryDataModel.s.delete()

@@ -89,40 +89,43 @@ class FooterView: UIView, ShadowView {
                 log.eventIn(chain: "rx_footerViewModelDidRemoveThumbnail")
                 guard let `self` = self else { return }
                 if let object = object.element {
-                    let deleteIndex = self.thumbnails.index(where: { $0.context == object.deleteContext })!
+                    if let deleteIndex = self.thumbnails.index(where: { $0.context == object.deleteContext }) {
 
-                    self.thumbnails[deleteIndex].removeFromSuperview()
-                    self.thumbnails.remove(at: deleteIndex)
-                    self.updateFrontBar(to: object.currentContext)
+                        self.thumbnails[deleteIndex].removeFromSuperview()
+                        self.thumbnails.remove(at: deleteIndex)
+                        self.updateFrontBar(to: object.currentContext)
 
-                    if self.thumbnails.count == 0 {
-                        if (self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width {
-                            self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-                            self.scrollView.contentInset = UIEdgeInsets(top: 0, left: self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), bottom: 0, right: 0)
-                        }
-                    } else {
-                        if let deleteAnimator = self.deleteAnimator {
-                            // アニメーション実行中であれば、強制的に完了にする
-                            deleteAnimator.fractionComplete = 1
-                        }
-                        self.deleteAnimator = UIViewPropertyAnimator(duration: 0.25, curve: .linear) {
+                        if self.thumbnails.count == 0 {
                             if (self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width {
                                 self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
                                 self.scrollView.contentInset = UIEdgeInsets(top: 0, left: self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), bottom: 0, right: 0)
                             }
+                        } else {
+                            if let deleteAnimator = self.deleteAnimator {
+                                // アニメーション実行中であれば、強制的に完了にする
+                                deleteAnimator.fractionComplete = 1
+                            }
+                            self.deleteAnimator = UIViewPropertyAnimator(duration: 0.25, curve: .linear) {
+                                if (self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width {
+                                    self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
+                                    self.scrollView.contentInset = UIEdgeInsets(top: 0, left: self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), bottom: 0, right: 0)
+                                }
 
-                            (0 ... self.thumbnails.count - 1).forEach {
-                                if $0 < deleteIndex {
-                                    self.thumbnails[$0].center.x += self.thumbnails[$0].frame.size.width / 2
-                                } else if $0 >= deleteIndex {
-                                    self.thumbnails[$0].center.x -= self.thumbnails[$0].frame.size.width / 2
+                                (0 ... self.thumbnails.count - 1).forEach {
+                                    if $0 < deleteIndex {
+                                        self.thumbnails[$0].center.x += self.thumbnails[$0].frame.size.width / 2
+                                    } else if $0 >= deleteIndex {
+                                        self.thumbnails[$0].center.x -= self.thumbnails[$0].frame.size.width / 2
+                                    }
                                 }
                             }
+                            self.deleteAnimator!.addCompletion { _ in
+                                self.deleteAnimator = nil
+                            }
+                            self.deleteAnimator!.startAnimation()
                         }
-                        self.deleteAnimator!.addCompletion { _ in
-                            self.deleteAnimator = nil
-                        }
-                        self.deleteAnimator!.startAnimation()
+                    } else {
+                        log.error("delete context not found.")
                     }
                 }
                 log.eventOut(chain: "rx_footerViewModelDidRemoveThumbnail")

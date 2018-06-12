@@ -31,7 +31,7 @@ class PageHistoryDataModelTests: XCTestCase {
         PageHistoryDataModel.s.initialize()
         XCTAssertTrue(PageHistoryDataModel.s.histories.count == 1)
         
-        PageHistoryDataModel.s.append(url: "testInitialize")
+        PageHistoryDataModel.s.append(url: #function)
         PageHistoryDataModel.s.store()
         
         PageHistoryDataModel.s.initialize()
@@ -39,28 +39,28 @@ class PageHistoryDataModelTests: XCTestCase {
     }
     
     func testStartLoading() {
-        weak var expectation = self.expectation(description: "testStartLoading")
+        weak var expectation = self.expectation(description: #function)
         
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidStartLoading
             .subscribe { element in
                 if let expectation = expectation {
-                    XCTAssertTrue(element.element! == "testStartLoading")
+                    XCTAssertTrue(element.element! == #function)
                     expectation.fulfill()
                 }
             }
             .disposed(by: disposeBag)
         
-        PageHistoryDataModel.s.startLoading(context: "testStartLoading")
+        PageHistoryDataModel.s.startLoading(context: #function)
         
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testEndLoading(context: String) {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testEndLoading")
-        PageHistoryDataModel.s.append(url: "testEndLoading")
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
         
-        weak var expectation = self.expectation(description: "testEndLoading")
+        weak var expectation = self.expectation(description: #function)
         
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidEndLoading
             .subscribe { object in
@@ -76,9 +76,9 @@ class PageHistoryDataModelTests: XCTestCase {
     
     func testEndRendering(context: String) {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testEndRendering")
+        PageHistoryDataModel.s.append(url: #function)
         
-        weak var expectation = self.expectation(description: "testEndRendering")
+        weak var expectation = self.expectation(description: #function)
         
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidEndRendering
             .subscribe { object in
@@ -101,122 +101,122 @@ class PageHistoryDataModelTests: XCTestCase {
     
     func testGetMostForwardUrl() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGetMostForwardUrl")
-        PageHistoryDataModel.s.append(url: "testGetMostForwardUrl")
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetMostForwardUrl", title: "testGetMostForwardUrl", operation: .normal)
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
         PageHistoryDataModel.s.store()
         
         let url = PageHistoryDataModel.s.getMostForwardUrl(context: PageHistoryDataModel.s.histories[1].context)
-        XCTAssertTrue(url == "testGetMostForwardUrl")
+        XCTAssertTrue(url == #function)
     }
     
     func testGetBackURL() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGetBackURL")
-        PageHistoryDataModel.s.append(url: "testGetBackURL")
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetBackURL", title: "testGetBackURL", operation: .normal)
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetBackURL", title: "testGetBackURL", operation: .normal)
-
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
+        
         PageHistoryDataModel.s.store()
         let backUrl = PageHistoryDataModel.s.getBackUrl(context: PageHistoryDataModel.s.histories[1].context)
-
-        XCTAssertTrue(backUrl == "testGetBackURL")
+        
+        XCTAssertTrue(backUrl == #function)
     }
     
     func testGetForwardUrl() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGetForwardURL")
-        PageHistoryDataModel.s.append(url: "testGetForwardURL")
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetForwardURL", title: "testGetForwardURL", operation: .normal)
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetForwardURL", title: "testGetForwardURL", operation: .normal)
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
         
         PageHistoryDataModel.s.store()
         PageHistoryDataModel.s.getBackUrl(context: PageHistoryDataModel.s.histories[1].context)
         let forwardUrl = PageHistoryDataModel.s.getForwardUrl(context: PageHistoryDataModel.s.histories[1].context)
         
-        XCTAssertTrue(forwardUrl == "testGetForwardURL")
+        XCTAssertTrue(forwardUrl == #function)
     }
     
     func testUpdate() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGetForwardURL")
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetForwardURL", title: "testGetForwardURL", operation: .normal)
-        XCTAssertTrue(PageHistoryDataModel.s.histories[1].backForwardList[PageHistoryDataModel.s.histories[1].listIndex] == "testGetForwardURL")
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
+        XCTAssertTrue(PageHistoryDataModel.s.histories[1].backForwardList[PageHistoryDataModel.s.histories[1].listIndex] == #function)
     }
     
     func testInsert() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testInsert")
-        PageHistoryDataModel.s.append(url: "testInsert")
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
         PageHistoryDataModel.s.change(context: PageHistoryDataModel.s.histories[1].context)
         PageHistoryDataModel.s.store()
         
-        weak var expectation = self.expectation(description: "testInsert")
+        weak var expectation = self.expectation(description: #function)
         
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert
             .subscribe { object in
                 if let expectation = expectation {
-                    XCTAssertTrue(object.element!.pageHistory.url == "testInsert")
+                    XCTAssertTrue(object.element!.pageHistory.url == #function)
                     expectation.fulfill()
                 }
             }
             .disposed(by: disposeBag)
-        PageHistoryDataModel.s.insert(url: "testInsert")
+        PageHistoryDataModel.s.insert(url: #function)
         
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testInsertToAppend() {
         PageHistoryDataModel.s.initialize()
-
-        weak var expectation = self.expectation(description: "testInsertToAppend")
-
+        
+        weak var expectation = self.expectation(description: #function)
+        
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
             .subscribe { object in
                 if let expectation = expectation {
-                    XCTAssertTrue(object.element!.url == "testInsertToAppend")
+                    XCTAssertTrue(object.element!.url == #function)
                     expectation.fulfill()
                 }
             }
             .disposed(by: disposeBag)
-        PageHistoryDataModel.s.insert(url: "testInsertToAppend")
-
+        PageHistoryDataModel.s.insert(url: #function)
+        
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testAppend() {
         PageHistoryDataModel.s.initialize()
         
-        weak var expectation = self.expectation(description: "testAppend")
-
+        weak var expectation = self.expectation(description: #function)
+        
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
             .subscribe { object in
                 if let expectation = expectation {
-                    XCTAssertTrue(object.element!.url == "testAppend")
-                    XCTAssertTrue(PageHistoryDataModel.s.histories.last!.url == "testAppend")
+                    XCTAssertTrue(object.element!.url == #function)
+                    XCTAssertTrue(PageHistoryDataModel.s.histories.last!.url == #function)
                     expectation.fulfill()
                 }
             }
             .disposed(by: disposeBag)
-
-        PageHistoryDataModel.s.append(url: "testAppend")
+        
+        PageHistoryDataModel.s.append(url: #function)
         
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testCopyWithInsert() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testCopyWithInsert")
-        PageHistoryDataModel.s.append(url: "testCopyWithInsert")
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
         PageHistoryDataModel.s.change(context: PageHistoryDataModel.s.histories[1].context)
         PageHistoryDataModel.s.store()
         
-        weak var expectation = self.expectation(description: "testCopyWithInsert")
+        weak var expectation = self.expectation(description: #function)
         
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert
             .subscribe { object in
                 if let expectation = expectation {
-                    XCTAssertTrue(object.element!.pageHistory.url == "testCopyWithInsert")
+                    XCTAssertTrue(object.element!.pageHistory.url == #function)
                     expectation.fulfill()
                 }
             }
@@ -228,15 +228,15 @@ class PageHistoryDataModelTests: XCTestCase {
     
     func testCopyWithAppend() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testCopyWithAppend")
-
-        weak var expectation = self.expectation(description: "testCopyWithAppend")
+        PageHistoryDataModel.s.append(url: #function)
+        
+        weak var expectation = self.expectation(description: #function)
         
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
             .subscribe { object in
                 if let expectation = expectation {
-                    XCTAssertTrue(object.element!.url == "testCopyWithAppend")
-                    XCTAssertTrue(PageHistoryDataModel.s.histories.last!.url == "testCopyWithAppend")
+                    XCTAssertTrue(object.element!.url == #function)
+                    XCTAssertTrue(PageHistoryDataModel.s.histories.last!.url == #function)
                     expectation.fulfill()
                 }
             }
@@ -249,9 +249,9 @@ class PageHistoryDataModelTests: XCTestCase {
     
     func testReload() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testReload")
+        PageHistoryDataModel.s.append(url: #function)
         
-        weak var expectation = self.expectation(description: "testReload")
+        weak var expectation = self.expectation(description: #function)
         
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidReload
             .subscribe { _ in
@@ -268,7 +268,7 @@ class PageHistoryDataModelTests: XCTestCase {
     
     func testGetIndex() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testReload")
+        PageHistoryDataModel.s.append(url: #function)
         
         let index = PageHistoryDataModel.s.getIndex(context: PageHistoryDataModel.s.histories[1].context)
         XCTAssertTrue(index == 1)
@@ -276,17 +276,17 @@ class PageHistoryDataModelTests: XCTestCase {
     
     func testRemoveAndEmpty() {
         PageHistoryDataModel.s.initialize()
-
+        
         let deleteContext = PageHistoryDataModel.s.histories.first!.context
-
-        weak var expectation = self.expectation(description: "testRemoveAndEmpty")
-
+        
+        weak var expectation = self.expectation(description: #function)
+        
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
             .subscribe { object in
                 XCTAssertTrue(object.element?.deleteContext == deleteContext)
             }
             .disposed(by: disposeBag)
-
+        
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
             .subscribe { _ in
                 if let expectation = expectation {
@@ -294,20 +294,20 @@ class PageHistoryDataModelTests: XCTestCase {
                 }
             }
             .disposed(by: disposeBag)
-
+        
         PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.histories.first!.context)
-
+        
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testRemove() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testRemove")
-
+        PageHistoryDataModel.s.append(url: #function)
+        
         let deleteContext = PageHistoryDataModel.s.histories.first!.context
-
-        weak var expectation = self.expectation(description: "testRemove")
-
+        
+        weak var expectation = self.expectation(description: #function)
+        
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
             .subscribe { object in
                 if let expectation = expectation {
@@ -316,18 +316,18 @@ class PageHistoryDataModelTests: XCTestCase {
                 }
             }
             .disposed(by: disposeBag)
-
+        
         PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.histories.first!.context)
-
+        
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testChange() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testChange")
-        PageHistoryDataModel.s.append(url: "testChange")
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
         
-        weak var expectation = self.expectation(description: "testChange")
+        weak var expectation = self.expectation(description: #function)
         
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange
             .subscribe { object in
@@ -345,10 +345,10 @@ class PageHistoryDataModelTests: XCTestCase {
     
     func testGoBack() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGoBack")
-        PageHistoryDataModel.s.append(url: "testGoBack")
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
         
-        weak var expectation = self.expectation(description: "testChange")
+        weak var expectation = self.expectation(description: #function)
         
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange
             .subscribe { object in
@@ -366,10 +366,10 @@ class PageHistoryDataModelTests: XCTestCase {
     
     func testGoNext() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGoNext")
-        PageHistoryDataModel.s.append(url: "testGoNext")
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
         
-        weak var expectation = self.expectation(description: "testGoNext")
+        weak var expectation = self.expectation(description: #function)
         
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange
             .subscribe { object in
@@ -387,16 +387,16 @@ class PageHistoryDataModelTests: XCTestCase {
     
     func testStore() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGoNext")
-        PageHistoryDataModel.s.append(url: "testGoNext")
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
         PageHistoryDataModel.s.store()
         PageHistoryDataModel.s.initialize()
     }
     
     func testDelete() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGoNext")
-        PageHistoryDataModel.s.append(url: "testGoNext")
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
         PageHistoryDataModel.s.delete()
         XCTAssertTrue(PageHistoryDataModel.s.histories.count == 0)
     }

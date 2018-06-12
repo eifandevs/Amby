@@ -29,15 +29,15 @@ class BaseViewModelTests: XCTestCase {
     
     func testGetIndex() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGetIndex")
+        PageHistoryDataModel.s.append(url: #function)
         XCTAssertTrue(viewModel.getIndex(context: PageHistoryDataModel.s.histories[1].context) == 1)
     }
     
     func testGetMostForwardUrlPageHistoryDataModel() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGetMostForwardUrlPageHistoryDataModel")
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetMostForwardUrlPageHistoryDataModel", title: "testGetMostForwardUrlPageHistoryDataModel", operation: .normal)
-        XCTAssertTrue(viewModel.getMostForwardUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context) == "testGetMostForwardUrlPageHistoryDataModel")
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
+        XCTAssertTrue(viewModel.getMostForwardUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context) == #function)
     }
     
     func testGetIsPastViewingPageHistoryDataModel() {
@@ -48,28 +48,28 @@ class BaseViewModelTests: XCTestCase {
     
     func testGetBackUrlPageHistoryDataModel() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGetBackUrlPageHistoryDataModel")
-        PageHistoryDataModel.s.append(url: "testGetBackUrlPageHistoryDataModel")
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetBackUrlPageHistoryDataModel", title: "testGetBackUrlPageHistoryDataModel", operation: .normal)
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetBackUrlPageHistoryDataModel", title: "testGetBackUrlPageHistoryDataModel", operation: .normal)
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
         
         PageHistoryDataModel.s.store()
         let backUrl = viewModel.getBackUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context)
         
-        XCTAssertTrue(backUrl == "testGetBackUrlPageHistoryDataModel")
+        XCTAssertTrue(backUrl == #function)
     }
     
     func testGetForwardUrlPageHistoryDataModel() {
         PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: "testGetForwardUrlPageHistoryDataModel")
-        PageHistoryDataModel.s.append(url: "testGetForwardUrlPageHistoryDataModel")
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetForwardUrlPageHistoryDataModel", title: "testGetForwardUrlPageHistoryDataModel", operation: .normal)
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: "testGetForwardUrlPageHistoryDataModel", title: "testGetForwardUrlPageHistoryDataModel", operation: .normal)
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
+        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
         
         PageHistoryDataModel.s.store()
         let backUrl = viewModel.getBackUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context)
         let forwardUrl = viewModel.getForwardUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context)
         
-        XCTAssertTrue(forwardUrl == "testGetForwardUrlPageHistoryDataModel")
+        XCTAssertTrue(forwardUrl == #function)
     }
 }
