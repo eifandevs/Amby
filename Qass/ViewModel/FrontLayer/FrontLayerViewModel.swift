@@ -30,7 +30,7 @@ final class FrontLayerViewModel {
     }
 
     func beginEditingHeaderViewDataModel() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { in
             HeaderViewDataModel.s.beginEditing(forceEditFlg: true)
         }
     }
