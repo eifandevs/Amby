@@ -22,8 +22,7 @@ import UIKit
     static let sharedMyApplication = UIApplication.shared as! EGApplication
 
     override func sendEvent(_ event: UIEvent) {
-        // webviewでタッチイベントを検知するため
-        // タッチイベントをフックする
+        // hook touch event for webview
         if event.type == .touches {
             if let touches = event.allTouches, let touch = touches.first, touches.count == 1 {
                 // 動画を全画面表示しているときは、無効
