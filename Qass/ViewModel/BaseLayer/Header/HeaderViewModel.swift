@@ -69,7 +69,7 @@ final class HeaderViewModel {
     }
 
     func registerFavoriteDataModel() {
-        FavoriteDataModel.s.register()
+        FavoriteDataModel.s.update()
     }
 
     func removePageHistoryDataModel() {

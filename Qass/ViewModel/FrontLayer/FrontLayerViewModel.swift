@@ -22,7 +22,7 @@ final class FrontLayerViewModel {
     }
 
     func registerFavoriteDataModel() {
-        FavoriteDataModel.s.register()
+        FavoriteDataModel.s.update()
     }
 
     func removePageHistoryDataModel() {
