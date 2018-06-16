@@ -180,13 +180,13 @@ final class PageHistoryDataModel {
     }
 
     /// ページ挿入(new window event)
-    func insert(url: String?) {
+    func insert(url: String?, title: String? = nil) {
         if isViewingLatest {
             // 最新ページを見ているなら、insertではないので、appendに切り替える
-            append(url: url)
+            append(url: url, title: title ?? "")
         } else {
             if let currentLocation = currentLocation {
-                let newPage = PageHistory(url: url ?? "")
+                let newPage = PageHistory(url: url ?? "", title: title ?? "")
                 histories.insert(newPage, at: currentLocation + 1)
                 currentContext = newPage.context
                 rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation))
@@ -194,9 +194,9 @@ final class PageHistoryDataModel {
         }
     }
 
-    /// ページ追加
-    func append(url: String?) {
-        let newPage = PageHistory(url: url ?? "")
+    /// add page
+    func append(url: String?, title: String? = nil) {
+        let newPage = PageHistory(url: url ?? "", title: title ?? "")
         histories.append(newPage)
         currentContext = newPage.context
         rx_pageHistoryDataModelDidAppend.onNext(newPage)
