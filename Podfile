@@ -27,6 +27,8 @@ target 'Qass-Develop' do
     inherit! :search_paths
     # Pods for testing
     pod 'RxSwift', '~> 4.0'
+    pod 'Realm', '~> 2.4'
+    pod 'RealmSwift', '~> 2.4'
   end
 
   target 'Qass-DevelopUITests' do

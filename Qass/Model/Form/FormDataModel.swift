@@ -12,13 +12,15 @@ import RealmSwift
 final class FormDataModel {
     static let s = FormDataModel()
 
-    /// DBプロバイダー
+    /// db repository
     let repository = DBRepository()
 
+    /// insert forms
     func insert(forms: [Form]) {
         repository.insert(data: forms)
     }
 
+    /// select forms
     func select(id: String? = nil, url: String? = nil) -> [Form] {
         let forms = repository.select(type: Form.self) as! [Form]
         if let id = id {
@@ -29,6 +31,7 @@ final class FormDataModel {
         return forms
     }
 
+    /// delete forms
     func delete(forms: [Form]? = nil) {
         if let forms = forms {
             repository.delete(data: forms)
@@ -38,7 +41,7 @@ final class FormDataModel {
         }
     }
 
-    /// フォーム情報の保存
+    /// store form
     func store(form: Form) {
         // 有効なフォーム情報かを判定
         // 入力済みのフォームが一つでもあれば保存する

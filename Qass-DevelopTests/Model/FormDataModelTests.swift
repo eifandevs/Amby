@@ -7,12 +7,21 @@
 //
 
 import XCTest
+import RxSwift
+import RxCocoa
+import Realm
+import RealmSwift
+
+@testable import Qass_Develop
 
 class FormDataModelTests: XCTestCase {
     
+    let disposeBag = DisposeBag()
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        FormDataModel.s.delete()
     }
     
     override func tearDown() {
@@ -20,16 +29,55 @@ class FormDataModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testInsert() {
+        let form = Form()
+        form.title = #function
+        form.host = #function
+        form.url = #function
+        FormDataModel.s.insert(forms: [form])
+        
+        XCTAssertTrue(FormDataModel.s.select(url: form.url).first!.title == #function)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testSelect() {
+        let form = Form()
+        form.title = #function
+        form.host = #function
+        form.url = #function
+        FormDataModel.s.insert(forms: [form])
+        
+        XCTAssertTrue(FormDataModel.s.select().count == 1)
+        XCTAssertTrue(FormDataModel.s.select(url: form.url).first!.title == #function)
+        XCTAssertTrue(FormDataModel.s.select(id: form.id).first!.title == #function)
     }
     
+    func testStore() {
+        let input = Input()
+        input.formIndex = 0
+        input.formInputIndex = 0
+        input.value = Data()
+        
+        let form = Form()
+        form.title = #function
+        form.host = #function
+        form.url = #function
+        form.inputs.append(input)
+        
+        FormDataModel.s.store(form: form)
+        
+        XCTAssertTrue(FormDataModel.s.select().count == 1)
+        XCTAssertTrue(FormDataModel.s.select(url: form.url).first!.title == #function)
+        XCTAssertTrue(FormDataModel.s.select(id: form.id).first!.title == #function)
+    }
+    
+    func testStoreFailed() {
+        let form = Form()
+        form.title = #function
+        form.host = #function
+        form.url = #function
+        
+        FormDataModel.s.store(form: form)
+        
+        XCTAssertTrue(FormDataModel.s.select().count == 0)
+    }
 }
