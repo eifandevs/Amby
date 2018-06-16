@@ -20,6 +20,7 @@ class FavoriteDataModelTests: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         FavoriteDataModel.s.delete()
+        PageHistoryDataModel.s.delete()
     }
     
     override func tearDown() {
@@ -135,5 +136,36 @@ class FavoriteDataModelTests: XCTestCase {
         FavoriteDataModel.s.delete(notify: true)
         
         self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testReload() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: #function)
+        
+        weak var expectation = self.expectation(description: #function)
+        
+        FavoriteDataModel.s.rx_favoriteDataModelDidReload
+            .subscribe { _ in
+                if let expectation = expectation {
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        FavoriteDataModel.s.reload()
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testUpdate() {
+        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: #function, title: #function)
+        
+        FavoriteDataModel.s.update()
+        let fds = FavoriteDataModel.s.select(url: #function)
+        XCTAssertTrue(fds.first!.url == #function)
+        
+        FavoriteDataModel.s.update()
+        XCTAssertTrue(FavoriteDataModel.s.select(url: #function).count == 0)
     }
 }
