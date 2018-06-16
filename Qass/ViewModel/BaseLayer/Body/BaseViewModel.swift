@@ -105,7 +105,7 @@ final class BaseViewModel {
 
     var headerFieldText: String = "" {
         didSet {
-            HeaderViewDataModel.s.updateHeaderFieldText(text: headerFieldText)
+            HeaderViewDataModel.s.updateText(text: headerFieldText)
         }
     }
 

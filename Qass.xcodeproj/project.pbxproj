@@ -330,6 +330,12 @@
 		A1E1A09820D0667D004DB01D /* OptionMenuHelpTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E1A08B20D0667D004DB01D /* OptionMenuHelpTableViewModel.swift */; };
 		A1E1A09920D0667D004DB01D /* OptionMenuAppTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E1A08C20D0667D004DB01D /* OptionMenuAppTableViewModel.swift */; };
 		A1E1A09A20D0667D004DB01D /* OptionMenuAppTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E1A08C20D0667D004DB01D /* OptionMenuAppTableViewModel.swift */; };
+		A1E562CB20D55C0E007B5B1C /* HeaderViewDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562CA20D55C0E007B5B1C /* HeaderViewDataModelTests.swift */; };
+		A1E562CD20D560C9007B5B1C /* OperationDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562CC20D560C9007B5B1C /* OperationDataModelTests.swift */; };
+		A1E562CF20D56265007B5B1C /* HtmlDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562CE20D56265007B5B1C /* HtmlDataModelTests.swift */; };
+		A1E562D120D564B0007B5B1C /* EnvDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D020D564B0007B5B1C /* EnvDataModelTests.swift */; };
+		A1E562D320D56724007B5B1C /* ArticleDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D220D56724007B5B1C /* ArticleDataModelTests.swift */; };
+		A1E562D520D569D8007B5B1C /* AuthTokenDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D420D569D8007B5B1C /* AuthTokenDataModelTests.swift */; };
 		A1ED0BFD20C94DDD00DFC55B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */; };
 		A1ED0BFE20C94DFE00DFC55B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */; };
 		A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
@@ -550,6 +556,12 @@
 		A1E1A08A20D0667D004DB01D /* OptionMenuHistoryTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuHistoryTableViewModel.swift; sourceTree = "<group>"; };
 		A1E1A08B20D0667D004DB01D /* OptionMenuHelpTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuHelpTableViewModel.swift; sourceTree = "<group>"; };
 		A1E1A08C20D0667D004DB01D /* OptionMenuAppTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuAppTableViewModel.swift; sourceTree = "<group>"; };
+		A1E562CA20D55C0E007B5B1C /* HeaderViewDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewDataModelTests.swift; sourceTree = "<group>"; };
+		A1E562CC20D560C9007B5B1C /* OperationDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataModelTests.swift; sourceTree = "<group>"; };
+		A1E562CE20D56265007B5B1C /* HtmlDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlDataModelTests.swift; sourceTree = "<group>"; };
+		A1E562D020D564B0007B5B1C /* EnvDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvDataModelTests.swift; sourceTree = "<group>"; };
+		A1E562D220D56724007B5B1C /* ArticleDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataModelTests.swift; sourceTree = "<group>"; };
+		A1E562D420D569D8007B5B1C /* AuthTokenDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenDataModelTests.swift; sourceTree = "<group>"; };
 		A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		A1ED0C0320CC097B00DFC55B /* UserDefaultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultRepository.swift; sourceTree = "<group>"; };
@@ -678,6 +690,12 @@
 				A1902F31209CF976004F1EA5 /* FavoriteDataModelTests.swift */,
 				A1902F32209CF976004F1EA5 /* FormDataModelTests.swift */,
 				A1902F33209CF976004F1EA5 /* PageHistoryDataModelTests.swift */,
+				A1E562CA20D55C0E007B5B1C /* HeaderViewDataModelTests.swift */,
+				A1E562CC20D560C9007B5B1C /* OperationDataModelTests.swift */,
+				A1E562CE20D56265007B5B1C /* HtmlDataModelTests.swift */,
+				A1E562D020D564B0007B5B1C /* EnvDataModelTests.swift */,
+				A1E562D220D56724007B5B1C /* ArticleDataModelTests.swift */,
+				A1E562D420D569D8007B5B1C /* AuthTokenDataModelTests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2035,9 +2053,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1DF4B43209D03B300196E0F /* BaseViewModelTests.swift in Sources */,
+				A1E562D120D564B0007B5B1C /* EnvDataModelTests.swift in Sources */,
 				A1DF4B3F209D039F00196E0F /* CommonHistoryDataModelTests.swift in Sources */,
+				A1E562D520D569D8007B5B1C /* AuthTokenDataModelTests.swift in Sources */,
 				A1DF4B41209D03A900196E0F /* FormDataModelTests.swift in Sources */,
+				A1E562CD20D560C9007B5B1C /* OperationDataModelTests.swift in Sources */,
+				A1E562CB20D55C0E007B5B1C /* HeaderViewDataModelTests.swift in Sources */,
+				A1E562D320D56724007B5B1C /* ArticleDataModelTests.swift in Sources */,
 				A1DF4B40209D03A300196E0F /* FavoriteDataModelTests.swift in Sources */,
+				A1E562CF20D56265007B5B1C /* HtmlDataModelTests.swift in Sources */,
 				A1DF4B42209D03AC00196E0F /* PageHistoryDataModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

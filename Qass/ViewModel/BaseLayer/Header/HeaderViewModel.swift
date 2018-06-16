@@ -39,7 +39,7 @@ final class HeaderViewModel {
             }
         }
     /// テキストフィールド更新通知用RX
-    let rx_headerViewModelDidChangeField = HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateHeaderFieldText
+    let rx_headerViewModelDidChangeField = HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateText
         .flatMap { text -> Observable<String> in
             return Observable.just(text)
         }

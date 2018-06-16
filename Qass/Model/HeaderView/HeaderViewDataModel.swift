@@ -2,7 +2,7 @@
 //  HeaderViewDataModel.swift
 //  Qas
 //
-//  Created by jmas on 2017/12/07.
+//  Created by temma on 2017/12/07.
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ final class HeaderViewDataModel {
     /// プログレス更新通知用RX
     let rx_headerViewDataModelDidUpdateProgress = PublishSubject<CGFloat>()
     /// ヘッダーテキストの更新通知用RX
-    let rx_headerViewDataModelDidUpdateHeaderFieldText = PublishSubject<String>()
+    let rx_headerViewDataModelDidUpdateText = PublishSubject<String>()
     /// 編集開始通知用RX
     let rx_headerViewDataModelDidBeginEditing = PublishSubject<Bool>()
 
@@ -25,22 +25,22 @@ final class HeaderViewDataModel {
     // プログレス
     private var progress = 0.f
 
-    // ヘッダーテキスト
+    // header text
     private var headerFieldText = ""
 
-    /// プログレス情報の更新
+    /// update header progress
     func updateProgress(progress: CGFloat) {
         self.progress = progress
         rx_headerViewDataModelDidUpdateProgress.onNext(progress)
     }
 
-    /// ヘッダーテキストの更新
-    func updateHeaderFieldText(text: String) {
+    /// update header field text
+    func updateText(text: String) {
         headerFieldText = text
-        rx_headerViewDataModelDidUpdateHeaderFieldText.onNext(text)
+        rx_headerViewDataModelDidUpdateText.onNext(text)
     }
 
-    /// 編集開始通知
+    /// begin header edit
     func beginEditing(forceEditFlg: Bool) {
         rx_headerViewDataModelDidBeginEditing.onNext(forceEditFlg)
     }

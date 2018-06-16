@@ -31,10 +31,10 @@ final class ApiRepository<T: TargetType>: MoyaProvider<T> {
         #endif
 
         var stubClosure: (Target) -> Moya.StubBehavior
-        #if DEVELOP
-            stubClosure = ApiRepository.immediatelyStub
-        #else
+        #if PRODUCTION
             stubClosure = ApiRepository.neverStub
+        #else
+            stubClosure = ApiRepository.immediatelyStub
         #endif
 
         super.init(endpointClosure: endpointClosure,
