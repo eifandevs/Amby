@@ -336,6 +336,9 @@
 		A1E562D120D564B0007B5B1C /* EnvDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D020D564B0007B5B1C /* EnvDataModelTests.swift */; };
 		A1E562D320D56724007B5B1C /* ArticleDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D220D56724007B5B1C /* ArticleDataModelTests.swift */; };
 		A1E562D520D569D8007B5B1C /* AuthTokenDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D420D569D8007B5B1C /* AuthTokenDataModelTests.swift */; };
+		A1E562D720D56BF8007B5B1C /* SearchHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D620D56BF8007B5B1C /* SearchHistoryDataModelTests.swift */; };
+		A1E562D920D679E1007B5B1C /* AppDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D820D679E1007B5B1C /* AppDataModelTests.swift */; };
+		A1E562DB20D67C11007B5B1C /* SuggestDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562DA20D67C11007B5B1C /* SuggestDataModelTests.swift */; };
 		A1ED0BFD20C94DDD00DFC55B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */; };
 		A1ED0BFE20C94DFE00DFC55B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */; };
 		A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
@@ -562,6 +565,9 @@
 		A1E562D020D564B0007B5B1C /* EnvDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvDataModelTests.swift; sourceTree = "<group>"; };
 		A1E562D220D56724007B5B1C /* ArticleDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataModelTests.swift; sourceTree = "<group>"; };
 		A1E562D420D569D8007B5B1C /* AuthTokenDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenDataModelTests.swift; sourceTree = "<group>"; };
+		A1E562D620D56BF8007B5B1C /* SearchHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModelTests.swift; sourceTree = "<group>"; };
+		A1E562D820D679E1007B5B1C /* AppDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDataModelTests.swift; sourceTree = "<group>"; };
+		A1E562DA20D67C11007B5B1C /* SuggestDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestDataModelTests.swift; sourceTree = "<group>"; };
 		A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		A1ED0C0320CC097B00DFC55B /* UserDefaultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultRepository.swift; sourceTree = "<group>"; };
@@ -696,6 +702,9 @@
 				A1E562D020D564B0007B5B1C /* EnvDataModelTests.swift */,
 				A1E562D220D56724007B5B1C /* ArticleDataModelTests.swift */,
 				A1E562D420D569D8007B5B1C /* AuthTokenDataModelTests.swift */,
+				A1E562D620D56BF8007B5B1C /* SearchHistoryDataModelTests.swift */,
+				A1E562D820D679E1007B5B1C /* AppDataModelTests.swift */,
+				A1E562DA20D67C11007B5B1C /* SuggestDataModelTests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2052,6 +2061,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1E562DB20D67C11007B5B1C /* SuggestDataModelTests.swift in Sources */,
 				A1DF4B43209D03B300196E0F /* BaseViewModelTests.swift in Sources */,
 				A1E562D120D564B0007B5B1C /* EnvDataModelTests.swift in Sources */,
 				A1DF4B3F209D039F00196E0F /* CommonHistoryDataModelTests.swift in Sources */,
@@ -2060,8 +2070,10 @@
 				A1E562CD20D560C9007B5B1C /* OperationDataModelTests.swift in Sources */,
 				A1E562CB20D55C0E007B5B1C /* HeaderViewDataModelTests.swift in Sources */,
 				A1E562D320D56724007B5B1C /* ArticleDataModelTests.swift in Sources */,
+				A1E562D920D679E1007B5B1C /* AppDataModelTests.swift in Sources */,
 				A1DF4B40209D03A300196E0F /* FavoriteDataModelTests.swift in Sources */,
 				A1E562CF20D56265007B5B1C /* HtmlDataModelTests.swift in Sources */,
+				A1E562D720D56BF8007B5B1C /* SearchHistoryDataModelTests.swift in Sources */,
 				A1DF4B42209D03AC00196E0F /* PageHistoryDataModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
