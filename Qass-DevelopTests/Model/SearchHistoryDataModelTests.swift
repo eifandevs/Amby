@@ -72,6 +72,7 @@ class SearchHistoryDataModelTests: XCTestCase {
             SearchHistoryDataModel.s.store(histories: [SearchHistory(title: #function, date: date)])
         }
         XCTAssertTrue(SearchHistoryDataModel.s.getList().count == 400)
-//        SearchHistoryDataModel.s.expireCheck()
+        SearchHistoryDataModel.s.expireCheck()
+        XCTAssertTrue(SearchHistoryDataModel.s.getList().count == 90)
     }
 }
