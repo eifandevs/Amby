@@ -47,7 +47,7 @@ final class SearchHistoryDataModel {
             }
 
             for (key, value) in searchHistoryByDate {
-                let filename = "/\(key).dat"
+                let filename = "\(key).dat"
 
                 let saveData: [SearchHistory] = { () -> [SearchHistory] in
                     if let data = localStorageRepository.getData(.searchHistory(resource: filename)) {
@@ -67,6 +67,7 @@ final class SearchHistoryDataModel {
 
     /// 検索履歴の検索
     /// 検索ワードと検索件数を指定する
+    /// 指定ワードを含むかどうか
     func select(title: String, readNum: Int) -> [SearchHistory] {
         var result: [SearchHistory] = []
         let readFiles = getList().reversed()

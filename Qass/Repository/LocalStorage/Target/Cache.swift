@@ -41,8 +41,16 @@ extension Cache: LocalStorageTargetType {
             }()
             
             return path
-        case .searchHistory:
-            return "/search_history"
+        case let .searchHistory(resource):
+            let path: String = {
+                if let resource = resource {
+                    return "/search_history/\(resource)"
+                } else {
+                    return "/search_history"
+                }
+            }()
+            
+            return path
         case let .thumbnails(additionalPath, resource):
             let path: String = {
                 if let additionalPath = additionalPath {
