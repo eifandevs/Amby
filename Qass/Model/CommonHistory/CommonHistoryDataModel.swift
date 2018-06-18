@@ -67,7 +67,7 @@ final class CommonHistoryDataModel {
 
             // 日付毎に分けた閲覧履歴を日付毎に保存していく
             for (key, value) in commonHistoryByDate {
-                let filename = "/\(key).dat"
+                let filename = "\(key).dat"
                 
                 let saveData: [CommonHistory] = { () -> [CommonHistory] in
                     if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
@@ -103,7 +103,7 @@ final class CommonHistoryDataModel {
     /// 閲覧履歴の検索
     /// 日付指定
     func select(dateString: String) -> [CommonHistory] {
-        let filename = "/\(dateString).dat"
+        let filename = "\(dateString).dat"
         
         if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
             let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
@@ -123,7 +123,7 @@ final class CommonHistoryDataModel {
                 let latestFiles = readFiles.prefix(readNum)
                 var allCommonHistory: [CommonHistory] = []
                 latestFiles.forEach({ (keyStr: String) in
-                    let filename = "/\(keyStr).dat"
+                    let filename = "\(keyStr).dat"
                     if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
                         let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
                         allCommonHistory += commonHistory
@@ -160,7 +160,7 @@ final class CommonHistoryDataModel {
         if readFiles.count > historySaveCount {
             let deleteFiles = readFiles.prefix(readFiles.count - historySaveCount)
             deleteFiles.forEach({ key in
-                localStorageRepository.delete(.commonHistory(resource: "/\(key).dat"))
+                localStorageRepository.delete(.commonHistory(resource: "\(key).dat"))
             })
             log.debug("deleteCommonHistory: \(deleteFiles)")
         }
@@ -171,7 +171,7 @@ final class CommonHistoryDataModel {
     func delete(historyIds: [String: [String]]) {
         // 履歴
         for (key, value) in historyIds {
-            let filename = "/\(key).dat"
+            let filename = "\(key).dat"
 
             let saveData: [CommonHistory]? = { () -> [CommonHistory]? in
                 if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {

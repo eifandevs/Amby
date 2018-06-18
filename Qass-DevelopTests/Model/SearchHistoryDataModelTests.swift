@@ -75,4 +75,10 @@ class SearchHistoryDataModelTests: XCTestCase {
         SearchHistoryDataModel.s.expireCheck()
         XCTAssertTrue(SearchHistoryDataModel.s.getList().count == 90)
     }
+    
+    func testDelete() {
+        SearchHistoryDataModel.s.store(histories: [SearchHistory(title: #function, date: Date().yesterday)])
+        SearchHistoryDataModel.s.delete()
+        XCTAssert(SearchHistoryDataModel.s.getList().count == 0)
+    }
 }

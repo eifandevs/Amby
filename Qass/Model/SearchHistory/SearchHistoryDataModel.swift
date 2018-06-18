@@ -76,7 +76,7 @@ final class SearchHistoryDataModel {
             let latestFiles = readFiles.prefix(readNum)
             var allSearchHistory: [SearchHistory] = []
             latestFiles.forEach({ (keyStr: String) in
-                let filename = "/\(keyStr).dat"
+                let filename = "\(keyStr).dat"
 
                 if let data = localStorageRepository.getData(.searchHistory(resource: filename)) {
                     let searchHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [SearchHistory]
@@ -114,7 +114,7 @@ final class SearchHistoryDataModel {
         if readFiles.count > saveTerm {
             let deleteFiles = readFiles.prefix(readFiles.count - saveTerm)
             deleteFiles.forEach({ key in
-                let filename = "/\(key).dat"
+                let filename = "\(key).dat"
                 localStorageRepository.delete(.searchHistory(resource: filename))
             })
             log.debug("deleteSearchHistory: \(deleteFiles)")
