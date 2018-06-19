@@ -15,19 +15,23 @@ excluded:
 
 disabled_rules:
 - variable_name
-- force_cast
-- force_try
-- cyclomatic_complexity
 - type_name
 
+# error to warning
+force_try: warning
+force_cast: warning
+
+cyclomatic_complexity:
+- 10 # warning
+
 line_length:
-- 180
+- 180 # warning
 
 type_body_length:
-- 400
+- 400 # warning
 
 file_length:
-- 500
+- 500 # warning
 
 function_body_length:
-- 100
+- 100 # warning
