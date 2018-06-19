@@ -14,7 +14,6 @@ excluded:
 - Carthage
 
 disabled_rules:
-- trailing_whitespace
 - line_length
 - nesting
 - variable_name

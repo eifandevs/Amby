@@ -9,7 +9,7 @@
 import Foundation
 
 final class LocalStorageRepository<Target: LocalStorageTargetType> {
-    
+
     /// get file list
     public func getList(_ target: Target) -> [String]? {
         do {
@@ -20,7 +20,7 @@ final class LocalStorageRepository<Target: LocalStorageTargetType> {
             return nil
         }
     }
-    
+
     /// get file data
     public func getData(_ target: Target) -> Data? {
         do {
@@ -31,12 +31,12 @@ final class LocalStorageRepository<Target: LocalStorageTargetType> {
             return nil
         }
     }
-    
+
     /// get image data
     public func getImage(_ target: Target) -> UIImage? {
         return UIImage(contentsOfFile: target.absolutePath)
     }
-    
+
     /// write
     public func write(_ target: Target, data: Data) {
         do {
@@ -46,12 +46,12 @@ final class LocalStorageRepository<Target: LocalStorageTargetType> {
             log.error("failed to store: \(error.localizedDescription)")
         }
     }
-    
+
     /// create folder
     public func create(_ target: Target) {
         Util.createFolder(path: target.absolutePath)
     }
-    
+
     /// delete
     public func delete(_ target: Target) {
         Util.deleteFolder(path: target.absolutePath)

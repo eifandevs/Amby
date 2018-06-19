@@ -14,7 +14,7 @@ final class ThumbnailDataModel {
 
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
-    
+
     func getThumbnail(context: String) -> UIImage? {
         let image = localStorageRepository.getImage(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"))
         return image?.crop(w: Int(AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2) * DeviceConst.ASPECT_RATE))
@@ -34,12 +34,12 @@ final class ThumbnailDataModel {
         localStorageRepository.delete(.thumbnails(additionalPath: nil, resource: nil))
         localStorageRepository.create(.thumbnails(additionalPath: nil, resource: nil))
     }
-    
+
     /// create folder
     func create(context: String) {
         localStorageRepository.create(.thumbnails(additionalPath: context, resource: nil))
     }
-    
+
     /// write
     func write(context: String, data: Data) {
         localStorageRepository.write(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"), data: data)

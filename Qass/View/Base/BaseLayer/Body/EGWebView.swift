@@ -38,7 +38,7 @@ class EGWebView: WKWebView {
 
     /// オペレーション
     var operation: PageHistory.Operation = .normal
-    
+
     // TODO: submit検知
 //    var form: Form?
 

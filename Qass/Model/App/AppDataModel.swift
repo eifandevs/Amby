@@ -11,7 +11,7 @@ import Foundation
 final class AppDataModel {
     static let s = AppDataModel()
     let repository = UserDefaultRepository()
-    
+
     /// 閲覧履歴保存日数
     var commonHistorySaveCount: Int {
         return repository.commonHistorySaveCount

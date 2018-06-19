@@ -14,10 +14,10 @@ final class SearchHistoryDataModel {
 
     /// userdefault repository
     private let userDefaultRepository = UserDefaultRepository()
-    
+
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
-    
+
     /// 保存済みリスト取得
     func getList() -> [String] {
         if let list = localStorageRepository.getList(.searchHistory(resource: nil)) {
@@ -25,7 +25,7 @@ final class SearchHistoryDataModel {
                 path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).sorted(by: { $1.toDate() < $0.toDate() })
         }
-        
+
         return []
     }
 
@@ -55,7 +55,7 @@ final class SearchHistoryDataModel {
                         let saveData: [SearchHistory] = value + old
                         return saveData
                     }
-                    
+
                     return value
                 }()
 

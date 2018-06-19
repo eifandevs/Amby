@@ -26,7 +26,7 @@ final class CommonHistoryDataModel {
 
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
-    
+
     /// 閲覧履歴
     public private(set) var histories = [CommonHistory]()
 
@@ -47,12 +47,12 @@ final class CommonHistoryDataModel {
     func insert(history: CommonHistory) {
         histories.insert(history, at: 0)
     }
-    
+
     /// get the history with index
     func getHistory(index: Int) -> CommonHistory? {
         return histories[index]
     }
-    
+
     /// 閲覧履歴の永続化
     func store() {
         if histories.count > 0 {
@@ -73,7 +73,7 @@ final class CommonHistoryDataModel {
             // 日付毎に分けた閲覧履歴を日付毎に保存していく
             for (key, value) in commonHistoryByDate {
                 let filename = "\(key).dat"
-                
+
                 let saveData: [CommonHistory] = { () -> [CommonHistory] in
                     if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
                         let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
@@ -99,9 +99,9 @@ final class CommonHistoryDataModel {
                 path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).sorted(by: { $1.toDate() < $0.toDate() })
         }
-        
+
         log.debug("not exist common history.")
-        
+
         return []
     }
 
@@ -109,12 +109,12 @@ final class CommonHistoryDataModel {
     /// 日付指定
     func select(dateString: String) -> [CommonHistory] {
         let filename = "\(dateString).dat"
-        
+
         if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
             let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
             return commonHistory
         }
-        
+
         return []
     }
 

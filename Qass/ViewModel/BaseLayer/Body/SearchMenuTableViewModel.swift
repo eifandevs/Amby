@@ -111,7 +111,7 @@ final class SearchMenuTableViewModel {
 
                 // 画面更新
                 self.rx_searchMenuViewWillUpdateLayout.onNext(())
-                
+
                 log.eventOut(chain: "rx_articleDataModelDidUpdate")
             }
             .disposed(by: disposeBag)
@@ -128,7 +128,7 @@ final class SearchMenuTableViewModel {
         // 記事取得
         ArticleDataModel.s.get()
     }
-    
+
     /// 検索開始
     private func requestSearch() {
         if !isRequesting {

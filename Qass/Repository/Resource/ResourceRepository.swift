@@ -21,31 +21,31 @@ final class ResourceRepository {
         return plist
         #endif
     }
-    
+
     /// タイムアウトページ
     var timeoutHtml: Foundation.URL {
         let fileResource = R.file.timeoutHtml
         return fileResource.bundle.url(forResource: fileResource)!
     }
-    
+
     /// DNSエラーページ
     var dnsHtml: Foundation.URL {
         let fileResource = R.file.dnsHtml
         return fileResource.bundle.url(forResource: fileResource)!
     }
-    
+
     /// オフラインエラーページ
     var offlineHtml: Foundation.URL {
         let fileResource = R.file.offlineHtml
         return fileResource.bundle.url(forResource: fileResource)!
     }
-    
+
     /// 認証エラーページ
     var authorizeHtml: Foundation.URL {
         let fileResource = R.file.authorizeHtml
         return fileResource.bundle.url(forResource: fileResource)!
     }
-    
+
     /// 汎用エラーページ
     var invalidHtml: Foundation.URL {
         let fileResource = R.file.invalidHtml

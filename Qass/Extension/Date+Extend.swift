@@ -16,7 +16,7 @@ extension Date {
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
-    
+
     var yesterday: Date {
         return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
     }

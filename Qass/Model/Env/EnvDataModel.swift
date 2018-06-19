@@ -10,10 +10,10 @@ import Foundation
 
 final class EnvDataModel {
     static let s = EnvDataModel()
-    
+
     /// resource repository
     let repository = ResourceRepository()
-    
+
     func get(key: String) -> String {
         return repository.envList[key] as! String
     }

@@ -94,7 +94,7 @@ class BaseView: UIView {
     private var touchBeganPoint: CGPoint?
     /// スワイプでページ切り替えを検知したかどうかのフラグ
     private var isChangingFront: Bool = false
-    
+
     /// スライド中かどうかのフラグ
     var isMoving: Bool {
         return !isLocateMax && !isLocateMin
@@ -286,7 +286,7 @@ class BaseView: UIView {
                 if let currentLocation = self.viewModel.currentLocation {
                     self.front.removeObserver(self, forKeyPath: "estimatedProgress")
                     self.viewModel.updateProgressHeaderViewDataModel(object: 0)
-                    
+
                     if let current = self.webViews[currentLocation] {
                         current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
                         if current.isLoading == true {
@@ -680,7 +680,7 @@ class BaseView: UIView {
                     if let img = image {
                         let pngImageData = UIImagePNGRepresentation(img)
                         let context = webView.context
-                        
+
                         if let pngImageData = pngImageData {
                             self.viewModel.writeThumbnailDataModel(context: context, data: pngImageData)
                         } else {

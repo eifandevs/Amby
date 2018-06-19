@@ -12,13 +12,13 @@ public protocol LocalStorageTargetType {
 
     /// The target's base
     var base: String { get }
-    
+
     /// The target's base `URL`.
     var url: URL { get }
-    
+
     /// path
     var path: String { get }
-    
+
     /// absolutePath
     var absolutePath: String { get }
 }

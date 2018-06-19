@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 final class FooterViewModel {
-    
+
     /// サムネイル追加通知用RX
     let rx_footerViewModelDidAppendThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
         .flatMap { pageHistory -> Observable<PageHistory> in

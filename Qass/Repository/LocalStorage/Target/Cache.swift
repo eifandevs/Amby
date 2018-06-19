@@ -19,13 +19,13 @@ enum Cache {
 extension Cache: LocalStorageTargetType {
     /// The target's base
     var base: String { return DeviceConst.CACHES_PATH }
-    
+
     /// The target's base `URL`.
     var url: URL { return URL(fileURLWithPath: self.base + self.path) }
-    
+
     /// absolute path
     var absolutePath: String { return self.base + self.path }
-    
+
     /// path
     var path: String {
         switch self {
@@ -39,7 +39,7 @@ extension Cache: LocalStorageTargetType {
                     return "/common_history"
                 }
             }()
-            
+
             return path
         case let .searchHistory(resource):
             let path: String = {
@@ -49,7 +49,7 @@ extension Cache: LocalStorageTargetType {
                     return "/search_history"
                 }
             }()
-            
+
             return path
         case let .thumbnails(additionalPath, resource):
             let path: String = {
@@ -59,7 +59,7 @@ extension Cache: LocalStorageTargetType {
                     return "/thumbnails"
                 }
             }()
-            
+
             let resourcePath: String = {
                 if let resource = resource {
                     return "\(path)/\(resource)"
@@ -76,7 +76,7 @@ extension Cache: LocalStorageTargetType {
                     return "/database"
                 }
             }()
-            
+
             return path
         }
     }

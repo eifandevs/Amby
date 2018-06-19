@@ -29,7 +29,7 @@ final class PageHistoryDataModel {
     let rx_pageHistoryDataModelDidEndRendering = PublishSubject<String>()
 
     static let s = PageHistoryDataModel()
-    
+
     /// 通知センター
     private let center = NotificationCenter.default
 
@@ -67,12 +67,12 @@ final class PageHistoryDataModel {
 
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
-    
+
     private init() {
     }
 
     /// 初期化
-    func initialize() {        
+    func initialize() {
         // pageHistory読み込み
         if let data = localStorageRepository.getData(.pageHistory) {
             histories = NSKeyedUnarchiver.unarchiveObject(with: data) as! [PageHistory]
@@ -92,7 +92,7 @@ final class PageHistoryDataModel {
     func getHistory(index: Int) -> PageHistory? {
         return histories[index]
     }
-    
+
     /// ロード開始
     func startLoading(context: String) {
         rx_pageHistoryDataModelDidStartLoading.onNext(context)
@@ -177,7 +177,7 @@ final class PageHistoryDataModel {
 
                     // インデックス調整
                     $0.listIndex = $0.backForwardList.count - 1
-                    
+
                     return
                 }
             })

@@ -13,7 +13,7 @@ final class UserDefaultRepository {
     var commonHistorySaveCount: Int {
         return UserDefaults.standard.integer(forKey: AppConst.KEY_COMMON_HISTORY_SAVE_COUNT)
     }
-    
+
     /// カレントコンテキスト
     var currentContext: String {
         get {
@@ -23,7 +23,7 @@ final class UserDefaultRepository {
             UserDefaults.standard.set(value, forKey: AppConst.KEY_CURRENT_CONTEXT)
         }
     }
-    
+
     /// 自動スクロールインターバル
     var autoScrollInterval: Float {
         get {
@@ -33,17 +33,17 @@ final class UserDefaultRepository {
             UserDefaults.standard.set(value, forKey: AppConst.KEY_AUTO_SCROLL_INTERVAL)
         }
     }
-    
+
     /// ページ履歴保存日数
     var pageHistorySaveCount: Int {
         return UserDefaults.standard.integer(forKey: AppConst.KEY_PAGE_HISTORY_SAVE_COUNT)
     }
-    
+
     /// 検索履歴保存日数
     var searchHistorySaveCount: Int {
         return UserDefaults.standard.integer(forKey: AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT)
     }
-    
+
     /// ユーザーデフォルト初期値設定
     func setup() {
         UserDefaults.standard.register(defaults: [
@@ -54,7 +54,7 @@ final class UserDefaultRepository {
             AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT: AppConst.UD_SEARCH_HISTORY_SAVE_COUNT,
             ])
     }
-    
+
     /// ユーザーデフォルト初期化
     func initialize() {
         UserDefaults.standard.set(AppConst.UD_CURRENT_CONTEXT, forKey: AppConst.KEY_CURRENT_CONTEXT)

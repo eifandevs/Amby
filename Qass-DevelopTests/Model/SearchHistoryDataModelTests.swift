@@ -11,19 +11,19 @@ import XCTest
 @testable import Qass_Develop
 
 class SearchHistoryDataModelTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         // local storage setup
         SearchHistoryDataModel.s.delete()
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+
     func testGetList() {
         SearchHistoryDataModel.s.store(histories: [SearchHistory(title: #function, date: Date().yesterday)])
         SearchHistoryDataModel.s.store(histories: [SearchHistory(title: #function, date: Date().yesterday)])
@@ -31,7 +31,7 @@ class SearchHistoryDataModelTests: XCTestCase {
         SearchHistoryDataModel.s.store(histories: [SearchHistory(title: #function, date: Date())])
         SearchHistoryDataModel.s.store(histories: [SearchHistory(title: #function, date: Date().tomorrow)])
         SearchHistoryDataModel.s.store(histories: [SearchHistory(title: #function, date: Date().tomorrow)])
-        
+
         SearchHistoryDataModel.s.store(histories: [
             SearchHistory(title: #function + "2", date: Date().yesterday),
             SearchHistory(title: #function + "2", date: Date().yesterday),
@@ -40,10 +40,10 @@ class SearchHistoryDataModelTests: XCTestCase {
             SearchHistory(title: #function + "2", date: Date().tomorrow),
             SearchHistory(title: #function + "2", date: Date().tomorrow)
         ])
-        
+
         XCTAssertTrue(SearchHistoryDataModel.s.getList().count == 3)
     }
-    
+
     func testStore() {
         SearchHistoryDataModel.s.store(histories: [SearchHistory(title: #function, date: Date().yesterday)])
         SearchHistoryDataModel.s.store(histories: [SearchHistory(title: #function, date: Date().yesterday)])
@@ -63,7 +63,7 @@ class SearchHistoryDataModelTests: XCTestCase {
 
         XCTAssertTrue(SearchHistoryDataModel.s.select(title: #function, readNum: 5).count == 2)
     }
-    
+
     func testExpireCheck() {
         let now = Date()
         (1...400).forEach { index in
@@ -75,7 +75,7 @@ class SearchHistoryDataModelTests: XCTestCase {
         SearchHistoryDataModel.s.expireCheck()
         XCTAssertTrue(SearchHistoryDataModel.s.getList().count == 90)
     }
-    
+
     func testDelete() {
         SearchHistoryDataModel.s.store(histories: [SearchHistory(title: #function, date: Date().yesterday)])
         SearchHistoryDataModel.s.delete()
