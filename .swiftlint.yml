@@ -15,7 +15,6 @@ excluded:
 
 disabled_rules:
 - line_length
-- nesting
 - variable_name
 - force_cast
 - force_try
