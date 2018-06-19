@@ -10,7 +10,7 @@ def common_pods
   pod 'NSObject+Rx', '~> 4.2'
   pod 'R.swift', '~> 3.3'
   pod 'Alamofire', '~> 4.4'
-  pod 'SwiftLint', '~> 0.23'
+  pod 'SwiftLint', '~> 0.25'
   pod 'SwiftFormat/CLI', '~> 0.33'
   pod 'VerticalAlignmentLabel', '~> 0.1'
   pod 'Moya/RxSwift', '~> 11.0'
