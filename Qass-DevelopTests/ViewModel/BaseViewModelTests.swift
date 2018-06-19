@@ -111,7 +111,7 @@ class BaseViewModelTests: XCTestCase {
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
-    func testEndRenderingPageHistoryDataModel(context: String) {
+    func testEndRenderingPageHistoryDataModel() {
         viewModel.insertPageHistoryDataModel(url: #function)
         
         weak var expectation = self.expectation(description: #function)
@@ -146,7 +146,7 @@ class BaseViewModelTests: XCTestCase {
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
-    func testInsertPageHistoryDataModel(url: String? = nil) {
+    func testInsertPageHistoryDataModel() {
         weak var expectation = self.expectation(description: #function)
         
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
@@ -163,13 +163,16 @@ class BaseViewModelTests: XCTestCase {
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
-    func testInsertByEventPageHistoryDataModel(url: String? = nil) {
+    func testInsertByEventPageHistoryDataModel() {
+        
+        viewModel.insertPageHistoryDataModel(url: "dummy")
+
         weak var expectation = self.expectation(description: #function)
         
-        PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
             .subscribe { element in
                 if let expectation = expectation {
-                    XCTAssert(element.element!.pageHistory.url == #function)
+                    XCTAssert(element.element!.url == #function)
                     expectation.fulfill()
                 }
             }
@@ -197,7 +200,7 @@ class BaseViewModelTests: XCTestCase {
         self.waitForExpectations(timeout: 10, handler: nil)
     }
     
-    func testStoreFormDataModel(form: Form) {
+    func testStoreFormDataModel() {
         let input = Input()
         input.formIndex = 0
         input.formInputIndex = 0
@@ -210,6 +213,196 @@ class BaseViewModelTests: XCTestCase {
         form.inputs.append(input)
         
         viewModel.storeFormDataModel(form: form)
-        XCTAssert(FormDataModel.s.select(id: form.id).first!.title == #function)
+        XCTAssertTrue(FormDataModel.s.select(id: form.id).first!.title == #function)
+    }
+    
+    func testIsHistorySwipe() {
+        XCTAssertTrue(viewModel.isHistorySwipe(touchPoint: CGPoint(x: 10, y: 10)))
+    }
+    
+    func testIsActiveBaseViewController() {
+        XCTAssertTrue(viewModel.isActiveBaseViewController())
+    }
+    
+    func testGetPreviousCapture() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: #function)
+        XCTAssertNotNil(viewModel.getPreviousCapture())
+    }
+    
+    func testGetNextCapture() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: #function)
+        XCTAssertNotNil(viewModel.getNextCapture())
+    }
+    
+    func testReloadHeaderText() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        
+        weak var expectation = self.expectation(description: #function)
+        
+        HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateText
+            .subscribe { element in
+                if let expectation = expectation {
+                    XCTAssert(element.element! == #function)
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.reloadHeaderText()
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testGoBackPageHistoryDataModel() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: #function)
+        
+        weak var expectation = self.expectation(description: #function)
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange
+            .subscribe { element in
+                if let expectation = expectation {
+                    XCTAssertTrue(element.element! == PageHistoryDataModel.s.getHistory(index: 0)!.context)
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.goBackPageHistoryDataModel()
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testGoNextPageHistoryDataModel() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.goBackPageHistoryDataModel()
+
+        weak var expectation = self.expectation(description: #function)
+        
+        PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange
+            .subscribe { element in
+                if let expectation = expectation {
+                    XCTAssertTrue(element.element! == PageHistoryDataModel.s.getHistory(index: 1)!.context)
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.goNextPageHistoryDataModel()
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testGoBackCommonHistoryDataModel() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: #function)
+        
+        weak var expectation = self.expectation(description: #function)
+        
+        CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoBack
+            .subscribe { _ in
+                if let expectation = expectation {
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.goBackCommonHistoryDataModel()
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testGoForwardCommonHistoryDataModel() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: #function)
+        
+        weak var expectation = self.expectation(description: #function)
+        
+        CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoForward
+            .subscribe { _ in
+                if let expectation = expectation {
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.goForwardCommonHistoryDataModel()
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testCreateThumbnailDataModel() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.createThumbnailDataModel(context: PageHistoryDataModel.s.getHistory(index: 0)!.context)
+    }
+    
+    func testWriteThumbnailDataModel() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: #function)
+        let image = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100)).getImage()
+        let data = UIImagePNGRepresentation(image)!
+        viewModel.writeThumbnailDataModel(context: PageHistoryDataModel.s.getHistory(index: 0)!.context, data: data)
+    }
+    
+    func testUpdateHistoryDataModel() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: #function)
+        
+        weak var expectation = self.expectation(description: #function)
+
+        FavoriteDataModel.s.rx_favoriteDataModelDidReload
+            .subscribe { _ in
+                if let expectation = expectation {
+                    expectation.fulfill()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        let targetContext = PageHistoryDataModel.s.getHistory(index: 1)!.context
+        viewModel.updateHistoryDataModel(context: targetContext, url: "testUpdateHistoryDataModel", title: "testUpdateHistoryDataModel", operation: PageHistory.Operation.normal)
+        XCTAssertTrue(CommonHistoryDataModel.s.histories.last!.url == "testUpdateHistoryDataModel")
+        XCTAssertTrue(PageHistoryDataModel.s.getHistory(context: targetContext)!.url == "testUpdateHistoryDataModel")
+        
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testStoreHistoryDataModel() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: #function)
+        
+        let targetContext = PageHistoryDataModel.s.getHistory(index: 1)!.context
+        viewModel.updateHistoryDataModel(context: targetContext, url: "testStoreHistoryDataModel", title: "testStoreHistoryDataModel", operation: PageHistory.Operation.normal)
+        viewModel.storeHistoryDataModel()
+        
+        XCTAssertTrue(CommonHistoryDataModel.s.getList().count == 1)
+        XCTAssertTrue(PageHistoryDataModel.s.getHistory(context: targetContext)?.url == "testStoreHistoryDataModel")
+    }
+  
+    func testStoreSearchHistoryDataModel() {
+        viewModel.storeSearchHistoryDataModel(title: #function)
+        XCTAssertTrue(SearchHistoryDataModel.s.select(title: #function, readNum: 10).first!.title == #function)
+    }
+    
+    func testStorePageHistoryDataModel() {
+        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: #function)
+        
+        let targetContext = PageHistoryDataModel.s.getHistory(index: 1)!.context
+        viewModel.updateHistoryDataModel(context: targetContext, url: "testStorePageHistoryDataModel", title: "testStorePageHistoryDataModel", operation: PageHistory.Operation.forward)
+        viewModel.storePageHistoryDataModel()
+        XCTAssertTrue(PageHistoryDataModel.s.getHistory(context: targetContext)?.url == #function)
+    }
+    
+    func testDeleteThumbnailDataModel() {
+        viewModel.deleteThumbnailDataModel(webView: EGWebView(id: #function))
+    }
+    
+    func testEncrypt() {
+        let data = viewModel.encrypt(value: #function)
+        XCTAssertNotNil(data)
+    }
+    
+    func testDecrypt() {
+        let data = viewModel.encrypt(value: #function)
+        XCTAssertTrue(viewModel.decrypt(value: data) == #function)
     }
 }

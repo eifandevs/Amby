@@ -83,11 +83,16 @@ final class PageHistoryDataModel {
         }
     }
 
-    /// 特定の履歴取得
+    /// get the history with context
     func getHistory(context: String) -> PageHistory? {
         return histories.find({ $0.context == context })
     }
 
+    /// get the history with index
+    func getHistory(index: Int) -> PageHistory? {
+        return histories[index]
+    }
+    
     /// ロード開始
     func startLoading(context: String) {
         rx_pageHistoryDataModelDidStartLoading.onNext(context)
@@ -149,13 +154,13 @@ final class PageHistoryDataModel {
 
     /// ページ読み込み完了後のページ更新
     func update(context: String, url: String, title: String, operation: PageHistory.Operation) {
-        histories.forEach({
-            if $0.context == context {
-                $0.url = url
-                $0.title = title
+        /// 通常の遷移の場合（ヒストリバックやフォワードではない）
+        if operation == .normal {
+            histories.forEach({
+                if $0.context == context {
+                    $0.url = url
+                    $0.title = title
 
-                /// 通常の遷移の場合（ヒストリバックやフォワードではない）
-                if operation == .normal {
                     // リスト更新
                     if !isPastViewing(context: context) {
                         $0.backForwardList.append($0.url)
@@ -172,11 +177,11 @@ final class PageHistoryDataModel {
 
                     // インデックス調整
                     $0.listIndex = $0.backForwardList.count - 1
+                    
+                    return
                 }
-
-                return
-            }
-        })
+            })
+        }
     }
 
     /// ページ挿入(new window event)
@@ -235,32 +240,35 @@ final class PageHistoryDataModel {
     /// 指定ページの削除
     func remove(context: String) {
         // 削除インデックス取得
-        let deleteIndex = histories.index(where: { $0.context == context })!
+        if let deleteIndex = histories.index(where: { $0.context == context }) {
 
-        // フロントの削除かどうか
-        if context == currentContext {
-            histories.remove(at: deleteIndex)
-            // 削除した結果、ページが存在しない場合は作成する
-            if histories.count == 0 {
-                rx_pageHistoryDataModelDidRemove.onNext((deleteContext: context, currentContext: nil, deleteIndex: deleteIndex))
-                let pageHistory = PageHistory()
-                histories.append(pageHistory)
-                currentContext = pageHistory.context
-                rx_pageHistoryDataModelDidAppend.onNext(pageHistory)
+            // フロントの削除かどうか
+            if context == currentContext {
+                histories.remove(at: deleteIndex)
+                // 削除した結果、ページが存在しない場合は作成する
+                if histories.count == 0 {
+                    rx_pageHistoryDataModelDidRemove.onNext((deleteContext: context, currentContext: nil, deleteIndex: deleteIndex))
+                    let pageHistory = PageHistory()
+                    histories.append(pageHistory)
+                    currentContext = pageHistory.context
+                    rx_pageHistoryDataModelDidAppend.onNext(pageHistory)
 
-                return
-            } else {
-                // 最後の要素を削除した場合は、前のページに戻る
-                if deleteIndex == histories.count {
-                    currentContext = histories[deleteIndex - 1].context
+                    return
                 } else {
-                    currentContext = histories[deleteIndex].context
+                    // 最後の要素を削除した場合は、前のページに戻る
+                    if deleteIndex == histories.count {
+                        currentContext = histories[deleteIndex - 1].context
+                    } else {
+                        currentContext = histories[deleteIndex].context
+                    }
                 }
+            } else {
+                histories.remove(at: deleteIndex)
             }
+            rx_pageHistoryDataModelDidRemove.onNext((deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
         } else {
-            histories.remove(at: deleteIndex)
+            log.error("cannot find delete context.")
         }
-        rx_pageHistoryDataModelDidRemove.onNext((deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
     }
 
     /// 表示中ページの変更

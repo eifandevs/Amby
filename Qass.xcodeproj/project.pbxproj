@@ -301,6 +301,9 @@
 		A1B5F43E209D0C8700DF1AE3 /* OptionMenuSettingTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FF3209CF977004F1EA5 /* OptionMenuSettingTableView.xib */; };
 		A1B5F43F209D0C8700DF1AE3 /* SearchMenuNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FE1209CF977004F1EA5 /* SearchMenuNewsTableViewCell.xib */; };
 		A1CF359020D7D16400C1343B /* ThumbnailDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */; };
+		A1CF359220D91C1C00C1343B /* BaseViewControllerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359120D91C1C00C1343B /* BaseViewControllerViewModelTests.swift */; };
+		A1CF359420D91C4E00C1343B /* FooterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359320D91C4E00C1343B /* FooterViewModelTests.swift */; };
+		A1CF359620D91C6800C1343B /* SearchMenuTableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359520D91C6800C1343B /* SearchMenuTableViewModelTests.swift */; };
 		A1DF4B3F209D039F00196E0F /* CommonHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */; };
 		A1DF4B40209D03A300196E0F /* FavoriteDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F31209CF976004F1EA5 /* FavoriteDataModelTests.swift */; };
 		A1DF4B41209D03A900196E0F /* FormDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F32209CF976004F1EA5 /* FormDataModelTests.swift */; };
@@ -549,6 +552,9 @@
 		A19880732073A5E20067EC4F /* Qass-DevelopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-DevelopUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B5F448209D0C8700DF1AE3 /* Qass-Production.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qass-Production.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModelTests.swift; sourceTree = "<group>"; };
+		A1CF359120D91C1C00C1343B /* BaseViewControllerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerViewModelTests.swift; sourceTree = "<group>"; };
+		A1CF359320D91C4E00C1343B /* FooterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterViewModelTests.swift; sourceTree = "<group>"; };
+		A1CF359520D91C6800C1343B /* SearchMenuTableViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenuTableViewModelTests.swift; sourceTree = "<group>"; };
 		A1E1A07420D06652004DB01D /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		A1E1A07520D06652004DB01D /* SearchMenuTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMenuTableViewModel.swift; sourceTree = "<group>"; };
 		A1E1A07720D06652004DB01D /* HeaderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewModel.swift; sourceTree = "<group>"; };
@@ -716,6 +722,9 @@
 			isa = PBXGroup;
 			children = (
 				A1902F35209CF976004F1EA5 /* BaseViewModelTests.swift */,
+				A1CF359120D91C1C00C1343B /* BaseViewControllerViewModelTests.swift */,
+				A1CF359320D91C4E00C1343B /* FooterViewModelTests.swift */,
+				A1CF359520D91C6800C1343B /* SearchMenuTableViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2065,15 +2074,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1E562DB20D67C11007B5B1C /* SuggestDataModelTests.swift in Sources */,
+				A1CF359420D91C4E00C1343B /* FooterViewModelTests.swift in Sources */,
 				A1DF4B43209D03B300196E0F /* BaseViewModelTests.swift in Sources */,
 				A1E562D120D564B0007B5B1C /* EnvDataModelTests.swift in Sources */,
 				A1DF4B3F209D039F00196E0F /* CommonHistoryDataModelTests.swift in Sources */,
 				A1E562D520D569D8007B5B1C /* AuthTokenDataModelTests.swift in Sources */,
+				A1CF359620D91C6800C1343B /* SearchMenuTableViewModelTests.swift in Sources */,
 				A1DF4B41209D03A900196E0F /* FormDataModelTests.swift in Sources */,
 				A1E562CD20D560C9007B5B1C /* OperationDataModelTests.swift in Sources */,
 				A1E562CB20D55C0E007B5B1C /* HeaderViewDataModelTests.swift in Sources */,
 				A1CF359020D7D16400C1343B /* ThumbnailDataModelTests.swift in Sources */,
 				A1E562D320D56724007B5B1C /* ArticleDataModelTests.swift in Sources */,
+				A1CF359220D91C1C00C1343B /* BaseViewControllerViewModelTests.swift in Sources */,
 				A1E562D920D679E1007B5B1C /* AppDataModelTests.swift in Sources */,
 				A1DF4B40209D03A300196E0F /* FavoriteDataModelTests.swift in Sources */,
 				A1E562CF20D56265007B5B1C /* HtmlDataModelTests.swift in Sources */,

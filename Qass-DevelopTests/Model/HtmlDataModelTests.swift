@@ -22,7 +22,7 @@ class HtmlDataModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testProperties() {
         _ = HtmlDataModel.s.authorizeHtml
         _ = HtmlDataModel.s.dnsHtml
         _ = HtmlDataModel.s.invalidHtml

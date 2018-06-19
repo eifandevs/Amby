@@ -47,7 +47,12 @@ final class CommonHistoryDataModel {
     func insert(history: CommonHistory) {
         histories.insert(history, at: 0)
     }
-
+    
+    /// get the history with index
+    func getHistory(index: Int) -> CommonHistory? {
+        return histories[index]
+    }
+    
     /// 閲覧履歴の永続化
     func store() {
         if histories.count > 0 {

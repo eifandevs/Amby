@@ -283,18 +283,24 @@ class BaseView: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidChangeWebView")
                 guard let `self` = self else { return }
-                self.front.removeObserver(self, forKeyPath: "estimatedProgress")
-                self.viewModel.updateProgressHeaderViewDataModel(object: 0)
-                if let current = self.webViews[self.viewModel.currentLocation!] {
-                    current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
-                    if current.isLoading == true {
-                        self.viewModel.updateProgressHeaderViewDataModel(object: CGFloat(current.estimatedProgress))
+                if let currentLocation = self.viewModel.currentLocation {
+                    self.front.removeObserver(self, forKeyPath: "estimatedProgress")
+                    self.viewModel.updateProgressHeaderViewDataModel(object: 0)
+                    
+                    if let current = self.webViews[currentLocation] {
+                        current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
+                        if current.isLoading == true {
+                            self.viewModel.updateProgressHeaderViewDataModel(object: CGFloat(current.estimatedProgress))
+                        }
+                        self.front = current
+                        self.bringSubview(toFront: current)
+                    } else {
+                        self.loadWebView()
                     }
-                    self.front = current
-                    self.bringSubview(toFront: current)
                 } else {
-                    self.loadWebView()
+                    log.error("cannot find current location.")
                 }
+
                 log.eventOut(chain: "rx_baseViewModelDidChangeWebView")
             }
             .disposed(by: rx.disposeBag)

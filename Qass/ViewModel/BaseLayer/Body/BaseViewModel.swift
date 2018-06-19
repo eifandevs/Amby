@@ -228,11 +228,14 @@ final class BaseViewModel {
     func getPreviousCapture() -> UIImage? {
         if let currentLocation = currentLocation {
             let targetIndex = currentLocation == 0 ? PageHistoryDataModel.s.histories.count - 1 : currentLocation - 1
-            let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
-            if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
-                return image
+            if let targetContext = PageHistoryDataModel.s.getHistory(index: targetIndex)?.context {
+                if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
+                    return image
+                } else {
+                    return UIImage()
+                }
             } else {
-                return UIImage()
+                return nil
             }
         }
 
@@ -243,11 +246,14 @@ final class BaseViewModel {
     func getNextCapture() -> UIImage? {
         if let currentLocation = currentLocation {
             let targetIndex = currentLocation == PageHistoryDataModel.s.histories.count - 1 ? 0 : currentLocation + 1
-            let targetContext = PageHistoryDataModel.s.histories[targetIndex].context
-            if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
-                return image
+            if let targetContext = PageHistoryDataModel.s.getHistory(index: targetIndex)?.context {
+                if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
+                    return image
+                } else {
+                    return UIImage()
+                }
             } else {
-                return UIImage()
+                return nil
             }
         }
 
