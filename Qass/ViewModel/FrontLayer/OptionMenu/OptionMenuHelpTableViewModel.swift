@@ -27,7 +27,7 @@ final class OptionMenuHelpTableViewModel {
         Row(title: MessageConst.HELP_AUTO_SCROLL_TITLE, subTitle: MessageConst.HELP_AUTO_SCROLL_SUBTITLE, message: MessageConst.HELP_AUTO_SCROLL_MESSAGE),
         Row(title: MessageConst.HELP_TAB_TRANSITION_TITLE, subTitle: MessageConst.HELP_TAB_TRANSITION_SUBTITLE, message: MessageConst.HELP_TAB_TRANSITION_MESSAGE),
         Row(title: MessageConst.HELP_TAB_DELETE_TITLE, subTitle: MessageConst.HELP_TAB_DELETE_SUBTITLE, message: MessageConst.HELP_TAB_DELETE_MESSAGE),
-        Row(title: MessageConst.HELP_DATA_DELETE_TITLE, subTitle: MessageConst.HELP_DATA_DELETE_SUBTITLE, message: MessageConst.HELP_DATA_DELETE_MESSAGE),
+        Row(title: MessageConst.HELP_DATA_DELETE_TITLE, subTitle: MessageConst.HELP_DATA_DELETE_SUBTITLE, message: MessageConst.HELP_DATA_DELETE_MESSAGE)
     ]
 
     // 高さ
@@ -47,7 +47,7 @@ final class OptionMenuHelpTableViewModel {
         let row = getRow(indexPath: indexPath)
         OperationDataModel.s.executeOperation(operation: .help, object: [
             self.objectKeySubTitle: row.subTitle,
-            self.objectKeyMessage: row.message,
+            self.objectKeyMessage: row.message
         ])
     }
 }

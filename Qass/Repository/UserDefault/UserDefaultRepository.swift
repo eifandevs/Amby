@@ -51,7 +51,7 @@ final class UserDefaultRepository {
             AppConst.KEY_AUTO_SCROLL_INTERVAL: AppConst.UD_AUTO_SCROLL,
             AppConst.KEY_COMMON_HISTORY_SAVE_COUNT: AppConst.UD_COMMON_HISTORY_SAVE_COUNT,
             AppConst.KEY_PAGE_HISTORY_SAVE_COUNT: AppConst.UD_PAGE_HISTORY_SAVE_COUNT,
-            AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT: AppConst.UD_SEARCH_HISTORY_SAVE_COUNT,
+            AppConst.KEY_SEARCH_HISTORY_SAVE_COUNT: AppConst.UD_SEARCH_HISTORY_SAVE_COUNT
             ])
     }
 

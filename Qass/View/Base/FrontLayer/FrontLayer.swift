@@ -82,7 +82,7 @@ class FrontLayer: UIView {
                 CircleMenuItem(image: R.image.circlemenuAdd(), tapAction: { _ in
                     log.debug("circle menu event. event: add")
                     self.viewModel.insertPageHistoryDataModel()
-                }),
+                })
             ],
             [
                 CircleMenuItem(image: R.image.circlemenuScrollup(), tapAction: { _ in
@@ -108,8 +108,8 @@ class FrontLayer: UIView {
                 CircleMenuItem(image: R.image.circlemenuHome(), tapAction: { _ in
                     log.debug("circle menu event. event: home")
                     self.viewModel.executeOperationDataModel(operation: .home)
-                }),
-            ],
+                })
+            ]
         ]
         circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: circleButtonRadius, height: circleButtonRadius)), menuItems: menuItems, swipeDirection: swipeDirection)
 

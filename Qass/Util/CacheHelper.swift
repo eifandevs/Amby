@@ -34,7 +34,7 @@ class CacheHelper {
             WKWebsiteDataTypeSessionStorage,
             WKWebsiteDataTypeLocalStorage,
             WKWebsiteDataTypeWebSQLDatabases,
-            WKWebsiteDataTypeIndexedDBDatabases,
+            WKWebsiteDataTypeIndexedDBDatabases
         ], modifiedSince: dateFrom) {}
     }
 

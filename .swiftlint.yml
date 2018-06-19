@@ -14,13 +14,20 @@ excluded:
 - Carthage
 
 disabled_rules:
-- line_length
 - variable_name
 - force_cast
 - force_try
 - cyclomatic_complexity
 - type_name
-- function_body_length
-- file_length
-- type_body_length
-- trailing_comma
+
+line_length:
+- 180
+
+type_body_length:
+- 400
+
+file_length:
+- 500
+
+function_body_length:
+- 100

@@ -159,7 +159,7 @@ class Util {
             "iPad6,3": "iPad Pro 9.7inch WiFi", // iPad Pro 9.7inch WiFi
             "iPad6,4": "iPad Pro 9.7inch Cell", // iPad Pro 9.7inch Cellular
             "iPad6,7": "iPad Pro 12.9inch WiFi", // iPad Pro 12.9inch WiFi
-            "iPad6,8": "iPad Pro 12.9inch Cell",
+            "iPad6,8": "iPad Pro 12.9inch Cell"
         ] // iPad Pro 12.9inch Cellular
 
         if let deviceName = deviceCodeDic[code] {

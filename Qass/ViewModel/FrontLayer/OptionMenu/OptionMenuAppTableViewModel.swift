@@ -29,7 +29,7 @@ final class OptionMenuAppTableViewModel {
     // セル
     let rows = [
         Row(cellType: .app),
-        Row(cellType: .copyright),
+        Row(cellType: .copyright)
     ]
 
     // 高さ

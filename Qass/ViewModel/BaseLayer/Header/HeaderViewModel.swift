@@ -15,7 +15,7 @@ final class HeaderViewModel {
     let rx_headerViewModelDidChangeProgress = Observable
         .merge([
             HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateProgress,
-            NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) },
+            NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) }
         ])
         .flatMap { progress -> Observable<CGFloat> in
             return Observable.just(progress)
@@ -29,7 +29,7 @@ final class HeaderViewModel {
             PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove.flatMap { _ in Observable.just(()) },
             FavoriteDataModel.s.rx_favoriteDataModelDidInsert.flatMap { _ in Observable.just(()) },
             FavoriteDataModel.s.rx_favoriteDataModelDidRemove,
-            FavoriteDataModel.s.rx_favoriteDataModelDidReload.flatMap { _ in Observable.just(()) },
+            FavoriteDataModel.s.rx_favoriteDataModelDidReload.flatMap { _ in Observable.just(()) }
         ])
         .flatMap { _ -> Observable<Bool> in
             if let currentHistory = PageHistoryDataModel.s.currentHistory, !currentHistory.url.isEmpty {
