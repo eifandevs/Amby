@@ -1,8 +1,8 @@
 //
-//  SearchMenuTableViewModelTests.swift
+//  HeaderFieldViewModelTests.swift
 //  Qass-DevelopTests
 //
-//  Created by tenma on 2018/06/19.
+//  Created by tenma on 2018/06/20.
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
@@ -12,9 +12,9 @@ import RxCocoa
 
 @testable import Qass_Develop
 
-class SearchMenuTableViewModelTests: XCTestCase {
+class HeaderFieldViewModelTests: XCTestCase {
 
-    let viewModel = SearchMenuTableViewModel()
+    let viewModel = HeaderFieldViewModel()
 
     let disposeBag = DisposeBag()
 
@@ -28,23 +28,6 @@ class SearchMenuTableViewModelTests: XCTestCase {
         super.tearDown()
     }
 
-    func testGetArticle() {
-        weak var expectation = self.expectation(description: #function)
-
-        ArticleDataModel.s.rx_articleDataModelDidUpdate
-            .subscribe { element in
-                if let expectation = expectation {
-                    XCTAssertTrue(element.element!.count > 0)
-                    expectation.fulfill()
-                }
-            }
-            .disposed(by: disposeBag)
-
-        viewModel.getArticle()
-
-        self.waitForExpectations(timeout: 10, handler: nil)
-    }
-
     func testExecuteOperationDataModel() {
         weak var expectation = self.expectation(description: #function)
 
@@ -52,12 +35,13 @@ class SearchMenuTableViewModelTests: XCTestCase {
             .subscribe { element in
                 if let expectation = expectation {
                     XCTAssertTrue(element.element!.operation == .search)
+                    XCTAssertTrue(element.element!.object! as! String == #function)
                     expectation.fulfill()
                 }
             }
             .disposed(by: disposeBag)
 
-        viewModel.executeOperationDataModel(operation: .search, url: #function)
+        viewModel.executeOperationDataModel(operation: .search, object: #function)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }

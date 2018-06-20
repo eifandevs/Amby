@@ -304,6 +304,11 @@
 		A1CF359220D91C1C00C1343B /* BaseViewControllerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359120D91C1C00C1343B /* BaseViewControllerViewModelTests.swift */; };
 		A1CF359420D91C4E00C1343B /* FooterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359320D91C4E00C1343B /* FooterViewModelTests.swift */; };
 		A1CF359620D91C6800C1343B /* SearchMenuTableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359520D91C6800C1343B /* SearchMenuTableViewModelTests.swift */; };
+		A1CF359820DA6F8B00C1343B /* BaseLayerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359720DA6F8B00C1343B /* BaseLayerViewModelTests.swift */; };
+		A1CF359A20DA6FA900C1343B /* FrontLayerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359920DA6FA900C1343B /* FrontLayerViewModelTests.swift */; };
+		A1CF359C20DA6FCE00C1343B /* HeaderFieldViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359B20DA6FCE00C1343B /* HeaderFieldViewModelTests.swift */; };
+		A1CF359E20DA6FEF00C1343B /* HeaderViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359D20DA6FEF00C1343B /* HeaderViewModelTests.swift */; };
+		A1CF35A020DA703800C1343B /* Springboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359F20DA703800C1343B /* Springboard.swift */; };
 		A1DF4B3F209D039F00196E0F /* CommonHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */; };
 		A1DF4B40209D03A300196E0F /* FavoriteDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F31209CF976004F1EA5 /* FavoriteDataModelTests.swift */; };
 		A1DF4B41209D03A900196E0F /* FormDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F32209CF976004F1EA5 /* FormDataModelTests.swift */; };
@@ -555,6 +560,11 @@
 		A1CF359120D91C1C00C1343B /* BaseViewControllerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerViewModelTests.swift; sourceTree = "<group>"; };
 		A1CF359320D91C4E00C1343B /* FooterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterViewModelTests.swift; sourceTree = "<group>"; };
 		A1CF359520D91C6800C1343B /* SearchMenuTableViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenuTableViewModelTests.swift; sourceTree = "<group>"; };
+		A1CF359720DA6F8B00C1343B /* BaseLayerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLayerViewModelTests.swift; sourceTree = "<group>"; };
+		A1CF359920DA6FA900C1343B /* FrontLayerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModelTests.swift; sourceTree = "<group>"; };
+		A1CF359B20DA6FCE00C1343B /* HeaderFieldViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFieldViewModelTests.swift; sourceTree = "<group>"; };
+		A1CF359D20DA6FEF00C1343B /* HeaderViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewModelTests.swift; sourceTree = "<group>"; };
+		A1CF359F20DA703800C1343B /* Springboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Springboard.swift; sourceTree = "<group>"; };
 		A1E1A07420D06652004DB01D /* BaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		A1E1A07520D06652004DB01D /* SearchMenuTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMenuTableViewModel.swift; sourceTree = "<group>"; };
 		A1E1A07720D06652004DB01D /* HeaderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewModel.swift; sourceTree = "<group>"; };
@@ -725,6 +735,10 @@
 				A1CF359120D91C1C00C1343B /* BaseViewControllerViewModelTests.swift */,
 				A1CF359320D91C4E00C1343B /* FooterViewModelTests.swift */,
 				A1CF359520D91C6800C1343B /* SearchMenuTableViewModelTests.swift */,
+				A1CF359720DA6F8B00C1343B /* BaseLayerViewModelTests.swift */,
+				A1CF359920DA6FA900C1343B /* FrontLayerViewModelTests.swift */,
+				A1CF359B20DA6FCE00C1343B /* HeaderFieldViewModelTests.swift */,
+				A1CF359D20DA6FEF00C1343B /* HeaderViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1060,7 +1074,6 @@
 		A1902F9E209CF976004F1EA5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				A1902F9F209CF976004F1EA5 /* CacheHelper.swift */,
 				A1902FA0209CF976004F1EA5 /* Service */,
 				A1902FA7209CF976004F1EA5 /* Util.swift */,
 			);
@@ -1070,6 +1083,7 @@
 		A1902FA0209CF976004F1EA5 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				A1902F9F209CF976004F1EA5 /* CacheHelper.swift */,
 				A1902FA1209CF976004F1EA5 /* EGApplication.swift */,
 				A1902FA2209CF976004F1EA5 /* Logger.swift */,
 				A1902FA3209CF976004F1EA5 /* Notification */,
@@ -1357,6 +1371,7 @@
 			children = (
 				A190300E209CF977004F1EA5 /* Info.plist */,
 				A190300F209CF977004F1EA5 /* Qass_DevelopUITests.swift */,
+				A1CF359F20DA703800C1343B /* Springboard.swift */,
 			);
 			path = "Qass-DevelopUITests";
 			sourceTree = "<group>";
@@ -2075,6 +2090,7 @@
 			files = (
 				A1E562DB20D67C11007B5B1C /* SuggestDataModelTests.swift in Sources */,
 				A1CF359420D91C4E00C1343B /* FooterViewModelTests.swift in Sources */,
+				A1CF359A20DA6FA900C1343B /* FrontLayerViewModelTests.swift in Sources */,
 				A1DF4B43209D03B300196E0F /* BaseViewModelTests.swift in Sources */,
 				A1E562D120D564B0007B5B1C /* EnvDataModelTests.swift in Sources */,
 				A1DF4B3F209D039F00196E0F /* CommonHistoryDataModelTests.swift in Sources */,
@@ -2087,7 +2103,10 @@
 				A1E562D320D56724007B5B1C /* ArticleDataModelTests.swift in Sources */,
 				A1CF359220D91C1C00C1343B /* BaseViewControllerViewModelTests.swift in Sources */,
 				A1E562D920D679E1007B5B1C /* AppDataModelTests.swift in Sources */,
+				A1CF359C20DA6FCE00C1343B /* HeaderFieldViewModelTests.swift in Sources */,
 				A1DF4B40209D03A300196E0F /* FavoriteDataModelTests.swift in Sources */,
+				A1CF359E20DA6FEF00C1343B /* HeaderViewModelTests.swift in Sources */,
+				A1CF359820DA6F8B00C1343B /* BaseLayerViewModelTests.swift in Sources */,
 				A1E562CF20D56265007B5B1C /* HtmlDataModelTests.swift in Sources */,
 				A1E562D720D56BF8007B5B1C /* SearchHistoryDataModelTests.swift in Sources */,
 				A1DF4B42209D03AC00196E0F /* PageHistoryDataModelTests.swift in Sources */,
@@ -2099,6 +2118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1DF4B44209D03BF00196E0F /* Qass_DevelopUITests.swift in Sources */,
+				A1CF35A020DA703800C1343B /* Springboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

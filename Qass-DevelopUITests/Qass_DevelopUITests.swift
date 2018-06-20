@@ -16,6 +16,7 @@ class Qass_DevelopUITests: XCTestCase {
         super.setUp()
 
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        Springboard.deleteMyApp()
 
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
@@ -36,38 +37,33 @@ class Qass_DevelopUITests: XCTestCase {
 
         let app = XCUIApplication()
         sleep(5)
-        if app.keyboards.count > 0 {
-            app.keys["A"].tap()
-            app.keys["a"].tap()
-            app.keys["a"].tap()
 
-            // 検索してくるくるがいなくなるまで10秒間処理を中断する
-            let indicator = app.otherElements["NVActivityIndicatorView.NVActivityIndicatorView"]
-            let notExists = NSPredicate(format: "exists == false")
-            expectation(for: notExists, evaluatedWith: indicator, handler: { () -> Bool in
-                print("search loading finish.")
-                return true
-            })
-            // 検索タップ
-            app.buttons["Search"].tap()
-            sleep(5)
-            waitForExpectations(timeout: 10, handler: nil)
+        XCTAssertTrue(app.keyboards.count > 0)
 
-            // 初回google検索結果表示時は、言語設定のモーダルが表示されるので、タップして削除する
-            let launguageLink = app.links.element(boundBy: 1)
-            launguageLink.tap()
-        }
-        sleep(2)
+        app.keys["A"].tap()
+        app.keys["a"].tap()
+        app.keys["a"].tap()
+
+        // 検索タップ
+        app.buttons["Search"].tap()
         // 検索してくるくるがいなくなるまで10秒間処理を中断する
         let indicator = app.otherElements["NVActivityIndicatorView.NVActivityIndicatorView"]
         let notExists = NSPredicate(format: "exists == false")
-        expectation(for: notExists, evaluatedWith: indicator, handler: { () -> Bool in
-            print("link loading finish.")
-            return true
-        })
+        expectation(for: notExists, evaluatedWith: indicator, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
+
+        // 初回google検索結果表示時は、言語設定のモーダルが表示されるので、タップして削除する
+        let launguageLink = app.links.element(boundBy: 1)
+        launguageLink.tap()
+
+        sleep(2)
+
         // 適当にリンクタップ
         app.links.element(boundBy: 30).tap()
-        sleep(5)
+        // 検索してくるくるがいなくなるまで10秒間処理を中断する
+        let indicator2 = app.otherElements["NVActivityIndicatorView.NVActivityIndicatorView"]
+        let notExists2 = NSPredicate(format: "exists == false")
+        expectation(for: notExists2, evaluatedWith: indicator2, handler: nil)
         waitForExpectations(timeout: 10, handler: nil)
 
         // 左エッジスワイプ
