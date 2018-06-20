@@ -482,13 +482,17 @@ class BaseView: UIView {
     }
 
     // MARK: KVO(Progress)
+    override func observeValue(forKeyPath keyPath: String?, of _: Any?, change: [NSKeyValueChangeKey: Any]?, context pointer: UnsafeMutableRawPointer?) {
 
-    override func observeValue(forKeyPath keyPath: String?, of _: Any?, change _: [NSKeyValueChangeKey: Any]?, context pointer: UnsafeMutableRawPointer?) {
-        // restore context
-        let opaquePtr = OpaquePointer(pointer)
-        if let contextPtr = UnsafeMutablePointer<String>(opaquePtr), contextPtr.pointee == front.context, keyPath == "estimatedProgress" {
-            // estimatedProgressが変更されたときに、プログレスバーの値を変更する。
-            viewModel.updateProgressHeaderViewDataModel(object: CGFloat(front.estimatedProgress))
+        if keyPath == "estimatedProgress" {
+            // restore context
+            let opaquePtr = OpaquePointer(pointer)
+            if let contextPtr = UnsafeMutablePointer<String>(opaquePtr), contextPtr.pointee == front.context {
+                if let change = change, let progress = change[NSKeyValueChangeKey.newKey] as? CGFloat {
+                    // estimatedProgressが変更されたときに、プログレスバーの値を変更する。
+                    viewModel.updateProgressHeaderViewDataModel(object: progress)
+                }
+            }
         }
     }
 
