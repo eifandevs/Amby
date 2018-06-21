@@ -39,6 +39,15 @@ class EGWebView: WKWebView {
     /// オペレーション
     var operation: PageHistory.Operation = .normal
 
+    /// observing estimatedprogress flag
+    var isObservingEstimagedProgress = false
+
+    /// observing title flag
+    var isObservingTitle = false
+
+    /// observing url flag
+    var isObservingUrl = false
+
     // TODO: submit検知
 //    var form: Form?
 
@@ -79,6 +88,54 @@ class EGWebView: WKWebView {
 
     deinit {
         log.debug("deinit called.")
+    }
+
+    /// start observe 'EstimatedProgress'
+    func observeEstimatedProgress(observer: NSObject) {
+        if !isObservingEstimagedProgress {
+            addObserver(observer, forKeyPath: "estimatedProgress", options: .new, context: &(context))
+            isObservingEstimagedProgress = true
+        }
+    }
+
+    /// remove observe 'EstimatedProgress'
+    func removeObserverEstimatedProgress(observer: NSObject) {
+        if isObservingEstimagedProgress {
+            removeObserver(observer, forKeyPath: "estimatedProgress")
+            isObservingEstimagedProgress = false
+        }
+    }
+
+    /// start observe 'title'
+    func observeTitle(observer: NSObject) {
+        if !isObservingTitle {
+            addObserver(observer, forKeyPath: "title", options: .new, context: &(context))
+            isObservingTitle = true
+        }
+    }
+
+    /// remove observe 'title'
+    func removeObserverTitle(observer: NSObject) {
+        if isObservingTitle {
+            removeObserver(observer, forKeyPath: "title")
+            isObservingTitle = false
+        }
+    }
+
+    /// start observe 'url'
+    func observeUrl(observer: NSObject) {
+        if !isObservingUrl {
+            addObserver(observer, forKeyPath: "URL", options: .new, context: &(context))
+            isObservingUrl = true
+        }
+    }
+
+    /// remove observe 'url'
+    func removeObserverUrl(observer: NSObject) {
+        if isObservingUrl {
+            removeObserver(observer, forKeyPath: "URL")
+            isObservingUrl = false
+        }
     }
 
     func evaluate(script: String, completion: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) {

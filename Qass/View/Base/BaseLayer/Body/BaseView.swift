@@ -173,7 +173,7 @@ class BaseView: UIView {
                 if let at = object.element {
                     // 現フロントのプログレス監視を削除
                     if let front = self.front {
-                        front.removeObserver(self, forKeyPath: "estimatedProgress")
+                        front.removeObserverEstimatedProgress(observer: self)
                     }
                     self.viewModel.updateProgressHeaderViewDataModel(object: 0)
                     let newWv = self.createWebView(context: self.viewModel.currentContext)
@@ -237,7 +237,7 @@ class BaseView: UIView {
                 guard let `self` = self else { return }
                 // 現フロントのプログレス監視を削除
                 if let front = self.front {
-                    front.removeObserver(self, forKeyPath: "estimatedProgress")
+                    front.removeObserverEstimatedProgress(observer: self)
                 }
                 self.viewModel.updateProgressHeaderViewDataModel(object: 0)
                 let newWv = self.createWebView(context: self.viewModel.currentContext)
@@ -284,11 +284,11 @@ class BaseView: UIView {
                 log.eventIn(chain: "rx_baseViewModelDidChangeWebView")
                 guard let `self` = self else { return }
                 if let currentLocation = self.viewModel.currentLocation {
-                    self.front.removeObserver(self, forKeyPath: "estimatedProgress")
+                    self.front.removeObserverEstimatedProgress(observer: self)
                     self.viewModel.updateProgressHeaderViewDataModel(object: 0)
 
                     if let current = self.webViews[currentLocation] {
-                        current.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current.context))
+                        current.observeEstimatedProgress(observer: self)
                         if current.isLoading == true {
                             self.viewModel.updateProgressHeaderViewDataModel(object: CGFloat(current.estimatedProgress))
                         }
@@ -317,7 +317,7 @@ class BaseView: UIView {
 
                         let isFrontDelete = object.deleteContext == self.front.context
                         if isFrontDelete {
-                            webView.removeObserver(self, forKeyPath: "estimatedProgress")
+                            webView.removeObserverEstimatedProgress(observer: self)
                             self.viewModel.updateProgressHeaderViewDataModel(object: 0)
                             self.front = nil
                         }
@@ -335,10 +335,10 @@ class BaseView: UIView {
 
                         if isFrontDelete && object.currentContext != nil {
                             // フロントの削除で、削除後にwebviewが存在する場合
-                            if let current = self.webViews.find({ $0?.context == PageHistoryDataModel.s.currentContext }) {
-                                current!.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(current!.context))
+                            if let current = self.webViews.find({ $0?.context == PageHistoryDataModel.s.currentContext })! {
+                                current.observeEstimatedProgress(observer: self)
                                 self.front = current
-                                self.bringSubview(toFront: current!)
+                                self.bringSubview(toFront: current)
                             } else {
                                 self.loadWebView()
                             }
@@ -469,9 +469,9 @@ class BaseView: UIView {
         log.debug("deinit called.")
         webViews.forEach { webView in
             if let unwrappedWebView = webView {
-                if unwrappedWebView == front {
-                    unwrappedWebView.removeObserver(self, forKeyPath: "estimatedProgress")
-                }
+                unwrappedWebView.removeObserverEstimatedProgress(observer: self)
+                unwrappedWebView.removeObserverTitle(observer: self)
+                unwrappedWebView.removeObserverUrl(observer: self)
             }
         }
         NotificationCenter.default.removeObserver(self)
@@ -483,14 +483,22 @@ class BaseView: UIView {
 
     // MARK: KVO(Progress)
     override func observeValue(forKeyPath keyPath: String?, of _: Any?, change: [NSKeyValueChangeKey: Any]?, context pointer: UnsafeMutableRawPointer?) {
-
-        if keyPath == "estimatedProgress" {
-            // restore context
-            let opaquePtr = OpaquePointer(pointer)
-            if let contextPtr = UnsafeMutablePointer<String>(opaquePtr), contextPtr.pointee == front.context {
+        let opaquePtr = OpaquePointer(pointer)
+        if let contextPtr = UnsafeMutablePointer<String>(opaquePtr) {
+            if keyPath == "estimatedProgress" && contextPtr.pointee == front.context {
                 if let change = change, let progress = change[NSKeyValueChangeKey.newKey] as? CGFloat {
                     // estimatedProgressが変更されたときに、プログレスバーの値を変更する。
                     viewModel.updateProgressHeaderViewDataModel(object: progress)
+                }
+            } else if keyPath == "title" {
+                if let change = change, let title = change[NSKeyValueChangeKey.newKey] as? String, !title.isEmpty {
+                    // TODO: PageHistoryのタイトル更新
+                    log.error("received title: \(title)")
+                }
+            } else if keyPath == "URL" {
+                if let change = change, let url = change[NSKeyValueChangeKey.newKey] as? URL, !url.absoluteString.isEmpty {
+                    // TODO: PageHistoryのURL更新
+                    log.error("received url: \(url.absoluteString)")
                 }
             }
         }
@@ -619,11 +627,13 @@ class BaseView: UIView {
         front.scrollView.bounces = false
     }
 
-    private func startProgressObserving(target: EGWebView) {
-        log.debug("start progress observe. target: \(target.context)")
+    private func startObserving(target: EGWebView) {
+        log.debug("start observe. target: \(target.context)")
 
-        // プログレスが変更されたことを取得
-        target.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: &(target.context))
+        target.observeEstimatedProgress(observer: self)
+        target.observeTitle(observer: self)
+        target.observeUrl(observer: self)
+
         if target.isLoading == true {
             viewModel.updateProgressHeaderViewDataModel(object: CGFloat(target.estimatedProgress))
         }
@@ -643,7 +653,7 @@ class BaseView: UIView {
         addSubview(newWv)
 
         // プログレスバー
-        startProgressObserving(target: newWv)
+        startObserving(target: newWv)
 
         return newWv
     }
