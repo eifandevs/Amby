@@ -146,8 +146,9 @@ final class OptionMenuSettingTableViewModel {
             CacheHelper.deleteCaches()
             ThumbnailDataModel.s.delete()
             PageHistoryDataModel.s.delete()
-            (UIApplication.shared.delegate as! AppDelegate).initialize()
-        }
-        )
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.initialize()
+            }
+        })
     }
 }
