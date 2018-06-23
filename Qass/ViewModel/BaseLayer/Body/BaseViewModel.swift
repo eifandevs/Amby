@@ -39,14 +39,13 @@ final class BaseViewModel {
                 let text = object.object as! String
                 let searchText = { () -> String in
                     if text.isValidUrl {
-                        let encodedText = text.contains("%") ? text : text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-                        return encodedText
+                        return text
                     } else {
                         // 検索ワードによる検索
                         // 閲覧履歴を保存する
                         SearchHistoryDataModel.s.store(text: text)
 
-                        let encodedText = "\(HttpConst.PATH_SEARCH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)"
+                        let encodedText = "\(HttpConst.PATH_SEARCH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)"
                         return encodedText
                     }
                 }()

@@ -46,7 +46,7 @@ final class CommonHistoryDataModel {
     /// insert with URL
     func insert(url: URL?, title: String?) {
         if let url = url?.absoluteString, let title = title, !url.isEmpty && !title.isEmpty {
-            if let currentUrl = PageHistoryDataModel.s.currentHistory?.url, currentUrl != url {
+            if let currentUrl = PageHistoryDataModel.s.currentHistory?.url, currentUrl != url, url.isValidUrl {
                 // Common History
                 let history = CommonHistory(url: url, title: title, date: Date())
                 // 配列の先頭に追加する

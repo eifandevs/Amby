@@ -269,9 +269,8 @@ class HeaderView: UIView, ShadowView {
 
         if let text = text, headerFieldUpdate && !text.isEmpty {
             let restoreText = text.isValidUrl ? text : "\(HttpConst.PATH_SEARCH)\(text)"
-            let encodedText = restoreText.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
 
-            headerField.makeContent(restore: true, restoreText: encodedText)
+            headerField.makeContent(restore: true, restoreText: restoreText)
         } else {
             headerField.makeContent(restore: true, restoreText: nil)
         }

@@ -158,14 +158,14 @@ final class PageHistoryDataModel {
 
         /// 通常の遷移の場合（ヒストリバックやフォワードではない）
         if !url.isEmpty && url.isValidUrl {
-            if operation == .normal {
-                histories.forEach({
-                    if $0.context == context {
-                        isChanged = true
-                        $0.url = url
+            histories.forEach({
+                if $0.context == context {
+                    isChanged = true
+                    $0.url = url
 
-                        log.debug("save page history url. url: \(url)")
+                    log.debug("save page history url. url: \(url)")
 
+                    if operation == .normal {
                         // リスト更新
                         if !isPastViewing(context: context) {
                             $0.backForwardList.append($0.url)
@@ -183,10 +183,12 @@ final class PageHistoryDataModel {
                         // インデックス調整
                         $0.listIndex = $0.backForwardList.count - 1
 
-                        return
+                        log.debug("change backForwardList. listIndex: \($0.listIndex) backForwardList: \($0.backForwardList)")
+
                     }
-                })
-            }
+                    return
+                }
+            })
         }
 
         // if change front context, reload header view
