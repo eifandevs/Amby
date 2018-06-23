@@ -36,8 +36,20 @@ final class HeaderViewDataModel {
 
     /// update header field text
     func updateText(text: String) {
-        headerFieldText = text
-        rx_headerViewDataModelDidUpdateText.onNext(text)
+        if !text.isEmpty && text != headerFieldText {
+            headerFieldText = text
+            rx_headerViewDataModelDidUpdateText.onNext(text)
+        }
+    }
+
+    /// reload
+    func reload() {
+        if let url = PageHistoryDataModel.s.currentHistory?.url {
+            if !url.isEmpty && url != headerFieldText {
+                headerFieldText = url
+                rx_headerViewDataModelDidUpdateText.onNext(url)
+            }
+        }
     }
 
     /// begin header edit

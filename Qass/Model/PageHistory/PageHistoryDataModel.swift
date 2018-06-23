@@ -152,31 +152,57 @@ final class PageHistoryDataModel {
         return nil
     }
 
-    /// ページ読み込み完了後のページ更新
-    func update(context: String, url: String, title: String, operation: PageHistory.Operation) {
+    /// update url with context
+    func updateUrl(context: String, url: String, operation: PageHistory.Operation) {
+        var isChanged = false
+
         /// 通常の遷移の場合（ヒストリバックやフォワードではない）
-        if operation == .normal {
+        if !url.isEmpty && url.isValidUrl {
+            if operation == .normal {
+                histories.forEach({
+                    if $0.context == context {
+                        isChanged = true
+                        $0.url = url
+
+                        log.debug("save page history url. url: \(url)")
+
+                        // リスト更新
+                        if !isPastViewing(context: context) {
+                            $0.backForwardList.append($0.url)
+                        } else {
+                            // ヒストリーバック -> 通常遷移の場合は、履歴リストを再構築する
+                            $0.backForwardList = Array($0.backForwardList.prefix($0.listIndex + 1))
+                            $0.backForwardList.append($0.url)
+                        }
+
+                        // 保存件数を超えた場合は、削除する
+                        if $0.backForwardList.count > pageHistorySaveCount {
+                            $0.backForwardList = Array($0.backForwardList.suffix(pageHistorySaveCount))
+                        }
+
+                        // インデックス調整
+                        $0.listIndex = $0.backForwardList.count - 1
+
+                        return
+                    }
+                })
+            }
+        }
+
+        // if change front context, reload header view
+        if isChanged && context == currentContext {
+            HeaderViewDataModel.s.updateText(text: url)
+            FavoriteDataModel.s.reload()
+        }
+    }
+
+    /// update title with context
+    func updateTitle(context: String, title: String) {
+        if !title.isEmpty {
             histories.forEach({
                 if $0.context == context {
-                    $0.url = url
                     $0.title = title
-
-                    // リスト更新
-                    if !isPastViewing(context: context) {
-                        $0.backForwardList.append($0.url)
-                    } else {
-                        // ヒストリーバック -> 通常遷移の場合は、履歴リストを再構築する
-                        $0.backForwardList = Array($0.backForwardList.prefix($0.listIndex + 1))
-                        $0.backForwardList.append($0.url)
-                    }
-
-                    // 保存件数を超えた場合は、削除する
-                    if $0.backForwardList.count > pageHistorySaveCount {
-                        $0.backForwardList = Array($0.backForwardList.suffix(pageHistorySaveCount))
-                    }
-
-                    // インデックス調整
-                    $0.listIndex = $0.backForwardList.count - 1
+                    log.debug("save page history title. title: \(title)")
 
                     return
                 }

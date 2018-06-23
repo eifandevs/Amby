@@ -29,8 +29,14 @@ final class SearchHistoryDataModel {
         return []
     }
 
+    /// store with search word
+    func store(text: String) {
+        store(histories: [SearchHistory(title: text, date: Date())])
+    }
+
     /// 検索履歴の保存
     func store(histories: [SearchHistory]) {
+
         if histories.count > 0 {
             // searchHistoryを日付毎に分ける
             var searchHistoryByDate: [String: [SearchHistory]] = [:]

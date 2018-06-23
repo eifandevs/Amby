@@ -37,7 +37,22 @@ final class BaseViewModel {
         .flatMap { object -> Observable<String> in
             if object.operation == .search {
                 let text = object.object as! String
-                return Observable.just(text)
+                let searchText = { () -> String in
+                    if text.isValidUrl {
+                        let encodedText = text.contains("%") ? text : text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+                        return encodedText
+                    } else {
+                        // 検索ワードによる検索
+                        // 閲覧履歴を保存する
+                        SearchHistoryDataModel.s.store(text: text)
+
+                        let encodedText = "\(HttpConst.PATH_SEARCH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)"
+                        return encodedText
+                    }
+                }()
+                HeaderViewDataModel.s.updateText(text: searchText)
+
+                return Observable.just(searchText)
             } else {
                 return Observable.empty()
             }
@@ -102,19 +117,6 @@ final class BaseViewModel {
     var currentLocation: Int? {
         return PageHistoryDataModel.s.currentLocation
     }
-
-    var headerFieldText: String = "" {
-        didSet {
-            HeaderViewDataModel.s.updateText(text: headerFieldText)
-        }
-    }
-
-    var reloadUrl: String {
-        return headerFieldText
-    }
-
-    /// 最新のリクエストURL(wv.url)。エラーが発生した時用
-    var latestRequestUrl: String = ""
 
     /// webviewの数
     var webViewCount: Int {
@@ -260,11 +262,14 @@ final class BaseViewModel {
         return nil
     }
 
-    /// ヘッダーフィールドの更新
-    func reloadHeaderText() {
-        if let url = currentUrl {
-            headerFieldText = url
-        }
+    /// reload HeaderViewDataModel
+    func reloadHeaderViewDataModel() {
+        HeaderViewDataModel.s.reload()
+    }
+
+    /// update text in HeaderViewDataModel
+    func updateTextHeaderViewDataModel(text: String) {
+        HeaderViewDataModel.s.updateText(text: text)
     }
 
     /// 前WebViewに切り替え
@@ -297,40 +302,25 @@ final class BaseViewModel {
         ThumbnailDataModel.s.write(context: context, data: data)
     }
 
-    /// 履歴保存
-    func updateHistoryDataModel(context: String, url: String, title: String, operation: PageHistory.Operation) {
-        if !url.isEmpty && !title.isEmpty {
-            let currentUrl = self.currentUrl
-            // Each History
-            PageHistoryDataModel.s.update(context: context, url: url, title: title, operation: operation)
-            log.debug("save page history. url: \(url)")
+    /// update url in page history
+    func updateUrlPageHistoryDataModel(context: String, url: String, operation: PageHistory.Operation) {
+        PageHistoryDataModel.s.updateUrl(context: context, url: url, operation: operation)
+    }
 
-            // 　アプリ起動後の前回ページロード時は、履歴に保存しない
-            if url != currentUrl {
-                // Common History
-                let common = CommonHistory(url: url, title: title, date: Date())
-                // 配列の先頭に追加する
-                CommonHistoryDataModel.s.insert(history: common)
-                log.debug("save common history. url: \(common.url)")
-            }
-        }
+    /// update title in page history
+    func updateTitlePageHistoryDataModel(context: String, title: String) {
+        PageHistoryDataModel.s.updateTitle(context: context, title: title)
+    }
 
-        // ヘッダーのお気に入りアイコン更新
-        if context == currentContext {
-            // フロントページの保存の場合
-            FavoriteDataModel.s.reload()
-        }
+    /// update common history
+    func insertCommonHistoryDataModel(url: URL?, title: String?) {
+        CommonHistoryDataModel.s.insert(url: url, title: title)
     }
 
     /// 閲覧、ページ履歴の永続化
     func storeHistoryDataModel() {
         CommonHistoryDataModel.s.store()
         PageHistoryDataModel.s.store()
-    }
-
-    /// 検索履歴の永続化
-    func storeSearchHistoryDataModel(title: String) {
-        SearchHistoryDataModel.s.store(histories: [SearchHistory(title: title, date: Date())])
     }
 
     /// ページ履歴の永続化

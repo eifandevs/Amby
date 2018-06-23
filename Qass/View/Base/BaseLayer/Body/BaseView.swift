@@ -54,7 +54,7 @@ class BaseView: UIView {
                 // プライベートモードならデザインを変更する
                 rx_baseViewDidChangeFront.onNext(())
                 // ヘッダーフィールドを更新する
-                viewModel.reloadHeaderText()
+                viewModel.reloadHeaderViewDataModel()
                 // 空ページの場合は、編集状態にする
                 if viewModel.currentUrl.isEmpty {
                     if let beginEditingWorkItem = self.beginEditingWorkItem {
@@ -272,7 +272,9 @@ class BaseView: UIView {
                 if self.front.isValidUrl {
                     self.front.reload()
                 } else {
-                    _ = self.front.load(urlStr: self.viewModel.reloadUrl)
+                    if let url = self.viewModel.currentUrl {
+                        _ = self.front.load(urlStr: url)
+                    }
                 }
                 log.eventOut(chain: "rx_baseViewModelDidReloadWebView")
             }
@@ -355,18 +357,7 @@ class BaseView: UIView {
                 log.eventIn(chain: "rx_baseViewModelDidSearchWebView")
                 guard let `self` = self else { return }
                 if let text = object.element {
-                    if text.isValidUrl {
-                        let encodedText = text.contains("%") ? text : text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-                        self.viewModel.headerFieldText = encodedText
-                        _ = self.front.load(urlStr: encodedText)
-                    } else {
-                        // 検索ワードによる検索
-                        // 閲覧履歴を保存する
-                        self.viewModel.storeSearchHistoryDataModel(title: text)
-                        let encodedText = "\(HttpConst.PATH_SEARCH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)"
-                        self.viewModel.headerFieldText = encodedText
-                        _ = self.front.load(urlStr: encodedText)
-                    }
+                    _ = self.front.load(urlStr: text)
                 }
                 log.eventOut(chain: "rx_baseViewModelDidSearchWebView")
             }
@@ -491,14 +482,14 @@ class BaseView: UIView {
                     viewModel.updateProgressHeaderViewDataModel(object: progress)
                 }
             } else if keyPath == "title" {
-                if let change = change, let title = change[NSKeyValueChangeKey.newKey] as? String, !title.isEmpty {
-                    // TODO: PageHistoryのタイトル更新
-                    log.error("received title: \(title)")
+                if let change = change, let title = change[NSKeyValueChangeKey.newKey] as? String {
+                    viewModel.updateTitlePageHistoryDataModel(context: contextPtr.pointee, title: title)
                 }
             } else if keyPath == "URL" {
                 if let change = change, let url = change[NSKeyValueChangeKey.newKey] as? URL, !url.absoluteString.isEmpty {
-                    // TODO: PageHistoryのURL更新
-                    log.error("received url: \(url.absoluteString)")
+                    if let targetWebView = self.webViews.find({ $0?.context == contextPtr.pointee })! {
+                        viewModel.updateUrlPageHistoryDataModel(context: contextPtr.pointee, url: url.absoluteString, operation: targetWebView.operation)
+                    }
                 }
             }
         }
@@ -666,24 +657,6 @@ class BaseView: UIView {
             newWv.load(urlStr: url)
         } else {
             log.error("cannot get currentUrl.")
-        }
-    }
-
-    /// ページ情報保存
-    private func saveMetaData(webView: EGWebView) {
-        if let urlStr = webView.url?.absoluteString, let title = webView.title, !title.isEmpty {
-            if urlStr.isValidUrl {
-                webView.requestUrl = urlStr
-                webView.requestTitle = title
-                if webView == front {
-                    viewModel.headerFieldText = webView.requestUrl
-                }
-            } else if urlStr.isLocalUrl {
-                // エラーが発生した時のheaderField更新
-                if webView == front {
-                    viewModel.headerFieldText = viewModel.latestRequestUrl
-                }
-            }
         }
     }
 
@@ -1004,30 +977,17 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             return
         }
 
-        // 操作種別の保持
-        let operation = wv.operation
-
         // 操作種別はnormalに戻しておく
         if wv.operation != .normal {
             wv.operation = .normal
         }
 
-        // ページ情報を取得
-        saveMetaData(webView: wv)
-
-        if wv.hasSavableUrl {
-            isDoneAutoFill = false
-            // 有効なURLの場合は、履歴に保存する
-            viewModel.updateHistoryDataModel(context: wv.context, url: wv.requestUrl, title: wv.requestTitle, operation: operation)
-            viewModel.storePageHistoryDataModel()
-        }
-
-        if wv.requestUrl != nil {
-            wv.previousUrl = wv.requestUrl
-        }
+        // store common history
+        viewModel.insertCommonHistoryDataModel(url: wv.url, title: wv.title)
 
         // プログレス更新
         if wv.context == front.context {
+            isDoneAutoFill = false
             viewModel.updateProgressHeaderViewDataModel(object: 1.0)
         }
         updateNetworkActivityIndicator()
@@ -1121,7 +1081,6 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        let webView = webView as! EGWebView
 
         guard let url = navigationAction.request.url else {
             decisionHandler(.cancel)
@@ -1155,15 +1114,6 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             decisionHandler(.cancel)
             return
         }
-
-        // リクエストURLはエラーが発生した時のため保持しておく
-        // エラー発生時は、リクエストしたURLを履歴に保持する
-        if let latest = navigationAction.request.url?.absoluteString, latest.isValidUrl {
-            log.debug("[Request Url]: \(latest)")
-            viewModel.latestRequestUrl = latest
-        }
-
-        saveMetaData(webView: webView)
 
         decisionHandler(.allow)
     }

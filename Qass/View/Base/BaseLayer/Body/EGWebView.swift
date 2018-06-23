@@ -24,15 +24,6 @@ class EGWebView: WKWebView {
 
     var context = "" // 監視ID
 
-    // 最新のリクエストURLを常に保持しておく
-    // 履歴保存時やリロード時に使用する
-    var previousUrl: String!
-
-    // 最新のリクエストURL
-    // 不正なリクエストは入らない
-    var requestUrl: String!
-    var requestTitle: String!
-
     // スワイプ中かどうか
     var isSwiping: Bool = false
 
@@ -155,10 +146,6 @@ class EGWebView: WKWebView {
         while !finished {
             RunLoop.current.run(mode: RunLoopMode(rawValue: "NSDefaultRunLoopMode"), before: NSDate.distantFuture)
         }
-    }
-
-    var hasSavableUrl: Bool {
-        return previousUrl != requestUrl && requestUrl.isValidUrl
     }
 
     var isValidUrl: Bool {

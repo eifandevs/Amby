@@ -43,9 +43,18 @@ final class CommonHistoryDataModel {
         rx_commonHistoryDataModelDidGoForward.onNext(())
     }
 
-    /// 履歴追加
-    func insert(history: CommonHistory) {
-        histories.insert(history, at: 0)
+    /// insert with URL
+    func insert(url: URL?, title: String?) {
+        if let url = url?.absoluteString, let title = title, !url.isEmpty && !title.isEmpty {
+            if let currentUrl = PageHistoryDataModel.s.currentHistory?.url, currentUrl != url {
+                // Common History
+                let history = CommonHistory(url: url, title: title, date: Date())
+                // 配列の先頭に追加する
+                histories.insert(history, at: 0)
+
+                log.debug("save common history. url: \(history.url) title: \(history.title)")
+            }
+        }
     }
 
     /// get the history with index
