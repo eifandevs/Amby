@@ -16,10 +16,13 @@ final class BaseViewControllerViewModel {
         .flatMap { object -> Observable<(subtitle: String, message: String)> in
             if object.operation == .help {
                 // ヘルプ画面を表示する
-                let object = object.object as! [String: String]
-                let subtitle = object[AppConst.KEY_NOTIFICATION_SUBTITLE]!
-                let message = object[AppConst.KEY_NOTIFICATION_MESSAGE]!
-                return Observable.just((subtitle: subtitle, message: message))
+                if let object = object.object as? [String: String] {
+                    let subtitle = object[AppConst.KEY_NOTIFICATION_SUBTITLE]!
+                    let message = object[AppConst.KEY_NOTIFICATION_MESSAGE]!
+                    return Observable.just((subtitle: subtitle, message: message))
+                }
+
+                return Observable.empty()
             } else {
                 return Observable.empty()
             }
