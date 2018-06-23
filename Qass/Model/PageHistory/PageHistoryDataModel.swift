@@ -200,7 +200,7 @@ final class PageHistoryDataModel {
 
     /// update title with context
     func updateTitle(context: String, title: String) {
-        if !title.isEmpty {
+        if !title.isEmpty && title != "読み込みエラー" {
             histories.forEach({
                 if $0.context == context {
                     $0.title = title
