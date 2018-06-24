@@ -32,49 +32,43 @@ class BaseViewModelTests: XCTestCase {
     }
 
     func testGetIndex() {
-        PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: #function)
+        PageHistoryDataModel.s.append(url: "https://abc")
         XCTAssertTrue(viewModel.getIndex(context: PageHistoryDataModel.s.histories[1].context) == 1)
     }
 
     func testGetMostForwardUrlPageHistoryDataModel() {
-        PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: #function)
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
-        XCTAssertTrue(viewModel.getMostForwardUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context) == #function)
+        PageHistoryDataModel.s.append(url: "https://abc")
+        PageHistoryDataModel.s.updateUrl(context: PageHistoryDataModel.s.histories[1].context, url: "https://abc", operation: .normal)
+        XCTAssertTrue(viewModel.getMostForwardUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context) == "https://abc")
     }
 
     func testGetIsPastViewingPageHistoryDataModel() {
-        PageHistoryDataModel.s.initialize()
+        PageHistoryDataModel.s.append(url: "https://abc")
         let isPastViewing = viewModel.getIsPastViewingPageHistoryDataModel(context: PageHistoryDataModel.s.histories[0].context)
         XCTAssertFalse(isPastViewing)
     }
 
     func testGetBackUrlPageHistoryDataModel() {
-        PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: #function)
-        PageHistoryDataModel.s.append(url: #function)
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
+        PageHistoryDataModel.s.append(url: "https://abc")
+        PageHistoryDataModel.s.append(url: "https://abc")
+        PageHistoryDataModel.s.updateUrl(context: PageHistoryDataModel.s.histories[1].context, url: "https://abc", operation: .normal)
 
         PageHistoryDataModel.s.store()
         let backUrl = viewModel.getBackUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context)
 
-        XCTAssertTrue(backUrl == #function)
+        XCTAssertTrue(backUrl == "https://abc")
     }
 
     func testGetForwardUrlPageHistoryDataModel() {
-        PageHistoryDataModel.s.initialize()
-        PageHistoryDataModel.s.append(url: #function)
-        PageHistoryDataModel.s.append(url: #function)
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
-        PageHistoryDataModel.s.update(context: PageHistoryDataModel.s.histories[1].context, url: #function, title: #function, operation: .normal)
+        PageHistoryDataModel.s.append(url: "https://abc")
+        PageHistoryDataModel.s.append(url: "https://abc")
+        PageHistoryDataModel.s.updateUrl(context: PageHistoryDataModel.s.histories[1].context, url: "https://abc", operation: .normal)
 
         PageHistoryDataModel.s.store()
         _ = viewModel.getBackUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context)
         let forwardUrl = viewModel.getForwardUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context)
 
-        XCTAssertTrue(forwardUrl == #function)
+        XCTAssertTrue(forwardUrl == "https://abc")
     }
 
     func testStartLoadingPageHistoryDataModel() {
@@ -94,7 +88,7 @@ class BaseViewModelTests: XCTestCase {
     }
 
     func testEndLoadingPageHistoryDataModel() {
-        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
 
         weak var expectation = self.expectation(description: #function)
 
@@ -112,7 +106,7 @@ class BaseViewModelTests: XCTestCase {
     }
 
     func testEndRenderingPageHistoryDataModel() {
-        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
 
         weak var expectation = self.expectation(description: #function)
 
@@ -172,13 +166,13 @@ class BaseViewModelTests: XCTestCase {
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
             .subscribe { element in
                 if let expectation = expectation {
-                    XCTAssert(element.element!.url == #function)
+                    XCTAssert(element.element!.url == "https://abc")
                     expectation.fulfill()
                 }
             }
             .disposed(by: disposeBag)
 
-        viewModel.insertByEventPageHistoryDataModel(url: #function)
+        viewModel.insertByEventPageHistoryDataModel(url: "https://abc")
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -209,7 +203,7 @@ class BaseViewModelTests: XCTestCase {
         let form = Form()
         form.title = #function
         form.host = #function
-        form.url = #function
+        form.url = "https://abc"
         form.inputs.append(input)
 
         viewModel.storeFormDataModel(form: form)
@@ -225,38 +219,28 @@ class BaseViewModelTests: XCTestCase {
     }
 
     func testGetPreviousCapture() {
-        viewModel.insertPageHistoryDataModel(url: #function)
-        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
         XCTAssertNotNil(viewModel.getPreviousCapture())
     }
 
     func testGetNextCapture() {
-        viewModel.insertPageHistoryDataModel(url: #function)
-        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
         XCTAssertNotNil(viewModel.getNextCapture())
     }
 
-    func testReloadHeaderText() {
-        viewModel.insertPageHistoryDataModel(url: #function)
+    func testReloadHeaderViewDataModel() {
+        HeaderViewDataModel.s.reload()
+    }
 
-        weak var expectation = self.expectation(description: #function)
-
-        HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateText
-            .subscribe { element in
-                if let expectation = expectation {
-                    XCTAssert(element.element! == #function)
-                    expectation.fulfill()
-                }
-            }
-            .disposed(by: disposeBag)
-
-        viewModel.reloadHeaderText()
-        self.waitForExpectations(timeout: 10, handler: nil)
+    func testUpdateTextHeaderViewDataModel() {
+        HeaderViewDataModel.s.updateText(text: "https://abc")
     }
 
     func testGoBackPageHistoryDataModel() {
-        viewModel.insertPageHistoryDataModel(url: #function)
-        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
 
         weak var expectation = self.expectation(description: #function)
 
@@ -274,8 +258,8 @@ class BaseViewModelTests: XCTestCase {
     }
 
     func testGoNextPageHistoryDataModel() {
-        viewModel.insertPageHistoryDataModel(url: #function)
-        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
         viewModel.goBackPageHistoryDataModel()
 
         weak var expectation = self.expectation(description: #function)
@@ -294,8 +278,8 @@ class BaseViewModelTests: XCTestCase {
     }
 
     func testGoBackCommonHistoryDataModel() {
-        viewModel.insertPageHistoryDataModel(url: #function)
-        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
 
         weak var expectation = self.expectation(description: #function)
 
@@ -312,8 +296,8 @@ class BaseViewModelTests: XCTestCase {
     }
 
     func testGoForwardCommonHistoryDataModel() {
-        viewModel.insertPageHistoryDataModel(url: #function)
-        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
 
         weak var expectation = self.expectation(description: #function)
 
@@ -330,66 +314,50 @@ class BaseViewModelTests: XCTestCase {
     }
 
     func testCreateThumbnailDataModel() {
-        viewModel.insertPageHistoryDataModel(url: #function)
-        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
         viewModel.createThumbnailDataModel(context: PageHistoryDataModel.s.getHistory(index: 0)!.context)
     }
 
     func testWriteThumbnailDataModel() {
-        viewModel.insertPageHistoryDataModel(url: #function)
-        viewModel.insertPageHistoryDataModel(url: #function)
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
+        viewModel.insertPageHistoryDataModel(url: "https://abc")
         let image = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100)).getImage()
         let data = UIImagePNGRepresentation(image)!
         viewModel.writeThumbnailDataModel(context: PageHistoryDataModel.s.getHistory(index: 0)!.context, data: data)
     }
 
-    func testUpdateHistoryDataModel() {
-        viewModel.insertPageHistoryDataModel(url: #function)
-        viewModel.insertPageHistoryDataModel(url: #function)
+    func testUpdateUrlPageHistoryDataModel() {
+        PageHistoryDataModel.s.append(url: "https://abc")
+        PageHistoryDataModel.s.append(url: "https://abc")
+        viewModel.updateUrlPageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context, url: "https://abc", operation: .normal)
+        XCTAssert(PageHistoryDataModel.s.getHistory(index: 1)?.url == "https://abc")
+    }
 
-        weak var expectation = self.expectation(description: #function)
+    func testUpdateTitlePageHistoryDataModel() {
+        PageHistoryDataModel.s.append(url: "https://abc")
+        PageHistoryDataModel.s.append(url: "https://abc")
+        viewModel.updateTitlePageHistoryDataModel(context: PageHistoryDataModel.s.histories[1].context, title: "updateUrlPageHistoryDataModel")
+        XCTAssert(PageHistoryDataModel.s.getHistory(index: 1)?.title == "updateUrlPageHistoryDataModel")
+    }
 
-        FavoriteDataModel.s.rx_favoriteDataModelDidReload
-            .subscribe { _ in
-                if let expectation = expectation {
-                    expectation.fulfill()
-                }
-            }
-            .disposed(by: disposeBag)
-
-        let targetContext = PageHistoryDataModel.s.getHistory(index: 1)!.context
-        viewModel.updateHistoryDataModel(context: targetContext, url: "testUpdateHistoryDataModel", title: "testUpdateHistoryDataModel", operation: PageHistory.Operation.normal)
-        XCTAssertTrue(CommonHistoryDataModel.s.histories.last!.url == "testUpdateHistoryDataModel")
-        XCTAssertTrue(PageHistoryDataModel.s.getHistory(context: targetContext)!.url == "testUpdateHistoryDataModel")
-
-        self.waitForExpectations(timeout: 10, handler: nil)
+    func testInsertCommonHistoryDataModel() {
+        viewModel.insertCommonHistoryDataModel(url: URL(string: "https://abc"), title: #function)
+        XCTAssert(CommonHistoryDataModel.s.histories.last!.title == #function)
     }
 
     func testStoreHistoryDataModel() {
-        viewModel.insertPageHistoryDataModel(url: #function)
-        viewModel.insertPageHistoryDataModel(url: #function)
-
-        let targetContext = PageHistoryDataModel.s.getHistory(index: 1)!.context
-        viewModel.updateHistoryDataModel(context: targetContext, url: "testStoreHistoryDataModel", title: "testStoreHistoryDataModel", operation: PageHistory.Operation.normal)
+        PageHistoryDataModel.s.append(url: "https://abc")
+        PageHistoryDataModel.s.append(url: "https://abc")
+        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc"), title: #function)
         viewModel.storeHistoryDataModel()
-
-        XCTAssertTrue(CommonHistoryDataModel.s.getList().count == 1)
-        XCTAssertTrue(PageHistoryDataModel.s.getHistory(context: targetContext)?.url == "testStoreHistoryDataModel")
-    }
-
-    func testStoreSearchHistoryDataModel() {
-        viewModel.storeSearchHistoryDataModel(title: #function)
-        XCTAssertTrue(SearchHistoryDataModel.s.select(title: #function, readNum: 10).first!.title == #function)
     }
 
     func testStorePageHistoryDataModel() {
-        viewModel.insertPageHistoryDataModel(url: #function)
-        viewModel.insertPageHistoryDataModel(url: #function)
-
-        let targetContext = PageHistoryDataModel.s.getHistory(index: 1)!.context
-        viewModel.updateHistoryDataModel(context: targetContext, url: "testStorePageHistoryDataModel", title: "testStorePageHistoryDataModel", operation: PageHistory.Operation.forward)
-        viewModel.storePageHistoryDataModel()
-        XCTAssertTrue(PageHistoryDataModel.s.getHistory(context: targetContext)?.url == #function)
+        PageHistoryDataModel.s.append(url: "https://abc")
+        PageHistoryDataModel.s.append(url: "https://abc")
+        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc"), title: #function)
+        viewModel.storeHistoryDataModel()
     }
 
     func testDeleteThumbnailDataModel() {
