@@ -45,10 +45,19 @@ final class CommonHistoryDataModel {
 
     /// insert with URL
     func insert(url: URL?, title: String?) {
+        insert(url: url, title: title, date: Date())
+    }
+
+    /// insert with data
+    func insert(url: URL?, title: String?, date: Date) {
         if let url = url?.absoluteString, let title = title, !url.isEmpty && !title.isEmpty {
-            if let currentUrl = PageHistoryDataModel.s.currentHistory?.url, currentUrl != url, url.isValidUrl {
+
+            let currentUrl = histories.count > 0 ? histories.first!.url : nil
+
+            // do not duplicate registration
+            if url != currentUrl, url.isValidUrl {
                 // Common History
-                let history = CommonHistory(url: url, title: title, date: Date())
+                let history = CommonHistory(url: url, title: title, date: date)
                 // 配列の先頭に追加する
                 histories.insert(history, at: 0)
 
