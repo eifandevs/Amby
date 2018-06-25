@@ -363,7 +363,7 @@ class BaseView: UIView {
             }
             .disposed(by: rx.disposeBag)
 
-        // ヒストリーバック監視
+        // observe history back
         viewModel.rx_baseViewModelDidHistoryBackWebView
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidHistoryBackWebView")
