@@ -430,7 +430,7 @@ class BaseView: UIView {
             }
             .disposed(by: rx.disposeBag)
 
-        // スクロールアップ監視
+        // observe scroll up
         viewModel.rx_baseViewModelDidScrollUp
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidScrollUp")
