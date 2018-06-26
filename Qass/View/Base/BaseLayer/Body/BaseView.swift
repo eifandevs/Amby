@@ -368,20 +368,22 @@ class BaseView: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidHistoryBackWebView")
                 guard let `self` = self else { return }
-                if self.front.isLoading && self.front.operation == .normal && !(self.viewModel.getIsPastViewingPageHistoryDataModel(context: self.front.context)) {
-                    // 新規ページ表示中に戻るを押下したルート
-                    log.debug("go back on loading.")
+                if let isPastViewing = self.viewModel.getIsPastViewingPageHistoryDataModel(context: self.front.context) {
+                    if self.front.isLoading && self.front.operation == .normal && !isPastViewing {
+                        // 新規ページ表示中に戻るを押下したルート
+                        log.debug("go back on loading.")
 
-                    if let url = self.viewModel.getMostForwardUrlPageHistoryDataModel(context: self.front.context) {
-                        self.front.operation = .back
-                        _ = self.front.load(urlStr: url)
-                    }
-                } else {
-                    log.debug("go back.")
-                    // 有効なURLを探す
-                    if let url = self.viewModel.getBackUrlPageHistoryDataModel(context: self.front.context) {
-                        self.front.operation = .back
-                        _ = self.front.load(urlStr: url)
+                        if let url = self.viewModel.getMostForwardUrlPageHistoryDataModel(context: self.front.context) {
+                            self.front.operation = .back
+                            _ = self.front.load(urlStr: url)
+                        }
+                    } else {
+                        log.debug("go back.")
+                        // 有効なURLを探す
+                        if let url = self.viewModel.getBackUrlPageHistoryDataModel(context: self.front.context) {
+                            self.front.operation = .back
+                            _ = self.front.load(urlStr: url)
+                        }
                     }
                 }
                 log.eventOut(chain: "rx_baseViewModelDidHistoryBackWebView")

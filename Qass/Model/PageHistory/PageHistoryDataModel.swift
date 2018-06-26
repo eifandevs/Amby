@@ -117,9 +117,11 @@ final class PageHistoryDataModel {
     }
 
     /// 過去のページを閲覧しているかのフラグ
-    func isPastViewing(context: String) -> Bool {
-        let history = histories.find({ $0.context == context })!
-        return history.backForwardList.count != 0 && history.listIndex != history.backForwardList.count - 1
+    func isPastViewing(context: String) -> Bool? {
+        if let history = histories.find({ $0.context == context }) {
+            return history.backForwardList.count != 0 && history.listIndex != history.backForwardList.count - 1
+        }
+        return nil
     }
 
     /// 直近URL取得
@@ -165,9 +167,9 @@ final class PageHistoryDataModel {
 
                     log.debug("save page history url. url: \(url)")
 
-                    if operation == .normal {
+                    if let isPastViewing = isPastViewing(context: context), operation == .normal {
                         // リスト更新
-                        if !isPastViewing(context: context) {
+                        if !isPastViewing {
                             $0.backForwardList.append($0.url)
                         } else {
                             // ヒストリーバック -> 通常遷移の場合は、履歴リストを再構築する
@@ -185,6 +187,8 @@ final class PageHistoryDataModel {
 
                         log.debug("change backForwardList. listIndex: \($0.listIndex) backForwardList: \($0.backForwardList)")
 
+                    } else {
+                        log.error("isPastViewing error.")
                     }
                     return
                 }

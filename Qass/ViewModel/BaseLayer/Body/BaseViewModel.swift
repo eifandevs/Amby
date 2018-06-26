@@ -166,7 +166,7 @@ final class BaseViewModel {
     }
 
     /// 過去ページ閲覧中フラグ取得
-    func getIsPastViewingPageHistoryDataModel(context: String) -> Bool {
+    func getIsPastViewingPageHistoryDataModel(context: String) -> Bool? {
         return PageHistoryDataModel.s.isPastViewing(context: context)
     }
 
