@@ -39,7 +39,11 @@ class Util {
         var isDir: ObjCBool = false
 
         if fileManager.fileExists(atPath: path, isDirectory: &isDir) {
-            try! fileManager.removeItem(atPath: path)
+            do {
+                try fileManager.removeItem(atPath: path)
+            } catch let error as NSError {
+                log.error("remove Item error. error: \(error.localizedDescription)")
+            }
         }
     }
 
