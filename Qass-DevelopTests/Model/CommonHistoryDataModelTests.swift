@@ -61,40 +61,40 @@ class CommonHistoryDataModelTests: XCTestCase {
     }
 
     func testInsert() {
-        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc"), title: #function)
+        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc/"), title: #function)
         XCTAssertTrue(CommonHistoryDataModel.s.histories.first!.title == #function)
-        XCTAssertTrue(CommonHistoryDataModel.s.histories.first!.url == "https://abc")
+        XCTAssertTrue(CommonHistoryDataModel.s.histories.first!.url == "https://abc/")
     }
 
     func testStore() {
-        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc"), title: #function)
+        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc/"), title: #function)
         CommonHistoryDataModel.s.store()
         let storedHistory = CommonHistoryDataModel.s.select(title: #function, readNum: 10).first!
         XCTAssertTrue(storedHistory.title == #function)
-        XCTAssertTrue(storedHistory.url == "https://abc")
+        XCTAssertTrue(storedHistory.url == "https://abc/")
     }
 
     func testGetList() {
-        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc"), title: #function)
+        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc/"), title: #function)
         CommonHistoryDataModel.s.store()
         let list = CommonHistoryDataModel.s.getList()
         XCTAssertTrue(list.first! == Date().toString())
     }
 
     func testSelect() {
-        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc"), title: #function)
+        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc/"), title: #function)
         CommonHistoryDataModel.s.store()
         let storedHistory = CommonHistoryDataModel.s.select(dateString: Date().toString()).first!
         XCTAssertTrue(storedHistory.title == #function)
-        XCTAssertTrue(storedHistory.url == "https://abc")
+        XCTAssertTrue(storedHistory.url == "https://abc/")
     }
 
     func testSelectWithTitle() {
-        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc"), title: #function)
+        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc/"), title: #function)
         CommonHistoryDataModel.s.store()
         let storedHistory = CommonHistoryDataModel.s.select(title: #function, readNum: 10).first!
         XCTAssertTrue(storedHistory.title == #function)
-        XCTAssertTrue(storedHistory.url == "https://abc")
+        XCTAssertTrue(storedHistory.url == "https://abc/")
     }
 
     func testExpireCheck() {
@@ -105,7 +105,7 @@ class CommonHistoryDataModelTests: XCTestCase {
         (0...historySaveCount).forEach {
             let expiredDate = calendar.date(byAdding: .day, value: -($0 + 1), to: calendar.startOfDay(for: date))!
 
-            CommonHistoryDataModel.s.insert(url: URL(string: "https://abc"), title: #function, date: expiredDate)
+            CommonHistoryDataModel.s.insert(url: URL(string: "https://abc/"), title: #function, date: expiredDate)
             CommonHistoryDataModel.s.store()
         }
 
@@ -117,7 +117,7 @@ class CommonHistoryDataModelTests: XCTestCase {
     }
 
     func testDeleteWithIds() {
-        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc"), title: #function)
+        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc/"), title: #function)
         let storedId = CommonHistoryDataModel.s.histories.first!._id
 
         CommonHistoryDataModel.s.store()
@@ -127,7 +127,7 @@ class CommonHistoryDataModelTests: XCTestCase {
     }
 
     func testDelete() {
-        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc"), title: #function)
+        CommonHistoryDataModel.s.insert(url: URL(string: "https://abc/"), title: #function)
         CommonHistoryDataModel.s.store()
         CommonHistoryDataModel.s.delete()
 
