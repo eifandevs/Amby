@@ -94,7 +94,7 @@ class PageHistoryDataModelTests: XCTestCase {
 
         let isPastViewing = PageHistoryDataModel.s.isPastViewing(context: PageHistoryDataModel.s.histories[0].context)
 
-        XCTAssertFalse(isPastViewing)
+        XCTAssertFalse(isPastViewing!)
     }
 
     func testGetMostForwardUrl() {

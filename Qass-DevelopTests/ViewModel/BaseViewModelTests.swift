@@ -47,7 +47,7 @@ class BaseViewModelTests: XCTestCase {
     func testGetIsPastViewingPageHistoryDataModel() {
         PageHistoryDataModel.s.append(url: "https://abc/")
         let isPastViewing = viewModel.getIsPastViewingPageHistoryDataModel(context: PageHistoryDataModel.s.histories[0].context)
-        XCTAssertFalse(isPastViewing)
+        XCTAssertFalse(isPastViewing!)
     }
 
     func testGetBackUrlPageHistoryDataModel() {

@@ -96,9 +96,8 @@ class FrontLayerViewModelTests: XCTestCase {
         weak var expectation = self.expectation(description: #function)
 
         HeaderViewDataModel.s.rx_headerViewDataModelDidBeginEditing
-            .subscribe { element in
+            .subscribe { _ in
                 if let expectation = expectation {
-                    XCTAssertTrue(element.element! == true)
                     expectation.fulfill()
                 }
             }
