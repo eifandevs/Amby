@@ -42,7 +42,7 @@ class Util {
             do {
                 try fileManager.removeItem(atPath: path)
             } catch let error as NSError {
-                log.error("remove Item error. error: \(error.localizedDescription)")
+                log.error("remove item error. error: \(error.localizedDescription)")
             }
         }
     }

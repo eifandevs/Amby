@@ -24,14 +24,22 @@ final class DBRepository {
     }
 
     func insert(data: [Object]) {
-        try! realm.write {
-            realm.add(data, update: true)
+        do {
+            try realm.write {
+                realm.add(data, update: true)
+            }
+        } catch let error as NSError {
+            log.error("realm write error. error: \(error)")
         }
     }
 
     func delete(data: [Object]) {
-        try! realm.write {
-            realm.delete(data)
+        do {
+            try realm.write {
+                realm.delete(data)
+            }
+        } catch let error as NSError {
+            log.error("realm write error. error: \(error)")
         }
     }
 
