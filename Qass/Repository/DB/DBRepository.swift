@@ -29,7 +29,7 @@ final class DBRepository {
                 realm.add(data, update: true)
             }
         } catch let error as NSError {
-            log.error("realm write error. error: \(error)")
+            log.error("realm write error. error: \(error.localizedDescription)")
         }
     }
 
@@ -39,7 +39,7 @@ final class DBRepository {
                 realm.delete(data)
             }
         } catch let error as NSError {
-            log.error("realm write error. error: \(error)")
+            log.error("realm write error. error: \(error.localizedDescription)")
         }
     }
 

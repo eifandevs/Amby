@@ -29,7 +29,11 @@ class Util {
         fileManager.fileExists(atPath: path, isDirectory: &isDir)
 
         if !isDir.boolValue {
-            try! fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+            do {
+                try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+            } catch let error as NSError {
+                log.error("create directory error. error: \(error.localizedDescription)")
+            }
         }
     }
 
