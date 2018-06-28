@@ -34,7 +34,9 @@ class NotificationView: UIButton {
                     })
                     .disposed(by: self.rx.disposeBag)
 
-                (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.view.addSubview(self.overlay)
+                if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                    delegate.window?.rootViewController?.view.addSubview(self.overlay)
+                }
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
                     guard let `self` = self else { return }
