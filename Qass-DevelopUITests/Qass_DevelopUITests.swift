@@ -7,10 +7,13 @@
 //
 
 import XCTest
+import UIKit
 
 @testable import Qass_Develop
 
 class Qass_DevelopUITests: XCTestCase {
+
+    var app: XCUIApplication!
 
     override func setUp() {
         super.setUp()
@@ -33,50 +36,45 @@ class Qass_DevelopUITests: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
 
-        let app = XCUIApplication()
-        sleep(5)
+        app = XCUIApplication()
+        sleep(4)
 
+        // キーボードの表示を確認
         XCTAssertTrue(app.keyboards.count > 0)
 
+        // ----- 検索 -----
         app.keys["A"].tap()
-        app.keys["p"].tap()
-        app.keys["p"].tap()
-        app.keys["l"].tap()
-        app.keys["e"].tap()
-
-        // 検索タップ
         app.buttons["Search"].tap()
-        // NVActivityIndicatorViewの表示を待つ
+        waitLoading()
+        // 初回google検索結果表示時は、言語設定のモーダルが表示されるので、タップして削除する
+        let launguageLink = app.links.element(boundBy: 1)
+        launguageLink.tap()
+        sleep(1)
+
+        // ----- 適当にリンクタップ -----
+        app.links.element(boundBy: 30).tap()
+        waitLoading()
+
+        // ----- ヒストリーバック -----
+        let coord1: XCUICoordinate = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+        let coord2 = coord1.withOffset(CGVector(dx: coord1.screenPoint.x + 40, dy: 0))
+        coord1.press(forDuration: 0.1, thenDragTo: coord2)
+        waitLoading()
+
+        // ----- ヒストリーフォワード -----
+        let coord3: XCUICoordinate = app.coordinate(withNormalizedOffset: CGVector(dx: 1, dy: 0))
+        let coord4 = coord3.withOffset(CGVector(dx: 0.99, dy: 0))
+        coord3.press(forDuration: 0.1, thenDragTo: coord4)
+    }
+
+    private func waitLoading() {
         sleep(1)
         // 検索してくるくるがいなくなるのを検知
         let indicator = app.otherElements["NVActivityIndicatorView.NVActivityIndicatorView"]
         let notExists = NSPredicate(format: "exists == false")
         expectation(for: notExists, evaluatedWith: indicator, handler: nil)
         waitForExpectations(timeout: 10, handler: nil)
-
-        // 言語設定のモーダルの表示を待つ
         sleep(1)
-        // 初回google検索結果表示時は、言語設定のモーダルが表示されるので、タップして削除する
-        let launguageLink = app.links.element(boundBy: 1)
-        launguageLink.tap()
-        sleep(1)
-
-        // 適当にリンクタップ
-        app.links.element(boundBy: 30).tap()
-        // NVActivityIndicatorViewの表示を待つ
-        sleep(1)
-        // 検索してくるくるがいなくなるのを検知
-        let indicator2 = app.otherElements["NVActivityIndicatorView.NVActivityIndicatorView"]
-        let notExists2 = NSPredicate(format: "exists == false")
-        expectation(for: notExists2, evaluatedWith: indicator2, handler: nil)
-        waitForExpectations(timeout: 10, handler: nil)
-
-        // 左エッジスワイプ
-        let coord1: XCUICoordinate = app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.15))
-        let coord2 = coord1.withOffset(CGVector(dx: 40, dy: 100))
-
-        coord1.press(forDuration: 0.1, thenDragTo: coord2)
-        sleep(2)
     }
 
 }
