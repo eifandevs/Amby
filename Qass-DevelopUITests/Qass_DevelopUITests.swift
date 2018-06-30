@@ -39,26 +39,33 @@ class Qass_DevelopUITests: XCTestCase {
         XCTAssertTrue(app.keyboards.count > 0)
 
         app.keys["A"].tap()
-        app.keys["a"].tap()
-        app.keys["a"].tap()
+        app.keys["p"].tap()
+        app.keys["p"].tap()
+        app.keys["l"].tap()
+        app.keys["e"].tap()
 
         // 検索タップ
         app.buttons["Search"].tap()
-        // 検索してくるくるがいなくなるまで10秒間処理を中断する
+        // NVActivityIndicatorViewの表示を待つ
+        sleep(1)
+        // 検索してくるくるがいなくなるのを検知
         let indicator = app.otherElements["NVActivityIndicatorView.NVActivityIndicatorView"]
         let notExists = NSPredicate(format: "exists == false")
         expectation(for: notExists, evaluatedWith: indicator, handler: nil)
         waitForExpectations(timeout: 10, handler: nil)
 
+        // 言語設定のモーダルの表示を待つ
+        sleep(1)
         // 初回google検索結果表示時は、言語設定のモーダルが表示されるので、タップして削除する
         let launguageLink = app.links.element(boundBy: 1)
         launguageLink.tap()
-
-        sleep(2)
+        sleep(1)
 
         // 適当にリンクタップ
         app.links.element(boundBy: 30).tap()
-        // 検索してくるくるがいなくなるまで10秒間処理を中断する
+        // NVActivityIndicatorViewの表示を待つ
+        sleep(1)
+        // 検索してくるくるがいなくなるのを検知
         let indicator2 = app.otherElements["NVActivityIndicatorView.NVActivityIndicatorView"]
         let notExists2 = NSPredicate(format: "exists == false")
         expectation(for: notExists2, evaluatedWith: indicator2, handler: nil)
@@ -69,7 +76,7 @@ class Qass_DevelopUITests: XCTestCase {
         let coord2 = coord1.withOffset(CGVector(dx: 40, dy: 100))
 
         coord1.press(forDuration: 0.1, thenDragTo: coord2)
-        sleep(6)
+        sleep(2)
     }
 
 }
