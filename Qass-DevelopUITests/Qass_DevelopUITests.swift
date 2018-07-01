@@ -32,55 +32,57 @@ class Qass_DevelopUITests: XCTestCase {
         super.tearDown()
     }
 
-    func testExample() {
+    func testScenario() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
 
         app = XCUIApplication()
-        sleep(4)
 
-        // キーボードの表示を確認
-        XCTAssertTrue(app.keyboards.count > 0)
+        // キーボードの表示を待つ
+        waitExist(element: app.keyboards.firstMatch)
+        XCTAssertTrue(app.keys["A"].exists) // 英語キーボードのみ
 
         // ----- 検索 -----
-        if app.keys["A"].exists {
-            // 英語キーボード起動
+        do {
             app.keys["A"].tap()
+            app.keys["m"].tap()
+            app.keys["a"].tap()
+            app.keys["z"].tap()
+            app.keys["o"].tap()
+            app.keys["n"].tap()
             app.buttons["Search"].tap()
-        } else {
-            // 日本語キーボード起動
-            app.keys["あ"].tap()
-            app.buttons["確定"].tap()
+
+            // 初回google検索結果表示時は、言語設定のモーダルが表示されるので、それを待つ
+            waitExist(element: app.links["Change to English"])
+            app.links["Change to English"].tap()
+
+            // ----- 適当にリンクタップ -----
+            app.links["Welcome to Prime Video"].tap()
+            waitExist(element: app.links["Help"])
         }
-        waitLoading()
-        // 初回google検索結果表示時は、言語設定のモーダルが表示されるので、タップして削除する
-        let launguageLink = app.links.element(boundBy: 1)
-        launguageLink.tap()
-        sleep(1)
-
-        // ----- 適当にリンクタップ -----
-        app.links.element(boundBy: 30).tap()
-        waitLoading()
-
+        
         // ----- ヒストリーバック -----
-        let coord1: XCUICoordinate = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
-        let coord2 = coord1.withOffset(CGVector(dx: coord1.screenPoint.x + 40, dy: 0))
-        coord1.press(forDuration: 0.1, thenDragTo: coord2)
-        waitLoading()
+        do {
+            let coord1 = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+            let coord2 = coord1.withOffset(CGVector(dx: coord1.screenPoint.x + 40, dy: 0))
+            coord1.press(forDuration: 0.1, thenDragTo: coord2)
+            waitExist(element: app.links["Welcome to Prime Video"])
+        }
 
         // ----- ヒストリーフォワード -----
-        let coord3: XCUICoordinate = app.coordinate(withNormalizedOffset: CGVector(dx: 1, dy: 0))
-        let coord4 = coord3.withOffset(CGVector(dx: 0.99, dy: 0))
-        coord3.press(forDuration: 0.1, thenDragTo: coord4)
+        do {
+            let coord1 = app.coordinate(withNormalizedOffset: CGVector(dx: 1, dy: 0))
+            let coord2 = coord1.withOffset(CGVector(dx: 0.99, dy: 0))
+            coord1.press(forDuration: 0.1, thenDragTo: coord2)
+            waitExist(element: app.links["Help"])
+        }
     }
 
-    private func waitLoading() {
-        sleep(3)
-        // 検索してくるくるがいなくなるのを検知
-        let indicator = app.otherElements["NVActivityIndicatorView.NVActivityIndicatorView"]
-        let notExists = NSPredicate(format: "exists == false")
-        expectation(for: notExists, evaluatedWith: indicator, handler: nil)
-        waitForExpectations(timeout: 20, handler: nil)
+    private func waitExist(element: XCUIElement) {
+        let notExists = NSPredicate(format: "exists == true")
+        expectation(for: notExists, evaluatedWith: element, handler: nil)
+        waitForExpectations(timeout: 60, handler: nil)
+        sleep(2)
     }
 
 }
