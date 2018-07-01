@@ -60,7 +60,7 @@ class Qass_DevelopUITests: XCTestCase {
             app.links["Welcome to Prime Video"].tap()
             waitExist(element: app.links["Help"])
         }
-        
+
         // ----- ヒストリーバック -----
         do {
             let coord1 = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))

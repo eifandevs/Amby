@@ -484,10 +484,12 @@ class BaseView: UIView {
                     viewModel.updateProgressHeaderViewDataModel(object: progress)
                 }
             } else if keyPath == "title" {
+                log.debug("receive title change.")
                 if let change = change, let title = change[NSKeyValueChangeKey.newKey] as? String {
                     viewModel.updateTitlePageHistoryDataModel(context: contextPtr.pointee, title: title)
                 }
             } else if keyPath == "URL" {
+                log.debug("receive url change.")
                 if let change = change, let url = change[NSKeyValueChangeKey.newKey] as? URL, !url.absoluteString.isEmpty {
                     if let targetWebView = self.webViews.find({ $0?.context == contextPtr.pointee })! {
                         viewModel.updateUrlPageHistoryDataModel(context: contextPtr.pointee, url: url.absoluteString, operation: targetWebView.operation)
