@@ -43,8 +43,15 @@ class Qass_DevelopUITests: XCTestCase {
         XCTAssertTrue(app.keyboards.count > 0)
 
         // ----- 検索 -----
-        app.keys["A"].tap()
-        app.buttons["Search"].tap()
+        if app.keys["A"].exists {
+            // 英語キーボード起動
+            app.keys["A"].tap()
+            app.buttons["Search"].tap()
+        } else {
+            // 日本語キーボード起動
+            app.keys["あ"].tap()
+            app.buttons["確定"].tap()
+        }
         waitLoading()
         // 初回google検索結果表示時は、言語設定のモーダルが表示されるので、タップして削除する
         let launguageLink = app.links.element(boundBy: 1)
@@ -68,13 +75,12 @@ class Qass_DevelopUITests: XCTestCase {
     }
 
     private func waitLoading() {
-        sleep(1)
+        sleep(3)
         // 検索してくるくるがいなくなるのを検知
         let indicator = app.otherElements["NVActivityIndicatorView.NVActivityIndicatorView"]
         let notExists = NSPredicate(format: "exists == false")
         expectation(for: notExists, evaluatedWith: indicator, handler: nil)
-        waitForExpectations(timeout: 10, handler: nil)
-        sleep(1)
+        waitForExpectations(timeout: 20, handler: nil)
     }
 
 }
