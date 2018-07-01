@@ -172,6 +172,7 @@ final class PageHistoryDataModel {
                         if !isPastViewing {
                             $0.backForwardList.append($0.url)
                         } else {
+                            log.debug("refactor backForwardList.")
                             // ヒストリーバック -> 通常遷移の場合は、履歴リストを再構築する
                             $0.backForwardList = Array($0.backForwardList.prefix($0.listIndex + 1))
                             $0.backForwardList.append($0.url)
@@ -179,6 +180,7 @@ final class PageHistoryDataModel {
 
                         // 保存件数を超えた場合は、削除する
                         if $0.backForwardList.count > pageHistorySaveCount {
+                            log.warning("over backForwardList max.")
                             $0.backForwardList = Array($0.backForwardList.suffix(pageHistorySaveCount))
                         }
 
