@@ -167,28 +167,32 @@ final class PageHistoryDataModel {
 
                     log.debug("save page history url. url: \(url)")
 
-                    if let isPastViewing = isPastViewing(context: context), operation == .normal {
-                        // リスト更新
-                        if !isPastViewing {
-                            $0.backForwardList.append($0.url)
+                    if let isPastViewing = isPastViewing(context: context) {
+                        if operation == .normal {
+                            // リスト更新
+                            if !isPastViewing {
+                                log.debug("add backForwardList.")
+                                $0.backForwardList.append($0.url)
+                            } else {
+                                log.debug("refactor backForwardList.")
+                                // ヒストリーバック -> 通常遷移の場合は、履歴リストを再構築する
+                                $0.backForwardList = Array($0.backForwardList.prefix($0.listIndex + 1))
+                                $0.backForwardList.append($0.url)
+                            }
+
+                            // 保存件数を超えた場合は、削除する
+                            if $0.backForwardList.count > pageHistorySaveCount {
+                                log.warning("over backForwardList max.")
+                                $0.backForwardList = Array($0.backForwardList.suffix(pageHistorySaveCount))
+                            }
+
+                            // インデックス調整
+                            $0.listIndex = $0.backForwardList.count - 1
+
+                            log.debug("change backForwardList. listIndex: \($0.listIndex) backForwardList: \($0.backForwardList)")
                         } else {
-                            log.debug("refactor backForwardList.")
-                            // ヒストリーバック -> 通常遷移の場合は、履歴リストを再構築する
-                            $0.backForwardList = Array($0.backForwardList.prefix($0.listIndex + 1))
-                            $0.backForwardList.append($0.url)
+                            log.debug("not change backForwardList.")
                         }
-
-                        // 保存件数を超えた場合は、削除する
-                        if $0.backForwardList.count > pageHistorySaveCount {
-                            log.warning("over backForwardList max.")
-                            $0.backForwardList = Array($0.backForwardList.suffix(pageHistorySaveCount))
-                        }
-
-                        // インデックス調整
-                        $0.listIndex = $0.backForwardList.count - 1
-
-                        log.debug("change backForwardList. listIndex: \($0.listIndex) backForwardList: \($0.backForwardList)")
-
                     } else {
                         log.error("isPastViewing error.")
                     }
