@@ -670,6 +670,8 @@ class BaseView: UIView {
     }
 
     private func saveThumbnail(webView: EGWebView, completion: @escaping (() -> Void)) {
+        log.debug("save thumbnail. context: \(webView.context)")
+
         // サムネイルを保存
         DispatchQueue.mainSyncSafe {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
