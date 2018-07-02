@@ -93,14 +93,26 @@ final class PageHistoryDataModel {
         return histories[index]
     }
 
+    /// get isLoading property
+    func getIsLoading(context: String) -> Bool? {
+        if let history = histories.find({ $0.context == context }) {
+            return history.isLoading
+        }
+        return nil
+    }
+
     /// ロード開始
     func startLoading(context: String) {
-        rx_pageHistoryDataModelDidStartLoading.onNext(context)
+        if let history = histories.find({ $0.context == context }) {
+            history.isLoading = true
+            rx_pageHistoryDataModelDidStartLoading.onNext(context)
+        }
     }
 
     /// ロード終了
     func endLoading(context: String) {
-        if histories.find({ $0.context == context }) != nil {
+        if let history = histories.find({ $0.context == context }) {
+            history.isLoading = false
             rx_pageHistoryDataModelDidEndLoading.onNext(context)
         } else {
             log.error("pageHistoryDataModelDidEndLoading not fired. history is deleted.")

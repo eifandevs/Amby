@@ -47,11 +47,20 @@ final class FooterViewModel {
     /// ローディング終了通知用RX
     let rx_footerViewModelDidEndLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidEndRendering
         .flatMap { context -> Observable<(context: String, title: String)> in
-            if let pageHistory = PageHistoryDataModel.s.getHistory(context: context) {
-                return Observable.just((context: context, title: pageHistory.title))
-            } else {
-                return Observable.empty()
+            if let isLoading = PageHistoryDataModel.s.getIsLoading(context: context) {
+                if !isLoading {
+                    // When loading is completed and loading has started while saving thumbnails, skip
+                    if let pageHistory = PageHistoryDataModel.s.getHistory(context: context) {
+                        return Observable.just((context: context, title: pageHistory.title))
+                    } else {
+                        return Observable.empty()
+                    }
+                } else {
+                    log.warning("start loading while saving thumbnails.")
+                }
             }
+
+            return Observable.empty()
         }
 
     /// 現在位置

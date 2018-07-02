@@ -22,17 +22,19 @@ class PageHistory: NSObject, NSCoding {
     var title: String = ""
     var backForwardList = [String]()
     var listIndex: Int = 0
+    var isLoading = false
 
     override init() {
         super.init()
     }
 
-    init(context: String = NSUUID().uuidString, url: String = "", title: String = "", backForwardList: [String] = [], listIndex: Int = 0, operation _: Int = 0) {
+    init(context: String = NSUUID().uuidString, url: String = "", title: String = "", backForwardList: [String] = [], listIndex: Int = 0, isLoading: Bool = false, operation _: Int = 0) {
         self.context = context
         self.url = url
         self.title = title
         self.backForwardList = backForwardList
         self.listIndex = listIndex
+        self.isLoading = isLoading
     }
 
     required convenience init?(coder decoder: NSCoder) {
@@ -41,7 +43,8 @@ class PageHistory: NSObject, NSCoding {
         let title = decoder.decodeObject(forKey: "title") as! String
         let backForwardList = decoder.decodeObject(forKey: "backForwardList") as! [String]
         let listIndex = decoder.decodeInteger(forKey: "listIndex")
-        self.init(context: context, url: url, title: title, backForwardList: backForwardList, listIndex: listIndex)
+        let isLoading = decoder.decodeBool(forKey: "isLoading")
+        self.init(context: context, url: url, title: title, backForwardList: backForwardList, listIndex: listIndex, isLoading: isLoading)
     }
 
     public func encode(with aCoder: NSCoder) {
@@ -50,5 +53,6 @@ class PageHistory: NSObject, NSCoding {
         aCoder.encode(title, forKey: "title")
         aCoder.encode(backForwardList, forKey: "backForwardList")
         aCoder.encode(listIndex, forKey: "listIndex")
+        aCoder.encode(isLoading, forKey: "isLoading")
     }
 }
