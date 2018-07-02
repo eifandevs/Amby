@@ -148,8 +148,9 @@ final class CommonHistoryDataModel {
                 latestFiles.forEach({ (keyStr: String) in
                     let filename = "\(keyStr).dat"
                     if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
-                        let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
-                        allCommonHistory += commonHistory
+                        if let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
+                            allCommonHistory += commonHistory
+                        }
                     }
                 })
                 let hitCommonHistory = allCommonHistory.filter({ (commonHistoryItem) -> Bool in
