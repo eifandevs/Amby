@@ -75,16 +75,20 @@ class BaseViewModelTests: XCTestCase {
 
     func testStartLoadingPageHistoryDataModel() {
         weak var expectation = self.expectation(description: #function)
-
+        viewModel.insertPageHistoryDataModel(url: "https://abc/")
+        
+        let targetContext = PageHistoryDataModel.s.histories.first!.context
+        
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidStartLoading
-            .subscribe { _ in
+            .subscribe { element in
                 if let expectation = expectation {
+                    XCTAssertTrue(element.element! == targetContext)
                     expectation.fulfill()
                 }
             }
             .disposed(by: disposeBag)
 
-        viewModel.startLoadingPageHistoryDataModel(context: #function)
+        viewModel.startLoadingPageHistoryDataModel(context: targetContext)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }

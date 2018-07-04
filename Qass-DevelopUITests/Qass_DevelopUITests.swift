@@ -63,26 +63,46 @@ class Qass_DevelopUITests: XCTestCase {
 
         // ----- ヒストリーバック -----
         do {
-            let coord1 = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
-            let coord2 = coord1.withOffset(CGVector(dx: coord1.screenPoint.x + 40, dy: 0))
-            coord1.press(forDuration: 0.1, thenDragTo: coord2)
-            waitExist(element: app.links["Welcome to Prime Video"])
-        }
-
-        // ----- ヒストリーフォワード -----
-        do {
-            let coord1 = app.coordinate(withNormalizedOffset: CGVector(dx: 1, dy: 0))
-            let coord2 = coord1.withOffset(CGVector(dx: 0.99, dy: 0))
-            coord1.press(forDuration: 0.1, thenDragTo: coord2)
-            waitExist(element: app.links["Help"])
+            openMenu()
         }
     }
 
+    private func openMenu() {
+        let deviceName = getDeviceInfo()
+        switch deviceName {
+        case "iPhone":
+            let coord1 = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 1.5))
+            let coord2 = coord1.withOffset(CGVector(dx: 100, dy: 1.5))
+            coord1.press(forDuration: 0.1, thenDragTo: coord2)
+            sleep(2)
+        case "iPhone Plus":
+            let coord1 = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 2.3))
+            let coord2 = coord1.withOffset(CGVector(dx: 140, dy: 2.3))
+            coord1.press(forDuration: 0.1, thenDragTo: coord2)
+            sleep(2)
+        default:
+            XCTAssertTrue(false)
+        }
+    }
+    
     private func waitExist(element: XCUIElement) {
         let notExists = NSPredicate(format: "exists == true")
         expectation(for: notExists, evaluatedWith: element, handler: nil)
         waitForExpectations(timeout: 60, handler: nil)
-        sleep(2)
+        sleep(4)
     }
-
+    
+    private func getDeviceInfo() -> String {
+        let size = UIScreen.main.bounds.size
+        let scale = UIScreen.main.scale
+        let result = CGSize(width: size.width * scale, height: size.height * scale)
+        switch result.height {
+        case 960:
+            return "iPhone"
+        case 1440:
+            return "iPhone Plus"
+        default:
+            return "unknown"
+        }
+    }
 }

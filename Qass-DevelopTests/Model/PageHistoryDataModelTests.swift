@@ -39,17 +39,20 @@ class PageHistoryDataModelTests: XCTestCase {
 
     func testStartLoading() {
         weak var expectation = self.expectation(description: #function)
+        PageHistoryDataModel.s.append(url: "https://abc/")
+        
+        let targetContext = PageHistoryDataModel.s.histories.first!.context
 
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidStartLoading
             .subscribe { element in
                 if let expectation = expectation {
-                    XCTAssertTrue(element.element! == #function)
+                    XCTAssertTrue(element.element! == targetContext)
                     expectation.fulfill()
                 }
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.startLoading(context: #function)
+        PageHistoryDataModel.s.startLoading(context: targetContext)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
