@@ -33,7 +33,10 @@ class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
     }
 
     func loadNib() {
-        let view = Bundle.main.loadNibNamed(R.nib.optionMenuFavoriteTableView.name, owner: self, options: nil)?.first as! UIView
+        guard let view = Bundle.main.loadNibNamed(R.nib.optionMenuFavoriteTableView.name, owner: self, options: nil)?.first as? UIView else {
+            return
+        }
+
         view.frame = bounds
 
         // 影
