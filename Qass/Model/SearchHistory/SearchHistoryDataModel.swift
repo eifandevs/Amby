@@ -85,8 +85,9 @@ final class SearchHistoryDataModel {
                 let filename = "\(keyStr).dat"
 
                 if let data = localStorageRepository.getData(.searchHistory(resource: filename)) {
-                    let searchHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [SearchHistory]
-                    allSearchHistory += searchHistory
+                    if let searchHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as? [SearchHistory] {
+                        allSearchHistory += searchHistory
+                    }
                 }
             })
             let hitSearchHistory = allSearchHistory.filter({ (searchHistoryItem) -> Bool in
