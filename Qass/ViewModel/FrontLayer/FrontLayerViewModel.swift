@@ -29,6 +29,10 @@ final class FrontLayerViewModel {
         PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)
     }
 
+    func copyPageHistoryDataModel() {
+        PageHistoryDataModel.s.copy()
+    }
+
     func beginEditingHeaderViewDataModel() {
         HeaderViewDataModel.s.beginEditing(forceEditFlg: true)
     }

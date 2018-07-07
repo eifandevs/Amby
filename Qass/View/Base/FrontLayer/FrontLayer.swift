@@ -31,11 +31,15 @@ class FrontLayer: UIView {
         self.swipeDirection = swipeDirection
 
         // サークルメニューの作成
-        let menuItems = [
-            [
-                CircleMenuItem(image: R.image.circlemenuMenu(), tapAction: { [weak self] (initialPt: CGPoint) in
-                    guard let `self` = self else { return }
+        circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: circleButtonRadius, height: circleButtonRadius)), swipeDirection: swipeDirection)
 
+        // Monitor menu press
+        circleMenu.rx_circleMenuDidSelect
+            .subscribe { [weak self] object in
+                guard let `self` = self, let element = object.element else { return }
+                switch element.operation {
+                case .menu:
+                    let initialPt = element.point
                     // オプションメニューの表示位置を計算
                     let ptX = self.swipeDirection == .left ? initialPt.x / 6 : DeviceConst.DISPLAY_SIZE.width - 250 - (DeviceConst.DISPLAY_SIZE.width - initialPt.x) / 6
                     let ptY: CGFloat = { () -> CGFloat in
@@ -62,56 +66,33 @@ class FrontLayer: UIView {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.addSubview(self.optionMenu!)
                     }
-                }),
-                CircleMenuItem(image: R.image.circlemenuClose(), tapAction: { _ in
-                    log.debug("circle menu event. event: close")
+                case .close:
                     self.viewModel.removePageHistoryDataModel()
-                }),
-                CircleMenuItem(image: R.image.circlemenuHistoryback(), tapAction: { _ in
-                    log.debug("circle menu event. event: history back")
+                case .historyBack:
                     self.viewModel.goBackCommonHistoryDataModel()
-                }),
-                CircleMenuItem(image: R.image.circlemenuCopy(), tapAction: { _ in
-                    log.debug("circle menu event. event: copy")
-                    PageHistoryDataModel.s.copy()
-                }),
-                CircleMenuItem(image: R.image.circlemenuSearch(), tapAction: { _ in
-                    log.debug("circle menu event. event: search")
+                case .copy:
+                    self.viewModel.copyPageHistoryDataModel()
+                case .search:
                     self.viewModel.beginEditingHeaderViewDataModel()
-                }),
-                CircleMenuItem(image: R.image.circlemenuAdd(), tapAction: { _ in
-                    log.debug("circle menu event. event: add")
+                case .add:
                     self.viewModel.insertPageHistoryDataModel()
-                })
-            ],
-            [
-                CircleMenuItem(image: R.image.circlemenuScrollup(), tapAction: { _ in
-                    log.debug("circle menu event. event: scroll up")
+                case .scrollUp:
                     self.viewModel.executeOperationDataModel(operation: .scrollUp)
-                }),
-                CircleMenuItem(image: R.image.circlemenuAutoscroll(), tapAction: { _ in
-                    log.debug("circle menu event. event: auto scroll")
+                case .autoScroll:
                     self.viewModel.executeOperationDataModel(operation: .autoScroll)
-                }),
-                CircleMenuItem(image: R.image.circlemenuHistoryforward(), tapAction: { _ in
-                    log.debug("circle menu event. event: history forward")
+                case .historyForward:
                     self.viewModel.goForwardCommonHistoryDataModel()
-                }),
-                CircleMenuItem(image: R.image.circlemenuForm(), tapAction: { _ in
-                    log.debug("circle menu event. event: form")
+                case .form:
                     self.viewModel.executeOperationDataModel(operation: .form)
-                }),
-                CircleMenuItem(image: R.image.headerFavorite(), tapAction: { _ in
-                    log.debug("circle menu event. event: favorite")
+                case .favorite:
                     self.viewModel.registerFavoriteDataModel()
-                }),
-                CircleMenuItem(image: R.image.circlemenuHome(), tapAction: { _ in
-                    log.debug("circle menu event. event: home")
+                case .home:
                     self.viewModel.executeOperationDataModel(operation: .home)
-                })
-            ]
-        ]
-        circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: circleButtonRadius, height: circleButtonRadius)), menuItems: menuItems, swipeDirection: swipeDirection)
+                default:
+                    break
+                }
+            }
+            .disposed(by: rx.disposeBag)
 
         // 有効化監視
         circleMenu.rx_circleMenuDidActive

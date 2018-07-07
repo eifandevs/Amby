@@ -18,6 +18,10 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     let rx_circleMenuDidClose = PublishSubject<()>()
     // メニューアクティブ通知用RX
     let rx_circleMenuDidActive = PublishSubject<()>()
+    // ボタン押下通知用RX
+    let rx_circleMenuDidSelect = PublishSubject<(operation: UserOperation, point: CGPoint)>()
+
+    private let viewModel = CircleMenuViewModel()
 
     private var swipeDirection: EdgeSwipeDirection!
 
@@ -27,9 +31,8 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     private var isClosing = false
     private var progress: CircleProgress!
     private var circleMenuItemGroup: [[CircleMenuItem]] = []
-    private var menuIndex: Int = 0
     private var circleMenuItems: [CircleMenuItem] {
-        return circleMenuItemGroup[menuIndex]
+        return circleMenuItemGroup[viewModel.menuIndex]
     }
 
     enum CircleMenuLeftLocation: CGPoint, EnumEnumerable {
@@ -62,9 +65,9 @@ class CircleMenu: UIButton, ShadowView, CircleView {
         super.init(frame: frame)
     }
 
-    convenience init(frame: CGRect, menuItems: [[CircleMenuItem]], swipeDirection: EdgeSwipeDirection) {
+    convenience init(frame: CGRect, swipeDirection: EdgeSwipeDirection) {
         self.init(frame: frame)
-        circleMenuItemGroup = menuItems
+        circleMenuItemGroup = viewModel.menuItems.map { $0.map { CircleMenuItem(operation: $0) } }
         self.swipeDirection = swipeDirection
         // 陰影と角丸
         addCircleShadow()
@@ -125,7 +128,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
             if center == initialPt! {
                 // サークルメニューアイテムを切り替える
                 let currentCircleMenuItems = circleMenuItems
-                menuIndex = (menuIndex + 1 == circleMenuItemGroup.count) ? 0 : (menuIndex + 1)
+                viewModel.menuIndex = (viewModel.menuIndex + 1 == circleMenuItemGroup.count) ? 0 : (viewModel.menuIndex + 1)
                 let nextCircleMenuItems = circleMenuItems
                 for (index, item) in currentCircleMenuItems.enumerated() {
                     nextCircleMenuItems[index].frame = item.frame
@@ -309,7 +312,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
 
     private func executeCircleMenuAction() -> Bool {
         for item in circleMenuItems where item.scheduledAction {
-            item.action?(initialPt!)
+            rx_circleMenuDidSelect.onNext((operation: item.operation, point: initialPt!))
             return true
         }
         return false

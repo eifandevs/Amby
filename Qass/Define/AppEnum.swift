@@ -14,6 +14,10 @@ import UIKit
 // MARK: - オペレーション
 
 enum UserOperation {
+    case menu
+    case add
+    case close
+    case copy
     case autoScroll
     case home
     case form
@@ -24,4 +28,6 @@ enum UserOperation {
     case scrollUp
     case suggest
     case help
+    case historyBack
+    case historyForward
 }

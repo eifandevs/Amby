@@ -300,6 +300,8 @@
 		A1B5F43D209D0C8700DF1AE3 /* OptionMenuFavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FE7209CF977004F1EA5 /* OptionMenuFavoriteTableViewCell.xib */; };
 		A1B5F43E209D0C8700DF1AE3 /* OptionMenuSettingTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FF3209CF977004F1EA5 /* OptionMenuSettingTableView.xib */; };
 		A1B5F43F209D0C8700DF1AE3 /* SearchMenuNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FE1209CF977004F1EA5 /* SearchMenuNewsTableViewCell.xib */; };
+		A1CB70CD20F14D810053BD3A /* CircleMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB70CC20F14D810053BD3A /* CircleMenuViewModel.swift */; };
+		A1CB70CE20F14D810053BD3A /* CircleMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CB70CC20F14D810053BD3A /* CircleMenuViewModel.swift */; };
 		A1CF359020D7D16400C1343B /* ThumbnailDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */; };
 		A1CF359220D91C1C00C1343B /* BaseViewControllerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359120D91C1C00C1343B /* BaseViewControllerViewModelTests.swift */; };
 		A1CF359420D91C4E00C1343B /* FooterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359320D91C4E00C1343B /* FooterViewModelTests.swift */; };
@@ -556,6 +558,7 @@
 		A190300F209CF977004F1EA5 /* Qass_DevelopUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Qass_DevelopUITests.swift; sourceTree = "<group>"; };
 		A19880732073A5E20067EC4F /* Qass-DevelopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-DevelopUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1B5F448209D0C8700DF1AE3 /* Qass-Production.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qass-Production.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1CB70CC20F14D810053BD3A /* CircleMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleMenuViewModel.swift; sourceTree = "<group>"; };
 		A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModelTests.swift; sourceTree = "<group>"; };
 		A1CF359120D91C1C00C1343B /* BaseViewControllerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerViewModelTests.swift; sourceTree = "<group>"; };
 		A1CF359320D91C4E00C1343B /* FooterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterViewModelTests.swift; sourceTree = "<group>"; };
@@ -1360,6 +1363,7 @@
 		A1903004209CF977004F1EA5 /* FrontLayer */ = {
 			isa = PBXGroup;
 			children = (
+				A1CB70CB20F14D600053BD3A /* CircleMenu */,
 				A1E1A08520D0667D004DB01D /* OptionMenu */,
 				A190300C209CF977004F1EA5 /* FrontLayerViewModel.swift */,
 			);
@@ -1374,6 +1378,14 @@
 				A1CF359F20DA703800C1343B /* Springboard.swift */,
 			);
 			path = "Qass-DevelopUITests";
+			sourceTree = "<group>";
+		};
+		A1CB70CB20F14D600053BD3A /* CircleMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A1CB70CC20F14D810053BD3A /* CircleMenuViewModel.swift */,
+			);
+			path = CircleMenu;
 			sourceTree = "<group>";
 		};
 		A1E1A07320D06652004DB01D /* Body */ = {
@@ -2223,6 +2235,7 @@
 				A1E1A09620D0667D004DB01D /* OptionMenuHistoryTableViewModel.swift in Sources */,
 				A1B5F3FE209D0C8700DF1AE3 /* CacheHelper.swift in Sources */,
 				A1B5F3FF209D0C8700DF1AE3 /* OptionMenuHistoryTableViewCell.swift in Sources */,
+				A1CB70CE20F14D810053BD3A /* CircleMenuViewModel.swift in Sources */,
 				A1E1A08020D06652004DB01D /* HeaderViewModel.swift in Sources */,
 				A1B5F401209D0C8700DF1AE3 /* FooterView.swift in Sources */,
 				A1B5F402209D0C8700DF1AE3 /* Util.swift in Sources */,
@@ -2358,6 +2371,7 @@
 				A1E1A09520D0667D004DB01D /* OptionMenuHistoryTableViewModel.swift in Sources */,
 				A190305D209CF978004F1EA5 /* CacheHelper.swift in Sources */,
 				A190307B209CF978004F1EA5 /* OptionMenuHistoryTableViewCell.swift in Sources */,
+				A1CB70CD20F14D810053BD3A /* CircleMenuViewModel.swift in Sources */,
 				A1E1A07F20D06652004DB01D /* HeaderViewModel.swift in Sources */,
 				A190306C209CF978004F1EA5 /* FooterView.swift in Sources */,
 				A1903063209CF978004F1EA5 /* Util.swift in Sources */,
