@@ -39,7 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
             UIViewController.swizzle() // ログ出力
             #if UT
-                UIView.swizzle() // UT設定
                 log.info("DEBUG UT BUILD")
             #else
                 log.info("DEBUG BUILD")

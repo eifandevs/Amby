@@ -74,12 +74,12 @@ class Qass_DevelopUITests: XCTestCase {
             let coord1 = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 1.5))
             let coord2 = coord1.withOffset(CGVector(dx: 100, dy: 1.5))
             coord1.press(forDuration: 0.1, thenDragTo: coord2)
-            sleep(2)
+            sleep(1)
         case "iPhone Plus":
             let coord1 = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 2.3))
             let coord2 = coord1.withOffset(CGVector(dx: 140, dy: 2.3))
             coord1.press(forDuration: 0.1, thenDragTo: coord2)
-            sleep(2)
+            sleep(1)
         default:
             XCTAssertTrue(false)
         }
