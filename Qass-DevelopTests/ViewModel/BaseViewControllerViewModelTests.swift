@@ -31,16 +31,18 @@ class BaseViewControllerViewModelTests: XCTestCase {
     func testInsertByEventPageHistoryDataModel() {
         weak var expectation = self.expectation(description: #function)
 
+        PageHistoryDataModel.s.append(url: "https://abc/")
+        
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
             .subscribe { element in
                 if let expectation = expectation {
-                    XCTAssert(element.element!.url == #function)
+                    XCTAssert(element.element!.url == "https://abc/")
                     expectation.fulfill()
                 }
             }
             .disposed(by: disposeBag)
 
-        viewModel.insertByEventPageHistoryDataModel(url: #function)
+        viewModel.insertByEventPageHistoryDataModel(url: "https://abc/")
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
