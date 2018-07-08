@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// swiftlint:disable force_cast
+
 class PageHistory: NSObject, NSCoding {
     /// 操作種別
     enum Operation: Int {
