@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// swiftlint:disable force_cast
+
 class SearchHistory: NSObject, NSCoding {
     var _id: String = NSUUID().uuidString
     var title: String = ""
