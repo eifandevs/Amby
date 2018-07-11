@@ -78,6 +78,7 @@ final class PageHistoryDataModel {
             if let histories = NSKeyedUnarchiver.unarchiveObject(with: data) as? [PageHistory] {
                 self.histories = histories
             } else {
+                self.histories = []
                 log.error("unarchive histories error.")
             }
         } else {

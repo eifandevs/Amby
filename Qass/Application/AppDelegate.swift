@@ -30,23 +30,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.setup()
 
         #if DEVELOP
-            // developターゲットは通信しない
-            log.info("DEVELOP TARGET")
+        // developターゲットは通信しない
+        log.info("DEVELOP TARGET")
         #else
-            log.info("PRODUCTION TARGET")
+        log.info("PRODUCTION TARGET")
         #endif
 
         #if DEBUG
-            UIViewController.swizzle() // ログ出力
+        UIViewController.swizzle() // ログ出力
             #if UT
-                log.info("DEBUG UT BUILD")
+            log.info("DEBUG UT BUILD")
             #else
-                log.info("DEBUG BUILD")
+            log.info("DEBUG BUILD")
             #endif
         #endif
 
         #if RELEASE
-            log.info("RELEASE BUILD")
+        log.info("RELEASE BUILD")
         #endif
 
         // プログレス初期設定
