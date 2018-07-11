@@ -128,7 +128,7 @@ class PageHistoryDataModelTests: XCTestCase {
         PageHistoryDataModel.s.updateUrl(context: PageHistoryDataModel.s.histories[1].context, url: "https://abc/", operation: .normal)
 
         PageHistoryDataModel.s.store()
-        PageHistoryDataModel.s.getBackUrl(context: PageHistoryDataModel.s.histories[1].context)
+        _ = PageHistoryDataModel.s.getBackUrl(context: PageHistoryDataModel.s.histories[1].context)
         let forwardUrl = PageHistoryDataModel.s.getForwardUrl(context: PageHistoryDataModel.s.histories[1].context)
 
         XCTAssertTrue(forwardUrl == "https://abc/")
