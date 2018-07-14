@@ -8,9 +8,9 @@ PODS:
     - RxSwift (~> 4.0)
   - NSObject+Rx (4.2.0):
     - RxSwift (~> 4.0)
-  - R.swift (3.3.0):
-    - R.swift.Library (~> 3.0.2)
-  - R.swift.Library (3.0.2)
+  - R.swift (4.0.0):
+    - R.swift.Library (~> 4.0.0)
+  - R.swift.Library (4.0.0)
   - Realm (2.10.2):
     - Realm/Headers (= 2.10.2)
   - Realm/Headers (2.10.2)
@@ -28,7 +28,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.4)
   - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
-  - R.swift (~> 3.3)
+  - R.swift
   - Realm (~> 2.4)
   - RealmSwift (~> 2.4)
   - RxCocoa (~> 4.0)
@@ -41,8 +41,8 @@ SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Moya: 3d594ada51a21cc02b18739ab578a1984f900c8a
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
-  R.swift: bde9704d50ff36820f49e266bc88ef545e1e9b36
-  R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
+  R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
+  R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
   Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
   RealmSwift: 07a9ae0505091eda6b2ee7c190c3786d6e90a7b0
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
@@ -52,6 +52,6 @@ SPEC CHECKSUMS:
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: 9419a921c56db8107250573746a025d9fc67a369
+PODFILE CHECKSUM: c88336fd00b11b0295155a57fdf481417b1f9fe9
 
 COCOAPODS: 1.4.0
