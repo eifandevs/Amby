@@ -40,7 +40,11 @@ class CircleProgress: UIView {
     func start() {
         invalidate()
         createProgress()
+        #if UT
+        progressTimer = Timer.scheduledTimer(timeInterval: 100, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
+        #else
         progressTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
+        #endif
         progressTimer.fire()
     }
 

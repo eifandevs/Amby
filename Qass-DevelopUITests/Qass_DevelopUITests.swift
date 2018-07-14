@@ -67,16 +67,14 @@ class Qass_DevelopUITests: XCTestCase {
             app.buttons["circlemenu-historyback"].tap()
             waitExist(element: app.links["Welcome to Prime Video"], wait: 0)
         }
-        
+
         // ----- ヒストリーフォワード -----
         do {
             openMenu()
-            changeMenu()
+            app.buttons["circlemenu"].tap()
+            app.buttons["circlemenu-historyforward"].tap()
+            waitExist(element: app.links["Help"], wait: 0)
         }
-    }
-
-    private func changeMenu() {
-        app.buttons["circlemenu"].tap()
     }
     
     private func openMenu() {
@@ -93,7 +91,6 @@ class Qass_DevelopUITests: XCTestCase {
         default:
             XCTAssertTrue(false)
         }
-        sleep(1)
     }
     
     private func waitExist(element: XCUIElement, wait: Int = 4) {
