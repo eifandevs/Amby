@@ -8,12 +8,14 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class CircleProgress: UIView {
+
     private var circle: UIView
     private var progress: CAShapeLayer!
     private var progressTimer: Timer!
-    private var animationFinishAction: (() -> Void)?
+    let rx_circleProgressDidFinish = PublishSubject<()>()
 
     override init(frame: CGRect) {
         circle = UIView()
@@ -35,11 +37,8 @@ class CircleProgress: UIView {
 
     // MARK: Public Method
 
-    func start(complition: (() -> Void)?) {
+    func start() {
         invalidate()
-        if let _complition = complition {
-            animationFinishAction = _complition
-        }
         createProgress()
         progressTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
         progressTimer.fire()
@@ -48,7 +47,6 @@ class CircleProgress: UIView {
     func invalidate() {
         if progressTimer != nil && progressTimer.isValid {
             progressTimer.invalidate()
-            animationFinishAction = nil
             progressTimer = nil
             progress.removeFromSuperlayer()
             progress = nil
@@ -84,7 +82,7 @@ class CircleProgress: UIView {
             log.debug("circle animation stop")
             progressTimer.invalidate()
             progressTimer = nil
-            animationFinishAction?()
+            rx_circleProgressDidFinish.onNext(())
         }
     }
 }

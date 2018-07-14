@@ -35,6 +35,8 @@ class CircleMenu: UIButton, ShadowView, CircleView {
         return circleMenuItemGroup[viewModel.menuIndex]
     }
 
+    let disposeBag = DisposeBag()
+
     enum CircleMenuLeftLocation: CGPoint, EnumEnumerable {
         case Upper = "0,-130"
         case UpperRight = "62,-100"
@@ -86,6 +88,25 @@ class CircleMenu: UIButton, ShadowView, CircleView {
 
         // プログレス
         progress = CircleProgress(frame: CGRect(origin: CGPoint.zero, size: frame.size))
+        progress.rx_circleProgressDidFinish
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_circleProgressDidFinish")
+                guard let `self` = self else { return }
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.alpha = 0
+                    self.circleMenuItems.forEach({ menuItem in
+                        menuItem.center = self.initialPt!
+                        menuItem.alpha = 0
+                    })
+                }, completion: { finished in
+                    if finished {
+                        self.rx_circleMenuDidClose.onNext(())
+                    }
+                })
+                log.eventOut(chain: "rx_circleProgressDidFinish")
+            }
+            .disposed(by: disposeBag)
+
         addSubview(progress)
     }
 
@@ -201,19 +222,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                 }
             })
         } else {
-            progress.start {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.alpha = 0
-                    self.circleMenuItems.forEach({ menuItem in
-                        menuItem.center = self.initialPt!
-                        menuItem.alpha = 0
-                    })
-                }, completion: { finished in
-                    if finished {
-                        self.rx_circleMenuDidClose.onNext(())
-                    }
-                })
-            }
+            progress.start()
         }
     }
 
