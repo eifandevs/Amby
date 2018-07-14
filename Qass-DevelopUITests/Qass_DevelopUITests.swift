@@ -64,9 +64,21 @@ class Qass_DevelopUITests: XCTestCase {
         // ----- ヒストリーバック -----
         do {
             openMenu()
+            app.buttons["circlemenu-historyback"].tap()
+            waitExist(element: app.links["Welcome to Prime Video"], wait: 0)
+        }
+        
+        // ----- ヒストリーフォワード -----
+        do {
+            openMenu()
+            changeMenu()
         }
     }
 
+    private func changeMenu() {
+        app.buttons["circlemenu"].tap()
+    }
+    
     private func openMenu() {
         let deviceName = getDeviceInfo()
         switch deviceName {
@@ -74,22 +86,21 @@ class Qass_DevelopUITests: XCTestCase {
             let coord1 = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 1.5))
             let coord2 = coord1.withOffset(CGVector(dx: 100, dy: 1.5))
             coord1.press(forDuration: 0.1, thenDragTo: coord2)
-            sleep(1)
         case "iPhone Plus":
             let coord1 = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 2.3))
             let coord2 = coord1.withOffset(CGVector(dx: 140, dy: 2.3))
             coord1.press(forDuration: 0.1, thenDragTo: coord2)
-            sleep(1)
         default:
             XCTAssertTrue(false)
         }
+        sleep(1)
     }
     
-    private func waitExist(element: XCUIElement) {
+    private func waitExist(element: XCUIElement, wait: Int = 4) {
         let notExists = NSPredicate(format: "exists == true")
         expectation(for: notExists, evaluatedWith: element, handler: nil)
         waitForExpectations(timeout: 60, handler: nil)
-        sleep(4)
+        sleep(UInt32(wait))
     }
     
     private func getDeviceInfo() -> String {

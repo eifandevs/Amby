@@ -67,6 +67,12 @@ class CircleMenu: UIButton, ShadowView, CircleView {
 
     convenience init(frame: CGRect, swipeDirection: EdgeSwipeDirection) {
         self.init(frame: frame)
+
+        #if UT
+        accessibilityIdentifier = "circlemenu"
+        log.debug("set accessibility. name: circlemenu")
+        #endif
+
         circleMenuItemGroup = viewModel.menuItems.map { $0.map { CircleMenuItem(operation: $0) } }
         self.swipeDirection = swipeDirection
         // 陰影と角丸
