@@ -199,11 +199,14 @@ final class CommonHistoryDataModel {
 
             let saveData: [CommonHistory]? = { () -> [CommonHistory]? in
                 if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
-                    let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
-                    let saveData = old.filter({ (historyItem) -> Bool in
-                        !value.contains(historyItem._id)
-                    })
-                    return saveData
+                    if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
+                        let saveData = old.filter({ (historyItem) -> Bool in
+                            !value.contains(historyItem._id)
+                        })
+
+                        return saveData
+                    }
+                    return nil
                 }
                 return nil
             }()
