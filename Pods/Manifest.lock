@@ -28,7 +28,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.4)
   - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
-  - R.swift
+  - R.swift (~> 4.0)
   - Realm (~> 2.4)
   - RealmSwift (~> 2.4)
   - RxCocoa (~> 4.0)
@@ -52,6 +52,6 @@ SPEC CHECKSUMS:
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: c88336fd00b11b0295155a57fdf481417b1f9fe9
+PODFILE CHECKSUM: 7725516b85a0947e961518acc6fab8e14ecc2156
 
 COCOAPODS: 1.4.0
