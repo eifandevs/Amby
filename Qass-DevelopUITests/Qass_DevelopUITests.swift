@@ -55,6 +55,7 @@ class Qass_DevelopUITests: XCTestCase {
             // 初回google検索結果表示時は、言語設定のモーダルが表示されるので、それを待つ
             waitExist(element: app.links["Change to English"])
             app.links["Change to English"].tap()
+            waitExist(element: app.links["Welcome to Prime Video"])
 
             // ----- 適当にリンクタップ -----
             app.links["Welcome to Prime Video"].tap()
@@ -82,6 +83,59 @@ class Qass_DevelopUITests: XCTestCase {
             app.buttons["circlemenu-menu"].tap()
             let coord = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 1.5))
             coord.press(forDuration: 0.1)
+        }
+        
+        // ----- コピー -----
+        do {
+            openMenu()
+            app.buttons["circlemenu-copy"].tap()
+            waitExist(element: app.links["Help"])
+        }
+        
+        // ----- 削除 -----
+        do {
+            openMenu()
+            app.buttons["circlemenu-close"].tap()
+        }
+        
+        // ----- 検索 -----
+        do {
+            openMenu()
+            app.buttons["circlemenu-add"].tap()
+            
+            // キーボードの表示を待つ
+            waitExist(element: app.keyboards.firstMatch)
+            XCTAssertTrue(app.keys["A"].exists) // 英語キーボードのみ
+            
+            app.keys["A"].tap()
+            app.keys["m"].tap()
+            app.keys["a"].tap()
+            app.keys["z"].tap()
+            app.keys["o"].tap()
+            app.keys["n"].tap()
+            app.buttons["Search"].tap()
+            
+            waitExist(element: app.links["Welcome to Prime Video"])
+        }
+        
+        // ----- 自動スクロール -----
+        do {
+            openMenu()
+            changeMenu()
+            app.buttons["circlemenu-autoscroll"].tap()
+            sleep(2)
+            app.links["Welcome to Prime Video"].tap()
+            waitExist(element: app.links["Help"])
+        }
+        
+        // ----- お気に入り -----
+        do {
+            openMenu()
+            changeMenu()
+            app.buttons["circlemenu-autoscroll"].tap()
+            sleep(2)
+            app.links["Welcome to Prime Video"].tap()
+            waitExist(element: app.links["Help"])
         }
     }
     
