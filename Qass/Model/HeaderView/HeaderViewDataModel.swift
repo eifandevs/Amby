@@ -45,7 +45,7 @@ final class HeaderViewDataModel {
     /// reload
     func reload() {
         if let url = PageHistoryDataModel.s.currentHistory?.url {
-            if !url.isEmpty && url != headerFieldText {
+            if url != headerFieldText {
                 headerFieldText = url
                 rx_headerViewDataModelDidUpdateText.onNext(url)
             }
