@@ -52,7 +52,7 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
         case .form:
             setImage(image: R.image.circlemenuForm(), color: UIColor.darkGray)
         case .favorite:
-            setImage(image: R.image.headerFavorite(), color: UIColor.darkGray)
+            setImage(image: R.image.circlemenuFavorite(), color: UIColor.darkGray)
         case .home:
             setImage(image: R.image.circlemenuHome(), color: UIColor.darkGray)
         default:
@@ -93,7 +93,7 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
             log.debug("set accessibility. name: \(R.image.circlemenuForm.name)")
         case .favorite:
             accessibilityIdentifier = R.image.headerFavorite.name
-            log.debug("set accessibility. name: \(R.image.headerFavorite.name)")
+            log.debug("set accessibility. name: \(R.image.circlemenuFavorite.name)")
         case .home:
             accessibilityIdentifier = R.image.circlemenuHome.name
             log.debug("set accessibility. name: \(R.image.circlemenuHome.name)")
