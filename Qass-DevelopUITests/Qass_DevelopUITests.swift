@@ -132,10 +132,21 @@ class Qass_DevelopUITests: XCTestCase {
         do {
             openMenu()
             changeMenu()
-            app.buttons["circlemenu-autoscroll"].tap()
-            sleep(2)
-            app.links["Welcome to Prime Video"].tap()
-            waitExist(element: app.links["Help"])
+            app.buttons["circlemenu-favorite"].tap()
+        }
+        
+        // ----- お気に入り解除 -----
+        do {
+            openMenu()
+            changeMenu()
+            app.buttons["circlemenu-favorite"].tap()
+        }
+        
+        // ----- ホーム -----
+        do {
+            openMenu()
+            changeMenu()
+            app.buttons["circlemenu-home"].tap()
         }
     }
     

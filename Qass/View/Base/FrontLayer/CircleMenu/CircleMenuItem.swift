@@ -92,7 +92,7 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
             accessibilityIdentifier = R.image.circlemenuForm.name
             log.debug("set accessibility. name: \(R.image.circlemenuForm.name)")
         case .favorite:
-            accessibilityIdentifier = R.image.headerFavorite.name
+            accessibilityIdentifier = R.image.circlemenuFavorite.name
             log.debug("set accessibility. name: \(R.image.circlemenuFavorite.name)")
         case .home:
             accessibilityIdentifier = R.image.circlemenuHome.name
