@@ -71,10 +71,22 @@ class Qass_DevelopUITests: XCTestCase {
         // ----- ヒストリーフォワード -----
         do {
             openMenu()
-            app.buttons["circlemenu"].tap()
+            changeMenu()
             app.buttons["circlemenu-historyforward"].tap()
             waitExist(element: app.links["Help"], wait: 0)
         }
+        
+        // ----- メニュー -----
+        do {
+            openMenu()
+            app.buttons["circlemenu-menu"].tap()
+            let coord = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 1.5))
+            coord.press(forDuration: 0.1)
+        }
+    }
+    
+    private func changeMenu() {
+        app.buttons["circlemenu"].tap()
     }
     
     private func openMenu() {
