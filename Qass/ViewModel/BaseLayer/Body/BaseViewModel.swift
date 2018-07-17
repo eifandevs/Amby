@@ -220,8 +220,12 @@ final class BaseViewModel {
     /// baseViewControllerの状態取得
     /// ヘルプ画面表示中はfalseとなる
     func isActiveBaseViewController() -> Bool {
-        if let baseViewController = (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController {
-            return (baseViewController as! BaseViewController).isActive
+        if let delegate = UIApplication.shared.delegate as? AppDelegate, let baseViewController = delegate.window?.rootViewController {
+            if let baseViewController = baseViewController as? BaseViewController {
+                return baseViewController.isActive
+            } else {
+                return false
+            }
         }
         return false
     }
