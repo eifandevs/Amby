@@ -55,17 +55,18 @@ final class SearchMenuTableViewModel {
                 guard let `self` = self else { return }
                 if let object = object.element {
                     if object.operation == .suggest {
-                        let token = object.object as! String
-                        // 閲覧履歴と検索履歴の検索
-                        self.commonHistoryCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
-                        self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
+                        if let token = object.object as? String {
+                            // 閲覧履歴と検索履歴の検索
+                            self.commonHistoryCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
+                            self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
 
-                        // とりあえずここで画面更新
-                        self.rx_searchMenuViewWillUpdateLayout.onNext(())
+                            // とりあえずここで画面更新
+                            self.rx_searchMenuViewWillUpdateLayout.onNext(())
 
-                        // オートサジェスト
-                        self.requestSearchQueue.append(token)
-                        self.requestSearch()
+                            // オートサジェスト
+                            self.requestSearchQueue.append(token)
+                            self.requestSearch()
+                        }
                     }
                 }
                 log.eventOut(chain: "rx_operationDataModelDidChange")
