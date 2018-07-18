@@ -22,13 +22,17 @@ final class FormDataModel {
 
     /// select forms
     func select(id: String? = nil, url: String? = nil) -> [Form] {
-        let forms = repository.select(type: Form.self) as! [Form]
-        if let id = id {
-            return forms.filter({ $0.id == id })
-        } else if let url = url {
-            return forms.filter({ $0.url.domainAndPath == url.domainAndPath })
+        if let forms = repository.select(type: Form.self) as? [Form] {
+            if let id = id {
+                return forms.filter({ $0.id == id })
+            } else if let url = url {
+                return forms.filter({ $0.url.domainAndPath == url.domainAndPath })
+            }
+            return forms
+        } else {
+            log.error("fail to select form.")
+            return []
         }
-        return forms
     }
 
     /// delete forms
