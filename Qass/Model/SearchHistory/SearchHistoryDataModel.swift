@@ -57,9 +57,10 @@ final class SearchHistoryDataModel {
 
                 let saveData: [SearchHistory] = { () -> [SearchHistory] in
                     if let data = localStorageRepository.getData(.searchHistory(resource: filename)) {
-                        let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [SearchHistory]
-                        let saveData: [SearchHistory] = value + old
-                        return saveData
+                        if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [SearchHistory] {
+                            let saveData: [SearchHistory] = value + old
+                            return saveData
+                        }
                     }
 
                     return value
