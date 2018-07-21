@@ -30,13 +30,16 @@ final class FavoriteDataModel {
     }
 
     func select(id: String? = nil, url: String? = nil) -> [Favorite] {
-        let favorites = repository.select(type: Favorite.self) as! [Favorite]
-        if let id = id {
-            return favorites.filter({ $0.id == id })
-        } else if let url = url {
-            return favorites.filter({ $0.url == url })
+        if let favorites = repository.select(type: Favorite.self) as? [Favorite] {
+            if let id = id {
+                return favorites.filter({ $0.id == id })
+            } else if let url = url {
+                return favorites.filter({ $0.url == url })
+            }
+            return favorites
+        } else {
+            return []
         }
-        return favorites
     }
 
     func delete(favorites: [Favorite]? = nil, notify: Bool = true) {
