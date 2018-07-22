@@ -89,11 +89,14 @@ extension OptionMenuFormTableView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuFormCell.identifier, for: indexPath) as! OptionMenuFormTableViewCell
-        let row = viewModel.getRow(indexPath: indexPath)
-        cell.setViewModelData(row: row)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuFormCell.identifier, for: indexPath) as? OptionMenuFormTableViewCell {
+            let row = viewModel.getRow(indexPath: indexPath)
+            cell.setViewModelData(row: row)
 
-        return cell
+            return cell
+        }
+
+        return UITableViewCell()
     }
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
