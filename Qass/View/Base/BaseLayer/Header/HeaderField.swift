@@ -117,7 +117,10 @@ class HeaderField: UIButton, ShadowView {
             .disposed(by: rx.disposeBag)
 
         // 削除ボタン作成
-        let closeMenuButton = UIButton(frame: CGRect(x: textField.frame.size.width + 5, y: DeviceConst.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: frame.size.height - DeviceConst.STATUS_BAR_HEIGHT))
+        let closeMenuButtonX = textField.frame.size.width + 5
+        let closeMenuButtonHeight = frame.size.height - DeviceConst.STATUS_BAR_HEIGHT
+        let closeMenuButtonRect = CGRect(x: closeMenuButtonX, y: DeviceConst.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: closeMenuButtonHeight)
+        let closeMenuButton = UIButton(frame: closeMenuButtonRect)
         closeMenuButton.setImage(image: R.image.headerClose(), color: UIColor.gray)
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
         closeMenuButton.imageView?.contentMode = .scaleAspectFit
