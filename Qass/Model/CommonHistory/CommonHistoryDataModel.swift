@@ -94,12 +94,13 @@ final class CommonHistoryDataModel {
 
                 let saveData: [CommonHistory] = { () -> [CommonHistory] in
                     if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
-                        let old = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
-                        let saveData: [CommonHistory] = value + old
-                        return saveData
-                    } else {
-                        return value
+                        if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
+                            let saveData: [CommonHistory] = value + old
+                            return saveData
+                        }
                     }
+
+                    return value
                 }()
 
                 let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
