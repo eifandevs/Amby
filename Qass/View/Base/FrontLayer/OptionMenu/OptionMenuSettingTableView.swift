@@ -65,13 +65,19 @@ extension OptionMenuSettingTableView: UITableViewDataSource {
         let row = viewModel.getRow(indexPath: indexPath)
 
         if row.cellType == .autoScroll {
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuSettingSliderCell.identifier, for: indexPath) as! OptionMenuSettingSliderTableViewCell
-            return cell
+            let identifier = R.reuseIdentifier.optionMenuSettingSliderCell.identifier
+            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuSettingSliderTableViewCell {
+                return cell
+            }
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuSettingCell.identifier, for: indexPath) as! OptionMenuSettingTableViewCell
-            cell.setViewModelData(row: row)
-            return cell
+            let identifier = R.reuseIdentifier.optionMenuSettingCell.identifier
+            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuSettingTableViewCell {
+                cell.setViewModelData(row: row)
+                return cell
+            }
         }
+
+        return UITableViewCell()
     }
 
     func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
