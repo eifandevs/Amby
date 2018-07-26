@@ -130,8 +130,9 @@ final class CommonHistoryDataModel {
         let filename = "\(dateString).dat"
 
         if let data = localStorageRepository.getData(.commonHistory(resource: filename)) {
-            let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as! [CommonHistory]
-            return commonHistory
+            if let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
+                return commonHistory
+            }
         }
 
         return []
