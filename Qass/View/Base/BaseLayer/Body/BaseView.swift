@@ -572,7 +572,7 @@ class BaseView: UIView {
             // take form
             webView.evaluate(script: "document.forms.length") { object, error in
                 if object != nil && error == nil {
-                    let formLength = Int((object as? NSNumber)!)
+                    let formLength = Int(truncating: (object as? NSNumber)!)
                     if formLength > 0 {
                         for i in 0 ... (formLength - 1) {
                             webView.evaluate(script: "document.forms[\(i)].elements.length") { object, error in
@@ -585,13 +585,14 @@ class BaseView: UIView {
                                                 if (type != "hidden") && (type != "submit") && (type != "checkbox") {
                                                     let input = Input()
                                                     webView.evaluate(script: "document.forms[\(i)].elements[\(j)].value") { object, _ in
-                                                        let value = object as! String
-                                                        if value.count > 0 {
-                                                            input.type = type!
-                                                            input.formIndex = i
-                                                            input.formInputIndex = j
-                                                            input.value = self.viewModel.encrypt(value: value)
-                                                            form.inputs.append(input)
+                                                        if let value = object as? String {
+                                                            if value.count > 0 {
+                                                                input.type = type!
+                                                                input.formIndex = i
+                                                                input.formInputIndex = j
+                                                                input.value = self.viewModel.encrypt(value: value)
+                                                                form.inputs.append(input)
+                                                            }
                                                         }
                                                     }
                                                 }
