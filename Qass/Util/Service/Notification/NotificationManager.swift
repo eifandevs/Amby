@@ -12,7 +12,11 @@ import UIKit
 /// 通知マネージャー
 class NotificationManager {
     static func presentNotification(message: String) {
-        let notificationView = NotificationView(frame: CGRect(x: 0, y: DeviceConst.DISPLAY_SIZE.height, width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.9))
+        let notificationViewX = 0.f
+        let notificationViewY = DeviceConst.DISPLAY_SIZE.height
+        let notificationViewWidth = DeviceConst.DISPLAY_SIZE.width
+        let notificationViewHeight = AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.9
+        let notificationView = NotificationView(frame: CGRect(x: notificationViewX, y: notificationViewY, width: notificationViewWidth, height: notificationViewHeight))
         notificationView.setTitle(" 　\(message)", for: .normal)
         notificationView.titleLabel?.textColor = UIColor.white
         notificationView.titleLabel?.font = UIFont(name: AppConst.APP_FONT, size: notificationView.frame.size.height / 4)
