@@ -30,7 +30,13 @@ class PageHistory: NSObject, NSCoding {
         super.init()
     }
 
-    init(context: String = NSUUID().uuidString, url: String = "", title: String = "", backForwardList: [String] = [], listIndex: Int = 0, isLoading: Bool = false, operation _: Int = 0) {
+    init(context: String = NSUUID().uuidString,
+         url: String = "",
+         title: String = "",
+         backForwardList: [String] = [],
+         listIndex: Int = 0,
+         isLoading: Bool = false,
+         operation _: Int = 0) {
         self.context = context
         self.url = url
         self.title = title
