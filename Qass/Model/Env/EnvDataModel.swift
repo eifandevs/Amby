@@ -15,6 +15,6 @@ final class EnvDataModel {
     let repository = ResourceRepository()
 
     func get(key: String) -> String {
-        return repository.envList[key] as! String
+        return repository.envList[key] as? String ?? ""
     }
 }
