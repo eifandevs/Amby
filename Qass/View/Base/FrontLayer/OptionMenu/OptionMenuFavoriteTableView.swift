@@ -92,11 +92,15 @@ extension OptionMenuFavoriteTableView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuFavoriteCell.identifier, for: indexPath) as! OptionMenuFavoriteTableViewCell
-        let row = viewModel.getRow(indexPath: indexPath)
-        cell.setViewModelData(row: row)
+        let identifier = R.reuseIdentifier.optionMenuFavoriteCell.identifier
+        if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuFavoriteTableViewCell {
+            let row = viewModel.getRow(indexPath: indexPath)
+            cell.setViewModelData(row: row)
 
-        return cell
+            return cell
+        }
+
+        return UITableViewCell()
     }
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
