@@ -61,11 +61,15 @@ extension OptionMenuHelpTableView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuHelpCell.identifier, for: indexPath) as! OptionMenuHelpTableViewCell
-        let row = viewModel.getRow(indexPath: indexPath)
-        cell.setViewModelData(row: row)
+        let identifier = R.reuseIdentifier.optionMenuHelpCell.identifier
+        if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuHelpTableViewCell {
+            let row = viewModel.getRow(indexPath: indexPath)
+            cell.setViewModelData(row: row)
 
-        return cell
+            return cell
+        }
+
+        return UITableViewCell()
     }
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
