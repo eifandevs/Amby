@@ -980,7 +980,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
-        let wv = webView as! EGWebView
+        guard let wv = webView as? EGWebView else { return }
         log.debug("loading finish. context: \(wv.context)")
 
         // 削除済みチェック
