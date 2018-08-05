@@ -231,22 +231,22 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.cellForRow(at: indexPath)!
         if cell.className == SearchMenuCommonHistoryTableViewCell.className {
             // 閲覧履歴セルタップ
-            if let history = (cell as! SearchMenuCommonHistoryTableViewCell).history {
+            if let cell = (cell as? SearchMenuCommonHistoryTableViewCell), let history = cell.history {
                 viewModel.executeOperationDataModel(operation: .search, url: history.url)
             }
         } else if cell.className == SearchMenuSearchHistoryTableViewCell.className {
             // 検索履歴セルタップ
-            if let history = (cell as! SearchMenuSearchHistoryTableViewCell).history {
+            if let cell = (cell as? SearchMenuSearchHistoryTableViewCell), let history = cell.history {
                 viewModel.executeOperationDataModel(operation: .search, url: history.title)
             }
         } else if cell.className == SearchMenuSuggestTableViewCell.className {
             // サジェストセルタップ
-            if let suggest = (cell as! SearchMenuSuggestTableViewCell).suggest {
+            if let cell = (cell as? SearchMenuSuggestTableViewCell), let suggest = cell.suggest {
                 viewModel.executeOperationDataModel(operation: .search, url: suggest)
             }
         } else {
             // ニュースセルタップ
-            if let url = (cell as! SearchMenuNewsTableViewCell).article?.url {
+            if let cell = (cell as? SearchMenuNewsTableViewCell), let url = cell.article?.url {
                 viewModel.executeOperationDataModel(operation: .search, url: url)
             }
         }
