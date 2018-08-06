@@ -960,7 +960,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
-        let wv = webView as! EGWebView
+        guard let wv = webView as? EGWebView else { return }
         log.debug("loading start. context: \(wv.context)")
 
         if wv.context == front.context {
