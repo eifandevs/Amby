@@ -16,7 +16,6 @@ final class OptionMenuTableViewModel {
 
     /// セルタイプ
     enum CellType {
-        case trend
         case history
         case form
         case favorite
@@ -26,7 +25,6 @@ final class OptionMenuTableViewModel {
 
         var imageName: String {
             switch self {
-            case .trend: return R.image.optionmenuHistory.name
             case .history: return R.image.optionmenuHistory.name
             case .form: return R.image.optionmenuForm.name
             case .favorite: return R.image.optionmenuFavorite.name
@@ -38,7 +36,6 @@ final class OptionMenuTableViewModel {
 
         var title: String {
             switch self {
-            case .trend: return AppConst.OPTION_MENU_TREND
             case .history: return AppConst.OPTION_MENU_HISTORY
             case .form: return AppConst.OPTION_MENU_FORM
             case .favorite: return AppConst.OPTION_MENU_BOOKMARK
@@ -51,7 +48,6 @@ final class OptionMenuTableViewModel {
 
     // セル
     let rows = [
-        Row(cellType: .trend),
         Row(cellType: .history),
         Row(cellType: .form),
         Row(cellType: .favorite),
@@ -85,11 +81,6 @@ final class OptionMenuTableViewModel {
         } else {
             return AppConst.FRONT_LAYER_OVER_VIEW_MARGIN
         }
-    }
-
-    /// ユーザーオペレーション実行
-    func executeOperationDataModel(operation: UserOperation) {
-        OperationDataModel.s.executeOperation(operation: operation, object: nil)
     }
 
     /// 履歴情報永続化

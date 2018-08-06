@@ -53,7 +53,7 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
             setImage(image: R.image.circlemenuForm(), color: UIColor.darkGray)
         case .favorite:
             setImage(image: R.image.circlemenuFavorite(), color: UIColor.darkGray)
-        case .home:
+        case .trendHome:
             setImage(image: R.image.circlemenuHome(), color: UIColor.darkGray)
         default:
             break

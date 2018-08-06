@@ -17,8 +17,8 @@ final class HttpConst {
     static let APP_SERVER_DOMAIN = EnvDataModel.s.get(key: "APP_SERVER_DOMAIN")
     static let APP_SERVER_PATH = EnvDataModel.s.get(key: "APP_SERVER_PATH")
 
-    // ニュースホーム
-    static let HOME_URL = EnvDataModel.s.get(key: "HOME_URL")
+    // トレンドホーム
+    static let TREND_HOME_URL = EnvDataModel.s.get(key: "TREND_HOME_URL")
 
     static let PATH_SEARCH = "https://www.google.co.jp/search?q="
 

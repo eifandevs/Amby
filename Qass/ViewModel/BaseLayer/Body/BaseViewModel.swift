@@ -93,9 +93,9 @@ final class BaseViewModel {
             }
         }
     /// ホーム表示通知用RX
-    let rx_baseViewModelDidGoHome = OperationDataModel.s.rx_operationDataModelDidChange
+    let rx_baseViewModelDidGoTrendHome = OperationDataModel.s.rx_operationDataModelDidChange
         .flatMap { object -> Observable<()> in
-            if object.operation == .home {
+            if object.operation == .trendHome {
                 return Observable.just(())
             } else {
                 return Observable.empty()

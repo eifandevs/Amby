@@ -6,7 +6,7 @@
 	<string>/path</string>
 	<key>APP_SERVER_DOMAIN</key>
 	<string>https://</string>
-	<key>HOME_URL</key>
+	<key>TREND_HOME_URL</key>
 	<string>https://google.com</string>
 	<key>KEY_ENCRYPT_IV_TOKEN</key>
 	<string>com.eifaniori.qass-encrypt-iv-token</string>

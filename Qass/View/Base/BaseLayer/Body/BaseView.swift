@@ -446,13 +446,13 @@ class BaseView: UIView {
             }
             .disposed(by: rx.disposeBag)
 
-        // ホーム監視
-        viewModel.rx_baseViewModelDidGoHome
+        // トレンドホーム監視
+        viewModel.rx_baseViewModelDidGoTrendHome
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidGoHome")
                 guard let `self` = self else { return }
                 // スクロールアップ
-                self.front.load(urlStr: HttpConst.HOME_URL)
+                self.front.load(urlStr: HttpConst.TREND_HOME_URL)
                 log.eventOut(chain: "rx_baseViewModelDidGoHome")
             }
             .disposed(by: rx.disposeBag)

@@ -19,7 +19,7 @@ enum UserOperation {
     case close
     case copy
     case autoScroll
-    case home
+    case trendHome
     case form
     case favorite
     case autoFill

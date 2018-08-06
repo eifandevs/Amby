@@ -67,6 +67,7 @@ final class AppConst {
 
     // MARK: - メニュー画面
 
+    static let OPTION_MENU_TREND = "トレンド"
     static let OPTION_MENU_HISTORY = "閲覧履歴"
     static let OPTION_MENU_FORM = "フォーム"
     static let OPTION_MENU_BOOKMARK = "ブックマーク"

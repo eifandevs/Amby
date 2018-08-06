@@ -52,10 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // プログレス初期設定
         SVProgressHUD.setForegroundColor(UIColor.ultraOrange)
 
-        // 設定データセットアップ
+        // 設定データ(UD)セットアップ
         AppDataModel.s.setup()
 
-        // local storage setup
+        // ローカルストレージセットアップ
         let repository = LocalStorageRepository<Cache>()
         repository.create(.commonHistory(resource: nil))
         repository.create(.database(resource: nil))

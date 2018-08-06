@@ -20,6 +20,7 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
     let viewModel = OptionMenuTableViewModel()
     var detailView: UIView?
     private var selectedIndexPath: IndexPath?
+    private var overlay: UIButton?
 
     convenience init(frame: CGRect, swipeDirection: EdgeSwipeDirection) {
         self.init(frame: frame)
@@ -62,6 +63,31 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
 
         addSubview(view)
     }
+
+    private func back() {
+        // overlay削除
+        if let overlay = overlay {
+            overlay.removeFromSuperview()
+        }
+
+        // 選択状態解除
+        if let selectedIndexPath = self.selectedIndexPath {
+            tableView.deselectRow(at: selectedIndexPath, animated: false)
+            self.selectedIndexPath = nil
+        }
+
+        if let detailView = self.detailView {
+            // 詳細ビューを表示していれば、削除する
+            UIView.animate(withDuration: 0.15, animations: {
+                detailView.alpha = 0
+            }, completion: { finished in
+                if finished {
+                    detailView.removeFromSuperview()
+                    self.detailView = nil
+                }
+            })
+        }
+    }
 }
 
 // MARK: - TableViewDataSourceDelegate
@@ -99,6 +125,10 @@ extension OptionMenuTableView: UITableViewDelegate {
         let detailViewFrame = CGRect(x: frame.origin.x + overViewMargin.x, y: frame.origin.y + marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height)
         // 詳細ビュー作成
         switch viewModel.getRow(indexPath: indexPath).cellType {
+        case .trend:
+            self.viewModel.executeOperationDataModel(operation: .trendHome)
+            self.rx_optionMenuTableViewDidClose.onNext(())
+            return
         case .history:
             let historyTableView = OptionMenuHistoryTableView(frame: detailViewFrame)
             historyTableView.rx_optionMenuHistoryDidClose
@@ -171,39 +201,20 @@ extension OptionMenuTableView: UITableViewDelegate {
         superview!.addSubview(detailView!)
 
         // オーバーレイ表示
-        let overlay = UIButton(frame: CGRect(origin: CGPoint.zero, size: frame.size))
-        overlay.backgroundColor = UIColor.clear
+        overlay = UIButton(frame: CGRect(origin: CGPoint.zero, size: frame.size))
+        overlay!.backgroundColor = UIColor.clear
 
         // ボタンタップ
-        overlay.rx.tap
+        overlay!.rx.tap
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
-                // overlay削除
-                overlay.removeFromSuperview()
-
-                // 選択状態解除
-                if let selectedIndexPath = self.selectedIndexPath {
-                    tableView.deselectRow(at: selectedIndexPath, animated: false)
-                    self.selectedIndexPath = nil
-                }
-
-                if let detailView = self.detailView {
-                    // 詳細ビューを表示していれば、削除する
-                    UIView.animate(withDuration: 0.15, animations: {
-                        detailView.alpha = 0
-                    }, completion: { finished in
-                        if finished {
-                            detailView.removeFromSuperview()
-                            self.detailView = nil
-                        }
-                    })
-                }
+                self.back()
                 log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
 
-        addSubview(overlay)
+        addSubview(overlay!)
     }
 }
