@@ -11,7 +11,7 @@ import Foundation
 final class CircleMenuViewModel {
     let menuItems: [[UserOperation]] = [
         [.menu, .close, .historyBack, .copy, .search, .add],
-        [.scrollUp, .autoScroll, .historyForward, .form, .favorite, .trendHome]
+        [.scrollUp, .autoScroll, .historyForward, .form, .favorite, .grep]
     ]
     var menuIndex = 0
 }

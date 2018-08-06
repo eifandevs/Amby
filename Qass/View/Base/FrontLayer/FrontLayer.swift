@@ -86,8 +86,8 @@ class FrontLayer: UIView {
                     self.viewModel.executeOperationDataModel(operation: .form)
                 case .favorite:
                     self.viewModel.registerFavoriteDataModel()
-                case .trendHome:
-                    self.viewModel.executeOperationDataModel(operation: .trendHome)
+                case .grep:
+                    self.viewModel.executeOperationDataModel(operation: .grep)
                 default:
                     break
                 }

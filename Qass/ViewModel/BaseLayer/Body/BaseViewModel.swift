@@ -92,10 +92,10 @@ final class BaseViewModel {
                 return Observable.empty()
             }
         }
-    /// ホーム表示通知用RX
-    let rx_baseViewModelDidGoTrendHome = OperationDataModel.s.rx_operationDataModelDidChange
+    /// 全文検索通知用RX
+    let rx_baseViewModelDidGrep = OperationDataModel.s.rx_operationDataModelDidChange
         .flatMap { object -> Observable<()> in
-            if object.operation == .trendHome {
+            if object.operation == .grep {
                 return Observable.just(())
             } else {
                 return Observable.empty()
