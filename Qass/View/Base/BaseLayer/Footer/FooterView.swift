@@ -228,8 +228,10 @@ class FooterView: UIView, ShadowView {
     /// 新しいサムネイル追加
     private func append(context: String) -> Thumbnail {
         // 後ろに追加
-        let additionalPointX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width) - (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + additionalPointX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
+        let baseX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width)
+        let additionalPointX = (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
+        let btnX = (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + (baseX - additionalPointX)
+        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: btnX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
         btn.backgroundColor = UIColor.darkGray
         btn.setImage(image: R.image.footerThumbnailBack(), color: UIColor.gray)
         let inset: CGFloat = btn.frame.size.width / 9
