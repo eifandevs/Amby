@@ -31,7 +31,9 @@ class FrontLayer: UIView {
         self.swipeDirection = swipeDirection
 
         // サークルメニューの作成
-        circleMenu = CircleMenu(frame: CGRect(origin: CGPoint(x: -100, y: -100), size: CGSize(width: circleButtonRadius, height: circleButtonRadius)), swipeDirection: swipeDirection)
+        let point = CGPoint(x: -100, y: -100)
+        let size = CGSize(width: circleButtonRadius, height: circleButtonRadius)
+        circleMenu = CircleMenu(frame: CGRect(origin: point, size: size), swipeDirection: swipeDirection)
 
         // Monitor menu press
         circleMenu.rx_circleMenuDidSelect
