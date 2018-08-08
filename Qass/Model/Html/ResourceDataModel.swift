@@ -1,5 +1,5 @@
 //
-//  HtmlDataModel.swift
+//  ResourceDataModel.swift
 //  Qass
 //
 //  Created by tenma on 2018/06/10.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-final class HtmlDataModel {
-    static let s = HtmlDataModel()
+final class ResourceDataModel {
+    static let s = ResourceDataModel()
 
     /// timeout page
     var timeoutHtml: Foundation.URL {
@@ -34,5 +34,10 @@ final class HtmlDataModel {
     /// common error page
     var invalidHtml: Foundation.URL {
         return ResourceRepository().timeoutHtml
+    }
+
+    /// highlight js
+    var highlightScript: Foundation.URL {
+        return ResourceRepository().highlightScript
     }
 }

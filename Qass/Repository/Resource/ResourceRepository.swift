@@ -51,4 +51,10 @@ final class ResourceRepository {
         let fileResource = R.file.invalidHtml
         return fileResource.bundle.url(forResource: fileResource)!
     }
+
+    /// ハイライトスクリプト
+    var highlightScript: Foundation.URL {
+        let fileResource = R.file.highlightJs
+        return fileResource.bundle.url(forResource: fileResource)!
+    }
 }

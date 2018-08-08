@@ -178,11 +178,11 @@ class EGWebView: WKWebView {
 
     func loadHtml(code: NetWorkError) {
         let url: URL = { () -> URL in
-            if code == NetWorkError.timeout { return HtmlDataModel.s.timeoutHtml }
-            if code == NetWorkError.dnsNotFound { return HtmlDataModel.s.dnsHtml }
-            if code == NetWorkError.offline { return HtmlDataModel.s.offlineHtml }
-            if code == NetWorkError.unauthorized { return HtmlDataModel.s.authorizeHtml }
-            return HtmlDataModel.s.invalidHtml
+            if code == NetWorkError.timeout { return ResourceDataModel.s.timeoutHtml }
+            if code == NetWorkError.dnsNotFound { return ResourceDataModel.s.dnsHtml }
+            if code == NetWorkError.offline { return ResourceDataModel.s.offlineHtml }
+            if code == NetWorkError.unauthorized { return ResourceDataModel.s.authorizeHtml }
+            return ResourceDataModel.s.invalidHtml
         }()
         loadFileURL(url, allowingReadAccessTo: url)
     }
@@ -203,6 +203,38 @@ class EGWebView: WKWebView {
         }()
         loadHtml(code: errorType)
     }
+
+    func highlight(word: String) {
+        let scriptPath = ResourceDataModel.s.highlightScript
+        let script = try! String(contentsOf: scriptPath, encoding: .utf8)
+        evaluateJavaScript(script) { (_: Any?, error: Error?) in
+            if error != nil {
+                log.error("js setup error: \(error!)")
+            }
+        }
+        evaluateJavaScript("MyApp_HighlightAllOccurencesOfString('\(word)')") { (_: Any?, error: Error?) in
+            if error != nil {
+                log.error("js grep error: \(error!)")
+            }
+        }
+    }
+//    - (NSInteger)highlightAllOccurencesOfString:(NSString*)str
+//    {
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"SearchWebView" ofType:@"js"];
+//    NSString *jsCode = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+//    [self stringByEvaluatingJavaScriptFromString:jsCode];
+//
+//    NSString *startSearch = [NSString stringWithFormat:@"MyApp_HighlightAllOccurencesOfString('%@')",str];
+//    [self stringByEvaluatingJavaScriptFromString:startSearch];
+//
+//    NSString *result = [self stringByEvaluatingJavaScriptFromString:@"MyApp_SearchResultCount"];
+//    return [result integerValue];
+//    }
+//
+//    - (void)removeAllHighlights
+//    {
+//    [self stringByEvaluatingJavaScriptFromString:@"MyApp_RemoveAllHighlights()"];
+//    }
 
     func takeThumbnail() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(frame.size, true, 0)

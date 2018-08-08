@@ -451,7 +451,7 @@ class BaseView: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidGrep")
                 guard let `self` = self else { return }
-                // TODO: 全文検索
+                self.front.highlight(word: "AAA")
                 log.eventOut(chain: "rx_baseViewModelDidGrep")
             }
             .disposed(by: rx.disposeBag)

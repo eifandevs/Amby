@@ -1,5 +1,5 @@
 //
-//  HtmlDataModelTests.swift
+//  ResourceDataModelTests.swift
 //  Qass-DevelopTests
 //
 //  Created by tenma on 2018/06/17.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import Qass_Develop
 
-class HtmlDataModelTests: XCTestCase {
+class ResourceDataModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
@@ -23,10 +23,10 @@ class HtmlDataModelTests: XCTestCase {
     }
 
     func testProperties() {
-        _ = HtmlDataModel.s.authorizeHtml
-        _ = HtmlDataModel.s.dnsHtml
-        _ = HtmlDataModel.s.invalidHtml
-        _ = HtmlDataModel.s.offlineHtml
-        _ = HtmlDataModel.s.timeoutHtml
+        _ = ResourceDataModel.s.authorizeHtml
+        _ = ResourceDataModel.s.dnsHtml
+        _ = ResourceDataModel.s.invalidHtml
+        _ = ResourceDataModel.s.offlineHtml
+        _ = ResourceDataModel.s.timeoutHtml
     }
 }
