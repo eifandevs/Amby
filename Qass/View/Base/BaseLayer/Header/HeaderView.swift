@@ -49,7 +49,8 @@ class HeaderView: UIView, ShadowView {
 
     override init(frame: CGRect) {
         // ヘッダーフィールド
-        let headerFieldOriginY = DeviceConst.STATUS_BAR_HEIGHT + ((frame.size.height - DeviceConst.STATUS_BAR_HEIGHT - (AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT)) / 2) - (AppConst.BASE_LAYER_HEADER_PROGRESS_MARGIN)
+        let headerFieldHeight = (frame.size.height - DeviceConst.STATUS_BAR_HEIGHT - (AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT)) / 2
+        let headerFieldOriginY = DeviceConst.STATUS_BAR_HEIGHT + headerFieldHeight - (AppConst.BASE_LAYER_HEADER_PROGRESS_MARGIN)
         headerField = HeaderField(frame: CGRect(x: (DeviceConst.DISPLAY_SIZE.width - AppConst.BASE_LAYER_HEADER_FIELD_WIDTH) / 2, y: headerFieldOriginY, width: AppConst.BASE_LAYER_HEADER_FIELD_WIDTH, height: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT))
 
         // ヘッダーアイテム
