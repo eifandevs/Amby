@@ -17,8 +17,8 @@ final class FrontLayerViewModel {
         PageHistoryDataModel.s.append(url: nil)
     }
 
-    func executeOperationDataModel(operation: UserOperation) {
-        OperationDataModel.s.executeOperation(operation: operation, object: nil)
+    func executeOperationDataModel(operation: UserOperation, object: Any? = nil) {
+        OperationDataModel.s.executeOperation(operation: operation, object: object)
     }
 
     func registerFavoriteDataModel() {
@@ -35,6 +35,10 @@ final class FrontLayerViewModel {
 
     func beginEditingHeaderViewDataModel() {
         HeaderViewDataModel.s.beginEditing(forceEditFlg: true)
+    }
+
+    func beginGrepingHeaderViewDataModel() {
+        HeaderViewDataModel.s.beginGreping()
     }
 
     func goForwardCommonHistoryDataModel() {

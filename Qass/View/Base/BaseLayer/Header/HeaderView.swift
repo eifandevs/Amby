@@ -18,9 +18,14 @@ class HeaderView: UIView, ShadowView {
     let rx_headerViewDidBeginEditing = PublishSubject<()>()
     /// 編集終了監視用RX
     let rx_headerViewDidEndEditing = PublishSubject<()>()
+    /// グレップ開始監視用RX
+    let rx_headerViewDidBeginGreping = PublishSubject<()>()
+    /// グレップ終了監視用RX
+    let rx_headerViewDidEndGreping = PublishSubject<()>()
 
     private let headerField: HeaderField
     private var isEditing = false
+    private var isGreping = false
     private let viewModel = HeaderViewModel()
     private let progressBar: EGProgressBar
     private let historyBackButton: UIButton
@@ -205,6 +210,16 @@ class HeaderView: UIView, ShadowView {
             }
             .disposed(by: rx.disposeBag)
 
+        // グレップ開始監視
+        viewModel.rx_headerViewModelDidBeginGreping
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_headerViewModelDidBeginGreping")
+                guard let `self` = self else { return }
+                self.startGreping()
+                log.eventOut(chain: "rx_headerViewModelDidBeginGreping")
+            }
+            .disposed(by: rx.disposeBag)
+
         // ヘッダーフィールド編集終了監視
         headerField.rx_headerFieldDidEndEditing
             .subscribe { [weak self] object in
@@ -261,6 +276,7 @@ class HeaderView: UIView, ShadowView {
         headerField.closeKeyBoard()
     }
 
+    /// 編集終了
     func finishEditing(headerFieldUpdate: Bool) {
         let text = headerField.textField?.text
         headerField.removeInputForm()
@@ -275,6 +291,10 @@ class HeaderView: UIView, ShadowView {
         } else {
             headerField.makeContent(restore: true, restoreText: nil)
         }
+    }
+
+    /// グレップ終了
+    func finishGreping() {
     }
 
     /// ヘッダービューのスライド
@@ -293,6 +313,23 @@ class HeaderView: UIView, ShadowView {
             isEditing = true
             headerField.removeContent()
             rx_headerViewDidBeginEditing.onNext(())
+            UIView.animate(withDuration: 0.11, delay: 0, options: .curveLinear, animations: {
+                self.headerField.frame = self.frame
+                self.headerField.layer.shadowColor = UIColor.clear.cgColor
+            }, completion: { _ in
+                // キーボード表示
+                self.headerField.makeInputForm(height: self.headerFieldOriginY)
+            })
+        }
+    }
+
+    /// グレップ開始
+    private func startGreping() {
+        if !isGreping {
+            slideToMax()
+            isGreping = true
+            headerField.removeContent()
+            rx_headerViewDidBeginGreping.onNext(())
             UIView.animate(withDuration: 0.11, delay: 0, options: .curveLinear, animations: {
                 self.headerField.frame = self.frame
                 self.headerField.layer.shadowColor = UIColor.clear.cgColor

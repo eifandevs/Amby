@@ -448,10 +448,12 @@ class BaseView: UIView {
 
         // 全文検索監視
         viewModel.rx_baseViewModelDidGrep
-            .subscribe { [weak self] _ in
+            .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_baseViewModelDidGrep")
                 guard let `self` = self else { return }
-                self.front.highlight(word: "AAA")
+                if let searchText = object.element {
+                    self.front.highlight(word: searchText)
+                }
                 log.eventOut(chain: "rx_baseViewModelDidGrep")
             }
             .disposed(by: rx.disposeBag)

@@ -94,12 +94,14 @@ final class BaseViewModel {
         }
     /// 全文検索通知用RX
     let rx_baseViewModelDidGrep = OperationDataModel.s.rx_operationDataModelDidChange
-        .flatMap { object -> Observable<()> in
+        .flatMap { object -> Observable<(String)> in
             if object.operation == .grep {
-                return Observable.just(())
-            } else {
-                return Observable.empty()
+                if let text = object.object as? String, !text.isEmpty {
+                    return Observable.just(text)
+                }
             }
+
+            return Observable.empty()
         }
 
     /// リクエストURL(jsのURL)

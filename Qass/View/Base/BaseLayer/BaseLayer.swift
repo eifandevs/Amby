@@ -165,6 +165,24 @@ class BaseLayer: UIView {
             }
             .disposed(by: rx.disposeBag)
 
+        // HeaderViewグレップ開始監視
+        headerView.rx_headerViewDidBeginGreping
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_headerViewDidBeginGreping")
+                guard let `self` = self else { return }
+                log.eventOut(chain: "rx_headerViewDidBeginGreping")
+            }
+            .disposed(by: rx.disposeBag)
+
+        // HeaderViewグレップ終了監視
+        headerView.rx_headerViewDidEndGreping
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_headerViewDidEndGreping")
+                guard let `self` = self else { return }
+                log.eventOut(chain: "rx_headerViewDidEndGreping")
+            }
+            .disposed(by: rx.disposeBag)
+
         addSubview(baseView)
         addSubview(headerView)
         addSubview(footerView)

@@ -49,6 +49,12 @@ final class HeaderViewModel {
             return Observable.just(forceEditFlg)
         }
 
+    /// グレップ開始通知用RX
+    let rx_headerViewModelDidBeginGreping = HeaderViewDataModel.s.rx_headerViewDataModelDidBeginGreping
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
+        }
+
     deinit {
         log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)

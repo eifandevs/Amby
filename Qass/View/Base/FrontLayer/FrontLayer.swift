@@ -89,7 +89,7 @@ class FrontLayer: UIView {
                 case .favorite:
                     self.viewModel.registerFavoriteDataModel()
                 case .grep:
-                    self.viewModel.executeOperationDataModel(operation: .grep)
+                    self.viewModel.beginGrepingHeaderViewDataModel()
                 default:
                     break
                 }
