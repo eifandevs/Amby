@@ -335,6 +335,7 @@ class HeaderView: UIView, ShadowView {
                 self.headerField.layer.shadowColor = UIColor.clear.cgColor
             }, completion: { _ in
                 // キーボード表示
+                // TODO: グレップ準備
                 self.headerField.makeInputForm(height: self.headerFieldOriginY)
             })
         }
