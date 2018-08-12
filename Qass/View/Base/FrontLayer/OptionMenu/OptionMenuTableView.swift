@@ -122,7 +122,11 @@ extension OptionMenuTableView: UITableViewDelegate {
             overViewMargin.y
 
         // スーパービューに追加するので、自身の座標をたす
-        let detailViewFrame = CGRect(x: frame.origin.x + overViewMargin.x, y: frame.origin.y + marginY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height)
+        let frameX = frame.origin.x + overViewMargin.x
+        let frameY = frame.origin.y + marginY
+        let width = AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width
+        let height = AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height
+        let detailViewFrame = CGRect(x: frameX, y: frameY, width: width, height: height)
         // 詳細ビュー作成
         switch viewModel.getRow(indexPath: indexPath).cellType {
         case .trend:
