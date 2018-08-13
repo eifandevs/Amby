@@ -180,25 +180,29 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             // オートコンプリート表示
-            if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuSuggestCell.identifier, for: indexPath) as? SearchMenuSuggestTableViewCell {
+            let identifier = R.reuseIdentifier.searchMenuSuggestCell.identifier
+            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? SearchMenuSuggestTableViewCell {
                 cell.setSuggest(suggest: viewModel.suggestCellItem[safe: indexPath.row])
                 return cell
             }
         } else if indexPath.section == 1 {
             // 検索履歴表示
-            if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuSearchHistoryCell.identifier, for: indexPath) as? SearchMenuSearchHistoryTableViewCell {
+            let identifier = R.reuseIdentifier.searchMenuSearchHistoryCell.identifier
+            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? SearchMenuSearchHistoryTableViewCell {
                 cell.setHistory(history: viewModel.searchHistoryCellItem[safe: indexPath.row])
                 return cell
             }
         } else if indexPath.section == 2 {
             // 閲覧履歴表示
-            if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuCommonHistoryCell.identifier, for: indexPath) as? SearchMenuCommonHistoryTableViewCell {
+            let identifier = R.reuseIdentifier.searchMenuCommonHistoryCell.identifier
+            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? SearchMenuCommonHistoryTableViewCell {
                 cell.setHistory(history: viewModel.commonHistoryCellItem[safe: indexPath.row])
                 return cell
             }
         } else {
             // 記事表示
-            if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.searchMenuNewsCell.identifier, for: indexPath) as? SearchMenuNewsTableViewCell {
+            let identifier = R.reuseIdentifier.searchMenuNewsCell.identifier
+            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? SearchMenuNewsTableViewCell {
                 cell.setArticle(article: viewModel.newsItem[safe: indexPath.row])
                 return cell
             }
