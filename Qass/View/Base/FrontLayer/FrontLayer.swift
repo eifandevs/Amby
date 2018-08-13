@@ -31,9 +31,9 @@ class FrontLayer: UIView {
         self.swipeDirection = swipeDirection
 
         // サークルメニューの作成
-        let point = CGPoint(x: -100, y: -100)
+        let pt = CGPoint(x: -100, y: -100)
         let size = CGSize(width: circleButtonRadius, height: circleButtonRadius)
-        circleMenu = CircleMenu(frame: CGRect(origin: point, size: size), swipeDirection: swipeDirection)
+        circleMenu = CircleMenu(frame: CGRect(origin: pt, size: size), swipeDirection: swipeDirection)
 
         // Monitor menu press
         circleMenu.rx_circleMenuDidSelect
@@ -55,7 +55,10 @@ class FrontLayer: UIView {
                         return y
                     }()
                     // オプションメニューを表示
-                    self.optionMenu = OptionMenuTableView(frame: CGRect(x: ptX, y: ptY, width: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width, height: AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height), swipeDirection: swipeDirection)
+                    let width = AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width
+                    let height = AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height
+                    let optionMenuRect = CGRect(x: ptX, y: ptY, width: width, height: height)
+                    self.optionMenu = OptionMenuTableView(frame: optionMenuRect, swipeDirection: swipeDirection)
                     // クローズ監視
                     self.optionMenu?.rx_optionMenuTableViewDidClose
                         .subscribe({ [weak self] _ in
