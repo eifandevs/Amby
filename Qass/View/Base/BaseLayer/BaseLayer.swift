@@ -220,6 +220,10 @@ class BaseLayer: UIView {
         searchMenuTableView = nil
         headerView.finishEditing(headerFieldUpdate: false)
     }
+    
+    /// グレップモード終了
+    private func endGreping() {
+    }
 }
 
 // MARK: EGApplication Delegate
