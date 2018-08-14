@@ -1021,7 +1021,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: Error) {
         log.error("[error url]\((error as NSError).userInfo["NSErrorFailingURLKey"]). code: \((error as NSError).code)")
 
-        let egWv: EGWebView = webView as! EGWebView
+        guard let wv = webView as? EGWebView else { return }
 
         // 連打したら-999 "(null)"になる対応
         if (error as NSError).code == NSURLErrorCancelled {
@@ -1031,28 +1031,24 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         // プログレス更新
         DispatchQueue.mainSyncSafe {
             // プログレス更新
-            if egWv.context == front.context {
+            if wv.context == front.context {
                 viewModel.updateProgressHeaderViewDataModel(object: 0)
             }
             self.updateNetworkActivityIndicator()
-            self.viewModel.endLoadingPageHistoryDataModel(context: egWv.context)
+            self.viewModel.endLoadingPageHistoryDataModel(context: wv.context)
         }
 
         // URLスキーム対応
         if let errorUrl = (error as NSError).userInfo["NSErrorFailingURLKey"] {
-            let url = (errorUrl as! NSURL).absoluteString!
-            if !url.isValidUrl || url.range(of: AppConst.URL_ITUNES_STORE) != nil {
-                log.warning("load error. [open url event]")
-                return
+            if let url = (errorUrl as? NSURL)?.absoluteString {
+                if !url.isValidUrl || url.range(of: AppConst.URL_ITUNES_STORE) != nil {
+                    log.warning("load error. [open url event]")
+                    return
+                }
             }
         }
 
-        // TODO: submit検知
-//        if let _ = egWv.form {
-//            egWv.form = nil
-//        }
-
-        egWv.loadHtml(error: (error as NSError))
+        wv.loadHtml(error: (error as NSError))
     }
 
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
