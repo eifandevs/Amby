@@ -24,7 +24,8 @@ class BaseLayer: UIView {
     private var headerView: HeaderView
     private let footerView: FooterView
     private let baseView: BaseView
-    private var searchMenuTableView: SearchMenuTableView?
+    private var searchMenuTableView: SearchMenuTableView? // 検索ビュー
+    private var grepOverlay: UIButton? // グレップ中のオーバーレイ
     private var isTouchEndAnimating = false
     private var isHeaderViewEditing = false // 検索中
     private var isHeaderViewGreping = false // グレップ中
@@ -174,6 +175,8 @@ class BaseLayer: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_headerViewDidBeginGreping")
                 guard let `self` = self else { return }
+                self.isHeaderViewGreping = true
+
                 log.eventOut(chain: "rx_headerViewDidBeginGreping")
             }
             .disposed(by: rx.disposeBag)
