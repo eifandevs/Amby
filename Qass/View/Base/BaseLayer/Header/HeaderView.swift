@@ -221,6 +221,7 @@ class HeaderView: UIView, ShadowView {
             .disposed(by: rx.disposeBag)
 
         // ヘッダーフィールド編集終了監視
+        // ヘッダーのクローズボタンタップ or 検索軽視
         headerField.rx_headerFieldDidEndEditing
             .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_headerFieldDidEndEditing")

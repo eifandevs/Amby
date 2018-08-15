@@ -26,7 +26,8 @@ class BaseLayer: UIView {
     private let baseView: BaseView
     private var searchMenuTableView: SearchMenuTableView?
     private var isTouchEndAnimating = false
-    private var isHeaderViewEditing = false
+    private var isHeaderViewEditing = false // 検索中
+    private var isHeaderViewGreping = false // グレップ中
 
     override init(frame: CGRect) {
         // ヘッダービュー
@@ -137,6 +138,7 @@ class BaseLayer: UIView {
                     .disposed(by: self.rx.disposeBag)
 
                 // サーチメニュークローズ監視
+                // サーチメニューのクローズ要求を受けて、ヘッダービューにクローズ要求を送り、自分はサーチメニューの削除をする
                 self.searchMenuTableView!.rx_searchMenuDidClose
                     .subscribe { [weak self] _ in
                         log.eventIn(chain: "rx_searchMenuDidClose")
@@ -153,6 +155,8 @@ class BaseLayer: UIView {
             .disposed(by: rx.disposeBag)
 
         // HeaderView編集終了監視
+        // ヘッダーのクローズボタン押下 or 検索開始
+        // ヘッダーフィールドやヘッダービューはすでにクローズ処理を実施しているので、サーチメニューの削除をする
         headerView.rx_headerViewDidEndEditing
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_headerViewDidEndEditing")
