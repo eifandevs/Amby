@@ -162,10 +162,11 @@ class FooterView: UIView, ShadowView {
                             guard let _ = self else { return }
                             targetThumbnail.subviews.forEach({ v in
                                 if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
-                                    let indicator = v as! NVActivityIndicatorView
-                                    indicator.stopAnimating()
-                                    indicator.alpha = 0
-                                    indicator.removeFromSuperview()
+                                    if let indicator = v as? NVActivityIndicatorView {
+                                        indicator.stopAnimating()
+                                        indicator.alpha = 0
+                                        indicator.removeFromSuperview()
+                                    }
                                 }
                             })
                             targetThumbnail.setThumbnailTitle(title: tuple.title)
