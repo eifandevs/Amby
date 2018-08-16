@@ -132,6 +132,19 @@ final class BaseViewModel {
         return CGFloat(AppDataModel.s.autoScrollInterval)
     }
 
+    /// baseViewControllerの状態取得
+    /// ヘルプ画面表示中はfalseとなる
+    var canSwipe: Bool {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate, let baseViewController = delegate.window?.rootViewController {
+            if let baseViewController = baseViewController as? BaseViewController {
+                return !baseViewController.isPresented
+            } else {
+                return false
+            }
+        }
+        return false
+    }
+
     /// 自動スクロールスピード
     let autoScrollSpeed: CGFloat = 0.6
 
@@ -219,18 +232,6 @@ final class BaseViewModel {
         return touchPoint.y < (DeviceConst.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER_HEADER_HEIGHT
     }
 
-    /// baseViewControllerの状態取得
-    /// ヘルプ画面表示中はfalseとなる
-    func isActiveBaseViewController() -> Bool {
-        if let delegate = UIApplication.shared.delegate as? AppDelegate, let baseViewController = delegate.window?.rootViewController {
-            if let baseViewController = baseViewController as? BaseViewController {
-                return baseViewController.isActive
-            } else {
-                return false
-            }
-        }
-        return false
-    }
     /// 前webviewのキャプチャ取得
     func getPreviousCapture() -> UIImage? {
         if let currentLocation = currentLocation {

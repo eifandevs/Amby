@@ -17,7 +17,15 @@ class BaseViewController: UIViewController {
     private let viewModel = BaseViewControllerViewModel()
 
     private var splash: SplashViewController?
-    var isActive = true
+
+    // 全面に画面がpresentされているか
+    var isPresented: Bool {
+        if self.presentedViewController != nil {
+            return true
+        }
+
+        return false
+    }
 
     /// 初回実行用
     private var onceExec = OnceExec()
@@ -28,12 +36,10 @@ class BaseViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        isActive = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        isActive = true
     }
 
     override func viewDidDisappear(_ animated: Bool) {

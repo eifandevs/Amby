@@ -718,9 +718,15 @@ class BaseView: UIView {
 
 extension BaseView: EGApplicationDelegate {
     internal func screenTouchBegan(touch: UITouch) {
+        if !viewModel.canSwipe {
+            log.warning("cannot swipe.")
+            isTouching = false
+            return
+        }
+
         isTouching = true
-        touchBeganPoint = touch.location(in: self)
         isChangingFront = false
+        touchBeganPoint = touch.location(in: self)
         if touchBeganPoint!.x < AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
             swipeDirection = .left
         } else if touchBeganPoint!.x > bounds.size.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
@@ -731,6 +737,8 @@ extension BaseView: EGApplicationDelegate {
     }
 
     internal func screenTouchMoved(touch: UITouch) {
+        if !isTouching { return }
+
         if let touchBeganPoint = touchBeganPoint, front.scrollView.isScrollEnabled {
             let touchPoint = touch.location(in: self)
             if (swipeDirection == .left && touchPoint.x > AppConst.FRONT_LAYER_EDGE_SWIPE_EREA + 20) ||
@@ -741,20 +749,18 @@ extension BaseView: EGApplicationDelegate {
 //                    log.warning("object: \(object)")
 //                }
 
-                if viewModel.isActiveBaseViewController() {
-                    if viewModel.isHistorySwipe(touchPoint: touchBeganPoint) {
-                        // 画面上半分のスワイプの場合は、履歴移動
-                        if swipeDirection == .left {
-                            viewModel.goBackCommonHistoryDataModel()
-                        } else {
-                            viewModel.goForwardCommonHistoryDataModel()
-                        }
+                if viewModel.isHistorySwipe(touchPoint: touchBeganPoint) {
+                    // 画面上半分のスワイプの場合は、履歴移動
+                    if swipeDirection == .left {
+                        viewModel.goBackCommonHistoryDataModel()
                     } else {
-                        // 操作を無効化
-                        invalidateUserInteraction()
-
-                        rx_baseViewDidEdgeSwiped.onNext(swipeDirection)
+                        viewModel.goForwardCommonHistoryDataModel()
                     }
+                } else {
+                    // 操作を無効化
+                    invalidateUserInteraction()
+
+                    rx_baseViewDidEdgeSwiped.onNext(swipeDirection)
                 }
             }
 
@@ -785,6 +791,8 @@ extension BaseView: EGApplicationDelegate {
     }
 
     internal func screenTouchEnded(touch _: UITouch) {
+        if !isTouching { return }
+
         isTouching = false
         if isChangingFront {
             isChangingFront = false
@@ -818,7 +826,6 @@ extension BaseView: EGApplicationDelegate {
     }
 
     internal func screenTouchCancelled(touch: UITouch) {
-        isTouching = false
         screenTouchEnded(touch: touch)
     }
 }
