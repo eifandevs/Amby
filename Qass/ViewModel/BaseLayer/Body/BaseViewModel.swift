@@ -36,7 +36,9 @@ final class BaseViewModel {
     let rx_baseViewModelDidSearchWebView = OperationDataModel.s.rx_operationDataModelDidChange
         .flatMap { object -> Observable<String> in
             if object.operation == .search {
-                let text = object.object as! String
+                guard let text = object.object as? String else {
+                    return Observable.empty()
+                }
                 let searchText = { () -> String in
                     if text.isValidUrl {
                         return text
