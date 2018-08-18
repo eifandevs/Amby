@@ -239,6 +239,25 @@ class HeaderView: UIView, ShadowView {
             }
             .disposed(by: rx.disposeBag)
 
+        // ヘッダーフィールド編集終了監視
+        // ヘッダーのクローズボタンタップ or 検索軽視
+        headerField.rx_headerFieldDidEndGreping
+            .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_headerFieldDidEndGreping")
+                guard let `self` = self else { return }
+                if let text = object.element {
+                    self.rx_headerViewDidEndGreping.onNext(())
+                    self.endGreping()
+
+                    if let text = text, !text.isEmpty {
+                        log.debug("grep word: \(text)")
+                        self.viewModel.grepOperationDataModel(text: text)
+                    }
+                }
+                log.eventOut(chain: "rx_headerFieldDidEndGreping")
+            }
+            .disposed(by: rx.disposeBag)
+
         // ボタン追加
         addSubview(headerField)
 

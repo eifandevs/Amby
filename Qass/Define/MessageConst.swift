@@ -44,6 +44,7 @@ final class MessageConst {
     // MARK: - ヘッダー
 
     static let HEADER_SEARCH_PLACEHOLDER = "検索ワードまたは、URLを入力"
+    static let HEADER_GREP_PLACEHOLDER = "ページ内の検索ワード"
 
     // MARK: - ヘルプ
 

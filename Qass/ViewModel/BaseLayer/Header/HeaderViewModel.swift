@@ -74,6 +74,10 @@ final class HeaderViewModel {
         OperationDataModel.s.executeOperation(operation: .search, object: text)
     }
 
+    func grepOperationDataModel(text: String) {
+        OperationDataModel.s.executeOperation(operation: .grep, object: text)
+    }
+
     func registerFavoriteDataModel() {
         FavoriteDataModel.s.update()
     }
