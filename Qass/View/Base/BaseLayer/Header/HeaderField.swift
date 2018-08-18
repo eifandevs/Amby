@@ -73,9 +73,9 @@ class HeaderField: UIButton, ShadowView {
 
     // ヘッダービューをタップしたらコールされる
     // それまで、テキストフィールドは表示しない
-    func makeInputForm(height: CGFloat) {
+    func startEditing(textFieldY: CGFloat) {
         let closeMenuButtonWidth: CGFloat = frame.size.width / 8.28
-        textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: height), size: CGSize(width: frame.size.width - closeMenuButtonWidth, height: iconSize.height)))
+        textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: textFieldY), size: CGSize(width: frame.size.width - closeMenuButtonWidth, height: iconSize.height)))
         textField.borderStyle = .none
         textField.keyboardType = .default
         textField.returnKeyType = .search
@@ -91,6 +91,77 @@ class HeaderField: UIButton, ShadowView {
                 // 表示している履歴情報の更新
                 if let text = self.textField.text {
                     self.viewModel.executeOperationDataModel(operation: .suggest, object: text)
+                }
+                log.eventOut(chain: "rx_editingDidChanged")
+            })
+            .disposed(by: rx.disposeBag)
+
+        // テキストフィールドの編集開始を監視
+        textField.rx.controlEvent(UIControlEvents.editingDidBegin)
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_editingDidBegin")
+                guard let `self` = self else { return }
+                self.textField.selectedTextRange = self.textField.textRange(from: self.textField.beginningOfDocument, to: self.textField.endOfDocument)
+                log.eventOut(chain: "rx_editingDidBegin")
+            })
+            .disposed(by: rx.disposeBag)
+
+        // テキストフィールドの編集終了を監視
+        textField.rx.controlEvent(UIControlEvents.editingDidEndOnExit)
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_editingDidEndOnExit")
+                guard let `self` = self else { return }
+                self.rx_headerFieldDidEndEditing.onNext(self.textField.text)
+                log.eventOut(chain: "rx_editingDidEndOnExit")
+            })
+            .disposed(by: rx.disposeBag)
+
+        // 削除ボタン作成
+        let closeMenuButtonX = textField.frame.size.width + 5
+        let closeMenuButtonHeight = frame.size.height - DeviceConst.STATUS_BAR_HEIGHT
+        let closeMenuButtonRect = CGRect(x: closeMenuButtonX, y: DeviceConst.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: closeMenuButtonHeight)
+        let closeMenuButton = UIButton(frame: closeMenuButtonRect)
+        closeMenuButton.setImage(image: R.image.headerClose(), color: UIColor.gray)
+        let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
+        closeMenuButton.imageView?.contentMode = .scaleAspectFit
+        closeMenuButton.imageEdgeInsets = UIEdgeInsets(top: edgeInset, left: edgeInset, bottom: edgeInset, right: edgeInset)
+
+        // ボタンタップ
+        closeMenuButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_tap")
+                guard let `self` = self else { return }
+                self.rx_headerFieldDidEndEditing.onNext(nil)
+                log.eventOut(chain: "rx_tap")
+            })
+            .disposed(by: rx.disposeBag)
+
+        addSubview(closeMenuButton)
+
+        textField.becomeFirstResponder()
+        addSubview(textField)
+    }
+
+    // グレップ選択でコールされる
+    // それまで、テキストフィールドは表示しない
+    func startGreping(textFieldY: CGFloat) {
+        let closeMenuButtonWidth: CGFloat = frame.size.width / 8.28
+        textField = UITextField(frame: CGRect(origin: CGPoint(x: 5, y: textFieldY), size: CGSize(width: frame.size.width - closeMenuButtonWidth, height: iconSize.height)))
+        textField.borderStyle = .none
+        textField.keyboardType = .default
+        textField.returnKeyType = .search
+        textField.placeholder = MessageConst.HEADER_SEARCH_PLACEHOLDER
+        textField.text = pastLabelText
+        textField.clearButtonMode = .always
+
+        // テキストフィールドの変更監視
+        textField.rx.controlEvent(UIControlEvents.editingChanged)
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_editingDidChanged")
+                guard let `self` = self else { return }
+                // 表示している履歴情報の更新
+                if let text = self.textField.text {
+                    self.viewModel.executeOperationDataModel(operation: .grep, object: text)
                 }
                 log.eventOut(chain: "rx_editingDidChanged")
             })
@@ -176,6 +247,8 @@ class HeaderField: UIButton, ShadowView {
         addSubview(label!)
     }
 
+    // ヘッダービューのコンテンツの削除
+    // 検索 or グレップ開始時にコール
     func removeContent() {
         if let text = label?.text {
             pastLabelText = text

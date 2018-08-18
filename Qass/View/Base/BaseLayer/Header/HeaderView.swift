@@ -41,8 +41,6 @@ class HeaderView: UIView, ShadowView {
         return DeviceConst.STATUS_BAR_HEIGHT + ((frame.size.height - DeviceConst.STATUS_BAR_HEIGHT - (AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT)) / 2) - (AppConst.BASE_LAYER_HEADER_PROGRESS_MARGIN)
     }
 
-    private let positionY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.BASE_LAYER_HEADER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT))
-
     var fieldAlpha: CGFloat {
         get {
             return headerField.alpha
@@ -230,11 +228,11 @@ class HeaderView: UIView, ShadowView {
                     if let text = text, !text.isEmpty {
                         log.debug("suggest word: \(text)")
                         self.rx_headerViewDidEndEditing.onNext(())
-                        self.finishEditing(headerFieldUpdate: true)
+                        self.endEditing(headerFieldUpdate: true)
                         self.viewModel.searchOperationDataModel(text: text)
                     } else {
                         self.rx_headerViewDidEndEditing.onNext(())
-                        self.finishEditing(headerFieldUpdate: false)
+                        self.endEditing(headerFieldUpdate: false)
                     }
                 }
                 log.eventOut(chain: "rx_headerFieldDidEndEditing")
@@ -278,7 +276,7 @@ class HeaderView: UIView, ShadowView {
     }
 
     /// 編集終了
-    func finishEditing(headerFieldUpdate: Bool) {
+    func endEditing(headerFieldUpdate: Bool) {
         let text = headerField.textField?.text
         headerField.removeInputForm()
         headerField.frame = CGRect(x: (DeviceConst.DISPLAY_SIZE.width - AppConst.BASE_LAYER_HEADER_FIELD_WIDTH) / 2, y: headerFieldOriginY, width: AppConst.BASE_LAYER_HEADER_FIELD_WIDTH, height: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT)
@@ -295,7 +293,13 @@ class HeaderView: UIView, ShadowView {
     }
 
     /// グレップ終了
-    func finishGreping() {
+    func endGreping() {
+        headerField.removeInputForm()
+        headerField.frame = CGRect(x: (DeviceConst.DISPLAY_SIZE.width - AppConst.BASE_LAYER_HEADER_FIELD_WIDTH) / 2, y: headerFieldOriginY, width: AppConst.BASE_LAYER_HEADER_FIELD_WIDTH, height: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT)
+        headerField.layer.shadowColor = UIColor.black.cgColor
+        isGreping = false
+
+        headerField.makeContent(restore: true, restoreText: nil)
     }
 
     /// ヘッダービューのスライド
@@ -319,7 +323,7 @@ class HeaderView: UIView, ShadowView {
                 self.headerField.layer.shadowColor = UIColor.clear.cgColor
             }, completion: { _ in
                 // キーボード表示
-                self.headerField.makeInputForm(height: self.headerFieldOriginY)
+                self.headerField.startEditing(textFieldY: self.headerFieldOriginY)
             })
         }
     }
@@ -336,8 +340,7 @@ class HeaderView: UIView, ShadowView {
                 self.headerField.layer.shadowColor = UIColor.clear.cgColor
             }, completion: { _ in
                 // キーボード表示
-                // TODO: グレップ準備
-                self.headerField.makeInputForm(height: self.headerFieldOriginY)
+                self.headerField.startGreping(textFieldY: self.headerFieldOriginY)
             })
         }
     }

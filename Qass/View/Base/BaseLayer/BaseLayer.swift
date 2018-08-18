@@ -176,16 +176,34 @@ class BaseLayer: UIView {
                 log.eventIn(chain: "rx_headerViewDidBeginGreping")
                 guard let `self` = self else { return }
                 self.isHeaderViewGreping = true
+                self.grepOverlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
 
+                // グレップ中に画面をタップ
+                self.grepOverlay!.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        log.eventIn(chain: "rx_tap")
+                        guard let `self` = self else { return }
+                        self.endGreping()
+                        log.eventOut(chain: "rx_tap")
+                    })
+                    .disposed(by: self.rx.disposeBag)
+
+                self.addSubview(self.grepOverlay!)
                 log.eventOut(chain: "rx_headerViewDidBeginGreping")
             }
             .disposed(by: rx.disposeBag)
 
         // HeaderViewグレップ終了監視
+        // ヘッダーのクローズボタン押下 or 検索開始
+        // ヘッダーフィールドやヘッダービューはすでにクローズ処理を実施しているので、サーチメニューの削除をする
         headerView.rx_headerViewDidEndGreping
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_headerViewDidEndGreping")
                 guard let `self` = self else { return }
+                EGApplication.sharedMyApplication.egDelegate = self.baseView
+                self.isHeaderViewGreping = false
+                self.grepOverlay!.removeFromSuperview()
+                self.grepOverlay = nil
                 log.eventOut(chain: "rx_headerViewDidEndGreping")
             }
             .disposed(by: rx.disposeBag)
@@ -225,11 +243,16 @@ class BaseLayer: UIView {
         isHeaderViewEditing = false
         searchMenuTableView!.removeFromSuperview()
         searchMenuTableView = nil
-        headerView.finishEditing(headerFieldUpdate: false)
+        headerView.endEditing(headerFieldUpdate: false)
     }
 
     /// グレップモード終了
     private func endGreping() {
+        EGApplication.sharedMyApplication.egDelegate = baseView
+        isHeaderViewGreping = false
+        grepOverlay!.removeFromSuperview()
+        grepOverlay = nil
+        headerView.endGreping()
     }
 }
 
