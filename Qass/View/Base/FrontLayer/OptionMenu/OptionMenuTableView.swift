@@ -42,7 +42,7 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
     }
 
     func loadNib() {
-        let view = Bundle.main.loadNibNamed(R.nib.optionMenuTableView.name, owner: self, options: nil)?.first as! UIView
+        guard let view = Bundle.main.loadNibNamed(R.nib.optionMenuTableView.name, owner: self, options: nil)?.first as? UIView else { return }
         view.frame = bounds
 
         // 影
