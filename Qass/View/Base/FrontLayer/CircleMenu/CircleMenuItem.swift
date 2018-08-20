@@ -41,6 +41,8 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
             setImage(image: R.image.circlemenuCopy(), color: UIColor.darkGray)
         case .search:
             setImage(image: R.image.circlemenuSearch(), color: UIColor.darkGray)
+        case .grep:
+            setImage(image: R.image.circlemenuGrep(), color: UIColor.darkGray)
         case .add:
             setImage(image: R.image.circlemenuAdd(), color: UIColor.darkGray)
         case .scrollUp:
@@ -76,6 +78,9 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
         case .search:
             accessibilityIdentifier = R.image.circlemenuSearch.name
             log.debug("set accessibility. name: \(R.image.circlemenuSearch.name)")
+        case .grep:
+            accessibilityIdentifier = R.image.circlemenuGrep.name
+            log.debug("set accessibility. name: \(R.image.circlemenuGrep.name)")
         case .add:
             accessibilityIdentifier = R.image.circlemenuAdd.name
             log.debug("set accessibility. name: \(R.image.circlemenuAdd.name)")
