@@ -28,6 +28,15 @@ final class BaseViewControllerViewModel {
             }
         }
 
+    // メーラー起動通知用RX
+    let rx_baseViewControllerViewModelDidPresentMail = OperationDataModel.s.rx_operationDataModelDidChange
+        .flatMap { object -> Observable<()> in
+            if object.operation == .contact {
+                return Observable.just(())
+            }
+            return Observable.empty()
+        }
+
     deinit {
         log.debug("deinit called.")
     }

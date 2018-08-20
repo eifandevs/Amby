@@ -11,6 +11,8 @@
 		6C9DF6C868BDCF40D4DA265D /* Pods_Qass_Production.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C7D9CDCF1ED1584806D133 /* Pods_Qass_Production.framework */; };
 		A101649720C56376007A3CC7 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
 		A101649920C56599007A3CC7 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
+		A112E735212AF83800320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
+		A112E736212AF85500320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
 		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9820CE95D300146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
@@ -264,7 +266,6 @@
 		A1B5F41B209D0C8700DF1AE3 /* BaseViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1903003209CF977004F1EA5 /* BaseViewControllerViewModel.swift */; };
 		A1B5F41C209D0C8700DF1AE3 /* OptionMenuFormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FC8209CF976004F1EA5 /* OptionMenuFormTableViewCell.swift */; };
 		A1B5F41D209D0C8700DF1AE3 /* EGWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FB3209CF976004F1EA5 /* EGWebView.swift */; };
-		A1B5F41F209D0C8700DF1AE3 /* Pods_Qass_Develop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8AC3C84A925C26AE61ACEF /* Pods_Qass_Develop.framework */; };
 		A1B5F421209D0C8700DF1AE3 /* OptionMenuAppTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FEE209CF977004F1EA5 /* OptionMenuAppTableView.xib */; };
 		A1B5F422209D0C8700DF1AE3 /* OptionMenuFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FE8209CF977004F1EA5 /* OptionMenuFormTableViewCell.xib */; };
 		A1B5F423209D0C8700DF1AE3 /* OptionMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1902FED209CF977004F1EA5 /* OptionMenuTableViewCell.xib */; };
@@ -402,6 +403,7 @@
 		79E42E2E4E116138B394AA57 /* Pods-Qass-DevelopUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8DD8D05F664AB7906F830747 /* Pods-Qass-DevelopUITests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		A112E734212AF83800320048 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
@@ -631,13 +633,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A112E736212AF85500320048 /* MessageUI.framework in Frameworks */,
 				A12A9C9E20CE9D5F00146010 /* NVActivityIndicatorView.framework in Frameworks */,
 				A12A9C9B20CE9A0000146010 /* SVProgressHUD.framework in Frameworks */,
 				A12A9C9820CE95D300146010 /* KeychainAccess.framework in Frameworks */,
 				A1ED0C0120CBCABF00DFC55B /* SwiftyBeaver.framework in Frameworks */,
 				A1ED0BFE20C94DFE00DFC55B /* Kingfisher.framework in Frameworks */,
 				A101649920C56599007A3CC7 /* CryptoSwift.framework in Frameworks */,
-				A1B5F41F209D0C8700DF1AE3 /* Pods_Qass_Develop.framework in Frameworks */,
 				6C9DF6C868BDCF40D4DA265D /* Pods_Qass_Production.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -646,6 +648,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A112E735212AF83800320048 /* MessageUI.framework in Frameworks */,
 				A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */,
 				A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */,
 				A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */,
@@ -662,6 +665,7 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A112E734212AF83800320048 /* MessageUI.framework */,
 				A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */,
 				A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */,
 				A12A9C9620CE955200146010 /* KeychainAccess.framework */,

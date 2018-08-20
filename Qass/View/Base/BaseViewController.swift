@@ -10,6 +10,7 @@ import NSObject_Rx
 import RxCocoa
 import RxSwift
 import UIKit
+import MessageUI
 
 class BaseViewController: UIViewController {
     private var baseLayer: BaseLayer?
@@ -92,6 +93,25 @@ class BaseViewController: UIViewController {
                     self.present(vc, animated: true)
                 }
                 log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentHelp")
+            }
+            .disposed(by: rx.disposeBag)
+
+        // メーラー起動監視
+        viewModel.rx_baseViewControllerViewModelDidPresentMail
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentMail")
+                guard let `self` = self else { return }
+                if MFMailComposeViewController.canSendMail() {
+                    let mail = MFMailComposeViewController()
+                    mail.mailComposeDelegate = self
+                    mail.setToRecipients(["eifan.devs@gmail.com"])
+                    mail.setSubject("お問い合わせ")
+                    mail.setMessageBody("ここに本文が入ります。", isHTML: false)
+                    self.present(mail, animated: true)
+                } else {
+                    log.error("cannot send mail.")
+                }
+                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentMail")
             }
             .disposed(by: rx.disposeBag)
 
@@ -198,5 +218,21 @@ class BaseViewController: UIViewController {
             }
         }
         super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
+}
+
+extension BaseViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled:
+            log.debug("キャンセル")
+        case .saved:
+            log.debug("下書き保存")
+        case .sent:
+            log.debug("送信成功")
+        default:
+            log.debug("送信失敗")
+        }
+        dismiss(animated: true, completion: nil)
     }
 }
