@@ -13,6 +13,22 @@
 		A101649920C56599007A3CC7 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
 		A112E735212AF83800320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
 		A112E736212AF85500320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
+		A112E741212AFD6C00320048 /* AppInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E73F212AFD6C00320048 /* AppInformationViewController.swift */; };
+		A112E742212AFD6C00320048 /* AppInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E73F212AFD6C00320048 /* AppInformationViewController.swift */; };
+		A112E743212AFD6C00320048 /* AppInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E740212AFD6C00320048 /* AppInformationViewController.xib */; };
+		A112E744212AFD6C00320048 /* AppInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E740212AFD6C00320048 /* AppInformationViewController.xib */; };
+		A112E747212AFD9200320048 /* CopyrightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E745212AFD9200320048 /* CopyrightViewController.swift */; };
+		A112E748212AFD9200320048 /* CopyrightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E745212AFD9200320048 /* CopyrightViewController.swift */; };
+		A112E749212AFD9200320048 /* CopyrightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E746212AFD9200320048 /* CopyrightViewController.xib */; };
+		A112E74A212AFD9200320048 /* CopyrightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E746212AFD9200320048 /* CopyrightViewController.xib */; };
+		A112E74D212AFDAA00320048 /* MenuOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E74B212AFDAA00320048 /* MenuOrderViewController.swift */; };
+		A112E74E212AFDAA00320048 /* MenuOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E74B212AFDAA00320048 /* MenuOrderViewController.swift */; };
+		A112E74F212AFDAA00320048 /* MenuOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E74C212AFDAA00320048 /* MenuOrderViewController.xib */; };
+		A112E750212AFDAA00320048 /* MenuOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E74C212AFDAA00320048 /* MenuOrderViewController.xib */; };
+		A112E753212AFDC600320048 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E751212AFDC600320048 /* ReportViewController.swift */; };
+		A112E754212AFDC600320048 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E751212AFDC600320048 /* ReportViewController.swift */; };
+		A112E755212AFDC600320048 /* ReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E752212AFDC600320048 /* ReportViewController.xib */; };
+		A112E756212AFDC600320048 /* ReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E752212AFDC600320048 /* ReportViewController.xib */; };
 		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9820CE95D300146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
@@ -404,6 +420,14 @@
 		8DD8D05F664AB7906F830747 /* Pods-Qass-DevelopUITests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		A112E734212AF83800320048 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		A112E73F212AFD6C00320048 /* AppInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformationViewController.swift; sourceTree = "<group>"; };
+		A112E740212AFD6C00320048 /* AppInformationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppInformationViewController.xib; sourceTree = "<group>"; };
+		A112E745212AFD9200320048 /* CopyrightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyrightViewController.swift; sourceTree = "<group>"; };
+		A112E746212AFD9200320048 /* CopyrightViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CopyrightViewController.xib; sourceTree = "<group>"; };
+		A112E74B212AFDAA00320048 /* MenuOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderViewController.swift; sourceTree = "<group>"; };
+		A112E74C212AFDAA00320048 /* MenuOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuOrderViewController.xib; sourceTree = "<group>"; };
+		A112E751212AFDC600320048 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		A112E752212AFDC600320048 /* ReportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportViewController.xib; sourceTree = "<group>"; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
@@ -697,6 +721,70 @@
 				33049F868E73A69619BB2972 /* Pods-Qass-Production.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A112E737212AFD1900320048 /* AppInformation */ = {
+			isa = PBXGroup;
+			children = (
+				A112E73F212AFD6C00320048 /* AppInformationViewController.swift */,
+			);
+			path = AppInformation;
+			sourceTree = "<group>";
+		};
+		A112E738212AFD1900320048 /* Copyright */ = {
+			isa = PBXGroup;
+			children = (
+				A112E745212AFD9200320048 /* CopyrightViewController.swift */,
+			);
+			path = Copyright;
+			sourceTree = "<group>";
+		};
+		A112E739212AFD1A00320048 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				A112E751212AFDC600320048 /* ReportViewController.swift */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		A112E73A212AFD1A00320048 /* MenuOrder */ = {
+			isa = PBXGroup;
+			children = (
+				A112E74B212AFDAA00320048 /* MenuOrderViewController.swift */,
+			);
+			path = MenuOrder;
+			sourceTree = "<group>";
+		};
+		A112E73B212AFD2800320048 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				A112E752212AFDC600320048 /* ReportViewController.xib */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		A112E73C212AFD2800320048 /* Copyright */ = {
+			isa = PBXGroup;
+			children = (
+				A112E746212AFD9200320048 /* CopyrightViewController.xib */,
+			);
+			path = Copyright;
+			sourceTree = "<group>";
+		};
+		A112E73D212AFD2800320048 /* AppInformation */ = {
+			isa = PBXGroup;
+			children = (
+				A112E740212AFD6C00320048 /* AppInformationViewController.xib */,
+			);
+			path = AppInformation;
+			sourceTree = "<group>";
+		};
+		A112E73E212AFD2800320048 /* MenuOrder */ = {
+			isa = PBXGroup;
+			children = (
+				A112E74C212AFDAA00320048 /* MenuOrderViewController.xib */,
+			);
+			path = MenuOrder;
 			sourceTree = "<group>";
 		};
 		A150624E20BE39E100ACCF78 /* Env */ = {
@@ -1103,6 +1191,10 @@
 		A1902FA8209CF976004F1EA5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A112E737212AFD1900320048 /* AppInformation */,
+				A112E738212AFD1900320048 /* Copyright */,
+				A112E73A212AFD1A00320048 /* MenuOrder */,
+				A112E739212AFD1A00320048 /* Report */,
 				A1902FA9209CF976004F1EA5 /* Base */,
 				A1902FD5209CF976004F1EA5 /* Common */,
 				A1902FD8209CF976004F1EA5 /* Help */,
@@ -1253,6 +1345,10 @@
 		A1902FDC209CF976004F1EA5 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				A112E73D212AFD2800320048 /* AppInformation */,
+				A112E73C212AFD2800320048 /* Copyright */,
+				A112E73E212AFD2800320048 /* MenuOrder */,
+				A112E73B212AFD2800320048 /* Report */,
 				A1902FDD209CF976004F1EA5 /* Base */,
 				A1902FF5209CF977004F1EA5 /* Help */,
 				A1902FF7209CF977004F1EA5 /* Splash */,
@@ -1676,20 +1772,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A112E74A212AFD9200320048 /* CopyrightViewController.xib in Resources */,
 				A1B5F421209D0C8700DF1AE3 /* OptionMenuAppTableView.xib in Resources */,
 				A1B5F422209D0C8700DF1AE3 /* OptionMenuFormTableViewCell.xib in Resources */,
 				A1FE87E1211B015800B258A3 /* invalid.html in Resources */,
 				A152086120C5543B00201B30 /* env-dev.plist in Resources */,
 				A1B5F423209D0C8700DF1AE3 /* OptionMenuTableViewCell.xib in Resources */,
 				A1B5F425209D0C8700DF1AE3 /* OptionMenuHelpTableView.xib in Resources */,
+				A112E756212AFDC600320048 /* ReportViewController.xib in Resources */,
 				A1B5F426209D0C8700DF1AE3 /* Assets.xcassets in Resources */,
 				A1B5F427209D0C8700DF1AE3 /* suggest_stub.json in Resources */,
 				A1B5F428209D0C8700DF1AE3 /* OptionMenuFormTableView.xib in Resources */,
 				A1B5F42A209D0C8700DF1AE3 /* LaunchScreen.storyboard in Resources */,
 				A1B5F42B209D0C8700DF1AE3 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
+				A112E750212AFDAA00320048 /* MenuOrderViewController.xib in Resources */,
 				A1B5F42C209D0C8700DF1AE3 /* OptionMenuHistoryTableViewCell.xib in Resources */,
 				A1FE87E5211B015800B258A3 /* authorize.html in Resources */,
 				A1B5F42D209D0C8700DF1AE3 /* SearchMenuSuggestTableViewCell.xib in Resources */,
+				A112E744212AFD6C00320048 /* AppInformationViewController.xib in Resources */,
 				A1B5F42E209D0C8700DF1AE3 /* HelpViewController.xib in Resources */,
 				A1B5F42F209D0C8700DF1AE3 /* OptionMenuTableView.xib in Resources */,
 				A1FE87DD211B015800B258A3 /* offline.html in Resources */,
@@ -1716,6 +1816,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A112E743212AFD6C00320048 /* AppInformationViewController.xib in Resources */,
 				A152086020C5543B00201B30 /* env-dev.plist in Resources */,
 				A1903096209CF978004F1EA5 /* OptionMenuAppTableView.xib in Resources */,
 				A1FE87E2211B015800B258A3 /* dns.html in Resources */,
@@ -1723,6 +1824,7 @@
 				A1903090209CF978004F1EA5 /* OptionMenuFormTableViewCell.xib in Resources */,
 				A1903095209CF978004F1EA5 /* OptionMenuTableViewCell.xib in Resources */,
 				A1FE87E4211B015800B258A3 /* authorize.html in Resources */,
+				A112E755212AFDC600320048 /* ReportViewController.xib in Resources */,
 				A1903099209CF978004F1EA5 /* OptionMenuHelpTableView.xib in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
@@ -1736,6 +1838,7 @@
 				A190309D209CF978004F1EA5 /* HelpViewController.xib in Resources */,
 				A190309C209CF978004F1EA5 /* OptionMenuTableView.xib in Resources */,
 				A190308C209CF978004F1EA5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
+				A112E74F212AFDAA00320048 /* MenuOrderViewController.xib in Resources */,
 				A1903056209CF978004F1EA5 /* article_stub.json in Resources */,
 				A190308E209CF978004F1EA5 /* OptionMenuAppTableViewCell.xib in Resources */,
 				A1903094209CF978004F1EA5 /* OptionMenuSettingTableViewCell.xib in Resources */,
@@ -1747,6 +1850,7 @@
 				A190308F209CF978004F1EA5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
 				A1FE87DC211B015800B258A3 /* offline.html in Resources */,
 				A190309B209CF978004F1EA5 /* OptionMenuSettingTableView.xib in Resources */,
+				A112E749212AFD9200320048 /* CopyrightViewController.xib in Resources */,
 				A190308B209CF978004F1EA5 /* SearchMenuNewsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2165,6 +2269,7 @@
 				A1B5F3AC209D0C8700DF1AE3 /* BaseViewController.swift in Sources */,
 				A1B5F3AD209D0C8700DF1AE3 /* OptionMenuSettingTableView.swift in Sources */,
 				A1B5F3AE209D0C8700DF1AE3 /* EncryptHelper.swift in Sources */,
+				A112E742212AFD6C00320048 /* AppInformationViewController.swift in Sources */,
 				A1ED0C0520CC097B00DFC55B /* UserDefaultRepository.swift in Sources */,
 				A1B5F3AF209D0C8700DF1AE3 /* UIScrollView+Extend.swift in Sources */,
 				A1B5F3B0209D0C8700DF1AE3 /* NSObject+Extend.swift in Sources */,
@@ -2236,8 +2341,10 @@
 				A1B5F3EE209D0C8700DF1AE3 /* BaseLayerViewModel.swift in Sources */,
 				A1B5F3F0209D0C8700DF1AE3 /* Input.swift in Sources */,
 				A1B5F3F1209D0C8700DF1AE3 /* OptionMenuAppTableView.swift in Sources */,
+				A112E748212AFD9200320048 /* CopyrightViewController.swift in Sources */,
 				A1B5F3F2209D0C8700DF1AE3 /* SearchHistoryDataModel.swift in Sources */,
 				A1B5F3F3209D0C8700DF1AE3 /* NotificationView.swift in Sources */,
+				A112E74E212AFDAA00320048 /* MenuOrderViewController.swift in Sources */,
 				A1B5F3F4209D0C8700DF1AE3 /* HeaderView.swift in Sources */,
 				A1B5F3F5209D0C8700DF1AE3 /* RealmHelper.swift in Sources */,
 				A1B5F3F6209D0C8700DF1AE3 /* ArticleResponse.swift in Sources */,
@@ -2250,6 +2357,7 @@
 				A1B5F3FC209D0C8700DF1AE3 /* SearchMenuTableView.swift in Sources */,
 				A1B5F3FD209D0C8700DF1AE3 /* OptionMenuTableView.swift in Sources */,
 				A1E1A09A20D0667D004DB01D /* OptionMenuAppTableViewModel.swift in Sources */,
+				A112E754212AFDC600320048 /* ReportViewController.swift in Sources */,
 				A1E1A09620D0667D004DB01D /* OptionMenuHistoryTableViewModel.swift in Sources */,
 				A1B5F3FE209D0C8700DF1AE3 /* CacheHelper.swift in Sources */,
 				A1B5F3FF209D0C8700DF1AE3 /* OptionMenuHistoryTableViewCell.swift in Sources */,
@@ -2301,6 +2409,7 @@
 				A1903072209CF978004F1EA5 /* BaseViewController.swift in Sources */,
 				A1903084209CF978004F1EA5 /* OptionMenuSettingTableView.swift in Sources */,
 				A190304E209CF978004F1EA5 /* EncryptHelper.swift in Sources */,
+				A112E741212AFD6C00320048 /* AppInformationViewController.swift in Sources */,
 				A1ED0C0420CC097B00DFC55B /* UserDefaultRepository.swift in Sources */,
 				A1903038209CF977004F1EA5 /* UIScrollView+Extend.swift in Sources */,
 				A1903031209CF977004F1EA5 /* NSObject+Extend.swift in Sources */,
@@ -2372,8 +2481,10 @@
 				A19030A5209CF978004F1EA5 /* BaseLayerViewModel.swift in Sources */,
 				A1903020209CF977004F1EA5 /* Input.swift in Sources */,
 				A190307F209CF978004F1EA5 /* OptionMenuAppTableView.swift in Sources */,
+				A112E747212AFD9200320048 /* CopyrightViewController.swift in Sources */,
 				A1903043209CF977004F1EA5 /* SearchHistoryDataModel.swift in Sources */,
 				A1903061209CF978004F1EA5 /* NotificationView.swift in Sources */,
+				A112E74D212AFDAA00320048 /* MenuOrderViewController.swift in Sources */,
 				A1903071209CF978004F1EA5 /* HeaderView.swift in Sources */,
 				A190304D209CF978004F1EA5 /* RealmHelper.swift in Sources */,
 				A1903048209CF978004F1EA5 /* ArticleResponse.swift in Sources */,
@@ -2386,6 +2497,7 @@
 				A190306B209CF978004F1EA5 /* SearchMenuTableView.swift in Sources */,
 				A1903085209CF978004F1EA5 /* OptionMenuTableView.swift in Sources */,
 				A1E1A09920D0667D004DB01D /* OptionMenuAppTableViewModel.swift in Sources */,
+				A112E753212AFDC600320048 /* ReportViewController.swift in Sources */,
 				A1E1A09520D0667D004DB01D /* OptionMenuHistoryTableViewModel.swift in Sources */,
 				A190305D209CF978004F1EA5 /* CacheHelper.swift in Sources */,
 				A190307B209CF978004F1EA5 /* OptionMenuHistoryTableViewCell.swift in Sources */,

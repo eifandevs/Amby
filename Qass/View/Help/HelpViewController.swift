@@ -13,7 +13,6 @@ import UIKit
 import VerticalAlignmentLabel
 
 class HelpViewController: UIViewController {
-    @IBOutlet var contentView: UIView!
     @IBOutlet var closeButton: CornerRadiusButton!
     @IBOutlet var messageLabel: VerticalAlignmentLabel!
     @IBOutlet var subtitleLabel: VerticalAlignmentLabel!

@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HelpViewController" customModule="Qas" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HelpViewController" customModule="Qass_Develop" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="pTc-B0-dmK" id="Sbb-tM-0f5"/>
-                <outlet property="contentView" destination="i5M-Pr-FkT" id="iA5-sm-v7R"/>
                 <outlet property="messageLabel" destination="CTm-Mx-PCX" id="vG5-Ky-bAk"/>
                 <outlet property="subtitleLabel" destination="r9K-fX-E2b" id="vvu-8Q-VVk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -48,7 +46,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="top" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTc-B0-dmK" customClass="CornerRadiusButton" customModule="Qas" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTc-B0-dmK" customClass="CornerRadiusButton" customModule="Qass_Develop" customModuleProvider="target">
                     <rect key="frame" x="22" y="581" width="331" height="48"/>
                     <color key="backgroundColor" red="0.42418062744419305" green="0.55642033537069668" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
