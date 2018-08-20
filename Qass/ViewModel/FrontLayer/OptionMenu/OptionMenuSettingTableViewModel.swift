@@ -23,6 +23,7 @@ final class OptionMenuSettingTableViewModel {
     /// セルタイプ
     enum CellType {
         case autoScroll
+        case menu
         case commonHistory
         case bookMark
         case form
@@ -34,6 +35,7 @@ final class OptionMenuSettingTableViewModel {
         var title: String {
             switch self {
             case .autoScroll: return ""
+            case .menu: return AppConst.OPTION_MENU.MENU
             case .commonHistory: return AppConst.OPTION_MENU.HISTORY
             case .form: return AppConst.SETTING.TITLE_FORM_DATA
             case .bookMark: return AppConst.SETTING.TITLE_BOOK_MARK
@@ -58,6 +60,9 @@ final class OptionMenuSettingTableViewModel {
     var sections: [Section] = [
         Section(title: AppConst.SETTING.SECTION_AUTO_SCROLL, rows: [
             Section.Row(cellType: .autoScroll)
+        ]),
+        Section(title: AppConst.SETTING.SECTION_MENU, rows: [
+            Section.Row(cellType: .menu)
         ]),
         Section(title: AppConst.SETTING.SECTION_DELETE, rows: [
             Section.Row(cellType: .commonHistory),

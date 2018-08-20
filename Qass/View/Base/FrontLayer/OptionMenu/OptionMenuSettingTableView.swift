@@ -109,6 +109,9 @@ extension OptionMenuSettingTableView: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = viewModel.getRow(indexPath: indexPath)
         switch row.cellType {
+        case .menu:
+            // TODO: メニュー設定表示
+            break
         case .commonHistory:
             viewModel.deleteCommonHistoryDataModel()
         case .bookMark:

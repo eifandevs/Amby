@@ -67,6 +67,24 @@ final class BaseViewModel {
                 return Observable.empty()
             }
         }
+    /// トレンド表示通知用RX
+    let rx_baseViewModelDidLoadTrend = OperationDataModel.s.rx_operationDataModelDidChange
+        .flatMap { object -> Observable<()> in
+            if object.operation == .trend {
+                return Observable.just(())
+            } else {
+                return Observable.empty()
+            }
+    }
+    /// ソース表示通知用RX
+    let rx_baseViewModelDidLoadSource = OperationDataModel.s.rx_operationDataModelDidChange
+        .flatMap { object -> Observable<()> in
+            if object.operation == .source {
+                return Observable.just(())
+            } else {
+                return Observable.empty()
+            }
+    }
     /// 自動スクロール通知用RX
     let rx_baseViewModelDidAutoScroll = OperationDataModel.s.rx_operationDataModelDidChange
         .flatMap { object -> Observable<()> in

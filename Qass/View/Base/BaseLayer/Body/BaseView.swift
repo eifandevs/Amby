@@ -363,6 +363,26 @@ class BaseView: UIView {
             }
             .disposed(by: rx.disposeBag)
 
+        // observe load trend
+        viewModel.rx_baseViewModelDidLoadTrend
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidLoadTrend")
+                guard let `self` = self else { return }
+                _ = self.front.load(urlStr: HttpConst.URL.TREND_HOME_URL)
+                log.eventOut(chain: "rx_baseViewModelDidLoadTrend")
+            }
+            .disposed(by: rx.disposeBag)
+
+        // observe load source
+        viewModel.rx_baseViewModelDidLoadSource
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewModelDidLoadSource")
+                guard let `self` = self else { return }
+                _ = self.front.load(urlStr: HttpConst.URL.SOURCE_URL)
+                log.eventOut(chain: "rx_baseViewModelDidLoadSource")
+            }
+            .disposed(by: rx.disposeBag)
+
         // observe history back
         viewModel.rx_baseViewModelDidHistoryBackWebView
             .subscribe { [weak self] _ in
@@ -750,6 +770,7 @@ extension BaseView: EGApplicationDelegate {
 //                }
 
                 if viewModel.isHistorySwipe(touchPoint: touchBeganPoint) {
+                    isTouching = false
                     // 画面上半分のスワイプの場合は、履歴移動
                     if swipeDirection == .left {
                         viewModel.goBackCommonHistoryDataModel()

@@ -22,6 +22,9 @@ struct HttpConst {
         // トレンドホーム
         let TREND_HOME_URL = EnvDataModel.s.get(key: "TREND_HOME_URL")
 
+        // ソース
+        let SOURCE_URL = EnvDataModel.s.get(key: "SOURCE_URL")
+
         let SEARCH_PATH = "https://www.google.co.jp/search?q="
     }
 

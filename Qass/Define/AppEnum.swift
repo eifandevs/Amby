@@ -19,7 +19,10 @@ enum UserOperation {
     case close
     case copy
     case autoScroll
-    case trendHome
+    case trend
+    case source
+    case report
+    case contact
     case grep
     case form
     case favorite

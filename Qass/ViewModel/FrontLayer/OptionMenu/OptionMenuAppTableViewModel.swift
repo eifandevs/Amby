@@ -17,11 +17,13 @@ final class OptionMenuAppTableViewModel {
     enum CellType: Int {
         case app
         case copyright
+        case source
 
         var title: String {
             switch self {
             case .app: return AppConst.APP_INFORMATION.APP
             case .copyright: return AppConst.APP_INFORMATION.COPYRIGHT
+            case .source: return AppConst.APP_INFORMATION.SOURCE
             }
         }
     }
@@ -29,7 +31,8 @@ final class OptionMenuAppTableViewModel {
     // セル
     let rows = [
         Row(cellType: .app),
-        Row(cellType: .copyright)
+        Row(cellType: .copyright),
+        Row(cellType: .source)
     ]
 
     // 高さ
@@ -42,5 +45,10 @@ final class OptionMenuAppTableViewModel {
     /// セル情報取得
     func getRow(indexPath: IndexPath) -> Row {
         return rows[indexPath.row]
+    }
+
+    /// ユーザーオペレーション実行
+    func executeOperationDataModel(operation: UserOperation) {
+        OperationDataModel.s.executeOperation(operation: operation, object: nil)
     }
 }

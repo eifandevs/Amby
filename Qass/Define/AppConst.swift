@@ -79,7 +79,10 @@ struct AppConst {
     static let OPTION_MENU = OPTION_MENU_VALUE()
     struct OPTION_MENU_VALUE {
         let TREND = "トレンド"
+        let REPORT = "問題の報告"
+        let CONTACT = "お問い合わせ(メール)"
         let HISTORY = "閲覧履歴"
+        let MENU = "メニュー並び替え"
         let FORM = "フォーム"
         let BOOKMARK = "ブックマーク"
         let SETTING = "設定"
@@ -92,12 +95,14 @@ struct AppConst {
     struct APP_INFORMATION_VALUE {
         let APP = "アプリについて"
         let COPYRIGHT = "クレジット"
+        let SOURCE = "ソースコード"
     }
 
     // MARK: - 設定画面
     static let SETTING = SETTING_VALUE()
     struct SETTING_VALUE {
         let SECTION_AUTO_SCROLL = "自動スクロール設定"
+        let SECTION_MENU = "メニュー設定"
         let SECTION_HISTORY = "履歴保存件数（何日分）"
         let SECTION_DELETE = "データ削除"
         let TITLE_COMMON_HISTORY = "閲覧履歴"
