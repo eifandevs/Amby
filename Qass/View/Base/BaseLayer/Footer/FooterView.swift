@@ -96,9 +96,9 @@ class FooterView: UIView, ShadowView {
                         self.updateFrontBar(to: object.currentContext)
 
                         if self.thumbnails.count == 0 {
-                            if (self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width {
-                                self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-                                self.scrollView.contentInset = UIEdgeInsets(top: 0, left: self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), bottom: 0, right: 0)
+                            if (self.thumbnails.count + 1).f * AppConst.BASE_LAYER.THUMBNAIL_SIZE.width > self.scrollView.frame.size.width {
+                                self.scrollView.contentSize.width -= AppConst.BASE_LAYER.THUMBNAIL_SIZE.width / 2
+                                self.scrollView.contentInset = UIEdgeInsets(top: 0, left: self.scrollView.contentInset.left - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width / 2), bottom: 0, right: 0)
                             }
                         } else {
                             if let deleteAnimator = self.deleteAnimator {
@@ -106,9 +106,9 @@ class FooterView: UIView, ShadowView {
                                 deleteAnimator.fractionComplete = 1
                             }
                             self.deleteAnimator = UIViewPropertyAnimator(duration: 0.25, curve: .linear) {
-                                if (self.thumbnails.count + 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width > self.scrollView.frame.size.width {
-                                    self.scrollView.contentSize.width -= AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-                                    self.scrollView.contentInset = UIEdgeInsets(top: 0, left: self.scrollView.contentInset.left - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2), bottom: 0, right: 0)
+                                if (self.thumbnails.count + 1).f * AppConst.BASE_LAYER.THUMBNAIL_SIZE.width > self.scrollView.frame.size.width {
+                                    self.scrollView.contentSize.width -= AppConst.BASE_LAYER.THUMBNAIL_SIZE.width / 2
+                                    self.scrollView.contentInset = UIEdgeInsets(top: 0, left: self.scrollView.contentInset.left - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width / 2), bottom: 0, right: 0)
                                 }
 
                                 (0 ... self.thumbnails.count - 1).forEach {
@@ -199,7 +199,7 @@ class FooterView: UIView, ShadowView {
     /// 現在地にスクロール
     private func scrollAtCurrent() {
         if let currentLocation = viewModel.currentLocation {
-            var ptX = -scrollView.contentInset.left + (currentLocation.f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width)
+            var ptX = -scrollView.contentInset.left + (currentLocation.f * AppConst.BASE_LAYER.THUMBNAIL_SIZE.width)
             if ptX > scrollView.contentSize.width - frame.width + scrollView.contentInset.right {
                 ptX = scrollView.contentSize.width - frame.width + scrollView.contentInset.right
             }
@@ -229,10 +229,10 @@ class FooterView: UIView, ShadowView {
     /// 新しいサムネイル追加
     private func append(context: String) -> Thumbnail {
         // 後ろに追加
-        let basePtX = ((thumbnails.count).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width)
-        let additionalPtX = (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2
-        let btnPtX = (frame.size.width / 2) - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.width / 2.0) + (basePtX - additionalPtX)
-        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: btnPtX, y: 0), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
+        let basePtX = ((thumbnails.count).f * AppConst.BASE_LAYER.THUMBNAIL_SIZE.width)
+        let additionalPtX = (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER.THUMBNAIL_SIZE.width / 2
+        let btnPtX = (frame.size.width / 2) - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width / 2.0) + (basePtX - additionalPtX)
+        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: btnPtX, y: 0), size: AppConst.BASE_LAYER.THUMBNAIL_SIZE))
         btn.backgroundColor = UIColor.darkGray
         btn.setImage(image: R.image.footerThumbnailBack(), color: UIColor.gray)
         let inset: CGFloat = btn.frame.size.width / 9
@@ -315,7 +315,7 @@ class FooterView: UIView, ShadowView {
 
         // 間に挿入
         let preBtn = thumbnails[at - 1] // 左隣のボタン
-        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: preBtn.frame.origin.x + AppConst.BASE_LAYER_THUMBNAIL_SIZE.width, y: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height), size: AppConst.BASE_LAYER_THUMBNAIL_SIZE))
+        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: preBtn.frame.origin.x + AppConst.BASE_LAYER.THUMBNAIL_SIZE.width, y: AppConst.BASE_LAYER.THUMBNAIL_SIZE.height), size: AppConst.BASE_LAYER.THUMBNAIL_SIZE))
         btn.backgroundColor = UIColor.darkGray
         btn.setImage(image: R.image.footerThumbnailBack(), color: UIColor.gray)
         let inset: CGFloat = btn.frame.size.width / 9
@@ -382,7 +382,7 @@ class FooterView: UIView, ShadowView {
             // くるくるを表示する
             let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
             if !existIndicator {
-                let rect = CGRect(x: 0, y: 0, width: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.7, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.7)
+                let rect = CGRect(x: 0, y: 0, width: AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 0.7, height: AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 0.7)
                 let indicator = NVActivityIndicatorView(frame: rect, type: NVActivityIndicatorType.ballClipRotate, color: UIColor.ultraOrange, padding: 0)
                 indicator.center = CGPoint(x: targetThumbnail.bounds.size.width / 2, y: targetThumbnail.bounds.size.height / 2)
                 indicator.isUserInteractionEnabled = false

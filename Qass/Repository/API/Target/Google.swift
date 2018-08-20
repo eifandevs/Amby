@@ -15,13 +15,13 @@ enum Google {
 
 extension Google: TargetType {
     // ベースのURL
-    var baseURL: URL { return URL(string: HttpConst.SUGGEST_SERVER_DOMAIN)! }
+    var baseURL: URL { return URL(string: HttpConst.URL.SUGGEST_SERVER_DOMAIN)! }
 
     // パス
     var path: String {
         switch self {
         case .suggest:
-            return HttpConst.SUGGEST_SERVER_PATH
+            return HttpConst.URL.SUGGEST_SERVER_PATH
         }
     }
 

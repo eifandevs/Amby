@@ -9,9 +9,9 @@
 import Foundation
 
 extension Date {
-    func toString(format: String = AppConst.APP_DATE_FORMAT) -> String {
+    func toString(format: String = AppConst.APP.DATE_FORMAT) -> String {
         let formatter = DateFormatter()
-        let jaLocale = Locale(identifier: AppConst.APP_LOCALE)
+        let jaLocale = Locale(identifier: AppConst.APP.LOCALE)
         formatter.locale = jaLocale
         formatter.dateFormat = format
         return formatter.string(from: self)

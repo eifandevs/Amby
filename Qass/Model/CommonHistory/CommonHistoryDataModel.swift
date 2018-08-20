@@ -79,7 +79,7 @@ final class CommonHistoryDataModel {
             histories.forEach {
                 let dateFormatter = DateFormatter()
                 dateFormatter.locale = Locale(identifier: NSLocale.current.identifier)
-                dateFormatter.dateFormat = AppConst.APP_DATE_FORMAT
+                dateFormatter.dateFormat = AppConst.APP.DATE_FORMAT
                 let key = dateFormatter.string(from: $0.date)
                 if commonHistoryByDate[key] == nil {
                     commonHistoryByDate[key] = [$0]

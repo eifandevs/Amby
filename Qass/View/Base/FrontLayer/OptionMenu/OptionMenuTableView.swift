@@ -117,15 +117,15 @@ extension OptionMenuTableView: UITableViewDelegate {
         selectedIndexPath = indexPath
         let overViewMargin = viewModel.getOverViewMargin()
 
-        let marginY = frame.origin.y + frame.size.height + overViewMargin.y > DeviceConst.DISPLAY_SIZE.height ?
-            overViewMargin.y - (frame.origin.y + frame.size.height + overViewMargin.y - DeviceConst.DISPLAY_SIZE.height) :
+        let marginY = frame.origin.y + frame.size.height + overViewMargin.y > DeviceConst.DEVICE.DISPLAY_SIZE.height ?
+            overViewMargin.y - (frame.origin.y + frame.size.height + overViewMargin.y - DeviceConst.DEVICE.DISPLAY_SIZE.height) :
             overViewMargin.y
 
         // スーパービューに追加するので、自身の座標をたす
         let frameX = frame.origin.x + overViewMargin.x
         let frameY = frame.origin.y + marginY
-        let width = AppConst.FRONT_LAYER_OPTION_MENU_SIZE.width
-        let height = AppConst.FRONT_LAYER_OPTION_MENU_SIZE.height
+        let width = AppConst.FRONT_LAYER.OPTION_MENU_SIZE.width
+        let height = AppConst.FRONT_LAYER.OPTION_MENU_SIZE.height
         let detailViewFrame = CGRect(x: frameX, y: frameY, width: width, height: height)
         // 詳細ビュー作成
         switch viewModel.getRow(indexPath: indexPath).cellType {

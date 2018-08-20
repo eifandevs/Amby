@@ -9,8 +9,8 @@
 import Foundation
 
 final class OptionMenuHelpTableViewModel {
-    private let objectKeySubTitle = AppConst.KEY_NOTIFICATION_SUBTITLE
-    private let objectKeyMessage = AppConst.KEY_NOTIFICATION_MESSAGE
+    private let objectKeySubTitle = AppConst.KEY.NOTIFICATION_SUBTITLE
+    private let objectKeyMessage = AppConst.KEY.NOTIFICATION_MESSAGE
 
     // セル情報
     struct Row {
@@ -21,17 +21,17 @@ final class OptionMenuHelpTableViewModel {
 
     // セル
     let rows = [
-        Row(title: MessageConst.HELP_HISTORY_SAVE_TITLE, subTitle: MessageConst.HELP_HISTORY_SAVE_SUBTITLE, message: MessageConst.HELP_HISTORY_SAVE_MESSAGE),
-        Row(title: MessageConst.HELP_SEARCH_CLOSE_TITLE, subTitle: MessageConst.HELP_SEARCH_CLOSE_SUBTITLE, message: MessageConst.HELP_SEARCH_CLOSE_MESSAGE),
-        Row(title: MessageConst.HELP_FORM_TITLE, subTitle: MessageConst.HELP_FORM_SUB_TITLE, message: MessageConst.HELP_FORM_MESSAGE),
-        Row(title: MessageConst.HELP_AUTO_SCROLL_TITLE, subTitle: MessageConst.HELP_AUTO_SCROLL_SUBTITLE, message: MessageConst.HELP_AUTO_SCROLL_MESSAGE),
-        Row(title: MessageConst.HELP_TAB_TRANSITION_TITLE, subTitle: MessageConst.HELP_TAB_TRANSITION_SUBTITLE, message: MessageConst.HELP_TAB_TRANSITION_MESSAGE),
-        Row(title: MessageConst.HELP_TAB_DELETE_TITLE, subTitle: MessageConst.HELP_TAB_DELETE_SUBTITLE, message: MessageConst.HELP_TAB_DELETE_MESSAGE),
-        Row(title: MessageConst.HELP_DATA_DELETE_TITLE, subTitle: MessageConst.HELP_DATA_DELETE_SUBTITLE, message: MessageConst.HELP_DATA_DELETE_MESSAGE)
+        Row(title: MessageConst.HELP.HISTORY_SAVE_TITLE, subTitle: MessageConst.HELP.HISTORY_SAVE_SUBTITLE, message: MessageConst.HELP.HISTORY_SAVE_MESSAGE),
+        Row(title: MessageConst.HELP.SEARCH_CLOSE_TITLE, subTitle: MessageConst.HELP.SEARCH_CLOSE_SUBTITLE, message: MessageConst.HELP.SEARCH_CLOSE_MESSAGE),
+        Row(title: MessageConst.HELP.FORM_TITLE, subTitle: MessageConst.HELP.FORM_SUB_TITLE, message: MessageConst.HELP.FORM_MESSAGE),
+        Row(title: MessageConst.HELP.AUTO_SCROLL_TITLE, subTitle: MessageConst.HELP.AUTO_SCROLL_SUBTITLE, message: MessageConst.HELP.AUTO_SCROLL_MESSAGE),
+        Row(title: MessageConst.HELP.TAB_TRANSITION_TITLE, subTitle: MessageConst.HELP.TAB_TRANSITION_SUBTITLE, message: MessageConst.HELP.TAB_TRANSITION_MESSAGE),
+        Row(title: MessageConst.HELP.TAB_DELETE_TITLE, subTitle: MessageConst.HELP.TAB_DELETE_SUBTITLE, message: MessageConst.HELP.TAB_DELETE_MESSAGE),
+        Row(title: MessageConst.HELP.DATA_DELETE_TITLE, subTitle: MessageConst.HELP.DATA_DELETE_SUBTITLE, message: MessageConst.HELP.DATA_DELETE_MESSAGE)
     ]
 
     // 高さ
-    let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
+    let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     // 数
     var cellCount: Int {
         return rows.count

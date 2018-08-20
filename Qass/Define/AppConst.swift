@@ -9,95 +9,113 @@
 import Foundation
 import UIKit
 
-/// アプリ内定数クラス
-final class AppConst {
+/// アプリ内定数構造体
+struct AppConst {
 
     // MARK: - 共通
-
-    static let APP_FONT = "Avenir"
-    static let APP_DATE_FORMAT = "yyyyMMdd"
-    static let APP_LOCALE = "ja_JP"
+    static let APP = AppConst.APP_VALUE()
+    struct APP_VALUE {
+        let FONT = "Avenir"
+        let DATE_FORMAT = "yyyyMMdd"
+        let LOCALE = "ja_JP"
+    }
 
     // MARK: - フロントレイヤーの定数
-
-    static let FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT = 50.f
-    static let FRONT_LAYER_TABLE_VIEW_NEWS_CELL_HEIGHT = 85.f
-    static let FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT = 19.f
-    static let FRONT_LAYER_SEARCH_TABLE_VIEW_ROW_NUM = 2
-    static let FRONT_LAYER_EDGE_SWIPE_EREA = 15.f
-    static let FRONT_LAYER_OVER_VIEW_MARGIN = CGPoint(x: 30.f, y: 18.f)
-    static let FRONT_LAYER_OPTION_MENU_SIZE = CGSize(width: 250, height: 450)
-    static let FRONT_LAYER_OPTION_MENU_MARGIN = CGSize(width: 38, height: 20)
+    static let FRONT_LAYER = AppConst.FRONT_LAYER_VALUE()
+    struct FRONT_LAYER_VALUE {
+        let TABLE_VIEW_CELL_HEIGHT = 50.f
+        let TABLE_VIEW_NEWS_CELL_HEIGHT = 85.f
+        let TABLE_VIEW_SECTION_HEIGHT = 19.f
+        let SEARCH_TABLE_VIEW_ROW_NUM = 2
+        let EDGE_SWIPE_EREA = 15.f
+        let OVER_VIEW_MARGIN = CGPoint(x: 30.f, y: 18.f)
+        let OPTION_MENU_SIZE = CGSize(width: 250, height: 450)
+        let OPTION_MENU_MARGIN = CGSize(width: 38, height: 20)
+    }
 
     // MARK: - ベースレイヤーの定数
-
-    static var BASE_LAYER_HEADER_HEIGHT = AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 1.3
-    static var BASE_LAYER_HEADER_FIELD_HEIGHT = AppConst.BASE_LAYER_HEADER_HEIGHT / 2
-    static let BASE_LAYER_HEADER_PROGRESS_BAR_HEIGHT = 2.1.f
-    static var BASE_LAYER_HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER_HEADER_PROGRESS_BAR_HEIGHT
-    static var BASE_LAYER_FOOTER_HEIGHT = AppConst.BASE_LAYER_THUMBNAIL_SIZE.height
-    static let BASE_LAYER_BASE_HEIGHT = DeviceConst.DISPLAY_SIZE.height - AppConst.BASE_LAYER_FOOTER_HEIGHT - DeviceConst.STATUS_BAR_HEIGHT
-    static let BASE_LAYER_HEADER_FIELD_WIDTH = DeviceConst.DISPLAY_SIZE.width / 1.8
-    static var BASE_LAYER_THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
+    static var BASE_LAYER = AppConst.BASE_LAYER_VALUE()
+    struct BASE_LAYER_VALUE {
+        var HEADER_HEIGHT = ((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height) * 1.3 // サムネイルの高さ * 1.3
+        var HEADER_FIELD_HEIGHT = (((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height) * 1.3) / 2 // ヘッダーの高さ / 2
+        let HEADER_PROGRESS_BAR_HEIGHT = 2.1.f
+        var HEADER_PROGRESS_MARGIN = 2.1.f // プログレスバーの高さをマージンにする
+        var FOOTER_HEIGHT = ((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height) // サムネイルの高さ
+        let BASE_HEIGHT = DeviceConst.DEVICE.DISPLAY_SIZE.height - (((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)) - DeviceConst.DEVICE.STATUS_BAR_HEIGHT // デバイスの高さ - フッターの高さ - ステータスバーの高さ
+        let HEADER_FIELD_WIDTH = DeviceConst.DEVICE.DISPLAY_SIZE.width / 1.8
+        var THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
+    }
 
     // MARK: - キー情報
-
-    static let KEY_REALM_TOKEN = EnvDataModel.s.get(key: "KEY_REALM_TOKEN")
-    static let KEY_ENCRYPT_SERVICE_TOKEN = EnvDataModel.s.get(key: "KEY_ENCRYPT_SERVICE_TOKEN")
-    static let KEY_ENCRYPT_IV_TOKEN = EnvDataModel.s.get(key: "KEY_ENCRYPT_IV_TOKEN")
-    static let KEY_CURRENT_CONTEXT = "currentContext"
-    static let KEY_AUTO_SCROLL_INTERVAL = "autoScrollInterval"
-    static let KEY_COMMON_HISTORY_SAVE_COUNT = "historySaveCount"
-    static let KEY_SEARCH_HISTORY_SAVE_COUNT = "searchHistorySaveCount"
-    static let KEY_PAGE_HISTORY_SAVE_COUNT = "pageHistorySaveCount"
-    static let KEY_NOTIFICATION_SUBTITLE = "subtitle"
-    static let KEY_NOTIFICATION_MESSAGE = "message"
-    static let KEY_NOTIFICATION_OPERATION = "operation"
-    static let KEY_NOTIFICATION_OBJECT = "object"
-    static let KEY_NOTIFICATION_CONTEXT = "context"
-    static let KEY_NOTIFICATION_PAGE_EXIST = "pageExist"
-    static let KEY_NOTIFICATION_DELETE_INDEX = "deleteIndex"
-    static let KEY_NOTIFICATION_AT = "at"
+    static let KEY = KEY_VALUE()
+    struct KEY_VALUE {
+        let REALM_TOKEN = EnvDataModel.s.get(key: "KEY_REALM_TOKEN")
+        let ENCRYPT_SERVICE_TOKEN = EnvDataModel.s.get(key: "KEY_ENCRYPT_SERVICE_TOKEN")
+        let ENCRYPT_IV_TOKEN = EnvDataModel.s.get(key: "KEY_ENCRYPT_IV_TOKEN")
+        let CURRENT_CONTEXT = "currentContext"
+        let AUTO_SCROLL_INTERVAL = "autoScrollInterval"
+        let COMMON_HISTORY_SAVE_COUNT = "historySaveCount"
+        let SEARCH_HISTORY_SAVE_COUNT = "searchHistorySaveCount"
+        let PAGE_HISTORY_SAVE_COUNT = "pageHistorySaveCount"
+        let NOTIFICATION_SUBTITLE = "subtitle"
+        let NOTIFICATION_MESSAGE = "message"
+        let NOTIFICATION_OPERATION = "operation"
+        let NOTIFICATION_OBJECT = "object"
+        let NOTIFICATION_CONTEXT = "context"
+        let NOTIFICATION_PAGE_EXIST = "pageExist"
+        let NOTIFICATION_DELETE_INDEX = "deleteIndex"
+        let NOTIFICATION_AT = "at"
+    }
 
     // MARK: - URL
-
-    static let URL_BLANK = "about:blank"
-    static let URL_ITUNES_STORE = "//itunes.apple.com/"
-    static let PATH_DB = DeviceConst.CACHES_PATH + "/database"
+    static let URL = URL_VALUE()
+    struct URL_VALUE {
+        let BLANK = "about:blank"
+        let ITUNES_STORE = "//itunes.apple.com/"
+        let DB_PATH = DeviceConst.DEVICE.CACHES_PATH + "/database"
+    }
 
     // MARK: - メニュー画面
-
-    static let OPTION_MENU_TREND = "トレンド"
-    static let OPTION_MENU_HISTORY = "閲覧履歴"
-    static let OPTION_MENU_FORM = "フォーム"
-    static let OPTION_MENU_BOOKMARK = "ブックマーク"
-    static let OPTION_MENU_SETTING = "設定"
-    static let OPTION_MENU_HELP = "ヘルプ"
-    static let OPTION_MENU_APP_INFORMATION = "アプリ情報"
+    static let OPTION_MENU = OPTION_MENU_VALUE()
+    struct OPTION_MENU_VALUE {
+        let TREND = "トレンド"
+        let HISTORY = "閲覧履歴"
+        let FORM = "フォーム"
+        let BOOKMARK = "ブックマーク"
+        let SETTING = "設定"
+        let HELP = "ヘルプ"
+        let APP_INFORMATION = "アプリ情報"
+    }
 
     // MARK: - アプリ情報
-
-    static let APP_INFORMATION_APP = "アプリについて"
-    static let APP_INFORMATION_COPYRIGHT = "クレジット"
+    static let APP_INFORMATION = APP_INFORMATION_VALUE()
+    struct APP_INFORMATION_VALUE {
+        let APP = "アプリについて"
+        let COPYRIGHT = "クレジット"
+    }
 
     // MARK: - 設定画面
-
-    static let SETTING_SECTION_AUTO_SCROLL = "自動スクロール設定"
-    static let SETTING_SECTION_HISTORY = "履歴保存件数（何日分）"
-    static let SETTING_SECTION_DELETE = "データ削除"
-    static let SETTING_TITLE_COMMON_HISTORY = "閲覧履歴"
-    static let SETTING_TITLE_SEARCH_HISTORY = "検索履歴"
-    static let SETTING_TITLE_BOOK_MARK = "ブックマーク"
-    static let SETTING_TITLE_FORM_DATA = "フォームデータ"
-    static let SETTING_TITLE_COOKIES = "Cookie"
-    static let SETTING_TITLE_SITE_DATA = "サイトデータ"
-    static let SETTING_TITLE_ALL = "全てのデータ"
+    static let SETTING = SETTING_VALUE()
+    struct SETTING_VALUE {
+        let SECTION_AUTO_SCROLL = "自動スクロール設定"
+        let SECTION_HISTORY = "履歴保存件数（何日分）"
+        let SECTION_DELETE = "データ削除"
+        let TITLE_COMMON_HISTORY = "閲覧履歴"
+        let TITLE_SEARCH_HISTORY = "検索履歴"
+        let TITLE_BOOK_MARK = "ブックマーク"
+        let TITLE_FORM_DATA = "フォームデータ"
+        let TITLE_COOKIES = "Cookie"
+        let TITLE_SITE_DATA = "サイトデータ"
+        let TITLE_ALL = "全てのデータ"
+    }
 
     // MARK: - UD初期値
-
-    static let UD_CURRENT_CONTEXT = ""
-    static let UD_AUTO_SCROLL = 0.06
-    static let UD_COMMON_HISTORY_SAVE_COUNT = 90
-    static let UD_SEARCH_HISTORY_SAVE_COUNT = 90
-    static let UD_PAGE_HISTORY_SAVE_COUNT = 30
+    static let UD = UD_VALUE()
+    struct UD_VALUE {
+        let CURRENT_CONTEXT = ""
+        let AUTO_SCROLL = 0.06
+        let COMMON_HISTORY_SAVE_COUNT = 90
+        let SEARCH_HISTORY_SAVE_COUNT = 90
+        let PAGE_HISTORY_SAVE_COUNT = 30
+    }
 }

@@ -43,7 +43,7 @@ final class SearchHistoryDataModel {
             for item in histories {
                 let dateFormatter = DateFormatter()
                 dateFormatter.locale = Locale(identifier: NSLocale.current.identifier)
-                dateFormatter.dateFormat = AppConst.APP_DATE_FORMAT
+                dateFormatter.dateFormat = AppConst.APP.DATE_FORMAT
                 let key = dateFormatter.string(from: item.date)
                 if searchHistoryByDate[key] == nil {
                     searchHistoryByDate[key] = [item]

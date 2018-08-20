@@ -224,7 +224,7 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
         label.backgroundColor = UIColor.black
         label.text = "   \(viewModel.sectionItem[section])"
         label.textColor = UIColor.white
-        label.font = UIFont(name: AppConst.APP_FONT, size: 12)
+        label.font = UIFont(name: AppConst.APP.FONT, size: 12)
         return label
     }
 

@@ -23,6 +23,6 @@ class EnvDataModelTests: XCTestCase {
     }
 
     func testGet() {
-        _ = EnvDataModel.s.get(key: "KEY_REALM_TOKEN")
+        _ = EnvDataModel.s.get(key: "KEY.REALM_TOKEN")
     }
 }

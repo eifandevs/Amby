@@ -21,7 +21,7 @@ class NotificationView: UIButton {
             self.frame.origin.y -= self.frame.size.height
         }) { finished in
             if finished {
-                self.overlay.frame = CGRect(x: 0, y: DeviceConst.DISPLAY_SIZE.height - (AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.9), width: DeviceConst.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER_THUMBNAIL_SIZE.height * 0.9)
+                self.overlay.frame = CGRect(x: 0, y: DeviceConst.DEVICE.DISPLAY_SIZE.height - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 0.9), width: DeviceConst.DEVICE.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 0.9)
                 self.overlay.backgroundColor = UIColor.clear
 
                 // オーバーレイタップ

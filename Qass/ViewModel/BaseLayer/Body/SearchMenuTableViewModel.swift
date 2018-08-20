@@ -17,13 +17,13 @@ final class SearchMenuTableViewModel {
     let rx_searchMenuViewWillHide = PublishSubject<()>()
 
     /// ニュースセル高さ
-    let newsCellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_NEWS_CELL_HEIGHT
+    let newsCellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_NEWS_CELL_HEIGHT
     /// 通常セル高さ
-    let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
+    let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     /// セクション高さ
-    let sectionHeight = AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
+    let sectionHeight = AppConst.FRONT_LAYER.TABLE_VIEW_SECTION_HEIGHT
     /// 表示セル数
-    let cellNum = AppConst.FRONT_LAYER_SEARCH_TABLE_VIEW_ROW_NUM
+    let cellNum = AppConst.FRONT_LAYER.SEARCH_TABLE_VIEW_ROW_NUM
 
     /// セクション
     let sectionItem: [String] = ["Google検索", "検索履歴", "閲覧履歴", "Top News"]

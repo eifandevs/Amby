@@ -18,7 +18,7 @@ enum Cache {
 
 extension Cache: LocalStorageTargetType {
     /// The target's base
-    var base: String { return DeviceConst.CACHES_PATH }
+    var base: String { return DeviceConst.DEVICE.CACHES_PATH }
 
     /// The target's base `URL`.
     var url: URL { return URL(fileURLWithPath: self.base + self.path) }

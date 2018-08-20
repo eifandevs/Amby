@@ -14,14 +14,14 @@ final class OptionMenuHistoryTableViewModel {
     /// データ取得通知用RX
     let rx_optionMenuHistoryTableViewModelDidGetData = PublishSubject<()>()
     /// セルの高さ
-    let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
+    let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     /// セクション数
     var sectionCount: Int {
         return sections.count
     }
 
     /// セクションの高さ
-    let sectionHeight = AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
+    let sectionHeight = AppConst.FRONT_LAYER.TABLE_VIEW_SECTION_HEIGHT
     /// セル情報
     var sections: [Section] = []
     /// 保持データリスト

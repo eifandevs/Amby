@@ -54,9 +54,9 @@ final class FormDataModel {
                 FormDataModel.s.delete(forms: [savedForm])
             }
             FormDataModel.s.insert(forms: [form])
-            NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_FORM)
+            NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.REGISTER_FORM)
         } else {
-            NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_FORM_ERROR_INPUT)
+            NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_INPUT)
         }
     }
 }

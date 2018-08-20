@@ -20,8 +20,8 @@ final class OptionMenuAppTableViewModel {
 
         var title: String {
             switch self {
-            case .app: return AppConst.APP_INFORMATION_APP
-            case .copyright: return AppConst.APP_INFORMATION_COPYRIGHT
+            case .app: return AppConst.APP_INFORMATION.APP
+            case .copyright: return AppConst.APP_INFORMATION.COPYRIGHT
             }
         }
     }
@@ -33,7 +33,7 @@ final class OptionMenuAppTableViewModel {
     ]
 
     // 高さ
-    let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
+    let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     // 数
     var cellCount: Int {
         return rows.count

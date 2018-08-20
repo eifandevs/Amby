@@ -77,10 +77,10 @@ final class FavoriteDataModel {
                 } else {
                     insert(favorites: [fd])
                     // ヘッダーのお気に入りアイコン更新
-                    NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_BOOK_MARK)
+                    NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.REGISTER_BOOK_MARK)
                 }
             } else {
-                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_BOOK_MARK_ERROR)
+                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.REGISTER_BOOK_MARK_ERROR)
             }
         }
     }

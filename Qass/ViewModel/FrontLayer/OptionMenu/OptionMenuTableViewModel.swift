@@ -38,13 +38,13 @@ final class OptionMenuTableViewModel {
 
         var title: String {
             switch self {
-            case .trend: return AppConst.OPTION_MENU_TREND
-            case .history: return AppConst.OPTION_MENU_HISTORY
-            case .form: return AppConst.OPTION_MENU_FORM
-            case .favorite: return AppConst.OPTION_MENU_BOOKMARK
-            case .setting: return AppConst.OPTION_MENU_SETTING
-            case .help: return AppConst.OPTION_MENU_HELP
-            case .app: return AppConst.OPTION_MENU_APP_INFORMATION
+            case .trend: return AppConst.OPTION_MENU.TREND
+            case .history: return AppConst.OPTION_MENU.HISTORY
+            case .form: return AppConst.OPTION_MENU.FORM
+            case .favorite: return AppConst.OPTION_MENU.BOOKMARK
+            case .setting: return AppConst.OPTION_MENU.SETTING
+            case .help: return AppConst.OPTION_MENU.HELP
+            case .app: return AppConst.OPTION_MENU.APP_INFORMATION
             }
         }
     }
@@ -60,7 +60,7 @@ final class OptionMenuTableViewModel {
         Row(cellType: .app)
     ]
     // 高さ
-    let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
+    let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     // 数
     var cellCount: Int {
         return rows.count
@@ -78,12 +78,12 @@ final class OptionMenuTableViewModel {
     func getOverViewMargin() -> CGPoint {
         if let swipeDirection = swipeDirection {
             if swipeDirection == .left {
-                return AppConst.FRONT_LAYER_OVER_VIEW_MARGIN
+                return AppConst.FRONT_LAYER.OVER_VIEW_MARGIN
             } else {
-                return CGPoint(x: -AppConst.FRONT_LAYER_OVER_VIEW_MARGIN.x, y: AppConst.FRONT_LAYER_OVER_VIEW_MARGIN.y)
+                return CGPoint(x: -AppConst.FRONT_LAYER.OVER_VIEW_MARGIN.x, y: AppConst.FRONT_LAYER.OVER_VIEW_MARGIN.y)
             }
         } else {
-            return AppConst.FRONT_LAYER_OVER_VIEW_MARGIN
+            return AppConst.FRONT_LAYER.OVER_VIEW_MARGIN
         }
     }
 

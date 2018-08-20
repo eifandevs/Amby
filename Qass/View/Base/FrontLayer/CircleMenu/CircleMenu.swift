@@ -246,7 +246,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
 
     /// エッジクローズの検知
     private func edgeClose() {
-        if center.x < AppConst.FRONT_LAYER_EDGE_SWIPE_EREA * 0.98 {
+        if center.x < AppConst.FRONT_LAYER.EDGE_SWIPE_EREA * 0.98 {
             isEdgeClosing = true
             isUserInteractionEnabled = false
             UIView.animate(withDuration: 0.2, animations: {
@@ -259,13 +259,13 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                     self.rx_circleMenuDidClose.onNext(())
                 }
             })
-        } else if center.x > DeviceConst.DISPLAY_SIZE.width * 0.98 {
+        } else if center.x > DeviceConst.DEVICE.DISPLAY_SIZE.width * 0.98 {
             isEdgeClosing = true
             isUserInteractionEnabled = false
             UIView.animate(withDuration: 0.2, animations: {
-                self.center.x = DeviceConst.DISPLAY_SIZE.width + self.frame.size.width / 2
+                self.center.x = DeviceConst.DEVICE.DISPLAY_SIZE.width + self.frame.size.width / 2
                 self.circleMenuItems.forEach({ item in
-                    item.center = CGPoint(x: DeviceConst.DISPLAY_SIZE.width + self.frame.size.width, y: self.center.y)
+                    item.center = CGPoint(x: DeviceConst.DEVICE.DISPLAY_SIZE.width + self.frame.size.width, y: self.center.y)
                 })
             }, completion: { finished in
                 if finished {

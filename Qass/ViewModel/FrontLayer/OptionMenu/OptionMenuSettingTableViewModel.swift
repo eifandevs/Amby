@@ -34,32 +34,32 @@ final class OptionMenuSettingTableViewModel {
         var title: String {
             switch self {
             case .autoScroll: return ""
-            case .commonHistory: return AppConst.OPTION_MENU_HISTORY
-            case .form: return AppConst.SETTING_TITLE_FORM_DATA
-            case .bookMark: return AppConst.SETTING_TITLE_BOOK_MARK
-            case .searchHistory: return AppConst.SETTING_TITLE_SEARCH_HISTORY
-            case .cookies: return AppConst.SETTING_TITLE_COOKIES
-            case .siteData: return AppConst.SETTING_TITLE_SITE_DATA
-            case .all: return AppConst.SETTING_TITLE_ALL
+            case .commonHistory: return AppConst.OPTION_MENU.HISTORY
+            case .form: return AppConst.SETTING.TITLE_FORM_DATA
+            case .bookMark: return AppConst.SETTING.TITLE_BOOK_MARK
+            case .searchHistory: return AppConst.SETTING.TITLE_SEARCH_HISTORY
+            case .cookies: return AppConst.SETTING.TITLE_COOKIES
+            case .siteData: return AppConst.SETTING.TITLE_SITE_DATA
+            case .all: return AppConst.SETTING.TITLE_ALL
             }
         }
     }
 
-    let cellHeight = AppConst.FRONT_LAYER_TABLE_VIEW_CELL_HEIGHT
+    let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     // セクション数
     var sectionCount: Int {
         return sections.count
     }
 
     // セクションの高さ
-    let sectionHeight = AppConst.FRONT_LAYER_TABLE_VIEW_SECTION_HEIGHT
+    let sectionHeight = AppConst.FRONT_LAYER.TABLE_VIEW_SECTION_HEIGHT
 
     // セル情報
     var sections: [Section] = [
-        Section(title: AppConst.SETTING_SECTION_AUTO_SCROLL, rows: [
+        Section(title: AppConst.SETTING.SECTION_AUTO_SCROLL, rows: [
             Section.Row(cellType: .autoScroll)
         ]),
-        Section(title: AppConst.SETTING_SECTION_DELETE, rows: [
+        Section(title: AppConst.SETTING.SECTION_DELETE, rows: [
             Section.Row(cellType: .commonHistory),
             Section.Row(cellType: .form),
             Section.Row(cellType: .bookMark),
@@ -89,7 +89,7 @@ final class OptionMenuSettingTableViewModel {
 
     /// 閲覧履歴削除
     func deleteCommonHistoryDataModel() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_COMMON_HISTORY, completion: {
+        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_COMMON_HISTORY, completion: {
             CommonHistoryDataModel.s.delete()
         }
         )
@@ -97,7 +97,7 @@ final class OptionMenuSettingTableViewModel {
 
     /// お気に入り削除
     func deleteFavoriteDataModel() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_BOOK_MARK, completion: {
+        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_BOOK_MARK, completion: {
             FavoriteDataModel.s.delete()
         }
         )
@@ -105,7 +105,7 @@ final class OptionMenuSettingTableViewModel {
 
     /// フォーム削除
     func deleteFormDataModel() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_FORM, completion: {
+        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_FORM, completion: {
             FormDataModel.s.delete()
         }
         )
@@ -113,7 +113,7 @@ final class OptionMenuSettingTableViewModel {
 
     /// 検索履歴削除
     func deleteSearchHistoryDataModel() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_SEARCH_HISTORY, completion: {
+        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SEARCH_HISTORY, completion: {
             SearchHistoryDataModel.s.delete()
         }
         )
@@ -121,7 +121,7 @@ final class OptionMenuSettingTableViewModel {
 
     /// クッキー削除
     func deleteCookies() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_COOKIES, completion: {
+        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_COOKIES, completion: {
             CacheHelper.deleteCookies()
         }
         )
@@ -129,7 +129,7 @@ final class OptionMenuSettingTableViewModel {
 
     /// キャッシュ削除
     func deleteCaches() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_SITE_DATA, completion: {
+        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SITE_DATA, completion: {
             CacheHelper.deleteCaches()
         }
         )
@@ -137,7 +137,7 @@ final class OptionMenuSettingTableViewModel {
 
     /// 全て削除
     func deleteAll() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT_DELETE_TITLE, message: MessageConst.ALERT_DELETE_ALL, completion: {
+        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_ALL, completion: {
             CommonHistoryDataModel.s.delete()
             SearchHistoryDataModel.s.delete()
             FavoriteDataModel.s.delete(notify: false)

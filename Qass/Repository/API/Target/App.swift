@@ -15,13 +15,13 @@ enum App {
 
 extension App: TargetType {
     // ベースのURL
-    var baseURL: URL { return URL(string: HttpConst.APP_SERVER_DOMAIN)! }
+    var baseURL: URL { return URL(string: HttpConst.URL.APP_SERVER_DOMAIN)! }
 
     // パス
     var path: String {
         switch self {
         case .article:
-            return HttpConst.APP_SERVER_PATH
+            return HttpConst.URL.APP_SERVER_PATH
         }
     }
 

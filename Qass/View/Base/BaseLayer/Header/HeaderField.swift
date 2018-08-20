@@ -18,7 +18,7 @@ class HeaderField: UIButton, ShadowView {
     let rx_headerFieldDidEndGreping = PublishSubject<String?>()
 
     private var icon: UIImageView?
-    private let iconSize: CGSize = CGSize(width: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT, height: AppConst.BASE_LAYER_HEADER_FIELD_HEIGHT)
+    private let iconSize: CGSize = CGSize(width: AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT, height: AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT)
     private var label: EGGradientLabel?
     private var pastLabelText: String?
     private let viewModel = HeaderFieldViewModel()
@@ -80,7 +80,7 @@ class HeaderField: UIButton, ShadowView {
         textField.borderStyle = .none
         textField.keyboardType = .default
         textField.returnKeyType = .search
-        textField.placeholder = MessageConst.HEADER_SEARCH_PLACEHOLDER
+        textField.placeholder = MessageConst.HEADER.SEARCH_PLACEHOLDER
         textField.text = pastLabelText
         textField.clearButtonMode = .always
 
@@ -119,8 +119,8 @@ class HeaderField: UIButton, ShadowView {
 
         // 削除ボタン作成
         let closeMenuButtonX = textField.frame.size.width + 5
-        let closeMenuButtonHeight = frame.size.height - DeviceConst.STATUS_BAR_HEIGHT
-        let closeMenuButtonRect = CGRect(x: closeMenuButtonX, y: DeviceConst.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: closeMenuButtonHeight)
+        let closeMenuButtonHeight = frame.size.height - DeviceConst.DEVICE.STATUS_BAR_HEIGHT
+        let closeMenuButtonRect = CGRect(x: closeMenuButtonX, y: DeviceConst.DEVICE.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: closeMenuButtonHeight)
         let closeMenuButton = UIButton(frame: closeMenuButtonRect)
         closeMenuButton.setImage(image: R.image.headerClose(), color: UIColor.gray)
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
@@ -151,7 +151,7 @@ class HeaderField: UIButton, ShadowView {
         textField.borderStyle = .none
         textField.keyboardType = .default
         textField.returnKeyType = .search
-        textField.placeholder = MessageConst.HEADER_GREP_PLACEHOLDER
+        textField.placeholder = MessageConst.HEADER.GREP_PLACEHOLDER
         textField.clearButtonMode = .always
 
         // テキストフィールドの編集終了を監視
@@ -166,8 +166,8 @@ class HeaderField: UIButton, ShadowView {
 
         // 削除ボタン作成
         let closeMenuButtonX = textField.frame.size.width + 5
-        let closeMenuButtonHeight = frame.size.height - DeviceConst.STATUS_BAR_HEIGHT
-        let closeMenuButtonRect = CGRect(x: closeMenuButtonX, y: DeviceConst.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: closeMenuButtonHeight)
+        let closeMenuButtonHeight = frame.size.height - DeviceConst.DEVICE.STATUS_BAR_HEIGHT
+        let closeMenuButtonRect = CGRect(x: closeMenuButtonX, y: DeviceConst.DEVICE.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: closeMenuButtonHeight)
         let closeMenuButton = UIButton(frame: closeMenuButtonRect)
         closeMenuButton.setImage(image: R.image.headerClose(), color: UIColor.gray)
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
@@ -262,7 +262,7 @@ class HeaderField: UIButton, ShadowView {
 
         let attr: [NSAttributedStringKey: Any] = [
             .foregroundColor: UIColor.black,
-            .font: UIFont(name: AppConst.APP_FONT, size: frame.size.height / 2.5)!,
+            .font: UIFont(name: AppConst.APP.FONT, size: frame.size.height / 2.5)!,
             .paragraphStyle: style
         ]
 

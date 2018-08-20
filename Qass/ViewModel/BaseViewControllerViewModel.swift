@@ -17,8 +17,8 @@ final class BaseViewControllerViewModel {
             if object.operation == .help {
                 // ヘルプ画面を表示する
                 if let object = object.object as? [String: String] {
-                    let subtitle = object[AppConst.KEY_NOTIFICATION_SUBTITLE]!
-                    let message = object[AppConst.KEY_NOTIFICATION_MESSAGE]!
+                    let subtitle = object[AppConst.KEY.NOTIFICATION_SUBTITLE]!
+                    let message = object[AppConst.KEY.NOTIFICATION_MESSAGE]!
                     return Observable.just((subtitle: subtitle, message: message))
                 }
 

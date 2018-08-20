@@ -35,7 +35,7 @@ class BaseView: UIView {
     private var beginEditingWorkItem: DispatchWorkItem?
 
     /// yポジションの最大最小値
-    private let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER_HEADER_HEIGHT, DeviceConst.STATUS_BAR_HEIGHT)
+    private let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER.HEADER_HEIGHT, DeviceConst.DEVICE.STATUS_BAR_HEIGHT)
 
     /// 最前面のWebView
     private var front: EGWebView! {
@@ -125,7 +125,7 @@ class BaseView: UIView {
 
     /// スクロールすべきかどうかのフラグ
     var shouldScroll: Bool {
-        return front.scrollView.contentSize.height > AppConst.BASE_LAYER_BASE_HEIGHT
+        return front.scrollView.contentSize.height > AppConst.BASE_LAYER.BASE_HEIGHT
     }
 
     override init(frame: CGRect) {
@@ -208,7 +208,7 @@ class BaseView: UIView {
                 guard let `self` = self else { return }
                 if !self.isDoneAutoFill {
                     if let inputForm = FormDataModel.s.select(url: self.front.url?.absoluteString).first {
-                        NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_TITLE, message: MessageConst.ALERT_FORM_EXIST, completion: { [weak self] in
+                        NotificationManager.presentAlert(title: MessageConst.ALERT.FORM_TITLE, message: MessageConst.ALERT.FORM_EXIST, completion: { [weak self] in
                             guard let `self` = self else { return }
                             inputForm.inputs.forEach {
                                 let value = self.viewModel.decrypt(value: $0.value)
@@ -410,7 +410,7 @@ class BaseView: UIView {
                 if let form = self.takeForm(webView: self.front) {
                     self.viewModel.storeFormDataModel(form: form)
                 } else {
-                    NotificationManager.presentNotification(message: MessageConst.NOTIFICATION_REGISTER_FORM_ERROR_CRAWL)
+                    NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_CRAWL)
                 }
                 log.eventOut(chain: "rx_baseViewModelDidRegisterAsForm")
             }
@@ -521,21 +521,21 @@ class BaseView: UIView {
 
     /// サイズの最大化
     func scaleToMax() {
-        frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT
-        front.frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT
+        frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT
+        front.frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT
     }
 
     /// サイズの最小化
     func scaleToMin() {
-        frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT - AppConst.BASE_LAYER_HEADER_HEIGHT + DeviceConst.STATUS_BAR_HEIGHT
-        front.frame.size.height = AppConst.BASE_LAYER_BASE_HEIGHT - AppConst.BASE_LAYER_HEADER_HEIGHT + DeviceConst.STATUS_BAR_HEIGHT
+        frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + DeviceConst.DEVICE.STATUS_BAR_HEIGHT
+        front.frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + DeviceConst.DEVICE.STATUS_BAR_HEIGHT
     }
 
     /// 高さの最大位置までスライド
     func slideToMax() {
         if !isLocateMax {
             rx_baseViewDidSlideToMax.onNext(())
-            frame.origin.y = AppConst.BASE_LAYER_HEADER_HEIGHT
+            frame.origin.y = AppConst.BASE_LAYER.HEADER_HEIGHT
             scaleToMin()
         }
     }
@@ -544,7 +544,7 @@ class BaseView: UIView {
     func slideToMin() {
         if !isLocateMin {
             rx_baseViewDidSlideToMin.onNext(())
-            frame.origin.y = DeviceConst.STATUS_BAR_HEIGHT
+            frame.origin.y = DeviceConst.DEVICE.STATUS_BAR_HEIGHT
             scaleToMax()
         }
     }
@@ -727,9 +727,9 @@ extension BaseView: EGApplicationDelegate {
         isTouching = true
         isChangingFront = false
         touchBeganPoint = touch.location(in: self)
-        if touchBeganPoint!.x < AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
+        if touchBeganPoint!.x < AppConst.FRONT_LAYER.EDGE_SWIPE_EREA {
             swipeDirection = .left
-        } else if touchBeganPoint!.x > bounds.size.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA {
+        } else if touchBeganPoint!.x > bounds.size.width - AppConst.FRONT_LAYER.EDGE_SWIPE_EREA {
             swipeDirection = .right
         } else {
             swipeDirection = .none
@@ -741,8 +741,8 @@ extension BaseView: EGApplicationDelegate {
 
         if let touchBeganPoint = touchBeganPoint, front.scrollView.isScrollEnabled {
             let touchPoint = touch.location(in: self)
-            if (swipeDirection == .left && touchPoint.x > AppConst.FRONT_LAYER_EDGE_SWIPE_EREA + 20) ||
-                (swipeDirection == .right && touchPoint.x < bounds.width - AppConst.FRONT_LAYER_EDGE_SWIPE_EREA - 20) {
+            if (swipeDirection == .left && touchPoint.x > AppConst.FRONT_LAYER.EDGE_SWIPE_EREA + 20) ||
+                (swipeDirection == .right && touchPoint.x < bounds.width - AppConst.FRONT_LAYER.EDGE_SWIPE_EREA - 20) {
                 // エッジスワイプ検知
                 // 動画DL
 //                self.front.evaluateJavaScript("document.querySelector('video').currentSrc") { (object, error) in
@@ -1017,7 +1017,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         // TODO: submit検知
 //        if let form = wv.form {
 //            wv.form = nil
-//            NotificationManager.presentAlert(title: MessageConst.ALERT_FORM_SAVE_TITLE, message: MessageConst.ALERT_FORM_SAVE_MESSAGE, completion: { [weak self] in
+//            NotificationManager.presentAlert(title: MessageConst.ALERT.FORM_SAVE_TITLE, message: MessageConst.ALERT.FORM_SAVE_MESSAGE, completion: { [weak self] in
 //                guard let `self` = self else { return }
 //                self.viewModel.storeFormDataModel(form: form)
 //
@@ -1048,7 +1048,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         // URLスキーム対応
         if let errorUrl = (error as NSError).userInfo["NSErrorFailingURLKey"] {
             if let url = (errorUrl as? NSURL)?.absoluteString {
-                if !url.isValidUrl || url.range(of: AppConst.URL_ITUNES_STORE) != nil {
+                if !url.isValidUrl || url.range(of: AppConst.URL.ITUNES_STORE) != nil {
                     log.warning("load error. [open url event]")
                     return
                 }
@@ -1112,11 +1112,11 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
 //        }
 
         // 外部アプリ起動要求
-        if (url.absoluteString.range(of: AppConst.URL_ITUNES_STORE) != nil) ||
+        if (url.absoluteString.range(of: AppConst.URL.ITUNES_STORE) != nil) ||
             (!url.absoluteString.hasPrefix("about:") && !url.absoluteString.hasPrefix("http:") && !url.absoluteString.hasPrefix("https:") && !url.absoluteString.hasPrefix("file:")) {
             log.warning("open url. url: \(url)")
             if UIApplication.shared.canOpenURL(url) {
-                NotificationManager.presentActionSheet(title: "", message: MessageConst.ALERT_OPEN_COMFIRM, completion: {
+                NotificationManager.presentActionSheet(title: "", message: MessageConst.ALERT.OPEN_COMFIRM, completion: {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 })
             } else {
@@ -1136,7 +1136,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
 
                 viewModel.insertByEventPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
 
-//                if url != AppConst.URL_BLANK {
+//                if url != AppConst.URL.BLANK {
 //                    // about:blankは無視する
 //                    viewModel.insertPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
 //                } else {

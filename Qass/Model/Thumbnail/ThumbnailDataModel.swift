@@ -17,7 +17,7 @@ final class ThumbnailDataModel {
 
     func getThumbnail(context: String) -> UIImage? {
         let image = localStorageRepository.getImage(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"))
-        return image?.crop(w: Int(AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER_THUMBNAIL_SIZE.width * 2) * DeviceConst.ASPECT_RATE))
+        return image?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * DeviceConst.DEVICE.ASPECT_RATE))
     }
 
     func getCapture(context: String) -> UIImage? {

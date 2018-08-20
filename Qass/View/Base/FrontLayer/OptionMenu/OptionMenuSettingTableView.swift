@@ -86,7 +86,7 @@ extension OptionMenuSettingTableView: UITableViewDataSource {
         label.textAlignment = .left
         label.text = viewModel.getSection(section: section).title
         label.textColor = UIColor.white
-        label.font = UIFont(name: AppConst.APP_FONT, size: viewModel.sectionFontSize)
+        label.font = UIFont(name: AppConst.APP.FONT, size: viewModel.sectionFontSize)
         return label
     }
 

@@ -47,7 +47,7 @@ final class BaseViewModel {
                         // 閲覧履歴を保存する
                         SearchHistoryDataModel.s.store(text: text)
 
-                        let encodedText = "\(HttpConst.PATH_SEARCH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)"
+                        let encodedText = "\(HttpConst.URL.SEARCH_PATH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)"
                         return encodedText
                     }
                 }()
@@ -231,7 +231,7 @@ final class BaseViewModel {
 
     /// スワイプが履歴移動スワイプかを判定
     func isHistorySwipe(touchPoint: CGPoint) -> Bool {
-        return touchPoint.y < (DeviceConst.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER_HEADER_HEIGHT
+        return touchPoint.y < (DeviceConst.DEVICE.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER.HEADER_HEIGHT
     }
 
     /// 前webviewのキャプチャ取得
