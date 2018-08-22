@@ -29,9 +29,9 @@ final class BaseViewModel {
             return Observable.just(object)
         }
     /// ヒストリーバック通知用RX
-    let rx_baseViewModelDidHistoryBackWebView = CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoBack.flatMap { _ in Observable.just(()) }
+    let rx_baseViewModelDidHistoryBackWebView = OperationUseCase.s.rx_operationUseCaseDidGoBack.flatMap { _ in Observable.just(()) }
     /// ヒストリーフォワード通知用RX
-    let rx_baseViewModelDidHistoryForwardWebView = CommonHistoryDataModel.s.rx_commonHistoryDataModelDidGoForward.flatMap { _ in Observable.just(()) }
+    let rx_baseViewModelDidHistoryForwardWebView = OperationUseCase.s.rx_operationUseCaseDidGoForward.flatMap { _ in Observable.just(()) }
     /// 検索通知用RX
     let rx_baseViewModelDidSearchWebView = OperationDataModel.s.rx_operationDataModelDidChange
         .flatMap { object -> Observable<String> in
@@ -309,13 +309,13 @@ final class BaseViewModel {
     }
 
     /// 前ページに戻る
-    func goBackCommonHistoryDataModel() {
-        CommonHistoryDataModel.s.goBack()
+    func historyBack() {
+        OperationUseCase.s.historyBack()
     }
 
     /// 次ページに進む
-    func goForwardCommonHistoryDataModel() {
-        CommonHistoryDataModel.s.goForward()
+    func historyForward() {
+        OperationUseCase.s.historyForward()
     }
 
     /// create thumbnail folder

@@ -25,8 +25,8 @@ final class FrontLayerViewModel {
         FavoriteDataModel.s.update()
     }
 
-    func closeCurrentTab() {
-        OperationUseCase.s.closeCurrentTab()
+    func removePageHistoryDataModel() {
+        PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)
     }
 
     func copyPageHistoryDataModel() {
@@ -41,11 +41,11 @@ final class FrontLayerViewModel {
         HeaderViewDataModel.s.beginGreping()
     }
 
-    func historyForward() {
-        OperationUseCase.s.historyForward()
+    func goForwardCommonHistoryDataModel() {
+        CommonHistoryDataModel.s.goForward()
     }
 
-    func historyBack() {
-        OperationUseCase.s.historyBack()
+    func goBackCommonHistoryDataModel() {
+        CommonHistoryDataModel.s.goBack()
     }
 }

@@ -15,12 +15,6 @@ final class CommonHistoryDataModel {
 
     static let s = CommonHistoryDataModel()
 
-    /// ヒストリーバック通知用RX
-    let rx_commonHistoryDataModelDidGoBack = PublishSubject<()>()
-
-    /// ヒストリーフォワード通知用RX
-    let rx_commonHistoryDataModelDidGoForward = PublishSubject<()>()
-
     /// userdefault storage repository
     private let userDefaultRepository = UserDefaultRepository()
 
@@ -32,16 +26,6 @@ final class CommonHistoryDataModel {
 
     // 通知センター
     private let center = NotificationCenter.default
-
-    /// 前の履歴に移動
-    func goBack() {
-        rx_commonHistoryDataModelDidGoBack.onNext(())
-    }
-
-    /// 次の履歴に移動
-    func goForward() {
-        rx_commonHistoryDataModelDidGoForward.onNext(())
-    }
 
     /// insert with URL
     func insert(url: URL?, title: String?) {

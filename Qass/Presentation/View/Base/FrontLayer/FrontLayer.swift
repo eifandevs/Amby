@@ -72,9 +72,9 @@ class FrontLayer: UIView {
                         self.addSubview(self.optionMenu!)
                     }
                 case .close:
-                    self.viewModel.removePageHistoryDataModel()
+                    self.viewModel.closeCurrentTab()
                 case .historyBack:
-                    self.viewModel.goBackCommonHistoryDataModel()
+                    self.viewModel.historyBack()
                 case .copy:
                     self.viewModel.copyPageHistoryDataModel()
                 case .search:
@@ -86,7 +86,7 @@ class FrontLayer: UIView {
                 case .autoScroll:
                     self.viewModel.executeOperationDataModel(operation: .autoScroll)
                 case .historyForward:
-                    self.viewModel.goForwardCommonHistoryDataModel()
+                    self.viewModel.historyForward()
                 case .form:
                     self.viewModel.executeOperationDataModel(operation: .form)
                 case .favorite:

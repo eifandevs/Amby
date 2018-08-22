@@ -90,7 +90,7 @@ class HeaderView: UIView, ShadowView {
                 log.eventIn(chain: "rx_historyBackTap")
                 guard let `self` = self else { return }
                 // サーチメニューが透明になっている時にタップ
-                self.viewModel.goBackCommonHistoryDataModel()
+                self.viewModel.historyBack()
                 log.eventOut(chain: "rx_historyBackTap")
             })
             .disposed(by: rx.disposeBag)
@@ -103,7 +103,7 @@ class HeaderView: UIView, ShadowView {
             .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_historyForwardTap")
                 guard let `self` = self else { return }
-                self.viewModel.goForwardCommonHistoryDataModel()
+                self.viewModel.historyForward()
                 log.eventOut(chain: "rx_historyForwardTap")
             })
             .disposed(by: rx.disposeBag)

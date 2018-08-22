@@ -255,6 +255,8 @@
 		A112E93C212D7B8D00320048 /* ArticleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E920212D7B8D00320048 /* ArticleDataModel.swift */; };
 		A112E93D212D7B8D00320048 /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E922212D7B8D00320048 /* CommonHistoryDataModel.swift */; };
 		A112E93E212D7B8D00320048 /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E922212D7B8D00320048 /* CommonHistoryDataModel.swift */; };
+		A112E941212D7D5D00320048 /* OperationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E940212D7D5C00320048 /* OperationUseCase.swift */; };
+		A112E942212D7D5D00320048 /* OperationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E940212D7D5C00320048 /* OperationUseCase.swift */; };
 		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9820CE95D300146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
@@ -543,6 +545,7 @@
 		A112E91E212D7B8D00320048 /* PageHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModel.swift; sourceTree = "<group>"; };
 		A112E920212D7B8D00320048 /* ArticleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleDataModel.swift; sourceTree = "<group>"; };
 		A112E922212D7B8D00320048 /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
+		A112E940212D7D5C00320048 /* OperationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationUseCase.swift; sourceTree = "<group>"; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
@@ -1391,6 +1394,7 @@
 		A112E93F212D7C1200320048 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				A112E940212D7D5C00320048 /* OperationUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -2399,6 +2403,7 @@
 				A112E896212CD76500320048 /* FrontLayer.swift in Sources */,
 				A112E890212CD76500320048 /* OptionMenuSettingTableView.swift in Sources */,
 				A1B5F40D209D0C8700DF1AE3 /* CollectionType+Extend.swift in Sources */,
+				A112E942212D7D5D00320048 /* OperationUseCase.swift in Sources */,
 				A112E82A212CD76500320048 /* HeaderViewModel.swift in Sources */,
 				A1B5F40E209D0C8700DF1AE3 /* CircleView.swift in Sources */,
 				A112E874212CD76500320048 /* CircleProgress.swift in Sources */,
@@ -2539,6 +2544,7 @@
 				A112E895212CD76500320048 /* FrontLayer.swift in Sources */,
 				A112E88F212CD76500320048 /* OptionMenuSettingTableView.swift in Sources */,
 				A1903029209CF977004F1EA5 /* CollectionType+Extend.swift in Sources */,
+				A112E941212D7D5D00320048 /* OperationUseCase.swift in Sources */,
 				A112E829212CD76500320048 /* HeaderViewModel.swift in Sources */,
 				A1903050209CF978004F1EA5 /* CircleView.swift in Sources */,
 				A112E873212CD76500320048 /* CircleProgress.swift in Sources */,

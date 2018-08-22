@@ -773,9 +773,9 @@ extension BaseView: EGApplicationDelegate {
                     isTouching = false
                     // 画面上半分のスワイプの場合は、履歴移動
                     if swipeDirection == .left {
-                        viewModel.goBackCommonHistoryDataModel()
+                        viewModel.historyBack()
                     } else {
-                        viewModel.goForwardCommonHistoryDataModel()
+                        viewModel.historyForward()
                     }
                 } else {
                     // 操作を無効化

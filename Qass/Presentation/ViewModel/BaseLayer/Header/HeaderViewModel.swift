@@ -62,12 +62,12 @@ final class HeaderViewModel {
 
     // MARK: Public Method
 
-    func goBackCommonHistoryDataModel() {
-        CommonHistoryDataModel.s.goBack()
+    func historyBack() {
+        OperationUseCase.s.historyBack()
     }
 
-    func goForwardCommonHistoryDataModel() {
-        CommonHistoryDataModel.s.goForward()
+    func historyForward() {
+        OperationUseCase.s.historyForward()
     }
 
     func searchOperationDataModel(text: String) {
