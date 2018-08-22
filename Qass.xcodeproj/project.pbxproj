@@ -732,8 +732,9 @@
 		A112E757212CD76400320048 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				A112E758212CD76400320048 /* ViewModel */,
 				A112E771212CD76400320048 /* View */,
+				A112E758212CD76400320048 /* ViewModel */,
+				A1902F8D209CF976004F1EA5 /* Protocol */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1399,6 +1400,14 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
+		A112E943212E2B8200320048 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				A1902F8F209CF976004F1EA5 /* EnumEnumerable.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		A1902F2D209CF976004F1EA5 /* Qass-DevelopTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1455,8 +1464,6 @@
 				A112E7D5212CD76400320048 /* Domain */,
 				A112E7F2212CD76400320048 /* Infrastructure */,
 				A1902F3A209CF976004F1EA5 /* Define */,
-				A1902F4E209CF976004F1EA5 /* Extension */,
-				A1902F8D209CF976004F1EA5 /* Protocol */,
 				A1902F9E209CF976004F1EA5 /* Util */,
 				A1902F49209CF976004F1EA5 /* Environment */,
 				A1902F92209CF976004F1EA5 /* Resources */,
@@ -1535,7 +1542,6 @@
 			isa = PBXGroup;
 			children = (
 				A1902F8E209CF976004F1EA5 /* CircleView.swift */,
-				A1902F8F209CF976004F1EA5 /* EnumEnumerable.swift */,
 				A1902F90209CF976004F1EA5 /* OptionMenuView.swift */,
 				A1902F91209CF976004F1EA5 /* ShadowView.swift */,
 			);
@@ -1566,6 +1572,8 @@
 			isa = PBXGroup;
 			children = (
 				A1902FA0209CF976004F1EA5 /* Service */,
+				A112E943212E2B8200320048 /* Protocol */,
+				A1902F4E209CF976004F1EA5 /* Extension */,
 				A1902FA7209CF976004F1EA5 /* Util.swift */,
 			);
 			path = Util;
