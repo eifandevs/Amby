@@ -255,8 +255,32 @@
 		A112E93C212D7B8D00320048 /* ArticleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E920212D7B8D00320048 /* ArticleDataModel.swift */; };
 		A112E93D212D7B8D00320048 /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E922212D7B8D00320048 /* CommonHistoryDataModel.swift */; };
 		A112E93E212D7B8D00320048 /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E922212D7B8D00320048 /* CommonHistoryDataModel.swift */; };
-		A112E941212D7D5D00320048 /* OperationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E940212D7D5C00320048 /* OperationUseCase.swift */; };
-		A112E942212D7D5D00320048 /* OperationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E940212D7D5C00320048 /* OperationUseCase.swift */; };
+		A112E945212EDA3E00320048 /* ContactUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E944212EDA3E00320048 /* ContactUseCase.swift */; };
+		A112E946212EDA3E00320048 /* ContactUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E944212EDA3E00320048 /* ContactUseCase.swift */; };
+		A112E948212EDA6400320048 /* FavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E947212EDA6400320048 /* FavoriteUseCase.swift */; };
+		A112E949212EDA6400320048 /* FavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E947212EDA6400320048 /* FavoriteUseCase.swift */; };
+		A112E94B212EDAA000320048 /* FormUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E94A212EDAA000320048 /* FormUseCase.swift */; };
+		A112E94C212EDAA000320048 /* FormUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E94A212EDAA000320048 /* FormUseCase.swift */; };
+		A112E94E212EDAD500320048 /* GrepUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E94D212EDAD500320048 /* GrepUseCase.swift */; };
+		A112E94F212EDAD500320048 /* GrepUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E94D212EDAD500320048 /* GrepUseCase.swift */; };
+		A112E951212EDAF600320048 /* HelpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E950212EDAF600320048 /* HelpUseCase.swift */; };
+		A112E952212EDAF600320048 /* HelpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E950212EDAF600320048 /* HelpUseCase.swift */; };
+		A112E954212EDB0F00320048 /* HistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E953212EDB0F00320048 /* HistoryUseCase.swift */; };
+		A112E955212EDB0F00320048 /* HistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E953212EDB0F00320048 /* HistoryUseCase.swift */; };
+		A112E957212EDB4200320048 /* ReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E956212EDB4200320048 /* ReportUseCase.swift */; };
+		A112E958212EDB4200320048 /* ReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E956212EDB4200320048 /* ReportUseCase.swift */; };
+		A112E95A212EDB6100320048 /* ScrollUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E959212EDB6000320048 /* ScrollUseCase.swift */; };
+		A112E95B212EDB6100320048 /* ScrollUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E959212EDB6000320048 /* ScrollUseCase.swift */; };
+		A112E95D212EDB7B00320048 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E95C212EDB7B00320048 /* SearchUseCase.swift */; };
+		A112E95E212EDB7B00320048 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E95C212EDB7B00320048 /* SearchUseCase.swift */; };
+		A112E960212EDB9200320048 /* SourceCodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E95F212EDB9200320048 /* SourceCodeUseCase.swift */; };
+		A112E961212EDB9200320048 /* SourceCodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E95F212EDB9200320048 /* SourceCodeUseCase.swift */; };
+		A112E963212EDC9800320048 /* SuggestUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E962212EDC9800320048 /* SuggestUseCase.swift */; };
+		A112E964212EDC9800320048 /* SuggestUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E962212EDC9800320048 /* SuggestUseCase.swift */; };
+		A112E966212EDCC600320048 /* TabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E965212EDCC600320048 /* TabUseCase.swift */; };
+		A112E967212EDCC600320048 /* TabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E965212EDCC600320048 /* TabUseCase.swift */; };
+		A112E969212EDCDE00320048 /* TrendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E968212EDCDE00320048 /* TrendUseCase.swift */; };
+		A112E96A212EDCDE00320048 /* TrendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E968212EDCDE00320048 /* TrendUseCase.swift */; };
 		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9820CE95D300146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
@@ -545,7 +569,19 @@
 		A112E91E212D7B8D00320048 /* PageHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModel.swift; sourceTree = "<group>"; };
 		A112E920212D7B8D00320048 /* ArticleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleDataModel.swift; sourceTree = "<group>"; };
 		A112E922212D7B8D00320048 /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
-		A112E940212D7D5C00320048 /* OperationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationUseCase.swift; sourceTree = "<group>"; };
+		A112E944212EDA3E00320048 /* ContactUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUseCase.swift; sourceTree = "<group>"; };
+		A112E947212EDA6400320048 /* FavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteUseCase.swift; sourceTree = "<group>"; };
+		A112E94A212EDAA000320048 /* FormUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUseCase.swift; sourceTree = "<group>"; };
+		A112E94D212EDAD500320048 /* GrepUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrepUseCase.swift; sourceTree = "<group>"; };
+		A112E950212EDAF600320048 /* HelpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpUseCase.swift; sourceTree = "<group>"; };
+		A112E953212EDB0F00320048 /* HistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryUseCase.swift; sourceTree = "<group>"; };
+		A112E956212EDB4200320048 /* ReportUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUseCase.swift; sourceTree = "<group>"; };
+		A112E959212EDB6000320048 /* ScrollUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollUseCase.swift; sourceTree = "<group>"; };
+		A112E95C212EDB7B00320048 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
+		A112E95F212EDB9200320048 /* SourceCodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCodeUseCase.swift; sourceTree = "<group>"; };
+		A112E962212EDC9800320048 /* SuggestUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestUseCase.swift; sourceTree = "<group>"; };
+		A112E965212EDCC600320048 /* TabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabUseCase.swift; sourceTree = "<group>"; };
+		A112E968212EDCDE00320048 /* TrendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendUseCase.swift; sourceTree = "<group>"; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
@@ -1395,7 +1431,19 @@
 		A112E93F212D7C1200320048 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				A112E940212D7D5C00320048 /* OperationUseCase.swift */,
+				A112E944212EDA3E00320048 /* ContactUseCase.swift */,
+				A112E947212EDA6400320048 /* FavoriteUseCase.swift */,
+				A112E94A212EDAA000320048 /* FormUseCase.swift */,
+				A112E94D212EDAD500320048 /* GrepUseCase.swift */,
+				A112E950212EDAF600320048 /* HelpUseCase.swift */,
+				A112E953212EDB0F00320048 /* HistoryUseCase.swift */,
+				A112E956212EDB4200320048 /* ReportUseCase.swift */,
+				A112E959212EDB6000320048 /* ScrollUseCase.swift */,
+				A112E95C212EDB7B00320048 /* SearchUseCase.swift */,
+				A112E95F212EDB9200320048 /* SourceCodeUseCase.swift */,
+				A112E962212EDC9800320048 /* SuggestUseCase.swift */,
+				A112E965212EDCC600320048 /* TabUseCase.swift */,
+				A112E968212EDCDE00320048 /* TrendUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -2340,6 +2388,7 @@
 				A1B5F3C0209D0C8700DF1AE3 /* UIColor+Extend.swift in Sources */,
 				A112E87A212CD76500320048 /* OptionMenuHistoryTableView.swift in Sources */,
 				A112E8DC212CD76500320048 /* LocalStorageRepository.swift in Sources */,
+				A112E95E212EDB7B00320048 /* SearchUseCase.swift in Sources */,
 				A112E894212CD76500320048 /* OptionMenuFormTableView.swift in Sources */,
 				A1B5F3C6209D0C8700DF1AE3 /* EGApplication.swift in Sources */,
 				A1B5F3C9209D0C8700DF1AE3 /* UIImage+Extend.swift in Sources */,
@@ -2357,6 +2406,7 @@
 				A1B5F3D7209D0C8700DF1AE3 /* Array+Extend.swift in Sources */,
 				A112E892212CD76500320048 /* OptionMenuAppTableView.swift in Sources */,
 				A1B5F3D9209D0C8700DF1AE3 /* NotificationManager.swift in Sources */,
+				A112E958212EDB4200320048 /* ReportUseCase.swift in Sources */,
 				A112E81A212CD76500320048 /* OptionMenuHistoryTableViewModel.swift in Sources */,
 				A112E8E4212CD76500320048 /* SuggestResponse.swift in Sources */,
 				A112E905212CD7D100320048 /* Article.swift in Sources */,
@@ -2368,8 +2418,10 @@
 				A112E80C212CD76500320048 /* FrontLayerViewModel.swift in Sources */,
 				A112E8B4212CD76500320048 /* HelpViewController.swift in Sources */,
 				A1B5F3DE209D0C8700DF1AE3 /* Data+Extend.swift in Sources */,
+				A112E94C212EDAA000320048 /* FormUseCase.swift in Sources */,
 				A112E82E212CD76500320048 /* SplashViewController.swift in Sources */,
 				A1B5F3E0209D0C8700DF1AE3 /* DispatchQueue+Extend.swift in Sources */,
+				A112E95B212EDB6100320048 /* ScrollUseCase.swift in Sources */,
 				A112E86C212CD76500320048 /* ReportViewController.swift in Sources */,
 				A1B5F3E1209D0C8700DF1AE3 /* String+Extend.swift in Sources */,
 				A112E8DA212CD76500320048 /* LocalStorageTargetType.swift in Sources */,
@@ -2383,6 +2435,7 @@
 				A112E92A212D7B8D00320048 /* OperationDataModel.swift in Sources */,
 				A112E930212D7B8D00320048 /* AuthTokenDataModel.swift in Sources */,
 				A112E8B0212CD76500320048 /* EGProgressBar.swift in Sources */,
+				A112E949212EDA6400320048 /* FavoriteUseCase.swift in Sources */,
 				A112E93A212D7B8D00320048 /* PageHistoryDataModel.swift in Sources */,
 				A112E93E212D7B8D00320048 /* CommonHistoryDataModel.swift in Sources */,
 				A112E872212CD76500320048 /* CircleMenu.swift in Sources */,
@@ -2391,6 +2444,7 @@
 				A112E86A212CD76500320048 /* CornerRadiusButton.swift in Sources */,
 				A112E8FB212CD7D100320048 /* Suggest.swift in Sources */,
 				A1B5F3E9209D0C8700DF1AE3 /* CGPoint+Extend.swift in Sources */,
+				A112E952212EDAF600320048 /* HelpUseCase.swift in Sources */,
 				A112E870212CD76500320048 /* BaseViewController.swift in Sources */,
 				A112E8A2212CD76500320048 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */,
 				A112E8FF212CD7D100320048 /* PageHistory.swift in Sources */,
@@ -2398,6 +2452,8 @@
 				A1B5F3EB209D0C8700DF1AE3 /* OnceExec.swift in Sources */,
 				A1B5F3F3209D0C8700DF1AE3 /* NotificationView.swift in Sources */,
 				A1B5F3FA209D0C8700DF1AE3 /* UIViewController+Extend.swift in Sources */,
+				A112E946212EDA3E00320048 /* ContactUseCase.swift in Sources */,
+				A112E964212EDC9800320048 /* SuggestUseCase.swift in Sources */,
 				A112E8E0212CD76500320048 /* DBRepository.swift in Sources */,
 				A112E93C212D7B8D00320048 /* ArticleDataModel.swift in Sources */,
 				A112E80E212CD76500320048 /* CircleMenuViewModel.swift in Sources */,
@@ -2405,13 +2461,13 @@
 				A112E8E8212CD76500320048 /* App.swift in Sources */,
 				A1B5F402209D0C8700DF1AE3 /* Util.swift in Sources */,
 				A112E8F9212CD7D100320048 /* CommonHistory.swift in Sources */,
+				A112E967212EDCC600320048 /* TabUseCase.swift in Sources */,
 				A1B5F404209D0C8700DF1AE3 /* EnumEnumerable.swift in Sources */,
 				A112E924212D7B8D00320048 /* SuggestDataModel.swift in Sources */,
 				A112E878212CD76500320048 /* OptionMenuFavoriteTableView.swift in Sources */,
 				A112E896212CD76500320048 /* FrontLayer.swift in Sources */,
 				A112E890212CD76500320048 /* OptionMenuSettingTableView.swift in Sources */,
 				A1B5F40D209D0C8700DF1AE3 /* CollectionType+Extend.swift in Sources */,
-				A112E942212D7D5D00320048 /* OperationUseCase.swift in Sources */,
 				A112E82A212CD76500320048 /* HeaderViewModel.swift in Sources */,
 				A1B5F40E209D0C8700DF1AE3 /* CircleView.swift in Sources */,
 				A112E874212CD76500320048 /* CircleProgress.swift in Sources */,
@@ -2422,12 +2478,14 @@
 				A112E8A6212CD76500320048 /* SearchMenuNewsTableViewCell.swift in Sources */,
 				A112E810212CD76500320048 /* OptionMenuTableViewModel.swift in Sources */,
 				A112E938212D7B8D00320048 /* EnvDataModel.swift in Sources */,
+				A112E961212EDB9200320048 /* SourceCodeUseCase.swift in Sources */,
 				A1B5F411209D0C8700DF1AE3 /* MessageConst.swift in Sources */,
 				A1B5F412209D0C8700DF1AE3 /* R.generated.swift in Sources */,
 				A112E888212CD76500320048 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A112E8D4212CD76500320048 /* EncryptHelper.swift in Sources */,
 				A112E8EC212CD76500320048 /* ResourceRepository.swift in Sources */,
 				A112E8D6212CD76500320048 /* KeychainRepository.swift in Sources */,
+				A112E955212EDB0F00320048 /* HistoryUseCase.swift in Sources */,
 				A112E824212CD76500320048 /* BaseViewModel.swift in Sources */,
 				A112E92C212D7B8D00320048 /* FormDataModel.swift in Sources */,
 				A1B5F415209D0C8700DF1AE3 /* UIButton+Extend.swift in Sources */,
@@ -2440,8 +2498,10 @@
 				A112E876212CD76500320048 /* CircleMenuItem.swift in Sources */,
 				A112E81E212CD76500320048 /* OptionMenuAppTableViewModel.swift in Sources */,
 				A112E901212CD7D100320048 /* Form.swift in Sources */,
+				A112E94F212EDAD500320048 /* GrepUseCase.swift in Sources */,
 				A112E868212CD76500320048 /* PaddingLabel.swift in Sources */,
 				A112E880212CD76500320048 /* OptionMenuFormTableViewCell.swift in Sources */,
+				A112E96A212EDCDE00320048 /* TrendUseCase.swift in Sources */,
 				A112E928212D7B8D00320048 /* SearchHistoryDataModel.swift in Sources */,
 				A1B5F419209D0C8700DF1AE3 /* Double+Extend.swift in Sources */,
 			);
@@ -2481,6 +2541,7 @@
 				A1903035209CF977004F1EA5 /* UIColor+Extend.swift in Sources */,
 				A112E879212CD76500320048 /* OptionMenuHistoryTableView.swift in Sources */,
 				A112E8DB212CD76500320048 /* LocalStorageRepository.swift in Sources */,
+				A112E95D212EDB7B00320048 /* SearchUseCase.swift in Sources */,
 				A112E893212CD76500320048 /* OptionMenuFormTableView.swift in Sources */,
 				A190305E209CF978004F1EA5 /* EGApplication.swift in Sources */,
 				A1903036209CF977004F1EA5 /* UIImage+Extend.swift in Sources */,
@@ -2498,6 +2559,7 @@
 				A1903026209CF977004F1EA5 /* Array+Extend.swift in Sources */,
 				A112E891212CD76500320048 /* OptionMenuAppTableView.swift in Sources */,
 				A1903060209CF978004F1EA5 /* NotificationManager.swift in Sources */,
+				A112E957212EDB4200320048 /* ReportUseCase.swift in Sources */,
 				A112E819212CD76500320048 /* OptionMenuHistoryTableViewModel.swift in Sources */,
 				A112E8E3212CD76500320048 /* SuggestResponse.swift in Sources */,
 				A112E904212CD7D100320048 /* Article.swift in Sources */,
@@ -2509,8 +2571,10 @@
 				A112E80B212CD76500320048 /* FrontLayerViewModel.swift in Sources */,
 				A112E8B3212CD76500320048 /* HelpViewController.swift in Sources */,
 				A190302A209CF977004F1EA5 /* Data+Extend.swift in Sources */,
+				A112E94B212EDAA000320048 /* FormUseCase.swift in Sources */,
 				A112E82D212CD76500320048 /* SplashViewController.swift in Sources */,
 				A190302D209CF977004F1EA5 /* DispatchQueue+Extend.swift in Sources */,
+				A112E95A212EDB6100320048 /* ScrollUseCase.swift in Sources */,
 				A112E86B212CD76500320048 /* ReportViewController.swift in Sources */,
 				A1903033209CF977004F1EA5 /* String+Extend.swift in Sources */,
 				A112E8D9212CD76500320048 /* LocalStorageTargetType.swift in Sources */,
@@ -2524,6 +2588,7 @@
 				A112E929212D7B8D00320048 /* OperationDataModel.swift in Sources */,
 				A112E92F212D7B8D00320048 /* AuthTokenDataModel.swift in Sources */,
 				A112E8AF212CD76500320048 /* EGProgressBar.swift in Sources */,
+				A112E948212EDA6400320048 /* FavoriteUseCase.swift in Sources */,
 				A112E939212D7B8D00320048 /* PageHistoryDataModel.swift in Sources */,
 				A112E93D212D7B8D00320048 /* CommonHistoryDataModel.swift in Sources */,
 				A112E871212CD76500320048 /* CircleMenu.swift in Sources */,
@@ -2532,6 +2597,7 @@
 				A112E869212CD76500320048 /* CornerRadiusButton.swift in Sources */,
 				A112E8FA212CD7D100320048 /* Suggest.swift in Sources */,
 				A1903027209CF977004F1EA5 /* CGPoint+Extend.swift in Sources */,
+				A112E951212EDAF600320048 /* HelpUseCase.swift in Sources */,
 				A112E86F212CD76500320048 /* BaseViewController.swift in Sources */,
 				A112E8A1212CD76500320048 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */,
 				A112E8FE212CD7D100320048 /* PageHistory.swift in Sources */,
@@ -2539,6 +2605,8 @@
 				A1903062209CF978004F1EA5 /* OnceExec.swift in Sources */,
 				A1903061209CF978004F1EA5 /* NotificationView.swift in Sources */,
 				A190303A209CF977004F1EA5 /* UIViewController+Extend.swift in Sources */,
+				A112E945212EDA3E00320048 /* ContactUseCase.swift in Sources */,
+				A112E963212EDC9800320048 /* SuggestUseCase.swift in Sources */,
 				A112E8DF212CD76500320048 /* DBRepository.swift in Sources */,
 				A112E93B212D7B8D00320048 /* ArticleDataModel.swift in Sources */,
 				A112E80D212CD76500320048 /* CircleMenuViewModel.swift in Sources */,
@@ -2546,13 +2614,13 @@
 				A112E8E7212CD76500320048 /* App.swift in Sources */,
 				A1903063209CF978004F1EA5 /* Util.swift in Sources */,
 				A112E8F8212CD7D100320048 /* CommonHistory.swift in Sources */,
+				A112E966212EDCC600320048 /* TabUseCase.swift in Sources */,
 				A1903051209CF978004F1EA5 /* EnumEnumerable.swift in Sources */,
 				A112E923212D7B8D00320048 /* SuggestDataModel.swift in Sources */,
 				A112E877212CD76500320048 /* OptionMenuFavoriteTableView.swift in Sources */,
 				A112E895212CD76500320048 /* FrontLayer.swift in Sources */,
 				A112E88F212CD76500320048 /* OptionMenuSettingTableView.swift in Sources */,
 				A1903029209CF977004F1EA5 /* CollectionType+Extend.swift in Sources */,
-				A112E941212D7D5D00320048 /* OperationUseCase.swift in Sources */,
 				A112E829212CD76500320048 /* HeaderViewModel.swift in Sources */,
 				A1903050209CF978004F1EA5 /* CircleView.swift in Sources */,
 				A112E873212CD76500320048 /* CircleProgress.swift in Sources */,
@@ -2563,12 +2631,14 @@
 				A112E8A5212CD76500320048 /* SearchMenuNewsTableViewCell.swift in Sources */,
 				A112E80F212CD76500320048 /* OptionMenuTableViewModel.swift in Sources */,
 				A112E937212D7B8D00320048 /* EnvDataModel.swift in Sources */,
+				A112E960212EDB9200320048 /* SourceCodeUseCase.swift in Sources */,
 				A190301B209CF977004F1EA5 /* MessageConst.swift in Sources */,
 				A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */,
 				A112E887212CD76500320048 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A112E8D3212CD76500320048 /* EncryptHelper.swift in Sources */,
 				A112E8EB212CD76500320048 /* ResourceRepository.swift in Sources */,
 				A112E8D5212CD76500320048 /* KeychainRepository.swift in Sources */,
+				A112E954212EDB0F00320048 /* HistoryUseCase.swift in Sources */,
 				A112E823212CD76500320048 /* BaseViewModel.swift in Sources */,
 				A112E92B212D7B8D00320048 /* FormDataModel.swift in Sources */,
 				A1903034209CF977004F1EA5 /* UIButton+Extend.swift in Sources */,
@@ -2581,8 +2651,10 @@
 				A112E875212CD76500320048 /* CircleMenuItem.swift in Sources */,
 				A112E81D212CD76500320048 /* OptionMenuAppTableViewModel.swift in Sources */,
 				A112E900212CD7D100320048 /* Form.swift in Sources */,
+				A112E94E212EDAD500320048 /* GrepUseCase.swift in Sources */,
 				A112E867212CD76500320048 /* PaddingLabel.swift in Sources */,
 				A112E87F212CD76500320048 /* OptionMenuFormTableViewCell.swift in Sources */,
+				A112E969212EDCDE00320048 /* TrendUseCase.swift in Sources */,
 				A112E927212D7B8D00320048 /* SearchHistoryDataModel.swift in Sources */,
 				A190302E209CF977004F1EA5 /* Double+Extend.swift in Sources */,
 			);

@@ -49,27 +49,23 @@ final class SearchMenuTableViewModel {
     init() {
         // webview検索
         // オペレーション監視
-        OperationDataModel.s.rx_operationDataModelDidChange
+        SuggestUseCase.s.rx_suggestUseCaseDidRequestSuggest
             .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_operationDataModelDidChange")
+                log.eventIn(chain: "rx_operationUseCaseDidRequestSuggest")
                 guard let `self` = self else { return }
-                if let object = object.element {
-                    if object.operation == .suggest {
-                        if let token = object.object as? String {
-                            // 閲覧履歴と検索履歴の検索
-                            self.commonHistoryCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
-                            self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
+                if let token = object.element {
+                    // 閲覧履歴と検索履歴の検索
+                    self.commonHistoryCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
+                    self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
 
-                            // とりあえずここで画面更新
-                            self.rx_searchMenuViewWillUpdateLayout.onNext(())
+                    // とりあえずここで画面更新
+                    self.rx_searchMenuViewWillUpdateLayout.onNext(())
 
-                            // オートサジェスト
-                            self.requestSearchQueue.append(token)
-                            self.requestSearch()
-                        }
-                    }
+                    // オートサジェスト
+                    self.requestSearchQueue.append(token)
+                    self.requestSearch()
                 }
-                log.eventOut(chain: "rx_operationDataModelDidChange")
+                log.eventOut(chain: "rx_operationUseCaseDidRequestSuggest")
             }
             .disposed(by: disposeBag)
 
@@ -154,8 +150,8 @@ final class SearchMenuTableViewModel {
         }
     }
 
-    /// ユーザーアクション実行
-    func executeOperationDataModel(operation: UserOperation, url: String) {
-        OperationDataModel.s.executeOperation(operation: operation, object: url)
+    /// ロードリクエスト
+    func loadRequest(url: String) {
+        SearchUseCase.s.load(url: url)
     }
 }

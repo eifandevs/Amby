@@ -82,6 +82,7 @@ extension OptionMenuHelpTableView: UITableViewDataSource {
 extension OptionMenuHelpTableView: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         rx_optionMenuHelpDidClose.onNext(())
-        viewModel.executeOperationDataModel(indexPath: indexPath)
+        let row = viewModel.getRow(indexPath: indexPath)
+        viewModel.openHelpScreen(title: row.subTitle, message: row.message)
     }
 }

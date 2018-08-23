@@ -236,22 +236,22 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
         if cell.className == SearchMenuCommonHistoryTableViewCell.className {
             // 閲覧履歴セルタップ
             if let cell = (cell as? SearchMenuCommonHistoryTableViewCell), let history = cell.history {
-                viewModel.executeOperationDataModel(operation: .search, url: history.url)
+                viewModel.loadRequest(url: history.url)
             }
         } else if cell.className == SearchMenuSearchHistoryTableViewCell.className {
             // 検索履歴セルタップ
             if let cell = (cell as? SearchMenuSearchHistoryTableViewCell), let history = cell.history {
-                viewModel.executeOperationDataModel(operation: .search, url: history.title)
+                viewModel.loadRequest(url: history.title)
             }
         } else if cell.className == SearchMenuSuggestTableViewCell.className {
             // サジェストセルタップ
             if let cell = (cell as? SearchMenuSuggestTableViewCell), let suggest = cell.suggest {
-                viewModel.executeOperationDataModel(operation: .search, url: suggest)
+                viewModel.loadRequest(url: suggest)
             }
         } else {
             // ニュースセルタップ
             if let cell = (cell as? SearchMenuNewsTableViewCell), let url = cell.article?.url {
-                viewModel.executeOperationDataModel(operation: .search, url: url)
+                viewModel.loadRequest(url: url)
             }
         }
     }

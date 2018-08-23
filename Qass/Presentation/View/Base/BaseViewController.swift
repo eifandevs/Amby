@@ -89,7 +89,7 @@ class BaseViewController: UIViewController {
                 log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentHelp")
                 guard let `self` = self else { return }
                 if let element = object.element {
-                    let vc = HelpViewController(subtitle: element.subtitle, message: element.message)
+                    let vc = HelpViewController(subtitle: element.title, message: element.message)
                     self.present(vc, animated: true)
                 }
                 log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentHelp")

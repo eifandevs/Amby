@@ -13,39 +13,58 @@ final class FrontLayerViewModel {
         log.debug("deinit called.")
     }
 
-    func insertPageHistoryDataModel() {
-        PageHistoryDataModel.s.append(url: nil)
+    /// タブの追加
+    func add() {
+        TabUseCase.s.add()
     }
 
-    func executeOperationDataModel(operation: UserOperation, object: Any? = nil) {
-        OperationDataModel.s.executeOperation(operation: operation, object: object)
+    /// スクロールアップ
+    func scrollUp() {
+        ScrollUseCase.s.scrollUp()
     }
 
-    func registerFavoriteDataModel() {
-        FavoriteDataModel.s.update()
+    /// 自動スクロール
+    func autoScroll() {
+        ScrollUseCase.s.autoScroll()
     }
 
-    func closeCurrentTab() {
-        OperationUseCase.s.closeCurrentTab()
+    /// フォーム登録
+    func registerForm() {
+        FormUseCase.s.registerForm()
     }
 
-    func copyPageHistoryDataModel() {
-        PageHistoryDataModel.s.copy()
+    /// お気に入り切り替え
+    func updateFavorite() {
+        FavoriteUseCase.s.update()
     }
 
-    func beginEditingHeaderViewDataModel() {
-        HeaderViewDataModel.s.beginEditing(forceEditFlg: true)
+    /// 現在のタブを削除
+    func close() {
+        TabUseCase.s.close()
     }
 
-    func beginGrepingHeaderViewDataModel() {
-        HeaderViewDataModel.s.beginGreping()
+    /// 現在のタブをコピー
+    func copy() {
+        TabUseCase.s.copy()
     }
 
+    /// 検索開始
+    func beginSearching() {
+        SearchUseCase.s.beginAtCircleMenu()
+    }
+
+    /// グレップ開始
+    func beginGreping() {
+        GrepUseCase.s.begin()
+    }
+
+    /// ヒストリーフォワード
     func historyForward() {
-        OperationUseCase.s.historyForward()
+        HistoryUseCase.s.goForward()
     }
 
+    /// ヒストリーバック
     func historyBack() {
-        OperationUseCase.s.historyBack()
+        HistoryUseCase.s.goBack()
     }
 }

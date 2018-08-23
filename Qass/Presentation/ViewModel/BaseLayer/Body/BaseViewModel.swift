@@ -29,96 +29,78 @@ final class BaseViewModel {
             return Observable.just(object)
         }
     /// ヒストリーバック通知用RX
-    let rx_baseViewModelDidHistoryBackWebView = OperationUseCase.s.rx_operationUseCaseDidGoBack.flatMap { _ in Observable.just(()) }
+    let rx_baseViewModelDidHistoryBackWebView = HistoryUseCase.s.rx_historyUseCaseDidRequestHistoryBack.flatMap { _ in Observable.just(()) }
     /// ヒストリーフォワード通知用RX
-    let rx_baseViewModelDidHistoryForwardWebView = OperationUseCase.s.rx_operationUseCaseDidGoForward.flatMap { _ in Observable.just(()) }
-    /// 検索通知用RX
-    let rx_baseViewModelDidSearchWebView = OperationDataModel.s.rx_operationDataModelDidChange
-        .flatMap { object -> Observable<String> in
-            if object.operation == .search {
-                guard let text = object.object as? String else {
-                    return Observable.empty()
+    let rx_baseViewModelDidHistoryForwardWebView = HistoryUseCase.s.rx_historyUseCaseDidRequestHistoryForward.flatMap { _ in Observable.just(()) }
+    /// トレンド表示リクエスト通知用RX
+    let rx_baseViewModelDidLoadTrend = TrendUseCase.s.rx_trendUseCaseDidRequestLoad
+        .flatMap { url -> Observable<String> in
+            return Observable.just(url)
+        }
+    /// ソースコード表示リクエスト通知用RX
+    let rx_baseViewModelDidLoadSourceCode = SourceCodeUseCase.s.rx_sourceCodeUseCaseDidRequestLoad
+        .flatMap { url -> Observable<String> in
+            return Observable.just(url)
+    }
+    /// ロードリクエスト通知用RX(Favorite)
+    let rx_baseViewModelDidLoadFavorite = FavoriteUseCase.s.rx_favoriteUseCaseDidRequestLoad
+        .flatMap { url -> Observable<String> in
+            return Observable.just(url)
+    }
+    /// ロードリクエスト通知用RX(Form)
+    let rx_baseViewModelDidLoadForm = FormUseCase.s.rx_formUseCaseDidRequestLoad
+        .flatMap { url -> Observable<String> in
+            return Observable.just(url)
+    }
+    /// ロードリクエスト通知用RX(History)
+    let rx_baseViewModelDidLoadHistory = HistoryUseCase.s.rx_historyUseCaseDidRequestLoad
+        .flatMap { url -> Observable<String> in
+            return Observable.just(url)
+    }
+    /// ロードリクエスト通知用RX
+    let rx_baseViewModelDidSearchWebView = SearchUseCase.s.rx_searchUseCaseDidRequestLoad
+        .flatMap { text -> Observable<String> in
+            let searchText = { () -> String in
+                if text.isValidUrl {
+                    return text
+                } else {
+                    // 検索ワードによる検索
+                    // 閲覧履歴を保存する
+                    SearchHistoryDataModel.s.store(text: text)
+
+                    let encodedText = "\(HttpConst.URL.SEARCH_PATH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)"
+                    return encodedText
                 }
-                let searchText = { () -> String in
-                    if text.isValidUrl {
-                        return text
-                    } else {
-                        // 検索ワードによる検索
-                        // 閲覧履歴を保存する
-                        SearchHistoryDataModel.s.store(text: text)
+            }()
+            HeaderViewDataModel.s.updateText(text: searchText)
 
-                        let encodedText = "\(HttpConst.URL.SEARCH_PATH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)"
-                        return encodedText
-                    }
-                }()
-                HeaderViewDataModel.s.updateText(text: searchText)
-
-                return Observable.just(searchText)
-            } else {
-                return Observable.empty()
-            }
+            return Observable.just(searchText)
         }
     /// フォーム登録通知用RX
-    let rx_baseViewModelDidRegisterAsForm = OperationDataModel.s.rx_operationDataModelDidChange
-        .flatMap { object -> Observable<()> in
-            if object.operation == .form {
-                return Observable.just(())
-            } else {
-                return Observable.empty()
-            }
+    let rx_baseViewModelDidRegisterAsForm = FormUseCase.s.rx_formUseCaseDidRequestRegisterForm
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
         }
-    /// トレンド表示通知用RX
-    let rx_baseViewModelDidLoadTrend = OperationDataModel.s.rx_operationDataModelDidChange
-        .flatMap { object -> Observable<()> in
-            if object.operation == .trend {
-                return Observable.just(())
-            } else {
-                return Observable.empty()
-            }
-    }
-    /// ソース表示通知用RX
-    let rx_baseViewModelDidLoadSource = OperationDataModel.s.rx_operationDataModelDidChange
-        .flatMap { object -> Observable<()> in
-            if object.operation == .source {
-                return Observable.just(())
-            } else {
-                return Observable.empty()
-            }
-    }
     /// 自動スクロール通知用RX
-    let rx_baseViewModelDidAutoScroll = OperationDataModel.s.rx_operationDataModelDidChange
-        .flatMap { object -> Observable<()> in
-            if object.operation == .autoScroll {
-                return Observable.just(())
-            } else {
-                return Observable.empty()
-            }
+    let rx_baseViewModelDidAutoScroll = ScrollUseCase.s.rx_scrollUseCaseDidRequestAutoScroll
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
         }
     /// 自動入力通知用RX
-    let rx_baseViewModelDidAutoFill = OperationDataModel.s.rx_operationDataModelDidChange
-        .flatMap { object -> Observable<()> in
-            if object.operation == .autoFill {
-                return Observable.just(())
-            } else {
-                return Observable.empty()
-            }
+    let rx_baseViewModelDidAutoFill = FormUseCase.s.rx_formUseCaseDidRequestAutoFill
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
         }
     /// スクロールアップ通知用RX
-    let rx_baseViewModelDidScrollUp = OperationDataModel.s.rx_operationDataModelDidChange
-        .flatMap { object -> Observable<()> in
-            if object.operation == .scrollUp {
-                return Observable.just(())
-            } else {
-                return Observable.empty()
-            }
+    let rx_baseViewModelDidScrollUp = ScrollUseCase.s.rx_scrollUseCaseDidRequestScrollUp
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
         }
     /// 全文検索通知用RX
-    let rx_baseViewModelDidGrep = OperationDataModel.s.rx_operationDataModelDidChange
-        .flatMap { object -> Observable<(String)> in
-            if object.operation == .grep {
-                if let text = object.object as? String, !text.isEmpty {
-                    return Observable.just(text)
-                }
+    let rx_baseViewModelDidGrep = GrepUseCase.s.rx_grepUseCaseDidRequestGrep
+        .flatMap { text -> Observable<(String)> in
+            if !text.isEmpty {
+                return Observable.just(text)
             }
 
             return Observable.empty()
@@ -239,8 +221,9 @@ final class BaseViewModel {
         PageHistoryDataModel.s.insert(url: url)
     }
 
-    func beginEditingHeaderViewDataModel() {
-        HeaderViewDataModel.s.beginEditing(forceEditFlg: false)
+    /// 検索開始
+    func beginSearching() {
+        SearchUseCase.s.beginAtHeader()
     }
 
     func storeFormDataModel(form: Form) {
@@ -310,12 +293,12 @@ final class BaseViewModel {
 
     /// 前ページに戻る
     func historyBack() {
-        OperationUseCase.s.historyBack()
+        HistoryUseCase.s.goBack()
     }
 
     /// 次ページに進む
     func historyForward() {
-        OperationUseCase.s.historyForward()
+        HistoryUseCase.s.goForward()
     }
 
     /// create thumbnail folder

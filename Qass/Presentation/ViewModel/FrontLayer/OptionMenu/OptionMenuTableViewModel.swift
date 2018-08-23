@@ -95,9 +95,19 @@ final class OptionMenuTableViewModel {
         }
     }
 
-    /// ユーザーオペレーション実行
-    func executeOperationDataModel(operation: UserOperation) {
-        OperationDataModel.s.executeOperation(operation: operation, object: nil)
+    /// トレンド表示
+    func loadTrend() {
+        TrendUseCase.s.load()
+    }
+
+    /// レポート画面表示
+    func openReportScreen() {
+        ReportUseCase.s.open()
+    }
+
+    /// コンタクト画面表示
+    func openContactScreen() {
+        ContactUseCase.s.open()
     }
 
     /// 履歴情報永続化

@@ -77,6 +77,11 @@ final class OptionMenuHistoryTableViewModel {
         }
     }
 
+    /// ロードリクエスト
+    func loadRequest(url: String) {
+        HistoryUseCase.s.load(url: url)
+    }
+
     /// セル情報
     struct Section {
         let dateString: String

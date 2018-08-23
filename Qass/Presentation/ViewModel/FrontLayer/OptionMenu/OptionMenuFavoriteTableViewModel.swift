@@ -39,4 +39,9 @@ final class OptionMenuFavoriteTableViewModel {
     struct Row {
         let data: Favorite
     }
+
+    /// ページ表示要求
+    func loadRequest(url: String) {
+        FavoriteUseCase.s.load(url: url)
+    }
 }

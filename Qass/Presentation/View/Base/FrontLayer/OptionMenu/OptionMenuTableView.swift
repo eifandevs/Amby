@@ -130,15 +130,15 @@ extension OptionMenuTableView: UITableViewDelegate {
         // 詳細ビュー作成
         switch viewModel.getRow(indexPath: indexPath).cellType {
         case .trend:
-            self.viewModel.executeOperationDataModel(operation: .trend)
+            viewModel.loadTrend()
             self.rx_optionMenuTableViewDidClose.onNext(())
             return
         case .report:
-            self.viewModel.executeOperationDataModel(operation: .report)
+            viewModel.openReportScreen()
             self.rx_optionMenuTableViewDidClose.onNext(())
             return
         case .contact:
-            self.viewModel.executeOperationDataModel(operation: .contact)
+            viewModel.openContactScreen()
             self.rx_optionMenuTableViewDidClose.onNext(())
             return
         case .history:

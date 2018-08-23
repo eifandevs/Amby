@@ -12,29 +12,16 @@ import RxSwift
 
 final class BaseViewControllerViewModel {
     // ヘルプ表示通知用RX
-    let rx_baseViewControllerViewModelDidPresentHelp = OperationDataModel.s.rx_operationDataModelDidChange
-        .flatMap { object -> Observable<(subtitle: String, message: String)> in
-            if object.operation == .help {
-                // ヘルプ画面を表示する
-                if let object = object.object as? [String: String] {
-                    let subtitle = object[AppConst.KEY.NOTIFICATION_SUBTITLE]!
-                    let message = object[AppConst.KEY.NOTIFICATION_MESSAGE]!
-                    return Observable.just((subtitle: subtitle, message: message))
-                }
-
-                return Observable.empty()
-            } else {
-                return Observable.empty()
-            }
+    let rx_baseViewControllerViewModelDidPresentHelp = HelpUseCase.s.rx_helpUseCaseDidRequestPresentHelpScreen
+        .flatMap { object -> Observable<(title: String, message: String)> in
+            // ヘルプ画面を表示する
+            return Observable.just((title: object.title, message: object.message))
         }
 
     // メーラー起動通知用RX
-    let rx_baseViewControllerViewModelDidPresentMail = OperationDataModel.s.rx_operationDataModelDidChange
-        .flatMap { object -> Observable<()> in
-            if object.operation == .contact {
-                return Observable.just(())
-            }
-            return Observable.empty()
+    let rx_baseViewControllerViewModelDidPresentMail = ContactUseCase.s.rx_operationUseCaseDidRequestPresentContactScreen
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
         }
 
     deinit {
@@ -42,6 +29,6 @@ final class BaseViewControllerViewModel {
     }
 
     func insertByEventPageHistoryDataModel(url: String) {
-        PageHistoryDataModel.s.insert(url: url)
+        TabUseCase.s.insert(url: url)
     }
 }

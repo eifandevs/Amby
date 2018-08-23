@@ -16,10 +16,6 @@ final class HeaderViewDataModel {
     let rx_headerViewDataModelDidUpdateProgress = PublishSubject<CGFloat>()
     /// ヘッダーテキストの更新通知用RX
     let rx_headerViewDataModelDidUpdateText = PublishSubject<String>()
-    /// 編集開始通知用RX
-    let rx_headerViewDataModelDidBeginEditing = PublishSubject<Bool>()
-    /// グレップ開始通知用RX
-    let rx_headerViewDataModelDidBeginGreping = PublishSubject<()>()
 
     static let s = HeaderViewDataModel()
     let center = NotificationCenter.default
@@ -53,15 +49,4 @@ final class HeaderViewDataModel {
             }
         }
     }
-
-    /// begin search
-    func beginEditing(forceEditFlg: Bool) {
-        rx_headerViewDataModelDidBeginEditing.onNext(forceEditFlg)
-    }
-
-    /// begin grep
-    func beginGreping() {
-        rx_headerViewDataModelDidBeginGreping.onNext(())
-    }
-
 }

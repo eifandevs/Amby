@@ -47,8 +47,8 @@ final class OptionMenuAppTableViewModel {
         return rows[indexPath.row]
     }
 
-    /// ユーザーオペレーション実行
-    func executeOperationDataModel(operation: UserOperation) {
-        OperationDataModel.s.executeOperation(operation: operation, object: nil)
+    /// ソース表示
+    func loadSource() {
+        SourceCodeUseCase.s.load()
     }
 }

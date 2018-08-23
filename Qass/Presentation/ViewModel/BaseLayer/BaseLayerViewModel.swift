@@ -9,11 +9,13 @@
 import Foundation
 
 final class BaseLayerViewModel {
-    func changeOperationDataModel(operation: UserOperation) {
-        OperationDataModel.s.executeOperation(operation: operation, object: nil)
-    }
 
     deinit {
         log.debug("deinit called.")
+    }
+
+    /// 自動入力
+    func autoFill() {
+        FormUseCase.s.autoFill()
     }
 }

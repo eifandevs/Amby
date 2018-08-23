@@ -115,7 +115,7 @@ extension OptionMenuFavoriteTableView: UITableViewDelegate {
         // セル情報取得
         let row = viewModel.getRow(indexPath: indexPath)
         // ページを表示
-        OperationDataModel.s.executeOperation(operation: .search, object: row.data.url)
+        viewModel.loadRequest(url: row.data.url)
         // 通知
         rx_optionMenuFavoriteDidClose.onNext(())
     }

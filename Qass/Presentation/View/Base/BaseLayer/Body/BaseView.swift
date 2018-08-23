@@ -32,7 +32,7 @@ class BaseView: UIView {
     let rx_baseViewDidEdgeSwiped = PublishSubject<EdgeSwipeDirection>()
 
     /// 編集状態にするクロージャ
-    private var beginEditingWorkItem: DispatchWorkItem?
+    private var beginSearchingWorkItem: DispatchWorkItem?
 
     /// yポジションの最大最小値
     private let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER.HEADER_HEIGHT, DeviceConst.DEVICE.STATUS_BAR_HEIGHT)
@@ -57,15 +57,15 @@ class BaseView: UIView {
                 viewModel.reloadHeaderViewDataModel()
                 // 空ページの場合は、編集状態にする
                 if viewModel.currentUrl.isEmpty {
-                    if let beginEditingWorkItem = self.beginEditingWorkItem {
-                        beginEditingWorkItem.cancel()
+                    if let beginSearchingWorkItem = self.beginSearchingWorkItem {
+                        beginSearchingWorkItem.cancel()
                     }
-                    beginEditingWorkItem = DispatchWorkItem { [weak self] in
+                    beginSearchingWorkItem = DispatchWorkItem { [weak self] in
                         guard let `self` = self else { return }
-                        self.viewModel.beginEditingHeaderViewDataModel()
-                        self.beginEditingWorkItem = nil
+                        self.viewModel.beginSearching()
+                        self.beginSearchingWorkItem = nil
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginEditingWorkItem!)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginSearchingWorkItem!)
                 }
             }
         }
@@ -158,10 +158,10 @@ class BaseView: UIView {
                 log.error("cannot get currentUrl.")
             }
         } else {
-            // 1秒後にwillBeginEditingする
+            // 1秒後にwillbeginSearchingする
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                 guard let `self` = self else { return }
-                self.viewModel.beginEditingHeaderViewDataModel()
+                self.viewModel.beginSearching()
             }
         }
 
@@ -180,15 +180,15 @@ class BaseView: UIView {
                     self.webViews.insert(newWv, at: at)
                     if self.viewModel.currentUrl.isEmpty {
                         // 編集状態にする
-                        if let beginEditingWorkItem = self.beginEditingWorkItem {
-                            beginEditingWorkItem.cancel()
+                        if let beginSearchingWorkItem = self.beginSearchingWorkItem {
+                            beginSearchingWorkItem.cancel()
                         }
-                        self.beginEditingWorkItem = DispatchWorkItem { [weak self] in
+                        self.beginSearchingWorkItem = DispatchWorkItem { [weak self] in
                             guard let `self` = self else { return }
-                            self.viewModel.beginEditingHeaderViewDataModel()
-                            self.beginEditingWorkItem = nil
+                            self.viewModel.beginSearching()
+                            self.beginSearchingWorkItem = nil
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: self.beginEditingWorkItem!)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: self.beginSearchingWorkItem!)
                     } else {
                         if let url = self.viewModel.currentUrl {
                             _ = newWv.load(urlStr: url)
@@ -244,15 +244,15 @@ class BaseView: UIView {
                 self.webViews.append(newWv)
                 if self.viewModel.currentUrl.isEmpty {
                     // 編集状態にする
-                    if let beginEditingWorkItem = self.beginEditingWorkItem {
-                        beginEditingWorkItem.cancel()
+                    if let beginSearchingWorkItem = self.beginSearchingWorkItem {
+                        beginSearchingWorkItem.cancel()
                     }
-                    self.beginEditingWorkItem = DispatchWorkItem { [weak self] in
+                    self.beginSearchingWorkItem = DispatchWorkItem { [weak self] in
                         guard let `self` = self else { return }
-                        self.viewModel.beginEditingHeaderViewDataModel()
-                        self.beginEditingWorkItem = nil
+                        self.viewModel.beginSearching()
+                        self.beginSearchingWorkItem = nil
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: self.beginEditingWorkItem!)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: self.beginSearchingWorkItem!)
                 } else {
                     if let url = self.viewModel.currentUrl {
                         _ = newWv.load(urlStr: url)
@@ -363,23 +363,63 @@ class BaseView: UIView {
             }
             .disposed(by: rx.disposeBag)
 
-        // observe load trend
+        // トレンド表示監視
         viewModel.rx_baseViewModelDidLoadTrend
-            .subscribe { [weak self] _ in
+            .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_baseViewModelDidLoadTrend")
                 guard let `self` = self else { return }
-                _ = self.front.load(urlStr: HttpConst.URL.TREND_HOME_URL)
+                if let url = object.element {
+                    _ = self.front.load(urlStr: url)
+                }
                 log.eventOut(chain: "rx_baseViewModelDidLoadTrend")
             }
             .disposed(by: rx.disposeBag)
 
-        // observe load source
-        viewModel.rx_baseViewModelDidLoadSource
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_baseViewModelDidLoadSource")
+        // ソースコード表示監視
+        viewModel.rx_baseViewModelDidLoadSourceCode
+            .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_baseViewModelDidLoadSourceCode")
                 guard let `self` = self else { return }
-                _ = self.front.load(urlStr: HttpConst.URL.SOURCE_URL)
-                log.eventOut(chain: "rx_baseViewModelDidLoadSource")
+                if let url = object.element {
+                    _ = self.front.load(urlStr: url)
+                }
+                log.eventOut(chain: "rx_baseViewModelDidLoadSourceCode")
+            }
+            .disposed(by: rx.disposeBag)
+
+        // ロードリクエスト監視(favorite)
+        viewModel.rx_baseViewModelDidLoadFavorite
+            .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_baseViewModelDidLoadFavorite")
+                guard let `self` = self else { return }
+                if let url = object.element {
+                    _ = self.front.load(urlStr: url)
+                }
+                log.eventOut(chain: "rx_baseViewModelDidLoadFavorite")
+            }
+            .disposed(by: rx.disposeBag)
+
+        // ロードリクエスト監視(form)
+        viewModel.rx_baseViewModelDidLoadForm
+            .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_baseViewModelDidLoadForm")
+                guard let `self` = self else { return }
+                if let url = object.element {
+                    _ = self.front.load(urlStr: url)
+                }
+                log.eventOut(chain: "rx_baseViewModelDidLoadForm")
+            }
+            .disposed(by: rx.disposeBag)
+
+        // ロードリクエスト監視(form)
+        viewModel.rx_baseViewModelDidLoadHistory
+            .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_baseViewModelDidLoadHistory")
+                guard let `self` = self else { return }
+                if let url = object.element {
+                    _ = self.front.load(urlStr: url)
+                }
+                log.eventOut(chain: "rx_baseViewModelDidLoadHistory")
             }
             .disposed(by: rx.disposeBag)
 

@@ -9,7 +9,8 @@
 import Foundation
 
 final class HeaderFieldViewModel {
-    func executeOperationDataModel(operation: UserOperation, object: String) {
-        OperationDataModel.s.executeOperation(operation: operation, object: object)
+    /// サジェストリクエスト
+    func suggest(word: String) {
+        SuggestUseCase.s.suggest(word: word)
     }
 }

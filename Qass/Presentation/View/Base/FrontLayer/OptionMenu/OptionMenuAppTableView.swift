@@ -90,7 +90,7 @@ extension OptionMenuAppTableView: UITableViewDelegate {
             // TODO: 処理
             break
         case .source:
-            viewModel.executeOperationDataModel(operation: .source)
+            viewModel.loadSource()
         }
         rx_optionMenuAppDidClose.onNext(())
     }

@@ -91,7 +91,7 @@ class HeaderField: UIButton, ShadowView {
                 guard let `self` = self else { return }
                 // 表示している履歴情報の更新
                 if let text = self.textField.text {
-                    self.viewModel.executeOperationDataModel(operation: .suggest, object: text)
+                    self.viewModel.suggest(word: text)
                 }
                 log.eventOut(chain: "rx_editingDidChanged")
             })

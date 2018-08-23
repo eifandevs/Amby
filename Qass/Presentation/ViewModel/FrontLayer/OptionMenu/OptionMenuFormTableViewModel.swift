@@ -39,4 +39,9 @@ final class OptionMenuFormTableViewModel {
     struct Row {
         let data: Form
     }
+
+    /// ロードリクエスト
+    func loadRequest(url: String) {
+        FormUseCase.s.load(url: url)
+    }
 }

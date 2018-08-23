@@ -44,13 +44,13 @@ final class HeaderViewModel {
             return Observable.just(text)
         }
     /// 編集開始通知用RX
-    let rx_headerViewModelDidBeginEditing = HeaderViewDataModel.s.rx_headerViewDataModelDidBeginEditing
+    let rx_headerViewModelDidbeginSearching = SearchUseCase.s.rx_searchUseCaseDidBeginSearching
         .flatMap { forceEditFlg -> Observable<Bool> in
             return Observable.just(forceEditFlg)
         }
 
     /// グレップ開始通知用RX
-    let rx_headerViewModelDidBeginGreping = HeaderViewDataModel.s.rx_headerViewDataModelDidBeginGreping
+    let rx_headerViewModelDidBeginGreping = GrepUseCase.s.rx_grepUseCaseDidBeginGreping
         .flatMap { _ -> Observable<()> in
             return Observable.just(())
         }
@@ -63,26 +63,26 @@ final class HeaderViewModel {
     // MARK: Public Method
 
     func historyBack() {
-        OperationUseCase.s.historyBack()
+        HistoryUseCase.s.goBack()
     }
 
     func historyForward() {
-        OperationUseCase.s.historyForward()
+        HistoryUseCase.s.goForward()
     }
 
-    func searchOperationDataModel(text: String) {
-        OperationDataModel.s.executeOperation(operation: .search, object: text)
+    func loadRequest(text: String) {
+        SearchUseCase.s.load(url: text)
     }
 
-    func grepOperationDataModel(text: String) {
-        OperationDataModel.s.executeOperation(operation: .grep, object: text)
+    func grepRequest(word: String) {
+        GrepUseCase.s.grep(word: word)
     }
 
-    func registerFavoriteDataModel() {
-        FavoriteDataModel.s.update()
+    func updateFavorite() {
+        FavoriteUseCase.s.update()
     }
 
-    func removePageHistoryDataModel() {
-        PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)
+    func remove() {
+        TabUseCase.s.remove()
     }
 }

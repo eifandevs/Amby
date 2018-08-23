@@ -47,7 +47,7 @@ class BaseLayer: UIView {
                 guard let `self` = self else { return }
                 if !self.isHeaderViewEditing {
                     // 自動入力オペ要求
-                    self.viewModel.changeOperationDataModel(operation: .autoFill)
+                    self.viewModel.autoFill()
                 }
                 log.eventOut(chain: "rx_UIKeyboardDidShow")
             }
@@ -118,9 +118,9 @@ class BaseLayer: UIView {
             .disposed(by: rx.disposeBag)
 
         // HeaderView編集開始監視
-        headerView.rx_headerViewDidBeginEditing
+        headerView.rx_headerViewDidbeginSearching
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_headerViewDidBeginEditing")
+                log.eventIn(chain: "rx_headerViewDidbeginSearching")
                 guard let `self` = self else { return }
                 // 履歴検索を行うので、事前に永続化しておく
                 CommonHistoryDataModel.s.store()
@@ -151,7 +151,7 @@ class BaseLayer: UIView {
 
                 self.addSubview(self.searchMenuTableView!)
                 self.searchMenuTableView!.getModelData()
-                log.eventOut(chain: "rx_headerViewDidBeginEditing")
+                log.eventOut(chain: "rx_headerViewDidbeginSearching")
             }
             .disposed(by: rx.disposeBag)
 

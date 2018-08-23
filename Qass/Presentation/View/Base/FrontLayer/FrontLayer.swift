@@ -72,27 +72,27 @@ class FrontLayer: UIView {
                         self.addSubview(self.optionMenu!)
                     }
                 case .close:
-                    self.viewModel.closeCurrentTab()
+                    self.viewModel.close()
                 case .historyBack:
                     self.viewModel.historyBack()
                 case .copy:
-                    self.viewModel.copyPageHistoryDataModel()
+                    self.viewModel.copy()
                 case .search:
-                    self.viewModel.beginEditingHeaderViewDataModel()
+                    self.viewModel.beginSearching()
                 case .add:
-                    self.viewModel.insertPageHistoryDataModel()
+                    self.viewModel.add()
                 case .scrollUp:
-                    self.viewModel.executeOperationDataModel(operation: .scrollUp)
+                    self.viewModel.scrollUp()
                 case .autoScroll:
-                    self.viewModel.executeOperationDataModel(operation: .autoScroll)
+                    self.viewModel.autoScroll()
                 case .historyForward:
                     self.viewModel.historyForward()
                 case .form:
-                    self.viewModel.executeOperationDataModel(operation: .form)
+                    self.viewModel.registerForm()
                 case .favorite:
-                    self.viewModel.registerFavoriteDataModel()
+                    self.viewModel.updateFavorite()
                 case .grep:
-                    self.viewModel.beginGrepingHeaderViewDataModel()
+                    self.viewModel.beginGreping()
                 default:
                     break
                 }

@@ -43,11 +43,7 @@ final class OptionMenuHelpTableViewModel {
     }
 
     /// ヘルプ表示
-    func executeOperationDataModel(indexPath: IndexPath) {
-        let row = getRow(indexPath: indexPath)
-        OperationDataModel.s.executeOperation(operation: .help, object: [
-            self.objectKeySubTitle: row.subTitle,
-            self.objectKeyMessage: row.message
-        ])
+    func openHelpScreen(title: String, message: String) {
+        HelpUseCase.s.open(title: title, message: message)
     }
 }
