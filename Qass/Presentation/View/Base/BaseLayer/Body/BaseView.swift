@@ -1074,16 +1074,6 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             // プログレス更新
             self.viewModel.endRenderingPageHistoryDataModel(context: wv.context)
         })
-
-        // TODO: submit検知
-//        if let form = wv.form {
-//            wv.form = nil
-//            NotificationManager.presentAlert(title: MessageConst.ALERT.FORM_SAVE_TITLE, message: MessageConst.ALERT.FORM_SAVE_MESSAGE, completion: { [weak self] in
-//                guard let `self` = self else { return }
-//                self.viewModel.storeFormDataModel(form: form)
-//
-//            })
-//        }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: Error) {
@@ -1164,13 +1154,6 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             autoScrollTimer.invalidate()
             self.autoScrollTimer = nil
         }
-
-        // TODO: Submit検知
-//        if navigationAction.navigationType == .formSubmitted || navigationAction.navigationType == .formResubmitted {
-//            DispatchQueue.mainSyncSafe {
-//                webView.form = takeForm(webView: webView)
-//            }
-//        }
 
         // 外部アプリ起動要求
         if (url.absoluteString.range(of: AppConst.URL.ITUNES_STORE) != nil) ||
