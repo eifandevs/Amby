@@ -13,25 +13,25 @@ import RxSwift
 final class FooterViewModel {
 
     /// サムネイル追加通知用RX
-    let rx_footerViewModelDidAppendThumbnail = FooterUseCase.s.rx_footerUseCaseDidAppendThumbnail
+    let rx_footerViewModelDidAppendThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidAppendThumbnail
         .flatMap { pageHistory -> Observable<PageHistory> in
             return Observable.just(pageHistory)
         }
 
     /// サムネイル追加用RX
-    let rx_footerViewModelDidInsertThumbnail = FooterUseCase.s.rx_footerUseCaseDidInsertThumbnail
+    let rx_footerViewModelDidInsertThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidInsertThumbnail
         .flatMap { object -> Observable<(at: Int, pageHistory: PageHistory)> in
             return Observable.just((at: object.at, pageHistory: object.pageHistory))
         }
 
     /// サムネイル変更通知用RX
-    let rx_footerViewModelDidChangeThumbnail = FooterUseCase.s.rx_footerUseCaseDidChangeThumbnail
+    let rx_footerViewModelDidChangeThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidChangeThumbnail
         .flatMap { context -> Observable<String> in
             return Observable.just(context)
         }
 
     /// サムネイル削除用RX
-    let rx_footerViewModelDidRemoveThumbnail = FooterUseCase.s.rx_footerUseCaseDidRemoveThumbnail
+    let rx_footerViewModelDidRemoveThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidRemoveThumbnail
         .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
             // 実データの削除
             ThumbnailDataModel.s.delete(context: object.deleteContext)

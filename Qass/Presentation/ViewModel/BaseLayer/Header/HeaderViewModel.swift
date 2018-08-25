@@ -12,7 +12,7 @@ import RxSwift
 
 final class HeaderViewModel {
     /// プログレス更新通知用RX
-    let rx_headerViewModelDidChangeProgress = HeaderUseCase.s.rx_HeaderUseCaseDidChangeProgress
+    let rx_headerViewModelDidChangeProgress = ProgressUseCase.s.rx_progressUseCaseDidChangeProgress
         .flatMap { progress -> Observable<CGFloat> in
             return Observable.just(progress)
         }
@@ -22,7 +22,7 @@ final class HeaderViewModel {
             return Observable.just(flag)
         }
     /// テキストフィールド更新通知用RX
-    let rx_headerViewModelDidChangeField = HeaderUseCase.s.rx_HeaderUseCaseDidChangeField
+    let rx_headerViewModelDidChangeField = ProgressUseCase.s.rx_progressUseCaseDidChangeField
         .flatMap { text -> Observable<String> in
             return Observable.just(text)
         }

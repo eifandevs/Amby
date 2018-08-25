@@ -281,8 +281,8 @@
 		A112E967212EDCC600320048 /* TabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E965212EDCC600320048 /* TabUseCase.swift */; };
 		A112E969212EDCDE00320048 /* TrendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E968212EDCDE00320048 /* TrendUseCase.swift */; };
 		A112E96A212EDCDE00320048 /* TrendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E968212EDCDE00320048 /* TrendUseCase.swift */; };
-		A112E96C21318F2600320048 /* HeaderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E96B21318F2600320048 /* HeaderUseCase.swift */; };
-		A112E96D21318F2600320048 /* HeaderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E96B21318F2600320048 /* HeaderUseCase.swift */; };
+		A112E96C21318F2600320048 /* ProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E96B21318F2600320048 /* ProgressUseCase.swift */; };
+		A112E96D21318F2600320048 /* ProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E96B21318F2600320048 /* ProgressUseCase.swift */; };
 		A112E96F21318FDF00320048 /* FooterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E96E21318FDF00320048 /* FooterUseCase.swift */; };
 		A112E97021318FDF00320048 /* FooterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E96E21318FDF00320048 /* FooterUseCase.swift */; };
 		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
@@ -586,7 +586,7 @@
 		A112E962212EDC9800320048 /* SuggestUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestUseCase.swift; sourceTree = "<group>"; };
 		A112E965212EDCC600320048 /* TabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabUseCase.swift; sourceTree = "<group>"; };
 		A112E968212EDCDE00320048 /* TrendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendUseCase.swift; sourceTree = "<group>"; };
-		A112E96B21318F2600320048 /* HeaderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderUseCase.swift; sourceTree = "<group>"; };
+		A112E96B21318F2600320048 /* ProgressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressUseCase.swift; sourceTree = "<group>"; };
 		A112E96E21318FDF00320048 /* FooterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterUseCase.swift; sourceTree = "<group>"; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
@@ -1450,7 +1450,7 @@
 				A112E962212EDC9800320048 /* SuggestUseCase.swift */,
 				A112E965212EDCC600320048 /* TabUseCase.swift */,
 				A112E968212EDCDE00320048 /* TrendUseCase.swift */,
-				A112E96B21318F2600320048 /* HeaderUseCase.swift */,
+				A112E96B21318F2600320048 /* ProgressUseCase.swift */,
 				A112E96E21318FDF00320048 /* FooterUseCase.swift */,
 			);
 			path = UseCase;
@@ -2504,7 +2504,7 @@
 				A1B5F417209D0C8700DF1AE3 /* OptionMenuView.swift in Sources */,
 				A112E826212CD76500320048 /* SearchMenuTableViewModel.swift in Sources */,
 				A112E88C212CD76500320048 /* OptionMenuHelpTableViewCell.swift in Sources */,
-				A112E96D21318F2600320048 /* HeaderUseCase.swift in Sources */,
+				A112E96D21318F2600320048 /* ProgressUseCase.swift in Sources */,
 				A112E876212CD76500320048 /* CircleMenuItem.swift in Sources */,
 				A112E81E212CD76500320048 /* OptionMenuAppTableViewModel.swift in Sources */,
 				A112E901212CD7D100320048 /* Form.swift in Sources */,
@@ -2659,7 +2659,7 @@
 				A1903052209CF978004F1EA5 /* OptionMenuView.swift in Sources */,
 				A112E825212CD76500320048 /* SearchMenuTableViewModel.swift in Sources */,
 				A112E88B212CD76500320048 /* OptionMenuHelpTableViewCell.swift in Sources */,
-				A112E96C21318F2600320048 /* HeaderUseCase.swift in Sources */,
+				A112E96C21318F2600320048 /* ProgressUseCase.swift in Sources */,
 				A112E875212CD76500320048 /* CircleMenuItem.swift in Sources */,
 				A112E81D212CD76500320048 /* OptionMenuAppTableViewModel.swift in Sources */,
 				A112E900212CD7D100320048 /* Form.swift in Sources */,

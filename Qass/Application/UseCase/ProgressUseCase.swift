@@ -1,5 +1,5 @@
 //
-//  HeaderUseCase.swift
+//  ProgressUseCase.swift
 //  Qass
 //
 //  Created by tenma on 2018/08/25.
@@ -11,12 +11,12 @@ import RxCocoa
 import RxSwift
 
 /// ヘッダーユースケース
-final class HeaderUseCase {
+final class ProgressUseCase {
 
-    static let s = HeaderUseCase()
+    static let s = ProgressUseCase()
 
     /// プログレス更新通知用RX
-    let rx_HeaderUseCaseDidChangeProgress = Observable
+    let rx_progressUseCaseDidChangeProgress = Observable
         .merge([
             HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateProgress,
             NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) }
@@ -26,7 +26,7 @@ final class HeaderUseCase {
     }
 
     /// テキストフィールド更新通知用RX
-    let rx_HeaderUseCaseDidChangeField = HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateText
+    let rx_progressUseCaseDidChangeField = HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateText
         .flatMap { text -> Observable<String> in
             return Observable.just(text)
     }
