@@ -13,25 +13,25 @@ import RxSwift
 final class FooterViewModel {
 
     /// サムネイル追加通知用RX
-    let rx_footerViewModelDidAppendThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
+    let rx_footerViewModelDidAppendThumbnail = FooterUseCase.s.rx_footerUseCaseDidAppendThumbnail
         .flatMap { pageHistory -> Observable<PageHistory> in
             return Observable.just(pageHistory)
         }
 
     /// サムネイル追加用RX
-    let rx_footerViewModelDidInsertThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert
+    let rx_footerViewModelDidInsertThumbnail = FooterUseCase.s.rx_footerUseCaseDidInsertThumbnail
         .flatMap { object -> Observable<(at: Int, pageHistory: PageHistory)> in
             return Observable.just((at: object.at, pageHistory: object.pageHistory))
         }
 
     /// サムネイル変更通知用RX
-    let rx_footerViewModelDidChangeThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange
+    let rx_footerViewModelDidChangeThumbnail = FooterUseCase.s.rx_footerUseCaseDidChangeThumbnail
         .flatMap { context -> Observable<String> in
             return Observable.just(context)
         }
 
     /// サムネイル削除用RX
-    let rx_footerViewModelDidRemoveThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
+    let rx_footerViewModelDidRemoveThumbnail = FooterUseCase.s.rx_footerUseCaseDidRemoveThumbnail
         .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
             // 実データの削除
             ThumbnailDataModel.s.delete(context: object.deleteContext)
@@ -39,28 +39,15 @@ final class FooterViewModel {
         }
 
     /// ローディング開始通知用RX
-    let rx_footerViewModelDidStartLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidStartLoading
+    let rx_footerViewModelDidStartLoading = TabUseCase.s.rx_tabUseCaseDidStartLoading
         .flatMap { context -> Observable<String> in
             return Observable.just(context)
         }
 
     /// ローディング終了通知用RX
-    let rx_footerViewModelDidEndLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidEndRendering
+    let rx_footerViewModelDidEndLoading = TabUseCase.s.rx_tabUseCaseDidEndLoading
         .flatMap { context -> Observable<(context: String, title: String)> in
-            if let isLoading = PageHistoryDataModel.s.getIsLoading(context: context) {
-                if !isLoading {
-                    // When loading is completed and loading has started while saving thumbnails, skip
-                    if let pageHistory = PageHistoryDataModel.s.getHistory(context: context) {
-                        return Observable.just((context: context, title: pageHistory.title))
-                    } else {
-                        return Observable.empty()
-                    }
-                } else {
-                    log.warning("start loading while saving thumbnails.")
-                }
-            }
-
-            return Observable.empty()
+            return Observable.just(context)
         }
 
     /// 現在位置

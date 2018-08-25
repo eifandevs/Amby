@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-/// WebKVOユースケース
+/// ヘッダーユースケース
 final class HeaderUseCase {
 
     static let s = HeaderUseCase()

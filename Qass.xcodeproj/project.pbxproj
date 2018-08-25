@@ -283,6 +283,8 @@
 		A112E96A212EDCDE00320048 /* TrendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E968212EDCDE00320048 /* TrendUseCase.swift */; };
 		A112E96C21318F2600320048 /* HeaderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E96B21318F2600320048 /* HeaderUseCase.swift */; };
 		A112E96D21318F2600320048 /* HeaderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E96B21318F2600320048 /* HeaderUseCase.swift */; };
+		A112E96F21318FDF00320048 /* FooterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E96E21318FDF00320048 /* FooterUseCase.swift */; };
+		A112E97021318FDF00320048 /* FooterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E96E21318FDF00320048 /* FooterUseCase.swift */; };
 		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9820CE95D300146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
@@ -585,6 +587,7 @@
 		A112E965212EDCC600320048 /* TabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabUseCase.swift; sourceTree = "<group>"; };
 		A112E968212EDCDE00320048 /* TrendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendUseCase.swift; sourceTree = "<group>"; };
 		A112E96B21318F2600320048 /* HeaderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderUseCase.swift; sourceTree = "<group>"; };
+		A112E96E21318FDF00320048 /* FooterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterUseCase.swift; sourceTree = "<group>"; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
@@ -1448,6 +1451,7 @@
 				A112E965212EDCC600320048 /* TabUseCase.swift */,
 				A112E968212EDCDE00320048 /* TrendUseCase.swift */,
 				A112E96B21318F2600320048 /* HeaderUseCase.swift */,
+				A112E96E21318FDF00320048 /* FooterUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -2484,6 +2488,7 @@
 				A112E938212D7B8D00320048 /* EnvDataModel.swift in Sources */,
 				A112E961212EDB9200320048 /* SourceCodeUseCase.swift in Sources */,
 				A1B5F411209D0C8700DF1AE3 /* MessageConst.swift in Sources */,
+				A112E97021318FDF00320048 /* FooterUseCase.swift in Sources */,
 				A1B5F412209D0C8700DF1AE3 /* R.generated.swift in Sources */,
 				A112E888212CD76500320048 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A112E8D4212CD76500320048 /* EncryptHelper.swift in Sources */,
@@ -2638,6 +2643,7 @@
 				A112E937212D7B8D00320048 /* EnvDataModel.swift in Sources */,
 				A112E960212EDB9200320048 /* SourceCodeUseCase.swift in Sources */,
 				A190301B209CF977004F1EA5 /* MessageConst.swift in Sources */,
+				A112E96F21318FDF00320048 /* FooterUseCase.swift in Sources */,
 				A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */,
 				A112E887212CD76500320048 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A112E8D3212CD76500320048 /* EncryptHelper.swift in Sources */,
