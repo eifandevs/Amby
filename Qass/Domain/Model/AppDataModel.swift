@@ -32,6 +32,8 @@ final class AppDataModel {
         return repository.searchHistorySaveCount
     }
 
+    private init() {}
+
     /// ユーザーデフォルト初期値設定
     func setup() {
         repository.setup()

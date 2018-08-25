@@ -18,6 +18,8 @@ final class ReportUseCase {
     /// レポート画面表示通知用RX
     let rx_reportUseCaseDidRequestPresentReportScreen = PublishSubject<()>()
 
+    private init() {}
+
     /// レポート画面表示
     func open() {
         rx_reportUseCaseDidRequestPresentReportScreen.onNext(())

@@ -68,8 +68,7 @@ final class PageHistoryDataModel {
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
 
-    private init() {
-    }
+    private init() {}
 
     /// 初期化
     func initialize() {

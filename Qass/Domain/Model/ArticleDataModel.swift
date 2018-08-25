@@ -21,6 +21,8 @@ final class ArticleDataModel {
     static let s = ArticleDataModel()
     private let disposeBag = DisposeBag()
 
+    private init() {}
+
     /// 記事取得
     func get() {
         /// TODO: 前回の取得から3時間経過していたら取得する

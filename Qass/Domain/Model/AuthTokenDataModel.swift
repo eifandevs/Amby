@@ -40,5 +40,6 @@ final class AuthTokenDataModel {
         } else {
             keychainIvToken = String.getRandomStringWithLength(length: 16)
             repository.save(key: AppConst.KEY.ENCRYPT_IV_TOKEN, value: keychainIvToken)
-    } }
+        }
+    }
 }

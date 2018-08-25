@@ -26,6 +26,8 @@ final class HeaderViewDataModel {
     // header text
     private var headerFieldText = ""
 
+    private init() {}
+
     /// update header progress
     func updateProgress(progress: CGFloat) {
         self.progress = progress

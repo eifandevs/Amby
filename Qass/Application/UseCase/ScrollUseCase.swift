@@ -20,6 +20,8 @@ final class ScrollUseCase {
     /// 自動スクロール通知用RX
     let rx_scrollUseCaseDidRequestAutoScroll = PublishSubject<()>()
 
+    private init() {}
+
     /// スクロールアップ
     func scrollUp() {
         rx_scrollUseCaseDidRequestScrollUp.onNext(())

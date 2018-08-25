@@ -1,5 +1,5 @@
 //
-//  TabUseCase.swift
+//  PageUseCase.swift
 //  Qass
 //
 //  Created by tenma on 2018/08/23.
@@ -10,19 +10,19 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-/// タブユースケース
-final class TabUseCase {
+/// ページユースケース
+final class PageUseCase {
 
-    static let s = TabUseCase()
+    static let s = PageUseCase()
 
     /// ローディング開始通知用RX
-    let rx_tabUseCaseDidStartLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidStartLoading
+    let rx_pageUseCaseDidStartLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidStartLoading
         .flatMap { context -> Observable<String> in
             return Observable.just(context)
     }
 
     /// ローディング終了通知用RX
-    let rx_tabUseCaseDidEndLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidEndRendering
+    let rx_pageUseCaseDidEndLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidEndRendering
         .flatMap { context -> Observable<(context: String, title: String)> in
             if let isLoading = PageHistoryDataModel.s.getIsLoading(context: context) {
                 if !isLoading {
@@ -39,6 +39,8 @@ final class TabUseCase {
 
             return Observable.empty()
     }
+
+    private init() {}
 
     /// 現在のタブをクローズ
     func close() {

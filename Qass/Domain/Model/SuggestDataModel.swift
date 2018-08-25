@@ -19,6 +19,8 @@ final class SuggestDataModel {
     static let s = SuggestDataModel()
     private let disposeBag = DisposeBag()
 
+    private init() {}
+
     func get(token: String) {
         let repository = ApiRepository<Google>()
 

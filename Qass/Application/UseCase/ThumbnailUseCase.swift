@@ -40,4 +40,7 @@ final class ThumbnailUseCase {
             ThumbnailDataModel.s.delete(context: object.deleteContext)
             return Observable.just(object)
     }
+
+    private init() {}
+
 }

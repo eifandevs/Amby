@@ -22,6 +22,8 @@ final class FormUseCase {
     /// ロードリクエスト通知用RX
     let rx_formUseCaseDidRequestLoad = PublishSubject<String>()
 
+    private init() {}
+
     /// フォーム登録
     func registerForm() {
         rx_formUseCaseDidRequestRegisterForm.onNext(())

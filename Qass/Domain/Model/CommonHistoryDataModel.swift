@@ -27,6 +27,8 @@ final class CommonHistoryDataModel {
     // 通知センター
     private let center = NotificationCenter.default
 
+    private init() {}
+
     /// insert with URL
     func insert(url: URL?, title: String?) {
         insert(url: url, title: title, date: Date())

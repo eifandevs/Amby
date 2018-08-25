@@ -15,6 +15,8 @@ final class FormDataModel {
     /// db repository
     let repository = DBRepository()
 
+    private init() {}
+
     /// insert forms
     func insert(forms: [Form]) {
         repository.insert(data: forms)

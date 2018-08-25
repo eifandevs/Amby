@@ -40,4 +40,7 @@ final class ResourceDataModel {
     var highlightScript: Foundation.URL {
         return ResourceRepository().highlightScript
     }
+
+    private init() {}
+
 }

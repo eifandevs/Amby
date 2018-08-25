@@ -18,6 +18,8 @@ final class SourceCodeUseCase {
     /// ロードリクエスト通知用RX
     let rx_sourceCodeUseCaseDidRequestLoad = PublishSubject<String>()
 
+    private init() {}
+
     /// ソースコードページ表示
     func load() {
         rx_sourceCodeUseCaseDidRequestLoad.onNext(HttpConst.URL.SOURCE_URL)

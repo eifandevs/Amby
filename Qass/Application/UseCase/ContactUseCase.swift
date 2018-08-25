@@ -18,6 +18,8 @@ final class ContactUseCase {
     /// コンタクト画面表示通知用RX
     let rx_operationUseCaseDidRequestPresentContactScreen = PublishSubject<()>()
 
+    private init() {}
+
     /// コンタクト画面表示
     func open() {
         rx_operationUseCaseDidRequestPresentContactScreen.onNext(())

@@ -18,6 +18,8 @@ final class HelpUseCase {
     /// ヘルプ画面表示通知用RX
     let rx_helpUseCaseDidRequestPresentHelpScreen = PublishSubject<(title: String, message: String)>()
 
+    private init() {}
+
     /// ヘルプ画面表示
     func open(title: String, message: String) {
         rx_helpUseCaseDidRequestPresentHelpScreen.onNext((title: title, message: message))

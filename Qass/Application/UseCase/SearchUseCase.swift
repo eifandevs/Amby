@@ -20,6 +20,8 @@ final class SearchUseCase {
     /// ロードリクエスト通知用RX
     let rx_searchUseCaseDidRequestLoad = PublishSubject<String>()
 
+    private init() {}
+
     /// ロードリクエスト
     func load(url: String) {
         rx_searchUseCaseDidRequestLoad.onNext(url)

@@ -18,6 +18,8 @@ final class TrendUseCase {
     /// ロードリクエスト通知用RX
     let rx_trendUseCaseDidRequestLoad = PublishSubject<String>()
 
+    private init() {}
+
     /// トレンドページ表示
     func load() {
         rx_trendUseCaseDidRequestLoad.onNext(HttpConst.URL.TREND_HOME_URL)

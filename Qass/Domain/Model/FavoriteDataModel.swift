@@ -24,6 +24,8 @@ final class FavoriteDataModel {
     /// DBプロバイダー
     let repository = DBRepository()
 
+    private init() {}
+
     func insert(favorites: [Favorite]) {
         repository.insert(data: favorites)
         rx_favoriteDataModelDidInsert.onNext(favorites)

@@ -20,6 +20,8 @@ final class GrepUseCase {
     /// グレップリクエスト通知用RX
     let rx_grepUseCaseDidRequestGrep = PublishSubject<String>()
 
+    private init() {}
+
     /// グレップ開始
     func begin() {
         rx_grepUseCaseDidBeginGreping.onNext(())

@@ -39,13 +39,13 @@ final class FooterViewModel {
         }
 
     /// ローディング開始通知用RX
-    let rx_footerViewModelDidStartLoading = TabUseCase.s.rx_tabUseCaseDidStartLoading
+    let rx_footerViewModelDidStartLoading = PageUseCase.s.rx_pageUseCaseDidStartLoading
         .flatMap { context -> Observable<String> in
             return Observable.just(context)
         }
 
     /// ローディング終了通知用RX
-    let rx_footerViewModelDidEndLoading = TabUseCase.s.rx_tabUseCaseDidEndLoading
+    let rx_footerViewModelDidEndLoading = PageUseCase.s.rx_pageUseCaseDidEndLoading
         .flatMap { context -> Observable<(context: String, title: String)> in
             return Observable.just(context)
         }

@@ -37,6 +37,8 @@ final class FavoriteUseCase {
             }
     }
 
+    private init() {}
+
     /// お気に入り更新
     func update() {
         FavoriteDataModel.s.update()

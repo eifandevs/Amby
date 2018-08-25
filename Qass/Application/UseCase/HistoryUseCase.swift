@@ -22,6 +22,8 @@ final class HistoryUseCase {
     /// ロードリクエスト通知用RX
     let rx_historyUseCaseDidRequestLoad = PublishSubject<String>()
 
+    private init() {}
+
     /// ヒストリーバック
     func goBack() {
         rx_historyUseCaseDidRequestHistoryBack.onNext(())

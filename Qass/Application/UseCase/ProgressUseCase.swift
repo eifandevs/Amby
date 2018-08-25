@@ -30,4 +30,7 @@ final class ProgressUseCase {
         .flatMap { text -> Observable<String> in
             return Observable.just(text)
     }
+
+    private init() {}
+
 }

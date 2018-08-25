@@ -18,6 +18,8 @@ final class SearchHistoryDataModel {
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
 
+    private init() {}
+
     /// 保存済みリスト取得
     func getList() -> [String] {
         if let list = localStorageRepository.getList(.searchHistory(resource: nil)) {

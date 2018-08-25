@@ -18,6 +18,8 @@ final class SuggestUseCase {
     /// サジェストリクエスト通知用RX
     let rx_suggestUseCaseDidRequestSuggest = PublishSubject<String>()
 
+    private init() {}
+
     /// サジェストリクエスト
     func suggest(word: String) {
         rx_suggestUseCaseDidRequestSuggest.onNext(word)
