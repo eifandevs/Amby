@@ -92,10 +92,10 @@ class FrontLayerViewModelTests: XCTestCase {
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
-    func testBeginEditingHeaderViewDataModel() {
+    func testBeginEditingProgressDataModel() {
         weak var expectation = self.expectation(description: #function)
 
-        HeaderViewDataModel.s.rx_headerViewDataModelDidBeginEditing
+        ProgressDataModel.s.rx_progressDataModelDidBeginEditing
             .subscribe { _ in
                 if let expectation = expectation {
                     expectation.fulfill()
@@ -103,7 +103,7 @@ class FrontLayerViewModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        viewModel.beginEditingHeaderViewDataModel()
+        viewModel.beginEditingProgressDataModel()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }

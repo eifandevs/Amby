@@ -261,8 +261,8 @@
 		A112E97F21319C7800320048 /* SearchHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97121319C7700320048 /* SearchHistoryDataModel.swift */; };
 		A112E98021319C7800320048 /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97221319C7700320048 /* SuggestDataModel.swift */; };
 		A112E98121319C7800320048 /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97221319C7700320048 /* SuggestDataModel.swift */; };
-		A112E98221319C7800320048 /* HeaderViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97321319C7700320048 /* HeaderViewDataModel.swift */; };
-		A112E98321319C7800320048 /* HeaderViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97321319C7700320048 /* HeaderViewDataModel.swift */; };
+		A112E98221319C7800320048 /* ProgressDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97321319C7700320048 /* ProgressDataModel.swift */; };
+		A112E98321319C7800320048 /* ProgressDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97321319C7700320048 /* ProgressDataModel.swift */; };
 		A112E98421319C7800320048 /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97421319C7700320048 /* CommonHistoryDataModel.swift */; };
 		A112E98521319C7800320048 /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97421319C7700320048 /* CommonHistoryDataModel.swift */; };
 		A112E98621319C7800320048 /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97521319C7700320048 /* FavoriteDataModel.swift */; };
@@ -574,7 +574,7 @@
 		A112E96E21318FDF00320048 /* ThumbnailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailUseCase.swift; sourceTree = "<group>"; };
 		A112E97121319C7700320048 /* SearchHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModel.swift; sourceTree = "<group>"; };
 		A112E97221319C7700320048 /* SuggestDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestDataModel.swift; sourceTree = "<group>"; };
-		A112E97321319C7700320048 /* HeaderViewDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewDataModel.swift; sourceTree = "<group>"; };
+		A112E97321319C7700320048 /* ProgressDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressDataModel.swift; sourceTree = "<group>"; };
 		A112E97421319C7700320048 /* CommonHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModel.swift; sourceTree = "<group>"; };
 		A112E97521319C7700320048 /* FavoriteDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteDataModel.swift; sourceTree = "<group>"; };
 		A112E97621319C7800320048 /* ResourceDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceDataModel.swift; sourceTree = "<group>"; };
@@ -1308,7 +1308,7 @@
 				A112E97A21319C7800320048 /* EnvDataModel.swift */,
 				A112E97521319C7700320048 /* FavoriteDataModel.swift */,
 				A112E97821319C7800320048 /* FormDataModel.swift */,
-				A112E97321319C7700320048 /* HeaderViewDataModel.swift */,
+				A112E97321319C7700320048 /* ProgressDataModel.swift */,
 				A112E97921319C7800320048 /* PageHistoryDataModel.swift */,
 				A112E97621319C7800320048 /* ResourceDataModel.swift */,
 				A112E97121319C7700320048 /* SearchHistoryDataModel.swift */,
@@ -2362,7 +2362,7 @@
 				A1B5F40E209D0C8700DF1AE3 /* CircleView.swift in Sources */,
 				A112E874212CD76500320048 /* CircleProgress.swift in Sources */,
 				A112E99721319C7800320048 /* AuthTokenDataModel.swift in Sources */,
-				A112E98321319C7800320048 /* HeaderViewDataModel.swift in Sources */,
+				A112E98321319C7800320048 /* ProgressDataModel.swift in Sources */,
 				A1B5F410209D0C8700DF1AE3 /* Float+Extend.swift in Sources */,
 				A112E903212CD7D100320048 /* Favorite.swift in Sources */,
 				A112E89E212CD76500320048 /* EGWebView.swift in Sources */,
@@ -2516,7 +2516,7 @@
 				A1903050209CF978004F1EA5 /* CircleView.swift in Sources */,
 				A112E873212CD76500320048 /* CircleProgress.swift in Sources */,
 				A112E99621319C7800320048 /* AuthTokenDataModel.swift in Sources */,
-				A112E98221319C7800320048 /* HeaderViewDataModel.swift in Sources */,
+				A112E98221319C7800320048 /* ProgressDataModel.swift in Sources */,
 				A190302F209CF977004F1EA5 /* Float+Extend.swift in Sources */,
 				A112E902212CD7D100320048 /* Favorite.swift in Sources */,
 				A112E89D212CD76500320048 /* EGWebView.swift in Sources */,

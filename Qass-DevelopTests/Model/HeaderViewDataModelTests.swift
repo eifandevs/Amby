@@ -1,5 +1,5 @@
 //
-//  HeaderViewDataModelTests.swift
+//  ProgressDataModelTests.swift
 //  Qass-DevelopTests
 //
 //  Created by tenma on 2018/06/16.
@@ -12,7 +12,7 @@ import RxCocoa
 
 @testable import Qass_Develop
 
-class HeaderViewDataModelTests: XCTestCase {
+class ProgressDataModelTests: XCTestCase {
 
     let disposeBag = DisposeBag()
 
@@ -29,7 +29,7 @@ class HeaderViewDataModelTests: XCTestCase {
     func testUpdateProgress() {
         weak var expectation = self.expectation(description: #function)
 
-        HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateProgress
+        ProgressDataModel.s.rx_progressDataModelDidUpdateProgress
             .subscribe { element in
                 if let expectation = expectation {
                     XCTAssertTrue(element.element! == 0.75)
@@ -38,7 +38,7 @@ class HeaderViewDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        HeaderViewDataModel.s.updateProgress(progress: 0.75)
+        ProgressDataModel.s.updateProgress(progress: 0.75)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -46,7 +46,7 @@ class HeaderViewDataModelTests: XCTestCase {
     func testUpdateText() {
         weak var expectation = self.expectation(description: #function)
 
-        HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateText
+        ProgressDataModel.s.rx_progressDataModelDidUpdateText
             .subscribe { element in
                 if let expectation = expectation {
                     XCTAssertTrue(element.element! == #function)
@@ -55,7 +55,7 @@ class HeaderViewDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        HeaderViewDataModel.s.updateText(text: #function)
+        ProgressDataModel.s.updateText(text: #function)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -63,7 +63,7 @@ class HeaderViewDataModelTests: XCTestCase {
     func testBeginEditing() {
         weak var expectation = self.expectation(description: #function)
 
-        HeaderViewDataModel.s.rx_headerViewDataModelDidBeginEditing
+        ProgressDataModel.s.rx_progressDataModelDidBeginEditing
             .subscribe { element in
                 if let expectation = expectation {
                     XCTAssertTrue(element.element!)
@@ -72,7 +72,7 @@ class HeaderViewDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        HeaderViewDataModel.s.beginEditing(forceEditFlg: true)
+        ProgressDataModel.s.beginEditing(forceEditFlg: true)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }

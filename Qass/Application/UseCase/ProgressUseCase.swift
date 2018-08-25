@@ -18,7 +18,7 @@ final class ProgressUseCase {
     /// プログレス更新通知用RX
     let rx_progressUseCaseDidChangeProgress = Observable
         .merge([
-            HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateProgress,
+            ProgressDataModel.s.rx_progressDataModelDidUpdateProgress,
             NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) }
             ])
         .flatMap { progress -> Observable<CGFloat> in
@@ -26,7 +26,7 @@ final class ProgressUseCase {
     }
 
     /// テキストフィールド更新通知用RX
-    let rx_progressUseCaseDidChangeField = HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateText
+    let rx_progressUseCaseDidChangeField = ProgressDataModel.s.rx_progressDataModelDidUpdateText
         .flatMap { text -> Observable<String> in
             return Observable.just(text)
     }

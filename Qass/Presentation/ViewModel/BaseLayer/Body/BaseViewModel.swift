@@ -72,7 +72,7 @@ final class BaseViewModel {
                     return encodedText
                 }
             }()
-            HeaderViewDataModel.s.updateText(text: searchText)
+            ProgressDataModel.s.updateText(text: searchText)
 
             return Observable.just(searchText)
         }
@@ -209,8 +209,8 @@ final class BaseViewModel {
         PageHistoryDataModel.s.endRendering(context: context)
     }
 
-    func updateProgressHeaderViewDataModel(object: CGFloat) {
-        HeaderViewDataModel.s.updateProgress(progress: object)
+    func updateProgressProgressDataModel(object: CGFloat) {
+        ProgressDataModel.s.updateProgress(progress: object)
     }
 
     func insertPageHistoryDataModel(url: String? = nil) {
@@ -271,14 +271,14 @@ final class BaseViewModel {
         return nil
     }
 
-    /// reload HeaderViewDataModel
-    func reloadHeaderViewDataModel() {
-        HeaderViewDataModel.s.reload()
+    /// reload ProgressDataModel
+    func reloadProgressDataModel() {
+        ProgressDataModel.s.reload()
     }
 
-    /// update text in HeaderViewDataModel
-    func updateTextHeaderViewDataModel(text: String) {
-        HeaderViewDataModel.s.updateText(text: text)
+    /// update text in ProgressDataModel
+    func updateTextProgressDataModel(text: String) {
+        ProgressDataModel.s.updateText(text: text)
     }
 
     /// 前WebViewに切り替え

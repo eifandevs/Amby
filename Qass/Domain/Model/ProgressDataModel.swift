@@ -1,5 +1,5 @@
 //
-//  HeaderViewDataModel.swift
+//  ProgressDataModel.swift
 //  Qas
 //
 //  Created by temma on 2017/12/07.
@@ -10,14 +10,14 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-/// ページ共通データモデル
-final class HeaderViewDataModel {
+/// プログレスデータモデル
+final class ProgressDataModel {
     /// プログレス更新通知用RX
-    let rx_headerViewDataModelDidUpdateProgress = PublishSubject<CGFloat>()
+    let rx_progressDataModelDidUpdateProgress = PublishSubject<CGFloat>()
     /// ヘッダーテキストの更新通知用RX
-    let rx_headerViewDataModelDidUpdateText = PublishSubject<String>()
+    let rx_progressDataModelDidUpdateText = PublishSubject<String>()
 
-    static let s = HeaderViewDataModel()
+    static let s = ProgressDataModel()
     let center = NotificationCenter.default
 
     // プログレス
@@ -31,14 +31,14 @@ final class HeaderViewDataModel {
     /// update header progress
     func updateProgress(progress: CGFloat) {
         self.progress = progress
-        rx_headerViewDataModelDidUpdateProgress.onNext(progress)
+        rx_progressDataModelDidUpdateProgress.onNext(progress)
     }
 
     /// update header field text
     func updateText(text: String) {
         if !text.isEmpty && text != headerFieldText {
             headerFieldText = text
-            rx_headerViewDataModelDidUpdateText.onNext(text)
+            rx_progressDataModelDidUpdateText.onNext(text)
         }
     }
 
@@ -47,7 +47,7 @@ final class HeaderViewDataModel {
         if let url = PageHistoryDataModel.s.currentHistory?.url {
             if url != headerFieldText {
                 headerFieldText = url
-                rx_headerViewDataModelDidUpdateText.onNext(url)
+                rx_progressDataModelDidUpdateText.onNext(url)
             }
         }
     }

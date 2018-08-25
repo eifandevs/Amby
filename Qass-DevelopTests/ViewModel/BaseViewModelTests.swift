@@ -129,10 +129,10 @@ class BaseViewModelTests: XCTestCase {
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
-    func testUpdateProgressHeaderViewDataModel() {
+    func testUpdateProgressProgressDataModel() {
         weak var expectation = self.expectation(description: #function)
 
-        HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateProgress
+        ProgressDataModel.s.rx_progressDataModelDidUpdateProgress
             .subscribe { element in
                 if let expectation = expectation {
                     XCTAssert(element.element! == 10.0)
@@ -141,7 +141,7 @@ class BaseViewModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        viewModel.updateProgressHeaderViewDataModel(object: 10.0)
+        viewModel.updateProgressProgressDataModel(object: 10.0)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -183,10 +183,10 @@ class BaseViewModelTests: XCTestCase {
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
-    func testBeginEditingHeaderViewDataModel() {
+    func testBeginEditingProgressDataModel() {
         weak var expectation = self.expectation(description: #function)
 
-        HeaderViewDataModel.s.rx_headerViewDataModelDidBeginEditing
+        ProgressDataModel.s.rx_progressDataModelDidBeginEditing
             .subscribe { element in
                 if let expectation = expectation {
                     XCTAssert(element.element! == false)
@@ -195,7 +195,7 @@ class BaseViewModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        viewModel.beginEditingHeaderViewDataModel()
+        viewModel.beginEditingProgressDataModel()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -236,12 +236,12 @@ class BaseViewModelTests: XCTestCase {
         XCTAssertNotNil(viewModel.getNextCapture())
     }
 
-    func testReloadHeaderViewDataModel() {
-        HeaderViewDataModel.s.reload()
+    func testReloadProgressDataModel() {
+        ProgressDataModel.s.reload()
     }
 
-    func testUpdateTextHeaderViewDataModel() {
-        HeaderViewDataModel.s.updateText(text: "https://abc/")
+    func testUpdateTextProgressDataModel() {
+        ProgressDataModel.s.updateText(text: "https://abc/")
     }
 
     func testGoBackPageHistoryDataModel() {

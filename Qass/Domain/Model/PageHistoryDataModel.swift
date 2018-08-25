@@ -219,7 +219,7 @@ final class PageHistoryDataModel {
 
         // if change front context, reload header view
         if isChanged && context == currentContext {
-            HeaderViewDataModel.s.updateText(text: url)
+            ProgressDataModel.s.updateText(text: url)
             FavoriteDataModel.s.reload()
         }
     }

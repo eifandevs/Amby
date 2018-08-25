@@ -54,7 +54,7 @@ class BaseView: UIView {
                 // プライベートモードならデザインを変更する
                 rx_baseViewDidChangeFront.onNext(())
                 // ヘッダーフィールドを更新する
-                viewModel.reloadHeaderViewDataModel()
+                viewModel.reloadProgressDataModel()
                 // 空ページの場合は、編集状態にする
                 if viewModel.currentUrl.isEmpty {
                     if let beginSearchingWorkItem = self.beginSearchingWorkItem {
@@ -175,7 +175,7 @@ class BaseView: UIView {
                     if let front = self.front {
                         front.removeObserverEstimatedProgress(observer: self)
                     }
-                    self.viewModel.updateProgressHeaderViewDataModel(object: 0)
+                    self.viewModel.updateProgressProgressDataModel(object: 0)
                     let newWv = self.createWebView(context: self.viewModel.currentContext)
                     self.webViews.insert(newWv, at: at)
                     if self.viewModel.currentUrl.isEmpty {
@@ -239,7 +239,7 @@ class BaseView: UIView {
                 if let front = self.front {
                     front.removeObserverEstimatedProgress(observer: self)
                 }
-                self.viewModel.updateProgressHeaderViewDataModel(object: 0)
+                self.viewModel.updateProgressProgressDataModel(object: 0)
                 let newWv = self.createWebView(context: self.viewModel.currentContext)
                 self.webViews.append(newWv)
                 if self.viewModel.currentUrl.isEmpty {
@@ -287,12 +287,12 @@ class BaseView: UIView {
                 guard let `self` = self else { return }
                 if let currentLocation = self.viewModel.currentLocation {
                     self.front.removeObserverEstimatedProgress(observer: self)
-                    self.viewModel.updateProgressHeaderViewDataModel(object: 0)
+                    self.viewModel.updateProgressProgressDataModel(object: 0)
 
                     if let current = self.webViews[currentLocation] {
                         current.observeEstimatedProgress(observer: self)
                         if current.isLoading == true {
-                            self.viewModel.updateProgressHeaderViewDataModel(object: CGFloat(current.estimatedProgress))
+                            self.viewModel.updateProgressProgressDataModel(object: CGFloat(current.estimatedProgress))
                         }
                         self.front = current
                         self.bringSubview(toFront: current)
@@ -320,7 +320,7 @@ class BaseView: UIView {
                         let isFrontDelete = object.deleteContext == self.front.context
                         if isFrontDelete {
                             webView.removeObserverEstimatedProgress(observer: self)
-                            self.viewModel.updateProgressHeaderViewDataModel(object: 0)
+                            self.viewModel.updateProgressProgressDataModel(object: 0)
                             self.front = nil
                         }
 
@@ -542,7 +542,7 @@ class BaseView: UIView {
             if keyPath == "estimatedProgress" && contextPtr.pointee == front.context {
                 if let change = change, let progress = change[NSKeyValueChangeKey.newKey] as? CGFloat {
                     // estimatedProgressが変更されたときに、プログレスバーの値を変更する。
-                    viewModel.updateProgressHeaderViewDataModel(object: progress)
+                    viewModel.updateProgressProgressDataModel(object: progress)
                 }
             } else if keyPath == "title" {
                 log.debug("receive title change.")
@@ -697,7 +697,7 @@ class BaseView: UIView {
         target.observeUrl(observer: self)
 
         if target.isLoading == true {
-            viewModel.updateProgressHeaderViewDataModel(object: CGFloat(target.estimatedProgress))
+            viewModel.updateProgressProgressDataModel(object: CGFloat(target.estimatedProgress))
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = target.isLoading
     }
@@ -1037,7 +1037,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             // フロントwebviewの通知なので、プログレスを更新する
             // インジゲーターの表示、非表示をきりかえる。
             viewModel.startLoadingPageHistoryDataModel(context: wv.context)
-            viewModel.updateProgressHeaderViewDataModel(object: CGFloat(0.1))
+            viewModel.updateProgressProgressDataModel(object: CGFloat(0.1))
             // くるくるを更新する
             updateNetworkActivityIndicator()
         } else {
@@ -1064,7 +1064,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         // プログレス更新
         if wv.context == front.context {
             isDoneAutoFill = false
-            viewModel.updateProgressHeaderViewDataModel(object: 1.0)
+            viewModel.updateProgressProgressDataModel(object: 1.0)
         }
         updateNetworkActivityIndicator()
         viewModel.endLoadingPageHistoryDataModel(context: wv.context)
@@ -1090,7 +1090,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         DispatchQueue.mainSyncSafe {
             // プログレス更新
             if wv.context == front.context {
-                viewModel.updateProgressHeaderViewDataModel(object: 0)
+                viewModel.updateProgressProgressDataModel(object: 0)
             }
             self.updateNetworkActivityIndicator()
             self.viewModel.endLoadingPageHistoryDataModel(context: wv.context)
