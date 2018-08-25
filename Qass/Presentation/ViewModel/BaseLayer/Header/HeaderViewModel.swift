@@ -12,34 +12,17 @@ import RxSwift
 
 final class HeaderViewModel {
     /// プログレス更新通知用RX
-    let rx_headerViewModelDidChangeProgress = Observable
-        .merge([
-            HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateProgress,
-            NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) }
-        ])
+    let rx_headerViewModelDidChangeProgress = HeaderUseCase.s.rx_HeaderUseCaseDidChangeProgress
         .flatMap { progress -> Observable<CGFloat> in
             return Observable.just(progress)
         }
     /// お気に入り変更通知用RX
-    let rx_headerViewModelDidChangeFavorite = Observable
-        .merge([
-            PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend.flatMap { _ in Observable.just(()) },
-            PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange.flatMap { _ in Observable.just(()) },
-            PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert.flatMap { _ in Observable.just(()) },
-            PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove.flatMap { _ in Observable.just(()) },
-            FavoriteDataModel.s.rx_favoriteDataModelDidInsert.flatMap { _ in Observable.just(()) },
-            FavoriteDataModel.s.rx_favoriteDataModelDidRemove,
-            FavoriteDataModel.s.rx_favoriteDataModelDidReload.flatMap { _ in Observable.just(()) }
-        ])
-        .flatMap { _ -> Observable<Bool> in
-            if let currentHistory = PageHistoryDataModel.s.currentHistory, !currentHistory.url.isEmpty {
-                return Observable.just(FavoriteDataModel.s.select().map({ $0.url }).contains(currentHistory.url))
-            } else {
-                return Observable.just(false)
-            }
+    let rx_headerViewModelDidChangeFavorite = FavoriteUseCase.s.rx_favoriteUseCaseDidChangeFavorite
+        .flatMap { flag -> Observable<Bool> in
+            return Observable.just(flag)
         }
     /// テキストフィールド更新通知用RX
-    let rx_headerViewModelDidChangeField = HeaderViewDataModel.s.rx_headerViewDataModelDidUpdateText
+    let rx_headerViewModelDidChangeField = HeaderUseCase.s.rx_HeaderUseCaseDidChangeField
         .flatMap { text -> Observable<String> in
             return Observable.just(text)
         }
