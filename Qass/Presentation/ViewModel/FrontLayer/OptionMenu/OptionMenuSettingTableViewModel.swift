@@ -93,50 +93,50 @@ final class OptionMenuSettingTableViewModel {
     }
 
     /// 閲覧履歴削除
-    func deleteCommonHistoryDataModel() {
+    func deleteHistory() {
         NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_COMMON_HISTORY, completion: {
-            CommonHistoryDataModel.s.delete()
-        }
+                HistoryUseCase.s.delete()
+            }
         )
     }
 
     /// お気に入り削除
-    func deleteFavoriteDataModel() {
+    func deleteFavorite() {
         NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_BOOK_MARK, completion: {
-            FavoriteDataModel.s.delete()
-        }
+                FavoriteUseCase.s.delete()
+            }
         )
     }
 
     /// フォーム削除
-    func deleteFormDataModel() {
+    func deleteForm() {
         NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_FORM, completion: {
-            FormDataModel.s.delete()
-        }
+                FormUseCase.s.delete()
+            }
         )
     }
 
     /// 検索履歴削除
-    func deleteSearchHistoryDataModel() {
+    func deleteSearchHistory() {
         NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SEARCH_HISTORY, completion: {
-            SearchHistoryDataModel.s.delete()
-        }
+                SearchUseCase.s.delete()
+            }
         )
     }
 
     /// クッキー削除
     func deleteCookies() {
         NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_COOKIES, completion: {
-            CacheHelper.deleteCookies()
-        }
+                CacheUseCase.s.deleteCookies()
+            }
         )
     }
 
     /// キャッシュ削除
     func deleteCaches() {
         NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SITE_DATA, completion: {
-            CacheHelper.deleteCaches()
-        }
+                CacheUseCase.s.deleteCaches()
+            }
         )
     }
 

@@ -159,7 +159,7 @@ class FooterView: UIView, ShadowView {
                     let existIndicator = targetThumbnail.subviews.filter { (view) -> Bool in return view is NVActivityIndicatorView }.count > 0
                     if existIndicator {
                         DispatchQueue.mainSyncSafe { [weak self] in
-                            guard let _ = self else { return }
+                            guard let `self` = self else { return }
                             targetThumbnail.subviews.forEach({ v in
                                 if NSStringFromClass(type(of: v)) == "NVActivityIndicatorView.NVActivityIndicatorView" {
                                     if let indicator = v as? NVActivityIndicatorView {
@@ -170,7 +170,7 @@ class FooterView: UIView, ShadowView {
                                 }
                             })
                             targetThumbnail.setThumbnailTitle(title: tuple.title)
-                            if let image = ThumbnailDataModel.s.getThumbnail(context: tuple.context) {
+                            if let image = self.viewModel.getThumbnail(context: tuple.context) {
                                 targetThumbnail.setImage(nil, for: .normal)
                                 targetThumbnail.setBackgroundImage(image, for: .normal)
                             } else {
@@ -214,7 +214,7 @@ class FooterView: UIView, ShadowView {
             let btn = append(context: $0.context)
             if !$0.context.isEmpty {
                 // コンテキストが存在しないのは、新規作成後にwebview作らずにアプリを終了した場合
-                if let image = ThumbnailDataModel.s.getThumbnail(context: $0.context) {
+                if let image = viewModel.getThumbnail(context: $0.context) {
                     btn.setImage(nil, for: .normal)
                     btn.setBackgroundImage(image, for: .normal)
                     btn.setThumbnailTitle(title: $0.title)

@@ -49,4 +49,11 @@ final class HistoryUseCase {
         CommonHistoryDataModel.s.store()
     }
 
+    func delete() {
+        CommonHistoryDataModel.s.delete()
+    }
+
+    func expireCheck() {
+        CommonHistoryDataModel.s.expireCheck()
+    }
 }

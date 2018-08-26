@@ -61,4 +61,8 @@ final class ThumbnailUseCase {
     func delete(context: String) {
         ThumbnailDataModel.s.delete(context: context)
     }
+
+    func getThumbnail(context: String) -> UIImage? {
+        return ThumbnailDataModel.s.getThumbnail(context: context)
+    }
 }

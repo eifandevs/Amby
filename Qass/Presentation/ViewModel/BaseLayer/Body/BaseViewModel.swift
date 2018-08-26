@@ -59,21 +59,7 @@ final class BaseViewModel {
     }
     /// ロードリクエスト通知用RX
     let rx_baseViewModelDidSearchWebView = SearchUseCase.s.rx_searchUseCaseDidRequestLoad
-        .flatMap { text -> Observable<String> in
-            let searchText = { () -> String in
-                if text.isValidUrl {
-                    return text
-                } else {
-                    // 検索ワードによる検索
-                    // 閲覧履歴を保存する
-                    SearchHistoryDataModel.s.store(text: text)
-
-                    let encodedText = "\(HttpConst.URL.SEARCH_PATH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)"
-                    return encodedText
-                }
-            }()
-            ProgressDataModel.s.updateText(text: searchText)
-
+        .flatMap { searchText -> Observable<String> in
             return Observable.just(searchText)
         }
     /// フォーム登録通知用RX
@@ -122,8 +108,8 @@ final class BaseViewModel {
     }
 
     /// webviewの数
-    var currentPageCount: Int {
-        return TabUseCase.s.currentPageCount
+    var currentTabCount: Int {
+        return TabUseCase.s.currentTabCount
     }
 
     /// 通知センター
@@ -131,7 +117,7 @@ final class BaseViewModel {
 
     /// 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
-        return CGFloat(AppDataModel.s.autoScrollInterval)
+        return ScrollUseCase.s.autoScrollInterval
     }
 
     /// baseViewControllerの状態取得
@@ -172,12 +158,12 @@ final class BaseViewModel {
 
     // MARK: Public Method
 
-    func insert(url: String? = nil) {
+    func insertTab(url: String? = nil) {
         TabUseCase.s.insert(url: url)
     }
 
     /// ページインデックス取得
-    func getIndex(context: String) -> Int? {
+    func getTabIndex(context: String) -> Int? {
         return TabUseCase.s.getIndex(context: context)
     }
 
@@ -234,7 +220,7 @@ final class BaseViewModel {
     /// 前webviewのキャプチャ取得
     func getPreviousCapture() -> UIImage? {
         if let currentLocation = currentLocation {
-            let targetIndex = currentLocation == 0 ? currentPageCount - 1 : currentLocation - 1
+            let targetIndex = currentLocation == 0 ? currentTabCount - 1 : currentLocation - 1
             if let targetContext = TabUseCase.s.getHistory(index: targetIndex)?.context {
                 if let image = ThumbnailUseCase.s.getCapture(context: targetContext) {
                     return image
@@ -252,7 +238,7 @@ final class BaseViewModel {
     /// 次webviewのキャプチャ取得
     func getNextCapture() -> UIImage? {
         if let currentLocation = currentLocation {
-            let targetIndex = currentLocation == currentPageCount - 1 ? 0 : currentLocation + 1
+            let targetIndex = currentLocation == currentTabCount - 1 ? 0 : currentLocation + 1
             if let targetContext = TabUseCase.s.getHistory(index: targetIndex)?.context {
                 if let image = ThumbnailUseCase.s.getCapture(context: targetContext) {
                     return image

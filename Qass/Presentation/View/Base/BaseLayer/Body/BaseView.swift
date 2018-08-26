@@ -133,7 +133,7 @@ class BaseView: UIView {
         EGApplication.sharedMyApplication.egDelegate = self
 
         // webviewsに初期値を入れる
-        (0 ... viewModel.currentPageCount - 1).forEach { _ in
+        (0 ... viewModel.currentTabCount - 1).forEach { _ in
             webViews.append(nil)
         }
 
@@ -207,7 +207,7 @@ class BaseView: UIView {
                 log.eventIn(chain: "rx_baseViewModelDidAutoFill")
                 guard let `self` = self else { return }
                 if !self.isDoneAutoFill {
-                    if let inputForm = FormDataModel.s.select(url: self.front.url?.absoluteString).first {
+                    if let inputForm = FormUseCase.s.select(url: self.front.url?.absoluteString).first {
                         NotificationManager.presentAlert(title: MessageConst.ALERT.FORM_TITLE, message: MessageConst.ALERT.FORM_EXIST, completion: { [weak self] in
                             guard let `self` = self else { return }
                             inputForm.inputs.forEach {
@@ -337,7 +337,7 @@ class BaseView: UIView {
 
                         if isFrontDelete && object.currentContext != nil {
                             // フロントの削除で、削除後にwebviewが存在する場合
-                            if let current = self.webViews.find({ $0?.context == PageHistoryDataModel.s.currentContext })! {
+                            if let current = self.webViews.find({ $0?.context == TabUseCase.s.currentContext })! {
                                 current.observeEstimatedProgress(observer: self)
                                 self.front = current
                                 self.bringSubview(toFront: current)
@@ -1053,7 +1053,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         log.debug("loading finish. context: \(wv.context)")
 
         // 削除済みチェック
-        if viewModel.getIndex(context: wv.context) == nil {
+        if viewModel.getTabIndex(context: wv.context) == nil {
             log.warning("loading finish on deleted page.")
             return
         }
@@ -1178,7 +1178,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             if let url = navigationAction.request.url?.absoluteString {
                 log.debug("receive new window event. url: \(url)")
 
-                viewModel.insert(url: navigationAction.request.url?.absoluteString)
+                viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
 
 //                if url != AppConst.URL.BLANK {
 //                    // about:blankは無視する

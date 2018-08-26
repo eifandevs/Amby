@@ -28,7 +28,7 @@ final class BaseViewControllerViewModel {
         log.debug("deinit called.")
     }
 
-    func insertByEventPageHistoryDataModel(url: String) {
+    func insertTab(url: String) {
         TabUseCase.s.insert(url: url)
     }
 }

@@ -14,4 +14,7 @@ import RxSwift
 final class AuthUseCase {
 
     static let s = AuthUseCase()
+
+    private init() {}
+
 }

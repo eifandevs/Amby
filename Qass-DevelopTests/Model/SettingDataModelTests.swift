@@ -1,5 +1,5 @@
 //
-//  ResourceDataModelTests.swift
+//  SettingDataModelTests.swift
 //  Qass-DevelopTests
 //
 //  Created by tenma on 2018/06/17.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import Qass_Develop
 
-class ResourceDataModelTests: XCTestCase {
+class SettingDataModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
@@ -22,11 +22,11 @@ class ResourceDataModelTests: XCTestCase {
         super.tearDown()
     }
 
-    func testProperties() {
-        _ = ResourceDataModel.s.authorizeHtml
-        _ = ResourceDataModel.s.dnsHtml
-        _ = ResourceDataModel.s.invalidHtml
-        _ = ResourceDataModel.s.offlineHtml
-        _ = ResourceDataModel.s.timeoutHtml
+    func testExample() {
+        SettingDataModel.s.setup()
+        XCTAssert(SettingDataModel.s.commonHistorySaveCount == 90)
+        XCTAssertTrue(SettingDataModel.s.autoScrollInterval == 0.06)
+        XCTAssertTrue(SettingDataModel.s.searchHistorySaveCount == 90)
+        SettingDataModel.s.initialize()
     }
 }

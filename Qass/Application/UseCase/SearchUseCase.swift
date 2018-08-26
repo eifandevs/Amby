@@ -23,8 +23,22 @@ final class SearchUseCase {
     private init() {}
 
     /// ロードリクエスト
-    func load(url: String) {
-        rx_searchUseCaseDidRequestLoad.onNext(url)
+    func load(text: String) {
+        let searchText = { () -> String in
+            if text.isValidUrl {
+                return text
+            } else {
+                // 検索ワードによる検索
+                // 閲覧履歴を保存する
+                SearchHistoryDataModel.s.store(text: text)
+
+                let encodedText = "\(HttpConst.URL.SEARCH_PATH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)"
+                return encodedText
+            }
+        }()
+        ProgressUseCase.s.updateText(text: searchText)
+
+        rx_searchUseCaseDidRequestLoad.onNext(searchText)
     }
 
     /// サークルメニューから検索開始押下
@@ -37,4 +51,11 @@ final class SearchUseCase {
         rx_searchUseCaseDidBeginSearching.onNext(false)
     }
 
+    func delete() {
+        SearchHistoryDataModel.s.delete()
+    }
+
+    func expireCheck() {
+        SearchHistoryDataModel.s.expireCheck()
+    }
 }

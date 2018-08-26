@@ -143,7 +143,7 @@ class BaseViewController: UIViewController {
         view.addSubview(splash!.view)
 
         // ページ情報初期化
-        PageHistoryDataModel.s.initialize()
+        TabUseCase.s.initialize()
 
         // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
         baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: view.bounds.size))
@@ -211,7 +211,7 @@ class BaseViewController: UIViewController {
                 if (orgActionSheet.preferredStyle == .actionSheet) && (orgActionSheet.title != nil) {
                     // webviewを長押しされたら、そのURLで新しいタブを作成する
                     if url.isValidUrl {
-                        viewModel.insertByEventPageHistoryDataModel(url: url)
+                        viewModel.insertTab(url: url)
                         return
                     }
                 }

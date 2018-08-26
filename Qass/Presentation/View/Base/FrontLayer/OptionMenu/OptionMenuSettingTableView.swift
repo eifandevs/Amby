@@ -113,13 +113,13 @@ extension OptionMenuSettingTableView: UITableViewDelegate {
             // TODO: メニュー設定表示
             break
         case .commonHistory:
-            viewModel.deleteCommonHistoryDataModel()
+            viewModel.deleteHistory()
         case .bookMark:
-            viewModel.deleteFavoriteDataModel()
+            viewModel.deleteFavorite()
         case .form:
-            viewModel.deleteFormDataModel()
+            viewModel.deleteForm()
         case .searchHistory:
-            viewModel.deleteSearchHistoryDataModel()
+            viewModel.deleteSearchHistory()
         case .cookies:
             viewModel.deleteCookies()
         case .siteData:

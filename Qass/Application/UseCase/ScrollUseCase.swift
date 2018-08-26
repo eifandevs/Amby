@@ -20,6 +20,15 @@ final class ScrollUseCase {
     /// 自動スクロール通知用RX
     let rx_scrollUseCaseDidRequestAutoScroll = PublishSubject<()>()
 
+    var autoScrollInterval: CGFloat {
+        get {
+            return CGFloat(SettingDataModel.s.autoScrollInterval)
+        }
+        set(value) {
+            SettingDataModel.s.autoScrollInterval = Float(value)
+        }
+    }
+
     private init() {}
 
     /// スクロールアップ

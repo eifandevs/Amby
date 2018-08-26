@@ -33,8 +33,6 @@ final class FooterViewModel {
     /// サムネイル削除用RX
     let rx_footerViewModelDidRemoveThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidRemoveThumbnail
         .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
-            // 実データの削除
-            ThumbnailDataModel.s.delete(context: object.deleteContext)
             return Observable.just(object)
         }
 
@@ -86,5 +84,9 @@ final class FooterViewModel {
 
     func remove(context: String) {
         TabUseCase.s.remove(context: context)
+    }
+
+    func getThumbnail(context: String) -> UIImage? {
+        return ThumbnailUseCase.s.getThumbnail(context: context)
     }
 }

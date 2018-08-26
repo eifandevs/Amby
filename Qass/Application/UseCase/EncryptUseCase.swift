@@ -15,6 +15,8 @@ final class EncryptUseCase {
 
     static let s = EncryptUseCase()
 
+    private init() {}
+
     /// 暗号化
     func encrypt(value: String) -> Data {
         return EncryptHelper.encrypt(serviceToken: AuthTokenDataModel.s.keychainServiceToken, ivToken: AuthTokenDataModel.s.keychainIvToken, value: value)!

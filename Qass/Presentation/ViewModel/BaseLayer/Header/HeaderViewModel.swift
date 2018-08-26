@@ -54,7 +54,7 @@ final class HeaderViewModel {
     }
 
     func loadRequest(text: String) {
-        SearchUseCase.s.load(url: text)
+        SearchUseCase.s.load(text: text)
     }
 
     func grepRequest(word: String) {

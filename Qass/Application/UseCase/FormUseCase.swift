@@ -42,4 +42,12 @@ final class FormUseCase {
     func store(form: Form) {
         FormDataModel.s.store(form: form)
     }
+
+    func delete() {
+        FormDataModel.s.delete()
+    }
+
+    func select(id: String? = nil, url: String? = nil) -> [Form] {
+        return FormDataModel.s.select(id: id, url: url)
+    }
 }

@@ -78,7 +78,7 @@ final class TabUseCase {
         return PageHistoryDataModel.s.currentLocation
     }
 
-    var currentPageCount: Int {
+    var currentTabCount: Int {
         return PageHistoryDataModel.s.histories.count
     }
 
@@ -188,5 +188,9 @@ final class TabUseCase {
     /// 閲覧、ページ履歴の永続化
     func store() {
         PageHistoryDataModel.s.store()
+    }
+
+    func initialize() {
+        PageHistoryDataModel.s.initialize()
     }
 }

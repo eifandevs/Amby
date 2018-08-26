@@ -36,9 +36,9 @@ final class SearchMenuTableViewModel {
     /// 記事アイテム
     var newsItem: [Article] = []
     /// 閲覧履歴読み込み数
-    private let readCommonHistoryNum = AppDataModel.s.commonHistorySaveCount
+    private let readCommonHistoryNum = SettingDataModel.s.commonHistorySaveCount
     /// 検索履歴読み込み数
-    private let readSearchHistoryNum = AppDataModel.s.searchHistorySaveCount
+    private let readSearchHistoryNum = SettingDataModel.s.searchHistorySaveCount
     /// サジェスト取得キュー
     private var requestSearchQueue = [String?]()
     /// サジェスト取得中フラグ
@@ -152,6 +152,6 @@ final class SearchMenuTableViewModel {
 
     /// ロードリクエスト
     func loadRequest(url: String) {
-        SearchUseCase.s.load(url: url)
+        SearchUseCase.s.load(text: url)
     }
 }

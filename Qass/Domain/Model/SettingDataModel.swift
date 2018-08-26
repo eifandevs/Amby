@@ -1,5 +1,5 @@
 //
-//  AppDataModel.swift
+//  SettingDataModel.swift
 //  Qas
 //
 //  Created by tenma on 2018/04/19.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-final class AppDataModel {
-    static let s = AppDataModel()
+final class SettingDataModel {
+    static let s = SettingDataModel()
     let repository = UserDefaultRepository()
 
     /// 閲覧履歴保存日数

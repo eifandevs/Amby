@@ -48,4 +48,8 @@ final class FavoriteUseCase {
     func load(url: String) {
         rx_favoriteUseCaseDidRequestLoad.onNext(url)
     }
+
+    func delete() {
+        FavoriteDataModel.s.delete()
+    }
 }

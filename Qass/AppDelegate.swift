@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setForegroundColor(UIColor.ultraOrange)
 
         // 設定データ(UD)セットアップ
-        AppDataModel.s.setup()
+        SettingUseCase.s.setup()
 
         // ローカルストレージセットアップ
         let repository = LocalStorageRepository<Cache>()
@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func initialize() {
-        AppDataModel.s.initialize()
+        SettingDataModel.s.initialize()
 
         if let baseViewController = self.window!.rootViewController as? BaseViewController {
             baseViewController.mRelease()
@@ -109,8 +109,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        CommonHistoryDataModel.s.expireCheck()
-        SearchHistoryDataModel.s.expireCheck()
+        HistoryUseCase.s.expireCheck()
+        SearchUseCase.s.expireCheck()
     }
 
     func applicationWillTerminate(_: UIApplication) {
