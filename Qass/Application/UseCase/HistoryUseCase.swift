@@ -39,4 +39,14 @@ final class HistoryUseCase {
         rx_historyUseCaseDidRequestLoad.onNext(url)
     }
 
+    /// update common history
+    func insert(url: URL?, title: String?) {
+        CommonHistoryDataModel.s.insert(url: url, title: title)
+    }
+
+    /// 閲覧、ページ履歴の永続化
+    func store() {
+        CommonHistoryDataModel.s.store()
+    }
+
 }

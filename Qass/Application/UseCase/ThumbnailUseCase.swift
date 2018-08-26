@@ -43,4 +43,22 @@ final class ThumbnailUseCase {
 
     private init() {}
 
+    func getCapture(context: String) -> UIImage? {
+        return ThumbnailDataModel.s.getCapture(context: context)
+    }
+
+    /// create thumbnail folder
+    func createFolder(context: String) {
+        ThumbnailDataModel.s.create(context: context)
+    }
+
+    /// write thumbnail data
+    func write(context: String, data: Data) {
+        ThumbnailDataModel.s.write(context: context, data: data)
+    }
+
+    /// サムネイルの削除
+    func delete(context: String) {
+        ThumbnailDataModel.s.delete(context: context)
+    }
 }

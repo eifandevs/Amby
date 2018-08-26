@@ -123,8 +123,7 @@ class BaseLayer: UIView {
                 log.eventIn(chain: "rx_headerViewDidbeginSearching")
                 guard let `self` = self else { return }
                 // 履歴検索を行うので、事前に永続化しておく
-                CommonHistoryDataModel.s.store()
-                PageHistoryDataModel.s.store()
+                self.viewModel.store()
 
                 self.isHeaderViewEditing = true
                 self.searchMenuTableView = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))

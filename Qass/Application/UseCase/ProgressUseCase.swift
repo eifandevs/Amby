@@ -33,4 +33,17 @@ final class ProgressUseCase {
 
     private init() {}
 
+    func updateProgress(progress: CGFloat) {
+        ProgressDataModel.s.updateProgress(progress: progress)
+    }
+
+    /// reload ProgressDataModel
+    func reloadProgress() {
+        ProgressDataModel.s.reload()
+    }
+
+    /// update text in ProgressDataModel
+    func updateText(text: String) {
+        ProgressDataModel.s.updateText(text: text)
+    }
 }

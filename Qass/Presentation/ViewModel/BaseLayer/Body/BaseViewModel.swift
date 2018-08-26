@@ -12,19 +12,19 @@ import RxSwift
 
 final class BaseViewModel {
     /// ページインサート通知用RX
-    let rx_baseViewModelDidInsertWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert
-        .flatMap { object -> Observable<Int> in
-            return Observable.just(object.at)
+    let rx_baseViewModelDidInsertWebView = TabUseCase.s.rx_tabUseCaseDidInsert
+        .flatMap { at -> Observable<Int> in
+            return Observable.just(at)
         }
 
     /// ページリロード通知用RX
-    let rx_baseViewModelDidReloadWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidReload.flatMap { _ in Observable.just(()) }
+    let rx_baseViewModelDidReloadWebView = TabUseCase.s.rx_tabUseCaseDidReload.flatMap { _ in Observable.just(()) }
     /// ページ追加通知用RX
-    let rx_baseViewModelDidAppendWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend.flatMap { _ in Observable.just(()) }
+    let rx_baseViewModelDidAppendWebView = TabUseCase.s.rx_tabUseCaseDidAppend.flatMap { _ in Observable.just(()) }
     /// ページ変更通知用RX
-    let rx_baseViewModelDidChangeWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange.flatMap { _ in Observable.just(()) }
+    let rx_baseViewModelDidChangeWebView = TabUseCase.s.rx_tabUseCaseDidChange.flatMap { _ in Observable.just(()) }
     /// ページ削除通知用RX
-    let rx_baseViewModelDidRemoveWebView = PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
+    let rx_baseViewModelDidRemoveWebView = TabUseCase.s.rx_tabUseCaseDidRemove
         .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
             return Observable.just(object)
         }
@@ -108,22 +108,22 @@ final class BaseViewModel {
 
     /// リクエストURL(jsのURL)
     var currentUrl: String? {
-        return PageHistoryDataModel.s.currentHistory?.url
+        return TabUseCase.s.currentUrl
     }
 
     /// 現在のコンテキスト
     var currentContext: String? {
-        return PageHistoryDataModel.s.currentContext
+        return TabUseCase.s.currentContext
     }
 
     /// 現在の位置
     var currentLocation: Int? {
-        return PageHistoryDataModel.s.currentLocation
+        return TabUseCase.s.currentLocation
     }
 
     /// webviewの数
-    var webViewCount: Int {
-        return PageHistoryDataModel.s.histories.count
+    var currentPageCount: Int {
+        return TabUseCase.s.currentPageCount
     }
 
     /// 通知センター
@@ -159,7 +159,7 @@ final class BaseViewModel {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_UIApplicationWillResignActive")
                 guard let `self` = self else { return }
-                self.storeHistoryDataModel()
+                self.store()
                 log.eventOut(chain: "rx_UIApplicationWillResignActive")
             }
             .disposed(by: disposeBag)
@@ -172,53 +172,49 @@ final class BaseViewModel {
 
     // MARK: Public Method
 
+    func insert(url: String? = nil) {
+        TabUseCase.s.insert(url: url)
+    }
+
     /// ページインデックス取得
     func getIndex(context: String) -> Int? {
-        return PageHistoryDataModel.s.getIndex(context: context)
+        return TabUseCase.s.getIndex(context: context)
     }
 
     /// 直近URL取得
-    func getMostForwardUrlPageHistoryDataModel(context: String) -> String? {
-        return PageHistoryDataModel.s.getMostForwardUrl(context: context)
+    func getMostForwardUrl(context: String) -> String? {
+        return TabUseCase.s.getMostForwardUrl(context: context)
     }
 
     /// 過去ページ閲覧中フラグ取得
-    func getIsPastViewingPageHistoryDataModel(context: String) -> Bool? {
-        return PageHistoryDataModel.s.isPastViewing(context: context)
+    func getIsPastViewing(context: String) -> Bool? {
+        return TabUseCase.s.getIsPastViewing(context: context)
     }
 
     /// 前回URL取得
-    func getBackUrlPageHistoryDataModel(context: String) -> String? {
-        return PageHistoryDataModel.s.getBackUrl(context: context)
+    func getBackUrl(context: String) -> String? {
+        return TabUseCase.s.getBackUrl(context: context)
     }
 
     /// 次URL取得
-    func getForwardUrlPageHistoryDataModel(context: String) -> String? {
-        return PageHistoryDataModel.s.getForwardUrl(context: context)
+    func getForwardUrl(context: String) -> String? {
+        return TabUseCase.s.getForwardUrl(context: context)
     }
 
-    func startLoadingPageHistoryDataModel(context: String) {
-        PageHistoryDataModel.s.startLoading(context: context)
+    func startLoading(context: String) {
+        TabUseCase.s.startLoading(context: context)
     }
 
-    func endLoadingPageHistoryDataModel(context: String) {
-        PageHistoryDataModel.s.endLoading(context: context)
+    func endLoading(context: String) {
+        TabUseCase.s.endLoading(context: context)
     }
 
-    func endRenderingPageHistoryDataModel(context: String) {
-        PageHistoryDataModel.s.endRendering(context: context)
+    func endRendering(context: String) {
+        TabUseCase.s.endRendering(context: context)
     }
 
-    func updateProgressProgressDataModel(object: CGFloat) {
-        ProgressDataModel.s.updateProgress(progress: object)
-    }
-
-    func insertPageHistoryDataModel(url: String? = nil) {
-        PageHistoryDataModel.s.append(url: url)
-    }
-
-    func insertByEventPageHistoryDataModel(url: String? = nil) {
-        PageHistoryDataModel.s.insert(url: url)
+    func updateProgress(progress: CGFloat) {
+        ProgressUseCase.s.updateProgress(progress: progress)
     }
 
     /// 検索開始
@@ -226,8 +222,8 @@ final class BaseViewModel {
         SearchUseCase.s.beginAtHeader()
     }
 
-    func storeFormDataModel(form: Form) {
-        FormDataModel.s.store(form: form)
+    func storeForm(form: Form) {
+        FormUseCase.s.store(form: form)
     }
 
     /// スワイプが履歴移動スワイプかを判定
@@ -238,9 +234,9 @@ final class BaseViewModel {
     /// 前webviewのキャプチャ取得
     func getPreviousCapture() -> UIImage? {
         if let currentLocation = currentLocation {
-            let targetIndex = currentLocation == 0 ? PageHistoryDataModel.s.histories.count - 1 : currentLocation - 1
-            if let targetContext = PageHistoryDataModel.s.getHistory(index: targetIndex)?.context {
-                if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
+            let targetIndex = currentLocation == 0 ? currentPageCount - 1 : currentLocation - 1
+            if let targetContext = TabUseCase.s.getHistory(index: targetIndex)?.context {
+                if let image = ThumbnailUseCase.s.getCapture(context: targetContext) {
                     return image
                 } else {
                     return UIImage()
@@ -256,9 +252,9 @@ final class BaseViewModel {
     /// 次webviewのキャプチャ取得
     func getNextCapture() -> UIImage? {
         if let currentLocation = currentLocation {
-            let targetIndex = currentLocation == PageHistoryDataModel.s.histories.count - 1 ? 0 : currentLocation + 1
-            if let targetContext = PageHistoryDataModel.s.getHistory(index: targetIndex)?.context {
-                if let image = ThumbnailDataModel.s.getCapture(context: targetContext) {
+            let targetIndex = currentLocation == currentPageCount - 1 ? 0 : currentLocation + 1
+            if let targetContext = TabUseCase.s.getHistory(index: targetIndex)?.context {
+                if let image = ThumbnailUseCase.s.getCapture(context: targetContext) {
                     return image
                 } else {
                     return UIImage()
@@ -272,23 +268,23 @@ final class BaseViewModel {
     }
 
     /// reload ProgressDataModel
-    func reloadProgressDataModel() {
-        ProgressDataModel.s.reload()
+    func reloadProgress() {
+        ProgressUseCase.s.reloadProgress()
     }
 
     /// update text in ProgressDataModel
-    func updateTextProgressDataModel(text: String) {
-        ProgressDataModel.s.updateText(text: text)
+    func updateProgressText(text: String) {
+        ProgressUseCase.s.updateText(text: text)
     }
 
     /// 前WebViewに切り替え
-    func goBackPageHistoryDataModel() {
-        PageHistoryDataModel.s.goBack()
+    func goBackTab() {
+        TabUseCase.s.goBack()
     }
 
     /// 後WebViewに切り替え
-    func goNextPageHistoryDataModel() {
-        PageHistoryDataModel.s.goNext()
+    func goNextTab() {
+        TabUseCase.s.goNext()
     }
 
     /// 前ページに戻る
@@ -302,63 +298,48 @@ final class BaseViewModel {
     }
 
     /// create thumbnail folder
-    func createThumbnailDataModel(context: String) {
-        ThumbnailDataModel.s.create(context: context)
+    func createThumbnailFolder(context: String) {
+        ThumbnailUseCase.s.createFolder(context: context)
     }
 
     /// write thumbnail data
-    func writeThumbnailDataModel(context: String, data: Data) {
-        ThumbnailDataModel.s.write(context: context, data: data)
+    func writeThumbnailData(context: String, data: Data) {
+        ThumbnailUseCase.s.write(context: context, data: data)
     }
 
     /// update url in page history
-    func updateUrlPageHistoryDataModel(context: String, url: String, operation: PageHistory.Operation) {
-        PageHistoryDataModel.s.updateUrl(context: context, url: url, operation: operation)
+    func updatePageUrl(context: String, url: String, operation: PageHistory.Operation) {
+        TabUseCase.s.updateUrl(context: context, url: url, operation: operation)
     }
 
     /// update title in page history
-    func updateTitlePageHistoryDataModel(context: String, title: String) {
-        PageHistoryDataModel.s.updateTitle(context: context, title: title)
+    func updatePageTitle(context: String, title: String) {
+        TabUseCase.s.updateTitle(context: context, title: title)
     }
 
     /// update common history
-    func insertCommonHistoryDataModel(url: URL?, title: String?) {
-        CommonHistoryDataModel.s.insert(url: url, title: title)
+    func insertHistory(url: URL?, title: String?) {
+        HistoryUseCase.s.insert(url: url, title: title)
     }
 
     /// 閲覧、ページ履歴の永続化
-    func storeHistoryDataModel() {
-        CommonHistoryDataModel.s.store()
-        PageHistoryDataModel.s.store()
-    }
-
-    /// ページ履歴の永続化
-    func storePageHistoryDataModel() {
-        PageHistoryDataModel.s.store()
+    func store() {
+        HistoryUseCase.s.store()
+        TabUseCase.s.store()
     }
 
     /// サムネイルの削除
-    func deleteThumbnailDataModel(webView: EGWebView) {
-        log.debug("delete thumbnail. context: \(webView.context)")
-        ThumbnailDataModel.s.delete(context: webView.context)
+    func deleteThumbnail(context: String) {
+        ThumbnailUseCase.s.delete(context: context)
     }
 
     /// 暗号化
     func encrypt(value: String) -> Data {
-        return EncryptHelper.encrypt(serviceToken: AuthTokenDataModel.s.keychainServiceToken, ivToken: AuthTokenDataModel.s.keychainIvToken, value: value)!
+        return EncryptUseCase.s.encrypt(value: value)
     }
 
     /// 複合化
     func decrypt(value: Data) -> String {
-        if let value = EncryptHelper.decrypt(serviceToken: AuthTokenDataModel.s.keychainServiceToken, ivToken: AuthTokenDataModel.s.keychainIvToken, data: value) {
-            return value
-        }
-        return ""
-    }
-
-    // MARK: Private Method
-
-    private func changePageHistoryDataModel(context: String) {
-        PageHistoryDataModel.s.change(context: context)
+        return EncryptUseCase.s.decrypt(value: value)
     }
 }

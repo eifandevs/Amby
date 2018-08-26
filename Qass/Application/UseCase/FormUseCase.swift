@@ -38,4 +38,8 @@ final class FormUseCase {
     func load(url: String) {
         rx_formUseCaseDidRequestLoad.onNext(url)
     }
+
+    func store(form: Form) {
+        FormDataModel.s.store(form: form)
+    }
 }

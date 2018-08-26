@@ -54,7 +54,7 @@ class BaseView: UIView {
                 // プライベートモードならデザインを変更する
                 rx_baseViewDidChangeFront.onNext(())
                 // ヘッダーフィールドを更新する
-                viewModel.reloadProgressDataModel()
+                viewModel.reloadProgress()
                 // 空ページの場合は、編集状態にする
                 if viewModel.currentUrl.isEmpty {
                     if let beginSearchingWorkItem = self.beginSearchingWorkItem {
@@ -133,7 +133,7 @@ class BaseView: UIView {
         EGApplication.sharedMyApplication.egDelegate = self
 
         // webviewsに初期値を入れる
-        (0 ... viewModel.webViewCount - 1).forEach { _ in
+        (0 ... viewModel.currentPageCount - 1).forEach { _ in
             webViews.append(nil)
         }
 
@@ -175,7 +175,7 @@ class BaseView: UIView {
                     if let front = self.front {
                         front.removeObserverEstimatedProgress(observer: self)
                     }
-                    self.viewModel.updateProgressProgressDataModel(object: 0)
+                    self.viewModel.updateProgress(progress: 0)
                     let newWv = self.createWebView(context: self.viewModel.currentContext)
                     self.webViews.insert(newWv, at: at)
                     if self.viewModel.currentUrl.isEmpty {
@@ -239,7 +239,7 @@ class BaseView: UIView {
                 if let front = self.front {
                     front.removeObserverEstimatedProgress(observer: self)
                 }
-                self.viewModel.updateProgressProgressDataModel(object: 0)
+                self.viewModel.updateProgress(progress: 0)
                 let newWv = self.createWebView(context: self.viewModel.currentContext)
                 self.webViews.append(newWv)
                 if self.viewModel.currentUrl.isEmpty {
@@ -287,12 +287,12 @@ class BaseView: UIView {
                 guard let `self` = self else { return }
                 if let currentLocation = self.viewModel.currentLocation {
                     self.front.removeObserverEstimatedProgress(observer: self)
-                    self.viewModel.updateProgressProgressDataModel(object: 0)
+                    self.viewModel.updateProgress(progress: 0)
 
                     if let current = self.webViews[currentLocation] {
                         current.observeEstimatedProgress(observer: self)
                         if current.isLoading == true {
-                            self.viewModel.updateProgressProgressDataModel(object: CGFloat(current.estimatedProgress))
+                            self.viewModel.updateProgress(progress: CGFloat(current.estimatedProgress))
                         }
                         self.front = current
                         self.bringSubview(toFront: current)
@@ -315,12 +315,12 @@ class BaseView: UIView {
                 if let object = object.element {
                     if let webView = self.webViews[object.deleteIndex] {
                         // サムネイルの削除
-                        self.viewModel.deleteThumbnailDataModel(webView: webView)
+                        self.viewModel.deleteThumbnail(context: webView.context)
 
                         let isFrontDelete = object.deleteContext == self.front.context
                         if isFrontDelete {
                             webView.removeObserverEstimatedProgress(observer: self)
-                            self.viewModel.updateProgressProgressDataModel(object: 0)
+                            self.viewModel.updateProgress(progress: 0)
                             self.front = nil
                         }
 
@@ -428,19 +428,19 @@ class BaseView: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidHistoryBackWebView")
                 guard let `self` = self else { return }
-                if let isPastViewing = self.viewModel.getIsPastViewingPageHistoryDataModel(context: self.front.context) {
+                if let isPastViewing = self.viewModel.getIsPastViewing(context: self.front.context) {
                     if self.front.isLoading && self.front.operation == .normal && !isPastViewing {
                         // 新規ページ表示中に戻るを押下したルート
                         log.debug("go back on loading.")
 
-                        if let url = self.viewModel.getMostForwardUrlPageHistoryDataModel(context: self.front.context) {
+                        if let url = self.viewModel.getMostForwardUrl(context: self.front.context) {
                             self.front.operation = .back
                             _ = self.front.load(urlStr: url)
                         }
                     } else {
                         log.debug("go back.")
                         // 有効なURLを探す
-                        if let url = self.viewModel.getBackUrlPageHistoryDataModel(context: self.front.context) {
+                        if let url = self.viewModel.getBackUrl(context: self.front.context) {
                             self.front.operation = .back
                             _ = self.front.load(urlStr: url)
                         }
@@ -455,7 +455,7 @@ class BaseView: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidHistoryForwardWebView")
                 guard let `self` = self else { return }
-                if let url = self.viewModel.getForwardUrlPageHistoryDataModel(context: self.front.context) {
+                if let url = self.viewModel.getForwardUrl(context: self.front.context) {
                     self.front.operation = .forward
                     _ = self.front.load(urlStr: url)
                 }
@@ -468,7 +468,7 @@ class BaseView: UIView {
                 log.eventIn(chain: "rx_baseViewModelDidRegisterAsForm")
                 guard let `self` = self else { return }
                 if let form = self.takeForm(webView: self.front) {
-                    self.viewModel.storeFormDataModel(form: form)
+                    self.viewModel.storeForm(form: form)
                 } else {
                     NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_CRAWL)
                 }
@@ -542,18 +542,18 @@ class BaseView: UIView {
             if keyPath == "estimatedProgress" && contextPtr.pointee == front.context {
                 if let change = change, let progress = change[NSKeyValueChangeKey.newKey] as? CGFloat {
                     // estimatedProgressが変更されたときに、プログレスバーの値を変更する。
-                    viewModel.updateProgressProgressDataModel(object: progress)
+                    viewModel.updateProgress(progress: progress)
                 }
             } else if keyPath == "title" {
                 log.debug("receive title change.")
                 if let change = change, let title = change[NSKeyValueChangeKey.newKey] as? String {
-                    viewModel.updateTitlePageHistoryDataModel(context: contextPtr.pointee, title: title)
+                    viewModel.updatePageTitle(context: contextPtr.pointee, title: title)
                 }
             } else if keyPath == "URL" {
                 log.debug("receive url change.")
                 if let change = change, let url = change[NSKeyValueChangeKey.newKey] as? URL, !url.absoluteString.isEmpty {
                     if let targetWebView = self.webViews.find({ $0?.context == contextPtr.pointee })! {
-                        viewModel.updateUrlPageHistoryDataModel(context: contextPtr.pointee, url: url.absoluteString, operation: targetWebView.operation)
+                        viewModel.updatePageUrl(context: contextPtr.pointee, url: url.absoluteString, operation: targetWebView.operation)
                         // 操作種別はnormalに戻しておく
                         // ヒストリーバック or ヒストリーフォワードで遷移したときは、リダイレクトを除きタップから連続してのURL変更がないはず
                         if targetWebView.operation != .normal {
@@ -697,7 +697,7 @@ class BaseView: UIView {
         target.observeUrl(observer: self)
 
         if target.isLoading == true {
-            viewModel.updateProgressProgressDataModel(object: CGFloat(target.estimatedProgress))
+            viewModel.updateProgress(progress: CGFloat(target.estimatedProgress))
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = target.isLoading
     }
@@ -711,7 +711,7 @@ class BaseView: UIView {
         newWv.uiDelegate = self
         newWv.scrollView.delegate = self
         front = newWv
-        viewModel.createThumbnailDataModel(context: newWv.context)
+        viewModel.createThumbnailFolder(context: newWv.context)
         addSubview(newWv)
 
         // プログレスバー
@@ -744,7 +744,7 @@ class BaseView: UIView {
                         let context = webView.context
 
                         if let pngImageData = pngImageData {
-                            self.viewModel.writeThumbnailDataModel(context: context, data: pngImageData)
+                            self.viewModel.writeThumbnailData(context: context, data: pngImageData)
                         } else {
                             log.error("image representation error.")
                         }
@@ -873,9 +873,9 @@ extension BaseView: EGApplicationDelegate {
                     // 入れ替える
                     if targetOriginX == self.frame.size.width {
                         // 前のwebviewに遷移
-                        self.viewModel.goBackPageHistoryDataModel()
+                        self.viewModel.goBackTab()
                     } else if targetOriginX == -self.frame.size.width {
-                        self.viewModel.goNextPageHistoryDataModel()
+                        self.viewModel.goNextTab()
                     }
                     // baseViewの位置を元に戻す
                     self.frame.origin.x = 0
@@ -1036,13 +1036,13 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         if wv.context == front.context {
             // フロントwebviewの通知なので、プログレスを更新する
             // インジゲーターの表示、非表示をきりかえる。
-            viewModel.startLoadingPageHistoryDataModel(context: wv.context)
-            viewModel.updateProgressProgressDataModel(object: CGFloat(0.1))
+            viewModel.startLoading(context: wv.context)
+            viewModel.updateProgress(progress: CGFloat(0.1))
             // くるくるを更新する
             updateNetworkActivityIndicator()
         } else {
             // インジゲーターの表示、非表示をきりかえる。
-            viewModel.startLoadingPageHistoryDataModel(context: wv.context)
+            viewModel.startLoading(context: wv.context)
             // くるくるを更新する
             updateNetworkActivityIndicator()
         }
@@ -1059,20 +1059,20 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         }
 
         // store common history
-        viewModel.insertCommonHistoryDataModel(url: wv.url, title: wv.title)
+        viewModel.insertHistory(url: wv.url, title: wv.title)
 
         // プログレス更新
         if wv.context == front.context {
             isDoneAutoFill = false
-            viewModel.updateProgressProgressDataModel(object: 1.0)
+            viewModel.updateProgress(progress: 1.0)
         }
         updateNetworkActivityIndicator()
-        viewModel.endLoadingPageHistoryDataModel(context: wv.context)
+        viewModel.endLoading(context: wv.context)
 
         // サムネイルを保存
         saveThumbnail(webView: wv, completion: {
             // プログレス更新
-            self.viewModel.endRenderingPageHistoryDataModel(context: wv.context)
+            self.viewModel.endRendering(context: wv.context)
         })
     }
 
@@ -1090,10 +1090,10 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         DispatchQueue.mainSyncSafe {
             // プログレス更新
             if wv.context == front.context {
-                viewModel.updateProgressProgressDataModel(object: 0)
+                viewModel.updateProgress(progress: 0)
             }
             self.updateNetworkActivityIndicator()
-            self.viewModel.endLoadingPageHistoryDataModel(context: wv.context)
+            self.viewModel.endLoading(context: wv.context)
         }
 
         // URLスキーム対応
@@ -1178,7 +1178,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             if let url = navigationAction.request.url?.absoluteString {
                 log.debug("receive new window event. url: \(url)")
 
-                viewModel.insertByEventPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
+                viewModel.insert(url: navigationAction.request.url?.absoluteString)
 
 //                if url != AppConst.URL.BLANK {
 //                    // about:blankは無視する

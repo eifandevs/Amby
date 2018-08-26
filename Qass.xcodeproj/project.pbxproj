@@ -249,8 +249,8 @@
 		A112E961212EDB9200320048 /* SourceCodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E95F212EDB9200320048 /* SourceCodeUseCase.swift */; };
 		A112E963212EDC9800320048 /* SuggestUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E962212EDC9800320048 /* SuggestUseCase.swift */; };
 		A112E964212EDC9800320048 /* SuggestUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E962212EDC9800320048 /* SuggestUseCase.swift */; };
-		A112E966212EDCC600320048 /* PageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E965212EDCC600320048 /* PageUseCase.swift */; };
-		A112E967212EDCC600320048 /* PageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E965212EDCC600320048 /* PageUseCase.swift */; };
+		A112E966212EDCC600320048 /* TabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E965212EDCC600320048 /* TabUseCase.swift */; };
+		A112E967212EDCC600320048 /* TabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E965212EDCC600320048 /* TabUseCase.swift */; };
 		A112E969212EDCDE00320048 /* TrendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E968212EDCDE00320048 /* TrendUseCase.swift */; };
 		A112E96A212EDCDE00320048 /* TrendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E968212EDCDE00320048 /* TrendUseCase.swift */; };
 		A112E96C21318F2600320048 /* ProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E96B21318F2600320048 /* ProgressUseCase.swift */; };
@@ -283,6 +283,10 @@
 		A112E99521319C7800320048 /* ThumbnailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97C21319C7800320048 /* ThumbnailDataModel.swift */; };
 		A112E99621319C7800320048 /* AuthTokenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97D21319C7800320048 /* AuthTokenDataModel.swift */; };
 		A112E99721319C7800320048 /* AuthTokenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97D21319C7800320048 /* AuthTokenDataModel.swift */; };
+		A112E9992132EF8F00320048 /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E9982132EF8F00320048 /* AuthUseCase.swift */; };
+		A112E99A2132EF8F00320048 /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E9982132EF8F00320048 /* AuthUseCase.swift */; };
+		A112E99C2132F00E00320048 /* EncryptUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E99B2132F00E00320048 /* EncryptUseCase.swift */; };
+		A112E99D2132F00E00320048 /* EncryptUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E99B2132F00E00320048 /* EncryptUseCase.swift */; };
 		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9820CE95D300146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
@@ -568,7 +572,7 @@
 		A112E95C212EDB7B00320048 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		A112E95F212EDB9200320048 /* SourceCodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCodeUseCase.swift; sourceTree = "<group>"; };
 		A112E962212EDC9800320048 /* SuggestUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestUseCase.swift; sourceTree = "<group>"; };
-		A112E965212EDCC600320048 /* PageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageUseCase.swift; sourceTree = "<group>"; };
+		A112E965212EDCC600320048 /* TabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabUseCase.swift; sourceTree = "<group>"; };
 		A112E968212EDCDE00320048 /* TrendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendUseCase.swift; sourceTree = "<group>"; };
 		A112E96B21318F2600320048 /* ProgressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressUseCase.swift; sourceTree = "<group>"; };
 		A112E96E21318FDF00320048 /* ThumbnailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailUseCase.swift; sourceTree = "<group>"; };
@@ -585,6 +589,8 @@
 		A112E97B21319C7800320048 /* AppDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDataModel.swift; sourceTree = "<group>"; };
 		A112E97C21319C7800320048 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
 		A112E97D21319C7800320048 /* AuthTokenDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTokenDataModel.swift; sourceTree = "<group>"; };
+		A112E9982132EF8F00320048 /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
+		A112E99B2132F00E00320048 /* EncryptUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptUseCase.swift; sourceTree = "<group>"; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
@@ -1332,10 +1338,12 @@
 				A112E95C212EDB7B00320048 /* SearchUseCase.swift */,
 				A112E95F212EDB9200320048 /* SourceCodeUseCase.swift */,
 				A112E962212EDC9800320048 /* SuggestUseCase.swift */,
-				A112E965212EDCC600320048 /* PageUseCase.swift */,
+				A112E965212EDCC600320048 /* TabUseCase.swift */,
 				A112E968212EDCDE00320048 /* TrendUseCase.swift */,
 				A112E96B21318F2600320048 /* ProgressUseCase.swift */,
 				A112E96E21318FDF00320048 /* ThumbnailUseCase.swift */,
+				A112E9982132EF8F00320048 /* AuthUseCase.swift */,
+				A112E99B2132F00E00320048 /* EncryptUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -2256,6 +2264,7 @@
 				A112E8E2212CD76500320048 /* ArticleResponse.swift in Sources */,
 				A112E8A0212CD76500320048 /* SearchMenuSuggestTableViewCell.swift in Sources */,
 				A112E87E212CD76500320048 /* OptionMenuTableView.swift in Sources */,
+				A112E99D2132F00E00320048 /* EncryptUseCase.swift in Sources */,
 				A112E86E212CD76500320048 /* CopyrightViewController.swift in Sources */,
 				A112E8A4212CD76500320048 /* SearchMenuCommonHistoryTableViewCell.swift in Sources */,
 				A112E8F7212CD7D100320048 /* SearchHistory.swift in Sources */,
@@ -2351,7 +2360,7 @@
 				A112E8E8212CD76500320048 /* App.swift in Sources */,
 				A1B5F402209D0C8700DF1AE3 /* Util.swift in Sources */,
 				A112E8F9212CD7D100320048 /* CommonHistory.swift in Sources */,
-				A112E967212EDCC600320048 /* PageUseCase.swift in Sources */,
+				A112E967212EDCC600320048 /* TabUseCase.swift in Sources */,
 				A112E98D21319C7800320048 /* FormDataModel.swift in Sources */,
 				A1B5F404209D0C8700DF1AE3 /* EnumEnumerable.swift in Sources */,
 				A112E878212CD76500320048 /* OptionMenuFavoriteTableView.swift in Sources */,
@@ -2377,6 +2386,7 @@
 				A112E8D4212CD76500320048 /* EncryptHelper.swift in Sources */,
 				A112E8EC212CD76500320048 /* ResourceRepository.swift in Sources */,
 				A112E8D6212CD76500320048 /* KeychainRepository.swift in Sources */,
+				A112E99A2132EF8F00320048 /* AuthUseCase.swift in Sources */,
 				A112E955212EDB0F00320048 /* HistoryUseCase.swift in Sources */,
 				A112E824212CD76500320048 /* BaseViewModel.swift in Sources */,
 				A1B5F415209D0C8700DF1AE3 /* UIButton+Extend.swift in Sources */,
@@ -2410,6 +2420,7 @@
 				A112E8E1212CD76500320048 /* ArticleResponse.swift in Sources */,
 				A112E89F212CD76500320048 /* SearchMenuSuggestTableViewCell.swift in Sources */,
 				A112E87D212CD76500320048 /* OptionMenuTableView.swift in Sources */,
+				A112E99C2132F00E00320048 /* EncryptUseCase.swift in Sources */,
 				A112E86D212CD76500320048 /* CopyrightViewController.swift in Sources */,
 				A112E8A3212CD76500320048 /* SearchMenuCommonHistoryTableViewCell.swift in Sources */,
 				A112E8F6212CD7D100320048 /* SearchHistory.swift in Sources */,
@@ -2505,7 +2516,7 @@
 				A112E8E7212CD76500320048 /* App.swift in Sources */,
 				A1903063209CF978004F1EA5 /* Util.swift in Sources */,
 				A112E8F8212CD7D100320048 /* CommonHistory.swift in Sources */,
-				A112E966212EDCC600320048 /* PageUseCase.swift in Sources */,
+				A112E966212EDCC600320048 /* TabUseCase.swift in Sources */,
 				A112E98C21319C7800320048 /* FormDataModel.swift in Sources */,
 				A1903051209CF978004F1EA5 /* EnumEnumerable.swift in Sources */,
 				A112E877212CD76500320048 /* OptionMenuFavoriteTableView.swift in Sources */,
@@ -2531,6 +2542,7 @@
 				A112E8D3212CD76500320048 /* EncryptHelper.swift in Sources */,
 				A112E8EB212CD76500320048 /* ResourceRepository.swift in Sources */,
 				A112E8D5212CD76500320048 /* KeychainRepository.swift in Sources */,
+				A112E9992132EF8F00320048 /* AuthUseCase.swift in Sources */,
 				A112E954212EDB0F00320048 /* HistoryUseCase.swift in Sources */,
 				A112E823212CD76500320048 /* BaseViewModel.swift in Sources */,
 				A1903034209CF977004F1EA5 /* UIButton+Extend.swift in Sources */,

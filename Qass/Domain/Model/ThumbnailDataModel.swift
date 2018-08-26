@@ -28,6 +28,7 @@ final class ThumbnailDataModel {
 
     /// サムネイルデータの削除
     func delete(context: String) {
+        log.debug("delete thumbnail. context: \(context)")
         localStorageRepository.delete(.thumbnails(additionalPath: context, resource: nil))
     }
 

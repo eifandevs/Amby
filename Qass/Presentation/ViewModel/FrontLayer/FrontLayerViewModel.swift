@@ -15,7 +15,7 @@ final class FrontLayerViewModel {
 
     /// タブの追加
     func add() {
-        PageUseCase.s.add()
+        TabUseCase.s.add()
     }
 
     /// スクロールアップ
@@ -40,12 +40,12 @@ final class FrontLayerViewModel {
 
     /// 現在のタブを削除
     func close() {
-        PageUseCase.s.close()
+        TabUseCase.s.close()
     }
 
     /// 現在のタブをコピー
     func copy() {
-        PageUseCase.s.copy()
+        TabUseCase.s.copy()
     }
 
     /// 検索開始

@@ -39,32 +39,32 @@ final class FooterViewModel {
         }
 
     /// ローディング開始通知用RX
-    let rx_footerViewModelDidStartLoading = PageUseCase.s.rx_pageUseCaseDidStartLoading
+    let rx_footerViewModelDidStartLoading = TabUseCase.s.rx_tabUseCaseDidStartLoading
         .flatMap { context -> Observable<String> in
             return Observable.just(context)
         }
 
     /// ローディング終了通知用RX
-    let rx_footerViewModelDidEndLoading = PageUseCase.s.rx_pageUseCaseDidEndLoading
+    let rx_footerViewModelDidEndLoading = TabUseCase.s.rx_tabUseCaseDidEndLoading
         .flatMap { context -> Observable<(context: String, title: String)> in
             return Observable.just(context)
         }
 
     /// 現在位置
     var pageHistories: [PageHistory] {
-        return PageHistoryDataModel.s.histories
+        return TabUseCase.s.pageHistories
     }
 
     var currentHistory: PageHistory? {
-        return PageHistoryDataModel.s.currentHistory
+        return TabUseCase.s.currentHistory
     }
 
     var currentContext: String {
-        return PageHistoryDataModel.s.currentContext
+        return TabUseCase.s.currentContext
     }
 
     var currentLocation: Int? {
-        return PageHistoryDataModel.s.currentLocation
+        return TabUseCase.s.currentLocation
     }
 
     /// 通知センター
@@ -80,11 +80,11 @@ final class FooterViewModel {
 
     // MARK: Public Method
 
-    func changePageHistoryDataModel(context: String) {
-        PageHistoryDataModel.s.change(context: context)
+    func change(context: String) {
+        TabUseCase.s.change(context: context)
     }
 
-    func removePageHistoryDataModel(context: String) {
-        PageHistoryDataModel.s.remove(context: context)
+    func remove(context: String) {
+        TabUseCase.s.remove(context: context)
     }
 }

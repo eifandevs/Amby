@@ -29,6 +29,6 @@ final class BaseViewControllerViewModel {
     }
 
     func insertByEventPageHistoryDataModel(url: String) {
-        PageUseCase.s.insert(url: url)
+        TabUseCase.s.insert(url: url)
     }
 }

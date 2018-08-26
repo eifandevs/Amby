@@ -247,7 +247,7 @@ class FooterView: UIView, ShadowView {
                 if tappedContext == self.viewModel.currentContext {
                     log.debug("selected same page.")
                 } else {
-                    self.viewModel.changePageHistoryDataModel(context: btn.context)
+                    self.viewModel.change(context: btn.context)
                 }
                 log.eventIn(chain: "rx_tap")
             })
@@ -263,7 +263,7 @@ class FooterView: UIView, ShadowView {
                 if let sender = sender.element {
                     if sender.state == .began {
                         for thumbnail in self.thumbnails where sender.view == thumbnail {
-                            self.viewModel.removePageHistoryDataModel(context: thumbnail.context)
+                            self.viewModel.remove(context: thumbnail.context)
                             break
                         }
                     }
@@ -330,7 +330,7 @@ class FooterView: UIView, ShadowView {
                 if tappedContext == self.viewModel.currentContext {
                     log.debug("selected same page.")
                 } else {
-                    self.viewModel.changePageHistoryDataModel(context: btn.context)
+                    self.viewModel.change(context: btn.context)
                 }
                 log.eventOut(chain: "rx_tap")
             })
@@ -346,7 +346,7 @@ class FooterView: UIView, ShadowView {
                 if let sender = sender.element {
                     if sender.state == .began {
                         for thumbnail in self.thumbnails where sender.view == thumbnail {
-                            self.viewModel.removePageHistoryDataModel(context: thumbnail.context)
+                            self.viewModel.remove(context: thumbnail.context)
                             break
                         }
                     }

@@ -66,6 +66,6 @@ final class HeaderViewModel {
     }
 
     func remove() {
-        PageUseCase.s.remove()
+        TabUseCase.s.remove()
     }
 }

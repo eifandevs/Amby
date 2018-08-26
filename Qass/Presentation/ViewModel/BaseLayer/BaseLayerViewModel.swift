@@ -18,4 +18,9 @@ final class BaseLayerViewModel {
     func autoFill() {
         FormUseCase.s.autoFill()
     }
+
+    func store() {
+        HistoryUseCase.s.store()
+        TabUseCase.s.store()
+    }
 }
