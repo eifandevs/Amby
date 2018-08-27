@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.5.1)
+  - Alamofire (4.7.3)
   - Moya/Core (11.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
@@ -25,7 +25,6 @@ PODS:
   - VerticalAlignmentLabel (0.1.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.4)
   - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
   - R.swift (~> 4.0)
@@ -38,7 +37,7 @@ DEPENDENCIES:
   - VerticalAlignmentLabel (~> 0.1)
 
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Moya: 3d594ada51a21cc02b18739ab578a1984f900c8a
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
@@ -52,6 +51,6 @@ SPEC CHECKSUMS:
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: 7725516b85a0947e961518acc6fab8e14ecc2156
+PODFILE CHECKSUM: 57c538255ebebf44bb348622b0be95b8c232e393
 
 COCOAPODS: 1.4.0
