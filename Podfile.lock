@@ -25,6 +25,7 @@ PODS:
   - VerticalAlignmentLabel (0.1.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.4)
   - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
   - R.swift (~> 4.0)
@@ -51,6 +52,6 @@ SPEC CHECKSUMS:
   SwiftLint: ce933681be10c3266e82576dad676fa815a602e9
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: 57c538255ebebf44bb348622b0be95b8c232e393
+PODFILE CHECKSUM: 4f97f3eee51a191d54610b2ee9ca3b82b1f520db
 
 COCOAPODS: 1.4.0

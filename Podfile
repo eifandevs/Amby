@@ -9,38 +9,45 @@ def common_pods
   pod 'RxCocoa', '~> 4.0'
   pod 'NSObject+Rx', '~> 4.2'
   pod 'R.swift', '~> 4.0'
+  pod 'Alamofire', '~> 4.4'
+  pod 'Moya/RxSwift', '~> 11.0'
   pod 'SwiftLint', '~> 0.25'
   pod 'SwiftFormat/CLI', '~> 0.33'
-  pod 'VerticalAlignmentLabel', '~> 0.1'
-  pod 'Moya/RxSwift', '~> 11.0'
 end
 
-target 'Qass-Develop' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+abstract_target 'All' do
 
-  # Pods for Qass-Develop
   common_pods
 
-  target 'Qass-DevelopTests' do
-    inherit! :search_paths
-    # Pods for testing
-    pod 'RxSwift', '~> 4.0'
-    pod 'Realm', '~> 2.4'
-    pod 'RealmSwift', '~> 2.4'
-  end
-
-  target 'Qass-DevelopUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-end
-
-target 'Qass-Production' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for Qass-Production
-  common_pods
+  target 'Qass-Develop' do
+    use_frameworks!
   
+    pod 'VerticalAlignmentLabel', '~> 0.1'
+
+    target 'Qass-DevelopTests' do
+      inherit! :search_paths
+    end
+  
+    target 'Qass-DevelopUITests' do
+      inherit! :search_paths
+    end
+  end
+
+  target 'Qass-Production' do
+    use_frameworks!
+  
+    pod 'VerticalAlignmentLabel', '~> 0.1'
+  
+    common_pods
+    
+  end
+
+  target 'Infrastructure' do
+  use_frameworks!
+
+    target 'InfrastructureTests' do
+      inherit! :search_paths
+    end
+  end
+
 end

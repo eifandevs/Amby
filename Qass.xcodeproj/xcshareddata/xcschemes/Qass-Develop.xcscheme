@@ -48,6 +48,16 @@
                ReferencedContainer = "container:Qass.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A1706862213487D600AAD993"
+               BuildableName = "InfrastructureTests.xctest"
+               BlueprintName = "InfrastructureTests"
+               ReferencedContainer = "container:Qass.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

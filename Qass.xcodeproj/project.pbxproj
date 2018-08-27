@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1E5E575750E6293FCFC43F4E /* Pods_Qass_Develop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8AC3C84A925C26AE61ACEF /* Pods_Qass_Develop.framework */; };
+		5151C749B513710BF74B6A93 /* Pods_All_Qass_Develop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA5EB3D14DE70EA66D4A4875 /* Pods_All_Qass_Develop.framework */; };
+		599441CEB1D8CD0E71757DDF /* Pods_All_Infrastructure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B217E7B41D854F314C9EE25A /* Pods_All_Infrastructure.framework */; };
 		6C9DF6C868BDCF40D4DA265D /* Pods_Qass_Production.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C7D9CDCF1ED1584806D133 /* Pods_Qass_Production.framework */; };
+		8D1C0025196839DED2CFA033 /* Pods_InfrastructureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 786B79A48750D3313E18422E /* Pods_InfrastructureTests.framework */; };
+		978F0DF07D033E1AC51CFF27 /* Pods_All_Qass_Production.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B6297BF48C14CDF9D28249 /* Pods_All_Qass_Production.framework */; };
 		A101649720C56376007A3CC7 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
 		A101649920C56599007A3CC7 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
 		A112E735212AF83800320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
@@ -299,6 +303,11 @@
 		A14266C120B5878D006E811A /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A14266C020B5878C006E811A /* env.plist */; };
 		A152086020C5543B00201B30 /* env-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = A152085F20C5543B00201B30 /* env-dev.plist */; };
 		A152086120C5543B00201B30 /* env-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = A152085F20C5543B00201B30 /* env-dev.plist */; };
+		A1706864213487D600AAD993 /* Infrastructure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A170685B213487D500AAD993 /* Infrastructure.framework */; };
+		A170686B213487D600AAD993 /* InfrastructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A170686A213487D600AAD993 /* InfrastructureTests.swift */; };
+		A170686D213487D600AAD993 /* Infrastructure.h in Headers */ = {isa = PBXBuildFile; fileRef = A170685D213487D500AAD993 /* Infrastructure.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A1706870213487D600AAD993 /* Infrastructure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A170685B213487D500AAD993 /* Infrastructure.framework */; };
+		A1706872213487D600AAD993 /* Infrastructure.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A170685B213487D500AAD993 /* Infrastructure.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F38209CF976004F1EA5 /* AppDelegate.swift */; };
 		A1903017209CF977004F1EA5 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3B209CF976004F1EA5 /* AppConst.swift */; };
 		A1903018209CF977004F1EA5 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3C209CF976004F1EA5 /* AppEnum.swift */; };
@@ -425,6 +434,27 @@
 			remoteGlobalIDString = A57EFEA01E3E06D300B66701;
 			remoteInfo = "Qas-Develop";
 		};
+		A1706865213487D600AAD993 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A170685A213487D500AAD993;
+			remoteInfo = Infrastructure;
+		};
+		A1706867213487D600AAD993 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A57EFEA01E3E06D300B66701;
+			remoteInfo = "Qass-Develop";
+		};
+		A170686E213487D600AAD993 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A170685A213487D500AAD993;
+			remoteInfo = Infrastructure;
+		};
 		A19880782073A5E20067EC4F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
@@ -434,15 +464,40 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A1706871213487D600AAD993 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A1706872213487D600AAD993 /* Infrastructure.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0DCA10614179B3C3E89DB806 /* Pods-All-Qass-Production.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Qass-Production.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Qass-Production/Pods-All-Qass-Production.debug.xcconfig"; sourceTree = "<group>"; };
 		0F88C0C6AEFCA8BF0EBDADDF /* Pods-Qass-DevelopTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopTests/Pods-Qass-DevelopTests.release.xcconfig"; sourceTree = "<group>"; };
+		137EC48551643EB3EF3D9C95 /* Pods-All-Qass-Production.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Qass-Production.release.xcconfig"; path = "Pods/Target Support Files/Pods-All-Qass-Production/Pods-All-Qass-Production.release.xcconfig"; sourceTree = "<group>"; };
 		13BEFEC8C75B22378FB644FE /* Pods-Qass-DevelopTests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopTests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopTests/Pods-Qass-DevelopTests.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		1F7F4557127E29C59D6530ED /* Pods-All-Qass-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Qass-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Qass-Develop/Pods-All-Qass-Develop.debug.xcconfig"; sourceTree = "<group>"; };
+		29E966DE2E45B2DF48BF2FBE /* Pods-InfrastructureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfrastructureTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InfrastructureTests/Pods-InfrastructureTests.debug.xcconfig"; sourceTree = "<group>"; };
 		33049F868E73A69619BB2972 /* Pods-Qass-Production.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Production.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Production/Pods-Qass-Production.release.xcconfig"; sourceTree = "<group>"; };
 		39C7D9CDCF1ED1584806D133 /* Pods_Qass_Production.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qass_Production.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C8A88249A1D6AE66F5C013A /* Pods-All-Qass-Production.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Qass-Production.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-All-Qass-Production/Pods-All-Qass-Production.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		568156B17DC764C7EE584236 /* Pods-Qass-Production.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Production.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Production/Pods-Qass-Production.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		5C4B4AD16C1932C2391BEF87 /* Pods-InfrastructureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfrastructureTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-InfrastructureTests/Pods-InfrastructureTests.release.xcconfig"; sourceTree = "<group>"; };
+		6A7C84D8535EF3A4F6503ADB /* Pods-All-Qass-Develop.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Qass-Develop.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-All-Qass-Develop/Pods-All-Qass-Develop.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		6AFB254ECF9D80625C6B1198 /* Pods-All-Infrastructure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Infrastructure.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Infrastructure/Pods-All-Infrastructure.debug.xcconfig"; sourceTree = "<group>"; };
 		6B413E23BA3E71FBD1B8F8C0 /* Pods_Qass_DevelopTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qass_DevelopTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		704D7409809AA4FD63EAD7A5 /* Pods-Qass-Production.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Production.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Production/Pods-Qass-Production.debug.xcconfig"; sourceTree = "<group>"; };
 		733E755ECE71F442A64C6908 /* Pods-Qass-DevelopTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopTests/Pods-Qass-DevelopTests.debug.xcconfig"; sourceTree = "<group>"; };
+		742AC0208BA758BD166388C3 /* Pods-All-Qass-Develop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Qass-Develop.release.xcconfig"; path = "Pods/Target Support Files/Pods-All-Qass-Develop/Pods-All-Qass-Develop.release.xcconfig"; sourceTree = "<group>"; };
+		770A85B9FB3A9A293FCEB3F7 /* Pods-All-Infrastructure.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Infrastructure.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-All-Infrastructure/Pods-All-Infrastructure.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		786B79A48750D3313E18422E /* Pods_InfrastructureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InfrastructureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79E42E2E4E116138B394AA57 /* Pods-Qass-DevelopUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8DD8D05F664AB7906F830747 /* Pods-Qass-DevelopUITests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
@@ -592,6 +647,12 @@
 		A14266C020B5878C006E811A /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
 		A152085F20C5543B00201B30 /* env-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "env-dev.plist"; sourceTree = "<group>"; };
 		A168382B2066960B00182028 /* Qass-DevelopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-DevelopTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A170685B213487D500AAD993 /* Infrastructure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Infrastructure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A170685D213487D500AAD993 /* Infrastructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Infrastructure.h; sourceTree = "<group>"; };
+		A170685E213487D500AAD993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1706863213487D600AAD993 /* InfrastructureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfrastructureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A170686A213487D600AAD993 /* InfrastructureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructureTests.swift; sourceTree = "<group>"; };
+		A170686C213487D600AAD993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1902F2E209CF976004F1EA5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A1902F31209CF976004F1EA5 /* FavoriteDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteDataModelTests.swift; sourceTree = "<group>"; };
@@ -664,12 +725,17 @@
 		A1FE87E6211B019D00B258A3 /* highlight.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlight.js; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass-Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qass-Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		B217E7B41D854F314C9EE25A /* Pods_All_Infrastructure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_Infrastructure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA347878BDD6D2A596C2A77F /* Pods-All-Infrastructure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Infrastructure.release.xcconfig"; path = "Pods/Target Support Files/Pods-All-Infrastructure/Pods-All-Infrastructure.release.xcconfig"; sourceTree = "<group>"; };
+		CA5EB3D14DE70EA66D4A4875 /* Pods_All_Qass_Develop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_Qass_Develop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC8AC3C84A925C26AE61ACEF /* Pods_Qass_Develop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qass_Develop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D01638F3D25C7880A129191D /* Pods-Qass-Develop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Develop.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Develop/Pods-Qass-Develop.release.xcconfig"; sourceTree = "<group>"; };
 		D4AC59DF776B4B04B7F7EEC4 /* Pods-Qass-Develop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Develop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Develop/Pods-Qass-Develop.debug.xcconfig"; sourceTree = "<group>"; };
 		D59BB598EE38BAC9FE3B07E2 /* Pods-Qass-DevelopUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-DevelopUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-DevelopUITests/Pods-Qass-DevelopUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DD6895BA0DE10F10478CCA1B /* Pods-Qass-Develop.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Develop.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Develop/Pods-Qass-Develop.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		EC116909E13363B2148924C6 /* Pods-InfrastructureTests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InfrastructureTests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-InfrastructureTests/Pods-InfrastructureTests.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		ECBD3443FFA620E93997B544 /* Pods_Qass_DevelopUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qass_DevelopUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6B6297BF48C14CDF9D28249 /* Pods_All_Qass_Production.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_Qass_Production.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -678,6 +744,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				D736BE5FF823758B8C789E24 /* Pods_Qass_DevelopTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1706857213487D500AAD993 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				599441CEB1D8CD0E71757DDF /* Pods_All_Infrastructure.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1706860213487D600AAD993 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1706864213487D600AAD993 /* Infrastructure.framework in Frameworks */,
+				8D1C0025196839DED2CFA033 /* Pods_InfrastructureTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,6 +784,7 @@
 				A1ED0BFE20C94DFE00DFC55B /* Kingfisher.framework in Frameworks */,
 				A101649920C56599007A3CC7 /* CryptoSwift.framework in Frameworks */,
 				6C9DF6C868BDCF40D4DA265D /* Pods_Qass_Production.framework in Frameworks */,
+				978F0DF07D033E1AC51CFF27 /* Pods_All_Qass_Production.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,8 +798,10 @@
 				A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */,
 				A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */,
 				A1ED0BFD20C94DDD00DFC55B /* Kingfisher.framework in Frameworks */,
+				A1706870213487D600AAD993 /* Infrastructure.framework in Frameworks */,
 				A101649720C56376007A3CC7 /* CryptoSwift.framework in Frameworks */,
 				1E5E575750E6293FCFC43F4E /* Pods_Qass_Develop.framework in Frameworks */,
+				5151C749B513710BF74B6A93 /* Pods_All_Qass_Develop.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,6 +822,10 @@
 				6B413E23BA3E71FBD1B8F8C0 /* Pods_Qass_DevelopTests.framework */,
 				ECBD3443FFA620E93997B544 /* Pods_Qass_DevelopUITests.framework */,
 				39C7D9CDCF1ED1584806D133 /* Pods_Qass_Production.framework */,
+				B217E7B41D854F314C9EE25A /* Pods_All_Infrastructure.framework */,
+				CA5EB3D14DE70EA66D4A4875 /* Pods_All_Qass_Develop.framework */,
+				F6B6297BF48C14CDF9D28249 /* Pods_All_Qass_Production.framework */,
+				786B79A48750D3313E18422E /* Pods_InfrastructureTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -755,6 +845,18 @@
 				704D7409809AA4FD63EAD7A5 /* Pods-Qass-Production.debug.xcconfig */,
 				568156B17DC764C7EE584236 /* Pods-Qass-Production.debug-ut.xcconfig */,
 				33049F868E73A69619BB2972 /* Pods-Qass-Production.release.xcconfig */,
+				6AFB254ECF9D80625C6B1198 /* Pods-All-Infrastructure.debug.xcconfig */,
+				770A85B9FB3A9A293FCEB3F7 /* Pods-All-Infrastructure.debug-ut.xcconfig */,
+				BA347878BDD6D2A596C2A77F /* Pods-All-Infrastructure.release.xcconfig */,
+				1F7F4557127E29C59D6530ED /* Pods-All-Qass-Develop.debug.xcconfig */,
+				6A7C84D8535EF3A4F6503ADB /* Pods-All-Qass-Develop.debug-ut.xcconfig */,
+				742AC0208BA758BD166388C3 /* Pods-All-Qass-Develop.release.xcconfig */,
+				0DCA10614179B3C3E89DB806 /* Pods-All-Qass-Production.debug.xcconfig */,
+				4C8A88249A1D6AE66F5C013A /* Pods-All-Qass-Production.debug-ut.xcconfig */,
+				137EC48551643EB3EF3D9C95 /* Pods-All-Qass-Production.release.xcconfig */,
+				29E966DE2E45B2DF48BF2FBE /* Pods-InfrastructureTests.debug.xcconfig */,
+				EC116909E13363B2148924C6 /* Pods-InfrastructureTests.debug-ut.xcconfig */,
+				5C4B4AD16C1932C2391BEF87 /* Pods-InfrastructureTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1350,6 +1452,24 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
+		A170685C213487D500AAD993 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				A170685D213487D500AAD993 /* Infrastructure.h */,
+				A170685E213487D500AAD993 /* Info.plist */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		A1706869213487D600AAD993 /* InfrastructureTests */ = {
+			isa = PBXGroup;
+			children = (
+				A170686A213487D600AAD993 /* InfrastructureTests.swift */,
+				A170686C213487D600AAD993 /* Info.plist */,
+			);
+			path = InfrastructureTests;
+			sourceTree = "<group>";
+		};
 		A1902F2D209CF976004F1EA5 /* Qass-DevelopTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1562,6 +1682,8 @@
 				A1902F2D209CF976004F1EA5 /* Qass-DevelopTests */,
 				A190300D209CF977004F1EA5 /* Qass-DevelopUITests */,
 				A5A6F2C51F1F92DD00A4620C /* R.generated.swift */,
+				A170685C213487D500AAD993 /* Infrastructure */,
+				A1706869213487D600AAD993 /* InfrastructureTests */,
 				A57EFEA21E3E06D300B66701 /* Products */,
 				2D6EC82ACCDEE92B54408E2F /* Pods */,
 				1BAE9B5DD71F0DF92296651C /* Frameworks */,
@@ -1575,11 +1697,24 @@
 				A168382B2066960B00182028 /* Qass-DevelopTests.xctest */,
 				A19880732073A5E20067EC4F /* Qass-DevelopUITests.xctest */,
 				A1B5F448209D0C8700DF1AE3 /* Qass-Production.app */,
+				A170685B213487D500AAD993 /* Infrastructure.framework */,
+				A1706863213487D600AAD993 /* InfrastructureTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A1706858213487D500AAD993 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A170686D213487D600AAD993 /* Infrastructure.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		A168382A2066960B00182028 /* Qass-DevelopTests */ = {
@@ -1601,6 +1736,48 @@
 			name = "Qass-DevelopTests";
 			productName = "Qas-DevelopTests";
 			productReference = A168382B2066960B00182028 /* Qass-DevelopTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A170685A213487D500AAD993 /* Infrastructure */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1706879213487D600AAD993 /* Build configuration list for PBXNativeTarget "Infrastructure" */;
+			buildPhases = (
+				5F8819FB8AE32E15AB718012 /* [CP] Check Pods Manifest.lock */,
+				A1706856213487D500AAD993 /* Sources */,
+				A1706857213487D500AAD993 /* Frameworks */,
+				A1706858213487D500AAD993 /* Headers */,
+				A1706859213487D500AAD993 /* Resources */,
+				A830D937C2D474915F784456 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Infrastructure;
+			productName = Infrastructure;
+			productReference = A170685B213487D500AAD993 /* Infrastructure.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A1706862213487D600AAD993 /* InfrastructureTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A170687A213487D600AAD993 /* Build configuration list for PBXNativeTarget "InfrastructureTests" */;
+			buildPhases = (
+				15E3B28C9AB80875B2A5E5DD /* [CP] Check Pods Manifest.lock */,
+				A170685F213487D600AAD993 /* Sources */,
+				A1706860213487D600AAD993 /* Frameworks */,
+				A1706861213487D600AAD993 /* Resources */,
+				5DF6DFF5D96940FC580531EE /* [CP] Embed Pods Frameworks */,
+				B76BFF70BF9E1B44576BF183 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1706866213487D600AAD993 /* PBXTargetDependency */,
+				A1706868213487D600AAD993 /* PBXTargetDependency */,
+			);
+			name = InfrastructureTests;
+			productName = InfrastructureTests;
+			productReference = A1706863213487D600AAD993 /* InfrastructureTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		A19880722073A5E20067EC4F /* Qass-DevelopUITests */ = {
@@ -1662,10 +1839,12 @@
 				A1EF0018207F7AA60079E1DF /* ShellScript */,
 				A544ACA02046F74C00D2C310 /* ShellScript */,
 				A101649820C5638E007A3CC7 /* ShellScript */,
+				A1706871213487D600AAD993 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A170686F213487D600AAD993 /* PBXTargetDependency */,
 			);
 			name = "Qass-Develop";
 			productName = Eiger;
@@ -1678,12 +1857,23 @@
 		A57EFE991E3E06D300B66701 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = eifandevs;
 				TargetAttributes = {
 					A168382A2066960B00182028 = {
 						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = TBQA5RANYY;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A57EFEA01E3E06D300B66701;
+					};
+					A170685A213487D500AAD993 = {
+						CreatedOnToolsVersion = 9.4;
+						DevelopmentTeam = TBQA5RANYY;
+						ProvisioningStyle = Automatic;
+					};
+					A1706862213487D600AAD993 = {
+						CreatedOnToolsVersion = 9.4;
 						DevelopmentTeam = TBQA5RANYY;
 						ProvisioningStyle = Automatic;
 						TestTargetID = A57EFEA01E3E06D300B66701;
@@ -1722,12 +1912,28 @@
 				A1B5F3A1209D0C8700DF1AE3 /* Qass-Production */,
 				A168382A2066960B00182028 /* Qass-DevelopTests */,
 				A19880722073A5E20067EC4F /* Qass-DevelopUITests */,
+				A170685A213487D500AAD993 /* Infrastructure */,
+				A1706862213487D600AAD993 /* InfrastructureTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A16838292066960B00182028 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1706859213487D500AAD993 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1706861213487D600AAD993 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1833,13 +2039,31 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		15E3B28C9AB80875B2A5E5DD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-InfrastructureTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1D029561B4665ADEDAE1473F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Qass-Develop/Pods-Qass-Develop-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-All-Qass-Develop/Pods-All-Qass-Develop-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
@@ -1866,7 +2090,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qass-Develop/Pods-Qass-Develop-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-All-Qass-Develop/Pods-All-Qass-Develop-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1E63D71BB12081FC0887EC86 /* [CP] Copy Pods Resources */ = {
@@ -1881,7 +2105,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qass-Develop/Pods-Qass-Develop-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-All-Qass-Develop/Pods-All-Qass-Develop-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		57D8DA48BB701B7EFB84CDD9 /* [CP] Check Pods Manifest.lock */ = {
@@ -1895,7 +2119,59 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Qass-Develop-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-All-Qass-Develop-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5DF6DFF5D96940FC580531EE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-InfrastructureTests/Pods-InfrastructureTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
+				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InfrastructureTests/Pods-InfrastructureTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F8819FB8AE32E15AB718012 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-All-Infrastructure-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1969,7 +2245,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Qass-Production-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-All-Qass-Production-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1995,7 +2271,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Qass-Production/Pods-Qass-Production-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-All-Qass-Production/Pods-All-Qass-Production-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
@@ -2022,7 +2298,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qass-Production/Pods-Qass-Production-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-All-Qass-Production/Pods-All-Qass-Production-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A1B5F441209D0C8700DF1AE3 /* [CP] Copy Pods Resources */ = {
@@ -2037,7 +2313,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Qass-Production/Pods-Qass-Production-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-All-Qass-Production/Pods-All-Qass-Production-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A1B5F442209D0C8700DF1AE3 /* ShellScript */ = {
@@ -2104,6 +2380,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT\"";
+		};
+		A830D937C2D474915F784456 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-All-Infrastructure/Pods-All-Infrastructure-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B76BFF70BF9E1B44576BF183 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-InfrastructureTests/Pods-InfrastructureTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		B9B79E097FCC6A8AF6D356DB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2210,6 +2516,21 @@
 				A1DF4B40209D03A300196E0F /* FavoriteDataModelTests.swift in Sources */,
 				A1E562D720D56BF8007B5B1C /* SearchHistoryDataModelTests.swift in Sources */,
 				A1DF4B42209D03AC00196E0F /* PageHistoryDataModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1706856213487D500AAD993 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A170685F213487D600AAD993 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A170686B213487D600AAD993 /* InfrastructureTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2544,6 +2865,21 @@
 			target = A57EFEA01E3E06D300B66701 /* Qass-Develop */;
 			targetProxy = A16838302066960B00182028 /* PBXContainerItemProxy */;
 		};
+		A1706866213487D600AAD993 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A170685A213487D500AAD993 /* Infrastructure */;
+			targetProxy = A1706865213487D600AAD993 /* PBXContainerItemProxy */;
+		};
+		A1706868213487D600AAD993 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A57EFEA01E3E06D300B66701 /* Qass-Develop */;
+			targetProxy = A1706867213487D600AAD993 /* PBXContainerItemProxy */;
+		};
+		A170686F213487D600AAD993 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A170685A213487D500AAD993 /* Infrastructure */;
+			targetProxy = A170686E213487D600AAD993 /* PBXContainerItemProxy */;
+		};
 		A19880792073A5E20067EC4F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A57EFEA01E3E06D300B66701 /* Qass-Develop */;
@@ -2611,6 +2947,174 @@
 			};
 			name = Release;
 		};
+		A1706873213487D600AAD993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AFB254ECF9D80625C6B1198 /* Pods-All-Infrastructure.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Infrastructure/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.Infrastructure;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A1706874213487D600AAD993 /* Debug-UT */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 770A85B9FB3A9A293FCEB3F7 /* Pods-All-Infrastructure.debug-ut.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Infrastructure/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.Infrastructure;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Debug-UT";
+		};
+		A1706875213487D600AAD993 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA347878BDD6D2A596C2A77F /* Pods-All-Infrastructure.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Infrastructure/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.Infrastructure;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A1706876213487D600AAD993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29E966DE2E45B2DF48BF2FBE /* Pods-InfrastructureTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = InfrastructureTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.InfrastructureTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qass-Develop.app/Qass-Develop";
+			};
+			name = Debug;
+		};
+		A1706877213487D600AAD993 /* Debug-UT */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC116909E13363B2148924C6 /* Pods-InfrastructureTests.debug-ut.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = InfrastructureTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.InfrastructureTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qass-Develop.app/Qass-Develop";
+			};
+			name = "Debug-UT";
+		};
+		A1706878213487D600AAD993 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C4B4AD16C1932C2391BEF87 /* Pods-InfrastructureTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = InfrastructureTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.InfrastructureTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qass-Develop.app/Qass-Develop";
+			};
+			name = Release;
+		};
 		A198807B2073A5E20067EC4F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 79E42E2E4E116138B394AA57 /* Pods-Qass-DevelopUITests.debug.xcconfig */;
@@ -2659,7 +3163,7 @@
 		};
 		A1B5F445209D0C8700DF1AE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 704D7409809AA4FD63EAD7A5 /* Pods-Qass-Production.debug.xcconfig */;
+			baseConfigurationReference = 0DCA10614179B3C3E89DB806 /* Pods-All-Qass-Production.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2682,7 +3186,7 @@
 		};
 		A1B5F446209D0C8700DF1AE3 /* Debug-UT */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 568156B17DC764C7EE584236 /* Pods-Qass-Production.debug-ut.xcconfig */;
+			baseConfigurationReference = 4C8A88249A1D6AE66F5C013A /* Pods-All-Qass-Production.debug-ut.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2705,7 +3209,7 @@
 		};
 		A1B5F447209D0C8700DF1AE3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33049F868E73A69619BB2972 /* Pods-Qass-Production.release.xcconfig */;
+			baseConfigurationReference = 137EC48551643EB3EF3D9C95 /* Pods-All-Qass-Production.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2787,10 +3291,11 @@
 		};
 		A1EA9D932074F8E70058D073 /* Debug-UT */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD6895BA0DE10F10478CCA1B /* Pods-Qass-Develop.debug-ut.xcconfig */;
+			baseConfigurationReference = 6A7C84D8535EF3A4F6503ADB /* Pods-All-Qass-Develop.debug-ut.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = TBQA5RANYY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2969,10 +3474,11 @@
 		};
 		A57EFEB41E3E06D300B66701 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4AC59DF776B4B04B7F7EEC4 /* Pods-Qass-Develop.debug.xcconfig */;
+			baseConfigurationReference = 1F7F4557127E29C59D6530ED /* Pods-All-Qass-Develop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = TBQA5RANYY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2992,10 +3498,11 @@
 		};
 		A57EFEB51E3E06D300B66701 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D01638F3D25C7880A129191D /* Pods-Qass-Develop.release.xcconfig */;
+			baseConfigurationReference = 742AC0208BA758BD166388C3 /* Pods-All-Qass-Develop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = TBQA5RANYY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3021,6 +3528,26 @@
 				A16838322066960B00182028 /* Debug */,
 				A1EA9D942074F8E70058D073 /* Debug-UT */,
 				A16838332066960B00182028 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1706879213487D600AAD993 /* Build configuration list for PBXNativeTarget "Infrastructure" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1706873213487D600AAD993 /* Debug */,
+				A1706874213487D600AAD993 /* Debug-UT */,
+				A1706875213487D600AAD993 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A170687A213487D600AAD993 /* Build configuration list for PBXNativeTarget "InfrastructureTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1706876213487D600AAD993 /* Debug */,
+				A1706877213487D600AAD993 /* Debug-UT */,
+				A1706878213487D600AAD993 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,6 @@
+framework module Pods_All_Qass_Develop {
+  umbrella header "Pods-All-Qass-Develop-umbrella.h"
+
+  export *
+  module * { export * }
+}
