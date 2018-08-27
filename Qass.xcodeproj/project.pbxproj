@@ -389,7 +389,6 @@
 		A1DF4B41209D03A900196E0F /* FormDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F32209CF976004F1EA5 /* FormDataModelTests.swift */; };
 		A1DF4B42209D03AC00196E0F /* PageHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F33209CF976004F1EA5 /* PageHistoryDataModelTests.swift */; };
 		A1DF4B44209D03BF00196E0F /* Qass_DevelopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190300F209CF977004F1EA5 /* Qass_DevelopUITests.swift */; };
-		A1E562CB20D55C0E007B5B1C /* HeaderViewDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562CA20D55C0E007B5B1C /* HeaderViewDataModelTests.swift */; };
 		A1E562CD20D560C9007B5B1C /* OperationDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562CC20D560C9007B5B1C /* OperationDataModelTests.swift */; };
 		A1E562D120D564B0007B5B1C /* EnvDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D020D564B0007B5B1C /* EnvDataModelTests.swift */; };
 		A1E562D320D56724007B5B1C /* ArticleDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D220D56724007B5B1C /* ArticleDataModelTests.swift */; };
@@ -648,7 +647,6 @@
 		A1B5F448209D0C8700DF1AE3 /* Qass-Production.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qass-Production.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModelTests.swift; sourceTree = "<group>"; };
 		A1CF359F20DA703800C1343B /* Springboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Springboard.swift; sourceTree = "<group>"; };
-		A1E562CA20D55C0E007B5B1C /* HeaderViewDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewDataModelTests.swift; sourceTree = "<group>"; };
 		A1E562CC20D560C9007B5B1C /* OperationDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataModelTests.swift; sourceTree = "<group>"; };
 		A1E562D020D564B0007B5B1C /* EnvDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvDataModelTests.swift; sourceTree = "<group>"; };
 		A1E562D220D56724007B5B1C /* ArticleDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataModelTests.swift; sourceTree = "<group>"; };
@@ -1369,7 +1367,6 @@
 				A1902F31209CF976004F1EA5 /* FavoriteDataModelTests.swift */,
 				A1902F32209CF976004F1EA5 /* FormDataModelTests.swift */,
 				A1902F33209CF976004F1EA5 /* PageHistoryDataModelTests.swift */,
-				A1E562CA20D55C0E007B5B1C /* HeaderViewDataModelTests.swift */,
 				A1E562CC20D560C9007B5B1C /* OperationDataModelTests.swift */,
 				A1E562D020D564B0007B5B1C /* EnvDataModelTests.swift */,
 				A1E562D220D56724007B5B1C /* ArticleDataModelTests.swift */,
@@ -2207,7 +2204,6 @@
 				A1DF4B41209D03A900196E0F /* FormDataModelTests.swift in Sources */,
 				A1E562CD20D560C9007B5B1C /* OperationDataModelTests.swift in Sources */,
 				A112E9B621330AA600320048 /* ContactUseCase.swift in Sources */,
-				A1E562CB20D55C0E007B5B1C /* HeaderViewDataModelTests.swift in Sources */,
 				A1CF359020D7D16400C1343B /* ThumbnailDataModelTests.swift in Sources */,
 				A1E562D320D56724007B5B1C /* ArticleDataModelTests.swift in Sources */,
 				A1E562D920D679E1007B5B1C /* SettingDataModelTests.swift in Sources */,
