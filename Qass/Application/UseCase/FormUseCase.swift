@@ -12,7 +12,6 @@ import RxSwift
 
 /// フォームユースケース
 final class FormUseCase {
-
     static let s = FormUseCase()
 
     /// フォーム登録通知用RX

@@ -71,8 +71,8 @@ class CircleMenu: UIButton, ShadowView, CircleView {
         self.init(frame: frame)
 
         #if UT
-        accessibilityIdentifier = "circlemenu"
-        log.debug("set accessibility. name: circlemenu")
+            accessibilityIdentifier = "circlemenu"
+            log.debug("set accessibility. name: circlemenu")
         #endif
 
         circleMenuItemGroup = viewModel.menuItems.map { $0.map { CircleMenuItem(operation: $0) } }

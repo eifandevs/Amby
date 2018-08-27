@@ -86,7 +86,7 @@ class EGWebView: WKWebView {
     /// start observe 'EstimatedProgress'
     func observeEstimatedProgress(observer: NSObject) {
         if !isObservingEstimagedProgress {
-            addObserver(observer, forKeyPath: "estimatedProgress", options: .new, context: &(context))
+            addObserver(observer, forKeyPath: "estimatedProgress", options: .new, context: &context)
             isObservingEstimagedProgress = true
         }
     }
@@ -102,7 +102,7 @@ class EGWebView: WKWebView {
     /// start observe 'title'
     func observeTitle(observer: NSObject) {
         if !isObservingTitle {
-            addObserver(observer, forKeyPath: "title", options: .new, context: &(context))
+            addObserver(observer, forKeyPath: "title", options: .new, context: &context)
             isObservingTitle = true
         }
     }
@@ -118,7 +118,7 @@ class EGWebView: WKWebView {
     /// start observe 'url'
     func observeUrl(observer: NSObject) {
         if !isObservingUrl {
-            addObserver(observer, forKeyPath: "URL", options: .new, context: &(context))
+            addObserver(observer, forKeyPath: "URL", options: .new, context: &context)
             isObservingUrl = true
         }
     }
@@ -220,6 +220,7 @@ class EGWebView: WKWebView {
             }
         }
     }
+
 //    - (NSInteger)highlightAllOccurencesOfString:(NSString*)str
 //    {
 //    NSString *path = [[NSBundle mainBundle] pathForResource:@"SearchWebView" ofType:@"js"];

@@ -12,7 +12,6 @@ import RxSwift
 
 /// キャッシュユースケース
 final class CacheUseCase {
-
     static let s = CacheUseCase()
 
     private init() {}

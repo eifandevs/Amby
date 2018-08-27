@@ -37,7 +37,6 @@ final class CommonHistoryDataModel {
     /// insert with data
     func insert(url: URL?, title: String?, date: Date) {
         if let url = url?.absoluteString, let title = title, !url.isEmpty && !title.isEmpty {
-
             let currentUrl = histories.count > 0 ? histories.first!.url : nil
 
             // do not duplicate registration

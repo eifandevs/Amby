@@ -41,22 +41,22 @@ final class BaseViewModel {
     let rx_baseViewModelDidLoadSourceCode = SourceCodeUseCase.s.rx_sourceCodeUseCaseDidRequestLoad
         .flatMap { url -> Observable<String> in
             return Observable.just(url)
-    }
+        }
     /// ロードリクエスト通知用RX(Favorite)
     let rx_baseViewModelDidLoadFavorite = FavoriteUseCase.s.rx_favoriteUseCaseDidRequestLoad
         .flatMap { url -> Observable<String> in
             return Observable.just(url)
-    }
+        }
     /// ロードリクエスト通知用RX(Form)
     let rx_baseViewModelDidLoadForm = FormUseCase.s.rx_formUseCaseDidRequestLoad
         .flatMap { url -> Observable<String> in
             return Observable.just(url)
-    }
+        }
     /// ロードリクエスト通知用RX(History)
     let rx_baseViewModelDidLoadHistory = HistoryUseCase.s.rx_historyUseCaseDidRequestLoad
         .flatMap { url -> Observable<String> in
             return Observable.just(url)
-    }
+        }
     /// ロードリクエスト通知用RX
     let rx_baseViewModelDidSearchWebView = SearchUseCase.s.rx_searchUseCaseDidRequestLoad
         .flatMap { searchText -> Observable<String> in
@@ -84,7 +84,7 @@ final class BaseViewModel {
         }
     /// 全文検索通知用RX
     let rx_baseViewModelDidGrep = GrepUseCase.s.rx_grepUseCaseDidRequestGrep
-        .flatMap { text -> Observable<(String)> in
+        .flatMap { text -> Observable<String> in
             if !text.isEmpty {
                 return Observable.just(text)
             }

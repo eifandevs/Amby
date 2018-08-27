@@ -12,7 +12,6 @@ import RxSwift
 
 /// トレンドユースケース
 final class TrendUseCase {
-
     static let s = TrendUseCase()
 
     /// ロードリクエスト通知用RX

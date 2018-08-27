@@ -6,11 +6,11 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import MessageUI
 import NSObject_Rx
 import RxCocoa
 import RxSwift
 import UIKit
-import MessageUI
 
 class BaseViewController: UIViewController {
     private var baseLayer: BaseLayer?
@@ -21,7 +21,7 @@ class BaseViewController: UIViewController {
 
     // 全面に画面がpresentされているか
     var isPresented: Bool {
-        if self.presentedViewController != nil {
+        if presentedViewController != nil {
             return true
         }
 
@@ -222,7 +222,7 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController: MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    func mailComposeController(_: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error _: Error?) {
         switch result {
         case .cancelled:
             log.debug("キャンセル")

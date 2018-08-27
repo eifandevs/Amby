@@ -12,14 +12,13 @@ import RxSwift
 
 /// タブユースケース
 final class TabUseCase {
-
     static let s = TabUseCase()
 
     /// ページインサート通知用RX
     let rx_tabUseCaseDidInsert = PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert
         .flatMap { object -> Observable<Int> in
             return Observable.just(object.at)
-    }
+        }
 
     /// ページリロード通知用RX
     let rx_tabUseCaseDidReload = PageHistoryDataModel.s.rx_pageHistoryDataModelDidReload.flatMap { _ in Observable.just(()) }
@@ -31,13 +30,13 @@ final class TabUseCase {
     let rx_tabUseCaseDidRemove = PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
         .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
             return Observable.just(object)
-    }
+        }
 
     /// ローディング開始通知用RX
     let rx_tabUseCaseDidStartLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidStartLoading
         .flatMap { context -> Observable<String> in
             return Observable.just(context)
-    }
+        }
 
     /// ローディング終了通知用RX
     let rx_tabUseCaseDidEndLoading = PageHistoryDataModel.s.rx_pageHistoryDataModelDidEndRendering
@@ -56,7 +55,7 @@ final class TabUseCase {
             }
 
             return Observable.empty()
-    }
+        }
 
     var currentUrl: String? {
         return PageHistoryDataModel.s.currentHistory?.url

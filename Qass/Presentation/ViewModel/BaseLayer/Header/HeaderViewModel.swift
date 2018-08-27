@@ -16,16 +16,19 @@ final class HeaderViewModel {
         .flatMap { progress -> Observable<CGFloat> in
             return Observable.just(progress)
         }
+
     /// お気に入り変更通知用RX
     let rx_headerViewModelDidChangeFavorite = FavoriteUseCase.s.rx_favoriteUseCaseDidChangeFavorite
         .flatMap { flag -> Observable<Bool> in
             return Observable.just(flag)
         }
+
     /// テキストフィールド更新通知用RX
     let rx_headerViewModelDidChangeField = ProgressUseCase.s.rx_progressUseCaseDidChangeField
         .flatMap { text -> Observable<String> in
             return Observable.just(text)
         }
+
     /// 編集開始通知用RX
     let rx_headerViewModelDidbeginSearching = SearchUseCase.s.rx_searchUseCaseDidBeginSearching
         .flatMap { forceEditFlg -> Observable<Bool> in

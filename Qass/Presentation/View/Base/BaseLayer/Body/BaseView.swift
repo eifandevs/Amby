@@ -536,6 +536,7 @@ class BaseView: UIView {
     }
 
     // MARK: KVO(Progress)
+
     override func observeValue(forKeyPath keyPath: String?, of _: Any?, change: [NSKeyValueChangeKey: Any]?, context pointer: UnsafeMutableRawPointer?) {
         let opaquePtr = OpaquePointer(pointer)
         if let contextPtr = UnsafeMutablePointer<String>(opaquePtr) {
@@ -1142,8 +1143,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
         }
     }
 
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-
+    func webView(_: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard let url = navigationAction.request.url else {
             decisionHandler(.cancel)
             return

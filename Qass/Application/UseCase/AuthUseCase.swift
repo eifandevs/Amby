@@ -12,9 +12,7 @@ import RxSwift
 
 /// 認証ユースケース
 final class AuthUseCase {
-
     static let s = AuthUseCase()
 
     private init() {}
-
 }

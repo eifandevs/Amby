@@ -12,7 +12,6 @@ import RxSwift
 
 /// 設定ユースケース
 final class SettingUseCase {
-
     static let s = SettingUseCase()
 
     private init() {}

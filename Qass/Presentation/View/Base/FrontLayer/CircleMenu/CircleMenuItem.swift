@@ -60,49 +60,49 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
         }
 
         #if UT
-        switch operation {
-        case .menu:
-            accessibilityIdentifier = R.image.circlemenuMenu.name
-            log.debug("set accessibility. name: \(R.image.circlemenuMenu.name)")
-        case .close:
-            accessibilityIdentifier = R.image.circlemenuClose.name
-            log.debug("set accessibility. name: \(R.image.circlemenuClose.name)")
-        case .historyBack:
-            accessibilityIdentifier = R.image.circlemenuHistoryback.name
-            log.debug("set accessibility. name: \(R.image.circlemenuHistoryback.name)")
-        case .copy:
-            accessibilityIdentifier = R.image.circlemenuCopy.name
-            log.debug("set accessibility. name: \(R.image.circlemenuCopy.name)")
-        case .search:
-            accessibilityIdentifier = R.image.circlemenuSearch.name
-            log.debug("set accessibility. name: \(R.image.circlemenuSearch.name)")
-        case .grep:
-            accessibilityIdentifier = R.image.circlemenuGrep.name
-            log.debug("set accessibility. name: \(R.image.circlemenuGrep.name)")
-        case .add:
-            accessibilityIdentifier = R.image.circlemenuAdd.name
-            log.debug("set accessibility. name: \(R.image.circlemenuAdd.name)")
-        case .scrollUp:
-            accessibilityIdentifier = R.image.circlemenuScrollup.name
-            log.debug("set accessibility. name: \(R.image.circlemenuScrollup.name)")
-        case .autoScroll:
-            accessibilityIdentifier = R.image.circlemenuAutoscroll.name
-            log.debug("set accessibility. name: \(R.image.circlemenuAutoscroll.name)")
-        case .historyForward:
-            accessibilityIdentifier = R.image.circlemenuHistoryforward.name
-            log.debug("set accessibility. name: \(R.image.circlemenuHistoryforward.name)")
-        case .form:
-            accessibilityIdentifier = R.image.circlemenuForm.name
-            log.debug("set accessibility. name: \(R.image.circlemenuForm.name)")
-        case .favorite:
-            accessibilityIdentifier = R.image.circlemenuFavorite.name
-            log.debug("set accessibility. name: \(R.image.circlemenuFavorite.name)")
-        case .home:
-            accessibilityIdentifier = R.image.circlemenuHome.name
-            log.debug("set accessibility. name: \(R.image.circlemenuHome.name)")
-        default:
-            break
-        }
+            switch operation {
+            case .menu:
+                accessibilityIdentifier = R.image.circlemenuMenu.name
+                log.debug("set accessibility. name: \(R.image.circlemenuMenu.name)")
+            case .close:
+                accessibilityIdentifier = R.image.circlemenuClose.name
+                log.debug("set accessibility. name: \(R.image.circlemenuClose.name)")
+            case .historyBack:
+                accessibilityIdentifier = R.image.circlemenuHistoryback.name
+                log.debug("set accessibility. name: \(R.image.circlemenuHistoryback.name)")
+            case .copy:
+                accessibilityIdentifier = R.image.circlemenuCopy.name
+                log.debug("set accessibility. name: \(R.image.circlemenuCopy.name)")
+            case .search:
+                accessibilityIdentifier = R.image.circlemenuSearch.name
+                log.debug("set accessibility. name: \(R.image.circlemenuSearch.name)")
+            case .grep:
+                accessibilityIdentifier = R.image.circlemenuGrep.name
+                log.debug("set accessibility. name: \(R.image.circlemenuGrep.name)")
+            case .add:
+                accessibilityIdentifier = R.image.circlemenuAdd.name
+                log.debug("set accessibility. name: \(R.image.circlemenuAdd.name)")
+            case .scrollUp:
+                accessibilityIdentifier = R.image.circlemenuScrollup.name
+                log.debug("set accessibility. name: \(R.image.circlemenuScrollup.name)")
+            case .autoScroll:
+                accessibilityIdentifier = R.image.circlemenuAutoscroll.name
+                log.debug("set accessibility. name: \(R.image.circlemenuAutoscroll.name)")
+            case .historyForward:
+                accessibilityIdentifier = R.image.circlemenuHistoryforward.name
+                log.debug("set accessibility. name: \(R.image.circlemenuHistoryforward.name)")
+            case .form:
+                accessibilityIdentifier = R.image.circlemenuForm.name
+                log.debug("set accessibility. name: \(R.image.circlemenuForm.name)")
+            case .favorite:
+                accessibilityIdentifier = R.image.circlemenuFavorite.name
+                log.debug("set accessibility. name: \(R.image.circlemenuFavorite.name)")
+            case .home:
+                accessibilityIdentifier = R.image.circlemenuHome.name
+                log.debug("set accessibility. name: \(R.image.circlemenuHome.name)")
+            default:
+                break
+            }
         #endif
     }
 

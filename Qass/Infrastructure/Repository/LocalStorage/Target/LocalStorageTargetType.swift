@@ -9,7 +9,6 @@
 import Foundation
 
 public protocol LocalStorageTargetType {
-
     /// The target's base
     var base: String { get }
 

@@ -12,7 +12,6 @@ import RxSwift
 
 /// ソースコードユースケース
 final class SourceCodeUseCase {
-
     static let s = SourceCodeUseCase()
 
     /// ロードリクエスト通知用RX

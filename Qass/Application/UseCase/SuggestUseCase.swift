@@ -12,7 +12,6 @@ import RxSwift
 
 /// サジェストユースケース
 final class SuggestUseCase {
-
     static let s = SuggestUseCase()
 
     /// サジェストリクエスト通知用RX

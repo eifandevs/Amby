@@ -13,6 +13,7 @@ import UIKit
 struct AppConst {
 
     // MARK: - 共通
+
     static let APP = AppConst.APP_VALUE()
     struct APP_VALUE {
         let FONT = "Avenir"
@@ -21,6 +22,7 @@ struct AppConst {
     }
 
     // MARK: - フロントレイヤーの定数
+
     static let FRONT_LAYER = AppConst.FRONT_LAYER_VALUE()
     struct FRONT_LAYER_VALUE {
         let TABLE_VIEW_CELL_HEIGHT = 50.f
@@ -34,6 +36,7 @@ struct AppConst {
     }
 
     // MARK: - ベースレイヤーの定数
+
     static var BASE_LAYER = AppConst.BASE_LAYER_VALUE()
     struct BASE_LAYER_VALUE {
         var HEADER_HEIGHT = ((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height) * 1.3 // サムネイルの高さ * 1.3
@@ -47,6 +50,7 @@ struct AppConst {
     }
 
     // MARK: - キー情報
+
     static let KEY = KEY_VALUE()
     struct KEY_VALUE {
         let REALM_TOKEN = EnvDataModel.s.get(key: "KEY_REALM_TOKEN")
@@ -68,6 +72,7 @@ struct AppConst {
     }
 
     // MARK: - URL
+
     static let URL = URL_VALUE()
     struct URL_VALUE {
         let BLANK = "about:blank"
@@ -76,6 +81,7 @@ struct AppConst {
     }
 
     // MARK: - メニュー画面
+
     static let OPTION_MENU = OPTION_MENU_VALUE()
     struct OPTION_MENU_VALUE {
         let TREND = "トレンド"
@@ -91,6 +97,7 @@ struct AppConst {
     }
 
     // MARK: - アプリ情報
+
     static let APP_INFORMATION = APP_INFORMATION_VALUE()
     struct APP_INFORMATION_VALUE {
         let APP = "アプリについて"
@@ -99,6 +106,7 @@ struct AppConst {
     }
 
     // MARK: - 設定画面
+
     static let SETTING = SETTING_VALUE()
     struct SETTING_VALUE {
         let SECTION_AUTO_SCROLL = "自動スクロール設定"
@@ -115,6 +123,7 @@ struct AppConst {
     }
 
     // MARK: - UD初期値
+
     static let UD = UD_VALUE()
     struct UD_VALUE {
         let CURRENT_CONTEXT = ""

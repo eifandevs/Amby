@@ -21,10 +21,10 @@ extension Cache: LocalStorageTargetType {
     var base: String { return DeviceConst.DEVICE.CACHES_PATH }
 
     /// The target's base `URL`.
-    var url: URL { return URL(fileURLWithPath: self.base + self.path) }
+    var url: URL { return URL(fileURLWithPath: base + path) }
 
     /// absolute path
-    var absolutePath: String { return self.base + self.path }
+    var absolutePath: String { return base + path }
 
     /// path
     var path: String {

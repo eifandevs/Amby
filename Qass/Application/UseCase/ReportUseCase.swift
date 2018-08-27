@@ -12,7 +12,6 @@ import RxSwift
 
 /// レポートユースケース
 final class ReportUseCase {
-
     static let s = ReportUseCase()
 
     /// レポート画面表示通知用RX

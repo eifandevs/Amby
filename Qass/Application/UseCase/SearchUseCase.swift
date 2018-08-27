@@ -12,7 +12,6 @@ import RxSwift
 
 /// 検索ユースケース
 final class SearchUseCase {
-
     static let s = SearchUseCase()
 
     /// 検索開始通知用RX

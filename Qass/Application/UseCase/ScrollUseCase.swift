@@ -12,7 +12,6 @@ import RxSwift
 
 /// スクロールユースケース
 final class ScrollUseCase {
-
     static let s = ScrollUseCase()
 
     /// スクロールアップ通知用RX

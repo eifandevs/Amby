@@ -90,7 +90,6 @@ class FooterView: UIView, ShadowView {
                 guard let `self` = self else { return }
                 if let object = object.element {
                     if let deleteIndex = self.thumbnails.index(where: { $0.context == object.deleteContext }) {
-
                         self.thumbnails[deleteIndex].removeFromSuperview()
                         self.thumbnails.remove(at: deleteIndex)
                         self.updateFrontBar(to: object.currentContext)

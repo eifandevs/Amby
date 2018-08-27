@@ -9,7 +9,6 @@
 import Foundation
 
 final class BaseLayerViewModel {
-
     deinit {
         log.debug("deinit called.")
     }

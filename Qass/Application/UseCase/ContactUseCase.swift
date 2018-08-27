@@ -12,7 +12,6 @@ import RxSwift
 
 /// コンタクトユースケース
 final class ContactUseCase {
-
     static let s = ContactUseCase()
 
     /// コンタクト画面表示通知用RX

@@ -12,7 +12,6 @@ import RxSwift
 
 /// ヒストリーユースケース
 final class HistoryUseCase {
-
     static let s = HistoryUseCase()
 
     /// ヒストリーバック通知用RX

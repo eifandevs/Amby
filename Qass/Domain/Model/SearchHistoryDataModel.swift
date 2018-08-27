@@ -38,7 +38,6 @@ final class SearchHistoryDataModel {
 
     /// 検索履歴の保存
     func store(histories: [SearchHistory]) {
-
         if histories.count > 0 {
             // searchHistoryを日付毎に分ける
             var searchHistoryByDate: [String: [SearchHistory]] = [:]

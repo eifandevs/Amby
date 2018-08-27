@@ -12,13 +12,13 @@ final class ResourceRepository {
     /// 環境設定
     var envList: NSDictionary {
         #if PRODUCTION
-        let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
-        let plist = NSDictionary(contentsOfFile: domainPath!)!
-        return plist
+            let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
+            let plist = NSDictionary(contentsOfFile: domainPath!)!
+            return plist
         #else
-        let domainPath = Bundle.main.path(forResource: "env-dev", ofType: "plist")
-        let plist = NSDictionary(contentsOfFile: domainPath!)!
-        return plist
+            let domainPath = Bundle.main.path(forResource: "env-dev", ofType: "plist")
+            let plist = NSDictionary(contentsOfFile: domainPath!)!
+            return plist
         #endif
     }
 

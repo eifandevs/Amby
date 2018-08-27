@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import UIKit
 import RxSwift
+import UIKit
 
 class CircleProgress: UIView {
-
     private var circle: UIView
     private var progress: CAShapeLayer!
     private var progressTimer: Timer!
@@ -41,9 +40,9 @@ class CircleProgress: UIView {
         invalidate()
         createProgress()
         #if UT
-        progressTimer = Timer.scheduledTimer(timeInterval: 100, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
+            progressTimer = Timer.scheduledTimer(timeInterval: 100, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
         #else
-        progressTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
+            progressTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
         #endif
         progressTimer.fire()
     }

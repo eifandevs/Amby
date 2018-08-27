@@ -12,7 +12,6 @@ import RxSwift
 
 /// グレップユースケース
 final class GrepUseCase {
-
     static let s = GrepUseCase()
 
     /// グレップ開始通知用RX

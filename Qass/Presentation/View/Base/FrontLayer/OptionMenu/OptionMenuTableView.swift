@@ -113,7 +113,7 @@ extension OptionMenuTableView: UITableViewDataSource {
 // MARK: - TableViewDelegate
 
 extension OptionMenuTableView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         let overViewMargin = viewModel.getOverViewMargin()
 
@@ -131,15 +131,15 @@ extension OptionMenuTableView: UITableViewDelegate {
         switch viewModel.getRow(indexPath: indexPath).cellType {
         case .trend:
             viewModel.loadTrend()
-            self.rx_optionMenuTableViewDidClose.onNext(())
+            rx_optionMenuTableViewDidClose.onNext(())
             return
         case .report:
             viewModel.openReportScreen()
-            self.rx_optionMenuTableViewDidClose.onNext(())
+            rx_optionMenuTableViewDidClose.onNext(())
             return
         case .contact:
             viewModel.openContactScreen()
-            self.rx_optionMenuTableViewDidClose.onNext(())
+            rx_optionMenuTableViewDidClose.onNext(())
             return
         case .history:
             let historyTableView = OptionMenuHistoryTableView(frame: detailViewFrame)

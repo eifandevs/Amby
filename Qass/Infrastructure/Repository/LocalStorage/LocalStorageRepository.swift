@@ -9,7 +9,6 @@
 import Foundation
 
 final class LocalStorageRepository<Target: LocalStorageTargetType> {
-
     /// get file list
     public func getList(_ target: Target) -> [String]? {
         do {

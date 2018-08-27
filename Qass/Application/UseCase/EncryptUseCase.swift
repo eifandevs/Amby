@@ -12,7 +12,6 @@ import RxSwift
 
 /// 認証ユースケース
 final class EncryptUseCase {
-
     static let s = EncryptUseCase()
 
     private init() {}
@@ -29,5 +28,4 @@ final class EncryptUseCase {
         }
         return ""
     }
-
 }

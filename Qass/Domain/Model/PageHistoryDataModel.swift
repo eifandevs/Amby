@@ -77,7 +77,7 @@ final class PageHistoryDataModel {
             if let histories = NSKeyedUnarchiver.unarchiveObject(with: data) as? [PageHistory] {
                 self.histories = histories
             } else {
-                self.histories = []
+                histories = []
                 log.error("unarchive histories error.")
             }
         } else {
@@ -295,7 +295,6 @@ final class PageHistoryDataModel {
     func remove(context: String) {
         // 削除インデックス取得
         if let deleteIndex = histories.index(where: { $0.context == context }) {
-
             // フロントの削除かどうか
             if context == currentContext {
                 histories.remove(at: deleteIndex)

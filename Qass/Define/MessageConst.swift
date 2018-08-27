@@ -12,6 +12,7 @@ import Foundation
 struct MessageConst {
 
     // MARK: - 汎用
+
     static let COMMON = COMMON_VALUE()
     struct COMMON_VALUE {
         let OK = "OK"
@@ -19,6 +20,7 @@ struct MessageConst {
     }
 
     // MARK: - アラート
+
     static let ALERT = ALERT_VALUE()
     struct ALERT_VALUE {
         let FORM_TITLE = "フォーム自動入力"
@@ -37,6 +39,7 @@ struct MessageConst {
     }
 
     // MARK: - 通知
+
     static let NOTIFICATION = NOTIFICATION_VALUE()
     struct NOTIFICATION_VALUE {
         let COPY_URL = "URLをコピーしました"
@@ -48,6 +51,7 @@ struct MessageConst {
     }
 
     // MARK: - ヘッダー
+
     static let HEADER = HEADER_VALUE()
     struct HEADER_VALUE {
         let SEARCH_PLACEHOLDER = "検索ワードまたは、URLを入力"
@@ -55,6 +59,7 @@ struct MessageConst {
     }
 
     // MARK: - ヘルプ
+
     static let HELP = HELP_VALUE()
     struct HELP_VALUE {
         // 履歴

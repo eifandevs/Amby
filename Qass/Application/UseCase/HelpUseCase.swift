@@ -12,7 +12,6 @@ import RxSwift
 
 /// ヘルプユースケース
 final class HelpUseCase {
-
     static let s = HelpUseCase()
 
     /// ヘルプ画面表示通知用RX
