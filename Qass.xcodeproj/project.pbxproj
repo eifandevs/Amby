@@ -409,6 +409,11 @@
 		A1ED0BFE20C94DFE00DFC55B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */; };
 		A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
 		A1ED0C0120CBCABF00DFC55B /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
+		A1F0EA9C213490AC00DF9195 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0EA93213490AB00DF9195 /* Shared.framework */; };
+		A1F0EAA3213490AC00DF9195 /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F0EAA2213490AC00DF9195 /* SharedTests.swift */; };
+		A1F0EAA5213490AC00DF9195 /* Shared.h in Headers */ = {isa = PBXBuildFile; fileRef = A1F0EA95213490AB00DF9195 /* Shared.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A1F0EAA8213490AC00DF9195 /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0EA93213490AB00DF9195 /* Shared.framework */; };
+		A1F0EAA9213490AC00DF9195 /* Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0EA93213490AB00DF9195 /* Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A1FE87DC211B015800B258A3 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A1FE87D6211B015700B258A3 /* offline.html */; };
 		A1FE87DD211B015800B258A3 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A1FE87D6211B015700B258A3 /* offline.html */; };
 		A1FE87DE211B015800B258A3 /* timeout.html in Resources */ = {isa = PBXBuildFile; fileRef = A1FE87D7211B015700B258A3 /* timeout.html */; };
@@ -462,6 +467,27 @@
 			remoteGlobalIDString = A57EFEA01E3E06D300B66701;
 			remoteInfo = "Qas-Develop";
 		};
+		A1F0EA9D213490AC00DF9195 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1F0EA92213490AB00DF9195;
+			remoteInfo = Shared;
+		};
+		A1F0EA9F213490AC00DF9195 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A57EFEA01E3E06D300B66701;
+			remoteInfo = "Qass-Develop";
+		};
+		A1F0EAA6213490AC00DF9195 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1F0EA92213490AB00DF9195;
+			remoteInfo = Shared;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -472,6 +498,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				A1706872213487D600AAD993 /* Infrastructure.framework in Embed Frameworks */,
+				A1F0EAA9213490AC00DF9195 /* Shared.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -717,6 +744,12 @@
 		A1E562DA20D67C11007B5B1C /* SuggestDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestDataModelTests.swift; sourceTree = "<group>"; };
 		A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
+		A1F0EA93213490AB00DF9195 /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1F0EA95213490AB00DF9195 /* Shared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shared.h; sourceTree = "<group>"; };
+		A1F0EA96213490AB00DF9195 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1F0EA9B213490AC00DF9195 /* SharedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1F0EAA2213490AC00DF9195 /* SharedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTests.swift; sourceTree = "<group>"; };
+		A1F0EAA4213490AC00DF9195 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1FE87D6211B015700B258A3 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
 		A1FE87D7211B015700B258A3 /* timeout.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = timeout.html; sourceTree = "<group>"; };
 		A1FE87D8211B015700B258A3 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
@@ -788,12 +821,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1F0EA8F213490AB00DF9195 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1F0EA98213490AC00DF9195 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1F0EA9C213490AC00DF9195 /* Shared.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A57EFE9E1E3E06D300B66701 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A112E735212AF83800320048 /* MessageUI.framework in Frameworks */,
 				A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */,
+				A1F0EAA8213490AC00DF9195 /* Shared.framework in Frameworks */,
 				A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */,
 				A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */,
 				A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */,
@@ -1655,6 +1704,24 @@
 			path = "Qass-DevelopUITests";
 			sourceTree = "<group>";
 		};
+		A1F0EA94213490AB00DF9195 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A1F0EA95213490AB00DF9195 /* Shared.h */,
+				A1F0EA96213490AB00DF9195 /* Info.plist */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		A1F0EAA1213490AC00DF9195 /* SharedTests */ = {
+			isa = PBXGroup;
+			children = (
+				A1F0EAA2213490AC00DF9195 /* SharedTests.swift */,
+				A1F0EAA4213490AC00DF9195 /* Info.plist */,
+			);
+			path = SharedTests;
+			sourceTree = "<group>";
+		};
 		A1FE87D5211B015700B258A3 /* html */ = {
 			isa = PBXGroup;
 			children = (
@@ -1684,6 +1751,8 @@
 				A5A6F2C51F1F92DD00A4620C /* R.generated.swift */,
 				A170685C213487D500AAD993 /* Infrastructure */,
 				A1706869213487D600AAD993 /* InfrastructureTests */,
+				A1F0EA94213490AB00DF9195 /* Shared */,
+				A1F0EAA1213490AC00DF9195 /* SharedTests */,
 				A57EFEA21E3E06D300B66701 /* Products */,
 				2D6EC82ACCDEE92B54408E2F /* Pods */,
 				1BAE9B5DD71F0DF92296651C /* Frameworks */,
@@ -1699,6 +1768,8 @@
 				A1B5F448209D0C8700DF1AE3 /* Qass-Production.app */,
 				A170685B213487D500AAD993 /* Infrastructure.framework */,
 				A1706863213487D600AAD993 /* InfrastructureTests.xctest */,
+				A1F0EA93213490AB00DF9195 /* Shared.framework */,
+				A1F0EA9B213490AC00DF9195 /* SharedTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1711,6 +1782,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A170686D213487D600AAD993 /* Infrastructure.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1F0EA90213490AB00DF9195 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1F0EAA5213490AC00DF9195 /* Shared.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1825,6 +1904,43 @@
 			productReference = A1B5F448209D0C8700DF1AE3 /* Qass-Production.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A1F0EA92213490AB00DF9195 /* Shared */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1F0EAB0213490AC00DF9195 /* Build configuration list for PBXNativeTarget "Shared" */;
+			buildPhases = (
+				A1F0EA8E213490AB00DF9195 /* Sources */,
+				A1F0EA8F213490AB00DF9195 /* Frameworks */,
+				A1F0EA90213490AB00DF9195 /* Headers */,
+				A1F0EA91213490AB00DF9195 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Shared;
+			productName = Shared;
+			productReference = A1F0EA93213490AB00DF9195 /* Shared.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A1F0EA9A213490AC00DF9195 /* SharedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1F0EAB1213490AC00DF9195 /* Build configuration list for PBXNativeTarget "SharedTests" */;
+			buildPhases = (
+				A1F0EA97213490AC00DF9195 /* Sources */,
+				A1F0EA98213490AC00DF9195 /* Frameworks */,
+				A1F0EA99213490AC00DF9195 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1F0EA9E213490AC00DF9195 /* PBXTargetDependency */,
+				A1F0EAA0213490AC00DF9195 /* PBXTargetDependency */,
+			);
+			name = SharedTests;
+			productName = SharedTests;
+			productReference = A1F0EA9B213490AC00DF9195 /* SharedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A57EFEA01E3E06D300B66701 /* Qass-Develop */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A57EFEB31E3E06D300B66701 /* Build configuration list for PBXNativeTarget "Qass-Develop" */;
@@ -1845,6 +1961,7 @@
 			);
 			dependencies = (
 				A170686F213487D600AAD993 /* PBXTargetDependency */,
+				A1F0EAA7213490AC00DF9195 /* PBXTargetDependency */,
 			);
 			name = "Qass-Develop";
 			productName = Eiger;
@@ -1887,6 +2004,17 @@
 					A1B5F3A1209D0C8700DF1AE3 = {
 						DevelopmentTeam = TBQA5RANYY;
 					};
+					A1F0EA92213490AB00DF9195 = {
+						CreatedOnToolsVersion = 9.4;
+						DevelopmentTeam = TBQA5RANYY;
+						ProvisioningStyle = Automatic;
+					};
+					A1F0EA9A213490AC00DF9195 = {
+						CreatedOnToolsVersion = 9.4;
+						DevelopmentTeam = TBQA5RANYY;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A57EFEA01E3E06D300B66701;
+					};
 					A57EFEA01E3E06D300B66701 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = TBQA5RANYY;
@@ -1914,6 +2042,8 @@
 				A19880722073A5E20067EC4F /* Qass-DevelopUITests */,
 				A170685A213487D500AAD993 /* Infrastructure */,
 				A1706862213487D600AAD993 /* InfrastructureTests */,
+				A1F0EA92213490AB00DF9195 /* Shared */,
+				A1F0EA9A213490AC00DF9195 /* SharedTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1989,6 +2119,20 @@
 				A112E856212CD76500320048 /* OptionMenuAppTableView.xib in Resources */,
 				A112E848212CD76500320048 /* OptionMenuTableViewCell.xib in Resources */,
 				A1FE87E3211B015800B258A3 /* dns.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1F0EA91213490AB00DF9195 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1F0EA99213490AC00DF9195 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2700,6 +2844,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1F0EA8E213490AB00DF9195 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1F0EA97213490AC00DF9195 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1F0EAA3213490AC00DF9195 /* SharedTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A57EFE9D1E3E06D300B66701 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2884,6 +3043,21 @@
 			isa = PBXTargetDependency;
 			target = A57EFEA01E3E06D300B66701 /* Qass-Develop */;
 			targetProxy = A19880782073A5E20067EC4F /* PBXContainerItemProxy */;
+		};
+		A1F0EA9E213490AC00DF9195 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1F0EA92213490AB00DF9195 /* Shared */;
+			targetProxy = A1F0EA9D213490AC00DF9195 /* PBXContainerItemProxy */;
+		};
+		A1F0EAA0213490AC00DF9195 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A57EFEA01E3E06D300B66701 /* Qass-Develop */;
+			targetProxy = A1F0EA9F213490AC00DF9195 /* PBXContainerItemProxy */;
+		};
+		A1F0EAA7213490AC00DF9195 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1F0EA92213490AB00DF9195 /* Shared */;
+			targetProxy = A1F0EAA6213490AC00DF9195 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3360,6 +3534,165 @@
 			};
 			name = "Debug-UT";
 		};
+		A1F0EAAA213490AC00DF9195 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Shared/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.Shared;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A1F0EAAB213490AC00DF9195 /* Debug-UT */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Shared/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.Shared;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Debug-UT";
+		};
+		A1F0EAAC213490AC00DF9195 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Shared/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.Shared;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A1F0EAAD213490AC00DF9195 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = SharedTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.SharedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qass-Develop.app/Qass-Develop";
+			};
+			name = Debug;
+		};
+		A1F0EAAE213490AC00DF9195 /* Debug-UT */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = SharedTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.SharedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qass-Develop.app/Qass-Develop";
+			};
+			name = "Debug-UT";
+		};
+		A1F0EAAF213490AC00DF9195 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = SharedTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.SharedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qass-Develop.app/Qass-Develop";
+			};
+			name = Release;
+		};
 		A57EFEB11E3E06D300B66701 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3568,6 +3901,26 @@
 				A1B5F445209D0C8700DF1AE3 /* Debug */,
 				A1B5F446209D0C8700DF1AE3 /* Debug-UT */,
 				A1B5F447209D0C8700DF1AE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1F0EAB0213490AC00DF9195 /* Build configuration list for PBXNativeTarget "Shared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1F0EAAA213490AC00DF9195 /* Debug */,
+				A1F0EAAB213490AC00DF9195 /* Debug-UT */,
+				A1F0EAAC213490AC00DF9195 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1F0EAB1213490AC00DF9195 /* Build configuration list for PBXNativeTarget "SharedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1F0EAAD213490AC00DF9195 /* Debug */,
+				A1F0EAAE213490AC00DF9195 /* Debug-UT */,
+				A1F0EAAF213490AC00DF9195 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
