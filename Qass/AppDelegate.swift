@@ -29,13 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ログ設定
         log.setup()
 
-        #if DEVELOP
-            // developターゲットは通信しない
-            log.info("DEVELOP TARGET")
-        #else
-            log.info("PRODUCTION TARGET")
-        #endif
-
         #if DEBUG
             UIViewController.swizzle() // ログ出力
             #if UT

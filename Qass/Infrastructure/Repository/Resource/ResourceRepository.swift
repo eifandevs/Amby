@@ -10,7 +10,7 @@ import Foundation
 
 final class ResourceRepository {
     /// 環境設定
-    var env: NSDictionary = {
+    var envList: NSDictionary = {
         let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
         if let plist = NSDictionary(contentsOfFile: domainPath!) {
             log.debug("use existed env.")
@@ -24,38 +24,38 @@ final class ResourceRepository {
     }()
 
     /// タイムアウトページ
-    var timeoutHtml: Foundation.URL {
+    var timeoutHtml: Foundation.URL = {
         let fileResource = R.file.timeoutHtml
         return fileResource.bundle.url(forResource: fileResource)!
-    }
+    }()
 
     /// DNSエラーページ
-    var dnsHtml: Foundation.URL {
+    var dnsHtml: Foundation.URL = {
         let fileResource = R.file.dnsHtml
         return fileResource.bundle.url(forResource: fileResource)!
-    }
+    }()
 
     /// オフラインエラーページ
-    var offlineHtml: Foundation.URL {
+    var offlineHtml: Foundation.URL = {
         let fileResource = R.file.offlineHtml
         return fileResource.bundle.url(forResource: fileResource)!
-    }
+    }()
 
     /// 認証エラーページ
-    var authorizeHtml: Foundation.URL {
+    var authorizeHtml: Foundation.URL = {
         let fileResource = R.file.authorizeHtml
         return fileResource.bundle.url(forResource: fileResource)!
-    }
+    }()
 
     /// 汎用エラーページ
-    var invalidHtml: Foundation.URL {
+    var invalidHtml: Foundation.URL = {
         let fileResource = R.file.invalidHtml
         return fileResource.bundle.url(forResource: fileResource)!
-    }
+    }()
 
     /// ハイライトスクリプト
-    var highlightScript: Foundation.URL {
+    var highlightScript: Foundation.URL = {
         let fileResource = R.file.highlightJs
         return fileResource.bundle.url(forResource: fileResource)!
-    }
+    }()
 }
