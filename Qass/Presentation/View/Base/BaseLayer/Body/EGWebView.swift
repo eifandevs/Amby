@@ -42,7 +42,7 @@ class EGWebView: WKWebView {
     // TODO: submit検知
 //    var form: Form?
 
-    let resourceRepository = ResourceRepository()
+    let resourceUtil = ResourceUtil()
 
     init(id: String?) {
         if let id = id, !id.isEmpty {
@@ -180,11 +180,11 @@ class EGWebView: WKWebView {
 
     func loadHtml(code: NetWorkError) {
         let url: URL = { () -> URL in
-            if code == NetWorkError.timeout { return resourceRepository.timeoutHtml }
-            if code == NetWorkError.dnsNotFound { return resourceRepository.dnsHtml }
-            if code == NetWorkError.offline { return resourceRepository.offlineHtml }
-            if code == NetWorkError.unauthorized { return resourceRepository.authorizeHtml }
-            return resourceRepository.invalidHtml
+            if code == NetWorkError.timeout { return resourceUtil.timeoutHtml }
+            if code == NetWorkError.dnsNotFound { return resourceUtil.dnsHtml }
+            if code == NetWorkError.offline { return resourceUtil.offlineHtml }
+            if code == NetWorkError.unauthorized { return resourceUtil.authorizeHtml }
+            return resourceUtil.invalidHtml
         }()
         loadFileURL(url, allowingReadAccessTo: url)
     }
@@ -207,7 +207,7 @@ class EGWebView: WKWebView {
     }
 
     func highlight(word: String) {
-        let scriptPath = resourceRepository.highlightScript
+        let scriptPath = resourceUtil.highlightScript
         let script = try! String(contentsOf: scriptPath, encoding: .utf8)
         evaluateJavaScript(script) { (_: Any?, error: Error?) in
             if error != nil {
