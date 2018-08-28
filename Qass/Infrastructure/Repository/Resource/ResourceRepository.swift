@@ -10,17 +10,18 @@ import Foundation
 
 final class ResourceRepository {
     /// 環境設定
-    var envList: NSDictionary {
-        #if PRODUCTION
-            let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
+    var env: NSDictionary = {
+        let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
+        if let plist = NSDictionary(contentsOfFile: domainPath!) {
+            log.debug("use existed env.")
+            return plist
+        } else {
+            log.debug("use dummy env.")
+            let domainPath = Bundle.main.path(forResource: "env-dummy", ofType: "plist")
             let plist = NSDictionary(contentsOfFile: domainPath!)!
             return plist
-        #else
-            let domainPath = Bundle.main.path(forResource: "env-dev", ofType: "plist")
-            let plist = NSDictionary(contentsOfFile: domainPath!)!
-            return plist
-        #endif
-    }
+        }
+    }()
 
     /// タイムアウトページ
     var timeoutHtml: Foundation.URL {

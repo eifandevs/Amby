@@ -19,27 +19,18 @@ abstract_target 'All' do
 
   common_pods
 
-  target 'Qass-Develop' do
+  target 'Qass' do
     use_frameworks!
   
     pod 'VerticalAlignmentLabel', '~> 0.1'
 
-    target 'Qass-DevelopTests' do
+    target 'Qass-Tests' do
       inherit! :search_paths
     end
   
-    target 'Qass-DevelopUITests' do
+    target 'Qass-UITests' do
       inherit! :search_paths
     end
-  end
-
-  target 'Qass-Production' do
-    use_frameworks!
-  
-    pod 'VerticalAlignmentLabel', '~> 0.1'
-  
-    common_pods
-    
   end
 
   target 'Infrastructure' do

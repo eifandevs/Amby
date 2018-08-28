@@ -1,6 +1,6 @@
 //
 //  SuggestDataModelTests.swift
-//  Qass-DevelopTests
+//  QassTests
 //
 //  Created by tenma on 2018/06/17.
 //  Copyright © 2018年 eifandevs. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  Springboard.swift
-//  Qass-DevelopUITests
+//  QassUITests
 //
 //  Created by tenma on 2018/06/20.
 //  Copyright © 2018年 eifandevs. All rights reserved.
@@ -11,7 +11,7 @@ import XCTest
 
 // 端末内のアプリを削除し、データもResetしてくれるクラス
 final class Springboard {
-    static let appDisplayName = "Qass-Develop"
+    static let appDisplayName = "Qass"
 
     static let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
     static let settings = XCUIApplication(bundleIdentifier: "com.apple.Preferences")

@@ -1,6 +1,6 @@
 //
 //  Qass_DevelopUITests.swift
-//  Qass-DevelopUITests
+//  QassUITests
 //
 //  Created by tenma on 2018/04/03.
 //  Copyright © 2018年 eifandevs. All rights reserved.
