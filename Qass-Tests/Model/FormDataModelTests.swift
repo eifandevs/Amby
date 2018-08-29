@@ -12,7 +12,7 @@ import RxCocoa
 import Realm
 import RealmSwift
 
-@testable import Qass_Develop
+@testable import Qass
 
 class FormDataModelTests: XCTestCase {
 

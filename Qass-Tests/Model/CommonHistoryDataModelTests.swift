@@ -10,7 +10,7 @@ import XCTest
 import RxSwift
 import RxCocoa
 
-@testable import Qass_Develop
+@testable import Qass
 
 class CommonHistoryDataModelTests: XCTestCase {
 

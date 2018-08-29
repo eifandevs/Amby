@@ -10,7 +10,7 @@ import XCTest
 import RxSwift
 import RxCocoa
 
-@testable import Qass_Develop
+@testable import Qass
 
 class PageHistoryDataModelTests: XCTestCase {
 
@@ -40,7 +40,7 @@ class PageHistoryDataModelTests: XCTestCase {
     func testStartLoading() {
         weak var expectation = self.expectation(description: #function)
         PageHistoryDataModel.s.append(url: "https://abc/")
-        
+
         let targetContext = PageHistoryDataModel.s.histories.first!.context
 
         PageHistoryDataModel.s.rx_pageHistoryDataModelDidStartLoading

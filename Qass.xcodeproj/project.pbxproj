@@ -151,6 +151,10 @@
 		A112E9B621330AA600320048 /* ContactUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E9B521330AA600320048 /* ContactUseCase.swift */; };
 		A12345192135A93F00C791B8 /* UserDefaultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12345182135A93F00C791B8 /* UserDefaultRepository.swift */; };
 		A123451B2135ADB400C791B8 /* ResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123451A2135ADB400C791B8 /* ResourceUtil.swift */; };
+		A123453421366FD600C791B8 /* InfraConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123453321366FD600C791B8 /* InfraConst.swift */; };
+		A12345392136725300C791B8 /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A12345372136725200C791B8 /* env.plist */; };
+		A123453A2136725300C791B8 /* env-dummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = A12345382136725200C791B8 /* env-dummy.plist */; };
+		A123453C2136727800C791B8 /* ResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123453B2136727800C791B8 /* ResourceUtil.swift */; };
 		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
 		A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */; };
@@ -207,7 +211,7 @@
 		A1DF4B40209D03A300196E0F /* FavoriteDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F31209CF976004F1EA5 /* FavoriteDataModelTests.swift */; };
 		A1DF4B41209D03A900196E0F /* FormDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F32209CF976004F1EA5 /* FormDataModelTests.swift */; };
 		A1DF4B42209D03AC00196E0F /* PageHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F33209CF976004F1EA5 /* PageHistoryDataModelTests.swift */; };
-		A1DF4B44209D03BF00196E0F /* Qass_DevelopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190300F209CF977004F1EA5 /* Qass_DevelopUITests.swift */; };
+		A1DF4B44209D03BF00196E0F /* Qass_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A190300F209CF977004F1EA5 /* Qass_UITests.swift */; };
 		A1E562D320D56724007B5B1C /* ArticleDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D220D56724007B5B1C /* ArticleDataModelTests.swift */; };
 		A1E562D520D569D8007B5B1C /* AuthTokenDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D420D569D8007B5B1C /* AuthTokenDataModelTests.swift */; };
 		A1E562D720D56BF8007B5B1C /* SearchHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E562D620D56BF8007B5B1C /* SearchHistoryDataModelTests.swift */; };
@@ -471,6 +475,10 @@
 		A112E9B521330AA600320048 /* ContactUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUseCase.swift; sourceTree = "<group>"; };
 		A12345182135A93F00C791B8 /* UserDefaultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultRepository.swift; sourceTree = "<group>"; };
 		A123451A2135ADB400C791B8 /* ResourceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceUtil.swift; sourceTree = "<group>"; };
+		A123453321366FD600C791B8 /* InfraConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfraConst.swift; sourceTree = "<group>"; };
+		A12345372136725200C791B8 /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
+		A12345382136725200C791B8 /* env-dummy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "env-dummy.plist"; sourceTree = "<group>"; };
+		A123453B2136727800C791B8 /* ResourceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceUtil.swift; sourceTree = "<group>"; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
@@ -531,7 +539,7 @@
 		A1902FA6209CF976004F1EA5 /* OnceExec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnceExec.swift; sourceTree = "<group>"; };
 		A1902FA7209CF976004F1EA5 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		A190300E209CF977004F1EA5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A190300F209CF977004F1EA5 /* Qass_DevelopUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Qass_DevelopUITests.swift; sourceTree = "<group>"; };
+		A190300F209CF977004F1EA5 /* Qass_UITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Qass_UITests.swift; sourceTree = "<group>"; };
 		A19880732073A5E20067EC4F /* Qass-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19DAE14878AED5A28A57BBD /* Pods-Qass-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Tests/Pods-Qass-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModelTests.swift; sourceTree = "<group>"; };
@@ -1277,48 +1285,8 @@
 			isa = PBXGroup;
 			children = (
 				A12345172135A7F800C791B8 /* UserDefault */,
-				A12345122135A7B800C791B8 /* Keychain */,
-				A12345132135A7B800C791B8 /* LocalStorage */,
-				A12345142135A7B800C791B8 /* DB */,
-				A12345152135A7B800C791B8 /* API */,
-				A12345162135A7B800C791B8 /* Resource */,
 			);
 			path = Repository;
-			sourceTree = "<group>";
-		};
-		A12345122135A7B800C791B8 /* Keychain */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Keychain;
-			sourceTree = "<group>";
-		};
-		A12345132135A7B800C791B8 /* LocalStorage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = LocalStorage;
-			sourceTree = "<group>";
-		};
-		A12345142135A7B800C791B8 /* DB */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DB;
-			sourceTree = "<group>";
-		};
-		A12345152135A7B800C791B8 /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
-		A12345162135A7B800C791B8 /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resource;
 			sourceTree = "<group>";
 		};
 		A12345172135A7F800C791B8 /* UserDefault */ = {
@@ -1329,10 +1297,38 @@
 			path = UserDefault;
 			sourceTree = "<group>";
 		};
+		A123453221366FAB00C791B8 /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				A123453321366FD600C791B8 /* InfraConst.swift */,
+			);
+			path = Define;
+			sourceTree = "<group>";
+		};
+		A12345352136719E00C791B8 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A1234536213671AD00C791B8 /* Service */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		A1234536213671AD00C791B8 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				A123453B2136727800C791B8 /* ResourceUtil.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		A170685C213487D500AAD993 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
 				A12345112135A7B800C791B8 /* Repository */,
+				A123453221366FAB00C791B8 /* Define */,
+				A12345352136719E00C791B8 /* Util */,
+				A12345382136725200C791B8 /* env-dummy.plist */,
+				A12345372136725200C791B8 /* env.plist */,
 				A170685D213487D500AAD993 /* Infrastructure.h */,
 				A170685E213487D500AAD993 /* Info.plist */,
 			);
@@ -1348,14 +1344,14 @@
 			path = InfrastructureTests;
 			sourceTree = "<group>";
 		};
-		A1902F2D209CF976004F1EA5 /* Qass-DevelopTests */ = {
+		A1902F2D209CF976004F1EA5 /* Qass-Tests */ = {
 			isa = PBXGroup;
 			children = (
 				A112E9A421330A7B00320048 /* UseCase */,
 				A1902F2E209CF976004F1EA5 /* Info.plist */,
 				A1902F2F209CF976004F1EA5 /* Model */,
 			);
-			path = "Qass-DevelopTests";
+			path = "Qass-Tests";
 			sourceTree = "<group>";
 		};
 		A1902F2F209CF976004F1EA5 /* Model */ = {
@@ -1513,14 +1509,14 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
-		A190300D209CF977004F1EA5 /* Qass-DevelopUITests */ = {
+		A190300D209CF977004F1EA5 /* Qass-UITests */ = {
 			isa = PBXGroup;
 			children = (
 				A190300E209CF977004F1EA5 /* Info.plist */,
-				A190300F209CF977004F1EA5 /* Qass_DevelopUITests.swift */,
+				A190300F209CF977004F1EA5 /* Qass_UITests.swift */,
 				A1CF359F20DA703800C1343B /* Springboard.swift */,
 			);
-			path = "Qass-DevelopUITests";
+			path = "Qass-UITests";
 			sourceTree = "<group>";
 		};
 		A1F0EA94213490AB00DF9195 /* Shared */ = {
@@ -1565,8 +1561,8 @@
 			isa = PBXGroup;
 			children = (
 				A1902F36209CF976004F1EA5 /* Qass */,
-				A1902F2D209CF976004F1EA5 /* Qass-DevelopTests */,
-				A190300D209CF977004F1EA5 /* Qass-DevelopUITests */,
+				A1902F2D209CF976004F1EA5 /* Qass-Tests */,
+				A190300D209CF977004F1EA5 /* Qass-UITests */,
 				A5A6F2C51F1F92DD00A4620C /* R.generated.swift */,
 				A170685C213487D500AAD993 /* Infrastructure */,
 				A1706869213487D600AAD993 /* InfrastructureTests */,
@@ -1851,6 +1847,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A12345392136725300C791B8 /* env.plist in Resources */,
+				A123453A2136725300C791B8 /* env-dummy.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2285,6 +2283,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A123453421366FD600C791B8 /* InfraConst.swift in Sources */,
+				A123453C2136727800C791B8 /* ResourceUtil.swift in Sources */,
 				A12345192135A93F00C791B8 /* UserDefaultRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2301,7 +2301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1DF4B44209D03BF00196E0F /* Qass_DevelopUITests.swift in Sources */,
+				A1DF4B44209D03BF00196E0F /* Qass_UITests.swift in Sources */,
 				A1CF35A020DA703800C1343B /* Springboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

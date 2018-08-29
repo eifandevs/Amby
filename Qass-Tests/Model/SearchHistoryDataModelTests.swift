@@ -8,7 +8,7 @@
 
 import XCTest
 
-@testable import Qass_Develop
+@testable import Qass
 
 class SearchHistoryDataModelTests: XCTestCase {
 
