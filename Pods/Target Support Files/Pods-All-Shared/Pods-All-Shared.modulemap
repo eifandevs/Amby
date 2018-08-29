@@ -1,0 +1,6 @@
+framework module Pods_All_Shared {
+  umbrella header "Pods-All-Shared-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -40,4 +40,11 @@ abstract_target 'All' do
     end
   end
 
+  target 'Shared' do
+    use_frameworks!
+  
+      target 'SharedTests' do
+        inherit! :search_paths
+      end
+    end
 end
