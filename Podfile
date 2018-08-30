@@ -32,19 +32,11 @@ abstract_target 'All' do
     end
   end
 
-  target 'Infrastructure' do
+  target 'Model' do
   use_frameworks!
 
-    target 'InfrastructureTests' do
+    target 'ModelTests' do
       inherit! :search_paths
     end
   end
-
-  target 'Shared' do
-    use_frameworks!
-  
-      target 'SharedTests' do
-        inherit! :search_paths
-      end
-    end
 end

@@ -1,15 +1,15 @@
 //
-//  SharedTests.swift
-//  SharedTests
+//  ModelTests.swift
+//  ModelTests
 //
-//  Created by tenma on 2018/08/29.
+//  Created by tenma on 2018/08/30.
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
 import XCTest
-@testable import Shared
+@testable import Model
 
-class SharedTests: XCTestCase {
+class ModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()

@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import Model
 import SVProgressHUD
 import UIKit
 
@@ -26,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var baseViewController: BaseViewController?
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // model setup
+        Model.setup()
+
         // ログ設定
         log.setup()
 
