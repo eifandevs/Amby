@@ -8,10 +8,10 @@
 
 import Foundation
 
-let log = Logger.self
+let log = ModelLogger.self
 
 final public class Model {
     static public func setup() {
-        log.setup()
+        log.verbose("model set up.")
     }
 }

@@ -6,11 +6,12 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import Logger
 import Model
 import SVProgressHUD
 import UIKit
 
-let log = Logger.self
+let log = AppLogger.self
 
 /// クラッシュ時にスタックトレースを表示する
 let uncaughtExceptionHandler: Void = NSSetUncaughtExceptionHandler { exception in
@@ -27,11 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var baseViewController: BaseViewController?
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // log setup
+        Logger.setup()
+
         // model setup
         Model.setup()
-
-        // ログ設定
-        log.setup()
 
         #if DEBUG
             UIViewController.swizzle() // ログ出力
