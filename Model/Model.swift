@@ -10,8 +10,22 @@ import Foundation
 
 let log = ModelLogger.self
 
-final public class Model {
-    static public func setup() {
-        log.verbose("model set up.")
+public final class Model {
+    public static func setup() {
+        #if DEBUG
+            log.info("DEBUG BUILD")
+        #endif
+
+        #if UT
+            log.info("UT BUILD")
+        #endif
+
+        #if LOCAL
+            log.info("LOCAL BUILD")
+        #endif
+
+        #if RELEASE
+            log.info("RELEASE BUILD")
+        #endif
     }
 }

@@ -54,7 +54,7 @@ public class UserDefaultRepository {
             ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT: ModelConst.UD.COMMON_HISTORY_SAVE_COUNT,
             ModelConst.KEY.PAGE_HISTORY_SAVE_COUNT: ModelConst.UD.PAGE_HISTORY_SAVE_COUNT,
             ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT: ModelConst.UD.SEARCH_HISTORY_SAVE_COUNT
-            ])
+        ])
     }
 
     /// ユーザーデフォルト初期化

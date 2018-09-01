@@ -36,11 +36,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         #if DEBUG
             UIViewController.swizzle() // ログ出力
-            #if UT
-                log.info("DEBUG UT BUILD")
-            #else
-                log.info("DEBUG BUILD")
-            #endif
+            log.info("DEBUG BUILD")
+        #endif
+
+        #if UT
+            log.info("UT BUILD")
+        #endif
+
+        #if LOCAL
+            log.info("LOCAL BUILD")
         #endif
 
         #if RELEASE

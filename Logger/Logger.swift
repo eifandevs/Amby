@@ -17,11 +17,11 @@ open class Logger: SwiftyBeaver {
         let file = FileDestination() // log to default swiftybeaver.log file
 
         #if DEBUG
-        console.minLevel = log.Level.verbose
-        file.minLevel = log.Level.verbose
+            console.minLevel = log.Level.verbose
+            file.minLevel = log.Level.verbose
         #else
-        console.minLevel = log.Level.error
-        file.minLevel = log.Level.error
+            console.minLevel = log.Level.error
+            file.minLevel = log.Level.error
         #endif
 
         console.format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
@@ -29,6 +29,20 @@ open class Logger: SwiftyBeaver {
         log.addDestination(console)
         log.addDestination(file)
 
-        log.verbose("logger set up")
+        #if DEBUG
+            log.info("DEBUG BUILD")
+        #endif
+
+        #if UT
+            log.info("UT BUILD")
+        #endif
+
+        #if LOCAL
+            log.info("LOCAL BUILD")
+        #endif
+
+        #if RELEASE
+            log.info("RELEASE BUILD")
+        #endif
     }
 }
