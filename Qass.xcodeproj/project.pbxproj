@@ -206,6 +206,8 @@
 		A1A3DE8321387D7F00F87009 /* ModelLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE8221387D7F00F87009 /* ModelLogger.swift */; };
 		A1A3DE842138815E00F87009 /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A3DE59213878D100F87009 /* Logger.framework */; };
 		A1A3DE852138827400F87009 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
+		A1A3DE88213ACBF200F87009 /* env-dummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1A3DE86213ACBF100F87009 /* env-dummy.plist */; };
+		A1A3DE89213ACBF200F87009 /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1A3DE87213ACBF200F87009 /* env.plist */; };
 		A1CF359020D7D16400C1343B /* ThumbnailDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */; };
 		A1CF35A020DA703800C1343B /* Springboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359F20DA703800C1343B /* Springboard.swift */; };
 		A1DF4B3F209D039F00196E0F /* CommonHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */; };
@@ -552,6 +554,8 @@
 		A1A3DE7E21387A5100F87009 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A1A3DE8021387C6F00F87009 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 		A1A3DE8221387D7F00F87009 /* ModelLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLogger.swift; sourceTree = "<group>"; };
+		A1A3DE86213ACBF100F87009 /* env-dummy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "env-dummy.plist"; sourceTree = "<group>"; };
+		A1A3DE87213ACBF200F87009 /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
 		A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModelTests.swift; sourceTree = "<group>"; };
 		A1CF359F20DA703800C1343B /* Springboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Springboard.swift; sourceTree = "<group>"; };
 		A1E33AA02137149A00C93FBE /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1534,6 +1538,8 @@
 		A1E33AA12137149A00C93FBE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A1A3DE86213ACBF100F87009 /* env-dummy.plist */,
+				A1A3DE87213ACBF200F87009 /* env.plist */,
 				A138CAE4213747D900AEA669 /* Util */,
 				A1E33AA22137149A00C93FBE /* Model.h */,
 				A1E33AA32137149A00C93FBE /* Info.plist */,
@@ -1885,6 +1891,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1A3DE89213ACBF200F87009 /* env.plist in Resources */,
+				A1A3DE88213ACBF200F87009 /* env-dummy.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
