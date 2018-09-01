@@ -53,9 +53,9 @@ struct AppConst {
 
     static let KEY = KEY_VALUE()
     struct KEY_VALUE {
-        let REALM_TOKEN = ResourceUtil().get(key: "KEY_REALM_TOKEN")
-        let ENCRYPT_SERVICE_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_SERVICE_TOKEN")
-        let ENCRYPT_IV_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_IV_TOKEN")
+        let REALM_TOKEN = AppResourceUtil().get(key: "KEY_REALM_TOKEN")
+        let ENCRYPT_SERVICE_TOKEN = AppResourceUtil().get(key: "KEY_ENCRYPT_SERVICE_TOKEN")
+        let ENCRYPT_IV_TOKEN = AppResourceUtil().get(key: "KEY_ENCRYPT_IV_TOKEN")
         let CURRENT_CONTEXT = "currentContext"
         let AUTO_SCROLL_INTERVAL = "autoScrollInterval"
         let COMMON_HISTORY_SAVE_COUNT = "historySaveCount"

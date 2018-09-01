@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 
 final class SettingDataModel {
     static let s = SettingDataModel()

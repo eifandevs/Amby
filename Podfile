@@ -8,7 +8,6 @@ def common_pods
   pod 'RxSwift', '~> 4.0'
   pod 'RxCocoa', '~> 4.0'
   pod 'NSObject+Rx', '~> 4.2'
-  pod 'R.swift', '~> 4.0'
   pod 'Moya/RxSwift', '~> 11.0'
   pod 'SwiftLint', '~> 0.25'
   pod 'SwiftFormat/CLI', '~> 0.33'
@@ -22,6 +21,7 @@ abstract_target 'All' do
     use_frameworks!
   
     pod 'VerticalAlignmentLabel', '~> 0.1'
+    pod 'R.swift', '~> 4.0'
 
     target 'Qass-Tests' do
       inherit! :search_paths

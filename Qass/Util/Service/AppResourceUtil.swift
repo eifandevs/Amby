@@ -1,5 +1,5 @@
 //
-//  ResourceUtil.swift
+//  AppResourceUtil.swift
 //  Qass
 //
 //  Created by tenma on 2018/08/29.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class ResourceUtil {
+final class AppResourceUtil {
     /// 環境データ取得
     func get(key: String) -> String {
         return envList[key] as? String ?? ""

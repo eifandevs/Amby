@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 import RxCocoa
 import RxSwift
 

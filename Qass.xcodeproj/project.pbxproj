@@ -97,7 +97,6 @@
 		A112E8AF212CD76500320048 /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7D0212CD76400320048 /* EGProgressBar.swift */; };
 		A112E8B1212CD76500320048 /* HeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7D1212CD76400320048 /* HeaderField.swift */; };
 		A112E8B3212CD76500320048 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7D3212CD76400320048 /* HelpViewController.swift */; };
-		A112E8D1212CD76500320048 /* UserDefaultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7F5212CD76400320048 /* UserDefaultRepository.swift */; };
 		A112E8D3212CD76500320048 /* EncryptHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7F7212CD76400320048 /* EncryptHelper.swift */; };
 		A112E8D5212CD76500320048 /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7F8212CD76400320048 /* KeychainRepository.swift */; };
 		A112E8D7212CD76500320048 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7FB212CD76400320048 /* Cache.swift */; };
@@ -149,7 +148,7 @@
 		A112E99F2132FE3900320048 /* CacheUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E99E2132FE3900320048 /* CacheUseCase.swift */; };
 		A112E9A22133015F00320048 /* SettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E9A12133015F00320048 /* SettingUseCase.swift */; };
 		A112E9B621330AA600320048 /* ContactUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E9B521330AA600320048 /* ContactUseCase.swift */; };
-		A123451B2135ADB400C791B8 /* ResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123451A2135ADB400C791B8 /* ResourceUtil.swift */; };
+		A123451B2135ADB400C791B8 /* AppResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123451A2135ADB400C791B8 /* AppResourceUtil.swift */; };
 		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
 		A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */; };
@@ -208,6 +207,9 @@
 		A1A3DE852138827400F87009 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
 		A1A3DE88213ACBF200F87009 /* env-dummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1A3DE86213ACBF100F87009 /* env-dummy.plist */; };
 		A1A3DE89213ACBF200F87009 /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1A3DE87213ACBF200F87009 /* env.plist */; };
+		A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE8E213AEDBC00F87009 /* UserDefaultRepository.swift */; };
+		A1A3DE94213AF06300F87009 /* ModelConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE93213AF06300F87009 /* ModelConst.swift */; };
+		A1A3DE96213AF31D00F87009 /* ModelResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE95213AF31D00F87009 /* ModelResourceUtil.swift */; };
 		A1CF359020D7D16400C1343B /* ThumbnailDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */; };
 		A1CF35A020DA703800C1343B /* Springboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359F20DA703800C1343B /* Springboard.swift */; };
 		A1DF4B3F209D039F00196E0F /* CommonHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */; };
@@ -435,7 +437,6 @@
 		A112E7D0212CD76400320048 /* EGProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGProgressBar.swift; sourceTree = "<group>"; };
 		A112E7D1212CD76400320048 /* HeaderField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderField.swift; sourceTree = "<group>"; };
 		A112E7D3212CD76400320048 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
-		A112E7F5212CD76400320048 /* UserDefaultRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultRepository.swift; sourceTree = "<group>"; };
 		A112E7F7212CD76400320048 /* EncryptHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptHelper.swift; sourceTree = "<group>"; };
 		A112E7F8212CD76400320048 /* KeychainRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainRepository.swift; sourceTree = "<group>"; };
 		A112E7FB212CD76400320048 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
@@ -487,7 +488,7 @@
 		A112E99E2132FE3900320048 /* CacheUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheUseCase.swift; sourceTree = "<group>"; };
 		A112E9A12133015F00320048 /* SettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUseCase.swift; sourceTree = "<group>"; };
 		A112E9B521330AA600320048 /* ContactUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUseCase.swift; sourceTree = "<group>"; };
-		A123451A2135ADB400C791B8 /* ResourceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceUtil.swift; sourceTree = "<group>"; };
+		A123451A2135ADB400C791B8 /* AppResourceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppResourceUtil.swift; sourceTree = "<group>"; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
@@ -556,6 +557,9 @@
 		A1A3DE8221387D7F00F87009 /* ModelLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelLogger.swift; sourceTree = "<group>"; };
 		A1A3DE86213ACBF100F87009 /* env-dummy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "env-dummy.plist"; sourceTree = "<group>"; };
 		A1A3DE87213ACBF200F87009 /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
+		A1A3DE8E213AEDBC00F87009 /* UserDefaultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultRepository.swift; sourceTree = "<group>"; };
+		A1A3DE93213AF06300F87009 /* ModelConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConst.swift; sourceTree = "<group>"; };
+		A1A3DE95213AF31D00F87009 /* ModelResourceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelResourceUtil.swift; sourceTree = "<group>"; };
 		A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModelTests.swift; sourceTree = "<group>"; };
 		A1CF359F20DA703800C1343B /* Springboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Springboard.swift; sourceTree = "<group>"; };
 		A1E33AA02137149A00C93FBE /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1169,21 +1173,12 @@
 		A112E7F3212CD76400320048 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				A112E7F4212CD76400320048 /* UserDefault */,
 				A112E7F6212CD76400320048 /* Keychain */,
 				A112E7F9212CD76400320048 /* LocalStorage */,
 				A112E7FE212CD76400320048 /* DB */,
 				A112E801212CD76400320048 /* API */,
 			);
 			path = Repository;
-			sourceTree = "<group>";
-		};
-		A112E7F4212CD76400320048 /* UserDefault */ = {
-			isa = PBXGroup;
-			children = (
-				A112E7F5212CD76400320048 /* UserDefaultRepository.swift */,
-			);
-			path = UserDefault;
 			sourceTree = "<group>";
 		};
 		A112E7F6212CD76400320048 /* Keychain */ = {
@@ -1337,6 +1332,7 @@
 			isa = PBXGroup;
 			children = (
 				A1A3DE8221387D7F00F87009 /* ModelLogger.swift */,
+				A1A3DE95213AF31D00F87009 /* ModelResourceUtil.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1491,7 +1487,7 @@
 				A1902FA1209CF976004F1EA5 /* EGApplication.swift */,
 				A1902FA3209CF976004F1EA5 /* Notification */,
 				A1902FA6209CF976004F1EA5 /* OnceExec.swift */,
-				A123451A2135ADB400C791B8 /* ResourceUtil.swift */,
+				A123451A2135ADB400C791B8 /* AppResourceUtil.swift */,
 				A1A3DE8021387C6F00F87009 /* AppLogger.swift */,
 			);
 			path = Service;
@@ -1535,9 +1531,51 @@
 			path = LoggerTests;
 			sourceTree = "<group>";
 		};
+		A1A3DE8A213AEC9400F87009 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				A1A3DE8B213AEC9400F87009 /* Repository */,
+				A1A3DE8D213AEC9400F87009 /* Entity */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		A1A3DE8B213AEC9400F87009 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				A1A3DE8C213AEC9400F87009 /* UserDefault */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		A1A3DE8C213AEC9400F87009 /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				A1A3DE8E213AEDBC00F87009 /* UserDefaultRepository.swift */,
+			);
+			path = UserDefault;
+			sourceTree = "<group>";
+		};
+		A1A3DE8D213AEC9400F87009 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		A1A3DE92213AF05100F87009 /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				A1A3DE93213AF06300F87009 /* ModelConst.swift */,
+			);
+			path = Define;
+			sourceTree = "<group>";
+		};
 		A1E33AA12137149A00C93FBE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A1A3DE92213AF05100F87009 /* Define */,
+				A1A3DE8A213AEC9400F87009 /* Infrastructure */,
 				A1A3DE86213ACBF100F87009 /* env-dummy.plist */,
 				A1A3DE87213ACBF200F87009 /* env.plist */,
 				A138CAE4213747D900AEA669 /* Util */,
@@ -2030,7 +2068,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
-				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -2042,7 +2079,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -2359,8 +2395,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */,
+				A1A3DE96213AF31D00F87009 /* ModelResourceUtil.swift in Sources */,
 				A138CAE12137281800AEA669 /* Model.swift in Sources */,
 				A1A3DE8321387D7F00F87009 /* ModelLogger.swift in Sources */,
+				A1A3DE94213AF06300F87009 /* ModelConst.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2396,7 +2435,6 @@
 				A112E81B212CD76500320048 /* OptionMenuHelpTableViewModel.swift in Sources */,
 				A112E863212CD76500320048 /* AppInformationViewController.swift in Sources */,
 				A190302B209CF977004F1EA5 /* Date+Extend.swift in Sources */,
-				A112E8D1212CD76500320048 /* UserDefaultRepository.swift in Sources */,
 				A112E889212CD76500320048 /* OptionMenuAppTableViewCell.swift in Sources */,
 				A112E8B1212CD76500320048 /* HeaderField.swift in Sources */,
 				A1903032209CF977004F1EA5 /* Optional+Extend.swift in Sources */,
@@ -2448,7 +2486,7 @@
 				A112E8D9212CD76500320048 /* LocalStorageTargetType.swift in Sources */,
 				A1903028209CF977004F1EA5 /* Collection+Extend.swift in Sources */,
 				A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */,
-				A123451B2135ADB400C791B8 /* ResourceUtil.swift in Sources */,
+				A123451B2135ADB400C791B8 /* AppResourceUtil.swift in Sources */,
 				A112E827212CD76500320048 /* BaseLayerViewModel.swift in Sources */,
 				A112E897212CD76500320048 /* FooterView.swift in Sources */,
 				A1903039209CF977004F1EA5 /* UIView+Extend.swift in Sources */,
@@ -2589,6 +2627,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A19DAE14878AED5A28A57BBD /* Pods-Qass-Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2613,6 +2652,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 96599B02A559BE221E7033EF /* Pods-Qass-Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2637,6 +2677,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8E05C2C539CBB8B4329CEE2B /* Pods-Qass-UITests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -2660,6 +2701,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1F3A3C60C544CA835B109A3B /* Pods-Qass-UITests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -2682,6 +2724,7 @@
 		A1A3DE70213878D200F87009 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -2718,6 +2761,7 @@
 		A1A3DE71213878D200F87009 /* Debug-Local */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -2759,6 +2803,7 @@
 		A1A3DE72213878D200F87009 /* Debug-UT */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -2800,6 +2845,7 @@
 		A1A3DE73213878D200F87009 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -2837,7 +2883,7 @@
 		A1A3DE74213878D200F87009 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -2860,7 +2906,7 @@
 		A1A3DE75213878D200F87009 /* Debug-Local */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -2883,7 +2929,7 @@
 		A1A3DE76213878D200F87009 /* Debug-UT */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -2906,7 +2952,7 @@
 		A1A3DE77213878D200F87009 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -2930,6 +2976,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 12DA48BDDD2785B0B7B88C2B /* Pods-All-Model.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -2967,6 +3014,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 49C9CF1EF233CC45CAC4373F /* Pods-All-Model.debug-local.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -3009,6 +3057,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5A6D459515BBF48BD6B50B35 /* Pods-All-Model.debug-ut.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -3051,6 +3100,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 02E029AA4948C14E22CABF55 /* Pods-All-Model.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -3092,7 +3142,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F5634BA39C6391FDA88EE72C /* Pods-ModelTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -3116,7 +3166,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 266DA52C76CFFA470CC19711 /* Pods-ModelTests.debug-local.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -3140,7 +3190,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD42BBB33235A3C87FF06A1D /* Pods-ModelTests.debug-ut.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -3164,7 +3214,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4454460F70AD9939416598AB /* Pods-ModelTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -3248,7 +3298,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C94DDA525D53D355C743374 /* Pods-All-Qass.debug-ut.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3277,6 +3327,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CA4AA851E2A4847CFDE091AD /* Pods-Qass-Tests.debug-ut.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -3301,6 +3352,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1A6FC2706CB03A8B5CD663E5 /* Pods-Qass-UITests.debug-ut.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -3384,7 +3436,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2AEB331B55B2A2E22DA7F769 /* Pods-All-Qass.debug-local.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3413,6 +3465,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 139C77EA9F0B7A0BC9BFECA4 /* Pods-Qass-Tests.debug-local.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -3437,6 +3490,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 74B6C0E8E714661E20EC20CA /* Pods-Qass-UITests.debug-local.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -3572,7 +3626,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7BAFBF6D62B88EA675620CF2 /* Pods-All-Qass.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3597,7 +3651,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 96AFF35B99825259F1DDFADD /* Pods-All-Qass.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

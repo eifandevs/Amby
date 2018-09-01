@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 
 final class SearchHistoryDataModel {
     static let s = SearchHistoryDataModel()

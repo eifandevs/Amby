@@ -42,7 +42,7 @@ class EGWebView: WKWebView {
     // TODO: submit検知
 //    var form: Form?
 
-    let resourceUtil = ResourceUtil()
+    let resourceUtil = AppResourceUtil()
 
     init(id: String?) {
         if let id = id, !id.isEmpty {
