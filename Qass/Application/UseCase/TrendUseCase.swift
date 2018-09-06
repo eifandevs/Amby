@@ -21,6 +21,6 @@ final class TrendUseCase {
 
     /// トレンドページ表示
     func load() {
-        rx_trendUseCaseDidRequestLoad.onNext(HttpConst.URL.TREND_HOME_URL)
+        rx_trendUseCaseDidRequestLoad.onNext(AppHttpConst.URL.TREND_HOME_URL)
     }
 }

@@ -1,31 +1,23 @@
 //
 //  HttpConst.swift
-//  Qas
+//  Qass
 //
-//  Created by temma on 2017/08/02.
-//  Copyright © 2017年 eifaniori. All rights reserved.
+//  Created by tenma on 2018/09/06.
+//  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
 import Foundation
 
-struct HttpConst {
+struct AppHttpConst {
     static let URL = URL_VALUE()
     struct URL_VALUE {
-        // オートコンプリートAPI
-        let SUGGEST_SERVER_DOMAIN = AppResourceUtil().get(key: "SUGGEST_SERVER_DOMAIN")
-        let SUGGEST_SERVER_PATH = AppResourceUtil().get(key: "SUGGEST_SERVER_PATH")
-
-        // アプリAPI
-        let APP_SERVER_DOMAIN = AppResourceUtil().get(key: "APP_SERVER_DOMAIN")
-        let APP_SERVER_PATH = AppResourceUtil().get(key: "APP_SERVER_PATH")
+        let SEARCH_PATH = "https://www.google.co.jp/search?q="
 
         // トレンドホーム
         let TREND_HOME_URL = AppResourceUtil().get(key: "TREND_HOME_URL")
 
         // ソース
         let SOURCE_URL = AppResourceUtil().get(key: "SOURCE_URL")
-
-        let SEARCH_PATH = "https://www.google.co.jp/search?q="
     }
 
     // Appステータスコード

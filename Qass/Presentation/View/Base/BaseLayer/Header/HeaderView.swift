@@ -303,7 +303,7 @@ class HeaderView: UIView, ShadowView {
         isEditing = false
 
         if let text = text, headerFieldUpdate && !text.isEmpty {
-            let restoreText = text.isValidUrl ? text : "\(HttpConst.URL.SEARCH_PATH)\(text)"
+            let restoreText = text.isValidUrl ? text : "\(AppHttpConst.URL.SEARCH_PATH)\(text)"
 
             headerField.makeContent(restore: true, restoreText: restoreText)
         } else {

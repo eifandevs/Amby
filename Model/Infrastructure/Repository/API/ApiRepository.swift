@@ -10,7 +10,7 @@ import Alamofire
 import Foundation
 import Moya
 
-final class ApiRepository<T: TargetType>: MoyaProvider<T> {
+public class ApiRepository<T: TargetType>: MoyaProvider<T> {
     public init(endpointClosure: @escaping EndpointClosure = ApiRepository.defaultEndpointMapping,
                 requestClosure: @escaping RequestClosure = ApiRepository.defaultRequestMapping,
                 callbackQueue: DispatchQueue? = nil,

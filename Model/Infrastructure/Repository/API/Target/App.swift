@@ -9,24 +9,24 @@
 import Foundation
 import Moya
 
-enum App {
+public enum App {
     case article
 }
 
 extension App: TargetType {
     // ベースのURL
-    var baseURL: URL { return URL(string: HttpConst.URL.APP_SERVER_DOMAIN)! }
+    public var baseURL: URL { return URL(string: ModelHttpConst.URL.APP_SERVER_DOMAIN)! }
 
     // パス
-    var path: String {
+    public var path: String {
         switch self {
         case .article:
-            return HttpConst.URL.APP_SERVER_PATH
+            return ModelHttpConst.URL.APP_SERVER_PATH
         }
     }
 
     // HTTPメソッド
-    var method: Moya.Method {
+    public var method: Moya.Method {
         switch self {
         case .article:
             return .get
@@ -34,7 +34,7 @@ extension App: TargetType {
     }
 
     // スタブデータ
-    var sampleData: Data {
+    public var sampleData: Data {
         let path = { () -> String in
             switch self {
             case .article:
@@ -45,7 +45,7 @@ extension App: TargetType {
     }
 
     // リクエストパラメータ等
-    var task: Task {
+    public var task: Task {
         switch self {
         case .article:
             return .requestPlain
@@ -53,7 +53,7 @@ extension App: TargetType {
     }
 
     // ヘッダー
-    var headers: [String: String]? {
+    public var headers: [String: String]? {
         switch self {
         case .article:
             return nil

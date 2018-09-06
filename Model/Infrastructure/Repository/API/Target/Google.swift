@@ -9,24 +9,24 @@
 import Foundation
 import Moya
 
-enum Google {
+public enum Google {
     case suggest(token: String)
 }
 
 extension Google: TargetType {
     // ベースのURL
-    var baseURL: URL { return URL(string: HttpConst.URL.SUGGEST_SERVER_DOMAIN)! }
+    public var baseURL: URL { return URL(string: ModelHttpConst.URL.SUGGEST_SERVER_DOMAIN)! }
 
     // パス
-    var path: String {
+    public var path: String {
         switch self {
         case .suggest:
-            return HttpConst.URL.SUGGEST_SERVER_PATH
+            return ModelHttpConst.URL.SUGGEST_SERVER_PATH
         }
     }
 
     // HTTPメソッド
-    var method: Moya.Method {
+    public var method: Moya.Method {
         switch self {
         case .suggest:
             return .get
@@ -34,7 +34,7 @@ extension Google: TargetType {
     }
 
     // スタブデータ
-    var sampleData: Data {
+    public var sampleData: Data {
         let path = { () -> String in
             switch self {
             case .suggest:
@@ -45,7 +45,7 @@ extension Google: TargetType {
     }
 
     // リクエストパラメータ等
-    var task: Task {
+    public var task: Task {
         switch self {
         case let .suggest(token):
             return .requestParameters(parameters: ["hl": "en", "client": "firefox", "q": token], encoding: URLEncoding.default)
@@ -53,7 +53,7 @@ extension Google: TargetType {
     }
 
     // ヘッダー
-    var headers: [String: String]? {
+    public var headers: [String: String]? {
         return nil
     }
 }

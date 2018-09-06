@@ -7,6 +7,7 @@
 //
 
 import Kingfisher
+import Model
 import UIKit
 
 class SearchMenuNewsTableViewCell: UITableViewCell {

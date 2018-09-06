@@ -21,6 +21,6 @@ final class SourceCodeUseCase {
 
     /// ソースコードページ表示
     func load() {
-        rx_sourceCodeUseCaseDidRequestLoad.onNext(HttpConst.URL.SOURCE_URL)
+        rx_sourceCodeUseCaseDidRequestLoad.onNext(AppHttpConst.URL.SOURCE_URL)
     }
 }

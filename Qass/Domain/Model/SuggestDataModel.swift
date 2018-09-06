@@ -8,6 +8,7 @@
 
 import Alamofire
 import Foundation
+import Model
 import Moya
 import RxCocoa
 import RxSwift
