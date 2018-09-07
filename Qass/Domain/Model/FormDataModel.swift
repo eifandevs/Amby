@@ -13,7 +13,7 @@ final class FormDataModel {
     static let s = FormDataModel()
 
     /// db repository
-    let repository = DBRepository()
+    let repository = DBRepository(realmEncryptionToken: AuthTokenDataModel.s.realmEncryptionToken)
 
     private init() {}
 

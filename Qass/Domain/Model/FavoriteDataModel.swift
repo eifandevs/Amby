@@ -22,7 +22,7 @@ final class FavoriteDataModel {
     /// 通知センター
     private let center = NotificationCenter.default
     /// DBプロバイダー
-    let repository = DBRepository()
+    let repository = DBRepository(realmEncryptionToken: AuthTokenDataModel.s.realmEncryptionToken)
 
     private init() {}
 

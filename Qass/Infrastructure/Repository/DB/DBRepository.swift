@@ -14,9 +14,9 @@ import UIKit
 final class DBRepository {
     private let realm: Realm!
 
-    init() {
+    init(realmEncryptionToken: String) {
         do {
-            realm = try Realm(configuration: RealmHelper.realmConfiguration(realmEncryptionToken: AuthTokenDataModel.s.realmEncryptionToken))
+            realm = try Realm(configuration: RealmHelper.realmConfiguration(realmEncryptionToken: realmEncryptionToken))
         } catch let error as NSError {
             log.error("Realm initialize error. description: \(error.description)")
             realm = nil
