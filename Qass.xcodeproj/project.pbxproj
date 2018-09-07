@@ -196,7 +196,7 @@
 		A19352A32141569C002A0865 /* ApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A193529E2141569B002A0865 /* ApiRepository.swift */; };
 		A195061C214159340091DF23 /* ModelHttpConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195061B214159340091DF23 /* ModelHttpConst.swift */; };
 		A195061E214159F10091DF23 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195061D214159F10091DF23 /* Article.swift */; };
-		A195062021415A990091DF23 /* HttpConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195061F21415A990091DF23 /* HttpConst.swift */; };
+		A195062021415A990091DF23 /* AppHttpConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195061F21415A990091DF23 /* AppHttpConst.swift */; };
 		A1A3DE62213878D200F87009 /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A3DE59213878D100F87009 /* Logger.framework */; };
 		A1A3DE69213878D200F87009 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE68213878D200F87009 /* LoggerTests.swift */; };
 		A1A3DE6B213878D200F87009 /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = A1A3DE5B213878D200F87009 /* Logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -551,7 +551,7 @@
 		A193529E2141569B002A0865 /* ApiRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRepository.swift; sourceTree = "<group>"; };
 		A195061B214159340091DF23 /* ModelHttpConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelHttpConst.swift; sourceTree = "<group>"; };
 		A195061D214159F10091DF23 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
-		A195061F21415A990091DF23 /* HttpConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpConst.swift; sourceTree = "<group>"; };
+		A195061F21415A990091DF23 /* AppHttpConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHttpConst.swift; sourceTree = "<group>"; };
 		A19880732073A5E20067EC4F /* Qass-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19DAE14878AED5A28A57BBD /* Pods-Qass-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Tests/Pods-Qass-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A1A3DE59213878D100F87009 /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1384,7 +1384,7 @@
 				A1902F3C209CF976004F1EA5 /* AppEnum.swift */,
 				A1902F3D209CF976004F1EA5 /* DeviceConst.swift */,
 				A1902F3F209CF976004F1EA5 /* MessageConst.swift */,
-				A195061F21415A990091DF23 /* HttpConst.swift */,
+				A195061F21415A990091DF23 /* AppHttpConst.swift */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -2666,7 +2666,7 @@
 				A1903029209CF977004F1EA5 /* CollectionType+Extend.swift in Sources */,
 				A112E829212CD76500320048 /* HeaderViewModel.swift in Sources */,
 				A1A3DE8121387C6F00F87009 /* AppLogger.swift in Sources */,
-				A195062021415A990091DF23 /* HttpConst.swift in Sources */,
+				A195062021415A990091DF23 /* AppHttpConst.swift in Sources */,
 				A1903050209CF978004F1EA5 /* CircleView.swift in Sources */,
 				A112E873212CD76500320048 /* CircleProgress.swift in Sources */,
 				A112E99621319C7800320048 /* AuthTokenDataModel.swift in Sources */,
