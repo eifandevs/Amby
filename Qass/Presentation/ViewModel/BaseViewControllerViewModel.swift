@@ -25,8 +25,24 @@ final class BaseViewControllerViewModel {
             return Observable.just(())
         }
 
+    /// Observable自動解放
+    let disposeBag = DisposeBag()
+
     deinit {
         log.debug("deinit called.")
+    }
+
+    init() {
+        NoticeUseCase.s.rx_noticeUseCaseDidInvoke
+            .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_noticeUseCaseDidInvoke")
+                if let message = object.element {
+                    NotificationManager.presentNotification(message: message)
+                }
+
+                log.eventOut(chain: "rx_noticeUseCaseDidInvoke")
+            }
+            .disposed(by: disposeBag)
     }
 
     func insertTab(url: String) {
