@@ -50,7 +50,7 @@ class EGWebView: WKWebView {
             // コンテキストを復元
             context = id
         }
-        super.init(frame: CGRect.zero, configuration: CacheHelper.cacheConfiguration())
+        super.init(frame: CGRect.zero, configuration: WebCacheUseCase.s.cacheConfiguration())
         isOpaque = true
         allowsLinkPreview = true
 

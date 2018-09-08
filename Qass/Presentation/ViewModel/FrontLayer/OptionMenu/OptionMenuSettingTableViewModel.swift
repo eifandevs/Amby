@@ -148,8 +148,8 @@ final class OptionMenuSettingTableViewModel {
             SearchUseCase.s.delete()
             FavoriteUseCase.s.delete(notify: false)
             FormUseCase.s.delete()
-            CacheHelper.deleteCookies()
-            CacheHelper.deleteCaches()
+            WebCacheUseCase.s.deleteCookies()
+            WebCacheUseCase.s.deleteCaches()
             ThumbnailUseCase.s.delete()
             TabUseCase.s.delete()
             if let delegate = UIApplication.shared.delegate as? AppDelegate {

@@ -138,7 +138,6 @@
 		A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1902F93209CF976004F1EA5 /* Assets.xcassets */; };
 		A1903056209CF978004F1EA5 /* article_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A1902F96209CF976004F1EA5 /* article_stub.json */; };
 		A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A1902F97209CF976004F1EA5 /* suggest_stub.json */; };
-		A190305D209CF978004F1EA5 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F9F209CF976004F1EA5 /* CacheHelper.swift */; };
 		A190305E209CF978004F1EA5 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FA1209CF976004F1EA5 /* EGApplication.swift */; };
 		A1903062209CF978004F1EA5 /* OnceExec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FA6209CF976004F1EA5 /* OnceExec.swift */; };
 		A1903063209CF978004F1EA5 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FA7209CF976004F1EA5 /* Util.swift */; };
@@ -207,6 +206,7 @@
 		A1950673214406980091DF23 /* NSObject+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1950672214406980091DF23 /* NSObject+Extend.swift */; };
 		A1950675214439980091DF23 /* NoticeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1950674214439980091DF23 /* NoticeUseCase.swift */; };
 		A195067721444E150091DF23 /* NewsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195067621444E150091DF23 /* NewsUseCase.swift */; };
+		A1950679214453AB0091DF23 /* WebCacheUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1950678214453AB0091DF23 /* WebCacheUseCase.swift */; };
 		A1A3DE62213878D200F87009 /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A3DE59213878D100F87009 /* Logger.framework */; };
 		A1A3DE69213878D200F87009 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE68213878D200F87009 /* LoggerTests.swift */; };
 		A1A3DE6B213878D200F87009 /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = A1A3DE5B213878D200F87009 /* Logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -545,7 +545,6 @@
 		A1902F93209CF976004F1EA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1902F96209CF976004F1EA5 /* article_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = article_stub.json; sourceTree = "<group>"; };
 		A1902F97209CF976004F1EA5 /* suggest_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = suggest_stub.json; sourceTree = "<group>"; };
-		A1902F9F209CF976004F1EA5 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
 		A1902FA1209CF976004F1EA5 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A1902FA6209CF976004F1EA5 /* OnceExec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnceExec.swift; sourceTree = "<group>"; };
 		A1902FA7209CF976004F1EA5 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -572,6 +571,7 @@
 		A1950672214406980091DF23 /* NSObject+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extend.swift"; sourceTree = "<group>"; };
 		A1950674214439980091DF23 /* NoticeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeUseCase.swift; sourceTree = "<group>"; };
 		A195067621444E150091DF23 /* NewsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUseCase.swift; sourceTree = "<group>"; };
+		A1950678214453AB0091DF23 /* WebCacheUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCacheUseCase.swift; sourceTree = "<group>"; };
 		A19880732073A5E20067EC4F /* Qass-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19DAE14878AED5A28A57BBD /* Pods-Qass-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Tests/Pods-Qass-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A1A3DE59213878D100F87009 /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1285,6 +1285,7 @@
 				A112E9A12133015F00320048 /* SettingUseCase.swift */,
 				A1950674214439980091DF23 /* NoticeUseCase.swift */,
 				A195067621444E150091DF23 /* NewsUseCase.swift */,
+				A1950678214453AB0091DF23 /* WebCacheUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -1467,7 +1468,6 @@
 			isa = PBXGroup;
 			children = (
 				A19506692144052B0091DF23 /* Notification */,
-				A1902F9F209CF976004F1EA5 /* CacheHelper.swift */,
 				A1902FA1209CF976004F1EA5 /* EGApplication.swift */,
 				A1902FA6209CF976004F1EA5 /* OnceExec.swift */,
 				A123451A2135ADB400C791B8 /* ResourceUtil.swift */,
@@ -2557,6 +2557,7 @@
 				A19506362143F8AF0091DF23 /* AuthTokenDataModel.swift in Sources */,
 				A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */,
 				A19506442143F8B80091DF23 /* HistoryUseCase.swift in Sources */,
+				A1950679214453AB0091DF23 /* WebCacheUseCase.swift in Sources */,
 				A195064D2143F8B80091DF23 /* ThumbnailUseCase.swift in Sources */,
 				A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */,
 				A19506582143FB800091DF23 /* Double+Extend.swift in Sources */,
@@ -2696,7 +2697,6 @@
 				A1903062209CF978004F1EA5 /* OnceExec.swift in Sources */,
 				A190303A209CF977004F1EA5 /* UIViewController+Extend.swift in Sources */,
 				A112E80D212CD76500320048 /* CircleMenuViewModel.swift in Sources */,
-				A190305D209CF978004F1EA5 /* CacheHelper.swift in Sources */,
 				A195066D2144052B0091DF23 /* NotificationView.swift in Sources */,
 				A1903063209CF978004F1EA5 /* Util.swift in Sources */,
 				A1903051209CF978004F1EA5 /* EnumEnumerable.swift in Sources */,
