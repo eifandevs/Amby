@@ -54,16 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // プログレス初期設定
         SVProgressHUD.setForegroundColor(UIColor.ultraOrange)
 
-        // 設定データ(UD)セットアップ
-        SettingUseCase.s.setup()
-
-        // ローカルストレージセットアップ
-        let repository = LocalStorageRepository<Cache>()
-        repository.create(.commonHistory(resource: nil))
-        repository.create(.database(resource: nil))
-        repository.create(.searchHistory(resource: nil))
-        repository.create(.thumbnails(additionalPath: nil, resource: nil))
-
         window = UIWindow(frame: UIScreen.main.bounds)
         baseViewController = BaseViewController()
         window!.rootViewController = baseViewController!
@@ -74,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func initialize() {
-        SettingDataModel.s.initialize()
+        SettingUseCase.s.initialize()
 
         if let baseViewController = self.window!.rootViewController as? BaseViewController {
             baseViewController.mRelease()

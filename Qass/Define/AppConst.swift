@@ -44,8 +44,8 @@ struct AppConst {
         let HEADER_PROGRESS_BAR_HEIGHT = 2.1.f
         var HEADER_PROGRESS_MARGIN = 2.1.f // プログレスバーの高さをマージンにする
         var FOOTER_HEIGHT = ((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height) // サムネイルの高さ
-        let BASE_HEIGHT = DeviceConst.DEVICE.DISPLAY_SIZE.height - (((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)) - DeviceConst.DEVICE.STATUS_BAR_HEIGHT // デバイスの高さ - フッターの高さ - ステータスバーの高さ
-        let HEADER_FIELD_WIDTH = DeviceConst.DEVICE.DISPLAY_SIZE.width / 1.8
+        let BASE_HEIGHT = AppConst.DEVICE.DISPLAY_SIZE.height - (((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)) - AppConst.DEVICE.STATUS_BAR_HEIGHT // デバイスの高さ - フッターの高さ - ステータスバーの高さ
+        let HEADER_FIELD_WIDTH = AppConst.DEVICE.DISPLAY_SIZE.width / 1.8
         var THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
     }
 
@@ -53,9 +53,9 @@ struct AppConst {
 
     static let KEY = KEY_VALUE()
     struct KEY_VALUE {
-        let REALM_TOKEN = AppResourceUtil().get(key: "KEY_REALM_TOKEN")
-        let ENCRYPT_SERVICE_TOKEN = AppResourceUtil().get(key: "KEY_ENCRYPT_SERVICE_TOKEN")
-        let ENCRYPT_IV_TOKEN = AppResourceUtil().get(key: "KEY_ENCRYPT_IV_TOKEN")
+        let REALM_TOKEN = ResourceUtil().get(key: "KEY_REALM_TOKEN")
+        let ENCRYPT_SERVICE_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_SERVICE_TOKEN")
+        let ENCRYPT_IV_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_IV_TOKEN")
         let CURRENT_CONTEXT = "currentContext"
         let AUTO_SCROLL_INTERVAL = "autoScrollInterval"
         let COMMON_HISTORY_SAVE_COUNT = "historySaveCount"
@@ -69,15 +69,6 @@ struct AppConst {
         let NOTIFICATION_PAGE_EXIST = "pageExist"
         let NOTIFICATION_DELETE_INDEX = "deleteIndex"
         let NOTIFICATION_AT = "at"
-    }
-
-    // MARK: - URL
-
-    static let URL = URL_VALUE()
-    struct URL_VALUE {
-        let BLANK = "about:blank"
-        let ITUNES_STORE = "//itunes.apple.com/"
-        let DB_PATH = DeviceConst.DEVICE.CACHES_PATH + "/database"
     }
 
     // MARK: - メニュー画面
@@ -131,5 +122,39 @@ struct AppConst {
         let COMMON_HISTORY_SAVE_COUNT = 90
         let SEARCH_HISTORY_SAVE_COUNT = 90
         let PAGE_HISTORY_SAVE_COUNT = 30
+    }
+
+    // MARK: - URL情報
+
+    static let URL = URL_VALUE()
+    struct URL_VALUE {
+        let BLANK = "about:blank"
+        let ITUNES_STORE = "//itunes.apple.com/"
+        let DB_PATH = AppConst.DEVICE.CACHES_PATH + "/database"
+        let SEARCH_PATH = "https://www.google.co.jp/search?q="
+
+        // トレンドホーム
+        let TREND_HOME_URL = ResourceUtil().get(key: "TREND_HOME_URL")
+
+        // ソース
+        let SOURCE_URL = ResourceUtil().get(key: "SOURCE_URL")
+    }
+
+    // MARK: - Appステータスコード
+
+    static let APP_STATUS_CODE = APP_STATUS_CODE_VALUE()
+    struct APP_STATUS_CODE_VALUE {
+        let NORMAL = "0000"
+        let PARSE_ERROR = "1000"
+    }
+
+    // MARK: - DEVICE情報
+
+    static let DEVICE = DEVICE_VALUE()
+    struct DEVICE_VALUE {
+        let STATUS_BAR_HEIGHT = UIApplication.shared.statusBarFrame.height
+        let DISPLAY_SIZE = UIScreen.main.bounds.size
+        let CACHES_PATH = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
+        let ASPECT_RATE = UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height
     }
 }

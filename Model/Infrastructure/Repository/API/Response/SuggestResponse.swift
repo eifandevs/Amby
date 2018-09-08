@@ -9,11 +9,11 @@
 import Foundation
 
 /// サジェストAPIレスポンス
-public struct SuggestResponse {
-    public init(data: [Any]) {
+struct SuggestResponse {
+    init(data: [Any]) {
         self.data = data
     }
 
     // レスポンスがjsonではないので、codableを使用せず、マニュアルでマッピングする
-    public let data: [Any]
+    let data: [Any]
 }

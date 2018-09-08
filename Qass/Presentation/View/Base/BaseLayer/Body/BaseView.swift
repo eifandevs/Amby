@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 import NSObject_Rx
 import RxCocoa
 import RxSwift
@@ -35,7 +36,7 @@ class BaseView: UIView {
     private var beginSearchingWorkItem: DispatchWorkItem?
 
     /// yポジションの最大最小値
-    private let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER.HEADER_HEIGHT, DeviceConst.DEVICE.STATUS_BAR_HEIGHT)
+    private let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER.HEADER_HEIGHT, AppConst.DEVICE.STATUS_BAR_HEIGHT)
 
     /// 最前面のWebView
     private var front: EGWebView! {
@@ -588,8 +589,8 @@ class BaseView: UIView {
 
     /// サイズの最小化
     func scaleToMin() {
-        frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + DeviceConst.DEVICE.STATUS_BAR_HEIGHT
-        front.frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + DeviceConst.DEVICE.STATUS_BAR_HEIGHT
+        frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + AppConst.DEVICE.STATUS_BAR_HEIGHT
+        front.frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + AppConst.DEVICE.STATUS_BAR_HEIGHT
     }
 
     /// 高さの最大位置までスライド
@@ -605,7 +606,7 @@ class BaseView: UIView {
     func slideToMin() {
         if !isLocateMin {
             rx_baseViewDidSlideToMin.onNext(())
-            frame.origin.y = DeviceConst.DEVICE.STATUS_BAR_HEIGHT
+            frame.origin.y = AppConst.DEVICE.STATUS_BAR_HEIGHT
             scaleToMax()
         }
     }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 
 final class OptionMenuHelpTableViewModel {
     private let objectKeySubTitle = AppConst.KEY.NOTIFICATION_SUBTITLE

@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import Model
 import UIKit
 
 class OptionMenuSettingSliderTableViewCell: UITableViewCell {

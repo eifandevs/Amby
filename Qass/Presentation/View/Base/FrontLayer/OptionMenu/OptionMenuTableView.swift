@@ -117,8 +117,8 @@ extension OptionMenuTableView: UITableViewDelegate {
         selectedIndexPath = indexPath
         let overViewMargin = viewModel.getOverViewMargin()
 
-        let marginY = frame.origin.y + frame.size.height + overViewMargin.y > DeviceConst.DEVICE.DISPLAY_SIZE.height ?
-            overViewMargin.y - (frame.origin.y + frame.size.height + overViewMargin.y - DeviceConst.DEVICE.DISPLAY_SIZE.height) :
+        let marginY = frame.origin.y + frame.size.height + overViewMargin.y > AppConst.DEVICE.DISPLAY_SIZE.height ?
+            overViewMargin.y - (frame.origin.y + frame.size.height + overViewMargin.y - AppConst.DEVICE.DISPLAY_SIZE.height) :
             overViewMargin.y
 
         // スーパービューに追加するので、自身の座標をたす

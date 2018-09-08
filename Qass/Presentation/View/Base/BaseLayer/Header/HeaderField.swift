@@ -119,8 +119,8 @@ class HeaderField: UIButton, ShadowView {
 
         // 削除ボタン作成
         let closeMenuButtonX = textField.frame.size.width + 5
-        let closeMenuButtonHeight = frame.size.height - DeviceConst.DEVICE.STATUS_BAR_HEIGHT
-        let closeMenuButtonRect = CGRect(x: closeMenuButtonX, y: DeviceConst.DEVICE.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: closeMenuButtonHeight)
+        let closeMenuButtonHeight = frame.size.height - AppConst.DEVICE.STATUS_BAR_HEIGHT
+        let closeMenuButtonRect = CGRect(x: closeMenuButtonX, y: AppConst.DEVICE.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: closeMenuButtonHeight)
         let closeMenuButton = UIButton(frame: closeMenuButtonRect)
         closeMenuButton.setImage(image: R.image.headerClose(), color: UIColor.gray)
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333
@@ -166,8 +166,8 @@ class HeaderField: UIButton, ShadowView {
 
         // 削除ボタン作成
         let closeMenuButtonX = textField.frame.size.width + 5
-        let closeMenuButtonHeight = frame.size.height - DeviceConst.DEVICE.STATUS_BAR_HEIGHT
-        let closeMenuButtonRect = CGRect(x: closeMenuButtonX, y: DeviceConst.DEVICE.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: closeMenuButtonHeight)
+        let closeMenuButtonHeight = frame.size.height - AppConst.DEVICE.STATUS_BAR_HEIGHT
+        let closeMenuButtonRect = CGRect(x: closeMenuButtonX, y: AppConst.DEVICE.STATUS_BAR_HEIGHT, width: closeMenuButtonWidth, height: closeMenuButtonHeight)
         let closeMenuButton = UIButton(frame: closeMenuButtonRect)
         closeMenuButton.setImage(image: R.image.headerClose(), color: UIColor.gray)
         let edgeInset: CGFloat = closeMenuButtonWidth / 8.333

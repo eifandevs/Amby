@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 import UIKit
 
 final class OptionMenuSettingTableViewModel {
@@ -143,14 +144,14 @@ final class OptionMenuSettingTableViewModel {
     /// 全て削除
     func deleteAll() {
         NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_ALL, completion: {
-            CommonHistoryDataModel.s.delete()
-            SearchHistoryDataModel.s.delete()
-            FavoriteDataModel.s.delete(notify: false)
-            FormDataModel.s.delete()
+            HistoryUseCase.s.delete()
+            SearchUseCase.s.delete()
+            FavoriteUseCase.s.delete(notify: false)
+            FormUseCase.s.delete()
             CacheHelper.deleteCookies()
             CacheHelper.deleteCaches()
-            ThumbnailDataModel.s.delete()
-            PageHistoryDataModel.s.delete()
+            ThumbnailUseCase.s.delete()
+            TabUseCase.s.delete()
             if let delegate = UIApplication.shared.delegate as? AppDelegate {
                 delegate.initialize()
             }

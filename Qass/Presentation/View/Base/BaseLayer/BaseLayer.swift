@@ -19,8 +19,8 @@ class BaseLayer: UIView {
     let rx_baseLayerDidInvalidate = PublishSubject<EdgeSwipeDirection>()
 
     let viewModel = BaseLayerViewModel()
-    let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.BASE_LAYER.HEADER_HEIGHT - DeviceConst.DEVICE.STATUS_BAR_HEIGHT))
-    let baseViewOriginY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER.HEADER_HEIGHT, DeviceConst.DEVICE.STATUS_BAR_HEIGHT)
+    let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.BASE_LAYER.HEADER_HEIGHT - AppConst.DEVICE.STATUS_BAR_HEIGHT))
+    let baseViewOriginY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER.HEADER_HEIGHT, AppConst.DEVICE.STATUS_BAR_HEIGHT)
     private var headerView: HeaderView
     private let footerView: FooterView
     private let baseView: BaseView
@@ -32,11 +32,11 @@ class BaseLayer: UIView {
 
     override init(frame: CGRect) {
         // ヘッダービュー
-        headerView = HeaderView(frame: CGRect(x: 0, y: headerViewOriginY.max, width: DeviceConst.DEVICE.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER.HEADER_HEIGHT))
+        headerView = HeaderView(frame: CGRect(x: 0, y: headerViewOriginY.max, width: AppConst.DEVICE.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER.HEADER_HEIGHT))
         // フッタービュー
-        footerView = FooterView(frame: CGRect(x: 0, y: DeviceConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT, width: DeviceConst.DEVICE.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER.FOOTER_HEIGHT))
+        footerView = FooterView(frame: CGRect(x: 0, y: AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT, width: AppConst.DEVICE.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER.FOOTER_HEIGHT))
         // ベースビュー
-        baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: DeviceConst.DEVICE.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + DeviceConst.DEVICE.STATUS_BAR_HEIGHT))
+        baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: AppConst.DEVICE.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + AppConst.DEVICE.STATUS_BAR_HEIGHT))
         super.init(frame: frame)
 
         // キーボード監視

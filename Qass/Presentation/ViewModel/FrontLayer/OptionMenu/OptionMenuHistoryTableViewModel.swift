@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 import RxCocoa
 import RxSwift
 
@@ -25,7 +26,7 @@ final class OptionMenuHistoryTableViewModel {
     /// セル情報
     var sections: [Section] = []
     /// 保持データリスト
-    private var readFiles = CommonHistoryDataModel.s.getList()
+    private var readFiles = HistoryUseCase.s.getList()
     /// ファイル読み込みインターバル
     private let readInterval = 6
     /// セクションフォントサイズ
@@ -46,7 +47,7 @@ final class OptionMenuHistoryTableViewModel {
     func removeRow(indexPath: IndexPath, row: Section.Row) -> Bool {
         sections[indexPath.section].rows.remove(at: indexPath.row)
         // モデルから削除
-        CommonHistoryDataModel.s.delete(historyIds: [getSection(section: indexPath.section).dateString: [row.data._id]])
+        HistoryUseCase.s.delete(historyIds: [getSection(section: indexPath.section).dateString: [row.data._id]])
 
         return sections[indexPath.section].rows.count > 0
     }
@@ -68,7 +69,7 @@ final class OptionMenuHistoryTableViewModel {
             let latestFiles = readFiles.prefix(readInterval)
             readFiles = Array(readFiles.dropFirst(readInterval))
             latestFiles.forEach({ (dateString: String) in
-                let rows = CommonHistoryDataModel.s.select(dateString: dateString).map({ Section.Row(data: $0) })
+                let rows = HistoryUseCase.s.select(dateString: dateString).map({ Section.Row(data: $0) })
                 if rows.count > 0 {
                     sections.append(Section(dateString: dateString, rows: rows))
                 }

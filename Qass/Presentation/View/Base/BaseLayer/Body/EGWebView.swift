@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 import NSObject_Rx
 import RxCocoa
 import RxSwift
@@ -42,7 +43,7 @@ class EGWebView: WKWebView {
     // TODO: submit検知
 //    var form: Form?
 
-    let resourceUtil = AppResourceUtil()
+    let resourceUtil = ResourceUtil()
 
     init(id: String?) {
         if let id = id, !id.isEmpty {

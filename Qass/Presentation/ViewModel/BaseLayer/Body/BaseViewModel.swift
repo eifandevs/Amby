@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 import RxCocoa
 import RxSwift
 
@@ -214,7 +215,7 @@ final class BaseViewModel {
 
     /// スワイプが履歴移動スワイプかを判定
     func isHistorySwipe(touchPoint: CGPoint) -> Bool {
-        return touchPoint.y < (DeviceConst.DEVICE.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER.HEADER_HEIGHT
+        return touchPoint.y < (AppConst.DEVICE.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER.HEADER_HEIGHT
     }
 
     /// 前webviewのキャプチャ取得

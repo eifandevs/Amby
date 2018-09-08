@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 
 final class OptionMenuTableViewModel {
     // セル情報
@@ -112,7 +113,7 @@ final class OptionMenuTableViewModel {
 
     /// 履歴情報永続化
     func storeHistory() {
-        CommonHistoryDataModel.s.store()
-        PageHistoryDataModel.s.store()
+        HistoryUseCase.s.store()
+        TabUseCase.s.store()
     }
 }

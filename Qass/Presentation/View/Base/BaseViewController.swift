@@ -7,6 +7,7 @@
 //
 
 import MessageUI
+import Model
 import NSObject_Rx
 import RxCocoa
 import RxSwift

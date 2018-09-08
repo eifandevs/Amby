@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 import RxCocoa
 import RxSwift
 
@@ -86,6 +87,8 @@ final class FooterViewModel {
     }
 
     func getThumbnail(context: String) -> UIImage? {
-        return ThumbnailUseCase.s.getThumbnail(context: context)
+        let thumbnail = ThumbnailUseCase.s.getThumbnail(context: context)
+        thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
+        return thumbnail
     }
 }

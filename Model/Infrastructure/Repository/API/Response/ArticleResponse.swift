@@ -9,12 +9,12 @@
 import Foundation
 
 /// 記事取得APIレスポンス
-public struct ArticleResponse: Codable {
-    public init(code: String, data: [Article]) {
+struct ArticleResponse: Codable {
+    init(code: String, data: [Article]) {
         self.code = code
         self.data = data
     }
 
-    public let code: String
-    public let data: [Article]
+    let code: String
+    let data: [Article]
 }

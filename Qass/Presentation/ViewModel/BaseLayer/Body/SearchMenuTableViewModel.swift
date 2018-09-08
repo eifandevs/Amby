@@ -37,9 +37,9 @@ final class SearchMenuTableViewModel {
     /// 記事アイテム
     var newsItem: [Article] = []
     /// 閲覧履歴読み込み数
-    private let readCommonHistoryNum = SettingDataModel.s.commonHistorySaveCount
+    private let readCommonHistoryNum = SettingUseCase.s.commonHistorySaveCount
     /// 検索履歴読み込み数
-    private let readSearchHistoryNum = SettingDataModel.s.searchHistorySaveCount
+    private let readSearchHistoryNum = SettingUseCase.s.searchHistorySaveCount
     /// サジェスト取得キュー
     private var requestSearchQueue = [String?]()
     /// サジェスト取得中フラグ
@@ -56,8 +56,8 @@ final class SearchMenuTableViewModel {
                 guard let `self` = self else { return }
                 if let token = object.element {
                     // 閲覧履歴と検索履歴の検索
-                    self.commonHistoryCellItem = CommonHistoryDataModel.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
-                    self.searchHistoryCellItem = SearchHistoryDataModel.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
+                    self.commonHistoryCellItem = HistoryUseCase.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
+                    self.searchHistoryCellItem = SearchUseCase.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
 
                     // とりあえずここで画面更新
                     self.rx_searchMenuViewWillUpdateLayout.onNext(())
@@ -71,7 +71,7 @@ final class SearchMenuTableViewModel {
             .disposed(by: disposeBag)
 
         // サジェスト検索監視
-        SuggestDataModel.s.rx_suggestDataModelDidUpdate
+        SuggestUseCase.s.rx_suggestUseCaseDidUpdate
             .subscribe { [weak self] suggest in
                 log.eventIn(chain: "rx_suggestDataModelDidUpdate")
 
@@ -95,7 +95,7 @@ final class SearchMenuTableViewModel {
             .disposed(by: disposeBag)
 
         // 記事取得監視
-        ArticleDataModel.s.rx_articleDataModelDidUpdate
+        NewsUseCase.s.rx_newsUseCaseDidUpdate
             .subscribe { [weak self] element in
                 log.eventIn(chain: "rx_articleDataModelDidUpdate")
 
@@ -124,7 +124,7 @@ final class SearchMenuTableViewModel {
     /// 記事取得
     public func getArticle() {
         // 記事取得
-        ArticleDataModel.s.get()
+        NewsUseCase.s.get()
     }
 
     /// 検索開始
@@ -135,7 +135,7 @@ final class SearchMenuTableViewModel {
                 if token.isUrl {
                     isRequesting = false
                 } else {
-                    SuggestDataModel.s.get(token: token)
+                    SuggestUseCase.s.get(token: token)
                 }
             } else {
                 suggestCellItem = []

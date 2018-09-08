@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 
 final class OptionMenuFavoriteTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
@@ -19,7 +20,7 @@ final class OptionMenuFavoriteTableViewModel {
     }
 
     init() {
-        rows = FavoriteDataModel.s.select().map({ Row(data: $0) })
+        rows = FavoriteUseCase.s.select().map({ Row(data: $0) })
     }
 
     /// セル情報取得
@@ -32,7 +33,7 @@ final class OptionMenuFavoriteTableViewModel {
     func removeRow(indexPath: IndexPath, row: Row) {
         rows.remove(at: indexPath.row)
         // モデルから削除
-        FavoriteDataModel.s.delete(favorites: [row.data])
+        FavoriteUseCase.s.delete(favorites: [row.data])
     }
 
     /// セル情報

@@ -27,5 +27,15 @@ public final class Model {
         #if RELEASE
             log.info("RELEASE BUILD")
         #endif
+
+        // 設定データ(UD)セットアップ
+        SettingDataModel.s.setup()
+
+        // ローカルストレージセットアップ
+        let repository = LocalStorageRepository<Cache>()
+        repository.create(.commonHistory(resource: nil))
+        repository.create(.database(resource: nil))
+        repository.create(.searchHistory(resource: nil))
+        repository.create(.thumbnails(additionalPath: nil, resource: nil))
     }
 }

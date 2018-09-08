@@ -10,11 +10,11 @@ import Alamofire
 import Foundation
 import Moya
 
-public class ApiRepository<T: TargetType>: MoyaProvider<T> {
-    public init(endpointClosure: @escaping EndpointClosure = ApiRepository.defaultEndpointMapping,
-                requestClosure: @escaping RequestClosure = ApiRepository.defaultRequestMapping,
-                callbackQueue: DispatchQueue? = nil,
-                trackInflights: Bool = false) {
+class ApiRepository<T: TargetType>: MoyaProvider<T> {
+    init(endpointClosure: @escaping EndpointClosure = ApiRepository.defaultEndpointMapping,
+         requestClosure: @escaping RequestClosure = ApiRepository.defaultRequestMapping,
+         callbackQueue: DispatchQueue? = nil,
+         trackInflights: Bool = false) {
         let sessionManager: SessionManager = {
             let configuration = URLSessionConfiguration.default
             // リクエストタイムアウト5秒

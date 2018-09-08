@@ -43,14 +43,14 @@ class FrontLayer: UIView {
                 case .menu:
                     let initialPt = element.point
                     // オプションメニューの表示位置を計算
-                    let ptX = self.swipeDirection == .left ? initialPt.x / 6 : DeviceConst.DEVICE.DISPLAY_SIZE.width - 250 - (DeviceConst.DEVICE.DISPLAY_SIZE.width - initialPt.x) / 6
+                    let ptX = self.swipeDirection == .left ? initialPt.x / 6 : AppConst.DEVICE.DISPLAY_SIZE.width - 250 - (AppConst.DEVICE.DISPLAY_SIZE.width - initialPt.x) / 6
                     let ptY: CGFloat = { () -> CGFloat in
                         let y = initialPt.y - AppConst.FRONT_LAYER.OPTION_MENU_SIZE.height / 2
                         if y < 0 {
                             return 0
                         }
-                        if y + AppConst.FRONT_LAYER.OPTION_MENU_SIZE.height > DeviceConst.DEVICE.DISPLAY_SIZE.height {
-                            return DeviceConst.DEVICE.DISPLAY_SIZE.height - AppConst.FRONT_LAYER.OPTION_MENU_SIZE.height
+                        if y + AppConst.FRONT_LAYER.OPTION_MENU_SIZE.height > AppConst.DEVICE.DISPLAY_SIZE.height {
+                            return AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.FRONT_LAYER.OPTION_MENU_SIZE.height
                         }
                         return y
                     }()

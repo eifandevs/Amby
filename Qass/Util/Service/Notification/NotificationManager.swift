@@ -13,8 +13,8 @@ import UIKit
 class NotificationManager {
     static func presentNotification(message: String) {
         let notificationViewX = 0.f
-        let notificationViewY = DeviceConst.DEVICE.DISPLAY_SIZE.height
-        let notificationViewWidth = DeviceConst.DEVICE.DISPLAY_SIZE.width
+        let notificationViewY = AppConst.DEVICE.DISPLAY_SIZE.height
+        let notificationViewWidth = AppConst.DEVICE.DISPLAY_SIZE.width
         let notificationViewHeight = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 0.9
         let notificationView = NotificationView(frame: CGRect(x: notificationViewX, y: notificationViewY, width: notificationViewWidth, height: notificationViewHeight))
         notificationView.setTitle(" 　\(message)", for: .normal)
