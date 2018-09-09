@@ -16,14 +16,18 @@ final class OptionMenuAppTableViewModel {
     }
 
     enum CellType: Int {
-        case app
-        case copyright
+        case about
+        case license
+        case policy
+        case review
         case source
 
         var title: String {
             switch self {
-            case .app: return AppConst.APP_INFORMATION.APP
-            case .copyright: return AppConst.APP_INFORMATION.COPYRIGHT
+            case .about: return AppConst.APP_INFORMATION.ABOUT
+            case .license: return AppConst.APP_INFORMATION.LICENSE
+            case .policy: return AppConst.APP_INFORMATION.POLICY
+            case .review: return AppConst.APP_INFORMATION.REVIEW
             case .source: return AppConst.APP_INFORMATION.SOURCE
             }
         }
@@ -31,8 +35,10 @@ final class OptionMenuAppTableViewModel {
 
     // セル
     let rows = [
-        Row(cellType: .app),
-        Row(cellType: .copyright),
+        Row(cellType: .about),
+        Row(cellType: .license),
+        Row(cellType: .policy),
+        Row(cellType: .review),
         Row(cellType: .source)
     ]
 
@@ -49,7 +55,27 @@ final class OptionMenuAppTableViewModel {
     }
 
     /// ソース表示
-    func loadSource() {
-        SourceCodeUseCase.s.load()
+    func openSource() {
+        SourceCodeUseCase.s.open()
+    }
+
+    /// About表示
+    func openAbout() {
+        AboutUseCase.s.open()
+    }
+
+    /// ライセンス表示
+    func openLicense() {
+        LicenseUseCase.s.open()
+    }
+
+    /// ポリシー表示
+    func openPolicy() {
+        PolicyUseCase.s.open()
+    }
+
+    /// レビュー表示
+    func openReview() {
+        ReviewUseCase.s.open()
     }
 }

@@ -39,7 +39,7 @@ final class BaseViewModel {
             return Observable.just(url)
         }
     /// ソースコード表示リクエスト通知用RX
-    let rx_baseViewModelDidLoadSourceCode = SourceCodeUseCase.s.rx_sourceCodeUseCaseDidRequestLoad
+    let rx_baseViewModelDidLoadSourceCode = SourceCodeUseCase.s.rx_sourceCodeUseCaseDidRequestOpen
         .flatMap { url -> Observable<String> in
             return Observable.just(url)
         }

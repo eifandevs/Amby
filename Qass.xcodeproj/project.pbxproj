@@ -207,6 +207,10 @@
 		A1950675214439980091DF23 /* NoticeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1950674214439980091DF23 /* NoticeUseCase.swift */; };
 		A195067721444E150091DF23 /* NewsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195067621444E150091DF23 /* NewsUseCase.swift */; };
 		A1950679214453AB0091DF23 /* WebCacheUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1950678214453AB0091DF23 /* WebCacheUseCase.swift */; };
+		A195067B214538FF0091DF23 /* AboutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195067A214538FF0091DF23 /* AboutUseCase.swift */; };
+		A195067D21453AF30091DF23 /* LicenseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195067C21453AF30091DF23 /* LicenseUseCase.swift */; };
+		A195067F21453B9C0091DF23 /* PolicyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195067E21453B9C0091DF23 /* PolicyUseCase.swift */; };
+		A195068121453BA80091DF23 /* ReviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195068021453BA80091DF23 /* ReviewUseCase.swift */; };
 		A1A3DE62213878D200F87009 /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A3DE59213878D100F87009 /* Logger.framework */; };
 		A1A3DE69213878D200F87009 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE68213878D200F87009 /* LoggerTests.swift */; };
 		A1A3DE6B213878D200F87009 /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = A1A3DE5B213878D200F87009 /* Logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -572,6 +576,10 @@
 		A1950674214439980091DF23 /* NoticeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeUseCase.swift; sourceTree = "<group>"; };
 		A195067621444E150091DF23 /* NewsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUseCase.swift; sourceTree = "<group>"; };
 		A1950678214453AB0091DF23 /* WebCacheUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCacheUseCase.swift; sourceTree = "<group>"; };
+		A195067A214538FF0091DF23 /* AboutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUseCase.swift; sourceTree = "<group>"; };
+		A195067C21453AF30091DF23 /* LicenseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseUseCase.swift; sourceTree = "<group>"; };
+		A195067E21453B9C0091DF23 /* PolicyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyUseCase.swift; sourceTree = "<group>"; };
+		A195068021453BA80091DF23 /* ReviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUseCase.swift; sourceTree = "<group>"; };
 		A19880732073A5E20067EC4F /* Qass-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19DAE14878AED5A28A57BBD /* Pods-Qass-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Tests/Pods-Qass-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A1A3DE59213878D100F87009 /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1286,6 +1294,10 @@
 				A1950674214439980091DF23 /* NoticeUseCase.swift */,
 				A195067621444E150091DF23 /* NewsUseCase.swift */,
 				A1950678214453AB0091DF23 /* WebCacheUseCase.swift */,
+				A195067A214538FF0091DF23 /* AboutUseCase.swift */,
+				A195067C21453AF30091DF23 /* LicenseUseCase.swift */,
+				A195067E21453B9C0091DF23 /* PolicyUseCase.swift */,
+				A195068021453BA80091DF23 /* ReviewUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -2557,6 +2569,7 @@
 				A19506362143F8AF0091DF23 /* AuthTokenDataModel.swift in Sources */,
 				A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */,
 				A19506442143F8B80091DF23 /* HistoryUseCase.swift in Sources */,
+				A195067D21453AF30091DF23 /* LicenseUseCase.swift in Sources */,
 				A1950679214453AB0091DF23 /* WebCacheUseCase.swift in Sources */,
 				A195064D2143F8B80091DF23 /* ThumbnailUseCase.swift in Sources */,
 				A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */,
@@ -2588,9 +2601,11 @@
 				A195064B2143F8B80091DF23 /* TrendUseCase.swift in Sources */,
 				A19506342143F8AF0091DF23 /* SettingDataModel.swift in Sources */,
 				A195063B2143F8AF0091DF23 /* PageHistoryDataModel.swift in Sources */,
+				A195067F21453B9C0091DF23 /* PolicyUseCase.swift in Sources */,
 				A19352A12141569C002A0865 /* Google.swift in Sources */,
 				A195065E2143FC580091DF23 /* CollectionType+Extend.swift in Sources */,
 				A19506372143F8AF0091DF23 /* CommonHistoryDataModel.swift in Sources */,
+				A195068121453BA80091DF23 /* ReviewUseCase.swift in Sources */,
 				A19506502143F8B80091DF23 /* CacheUseCase.swift in Sources */,
 				A195062D2143F8840091DF23 /* DBRepository.swift in Sources */,
 				A1950673214406980091DF23 /* NSObject+Extend.swift in Sources */,
@@ -2605,6 +2620,7 @@
 				A19506312143F89B0091DF23 /* LocalStorageTargetType.swift in Sources */,
 				A195062F2143F8930091DF23 /* LocalStorageRepository.swift in Sources */,
 				A19506482143F8B80091DF23 /* SourceCodeUseCase.swift in Sources */,
+				A195067B214538FF0091DF23 /* AboutUseCase.swift in Sources */,
 				A195061E214159F10091DF23 /* Article.swift in Sources */,
 				A19506472143F8B80091DF23 /* SearchUseCase.swift in Sources */,
 				A195065C2143FBD40091DF23 /* Int+Extend.swift in Sources */,

@@ -84,15 +84,17 @@ struct AppConst {
         let BOOKMARK = "ブックマーク"
         let SETTING = "設定"
         let HELP = "ヘルプ"
-        let APP_INFORMATION = "アプリ情報"
+        let APP_INFORMATION = "Qass"
     }
 
     // MARK: - アプリ情報
 
     static let APP_INFORMATION = APP_INFORMATION_VALUE()
     struct APP_INFORMATION_VALUE {
-        let APP = "アプリについて"
-        let COPYRIGHT = "クレジット"
+        let ABOUT = "About"
+        let LICENSE = "オープンソースライセンス"
+        let POLICY = "プライバシーポリシー"
+        let REVIEW = "評価・レビュー"
         let SOURCE = "ソースコード"
     }
 
