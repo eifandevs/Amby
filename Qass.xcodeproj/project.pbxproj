@@ -213,6 +213,8 @@
 		A195068F2146A0C40091DF23 /* LicenseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A195068D2146A0C40091DF23 /* LicenseViewController.xib */; };
 		A19506922146A0DF0091DF23 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19506902146A0DF0091DF23 /* PolicyViewController.swift */; };
 		A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19506912146A0DF0091DF23 /* PolicyViewController.xib */; };
+		A19506982146B6B40091DF23 /* OpenSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19506962146B6B40091DF23 /* OpenSourceViewController.swift */; };
+		A19506992146B6B40091DF23 /* OpenSourceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19506972146B6B40091DF23 /* OpenSourceViewController.xib */; };
 		A1A3DE62213878D200F87009 /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A3DE59213878D100F87009 /* Logger.framework */; };
 		A1A3DE69213878D200F87009 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE68213878D200F87009 /* LoggerTests.swift */; };
 		A1A3DE6B213878D200F87009 /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = A1A3DE5B213878D200F87009 /* Logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -584,6 +586,8 @@
 		A195068D2146A0C40091DF23 /* LicenseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LicenseViewController.xib; sourceTree = "<group>"; };
 		A19506902146A0DF0091DF23 /* PolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
 		A19506912146A0DF0091DF23 /* PolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolicyViewController.xib; sourceTree = "<group>"; };
+		A19506962146B6B40091DF23 /* OpenSourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceViewController.swift; sourceTree = "<group>"; };
+		A19506972146B6B40091DF23 /* OpenSourceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenSourceViewController.xib; sourceTree = "<group>"; };
 		A19880732073A5E20067EC4F /* Qass-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19DAE14878AED5A28A57BBD /* Pods-Qass-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Tests/Pods-Qass-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A1A3DE59213878D100F87009 /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -900,6 +904,7 @@
 			isa = PBXGroup;
 			children = (
 				A112E774212CD76400320048 /* Xib */,
+				A19506952146B6A40091DF23 /* OpenSource */,
 				A19506852146A0480091DF23 /* About */,
 				A19506862146A0480091DF23 /* License */,
 				A19506872146A0480091DF23 /* Policy */,
@@ -924,6 +929,7 @@
 		A112E774212CD76400320048 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				A19506942146B69B0091DF23 /* OpenSource */,
 				A19506832146A0360091DF23 /* About */,
 				A19506842146A0360091DF23 /* License */,
 				A19506822146A0360091DF23 /* Policy */,
@@ -1572,6 +1578,22 @@
 			path = Policy;
 			sourceTree = "<group>";
 		};
+		A19506942146B69B0091DF23 /* OpenSource */ = {
+			isa = PBXGroup;
+			children = (
+				A19506972146B6B40091DF23 /* OpenSourceViewController.xib */,
+			);
+			path = OpenSource;
+			sourceTree = "<group>";
+		};
+		A19506952146B6A40091DF23 /* OpenSource */ = {
+			isa = PBXGroup;
+			children = (
+				A19506962146B6B40091DF23 /* OpenSourceViewController.swift */,
+			);
+			path = OpenSource;
+			sourceTree = "<group>";
+		};
 		A1A3DE5A213878D200F87009 /* Logger */ = {
 			isa = PBXGroup;
 			children = (
@@ -2034,6 +2056,7 @@
 				A112E841212CD76500320048 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
 				A112E83B212CD76500320048 /* OptionMenuHistoryTableView.xib in Resources */,
 				A1FE87E2211B015800B258A3 /* dns.html in Resources */,
+				A19506992146B6B40091DF23 /* OpenSourceViewController.xib in Resources */,
 				A112E811212CD76500320048 /* OptionMenuTableViewModel.swift.orig in Resources */,
 				A112E851212CD76500320048 /* OptionMenuHelpTableView.xib in Resources */,
 				A112E837212CD76500320048 /* ReportViewController.xib in Resources */,
@@ -2689,6 +2712,7 @@
 				A112E8B1212CD76500320048 /* HeaderField.swift in Sources */,
 				A1903032209CF977004F1EA5 /* Optional+Extend.swift in Sources */,
 				A1903030209CF977004F1EA5 /* Int+Extend.swift in Sources */,
+				A19506982146B6B40091DF23 /* OpenSourceViewController.swift in Sources */,
 				A112E899212CD76500320048 /* Thumbnail.swift in Sources */,
 				A112E881212CD76500320048 /* OptionMenuFavoriteTableViewCell.swift in Sources */,
 				A1903035209CF977004F1EA5 /* UIColor+Extend.swift in Sources */,
