@@ -34,10 +34,8 @@
 		A112E82D212CD76500320048 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E773212CD76400320048 /* SplashViewController.swift */; };
 		A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A112E776212CD76400320048 /* LaunchScreen.storyboard */; };
 		A112E831212CD76500320048 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E778212CD76400320048 /* SplashViewController.xib */; };
-		A112E833212CD76500320048 /* AppInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E77A212CD76400320048 /* AppInformationViewController.xib */; };
 		A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E77C212CD76400320048 /* MenuOrderViewController.xib */; };
 		A112E837212CD76500320048 /* ReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E77E212CD76400320048 /* ReportViewController.xib */; };
-		A112E839212CD76500320048 /* CopyrightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E780212CD76400320048 /* CopyrightViewController.xib */; };
 		A112E83B212CD76500320048 /* OptionMenuHistoryTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E783212CD76400320048 /* OptionMenuHistoryTableView.xib */; };
 		A112E83D212CD76500320048 /* OptionMenuTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E784212CD76400320048 /* OptionMenuTableView.xib */; };
 		A112E83F212CD76500320048 /* OptionMenuFavoriteTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E785212CD76400320048 /* OptionMenuFavoriteTableView.xib */; };
@@ -58,12 +56,10 @@
 		A112E85D212CD76500320048 /* SearchMenuNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E797212CD76400320048 /* SearchMenuNewsTableViewCell.xib */; };
 		A112E85F212CD76500320048 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E798212CD76400320048 /* SearchMenuSearchHistoryTableViewCell.xib */; };
 		A112E861212CD76500320048 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E79A212CD76400320048 /* HelpViewController.xib */; };
-		A112E863212CD76500320048 /* AppInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E79C212CD76400320048 /* AppInformationViewController.swift */; };
 		A112E865212CD76500320048 /* MenuOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E79E212CD76400320048 /* MenuOrderViewController.swift */; };
 		A112E867212CD76500320048 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7A0212CD76400320048 /* PaddingLabel.swift */; };
 		A112E869212CD76500320048 /* CornerRadiusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7A1212CD76400320048 /* CornerRadiusButton.swift */; };
 		A112E86B212CD76500320048 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7A3212CD76400320048 /* ReportViewController.swift */; };
-		A112E86D212CD76500320048 /* CopyrightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7A5212CD76400320048 /* CopyrightViewController.swift */; };
 		A112E86F212CD76500320048 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7A7212CD76400320048 /* BaseViewController.swift */; };
 		A112E871212CD76500320048 /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7AA212CD76400320048 /* CircleMenu.swift */; };
 		A112E873212CD76500320048 /* CircleProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7AB212CD76400320048 /* CircleProgress.swift */; };
@@ -211,6 +207,12 @@
 		A195067D21453AF30091DF23 /* LicenseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195067C21453AF30091DF23 /* LicenseUseCase.swift */; };
 		A195067F21453B9C0091DF23 /* PolicyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195067E21453B9C0091DF23 /* PolicyUseCase.swift */; };
 		A195068121453BA80091DF23 /* ReviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195068021453BA80091DF23 /* ReviewUseCase.swift */; };
+		A195068A2146A0AE0091DF23 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19506882146A0AE0091DF23 /* AboutViewController.swift */; };
+		A195068B2146A0AE0091DF23 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19506892146A0AE0091DF23 /* AboutViewController.xib */; };
+		A195068E2146A0C40091DF23 /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195068C2146A0C40091DF23 /* LicenseViewController.swift */; };
+		A195068F2146A0C40091DF23 /* LicenseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A195068D2146A0C40091DF23 /* LicenseViewController.xib */; };
+		A19506922146A0DF0091DF23 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19506902146A0DF0091DF23 /* PolicyViewController.swift */; };
+		A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19506912146A0DF0091DF23 /* PolicyViewController.xib */; };
 		A1A3DE62213878D200F87009 /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A3DE59213878D100F87009 /* Logger.framework */; };
 		A1A3DE69213878D200F87009 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE68213878D200F87009 /* LoggerTests.swift */; };
 		A1A3DE6B213878D200F87009 /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = A1A3DE5B213878D200F87009 /* Logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -393,10 +395,8 @@
 		A112E773212CD76400320048 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		A112E777212CD76400320048 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A112E778212CD76400320048 /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
-		A112E77A212CD76400320048 /* AppInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppInformationViewController.xib; sourceTree = "<group>"; };
 		A112E77C212CD76400320048 /* MenuOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuOrderViewController.xib; sourceTree = "<group>"; };
 		A112E77E212CD76400320048 /* ReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportViewController.xib; sourceTree = "<group>"; };
-		A112E780212CD76400320048 /* CopyrightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CopyrightViewController.xib; sourceTree = "<group>"; };
 		A112E783212CD76400320048 /* OptionMenuHistoryTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHistoryTableView.xib; sourceTree = "<group>"; };
 		A112E784212CD76400320048 /* OptionMenuTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuTableView.xib; sourceTree = "<group>"; };
 		A112E785212CD76400320048 /* OptionMenuFavoriteTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFavoriteTableView.xib; sourceTree = "<group>"; };
@@ -417,12 +417,10 @@
 		A112E797212CD76400320048 /* SearchMenuNewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuNewsTableViewCell.xib; sourceTree = "<group>"; };
 		A112E798212CD76400320048 /* SearchMenuSearchHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuSearchHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		A112E79A212CD76400320048 /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
-		A112E79C212CD76400320048 /* AppInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInformationViewController.swift; sourceTree = "<group>"; };
 		A112E79E212CD76400320048 /* MenuOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuOrderViewController.swift; sourceTree = "<group>"; };
 		A112E7A0212CD76400320048 /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		A112E7A1212CD76400320048 /* CornerRadiusButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerRadiusButton.swift; sourceTree = "<group>"; };
 		A112E7A3212CD76400320048 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
-		A112E7A5212CD76400320048 /* CopyrightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyrightViewController.swift; sourceTree = "<group>"; };
 		A112E7A7212CD76400320048 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		A112E7AA212CD76400320048 /* CircleMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenu.swift; sourceTree = "<group>"; };
 		A112E7AB212CD76400320048 /* CircleProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgress.swift; sourceTree = "<group>"; };
@@ -580,6 +578,12 @@
 		A195067C21453AF30091DF23 /* LicenseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseUseCase.swift; sourceTree = "<group>"; };
 		A195067E21453B9C0091DF23 /* PolicyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyUseCase.swift; sourceTree = "<group>"; };
 		A195068021453BA80091DF23 /* ReviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUseCase.swift; sourceTree = "<group>"; };
+		A19506882146A0AE0091DF23 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		A19506892146A0AE0091DF23 /* AboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		A195068C2146A0C40091DF23 /* LicenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
+		A195068D2146A0C40091DF23 /* LicenseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LicenseViewController.xib; sourceTree = "<group>"; };
+		A19506902146A0DF0091DF23 /* PolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
+		A19506912146A0DF0091DF23 /* PolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolicyViewController.xib; sourceTree = "<group>"; };
 		A19880732073A5E20067EC4F /* Qass-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19DAE14878AED5A28A57BBD /* Pods-Qass-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Tests/Pods-Qass-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A1A3DE59213878D100F87009 /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -895,13 +899,14 @@
 		A112E771212CD76400320048 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A112E774212CD76400320048 /* Xib */,
+				A19506852146A0480091DF23 /* About */,
+				A19506862146A0480091DF23 /* License */,
+				A19506872146A0480091DF23 /* Policy */,
 				A112E772212CD76400320048 /* Splash */,
-				A112E774212CD76400320048 /* Storyboard */,
-				A112E79B212CD76400320048 /* AppInformation */,
 				A112E79D212CD76400320048 /* MenuOrder */,
 				A112E79F212CD76400320048 /* Common */,
 				A112E7A2212CD76400320048 /* Report */,
-				A112E7A4212CD76400320048 /* Copyright */,
 				A112E7A6212CD76400320048 /* Base */,
 				A112E7D2212CD76400320048 /* Help */,
 			);
@@ -916,18 +921,19 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
-		A112E774212CD76400320048 /* Storyboard */ = {
+		A112E774212CD76400320048 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				A19506832146A0360091DF23 /* About */,
+				A19506842146A0360091DF23 /* License */,
+				A19506822146A0360091DF23 /* Policy */,
 				A112E775212CD76400320048 /* Splash */,
-				A112E779212CD76400320048 /* AppInformation */,
 				A112E77B212CD76400320048 /* MenuOrder */,
 				A112E77D212CD76400320048 /* Report */,
-				A112E77F212CD76400320048 /* Copyright */,
 				A112E781212CD76400320048 /* Base */,
 				A112E799212CD76400320048 /* Help */,
 			);
-			path = Storyboard;
+			path = Xib;
 			sourceTree = "<group>";
 		};
 		A112E775212CD76400320048 /* Splash */ = {
@@ -937,14 +943,6 @@
 				A112E778212CD76400320048 /* SplashViewController.xib */,
 			);
 			path = Splash;
-			sourceTree = "<group>";
-		};
-		A112E779212CD76400320048 /* AppInformation */ = {
-			isa = PBXGroup;
-			children = (
-				A112E77A212CD76400320048 /* AppInformationViewController.xib */,
-			);
-			path = AppInformation;
 			sourceTree = "<group>";
 		};
 		A112E77B212CD76400320048 /* MenuOrder */ = {
@@ -961,14 +959,6 @@
 				A112E77E212CD76400320048 /* ReportViewController.xib */,
 			);
 			path = Report;
-			sourceTree = "<group>";
-		};
-		A112E77F212CD76400320048 /* Copyright */ = {
-			isa = PBXGroup;
-			children = (
-				A112E780212CD76400320048 /* CopyrightViewController.xib */,
-			);
-			path = Copyright;
 			sourceTree = "<group>";
 		};
 		A112E781212CD76400320048 /* Base */ = {
@@ -1037,14 +1027,6 @@
 			path = Help;
 			sourceTree = "<group>";
 		};
-		A112E79B212CD76400320048 /* AppInformation */ = {
-			isa = PBXGroup;
-			children = (
-				A112E79C212CD76400320048 /* AppInformationViewController.swift */,
-			);
-			path = AppInformation;
-			sourceTree = "<group>";
-		};
 		A112E79D212CD76400320048 /* MenuOrder */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,14 +1050,6 @@
 				A112E7A3212CD76400320048 /* ReportViewController.swift */,
 			);
 			path = Report;
-			sourceTree = "<group>";
-		};
-		A112E7A4212CD76400320048 /* Copyright */ = {
-			isa = PBXGroup;
-			children = (
-				A112E7A5212CD76400320048 /* CopyrightViewController.swift */,
-			);
-			path = Copyright;
 			sourceTree = "<group>";
 		};
 		A112E7A6212CD76400320048 /* Base */ = {
@@ -1548,6 +1522,54 @@
 				A195066B2144052B0091DF23 /* NotificationView.swift */,
 			);
 			path = Notification;
+			sourceTree = "<group>";
+		};
+		A19506822146A0360091DF23 /* Policy */ = {
+			isa = PBXGroup;
+			children = (
+				A19506912146A0DF0091DF23 /* PolicyViewController.xib */,
+			);
+			path = Policy;
+			sourceTree = "<group>";
+		};
+		A19506832146A0360091DF23 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				A19506892146A0AE0091DF23 /* AboutViewController.xib */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		A19506842146A0360091DF23 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				A195068D2146A0C40091DF23 /* LicenseViewController.xib */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
+		A19506852146A0480091DF23 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				A19506882146A0AE0091DF23 /* AboutViewController.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		A19506862146A0480091DF23 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				A195068C2146A0C40091DF23 /* LicenseViewController.swift */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
+		A19506872146A0480091DF23 /* Policy */ = {
+			isa = PBXGroup;
+			children = (
+				A19506902146A0DF0091DF23 /* PolicyViewController.swift */,
+			);
+			path = Policy;
 			sourceTree = "<group>";
 		};
 		A1A3DE5A213878D200F87009 /* Logger */ = {
@@ -2030,12 +2052,13 @@
 				A112E857212CD76500320048 /* OptionMenuFormTableView.xib in Resources */,
 				A1FE87E0211B015800B258A3 /* invalid.html in Resources */,
 				A1FE87E7211B019D00B258A3 /* highlight.js in Resources */,
-				A112E833212CD76500320048 /* AppInformationViewController.xib in Resources */,
 				A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */,
 				A1903056209CF978004F1EA5 /* article_stub.json in Resources */,
 				A112E84B212CD76500320048 /* OptionMenuHistoryTableViewCell.xib in Resources */,
+				A195068B2146A0AE0091DF23 /* AboutViewController.xib in Resources */,
 				A112E843212CD76500320048 /* OptionMenuHelpTableViewCell.xib in Resources */,
-				A112E839212CD76500320048 /* CopyrightViewController.xib in Resources */,
+				A195068F2146A0C40091DF23 /* LicenseViewController.xib in Resources */,
+				A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */,
 				A112E847212CD76500320048 /* OptionMenuTableViewCell.xib in Resources */,
 				A112E855212CD76500320048 /* OptionMenuAppTableView.xib in Resources */,
 				A112E83D212CD76500320048 /* OptionMenuTableView.xib in Resources */,
@@ -2654,7 +2677,6 @@
 				A112E87B212CD76500320048 /* OptionMenuHelpTableView.swift in Sources */,
 				A112E89F212CD76500320048 /* SearchMenuSuggestTableViewCell.swift in Sources */,
 				A112E87D212CD76500320048 /* OptionMenuTableView.swift in Sources */,
-				A112E86D212CD76500320048 /* CopyrightViewController.swift in Sources */,
 				A112E8A3212CD76500320048 /* SearchMenuCommonHistoryTableViewCell.swift in Sources */,
 				A112E81F212CD76500320048 /* BaseViewControllerViewModel.swift in Sources */,
 				A190302C209CF977004F1EA5 /* Dictionary+Extend.swift in Sources */,
@@ -2662,7 +2684,6 @@
 				A1903031209CF977004F1EA5 /* NSObject+Extend.swift in Sources */,
 				A1903017209CF977004F1EA5 /* AppConst.swift in Sources */,
 				A112E81B212CD76500320048 /* OptionMenuHelpTableViewModel.swift in Sources */,
-				A112E863212CD76500320048 /* AppInformationViewController.swift in Sources */,
 				A190302B209CF977004F1EA5 /* Date+Extend.swift in Sources */,
 				A112E889212CD76500320048 /* OptionMenuAppTableViewCell.swift in Sources */,
 				A112E8B1212CD76500320048 /* HeaderField.swift in Sources */,
@@ -2703,6 +2724,7 @@
 				A112E827212CD76500320048 /* BaseLayerViewModel.swift in Sources */,
 				A112E897212CD76500320048 /* FooterView.swift in Sources */,
 				A1903039209CF977004F1EA5 /* UIView+Extend.swift in Sources */,
+				A195068E2146A0C40091DF23 /* LicenseViewController.swift in Sources */,
 				A112E8AF212CD76500320048 /* EGProgressBar.swift in Sources */,
 				A112E871212CD76500320048 /* CircleMenu.swift in Sources */,
 				A112E869212CD76500320048 /* CornerRadiusButton.swift in Sources */,
@@ -2719,11 +2741,13 @@
 				A112E877212CD76500320048 /* OptionMenuFavoriteTableView.swift in Sources */,
 				A112E895212CD76500320048 /* FrontLayer.swift in Sources */,
 				A112E88F212CD76500320048 /* OptionMenuSettingTableView.swift in Sources */,
+				A19506922146A0DF0091DF23 /* PolicyViewController.swift in Sources */,
 				A1903029209CF977004F1EA5 /* CollectionType+Extend.swift in Sources */,
 				A112E829212CD76500320048 /* HeaderViewModel.swift in Sources */,
 				A1A3DE8121387C6F00F87009 /* AppLogger.swift in Sources */,
 				A195066C2144052B0091DF23 /* NotificationManager.swift in Sources */,
 				A1903050209CF978004F1EA5 /* CircleView.swift in Sources */,
+				A195068A2146A0AE0091DF23 /* AboutViewController.swift in Sources */,
 				A112E873212CD76500320048 /* CircleProgress.swift in Sources */,
 				A190302F209CF977004F1EA5 /* Float+Extend.swift in Sources */,
 				A112E89D212CD76500320048 /* EGWebView.swift in Sources */,
