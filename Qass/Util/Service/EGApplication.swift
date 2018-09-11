@@ -16,6 +16,8 @@ import UIKit
     func screenTouchCancelled(touch: UITouch)
 }
 
+// swiftlint:disable force_cast
+
 @objc(EGApplication) class EGApplication: UIApplication {
     weak var egDelegate: EGApplicationDelegate?
     private let movieClassName = "AVPlaybackControlsView"
@@ -44,3 +46,5 @@ import UIKit
         super.sendEvent(event)
     }
 }
+
+// swiftlint:enable force_cast
