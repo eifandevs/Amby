@@ -25,6 +25,12 @@ final class BaseViewControllerViewModel {
             return Observable.just(())
         }
 
+    // オープンソース表示通知用RX
+    let rx_baseViewControllerViewModelDidPresentOpenSource = OpenSourceUseCase.s.rx_openSourceUseCaseDidRequestPresentOpenSourceScreen
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
+        }
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 

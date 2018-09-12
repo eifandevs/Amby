@@ -11,6 +11,14 @@ import UIKit
 class OpenSourceViewController: UIViewController {
     @IBOutlet var textView: UITextView!
 
+    convenience init() {
+        self.init(nibName: R.nib.openSourceViewController.name, bundle: nil)
+    }
+
+    deinit {
+        log.debug("deinit called.")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

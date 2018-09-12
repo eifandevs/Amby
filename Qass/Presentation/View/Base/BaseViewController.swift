@@ -97,6 +97,17 @@ class BaseViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
 
+        // オープンソース表示監視
+        viewModel.rx_baseViewControllerViewModelDidPresentOpenSource
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentOpenSource")
+                guard let `self` = self else { return }
+                let vc = OpenSourceViewController()
+                self.present(vc, animated: true)
+                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentOpenSource")
+            }
+            .disposed(by: rx.disposeBag)
+
         // メーラー起動監視
         viewModel.rx_baseViewControllerViewModelDidPresentMail
             .subscribe { [weak self] _ in

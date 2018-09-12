@@ -10,41 +10,41 @@ import Foundation
 import Logger
 
 class AppLogger {
-    class func verbose(fileName _: String = #file, _ message: Any) {
-        Logger.verbose(message)
+    class func verbose(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        Logger.verbose(message, file, function, line: line, context: "PRESENTATION")
     }
 
-    class func debug(fileName _: String = #file, _ message: Any) {
-        Logger.debug(message)
+    class func debug(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        Logger.debug(message, file, function, line: line, context: "PRESENTATION")
     }
 
-    class func warning(fileName _: String = #file, _ message: Any) {
-        Logger.warning(message)
+    class func warning(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        Logger.warning(message, file, function, line: line, context: "PRESENTATION")
     }
 
-    class func info(fileName _: String = #file, _ message: Any) {
-        Logger.info(message)
+    class func info(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        Logger.info(message, file, function, line: line, context: "PRESENTATION")
     }
 
-    class func error(fileName _: String = #file, _ message: Any) {
-        Logger.error(message)
+    class func error(_ message: Any, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        Logger.error(message, file, function, line: line, context: "PRESENTATION")
     }
 
-    class func eventIn(fileName: String = #file, functionName: String = #function, chain: String = "") {
-        let fname = fileName.components(separatedBy: "/").last!.components(separatedBy: ".").first!
+    class func eventIn(_ file: String = #file, _ function: String = #function, _ line: Int = #line, chain: String = "") {
+        let fname = file.components(separatedBy: "/").last!.components(separatedBy: ".").first!
         if chain.isEmpty {
-            Logger.verbose("\(fname).\(functionName) >>>")
+            Logger.verbose("\(fname).\(function) >>>", file, function, line: line, context: "PRESENTATION")
         } else {
-            Logger.verbose("\(fname).\(functionName).\(chain) >>>")
+            Logger.verbose("\(fname).\(function).\(chain) >>>", file, function, line: line, context: "PRESENTATION")
         }
     }
 
-    class func eventOut(fileName: String = #file, functionName: String = #function, chain: String = "") {
-        let fname = fileName.components(separatedBy: "/").last!.components(separatedBy: ".").first!
+    class func eventOut(_ file: String = #file, _ function: String = #function, _ line: Int = #line, chain: String = "") {
+        let fname = file.components(separatedBy: "/").last!.components(separatedBy: ".").first!
         if chain.isEmpty {
-            Logger.verbose("\(fname).\(functionName) <<<")
+            Logger.verbose("\(fname).\(function) <<<", file, function, line: line, context: "PRESENTATION")
         } else {
-            Logger.verbose("\(fname).\(functionName).\(chain) <<<")
+            Logger.verbose("\(fname).\(function).\(chain) <<<", file, function, line: line, context: "PRESENTATION")
         }
     }
 }

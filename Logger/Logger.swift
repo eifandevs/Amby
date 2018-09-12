@@ -24,7 +24,7 @@ open class Logger: SwiftyBeaver {
             file.minLevel = log.Level.error
         #endif
 
-        console.format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
+        console.format = "$DHH:mm:ss.SSS$d $C$X$c $N.$F:$l - $M"
 
         log.addDestination(console)
         log.addDestination(file)

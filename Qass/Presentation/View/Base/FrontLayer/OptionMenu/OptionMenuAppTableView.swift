@@ -85,7 +85,7 @@ extension OptionMenuAppTableView: UITableViewDelegate {
         switch viewModel.getRow(indexPath: indexPath).cellType {
         case .about:
             viewModel.openAbout()
-        case .license:
+        case .opensource:
             viewModel.openLicense()
         case .policy:
             viewModel.openPolicy()

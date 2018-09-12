@@ -204,17 +204,15 @@
 		A195067721444E150091DF23 /* NewsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195067621444E150091DF23 /* NewsUseCase.swift */; };
 		A1950679214453AB0091DF23 /* WebCacheUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1950678214453AB0091DF23 /* WebCacheUseCase.swift */; };
 		A195067B214538FF0091DF23 /* AboutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195067A214538FF0091DF23 /* AboutUseCase.swift */; };
-		A195067D21453AF30091DF23 /* LicenseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195067C21453AF30091DF23 /* LicenseUseCase.swift */; };
 		A195067F21453B9C0091DF23 /* PolicyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195067E21453B9C0091DF23 /* PolicyUseCase.swift */; };
 		A195068121453BA80091DF23 /* ReviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195068021453BA80091DF23 /* ReviewUseCase.swift */; };
 		A195068A2146A0AE0091DF23 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19506882146A0AE0091DF23 /* AboutViewController.swift */; };
 		A195068B2146A0AE0091DF23 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19506892146A0AE0091DF23 /* AboutViewController.xib */; };
-		A195068E2146A0C40091DF23 /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195068C2146A0C40091DF23 /* LicenseViewController.swift */; };
-		A195068F2146A0C40091DF23 /* LicenseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A195068D2146A0C40091DF23 /* LicenseViewController.xib */; };
 		A19506922146A0DF0091DF23 /* PolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19506902146A0DF0091DF23 /* PolicyViewController.swift */; };
 		A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19506912146A0DF0091DF23 /* PolicyViewController.xib */; };
 		A19506982146B6B40091DF23 /* OpenSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19506962146B6B40091DF23 /* OpenSourceViewController.swift */; };
 		A19506992146B6B40091DF23 /* OpenSourceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19506972146B6B40091DF23 /* OpenSourceViewController.xib */; };
+		A195069B214936410091DF23 /* OpenSourceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A195069A214936410091DF23 /* OpenSourceUseCase.swift */; };
 		A1A3DE62213878D200F87009 /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A3DE59213878D100F87009 /* Logger.framework */; };
 		A1A3DE69213878D200F87009 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE68213878D200F87009 /* LoggerTests.swift */; };
 		A1A3DE6B213878D200F87009 /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = A1A3DE5B213878D200F87009 /* Logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -577,17 +575,15 @@
 		A195067621444E150091DF23 /* NewsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUseCase.swift; sourceTree = "<group>"; };
 		A1950678214453AB0091DF23 /* WebCacheUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCacheUseCase.swift; sourceTree = "<group>"; };
 		A195067A214538FF0091DF23 /* AboutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUseCase.swift; sourceTree = "<group>"; };
-		A195067C21453AF30091DF23 /* LicenseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseUseCase.swift; sourceTree = "<group>"; };
 		A195067E21453B9C0091DF23 /* PolicyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyUseCase.swift; sourceTree = "<group>"; };
 		A195068021453BA80091DF23 /* ReviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUseCase.swift; sourceTree = "<group>"; };
 		A19506882146A0AE0091DF23 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		A19506892146A0AE0091DF23 /* AboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
-		A195068C2146A0C40091DF23 /* LicenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
-		A195068D2146A0C40091DF23 /* LicenseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LicenseViewController.xib; sourceTree = "<group>"; };
 		A19506902146A0DF0091DF23 /* PolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolicyViewController.swift; sourceTree = "<group>"; };
 		A19506912146A0DF0091DF23 /* PolicyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolicyViewController.xib; sourceTree = "<group>"; };
 		A19506962146B6B40091DF23 /* OpenSourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceViewController.swift; sourceTree = "<group>"; };
 		A19506972146B6B40091DF23 /* OpenSourceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenSourceViewController.xib; sourceTree = "<group>"; };
+		A195069A214936410091DF23 /* OpenSourceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceUseCase.swift; sourceTree = "<group>"; };
 		A19880732073A5E20067EC4F /* Qass-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19DAE14878AED5A28A57BBD /* Pods-Qass-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Tests/Pods-Qass-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A1A3DE59213878D100F87009 /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -906,7 +902,6 @@
 				A112E774212CD76400320048 /* Xib */,
 				A19506952146B6A40091DF23 /* OpenSource */,
 				A19506852146A0480091DF23 /* About */,
-				A19506862146A0480091DF23 /* License */,
 				A19506872146A0480091DF23 /* Policy */,
 				A112E772212CD76400320048 /* Splash */,
 				A112E79D212CD76400320048 /* MenuOrder */,
@@ -931,7 +926,6 @@
 			children = (
 				A19506942146B69B0091DF23 /* OpenSource */,
 				A19506832146A0360091DF23 /* About */,
-				A19506842146A0360091DF23 /* License */,
 				A19506822146A0360091DF23 /* Policy */,
 				A112E775212CD76400320048 /* Splash */,
 				A112E77B212CD76400320048 /* MenuOrder */,
@@ -1275,9 +1269,9 @@
 				A195067621444E150091DF23 /* NewsUseCase.swift */,
 				A1950678214453AB0091DF23 /* WebCacheUseCase.swift */,
 				A195067A214538FF0091DF23 /* AboutUseCase.swift */,
-				A195067C21453AF30091DF23 /* LicenseUseCase.swift */,
 				A195067E21453B9C0091DF23 /* PolicyUseCase.swift */,
 				A195068021453BA80091DF23 /* ReviewUseCase.swift */,
+				A195069A214936410091DF23 /* OpenSourceUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -1546,28 +1540,12 @@
 			path = About;
 			sourceTree = "<group>";
 		};
-		A19506842146A0360091DF23 /* License */ = {
-			isa = PBXGroup;
-			children = (
-				A195068D2146A0C40091DF23 /* LicenseViewController.xib */,
-			);
-			path = License;
-			sourceTree = "<group>";
-		};
 		A19506852146A0480091DF23 /* About */ = {
 			isa = PBXGroup;
 			children = (
 				A19506882146A0AE0091DF23 /* AboutViewController.swift */,
 			);
 			path = About;
-			sourceTree = "<group>";
-		};
-		A19506862146A0480091DF23 /* License */ = {
-			isa = PBXGroup;
-			children = (
-				A195068C2146A0C40091DF23 /* LicenseViewController.swift */,
-			);
-			path = License;
 			sourceTree = "<group>";
 		};
 		A19506872146A0480091DF23 /* Policy */ = {
@@ -2080,7 +2058,6 @@
 				A112E84B212CD76500320048 /* OptionMenuHistoryTableViewCell.xib in Resources */,
 				A195068B2146A0AE0091DF23 /* AboutViewController.xib in Resources */,
 				A112E843212CD76500320048 /* OptionMenuHelpTableViewCell.xib in Resources */,
-				A195068F2146A0C40091DF23 /* LicenseViewController.xib in Resources */,
 				A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */,
 				A112E847212CD76500320048 /* OptionMenuTableViewCell.xib in Resources */,
 				A112E855212CD76500320048 /* OptionMenuAppTableView.xib in Resources */,
@@ -2615,7 +2592,6 @@
 				A19506362143F8AF0091DF23 /* AuthTokenDataModel.swift in Sources */,
 				A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */,
 				A19506442143F8B80091DF23 /* HistoryUseCase.swift in Sources */,
-				A195067D21453AF30091DF23 /* LicenseUseCase.swift in Sources */,
 				A1950679214453AB0091DF23 /* WebCacheUseCase.swift in Sources */,
 				A195064D2143F8B80091DF23 /* ThumbnailUseCase.swift in Sources */,
 				A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */,
@@ -2634,6 +2610,7 @@
 				A19506462143F8B80091DF23 /* ScrollUseCase.swift in Sources */,
 				A1950675214439980091DF23 /* NoticeUseCase.swift in Sources */,
 				A19506262142D9A90091DF23 /* SearchHistory.swift in Sources */,
+				A195069B214936410091DF23 /* OpenSourceUseCase.swift in Sources */,
 				A19352A02141569C002A0865 /* SuggestResponse.swift in Sources */,
 				A19506402143F8B80091DF23 /* FavoriteUseCase.swift in Sources */,
 				A19506322143F8A60091DF23 /* EncryptHelper.swift in Sources */,
@@ -2748,7 +2725,6 @@
 				A112E827212CD76500320048 /* BaseLayerViewModel.swift in Sources */,
 				A112E897212CD76500320048 /* FooterView.swift in Sources */,
 				A1903039209CF977004F1EA5 /* UIView+Extend.swift in Sources */,
-				A195068E2146A0C40091DF23 /* LicenseViewController.swift in Sources */,
 				A112E8AF212CD76500320048 /* EGProgressBar.swift in Sources */,
 				A112E871212CD76500320048 /* CircleMenu.swift in Sources */,
 				A112E869212CD76500320048 /* CornerRadiusButton.swift in Sources */,

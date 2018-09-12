@@ -92,7 +92,7 @@ struct AppConst {
     static let APP_INFORMATION = APP_INFORMATION_VALUE()
     struct APP_INFORMATION_VALUE {
         let ABOUT = "About"
-        let LICENSE = "オープンソースライセンス"
+        let OPENSOURCE = "オープンソースライセンス"
         let POLICY = "プライバシーポリシー"
         let REVIEW = "評価・レビュー"
         let SOURCE = "ソースコード"
