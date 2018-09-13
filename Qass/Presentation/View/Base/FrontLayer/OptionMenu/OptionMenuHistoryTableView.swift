@@ -110,11 +110,14 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuHistoryCell.identifier, for: indexPath) as! OptionMenuHistoryTableViewCell
-        let row = viewModel.getRow(indexPath: indexPath)
-        cell.setViewModelData(row: row)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuHistoryCell.identifier, for: indexPath) as? OptionMenuHistoryTableViewCell {
+            let row = viewModel.getRow(indexPath: indexPath)
+            cell.setViewModelData(row: row)
 
-        return cell
+            return cell
+        }
+        
+        return UITableViewCell()
     }
 
     func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
