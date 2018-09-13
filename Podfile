@@ -21,6 +21,7 @@ abstract_target 'All' do
     pod 'RxSwift', '~> 4.0'
     pod 'RxCocoa', '~> 4.0'
     pod 'NSObject+Rx', '~> 4.2'
+    pod 'LicensePlist', '~> 1.8'
 
     target 'Qass-Tests' do
       inherit! :search_paths

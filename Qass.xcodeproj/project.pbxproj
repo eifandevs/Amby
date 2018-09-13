@@ -1794,9 +1794,9 @@
 				A1A3DE55213878D100F87009 /* Frameworks */,
 				A1A3DE56213878D100F87009 /* Headers */,
 				A1A3DE57213878D100F87009 /* Resources */,
-				A1A3DE7B2138795A00F87009 /* ShellScript */,
+				A1A3DE7B2138795A00F87009 /* Carthage */,
 				2BAC47F5212FB0B5715A482B /* [CP] Copy Pods Resources */,
-				A1C18E49213B10F500846ADB /* ShellScript */,
+				A1C18E49213B10F500846ADB /* Formatter */,
 			);
 			buildRules = (
 			);
@@ -1839,8 +1839,8 @@
 				A1E33A9D2137149A00C93FBE /* Headers */,
 				A1E33A9E2137149A00C93FBE /* Resources */,
 				B1447DCDBC1BCF85DAE3B565 /* [CP] Copy Pods Resources */,
-				A138CAE32137414800AEA669 /* ShellScript */,
-				A1C18E48213B10D800846ADB /* ShellScript */,
+				A138CAE32137414800AEA669 /* Carthage */,
+				A1C18E48213B10D800846ADB /* Formatter */,
 			);
 			buildRules = (
 			);
@@ -1878,16 +1878,17 @@
 			buildConfigurationList = A57EFEB31E3E06D300B66701 /* Build configuration list for PBXNativeTarget "Qass" */;
 			buildPhases = (
 				57D8DA48BB701B7EFB84CDD9 /* [CP] Check Pods Manifest.lock */,
-				A5A6F2C41F1F917600A4620C /* ShellScript */,
+				A5A6F2C41F1F917600A4620C /* RSwift */,
 				A57EFE9D1E3E06D300B66701 /* Sources */,
 				A57EFE9E1E3E06D300B66701 /* Frameworks */,
 				A57EFE9F1E3E06D300B66701 /* Resources */,
 				1D029561B4665ADEDAE1473F /* [CP] Embed Pods Frameworks */,
 				1E63D71BB12081FC0887EC86 /* [CP] Copy Pods Resources */,
-				A1EF0018207F7AA60079E1DF /* ShellScript */,
-				A544ACA02046F74C00D2C310 /* ShellScript */,
-				A101649820C5638E007A3CC7 /* ShellScript */,
+				A1EF0018207F7AA60079E1DF /* Formatter */,
+				A544ACA02046F74C00D2C310 /* Lint */,
+				A101649820C5638E007A3CC7 /* Carthage */,
 				A1706871213487D600AAD993 /* Embed Frameworks */,
+				A15C53E6214AAAAE001E8AB5 /* License */,
 			);
 			buildRules = (
 			);
@@ -2278,7 +2279,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A101649820C5638E007A3CC7 /* ShellScript */ = {
+		A101649820C5638E007A3CC7 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2291,13 +2292,14 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
 			);
+			name = Carthage;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n    /usr/local/bin/carthage copy-frameworks\nelse\n    echo \"warning: carthage not installed. install at 'brew install carthage'\"\nfi";
 		};
-		A138CAE32137414800AEA669 /* ShellScript */ = {
+		A138CAE32137414800AEA669 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2305,13 +2307,28 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
 			);
+			name = Carthage;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n/usr/local/bin/carthage copy-frameworks\nelse\necho \"warning: carthage not installed. install at 'brew install carthage'\"\nfi";
 		};
-		A1A3DE7B2138795A00F87009 /* ShellScript */ = {
+		A15C53E6214AAAAE001E8AB5 /* License */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = License;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ $CONFIGURATION = \"Debug\" -o $CONFIGURATION = \"Debug-Local\" ]; then\n${PODS_ROOT}/LicensePlist/license-plist --output-path ${SRCROOT}/license\nfi";
+		};
+		A1A3DE7B2138795A00F87009 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2319,71 +2336,77 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
 			);
+			name = Carthage;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n/usr/local/bin/carthage copy-frameworks\nelse\necho \"warning: carthage not installed. install at 'brew install carthage'\"\nfi";
 		};
-		A1C18E48213B10D800846ADB /* ShellScript */ = {
+		A1C18E48213B10D800846ADB /* Formatter */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = Formatter;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/Model\"";
 		};
-		A1C18E49213B10F500846ADB /* ShellScript */ = {
+		A1C18E49213B10F500846ADB /* Formatter */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = Formatter;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/Logger\"";
 		};
-		A1EF0018207F7AA60079E1DF /* ShellScript */ = {
+		A1EF0018207F7AA60079E1DF /* Formatter */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = Formatter;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/Qass\"";
 		};
-		A544ACA02046F74C00D2C310 /* ShellScript */ = {
+		A544ACA02046F74C00D2C310 /* Lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = Lint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which \"${PODS_ROOT}/SwiftLint/swiftlint\" >/dev/null; then\n    ${PODS_ROOT}/SwiftLint/swiftlint autocorrect\n    ${PODS_ROOT}/SwiftLint/swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		A5A6F2C41F1F917600A4620C /* ShellScript */ = {
+		A5A6F2C41F1F917600A4620C /* RSwift */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = RSwift;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,0 +1,181 @@
+name: Alamofire, nameSpecified: 
+body: Copyright (c) 2014-2…
+version: 4.7.3
+
+name: Alamofire, nameSpecified: 
+body: Copyright (c) 2014-2…
+version: 4.7.3
+
+name: Alamofire, nameSpecified: 
+body: Copyright (c) 2014-2…
+version: 4.7.3
+
+name: LicensePlist, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 1.8.3
+
+name: Moya, nameSpecified: 
+body: The MIT License (MIT…
+version: 11.0.1
+
+name: Moya, nameSpecified: 
+body: The MIT License (MIT…
+version: 11.0.1
+
+name: Moya, nameSpecified: 
+body: The MIT License (MIT…
+version: 11.0.1
+
+name: NSObject+Rx, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.2.0
+
+name: NSObject+Rx, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.2.0
+
+name: NSObject+Rx, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.2.0
+
+name: R.swift, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.0.0
+
+name: R.swift.Library, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.0.0
+
+name: Realm, nameSpecified: 
+body: TABLE OF CONTENTS
+
+1…
+version: 2.10.2
+
+name: Realm, nameSpecified: 
+body: TABLE OF CONTENTS
+
+1…
+version: 2.10.2
+
+name: Realm, nameSpecified: 
+body: TABLE OF CONTENTS
+
+1…
+version: 2.10.2
+
+name: RealmSwift, nameSpecified: 
+body: TABLE OF CONTENTS
+
+1…
+version: 2.10.2
+
+name: RealmSwift, nameSpecified: 
+body: TABLE OF CONTENTS
+
+1…
+version: 2.10.2
+
+name: RealmSwift, nameSpecified: 
+body: TABLE OF CONTENTS
+
+1…
+version: 2.10.2
+
+name: Result, nameSpecified: 
+body: The MIT License (MIT…
+version: 3.2.4
+
+name: Result, nameSpecified: 
+body: The MIT License (MIT…
+version: 3.2.4
+
+name: Result, nameSpecified: 
+body: The MIT License (MIT…
+version: 3.2.4
+
+name: RxCocoa, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.0.0
+
+name: RxCocoa, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.0.0
+
+name: RxCocoa, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.0.0
+
+name: RxSwift, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.0.0
+
+name: RxSwift, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.0.0
+
+name: RxSwift, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.0.0
+
+name: SwiftFormat, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 0.33.4
+
+name: SwiftFormat, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 0.33.4
+
+name: SwiftFormat, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 0.33.4
+
+name: SwiftFormat, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 0.33.4
+
+name: SwiftFormat, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 0.33.4
+
+name: SwiftLint, nameSpecified: 
+body: The MIT License (MIT…
+version: 0.26.0
+
+name: VerticalAlignmentLabel, nameSpecified: 
+body: Copyright (c) 2017 d…
+version: 0.1.0
+
+name: CryptoSwift, nameSpecified: , owner: krzyzanowskim, version: 0.8.3
+
+name: KeychainAccess, nameSpecified: , owner: kishikawakatsumi, version: v3.1.1
+
+name: Kingfisher, nameSpecified: , owner: onevcat, version: 4.8.0
+
+name: NVActivityIndicatorView, nameSpecified: , owner: ninjaprox, version: 4.2.1
+
+name: SVProgressHUD, nameSpecified: , owner: SVProgressHUD, version: 2.2.5
+
+name: SwiftyBeaver, nameSpecified: , owner: SwiftyBeaver, version: 1.6.0
+
+add-version-numbers: false
+
+LicensePlist Version: 1.8.3
