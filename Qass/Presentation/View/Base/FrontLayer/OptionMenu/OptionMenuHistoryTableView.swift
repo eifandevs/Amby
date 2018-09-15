@@ -116,7 +116,7 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
 
             return cell
         }
-        
+
         return UITableViewCell()
     }
 

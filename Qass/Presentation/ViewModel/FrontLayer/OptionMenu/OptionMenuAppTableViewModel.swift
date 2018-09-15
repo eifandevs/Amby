@@ -16,7 +16,6 @@ final class OptionMenuAppTableViewModel {
     }
 
     enum CellType: Int {
-        case about
         case opensource
         case policy
         case review
@@ -24,7 +23,6 @@ final class OptionMenuAppTableViewModel {
 
         var title: String {
             switch self {
-            case .about: return AppConst.APP_INFORMATION.ABOUT
             case .opensource: return AppConst.APP_INFORMATION.OPENSOURCE
             case .policy: return AppConst.APP_INFORMATION.POLICY
             case .review: return AppConst.APP_INFORMATION.REVIEW
@@ -35,7 +33,6 @@ final class OptionMenuAppTableViewModel {
 
     // セル
     let rows = [
-        Row(cellType: .about),
         Row(cellType: .opensource),
         Row(cellType: .policy),
         Row(cellType: .review),
@@ -57,11 +54,6 @@ final class OptionMenuAppTableViewModel {
     /// ソース表示
     func openSource() {
         SourceCodeUseCase.s.open()
-    }
-
-    /// About表示
-    func openAbout() {
-        AboutUseCase.s.open()
     }
 
     /// ライセンス表示

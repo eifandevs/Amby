@@ -83,8 +83,6 @@ extension OptionMenuAppTableView: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セル情報取得
         switch viewModel.getRow(indexPath: indexPath).cellType {
-        case .about:
-            viewModel.openAbout()
         case .opensource:
             viewModel.openLicense()
         case .policy:
