@@ -36,25 +36,6 @@
 		A112E831212CD76500320048 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E778212CD76400320048 /* SplashViewController.xib */; };
 		A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E77C212CD76400320048 /* MenuOrderViewController.xib */; };
 		A112E837212CD76500320048 /* ReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E77E212CD76400320048 /* ReportViewController.xib */; };
-		A112E83B212CD76500320048 /* OptionMenuHistoryTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E783212CD76400320048 /* OptionMenuHistoryTableView.xib */; };
-		A112E83D212CD76500320048 /* OptionMenuTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E784212CD76400320048 /* OptionMenuTableView.xib */; };
-		A112E83F212CD76500320048 /* OptionMenuFavoriteTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E785212CD76400320048 /* OptionMenuFavoriteTableView.xib */; };
-		A112E841212CD76500320048 /* OptionMenuFavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E787212CD76400320048 /* OptionMenuFavoriteTableViewCell.xib */; };
-		A112E843212CD76500320048 /* OptionMenuHelpTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E788212CD76400320048 /* OptionMenuHelpTableViewCell.xib */; };
-		A112E845212CD76500320048 /* OptionMenuFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E789212CD76400320048 /* OptionMenuFormTableViewCell.xib */; };
-		A112E847212CD76500320048 /* OptionMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E78A212CD76400320048 /* OptionMenuTableViewCell.xib */; };
-		A112E849212CD76500320048 /* OptionMenuSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E78B212CD76400320048 /* OptionMenuSettingTableViewCell.xib */; };
-		A112E84B212CD76500320048 /* OptionMenuHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E78C212CD76400320048 /* OptionMenuHistoryTableViewCell.xib */; };
-		A112E84D212CD76500320048 /* OptionMenuAppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E78D212CD76400320048 /* OptionMenuAppTableViewCell.xib */; };
-		A112E84F212CD76500320048 /* OptionMenuSettingSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E78E212CD76400320048 /* OptionMenuSettingSliderTableViewCell.xib */; };
-		A112E851212CD76500320048 /* OptionMenuHelpTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E78F212CD76400320048 /* OptionMenuHelpTableView.xib */; };
-		A112E853212CD76500320048 /* OptionMenuSettingTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E790212CD76400320048 /* OptionMenuSettingTableView.xib */; };
-		A112E855212CD76500320048 /* OptionMenuAppTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E791212CD76400320048 /* OptionMenuAppTableView.xib */; };
-		A112E857212CD76500320048 /* OptionMenuFormTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E792212CD76400320048 /* OptionMenuFormTableView.xib */; };
-		A112E859212CD76500320048 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E795212CD76400320048 /* SearchMenuCommonHistoryTableViewCell.xib */; };
-		A112E85B212CD76500320048 /* SearchMenuSuggestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E796212CD76400320048 /* SearchMenuSuggestTableViewCell.xib */; };
-		A112E85D212CD76500320048 /* SearchMenuNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E797212CD76400320048 /* SearchMenuNewsTableViewCell.xib */; };
-		A112E85F212CD76500320048 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E798212CD76400320048 /* SearchMenuSearchHistoryTableViewCell.xib */; };
 		A112E861212CD76500320048 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A112E79A212CD76400320048 /* HelpViewController.xib */; };
 		A112E865212CD76500320048 /* MenuOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E79E212CD76400320048 /* MenuOrderViewController.swift */; };
 		A112E867212CD76500320048 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7A0212CD76400320048 /* PaddingLabel.swift */; };
@@ -110,6 +91,25 @@
 		A15C53F5214D4CDC001E8AB5 /* TrendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C53ED214D4CDC001E8AB5 /* TrendUseCase.swift */; };
 		A15C53F6214D4CDC001E8AB5 /* ReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C53EE214D4CDC001E8AB5 /* ReportUseCase.swift */; };
 		A15C53F7214D4CDC001E8AB5 /* PolicyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C53EF214D4CDC001E8AB5 /* PolicyUseCase.swift */; };
+		A15C5409214D5E23001E8AB5 /* OptionMenuHistoryTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53F9214D5E23001E8AB5 /* OptionMenuHistoryTableView.xib */; };
+		A15C540A214D5E23001E8AB5 /* OptionMenuTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53FA214D5E23001E8AB5 /* OptionMenuTableView.xib */; };
+		A15C540B214D5E23001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53FB214D5E23001E8AB5 /* OptionMenuFavoriteTableView.xib */; };
+		A15C540C214D5E23001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53FD214D5E23001E8AB5 /* OptionMenuFavoriteTableViewCell.xib */; };
+		A15C540D214D5E23001E8AB5 /* OptionMenuHelpTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53FE214D5E23001E8AB5 /* OptionMenuHelpTableViewCell.xib */; };
+		A15C540E214D5E23001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53FF214D5E23001E8AB5 /* OptionMenuFormTableViewCell.xib */; };
+		A15C540F214D5E23001E8AB5 /* OptionMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5400214D5E23001E8AB5 /* OptionMenuTableViewCell.xib */; };
+		A15C5410214D5E23001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5401214D5E23001E8AB5 /* OptionMenuSettingTableViewCell.xib */; };
+		A15C5411214D5E23001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5402214D5E23001E8AB5 /* OptionMenuHistoryTableViewCell.xib */; };
+		A15C5412214D5E23001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5403214D5E23001E8AB5 /* OptionMenuAppTableViewCell.xib */; };
+		A15C5413214D5E23001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5404214D5E23001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib */; };
+		A15C5414214D5E23001E8AB5 /* OptionMenuHelpTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5405214D5E23001E8AB5 /* OptionMenuHelpTableView.xib */; };
+		A15C5415214D5E23001E8AB5 /* OptionMenuSettingTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5406214D5E23001E8AB5 /* OptionMenuSettingTableView.xib */; };
+		A15C5416214D5E23001E8AB5 /* OptionMenuAppTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5407214D5E23001E8AB5 /* OptionMenuAppTableView.xib */; };
+		A15C5417214D5E23001E8AB5 /* OptionMenuFormTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5408214D5E23001E8AB5 /* OptionMenuFormTableView.xib */; };
+		A15C541E214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C541A214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib */; };
+		A15C541F214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C541B214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib */; };
+		A15C5420214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C541C214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib */; };
+		A15C5421214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C541D214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib */; };
 		A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F38209CF976004F1EA5 /* AppDelegate.swift */; };
 		A1903017209CF977004F1EA5 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3B209CF976004F1EA5 /* AppConst.swift */; };
 		A1903018209CF977004F1EA5 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3C209CF976004F1EA5 /* AppEnum.swift */; };
@@ -394,25 +394,6 @@
 		A112E778212CD76400320048 /* SplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
 		A112E77C212CD76400320048 /* MenuOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuOrderViewController.xib; sourceTree = "<group>"; };
 		A112E77E212CD76400320048 /* ReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportViewController.xib; sourceTree = "<group>"; };
-		A112E783212CD76400320048 /* OptionMenuHistoryTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHistoryTableView.xib; sourceTree = "<group>"; };
-		A112E784212CD76400320048 /* OptionMenuTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuTableView.xib; sourceTree = "<group>"; };
-		A112E785212CD76400320048 /* OptionMenuFavoriteTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFavoriteTableView.xib; sourceTree = "<group>"; };
-		A112E787212CD76400320048 /* OptionMenuFavoriteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFavoriteTableViewCell.xib; sourceTree = "<group>"; };
-		A112E788212CD76400320048 /* OptionMenuHelpTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHelpTableViewCell.xib; sourceTree = "<group>"; };
-		A112E789212CD76400320048 /* OptionMenuFormTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFormTableViewCell.xib; sourceTree = "<group>"; };
-		A112E78A212CD76400320048 /* OptionMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuTableViewCell.xib; sourceTree = "<group>"; };
-		A112E78B212CD76400320048 /* OptionMenuSettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingTableViewCell.xib; sourceTree = "<group>"; };
-		A112E78C212CD76400320048 /* OptionMenuHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHistoryTableViewCell.xib; sourceTree = "<group>"; };
-		A112E78D212CD76400320048 /* OptionMenuAppTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuAppTableViewCell.xib; sourceTree = "<group>"; };
-		A112E78E212CD76400320048 /* OptionMenuSettingSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingSliderTableViewCell.xib; sourceTree = "<group>"; };
-		A112E78F212CD76400320048 /* OptionMenuHelpTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHelpTableView.xib; sourceTree = "<group>"; };
-		A112E790212CD76400320048 /* OptionMenuSettingTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingTableView.xib; sourceTree = "<group>"; };
-		A112E791212CD76400320048 /* OptionMenuAppTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuAppTableView.xib; sourceTree = "<group>"; };
-		A112E792212CD76400320048 /* OptionMenuFormTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFormTableView.xib; sourceTree = "<group>"; };
-		A112E795212CD76400320048 /* SearchMenuCommonHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuCommonHistoryTableViewCell.xib; sourceTree = "<group>"; };
-		A112E796212CD76400320048 /* SearchMenuSuggestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuSuggestTableViewCell.xib; sourceTree = "<group>"; };
-		A112E797212CD76400320048 /* SearchMenuNewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuNewsTableViewCell.xib; sourceTree = "<group>"; };
-		A112E798212CD76400320048 /* SearchMenuSearchHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuSearchHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		A112E79A212CD76400320048 /* HelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		A112E79E212CD76400320048 /* MenuOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuOrderViewController.swift; sourceTree = "<group>"; };
 		A112E7A0212CD76400320048 /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
@@ -507,6 +488,25 @@
 		A15C53ED214D4CDC001E8AB5 /* TrendUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendUseCase.swift; sourceTree = "<group>"; };
 		A15C53EE214D4CDC001E8AB5 /* ReportUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUseCase.swift; sourceTree = "<group>"; };
 		A15C53EF214D4CDC001E8AB5 /* PolicyUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyUseCase.swift; sourceTree = "<group>"; };
+		A15C53F9214D5E23001E8AB5 /* OptionMenuHistoryTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHistoryTableView.xib; sourceTree = "<group>"; };
+		A15C53FA214D5E23001E8AB5 /* OptionMenuTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuTableView.xib; sourceTree = "<group>"; };
+		A15C53FB214D5E23001E8AB5 /* OptionMenuFavoriteTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFavoriteTableView.xib; sourceTree = "<group>"; };
+		A15C53FD214D5E23001E8AB5 /* OptionMenuFavoriteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFavoriteTableViewCell.xib; sourceTree = "<group>"; };
+		A15C53FE214D5E23001E8AB5 /* OptionMenuHelpTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHelpTableViewCell.xib; sourceTree = "<group>"; };
+		A15C53FF214D5E23001E8AB5 /* OptionMenuFormTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFormTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5400214D5E23001E8AB5 /* OptionMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5401214D5E23001E8AB5 /* OptionMenuSettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5402214D5E23001E8AB5 /* OptionMenuHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5403214D5E23001E8AB5 /* OptionMenuAppTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuAppTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5404214D5E23001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingSliderTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5405214D5E23001E8AB5 /* OptionMenuHelpTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHelpTableView.xib; sourceTree = "<group>"; };
+		A15C5406214D5E23001E8AB5 /* OptionMenuSettingTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingTableView.xib; sourceTree = "<group>"; };
+		A15C5407214D5E23001E8AB5 /* OptionMenuAppTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuAppTableView.xib; sourceTree = "<group>"; };
+		A15C5408214D5E23001E8AB5 /* OptionMenuFormTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFormTableView.xib; sourceTree = "<group>"; };
+		A15C541A214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuCommonHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		A15C541B214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuSuggestTableViewCell.xib; sourceTree = "<group>"; };
+		A15C541C214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuNewsTableViewCell.xib; sourceTree = "<group>"; };
+		A15C541D214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuSearchHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		A168382B2066960B00182028 /* Qass-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1902F2E209CF976004F1EA5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
@@ -965,50 +965,17 @@
 		A112E782212CD76400320048 /* FrontLayer */ = {
 			isa = PBXGroup;
 			children = (
-				A112E783212CD76400320048 /* OptionMenuHistoryTableView.xib */,
-				A112E784212CD76400320048 /* OptionMenuTableView.xib */,
-				A112E785212CD76400320048 /* OptionMenuFavoriteTableView.xib */,
-				A112E786212CD76400320048 /* Cell */,
-				A112E78F212CD76400320048 /* OptionMenuHelpTableView.xib */,
-				A112E790212CD76400320048 /* OptionMenuSettingTableView.xib */,
-				A112E791212CD76400320048 /* OptionMenuAppTableView.xib */,
-				A112E792212CD76400320048 /* OptionMenuFormTableView.xib */,
+				A15C53F8214D5E23001E8AB5 /* OptionMenu */,
 			);
 			path = FrontLayer;
-			sourceTree = "<group>";
-		};
-		A112E786212CD76400320048 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				A112E787212CD76400320048 /* OptionMenuFavoriteTableViewCell.xib */,
-				A112E788212CD76400320048 /* OptionMenuHelpTableViewCell.xib */,
-				A112E789212CD76400320048 /* OptionMenuFormTableViewCell.xib */,
-				A112E78A212CD76400320048 /* OptionMenuTableViewCell.xib */,
-				A112E78B212CD76400320048 /* OptionMenuSettingTableViewCell.xib */,
-				A112E78C212CD76400320048 /* OptionMenuHistoryTableViewCell.xib */,
-				A112E78D212CD76400320048 /* OptionMenuAppTableViewCell.xib */,
-				A112E78E212CD76400320048 /* OptionMenuSettingSliderTableViewCell.xib */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		A112E793212CD76400320048 /* BaseLayer */ = {
 			isa = PBXGroup;
 			children = (
-				A112E794212CD76400320048 /* Cell */,
+				A15C5418214D5E4D001E8AB5 /* SearchMenu */,
 			);
 			path = BaseLayer;
-			sourceTree = "<group>";
-		};
-		A112E794212CD76400320048 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				A112E795212CD76400320048 /* SearchMenuCommonHistoryTableViewCell.xib */,
-				A112E796212CD76400320048 /* SearchMenuSuggestTableViewCell.xib */,
-				A112E797212CD76400320048 /* SearchMenuNewsTableViewCell.xib */,
-				A112E798212CD76400320048 /* SearchMenuSearchHistoryTableViewCell.xib */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		A112E799212CD76400320048 /* Help */ = {
@@ -1238,7 +1205,7 @@
 		A112E93F212D7C1200320048 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				A15C53E7214D4CDC001E8AB5 /* MainMenu */,
+				A15C53E7214D4CDC001E8AB5 /* OptionMenu */,
 				A112E947212EDA6400320048 /* FavoriteUseCase.swift */,
 				A112E94A212EDAA000320048 /* FormUseCase.swift */,
 				A112E94D212EDAD500320048 /* GrepUseCase.swift */,
@@ -1296,7 +1263,7 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		A15C53E7214D4CDC001E8AB5 /* MainMenu */ = {
+		A15C53E7214D4CDC001E8AB5 /* OptionMenu */ = {
 			isa = PBXGroup;
 			children = (
 				A15C53E8214D4CDC001E8AB5 /* ContactUseCase.swift */,
@@ -1308,7 +1275,56 @@
 				A15C53EE214D4CDC001E8AB5 /* ReportUseCase.swift */,
 				A15C53EF214D4CDC001E8AB5 /* PolicyUseCase.swift */,
 			);
-			path = MainMenu;
+			path = OptionMenu;
+			sourceTree = "<group>";
+		};
+		A15C53F8214D5E23001E8AB5 /* OptionMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A15C53FC214D5E23001E8AB5 /* Cell */,
+				A15C53F9214D5E23001E8AB5 /* OptionMenuHistoryTableView.xib */,
+				A15C53FA214D5E23001E8AB5 /* OptionMenuTableView.xib */,
+				A15C53FB214D5E23001E8AB5 /* OptionMenuFavoriteTableView.xib */,
+				A15C5405214D5E23001E8AB5 /* OptionMenuHelpTableView.xib */,
+				A15C5406214D5E23001E8AB5 /* OptionMenuSettingTableView.xib */,
+				A15C5407214D5E23001E8AB5 /* OptionMenuAppTableView.xib */,
+				A15C5408214D5E23001E8AB5 /* OptionMenuFormTableView.xib */,
+			);
+			path = OptionMenu;
+			sourceTree = "<group>";
+		};
+		A15C53FC214D5E23001E8AB5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A15C53FD214D5E23001E8AB5 /* OptionMenuFavoriteTableViewCell.xib */,
+				A15C53FE214D5E23001E8AB5 /* OptionMenuHelpTableViewCell.xib */,
+				A15C53FF214D5E23001E8AB5 /* OptionMenuFormTableViewCell.xib */,
+				A15C5400214D5E23001E8AB5 /* OptionMenuTableViewCell.xib */,
+				A15C5401214D5E23001E8AB5 /* OptionMenuSettingTableViewCell.xib */,
+				A15C5402214D5E23001E8AB5 /* OptionMenuHistoryTableViewCell.xib */,
+				A15C5403214D5E23001E8AB5 /* OptionMenuAppTableViewCell.xib */,
+				A15C5404214D5E23001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A15C5418214D5E4D001E8AB5 /* SearchMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A15C5419214D5E4D001E8AB5 /* Cell */,
+			);
+			path = SearchMenu;
+			sourceTree = "<group>";
+		};
+		A15C5419214D5E4D001E8AB5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A15C541A214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib */,
+				A15C541B214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib */,
+				A15C541C214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib */,
+				A15C541D214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		A1902F2D209CF976004F1EA5 /* Qass-Tests */ = {
@@ -2012,43 +2028,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				A152086020C5543B00201B30 /* env.plist in Resources */,
-				A112E84D212CD76500320048 /* OptionMenuAppTableViewCell.xib in Resources */,
-				A112E83F212CD76500320048 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A112E831212CD76500320048 /* SplashViewController.xib in Resources */,
-				A112E841212CD76500320048 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
-				A112E83B212CD76500320048 /* OptionMenuHistoryTableView.xib in Resources */,
+				A15C5409214D5E23001E8AB5 /* OptionMenuHistoryTableView.xib in Resources */,
+				A15C540F214D5E23001E8AB5 /* OptionMenuTableViewCell.xib in Resources */,
+				A15C5410214D5E23001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A1FE87E2211B015800B258A3 /* dns.html in Resources */,
+				A15C5420214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib in Resources */,
 				A19506992146B6B40091DF23 /* OpenSourceViewController.xib in Resources */,
 				A112E811212CD76500320048 /* OptionMenuTableViewModel.swift.orig in Resources */,
-				A112E851212CD76500320048 /* OptionMenuHelpTableView.xib in Resources */,
 				A112E837212CD76500320048 /* ReportViewController.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
+				A15C5415214D5E23001E8AB5 /* OptionMenuSettingTableView.xib in Resources */,
 				A1FE87DE211B015800B258A3 /* timeout.html in Resources */,
 				A1FE87E4211B015800B258A3 /* authorize.html in Resources */,
-				A112E85D212CD76500320048 /* SearchMenuNewsTableViewCell.xib in Resources */,
-				A112E845212CD76500320048 /* OptionMenuFormTableViewCell.xib in Resources */,
-				A112E859212CD76500320048 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
+				A15C5417214D5E23001E8AB5 /* OptionMenuFormTableView.xib in Resources */,
+				A15C5411214D5E23001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */,
+				A15C541E214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
+				A15C540C214D5E23001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
+				A15C5414214D5E23001E8AB5 /* OptionMenuHelpTableView.xib in Resources */,
 				A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */,
+				A15C5416214D5E23001E8AB5 /* OptionMenuAppTableView.xib in Resources */,
+				A15C540A214D5E23001E8AB5 /* OptionMenuTableView.xib in Resources */,
 				A1F518BC213593E20029ACB7 /* env-dummy.plist in Resources */,
+				A15C5421214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
+				A15C5413214D5E23001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
+				A15C541F214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
-				A112E849212CD76500320048 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
-				A112E85F212CD76500320048 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
-				A112E857212CD76500320048 /* OptionMenuFormTableView.xib in Resources */,
 				A1FE87E0211B015800B258A3 /* invalid.html in Resources */,
+				A15C540B214D5E23001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A1FE87E7211B019D00B258A3 /* highlight.js in Resources */,
+				A15C5412214D5E23001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */,
+				A15C540D214D5E23001E8AB5 /* OptionMenuHelpTableViewCell.xib in Resources */,
+				A15C540E214D5E23001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */,
 				A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */,
 				A1903056209CF978004F1EA5 /* article_stub.json in Resources */,
-				A112E84B212CD76500320048 /* OptionMenuHistoryTableViewCell.xib in Resources */,
-				A112E843212CD76500320048 /* OptionMenuHelpTableViewCell.xib in Resources */,
 				A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */,
-				A112E847212CD76500320048 /* OptionMenuTableViewCell.xib in Resources */,
-				A112E855212CD76500320048 /* OptionMenuAppTableView.xib in Resources */,
-				A112E83D212CD76500320048 /* OptionMenuTableView.xib in Resources */,
 				A1FE87DC211B015800B258A3 /* offline.html in Resources */,
-				A112E853212CD76500320048 /* OptionMenuSettingTableView.xib in Resources */,
-				A112E84F212CD76500320048 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
-				A112E85B212CD76500320048 /* SearchMenuSuggestTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
