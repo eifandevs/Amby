@@ -24,14 +24,10 @@ final class OptionMenuTableViewModel {
         case setting
         case help
         case app
-        case report
-        case contact
 
         var imageName: String {
             switch self {
             case .trend: return R.image.optionmenuHistory.name
-            case .report: return R.image.optionmenuHistory.name
-            case .contact: return R.image.optionmenuHistory.name
             case .history: return R.image.optionmenuHistory.name
             case .form: return R.image.optionmenuForm.name
             case .favorite: return R.image.optionmenuFavorite.name
@@ -44,8 +40,6 @@ final class OptionMenuTableViewModel {
         var title: String {
             switch self {
             case .trend: return AppConst.OPTION_MENU.TREND
-            case .report: return AppConst.OPTION_MENU.REPORT
-            case .contact: return AppConst.OPTION_MENU.CONTACT
             case .history: return AppConst.OPTION_MENU.HISTORY
             case .form: return AppConst.OPTION_MENU.FORM
             case .favorite: return AppConst.OPTION_MENU.BOOKMARK
@@ -62,8 +56,6 @@ final class OptionMenuTableViewModel {
         Row(cellType: .form),
         Row(cellType: .favorite),
         Row(cellType: .trend),
-        Row(cellType: .report),
-        Row(cellType: .contact),
         Row(cellType: .setting),
         Row(cellType: .help),
         Row(cellType: .app)
@@ -99,16 +91,6 @@ final class OptionMenuTableViewModel {
     /// トレンド表示
     func loadTrend() {
         TrendUseCase.s.load()
-    }
-
-    /// レポート画面表示
-    func openReportScreen() {
-        ReportUseCase.s.open()
-    }
-
-    /// コンタクト画面表示
-    func openContactScreen() {
-        ContactUseCase.s.open()
     }
 
     /// 履歴情報永続化

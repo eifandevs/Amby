@@ -133,14 +133,6 @@ extension OptionMenuTableView: UITableViewDelegate {
             viewModel.loadTrend()
             rx_optionMenuTableViewDidClose.onNext(())
             return
-        case .report:
-            viewModel.openReportScreen()
-            rx_optionMenuTableViewDidClose.onNext(())
-            return
-        case .contact:
-            viewModel.openContactScreen()
-            rx_optionMenuTableViewDidClose.onNext(())
-            return
         case .history:
             let historyTableView = OptionMenuHistoryTableView(frame: detailViewFrame)
             historyTableView.rx_optionMenuHistoryDidClose

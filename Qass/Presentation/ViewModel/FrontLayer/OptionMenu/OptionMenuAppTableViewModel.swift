@@ -20,6 +20,8 @@ final class OptionMenuAppTableViewModel {
         case policy
         case review
         case source
+        case report
+        case contact
 
         var title: String {
             switch self {
@@ -27,6 +29,8 @@ final class OptionMenuAppTableViewModel {
             case .policy: return AppConst.APP_INFORMATION.POLICY
             case .review: return AppConst.APP_INFORMATION.REVIEW
             case .source: return AppConst.APP_INFORMATION.SOURCE
+            case .report: return AppConst.APP_INFORMATION.REPORT
+            case .contact: return AppConst.APP_INFORMATION.CONTACT
             }
         }
     }
@@ -36,7 +40,9 @@ final class OptionMenuAppTableViewModel {
         Row(cellType: .opensource),
         Row(cellType: .policy),
         Row(cellType: .review),
-        Row(cellType: .source)
+        Row(cellType: .source),
+        Row(cellType: .report),
+        Row(cellType: .contact)
     ]
 
     // 高さ
@@ -69,5 +75,15 @@ final class OptionMenuAppTableViewModel {
     /// レビュー表示
     func openReview() {
         ReviewUseCase.s.open()
+    }
+
+    /// 問題の報告表示
+    func openReport() {
+        ReportUseCase.s.open()
+    }
+
+    /// お問い合わせ表示
+    func openContact() {
+        ContactUseCase.s.open()
     }
 }

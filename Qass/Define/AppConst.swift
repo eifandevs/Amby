@@ -76,8 +76,6 @@ struct AppConst {
     static let OPTION_MENU = OPTION_MENU_VALUE()
     struct OPTION_MENU_VALUE {
         let TREND = "トレンド"
-        let REPORT = "問題の報告"
-        let CONTACT = "お問い合わせ(メール)"
         let HISTORY = "閲覧履歴"
         let MENU = "メニュー並び替え"
         let FORM = "フォーム"
@@ -91,11 +89,12 @@ struct AppConst {
 
     static let APP_INFORMATION = APP_INFORMATION_VALUE()
     struct APP_INFORMATION_VALUE {
-        let ABOUT = "About"
         let OPENSOURCE = "オープンソースライセンス"
         let POLICY = "プライバシーポリシー"
         let REVIEW = "評価・レビュー"
         let SOURCE = "ソースコード"
+        let CONTACT = "お問い合わせ"
+        let REPORT = "問題の報告"
     }
 
     // MARK: - 設定画面

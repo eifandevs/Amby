@@ -99,6 +99,10 @@ extension OptionMenuAppTableView: UITableViewDelegate {
             viewModel.openReview()
         case .source:
             viewModel.openSource()
+        case .report:
+            viewModel.openReport()
+        case .contact:
+            viewModel.openContact()
         }
         rx_optionMenuAppDidClose.onNext(())
     }
