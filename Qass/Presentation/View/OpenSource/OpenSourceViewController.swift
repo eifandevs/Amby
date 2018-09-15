@@ -10,6 +10,7 @@ import UIKit
 
 class OpenSourceViewController: UIViewController {
     @IBOutlet var textView: UITextView!
+    @IBOutlet var closeButton: CornerRadiusButton!
 
     convenience init() {
         self.init(nibName: R.nib.openSourceViewController.name, bundle: nil)
@@ -22,7 +23,17 @@ class OpenSourceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        closeButton.backgroundColor = UIColor.ultraOrange
         // Do any additional setup after loading the view.
+        // ボタンタップ
+        closeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_tap")
+                guard let `self` = self else { return }
+                self.dismiss(animated: true, completion: nil)
+                log.eventOut(chain: "rx_tap")
+            })
+            .disposed(by: rx.disposeBag)
     }
 
     override func didReceiveMemoryWarning() {

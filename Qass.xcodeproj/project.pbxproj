@@ -111,6 +111,28 @@
 		A15C5467214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5449214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib */; };
 		A15C546A214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5468214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.swift */; };
 		A15C546B214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5469214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib */; };
+		A15C5484214D935E001E8AB5 /* com.mono0926.LicensePlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C546D214D935E001E8AB5 /* com.mono0926.LicensePlist.plist */; };
+		A15C5485214D935E001E8AB5 /* NSObject+Rx.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C546F214D935E001E8AB5 /* NSObject+Rx.plist */; };
+		A15C5486214D935E001E8AB5 /* Moya.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5470214D935E001E8AB5 /* Moya.plist */; };
+		A15C5487214D935E001E8AB5 /* NVActivityIndicatorView.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5471214D935E001E8AB5 /* NVActivityIndicatorView.plist */; };
+		A15C5488214D935E001E8AB5 /* Alamofire.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5472214D935E001E8AB5 /* Alamofire.plist */; };
+		A15C5489214D935E001E8AB5 /* RxCocoa.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5473214D935E001E8AB5 /* RxCocoa.plist */; };
+		A15C548A214D935E001E8AB5 /* SVProgressHUD.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5474214D935E001E8AB5 /* SVProgressHUD.plist */; };
+		A15C548B214D935E001E8AB5 /* CryptoSwift.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5475214D935E001E8AB5 /* CryptoSwift.plist */; };
+		A15C548C214D935E001E8AB5 /* LicensePlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5476214D935E001E8AB5 /* LicensePlist.plist */; };
+		A15C548D214D935E001E8AB5 /* R.swift.Library.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5477214D935E001E8AB5 /* R.swift.Library.plist */; };
+		A15C548E214D935E001E8AB5 /* SwiftFormat.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5478214D935E001E8AB5 /* SwiftFormat.plist */; };
+		A15C548F214D935E001E8AB5 /* VerticalAlignmentLabel.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5479214D935E001E8AB5 /* VerticalAlignmentLabel.plist */; };
+		A15C5490214D935E001E8AB5 /* SwiftyBeaver.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C547A214D935E001E8AB5 /* SwiftyBeaver.plist */; };
+		A15C5491214D935E001E8AB5 /* R.swift.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C547B214D935E001E8AB5 /* R.swift.plist */; };
+		A15C5492214D935E001E8AB5 /* KeychainAccess.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C547C214D935E001E8AB5 /* KeychainAccess.plist */; };
+		A15C5493214D935E001E8AB5 /* Kingfisher.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C547D214D935E001E8AB5 /* Kingfisher.plist */; };
+		A15C5494214D935E001E8AB5 /* RxSwift.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C547E214D935E001E8AB5 /* RxSwift.plist */; };
+		A15C5495214D935E001E8AB5 /* Realm.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C547F214D935E001E8AB5 /* Realm.plist */; };
+		A15C5496214D935E001E8AB5 /* RealmSwift.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5480214D935E001E8AB5 /* RealmSwift.plist */; };
+		A15C5497214D935E001E8AB5 /* SwiftLint.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5481214D935E001E8AB5 /* SwiftLint.plist */; };
+		A15C5498214D935E001E8AB5 /* Result.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C5482214D935E001E8AB5 /* Result.plist */; };
+		A15C5499214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt in Resources */ = {isa = PBXBuildFile; fileRef = A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */; };
 		A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F38209CF976004F1EA5 /* AppDelegate.swift */; };
 		A1903017209CF977004F1EA5 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3B209CF976004F1EA5 /* AppConst.swift */; };
 		A1903018209CF977004F1EA5 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3C209CF976004F1EA5 /* AppEnum.swift */; };
@@ -509,6 +531,28 @@
 		A15C5449214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFavoriteTableView.xib; sourceTree = "<group>"; };
 		A15C5468214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuAppTableViewFooterCell.swift; sourceTree = "<group>"; };
 		A15C5469214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuAppTableViewFooterCell.xib; sourceTree = "<group>"; };
+		A15C546D214D935E001E8AB5 /* com.mono0926.LicensePlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.mono0926.LicensePlist.plist; sourceTree = "<group>"; };
+		A15C546F214D935E001E8AB5 /* NSObject+Rx.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "NSObject+Rx.plist"; sourceTree = "<group>"; };
+		A15C5470214D935E001E8AB5 /* Moya.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Moya.plist; sourceTree = "<group>"; };
+		A15C5471214D935E001E8AB5 /* NVActivityIndicatorView.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NVActivityIndicatorView.plist; sourceTree = "<group>"; };
+		A15C5472214D935E001E8AB5 /* Alamofire.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Alamofire.plist; sourceTree = "<group>"; };
+		A15C5473214D935E001E8AB5 /* RxCocoa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RxCocoa.plist; sourceTree = "<group>"; };
+		A15C5474214D935E001E8AB5 /* SVProgressHUD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SVProgressHUD.plist; sourceTree = "<group>"; };
+		A15C5475214D935E001E8AB5 /* CryptoSwift.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CryptoSwift.plist; sourceTree = "<group>"; };
+		A15C5476214D935E001E8AB5 /* LicensePlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LicensePlist.plist; sourceTree = "<group>"; };
+		A15C5477214D935E001E8AB5 /* R.swift.Library.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = R.swift.Library.plist; sourceTree = "<group>"; };
+		A15C5478214D935E001E8AB5 /* SwiftFormat.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SwiftFormat.plist; sourceTree = "<group>"; };
+		A15C5479214D935E001E8AB5 /* VerticalAlignmentLabel.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VerticalAlignmentLabel.plist; sourceTree = "<group>"; };
+		A15C547A214D935E001E8AB5 /* SwiftyBeaver.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SwiftyBeaver.plist; sourceTree = "<group>"; };
+		A15C547B214D935E001E8AB5 /* R.swift.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = R.swift.plist; sourceTree = "<group>"; };
+		A15C547C214D935E001E8AB5 /* KeychainAccess.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = KeychainAccess.plist; sourceTree = "<group>"; };
+		A15C547D214D935E001E8AB5 /* Kingfisher.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Kingfisher.plist; sourceTree = "<group>"; };
+		A15C547E214D935E001E8AB5 /* RxSwift.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RxSwift.plist; sourceTree = "<group>"; };
+		A15C547F214D935E001E8AB5 /* Realm.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Realm.plist; sourceTree = "<group>"; };
+		A15C5480214D935E001E8AB5 /* RealmSwift.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RealmSwift.plist; sourceTree = "<group>"; };
+		A15C5481214D935E001E8AB5 /* SwiftLint.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SwiftLint.plist; sourceTree = "<group>"; };
+		A15C5482214D935E001E8AB5 /* Result.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Result.plist; sourceTree = "<group>"; };
+		A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = com.mono0926.LicensePlist.latest_result.txt; sourceTree = "<group>"; };
 		A168382B2066960B00182028 /* Qass-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1902F2E209CF976004F1EA5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
@@ -894,13 +938,13 @@
 		A112E771212CD76400320048 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A112E7A6212CD76400320048 /* Base */,
 				A19506952146B6A40091DF23 /* OpenSource */,
 				A19506872146A0480091DF23 /* Policy */,
 				A112E772212CD76400320048 /* Splash */,
 				A112E79D212CD76400320048 /* MenuOrder */,
 				A112E79F212CD76400320048 /* Common */,
 				A112E7A2212CD76400320048 /* Report */,
-				A112E7A6212CD76400320048 /* Base */,
 				A112E7D2212CD76400320048 /* Help */,
 			);
 			path = View;
@@ -976,8 +1020,8 @@
 		A112E7AD212CD76400320048 /* OptionMenu */ = {
 			isa = PBXGroup;
 			children = (
-				A15C5434214D699C001E8AB5 /* App */,
 				A15C5425214D699C001E8AB5 /* Base */,
+				A15C5434214D699C001E8AB5 /* App */,
 				A15C5445214D699D001E8AB5 /* Favorite */,
 				A15C5440214D699D001E8AB5 /* Form */,
 				A15C542F214D699C001E8AB5 /* Help */,
@@ -1286,6 +1330,43 @@
 				A15C5449214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib */,
 			);
 			path = Favorite;
+			sourceTree = "<group>";
+		};
+		A15C546C214D935E001E8AB5 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				A15C546D214D935E001E8AB5 /* com.mono0926.LicensePlist.plist */,
+				A15C546E214D935E001E8AB5 /* com.mono0926.LicensePlist */,
+				A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
+		A15C546E214D935E001E8AB5 /* com.mono0926.LicensePlist */ = {
+			isa = PBXGroup;
+			children = (
+				A15C546F214D935E001E8AB5 /* NSObject+Rx.plist */,
+				A15C5470214D935E001E8AB5 /* Moya.plist */,
+				A15C5471214D935E001E8AB5 /* NVActivityIndicatorView.plist */,
+				A15C5472214D935E001E8AB5 /* Alamofire.plist */,
+				A15C5473214D935E001E8AB5 /* RxCocoa.plist */,
+				A15C5474214D935E001E8AB5 /* SVProgressHUD.plist */,
+				A15C5475214D935E001E8AB5 /* CryptoSwift.plist */,
+				A15C5476214D935E001E8AB5 /* LicensePlist.plist */,
+				A15C5477214D935E001E8AB5 /* R.swift.Library.plist */,
+				A15C5478214D935E001E8AB5 /* SwiftFormat.plist */,
+				A15C5479214D935E001E8AB5 /* VerticalAlignmentLabel.plist */,
+				A15C547A214D935E001E8AB5 /* SwiftyBeaver.plist */,
+				A15C547B214D935E001E8AB5 /* R.swift.plist */,
+				A15C547C214D935E001E8AB5 /* KeychainAccess.plist */,
+				A15C547D214D935E001E8AB5 /* Kingfisher.plist */,
+				A15C547E214D935E001E8AB5 /* RxSwift.plist */,
+				A15C547F214D935E001E8AB5 /* Realm.plist */,
+				A15C5480214D935E001E8AB5 /* RealmSwift.plist */,
+				A15C5481214D935E001E8AB5 /* SwiftLint.plist */,
+				A15C5482214D935E001E8AB5 /* Result.plist */,
+			);
+			path = com.mono0926.LicensePlist;
 			sourceTree = "<group>";
 		};
 		A1902F2D209CF976004F1EA5 /* Qass-Tests */ = {
@@ -1639,6 +1720,7 @@
 		A57EFE981E3E06D300B66701 = {
 			isa = PBXGroup;
 			children = (
+				A15C546C214D935E001E8AB5 /* License */,
 				A1902F36209CF976004F1EA5 /* Qass */,
 				A1902F2D209CF976004F1EA5 /* Qass-Tests */,
 				A190300D209CF977004F1EA5 /* Qass-UITests */,
@@ -1975,28 +2057,45 @@
 			buildActionMask = 2147483647;
 			files = (
 				A152086020C5543B00201B30 /* env.plist in Resources */,
+				A15C548E214D935E001E8AB5 /* SwiftFormat.plist in Resources */,
 				A112E831212CD76500320048 /* SplashViewController.xib in Resources */,
+				A15C5487214D935E001E8AB5 /* NVActivityIndicatorView.plist in Resources */,
 				A1FE87E2211B015800B258A3 /* dns.html in Resources */,
+				A15C5497214D935E001E8AB5 /* SwiftLint.plist in Resources */,
+				A15C548C214D935E001E8AB5 /* LicensePlist.plist in Resources */,
 				A15C5451214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */,
 				A15C5420214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib in Resources */,
+				A15C5484214D935E001E8AB5 /* com.mono0926.LicensePlist.plist in Resources */,
 				A19506992146B6B40091DF23 /* OpenSourceViewController.xib in Resources */,
 				A112E837212CD76500320048 /* ReportViewController.xib in Resources */,
 				A15C5455214D699D001E8AB5 /* OptionMenuHelpTableView.xib in Resources */,
+				A15C5492214D935E001E8AB5 /* KeychainAccess.plist in Resources */,
 				A15C5467214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
 				A15C545E214D699D001E8AB5 /* OptionMenuSettingTableView.xib in Resources */,
 				A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
+				A15C5489214D935E001E8AB5 /* RxCocoa.plist in Resources */,
 				A1FE87DE211B015800B258A3 /* timeout.html in Resources */,
 				A1FE87E4211B015800B258A3 /* authorize.html in Resources */,
 				A15C544E214D699D001E8AB5 /* OptionMenuHistoryTableView.xib in Resources */,
+				A15C5491214D935E001E8AB5 /* R.swift.plist in Resources */,
+				A15C5486214D935E001E8AB5 /* Moya.plist in Resources */,
+				A15C548B214D935E001E8AB5 /* CryptoSwift.plist in Resources */,
 				A15C541E214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
 				A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */,
+				A15C5490214D935E001E8AB5 /* SwiftyBeaver.plist in Resources */,
 				A1F518BC213593E20029ACB7 /* env-dummy.plist in Resources */,
+				A15C5494214D935E001E8AB5 /* RxSwift.plist in Resources */,
 				A15C5421214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
 				A15C545F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
 				A15C541F214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib in Resources */,
 				A15C5462214D699D001E8AB5 /* OptionMenuFormTableView.xib in Resources */,
+				A15C5488214D935E001E8AB5 /* Alamofire.plist in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
+				A15C5485214D935E001E8AB5 /* NSObject+Rx.plist in Resources */,
+				A15C548D214D935E001E8AB5 /* R.swift.Library.plist in Resources */,
+				A15C548A214D935E001E8AB5 /* SVProgressHUD.plist in Resources */,
+				A15C5495214D935E001E8AB5 /* Realm.plist in Resources */,
 				A15C5459214D699D001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
 				A15C544A214D699D001E8AB5 /* OptionMenuTableView.xib in Resources */,
@@ -2004,13 +2103,18 @@
 				A1FE87E7211B019D00B258A3 /* highlight.js in Resources */,
 				A15C5452214D699D001E8AB5 /* OptionMenuHelpTableViewCell.xib in Resources */,
 				A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */,
+				A15C5493214D935E001E8AB5 /* Kingfisher.plist in Resources */,
 				A15C5461214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */,
 				A15C5457214D699D001E8AB5 /* OptionMenuAppTableView.xib in Resources */,
 				A15C5465214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
 				A1903056209CF978004F1EA5 /* article_stub.json in Resources */,
+				A15C548F214D935E001E8AB5 /* VerticalAlignmentLabel.plist in Resources */,
 				A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */,
+				A15C5499214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt in Resources */,
 				A15C544C214D699D001E8AB5 /* OptionMenuTableViewCell.xib in Resources */,
 				A1FE87DC211B015800B258A3 /* offline.html in Resources */,
+				A15C5498214D935E001E8AB5 /* Result.plist in Resources */,
+				A15C5496214D935E001E8AB5 /* RealmSwift.plist in Resources */,
 				A15C546B214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2271,7 +2375,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ $CONFIGURATION = \"Debug\" -o $CONFIGURATION = \"Debug-Local\" ]; then\n${PODS_ROOT}/LicensePlist/license-plist --output-path ${SRCROOT}/license\nfi";
+			shellScript = "if [ $CONFIGURATION = \"Debug\" -o $CONFIGURATION = \"Debug-Local\" ]; then\n${PODS_ROOT}/LicensePlist/license-plist --output-path ${SRCROOT}/License\nfi";
 		};
 		A1A3DE7B2138795A00F87009 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
