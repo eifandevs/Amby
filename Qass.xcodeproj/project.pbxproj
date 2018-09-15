@@ -17,7 +17,6 @@
 		A112E80B212CD76500320048 /* FrontLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E75A212CD76400320048 /* FrontLayerViewModel.swift */; };
 		A112E80D212CD76500320048 /* CircleMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E75C212CD76400320048 /* CircleMenuViewModel.swift */; };
 		A112E80F212CD76500320048 /* OptionMenuTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E75E212CD76400320048 /* OptionMenuTableViewModel.swift */; };
-		A112E811212CD76500320048 /* OptionMenuTableViewModel.swift.orig in Resources */ = {isa = PBXBuildFile; fileRef = A112E75F212CD76400320048 /* OptionMenuTableViewModel.swift.orig */; };
 		A112E813212CD76500320048 /* OptionMenuSettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E760212CD76400320048 /* OptionMenuSettingTableViewModel.swift */; };
 		A112E815212CD76500320048 /* OptionMenuFormTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E761212CD76400320048 /* OptionMenuFormTableViewModel.swift */; };
 		A112E817212CD76500320048 /* OptionMenuFavoriteTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E762212CD76400320048 /* OptionMenuFavoriteTableViewModel.swift */; };
@@ -45,21 +44,6 @@
 		A112E871212CD76500320048 /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7AA212CD76400320048 /* CircleMenu.swift */; };
 		A112E873212CD76500320048 /* CircleProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7AB212CD76400320048 /* CircleProgress.swift */; };
 		A112E875212CD76500320048 /* CircleMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7AC212CD76400320048 /* CircleMenuItem.swift */; };
-		A112E877212CD76500320048 /* OptionMenuFavoriteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7AE212CD76400320048 /* OptionMenuFavoriteTableView.swift */; };
-		A112E879212CD76500320048 /* OptionMenuHistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7AF212CD76400320048 /* OptionMenuHistoryTableView.swift */; };
-		A112E87B212CD76500320048 /* OptionMenuHelpTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7B0212CD76400320048 /* OptionMenuHelpTableView.swift */; };
-		A112E87D212CD76500320048 /* OptionMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7B1212CD76400320048 /* OptionMenuTableView.swift */; };
-		A112E87F212CD76500320048 /* OptionMenuFormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7B3212CD76400320048 /* OptionMenuFormTableViewCell.swift */; };
-		A112E881212CD76500320048 /* OptionMenuFavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7B4212CD76400320048 /* OptionMenuFavoriteTableViewCell.swift */; };
-		A112E883212CD76500320048 /* OptionMenuSettingSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7B5212CD76400320048 /* OptionMenuSettingSliderTableViewCell.swift */; };
-		A112E885212CD76500320048 /* OptionMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7B6212CD76400320048 /* OptionMenuTableViewCell.swift */; };
-		A112E887212CD76500320048 /* OptionMenuSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7B7212CD76400320048 /* OptionMenuSettingTableViewCell.swift */; };
-		A112E889212CD76500320048 /* OptionMenuAppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7B8212CD76400320048 /* OptionMenuAppTableViewCell.swift */; };
-		A112E88B212CD76500320048 /* OptionMenuHelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7B9212CD76400320048 /* OptionMenuHelpTableViewCell.swift */; };
-		A112E88D212CD76500320048 /* OptionMenuHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7BA212CD76400320048 /* OptionMenuHistoryTableViewCell.swift */; };
-		A112E88F212CD76500320048 /* OptionMenuSettingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7BB212CD76400320048 /* OptionMenuSettingTableView.swift */; };
-		A112E891212CD76500320048 /* OptionMenuAppTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7BC212CD76400320048 /* OptionMenuAppTableView.swift */; };
-		A112E893212CD76500320048 /* OptionMenuFormTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7BD212CD76400320048 /* OptionMenuFormTableView.swift */; };
 		A112E895212CD76500320048 /* FrontLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7BE212CD76400320048 /* FrontLayer.swift */; };
 		A112E897212CD76500320048 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7C1212CD76400320048 /* FooterView.swift */; };
 		A112E899212CD76500320048 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7C2212CD76400320048 /* Thumbnail.swift */; };
@@ -91,25 +75,42 @@
 		A15C53F5214D4CDC001E8AB5 /* TrendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C53ED214D4CDC001E8AB5 /* TrendUseCase.swift */; };
 		A15C53F6214D4CDC001E8AB5 /* ReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C53EE214D4CDC001E8AB5 /* ReportUseCase.swift */; };
 		A15C53F7214D4CDC001E8AB5 /* PolicyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C53EF214D4CDC001E8AB5 /* PolicyUseCase.swift */; };
-		A15C5409214D5E23001E8AB5 /* OptionMenuHistoryTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53F9214D5E23001E8AB5 /* OptionMenuHistoryTableView.xib */; };
-		A15C540A214D5E23001E8AB5 /* OptionMenuTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53FA214D5E23001E8AB5 /* OptionMenuTableView.xib */; };
-		A15C540B214D5E23001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53FB214D5E23001E8AB5 /* OptionMenuFavoriteTableView.xib */; };
-		A15C540C214D5E23001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53FD214D5E23001E8AB5 /* OptionMenuFavoriteTableViewCell.xib */; };
-		A15C540D214D5E23001E8AB5 /* OptionMenuHelpTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53FE214D5E23001E8AB5 /* OptionMenuHelpTableViewCell.xib */; };
-		A15C540E214D5E23001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C53FF214D5E23001E8AB5 /* OptionMenuFormTableViewCell.xib */; };
-		A15C540F214D5E23001E8AB5 /* OptionMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5400214D5E23001E8AB5 /* OptionMenuTableViewCell.xib */; };
-		A15C5410214D5E23001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5401214D5E23001E8AB5 /* OptionMenuSettingTableViewCell.xib */; };
-		A15C5411214D5E23001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5402214D5E23001E8AB5 /* OptionMenuHistoryTableViewCell.xib */; };
-		A15C5412214D5E23001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5403214D5E23001E8AB5 /* OptionMenuAppTableViewCell.xib */; };
-		A15C5413214D5E23001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5404214D5E23001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib */; };
-		A15C5414214D5E23001E8AB5 /* OptionMenuHelpTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5405214D5E23001E8AB5 /* OptionMenuHelpTableView.xib */; };
-		A15C5415214D5E23001E8AB5 /* OptionMenuSettingTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5406214D5E23001E8AB5 /* OptionMenuSettingTableView.xib */; };
-		A15C5416214D5E23001E8AB5 /* OptionMenuAppTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5407214D5E23001E8AB5 /* OptionMenuAppTableView.xib */; };
-		A15C5417214D5E23001E8AB5 /* OptionMenuFormTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5408214D5E23001E8AB5 /* OptionMenuFormTableView.xib */; };
 		A15C541E214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C541A214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib */; };
 		A15C541F214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C541B214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib */; };
 		A15C5420214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C541C214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib */; };
 		A15C5421214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C541D214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib */; };
+		A15C544A214D699D001E8AB5 /* OptionMenuTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5426214D699C001E8AB5 /* OptionMenuTableView.xib */; };
+		A15C544B214D699D001E8AB5 /* OptionMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5427214D699C001E8AB5 /* OptionMenuTableViewCell.swift */; };
+		A15C544C214D699D001E8AB5 /* OptionMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5428214D699C001E8AB5 /* OptionMenuTableViewCell.xib */; };
+		A15C544D214D699D001E8AB5 /* OptionMenuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5429214D699C001E8AB5 /* OptionMenuTableView.swift */; };
+		A15C544E214D699D001E8AB5 /* OptionMenuHistoryTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C542B214D699C001E8AB5 /* OptionMenuHistoryTableView.xib */; };
+		A15C544F214D699D001E8AB5 /* OptionMenuHistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C542C214D699C001E8AB5 /* OptionMenuHistoryTableView.swift */; };
+		A15C5450214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C542D214D699C001E8AB5 /* OptionMenuHistoryTableViewCell.swift */; };
+		A15C5451214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C542E214D699C001E8AB5 /* OptionMenuHistoryTableViewCell.xib */; };
+		A15C5452214D699D001E8AB5 /* OptionMenuHelpTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5430214D699C001E8AB5 /* OptionMenuHelpTableViewCell.xib */; };
+		A15C5453214D699D001E8AB5 /* OptionMenuHelpTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5431214D699C001E8AB5 /* OptionMenuHelpTableView.swift */; };
+		A15C5454214D699D001E8AB5 /* OptionMenuHelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5432214D699C001E8AB5 /* OptionMenuHelpTableViewCell.swift */; };
+		A15C5455214D699D001E8AB5 /* OptionMenuHelpTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5433214D699C001E8AB5 /* OptionMenuHelpTableView.xib */; };
+		A15C5456214D699D001E8AB5 /* OptionMenuAppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5435214D699C001E8AB5 /* OptionMenuAppTableViewCell.swift */; };
+		A15C5457214D699D001E8AB5 /* OptionMenuAppTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5436214D699C001E8AB5 /* OptionMenuAppTableView.xib */; };
+		A15C5458214D699D001E8AB5 /* OptionMenuAppTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5437214D699C001E8AB5 /* OptionMenuAppTableView.swift */; };
+		A15C5459214D699D001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5438214D699C001E8AB5 /* OptionMenuAppTableViewCell.xib */; };
+		A15C545A214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C543A214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.swift */; };
+		A15C545B214D699D001E8AB5 /* OptionMenuSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C543B214D699D001E8AB5 /* OptionMenuSettingTableViewCell.swift */; };
+		A15C545C214D699D001E8AB5 /* OptionMenuSettingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C543C214D699D001E8AB5 /* OptionMenuSettingTableView.swift */; };
+		A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C543D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib */; };
+		A15C545E214D699D001E8AB5 /* OptionMenuSettingTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C543E214D699D001E8AB5 /* OptionMenuSettingTableView.xib */; };
+		A15C545F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C543F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib */; };
+		A15C5460214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5441214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift */; };
+		A15C5461214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5442214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib */; };
+		A15C5462214D699D001E8AB5 /* OptionMenuFormTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5443214D699D001E8AB5 /* OptionMenuFormTableView.xib */; };
+		A15C5463214D699D001E8AB5 /* OptionMenuFormTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5444214D699D001E8AB5 /* OptionMenuFormTableView.swift */; };
+		A15C5464214D699D001E8AB5 /* OptionMenuFavoriteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5446214D699D001E8AB5 /* OptionMenuFavoriteTableView.swift */; };
+		A15C5465214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5447214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib */; };
+		A15C5466214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5448214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.swift */; };
+		A15C5467214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5449214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib */; };
+		A15C546A214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C5468214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.swift */; };
+		A15C546B214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5469214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib */; };
 		A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F38209CF976004F1EA5 /* AppDelegate.swift */; };
 		A1903017209CF977004F1EA5 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3B209CF976004F1EA5 /* AppConst.swift */; };
 		A1903018209CF977004F1EA5 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3C209CF976004F1EA5 /* AppEnum.swift */; };
@@ -375,7 +376,6 @@
 		A112E75A212CD76400320048 /* FrontLayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModel.swift; sourceTree = "<group>"; };
 		A112E75C212CD76400320048 /* CircleMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenuViewModel.swift; sourceTree = "<group>"; };
 		A112E75E212CD76400320048 /* OptionMenuTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewModel.swift; sourceTree = "<group>"; };
-		A112E75F212CD76400320048 /* OptionMenuTableViewModel.swift.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OptionMenuTableViewModel.swift.orig; sourceTree = "<group>"; };
 		A112E760212CD76400320048 /* OptionMenuSettingTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingTableViewModel.swift; sourceTree = "<group>"; };
 		A112E761212CD76400320048 /* OptionMenuFormTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuFormTableViewModel.swift; sourceTree = "<group>"; };
 		A112E762212CD76400320048 /* OptionMenuFavoriteTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuFavoriteTableViewModel.swift; sourceTree = "<group>"; };
@@ -403,21 +403,6 @@
 		A112E7AA212CD76400320048 /* CircleMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenu.swift; sourceTree = "<group>"; };
 		A112E7AB212CD76400320048 /* CircleProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgress.swift; sourceTree = "<group>"; };
 		A112E7AC212CD76400320048 /* CircleMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenuItem.swift; sourceTree = "<group>"; };
-		A112E7AE212CD76400320048 /* OptionMenuFavoriteTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuFavoriteTableView.swift; sourceTree = "<group>"; };
-		A112E7AF212CD76400320048 /* OptionMenuHistoryTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuHistoryTableView.swift; sourceTree = "<group>"; };
-		A112E7B0212CD76400320048 /* OptionMenuHelpTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuHelpTableView.swift; sourceTree = "<group>"; };
-		A112E7B1212CD76400320048 /* OptionMenuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableView.swift; sourceTree = "<group>"; };
-		A112E7B3212CD76400320048 /* OptionMenuFormTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuFormTableViewCell.swift; sourceTree = "<group>"; };
-		A112E7B4212CD76400320048 /* OptionMenuFavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuFavoriteTableViewCell.swift; sourceTree = "<group>"; };
-		A112E7B5212CD76400320048 /* OptionMenuSettingSliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingSliderTableViewCell.swift; sourceTree = "<group>"; };
-		A112E7B6212CD76400320048 /* OptionMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewCell.swift; sourceTree = "<group>"; };
-		A112E7B7212CD76400320048 /* OptionMenuSettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingTableViewCell.swift; sourceTree = "<group>"; };
-		A112E7B8212CD76400320048 /* OptionMenuAppTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuAppTableViewCell.swift; sourceTree = "<group>"; };
-		A112E7B9212CD76400320048 /* OptionMenuHelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuHelpTableViewCell.swift; sourceTree = "<group>"; };
-		A112E7BA212CD76400320048 /* OptionMenuHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuHistoryTableViewCell.swift; sourceTree = "<group>"; };
-		A112E7BB212CD76400320048 /* OptionMenuSettingTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingTableView.swift; sourceTree = "<group>"; };
-		A112E7BC212CD76400320048 /* OptionMenuAppTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuAppTableView.swift; sourceTree = "<group>"; };
-		A112E7BD212CD76400320048 /* OptionMenuFormTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuFormTableView.swift; sourceTree = "<group>"; };
 		A112E7BE212CD76400320048 /* FrontLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontLayer.swift; sourceTree = "<group>"; };
 		A112E7C1212CD76400320048 /* FooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		A112E7C2212CD76400320048 /* Thumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
@@ -488,25 +473,42 @@
 		A15C53ED214D4CDC001E8AB5 /* TrendUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendUseCase.swift; sourceTree = "<group>"; };
 		A15C53EE214D4CDC001E8AB5 /* ReportUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUseCase.swift; sourceTree = "<group>"; };
 		A15C53EF214D4CDC001E8AB5 /* PolicyUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyUseCase.swift; sourceTree = "<group>"; };
-		A15C53F9214D5E23001E8AB5 /* OptionMenuHistoryTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHistoryTableView.xib; sourceTree = "<group>"; };
-		A15C53FA214D5E23001E8AB5 /* OptionMenuTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuTableView.xib; sourceTree = "<group>"; };
-		A15C53FB214D5E23001E8AB5 /* OptionMenuFavoriteTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFavoriteTableView.xib; sourceTree = "<group>"; };
-		A15C53FD214D5E23001E8AB5 /* OptionMenuFavoriteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFavoriteTableViewCell.xib; sourceTree = "<group>"; };
-		A15C53FE214D5E23001E8AB5 /* OptionMenuHelpTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHelpTableViewCell.xib; sourceTree = "<group>"; };
-		A15C53FF214D5E23001E8AB5 /* OptionMenuFormTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFormTableViewCell.xib; sourceTree = "<group>"; };
-		A15C5400214D5E23001E8AB5 /* OptionMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuTableViewCell.xib; sourceTree = "<group>"; };
-		A15C5401214D5E23001E8AB5 /* OptionMenuSettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingTableViewCell.xib; sourceTree = "<group>"; };
-		A15C5402214D5E23001E8AB5 /* OptionMenuHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHistoryTableViewCell.xib; sourceTree = "<group>"; };
-		A15C5403214D5E23001E8AB5 /* OptionMenuAppTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuAppTableViewCell.xib; sourceTree = "<group>"; };
-		A15C5404214D5E23001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingSliderTableViewCell.xib; sourceTree = "<group>"; };
-		A15C5405214D5E23001E8AB5 /* OptionMenuHelpTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHelpTableView.xib; sourceTree = "<group>"; };
-		A15C5406214D5E23001E8AB5 /* OptionMenuSettingTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingTableView.xib; sourceTree = "<group>"; };
-		A15C5407214D5E23001E8AB5 /* OptionMenuAppTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuAppTableView.xib; sourceTree = "<group>"; };
-		A15C5408214D5E23001E8AB5 /* OptionMenuFormTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFormTableView.xib; sourceTree = "<group>"; };
 		A15C541A214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuCommonHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		A15C541B214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuSuggestTableViewCell.xib; sourceTree = "<group>"; };
 		A15C541C214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuNewsTableViewCell.xib; sourceTree = "<group>"; };
 		A15C541D214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMenuSearchHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5426214D699C001E8AB5 /* OptionMenuTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuTableView.xib; sourceTree = "<group>"; };
+		A15C5427214D699C001E8AB5 /* OptionMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewCell.swift; sourceTree = "<group>"; };
+		A15C5428214D699C001E8AB5 /* OptionMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5429214D699C001E8AB5 /* OptionMenuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableView.swift; sourceTree = "<group>"; };
+		A15C542B214D699C001E8AB5 /* OptionMenuHistoryTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHistoryTableView.xib; sourceTree = "<group>"; };
+		A15C542C214D699C001E8AB5 /* OptionMenuHistoryTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuHistoryTableView.swift; sourceTree = "<group>"; };
+		A15C542D214D699C001E8AB5 /* OptionMenuHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		A15C542E214D699C001E8AB5 /* OptionMenuHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5430214D699C001E8AB5 /* OptionMenuHelpTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHelpTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5431214D699C001E8AB5 /* OptionMenuHelpTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuHelpTableView.swift; sourceTree = "<group>"; };
+		A15C5432214D699C001E8AB5 /* OptionMenuHelpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuHelpTableViewCell.swift; sourceTree = "<group>"; };
+		A15C5433214D699C001E8AB5 /* OptionMenuHelpTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuHelpTableView.xib; sourceTree = "<group>"; };
+		A15C5435214D699C001E8AB5 /* OptionMenuAppTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuAppTableViewCell.swift; sourceTree = "<group>"; };
+		A15C5436214D699C001E8AB5 /* OptionMenuAppTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuAppTableView.xib; sourceTree = "<group>"; };
+		A15C5437214D699C001E8AB5 /* OptionMenuAppTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuAppTableView.swift; sourceTree = "<group>"; };
+		A15C5438214D699C001E8AB5 /* OptionMenuAppTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuAppTableViewCell.xib; sourceTree = "<group>"; };
+		A15C543A214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingSliderTableViewCell.swift; sourceTree = "<group>"; };
+		A15C543B214D699D001E8AB5 /* OptionMenuSettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingTableViewCell.swift; sourceTree = "<group>"; };
+		A15C543C214D699D001E8AB5 /* OptionMenuSettingTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingTableView.swift; sourceTree = "<group>"; };
+		A15C543D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingTableViewCell.xib; sourceTree = "<group>"; };
+		A15C543E214D699D001E8AB5 /* OptionMenuSettingTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingTableView.xib; sourceTree = "<group>"; };
+		A15C543F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuSettingSliderTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5441214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuFormTableViewCell.swift; sourceTree = "<group>"; };
+		A15C5442214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFormTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5443214D699D001E8AB5 /* OptionMenuFormTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFormTableView.xib; sourceTree = "<group>"; };
+		A15C5444214D699D001E8AB5 /* OptionMenuFormTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuFormTableView.swift; sourceTree = "<group>"; };
+		A15C5446214D699D001E8AB5 /* OptionMenuFavoriteTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuFavoriteTableView.swift; sourceTree = "<group>"; };
+		A15C5447214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFavoriteTableViewCell.xib; sourceTree = "<group>"; };
+		A15C5448214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuFavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		A15C5449214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionMenuFavoriteTableView.xib; sourceTree = "<group>"; };
+		A15C5468214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuAppTableViewFooterCell.swift; sourceTree = "<group>"; };
+		A15C5469214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuAppTableViewFooterCell.xib; sourceTree = "<group>"; };
 		A168382B2066960B00182028 /* Qass-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1902F2E209CF976004F1EA5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
@@ -842,7 +844,6 @@
 			isa = PBXGroup;
 			children = (
 				A112E75E212CD76400320048 /* OptionMenuTableViewModel.swift */,
-				A112E75F212CD76400320048 /* OptionMenuTableViewModel.swift.orig */,
 				A112E760212CD76400320048 /* OptionMenuSettingTableViewModel.swift */,
 				A112E761212CD76400320048 /* OptionMenuFormTableViewModel.swift */,
 				A112E762212CD76400320048 /* OptionMenuFavoriteTableViewModel.swift */,
@@ -893,7 +894,6 @@
 		A112E771212CD76400320048 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A112E774212CD76400320048 /* Xib */,
 				A19506952146B6A40091DF23 /* OpenSource */,
 				A19506872146A0480091DF23 /* Policy */,
 				A112E772212CD76400320048 /* Splash */,
@@ -909,86 +909,17 @@
 		A112E772212CD76400320048 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
+				A112E776212CD76400320048 /* LaunchScreen.storyboard */,
+				A112E778212CD76400320048 /* SplashViewController.xib */,
 				A112E773212CD76400320048 /* SplashViewController.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
 		};
-		A112E774212CD76400320048 /* Xib */ = {
-			isa = PBXGroup;
-			children = (
-				A19506942146B69B0091DF23 /* OpenSource */,
-				A19506822146A0360091DF23 /* Policy */,
-				A112E775212CD76400320048 /* Splash */,
-				A112E77B212CD76400320048 /* MenuOrder */,
-				A112E77D212CD76400320048 /* Report */,
-				A112E781212CD76400320048 /* Base */,
-				A112E799212CD76400320048 /* Help */,
-			);
-			path = Xib;
-			sourceTree = "<group>";
-		};
-		A112E775212CD76400320048 /* Splash */ = {
-			isa = PBXGroup;
-			children = (
-				A112E776212CD76400320048 /* LaunchScreen.storyboard */,
-				A112E778212CD76400320048 /* SplashViewController.xib */,
-			);
-			path = Splash;
-			sourceTree = "<group>";
-		};
-		A112E77B212CD76400320048 /* MenuOrder */ = {
-			isa = PBXGroup;
-			children = (
-				A112E77C212CD76400320048 /* MenuOrderViewController.xib */,
-			);
-			path = MenuOrder;
-			sourceTree = "<group>";
-		};
-		A112E77D212CD76400320048 /* Report */ = {
-			isa = PBXGroup;
-			children = (
-				A112E77E212CD76400320048 /* ReportViewController.xib */,
-			);
-			path = Report;
-			sourceTree = "<group>";
-		};
-		A112E781212CD76400320048 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				A112E782212CD76400320048 /* FrontLayer */,
-				A112E793212CD76400320048 /* BaseLayer */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
-		A112E782212CD76400320048 /* FrontLayer */ = {
-			isa = PBXGroup;
-			children = (
-				A15C53F8214D5E23001E8AB5 /* OptionMenu */,
-			);
-			path = FrontLayer;
-			sourceTree = "<group>";
-		};
-		A112E793212CD76400320048 /* BaseLayer */ = {
-			isa = PBXGroup;
-			children = (
-				A15C5418214D5E4D001E8AB5 /* SearchMenu */,
-			);
-			path = BaseLayer;
-			sourceTree = "<group>";
-		};
-		A112E799212CD76400320048 /* Help */ = {
-			isa = PBXGroup;
-			children = (
-				A112E79A212CD76400320048 /* HelpViewController.xib */,
-			);
-			path = Help;
-			sourceTree = "<group>";
-		};
 		A112E79D212CD76400320048 /* MenuOrder */ = {
 			isa = PBXGroup;
 			children = (
+				A112E77C212CD76400320048 /* MenuOrderViewController.xib */,
 				A112E79E212CD76400320048 /* MenuOrderViewController.swift */,
 			);
 			path = MenuOrder;
@@ -1006,6 +937,7 @@
 		A112E7A2212CD76400320048 /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				A112E77E212CD76400320048 /* ReportViewController.xib */,
 				A112E7A3212CD76400320048 /* ReportViewController.swift */,
 			);
 			path = Report;
@@ -1044,31 +976,15 @@
 		A112E7AD212CD76400320048 /* OptionMenu */ = {
 			isa = PBXGroup;
 			children = (
-				A112E7AE212CD76400320048 /* OptionMenuFavoriteTableView.swift */,
-				A112E7AF212CD76400320048 /* OptionMenuHistoryTableView.swift */,
-				A112E7B0212CD76400320048 /* OptionMenuHelpTableView.swift */,
-				A112E7B1212CD76400320048 /* OptionMenuTableView.swift */,
-				A112E7B2212CD76400320048 /* Cell */,
-				A112E7BB212CD76400320048 /* OptionMenuSettingTableView.swift */,
-				A112E7BC212CD76400320048 /* OptionMenuAppTableView.swift */,
-				A112E7BD212CD76400320048 /* OptionMenuFormTableView.swift */,
+				A15C5434214D699C001E8AB5 /* App */,
+				A15C5425214D699C001E8AB5 /* Base */,
+				A15C5445214D699D001E8AB5 /* Favorite */,
+				A15C5440214D699D001E8AB5 /* Form */,
+				A15C542F214D699C001E8AB5 /* Help */,
+				A15C542A214D699C001E8AB5 /* History */,
+				A15C5439214D699D001E8AB5 /* Setting */,
 			);
 			path = OptionMenu;
-			sourceTree = "<group>";
-		};
-		A112E7B2212CD76400320048 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				A112E7B3212CD76400320048 /* OptionMenuFormTableViewCell.swift */,
-				A112E7B4212CD76400320048 /* OptionMenuFavoriteTableViewCell.swift */,
-				A112E7B5212CD76400320048 /* OptionMenuSettingSliderTableViewCell.swift */,
-				A112E7B6212CD76400320048 /* OptionMenuTableViewCell.swift */,
-				A112E7B7212CD76400320048 /* OptionMenuSettingTableViewCell.swift */,
-				A112E7B8212CD76400320048 /* OptionMenuAppTableViewCell.swift */,
-				A112E7B9212CD76400320048 /* OptionMenuHelpTableViewCell.swift */,
-				A112E7BA212CD76400320048 /* OptionMenuHistoryTableViewCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		A112E7BF212CD76400320048 /* BaseLayer */ = {
@@ -1094,9 +1010,8 @@
 		A112E7C3212CD76400320048 /* Body */ = {
 			isa = PBXGroup;
 			children = (
-				A112E7C4212CD76400320048 /* SearchMenuTableView.swift */,
+				A15C5424214D684C001E8AB5 /* SearchMenu */,
 				A112E7C5212CD76400320048 /* EGWebView.swift */,
-				A112E7C6212CD76400320048 /* Cell */,
 				A112E7CB212CD76400320048 /* BaseView.swift */,
 			);
 			path = Body;
@@ -1105,6 +1020,10 @@
 		A112E7C6212CD76400320048 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				A15C541A214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib */,
+				A15C541B214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib */,
+				A15C541C214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib */,
+				A15C541D214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib */,
 				A112E7C7212CD76400320048 /* SearchMenuSuggestTableViewCell.swift */,
 				A112E7C8212CD76400320048 /* SearchMenuSearchHistoryTableViewCell.swift */,
 				A112E7C9212CD76400320048 /* SearchMenuCommonHistoryTableViewCell.swift */,
@@ -1127,6 +1046,7 @@
 		A112E7D2212CD76400320048 /* Help */ = {
 			isa = PBXGroup;
 			children = (
+				A112E79A212CD76400320048 /* HelpViewController.xib */,
 				A112E7D3212CD76400320048 /* HelpViewController.swift */,
 			);
 			path = Help;
@@ -1278,53 +1198,94 @@
 			path = OptionMenu;
 			sourceTree = "<group>";
 		};
-		A15C53F8214D5E23001E8AB5 /* OptionMenu */ = {
+		A15C5424214D684C001E8AB5 /* SearchMenu */ = {
 			isa = PBXGroup;
 			children = (
-				A15C53FC214D5E23001E8AB5 /* Cell */,
-				A15C53F9214D5E23001E8AB5 /* OptionMenuHistoryTableView.xib */,
-				A15C53FA214D5E23001E8AB5 /* OptionMenuTableView.xib */,
-				A15C53FB214D5E23001E8AB5 /* OptionMenuFavoriteTableView.xib */,
-				A15C5405214D5E23001E8AB5 /* OptionMenuHelpTableView.xib */,
-				A15C5406214D5E23001E8AB5 /* OptionMenuSettingTableView.xib */,
-				A15C5407214D5E23001E8AB5 /* OptionMenuAppTableView.xib */,
-				A15C5408214D5E23001E8AB5 /* OptionMenuFormTableView.xib */,
-			);
-			path = OptionMenu;
-			sourceTree = "<group>";
-		};
-		A15C53FC214D5E23001E8AB5 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				A15C53FD214D5E23001E8AB5 /* OptionMenuFavoriteTableViewCell.xib */,
-				A15C53FE214D5E23001E8AB5 /* OptionMenuHelpTableViewCell.xib */,
-				A15C53FF214D5E23001E8AB5 /* OptionMenuFormTableViewCell.xib */,
-				A15C5400214D5E23001E8AB5 /* OptionMenuTableViewCell.xib */,
-				A15C5401214D5E23001E8AB5 /* OptionMenuSettingTableViewCell.xib */,
-				A15C5402214D5E23001E8AB5 /* OptionMenuHistoryTableViewCell.xib */,
-				A15C5403214D5E23001E8AB5 /* OptionMenuAppTableViewCell.xib */,
-				A15C5404214D5E23001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		A15C5418214D5E4D001E8AB5 /* SearchMenu */ = {
-			isa = PBXGroup;
-			children = (
-				A15C5419214D5E4D001E8AB5 /* Cell */,
+				A112E7C4212CD76400320048 /* SearchMenuTableView.swift */,
+				A112E7C6212CD76400320048 /* Cell */,
 			);
 			path = SearchMenu;
 			sourceTree = "<group>";
 		};
-		A15C5419214D5E4D001E8AB5 /* Cell */ = {
+		A15C5425214D699C001E8AB5 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				A15C541A214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib */,
-				A15C541B214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib */,
-				A15C541C214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib */,
-				A15C541D214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib */,
+				A15C5426214D699C001E8AB5 /* OptionMenuTableView.xib */,
+				A15C5427214D699C001E8AB5 /* OptionMenuTableViewCell.swift */,
+				A15C5428214D699C001E8AB5 /* OptionMenuTableViewCell.xib */,
+				A15C5429214D699C001E8AB5 /* OptionMenuTableView.swift */,
 			);
-			path = Cell;
+			path = Base;
+			sourceTree = "<group>";
+		};
+		A15C542A214D699C001E8AB5 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				A15C542B214D699C001E8AB5 /* OptionMenuHistoryTableView.xib */,
+				A15C542C214D699C001E8AB5 /* OptionMenuHistoryTableView.swift */,
+				A15C542D214D699C001E8AB5 /* OptionMenuHistoryTableViewCell.swift */,
+				A15C542E214D699C001E8AB5 /* OptionMenuHistoryTableViewCell.xib */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		A15C542F214D699C001E8AB5 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				A15C5430214D699C001E8AB5 /* OptionMenuHelpTableViewCell.xib */,
+				A15C5431214D699C001E8AB5 /* OptionMenuHelpTableView.swift */,
+				A15C5432214D699C001E8AB5 /* OptionMenuHelpTableViewCell.swift */,
+				A15C5433214D699C001E8AB5 /* OptionMenuHelpTableView.xib */,
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
+		A15C5434214D699C001E8AB5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A15C5435214D699C001E8AB5 /* OptionMenuAppTableViewCell.swift */,
+				A15C5436214D699C001E8AB5 /* OptionMenuAppTableView.xib */,
+				A15C5437214D699C001E8AB5 /* OptionMenuAppTableView.swift */,
+				A15C5438214D699C001E8AB5 /* OptionMenuAppTableViewCell.xib */,
+				A15C5468214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.swift */,
+				A15C5469214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A15C5439214D699D001E8AB5 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A15C543A214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.swift */,
+				A15C543B214D699D001E8AB5 /* OptionMenuSettingTableViewCell.swift */,
+				A15C543C214D699D001E8AB5 /* OptionMenuSettingTableView.swift */,
+				A15C543D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib */,
+				A15C543E214D699D001E8AB5 /* OptionMenuSettingTableView.xib */,
+				A15C543F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		A15C5440214D699D001E8AB5 /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				A15C5441214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift */,
+				A15C5442214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib */,
+				A15C5443214D699D001E8AB5 /* OptionMenuFormTableView.xib */,
+				A15C5444214D699D001E8AB5 /* OptionMenuFormTableView.swift */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
+		A15C5445214D699D001E8AB5 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				A15C5446214D699D001E8AB5 /* OptionMenuFavoriteTableView.swift */,
+				A15C5447214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib */,
+				A15C5448214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.swift */,
+				A15C5449214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib */,
+			);
+			path = Favorite;
 			sourceTree = "<group>";
 		};
 		A1902F2D209CF976004F1EA5 /* Qass-Tests */ = {
@@ -1539,33 +1500,19 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
-		A19506822146A0360091DF23 /* Policy */ = {
-			isa = PBXGroup;
-			children = (
-				A19506912146A0DF0091DF23 /* PolicyViewController.xib */,
-			);
-			path = Policy;
-			sourceTree = "<group>";
-		};
 		A19506872146A0480091DF23 /* Policy */ = {
 			isa = PBXGroup;
 			children = (
+				A19506912146A0DF0091DF23 /* PolicyViewController.xib */,
 				A19506902146A0DF0091DF23 /* PolicyViewController.swift */,
 			);
 			path = Policy;
 			sourceTree = "<group>";
 		};
-		A19506942146B69B0091DF23 /* OpenSource */ = {
-			isa = PBXGroup;
-			children = (
-				A19506972146B6B40091DF23 /* OpenSourceViewController.xib */,
-			);
-			path = OpenSource;
-			sourceTree = "<group>";
-		};
 		A19506952146B6A40091DF23 /* OpenSource */ = {
 			isa = PBXGroup;
 			children = (
+				A19506972146B6B40091DF23 /* OpenSourceViewController.xib */,
 				A19506962146B6B40091DF23 /* OpenSourceViewController.swift */,
 			);
 			path = OpenSource;
@@ -2029,42 +1976,42 @@
 			files = (
 				A152086020C5543B00201B30 /* env.plist in Resources */,
 				A112E831212CD76500320048 /* SplashViewController.xib in Resources */,
-				A15C5409214D5E23001E8AB5 /* OptionMenuHistoryTableView.xib in Resources */,
-				A15C540F214D5E23001E8AB5 /* OptionMenuTableViewCell.xib in Resources */,
-				A15C5410214D5E23001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A1FE87E2211B015800B258A3 /* dns.html in Resources */,
+				A15C5451214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */,
 				A15C5420214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib in Resources */,
 				A19506992146B6B40091DF23 /* OpenSourceViewController.xib in Resources */,
-				A112E811212CD76500320048 /* OptionMenuTableViewModel.swift.orig in Resources */,
 				A112E837212CD76500320048 /* ReportViewController.xib in Resources */,
+				A15C5455214D699D001E8AB5 /* OptionMenuHelpTableView.xib in Resources */,
+				A15C5467214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
-				A15C5415214D5E23001E8AB5 /* OptionMenuSettingTableView.xib in Resources */,
+				A15C545E214D699D001E8AB5 /* OptionMenuSettingTableView.xib in Resources */,
+				A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A1FE87DE211B015800B258A3 /* timeout.html in Resources */,
 				A1FE87E4211B015800B258A3 /* authorize.html in Resources */,
-				A15C5417214D5E23001E8AB5 /* OptionMenuFormTableView.xib in Resources */,
-				A15C5411214D5E23001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */,
+				A15C544E214D699D001E8AB5 /* OptionMenuHistoryTableView.xib in Resources */,
 				A15C541E214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
-				A15C540C214D5E23001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
-				A15C5414214D5E23001E8AB5 /* OptionMenuHelpTableView.xib in Resources */,
 				A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */,
-				A15C5416214D5E23001E8AB5 /* OptionMenuAppTableView.xib in Resources */,
-				A15C540A214D5E23001E8AB5 /* OptionMenuTableView.xib in Resources */,
 				A1F518BC213593E20029ACB7 /* env-dummy.plist in Resources */,
 				A15C5421214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
-				A15C5413214D5E23001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
+				A15C545F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
 				A15C541F214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib in Resources */,
+				A15C5462214D699D001E8AB5 /* OptionMenuFormTableView.xib in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
+				A15C5459214D699D001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
+				A15C544A214D699D001E8AB5 /* OptionMenuTableView.xib in Resources */,
 				A1FE87E0211B015800B258A3 /* invalid.html in Resources */,
-				A15C540B214D5E23001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A1FE87E7211B019D00B258A3 /* highlight.js in Resources */,
-				A15C5412214D5E23001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */,
-				A15C540D214D5E23001E8AB5 /* OptionMenuHelpTableViewCell.xib in Resources */,
-				A15C540E214D5E23001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */,
+				A15C5452214D699D001E8AB5 /* OptionMenuHelpTableViewCell.xib in Resources */,
 				A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */,
+				A15C5461214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */,
+				A15C5457214D699D001E8AB5 /* OptionMenuAppTableView.xib in Resources */,
+				A15C5465214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
 				A1903056209CF978004F1EA5 /* article_stub.json in Resources */,
 				A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */,
+				A15C544C214D699D001E8AB5 /* OptionMenuTableViewCell.xib in Resources */,
 				A1FE87DC211B015800B258A3 /* offline.html in Resources */,
+				A15C546B214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2694,9 +2641,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A112E82B212CD76500320048 /* HeaderFieldViewModel.swift in Sources */,
-				A112E87B212CD76500320048 /* OptionMenuHelpTableView.swift in Sources */,
 				A112E89F212CD76500320048 /* SearchMenuSuggestTableViewCell.swift in Sources */,
-				A112E87D212CD76500320048 /* OptionMenuTableView.swift in Sources */,
+				A15C546A214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.swift in Sources */,
 				A112E8A3212CD76500320048 /* SearchMenuCommonHistoryTableViewCell.swift in Sources */,
 				A112E81F212CD76500320048 /* BaseViewControllerViewModel.swift in Sources */,
 				A190302C209CF977004F1EA5 /* Dictionary+Extend.swift in Sources */,
@@ -2705,34 +2651,32 @@
 				A1903017209CF977004F1EA5 /* AppConst.swift in Sources */,
 				A112E81B212CD76500320048 /* OptionMenuHelpTableViewModel.swift in Sources */,
 				A190302B209CF977004F1EA5 /* Date+Extend.swift in Sources */,
-				A112E889212CD76500320048 /* OptionMenuAppTableViewCell.swift in Sources */,
 				A112E8B1212CD76500320048 /* HeaderField.swift in Sources */,
 				A1903032209CF977004F1EA5 /* Optional+Extend.swift in Sources */,
 				A1903030209CF977004F1EA5 /* Int+Extend.swift in Sources */,
 				A19506982146B6B40091DF23 /* OpenSourceViewController.swift in Sources */,
 				A112E899212CD76500320048 /* Thumbnail.swift in Sources */,
-				A112E881212CD76500320048 /* OptionMenuFavoriteTableViewCell.swift in Sources */,
+				A15C5460214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift in Sources */,
 				A1903035209CF977004F1EA5 /* UIColor+Extend.swift in Sources */,
-				A112E879212CD76500320048 /* OptionMenuHistoryTableView.swift in Sources */,
-				A112E893212CD76500320048 /* OptionMenuFormTableView.swift in Sources */,
 				A190305E209CF978004F1EA5 /* EGApplication.swift in Sources */,
 				A1903036209CF977004F1EA5 /* UIImage+Extend.swift in Sources */,
+				A15C5454214D699D001E8AB5 /* OptionMenuHelpTableViewCell.swift in Sources */,
 				A112E821212CD76500320048 /* FooterViewModel.swift in Sources */,
 				A112E865212CD76500320048 /* MenuOrderViewController.swift in Sources */,
 				A1903018209CF977004F1EA5 /* AppEnum.swift in Sources */,
 				A112E815212CD76500320048 /* OptionMenuFormTableViewModel.swift in Sources */,
-				A112E88D212CD76500320048 /* OptionMenuHistoryTableViewCell.swift in Sources */,
+				A15C544F214D699D001E8AB5 /* OptionMenuHistoryTableView.swift in Sources */,
 				A112E89B212CD76500320048 /* SearchMenuTableView.swift in Sources */,
-				A112E883212CD76500320048 /* OptionMenuSettingSliderTableViewCell.swift in Sources */,
 				A1903053209CF978004F1EA5 /* ShadowView.swift in Sources */,
 				A1903026209CF977004F1EA5 /* Array+Extend.swift in Sources */,
-				A112E891212CD76500320048 /* OptionMenuAppTableView.swift in Sources */,
 				A112E819212CD76500320048 /* OptionMenuHistoryTableViewModel.swift in Sources */,
 				A112E8A7212CD76500320048 /* BaseView.swift in Sources */,
 				A112E8AB212CD76500320048 /* EGGradientLabel.swift in Sources */,
 				A1903037209CF977004F1EA5 /* UIImageView+Extend.swift in Sources */,
+				A15C5466214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.swift in Sources */,
 				A112E813212CD76500320048 /* OptionMenuSettingTableViewModel.swift in Sources */,
 				A112E80B212CD76500320048 /* FrontLayerViewModel.swift in Sources */,
+				A15C5458214D699D001E8AB5 /* OptionMenuAppTableView.swift in Sources */,
 				A112E8B3212CD76500320048 /* HelpViewController.swift in Sources */,
 				A190302A209CF977004F1EA5 /* Data+Extend.swift in Sources */,
 				A112E82D212CD76500320048 /* SplashViewController.swift in Sources */,
@@ -2741,6 +2685,7 @@
 				A1903033209CF977004F1EA5 /* String+Extend.swift in Sources */,
 				A1903028209CF977004F1EA5 /* Collection+Extend.swift in Sources */,
 				A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */,
+				A15C545C214D699D001E8AB5 /* OptionMenuSettingTableView.swift in Sources */,
 				A123451B2135ADB400C791B8 /* ResourceUtil.swift in Sources */,
 				A112E827212CD76500320048 /* BaseLayerViewModel.swift in Sources */,
 				A112E897212CD76500320048 /* FooterView.swift in Sources */,
@@ -2751,16 +2696,20 @@
 				A1903027209CF977004F1EA5 /* CGPoint+Extend.swift in Sources */,
 				A112E86F212CD76500320048 /* BaseViewController.swift in Sources */,
 				A112E8A1212CD76500320048 /* SearchMenuSearchHistoryTableViewCell.swift in Sources */,
+				A15C5453214D699D001E8AB5 /* OptionMenuHelpTableView.swift in Sources */,
 				A112E817212CD76500320048 /* OptionMenuFavoriteTableViewModel.swift in Sources */,
+				A15C545A214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.swift in Sources */,
 				A1903062209CF978004F1EA5 /* OnceExec.swift in Sources */,
 				A190303A209CF977004F1EA5 /* UIViewController+Extend.swift in Sources */,
 				A112E80D212CD76500320048 /* CircleMenuViewModel.swift in Sources */,
+				A15C545B214D699D001E8AB5 /* OptionMenuSettingTableViewCell.swift in Sources */,
+				A15C5450214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.swift in Sources */,
 				A195066D2144052B0091DF23 /* NotificationView.swift in Sources */,
 				A1903063209CF978004F1EA5 /* Util.swift in Sources */,
 				A1903051209CF978004F1EA5 /* EnumEnumerable.swift in Sources */,
-				A112E877212CD76500320048 /* OptionMenuFavoriteTableView.swift in Sources */,
+				A15C5464214D699D001E8AB5 /* OptionMenuFavoriteTableView.swift in Sources */,
 				A112E895212CD76500320048 /* FrontLayer.swift in Sources */,
-				A112E88F212CD76500320048 /* OptionMenuSettingTableView.swift in Sources */,
+				A15C544B214D699D001E8AB5 /* OptionMenuTableViewCell.swift in Sources */,
 				A19506922146A0DF0091DF23 /* PolicyViewController.swift in Sources */,
 				A1903029209CF977004F1EA5 /* CollectionType+Extend.swift in Sources */,
 				A112E829212CD76500320048 /* HeaderViewModel.swift in Sources */,
@@ -2770,23 +2719,22 @@
 				A112E873212CD76500320048 /* CircleProgress.swift in Sources */,
 				A190302F209CF977004F1EA5 /* Float+Extend.swift in Sources */,
 				A112E89D212CD76500320048 /* EGWebView.swift in Sources */,
+				A15C5456214D699D001E8AB5 /* OptionMenuAppTableViewCell.swift in Sources */,
 				A112E8A5212CD76500320048 /* SearchMenuNewsTableViewCell.swift in Sources */,
 				A112E80F212CD76500320048 /* OptionMenuTableViewModel.swift in Sources */,
 				A190301B209CF977004F1EA5 /* MessageConst.swift in Sources */,
 				A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */,
-				A112E887212CD76500320048 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A112E823212CD76500320048 /* BaseViewModel.swift in Sources */,
 				A1903034209CF977004F1EA5 /* UIButton+Extend.swift in Sources */,
-				A112E885212CD76500320048 /* OptionMenuTableViewCell.swift in Sources */,
 				A112E8AD212CD76500320048 /* HeaderView.swift in Sources */,
 				A112E8A9212CD76500320048 /* BaseLayer.swift in Sources */,
+				A15C544D214D699D001E8AB5 /* OptionMenuTableView.swift in Sources */,
 				A1903052209CF978004F1EA5 /* OptionMenuView.swift in Sources */,
 				A112E825212CD76500320048 /* SearchMenuTableViewModel.swift in Sources */,
-				A112E88B212CD76500320048 /* OptionMenuHelpTableViewCell.swift in Sources */,
 				A112E875212CD76500320048 /* CircleMenuItem.swift in Sources */,
+				A15C5463214D699D001E8AB5 /* OptionMenuFormTableView.swift in Sources */,
 				A112E81D212CD76500320048 /* OptionMenuAppTableViewModel.swift in Sources */,
 				A112E867212CD76500320048 /* PaddingLabel.swift in Sources */,
-				A112E87F212CD76500320048 /* OptionMenuFormTableViewCell.swift in Sources */,
 				A190302E209CF977004F1EA5 /* Double+Extend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

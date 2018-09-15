@@ -49,6 +49,14 @@ class OptionMenuAppTableView: UIView, ShadowView, OptionMenuView {
         // カスタムビュー登録
         tableView.register(R.nib.optionMenuAppTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuAppCell.identifier)
 
+        tableView.register(R.nib.optionMenuAppTableViewFooterCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuAppFooterCell.identifier)
+
+        // TableViewのフッターを設定
+        if let footerCell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuAppFooterCell.identifier) as? OptionMenuAppTableViewFooterCell {
+            let footerView: UIView = footerCell.contentView
+            tableView.tableFooterView = footerView
+        }
+
         addSubview(view)
     }
 }
