@@ -29,7 +29,16 @@ final class ResourceUtil {
     }()
 
     /// ライセンリスト
-    var licenseList: Foundation.URL = R.file.comMono0926LicensePlistPlist()!
+    var licenseList: [String] = { () -> [String] in
+        do {
+            let path = Bundle.main.bundlePath + "/com.mono0926.LicensePlist"
+            let list = try FileManager.default.contentsOfDirectory(atPath: path)
+            return list
+        } catch let error as NSError {
+            log.error("get license list error. error: \(error.localizedDescription)")
+            return []
+        }
+    }()
 
     /// タイムアウトページ
     var timeoutHtml: Foundation.URL = R.file.timeoutHtml()!
