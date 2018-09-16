@@ -1332,14 +1332,14 @@
 			path = Favorite;
 			sourceTree = "<group>";
 		};
-		A15C546C214D935E001E8AB5 /* License */ = {
+		A15C546C214D935E001E8AB5 /* license */ = {
 			isa = PBXGroup;
 			children = (
 				A15C546D214D935E001E8AB5 /* com.mono0926.LicensePlist.plist */,
 				A15C546E214D935E001E8AB5 /* com.mono0926.LicensePlist */,
 				A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */,
 			);
-			path = License;
+			path = license;
 			sourceTree = "<group>";
 		};
 		A15C546E214D935E001E8AB5 /* com.mono0926.LicensePlist */ = {
@@ -1479,6 +1479,7 @@
 		A1902F92209CF976004F1EA5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A15C546C214D935E001E8AB5 /* license */,
 				A1FE87D5211B015700B258A3 /* html */,
 				A1FE87DB211B015800B258A3 /* js */,
 				A1902F93209CF976004F1EA5 /* Assets.xcassets */,
@@ -1720,7 +1721,6 @@
 		A57EFE981E3E06D300B66701 = {
 			isa = PBXGroup;
 			children = (
-				A15C546C214D935E001E8AB5 /* License */,
 				A1902F36209CF976004F1EA5 /* Qass */,
 				A1902F2D209CF976004F1EA5 /* Qass-Tests */,
 				A190300D209CF977004F1EA5 /* Qass-UITests */,
@@ -2375,7 +2375,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ $CONFIGURATION = \"Debug\" -o $CONFIGURATION = \"Debug-Local\" ]; then\n${PODS_ROOT}/LicensePlist/license-plist --output-path ${SRCROOT}/License\nfi";
+			shellScript = "if [ $CONFIGURATION = \"Debug\" -o $CONFIGURATION = \"Debug-Local\" ]; then\n${PODS_ROOT}/LicensePlist/license-plist --output-path ${SRCROOT}/Qass/Resources/license\nfi";
 		};
 		A1A3DE7B2138795A00F87009 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;

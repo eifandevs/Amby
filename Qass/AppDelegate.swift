@@ -51,6 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             log.info("RELEASE BUILD")
         #endif
 
+        log.verbose("DOCUMENT PATH: \(AppConst.DEVICE.DOCUMENT_PATH)")
+        log.verbose("BUNDLE PATH: \(AppConst.DEVICE.BUNDLE_PATH)")
+        log.verbose("APPLICATION PATH: \(AppConst.DEVICE.APPLICATION_PATH)")
+
         // プログレス初期設定
         SVProgressHUD.setForegroundColor(UIColor.ultraOrange)
 

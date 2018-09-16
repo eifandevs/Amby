@@ -28,39 +28,24 @@ final class ResourceUtil {
         }
     }()
 
+    /// ライセンリスト
+    var licenseList: Foundation.URL = R.file.comMono0926LicensePlistPlist()!
+
     /// タイムアウトページ
-    var timeoutHtml: Foundation.URL = {
-        let fileResource = R.file.timeoutHtml
-        return fileResource.bundle.url(forResource: fileResource)!
-    }()
+    var timeoutHtml: Foundation.URL = R.file.timeoutHtml()!
 
     /// DNSエラーページ
-    var dnsHtml: Foundation.URL = {
-        let fileResource = R.file.dnsHtml
-        return fileResource.bundle.url(forResource: fileResource)!
-    }()
+    var dnsHtml: Foundation.URL = R.file.dnsHtml()!
 
     /// オフラインエラーページ
-    var offlineHtml: Foundation.URL = {
-        let fileResource = R.file.offlineHtml
-        return fileResource.bundle.url(forResource: fileResource)!
-    }()
+    var offlineHtml: Foundation.URL = R.file.offlineHtml()!
 
     /// 認証エラーページ
-    var authorizeHtml: Foundation.URL = {
-        let fileResource = R.file.authorizeHtml
-        return fileResource.bundle.url(forResource: fileResource)!
-    }()
+    var authorizeHtml: Foundation.URL = R.file.authorizeHtml()!
 
     /// 汎用エラーページ
-    var invalidHtml: Foundation.URL = {
-        let fileResource = R.file.invalidHtml
-        return fileResource.bundle.url(forResource: fileResource)!
-    }()
+    var invalidHtml: Foundation.URL = R.file.invalidHtml()!
 
     /// ハイライトスクリプト
-    var highlightScript: Foundation.URL = {
-        let fileResource = R.file.highlightJs
-        return fileResource.bundle.url(forResource: fileResource)!
-    }()
+    var highlightScript: Foundation.URL = R.file.highlightJs()!
 }

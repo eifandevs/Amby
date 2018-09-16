@@ -156,6 +156,10 @@ struct AppConst {
         let STATUS_BAR_HEIGHT = UIApplication.shared.statusBarFrame.height
         let DISPLAY_SIZE = UIScreen.main.bounds.size
         let CACHES_PATH = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
+        let DOCUMENT_PATH = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let APPLICATION_PATH = NSSearchPathForDirectoriesInDomains(.applicationDirectory, .userDomainMask, true).first!
+        let RESOURCE_PATH = Bundle.main.resourcePath!
+        let BUNDLE_PATH = Bundle.main.bundlePath
         let ASPECT_RATE = UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height
     }
 }
