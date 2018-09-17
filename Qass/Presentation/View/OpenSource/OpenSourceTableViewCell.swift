@@ -9,6 +9,9 @@
 import UIKit
 
 class OpenSourceTableViewCell: UITableViewCell {
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var textView: UITextView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
