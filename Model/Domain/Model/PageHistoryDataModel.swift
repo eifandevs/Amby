@@ -185,15 +185,20 @@ final class PageHistoryDataModel {
 
                     if let isPastViewing = isPastViewing(context: context) {
                         if operation == .normal {
+                            // 更新判定
+                            if let lastUrl = $0.backForwardList.last, lastUrl == url {
+                                return
+                            }
+
                             // リスト更新
                             if !isPastViewing {
                                 log.debug("add backForwardList.")
-                                $0.backForwardList.append($0.url)
+                                $0.backForwardList.append(url)
                             } else {
                                 log.debug("refactor backForwardList.")
                                 // ヒストリーバック -> 通常遷移の場合は、履歴リストを再構築する
                                 $0.backForwardList = Array($0.backForwardList.prefix($0.listIndex + 1))
-                                $0.backForwardList.append($0.url)
+                                $0.backForwardList.append(url)
                             }
 
                             // 保存件数を超えた場合は、削除する
