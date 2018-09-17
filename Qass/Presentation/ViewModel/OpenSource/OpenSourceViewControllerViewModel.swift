@@ -15,5 +15,27 @@ final class OpenSourceViewControllerViewModel {
         let text: String
     }
 
-    let rows = [String]()
+    // 高さ
+    let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
+    // 数
+    var cellCount: Int {
+        return rows.count
+    }
+
+    let rows = [
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb"),
+        Row(title: "aaa", text: "bbb")
+    ]
 }

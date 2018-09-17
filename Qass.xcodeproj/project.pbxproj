@@ -62,6 +62,8 @@
 		A11CD335214F059000D9333F /* HeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD323214F058F00D9333F /* HeaderViewModel.swift */; };
 		A11CD336214F059000D9333F /* HeaderFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD324214F058F00D9333F /* HeaderFieldViewModel.swift */; };
 		A11CD338214F05B000D9333F /* OpenSourceViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD337214F05B000D9333F /* OpenSourceViewControllerViewModel.swift */; };
+		A11CD33B214F8F8500D9333F /* OpenSourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD339214F8F8500D9333F /* OpenSourceTableViewCell.swift */; };
+		A11CD33C214F8F8500D9333F /* OpenSourceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11CD33A214F8F8500D9333F /* OpenSourceTableViewCell.xib */; };
 		A123451B2135ADB400C791B8 /* ResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123451A2135ADB400C791B8 /* ResourceUtil.swift */; };
 		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
@@ -464,6 +466,8 @@
 		A11CD323214F058F00D9333F /* HeaderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewModel.swift; sourceTree = "<group>"; };
 		A11CD324214F058F00D9333F /* HeaderFieldViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFieldViewModel.swift; sourceTree = "<group>"; };
 		A11CD337214F05B000D9333F /* OpenSourceViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceViewControllerViewModel.swift; sourceTree = "<group>"; };
+		A11CD339214F8F8500D9333F /* OpenSourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceTableViewCell.swift; sourceTree = "<group>"; };
+		A11CD33A214F8F8500D9333F /* OpenSourceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenSourceTableViewCell.xib; sourceTree = "<group>"; };
 		A123451A2135ADB400C791B8 /* ResourceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceUtil.swift; sourceTree = "<group>"; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
@@ -1550,6 +1554,8 @@
 			children = (
 				A12B93F9214EFD710082EEA5 /* OpenSourceViewController.swift */,
 				A12B93FA214EFD710082EEA5 /* OpenSourceViewController.xib */,
+				A11CD339214F8F8500D9333F /* OpenSourceTableViewCell.swift */,
+				A11CD33A214F8F8500D9333F /* OpenSourceTableViewCell.xib */,
 			);
 			path = OpenSource;
 			sourceTree = "<group>";
@@ -2042,6 +2048,7 @@
 				A1FE87E7211B019D00B258A3 /* highlight.js in Resources */,
 				A15C5452214D699D001E8AB5 /* OptionMenuHelpTableViewCell.xib in Resources */,
 				A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */,
+				A11CD33C214F8F8500D9333F /* OpenSourceTableViewCell.xib in Resources */,
 				A15C5461214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */,
 				A15C5457214D699D001E8AB5 /* OptionMenuAppTableView.xib in Resources */,
 				A15C5465214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
@@ -2767,6 +2774,7 @@
 				A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */,
 				A1903034209CF977004F1EA5 /* UIButton+Extend.swift in Sources */,
 				A112E8AD212CD76500320048 /* HeaderView.swift in Sources */,
+				A11CD33B214F8F8500D9333F /* OpenSourceTableViewCell.swift in Sources */,
 				A11CD32B214F059000D9333F /* OptionMenuFormTableViewModel.swift in Sources */,
 				A112E8A9212CD76500320048 /* BaseLayer.swift in Sources */,
 				A15C544D214D699D001E8AB5 /* OptionMenuTableView.swift in Sources */,

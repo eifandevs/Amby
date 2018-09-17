@@ -12,6 +12,8 @@ class OpenSourceViewController: UIViewController {
     @IBOutlet var closeButton: CornerRadiusButton!
     @IBOutlet var tableView: UITableView!
 
+    let viewModel = OpenSourceViewControllerViewModel()
+
     convenience init() {
         self.init(nibName: R.nib.openSourceViewController.name, bundle: nil)
     }
@@ -22,6 +24,16 @@ class OpenSourceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // テーブルビュー監視
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.estimatedRowHeight = viewModel.cellHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
+
+        // カスタムビュー登録
+        tableView.register(R.nib.openSourceTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.openSourceCell.identifier)
 
         closeButton.backgroundColor = UIColor.ultraOrange
         // Do any additional setup after loading the view.
@@ -39,5 +51,28 @@ class OpenSourceViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+// MARK: - TableViewDataSourceDelegate
+
+extension OpenSourceViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.openSourceCell.identifier, for: indexPath) as? OpenSourceTableViewCell {
+            return cell
+        }
+        return UITableViewCell()
+    }
+
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        return viewModel.cellCount
+    }
+}
+
+// MARK: - TableViewDelegate
+
+extension OpenSourceViewController: UITableViewDelegate {
+    func tableView(_: UITableView, didSelectRowAt _: IndexPath) {
+        log.debug("tapped!!!!!!!!!!")
     }
 }
