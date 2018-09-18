@@ -257,7 +257,10 @@ class HeaderField: UIButton, ShadowView {
     }
 
     private func attribute(text: String) -> NSMutableAttributedString? {
-        let style = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        guard let style = NSParagraphStyle.default.mutableCopy() as? NSMutableParagraphStyle else {
+            return nil
+        }
+
         style.lineBreakMode = NSLineBreakMode.byClipping
 
         let attr: [NSAttributedStringKey: Any] = [
