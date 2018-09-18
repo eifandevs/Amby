@@ -29,14 +29,24 @@ final class ResourceUtil {
     }()
 
     /// ライセンリスト
-    var licenseList: [String] = { () -> [String] in
+    var licenseList: [(libraryName: String, description: String)] = { () -> [(libraryName: String, description: String)] in
         do {
             let path = Bundle.main.bundlePath + "/com.mono0926.LicensePlist"
-            let list = try FileManager.default.contentsOfDirectory(atPath: path)
-            return list
+            let libraryNameList = try FileManager.default.contentsOfDirectory(atPath: path)
+
+            let libraryList = libraryNameList.map { (fileName: String) -> (libraryName: String, description: String) in
+                let libraryName = fileName.components(separatedBy: ".plist").first!
+                let libraryPath = path + "/" + fileName
+                let plist = NSDictionary(contentsOfFile: libraryPath)!
+
+                let description = ((plist["PreferenceSpecifiers"] as! NSArray).firstObject as! NSDictionary)["FooterText"] as! String
+                return (libraryName, description)
+            }
+
+            return libraryList
         } catch let error as NSError {
             log.error("get license list error. error: \(error.localizedDescription)")
-            return []
+            return [("", "")]
         }
     }()
 

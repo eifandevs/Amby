@@ -22,4 +22,9 @@ class OpenSourceTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
+    func setTitle(title: String, description: String) {
+        titleLabel.text = title
+        textView.text = description
+    }
 }

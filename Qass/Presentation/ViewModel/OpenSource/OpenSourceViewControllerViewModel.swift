@@ -12,7 +12,7 @@ final class OpenSourceViewControllerViewModel {
     // セル情報
     struct Row {
         let title: String
-        let text: String
+        let description: String
     }
 
     // 高さ
@@ -22,25 +22,5 @@ final class OpenSourceViewControllerViewModel {
         return rows.count
     }
 
-    // TODO: リスト作成
-//    let aaa = ResourceUtil().licenseList.map {
-//        return $0
-//    }
-
-    let rows = [
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb"),
-        Row(title: "aaa", text: "bbb")
-    ]
+    let rows = ResourceUtil().licenseList
 }
