@@ -1112,7 +1112,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        let egWv: EGWebView = webView as! EGWebView
+        guard let egWv: EGWebView = webView as? EGWebView else { return }
 
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
             // SSL認証
