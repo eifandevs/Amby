@@ -29,7 +29,7 @@ final class ResourceUtil {
     }()
 
     /// ライセンリスト
-    var licenseList: [(libraryName: String, description: String)] = { () -> [(libraryName: String, description: String)] in
+    var licenseList = { () -> [(libraryName: String, description: String)] in
         do {
             let path = Bundle.main.bundlePath + "/com.mono0926.LicensePlist"
             let libraryNameList = try FileManager.default.contentsOfDirectory(atPath: path)

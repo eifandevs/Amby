@@ -15,6 +15,7 @@ class OpenSourceTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        textView.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,5 +27,9 @@ class OpenSourceTableViewCell: UITableViewCell {
     func setTitle(title: String, description: String) {
         titleLabel.text = title
         textView.text = description
+    }
+
+    func tapped() {
+        textView.isHidden = !textView.isHidden
     }
 }

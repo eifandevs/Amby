@@ -59,6 +59,9 @@ class OpenSourceViewController: UIViewController {
 extension OpenSourceViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.openSourceCell.identifier, for: indexPath) as? OpenSourceTableViewCell {
+            let row = viewModel.getRow(index: indexPath.row)
+            cell.setTitle(title: row.title, description: row.description)
+
             return cell
         }
         return UITableViewCell()
@@ -72,7 +75,10 @@ extension OpenSourceViewController: UITableViewDataSource {
 // MARK: - TableViewDelegate
 
 extension OpenSourceViewController: UITableViewDelegate {
-    func tableView(_: UITableView, didSelectRowAt _: IndexPath) {
-        log.debug("tapped!!!!!!!!!!")
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! OpenSourceTableViewCell
+        cell.tapped()
+//        tableView.reloadRows(at: [indexPath], with: .automatic)
+        tableView.reloadData()
     }
 }
