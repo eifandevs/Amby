@@ -39,7 +39,7 @@ final class ResourceUtil {
                 let libraryPath = path + "/" + fileName
                 let plist = NSDictionary(contentsOfFile: libraryPath)!
 
-                let description = ((plist["PreferenceSpecifiers"] as! NSArray).firstObject as! NSDictionary)["FooterText"] as! String
+                let description = ((plist["PreferenceSpecifiers"] as? NSArray ?? []).firstObject as? NSDictionary ?? [:])["FooterText"] as? String ?? ""
                 return (libraryName, description)
             }
 
