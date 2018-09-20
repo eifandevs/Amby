@@ -13,18 +13,23 @@ final class OpenSourceViewControllerViewModel {
     struct Row {
         let title: String
         let description: String
+        var expanded: Bool
     }
 
     // 高さ
-    let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
+    let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_LICENSE_CELL_HEIGHT
     // 数
     var cellCount: Int {
         return rows.count
     }
 
-    private let rows = ResourceUtil().licenseList.map { return Row(title: $0.libraryName, description: $0.description) }
+    private var rows = ResourceUtil().licenseList.map { return Row(title: $0.libraryName, description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", expanded: false) }
 
     func getRow(index: Int) -> Row {
         return rows[index]
+    }
+
+    func invert(index: Int) {
+        rows[index].expanded = !rows[index].expanded
     }
 }

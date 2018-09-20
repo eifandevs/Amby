@@ -9,13 +9,11 @@
 import UIKit
 
 class OpenSourceTableViewCell: UITableViewCell {
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var textView: UITextView!
+    @IBOutlet var licenseLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        textView.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,12 +22,7 @@ class OpenSourceTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setTitle(title: String, description: String) {
-        titleLabel.text = title
-        textView.text = description
-    }
-
-    func tapped() {
-        textView.isHidden = !textView.isHidden
+    func setRow(row: OpenSourceViewControllerViewModel.Row) {
+        licenseLabel.text = row.description
     }
 }

@@ -30,7 +30,6 @@ class OpenSourceViewController: UIViewController {
         tableView.dataSource = self
 
         tableView.estimatedRowHeight = viewModel.cellHeight
-        tableView.rowHeight = UITableViewAutomaticDimension
 
         // カスタムビュー登録
         tableView.register(R.nib.openSourceTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.openSourceCell.identifier)
@@ -59,8 +58,7 @@ class OpenSourceViewController: UIViewController {
 extension OpenSourceViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.openSourceCell.identifier, for: indexPath) as? OpenSourceTableViewCell {
-            let row = viewModel.getRow(index: indexPath.row)
-            cell.setTitle(title: row.title, description: row.description)
+            cell.setRow(row: viewModel.getRow(index: indexPath.row))
 
             return cell
         }
@@ -70,15 +68,17 @@ extension OpenSourceViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return viewModel.cellCount
     }
+
+    func tableView(_ tableView: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
 }
 
 // MARK: - TableViewDelegate
 
 extension OpenSourceViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! OpenSourceTableViewCell
-        cell.tapped()
-//        tableView.reloadRows(at: [indexPath], with: .automatic)
-        tableView.reloadData()
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.invert(index: indexPath.row)
+        log.debug("tapeed!!!!!!!!!!!!!1")
     }
 }
