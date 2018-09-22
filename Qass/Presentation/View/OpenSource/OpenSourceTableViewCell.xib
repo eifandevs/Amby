@@ -18,23 +18,46 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="148.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1a-Kp-MpE">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="NKP-j8-T7P">
                         <rect key="frame" x="10" y="0.0" width="305" height="148.5"/>
-                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1a-Kp-MpE">
+                                <rect key="frame" x="0.0" y="0.0" width="305" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="VmA-kc-PDf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcg-AE-GBw">
+                                <rect key="frame" x="0.0" y="44" width="305" height="104.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="y1a-Kp-MpE" firstAttribute="top" secondItem="NKP-j8-T7P" secondAttribute="top" id="9lx-xH-c4m"/>
+                            <constraint firstItem="Qcg-AE-GBw" firstAttribute="leading" secondItem="NKP-j8-T7P" secondAttribute="leading" id="CKX-3a-63C"/>
+                            <constraint firstItem="y1a-Kp-MpE" firstAttribute="leading" secondItem="NKP-j8-T7P" secondAttribute="leading" id="DnL-EY-jz9"/>
+                            <constraint firstAttribute="bottom" secondItem="Qcg-AE-GBw" secondAttribute="bottom" id="G2f-cd-rnO"/>
+                            <constraint firstItem="Qcg-AE-GBw" firstAttribute="top" secondItem="y1a-Kp-MpE" secondAttribute="bottom" id="jqH-lh-K0O"/>
+                            <constraint firstAttribute="trailing" secondItem="y1a-Kp-MpE" secondAttribute="trailing" id="pKH-4w-3sS"/>
+                            <constraint firstAttribute="trailing" secondItem="Qcg-AE-GBw" secondAttribute="trailing" id="yCI-TS-PbI"/>
+                        </constraints>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="y1a-Kp-MpE" secondAttribute="trailing" constant="5" id="3kW-HH-Rtq"/>
-                    <constraint firstItem="y1a-Kp-MpE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="aIN-Ld-4r1"/>
-                    <constraint firstItem="y1a-Kp-MpE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fgn-0C-TgU"/>
-                    <constraint firstItem="y1a-Kp-MpE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="j0Y-SB-UKk"/>
-                    <constraint firstAttribute="bottom" secondItem="y1a-Kp-MpE" secondAttribute="bottom" id="jdU-Sq-Dcv"/>
+                    <constraint firstItem="NKP-j8-T7P" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="45N-kW-8xH"/>
+                    <constraint firstAttribute="trailing" secondItem="NKP-j8-T7P" secondAttribute="trailing" constant="5" id="6wV-oF-vTJ"/>
+                    <constraint firstItem="NKP-j8-T7P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="eWp-XO-Obo"/>
+                    <constraint firstAttribute="bottom" secondItem="NKP-j8-T7P" secondAttribute="bottom" id="nOn-dT-X8n"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="descriptionLabel" destination="Qcg-AE-GBw" id="2Dd-ED-Zc6"/>
                 <outlet property="licenseLabel" destination="y1a-Kp-MpE" id="USt-ME-xhP"/>
             </connections>
             <point key="canvasLocation" x="34" y="200.5"/>

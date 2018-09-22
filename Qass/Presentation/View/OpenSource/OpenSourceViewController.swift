@@ -79,6 +79,6 @@ extension OpenSourceViewController: UITableViewDataSource {
 extension OpenSourceViewController: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.invert(index: indexPath.row)
-        log.debug("tapeed!!!!!!!!!!!!!1")
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }

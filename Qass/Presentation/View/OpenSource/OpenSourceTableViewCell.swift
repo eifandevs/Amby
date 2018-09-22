@@ -10,6 +10,7 @@ import UIKit
 
 class OpenSourceTableViewCell: UITableViewCell {
     @IBOutlet var licenseLabel: UILabel!
+    @IBOutlet var descriptionLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +24,8 @@ class OpenSourceTableViewCell: UITableViewCell {
     }
 
     func setRow(row: OpenSourceViewControllerViewModel.Row) {
-        licenseLabel.text = row.description
+        descriptionLabel.isHidden = !row.expanded
+        licenseLabel.text = row.title
+        descriptionLabel.text = row.description
     }
 }

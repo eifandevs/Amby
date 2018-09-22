@@ -23,7 +23,7 @@ final class OpenSourceViewControllerViewModel {
         return rows.count
     }
 
-    private var rows = ResourceUtil().licenseList.map { return Row(title: $0.libraryName, description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", expanded: false) }
+    private var rows = ResourceUtil().licenseList.map { return Row(title: $0.libraryName, description: $0.description, expanded: false) }
 
     func getRow(index: Int) -> Row {
         return rows[index]
