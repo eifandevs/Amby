@@ -88,7 +88,6 @@ final class FooterViewModel {
 
     func getThumbnail(context: String) -> UIImage? {
         let thumbnail = ThumbnailUseCase.s.getThumbnail(context: context)
-        thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
-        return thumbnail
+        return thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
     }
 }
