@@ -40,7 +40,7 @@ class NotificationManager {
         Util.foregroundViewController().present(alert, animated: true, completion: nil)
     }
 
-    static func presentActionSheet(title: String, message: String, completion: (() -> Void)?) {
+    static func presentActionSheet(title: String, message: String, completion: (() -> Void)?, cancel: (() -> Void)?) {
         // styleをActionSheetに設定
         let alertSheet = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.actionSheet)
 
@@ -51,6 +51,7 @@ class NotificationManager {
         })
         let action2 = UIAlertAction(title: MessageConst.COMMON.CANCEL, style: UIAlertActionStyle.cancel, handler: {
             (_: UIAlertAction!) in
+            cancel?()
         })
 
         // アクションを追加.

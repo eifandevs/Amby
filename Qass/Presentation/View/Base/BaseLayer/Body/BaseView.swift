@@ -95,7 +95,8 @@ class BaseView: UIView {
     private var touchBeganPoint: CGPoint?
     /// スワイプでページ切り替えを検知したかどうかのフラグ
     private var isChangingFront: Bool = false
-
+    /// 新規タブイベント選択中
+    private var isSelectingNewTabEvent = false
     /// スライド中かどうかのフラグ
     var isMoving: Bool {
         return !isLocateMax && !isLocateMin
@@ -1150,6 +1151,13 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             return
         }
 
+        // 新規ウィンドウ選択中の場合はキャンセル
+        if isSelectingNewTabEvent {
+            log.debug("cancel url: \(url)")
+            decisionHandler(.cancel)
+            return
+        }
+
         // 自動スクロールを停止する
         if let autoScrollTimer = autoScrollTimer, autoScrollTimer.isValid {
             autoScrollTimer.invalidate()
@@ -1163,7 +1171,7 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             if UIApplication.shared.canOpenURL(url) {
                 NotificationManager.presentActionSheet(title: "", message: MessageConst.ALERT.OPEN_COMFIRM, completion: {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                })
+                }, cancel: nil)
             } else {
                 log.warning("cannot open url. url: \(url)")
             }
@@ -1179,7 +1187,16 @@ extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
             if let url = navigationAction.request.url?.absoluteString {
                 log.debug("receive new window event. url: \(url)")
 
-                viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
+                isSelectingNewTabEvent = true
+
+                // 150文字以上は省略
+                let message = url.count > 50 ? String(url.prefix(200)) + "..." : url
+                NotificationManager.presentActionSheet(title: MessageConst.NOTIFICATION.NEW_TAB, message: message, completion: {
+                    self.isSelectingNewTabEvent = false
+                    self.viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
+                }, cancel: {
+                    self.isSelectingNewTabEvent = false
+                })
 
 //                if url != AppConst.URL.BLANK {
 //                    // about:blankは無視する

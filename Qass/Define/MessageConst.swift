@@ -42,6 +42,7 @@ struct MessageConst {
 
     static let NOTIFICATION = NOTIFICATION_VALUE()
     struct NOTIFICATION_VALUE {
+        let NEW_TAB = "新規タブイベント"
         let COPY_URL = "URLをコピーしました"
         let REGISTER_BOOK_MARK = "お気に入りに登録しました"
         let REGISTER_BOOK_MARK_ERROR = "ページ情報を取得できませんでした"
