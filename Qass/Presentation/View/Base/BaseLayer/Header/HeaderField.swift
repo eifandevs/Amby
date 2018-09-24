@@ -29,7 +29,7 @@ class HeaderField: UIButton, ShadowView {
             return label?.attributedText?.string
         }
         set {
-            guard let value = newValue, let icon = icon, let _ = label else {
+            guard let value = newValue, let icon = icon, let label = label else {
                 return
             }
             if let value = newValue, value.isHttpsUrl {
@@ -38,8 +38,8 @@ class HeaderField: UIButton, ShadowView {
                 icon.frame.size = CGSize.zero
             }
             // テキストフィールドがちらつくので、ラベルを再生成する
-            self.label!.removeFromSuperview()
-            self.label! = EGGradientLabel()
+            label.removeFromSuperview()
+            self.label = EGGradientLabel()
             self.label!.isUserInteractionEnabled = false
             self.label!.numberOfLines = 1
             self.label!.frame = CGRect(x: 0, y: 0, width: frame.size.width - icon.frame.size.width, height: frame.size.height)
