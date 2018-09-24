@@ -40,9 +40,6 @@ class EGWebView: WKWebView {
     /// observing url flag
     var isObservingUrl = false
 
-    // TODO: submit検知
-//    var form: Form?
-
     let resourceUtil = ResourceUtil()
 
     init(id: String?) {
