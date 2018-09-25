@@ -206,16 +206,20 @@ class EGWebView: WKWebView {
 
     func highlight(word: String) {
         let scriptPath = resourceUtil.highlightScript
-        let script = try! String(contentsOf: scriptPath, encoding: .utf8)
-        evaluateJavaScript(script) { (_: Any?, error: Error?) in
-            if error != nil {
-                log.error("js setup error: \(error!)")
+        do {
+            let script = try String(contentsOf: scriptPath, encoding: .utf8)
+            evaluateJavaScript(script) { (_: Any?, error: Error?) in
+                if error != nil {
+                    log.error("js setup error: \(error!)")
+                }
             }
-        }
-        evaluateJavaScript("MyApp_HighlightAllOccurencesOfString('\(word)')") { (_: Any?, error: Error?) in
-            if error != nil {
-                log.error("js grep error: \(error!)")
+            evaluateJavaScript("MyApp_HighlightAllOccurencesOfString('\(word)')") { (_: Any?, error: Error?) in
+                if error != nil {
+                    log.error("js grep error: \(error!)")
+                }
             }
+        } catch let error as NSError {
+            log.error("failed to get script. error: \(error.localizedDescription)")
         }
     }
 
