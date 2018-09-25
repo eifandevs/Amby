@@ -95,8 +95,6 @@ extension OptionMenuAppTableView: UITableViewDelegate {
             viewModel.openLicense()
         case .policy:
             viewModel.openPolicy()
-        case .review:
-            viewModel.openReview()
         case .source:
             viewModel.openSource()
         case .report:

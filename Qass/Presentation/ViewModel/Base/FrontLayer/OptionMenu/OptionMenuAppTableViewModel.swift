@@ -18,7 +18,6 @@ final class OptionMenuAppTableViewModel {
     enum CellType: Int {
         case opensource
         case policy
-        case review
         case source
         case report
         case contact
@@ -27,7 +26,6 @@ final class OptionMenuAppTableViewModel {
             switch self {
             case .opensource: return AppConst.APP_INFORMATION.OPENSOURCE
             case .policy: return AppConst.APP_INFORMATION.POLICY
-            case .review: return AppConst.APP_INFORMATION.REVIEW
             case .source: return AppConst.APP_INFORMATION.SOURCE
             case .report: return AppConst.APP_INFORMATION.REPORT
             case .contact: return AppConst.APP_INFORMATION.CONTACT
@@ -39,7 +37,6 @@ final class OptionMenuAppTableViewModel {
     let rows = [
         Row(cellType: .opensource),
         Row(cellType: .policy),
-        Row(cellType: .review),
         Row(cellType: .source),
         Row(cellType: .report),
         Row(cellType: .contact)
@@ -70,11 +67,6 @@ final class OptionMenuAppTableViewModel {
     /// ポリシー表示
     func openPolicy() {
         PolicyUseCase.s.open()
-    }
-
-    /// レビュー表示
-    func openReview() {
-        ReviewUseCase.s.open()
     }
 
     /// 問題の報告表示

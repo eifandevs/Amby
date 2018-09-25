@@ -253,7 +253,7 @@ final class PageHistoryDataModel {
                 let newPage = PageHistory(url: url ?? "", title: title ?? "")
                 histories.insert(newPage, at: currentLocation + 1)
                 currentContext = newPage.context
-                rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation))
+                rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation + 1))
             }
         }
     }
@@ -280,7 +280,7 @@ final class PageHistoryDataModel {
                     let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
                     histories.insert(newPage, at: currentLocation + 1)
                     currentContext = newPage.context
-                    rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation))
+                    rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation + 1))
                 }
             }
         }

@@ -92,7 +92,6 @@ struct AppConst {
     struct APP_INFORMATION_VALUE {
         let OPENSOURCE = "オープンソースライセンス"
         let POLICY = "プライバシーポリシー"
-        let REVIEW = "評価・レビュー"
         let SOURCE = "ソースコード"
         let CONTACT = "お問い合わせ"
         let REPORT = "問題の報告"
