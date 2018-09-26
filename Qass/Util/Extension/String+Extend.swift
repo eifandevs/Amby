@@ -79,4 +79,12 @@ extension String {
         let endIndex = index(from: r.upperBound)
         return substring(with: startIndex ..< endIndex)
     }
+
+    func encodeUrl() -> String? {
+        return addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)
+    }
+
+    func decodeUrl() -> String? {
+        return removingPercentEncoding
+    }
 }

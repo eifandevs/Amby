@@ -165,8 +165,8 @@ class EGWebView: WKWebView {
     @discardableResult
     func load(urlStr: String) -> Bool {
         if urlStr.isValidUrl {
-            guard let url = URL(string: urlStr) else {
-                log.error("invalud url load. url: \(urlStr)")
+            guard let url = URL(string: urlStr.encodeUrl()!) else {
+                log.error("invalid url load. url: \(urlStr)")
                 return false
             }
             load(URLRequest(url: url))

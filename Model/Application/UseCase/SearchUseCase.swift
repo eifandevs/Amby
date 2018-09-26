@@ -31,7 +31,7 @@ public final class SearchUseCase {
                 // 閲覧履歴を保存する
                 SearchHistoryDataModel.s.store(text: text)
 
-                let encodedText = "\(ModelConst.URL.SEARCH_PATH)\(text.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!)"
+                let encodedText = "\(ModelConst.URL.SEARCH_PATH)\(text.encodeUrl()!)"
                 return encodedText
             }
         }()
