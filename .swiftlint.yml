@@ -18,6 +18,7 @@ excluded:
 disabled_rules:
 - variable_name
 - type_name
+- nesting
 
 # error to warning
 force_try: warning
