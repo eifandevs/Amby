@@ -16,12 +16,12 @@ abstract_target 'All' do
     pod 'SwiftLint', '~> 0.25'
     pod 'VerticalAlignmentLabel', '~> 0.1'
     pod 'R.swift', '~> 4.0'
-    pod 'Realm', '~> 2.4'
-    pod 'RealmSwift', '~> 2.4'
     pod 'RxSwift', '~> 4.0'
     pod 'RxCocoa', '~> 4.0'
     pod 'NSObject+Rx', '~> 4.2'
     pod 'LicensePlist', '~> 1.8'
+    pod 'Firebase/Core', '~> 5.9'
+    pod 'Firebase/AdMob', '~> 5.9'
 
     target 'Qass-Tests' do
       inherit! :search_paths

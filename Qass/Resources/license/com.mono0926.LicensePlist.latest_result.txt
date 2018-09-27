@@ -10,6 +10,36 @@ name: Alamofire, nameSpecified:
 body: Copyright (c) 2014-2…
 version: 4.7.3
 
+name: Firebase, nameSpecified: 
+body: Copyright 2018 Googl…
+version: 5.9.0
+
+name: FirebaseAnalytics, nameSpecified: 
+body: Copyright 2018 Googl…
+version: 5.2.0
+
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 5.1.4
+
+name: FirebaseInstanceID, nameSpecified: 
+body: Copyright 2018 Googl…
+version: 3.2.2
+
+name: Google-Mobile-Ads-SDK, nameSpecified: 
+body: Copyright 2018 Googl…
+version: 7.34.0
+
+name: GoogleAppMeasurement, nameSpecified: 
+body: Copyright 2018 Googl…
+version: 5.2.0
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 5.3.0
+
 name: LicensePlist, nameSpecified: 
 body: MIT License
 
@@ -27,6 +57,10 @@ version: 11.0.1
 name: Moya, nameSpecified: 
 body: The MIT License (MIT…
 version: 11.0.1
+
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 0.3.8
 
 name: NSObject+Rx, nameSpecified: 
 body: The MIT License (MIT…
