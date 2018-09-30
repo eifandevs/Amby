@@ -19,6 +19,7 @@ disabled_rules:
 - variable_name
 - type_name
 - nesting
+- cyclomatic_complexity
 
 # error to warning
 force_try: warning
