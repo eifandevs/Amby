@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import Firebase
 import Logger
 import Model
 import SVProgressHUD
@@ -34,6 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // model setup
         Model.setup()
 
+        // firebase setup
+        FirebaseApp.configure()
+
         #if DEBUG
             UIViewController.swizzle() // ログ出力
             log.info("DEBUG BUILD")
@@ -55,16 +59,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.verbose("BUNDLE PATH: \(AppConst.DEVICE.BUNDLE_PATH)")
         log.verbose("APPLICATION PATH: \(AppConst.DEVICE.APPLICATION_PATH)")
 
-        // プログレス初期設定
+        // progress setup
         SVProgressHUD.setForegroundColor(UIColor.ultraOrange)
 
+        // app setup
+        setup()
+
+        return true
+    }
+
+    private func setup() {
         window = UIWindow(frame: UIScreen.main.bounds)
         baseViewController = BaseViewController()
         window!.rootViewController = baseViewController!
         window!.backgroundColor = UIColor.white
         window!.makeKeyAndVisible()
-
-        return true
     }
 
     func initialize() {

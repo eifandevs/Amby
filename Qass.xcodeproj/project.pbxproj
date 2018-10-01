@@ -43,6 +43,13 @@
 		A112E8B1212CD76500320048 /* HeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7D1212CD76400320048 /* HeaderField.swift */; };
 		A112E8B3212CD76500320048 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7D3212CD76400320048 /* HelpViewController.swift */; };
 		A112E9B621330AA600320048 /* ContactUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E9B521330AA600320048 /* ContactUseCase.swift */; };
+		A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11A7DE62162585D00646185 /* GoogleService-Info.plist */; };
+		A11A7DE82162585E00646185 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11A7DE62162585D00646185 /* GoogleService-Info.plist */; };
+		A11A7DE92162585E00646185 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11A7DE62162585D00646185 /* GoogleService-Info.plist */; };
+		A11A7DEA2162585E00646185 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11A7DE62162585D00646185 /* GoogleService-Info.plist */; };
+		A11A7DEB2162585E00646185 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11A7DE62162585D00646185 /* GoogleService-Info.plist */; };
+		A11A7DEC2162585E00646185 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11A7DE62162585D00646185 /* GoogleService-Info.plist */; };
+		A11A7DED2162585E00646185 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11A7DE62162585D00646185 /* GoogleService-Info.plist */; };
 		A11CD327214F059000D9333F /* FrontLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD30F214F058F00D9333F /* FrontLayerViewModel.swift */; };
 		A11CD328214F059000D9333F /* CircleMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD311214F058F00D9333F /* CircleMenuViewModel.swift */; };
 		A11CD329214F059000D9333F /* OptionMenuTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD313214F058F00D9333F /* OptionMenuTableViewModel.swift */; };
@@ -426,6 +433,7 @@
 		A112E99E2132FE3900320048 /* CacheUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheUseCase.swift; sourceTree = "<group>"; };
 		A112E9A12133015F00320048 /* SettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUseCase.swift; sourceTree = "<group>"; };
 		A112E9B521330AA600320048 /* ContactUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUseCase.swift; sourceTree = "<group>"; };
+		A11A7DE62162585D00646185 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A11CD30F214F058F00D9333F /* FrontLayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModel.swift; sourceTree = "<group>"; };
 		A11CD311214F058F00D9333F /* CircleMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenuViewModel.swift; sourceTree = "<group>"; };
 		A11CD313214F058F00D9333F /* OptionMenuTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewModel.swift; sourceTree = "<group>"; };
@@ -1284,6 +1292,7 @@
 		A1902F36209CF976004F1EA5 /* Qass */ = {
 			isa = PBXGroup;
 			children = (
+				A11A7DE62162585D00646185 /* GoogleService-Info.plist */,
 				A1902F38209CF976004F1EA5 /* AppDelegate.swift */,
 				A1902F39209CF976004F1EA5 /* Qass-Bridging-Header.h */,
 				A112E757212CD76400320048 /* Presentation */,
@@ -1899,6 +1908,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A11A7DE82162585E00646185 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1906,6 +1916,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A11A7DE92162585E00646185 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1913,6 +1924,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A11A7DEC2162585E00646185 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1920,6 +1932,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A11A7DED2162585E00646185 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1929,6 +1942,7 @@
 			files = (
 				A1A3DE89213ACBF200F87009 /* env.plist in Resources */,
 				A1A3DE88213ACBF200F87009 /* env-dummy.plist in Resources */,
+				A11A7DEA2162585E00646185 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1936,6 +1950,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A11A7DEB2162585E00646185 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1953,6 +1968,7 @@
 				A15C5455214D699D001E8AB5 /* OptionMenuHelpTableView.xib in Resources */,
 				A15C5467214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
+				A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */,
 				A15C545E214D699D001E8AB5 /* OptionMenuSettingTableView.xib in Resources */,
 				A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A1FE87DE211B015800B258A3 /* timeout.html in Resources */,
@@ -3484,7 +3500,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Qass/Environment/Qass/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qass.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.qass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG UT";
 				SWIFT_OBJC_BRIDGING_HEADER = "Qass/Qass-Bridging-Header.h";
@@ -3622,7 +3638,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Qass/Environment/Qass/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qass.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.qass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG LOCAL";
 				SWIFT_OBJC_BRIDGING_HEADER = "Qass/Qass-Bridging-Header.h";
@@ -3808,7 +3824,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Qass/Environment/Qass/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qass.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.qass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Qass/Qass-Bridging-Header.h";
@@ -3837,7 +3853,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Qass/Environment/Qass/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eifaniori.qass.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.qass;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Qass/Qass-Bridging-Header.h";

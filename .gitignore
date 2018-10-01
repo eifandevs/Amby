@@ -45,3 +45,6 @@ fastlane/test_output
 
 # slather
 # slather/reports
+
+# firebase
+GoogleService-Info.plist
