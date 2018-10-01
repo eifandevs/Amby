@@ -60,8 +60,11 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NBNRequestKit (2.2.0)
   - NSObject+Rx (4.2.0):
     - RxSwift (~> 4.0)
+  - OctoKit.swift (0.8.0):
+    - NBNRequestKit (~> 2.0)
   - R.swift (4.0.0):
     - R.swift.Library (~> 4.0.0)
   - R.swift.Library (4.0.0)
@@ -84,6 +87,7 @@ DEPENDENCIES:
   - LicensePlist (~> 1.8)
   - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
+  - OctoKit.swift
   - R.swift (~> 4.0)
   - Realm (~> 2.4)
   - RealmSwift (~> 2.4)
@@ -105,7 +109,9 @@ SPEC CHECKSUMS:
   LicensePlist: 3fda61ebe060afc8fc6d995df34a91401af5a244
   Moya: 3d594ada51a21cc02b18739ab578a1984f900c8a
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NBNRequestKit: 30c39d8e23e94f935bfc2a25789c44e4a6e1bfdd
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
+  OctoKit.swift: 2f51efbf888997fc625b91894777e76e9142d95b
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
   Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
@@ -117,6 +123,6 @@ SPEC CHECKSUMS:
   SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: b8aff7b2ae140ed5a4427e22bc1678eaa882141a
+PODFILE CHECKSUM: fa583d57411dc1b41bb726bf735ca9a4ad0c4c3b
 
 COCOAPODS: 1.4.0

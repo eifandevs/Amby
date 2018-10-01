@@ -62,9 +62,17 @@ name: nanopb, nameSpecified:
 body: Copyright (c) 2011 P…
 version: 0.3.8
 
-name: NSObject+Rx, nameSpecified: 
-body: The MIT License (MIT…
-version: 4.2.0
+name: NBNRequestKit, nameSpecified: 
+body: Copyright (c) 2015 P…
+version: 2.2.0
+
+name: NBNRequestKit, nameSpecified: 
+body: Copyright (c) 2015 P…
+version: 2.2.0
+
+name: NBNRequestKit, nameSpecified: 
+body: Copyright (c) 2015 P…
+version: 2.2.0
 
 name: NSObject+Rx, nameSpecified: 
 body: The MIT License (MIT…
@@ -73,6 +81,22 @@ version: 4.2.0
 name: NSObject+Rx, nameSpecified: 
 body: The MIT License (MIT…
 version: 4.2.0
+
+name: NSObject+Rx, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.2.0
+
+name: OctoKit.swift, nameSpecified: 
+body: Copyright (c) 2015 P…
+version: 0.8.0
+
+name: OctoKit.swift, nameSpecified: 
+body: Copyright (c) 2015 P…
+version: 0.8.0
+
+name: OctoKit.swift, nameSpecified: 
+body: Copyright (c) 2015 P…
+version: 0.8.0
 
 name: R.swift, nameSpecified: 
 body: The MIT License (MIT…
