@@ -1813,6 +1813,7 @@
 				A101649820C5638E007A3CC7 /* Carthage */,
 				A1706871213487D600AAD993 /* Embed Frameworks */,
 				A15C53E6214AAAAE001E8AB5 /* License */,
+				A1AD92DA21625CE700445FC8 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -2288,6 +2289,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n/usr/local/bin/carthage copy-frameworks\nelse\necho \"warning: carthage not installed. install at 'brew install carthage'\"\nfi";
+		};
+		A1AD92DA21625CE700445FC8 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
 		};
 		A1C18E48213B10D800846ADB /* Formatter */ = {
 			isa = PBXShellScriptBuildPhase;
