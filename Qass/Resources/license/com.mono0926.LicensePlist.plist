@@ -14,6 +14,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/BaseAPI</string>
+			<key>Title</key>
+			<string>BaseAPI</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/Crashlytics</string>
 			<key>Title</key>
 			<string>Crashlytics</string>
@@ -65,6 +73,14 @@
 			<string>com.mono0926.LicensePlist/FirebaseInstanceID</string>
 			<key>Title</key>
 			<string>FirebaseInstanceID</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/GithubAPI</string>
+			<key>Title</key>
+			<string>GithubAPI</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -134,14 +150,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/NBNRequestKit</string>
-			<key>Title</key>
-			<string>NBNRequestKit</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/NSObject+Rx</string>
 			<key>Title</key>
 			<string>NSObject+Rx</string>
@@ -153,14 +161,6 @@
 			<string>com.mono0926.LicensePlist/NVActivityIndicatorView</string>
 			<key>Title</key>
 			<string>NVActivityIndicatorView</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/OctoKit.swift</string>
-			<key>Title</key>
-			<string>OctoKit.swift</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

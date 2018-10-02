@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09C144041C4539DCAAD5D6AA /* Pods_Qass_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6358F355FCF8A9D1FC146E9 /* Pods_Qass_UITests.framework */; };
+		11D712C9F98E2B4279DA77BB /* Pods_Qass_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6A21CA5F994DD8A21881DF /* Pods_Qass_Tests.framework */; };
 		2D09190780127377F04D13FF /* Pods_All_Qass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3142C4F33D0DBAE0859EDF26 /* Pods_All_Qass.framework */; };
 		62F8CE49F96E0498CD005428 /* Pods_All_Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8472F7E2E1F266BC528B8E /* Pods_All_Model.framework */; };
 		71CF37049E7E55B00EBA1BCA /* Pods_All_Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8692F7480F7AAB8F5A3CCD8D /* Pods_All_Logger.framework */; };
+		9DA1C080D94CD726F2EAAF12 /* Pods_LoggerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F8067F5DB4DDA3119AC415 /* Pods_LoggerTests.framework */; };
 		A101649720C56376007A3CC7 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
 		A112E735212AF83800320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
 		A112E82D212CD76500320048 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E773212CD76400320048 /* SplashViewController.swift */; };
@@ -271,6 +274,7 @@
 		A1FE87E4211B015800B258A3 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A1FE87DA211B015700B258A3 /* authorize.html */; };
 		A1FE87E7211B019D00B258A3 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = A1FE87E6211B019D00B258A3 /* highlight.js */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
+		DD7A96C7A47EEF104EFBE48C /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -352,6 +356,7 @@
 		12DA48BDDD2785B0B7B88C2B /* Pods-All-Model.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Model.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Model/Pods-All-Model.debug.xcconfig"; sourceTree = "<group>"; };
 		139C77EA9F0B7A0BC9BFECA4 /* Pods-Qass-Tests.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Tests.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Tests/Pods-Qass-Tests.debug-local.xcconfig"; sourceTree = "<group>"; };
 		1A6FC2706CB03A8B5CD663E5 /* Pods-Qass-UITests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-UITests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-UITests/Pods-Qass-UITests.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModelTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3A3C60C544CA835B109A3B /* Pods-Qass-UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-UITests/Pods-Qass-UITests.release.xcconfig"; sourceTree = "<group>"; };
 		266DA52C76CFFA470CC19711 /* Pods-ModelTests.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModelTests.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-ModelTests/Pods-ModelTests.debug-local.xcconfig"; sourceTree = "<group>"; };
 		2AEB331B55B2A2E22DA7F769 /* Pods-All-Qass.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Qass.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-All-Qass/Pods-All-Qass.debug-local.xcconfig"; sourceTree = "<group>"; };
@@ -360,6 +365,7 @@
 		49C9CF1EF233CC45CAC4373F /* Pods-All-Model.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Model.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-All-Model/Pods-All-Model.debug-local.xcconfig"; sourceTree = "<group>"; };
 		5A6D459515BBF48BD6B50B35 /* Pods-All-Model.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Model.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-All-Model/Pods-All-Model.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		6D65D43D146A30C682BBF62B /* Pods-LoggerTests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoggerTests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-LoggerTests/Pods-LoggerTests.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		6E6A21CA5F994DD8A21881DF /* Pods_Qass_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qass_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70E1AED3EB7F6CC03678119F /* Pods-LoggerTests.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoggerTests.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-LoggerTests/Pods-LoggerTests.debug-local.xcconfig"; sourceTree = "<group>"; };
 		74B6C0E8E714661E20EC20CA /* Pods-Qass-UITests.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-UITests.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-UITests/Pods-Qass-UITests.debug-local.xcconfig"; sourceTree = "<group>"; };
 		7BAFBF6D62B88EA675620CF2 /* Pods-All-Qass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Qass.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Qass/Pods-All-Qass.debug.xcconfig"; sourceTree = "<group>"; };
@@ -629,7 +635,9 @@
 		AA8472F7E2E1F266BC528B8E /* Pods_All_Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD42BBB33235A3C87FF06A1D /* Pods-ModelTests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModelTests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-ModelTests/Pods-ModelTests.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		C0C5812CEAF440A7DF95DD2B /* Pods-All-Logger.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Logger.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-All-Logger/Pods-All-Logger.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		C4F8067F5DB4DDA3119AC415 /* Pods_LoggerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoggerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA4AA851E2A4847CFDE091AD /* Pods-Qass-Tests.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qass-Tests.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Qass-Tests/Pods-Qass-Tests.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		D6358F355FCF8A9D1FC146E9 /* Pods_Qass_UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qass_UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E453828DE4DABF6478795536 /* Pods-All-Logger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Logger.release.xcconfig"; path = "Pods/Target Support Files/Pods-All-Logger/Pods-All-Logger.release.xcconfig"; sourceTree = "<group>"; };
 		ED63BD38990C1600AE1C3170 /* Pods-LoggerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoggerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LoggerTests/Pods-LoggerTests.release.xcconfig"; sourceTree = "<group>"; };
 		F4031FE7D7F2752DBB04AC53 /* Pods-All-Logger.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Logger.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-All-Logger/Pods-All-Logger.debug-local.xcconfig"; sourceTree = "<group>"; };
@@ -641,6 +649,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D712C9F98E2B4279DA77BB /* Pods_Qass_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +657,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09C144041C4539DCAAD5D6AA /* Pods_Qass_UITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +675,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1A3DE62213878D200F87009 /* Logger.framework in Frameworks */,
+				9DA1C080D94CD726F2EAAF12 /* Pods_LoggerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +694,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1E33AA92137149B00C93FBE /* Model.framework in Frameworks */,
+				DD7A96C7A47EEF104EFBE48C /* Pods_ModelTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,6 +731,10 @@
 				3142C4F33D0DBAE0859EDF26 /* Pods_All_Qass.framework */,
 				AA8472F7E2E1F266BC528B8E /* Pods_All_Model.framework */,
 				8692F7480F7AAB8F5A3CCD8D /* Pods_All_Logger.framework */,
+				C4F8067F5DB4DDA3119AC415 /* Pods_LoggerTests.framework */,
+				1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */,
+				6E6A21CA5F994DD8A21881DF /* Pods_Qass_Tests.framework */,
+				D6358F355FCF8A9D1FC146E9 /* Pods_Qass_UITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2057,9 +2073,9 @@
 				"${BUILT_PRODUCTS_DIR}/VerticalAlignmentLabel/VerticalAlignmentLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BaseAPI/BaseAPI.framework",
+				"${BUILT_PRODUCTS_DIR}/GithubAPI/GithubAPI.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/NBNRequestKit/RequestKit.framework",
-				"${BUILT_PRODUCTS_DIR}/OctoKit.swift/Octokit.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -2074,9 +2090,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VerticalAlignmentLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BaseAPI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GithubAPI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RequestKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Octokit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -2145,9 +2161,9 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BaseAPI/BaseAPI.framework",
+				"${BUILT_PRODUCTS_DIR}/GithubAPI/GithubAPI.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/NBNRequestKit/RequestKit.framework",
-				"${BUILT_PRODUCTS_DIR}/OctoKit.swift/Octokit.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -2158,9 +2174,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BaseAPI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GithubAPI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RequestKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Octokit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",

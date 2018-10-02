@@ -43,7 +43,7 @@ abstract_target 'All' do
     pod 'RxCocoa', '~> 4.0'
     pod 'NSObject+Rx', '~> 4.2'
     pod 'Moya/RxSwift', '~> 11.0'
-    pod 'OctoKit.swift', '~> 0.8'
+    pod 'GithubAPI', '~> 0.0.5'
 
     target 'ModelTests' do
       inherit! :search_paths
