@@ -35,24 +35,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // model setup
         Model.setup()
 
-        // firebase setup
-        FirebaseApp.configure()
-
-        #if DEBUG
-            UIViewController.swizzle() // ログ出力
-            log.info("DEBUG BUILD")
-        #endif
-
-        #if UT
-            log.info("UT BUILD")
-        #endif
-
-        #if LOCAL
-            log.info("LOCAL BUILD")
-        #endif
-
         #if RELEASE
             log.info("RELEASE BUILD")
+            // firebase setup
+            FirebaseApp.configure()
+        #else
+            UIViewController.swizzle() // ログ出力
+            #if DEBUG
+                log.info("DEBUG BUILD")
+            #endif
+
+            #if UT
+                log.info("UT BUILD")
+            #endif
+
+            #if LOCAL
+                log.info("LOCAL BUILD")
+            #endif
         #endif
 
         log.verbose("DOCUMENT PATH: \(AppConst.DEVICE.DOCUMENT_PATH)")
