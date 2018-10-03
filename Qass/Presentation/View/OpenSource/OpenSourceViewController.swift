@@ -6,13 +6,18 @@
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
+import RxCocoa
+import RxSwift
 import UIKit
 
 class OpenSourceViewController: UIViewController {
     @IBOutlet var closeButton: CornerRadiusButton!
     @IBOutlet var tableView: UITableView!
 
-    let viewModel = OpenSourceViewControllerViewModel()
+    private let viewModel = OpenSourceViewControllerViewModel()
+
+    /// Observable自動解放
+    private let disposeBag = DisposeBag()
 
     convenience init() {
         self.init(nibName: R.nib.openSourceViewController.name, bundle: nil)
@@ -44,7 +49,7 @@ class OpenSourceViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
                 log.eventOut(chain: "rx_tap")
             })
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     override func didReceiveMemoryWarning() {

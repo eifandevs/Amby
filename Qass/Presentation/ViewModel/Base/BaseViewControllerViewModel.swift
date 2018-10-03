@@ -31,6 +31,12 @@ final class BaseViewControllerViewModel {
             return Observable.just(())
         }
 
+    // レポート表示通知用RX
+    let rx_baseViewControllerViewModelDidPresentReport = ReportUseCase.s.rx_reportUseCaseDidRequestPresentReportScreen
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
+        }
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 

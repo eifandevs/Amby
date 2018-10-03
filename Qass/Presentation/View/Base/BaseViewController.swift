@@ -108,6 +108,16 @@ class BaseViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
 
+        // レポート起動監視
+        viewModel.rx_baseViewControllerViewModelDidPresentReport
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentReport")
+                guard let `self` = self else { return }
+                let vc = ReportViewController()
+                self.present(vc, animated: true)
+                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentReport")
+            }
+            .disposed(by: rx.disposeBag)
         // メーラー起動監視
         viewModel.rx_baseViewControllerViewModelDidPresentMail
             .subscribe { [weak self] _ in

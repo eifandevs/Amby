@@ -6,13 +6,32 @@
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
+import RxCocoa
+import RxSwift
 import UIKit
 
 class ReportViewController: UIViewController {
+    @IBOutlet var closeButton: CornerRadiusButton!
+
+    /// Observable自動解放
+    private let disposeBag = DisposeBag()
+
+    convenience init() {
+        self.init(nibName: R.nib.reportViewController.name, bundle: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // ボタンタップ
+        closeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_tap")
+                guard let `self` = self else { return }
+                self.dismiss(animated: true, completion: nil)
+                log.eventOut(chain: "rx_tap")
+            })
+            .disposed(by: disposeBag)
     }
 
     override func didReceiveMemoryWarning() {
