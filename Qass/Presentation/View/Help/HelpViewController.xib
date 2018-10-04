@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,30 +22,46 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ヘルプ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xe4-v4-aDd">
-                    <rect key="frame" x="16" y="42" width="103" height="33"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="kmS-Vj-yfb">
+                    <rect key="frame" x="16" y="35" width="343" height="532"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ヘルプ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xe4-v4-aDd">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9K-fX-E2b" customClass="VerticalAlignmentLabel" customModule="VerticalAlignmentLabel">
+                            <rect key="frame" x="0.0" y="56.5" width="343" height="23.5"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="top" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTm-Mx-PCX" customClass="VerticalAlignmentLabel" customModule="VerticalAlignmentLabel">
+                            <rect key="frame" x="0.0" y="105" width="343" height="427"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="top" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="width" constant="103" id="FcF-yY-Jz6"/>
-                        <constraint firstAttribute="height" constant="33" id="Y2z-YL-6lx"/>
+                        <constraint firstAttribute="trailing" secondItem="CTm-Mx-PCX" secondAttribute="trailing" id="1mw-0u-2yt"/>
+                        <constraint firstItem="CTm-Mx-PCX" firstAttribute="leading" secondItem="kmS-Vj-yfb" secondAttribute="leading" id="7He-OL-pli"/>
+                        <constraint firstAttribute="trailing" secondItem="r9K-fX-E2b" secondAttribute="trailing" id="9wb-yU-IY6"/>
+                        <constraint firstItem="r9K-fX-E2b" firstAttribute="leading" secondItem="kmS-Vj-yfb" secondAttribute="leading" id="Dbd-Xb-x9V"/>
+                        <constraint firstItem="xe4-v4-aDd" firstAttribute="leading" secondItem="kmS-Vj-yfb" secondAttribute="leading" id="QIl-5C-rdp"/>
+                        <constraint firstAttribute="trailing" secondItem="xe4-v4-aDd" secondAttribute="trailing" id="zFG-Yf-aeZ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9K-fX-E2b" customClass="VerticalAlignmentLabel" customModule="VerticalAlignmentLabel">
-                    <rect key="frame" x="16" y="108" width="343" height="44"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="OCL-im-adG"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="top" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </label>
+                </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTc-B0-dmK" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
                     <rect key="frame" x="22" y="582" width="331" height="48"/>
                     <color key="backgroundColor" red="0.42418062744419305" green="0.55642033537069668" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -62,37 +77,16 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTm-Mx-PCX" customClass="VerticalAlignmentLabel" customModule="VerticalAlignmentLabel">
-                    <rect key="frame" x="16" y="162" width="343" height="402"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <attributedString key="attributedText">
-                        <fragment content="Label">
-                            <attributes>
-                                <font key="NSFont" size="15" name=".AppleSystemUIFont"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="top" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="CTm-Mx-PCX" firstAttribute="centerX" secondItem="pTc-B0-dmK" secondAttribute="centerX" id="2DS-j0-tkP"/>
-                <constraint firstAttribute="bottom" secondItem="pTc-B0-dmK" secondAttribute="bottom" constant="37" id="2FV-cg-Gar"/>
-                <constraint firstItem="xe4-v4-aDd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="DH2-EI-zMx"/>
-                <constraint firstItem="r9K-fX-E2b" firstAttribute="leading" secondItem="CTm-Mx-PCX" secondAttribute="leading" id="IOe-mD-if1"/>
-                <constraint firstItem="r9K-fX-E2b" firstAttribute="top" secondItem="xe4-v4-aDd" secondAttribute="bottom" constant="33" id="LXW-UI-srd"/>
-                <constraint firstItem="pTc-B0-dmK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="22" id="Rol-WB-cyD"/>
-                <constraint firstItem="r9K-fX-E2b" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="bRl-Gl-2kq"/>
-                <constraint firstItem="xe4-v4-aDd" firstAttribute="leading" secondItem="r9K-fX-E2b" secondAttribute="leading" id="jzw-SA-Hta"/>
-                <constraint firstItem="pTc-B0-dmK" firstAttribute="top" secondItem="CTm-Mx-PCX" secondAttribute="bottom" constant="18" id="ocN-up-Iti"/>
-                <constraint firstItem="xe4-v4-aDd" firstAttribute="top" secondItem="8IR-XT-iM4" secondAttribute="top" constant="22" id="qQw-1T-6wQ"/>
-                <constraint firstItem="r9K-fX-E2b" firstAttribute="trailing" secondItem="CTm-Mx-PCX" secondAttribute="trailing" id="yGm-bi-lU1"/>
-                <constraint firstItem="CTm-Mx-PCX" firstAttribute="top" secondItem="r9K-fX-E2b" secondAttribute="bottom" constant="10" id="yaA-MC-J96"/>
+                <constraint firstItem="8IR-XT-iM4" firstAttribute="trailing" secondItem="kmS-Vj-yfb" secondAttribute="trailing" constant="16" id="2d3-Ld-WQx"/>
+                <constraint firstItem="kmS-Vj-yfb" firstAttribute="leading" secondItem="8IR-XT-iM4" secondAttribute="leading" constant="16" id="3me-bK-6Gr"/>
+                <constraint firstItem="8IR-XT-iM4" firstAttribute="trailing" secondItem="pTc-B0-dmK" secondAttribute="trailing" constant="22" id="4pI-dH-Zmp"/>
+                <constraint firstItem="pTc-B0-dmK" firstAttribute="leading" secondItem="8IR-XT-iM4" secondAttribute="leading" constant="22" id="8Cd-Za-7fm"/>
+                <constraint firstItem="kmS-Vj-yfb" firstAttribute="top" secondItem="8IR-XT-iM4" secondAttribute="top" constant="15" id="D0D-qF-M2x"/>
+                <constraint firstItem="8IR-XT-iM4" firstAttribute="bottom" secondItem="pTc-B0-dmK" secondAttribute="bottom" constant="37" id="eNP-OI-JY1"/>
+                <constraint firstItem="pTc-B0-dmK" firstAttribute="top" secondItem="kmS-Vj-yfb" secondAttribute="bottom" constant="15" id="zss-hP-Ihu"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="8IR-XT-iM4"/>
             <point key="canvasLocation" x="21.5" y="47.5"/>

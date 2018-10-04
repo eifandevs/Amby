@@ -94,7 +94,7 @@ struct AppConst {
         let POLICY = "プライバシーポリシー"
         let SOURCE = "ソースコード"
         let CONTACT = "お問い合わせ"
-        let REPORT = "問題の報告"
+        let REPORT = "問題の報告/改善要望"
     }
 
     // MARK: - 設定画面
