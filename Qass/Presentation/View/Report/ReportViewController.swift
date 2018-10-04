@@ -12,6 +12,7 @@ import UIKit
 
 class ReportViewController: UIViewController {
     @IBOutlet var closeButton: CornerRadiusButton!
+    @IBOutlet var textView: UITextView!
 
     /// Observable自動解放
     private let disposeBag = DisposeBag()
