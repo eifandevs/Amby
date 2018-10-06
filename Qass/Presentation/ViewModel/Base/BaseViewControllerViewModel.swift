@@ -45,8 +45,12 @@ final class BaseViewControllerViewModel {
     }
 
     init() {
+        setupRx()
+    }
+
+    private func setupRx() {
         NoticeUseCase.s.rx_noticeUseCaseDidInvoke
-            .subscribe { [weak self] object in
+            .subscribe { object in
                 log.eventIn(chain: "rx_noticeUseCaseDidInvoke")
                 if let message = object.element {
                     NotificationManager.presentNotification(message: message)

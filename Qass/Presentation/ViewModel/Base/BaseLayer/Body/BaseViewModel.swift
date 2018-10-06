@@ -141,6 +141,10 @@ final class BaseViewModel {
     let disposeBag = DisposeBag()
 
     init() {
+        setupRx()
+    }
+
+    private func setupRx() {
         // バックグラウンドに入るときに履歴を保存する
         center.rx.notification(.UIApplicationWillResignActive, object: nil)
             .subscribe { [weak self] _ in

@@ -167,6 +167,10 @@ class BaseView: UIView {
             }
         }
 
+        setupRx()
+    }
+
+    private func setupRx() {
         // ページインサート監視
         viewModel.rx_baseViewModelDidInsertWebView
             .subscribe { [weak self] object in

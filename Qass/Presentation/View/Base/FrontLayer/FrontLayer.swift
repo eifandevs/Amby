@@ -35,6 +35,12 @@ class FrontLayer: UIView {
         let size = CGSize(width: circleButtonRadius, height: circleButtonRadius)
         circleMenu = CircleMenu(frame: CGRect(origin: pt, size: size), swipeDirection: swipeDirection)
 
+        setupRx(frame: frame, swipeDirection: swipeDirection)
+        addSubview(circleMenu)
+    }
+
+    /// setup rx
+    private func setupRx(frame: CGRect, swipeDirection: EdgeSwipeDirection) {
         // Monitor menu press
         circleMenu.rx_circleMenuDidSelect
             .subscribe { [weak self] object in
@@ -153,8 +159,6 @@ class FrontLayer: UIView {
                 log.eventOut(chain: "rx_circleMenuDidClose")
             }
             .disposed(by: rx.disposeBag)
-
-        addSubview(circleMenu)
     }
 
     override init(frame: CGRect) {

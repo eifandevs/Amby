@@ -73,6 +73,16 @@ class HeaderView: UIView, ShadowView {
         addShadow()
         backgroundColor = UIColor.lightGray
 
+        setupRx()
+
+        // ボタン追加
+        addSubview(headerField)
+
+        // プログレスバー追加
+        addSubview(progressBar)
+    }
+
+    private func setupRx() {
         // ヘッダーアイテム
         let addButton = { (button: UIButton, image: UIImage) -> Void in
             button.setImage(image: image, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
@@ -150,12 +160,12 @@ class HeaderView: UIView, ShadowView {
         viewModel.rx_headerViewModelDidChangeProgress
             .subscribe { [weak self] object in
                 // ログが大量に表示されるので、コメントアウト
-//                log.eventIn(chain: "rx_headerViewModelDidChangeProgress")
+                //                log.eventIn(chain: "rx_headerViewModelDidChangeProgress")
                 guard let `self` = self else { return }
                 if let progress = object.element {
                     self.progressBar.setProgress(progress)
                 }
-//                log.eventOut(chain: "rx_headerViewModelDidChangeProgress")
+                //                log.eventOut(chain: "rx_headerViewModelDidChangeProgress")
             }.disposed(by: rx.disposeBag)
 
         // テキストフィールド監視
@@ -257,12 +267,6 @@ class HeaderView: UIView, ShadowView {
                 log.eventOut(chain: "rx_headerFieldDidEndGreping")
             }
             .disposed(by: rx.disposeBag)
-
-        // ボタン追加
-        addSubview(headerField)
-
-        // プログレスバー追加
-        addSubview(progressBar)
     }
 
     required init(coder _: NSCoder) {

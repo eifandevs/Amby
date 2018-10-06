@@ -88,6 +88,13 @@ class CircleMenu: UIButton, ShadowView, CircleView {
 
         // プログレス
         progress = CircleProgress(frame: CGRect(origin: CGPoint.zero, size: frame.size))
+
+        setupRx()
+
+        addSubview(progress)
+    }
+
+    private func setupRx() {
         progress.rx_circleProgressDidFinish
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_circleProgressDidFinish")
@@ -106,8 +113,6 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                 log.eventOut(chain: "rx_circleProgressDidFinish")
             }
             .disposed(by: disposeBag)
-
-        addSubview(progress)
     }
 
     required init?(coder _: NSCoder) {

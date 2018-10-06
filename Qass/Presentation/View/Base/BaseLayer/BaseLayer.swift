@@ -39,6 +39,15 @@ class BaseLayer: UIView {
         baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: AppConst.DEVICE.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + AppConst.DEVICE.STATUS_BAR_HEIGHT))
         super.init(frame: frame)
 
+        addSubview(baseView)
+        addSubview(headerView)
+        addSubview(footerView)
+
+        setupRx(frame: frame)
+    }
+
+    /// setup rx
+    private func setupRx(frame: CGRect) {
         // キーボード監視
         // キーボード表示の処理(フォームの自動設定)
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
@@ -86,12 +95,12 @@ class BaseLayer: UIView {
         baseView.rx_baseViewDidSlide
             .subscribe { [weak self] object in
                 // ログが大量に出るので、コメントアウト
-//                log.eventIn(chain: "rx_baseViewDidSlide")
+                //                log.eventIn(chain: "rx_baseViewDidSlide")
                 guard let `self` = self else { return }
                 if let speed = object.element {
                     self.headerView.slide(value: speed)
                 }
-//                log.eventOut(chain: "rx_baseViewDidSlide")
+                //                log.eventOut(chain: "rx_baseViewDidSlide")
             }
             .disposed(by: rx.disposeBag)
 
@@ -99,10 +108,10 @@ class BaseLayer: UIView {
         baseView.rx_baseViewDidSlideToMax
             .subscribe { [weak self] _ in
                 // ログが大量に出るので、コメントアウト
-//                log.eventIn(chain: "rx_baseViewDidSlideToMax")
+                //                log.eventIn(chain: "rx_baseViewDidSlideToMax")
                 guard let `self` = self else { return }
                 self.headerView.slideToMax()
-//                log.eventOut(chain: "rx_baseViewDidSlideToMax")
+                //                log.eventOut(chain: "rx_baseViewDidSlideToMax")
             }
             .disposed(by: rx.disposeBag)
 
@@ -110,10 +119,10 @@ class BaseLayer: UIView {
         baseView.rx_baseViewDidSlideToMin
             .subscribe { [weak self] _ in
                 // ログが大量に出るので、コメントアウト
-//                log.eventIn(chain: "rx_baseViewDidSlideToMin")
+                //                log.eventIn(chain: "rx_baseViewDidSlideToMin")
                 guard let `self` = self else { return }
                 self.headerView.slideToMin()
-//                log.eventOut(chain: "rx_baseViewDidSlideToMin")
+                //                log.eventOut(chain: "rx_baseViewDidSlideToMin")
             }
             .disposed(by: rx.disposeBag)
 
@@ -206,10 +215,6 @@ class BaseLayer: UIView {
                 log.eventOut(chain: "rx_headerViewDidEndGreping")
             }
             .disposed(by: rx.disposeBag)
-
-        addSubview(baseView)
-        addSubview(headerView)
-        addSubview(footerView)
     }
 
     required init?(coder _: NSCoder) {

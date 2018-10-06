@@ -39,6 +39,13 @@ class FooterView: UIView, ShadowView {
         // サムネイル説明用に、スクロールビューの領域外に配置できるようにする
         scrollView.clipsToBounds = false
 
+        setupRx()
+
+        // 初期ロード
+        load()
+    }
+
+    private func setupRx() {
         // サムネイル追加監視
         viewModel.rx_footerViewModelDidAppendThumbnail
             .observeOn(MainScheduler.asyncInstance)
@@ -181,8 +188,6 @@ class FooterView: UIView, ShadowView {
                 log.eventOut(chain: "rx_footerViewModelDidEndLoading")
             }
             .disposed(by: rx.disposeBag)
-        // 初期ロード
-        load()
     }
 
     required init(coder _: NSCoder) {
