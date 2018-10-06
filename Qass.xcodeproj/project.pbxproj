@@ -126,6 +126,7 @@
 		A15C546B214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5469214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib */; };
 		A15C5484214D935E001E8AB5 /* com.mono0926.LicensePlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C546D214D935E001E8AB5 /* com.mono0926.LicensePlist.plist */; };
 		A15C5499214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt in Resources */ = {isa = PBXBuildFile; fileRef = A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */; };
+		A16AB90821692DB60036863C /* ReportViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */; };
 		A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F38209CF976004F1EA5 /* AppDelegate.swift */; };
 		A1903017209CF977004F1EA5 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3B209CF976004F1EA5 /* AppConst.swift */; };
 		A1903018209CF977004F1EA5 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3C209CF976004F1EA5 /* AppEnum.swift */; };
@@ -521,6 +522,7 @@
 		A15C546D214D935E001E8AB5 /* com.mono0926.LicensePlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.mono0926.LicensePlist.plist; sourceTree = "<group>"; };
 		A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = com.mono0926.LicensePlist.latest_result.txt; sourceTree = "<group>"; };
 		A168382B2066960B00182028 /* Qass-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A1902F2E209CF976004F1EA5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A1902F31209CF976004F1EA5 /* FavoriteDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteDataModelTests.swift; sourceTree = "<group>"; };
@@ -787,6 +789,7 @@
 		A112E758212CD76400320048 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A16AB90621692D8D0036863C /* Report */,
 				A11CD30C214F058F00D9333F /* Base */,
 				A11CD325214F059000D9333F /* OpenSource */,
 			);
@@ -1284,6 +1287,14 @@
 				A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */,
 			);
 			path = license;
+			sourceTree = "<group>";
+		};
+		A16AB90621692D8D0036863C /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */,
+			);
+			path = Report;
 			sourceTree = "<group>";
 		};
 		A1902F2D209CF976004F1EA5 /* Qass-Tests */ = {
@@ -2779,6 +2790,7 @@
 				A11CD32B214F059000D9333F /* OptionMenuFormTableViewModel.swift in Sources */,
 				A112E8A9212CD76500320048 /* BaseLayer.swift in Sources */,
 				A15C544D214D699D001E8AB5 /* OptionMenuTableView.swift in Sources */,
+				A16AB90821692DB60036863C /* ReportViewControllerViewModel.swift in Sources */,
 				A1903052209CF978004F1EA5 /* OptionMenuView.swift in Sources */,
 				A112E875212CD76500320048 /* CircleMenuItem.swift in Sources */,
 				A15C5463214D699D001E8AB5 /* OptionMenuFormTableView.swift in Sources */,

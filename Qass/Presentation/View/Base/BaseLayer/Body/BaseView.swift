@@ -393,6 +393,18 @@ class BaseView: UIView {
             }
             .disposed(by: rx.disposeBag)
 
+        // Issue表示監視
+        viewModel.rx_baseViewModelDidLoadIssue
+            .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_baseViewModelDidLoadIssue")
+                guard let `self` = self else { return }
+                if let url = object.element {
+                    _ = self.front.load(urlStr: url)
+                }
+                log.eventOut(chain: "rx_baseViewModelDidLoadIssue")
+            }
+            .disposed(by: rx.disposeBag)
+
         // ロードリクエスト監視(favorite)
         viewModel.rx_baseViewModelDidLoadFavorite
             .subscribe { [weak self] object in

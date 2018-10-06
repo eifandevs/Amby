@@ -83,6 +83,9 @@ struct ModelConst {
 
         // ソース
         let SOURCE_URL = ResourceUtil().get(key: "SOURCE_URL")
+
+        // issue
+        let ISSUE_URL = ResourceUtil().get(key: "ISSUE_URL")
     }
 
     // MARK: - Appステータスコード

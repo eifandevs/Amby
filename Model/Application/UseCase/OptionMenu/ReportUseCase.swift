@@ -17,10 +17,18 @@ public final class ReportUseCase {
     /// レポート画面表示通知用RX
     public let rx_reportUseCaseDidRequestPresentReportScreen = PublishSubject<()>()
 
+    /// 一覧表示通知用RX
+    public let rx_reportUseCaseDidRequestOpen = PublishSubject<String>()
+
     private init() {}
 
     /// レポート画面表示
     public func open() {
         rx_reportUseCaseDidRequestPresentReportScreen.onNext(())
+    }
+
+    /// レポート一覧表示
+    public func openList() {
+        rx_reportUseCaseDidRequestOpen.onNext(ModelConst.URL.ISSUE_URL)
     }
 }

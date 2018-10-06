@@ -23,4 +23,16 @@ final class BaseLayerViewModel {
         HistoryUseCase.s.store()
         TabUseCase.s.store()
     }
+
+    /// baseViewControllerの状態取得
+    var canAutoFill: Bool {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate, let baseViewController = delegate.window?.rootViewController {
+            if let baseViewController = baseViewController as? BaseViewController {
+                return !baseViewController.isPresented
+            } else {
+                return false
+            }
+        }
+        return false
+    }
 }

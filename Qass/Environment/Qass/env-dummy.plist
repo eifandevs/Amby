@@ -2,16 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>GITHUB_ACCESS_TOKEN</key>
-	<string>test</string>
 	<key>APP_SERVER_PATH</key>
 	<string>/path</string>
 	<key>APP_SERVER_DOMAIN</key>
 	<string>https://</string>
-	<key>TREND_HOME_URL</key>
-	<string>https://google.com</string>
-	<key>SOURCE_URL</key>
-	<string>https://github.com/eifandevs/Qass</string>
 	<key>KEY_ENCRYPT_IV_TOKEN</key>
 	<string>com.eifaniori.qass-encrypt-iv-token</string>
 	<key>KEY_ENCRYPT_SERVICE_TOKEN</key>

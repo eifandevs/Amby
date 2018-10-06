@@ -16,14 +16,15 @@ final class ResourceUtil {
 
     /// 環境設定
     private var envList: NSDictionary = {
-        let domainPath = Bundle.main.path(forResource: "env", ofType: "plist")
-        if let plist = NSDictionary(contentsOfFile: domainPath!) {
+        let path = Bundle.main.privateFrameworksPath! + "/Model.framework/env.plist"
+
+        if let plist = NSDictionary(contentsOfFile: path) {
             log.debug("use existed env.")
             return plist
         } else {
             log.debug("use dummy env.")
-            let domainPath = Bundle.main.path(forResource: "env-dummy", ofType: "plist")
-            let plist = NSDictionary(contentsOfFile: domainPath!)!
+            let path = Bundle.main.privateFrameworksPath! + "/Model.framework/env-dummy.plist"
+            let plist = NSDictionary(contentsOfFile: path)!
             return plist
         }
     }()

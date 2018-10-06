@@ -54,9 +54,11 @@ class BaseLayer: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_UIKeyboardDidShow")
                 guard let `self` = self else { return }
-                if !self.isHeaderViewEditing {
+                if !self.isHeaderViewEditing && self.viewModel.canAutoFill {
                     // 自動入力オペ要求
                     self.viewModel.autoFill()
+                } else {
+                    log.warning("cannot autofill")
                 }
                 log.eventOut(chain: "rx_UIKeyboardDidShow")
             }

@@ -43,6 +43,11 @@ final class BaseViewModel {
         .flatMap { url -> Observable<String> in
             return Observable.just(url)
         }
+    /// Issue表示リクエスト通知用RX
+    let rx_baseViewModelDidLoadIssue = ReportUseCase.s.rx_reportUseCaseDidRequestOpen
+        .flatMap { url -> Observable<String> in
+            return Observable.just(url)
+        }
     /// ロードリクエスト通知用RX(Favorite)
     let rx_baseViewModelDidLoadFavorite = FavoriteUseCase.s.rx_favoriteUseCaseDidRequestLoad
         .flatMap { url -> Observable<String> in
