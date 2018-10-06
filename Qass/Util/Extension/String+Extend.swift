@@ -81,7 +81,11 @@ extension String {
     }
 
     func encodeUrl() -> String? {
-        return addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)
+        if contains("%") {
+            return self
+        } else {
+            return addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)
+        }
     }
 
     func decodeUrl() -> String? {
