@@ -136,6 +136,9 @@ class Util {
             "iPhone10,5": "iPhone 8 Plus", // iPhone 8 Plus A1897
             "iPhone10,3": "iPhone X", // iPhone X A1865,A1902
             "iPhone10,6": "iPhone X", // iPhone X A1901
+            "iPhone11,2": "iPhone XS",
+            "iPhone11,4": "iPhone XS Max",
+            "iPhone11,8": "iPhone XR",
 
             /* iPad */
             "iPad1,1": "iPad 1 ", // iPad 1

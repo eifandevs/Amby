@@ -46,6 +46,7 @@ class ReportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        textView.delegate = self
         initialStackViewBottomConstraint = stackViewBottomConstraint.constant
 
         cancelButton.isHidden = true
@@ -94,15 +95,11 @@ class ReportViewController: UIViewController {
                 if let keyboardHeight = keyboardHeight.element {
                     if keyboardHeight == 0 {
                         self.stackViewBottomConstraint.constant = self.initialStackViewBottomConstraint
-                        self.cancelButton.isHidden = true
-                        self.listButton.isHidden = false
                         self.titleLabel.isHidden = false
                         self.subTitleLabel.isHidden = false
                     } else {
                         let margin = 13.f
                         self.stackViewBottomConstraint.constant = keyboardHeight + margin
-                        self.cancelButton.isHidden = false
-                        self.listButton.isHidden = true
                         self.titleLabel.isHidden = true
                         self.subTitleLabel.isHidden = true
                     }
@@ -116,14 +113,16 @@ class ReportViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
 
-    /*
-     // MARK: - Navigation
+extension ReportViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_: UITextView) {
+        cancelButton.isHidden = false
+        listButton.isHidden = true
+    }
 
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func textViewDidEndEditing(_: UITextView) {
+        cancelButton.isHidden = true
+        listButton.isHidden = false
+    }
 }
