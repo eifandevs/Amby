@@ -45,7 +45,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="iLj-qH-M4y">
                     <rect key="frame" x="16" y="35" width="343" height="526"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="問題の報告/改善要望" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuY-Pr-YTS" customClass="VerticalAlignmentLabel" customModule="VerticalAlignmentLabel">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="問題の報告/ご意見" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuY-Pr-YTS" customClass="VerticalAlignmentLabel" customModule="VerticalAlignmentLabel">
                             <rect key="frame" x="0.0" y="0.0" width="343" height="31.5"/>
                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
                             <nil key="textColor"/>
@@ -55,15 +55,15 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VdY-Wu-bfq" userLabel="問題や改善要望のご報告をお願いします。 報告内容に個人情報は含めないようお願いします。">
-                            <rect key="frame" x="0.0" y="54.5" width="343" height="61.5"/>
+                            <rect key="frame" x="0.0" y="54.5" width="343" height="36"/>
                             <string key="text">問題や改善要望のご報告をお願いします。
 報告内容に個人情報は含めないようお願いします。</string>
-                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Rn5-0H-Bfr">
-                            <rect key="frame" x="0.0" y="139" width="343" height="334"/>
+                            <rect key="frame" x="0.0" y="113.5" width="343" height="359.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="80C-WX-igd">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="1"/>
@@ -73,12 +73,12 @@
                                     </constraints>
                                 </view>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="248" text="メッセージを入力" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="olK-Sk-X5u">
-                                    <rect key="frame" x="0.0" y="1" width="343" height="332"/>
+                                    <rect key="frame" x="0.0" y="1" width="343" height="357.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                                 <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="8VP-r1-k6b">
-                                    <rect key="frame" x="0.0" y="333" width="343" height="1"/>
+                                    <rect key="frame" x="0.0" y="358.5" width="343" height="1"/>
                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="IAa-T7-Jnj"/>
