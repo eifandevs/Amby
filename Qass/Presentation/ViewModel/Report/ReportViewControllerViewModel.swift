@@ -14,4 +14,9 @@ final class ReportViewControllerViewModel {
     func openList() {
         ReportUseCase.s.openList()
     }
+
+    /// 送信
+    func send(title: String, message: String) {
+        ReportUseCase.s.registerReport(title: title, message: message)
+    }
 }

@@ -31,4 +31,9 @@ public final class ReportUseCase {
     public func openList() {
         rx_reportUseCaseDidRequestOpen.onNext(ModelConst.URL.ISSUE_URL)
     }
+
+    /// Issue登録
+    public func registerReport(title: String, message: String) {
+        IssueDataModel.s.post(title: title, body: message)
+    }
 }

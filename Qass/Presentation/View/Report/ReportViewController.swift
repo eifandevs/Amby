@@ -82,6 +82,17 @@ class ReportViewController: UIViewController {
             })
             .disposed(by: disposeBag)
 
+        sendButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_tap")
+                guard let `self` = self else { return }
+                self.viewModel.send(title: "test2", message: "test2")
+                self.textView.resignFirstResponder()
+                self.dismiss(animated: true, completion: nil)
+                log.eventOut(chain: "rx_tap")
+            })
+            .disposed(by: disposeBag)
+
         cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_tap")
