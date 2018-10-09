@@ -34,7 +34,7 @@ final class IssueDataModel {
         IssuesAPI(authentication: AccessTokenAuthentication(access_token: accessToken)).createIssue(owner: owner, repository: repo, issue: issue) { [weak self] response, error in
             guard let `self` = self else { return }
 
-            if let response = response {
+            if let response = response { //
                 log.debug("issue register success. response: \(response)")
                 self.rx_issueDataModelDidRegisterSuccess.onNext(())
             } else {
