@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "if [ ! -e ${SRCROOT}/Model/env.plist ]; then&#10;cp -pR ${SRCROOT}/Model/env-dummy.plist ${SRCROOT}/Model/env.plist&#10;fi&#10;&#10;if [ ! -e ${SRCROOT}/Qass/Environment/Qass/env.plist ]; then&#10;cp -pR ${SRCROOT}/Qass/Environment/Qass/env-dummy.plist ${SRCROOT}/Qass/Environment/Qass/env.plist&#10;fi"
+               scriptText = "f [ ! -e ${SRCROOT}/Model/env.plist ]; then&#10;cp -pR ${SRCROOT}/Model/env-dummy.plist ${SRCROOT}/Model/env.plist&#10;fi&#10;&#10;if [ ! -e ${SRCROOT}/Qass/Environment/Qass/env.plist ]; then&#10;cp -pR ${SRCROOT}/Qass/Environment/Qass/env-dummy.plist ${SRCROOT}/Qass/Environment/Qass/env.plist&#10;fi&#10;&#10;if [ ! -e ${SRCROOT}/Qass/GoogleService-Info.plist ]; then&#10;cp -pR ${SRCROOT}/Qass/GoogleService-Info-dummy.plist ${SRCROOT}/Qass/GoogleService-Info.plist&#10;fi"
                shellToInvoke = "/bin/sh">
                <EnvironmentBuildable>
                   <BuildableReference
