@@ -37,6 +37,18 @@ final class BaseViewControllerViewModel {
             return Observable.just(())
         }
 
+    // レポート登録成功通知用RX
+    let rx_baseViewControllerViewModelDidRegisterSuccess = ReportUseCase.s.rx_reportUseCaseDidRegisterSuccess
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
+        }
+
+    // レポート登録失敗通知用RX
+    let rx_baseViewControllerViewModelDidRegisterFailure = ReportUseCase.s.rx_reportUseCaseDidRegisterFailure
+        .flatMap { error -> Observable<Error?> in
+            return Observable.just(error)
+        }
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 

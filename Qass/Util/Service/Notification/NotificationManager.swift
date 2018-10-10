@@ -28,10 +28,10 @@ class NotificationManager {
         }
     }
 
-    static func presentAlert(title: String, message: String, completion: @escaping (() -> Void)) {
+    static func presentAlert(title: String, message: String, completion: (() -> Void)?) {
         let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let defaultAction: UIAlertAction = UIAlertAction(title: MessageConst.COMMON.OK, style: .default, handler: { (_: UIAlertAction!) -> Void in
-            completion()
+            completion?()
         })
         let cancelAction: UIAlertAction = UIAlertAction(title: MessageConst.COMMON.CANCEL, style: .cancel, handler: { (_: UIAlertAction!) -> Void in
         })

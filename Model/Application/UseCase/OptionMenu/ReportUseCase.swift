@@ -20,6 +20,15 @@ public final class ReportUseCase {
     /// 一覧表示通知用RX
     public let rx_reportUseCaseDidRequestOpen = PublishSubject<String>()
 
+    /// レポート登録成功
+    public let rx_reportUseCaseDidRegisterSuccess = IssueDataModel.s.rx_issueDataModelDidRegisterSuccess.flatMap { _ in Observable.just(()) }
+
+    /// レポート登録失敗
+    public let rx_reportUseCaseDidRegisterFailure = IssueDataModel.s.rx_issueDataModelDidRegisterFailure
+        .flatMap { error -> Observable<Error?> in
+            return Observable.just(error)
+        }
+
     private init() {}
 
     /// レポート画面表示

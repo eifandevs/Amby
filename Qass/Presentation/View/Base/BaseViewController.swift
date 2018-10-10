@@ -118,6 +118,25 @@ class BaseViewController: UIViewController {
                 log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentReport")
             }
             .disposed(by: rx.disposeBag)
+
+        // レポート登録成功監視
+        viewModel.rx_baseViewControllerViewModelDidRegisterSuccess
+            .subscribe { _ in
+                log.eventIn(chain: "rx_baseViewControllerViewModelDidRegisterSuccess")
+                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.REGISTER_REPORT)
+                log.eventOut(chain: "rx_baseViewControllerViewModelDidRegisterSuccess")
+            }
+            .disposed(by: rx.disposeBag)
+
+        // レポート登録失敗監視
+        viewModel.rx_baseViewControllerViewModelDidRegisterFailure
+            .subscribe { _ in
+                log.eventIn(chain: "rx_baseViewControllerViewModelDidRegisterFailure")
+                NotificationManager.presentAlert(title: MessageConst.COMMON.ERROR, message: MessageConst.ALERT.REGISTER_REPORT_ERROR, completion: nil)
+                log.eventOut(chain: "rx_baseViewControllerViewModelDidRegisterFailure")
+            }
+            .disposed(by: rx.disposeBag)
+
         // メーラー起動監視
         viewModel.rx_baseViewControllerViewModelDidPresentMail
             .subscribe { [weak self] _ in

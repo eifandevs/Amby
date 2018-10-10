@@ -488,7 +488,7 @@ class BaseView: UIView {
                 if let form = self.takeForm(webView: self.front) {
                     self.viewModel.storeForm(form: form)
                 } else {
-                    NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_CRAWL)
+                    NotificationManager.presentAlert(title: MessageConst.COMMON.ERROR, message: MessageConst.ALERT.REGISTER_FORM_ERROR_CRAWL, completion: nil)
                 }
                 log.eventOut(chain: "rx_baseViewModelDidRegisterAsForm")
             }

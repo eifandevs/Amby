@@ -16,6 +16,7 @@ struct MessageConst {
     static let COMMON = COMMON_VALUE()
     struct COMMON_VALUE {
         let OK = "OK"
+        let ERROR = "エラー"
         let CANCEL = "キャンセル"
     }
 
@@ -36,6 +37,8 @@ struct MessageConst {
         let DELETE_SITE_DATA = "サイトデータを全て削除します。よろしいですか？"
         let DELETE_ALL = "全てのデータを削除し、初期化します。よろしいですか？"
         let OPEN_COMFIRM = "外部アプリで開いてもよろしいですか？"
+        let REGISTER_FORM_ERROR_CRAWL = "ページ情報を取得できませんでした"
+        let REGISTER_REPORT_ERROR = "不具合・ご意見の登録に失敗しました"
     }
 
     // MARK: - 通知
@@ -45,10 +48,8 @@ struct MessageConst {
         let NEW_TAB = "新規タブイベント"
         let COPY_URL = "URLをコピーしました"
         let REGISTER_BOOK_MARK = "お気に入りに登録しました"
-        let REGISTER_BOOK_MARK_ERROR = "ページ情報を取得できませんでした"
         let REGISTER_FORM = "フォーム情報を登録しました"
-        let REGISTER_FORM_ERROR_INPUT = "フォーム情報の入力を確認できませんでした"
-        let REGISTER_FORM_ERROR_CRAWL = "ページ情報を取得できませんでした"
+        let REGISTER_REPORT = "レポートを登録しました。ご協力ありがとうございました。"
     }
 
     // MARK: - ヘッダー
