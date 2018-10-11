@@ -110,8 +110,7 @@ extension OptionMenuSettingTableView: UITableViewDelegate {
         let row = viewModel.getRow(indexPath: indexPath)
         switch row.cellType {
         case .menu:
-            // TODO: メニュー設定表示
-            break
+            viewModel.openMenuOrder()
         case .commonHistory:
             viewModel.deleteHistory()
         case .bookMark:

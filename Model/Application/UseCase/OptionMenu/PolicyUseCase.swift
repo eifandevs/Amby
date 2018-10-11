@@ -14,7 +14,7 @@ import RxSwift
 public final class PolicyUseCase {
     public static let s = PolicyUseCase()
 
-    /// ロードリクエスト通知用RX
+    /// オープンリクエスト通知用RX
     public let rx_policyUseCaseDidRequestOpen = PublishSubject<()>()
 
     private init() {}

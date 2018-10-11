@@ -93,6 +93,11 @@ final class OptionMenuSettingTableViewModel {
         return sections[section]
     }
 
+    /// メニュ-順序
+    func openMenuOrder() {
+        MenuOrderUseCase.s.open()
+    }
+
     /// 閲覧履歴削除
     func deleteHistory() {
         NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_COMMON_HISTORY, completion: {

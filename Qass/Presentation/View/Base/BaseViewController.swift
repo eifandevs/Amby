@@ -137,6 +137,15 @@ class BaseViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
 
+        // メニュー順序表示監視
+        viewModel.rx_baseViewControllerViewModelDidPresentMenuOrder
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentMenuOrder")
+                guard let `self` = self else { return }
+                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentMenuOrder")
+            }
+            .disposed(by: rx.disposeBag)
+
         // メーラー起動監視
         viewModel.rx_baseViewControllerViewModelDidPresentMail
             .subscribe { [weak self] _ in

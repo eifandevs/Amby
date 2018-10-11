@@ -19,6 +19,12 @@ final class BaseViewControllerViewModel {
             return Observable.just((title: object.title, message: object.message))
         }
 
+    // メニュー順序表示通知用RX
+    let rx_baseViewControllerViewModelDidPresentMenuOrder = MenuOrderUseCase.s.rx_menuOrderUseCaseDidRequestOpen
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
+        }
+
     // メーラー起動通知用RX
     let rx_baseViewControllerViewModelDidPresentMail = ContactUseCase.s.rx_operationUseCaseDidRequestPresentContactScreen
         .flatMap { _ -> Observable<()> in
