@@ -142,6 +142,8 @@ class BaseViewController: UIViewController {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentMenuOrder")
                 guard let `self` = self else { return }
+                let vc = MenuOrderViewController()
+                self.present(vc, animated: true)
                 log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentMenuOrder")
             }
             .disposed(by: rx.disposeBag)
