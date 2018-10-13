@@ -19,10 +19,6 @@ enum UserOperation {
     case close
     case copy
     case autoScroll
-    case trend
-    case source
-    case report
-    case contact
     case grep
     case form
     case favorite
@@ -31,7 +27,6 @@ enum UserOperation {
     case search
     case scrollUp
     case suggest
-    case help
     case historyBack
     case historyForward
 }
