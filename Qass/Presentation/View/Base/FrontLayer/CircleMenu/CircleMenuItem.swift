@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Model
 import UIKit
 
 class CircleMenuItem: UIButton, ShadowView, CircleView {

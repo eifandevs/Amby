@@ -57,11 +57,6 @@ struct AppConst {
         let REALM_TOKEN = ResourceUtil().get(key: "KEY_REALM_TOKEN")
         let ENCRYPT_SERVICE_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_SERVICE_TOKEN")
         let ENCRYPT_IV_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_IV_TOKEN")
-        let CURRENT_CONTEXT = "currentContext"
-        let AUTO_SCROLL_INTERVAL = "autoScrollInterval"
-        let COMMON_HISTORY_SAVE_COUNT = "historySaveCount"
-        let SEARCH_HISTORY_SAVE_COUNT = "searchHistorySaveCount"
-        let PAGE_HISTORY_SAVE_COUNT = "pageHistorySaveCount"
         let NOTIFICATION_SUBTITLE = "subtitle"
         let NOTIFICATION_MESSAGE = "message"
         let NOTIFICATION_OPERATION = "operation"

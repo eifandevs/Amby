@@ -26,6 +26,17 @@ class UserDefaultRepository {
         }
     }
 
+    /// メニュー順序
+    var menuOrder: [UserOperation] {
+        get {
+            let rawOrder: [Int] = (UserDefaults.standard.array(forKey: ModelConst.KEY.MENU_ORDER)!).map { $0 as! Int }
+            return rawOrder.map { UserOperation(rawValue: $0)! }
+        }
+        set(value) {
+            UserDefaults.standard.set(value.map { $0.rawValue }, forKey: ModelConst.KEY.MENU_ORDER)
+        }
+    }
+
     /// 自動スクロールインターバル
     var autoScrollInterval: Float {
         get {
@@ -53,8 +64,14 @@ class UserDefaultRepository {
             ModelConst.KEY.AUTO_SCROLL_INTERVAL: ModelConst.UD.AUTO_SCROLL,
             ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT: ModelConst.UD.COMMON_HISTORY_SAVE_COUNT,
             ModelConst.KEY.PAGE_HISTORY_SAVE_COUNT: ModelConst.UD.PAGE_HISTORY_SAVE_COUNT,
-            ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT: ModelConst.UD.SEARCH_HISTORY_SAVE_COUNT
+            ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT: ModelConst.UD.SEARCH_HISTORY_SAVE_COUNT,
+            ModelConst.KEY.MENU_ORDER: ModelConst.UD.MENU_ORDER
         ])
+    }
+
+    /// メニュー順序初期化
+    func initializeMenuOrder() {
+        UserDefaults.standard.set(ModelConst.UD.MENU_ORDER, forKey: ModelConst.KEY.MENU_ORDER)
     }
 
     /// ユーザーデフォルト初期化
@@ -64,5 +81,6 @@ class UserDefaultRepository {
         UserDefaults.standard.set(ModelConst.UD.COMMON_HISTORY_SAVE_COUNT, forKey: ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT)
         UserDefaults.standard.set(ModelConst.UD.PAGE_HISTORY_SAVE_COUNT, forKey: ModelConst.KEY.PAGE_HISTORY_SAVE_COUNT)
         UserDefaults.standard.set(ModelConst.UD.SEARCH_HISTORY_SAVE_COUNT, forKey: ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT)
+        UserDefaults.standard.set(ModelConst.UD.MENU_ORDER, forKey: ModelConst.KEY.MENU_ORDER)
     }
 }

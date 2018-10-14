@@ -1,9 +1,9 @@
 //
-//  AppEnum.swift
-//  Qas
+//  ModelEnum.swift
+//  Model
 //
-//  Created by temma on 2017/12/10.
-//  Copyright © 2017年 eifaniori. All rights reserved.
+//  Created by tenma on 2018/10/15.
+//  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
 import Foundation
@@ -13,8 +13,8 @@ import UIKit
 
 // MARK: - オペレーション
 
-enum UserOperation {
-    case menu
+public enum UserOperation: Int {
+    case menu = 1
     case add
     case close
     case copy

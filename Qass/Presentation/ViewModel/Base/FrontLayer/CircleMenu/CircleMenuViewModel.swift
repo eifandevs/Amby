@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import Model
 
 final class CircleMenuViewModel {
-    let menuItems: [[UserOperation]] = [
-        [.menu, .close, .historyBack, .copy, .search, .add],
-        [.scrollUp, .autoScroll, .historyForward, .form, .favorite, .grep]
-    ]
+    var menuItems: [[UserOperation]] {
+        return [SettingUseCase.s.menuOrder[0 ... 5].map { $0 }, SettingUseCase.s.menuOrder[6 ... 11].map { $0 }]
+    }
+
     var menuIndex = 0
 }

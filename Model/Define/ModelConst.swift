@@ -36,6 +36,7 @@ struct ModelConst {
         let COMMON_HISTORY_SAVE_COUNT = "historySaveCount"
         let SEARCH_HISTORY_SAVE_COUNT = "searchHistorySaveCount"
         let PAGE_HISTORY_SAVE_COUNT = "pageHistorySaveCount"
+        let MENU_ORDER = "menuOrder"
         let NOTIFICATION_SUBTITLE = "subtitle"
         let NOTIFICATION_MESSAGE = "message"
         let NOTIFICATION_OPERATION = "operation"
@@ -52,6 +53,20 @@ struct ModelConst {
     struct UD_VALUE {
         let CURRENT_CONTEXT = ""
         let AUTO_SCROLL = 0.06
+        let MENU_ORDER: [Int] = [
+            UserOperation.menu.rawValue,
+            UserOperation.close.rawValue,
+            UserOperation.historyBack.rawValue,
+            UserOperation.copy.rawValue,
+            UserOperation.search.rawValue,
+            UserOperation.add.rawValue,
+            UserOperation.scrollUp.rawValue,
+            UserOperation.autoScroll.rawValue,
+            UserOperation.historyForward.rawValue,
+            UserOperation.form.rawValue,
+            UserOperation.favorite.rawValue,
+            UserOperation.grep.rawValue
+        ]
         let COMMON_HISTORY_SAVE_COUNT = 90
         let SEARCH_HISTORY_SAVE_COUNT = 90
         let PAGE_HISTORY_SAVE_COUNT = 30

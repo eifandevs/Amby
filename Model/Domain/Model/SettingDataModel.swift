@@ -27,6 +27,16 @@ final class SettingDataModel {
         }
     }
 
+    /// メニュー順序
+    var menuOrder: [UserOperation] {
+        get {
+            return repository.menuOrder
+        }
+        set(value) {
+            repository.menuOrder = value
+        }
+    }
+
     /// 検索履歴保存日数
     var searchHistorySaveCount: Int {
         return repository.searchHistorySaveCount
@@ -42,5 +52,10 @@ final class SettingDataModel {
     /// ユーザーデフォルト初期化
     func initialize() {
         repository.initialize()
+    }
+
+    /// メニュー順序初期化
+    func initializeMenuOrder() {
+        repository.initializeMenuOrder()
     }
 }

@@ -29,6 +29,16 @@ public final class SettingUseCase {
         }
     }
 
+    /// メニュー順序
+    public var menuOrder: [UserOperation] {
+        get {
+            return SettingDataModel.s.menuOrder
+        }
+        set(value) {
+            SettingDataModel.s.menuOrder = value
+        }
+    }
+
     /// 検索履歴保存日数
     public var searchHistorySaveCount: Int {
         return SettingDataModel.s.searchHistorySaveCount
@@ -36,6 +46,10 @@ public final class SettingUseCase {
 
     public func initialize() {
         SettingDataModel.s.initialize()
+    }
+
+    public func initializeMenuOrder() {
+        SettingDataModel.s.initializeMenuOrder()
     }
 
     private init() {}
