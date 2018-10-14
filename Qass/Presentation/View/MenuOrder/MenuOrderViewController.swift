@@ -13,6 +13,7 @@ import UIKit
 class MenuOrderViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var closeButton: CornerRadiusButton!
+    @IBOutlet var initButton: CornerRadiusButton!
 
     private let viewModel = MenuOrderViewControllerViewModel()
 
@@ -29,6 +30,7 @@ class MenuOrderViewController: UIViewController {
         // カスタムビュー登録
         tableView.register(R.nib.menuOrderTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.menuOrderCell.identifier)
 
+        initButton.backgroundColor = UIColor.ultraOrange
         closeButton.backgroundColor = UIColor.ultraOrange
 
         setupRx()
@@ -41,12 +43,31 @@ class MenuOrderViewController: UIViewController {
     }
 
     private func setupRx() {
+        initButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_tap")
+                guard let `self` = self else { return }
+                self.viewModel.initialize()
+                log.eventOut(chain: "rx_tap")
+            })
+            .disposed(by: disposeBag)
+
         closeButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.dismiss(animated: true, completion: nil)
                 log.eventOut(chain: "rx_tap")
+            })
+            .disposed(by: disposeBag)
+
+        // リロード監視
+        viewModel.rx_menuOrderViewControllerViewModelDidReload
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_menuOrderViewControllerViewModelDidReload")
+                guard let `self` = self else { return }
+                self.tableView.reloadData()
+                log.eventOut(chain: "rx_menuOrderViewControllerViewModelDidReload")
             })
             .disposed(by: disposeBag)
     }

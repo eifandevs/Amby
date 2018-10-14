@@ -13,7 +13,7 @@ import UIKit
 
 // MARK: - オペレーション
 
-public enum UserOperation: Int {
+public enum UserOperation: Int, EnumEnumerable {
     case menu = 1
     case add
     case close

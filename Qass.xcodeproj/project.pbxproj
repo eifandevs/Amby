@@ -253,6 +253,7 @@
 		A1B778352173BE9F00BED141 /* MenuOrderViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778342173BE9E00BED141 /* MenuOrderViewControllerViewModel.swift */; };
 		A1B778382173C57100BED141 /* MenuOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778362173C57100BED141 /* MenuOrderTableViewCell.swift */; };
 		A1B778392173C57100BED141 /* MenuOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1B778372173C57100BED141 /* MenuOrderTableViewCell.xib */; };
+		A1B7783C2173CEF800BED141 /* EnumEnumerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7783B2173CEF800BED141 /* EnumEnumerable.swift */; };
 		A1CF359020D7D16400C1343B /* ThumbnailDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */; };
 		A1CF35A020DA703800C1343B /* Springboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359F20DA703800C1343B /* Springboard.swift */; };
 		A1DF4B3F209D039F00196E0F /* CommonHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */; };
@@ -618,6 +619,7 @@
 		A1B778342173BE9E00BED141 /* MenuOrderViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A1B778362173C57100BED141 /* MenuOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderTableViewCell.swift; sourceTree = "<group>"; };
 		A1B778372173C57100BED141 /* MenuOrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuOrderTableViewCell.xib; sourceTree = "<group>"; };
+		A1B7783B2173CEF800BED141 /* EnumEnumerable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumEnumerable.swift; sourceTree = "<group>"; };
 		A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModelTests.swift; sourceTree = "<group>"; };
 		A1CF359F20DA703800C1343B /* Springboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Springboard.swift; sourceTree = "<group>"; };
 		A1E33AA02137149A00C93FBE /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1172,6 +1174,7 @@
 		A138CAE4213747D900AEA669 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				A1B7783A2173CE8500BED141 /* Protocol */,
 				A19506542143FA8B0091DF23 /* Extension */,
 				A138CAE5213747D900AEA669 /* Service */,
 				A1950663214402B20091DF23 /* Util.swift */,
@@ -1625,6 +1628,14 @@
 				A1B778342173BE9E00BED141 /* MenuOrderViewControllerViewModel.swift */,
 			);
 			path = MenuOrder;
+			sourceTree = "<group>";
+		};
+		A1B7783A2173CE8500BED141 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				A1B7783B2173CEF800BED141 /* EnumEnumerable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		A1E33AA12137149A00C93FBE /* Model */ = {
@@ -2665,6 +2676,7 @@
 				A19352A02141569C002A0865 /* SuggestResponse.swift in Sources */,
 				A15C53F3214D4CDC001E8AB5 /* HelpUseCase.swift in Sources */,
 				A19506402143F8B80091DF23 /* FavoriteUseCase.swift in Sources */,
+				A1B7783C2173CEF800BED141 /* EnumEnumerable.swift in Sources */,
 				A19506322143F8A60091DF23 /* EncryptHelper.swift in Sources */,
 				A195062B2142D9A90091DF23 /* Input.swift in Sources */,
 				A19506392143F8AF0091DF23 /* FormDataModel.swift in Sources */,

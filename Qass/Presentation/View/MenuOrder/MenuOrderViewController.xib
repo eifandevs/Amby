@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuOrderViewController" customModule="Qass" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="LRL-Le-pGB" id="VSy-b9-eCf"/>
+                <outlet property="initButton" destination="0UR-La-jeQ" id="Bfo-Fd-Qsr"/>
                 <outlet property="tableView" destination="3af-kH-0TX" id="eTA-8G-g87"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,9 +26,24 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="610"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3af-kH-0TX">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="542"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="474"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0UR-La-jeQ" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
+                            <rect key="frame" x="22" y="494" width="331" height="48"/>
+                            <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="6az-JA-LFw"/>
+                            </constraints>
+                            <state key="normal" title="初期化">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRL-Le-pGB" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
                             <rect key="frame" x="22" y="562" width="331" height="48"/>
                             <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -47,6 +63,8 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="3af-kH-0TX" secondAttribute="trailing" id="3SH-zu-2Go"/>
                         <constraint firstItem="3af-kH-0TX" firstAttribute="leading" secondItem="9FM-se-fLu" secondAttribute="leading" id="ICP-yu-SJg"/>
+                        <constraint firstAttribute="trailing" secondItem="0UR-La-jeQ" secondAttribute="trailing" constant="22" id="Rks-sw-vBb"/>
+                        <constraint firstItem="0UR-La-jeQ" firstAttribute="leading" secondItem="9FM-se-fLu" secondAttribute="leading" constant="22" id="WCr-lU-NQj"/>
                         <constraint firstAttribute="trailing" secondItem="LRL-Le-pGB" secondAttribute="trailing" constant="22" id="at1-n9-Q0L"/>
                         <constraint firstItem="LRL-Le-pGB" firstAttribute="leading" secondItem="9FM-se-fLu" secondAttribute="leading" constant="22" id="jpa-ty-yH4"/>
                     </constraints>

@@ -8,8 +8,13 @@
 
 import Foundation
 import Model
+import RxCocoa
+import RxSwift
 
 final class MenuOrderViewControllerViewModel {
+    /// ページリロード通知用RX
+    let rx_menuOrderViewControllerViewModelDidReload = PublishSubject<()>()
+
     // セル情報
     struct Row {
         let operation: UserOperation
@@ -22,9 +27,16 @@ final class MenuOrderViewControllerViewModel {
         return rows.count
     }
 
-    private var rows = SettingUseCase.s.menuOrder.map { Row(operation: $0) }
+    private var menuOrder = SettingUseCase.s.menuOrder
+    private var rows = UserOperation.enumerate().map { Row(operation: $0.element) }
 
     func getRow(index: Int) -> Row {
         return rows[index]
+    }
+
+    /// 初期化
+    func initialize() {
+        SettingUseCase.s.initializeMenuOrder()
+        rx_menuOrderViewControllerViewModelDidReload.onNext(())
     }
 }
