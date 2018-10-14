@@ -27,6 +27,7 @@ struct AppConst {
     struct FRONT_LAYER_VALUE {
         let TABLE_VIEW_CELL_HEIGHT = 50.f
         let TABLE_VIEW_LICENSE_CELL_HEIGHT = 44.f
+        let TABLE_VIEW_MENU_ORDER_CELL_HEIGHT = 47.f
         let TABLE_VIEW_NEWS_CELL_HEIGHT = 85.f
         let TABLE_VIEW_SECTION_HEIGHT = 19.f
         let SEARCH_TABLE_VIEW_ROW_NUM = 2

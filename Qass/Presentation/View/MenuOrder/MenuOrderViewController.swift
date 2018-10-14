@@ -14,11 +14,22 @@ class MenuOrderViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var closeButton: CornerRadiusButton!
 
+    private let viewModel = MenuOrderViewControllerViewModel()
+
     /// Observable自動解放
     private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // テーブルビュー監視
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        // カスタムビュー登録
+        tableView.register(R.nib.menuOrderTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.menuOrderCell.identifier)
+
+        closeButton.backgroundColor = UIColor.ultraOrange
 
         setupRx()
         // Do any additional setup after loading the view.
@@ -38,5 +49,33 @@ class MenuOrderViewController: UIViewController {
                 log.eventOut(chain: "rx_tap")
             })
             .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - TableViewDataSourceDelegate
+
+extension MenuOrderViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.menuOrderCell.identifier, for: indexPath) as? MenuOrderTableViewCell {
+            cell.setRow(row: viewModel.getRow(index: indexPath.row))
+
+            return cell
+        }
+        return UITableViewCell()
+    }
+
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        return viewModel.cellCount
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
+        return viewModel.cellHeight
+    }
+}
+
+// MARK: - TableViewDelegate
+
+extension MenuOrderViewController: UITableViewDelegate {
+    func tableView(_: UITableView, didSelectRowAt _: IndexPath) {
     }
 }

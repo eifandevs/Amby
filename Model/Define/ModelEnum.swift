@@ -22,11 +22,40 @@ public enum UserOperation: Int {
     case grep
     case form
     case favorite
-    case autoFill
     case urlCopy
     case search
     case scrollUp
-    case suggest
     case historyBack
     case historyForward
+
+    public func title() -> String {
+        switch self {
+        case .menu:
+            return "メニュー"
+        case .add:
+            return "タブの追加"
+        case .close:
+            return "タブの削除"
+        case .copy:
+            return "タブのコピー"
+        case .autoScroll:
+            return "自動スクロール"
+        case .grep:
+            return "タブ内検索"
+        case .form:
+            return "フォーム内容の記録"
+        case .favorite:
+            return "お気に入り追加"
+        case .urlCopy:
+            return "URLのコピー"
+        case .search:
+            return "Web検索"
+        case .scrollUp:
+            return "スクロールトップ"
+        case .historyBack:
+            return "前ページに戻る"
+        case .historyForward:
+            return "次ページに進む"
+        }
+    }
 }

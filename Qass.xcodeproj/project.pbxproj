@@ -250,6 +250,9 @@
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */; };
 		A1B778322173A6DA00BED141 /* ModelEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778312173A6DA00BED141 /* ModelEnum.swift */; };
+		A1B778352173BE9F00BED141 /* MenuOrderViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778342173BE9E00BED141 /* MenuOrderViewControllerViewModel.swift */; };
+		A1B778382173C57100BED141 /* MenuOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778362173C57100BED141 /* MenuOrderTableViewCell.swift */; };
+		A1B778392173C57100BED141 /* MenuOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1B778372173C57100BED141 /* MenuOrderTableViewCell.xib */; };
 		A1CF359020D7D16400C1343B /* ThumbnailDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */; };
 		A1CF35A020DA703800C1343B /* Springboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF359F20DA703800C1343B /* Springboard.swift */; };
 		A1DF4B3F209D039F00196E0F /* CommonHistoryDataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */; };
@@ -612,6 +615,9 @@
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderUseCase.swift; sourceTree = "<group>"; };
 		A1B778312173A6DA00BED141 /* ModelEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelEnum.swift; sourceTree = "<group>"; };
+		A1B778342173BE9E00BED141 /* MenuOrderViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderViewControllerViewModel.swift; sourceTree = "<group>"; };
+		A1B778362173C57100BED141 /* MenuOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderTableViewCell.swift; sourceTree = "<group>"; };
+		A1B778372173C57100BED141 /* MenuOrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuOrderTableViewCell.xib; sourceTree = "<group>"; };
 		A1CF358F20D7D16400C1343B /* ThumbnailDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModelTests.swift; sourceTree = "<group>"; };
 		A1CF359F20DA703800C1343B /* Springboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Springboard.swift; sourceTree = "<group>"; };
 		A1E33AA02137149A00C93FBE /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -793,6 +799,7 @@
 		A112E758212CD76400320048 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A1B778332173BE0700BED141 /* MenuOrder */,
 				A16AB90621692D8D0036863C /* Report */,
 				A11CD30C214F058F00D9333F /* Base */,
 				A11CD325214F059000D9333F /* OpenSource */,
@@ -830,6 +837,8 @@
 			children = (
 				A112E77C212CD76400320048 /* MenuOrderViewController.xib */,
 				A112E79E212CD76400320048 /* MenuOrderViewController.swift */,
+				A1B778362173C57100BED141 /* MenuOrderTableViewCell.swift */,
+				A1B778372173C57100BED141 /* MenuOrderTableViewCell.xib */,
 			);
 			path = MenuOrder;
 			sourceTree = "<group>";
@@ -1610,6 +1619,14 @@
 			path = Define;
 			sourceTree = "<group>";
 		};
+		A1B778332173BE0700BED141 /* MenuOrder */ = {
+			isa = PBXGroup;
+			children = (
+				A1B778342173BE9E00BED141 /* MenuOrderViewControllerViewModel.swift */,
+			);
+			path = MenuOrder;
+			sourceTree = "<group>";
+		};
 		A1E33AA12137149A00C93FBE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2019,6 +2036,7 @@
 				A15C5467214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
 				A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */,
+				A1B778392173C57100BED141 /* MenuOrderTableViewCell.xib in Resources */,
 				A15C545E214D699D001E8AB5 /* OptionMenuSettingTableView.xib in Resources */,
 				A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A1FE87DE211B015800B258A3 /* timeout.html in Resources */,
@@ -2718,6 +2736,7 @@
 				A1903017209CF977004F1EA5 /* AppConst.swift in Sources */,
 				A190302B209CF977004F1EA5 /* Date+Extend.swift in Sources */,
 				A112E8B1212CD76500320048 /* HeaderField.swift in Sources */,
+				A1B778382173C57100BED141 /* MenuOrderTableViewCell.swift in Sources */,
 				A1903032209CF977004F1EA5 /* Optional+Extend.swift in Sources */,
 				A11CD32C214F059000D9333F /* OptionMenuFavoriteTableViewModel.swift in Sources */,
 				A1903030209CF977004F1EA5 /* Int+Extend.swift in Sources */,
@@ -2772,6 +2791,7 @@
 				A15C545B214D699D001E8AB5 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A15C5450214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.swift in Sources */,
 				A195066D2144052B0091DF23 /* NotificationView.swift in Sources */,
+				A1B778352173BE9F00BED141 /* MenuOrderViewControllerViewModel.swift in Sources */,
 				A1903063209CF978004F1EA5 /* Util.swift in Sources */,
 				A1903051209CF978004F1EA5 /* EnumEnumerable.swift in Sources */,
 				A15C5464214D699D001E8AB5 /* OptionMenuFavoriteTableView.swift in Sources */,

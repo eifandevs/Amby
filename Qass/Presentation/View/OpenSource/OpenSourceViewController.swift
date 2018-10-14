@@ -41,6 +41,16 @@ class OpenSourceViewController: UIViewController {
 
         closeButton.backgroundColor = UIColor.ultraOrange
         // Do any additional setup after loading the view.
+
+        setupRx()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    private func setupRx() {
         // ボタンタップ
         closeButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -50,11 +60,6 @@ class OpenSourceViewController: UIViewController {
                 log.eventOut(chain: "rx_tap")
             })
             .disposed(by: disposeBag)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
