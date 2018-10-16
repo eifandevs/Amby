@@ -37,7 +37,7 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
         case .close:
             setImage(image: R.image.circlemenuClose(), color: UIColor.darkGray)
         case .closeAll:
-            setImage(image: R.image.circlemenuClose(), color: UIColor.darkGray)
+            setImage(image: R.image.circlemenuCloseAll(), color: UIColor.darkGray)
         case .historyBack:
             setImage(image: R.image.circlemenuHistoryback(), color: UIColor.darkGray)
         case .copy:
@@ -71,8 +71,8 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
                 accessibilityIdentifier = R.image.circlemenuClose.name
                 log.debug("set accessibility. name: \(R.image.circlemenuClose.name)")
             case .closeAll:
-                accessibilityIdentifier = R.image.circlemenuClose.name
-                log.debug("set accessibility. name: \(R.image.circlemenuClose.name)")
+                accessibilityIdentifier = R.image.circlemenuCloseAll.name
+                log.debug("set accessibility. name: \(R.image.circlemenuCloseAll.name)")
             case .historyBack:
                 accessibilityIdentifier = R.image.circlemenuHistoryback.name
                 log.debug("set accessibility. name: \(R.image.circlemenuHistoryback.name)")
