@@ -11,7 +11,8 @@ import UIKit
 class OptionMenuFormTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var urlLabel: UILabel!
-
+    @IBOutlet weak var openButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
