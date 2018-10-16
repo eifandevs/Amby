@@ -174,6 +174,8 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                             if !self.isClosing {
                                 nextCircleMenuItems[index].scheduledAction = true
                                 self.closeCircleMenuItems()
+                            } else {
+                                log.warning("circlemenu already closing.")
                             }
                             log.eventOut(chain: "rx_tap")
                         })
@@ -194,8 +196,12 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     // MARK: Private Method
 
     private func closeCircleMenuItems() {
+        if isClosing {
+            log.warning("circlemenu already closing.")
+            return
+        }
+
         if executeCircleMenuAction() {
-            isClosing = true
             progress.invalidate()
             UIView.animate(withDuration: 0.2, animations: {
                 self.alpha = 0
@@ -333,6 +339,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
 
     private func executeCircleMenuAction() -> Bool {
         for item in circleMenuItems where item.scheduledAction {
+            isClosing = true
             rx_circleMenuDidSelect.onNext((operation: item.operation, point: initialPt!))
             return true
         }
@@ -369,6 +376,8 @@ extension CircleMenu: EGApplicationDelegate {
                             if !self.isClosing {
                                 circleMenuItem.scheduledAction = true
                                 self.closeCircleMenuItems()
+                            } else {
+                                log.warning("circlemenu already closing.")
                             }
                             log.eventOut(chain: "rx_tap")
                         })

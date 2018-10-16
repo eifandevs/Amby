@@ -77,6 +77,7 @@ struct AppConst {
         let MENU = "メニュー並び替え"
         let FORM = "フォーム"
         let BOOKMARK = "ブックマーク"
+        let MEMO = "メモ"
         let SETTING = "設定"
         let HELP = "ヘルプ"
         let APP_INFORMATION = "Qass"

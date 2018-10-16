@@ -44,6 +44,11 @@ final class FrontLayerViewModel {
         TabUseCase.s.close()
     }
 
+    /// 現在のタブを削除
+    func closeAll() {
+        TabUseCase.s.closeAll()
+    }
+
     /// 現在のタブをコピー
     func copy() {
         TabUseCase.s.copy()

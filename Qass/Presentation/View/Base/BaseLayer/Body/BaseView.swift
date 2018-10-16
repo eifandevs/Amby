@@ -320,9 +320,6 @@ class BaseView: UIView {
                 guard let `self` = self else { return }
                 if let object = object.element {
                     if let webView = self.webViews[object.deleteIndex] {
-                        // サムネイルの削除
-                        self.viewModel.deleteThumbnail(context: webView.context)
-
                         let isFrontDelete = object.deleteContext == self.front.context
                         if isFrontDelete {
                             webView.removeObserverEstimatedProgress(observer: self)

@@ -48,6 +48,8 @@ class Util {
             } catch let error as NSError {
                 log.error("remove item error. error: \(error.localizedDescription)")
             }
+        } else {
+            log.error("remove item already removed.")
         }
     }
 

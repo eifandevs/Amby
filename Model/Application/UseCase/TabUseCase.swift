@@ -88,6 +88,15 @@ public final class TabUseCase {
         PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)
     }
 
+    /// 全てのタブをクローズ
+    public func closeAll() {
+        let histories = PageHistoryDataModel.s.histories
+        histories.forEach { pageHistory in
+            PageHistoryDataModel.s.remove(context: pageHistory.context)
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+        }
+    }
+
     /// 現在のタブをコピー
     public func copy() {
         PageHistoryDataModel.s.copy()

@@ -79,6 +79,8 @@ class FrontLayer: UIView {
                     }
                 case .close:
                     self.viewModel.close()
+                case .closeAll:
+                    self.viewModel.closeAll()
                 case .historyBack:
                     self.viewModel.historyBack()
                 case .copy:

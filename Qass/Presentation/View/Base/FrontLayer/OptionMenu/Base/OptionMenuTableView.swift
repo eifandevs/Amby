@@ -167,6 +167,10 @@ extension OptionMenuTableView: UITableViewDelegate {
                 })
                 .disposed(by: rx.disposeBag)
             detailView = formTableView
+        case .memo:
+            // TODO: メモ表示
+            rx_optionMenuTableViewDidClose.onNext(())
+            return
         case .setting:
             let settingTableView = OptionMenuSettingTableView(frame: detailViewFrame)
             settingTableView.rx_optionMenuSettingDidClose

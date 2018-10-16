@@ -64,7 +64,7 @@ struct ModelConst {
             UserOperation.autoScroll.rawValue,
             UserOperation.historyForward.rawValue,
             UserOperation.form.rawValue,
-            UserOperation.favorite.rawValue,
+            UserOperation.closeAll.rawValue,
             UserOperation.grep.rawValue
         ]
         let COMMON_HISTORY_SAVE_COUNT = 90

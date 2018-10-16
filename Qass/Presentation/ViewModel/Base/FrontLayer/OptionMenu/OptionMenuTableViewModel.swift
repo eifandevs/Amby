@@ -21,6 +21,7 @@ final class OptionMenuTableViewModel {
         case history
         case form
         case favorite
+        case memo
         case setting
         case help
         case app
@@ -31,6 +32,7 @@ final class OptionMenuTableViewModel {
             case .history: return R.image.optionmenuHistory.name
             case .form: return R.image.optionmenuForm.name
             case .favorite: return R.image.optionmenuFavorite.name
+            case .memo: return R.image.optionmenuFavorite.name
             case .setting: return R.image.optionmenuSetting.name
             case .help: return R.image.optionmenuHelp.name
             case .app: return R.image.optionmenuApp.name
@@ -43,6 +45,7 @@ final class OptionMenuTableViewModel {
             case .history: return AppConst.OPTION_MENU.HISTORY
             case .form: return AppConst.OPTION_MENU.FORM
             case .favorite: return AppConst.OPTION_MENU.BOOKMARK
+            case .memo: return AppConst.OPTION_MENU.MEMO
             case .setting: return AppConst.OPTION_MENU.SETTING
             case .help: return AppConst.OPTION_MENU.HELP
             case .app: return AppConst.OPTION_MENU.APP_INFORMATION
@@ -55,6 +58,7 @@ final class OptionMenuTableViewModel {
         Row(cellType: .history),
         Row(cellType: .form),
         Row(cellType: .favorite),
+        Row(cellType: .memo),
         Row(cellType: .trend),
         Row(cellType: .setting),
         Row(cellType: .help),
