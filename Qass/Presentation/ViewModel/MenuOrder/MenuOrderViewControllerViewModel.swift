@@ -27,11 +27,25 @@ final class MenuOrderViewControllerViewModel {
         return rows.count
     }
 
-    private var menuOrder = SettingUseCase.s.menuOrder
+    private var menuOrder: [UserOperation] {
+        return SettingUseCase.s.menuOrder
+    }
+
     private var rows = UserOperation.enumerate().map { Row(operation: $0.element) }
 
     func getRow(index: Int) -> Row {
         return rows[index]
+    }
+
+    func getOrder(operation: UserOperation) -> Int? {
+        return menuOrder.index(where: { $0 == operation })
+    }
+
+    func changeOrder(operation _: UserOperation) {
+        // TODO: メニュー順序変更
+        SettingUseCase.s.menuOrder = [.add, .autoScroll, .autoScroll, .close, .copy, .form, .grep, .closeAll, .historyBack, .historyForward, .menu, .urlCopy]
+
+        rx_menuOrderViewControllerViewModelDidReload.onNext(())
     }
 
     /// 初期化

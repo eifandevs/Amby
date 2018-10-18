@@ -78,7 +78,8 @@ class MenuOrderViewController: UIViewController {
 extension MenuOrderViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.menuOrderCell.identifier, for: indexPath) as? MenuOrderTableViewCell {
-            cell.setRow(row: viewModel.getRow(index: indexPath.row))
+            let row = viewModel.getRow(index: indexPath.row)
+            cell.setRow(row: row, order: viewModel.getOrder(operation: row.operation))
 
             return cell
         }
@@ -97,6 +98,7 @@ extension MenuOrderViewController: UITableViewDataSource {
 // MARK: - TableViewDelegate
 
 extension MenuOrderViewController: UITableViewDelegate {
-    func tableView(_: UITableView, didSelectRowAt _: IndexPath) {
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.changeOrder(operation: viewModel.getRow(index: indexPath.row).operation)
     }
 }

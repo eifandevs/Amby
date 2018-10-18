@@ -21,7 +21,7 @@ class OptionMenuFormTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setRx()
+        setupRx()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,7 +30,7 @@ class OptionMenuFormTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setRx() {
+    func setupRx() {
         openButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_tap")
