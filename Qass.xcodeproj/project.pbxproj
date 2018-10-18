@@ -127,6 +127,10 @@
 		A15C5484214D935E001E8AB5 /* com.mono0926.LicensePlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C546D214D935E001E8AB5 /* com.mono0926.LicensePlist.plist */; };
 		A15C5499214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt in Resources */ = {isa = PBXBuildFile; fileRef = A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */; };
 		A16AB90821692DB60036863C /* ReportViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */; };
+		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
+		A1869C1E21795210007303B3 /* OptionMenuMemoTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1869C1D21795210007303B3 /* OptionMenuMemoTableView.xib */; };
+		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
+		A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */; };
 		A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F38209CF976004F1EA5 /* AppDelegate.swift */; };
 		A1903017209CF977004F1EA5 /* AppConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3B209CF976004F1EA5 /* AppConst.swift */; };
 		A190301B209CF977004F1EA5 /* MessageConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902F3F209CF976004F1EA5 /* MessageConst.swift */; };
@@ -529,6 +533,10 @@
 		A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = com.mono0926.LicensePlist.latest_result.txt; sourceTree = "<group>"; };
 		A168382B2066960B00182028 /* Qass-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qass-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewControllerViewModel.swift; sourceTree = "<group>"; };
+		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
+		A1869C1D21795210007303B3 /* OptionMenuMemoTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuMemoTableView.xib; sourceTree = "<group>"; };
+		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
+		A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuMemoTableViewCell.xib; sourceTree = "<group>"; };
 		A1902F2E209CF976004F1EA5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1902F30209CF976004F1EA5 /* CommonHistoryDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A1902F31209CF976004F1EA5 /* FavoriteDataModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteDataModelTests.swift; sourceTree = "<group>"; };
@@ -896,6 +904,7 @@
 		A112E7AD212CD76400320048 /* OptionMenu */ = {
 			isa = PBXGroup;
 			children = (
+				A1869C1A217951B6007303B3 /* Memo */,
 				A15C5425214D699C001E8AB5 /* Base */,
 				A15C5434214D699C001E8AB5 /* App */,
 				A15C5445214D699D001E8AB5 /* Favorite */,
@@ -1313,6 +1322,17 @@
 				A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */,
 			);
 			path = Report;
+			sourceTree = "<group>";
+		};
+		A1869C1A217951B6007303B3 /* Memo */ = {
+			isa = PBXGroup;
+			children = (
+				A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */,
+				A1869C1D21795210007303B3 /* OptionMenuMemoTableView.xib */,
+				A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */,
+				A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */,
+			);
+			path = Memo;
 			sourceTree = "<group>";
 		};
 		A1902F2D209CF976004F1EA5 /* Qass-Tests */ = {
@@ -2037,6 +2057,7 @@
 			files = (
 				A152086020C5543B00201B30 /* env.plist in Resources */,
 				A112E831212CD76500320048 /* SplashViewController.xib in Resources */,
+				A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */,
 				A1FE87E2211B015800B258A3 /* dns.html in Resources */,
 				A15C5451214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */,
 				A15C5420214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib in Resources */,
@@ -2064,6 +2085,7 @@
 				A12B93F8214EF7480082EEA5 /* com.mono0926.LicensePlist in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
 				A15C5459214D699D001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */,
+				A1869C1E21795210007303B3 /* OptionMenuMemoTableView.xib in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
 				A15C544A214D699D001E8AB5 /* OptionMenuTableView.xib in Resources */,
 				A1FE87E0211B015800B258A3 /* invalid.html in Resources */,
@@ -2756,6 +2778,7 @@
 				A15C5460214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift in Sources */,
 				A1903035209CF977004F1EA5 /* UIColor+Extend.swift in Sources */,
 				A190305E209CF978004F1EA5 /* EGApplication.swift in Sources */,
+				A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */,
 				A1903036209CF977004F1EA5 /* UIImage+Extend.swift in Sources */,
 				A15C5454214D699D001E8AB5 /* OptionMenuHelpTableViewCell.swift in Sources */,
 				A112E865212CD76500320048 /* MenuOrderViewController.swift in Sources */,
@@ -2774,6 +2797,7 @@
 				A11CD327214F059000D9333F /* FrontLayerViewModel.swift in Sources */,
 				A112E8B3212CD76500320048 /* HelpViewController.swift in Sources */,
 				A11CD32D214F059000D9333F /* OptionMenuHistoryTableViewModel.swift in Sources */,
+				A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */,
 				A190302A209CF977004F1EA5 /* Data+Extend.swift in Sources */,
 				A112E82D212CD76500320048 /* SplashViewController.swift in Sources */,
 				A190302D209CF977004F1EA5 /* DispatchQueue+Extend.swift in Sources */,
