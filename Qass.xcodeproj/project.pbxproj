@@ -1446,10 +1446,10 @@
 		A1902F92209CF976004F1EA5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A1902F93209CF976004F1EA5 /* Assets.xcassets */,
 				A15C546C214D935E001E8AB5 /* license */,
 				A1FE87D5211B015700B258A3 /* html */,
 				A1FE87DB211B015800B258A3 /* js */,
-				A1902F93209CF976004F1EA5 /* Assets.xcassets */,
 				A1902F95209CF976004F1EA5 /* stub */,
 			);
 			path = Resources;
