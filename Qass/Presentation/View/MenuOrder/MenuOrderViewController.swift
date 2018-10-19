@@ -14,6 +14,7 @@ class MenuOrderViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var closeButton: CornerRadiusButton!
     @IBOutlet var initButton: CornerRadiusButton!
+    @IBOutlet var okButton: CornerRadiusButton!
 
     private let viewModel = MenuOrderViewControllerViewModel()
 
@@ -32,6 +33,7 @@ class MenuOrderViewController: UIViewController {
 
         initButton.backgroundColor = UIColor.ultraOrange
         closeButton.backgroundColor = UIColor.ultraOrange
+        okButton.backgroundColor = UIColor.ultraOrange
 
         setupRx()
         // Do any additional setup after loading the view.
@@ -56,6 +58,16 @@ class MenuOrderViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
+                self.dismiss(animated: true, completion: nil)
+                log.eventOut(chain: "rx_tap")
+            })
+            .disposed(by: disposeBag)
+
+        okButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_tap")
+                guard let `self` = self else { return }
+                self.viewModel.changeOrder()
                 self.dismiss(animated: true, completion: nil)
                 log.eventOut(chain: "rx_tap")
             })
@@ -99,6 +111,6 @@ extension MenuOrderViewController: UITableViewDataSource {
 
 extension MenuOrderViewController: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.changeOrder(operation: viewModel.getRow(index: indexPath.row).operation)
+        viewModel.sort(operation: viewModel.getRow(index: indexPath.row).operation)
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 
 /// 通知マネージャー
 class NotificationManager {
+    /// トースト表示
     static func presentNotification(message: String) {
         let notificationViewX = 0.f
         let notificationViewY = AppConst.DEVICE.DISPLAY_SIZE.height
@@ -28,6 +29,8 @@ class NotificationManager {
         }
     }
 
+    /// アラート表示
+    /// 選択肢がある場合はこちらを使用する
     static func presentAlert(title: String, message: String, completion: (() -> Void)?) {
         let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let defaultAction: UIAlertAction = UIAlertAction(title: MessageConst.COMMON.OK, style: .default, handler: { (_: UIAlertAction!) -> Void in

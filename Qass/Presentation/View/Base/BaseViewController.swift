@@ -132,7 +132,7 @@ class BaseViewController: UIViewController {
         viewModel.rx_baseViewControllerViewModelDidRegisterFailure
             .subscribe { _ in
                 log.eventIn(chain: "rx_baseViewControllerViewModelDidRegisterFailure")
-                NotificationManager.presentAlert(title: MessageConst.COMMON.ERROR, message: MessageConst.ALERT.REGISTER_REPORT_ERROR, completion: nil)
+                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.REGISTER_REPORT_ERROR)
                 log.eventOut(chain: "rx_baseViewControllerViewModelDidRegisterFailure")
             }
             .disposed(by: rx.disposeBag)

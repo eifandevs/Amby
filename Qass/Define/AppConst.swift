@@ -35,6 +35,8 @@ struct AppConst {
         let OVER_VIEW_MARGIN = CGPoint(x: 30.f, y: 18.f)
         let OPTION_MENU_SIZE = CGSize(width: 250, height: 450)
         let OPTION_MENU_MARGIN = CGSize(width: 38, height: 20)
+        let CIRCLEMENU_ROW_NUM = 6
+        let CIRCLEMENU_SECTION_NUM = 2
     }
 
     // MARK: - ベースレイヤーの定数

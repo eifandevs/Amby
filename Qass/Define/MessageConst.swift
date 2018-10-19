@@ -37,8 +37,6 @@ struct MessageConst {
         let DELETE_SITE_DATA = "サイトデータを全て削除します。よろしいですか？"
         let DELETE_ALL = "全てのデータを削除し、初期化します。よろしいですか？"
         let OPEN_COMFIRM = "外部アプリで開いてもよろしいですか？"
-        let REGISTER_FORM_ERROR_CRAWL = "ページ情報を取得できませんでした"
-        let REGISTER_REPORT_ERROR = "不具合・ご意見の登録に失敗しました"
     }
 
     // MARK: - 通知
@@ -49,7 +47,11 @@ struct MessageConst {
         let COPY_URL = "URLをコピーしました"
         let REGISTER_BOOK_MARK = "お気に入りに登録しました"
         let REGISTER_FORM = "フォーム情報を登録しました"
-        let REGISTER_REPORT = "レポートを登録しました。ご協力ありがとうございました。"
+        let REGISTER_REPORT = "レポートを登録しました。ご協力ありがとうございました"
+        let REGISTER_FORM_ERROR_CRAWL = "ページ情報を取得できませんでした"
+        let REGISTER_REPORT_ERROR = "不具合・ご意見の登録に失敗しました"
+        let MENU_ORDER_SUCCESS = "メニューを並び替えました"
+        let MENU_ORDER_ERROR = "メニューの並び替えに失敗しました。12個選択してください"
     }
 
     // MARK: - ヘッダー

@@ -93,7 +93,7 @@ public final class TabUseCase {
         let histories = PageHistoryDataModel.s.histories
         histories.forEach { pageHistory in
             PageHistoryDataModel.s.remove(context: pageHistory.context)
-            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.2))
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.25))
         }
     }
 

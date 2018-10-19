@@ -27,9 +27,7 @@ final class MenuOrderViewControllerViewModel {
         return rows.count
     }
 
-    private var menuOrder: [UserOperation] {
-        return SettingUseCase.s.menuOrder
-    }
+    var menuOrder = SettingUseCase.s.menuOrder
 
     private var rows = UserOperation.enumerate().map { Row(operation: $0.element) }
 
@@ -41,9 +39,31 @@ final class MenuOrderViewControllerViewModel {
         return menuOrder.index(where: { $0 == operation })
     }
 
-    func changeOrder(operation _: UserOperation) {
-        // TODO: メニュー順序変更
-        SettingUseCase.s.menuOrder = [.add, .autoScroll, .autoScroll, .close, .copy, .form, .grep, .closeAll, .historyBack, .historyForward, .menu, .urlCopy]
+    /// 並び替えの確定
+    func changeOrder() {
+        if menuOrder.count == AppConst.FRONT_LAYER.CIRCLEMENU_SECTION_NUM * AppConst.FRONT_LAYER.CIRCLEMENU_ROW_NUM {
+            log.debug("change menu order")
+            SettingUseCase.s.menuOrder = menuOrder
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_SUCCESS)
+            }
+        } else {
+            log.warning("cannot change menu order")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_ERROR)
+            }
+        }
+    }
+
+    func sort(operation: UserOperation) {
+        if let index = menuOrder.index(where: { $0 == operation }) {
+            menuOrder.remove(at: index)
+        } else {
+            if menuOrder.count == AppConst.FRONT_LAYER.CIRCLEMENU_SECTION_NUM * AppConst.FRONT_LAYER.CIRCLEMENU_ROW_NUM {
+                menuOrder.removeFirst()
+            }
+            menuOrder.append(operation)
+        }
 
         rx_menuOrderViewControllerViewModelDidReload.onNext(())
     }
@@ -51,6 +71,7 @@ final class MenuOrderViewControllerViewModel {
     /// 初期化
     func initialize() {
         SettingUseCase.s.initializeMenuOrder()
+        menuOrder = SettingUseCase.s.menuOrder
         rx_menuOrderViewControllerViewModelDidReload.onNext(())
     }
 }
