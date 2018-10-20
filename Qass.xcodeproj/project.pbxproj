@@ -80,6 +80,9 @@
 		A12B93FB214EFD710082EEA5 /* OpenSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12B93F9214EFD710082EEA5 /* OpenSourceViewController.swift */; };
 		A12B93FC214EFD710082EEA5 /* OpenSourceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12B93FA214EFD710082EEA5 /* OpenSourceViewController.xib */; };
 		A138CAE12137281800AEA669 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A138CAE02137281800AEA669 /* Model.swift */; };
+		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
+		A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */; };
+		A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */; };
 		A152086020C5543B00201B30 /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A152085F20C5543B00201B30 /* env.plist */; };
 		A15C53F0214D4CDC001E8AB5 /* ContactUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C53E8214D4CDC001E8AB5 /* ContactUseCase.swift */; };
 		A15C53F2214D4CDC001E8AB5 /* SourceCodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C53EA214D4CDC001E8AB5 /* SourceCodeUseCase.swift */; };
@@ -486,6 +489,9 @@
 		A12B93F9214EFD710082EEA5 /* OpenSourceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSourceViewController.swift; sourceTree = "<group>"; };
 		A12B93FA214EFD710082EEA5 /* OpenSourceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenSourceViewController.xib; sourceTree = "<group>"; };
 		A138CAE02137281800AEA669 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
+		A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasscodeViewController.xib; sourceTree = "<group>"; };
+		A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeUseCase.swift; sourceTree = "<group>"; };
 		A152085F20C5543B00201B30 /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
 		A15C53E8214D4CDC001E8AB5 /* ContactUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUseCase.swift; sourceTree = "<group>"; };
 		A15C53EA214D4CDC001E8AB5 /* SourceCodeUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceCodeUseCase.swift; sourceTree = "<group>"; };
@@ -822,6 +828,7 @@
 		A112E771212CD76400320048 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A14F2F9E217B7E7800EB95FE /* Passcode */,
 				A112E7A6212CD76400320048 /* Base */,
 				A19506952146B6A40091DF23 /* OpenSource */,
 				A19506872146A0480091DF23 /* Policy */,
@@ -1204,6 +1211,15 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		A14F2F9E217B7E7800EB95FE /* Passcode */ = {
+			isa = PBXGroup;
+			children = (
+				A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */,
+				A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */,
+			);
+			path = Passcode;
+			sourceTree = "<group>";
+		};
 		A15C53E7214D4CDC001E8AB5 /* OptionMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -1215,6 +1231,7 @@
 				A15C53EE214D4CDC001E8AB5 /* ReportUseCase.swift */,
 				A15C53EF214D4CDC001E8AB5 /* PolicyUseCase.swift */,
 				A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */,
+				A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */,
 			);
 			path = OptionMenu;
 			sourceTree = "<group>";
@@ -2098,6 +2115,7 @@
 				A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */,
 				A11CD33C214F8F8500D9333F /* OpenSourceTableViewCell.xib in Resources */,
 				A15C5461214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */,
+				A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */,
 				A15C5457214D699D001E8AB5 /* OptionMenuAppTableView.xib in Resources */,
 				A15C5465214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
 				A1903056209CF978004F1EA5 /* article_stub.json in Resources */,
@@ -2142,6 +2160,7 @@
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SmileLock/SmileLock.framework",
 				"${BUILT_PRODUCTS_DIR}/VerticalAlignmentLabel/VerticalAlignmentLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
@@ -2159,6 +2178,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmileLock.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VerticalAlignmentLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
@@ -2688,6 +2708,7 @@
 				A19506602143FC920091DF23 /* Data+Extend.swift in Sources */,
 				A19506282142D9A90091DF23 /* CommonHistory.swift in Sources */,
 				A19506492143F8B80091DF23 /* SuggestUseCase.swift in Sources */,
+				A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */,
 				A195063C2143F8AF0091DF23 /* SearchHistoryDataModel.swift in Sources */,
 				A195064C2143F8B80091DF23 /* ProgressUseCase.swift in Sources */,
 				A19506412143F8B80091DF23 /* FormUseCase.swift in Sources */,
@@ -2765,6 +2786,7 @@
 			files = (
 				A11CD32A214F059000D9333F /* OptionMenuSettingTableViewModel.swift in Sources */,
 				A112E89F212CD76500320048 /* SearchMenuSuggestTableViewCell.swift in Sources */,
+				A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */,
 				A15C546A214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.swift in Sources */,
 				A112E8A3212CD76500320048 /* SearchMenuCommonHistoryTableViewCell.swift in Sources */,
 				A190302C209CF977004F1EA5 /* Dictionary+Extend.swift in Sources */,

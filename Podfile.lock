@@ -80,6 +80,7 @@ PODS:
   - RxCocoa (4.0.0):
     - RxSwift (~> 4.0)
   - RxSwift (4.0.0)
+  - SmileLock (3.0.5)
   - SwiftFormat/CLI (0.33.4)
   - SwiftLint (0.26.0)
   - VerticalAlignmentLabel (0.1.0)
@@ -98,6 +99,7 @@ DEPENDENCIES:
   - RealmSwift (~> 2.4)
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
+  - SmileLock
   - SwiftFormat/CLI (~> 0.33)
   - SwiftLint (~> 0.25)
   - VerticalAlignmentLabel (~> 0.1)
@@ -126,10 +128,11 @@ SPEC CHECKSUMS:
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+  SmileLock: 8f57ad4626cd23a8e1e01230521ede7761b38b0c
   SwiftFormat: f39044d75d5e58dbbc7c436c089104ec9c8f717a
   SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: bc7170d3315fa2d3b29e6713a17f3a40ebf6a119
+PODFILE CHECKSUM: 1d16fcfb103cb16954287cedff46d1bbaa417c52
 
 COCOAPODS: 1.4.0

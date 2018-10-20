@@ -192,6 +192,10 @@ body: **The MIT License**
 …
 version: 4.0.0
 
+name: SmileLock, nameSpecified: 
+body:                     …
+version: 3.0.5
+
 name: SwiftFormat, nameSpecified: 
 body: MIT License
 

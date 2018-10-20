@@ -23,6 +23,7 @@ final class OptionMenuSettingTableViewModel {
 
     /// セルタイプ
     enum CellType {
+        case passcode
         case autoScroll
         case menu
         case commonHistory
@@ -35,6 +36,7 @@ final class OptionMenuSettingTableViewModel {
 
         var title: String {
             switch self {
+            case .passcode: return AppConst.OPTION_MENU.PASSCODE
             case .autoScroll: return ""
             case .menu: return AppConst.OPTION_MENU.MENU
             case .commonHistory: return AppConst.OPTION_MENU.HISTORY
@@ -59,11 +61,12 @@ final class OptionMenuSettingTableViewModel {
 
     // セル情報
     var sections: [Section] = [
+        Section(title: AppConst.SETTING.SECTION_SETTING, rows: [
+            Section.Row(cellType: .passcode),
+            Section.Row(cellType: .menu)
+        ]),
         Section(title: AppConst.SETTING.SECTION_AUTO_SCROLL, rows: [
             Section.Row(cellType: .autoScroll)
-        ]),
-        Section(title: AppConst.SETTING.SECTION_MENU, rows: [
-            Section.Row(cellType: .menu)
         ]),
         Section(title: AppConst.SETTING.SECTION_DELETE, rows: [
             Section.Row(cellType: .commonHistory),
@@ -91,6 +94,11 @@ final class OptionMenuSettingTableViewModel {
     /// セクション情報取得
     func getSection(section: Int) -> Section {
         return sections[section]
+    }
+
+    /// パスコード設定
+    func openPasscodeSetting() {
+        PasscodeUseCase.s.open()
     }
 
     /// メニュ-順序

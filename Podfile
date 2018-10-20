@@ -24,6 +24,7 @@ abstract_target 'All' do
     pod 'Firebase/AdMob', '~> 5.9'
     pod 'Fabric', '~> 1.7.11'
     pod 'Crashlytics', '~> 3.10.7'
+    pod 'SmileLock', '~> 3.0'
 
     target 'Qass-Tests' do
       inherit! :search_paths

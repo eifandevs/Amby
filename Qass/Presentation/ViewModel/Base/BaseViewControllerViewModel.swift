@@ -25,6 +25,12 @@ final class BaseViewControllerViewModel {
             return Observable.just(())
         }
 
+    // パスコード設定表示通知用RX
+    let rx_baseViewControllerViewModelDidPresentPasscode = PasscodeUseCase.s.rx_passcodeUseCaseDidRequestOpen
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
+        }
+
     // メーラー起動通知用RX
     let rx_baseViewControllerViewModelDidPresentMail = ContactUseCase.s.rx_operationUseCaseDidRequestPresentContactScreen
         .flatMap { _ -> Observable<()> in

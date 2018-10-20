@@ -148,6 +148,17 @@ class BaseViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
 
+        // パスコード表示監視
+        viewModel.rx_baseViewControllerViewModelDidPresentPasscode
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentPasscode")
+                guard let `self` = self else { return }
+                let vc = PasscodeViewController()
+                self.present(vc, animated: true)
+                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentPasscode")
+            }
+            .disposed(by: rx.disposeBag)
+
         // メーラー起動監視
         viewModel.rx_baseViewControllerViewModelDidPresentMail
             .subscribe { [weak self] _ in

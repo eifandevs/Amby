@@ -77,6 +77,7 @@ struct AppConst {
         let TREND = "トレンド"
         let HISTORY = "閲覧履歴"
         let MENU = "メニュー並び替え"
+        let PASSCODE = "ルートパスワード設定"
         let FORM = "フォーム"
         let BOOKMARK = "ブックマーク"
         let MEMO = "メモ"
@@ -101,7 +102,7 @@ struct AppConst {
     static let SETTING = SETTING_VALUE()
     struct SETTING_VALUE {
         let SECTION_AUTO_SCROLL = "自動スクロール設定"
-        let SECTION_MENU = "メニュー設定"
+        let SECTION_SETTING = "初期設定"
         let SECTION_HISTORY = "履歴保存件数（何日分）"
         let SECTION_DELETE = "データ削除"
         let TITLE_COMMON_HISTORY = "閲覧履歴"

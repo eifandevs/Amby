@@ -109,6 +109,8 @@ extension OptionMenuSettingTableView: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = viewModel.getRow(indexPath: indexPath)
         switch row.cellType {
+        case .passcode:
+            viewModel.openPasscodeSetting()
         case .menu:
             viewModel.openMenuOrder()
         case .commonHistory:
@@ -128,6 +130,7 @@ extension OptionMenuSettingTableView: UITableViewDelegate {
         default:
             break
         }
-        rx_optionMenuSettingDidClose.onNext(())
+        // メニューは閉じない
+//        rx_optionMenuSettingDidClose.onNext(())
     }
 }
