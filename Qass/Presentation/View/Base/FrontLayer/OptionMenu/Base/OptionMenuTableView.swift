@@ -55,7 +55,7 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
         // OptionMenuProtocol
         _ = setup(tableView: tableView)
 
-        // カスタムビュー登録
+        // カスタムセル登録
         tableView.register(R.nib.optionMenuTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuCell.identifier)
 
         // 履歴情報を永続化しておく

@@ -18,7 +18,7 @@ final class FavoriteDataModel {
     /// お気に入り更新通知用RX
     let rx_favoriteDataModelDidReload = PublishSubject<String>()
     /// メッセージ通知用RX
-    let rx_favoriteDataModelDidNotice = PublishSubject<String>()
+    let rx_favoriteDataModelDidNotice = PublishSubject<(message: String, isSuccess: Bool)>()
 
     static let s = FavoriteDataModel()
     /// 通知センター
@@ -81,10 +81,10 @@ final class FavoriteDataModel {
                 } else {
                     insert(favorites: [fd])
                     // ヘッダーのお気に入りアイコン更新
-                    rx_favoriteDataModelDidNotice.onNext(MessageConst.NOTIFICATION.REGISTER_BOOK_MARK)
+                    rx_favoriteDataModelDidNotice.onNext((message: MessageConst.NOTIFICATION.REGISTER_BOOK_MARK, isSuccess: true))
                 }
             } else {
-                rx_favoriteDataModelDidNotice.onNext(MessageConst.NOTIFICATION.REGISTER_BOOK_MARK_ERROR)
+                rx_favoriteDataModelDidNotice.onNext((message: MessageConst.NOTIFICATION.REGISTER_BOOK_MARK_ERROR, isSuccess: false))
             }
         }
     }

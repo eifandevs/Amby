@@ -20,8 +20,8 @@ public final class NoticeUseCase {
             FormDataModel.s.rx_formDataModelDidNotice,
             FavoriteDataModel.s.rx_favoriteDataModelDidNotice
         ])
-        .flatMap { message -> Observable<String> in
-            return Observable.just(message)
+        .flatMap { (element: (message: String, isSuccess: Bool)) -> Observable<(message: String, isSuccess: Bool)> in
+            return Observable.just(element)
         }
 
     private init() {}

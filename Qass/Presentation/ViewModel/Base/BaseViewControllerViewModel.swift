@@ -70,8 +70,8 @@ final class BaseViewControllerViewModel {
         NoticeUseCase.s.rx_noticeUseCaseDidInvoke
             .subscribe { object in
                 log.eventIn(chain: "rx_noticeUseCaseDidInvoke")
-                if let message = object.element {
-                    NotificationManager.presentNotification(message: message)
+                if let element = object.element {
+                    NotificationManager.presentToastNotification(message: element.message, isSuccess: element.isSuccess)
                 }
 
                 log.eventOut(chain: "rx_noticeUseCaseDidInvoke")

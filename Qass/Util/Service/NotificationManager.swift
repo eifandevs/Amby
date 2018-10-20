@@ -12,17 +12,13 @@ import UIKit
 /// 通知マネージャー
 class NotificationManager {
     /// トースト表示
-    static func presentNotification(message: String) {
+    static func presentToastNotification(message: String, isSuccess: Bool) {
         let notificationViewX = 0.f
         let notificationViewY = AppConst.DEVICE.DISPLAY_SIZE.height
         let notificationViewWidth = AppConst.DEVICE.DISPLAY_SIZE.width
         let notificationViewHeight = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 0.9
-        let notificationView = NotificationView(frame: CGRect(x: notificationViewX, y: notificationViewY, width: notificationViewWidth, height: notificationViewHeight))
-        notificationView.setTitle(" 　\(message)", for: .normal)
-        notificationView.titleLabel?.textColor = UIColor.white
-        notificationView.titleLabel?.font = UIFont(name: AppConst.APP.FONT, size: notificationView.frame.size.height / 4)
-        notificationView.backgroundColor = UIColor.darkGray
-        notificationView.contentHorizontalAlignment = .left
+        let notificationViewRect = CGRect(x: notificationViewX, y: notificationViewY, width: notificationViewWidth, height: notificationViewHeight)
+        let notificationView = ToastView(frame: notificationViewRect, title: message, isSuccess: isSuccess)
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             delegate.window?.rootViewController?.view.addSubview(notificationView)
             notificationView.play()

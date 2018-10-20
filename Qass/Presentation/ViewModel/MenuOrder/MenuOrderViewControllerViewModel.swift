@@ -45,12 +45,12 @@ final class MenuOrderViewControllerViewModel {
             log.debug("change menu order")
             SettingUseCase.s.menuOrder = menuOrder
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_SUCCESS)
+                NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_SUCCESS, isSuccess: true)
             }
         } else {
             log.warning("cannot change menu order")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_ERROR)
+                NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_ERROR, isSuccess: false)
             }
         }
     }

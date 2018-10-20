@@ -123,7 +123,7 @@ class BaseViewController: UIViewController {
         viewModel.rx_baseViewControllerViewModelDidRegisterSuccess
             .subscribe { _ in
                 log.eventIn(chain: "rx_baseViewControllerViewModelDidRegisterSuccess")
-                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.REGISTER_REPORT)
+                NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.REGISTER_REPORT, isSuccess: true)
                 log.eventOut(chain: "rx_baseViewControllerViewModelDidRegisterSuccess")
             }
             .disposed(by: rx.disposeBag)
@@ -132,7 +132,7 @@ class BaseViewController: UIViewController {
         viewModel.rx_baseViewControllerViewModelDidRegisterFailure
             .subscribe { _ in
                 log.eventIn(chain: "rx_baseViewControllerViewModelDidRegisterFailure")
-                NotificationManager.presentNotification(message: MessageConst.NOTIFICATION.REGISTER_REPORT_ERROR)
+                NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.REGISTER_REPORT_ERROR, isSuccess: false)
                 log.eventOut(chain: "rx_baseViewControllerViewModelDidRegisterFailure")
             }
             .disposed(by: rx.disposeBag)

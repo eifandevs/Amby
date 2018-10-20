@@ -15,7 +15,7 @@ final class FormDataModel {
     static let s = FormDataModel()
 
     /// メッセージ通知用RX
-    let rx_formDataModelDidNotice = PublishSubject<String>()
+    let rx_formDataModelDidNotice = PublishSubject<(message: String, isSuccess: Bool)>()
 
     /// db repository
     let repository = DBRepository(realmEncryptionToken: AuthTokenDataModel.s.realmEncryptionToken)
@@ -61,9 +61,9 @@ final class FormDataModel {
                 FormDataModel.s.delete(forms: [savedForm])
             }
             FormDataModel.s.insert(forms: [form])
-            rx_formDataModelDidNotice.onNext(MessageConst.NOTIFICATION.REGISTER_FORM)
+            rx_formDataModelDidNotice.onNext((message: MessageConst.NOTIFICATION.REGISTER_FORM, isSuccess: true))
         } else {
-            rx_formDataModelDidNotice.onNext(MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_INPUT)
+            rx_formDataModelDidNotice.onNext((message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_INPUT, isSuccess: false))
         }
     }
 }
