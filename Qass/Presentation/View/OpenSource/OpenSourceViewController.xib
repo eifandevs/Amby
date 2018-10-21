@@ -22,10 +22,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8J1-qO-4Sc" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
-                    <rect key="frame" x="22" y="582" width="331" height="48"/>
+                    <rect key="frame" x="22" y="590" width="331" height="40"/>
                     <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="xiE-1g-MHi"/>
+                        <constraint firstAttribute="height" constant="40" id="xiE-1g-MHi"/>
                     </constraints>
                     <state key="normal" title="OK">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -37,7 +37,7 @@
                     </userDefinedRuntimeAttributes>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iCi-hU-GMy">
-                    <rect key="frame" x="0.0" y="20" width="375" height="540"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="548"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>

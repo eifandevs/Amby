@@ -28,10 +28,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4m6-2r-l2c" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
-                    <rect key="frame" x="22" y="582" width="331" height="48"/>
+                    <rect key="frame" x="22" y="590" width="331" height="40"/>
                     <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="s5k-6E-YCU"/>
+                        <constraint firstAttribute="height" constant="40" id="s5k-6E-YCU"/>
                     </constraints>
                     <state key="normal" title="キャンセル">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
