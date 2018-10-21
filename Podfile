@@ -26,10 +26,6 @@ abstract_target 'All' do
     pod 'Crashlytics', '~> 3.10.7'
     pod 'SmileLock', '~> 3.0'
 
-    target 'Qass-Tests' do
-      inherit! :search_paths
-    end
-  
     target 'Qass-UITests' do
       inherit! :search_paths
     end

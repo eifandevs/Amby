@@ -99,7 +99,7 @@ DEPENDENCIES:
   - RealmSwift (~> 2.4)
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
-  - SmileLock
+  - SmileLock (~> 3.0)
   - SwiftFormat/CLI (~> 0.33)
   - SwiftLint (~> 0.25)
   - VerticalAlignmentLabel (~> 0.1)
@@ -133,6 +133,6 @@ SPEC CHECKSUMS:
   SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: 1d16fcfb103cb16954287cedff46d1bbaa417c52
+PODFILE CHECKSUM: 1f124b0db5509c5b5e7ca30ef7e466c9cd2244d8
 
 COCOAPODS: 1.4.0
