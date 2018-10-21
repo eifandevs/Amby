@@ -83,6 +83,7 @@
 		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
 		A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */; };
 		A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */; };
+		A14F2FA6217C63F300EB95FE /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */; };
 		A152086020C5543B00201B30 /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A152085F20C5543B00201B30 /* env.plist */; };
 		A15C53F0214D4CDC001E8AB5 /* ContactUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C53E8214D4CDC001E8AB5 /* ContactUseCase.swift */; };
 		A15C53F2214D4CDC001E8AB5 /* SourceCodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C53EA214D4CDC001E8AB5 /* SourceCodeUseCase.swift */; };
@@ -492,6 +493,7 @@
 		A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasscodeViewController.xib; sourceTree = "<group>"; };
 		A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeUseCase.swift; sourceTree = "<group>"; };
+		A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyUserDefaults.framework; path = Carthage/Build/iOS/SwiftyUserDefaults.framework; sourceTree = "<group>"; };
 		A152085F20C5543B00201B30 /* env.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = env.plist; sourceTree = "<group>"; };
 		A15C53E8214D4CDC001E8AB5 /* ContactUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUseCase.swift; sourceTree = "<group>"; };
 		A15C53EA214D4CDC001E8AB5 /* SourceCodeUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceCodeUseCase.swift; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A14F2FA6217C63F300EB95FE /* SwiftyUserDefaults.framework in Frameworks */,
 				A112E735212AF83800320048 /* MessageUI.framework in Frameworks */,
 				A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */,
 				A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */,
@@ -751,6 +754,7 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */,
 				A112E734212AF83800320048 /* MessageUI.framework */,
 				A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */,
 				A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */,
@@ -2362,6 +2366,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyUserDefaults.framework",
 			);
 			name = Carthage;
 			outputPaths = (

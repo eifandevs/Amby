@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyUserDefaults
 
 class UserDefaultRepository {
     init() {}
@@ -26,7 +27,6 @@ class UserDefaultRepository {
         }
     }
 
-    
     /// メニュー順序
     var menuOrder: [UserOperation] {
         get {

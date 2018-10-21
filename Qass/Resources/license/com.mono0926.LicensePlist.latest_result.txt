@@ -246,6 +246,8 @@ name: SVProgressHUD, nameSpecified: , owner: SVProgressHUD, version: 2.2.5
 
 name: SwiftyBeaver, nameSpecified: , owner: SwiftyBeaver, version: 1.6.0
 
+name: SwiftyUserDefaults, nameSpecified: , owner: radex, version: 4.0.0-alpha.1
+
 add-version-numbers: false
 
 LicensePlist Version: 1.8.3
