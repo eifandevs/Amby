@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-/// 認証ユースケース
+/// 暗号化ユースケース
 public final class EncryptUseCase {
     public static let s = EncryptUseCase()
 

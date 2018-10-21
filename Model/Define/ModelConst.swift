@@ -32,6 +32,7 @@ struct ModelConst {
         let OWNER = "eifandevs"
         let REPOSITORY = "IssueTest"
         let CURRENT_CONTEXT = "currentContext"
+        let ROOT_PASSCODE = "rootPasscode"
         let AUTO_SCROLL_INTERVAL = "autoScrollInterval"
         let COMMON_HISTORY_SAVE_COUNT = "historySaveCount"
         let SEARCH_HISTORY_SAVE_COUNT = "searchHistorySaveCount"
@@ -52,6 +53,7 @@ struct ModelConst {
     static let UD = UD_VALUE()
     struct UD_VALUE {
         let CURRENT_CONTEXT = ""
+        let ROOT_PASSCODE = ""
         let AUTO_SCROLL = 0.06
         let MENU_ORDER: [Int] = [
             UserOperation.menu.rawValue,

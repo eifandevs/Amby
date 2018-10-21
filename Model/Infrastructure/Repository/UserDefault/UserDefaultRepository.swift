@@ -26,6 +26,7 @@ class UserDefaultRepository {
         }
     }
 
+    
     /// メニュー順序
     var menuOrder: [UserOperation] {
         get {
@@ -61,6 +62,7 @@ class UserDefaultRepository {
     func setup() {
         UserDefaults.standard.register(defaults: [
             ModelConst.KEY.CURRENT_CONTEXT: ModelConst.UD.CURRENT_CONTEXT,
+            ModelConst.KEY.ROOT_PASSCODE: ModelConst.UD.ROOT_PASSCODE,
             ModelConst.KEY.AUTO_SCROLL_INTERVAL: ModelConst.UD.AUTO_SCROLL,
             ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT: ModelConst.UD.COMMON_HISTORY_SAVE_COUNT,
             ModelConst.KEY.PAGE_HISTORY_SAVE_COUNT: ModelConst.UD.PAGE_HISTORY_SAVE_COUNT,
@@ -77,6 +79,7 @@ class UserDefaultRepository {
     /// ユーザーデフォルト初期化
     func initialize() {
         UserDefaults.standard.set(ModelConst.UD.CURRENT_CONTEXT, forKey: ModelConst.KEY.CURRENT_CONTEXT)
+        UserDefaults.standard.set(ModelConst.UD.ROOT_PASSCODE, forKey: ModelConst.KEY.ROOT_PASSCODE)
         UserDefaults.standard.set(ModelConst.UD.AUTO_SCROLL, forKey: ModelConst.KEY.AUTO_SCROLL_INTERVAL)
         UserDefaults.standard.set(ModelConst.UD.COMMON_HISTORY_SAVE_COUNT, forKey: ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT)
         UserDefaults.standard.set(ModelConst.UD.PAGE_HISTORY_SAVE_COUNT, forKey: ModelConst.KEY.PAGE_HISTORY_SAVE_COUNT)
