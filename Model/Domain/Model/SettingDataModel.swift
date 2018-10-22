@@ -12,42 +12,52 @@ final class SettingDataModel {
     static let s = SettingDataModel()
     let repository = UserDefaultRepository()
 
-    /// 閲覧履歴保存日数
-    var commonHistorySaveCount: Int {
-        return repository.commonHistorySaveCount
+    /// カレントコンテキスト
+    var currentContext: String {
+        get {
+            return repository.get(key: .currentContext)
+        }
+        set(value) {
+            repository.set(key: .currentContext, value: value)
+        }
     }
 
     /// 自動スクロールインターバル
     var autoScrollInterval: Float {
         get {
-            return repository.autoScrollInterval
+            return Float(repository.get(key: .autoScrollInterval))
         }
         set(value) {
-            repository.autoScrollInterval = value
+            repository.set(key: .autoScrollInterval, value: Double(value))
         }
     }
 
     /// メニュー順序
     var menuOrder: [UserOperation] {
         get {
-            return repository.menuOrder
+            return repository.get(key: .menuOrder)
         }
         set(value) {
-            repository.menuOrder = value
+            repository.set(key: .menuOrder, value: value)
         }
+    }
+
+    /// ページ履歴保存日数
+    var pageHistorySaveCount: Int {
+        return repository.get(key: .pageHistorySaveCount)
+    }
+
+    /// 閲覧履歴保存日数
+    var commonHistorySaveCount: Int {
+        return repository.get(key: .commonhistorySaveCount)
     }
 
     /// 検索履歴保存日数
     var searchHistorySaveCount: Int {
-        return repository.searchHistorySaveCount
+        return repository.get(key: .searchHistorySaveCount)
     }
 
     private init() {}
-
-    /// ユーザーデフォルト初期値設定
-    func setup() {
-        repository.setup()
-    }
 
     /// ユーザーデフォルト初期化
     func initialize() {
@@ -56,6 +66,6 @@ final class SettingDataModel {
 
     /// メニュー順序初期化
     func initializeMenuOrder() {
-        repository.initializeMenuOrder()
+        repository.set(key: .menuOrder, value: ModelConst.UD.MENU_ORDER)
     }
 }

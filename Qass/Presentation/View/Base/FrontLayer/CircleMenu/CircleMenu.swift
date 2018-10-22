@@ -38,7 +38,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
 
     let disposeBag = DisposeBag()
 
-    enum CircleMenuLeftLocation: CGPoint, EnumEnumerable {
+    enum CircleMenuLeftLocation: CGPoint, CaseIterable {
         case Upper = "0,-130"
         case UpperRight = "62,-100"
         case RightUpper = "100,-40"
@@ -47,11 +47,11 @@ class CircleMenu: UIButton, ShadowView, CircleView {
         case Lower = "0,130"
 
         static func locations() -> [CGPoint] {
-            return CircleMenuLeftLocation.cases.map({ $0.rawValue })
+            return CircleMenuLeftLocation.allCases.map({ $0.rawValue })
         }
     }
 
-    enum CircleMenuRightLocation: CGPoint, EnumEnumerable {
+    enum CircleMenuRightLocation: CGPoint, CaseIterable {
         case Upper = "0,-130"
         case UpperRight = "-62,-100"
         case RightUpper = "-100,-40"
@@ -60,7 +60,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
         case Lower = "0,130"
 
         static func locations() -> [CGPoint] {
-            return CircleMenuRightLocation.cases.map({ $0.rawValue })
+            return CircleMenuRightLocation.allCases.map({ $0.rawValue })
         }
     }
 
@@ -385,7 +385,9 @@ extension CircleMenu: EGApplicationDelegate {
 
                     superview!.addSubview(circleMenuItem)
                     UIView.animate(withDuration: 0.18, animations: {
-                        circleMenuItem.center = self.center + circleMenuLocations[index]
+                        if let location = circleMenuLocations[safe: index] {
+                            circleMenuItem.center = self.center + location
+                        }
                     })
                 }
             }

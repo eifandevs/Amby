@@ -29,7 +29,7 @@ final class MenuOrderViewControllerViewModel {
 
     var menuOrder = SettingUseCase.s.menuOrder
 
-    private var rows = UserOperation.enumerate().map { Row(operation: $0.element) }
+    private var rows = UserOperation.allCases.map { Row(operation: $0) }
 
     func getRow(index: Int) -> Row {
         return rows[index]
@@ -42,13 +42,20 @@ final class MenuOrderViewControllerViewModel {
     /// 並び替えの確定
     func changeOrder() {
         if menuOrder.count == AppConst.FRONT_LAYER.CIRCLEMENU_SECTION_NUM * AppConst.FRONT_LAYER.CIRCLEMENU_ROW_NUM {
-            log.debug("change menu order")
-            SettingUseCase.s.menuOrder = menuOrder
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_SUCCESS, isSuccess: true)
+            if menuOrder.index(where: { $0 == .menu }) == nil {
+                log.warning("cannot change menu. menu is required")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_CANNOT_SORT, isSuccess: false)
+                }
+            } else {
+                log.debug("change menu order")
+                SettingUseCase.s.menuOrder = menuOrder
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_SUCCESS, isSuccess: true)
+                }
             }
         } else {
-            log.warning("cannot change menu order")
+            log.warning("cannot change menu order. number error")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_ERROR, isSuccess: false)
             }

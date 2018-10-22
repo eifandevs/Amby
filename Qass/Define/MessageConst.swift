@@ -51,6 +51,7 @@ struct MessageConst {
         let REGISTER_FORM_ERROR_CRAWL = "ページ情報を取得できませんでした"
         let REGISTER_REPORT_ERROR = "不具合・ご意見の登録に失敗しました"
         let MENU_ORDER_SUCCESS = "メニューを並び替えました"
+        let MENU_ORDER_CANNOT_SORT = "メニューの並び替えに失敗しました。メニューアイコンは必須です"
         let MENU_ORDER_ERROR = "メニューの並び替えに失敗しました。12個選択してください"
     }
 

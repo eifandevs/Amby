@@ -28,9 +28,6 @@ public final class Model {
             log.info("RELEASE BUILD")
         #endif
 
-        // 設定データ(UD)セットアップ
-        SettingDataModel.s.setup()
-
         // ローカルストレージセットアップ
         let repository = LocalStorageRepository<Cache>()
         repository.create(.commonHistory(resource: nil))

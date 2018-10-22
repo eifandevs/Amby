@@ -45,7 +45,7 @@ class ToastView: UIView {
     func loadNib() {
         guard let view = Bundle.main.loadNibNamed(R.nib.toastView.name, owner: self, options: nil)?.first as? UIView else { return }
         view.frame = bounds
-        baseButton.titleLabel?.font = UIFont(name: AppConst.APP.FONT, size: frame.size.height / 4)
+        baseButton.titleLabel?.font = UIFont(name: AppConst.APP.FONT, size: frame.size.height / 4.5)
 
         addSubview(view)
     }

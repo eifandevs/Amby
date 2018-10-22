@@ -165,6 +165,7 @@ final class OptionMenuSettingTableViewModel {
             WebCacheUseCase.s.deleteCaches()
             ThumbnailUseCase.s.delete()
             TabUseCase.s.delete()
+            SettingUseCase.s.initialize()
             if let delegate = UIApplication.shared.delegate as? AppDelegate {
                 delegate.initialize()
             }

@@ -9,81 +9,34 @@
 import Foundation
 import SwiftyUserDefaults
 
+extension DefaultsKeys {
+    static let currentContext = DefaultsKey<String>(ModelConst.KEY.CURRENT_CONTEXT, defaultValue: ModelConst.UD.CURRENT_CONTEXT)
+    static let rootPasscode = DefaultsKey<String>(ModelConst.KEY.ROOT_PASSCODE, defaultValue: ModelConst.UD.ROOT_PASSCODE)
+    static let lastReportDate = DefaultsKey<Date>(ModelConst.KEY.LAST_REPORT_DATE, defaultValue: ModelConst.UD.LAST_REPORT_DATE)
+    static let autoScrollInterval = DefaultsKey<Double>(ModelConst.KEY.AUTO_SCROLL_INTERVAL, defaultValue: ModelConst.UD.AUTO_SCROLL_INTERVAL)
+    static let menuOrder = DefaultsKey<[UserOperation]>(ModelConst.KEY.MENU_ORDER, defaultValue: ModelConst.UD.MENU_ORDER)
+    static let commonhistorySaveCount = DefaultsKey<Int>(ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.COMMON_HISTORY_SAVE_COUNT)
+    static let searchHistorySaveCount = DefaultsKey<Int>(ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.SEARCH_HISTORY_SAVE_COUNT)
+    static let pageHistorySaveCount = DefaultsKey<Int>(ModelConst.KEY.PAGE_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.PAGE_HISTORY_SAVE_COUNT)
+}
+
 class UserDefaultRepository {
     init() {}
 
-    /// 閲覧履歴保存日数
-    var commonHistorySaveCount: Int {
-        return UserDefaults.standard.integer(forKey: ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT)
+    func get<T>(key: DefaultsKey<T>) -> T {
+        return Defaults[key]
     }
 
-    /// カレントコンテキスト
-    var currentContext: String {
-        get {
-            return UserDefaults.standard.string(forKey: ModelConst.KEY.CURRENT_CONTEXT)!
-        }
-        set(value) {
-            UserDefaults.standard.set(value, forKey: ModelConst.KEY.CURRENT_CONTEXT)
-        }
-    }
-
-    /// メニュー順序
-    var menuOrder: [UserOperation] {
-        get {
-            let rawOrder: [Int] = (UserDefaults.standard.array(forKey: ModelConst.KEY.MENU_ORDER)!).map { $0 as! Int }
-            return rawOrder.map { UserOperation(rawValue: $0)! }
-        }
-        set(value) {
-            UserDefaults.standard.set(value.map { $0.rawValue }, forKey: ModelConst.KEY.MENU_ORDER)
-        }
-    }
-
-    /// 自動スクロールインターバル
-    var autoScrollInterval: Float {
-        get {
-            return UserDefaults.standard.float(forKey: ModelConst.KEY.AUTO_SCROLL_INTERVAL)
-        }
-        set(value) {
-            UserDefaults.standard.set(value, forKey: ModelConst.KEY.AUTO_SCROLL_INTERVAL)
-        }
-    }
-
-    /// ページ履歴保存日数
-    var pageHistorySaveCount: Int {
-        return UserDefaults.standard.integer(forKey: ModelConst.KEY.PAGE_HISTORY_SAVE_COUNT)
-    }
-
-    /// 検索履歴保存日数
-    var searchHistorySaveCount: Int {
-        return UserDefaults.standard.integer(forKey: ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT)
-    }
-
-    /// ユーザーデフォルト初期値設定
-    func setup() {
-        UserDefaults.standard.register(defaults: [
-            ModelConst.KEY.CURRENT_CONTEXT: ModelConst.UD.CURRENT_CONTEXT,
-            ModelConst.KEY.ROOT_PASSCODE: ModelConst.UD.ROOT_PASSCODE,
-            ModelConst.KEY.AUTO_SCROLL_INTERVAL: ModelConst.UD.AUTO_SCROLL,
-            ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT: ModelConst.UD.COMMON_HISTORY_SAVE_COUNT,
-            ModelConst.KEY.PAGE_HISTORY_SAVE_COUNT: ModelConst.UD.PAGE_HISTORY_SAVE_COUNT,
-            ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT: ModelConst.UD.SEARCH_HISTORY_SAVE_COUNT,
-            ModelConst.KEY.MENU_ORDER: ModelConst.UD.MENU_ORDER
-        ])
-    }
-
-    /// メニュー順序初期化
-    func initializeMenuOrder() {
-        UserDefaults.standard.set(ModelConst.UD.MENU_ORDER, forKey: ModelConst.KEY.MENU_ORDER)
+    func set<T>(key: DefaultsKey<T>, value: T) {
+        Defaults[key] = value
     }
 
     /// ユーザーデフォルト初期化
     func initialize() {
-        UserDefaults.standard.set(ModelConst.UD.CURRENT_CONTEXT, forKey: ModelConst.KEY.CURRENT_CONTEXT)
-        UserDefaults.standard.set(ModelConst.UD.ROOT_PASSCODE, forKey: ModelConst.KEY.ROOT_PASSCODE)
-        UserDefaults.standard.set(ModelConst.UD.AUTO_SCROLL, forKey: ModelConst.KEY.AUTO_SCROLL_INTERVAL)
-        UserDefaults.standard.set(ModelConst.UD.COMMON_HISTORY_SAVE_COUNT, forKey: ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT)
-        UserDefaults.standard.set(ModelConst.UD.PAGE_HISTORY_SAVE_COUNT, forKey: ModelConst.KEY.PAGE_HISTORY_SAVE_COUNT)
-        UserDefaults.standard.set(ModelConst.UD.SEARCH_HISTORY_SAVE_COUNT, forKey: ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT)
-        UserDefaults.standard.set(ModelConst.UD.MENU_ORDER, forKey: ModelConst.KEY.MENU_ORDER)
+        if let bundleId = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleId)
+        } else {
+            log.error("userdefault initialize error")
+        }
     }
 }

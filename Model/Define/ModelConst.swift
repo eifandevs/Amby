@@ -33,8 +33,9 @@ struct ModelConst {
         let REPOSITORY = "IssueTest"
         let CURRENT_CONTEXT = "currentContext"
         let ROOT_PASSCODE = "rootPasscode"
+        let LAST_REPORT_DATE = "lastReportDate"
         let AUTO_SCROLL_INTERVAL = "autoScrollInterval"
-        let COMMON_HISTORY_SAVE_COUNT = "historySaveCount"
+        let COMMON_HISTORY_SAVE_COUNT = "commonHistorySaveCount"
         let SEARCH_HISTORY_SAVE_COUNT = "searchHistorySaveCount"
         let PAGE_HISTORY_SAVE_COUNT = "pageHistorySaveCount"
         let MENU_ORDER = "menuOrder"
@@ -54,20 +55,21 @@ struct ModelConst {
     struct UD_VALUE {
         let CURRENT_CONTEXT = ""
         let ROOT_PASSCODE = ""
-        let AUTO_SCROLL = 0.06
-        let MENU_ORDER: [Int] = [
-            UserOperation.menu.rawValue,
-            UserOperation.close.rawValue,
-            UserOperation.historyBack.rawValue,
-            UserOperation.copy.rawValue,
-            UserOperation.search.rawValue,
-            UserOperation.add.rawValue,
-            UserOperation.scrollUp.rawValue,
-            UserOperation.autoScroll.rawValue,
-            UserOperation.historyForward.rawValue,
-            UserOperation.form.rawValue,
-            UserOperation.closeAll.rawValue,
-            UserOperation.grep.rawValue
+        let LAST_REPORT_DATE = NSDate.distantPast
+        let AUTO_SCROLL_INTERVAL = 0.06
+        let MENU_ORDER: [UserOperation] = [
+            UserOperation.menu,
+            UserOperation.close,
+            UserOperation.historyBack,
+            UserOperation.copy,
+            UserOperation.search,
+            UserOperation.add,
+            UserOperation.scrollUp,
+            UserOperation.autoScroll,
+            UserOperation.historyForward,
+            UserOperation.form,
+            UserOperation.closeAll,
+            UserOperation.grep
         ]
         let COMMON_HISTORY_SAVE_COUNT = 90
         let SEARCH_HISTORY_SAVE_COUNT = 90

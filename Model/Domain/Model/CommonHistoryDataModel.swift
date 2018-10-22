@@ -15,9 +15,6 @@ final class CommonHistoryDataModel {
 
     static let s = CommonHistoryDataModel()
 
-    /// userdefault storage repository
-    private let userDefaultRepository = UserDefaultRepository()
-
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
 
@@ -165,7 +162,7 @@ final class CommonHistoryDataModel {
     /// 閲覧履歴の件数チェック
     // デフォルトで90日分の履歴を超えたら削除する
     func expireCheck() {
-        let historySaveCount = userDefaultRepository.commonHistorySaveCount
+        let historySaveCount = SettingDataModel.s.commonHistorySaveCount
         let readFiles = getList().reversed()
 
         if readFiles.count > historySaveCount {
