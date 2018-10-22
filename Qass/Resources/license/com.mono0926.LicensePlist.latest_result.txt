@@ -236,15 +236,15 @@ version: 0.1.0
 
 name: CryptoSwift, nameSpecified: , owner: krzyzanowskim, version: 0.8.3
 
-name: KeychainAccess, nameSpecified: , owner: kishikawakatsumi, version: v3.1.1
+name: KeychainAccess, nameSpecified: , owner: kishikawakatsumi, version: v3.1.2
 
-name: Kingfisher, nameSpecified: , owner: onevcat, version: 4.8.0
+name: Kingfisher, nameSpecified: , owner: onevcat, version: 4.10.0
 
-name: NVActivityIndicatorView, nameSpecified: , owner: ninjaprox, version: 4.2.1
+name: NVActivityIndicatorView, nameSpecified: , owner: ninjaprox, version: 4.4.0
 
 name: SVProgressHUD, nameSpecified: , owner: SVProgressHUD, version: 2.2.5
 
-name: SwiftyBeaver, nameSpecified: , owner: SwiftyBeaver, version: 1.6.0
+name: SwiftyBeaver, nameSpecified: , owner: SwiftyBeaver, version: 1.6.1
 
 name: SwiftyUserDefaults, nameSpecified: , owner: radex, version: 4.0.0-alpha.1
 
