@@ -86,7 +86,7 @@ class ReportViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
-                self.viewModel.send(title: "【エスカレーション】Qass不具合・ご意見報告", message: self.textView.text)
+                self.viewModel.send(title: MessageConst.REPORT.TITLE, message: self.textView.text)
                 self.textView.resignFirstResponder()
                 self.dismiss(animated: true, completion: nil)
                 log.eventOut(chain: "rx_tap")

@@ -331,11 +331,11 @@ final class BaseViewModel {
 
     /// 暗号化
     func encrypt(value: String) -> Data {
-        return EncryptUseCase.s.encrypt(value: value)
+        return EncryptHelper.encrypt(value: value)
     }
 
     /// 複合化
     func decrypt(value: Data) -> String {
-        return EncryptUseCase.s.decrypt(value: value)
+        return EncryptHelper.decrypt(data: value)
     }
 }

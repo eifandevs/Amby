@@ -9,28 +9,32 @@
 import CryptoSwift
 import Foundation
 
-class EncryptHelper {
-    static func encrypt(serviceToken: String, ivToken: String, value: String) -> Data? {
+public class EncryptHelper {
+    public static func encrypt(value: String) -> Data {
+        let serviceToken = AuthTokenDataModel.s.keychainServiceToken
+        let ivToken = AuthTokenDataModel.s.keychainIvToken
         let input = [UInt8](value.utf8)
         do {
-            let aes = try AES(key: serviceToken, iv: ivToken)
+            let aes = try AES(key: serviceToken!, iv: ivToken!)
             let encrypted = try aes.encrypt(input)
             return Data(fromArray: encrypted)
         } catch {
             log.error("encrypt error.")
-            return nil
+            return Data()
         }
     }
 
-    static func decrypt(serviceToken: String, ivToken: String, data: Data) -> String? {
+    public static func decrypt(data: Data) -> String {
+        let serviceToken = AuthTokenDataModel.s.keychainServiceToken
+        let ivToken = AuthTokenDataModel.s.keychainIvToken
         let input = data.toArray(type: UInt8.self)
         do {
-            let aes = try AES(key: serviceToken, iv: ivToken)
+            let aes = try AES(key: serviceToken!, iv: ivToken!)
             let decrypted = try aes.decrypt(input)
             return decrypted.reduce("", { $0 + String(format: "%c", $1) })
         } catch {
             log.error("decrypted error.")
-            return nil
+            return ""
         }
     }
 }

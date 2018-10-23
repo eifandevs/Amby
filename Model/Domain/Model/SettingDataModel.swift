@@ -22,6 +22,30 @@ final class SettingDataModel {
         }
     }
 
+    /// パスコード
+    var rootPasscode: String {
+        get {
+            // 復号化
+            let code = repository.get(key: .rootPasscode)
+            return code.bytes.count == 0 ? "" : EncryptHelper.decrypt(data: code)
+        }
+        set(value) {
+            // 暗号化
+            let code = EncryptHelper.encrypt(value: value)
+            repository.set(key: .rootPasscode, value: code)
+        }
+    }
+
+    /// 最終お問い合わせ美
+    var lastReportDate: Date {
+        get {
+            return repository.get(key: .lastReportDate)
+        }
+        set(value) {
+            repository.set(key: .lastReportDate, value: value)
+        }
+    }
+
     /// 自動スクロールインターバル
     var autoScrollInterval: Float {
         get {
