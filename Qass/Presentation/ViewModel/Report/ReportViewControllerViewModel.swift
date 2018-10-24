@@ -17,9 +17,7 @@ final class ReportViewControllerViewModel {
 
     /// 送信
     func send(title: String, message: String) {
-        let lastReportDate = SettingUseCase.s.lastReportDate
-        let intervalHour = -(lastReportDate.timeIntervalSinceNow / 60 / 60)
-        if intervalHour > Double(24) {
+        if Util.getInterval(from: SettingUseCase.s.lastReportDate) > Double(24) {
             // 前回投稿より24h経過していた場合に送信する
             SettingUseCase.s.lastReportDate = Date()
             ReportUseCase.s.registerReport(title: title, message: message)
