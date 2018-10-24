@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,12 +29,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4m6-2r-l2c" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
-                    <rect key="frame" x="22" y="590" width="331" height="40"/>
+                    <rect key="frame" x="22" y="605" width="331" height="40"/>
                     <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="s5k-6E-YCU"/>
                     </constraints>
-                    <state key="normal" title="キャンセル">
+                    <state key="normal" title="閉じる">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -141,7 +142,7 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iLj-qH-M4y" secondAttribute="trailing" constant="16" id="Itu-4L-bVH"/>
                 <constraint firstItem="4m6-2r-l2c" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="22" id="SbO-ws-qRI"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4m6-2r-l2c" secondAttribute="bottom" constant="37" id="T61-sw-Wan"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4m6-2r-l2c" secondAttribute="bottom" constant="22" id="T61-sw-Wan"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="iLj-qH-M4y" secondAttribute="bottom" constant="106" id="g42-Mb-mxX"/>
                 <constraint firstItem="iLj-qH-M4y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="rf8-lL-83e"/>
                 <constraint firstItem="iLj-qH-M4y" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="t2g-XC-F4Q"/>

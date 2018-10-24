@@ -58,6 +58,8 @@ class ReportViewController: UIViewController {
         let device = Util.getDeviceInfo()
         // メッセージテンプレ入力
         textView.text = "【 端末 】\n  \(device)\n\n【 OS 】\n  \(osver)\n\n【 ご報告内容 】\n  メッセージを入力"
+
+        closeButton.backgroundColor = UIColor.ultraOrange
     }
 
     private func setupRx() {

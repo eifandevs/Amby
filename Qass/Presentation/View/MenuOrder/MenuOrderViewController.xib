@@ -25,14 +25,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9FM-se-fLu">
-                    <rect key="frame" x="0.0" y="20" width="375" height="610"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="625"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3af-kH-0TX">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="460"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="475"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0UR-La-jeQ" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
-                            <rect key="frame" x="22" y="470" width="331" height="40"/>
+                            <rect key="frame" x="22" y="485" width="331" height="40"/>
                             <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="6az-JA-LFw"/>
@@ -46,13 +46,13 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRL-Le-pGB" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
-                            <rect key="frame" x="22" y="520" width="331" height="40"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPb-S6-bZK" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
+                            <rect key="frame" x="22" y="535" width="331" height="40"/>
                             <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="blq-sO-CIM"/>
+                                <constraint firstAttribute="height" constant="40" id="7Qp-Cv-ILW"/>
                             </constraints>
-                            <state key="normal" title="キャンセル">
+                            <state key="normal" title="並び替え">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -61,13 +61,13 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPb-S6-bZK" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
-                            <rect key="frame" x="22" y="570" width="331" height="40"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRL-Le-pGB" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
+                            <rect key="frame" x="22" y="585" width="331" height="40"/>
                             <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="7Qp-Cv-ILW"/>
+                                <constraint firstAttribute="height" constant="40" id="blq-sO-CIM"/>
                             </constraints>
-                            <state key="normal" title="並び替え">
+                            <state key="normal" title="閉じる">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -94,7 +94,7 @@
                 <constraint firstItem="9FM-se-fLu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5tg-LM-XcK"/>
                 <constraint firstItem="9FM-se-fLu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fxD-2Q-RhN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9FM-se-fLu" secondAttribute="trailing" id="nXb-ug-zdd"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9FM-se-fLu" secondAttribute="bottom" constant="37" id="xcN-90-TOW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9FM-se-fLu" secondAttribute="bottom" constant="22" id="xcN-90-TOW"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>

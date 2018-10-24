@@ -45,11 +45,12 @@ struct MessageConst {
         static let REGISTER_BOOK_MARK = "お気に入りに登録しました"
         static let REGISTER_FORM = "フォーム情報を登録しました"
         static let REGISTER_REPORT = "レポートを登録しました。ご協力ありがとうございました"
-        static let REGISTER_FORM_ERROR_CRAWL = "ページ情報を取得できませんでした"
-        static let REGISTER_REPORT_ERROR = "不具合・ご意見の登録に失敗しました"
+        static let REGISTER_FORM_ERROR_CRAWL = "ページ情報取得エラー"
+        static let REGISTER_REPORT_ERROR = "レポートの登録に失敗しました"
+        static let REGISTER_REPORT_MULTIPLE_ERROR = "レポート登録エラー。前回投稿時より24時間経過する必要があります"
         static let MENU_ORDER_SUCCESS = "メニューを並び替えました"
-        static let MENU_ORDER_CANNOT_SORT = "メニューの並び替えに失敗しました。メニューアイコンは必須です"
-        static let MENU_ORDER_ERROR = "メニューの並び替えに失敗しました。12個選択してください"
+        static let MENU_ORDER_CANNOT_SORT = "メニュー並び替えエラー。メニューアイコンは必須です"
+        static let MENU_ORDER_ERROR = "メニュー並び替えエラー。12個選択してください"
     }
 
     // MARK: - ヘッダー

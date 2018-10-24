@@ -36,7 +36,7 @@ final class SettingDataModel {
         }
     }
 
-    /// 最終お問い合わせ美
+    /// 最終お問い合わせ日
     var lastReportDate: Date {
         get {
             return repository.get(key: .lastReportDate)
