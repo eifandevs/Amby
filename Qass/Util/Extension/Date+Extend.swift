@@ -36,4 +36,9 @@ extension Date {
     var isLastDayOfMonth: Bool {
         return tomorrow.month != month
     }
+
+    /// インターバル(h)取得
+    var intervalHourSinceNow: Double {
+        return -(timeIntervalSinceNow / 60 / 60)
+    }
 }

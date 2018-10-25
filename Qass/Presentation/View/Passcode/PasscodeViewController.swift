@@ -12,9 +12,10 @@ import SmileLock
 import UIKit
 
 class PasscodeViewController: UIViewController {
-    @IBOutlet var baseView: UIView!
-    @IBOutlet var cancelButton: CornerRadiusButton!
-    @IBOutlet var passcodeBaseView: UIView!
+    @IBOutlet var passcodeStackView: UIStackView!
+
+    var passwordContainerView: PasswordContainerView!
+    let kPasswordDigit = 6
 
     /// Observable自動解放
     private let disposeBag = DisposeBag()
@@ -22,28 +23,49 @@ class PasscodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupRx()
+        passwordContainerView = PasswordContainerView.create(in: passcodeStackView, digit: kPasswordDigit)
+        passwordContainerView.delegate = self
 
-        let passcodeView = PasswordContainerView.create(withDigit: 6)
-        passcodeView.frame = CGRect(x: 0, y: 0, width: passcodeBaseView.bounds.size.width, height: passcodeBaseView.bounds.size.height)
-        passcodeBaseView.addSubview(passcodeView)
-
-        cancelButton.backgroundColor = UIColor.ultraOrange
+        passwordContainerView.tintColor = UIColor.darkGray
+        passwordContainerView.highlightedColor = UIColor.ultraViolet
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
 
-    private func setupRx() {
-        cancelButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
-                guard let `self` = self else { return }
-                self.dismiss(animated: true, completion: nil)
-                log.eventOut(chain: "rx_tap")
-            })
-            .disposed(by: disposeBag)
+extension PasscodeViewController: PasswordInputCompleteProtocol {
+    func passwordInputComplete(_: PasswordContainerView, input: String) {
+        if validation(input) {
+            validationSuccess()
+        } else {
+            validationFail()
+        }
+    }
+
+    func touchAuthenticationComplete(_ passwordContainerView: PasswordContainerView, success: Bool, error _: Error?) {
+        if success {
+            validationSuccess()
+        } else {
+            passwordContainerView.clearInput()
+        }
+    }
+}
+
+private extension PasscodeViewController {
+    func validation(_ input: String) -> Bool {
+        return input == "123456"
+    }
+
+    func validationSuccess() {
+        print("*️⃣ success!")
+        dismiss(animated: true, completion: nil)
+    }
+
+    func validationFail() {
+        print("*️⃣ failure!")
+        passwordContainerView.wrongPassword()
     }
 }

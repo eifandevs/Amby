@@ -21,12 +21,6 @@ class Util {
         return vc!
     }
 
-    /// インターバル(h)取得
-    static func getInterval(from: Date) -> Double {
-        let intervalHour = -(from.timeIntervalSinceNow / 60 / 60)
-        return intervalHour
-    }
-
     /// フォルダー作成
     static func createFolder(path: String) {
         let fileManager = FileManager.default
