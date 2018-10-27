@@ -77,6 +77,7 @@
 		A12B93FB214EFD710082EEA5 /* OpenSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12B93F9214EFD710082EEA5 /* OpenSourceViewController.swift */; };
 		A12B93FC214EFD710082EEA5 /* OpenSourceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12B93FA214EFD710082EEA5 /* OpenSourceViewController.xib */; };
 		A138CAE12137281800AEA669 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A138CAE02137281800AEA669 /* Model.swift */; };
+		A13D6A8121848B8900B1832E /* PasscodeViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A8021848B8900B1832E /* PasscodeViewControllerViewModel.swift */; };
 		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
 		A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */; };
 		A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */; };
@@ -469,6 +470,7 @@
 		A12B93F9214EFD710082EEA5 /* OpenSourceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSourceViewController.swift; sourceTree = "<group>"; };
 		A12B93FA214EFD710082EEA5 /* OpenSourceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenSourceViewController.xib; sourceTree = "<group>"; };
 		A138CAE02137281800AEA669 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		A13D6A8021848B8900B1832E /* PasscodeViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasscodeViewController.xib; sourceTree = "<group>"; };
 		A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeUseCase.swift; sourceTree = "<group>"; };
@@ -791,6 +793,7 @@
 		A112E758212CD76400320048 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A13D6A7F21848B7900B1832E /* Passcode */,
 				A1B778332173BE0700BED141 /* MenuOrder */,
 				A16AB90621692D8D0036863C /* Report */,
 				A11CD30C214F058F00D9333F /* Base */,
@@ -1175,6 +1178,14 @@
 				A195066E214406430091DF23 /* CacheHelper.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		A13D6A7F21848B7900B1832E /* Passcode */ = {
+			isa = PBXGroup;
+			children = (
+				A13D6A8021848B8900B1832E /* PasscodeViewControllerViewModel.swift */,
+			);
+			path = Passcode;
 			sourceTree = "<group>";
 		};
 		A14F2F9E217B7E7800EB95FE /* Passcode */ = {
@@ -2653,6 +2664,7 @@
 				A1903017209CF977004F1EA5 /* AppConst.swift in Sources */,
 				A190302B209CF977004F1EA5 /* Date+Extend.swift in Sources */,
 				A112E8B1212CD76500320048 /* HeaderField.swift in Sources */,
+				A13D6A8121848B8900B1832E /* PasscodeViewControllerViewModel.swift in Sources */,
 				A1B778382173C57100BED141 /* MenuOrderTableViewCell.swift in Sources */,
 				A1903032209CF977004F1EA5 /* Optional+Extend.swift in Sources */,
 				A11CD32C214F059000D9333F /* OptionMenuFavoriteTableViewModel.swift in Sources */,

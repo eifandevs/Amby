@@ -35,6 +35,8 @@ struct MessageConst {
         static let DELETE_SITE_DATA = "サイトデータを全て削除します。よろしいですか？"
         static let DELETE_ALL = "全てのデータを削除し、初期化します。よろしいですか？"
         static let OPEN_COMFIRM = "外部アプリで開いてもよろしいですか？"
+        static let PASSCODE_ALREADY_REGISTERED = "パスコードがすでに設定されてます"
+        static let PASSCODE_INITIALIZE = "パスコード再設定(アプリの初期化)"
     }
 
     // MARK: - 通知
@@ -51,6 +53,8 @@ struct MessageConst {
         static let MENU_ORDER_SUCCESS = "メニューを並び替えました"
         static let MENU_ORDER_CANNOT_SORT = "メニュー並び替えエラー。メニューアイコンは必須です"
         static let MENU_ORDER_ERROR = "メニュー並び替えエラー。12個選択してください"
+        static let PASSCODE_REGISTERED = "パスコードを登録しました"
+        static let PASSCODE_INPUT_ERROR = "パスコードエラー"
     }
 
     // MARK: - ヘッダー
@@ -60,13 +64,21 @@ struct MessageConst {
         static let GREP_PLACEHOLDER = "ページ内の検索ワード"
     }
 
-    // MARK: - お問い合わせ
+    // MARK: - お問い合わせ画面
 
     struct REPORT {
         static let TITLE = "【エスカレーション】Qass不具合・ご意見報告"
     }
 
-    // MARK: - ヘルプ
+    // MARK: - パスコード画面
+
+    struct PASSCODE {
+        static let TITLE_INPUT = "パスコードを入力してください"
+        static let TITLE_REGISTER = "パスコードを登録します"
+        static let TITLE_CONFIRM = "確認のため、もう一度入力してください"
+    }
+
+    // MARK: - ヘルプ画面
 
     struct HELP {
         // 履歴

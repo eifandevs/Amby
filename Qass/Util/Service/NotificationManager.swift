@@ -43,6 +43,17 @@ class NotificationManager {
         }
     }
 
+    /// アラート表示(アクション指定)
+    static func presentAlert(title: String, message: String, actions: [UIAlertAction]) {
+        DispatchQueue.mainSyncSafe {
+            let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            actions.forEach({ action in
+                alert.addAction(action)
+            })
+            Util.foregroundViewController().present(alert, animated: true, completion: nil)
+        }
+    }
+
     static func presentActionSheet(title: String, message: String, completion: (() -> Void)?, cancel: (() -> Void)?) {
         DispatchQueue.mainSyncSafe {
             // styleをActionSheetに設定

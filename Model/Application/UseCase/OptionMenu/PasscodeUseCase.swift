@@ -17,10 +17,28 @@ public final class PasscodeUseCase {
     /// オープンリクエスト通知用RX
     public let rx_passcodeUseCaseDidRequestOpen = PublishSubject<()>()
 
+    /// オープンリクエスト通知用RX
+    public let rx_passcodeUseCaseDidRequestConfirm = PublishSubject<()>()
+
+    /// パスコード
+    public var rootPasscode: String {
+        get {
+            return SettingDataModel.s.rootPasscode
+        }
+        set(value) {
+            SettingDataModel.s.rootPasscode = value
+        }
+    }
+
     private init() {}
 
     /// ライセンス表示
     public func open() {
         rx_passcodeUseCaseDidRequestOpen.onNext(())
+    }
+
+    /// 確認画面表示
+    public func confirm() {
+        rx_passcodeUseCaseDidRequestConfirm.onNext(())
     }
 }

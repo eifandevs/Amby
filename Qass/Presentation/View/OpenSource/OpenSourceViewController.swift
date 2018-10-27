@@ -39,9 +39,6 @@ class OpenSourceViewController: UIViewController {
         // カスタムビュー登録
         tableView.register(R.nib.openSourceTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.openSourceCell.identifier)
 
-        closeButton.backgroundColor = UIColor.ultraOrange
-        // Do any additional setup after loading the view.
-
         setupRx()
     }
 

@@ -36,7 +36,6 @@ class HelpViewController: UIViewController {
         // Do any additional setup after loading the view.
         subtitleLabel.text = subtitle
         messageLabel.text = message
-        closeButton.backgroundColor = UIColor.ultraOrange
 
         // ボタンタップ
         closeButton.rx.tap

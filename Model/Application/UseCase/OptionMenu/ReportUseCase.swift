@@ -29,6 +29,16 @@ public final class ReportUseCase {
             return Observable.just(error)
         }
 
+    /// 最終お問い合わせ日
+    public var lastReportDate: Date {
+        get {
+            return SettingDataModel.s.lastReportDate
+        }
+        set(value) {
+            SettingDataModel.s.lastReportDate = value
+        }
+    }
+
     private init() {}
 
     /// レポート画面表示

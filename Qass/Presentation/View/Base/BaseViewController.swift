@@ -153,7 +153,7 @@ class BaseViewController: UIViewController {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentPasscode")
                 guard let `self` = self else { return }
-                let vc = PasscodeViewController()
+                let vc = PasscodeViewController(isConfirm: false)
                 self.present(vc, animated: true)
                 log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentPasscode")
             }

@@ -31,10 +31,6 @@ class MenuOrderViewController: UIViewController {
         // カスタムビュー登録
         tableView.register(R.nib.menuOrderTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.menuOrderCell.identifier)
 
-        initButton.backgroundColor = UIColor.ultraOrange
-        closeButton.backgroundColor = UIColor.ultraOrange
-        okButton.backgroundColor = UIColor.ultraOrange
-
         setupRx()
         // Do any additional setup after loading the view.
     }

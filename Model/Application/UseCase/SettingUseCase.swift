@@ -14,26 +14,6 @@ import RxSwift
 public final class SettingUseCase {
     public static let s = SettingUseCase()
 
-    /// パスコード
-    public var rootPasscode: String {
-        get {
-            return SettingDataModel.s.rootPasscode
-        }
-        set(value) {
-            SettingDataModel.s.rootPasscode = value
-        }
-    }
-
-    /// 最終お問い合わせ日
-    public var lastReportDate: Date {
-        get {
-            return SettingDataModel.s.lastReportDate
-        }
-        set(value) {
-            SettingDataModel.s.lastReportDate = value
-        }
-    }
-
     /// 閲覧履歴保存日数
     public var commonHistorySaveCount: Int {
         return SettingDataModel.s.commonHistorySaveCount
