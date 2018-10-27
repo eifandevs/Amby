@@ -78,6 +78,10 @@
 		A12B93FC214EFD710082EEA5 /* OpenSourceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12B93FA214EFD710082EEA5 /* OpenSourceViewController.xib */; };
 		A138CAE12137281800AEA669 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A138CAE02137281800AEA669 /* Model.swift */; };
 		A13D6A8121848B8900B1832E /* PasscodeViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A8021848B8900B1832E /* PasscodeViewControllerViewModel.swift */; };
+		A13D6A862184A3F100B1832E /* MemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A842184A3F100B1832E /* MemoViewController.swift */; };
+		A13D6A872184A3F100B1832E /* MemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13D6A852184A3F100B1832E /* MemoViewController.xib */; };
+		A13D6A8A2184A43000B1832E /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A882184A43000B1832E /* FormViewController.swift */; };
+		A13D6A8B2184A43000B1832E /* FormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13D6A892184A43000B1832E /* FormViewController.xib */; };
 		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
 		A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */; };
 		A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */; };
@@ -471,6 +475,10 @@
 		A12B93FA214EFD710082EEA5 /* OpenSourceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenSourceViewController.xib; sourceTree = "<group>"; };
 		A138CAE02137281800AEA669 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		A13D6A8021848B8900B1832E /* PasscodeViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewControllerViewModel.swift; sourceTree = "<group>"; };
+		A13D6A842184A3F100B1832E /* MemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewController.swift; sourceTree = "<group>"; };
+		A13D6A852184A3F100B1832E /* MemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoViewController.xib; sourceTree = "<group>"; };
+		A13D6A882184A43000B1832E /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		A13D6A892184A43000B1832E /* FormViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormViewController.xib; sourceTree = "<group>"; };
 		A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasscodeViewController.xib; sourceTree = "<group>"; };
 		A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeUseCase.swift; sourceTree = "<group>"; };
@@ -805,6 +813,8 @@
 		A112E771212CD76400320048 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A13D6A832184A3B100B1832E /* Form */,
+				A13D6A822184A3B000B1832E /* Memo */,
 				A14F2F9E217B7E7800EB95FE /* Passcode */,
 				A112E7A6212CD76400320048 /* Base */,
 				A19506952146B6A40091DF23 /* OpenSource */,
@@ -1186,6 +1196,24 @@
 				A13D6A8021848B8900B1832E /* PasscodeViewControllerViewModel.swift */,
 			);
 			path = Passcode;
+			sourceTree = "<group>";
+		};
+		A13D6A822184A3B000B1832E /* Memo */ = {
+			isa = PBXGroup;
+			children = (
+				A13D6A842184A3F100B1832E /* MemoViewController.swift */,
+				A13D6A852184A3F100B1832E /* MemoViewController.xib */,
+			);
+			path = Memo;
+			sourceTree = "<group>";
+		};
+		A13D6A832184A3B100B1832E /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				A13D6A882184A43000B1832E /* FormViewController.swift */,
+				A13D6A892184A43000B1832E /* FormViewController.xib */,
+			);
+			path = Form;
 			sourceTree = "<group>";
 		};
 		A14F2F9E217B7E7800EB95FE /* Passcode */ = {
@@ -2023,6 +2051,7 @@
 				A112E837212CD76500320048 /* ReportViewController.xib in Resources */,
 				A15C5455214D699D001E8AB5 /* OptionMenuHelpTableView.xib in Resources */,
 				A1AD92DC2162E7BF00445FC8 /* GoogleService-Info-dummy.plist in Resources */,
+				A13D6A8B2184A43000B1832E /* FormViewController.xib in Resources */,
 				A15C5467214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
 				A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */,
@@ -2037,6 +2066,7 @@
 				A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */,
 				A1F518BC213593E20029ACB7 /* env-dummy.plist in Resources */,
 				A15C5421214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
+				A13D6A872184A3F100B1832E /* MemoViewController.xib in Resources */,
 				A15C545F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
 				A15C541F214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib in Resources */,
 				A15C5462214D699D001E8AB5 /* OptionMenuFormTableView.xib in Resources */,
@@ -2683,6 +2713,7 @@
 				A1903053209CF978004F1EA5 /* ShadowView.swift in Sources */,
 				A1903026209CF977004F1EA5 /* Array+Extend.swift in Sources */,
 				A112E8A7212CD76500320048 /* BaseView.swift in Sources */,
+				A13D6A862184A3F100B1832E /* MemoViewController.swift in Sources */,
 				A11CD338214F05B000D9333F /* OpenSourceViewControllerViewModel.swift in Sources */,
 				A112E8AB212CD76500320048 /* EGGradientLabel.swift in Sources */,
 				A1903037209CF977004F1EA5 /* UIImageView+Extend.swift in Sources */,
@@ -2744,6 +2775,7 @@
 				A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */,
 				A1903034209CF977004F1EA5 /* UIButton+Extend.swift in Sources */,
 				A112E8AD212CD76500320048 /* HeaderView.swift in Sources */,
+				A13D6A8A2184A43000B1832E /* FormViewController.swift in Sources */,
 				A11CD33B214F8F8500D9333F /* OpenSourceTableViewCell.swift in Sources */,
 				A11CD32B214F059000D9333F /* OptionMenuFormTableViewModel.swift in Sources */,
 				A112E8A9212CD76500320048 /* BaseLayer.swift in Sources */,
