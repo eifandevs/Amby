@@ -20,6 +20,8 @@ public final class FormUseCase {
     public let rx_formUseCaseDidRequestAutoFill = PublishSubject<()>()
     /// ロードリクエスト通知用RX
     public let rx_formUseCaseDidRequestLoad = PublishSubject<String>()
+    /// 閲覧通知用RX
+    public let rx_formUseCaseDidRequestRead = PublishSubject<String>()
 
     private init() {}
 
@@ -44,6 +46,10 @@ public final class FormUseCase {
 
     public func delete() {
         FormDataModel.s.delete()
+    }
+
+    public func read(id: String) {
+        rx_formUseCaseDidRequestRead.onNext(id)
     }
 
     public func delete(forms: [Form]?) {

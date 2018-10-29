@@ -159,6 +159,17 @@ class BaseViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
 
+        // フォーム閲覧画面表示監視
+        viewModel.rx_baseViewControllerViewModelDidPresentForm
+            .subscribe { [weak self] form in
+                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentForm")
+                guard let `self` = self else { return }
+                let vc = FormViewController(form: form.element!)
+                self.present(vc, animated: true)
+                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentForm")
+            }
+            .disposed(by: rx.disposeBag)
+
         // メーラー起動監視
         viewModel.rx_baseViewControllerViewModelDidPresentMail
             .subscribe { [weak self] _ in

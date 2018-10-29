@@ -1,0 +1,978 @@
+diff --git a/Model/Application/UseCase/FormUseCase.swift b/Model/Application/UseCase/FormUseCase.swift
+index dc17d28..938af5c 100644
+--- a/Model/Application/UseCase/FormUseCase.swift
++++ b/Model/Application/UseCase/FormUseCase.swift
+@@ -20,6 +20,8 @@ public final class FormUseCase {
+     public let rx_formUseCaseDidRequestAutoFill = PublishSubject<()>()
+     /// ロードリクエスト通知用RX
+     public let rx_formUseCaseDidRequestLoad = PublishSubject<String>()
++    /// 閲覧通知用RX
++    public let rx_formUseCaseDidRequestRead = PublishSubject<String>()
+ 
+     private init() {}
+ 
+@@ -46,6 +48,10 @@ public final class FormUseCase {
+         FormDataModel.s.delete()
+     }
+ 
++    public func read(id: String) {
++        rx_formUseCaseDidRequestRead.onNext(id)
++    }
++
+     public func delete(forms: [Form]?) {
+         FormDataModel.s.delete(forms: forms)
+     }
+diff --git a/Qass.xcodeproj/project.pbxproj b/Qass.xcodeproj/project.pbxproj
+index 399f1c9..a39f2e6 100644
+--- a/Qass.xcodeproj/project.pbxproj
++++ b/Qass.xcodeproj/project.pbxproj
+@@ -82,6 +82,10 @@
+ 		A13D6A872184A3F100B1832E /* MemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13D6A852184A3F100B1832E /* MemoViewController.xib */; };
+ 		A13D6A8A2184A43000B1832E /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A882184A43000B1832E /* FormViewController.swift */; };
+ 		A13D6A8B2184A43000B1832E /* FormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13D6A892184A43000B1832E /* FormViewController.xib */; };
++		A13DE1C021869B3B006B49B5 /* OptionMenuFormTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13DE1BF21869B3B006B49B5 /* OptionMenuFormTableViewCellViewModel.swift */; };
++		A13DE1C221869DE9006B49B5 /* FormViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13DE1C121869DE9006B49B5 /* FormViewControllerViewModel.swift */; };
++		A13DE1C52186A353006B49B5 /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13DE1C32186A353006B49B5 /* FormTableViewCell.swift */; };
++		A13DE1C62186A353006B49B5 /* FormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13DE1C42186A353006B49B5 /* FormTableViewCell.xib */; };
+ 		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
+ 		A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */; };
+ 		A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */; };
+@@ -479,6 +483,10 @@
+ 		A13D6A852184A3F100B1832E /* MemoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoViewController.xib; sourceTree = "<group>"; };
+ 		A13D6A882184A43000B1832E /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+ 		A13D6A892184A43000B1832E /* FormViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormViewController.xib; sourceTree = "<group>"; };
++		A13DE1BF21869B3B006B49B5 /* OptionMenuFormTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuFormTableViewCellViewModel.swift; sourceTree = "<group>"; };
++		A13DE1C121869DE9006B49B5 /* FormViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewControllerViewModel.swift; sourceTree = "<group>"; };
++		A13DE1C32186A353006B49B5 /* FormTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
++		A13DE1C42186A353006B49B5 /* FormTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormTableViewCell.xib; sourceTree = "<group>"; };
+ 		A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
+ 		A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasscodeViewController.xib; sourceTree = "<group>"; };
+ 		A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeUseCase.swift; sourceTree = "<group>"; };
+@@ -806,6 +814,7 @@
+ 				A16AB90621692D8D0036863C /* Report */,
+ 				A11CD30C214F058F00D9333F /* Base */,
+ 				A11CD325214F059000D9333F /* OpenSource */,
++				A13DE1C121869DE9006B49B5 /* FormViewControllerViewModel.swift */,
+ 			);
+ 			path = ViewModel;
+ 			sourceTree = "<group>";
+@@ -1120,6 +1129,7 @@
+ 				A11CD317214F058F00D9333F /* OptionMenuHistoryTableViewModel.swift */,
+ 				A11CD318214F058F00D9333F /* OptionMenuHelpTableViewModel.swift */,
+ 				A11CD319214F058F00D9333F /* OptionMenuAppTableViewModel.swift */,
++				A13DE1BF21869B3B006B49B5 /* OptionMenuFormTableViewCellViewModel.swift */,
+ 			);
+ 			path = OptionMenu;
+ 			sourceTree = "<group>";
+@@ -1212,6 +1222,8 @@
+ 			children = (
+ 				A13D6A882184A43000B1832E /* FormViewController.swift */,
+ 				A13D6A892184A43000B1832E /* FormViewController.xib */,
++				A13DE1C32186A353006B49B5 /* FormTableViewCell.swift */,
++				A13DE1C42186A353006B49B5 /* FormTableViewCell.xib */,
+ 			);
+ 			path = Form;
+ 			sourceTree = "<group>";
+@@ -2078,6 +2090,7 @@
+ 				A15C544A214D699D001E8AB5 /* OptionMenuTableView.xib in Resources */,
+ 				A1FE87E0211B015800B258A3 /* invalid.html in Resources */,
+ 				A1FE87E7211B019D00B258A3 /* highlight.js in Resources */,
++				A13DE1C62186A353006B49B5 /* FormTableViewCell.xib in Resources */,
+ 				A15C5452214D699D001E8AB5 /* OptionMenuHelpTableViewCell.xib in Resources */,
+ 				A1869C27217B5B86007303B3 /* ToastView.xib in Resources */,
+ 				A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */,
+@@ -2682,6 +2695,7 @@
+ 			buildActionMask = 2147483647;
+ 			files = (
+ 				A11CD32A214F059000D9333F /* OptionMenuSettingTableViewModel.swift in Sources */,
++				A13DE1C52186A353006B49B5 /* FormTableViewCell.swift in Sources */,
+ 				A112E89F212CD76500320048 /* SearchMenuSuggestTableViewCell.swift in Sources */,
+ 				A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */,
+ 				A15C546A214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.swift in Sources */,
+@@ -2702,6 +2716,7 @@
+ 				A112E899212CD76500320048 /* Thumbnail.swift in Sources */,
+ 				A15C5460214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift in Sources */,
+ 				A1903035209CF977004F1EA5 /* UIColor+Extend.swift in Sources */,
++				A13DE1C221869DE9006B49B5 /* FormViewControllerViewModel.swift in Sources */,
+ 				A190305E209CF978004F1EA5 /* EGApplication.swift in Sources */,
+ 				A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */,
+ 				A1903036209CF977004F1EA5 /* UIImage+Extend.swift in Sources */,
+@@ -2770,6 +2785,7 @@
+ 				A112E89D212CD76500320048 /* EGWebView.swift in Sources */,
+ 				A15C5456214D699D001E8AB5 /* OptionMenuAppTableViewCell.swift in Sources */,
+ 				A11CD32F214F059000D9333F /* OptionMenuAppTableViewModel.swift in Sources */,
++				A13DE1C021869B3B006B49B5 /* OptionMenuFormTableViewCellViewModel.swift in Sources */,
+ 				A112E8A5212CD76500320048 /* SearchMenuNewsTableViewCell.swift in Sources */,
+ 				A190301B209CF977004F1EA5 /* MessageConst.swift in Sources */,
+ 				A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */,
+diff --git a/Qass/Define/AppConst.swift b/Qass/Define/AppConst.swift
+index 319dc0d..67b2ce2 100644
+--- a/Qass/Define/AppConst.swift
++++ b/Qass/Define/AppConst.swift
+@@ -25,6 +25,7 @@ struct AppConst {
+     struct FRONT_LAYER {
+         static let TABLE_VIEW_CELL_HEIGHT = 50.f
+         static let TABLE_VIEW_LICENSE_CELL_HEIGHT = 44.f
++        static let TABLE_VIEW_FORM_CELL_HEIGHT = 44.f
+         static let TABLE_VIEW_MENU_ORDER_CELL_HEIGHT = 47.f
+         static let TABLE_VIEW_NEWS_CELL_HEIGHT = 85.f
+         static let TABLE_VIEW_SECTION_HEIGHT = 19.f
+diff --git a/Qass/Presentation/View/Base/BaseViewController.swift b/Qass/Presentation/View/Base/BaseViewController.swift
+index c5d6cd8..53a5593 100644
+--- a/Qass/Presentation/View/Base/BaseViewController.swift
++++ b/Qass/Presentation/View/Base/BaseViewController.swift
+@@ -159,6 +159,17 @@ class BaseViewController: UIViewController {
+             }
+             .disposed(by: rx.disposeBag)
+ 
++        // フォーム閲覧画面表示監視
++        viewModel.rx_baseViewControllerViewModelDidPresentForm
++            .subscribe { [weak self] form in
++                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentForm")
++                guard let `self` = self else { return }
++                let vc = FormViewController(form: form.element!)
++                self.present(vc, animated: true)
++                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentForm")
++            }
++            .disposed(by: rx.disposeBag)
++
+         // メーラー起動監視
+         viewModel.rx_baseViewControllerViewModelDidPresentMail
+             .subscribe { [weak self] _ in
+diff --git a/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.swift b/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.swift
+index 73f55da..0b96053 100644
+--- a/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.swift
++++ b/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.swift
+@@ -15,6 +15,9 @@ class OptionMenuFormTableViewCell: UITableViewCell {
+     @IBOutlet var urlLabel: UILabel!
+     @IBOutlet var openButton: UIButton!
+ 
++    let viewModel = OptionMenuFormTableViewCellViewModel()
++    var formId = ""
++
+     /// Observable自動解放
+     private let disposeBag = DisposeBag()
+ 
+@@ -35,7 +38,7 @@ class OptionMenuFormTableViewCell: UITableViewCell {
+             .subscribe(onNext: { [weak self] in
+                 log.eventIn(chain: "rx_tap")
+                 guard let `self` = self else { return }
+-                // TODO: open
++                self.viewModel.readForm(id: self.formId)
+                 log.eventOut(chain: "rx_tap")
+             })
+             .disposed(by: disposeBag)
+@@ -43,6 +46,7 @@ class OptionMenuFormTableViewCell: UITableViewCell {
+ 
+     // ビューモデルデータ設定
+     func setViewModelData(row: OptionMenuFormTableViewModel.Row) {
++        formId = row.data.id
+         titleLabel.text = row.data.title
+         urlLabel.text = row.data.url
+     }
+diff --git a/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.xib b/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.xib
+index cf81a5d..a6e9de9 100644
+--- a/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.xib
++++ b/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.xib
+@@ -1,10 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+     <device id="retina4_7" orientation="portrait">
+         <adaptation id="fullscreen"/>
+     </device>
+     <dependencies>
+-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
++        <deployment identifier="iOS"/>
++        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+     </dependencies>
+@@ -18,20 +19,20 @@
+                 <rect key="frame" x="0.0" y="0.0" width="250" height="49.5"/>
+                 <autoresizingMask key="autoresizingMask"/>
+                 <subviews>
+-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zig-Zy-YKX">
++                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Zig-Zy-YKX">
+                         <rect key="frame" x="10" y="5" width="235" height="39.5"/>
+                         <subviews>
+                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="chP-Hp-dAx">
+-                                <rect key="frame" x="0.0" y="0.0" width="205" height="39.5"/>
++                                <rect key="frame" x="0.0" y="0.0" width="202" height="39.5"/>
+                                 <subviews>
+                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJw-UC-7Zj">
+-                                        <rect key="frame" x="0.0" y="0.0" width="205" height="23"/>
++                                        <rect key="frame" x="0.0" y="0.0" width="202" height="23"/>
+                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                         <nil key="textColor"/>
+                                         <nil key="highlightedColor"/>
+                                     </label>
+                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqF-5Z-3KF">
+-                                        <rect key="frame" x="0.0" y="23" width="205" height="16.5"/>
++                                        <rect key="frame" x="0.0" y="23" width="202" height="16.5"/>
+                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                         <nil key="textColor"/>
+                                         <nil key="highlightedColor"/>
+diff --git a/Qass/Presentation/View/Form/FormViewController.swift b/Qass/Presentation/View/Form/FormViewController.swift
+index 8f8547a..4c8f4b4 100644
+--- a/Qass/Presentation/View/Form/FormViewController.swift
++++ b/Qass/Presentation/View/Form/FormViewController.swift
+@@ -6,25 +6,69 @@
+ //  Copyright © 2018年 eifandevs. All rights reserved.
+ //
+ 
++import Model
++import RxCocoa
++import RxSwift
+ import UIKit
+ 
+ class FormViewController: UIViewController {
++    private let viewModel = FormViewControllerViewModel()
++
++    @IBOutlet var tableView: UITableView!
++    @IBOutlet var closeButton: CornerRadiusButton!
++
++    /// Observable自動解放
++    private let disposeBag = DisposeBag()
++
++    convenience init(form: Form) {
++        self.init(nibName: R.nib.formViewController.name, bundle: nil)
++        viewModel.form = form
++    }
+ 
+     override func viewDidLoad() {
+         super.viewDidLoad()
+ 
+-        // Do any additional setup after loading the view.
++        // テーブルビュー監視
++        tableView.dataSource = self
++
++        tableView.estimatedRowHeight = viewModel.cellHeight
++
++        // カスタムビュー登録
++        tableView.register(R.nib.formTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.formCell.identifier)
++
++        setupRx()
+     }
+ 
++    private func setupRx() {
++        // ボタンタップ
++        closeButton.rx.tap
++            .subscribe(onNext: { [weak self] in
++                log.eventIn(chain: "rx_tap")
++                guard let `self` = self else { return }
++                self.dismiss(animated: true, completion: nil)
++                log.eventOut(chain: "rx_tap")
++            })
++            .disposed(by: disposeBag)
++    }
++}
++
++// MARK: - TableViewDataSourceDelegate
+ 
+-    /*
+-    // MARK: - Navigation
++extension FormViewController: UITableViewDataSource {
++    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
++        if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.formCell.identifier, for: indexPath) as? FormTableViewCell {
++            cell.setRow(row: viewModel.getRow(index: indexPath.row))
+ 
+-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+-        // Get the new view controller using segue.destination.
+-        // Pass the selected object to the new view controller.
++            return cell
++        }
++        return UITableViewCell()
+     }
+-    */
+ 
++    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
++        return viewModel.cellCount
++    }
++
++    func tableView(_ tableView: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
++        return UITableViewAutomaticDimension
++    }
+ }
+diff --git a/Qass/Presentation/View/Form/FormViewController.xib b/Qass/Presentation/View/Form/FormViewController.xib
+index 18b206c..6d3ca1f 100644
+--- a/Qass/Presentation/View/Form/FormViewController.xib
++++ b/Qass/Presentation/View/Form/FormViewController.xib
+@@ -1,13 +1,19 @@
+-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++<?xml version="1.0" encoding="UTF-8"?>
++<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++    <device id="retina4_7" orientation="portrait">
++        <adaptation id="fullscreen"/>
++    </device>
+     <dependencies>
+-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
++        <deployment identifier="iOS"/>
++        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+     </dependencies>
+     <objects>
+-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormViewController" customModuleProvider="target">
++        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormViewController" customModule="Qass" customModuleProvider="target">
+             <connections>
++                <outlet property="closeButton" destination="PMD-zZ-i4K" id="RS6-NH-FMP"/>
++                <outlet property="tableView" destination="8Up-m3-rc1" id="BWH-ua-6Lo"/>
+                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+             </connections>
+         </placeholder>
+@@ -15,7 +21,37 @@
+         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
++            <subviews>
++                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PMD-zZ-i4K" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
++                    <rect key="frame" x="22" y="605" width="331" height="40"/>
++                    <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
++                    <constraints>
++                        <constraint firstAttribute="height" constant="40" id="kDc-GC-arm"/>
++                    </constraints>
++                    <state key="normal" title="閉じる">
++                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
++                    </state>
++                    <userDefinedRuntimeAttributes>
++                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
++                            <real key="value" value="8"/>
++                        </userDefinedRuntimeAttribute>
++                    </userDefinedRuntimeAttributes>
++                </button>
++                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Up-m3-rc1">
++                    <rect key="frame" x="0.0" y="20" width="375" height="563"/>
++                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
++                </tableView>
++            </subviews>
+             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
++            <constraints>
++                <constraint firstItem="8Up-m3-rc1" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="4jK-Ew-nPc"/>
++                <constraint firstItem="PMD-zZ-i4K" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="22" id="Hon-Pj-91k"/>
++                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PMD-zZ-i4K" secondAttribute="trailing" constant="22" id="R7H-QC-uwP"/>
++                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8Up-m3-rc1" secondAttribute="trailing" id="RZd-NR-obd"/>
++                <constraint firstItem="8Up-m3-rc1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bCj-Tm-wPF"/>
++                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="PMD-zZ-i4K" secondAttribute="bottom" constant="22" id="tLs-Vb-ndn"/>
++                <constraint firstItem="PMD-zZ-i4K" firstAttribute="top" secondItem="8Up-m3-rc1" secondAttribute="bottom" constant="22" id="xMc-E6-0gq"/>
++            </constraints>
+             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+         </view>
+     </objects>
+diff --git a/Qass/Presentation/View/Memo/MemoViewController.swift b/Qass/Presentation/View/Memo/MemoViewController.swift
+index d62df02..69211c3 100644
+--- a/Qass/Presentation/View/Memo/MemoViewController.swift
++++ b/Qass/Presentation/View/Memo/MemoViewController.swift
+@@ -6,9 +6,17 @@
+ //  Copyright © 2018年 eifandevs. All rights reserved.
+ //
+ 
++import Model
++import RxCocoa
++import RxSwift
+ import UIKit
+ 
+ class MemoViewController: UIViewController {
++    @IBOutlet var closeButton: CornerRadiusButton!
++    @IBOutlet var tableView: UITableView!
++
++    /// Observable自動解放
++    private let disposeBag = DisposeBag()
+ 
+     override func viewDidLoad() {
+         super.viewDidLoad()
+@@ -16,15 +24,15 @@ class MemoViewController: UIViewController {
+         // Do any additional setup after loading the view.
+     }
+ 
+-
+-    /*
+-    // MARK: - Navigation
+-
+-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+-        // Get the new view controller using segue.destination.
+-        // Pass the selected object to the new view controller.
++    private func setupRx() {
++        // ボタンタップ
++        closeButton.rx.tap
++            .subscribe(onNext: { [weak self] in
++                log.eventIn(chain: "rx_tap")
++                guard let `self` = self else { return }
++                self.dismiss(animated: true, completion: nil)
++                log.eventOut(chain: "rx_tap")
++            })
++            .disposed(by: disposeBag)
+     }
+-    */
+-
+ }
+diff --git a/Qass/Presentation/View/Memo/MemoViewController.xib b/Qass/Presentation/View/Memo/MemoViewController.xib
+index 6f5bedc..e4bfc7d 100644
+--- a/Qass/Presentation/View/Memo/MemoViewController.xib
++++ b/Qass/Presentation/View/Memo/MemoViewController.xib
+@@ -1,13 +1,19 @@
+-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++<?xml version="1.0" encoding="UTF-8"?>
++<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++    <device id="retina4_7" orientation="portrait">
++        <adaptation id="fullscreen"/>
++    </device>
+     <dependencies>
+-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
++        <deployment identifier="iOS"/>
++        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+     </dependencies>
+     <objects>
+-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MemoViewController" customModuleProvider="target">
++        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MemoViewController" customModule="Qass" customModuleProvider="target">
+             <connections>
++                <outlet property="closeButton" destination="huQ-Hq-PiA" id="M0F-ye-xVQ"/>
++                <outlet property="tableView" destination="6SY-JU-hPH" id="kf2-5K-Eta"/>
+                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+             </connections>
+         </placeholder>
+@@ -15,7 +21,37 @@
+         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
++            <subviews>
++                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huQ-Hq-PiA" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
++                    <rect key="frame" x="22" y="605" width="331" height="40"/>
++                    <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
++                    <constraints>
++                        <constraint firstAttribute="height" constant="40" id="6PH-sf-9y7"/>
++                    </constraints>
++                    <state key="normal" title="閉じる">
++                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
++                    </state>
++                    <userDefinedRuntimeAttributes>
++                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
++                            <real key="value" value="8"/>
++                        </userDefinedRuntimeAttribute>
++                    </userDefinedRuntimeAttributes>
++                </button>
++                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6SY-JU-hPH">
++                    <rect key="frame" x="0.0" y="20" width="375" height="563"/>
++                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
++                </tableView>
++            </subviews>
+             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
++            <constraints>
++                <constraint firstItem="6SY-JU-hPH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5qh-1y-Klk"/>
++                <constraint firstAttribute="trailing" secondItem="huQ-Hq-PiA" secondAttribute="trailing" constant="22" id="JpM-Yr-4sq"/>
++                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="huQ-Hq-PiA" secondAttribute="bottom" constant="22" id="SrK-Xb-F6m"/>
++                <constraint firstItem="6SY-JU-hPH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZEs-oE-s83"/>
++                <constraint firstItem="huQ-Hq-PiA" firstAttribute="top" secondItem="6SY-JU-hPH" secondAttribute="bottom" constant="22" id="ZsS-Jf-16g"/>
++                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6SY-JU-hPH" secondAttribute="trailing" id="aBt-SF-y7i"/>
++                <constraint firstItem="huQ-Hq-PiA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="22" id="fPo-SV-W39"/>
++            </constraints>
+             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+         </view>
+     </objects>
+diff --git a/Qass/Presentation/View/OpenSource/OpenSourceTableViewCell.xib b/Qass/Presentation/View/OpenSource/OpenSourceTableViewCell.xib
+index cff4870..599ae01 100644
+--- a/Qass/Presentation/View/OpenSource/OpenSourceTableViewCell.xib
++++ b/Qass/Presentation/View/OpenSource/OpenSourceTableViewCell.xib
+@@ -1,10 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+     <device id="retina4_7" orientation="portrait">
+         <adaptation id="fullscreen"/>
+     </device>
+     <dependencies>
+-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
++        <deployment identifier="iOS"/>
++        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+     </dependencies>
+diff --git a/Qass/Presentation/ViewModel/Base/BaseViewControllerViewModel.swift b/Qass/Presentation/ViewModel/Base/BaseViewControllerViewModel.swift
+index 1c23583..23dcca8 100644
+--- a/Qass/Presentation/ViewModel/Base/BaseViewControllerViewModel.swift
++++ b/Qass/Presentation/ViewModel/Base/BaseViewControllerViewModel.swift
+@@ -31,6 +31,16 @@ final class BaseViewControllerViewModel {
+             return Observable.just(())
+         }
+ 
++    // フォーム閲覧通知用RX
++    let rx_baseViewControllerViewModelDidPresentForm = FormUseCase.s.rx_formUseCaseDidRequestRead
++        .flatMap { id -> Observable<Form> in
++            if let form = FormUseCase.s.select(id: id).first {
++                return Observable.just(form)
++            } else {
++                return Observable.empty()
++            }
++        }
++
+     // メーラー起動通知用RX
+     let rx_baseViewControllerViewModelDidPresentMail = ContactUseCase.s.rx_operationUseCaseDidRequestPresentContactScreen
+         .flatMap { _ -> Observable<()> in
+diff --git a/Qass/Presentation/ViewModel/Base/FrontLayer/OptionMenu/OptionMenuFormTableViewModel.swift b/Qass/Presentation/ViewModel/Base/FrontLayer/OptionMenu/OptionMenuFormTableViewModel.swift
+index 4ffefd1..30281d1 100644
+--- a/Qass/Presentation/ViewModel/Base/FrontLayer/OptionMenu/OptionMenuFormTableViewModel.swift
++++ b/Qass/Presentation/ViewModel/Base/FrontLayer/OptionMenu/OptionMenuFormTableViewModel.swift
+@@ -45,4 +45,9 @@ final class OptionMenuFormTableViewModel {
+     func loadRequest(url: String) {
+         FormUseCase.s.load(url: url)
+     }
++
++    /// 閲覧リクエスト
++    func loadRequest(id: String) {
++        FormUseCase.s.read(id: id)
++    }
+ }
+codeだけ
+diff --git a/Model/Application/UseCase/FormUseCase.swift b/Model/Application/UseCase/FormUseCase.swift
+index dc17d28..938af5c 100644
+--- a/Model/Application/UseCase/FormUseCase.swift
++++ b/Model/Application/UseCase/FormUseCase.swift
+@@ -20,6 +20,8 @@ public final class FormUseCase {
+     public let rx_formUseCaseDidRequestAutoFill = PublishSubject<()>()
+     /// ロードリクエスト通知用RX
+     public let rx_formUseCaseDidRequestLoad = PublishSubject<String>()
++    /// 閲覧通知用RX
++    public let rx_formUseCaseDidRequestRead = PublishSubject<String>()
+ 
+     private init() {}
+ 
+@@ -46,6 +48,10 @@ public final class FormUseCase {
+         FormDataModel.s.delete()
+     }
+ 
++    public func read(id: String) {
++        rx_formUseCaseDidRequestRead.onNext(id)
++    }
++
+     public func delete(forms: [Form]?) {
+         FormDataModel.s.delete(forms: forms)
+     }
+diff --git a/Qass/Define/AppConst.swift b/Qass/Define/AppConst.swift
+index 319dc0d..67b2ce2 100644
+--- a/Qass/Define/AppConst.swift
++++ b/Qass/Define/AppConst.swift
+@@ -25,6 +25,7 @@ struct AppConst {
+     struct FRONT_LAYER {
+         static let TABLE_VIEW_CELL_HEIGHT = 50.f
+         static let TABLE_VIEW_LICENSE_CELL_HEIGHT = 44.f
++        static let TABLE_VIEW_FORM_CELL_HEIGHT = 44.f
+         static let TABLE_VIEW_MENU_ORDER_CELL_HEIGHT = 47.f
+         static let TABLE_VIEW_NEWS_CELL_HEIGHT = 85.f
+         static let TABLE_VIEW_SECTION_HEIGHT = 19.f
+diff --git a/Qass/Presentation/View/Base/BaseViewController.swift b/Qass/Presentation/View/Base/BaseViewController.swift
+index c5d6cd8..53a5593 100644
+--- a/Qass/Presentation/View/Base/BaseViewController.swift
++++ b/Qass/Presentation/View/Base/BaseViewController.swift
+@@ -159,6 +159,17 @@ class BaseViewController: UIViewController {
+             }
+             .disposed(by: rx.disposeBag)
+ 
++        // フォーム閲覧画面表示監視
++        viewModel.rx_baseViewControllerViewModelDidPresentForm
++            .subscribe { [weak self] form in
++                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentForm")
++                guard let `self` = self else { return }
++                let vc = FormViewController(form: form.element!)
++                self.present(vc, animated: true)
++                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentForm")
++            }
++            .disposed(by: rx.disposeBag)
++
+         // メーラー起動監視
+         viewModel.rx_baseViewControllerViewModelDidPresentMail
+             .subscribe { [weak self] _ in
+diff --git a/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.swift b/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.swift
+index 73f55da..0b96053 100644
+--- a/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.swift
++++ b/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.swift
+@@ -15,6 +15,9 @@ class OptionMenuFormTableViewCell: UITableViewCell {
+     @IBOutlet var urlLabel: UILabel!
+     @IBOutlet var openButton: UIButton!
+ 
++    let viewModel = OptionMenuFormTableViewCellViewModel()
++    var formId = ""
++
+     /// Observable自動解放
+     private let disposeBag = DisposeBag()
+ 
+@@ -35,7 +38,7 @@ class OptionMenuFormTableViewCell: UITableViewCell {
+             .subscribe(onNext: { [weak self] in
+                 log.eventIn(chain: "rx_tap")
+                 guard let `self` = self else { return }
+-                // TODO: open
++                self.viewModel.readForm(id: self.formId)
+                 log.eventOut(chain: "rx_tap")
+             })
+             .disposed(by: disposeBag)
+@@ -43,6 +46,7 @@ class OptionMenuFormTableViewCell: UITableViewCell {
+ 
+     // ビューモデルデータ設定
+     func setViewModelData(row: OptionMenuFormTableViewModel.Row) {
++        formId = row.data.id
+         titleLabel.text = row.data.title
+         urlLabel.text = row.data.url
+     }
+diff --git a/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.xib b/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.xib
+index cf81a5d..a6e9de9 100644
+--- a/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.xib
++++ b/Qass/Presentation/View/Base/FrontLayer/OptionMenu/Form/OptionMenuFormTableViewCell.xib
+@@ -1,10 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+     <device id="retina4_7" orientation="portrait">
+         <adaptation id="fullscreen"/>
+     </device>
+     <dependencies>
+-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
++        <deployment identifier="iOS"/>
++        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+     </dependencies>
+@@ -18,20 +19,20 @@
+                 <rect key="frame" x="0.0" y="0.0" width="250" height="49.5"/>
+                 <autoresizingMask key="autoresizingMask"/>
+                 <subviews>
+-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zig-Zy-YKX">
++                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Zig-Zy-YKX">
+                         <rect key="frame" x="10" y="5" width="235" height="39.5"/>
+                         <subviews>
+                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="chP-Hp-dAx">
+-                                <rect key="frame" x="0.0" y="0.0" width="205" height="39.5"/>
++                                <rect key="frame" x="0.0" y="0.0" width="202" height="39.5"/>
+                                 <subviews>
+                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJw-UC-7Zj">
+-                                        <rect key="frame" x="0.0" y="0.0" width="205" height="23"/>
++                                        <rect key="frame" x="0.0" y="0.0" width="202" height="23"/>
+                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                         <nil key="textColor"/>
+                                         <nil key="highlightedColor"/>
+                                     </label>
+                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqF-5Z-3KF">
+-                                        <rect key="frame" x="0.0" y="23" width="205" height="16.5"/>
++                                        <rect key="frame" x="0.0" y="23" width="202" height="16.5"/>
+                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                         <nil key="textColor"/>
+                                         <nil key="highlightedColor"/>
+diff --git a/Qass/Presentation/View/Form/FormViewController.swift b/Qass/Presentation/View/Form/FormViewController.swift
+index 8f8547a..4c8f4b4 100644
+--- a/Qass/Presentation/View/Form/FormViewController.swift
++++ b/Qass/Presentation/View/Form/FormViewController.swift
+@@ -6,25 +6,69 @@
+ //  Copyright © 2018年 eifandevs. All rights reserved.
+ //
+ 
++import Model
++import RxCocoa
++import RxSwift
+ import UIKit
+ 
+ class FormViewController: UIViewController {
++    private let viewModel = FormViewControllerViewModel()
++
++    @IBOutlet var tableView: UITableView!
++    @IBOutlet var closeButton: CornerRadiusButton!
++
++    /// Observable自動解放
++    private let disposeBag = DisposeBag()
++
++    convenience init(form: Form) {
++        self.init(nibName: R.nib.formViewController.name, bundle: nil)
++        viewModel.form = form
++    }
+ 
+     override func viewDidLoad() {
+         super.viewDidLoad()
+ 
+-        // Do any additional setup after loading the view.
++        // テーブルビュー監視
++        tableView.dataSource = self
++
++        tableView.estimatedRowHeight = viewModel.cellHeight
++
++        // カスタムビュー登録
++        tableView.register(R.nib.formTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.formCell.identifier)
++
++        setupRx()
+     }
+ 
++    private func setupRx() {
++        // ボタンタップ
++        closeButton.rx.tap
++            .subscribe(onNext: { [weak self] in
++                log.eventIn(chain: "rx_tap")
++                guard let `self` = self else { return }
++                self.dismiss(animated: true, completion: nil)
++                log.eventOut(chain: "rx_tap")
++            })
++            .disposed(by: disposeBag)
++    }
++}
++
++// MARK: - TableViewDataSourceDelegate
+ 
+-    /*
+-    // MARK: - Navigation
++extension FormViewController: UITableViewDataSource {
++    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
++        if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.formCell.identifier, for: indexPath) as? FormTableViewCell {
++            cell.setRow(row: viewModel.getRow(index: indexPath.row))
+ 
+-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+-        // Get the new view controller using segue.destination.
+-        // Pass the selected object to the new view controller.
++            return cell
++        }
++        return UITableViewCell()
+     }
+-    */
+ 
++    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
++        return viewModel.cellCount
++    }
++
++    func tableView(_ tableView: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
++        return UITableViewAutomaticDimension
++    }
+ }
+diff --git a/Qass/Presentation/View/Form/FormViewController.xib b/Qass/Presentation/View/Form/FormViewController.xib
+index 18b206c..6d3ca1f 100644
+--- a/Qass/Presentation/View/Form/FormViewController.xib
++++ b/Qass/Presentation/View/Form/FormViewController.xib
+@@ -1,13 +1,19 @@
+-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++<?xml version="1.0" encoding="UTF-8"?>
++<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++    <device id="retina4_7" orientation="portrait">
++        <adaptation id="fullscreen"/>
++    </device>
+     <dependencies>
+-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
++        <deployment identifier="iOS"/>
++        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+     </dependencies>
+     <objects>
+-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormViewController" customModuleProvider="target">
++        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormViewController" customModule="Qass" customModuleProvider="target">
+             <connections>
++                <outlet property="closeButton" destination="PMD-zZ-i4K" id="RS6-NH-FMP"/>
++                <outlet property="tableView" destination="8Up-m3-rc1" id="BWH-ua-6Lo"/>
+                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+             </connections>
+         </placeholder>
+@@ -15,7 +21,37 @@
+         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
++            <subviews>
++                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PMD-zZ-i4K" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
++                    <rect key="frame" x="22" y="605" width="331" height="40"/>
++                    <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
++                    <constraints>
++                        <constraint firstAttribute="height" constant="40" id="kDc-GC-arm"/>
++                    </constraints>
++                    <state key="normal" title="閉じる">
++                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
++                    </state>
++                    <userDefinedRuntimeAttributes>
++                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
++                            <real key="value" value="8"/>
++                        </userDefinedRuntimeAttribute>
++                    </userDefinedRuntimeAttributes>
++                </button>
++                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Up-m3-rc1">
++                    <rect key="frame" x="0.0" y="20" width="375" height="563"/>
++                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
++                </tableView>
++            </subviews>
+             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
++            <constraints>
++                <constraint firstItem="8Up-m3-rc1" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="4jK-Ew-nPc"/>
++                <constraint firstItem="PMD-zZ-i4K" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="22" id="Hon-Pj-91k"/>
++                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PMD-zZ-i4K" secondAttribute="trailing" constant="22" id="R7H-QC-uwP"/>
++                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8Up-m3-rc1" secondAttribute="trailing" id="RZd-NR-obd"/>
++                <constraint firstItem="8Up-m3-rc1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bCj-Tm-wPF"/>
++                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="PMD-zZ-i4K" secondAttribute="bottom" constant="22" id="tLs-Vb-ndn"/>
++                <constraint firstItem="PMD-zZ-i4K" firstAttribute="top" secondItem="8Up-m3-rc1" secondAttribute="bottom" constant="22" id="xMc-E6-0gq"/>
++            </constraints>
+             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+         </view>
+     </objects>
+diff --git a/Qass/Presentation/View/Memo/MemoViewController.swift b/Qass/Presentation/View/Memo/MemoViewController.swift
+index d62df02..69211c3 100644
+--- a/Qass/Presentation/View/Memo/MemoViewController.swift
++++ b/Qass/Presentation/View/Memo/MemoViewController.swift
+@@ -6,9 +6,17 @@
+ //  Copyright © 2018年 eifandevs. All rights reserved.
+ //
+ 
++import Model
++import RxCocoa
++import RxSwift
+ import UIKit
+ 
+ class MemoViewController: UIViewController {
++    @IBOutlet var closeButton: CornerRadiusButton!
++    @IBOutlet var tableView: UITableView!
++
++    /// Observable自動解放
++    private let disposeBag = DisposeBag()
+ 
+     override func viewDidLoad() {
+         super.viewDidLoad()
+@@ -16,15 +24,15 @@ class MemoViewController: UIViewController {
+         // Do any additional setup after loading the view.
+     }
+ 
+-
+-    /*
+-    // MARK: - Navigation
+-
+-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+-        // Get the new view controller using segue.destination.
+-        // Pass the selected object to the new view controller.
++    private func setupRx() {
++        // ボタンタップ
++        closeButton.rx.tap
++            .subscribe(onNext: { [weak self] in
++                log.eventIn(chain: "rx_tap")
++                guard let `self` = self else { return }
++                self.dismiss(animated: true, completion: nil)
++                log.eventOut(chain: "rx_tap")
++            })
++            .disposed(by: disposeBag)
+     }
+-    */
+-
+ }
+diff --git a/Qass/Presentation/View/Memo/MemoViewController.xib b/Qass/Presentation/View/Memo/MemoViewController.xib
+index 6f5bedc..e4bfc7d 100644
+--- a/Qass/Presentation/View/Memo/MemoViewController.xib
++++ b/Qass/Presentation/View/Memo/MemoViewController.xib
+@@ -1,13 +1,19 @@
+-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++<?xml version="1.0" encoding="UTF-8"?>
++<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++    <device id="retina4_7" orientation="portrait">
++        <adaptation id="fullscreen"/>
++    </device>
+     <dependencies>
+-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
++        <deployment identifier="iOS"/>
++        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+     </dependencies>
+     <objects>
+-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MemoViewController" customModuleProvider="target">
++        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MemoViewController" customModule="Qass" customModuleProvider="target">
+             <connections>
++                <outlet property="closeButton" destination="huQ-Hq-PiA" id="M0F-ye-xVQ"/>
++                <outlet property="tableView" destination="6SY-JU-hPH" id="kf2-5K-Eta"/>
+                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+             </connections>
+         </placeholder>
+@@ -15,7 +21,37 @@
+         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
++            <subviews>
++                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huQ-Hq-PiA" customClass="CornerRadiusButton" customModule="Qass" customModuleProvider="target">
++                    <rect key="frame" x="22" y="605" width="331" height="40"/>
++                    <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
++                    <constraints>
++                        <constraint firstAttribute="height" constant="40" id="6PH-sf-9y7"/>
++                    </constraints>
++                    <state key="normal" title="閉じる">
++                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
++                    </state>
++                    <userDefinedRuntimeAttributes>
++                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
++                            <real key="value" value="8"/>
++                        </userDefinedRuntimeAttribute>
++                    </userDefinedRuntimeAttributes>
++                </button>
++                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6SY-JU-hPH">
++                    <rect key="frame" x="0.0" y="20" width="375" height="563"/>
++                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
++                </tableView>
++            </subviews>
+             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
++            <constraints>
++                <constraint firstItem="6SY-JU-hPH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5qh-1y-Klk"/>
++                <constraint firstAttribute="trailing" secondItem="huQ-Hq-PiA" secondAttribute="trailing" constant="22" id="JpM-Yr-4sq"/>
++                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="huQ-Hq-PiA" secondAttribute="bottom" constant="22" id="SrK-Xb-F6m"/>
++                <constraint firstItem="6SY-JU-hPH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZEs-oE-s83"/>
++                <constraint firstItem="huQ-Hq-PiA" firstAttribute="top" secondItem="6SY-JU-hPH" secondAttribute="bottom" constant="22" id="ZsS-Jf-16g"/>
++                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6SY-JU-hPH" secondAttribute="trailing" id="aBt-SF-y7i"/>
++                <constraint firstItem="huQ-Hq-PiA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="22" id="fPo-SV-W39"/>
++            </constraints>
+             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+         </view>
+     </objects>
+diff --git a/Qass/Presentation/View/OpenSource/OpenSourceTableViewCell.xib b/Qass/Presentation/View/OpenSource/OpenSourceTableViewCell.xib
+index cff4870..599ae01 100644
+--- a/Qass/Presentation/View/OpenSource/OpenSourceTableViewCell.xib
++++ b/Qass/Presentation/View/OpenSource/OpenSourceTableViewCell.xib
+@@ -1,10 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
++<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+     <device id="retina4_7" orientation="portrait">
+         <adaptation id="fullscreen"/>
+     </device>
+     <dependencies>
+-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
++        <deployment identifier="iOS"/>
++        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+     </dependencies>
+diff --git a/Qass/Presentation/ViewModel/Base/BaseViewControllerViewModel.swift b/Qass/Presentation/ViewModel/Base/BaseViewControllerViewModel.swift
+index 1c23583..23dcca8 100644
+--- a/Qass/Presentation/ViewModel/Base/BaseViewControllerViewModel.swift
++++ b/Qass/Presentation/ViewModel/Base/BaseViewControllerViewModel.swift
+@@ -31,6 +31,16 @@ final class BaseViewControllerViewModel {
+             return Observable.just(())
+         }
+ 
++    // フォーム閲覧通知用RX
++    let rx_baseViewControllerViewModelDidPresentForm = FormUseCase.s.rx_formUseCaseDidRequestRead
++        .flatMap { id -> Observable<Form> in
++            if let form = FormUseCase.s.select(id: id).first {
++                return Observable.just(form)
++            } else {
++                return Observable.empty()
++            }
++        }
++
+     // メーラー起動通知用RX
+     let rx_baseViewControllerViewModelDidPresentMail = ContactUseCase.s.rx_operationUseCaseDidRequestPresentContactScreen
+         .flatMap { _ -> Observable<()> in
+diff --git a/Qass/Presentation/ViewModel/Base/FrontLayer/OptionMenu/OptionMenuFormTableViewModel.swift b/Qass/Presentation/ViewModel/Base/FrontLayer/OptionMenu/OptionMenuFormTableViewModel.swift
+index 4ffefd1..30281d1 100644
+--- a/Qass/Presentation/ViewModel/Base/FrontLayer/OptionMenu/OptionMenuFormTableViewModel.swift
++++ b/Qass/Presentation/ViewModel/Base/FrontLayer/OptionMenu/OptionMenuFormTableViewModel.swift
+@@ -45,4 +45,9 @@ final class OptionMenuFormTableViewModel {
+     func loadRequest(url: String) {
+         FormUseCase.s.load(url: url)
+     }
++
++    /// 閲覧リクエスト
++    func loadRequest(id: String) {
++        FormUseCase.s.read(id: id)
++    }
+ }

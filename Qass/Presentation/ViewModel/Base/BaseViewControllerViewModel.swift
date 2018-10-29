@@ -31,6 +31,16 @@ final class BaseViewControllerViewModel {
             return Observable.just(())
         }
 
+    // フォーム閲覧通知用RX
+    let rx_baseViewControllerViewModelDidPresentForm = FormUseCase.s.rx_formUseCaseDidRequestRead
+        .flatMap { id -> Observable<Form> in
+            if let form = FormUseCase.s.select(id: id).first {
+                return Observable.just(form)
+            } else {
+                return Observable.empty()
+            }
+        }
+
     // メーラー起動通知用RX
     let rx_baseViewControllerViewModelDidPresentMail = ContactUseCase.s.rx_operationUseCaseDidRequestPresentContactScreen
         .flatMap { _ -> Observable<()> in

@@ -6,9 +6,17 @@
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
+import Model
+import RxCocoa
+import RxSwift
 import UIKit
 
 class MemoViewController: UIViewController {
+    @IBOutlet var closeButton: CornerRadiusButton!
+    @IBOutlet var tableView: UITableView!
+
+    /// Observable自動解放
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,15 +24,15 @@ class MemoViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupRx() {
+        // ボタンタップ
+        closeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_tap")
+                guard let `self` = self else { return }
+                self.dismiss(animated: true, completion: nil)
+                log.eventOut(chain: "rx_tap")
+            })
+            .disposed(by: disposeBag)
     }
-    */
-
 }

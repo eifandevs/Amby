@@ -45,4 +45,9 @@ final class OptionMenuFormTableViewModel {
     func loadRequest(url: String) {
         FormUseCase.s.load(url: url)
     }
+
+    /// 閲覧リクエスト
+    func loadRequest(id: String) {
+        FormUseCase.s.read(id: id)
+    }
 }
