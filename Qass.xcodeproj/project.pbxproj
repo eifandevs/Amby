@@ -86,6 +86,9 @@
 		A13D6A9521872B7D00B1832E /* OptionMenuFormTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9421872B7D00B1832E /* OptionMenuFormTableViewCellViewModel.swift */; };
 		A13D6A9821872C7500B1832E /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9621872C7500B1832E /* FormTableViewCell.swift */; };
 		A13D6A9921872C7500B1832E /* FormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13D6A9721872C7500B1832E /* FormTableViewCell.xib */; };
+		A13D6A9B2187474D00B1832E /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9A2187474D00B1832E /* Memo.swift */; };
+		A13D6A9D2187489C00B1832E /* MemoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9C2187489C00B1832E /* MemoDataModel.swift */; };
+		A13D6A9F21874D2000B1832E /* MemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9E21874D2000B1832E /* MemoUseCase.swift */; };
 		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
 		A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */; };
 		A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */; };
@@ -487,6 +490,9 @@
 		A13D6A9421872B7D00B1832E /* OptionMenuFormTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuFormTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		A13D6A9621872C7500B1832E /* FormTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
 		A13D6A9721872C7500B1832E /* FormTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormTableViewCell.xib; sourceTree = "<group>"; };
+		A13D6A9A2187474D00B1832E /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		A13D6A9C2187489C00B1832E /* MemoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDataModel.swift; sourceTree = "<group>"; };
+		A13D6A9E21874D2000B1832E /* MemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoUseCase.swift; sourceTree = "<group>"; };
 		A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasscodeViewController.xib; sourceTree = "<group>"; };
 		A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeUseCase.swift; sourceTree = "<group>"; };
@@ -1054,6 +1060,7 @@
 				A112E97221319C7700320048 /* SuggestDataModel.swift */,
 				A112E97C21319C7800320048 /* ThumbnailDataModel.swift */,
 				A1B7782D216B795400BED141 /* IssueDataModel.swift */,
+				A13D6A9C2187489C00B1832E /* MemoDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1079,6 +1086,7 @@
 				A1950674214439980091DF23 /* NoticeUseCase.swift */,
 				A195067621444E150091DF23 /* NewsUseCase.swift */,
 				A1950678214453AB0091DF23 /* WebCacheUseCase.swift */,
+				A13D6A9E21874D2000B1832E /* MemoUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -1679,6 +1687,7 @@
 				A112E8F3212CD7D100320048 /* Form.swift */,
 				A112E8F4212CD7D100320048 /* Favorite.swift */,
 				A195061D214159F10091DF23 /* Article.swift */,
+				A13D6A9A2187474D00B1832E /* Memo.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2646,6 +2655,7 @@
 				A1950675214439980091DF23 /* NoticeUseCase.swift in Sources */,
 				A19506262142D9A90091DF23 /* SearchHistory.swift in Sources */,
 				A19352A02141569C002A0865 /* SuggestResponse.swift in Sources */,
+				A13D6A9B2187474D00B1832E /* Memo.swift in Sources */,
 				A15C53F3214D4CDC001E8AB5 /* HelpUseCase.swift in Sources */,
 				A19506402143F8B80091DF23 /* FavoriteUseCase.swift in Sources */,
 				A1B7783C2173CEF800BED141 /* EnumEnumerable.swift in Sources */,
@@ -2653,6 +2663,7 @@
 				A195062B2142D9A90091DF23 /* Input.swift in Sources */,
 				A19506392143F8AF0091DF23 /* FormDataModel.swift in Sources */,
 				A1B778322173A6DA00BED141 /* ModelEnum.swift in Sources */,
+				A13D6A9F21874D2000B1832E /* MemoUseCase.swift in Sources */,
 				A19506422143F8B80091DF23 /* GrepUseCase.swift in Sources */,
 				A195063A2143F8AF0091DF23 /* ProgressDataModel.swift in Sources */,
 				A19506382143F8AF0091DF23 /* FavoriteDataModel.swift in Sources */,
@@ -2690,6 +2701,7 @@
 				A195063E2143F8AF0091DF23 /* ThumbnailDataModel.swift in Sources */,
 				A193529F2141569C002A0865 /* ArticleResponse.swift in Sources */,
 				A195062A2142D9A90091DF23 /* Suggest.swift in Sources */,
+				A13D6A9D2187489C00B1832E /* MemoDataModel.swift in Sources */,
 				A15C53F2214D4CDC001E8AB5 /* SourceCodeUseCase.swift in Sources */,
 				A15C53F5214D4CDC001E8AB5 /* TrendUseCase.swift in Sources */,
 				A19506332143F8A60091DF23 /* KeychainRepository.swift in Sources */,

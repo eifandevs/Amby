@@ -18,7 +18,7 @@ final class FormDataModel {
     let rx_formDataModelDidNotice = PublishSubject<(message: String, isSuccess: Bool)>()
 
     /// db repository
-    let repository = DBRepository(realmEncryptionToken: AuthTokenDataModel.s.realmEncryptionToken)
+    let repository = DBRepository()
 
     private init() {}
 
