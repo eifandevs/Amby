@@ -14,8 +14,16 @@ import RxSwift
 final class FormDataModel {
     static let s = FormDataModel()
 
-    /// メッセージ通知用RX
-    let rx_formDataModelDidNotice = PublishSubject<(message: String, isSuccess: Bool)>()
+    /// フォーム登録通知用RX
+    let rx_formDataModelDidInsert = PublishSubject<()>()
+    /// フォーム登録失敗通知用RX
+    let rx_formDataModelDidInsertFailure = PublishSubject<()>()
+    /// フォーム削除通知用RX
+    let rx_formDataModelDidDelete = PublishSubject<()>()
+    /// フォーム全削除通知用RX
+    let rx_formDataModelDidDeleteAll = PublishSubject<()>()
+    /// フォーム削除失敗通知用RX
+    let rx_formDataModelDidDeleteFailure = PublishSubject<()>()
 
     /// db repository
     let repository = DBRepository()
@@ -25,6 +33,7 @@ final class FormDataModel {
     /// insert forms
     func insert(forms: [Form]) {
         repository.insert(data: forms)
+        rx_formDataModelDidInsert.onNext(())
     }
 
     /// select forms
@@ -43,12 +52,21 @@ final class FormDataModel {
     }
 
     /// delete forms
-    func delete(forms: [Form]? = nil) {
-        if let forms = forms {
-            repository.delete(data: forms)
+    func delete() {
+        // 削除対象が指定されていない場合は、すべて削除する
+        if repository.delete(data: select()) {
+            rx_formDataModelDidDeleteAll.onNext(())
         } else {
-            // 削除対象が指定されていない場合は、すべて削除する
-            repository.delete(data: select())
+            rx_formDataModelDidDeleteFailure.onNext(())
+        }
+    }
+
+    /// delete forms
+    func delete(forms: [Form]) {
+        if repository.delete(data: forms) {
+            rx_formDataModelDidDelete.onNext(())
+        } else {
+            rx_formDataModelDidDeleteFailure.onNext(())
         }
     }
 
@@ -61,9 +79,8 @@ final class FormDataModel {
                 FormDataModel.s.delete(forms: [savedForm])
             }
             FormDataModel.s.insert(forms: [form])
-            rx_formDataModelDidNotice.onNext((message: MessageConst.NOTIFICATION.REGISTER_FORM, isSuccess: true))
         } else {
-            rx_formDataModelDidNotice.onNext((message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_INPUT, isSuccess: false))
+            rx_formDataModelDidInsertFailure.onNext(())
         }
     }
 }

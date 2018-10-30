@@ -7,8 +7,17 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
 
 final class SearchHistoryDataModel {
+    /// 削除通知用RX
+    let rx_searchHistoryDataModelDidDelete = PublishSubject<()>()
+    /// 全データ削除通知用RX
+    let rx_searchHistoryDataModelDidDeleteAll = PublishSubject<()>()
+    /// 削除失敗通知用RX
+    let rx_searchHistoryDataModelDidDeleteFailure = PublishSubject<()>()
+
     static let s = SearchHistoryDataModel()
     var histories = [SearchHistory]()
 
@@ -65,7 +74,7 @@ final class SearchHistoryDataModel {
                 }()
 
                 let searchHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                localStorageRepository.write(.searchHistory(resource: filename), data: searchHistoryData)
+                _ = localStorageRepository.write(.searchHistory(resource: filename), data: searchHistoryData)
             }
         }
     }
@@ -121,15 +130,23 @@ final class SearchHistoryDataModel {
             let deleteFiles = readFiles.prefix(readFiles.count - saveTerm)
             deleteFiles.forEach({ key in
                 let filename = "\(key).dat"
-                localStorageRepository.delete(.searchHistory(resource: filename))
+                if !localStorageRepository.delete(.searchHistory(resource: filename)) {
+                    rx_searchHistoryDataModelDidDeleteFailure.onNext(())
+                    return
+                }
             })
             log.debug("deleteSearchHistory: \(deleteFiles)")
         }
+
+        rx_searchHistoryDataModelDidDelete.onNext(())
     }
 
     /// 検索履歴を全て削除
     func delete() {
-        localStorageRepository.delete(.searchHistory(resource: nil))
-        localStorageRepository.create(.searchHistory(resource: nil))
+        if localStorageRepository.delete(.searchHistory(resource: nil)) && localStorageRepository.create(.searchHistory(resource: nil)) {
+            rx_searchHistoryDataModelDidDeleteAll.onNext(())
+        } else {
+            rx_searchHistoryDataModelDidDeleteFailure.onNext(())
+        }
     }
 }

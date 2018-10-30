@@ -22,7 +22,7 @@ class Util {
     }
 
     /// フォルダー作成
-    static func createFolder(path: String) {
+    static func createFolder(path: String) -> Bool {
         let fileManager = FileManager.default
         var isDir: ObjCBool = false
 
@@ -31,26 +31,32 @@ class Util {
         if !isDir.boolValue {
             do {
                 try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+                return true
             } catch let error as NSError {
                 log.error("create directory error. error: \(error.localizedDescription)")
             }
         }
+
+        return false
     }
 
     /// フォルダー削除
-    static func deleteFolder(path: String) {
+    static func deleteFolder(path: String) -> Bool {
         let fileManager = FileManager.default
         var isDir: ObjCBool = false
 
         if fileManager.fileExists(atPath: path, isDirectory: &isDir) {
             do {
                 try fileManager.removeItem(atPath: path)
+                return true
             } catch let error as NSError {
                 log.error("remove item error. error: \(error.localizedDescription)")
             }
         } else {
             log.error("remove item already removed.")
         }
+
+        return false
     }
 
     /// ファーストレスポンダー取得

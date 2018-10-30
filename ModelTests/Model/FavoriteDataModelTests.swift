@@ -96,7 +96,7 @@
 //
 //        weak var expectation = self.expectation(description: #function)
 //
-//        FavoriteDataModel.s.rx_favoriteDataModelDidRemove
+//        FavoriteDataModel.s.rx_favoriteDataModelDidDelete
 //            .subscribe { _ in
 //                if let expectation = expectation {
 //                    expectation.fulfill()
@@ -123,7 +123,7 @@
 //
 //        weak var expectation = self.expectation(description: #function)
 //
-//        FavoriteDataModel.s.rx_favoriteDataModelDidRemove
+//        FavoriteDataModel.s.rx_favoriteDataModelDidDelete
 //            .subscribe { _ in
 //                if let expectation = expectation {
 //                    expectation.fulfill()

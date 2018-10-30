@@ -11,6 +11,11 @@ import RxCocoa
 import RxSwift
 
 final class CommonHistoryDataModel {
+    /// 削除通知用RX
+    let rx_commonHistoryDataModelDidDeleteAll = PublishSubject<()>()
+    /// 削除失敗通知用RX
+    let rx_commonHistoryDataModelDidDeleteFailure = PublishSubject<()>()
+
     let disposeBag = DisposeBag()
 
     static let s = CommonHistoryDataModel()
@@ -198,9 +203,9 @@ final class CommonHistoryDataModel {
             if let saveData = saveData {
                 if saveData.count > 0 {
                     let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                    localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
+                    _ = localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
                 } else {
-                    localStorageRepository.delete(.commonHistory(resource: filename))
+                    _ = localStorageRepository.delete(.commonHistory(resource: filename))
                     log.debug("remove common history file. date: \(key)")
                 }
             }
@@ -210,7 +215,10 @@ final class CommonHistoryDataModel {
     /// 閲覧履歴を全て削除
     func delete() {
         histories = []
-        localStorageRepository.delete(.commonHistory(resource: nil))
-        localStorageRepository.create(.commonHistory(resource: nil))
+        if localStorageRepository.delete(.commonHistory(resource: nil)) && localStorageRepository.create(.commonHistory(resource: nil)) {
+            rx_commonHistoryDataModelDidDeleteAll.onNext(())
+        } else {
+            rx_commonHistoryDataModelDidDeleteFailure.onNext(())
+        }
     }
 }

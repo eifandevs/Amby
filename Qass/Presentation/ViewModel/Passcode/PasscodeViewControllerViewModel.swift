@@ -81,7 +81,7 @@ final class PasscodeViewControllerViewModel {
     func initializeApp() {
         HistoryUseCase.s.delete()
         SearchUseCase.s.delete()
-        FavoriteUseCase.s.delete(notify: false)
+        FavoriteUseCase.s.delete()
         FormUseCase.s.delete()
         WebCacheUseCase.s.deleteCookies()
         WebCacheUseCase.s.deleteCaches()

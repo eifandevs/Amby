@@ -25,7 +25,7 @@ public final class FavoriteUseCase {
             PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert.flatMap { _ in Observable.just(()) },
             PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove.flatMap { _ in Observable.just(()) },
             FavoriteDataModel.s.rx_favoriteDataModelDidInsert.flatMap { _ in Observable.just(()) },
-            FavoriteDataModel.s.rx_favoriteDataModelDidRemove,
+            FavoriteDataModel.s.rx_favoriteDataModelDidDelete,
             FavoriteDataModel.s.rx_favoriteDataModelDidReload.flatMap { _ in Observable.just(()) }
         ])
         .flatMap { _ -> Observable<Bool> in
@@ -52,7 +52,11 @@ public final class FavoriteUseCase {
         rx_favoriteUseCaseDidRequestLoad.onNext(url)
     }
 
-    public func delete(favorites: [Favorite]? = nil, notify: Bool = true) {
-        FavoriteDataModel.s.delete(favorites: favorites, notify: notify)
+    public func delete() {
+        FavoriteDataModel.s.delete()
+    }
+
+    public func delete(favorites: [Favorite]) {
+        FavoriteDataModel.s.delete(favorites: favorites)
     }
 }

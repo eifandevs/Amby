@@ -14,11 +14,15 @@ final class FavoriteDataModel {
     /// お気に入り追加通知用RX
     let rx_favoriteDataModelDidInsert = PublishSubject<([Favorite])>()
     /// お気に入り削除通知用RX
-    let rx_favoriteDataModelDidRemove = PublishSubject<()>()
+    let rx_favoriteDataModelDidDelete = PublishSubject<()>()
+    /// お気に入り全削除通知用RX
+    let rx_favoriteDataModelDidDeleteAll = PublishSubject<()>()
+    /// お気に入り削除失敗通知用RX
+    let rx_favoriteDataModelDidDeleteFailure = PublishSubject<()>()
     /// お気に入り更新通知用RX
     let rx_favoriteDataModelDidReload = PublishSubject<String>()
-    /// メッセージ通知用RX
-    let rx_favoriteDataModelDidNotice = PublishSubject<(message: String, isSuccess: Bool)>()
+    /// お気に入り登録失敗通知用RX
+    let rx_favoriteDataModelDidInsertFailure = PublishSubject<()>()
 
     static let s = FavoriteDataModel()
     /// 通知センター
@@ -46,17 +50,20 @@ final class FavoriteDataModel {
         }
     }
 
-    func delete(favorites: [Favorite]? = nil, notify: Bool = true) {
-        if let favorites = favorites {
-            repository.delete(data: favorites)
+    func delete() {
+        // 削除対象が指定されていない場合は、すべて削除する
+        if repository.delete(data: select()) {
+            rx_favoriteDataModelDidDeleteAll.onNext(())
         } else {
-            // 削除対象が指定されていない場合は、すべて削除する
-            repository.delete(data: select())
+            rx_favoriteDataModelDidDeleteFailure.onNext(())
         }
+    }
 
-        // 通知する
-        if notify {
-            rx_favoriteDataModelDidRemove.onNext(())
+    func delete(favorites: [Favorite]) {
+        if repository.delete(data: favorites) {
+            rx_favoriteDataModelDidDelete.onNext(())
+        } else {
+            rx_favoriteDataModelDidDeleteFailure.onNext(())
         }
     }
 
@@ -80,11 +87,9 @@ final class FavoriteDataModel {
                     delete(favorites: [favorite])
                 } else {
                     insert(favorites: [fd])
-                    // ヘッダーのお気に入りアイコン更新
-                    rx_favoriteDataModelDidNotice.onNext((message: MessageConst.NOTIFICATION.REGISTER_BOOK_MARK, isSuccess: true))
                 }
             } else {
-                rx_favoriteDataModelDidNotice.onNext((message: MessageConst.NOTIFICATION.REGISTER_BOOK_MARK_ERROR, isSuccess: false))
+                rx_favoriteDataModelDidInsertFailure.onNext(())
             }
         }
     }

@@ -52,7 +52,7 @@ public final class FormUseCase {
         rx_formUseCaseDidRequestRead.onNext(id)
     }
 
-    public func delete(forms: [Form]?) {
+    public func delete(forms: [Form]) {
         FormDataModel.s.delete(forms: forms)
     }
 

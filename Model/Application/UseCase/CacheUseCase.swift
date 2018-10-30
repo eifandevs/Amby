@@ -12,16 +12,23 @@ import RxSwift
 
 /// キャッシュユースケース
 public final class CacheUseCase {
+    /// クッキー削除通知用RX
+    let rx_cacheUseCaseDidDeleteCookies = PublishSubject<()>()
+    /// キャッシュ削除通知用RX
+    let rx_cacheUseCaseDidDeleteCaches = PublishSubject<()>()
+
     public static let s = CacheUseCase()
 
     private init() {}
 
     public func deleteCookies() {
         CacheHelper.deleteCookies()
+        rx_cacheUseCaseDidDeleteCookies.onNext(())
     }
 
     /// キャッシュ削除
     public func deleteCaches() {
         CacheHelper.deleteCaches()
+        rx_cacheUseCaseDidDeleteCaches.onNext(())
     }
 }
