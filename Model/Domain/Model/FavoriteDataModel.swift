@@ -23,6 +23,8 @@ final class FavoriteDataModel {
     let rx_favoriteDataModelDidReload = PublishSubject<String>()
     /// お気に入り登録失敗通知用RX
     let rx_favoriteDataModelDidInsertFailure = PublishSubject<()>()
+    /// お気に入り情報取得失敗通知用RX
+    let rx_favoriteDataModelDidGetFailure = PublishSubject<()>()
 
     static let s = FavoriteDataModel()
     /// 通知センター
@@ -33,19 +35,36 @@ final class FavoriteDataModel {
     private init() {}
 
     func insert(favorites: [Favorite]) {
-        repository.insert(data: favorites)
-        rx_favoriteDataModelDidInsert.onNext(favorites)
+        if repository.insert(data: favorites) {
+            rx_favoriteDataModelDidInsert.onNext(favorites)
+        } else {
+            rx_favoriteDataModelDidInsertFailure.onNext(())
+        }
     }
 
-    func select(id: String? = nil, url: String? = nil) -> [Favorite] {
+    func select() -> [Favorite] {
         if let favorites = repository.select(type: Favorite.self) as? [Favorite] {
-            if let id = id {
-                return favorites.filter({ $0.id == id })
-            } else if let url = url {
-                return favorites.filter({ $0.url == url })
-            }
             return favorites
         } else {
+            log.error("fail to select favorite")
+            return []
+        }
+    }
+
+    func select(id: String) -> [Favorite] {
+        if let favorites = repository.select(type: Favorite.self) as? [Favorite] {
+            return favorites.filter({ $0.id == id })
+        } else {
+            log.error("fail to select favorite")
+            return []
+        }
+    }
+
+    func select(url: String) -> [Favorite] {
+        if let favorites = repository.select(type: Favorite.self) as? [Favorite] {
+            return favorites.filter({ $0.url == url })
+        } else {
+            log.error("fail to select favorite")
             return []
         }
     }
@@ -89,7 +108,7 @@ final class FavoriteDataModel {
                     insert(favorites: [fd])
                 }
             } else {
-                rx_favoriteDataModelDidInsertFailure.onNext(())
+                rx_favoriteDataModelDidGetFailure.onNext(())
             }
         }
     }

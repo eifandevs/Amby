@@ -16,7 +16,6 @@ protocol OptionMenuView {
 extension OptionMenuView where Self: UIView {
     func setup(tableView: UITableView) -> UITableView {
         tableView.isUserInteractionEnabled = true
-        tableView.separatorColor = UIColor.clear
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         tableView.showsHorizontalScrollIndicator = false
         tableView.showsVerticalScrollIndicator = true

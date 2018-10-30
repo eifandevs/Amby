@@ -111,13 +111,13 @@ public final class NoticeUseCase {
             }
             .disposed(by: disposeBag)
 
-        // お気に入り登録失敗監視
-        FavoriteDataModel.s.rx_favoriteDataModelDidInsertFailure
+        // お気に入り情報取得失敗監視
+        FavoriteDataModel.s.rx_favoriteDataModelDidGetFailure
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_favoriteDataModelDidRegisterError")
+                log.eventIn(chain: "rx_favoriteDataModelDidGetFailure")
                 guard let `self` = self else { return }
                 self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.REGISTER_BOOK_MARK_ERROR, isSuccess: false))
-                log.eventOut(chain: "rx_favoriteDataModelDidRegisterError")
+                log.eventOut(chain: "rx_favoriteDataModelDidGetFailure")
             }
             .disposed(by: disposeBag)
 
@@ -131,13 +131,13 @@ public final class NoticeUseCase {
             }
             .disposed(by: disposeBag)
 
-        // フォーム登録失敗監視
-        FormDataModel.s.rx_formDataModelDidInsertFailure
+        // フォーム情報取得失敗監視
+        FormDataModel.s.rx_formDataModelDidGetFailure
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_formDataModelDidRegisterError")
+                log.eventIn(chain: "rx_formDataModelDidGetFailure")
                 guard let `self` = self else { return }
                 self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_INPUT, isSuccess: false))
-                log.eventOut(chain: "rx_formDataModelDidRegisterError")
+                log.eventOut(chain: "rx_formDataModelDidGetFailure")
             }
             .disposed(by: disposeBag)
 

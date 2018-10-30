@@ -30,9 +30,9 @@ public final class Model {
 
         // ローカルストレージセットアップ
         let repository = LocalStorageRepository<Cache>()
-        repository.create(.commonHistory(resource: nil))
-        repository.create(.database(resource: nil))
-        repository.create(.searchHistory(resource: nil))
-        repository.create(.thumbnails(additionalPath: nil, resource: nil))
+        _ = repository.create(.commonHistory(resource: nil))
+        _ = repository.create(.database(resource: nil))
+        _ = repository.create(.searchHistory(resource: nil))
+        _ = repository.create(.thumbnails(additionalPath: nil, resource: nil))
     }
 }

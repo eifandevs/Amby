@@ -24,6 +24,8 @@ final class FormDataModel {
     let rx_formDataModelDidDeleteAll = PublishSubject<()>()
     /// フォーム削除失敗通知用RX
     let rx_formDataModelDidDeleteFailure = PublishSubject<()>()
+    /// フォーム情報取得失敗通知用RX
+    let rx_formDataModelDidGetFailure = PublishSubject<()>()
 
     /// db repository
     let repository = DBRepository()
@@ -32,11 +34,41 @@ final class FormDataModel {
 
     /// insert forms
     func insert(forms: [Form]) {
-        repository.insert(data: forms)
-        rx_formDataModelDidInsert.onNext(())
+        if repository.insert(data: forms) {
+            rx_formDataModelDidInsert.onNext(())
+        } else {
+            rx_formDataModelDidInsertFailure.onNext(())
+        }
     }
 
     /// select forms
+    func select() -> [Form] {
+        if let form = repository.select(type: Form.self) as? [Form] {
+            return form
+        } else {
+            log.error("fail to select form")
+            return []
+        }
+    }
+
+    func select(id: String) -> [Form] {
+        if let form = repository.select(type: Form.self) as? [Form] {
+            return form.filter({ $0.id == id })
+        } else {
+            log.error("fail to select form")
+            return []
+        }
+    }
+
+    func select(url: String) -> [Form] {
+        if let form = repository.select(type: Form.self) as? [Form] {
+            return form.filter({ $0.url == url })
+        } else {
+            log.error("fail to select form")
+            return []
+        }
+    }
+
     func select(id: String? = nil, url: String? = nil) -> [Form] {
         if let forms = repository.select(type: Form.self) as? [Form] {
             if let id = id {
@@ -46,7 +78,7 @@ final class FormDataModel {
             }
             return forms
         } else {
-            log.error("fail to select form.")
+            log.error("fail to select form")
             return []
         }
     }
@@ -80,7 +112,7 @@ final class FormDataModel {
             }
             FormDataModel.s.insert(forms: [form])
         } else {
-            rx_formDataModelDidInsertFailure.onNext(())
+            rx_formDataModelDidGetFailure.onNext(())
         }
     }
 }

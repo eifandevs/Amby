@@ -38,8 +38,16 @@ public final class FavoriteUseCase {
 
     private init() {}
 
-    public func select(id: String? = nil, url: String? = nil) -> [Favorite] {
-        return FavoriteDataModel.s.select(id: id, url: url)
+    public func select() -> [Favorite] {
+        return FavoriteDataModel.s.select()
+    }
+
+    public func select(id: String) -> [Favorite] {
+        return FavoriteDataModel.s.select(id: id)
+    }
+
+    public func select(url: String) -> [Favorite] {
+        return FavoriteDataModel.s.select(url: url)
     }
 
     /// お気に入り更新

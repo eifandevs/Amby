@@ -216,7 +216,7 @@ class BaseView: UIView {
                 log.eventIn(chain: "rx_baseViewModelDidAutoFill")
                 guard let `self` = self else { return }
                 if !self.isDoneAutoFill {
-                    if let inputForm = FormUseCase.s.select(url: self.front.url?.absoluteString).first {
+                    if let url = self.front.url?.absoluteString, let inputForm = FormUseCase.s.select(url: url).first {
                         NotificationManager.presentAlert(title: MessageConst.ALERT.FORM_TITLE, message: MessageConst.ALERT.FORM_EXIST, completion: { [weak self] in
                             guard let `self` = self else { return }
                             inputForm.inputs.forEach {

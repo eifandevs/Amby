@@ -56,7 +56,15 @@ public final class FormUseCase {
         FormDataModel.s.delete(forms: forms)
     }
 
-    public func select(id: String? = nil, url: String? = nil) -> [Form] {
-        return FormDataModel.s.select(id: id, url: url)
+    public func select() -> [Form] {
+        return FormDataModel.s.select()
+    }
+
+    public func select(id: String) -> [Form] {
+        return FormDataModel.s.select(id: id)
+    }
+
+    public func select(url: String) -> [Form] {
+        return FormDataModel.s.select(url: url)
     }
 }
