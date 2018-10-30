@@ -27,7 +27,7 @@ class Thumbnail: UIButton {
         super.init(frame: frame)
         // フロントバーを配置
         frontBar.frame = CGRect(origin: CGPoint(x: 0, y: frame.size.height - 4), size: CGSize(width: frame.size.width, height: 4))
-        frontBar.backgroundColor = UIColor.ultraOrange
+        frontBar.backgroundColor = UIColor.ultraViolet
         frontBar.alpha = 0
         addSubview(frontBar)
 
@@ -71,7 +71,7 @@ class Thumbnail: UIButton {
         // アンダーライン初期化
         // ライン初期化
         underLine.frame = CGRect(x: -5, y: (frame.size.width / 3) - 1, width: width + 18, height: 1)
-        underLine.backgroundColor = UIColor.ultraOrange
+        underLine.backgroundColor = UIColor.ultraViolet
         thumbnailInfo.addSubview(underLine)
 
         // 回転

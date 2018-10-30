@@ -188,7 +188,7 @@ class HeaderView: UIView, ShadowView {
                 if let enable = object.element {
                     if enable {
                         // すでに登録済みの場合は、お気に入りボタンの色を変更する
-                        self.favoriteButton.setImage(image: R.image.headerFavoriteSelected(), color: UIColor.ultraOrange)
+                        self.favoriteButton.setImage(image: R.image.headerFavoriteSelected(), color: UIColor.ultraViolet)
                     } else {
                         self.favoriteButton.setImage(image: R.image.headerFavorite(), color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
                     }

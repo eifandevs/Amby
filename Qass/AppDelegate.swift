@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.verbose("APPLICATION PATH: \(AppConst.DEVICE.APPLICATION_PATH)")
 
         // progress setup
-        SVProgressHUD.setForegroundColor(UIColor.ultraOrange)
+        SVProgressHUD.setForegroundColor(UIColor.ultraViolet)
 
         // app setup
         setup()

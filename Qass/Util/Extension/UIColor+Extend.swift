@@ -42,10 +42,6 @@ extension UIColor {
         return UIColor(hex: 0x5F4B8B, alpha: 1)
     }
 
-    static var ultraOrange: UIColor {
-        return UIColor(hex: 0xEB6644, alpha: 1)
-    }
-
     static var lightUltraViolet: UIColor {
         return UIColor.ultraViolet.withAlphaComponent(0.4)
     }
