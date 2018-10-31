@@ -29,5 +29,7 @@ struct MessageConst {
         static let REGISTER_FORM = "フォーム情報を登録しました"
         static let REGISTER_FORM_ERROR_INPUT = "フォーム情報の入力を確認できませんでした"
         static let REGISTER_FORM_ERROR_CRAWL = "ページ情報を取得できませんでした"
+        static let REGISTER_REPORT = "レポートを登録しました。ご協力ありがとうございました"
+        static let REGISTER_REPORT_ERROR = "レポートの登録に失敗しました"
     }
 }

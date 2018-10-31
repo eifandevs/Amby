@@ -119,21 +119,15 @@ class BaseViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
 
-        // レポート登録成功監視
-        viewModel.rx_baseViewControllerViewModelDidRegisterSuccess
-            .subscribe { _ in
-                log.eventIn(chain: "rx_baseViewControllerViewModelDidRegisterSuccess")
-                NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.REGISTER_REPORT, isSuccess: true)
-                log.eventOut(chain: "rx_baseViewControllerViewModelDidRegisterSuccess")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // レポート登録失敗監視
-        viewModel.rx_baseViewControllerViewModelDidRegisterFailure
-            .subscribe { _ in
-                log.eventIn(chain: "rx_baseViewControllerViewModelDidRegisterFailure")
-                NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.REGISTER_REPORT_ERROR, isSuccess: false)
-                log.eventOut(chain: "rx_baseViewControllerViewModelDidRegisterFailure")
+        // メモ画面表示監視
+        viewModel.rx_baseViewControllerViewModelDidPresentMemo
+            .subscribe { [weak self] element in
+                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentMemo")
+                guard let `self` = self else { return }
+                let memo = element.element! == nil ? Memo() : element.element!!
+                let vc = MemoViewController(memo: memo)
+                self.present(vc, animated: true)
+                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentMemo")
             }
             .disposed(by: rx.disposeBag)
 

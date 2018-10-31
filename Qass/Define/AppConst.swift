@@ -27,6 +27,7 @@ struct AppConst {
         static let TABLE_VIEW_LICENSE_CELL_HEIGHT = 44.f
         static let TABLE_VIEW_FORM_CELL_HEIGHT = 44.f
         static let TABLE_VIEW_MENU_ORDER_CELL_HEIGHT = 47.f
+        static let TABLE_VIEW_MEMO_CELL_HEIGHT = 47.f
         static let TABLE_VIEW_NEWS_CELL_HEIGHT = 85.f
         static let TABLE_VIEW_SECTION_HEIGHT = 19.f
         static let SEARCH_TABLE_VIEW_ROW_NUM = 2

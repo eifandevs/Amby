@@ -99,7 +99,7 @@ extension OptionMenuTableView: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuCell.identifier, for: indexPath) as? OptionMenuTableViewCell {
-            cell.setViewModelData(row: viewModel.getRow(indexPath: indexPath))
+            cell.setRow(row: viewModel.getRow(indexPath: indexPath))
             return cell
         }
         return UITableViewCell()

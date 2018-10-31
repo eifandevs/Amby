@@ -13,15 +13,20 @@ import UIKit
 
 class MemoViewController: UIViewController {
     @IBOutlet var closeButton: CornerRadiusButton!
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var textView: UITextView!
 
-    /// Observable自動解放
-    private let disposeBag = DisposeBag()
+    private var memo: Memo!
+
+    convenience init(memo: Memo) {
+        self.init(nibName: R.nib.memoViewController.name, bundle: nil)
+        self.memo = memo
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        textView.text = memo.text
+        setupRx()
     }
 
     private func setupRx() {
@@ -33,6 +38,6 @@ class MemoViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
                 log.eventOut(chain: "rx_tap")
             })
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
     }
 }

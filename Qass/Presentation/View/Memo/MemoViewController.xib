@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MemoViewController" customModule="Qass" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="huQ-Hq-PiA" id="M0F-ye-xVQ"/>
-                <outlet property="tableView" destination="6SY-JU-hPH" id="kf2-5K-Eta"/>
+                <outlet property="textView" destination="IuS-IL-bJn" id="aCL-K3-R1i"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -37,20 +37,23 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6SY-JU-hPH">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IuS-IL-bJn">
                     <rect key="frame" x="0.0" y="20" width="375" height="563"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </tableView>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="6SY-JU-hPH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5qh-1y-Klk"/>
                 <constraint firstAttribute="trailing" secondItem="huQ-Hq-PiA" secondAttribute="trailing" constant="22" id="JpM-Yr-4sq"/>
+                <constraint firstItem="IuS-IL-bJn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="K0P-pf-uId"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="huQ-Hq-PiA" secondAttribute="bottom" constant="22" id="SrK-Xb-F6m"/>
-                <constraint firstItem="6SY-JU-hPH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZEs-oE-s83"/>
-                <constraint firstItem="huQ-Hq-PiA" firstAttribute="top" secondItem="6SY-JU-hPH" secondAttribute="bottom" constant="22" id="ZsS-Jf-16g"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6SY-JU-hPH" secondAttribute="trailing" id="aBt-SF-y7i"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IuS-IL-bJn" secondAttribute="trailing" id="cjL-rI-eLt"/>
+                <constraint firstItem="IuS-IL-bJn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fKh-uF-YJS"/>
                 <constraint firstItem="huQ-Hq-PiA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="22" id="fPo-SV-W39"/>
+                <constraint firstItem="huQ-Hq-PiA" firstAttribute="top" secondItem="IuS-IL-bJn" secondAttribute="bottom" constant="22" id="ftK-jD-6aC"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>

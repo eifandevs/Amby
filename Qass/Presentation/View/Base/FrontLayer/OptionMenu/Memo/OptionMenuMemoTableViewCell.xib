@@ -18,8 +18,26 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya7-XZ-FjA">
+                        <rect key="frame" x="10" y="0.0" width="305" height="43.5"/>
+                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Ya7-XZ-FjA" secondAttribute="trailing" constant="5" id="9wr-hw-cjo"/>
+                    <constraint firstItem="Ya7-XZ-FjA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="FFv-IP-20q"/>
+                    <constraint firstAttribute="bottom" secondItem="Ya7-XZ-FjA" secondAttribute="bottom" id="Jhp-2p-5Rp"/>
+                    <constraint firstItem="Ya7-XZ-FjA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="cMS-JA-eJg"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="titleLabel" destination="Ya7-XZ-FjA" id="A9f-x5-PSU"/>
+            </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="121.4392803598201"/>
         </tableViewCell>
     </objects>
 </document>

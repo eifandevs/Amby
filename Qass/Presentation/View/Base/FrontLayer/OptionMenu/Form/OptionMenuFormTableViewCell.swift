@@ -45,7 +45,7 @@ class OptionMenuFormTableViewCell: UITableViewCell {
     }
 
     // ビューモデルデータ設定
-    func setViewModelData(row: OptionMenuFormTableViewModel.Row) {
+    func setRow(row: OptionMenuFormTableViewModel.Row) {
         formId = row.data.id
         titleLabel.text = row.data.title
         urlLabel.text = row.data.url

@@ -112,7 +112,7 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuHistoryCell.identifier, for: indexPath) as? OptionMenuHistoryTableViewCell {
             let row = viewModel.getRow(indexPath: indexPath)
-            cell.setViewModelData(row: row)
+            cell.setRow(row: row)
 
             return cell
         }

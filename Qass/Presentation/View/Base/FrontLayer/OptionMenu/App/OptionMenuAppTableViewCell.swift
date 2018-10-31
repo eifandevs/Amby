@@ -23,7 +23,7 @@ class OptionMenuAppTableViewCell: UITableViewCell {
     }
 
     /// ビューモデルデータ反映
-    func setViewModelData(row: OptionMenuAppTableViewModel.Row) {
+    func setRow(row: OptionMenuAppTableViewModel.Row) {
         titleLabel.text = row.cellType.title
     }
 }

@@ -15,19 +15,10 @@ public final class ReportUseCase {
     public static let s = ReportUseCase()
 
     /// レポート画面表示通知用RX
-    public let rx_reportUseCaseDidRequestPresentReportScreen = PublishSubject<()>()
+    public let rx_reportUseCaseDidRequestOpen = PublishSubject<()>()
 
     /// 一覧表示通知用RX
-    public let rx_reportUseCaseDidRequestOpen = PublishSubject<String>()
-
-    /// レポート登録成功
-    public let rx_reportUseCaseDidRegisterSuccess = IssueDataModel.s.rx_issueDataModelDidRegisterSuccess.flatMap { _ in Observable.just(()) }
-
-    /// レポート登録失敗
-    public let rx_reportUseCaseDidRegisterFailure = IssueDataModel.s.rx_issueDataModelDidRegisterFailure
-        .flatMap { error -> Observable<Error?> in
-            return Observable.just(error)
-        }
+    public let rx_reportUseCaseDidRequestLoad = PublishSubject<String>()
 
     /// 最終お問い合わせ日
     public var lastReportDate: Date {
@@ -43,12 +34,12 @@ public final class ReportUseCase {
 
     /// レポート画面表示
     public func open() {
-        rx_reportUseCaseDidRequestPresentReportScreen.onNext(())
+        rx_reportUseCaseDidRequestOpen.onNext(())
     }
 
     /// レポート一覧表示
     public func openList() {
-        rx_reportUseCaseDidRequestOpen.onNext(ModelConst.URL.ISSUE_URL)
+        rx_reportUseCaseDidRequestLoad.onNext(ModelConst.URL.ISSUE_URL)
     }
 
     /// Issue登録

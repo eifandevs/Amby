@@ -15,12 +15,12 @@ public final class OpenSourceUseCase {
     public static let s = OpenSourceUseCase()
 
     /// オープンソース画面表示通知用RX
-    public let rx_openSourceUseCaseDidRequestPresentOpenSourceScreen = PublishSubject<()>()
+    public let rx_openSourceUseCaseDidRequestOpen = PublishSubject<()>()
 
     private init() {}
 
     /// オープンソース画面表示
     public func open() {
-        rx_openSourceUseCaseDidRequestPresentOpenSourceScreen.onNext(())
+        rx_openSourceUseCaseDidRequestOpen.onNext(())
     }
 }

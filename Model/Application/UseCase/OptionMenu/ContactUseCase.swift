@@ -15,12 +15,12 @@ public final class ContactUseCase {
     public static let s = ContactUseCase()
 
     /// コンタクト画面表示通知用RX
-    public let rx_operationUseCaseDidRequestPresentContactScreen = PublishSubject<()>()
+    public let rx_operationUseCaseDidRequestOpen = PublishSubject<()>()
 
     private init() {}
 
     /// コンタクト画面表示
     public func open() {
-        rx_operationUseCaseDidRequestPresentContactScreen.onNext(())
+        rx_operationUseCaseDidRequestOpen.onNext(())
     }
 }

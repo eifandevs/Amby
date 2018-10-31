@@ -72,7 +72,7 @@ extension OptionMenuSettingTableView: UITableViewDataSource {
         } else {
             let identifier = R.reuseIdentifier.optionMenuSettingCell.identifier
             if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuSettingTableViewCell {
-                cell.setViewModelData(row: row)
+                cell.setRow(row: row)
                 return cell
             }
         }

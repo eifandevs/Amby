@@ -46,9 +46,7 @@ struct MessageConst {
         static let COPY_URL = "URLをコピーしました"
         static let REGISTER_BOOK_MARK = "お気に入りに登録しました"
         static let REGISTER_FORM = "フォーム情報を登録しました"
-        static let REGISTER_REPORT = "レポートを登録しました。ご協力ありがとうございました"
         static let REGISTER_FORM_ERROR_CRAWL = "ページ情報取得エラー"
-        static let REGISTER_REPORT_ERROR = "レポートの登録に失敗しました"
         static let REGISTER_REPORT_MULTIPLE_ERROR = "レポート登録エラー。前回投稿時より24時間経過する必要があります"
         static let MENU_ORDER_SUCCESS = "メニューを並び替えました"
         static let MENU_ORDER_CANNOT_SORT = "メニュー並び替えエラー。メニューアイコンは必須です"
@@ -62,6 +60,12 @@ struct MessageConst {
     struct HEADER {
         static let SEARCH_PLACEHOLDER = "検索ワードまたは、URLを入力"
         static let GREP_PLACEHOLDER = "ページ内の検索ワード"
+    }
+
+    // MARK: - オプションメニュー
+
+    struct OPTION_MENU {
+        static let MEMO_REFRESH_TEXT = "新規メモの作成"
     }
 
     // MARK: - お問い合わせ画面

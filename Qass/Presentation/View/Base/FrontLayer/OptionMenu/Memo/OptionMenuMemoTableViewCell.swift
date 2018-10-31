@@ -9,6 +9,8 @@
 import UIKit
 
 class OptionMenuMemoTableViewCell: UITableViewCell {
+    @IBOutlet var titleLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -18,5 +20,9 @@ class OptionMenuMemoTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    func setRow(row: OptionMenuMemoTableViewModel.Row) {
+        titleLabel.text = row.memo.text
     }
 }

@@ -24,7 +24,7 @@ class OptionMenuHistoryTableViewCell: UITableViewCell {
     }
 
     /// ビューモデルデータ設定
-    func setViewModelData(row: OptionMenuHistoryTableViewModel.Section.Row) {
+    func setRow(row: OptionMenuHistoryTableViewModel.Section.Row) {
         titleLabel.text = row.data.title
         urlLabel.text = row.data.url
     }

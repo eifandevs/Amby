@@ -121,6 +121,26 @@ public final class NoticeUseCase {
             }
             .disposed(by: disposeBag)
 
+        // レポート登録成功監視
+        IssueDataModel.s.rx_issueDataModelDidRegisterSuccess
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_issueDataModelDidRegisterSuccess")
+                guard let `self` = self else { return }
+                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.REGISTER_REPORT, isSuccess: true))
+                log.eventOut(chain: "rx_issueDataModelDidRegisterSuccess")
+            }
+            .disposed(by: disposeBag)
+
+        // レポート登録失敗監視
+        IssueDataModel.s.rx_issueDataModelDidRegisterFailure
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_issueDataModelDidRegisterFailure")
+                guard let `self` = self else { return }
+                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.REGISTER_REPORT_ERROR, isSuccess: false))
+                log.eventOut(chain: "rx_issueDataModelDidRegisterFailure")
+            }
+            .disposed(by: disposeBag)
+
         // フォーム登録成功監視
         FormDataModel.s.rx_formDataModelDidInsert
             .subscribe { [weak self] _ in

@@ -24,7 +24,7 @@ class OptionMenuFavoriteTableViewCell: UITableViewCell {
     }
 
     // ビューモデルデータ設定
-    func setViewModelData(row: OptionMenuFavoriteTableViewModel.Row) {
+    func setRow(row: OptionMenuFavoriteTableViewModel.Row) {
         titleLabel.text = row.data.title
         urlLabel.text = row.data.url
     }

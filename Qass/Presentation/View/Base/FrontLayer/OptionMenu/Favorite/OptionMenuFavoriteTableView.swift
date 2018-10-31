@@ -95,7 +95,7 @@ extension OptionMenuFavoriteTableView: UITableViewDataSource {
         let identifier = R.reuseIdentifier.optionMenuFavoriteCell.identifier
         if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuFavoriteTableViewCell {
             let row = viewModel.getRow(indexPath: indexPath)
-            cell.setViewModelData(row: row)
+            cell.setRow(row: row)
 
             return cell
         }

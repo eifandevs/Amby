@@ -89,6 +89,7 @@
 		A13D6A9B2187474D00B1832E /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9A2187474D00B1832E /* Memo.swift */; };
 		A13D6A9D2187489C00B1832E /* MemoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9C2187489C00B1832E /* MemoDataModel.swift */; };
 		A13D6A9F21874D2000B1832E /* MemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9E21874D2000B1832E /* MemoUseCase.swift */; };
+		A13D6AA12189F7A000B1832E /* OptionMenuMemoTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */; };
 		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
 		A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */; };
 		A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */; };
@@ -493,6 +494,7 @@
 		A13D6A9A2187474D00B1832E /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		A13D6A9C2187489C00B1832E /* MemoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDataModel.swift; sourceTree = "<group>"; };
 		A13D6A9E21874D2000B1832E /* MemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoUseCase.swift; sourceTree = "<group>"; };
+		A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewModel.swift; sourceTree = "<group>"; };
 		A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasscodeViewController.xib; sourceTree = "<group>"; };
 		A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeUseCase.swift; sourceTree = "<group>"; };
@@ -1138,6 +1140,7 @@
 				A11CD317214F058F00D9333F /* OptionMenuHistoryTableViewModel.swift */,
 				A11CD318214F058F00D9333F /* OptionMenuHelpTableViewModel.swift */,
 				A11CD319214F058F00D9333F /* OptionMenuAppTableViewModel.swift */,
+				A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */,
 			);
 			path = OptionMenu;
 			sourceTree = "<group>";
@@ -2823,6 +2826,7 @@
 				A11CD33B214F8F8500D9333F /* OpenSourceTableViewCell.swift in Sources */,
 				A11CD32B214F059000D9333F /* OptionMenuFormTableViewModel.swift in Sources */,
 				A112E8A9212CD76500320048 /* BaseLayer.swift in Sources */,
+				A13D6AA12189F7A000B1832E /* OptionMenuMemoTableViewModel.swift in Sources */,
 				A15C544D214D699D001E8AB5 /* OptionMenuTableView.swift in Sources */,
 				A16AB90821692DB60036863C /* ReportViewControllerViewModel.swift in Sources */,
 				A1903052209CF978004F1EA5 /* OptionMenuView.swift in Sources */,

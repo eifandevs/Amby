@@ -42,33 +42,27 @@ final class BaseViewControllerViewModel {
         }
 
     // メーラー起動通知用RX
-    let rx_baseViewControllerViewModelDidPresentMail = ContactUseCase.s.rx_operationUseCaseDidRequestPresentContactScreen
+    let rx_baseViewControllerViewModelDidPresentMail = ContactUseCase.s.rx_operationUseCaseDidRequestOpen
         .flatMap { _ -> Observable<()> in
             return Observable.just(())
         }
 
     // オープンソース表示通知用RX
-    let rx_baseViewControllerViewModelDidPresentOpenSource = OpenSourceUseCase.s.rx_openSourceUseCaseDidRequestPresentOpenSourceScreen
+    let rx_baseViewControllerViewModelDidPresentOpenSource = OpenSourceUseCase.s.rx_openSourceUseCaseDidRequestOpen
         .flatMap { _ -> Observable<()> in
             return Observable.just(())
         }
 
     // レポート表示通知用RX
-    let rx_baseViewControllerViewModelDidPresentReport = ReportUseCase.s.rx_reportUseCaseDidRequestPresentReportScreen
+    let rx_baseViewControllerViewModelDidPresentReport = ReportUseCase.s.rx_reportUseCaseDidRequestOpen
         .flatMap { _ -> Observable<()> in
             return Observable.just(())
         }
 
-    // レポート登録成功通知用RX
-    let rx_baseViewControllerViewModelDidRegisterSuccess = ReportUseCase.s.rx_reportUseCaseDidRegisterSuccess
-        .flatMap { _ -> Observable<()> in
-            return Observable.just(())
-        }
-
-    // レポート登録失敗通知用RX
-    let rx_baseViewControllerViewModelDidRegisterFailure = ReportUseCase.s.rx_reportUseCaseDidRegisterFailure
-        .flatMap { error -> Observable<Error?> in
-            return Observable.just(error)
+    // メモ表示通知用RX
+    let rx_baseViewControllerViewModelDidPresentMemo = MemoUseCase.s.rx_memoUseCaseDidRequestOpen
+        .flatMap { memo -> Observable<Memo?> in
+            return Observable.just(memo)
         }
 
     /// Observable自動解放
@@ -89,7 +83,6 @@ final class BaseViewControllerViewModel {
                 if let element = object.element {
                     NotificationManager.presentToastNotification(message: element.message, isSuccess: element.isSuccess)
                 }
-
                 log.eventOut(chain: "rx_noticeUseCaseDidInvoke")
             }
             .disposed(by: disposeBag)

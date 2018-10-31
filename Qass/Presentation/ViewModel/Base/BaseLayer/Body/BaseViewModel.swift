@@ -44,7 +44,7 @@ final class BaseViewModel {
             return Observable.just(url)
         }
     /// Issue表示リクエスト通知用RX
-    let rx_baseViewModelDidLoadIssue = ReportUseCase.s.rx_reportUseCaseDidRequestOpen
+    let rx_baseViewModelDidLoadIssue = ReportUseCase.s.rx_reportUseCaseDidRequestLoad
         .flatMap { url -> Observable<String> in
             return Observable.just(url)
         }

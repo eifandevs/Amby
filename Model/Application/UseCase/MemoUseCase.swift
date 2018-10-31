@@ -14,8 +14,8 @@ import RxSwift
 public final class MemoUseCase {
     public static let s = MemoUseCase()
 
-    /// 閲覧通知用RX
-    public let rx_memoUseCaseDidRequestRead = PublishSubject<String>()
+    /// オープンリクエスト通知用RX
+    public let rx_memoUseCaseDidRequestOpen = PublishSubject<Memo?>()
 
     private init() {}
 
@@ -23,8 +23,12 @@ public final class MemoUseCase {
         MemoDataModel.s.delete()
     }
 
-    public func read(id: String) {
-        rx_memoUseCaseDidRequestRead.onNext(id)
+    public func open(memo: Memo? = nil) {
+        rx_memoUseCaseDidRequestOpen.onNext(memo)
+    }
+
+    public func insert(memo: Memo) {
+        MemoDataModel.s.insert(memo: memo)
     }
 
     public func delete(memo: Memo) {
