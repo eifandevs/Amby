@@ -90,6 +90,7 @@
 		A13D6A9D2187489C00B1832E /* MemoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9C2187489C00B1832E /* MemoDataModel.swift */; };
 		A13D6A9F21874D2000B1832E /* MemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9E21874D2000B1832E /* MemoUseCase.swift */; };
 		A13D6AA12189F7A000B1832E /* OptionMenuMemoTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */; };
+		A13D6AA3218A740F00B1832E /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */; };
 		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
 		A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */; };
 		A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */; };
@@ -495,6 +496,7 @@
 		A13D6A9C2187489C00B1832E /* MemoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDataModel.swift; sourceTree = "<group>"; };
 		A13D6A9E21874D2000B1832E /* MemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoUseCase.swift; sourceTree = "<group>"; };
 		A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewModel.swift; sourceTree = "<group>"; };
+		A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
 		A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasscodeViewController.xib; sourceTree = "<group>"; };
 		A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeUseCase.swift; sourceTree = "<group>"; };
@@ -711,6 +713,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A13D6AA3218A740F00B1832E /* SwiftyStoreKit.framework in Frameworks */,
 				A1A3DE852138827400F87009 /* SwiftyBeaver.framework in Frameworks */,
 				A1A3DE842138815E00F87009 /* Logger.framework in Frameworks */,
 				62F8CE49F96E0498CD005428 /* Pods_All_Model.framework in Frameworks */,
@@ -750,6 +753,7 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */,
 				A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */,
 				A112E734212AF83800320048 /* MessageUI.framework */,
 				A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */,
@@ -2369,13 +2373,14 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
 			);
 			name = Carthage;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n/usr/local/bin/carthage copy-frameworks\nelse\necho \"warning: carthage not installed. install at 'brew install carthage'\"\nfi";
+			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n/usr/local/bin/carthage copy-frameworks\nelse\necho \"warning: carthage not installed. install at 'brew install carthage'\"\nfi\n";
 		};
 		A15C53E6214AAAAE001E8AB5 /* License */ = {
 			isa = PBXShellScriptBuildPhase;

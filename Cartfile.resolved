@@ -1,5 +1,6 @@
 github "SVProgressHUD/SVProgressHUD" "2.2.5"
 github "SwiftyBeaver/SwiftyBeaver" "1.6.1"
+github "bizz84/SwiftyStoreKit" "0.13.3"
 github "kishikawakatsumi/KeychainAccess" "v3.1.2"
 github "krzyzanowskim/CryptoSwift" "0.8.3"
 github "ninjaprox/NVActivityIndicatorView" "4.4.0"
