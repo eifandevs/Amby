@@ -32,31 +32,32 @@ class OptionMenuAppTableView: UIView, ShadowView, OptionMenuView {
     }
 
     func loadNib() {
-        let view = Bundle.main.loadNibNamed(R.nib.optionMenuAppTableView.name, owner: self, options: nil)?.first as! UIView
-        view.frame = bounds
+        if let view = Bundle.main.loadNibNamed(R.nib.optionMenuAppTableView.name, owner: self, options: nil)?.first as? UIView {
+            view.frame = bounds
 
-        // 影
-        addMenuShadow()
+            // 影
+            addMenuShadow()
 
-        // テーブルビュー監視
-        tableView.delegate = self
-        tableView.dataSource = self
+            // テーブルビュー監視
+            tableView.delegate = self
+            tableView.dataSource = self
 
-        // OptionMenuProtocol
-        _ = setup(tableView: tableView)
+            // OptionMenuProtocol
+            _ = setup(tableView: tableView)
 
-        // カスタムビュー登録
-        tableView.register(R.nib.optionMenuAppTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuAppCell.identifier)
+            // カスタムビュー登録
+            tableView.register(R.nib.optionMenuAppTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuAppCell.identifier)
 
-        tableView.register(R.nib.optionMenuAppTableViewFooterCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuAppFooterCell.identifier)
+            tableView.register(R.nib.optionMenuAppTableViewFooterCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuAppFooterCell.identifier)
 
-        // TableViewのフッターを設定
-        if let footerCell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuAppFooterCell.identifier) as? OptionMenuAppTableViewFooterCell {
-            let footerView: UIView = footerCell.contentView
-            tableView.tableFooterView = footerView
+            // TableViewのフッターを設定
+            if let footerCell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuAppFooterCell.identifier) as? OptionMenuAppTableViewFooterCell {
+                let footerView: UIView = footerCell.contentView
+                tableView.tableFooterView = footerView
+            }
+
+            addSubview(view)
         }
-
-        addSubview(view)
     }
 }
 
