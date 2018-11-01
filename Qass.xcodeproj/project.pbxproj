@@ -91,6 +91,8 @@
 		A13D6A9F21874D2000B1832E /* MemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9E21874D2000B1832E /* MemoUseCase.swift */; };
 		A13D6AA12189F7A000B1832E /* OptionMenuMemoTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */; };
 		A13D6AA3218A740F00B1832E /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */; };
+		A13D6AA5218B350700B1832E /* post.html in Resources */ = {isa = PBXBuildFile; fileRef = A13D6AA4218B350700B1832E /* post.html */; };
+		A13D6AE6218B35F900B1832E /* MemoViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6AE5218B35F900B1832E /* MemoViewControllerViewModel.swift */; };
 		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
 		A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */; };
 		A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */; };
@@ -497,6 +499,8 @@
 		A13D6A9E21874D2000B1832E /* MemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoUseCase.swift; sourceTree = "<group>"; };
 		A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewModel.swift; sourceTree = "<group>"; };
 		A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
+		A13D6AA4218B350700B1832E /* post.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = post.html; sourceTree = "<group>"; };
+		A13D6AE5218B35F900B1832E /* MemoViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasscodeViewController.xib; sourceTree = "<group>"; };
 		A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeUseCase.swift; sourceTree = "<group>"; };
@@ -821,6 +825,7 @@
 		A112E758212CD76400320048 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A13D6AE4218B35F000B1832E /* Memo */,
 				A13D6A9021872B3000B1832E /* Form */,
 				A13D6A7F21848B7900B1832E /* Passcode */,
 				A1B778332173BE0700BED141 /* MenuOrder */,
@@ -1257,6 +1262,14 @@
 				A13D6A9421872B7D00B1832E /* OptionMenuFormTableViewCellViewModel.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		A13D6AE4218B35F000B1832E /* Memo */ = {
+			isa = PBXGroup;
+			children = (
+				A13D6AE5218B35F900B1832E /* MemoViewControllerViewModel.swift */,
+			);
+			path = Memo;
 			sourceTree = "<group>";
 		};
 		A14F2F9E217B7E7800EB95FE /* Passcode */ = {
@@ -1761,6 +1774,7 @@
 				A1FE87D8211B015700B258A3 /* invalid.html */,
 				A1FE87D9211B015700B258A3 /* dns.html */,
 				A1FE87DA211B015700B258A3 /* authorize.html */,
+				A13D6AA4218B350700B1832E /* post.html */,
 			);
 			path = html;
 			sourceTree = "<group>";
@@ -2132,6 +2146,7 @@
 				A15C5457214D699D001E8AB5 /* OptionMenuAppTableView.xib in Resources */,
 				A15C5465214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
 				A1903056209CF978004F1EA5 /* article_stub.json in Resources */,
+				A13D6AA5218B350700B1832E /* post.html in Resources */,
 				A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */,
 				A15C5499214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt in Resources */,
 				A15C544C214D699D001E8AB5 /* OptionMenuTableViewCell.xib in Resources */,
@@ -2807,6 +2822,7 @@
 				A1B778352173BE9F00BED141 /* MenuOrderViewControllerViewModel.swift in Sources */,
 				A1903063209CF978004F1EA5 /* Util.swift in Sources */,
 				A1903051209CF978004F1EA5 /* EnumEnumerable.swift in Sources */,
+				A13D6AE6218B35F900B1832E /* MemoViewControllerViewModel.swift in Sources */,
 				A15C5464214D699D001E8AB5 /* OptionMenuFavoriteTableView.swift in Sources */,
 				A112E895212CD76500320048 /* FrontLayer.swift in Sources */,
 				A15C544B214D699D001E8AB5 /* OptionMenuTableViewCell.swift in Sources */,

@@ -8,7 +8,6 @@
 
 import Foundation
 import Model
-import NSObject_Rx
 import RxCocoa
 import RxSwift
 import UIKit
@@ -1042,7 +1041,7 @@ extension BaseView: UIScrollViewDelegate {
 
 // MARK: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate
 
-extension BaseView: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate {
+extension BaseView: WKNavigationDelegate, WKUIDelegate {
     /// force touchを無効にする
     func webView(_: WKWebView, shouldPreviewElement _: WKPreviewElementInfo) -> Bool {
         return false

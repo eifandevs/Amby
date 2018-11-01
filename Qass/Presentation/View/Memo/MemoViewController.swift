@@ -12,20 +12,37 @@ import RxSwift
 import UIKit
 
 class MemoViewController: UIViewController {
+    @IBOutlet var cancelButton: CornerRadiusButton!
     @IBOutlet var closeButton: CornerRadiusButton!
     @IBOutlet var textView: UITextView!
+    @IBOutlet var stackViewBottomConstraint: NSLayoutConstraint!
+    private var initialStackViewBottomConstraint: CGFloat = 0
+    private var viewModel: MemoViewControllerViewModel!
 
-    private var memo: Memo!
+    private let rx_keyboardHeight = Observable
+        .merge([
+            NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillShow)
+                .map { notification -> CGFloat in
+                    (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+                },
+            NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillHide)
+                .map { _ -> CGFloat in
+                    0
+                }
+        ])
 
     convenience init(memo: Memo) {
         self.init(nibName: R.nib.memoViewController.name, bundle: nil)
-        self.memo = memo
+        viewModel = MemoViewControllerViewModel(memo: memo)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        textView.text = memo.text
+        initialStackViewBottomConstraint = stackViewBottomConstraint.constant
+
+        textView.delegate = self
+        textView.text = viewModel.getMemoText()
         setupRx()
     }
 
@@ -35,9 +52,50 @@ class MemoViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
+                self.viewModel.update(text: self.textView.text)
+                self.textView.resignFirstResponder()
                 self.dismiss(animated: true, completion: nil)
                 log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
+
+        // ボタンタップ
+        cancelButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_tap")
+                guard let `self` = self else { return }
+                // キャンセル
+                self.textView.resignFirstResponder()
+                log.eventOut(chain: "rx_tap")
+            })
+            .disposed(by: rx.disposeBag)
+
+        rx_keyboardHeight
+            .observeOn(MainScheduler.instance)
+            .subscribe { [weak self] keyboardHeight in
+                log.eventIn(chain: "rx_keyboardHeight")
+                guard let `self` = self else { return }
+
+                if let keyboardHeight = keyboardHeight.element {
+                    if keyboardHeight == 0 {
+                        self.stackViewBottomConstraint.constant = self.initialStackViewBottomConstraint
+                    } else {
+                        let margin = 13.f
+                        self.stackViewBottomConstraint.constant = keyboardHeight + margin
+                    }
+                }
+                log.eventOut(chain: "rx_keyboardHeight")
+            }
+            .disposed(by: rx.disposeBag)
+    }
+}
+
+extension MemoViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_: UITextView) {
+        cancelButton.isHidden = false
+    }
+
+    func textViewDidEndEditing(_: UITextView) {
+        cancelButton.isHidden = true
     }
 }

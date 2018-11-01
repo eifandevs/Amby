@@ -34,6 +34,12 @@ final class OptionMenuMemoTableViewModel {
 
     /// お問い合わせ表示
     func openMemo(memo: Memo? = nil) {
-        MemoUseCase.s.open(memo: memo)
+        if let memo = memo {
+            MemoUseCase.s.open(memo: memo)
+        } else {
+            // 新規作成
+            let newMemo = Memo()
+            MemoUseCase.s.open(memo: newMemo)
+        }
     }
 }

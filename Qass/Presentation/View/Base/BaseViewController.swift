@@ -8,7 +8,6 @@
 
 import MessageUI
 import Model
-import NSObject_Rx
 import RxCocoa
 import RxSwift
 import UIKit
@@ -121,12 +120,13 @@ class BaseViewController: UIViewController {
 
         // メモ画面表示監視
         viewModel.rx_baseViewControllerViewModelDidPresentMemo
-            .subscribe { [weak self] element in
+            .subscribe { [weak self] memo in
                 log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentMemo")
                 guard let `self` = self else { return }
-                let memo = element.element! == nil ? Memo() : element.element!!
-                let vc = MemoViewController(memo: memo)
-                self.present(vc, animated: true)
+                if let memo = memo.element {
+                    let vc = MemoViewController(memo: memo)
+                    self.present(vc, animated: true)
+                }
                 log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentMemo")
             }
             .disposed(by: rx.disposeBag)

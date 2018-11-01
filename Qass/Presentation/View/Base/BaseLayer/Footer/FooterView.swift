@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import NSObject_Rx
 import NVActivityIndicatorView
 import RxCocoa
 import RxSwift

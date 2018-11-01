@@ -15,7 +15,7 @@ public final class MemoUseCase {
     public static let s = MemoUseCase()
 
     /// オープンリクエスト通知用RX
-    public let rx_memoUseCaseDidRequestOpen = PublishSubject<Memo?>()
+    public let rx_memoUseCaseDidRequestOpen = PublishSubject<Memo>()
 
     private init() {}
 
@@ -23,7 +23,7 @@ public final class MemoUseCase {
         MemoDataModel.s.delete()
     }
 
-    public func open(memo: Memo? = nil) {
+    public func open(memo: Memo) {
         rx_memoUseCaseDidRequestOpen.onNext(memo)
     }
 

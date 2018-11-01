@@ -24,7 +24,7 @@ class ReportViewController: UIViewController {
     private var initialStackViewBottomConstraint: CGFloat = 0
     private let viewModel = ReportViewControllerViewModel()
 
-    public let rx_keyboardHeight = Observable
+    private let rx_keyboardHeight = Observable
         .merge([
             NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillShow)
                 .map { notification -> CGFloat in
@@ -35,9 +35,6 @@ class ReportViewController: UIViewController {
                     0
                 }
         ])
-
-    /// Observable自動解放
-    private let disposeBag = DisposeBag()
 
     convenience init() {
         self.init(nibName: R.nib.reportViewController.name, bundle: nil)
@@ -69,7 +66,7 @@ class ReportViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
                 log.eventOut(chain: "rx_tap")
             })
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         listButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -80,7 +77,7 @@ class ReportViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
                 log.eventOut(chain: "rx_tap")
             })
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         sendButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -91,7 +88,7 @@ class ReportViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
                 log.eventOut(chain: "rx_tap")
             })
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -100,7 +97,7 @@ class ReportViewController: UIViewController {
                 self.textView.resignFirstResponder()
                 log.eventOut(chain: "rx_tap")
             })
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         rx_keyboardHeight
             .observeOn(MainScheduler.instance)

@@ -9,7 +9,6 @@
 import CoreLocation
 import Foundation
 import Model
-import NSObject_Rx
 import RxCocoa
 import RxSwift
 import UIKit

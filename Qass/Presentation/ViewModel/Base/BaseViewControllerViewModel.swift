@@ -61,7 +61,7 @@ final class BaseViewControllerViewModel {
 
     // メモ表示通知用RX
     let rx_baseViewControllerViewModelDidPresentMemo = MemoUseCase.s.rx_memoUseCaseDidRequestOpen
-        .flatMap { memo -> Observable<Memo?> in
+        .flatMap { memo -> Observable<Memo> in
             return Observable.just(memo)
         }
 
