@@ -12,6 +12,7 @@ abstract_target 'All' do
 
   target 'Qass' do
     use_frameworks!
+    inhibit_all_warnings!
   
     pod 'SwiftLint', '~> 0.25'
     pod 'VerticalAlignmentLabel', '~> 0.1'
@@ -33,6 +34,7 @@ abstract_target 'All' do
 
   target 'Model' do
     use_frameworks!
+    inhibit_all_warnings!
 
     pod 'Realm', '~> 2.4'
     pod 'RealmSwift', '~> 2.4'
@@ -49,6 +51,7 @@ abstract_target 'All' do
 
   target 'Logger' do
     use_frameworks!
+    inhibit_all_warnings!
   
       target 'LoggerTests' do
         inherit! :search_paths
