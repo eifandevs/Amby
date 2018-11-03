@@ -62,8 +62,8 @@ final class MemoDataModel {
     }
 
     /// update Memo
-    func update(memo: Memo, text: String) -> Bool {
-        return repository.update {
+    func update(memo: Memo, text: String) {
+        _ = repository.update {
             memo.text = text
         }
     }

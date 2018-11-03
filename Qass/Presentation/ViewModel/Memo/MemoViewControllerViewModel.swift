@@ -23,9 +23,9 @@ final class MemoViewControllerViewModel {
     /// 送信
     func update(text: String) {
         if text.count > 0 {
-            MemoUseCase.s.update(memo: memo, text: text)
+            _ = MemoUseCase.s.update(memo: memo, text: text)
         } else {
-            MemoUseCase.s.delete(memo: memo)
+            _ = MemoUseCase.s.delete(memo: memo)
         }
     }
 }

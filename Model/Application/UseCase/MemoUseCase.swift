@@ -31,12 +31,25 @@ public final class MemoUseCase {
         MemoDataModel.s.insert(memo: memo)
     }
 
-    public func update(memo: Memo, text: String) -> Bool {
-        return MemoDataModel.s.update(memo: memo, text: text)
+    public func update(memo: Memo, text: String) {
+        // 新規作成の場合は、データが存在しないのでinsertに変更する
+        if MemoDataModel.s.select(id: memo.id).count > 0 {
+            log.debug("memo update. before: \(memo.text) after: \(text)")
+            MemoDataModel.s.update(memo: memo, text: text)
+        } else {
+            memo.text = text
+            log.debug("memo insert. memo: \(memo)")
+            MemoDataModel.s.insert(memo: memo)
+        }
     }
 
     public func delete(memo: Memo) {
-        MemoDataModel.s.delete(memo: memo)
+        if MemoDataModel.s.select(id: memo.id).count > 0 {
+            log.debug("delete memo. memo: \(memo)")
+            MemoDataModel.s.delete(memo: memo)
+        } else {
+            log.debug("not delete memo")
+        }
     }
 
     public func select() -> [Memo] {
