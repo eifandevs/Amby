@@ -61,6 +61,13 @@ final class MemoDataModel {
         }
     }
 
+    /// update Memo
+    func update(memo: Memo, text: String) -> Bool {
+        return repository.update {
+            memo.text = text
+        }
+    }
+
     /// delete Memos
     func delete() {
         // 削除対象が指定されていない場合は、すべて削除する

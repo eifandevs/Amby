@@ -31,6 +31,10 @@ public final class MemoUseCase {
         MemoDataModel.s.insert(memo: memo)
     }
 
+    public func update(memo: Memo, text: String) -> Bool {
+        return MemoDataModel.s.update(memo: memo, text: text)
+    }
+
     public func delete(memo: Memo) {
         MemoDataModel.s.delete(memo: memo)
     }

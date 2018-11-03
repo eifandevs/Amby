@@ -36,6 +36,19 @@ final class DBRepository {
         return true
     }
 
+    func update(action: (() -> Void)) -> Bool {
+        do {
+            try realm.write {
+                action()
+            }
+        } catch let error as NSError {
+            log.error("realm update error. error: \(error.localizedDescription)")
+            return false
+        }
+
+        return true
+    }
+
     func delete(data: [Object]) -> Bool {
         do {
             try realm.write {
