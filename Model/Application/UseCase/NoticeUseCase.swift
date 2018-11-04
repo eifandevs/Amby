@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-/// 通知ユースケース
+/// 汎用通知ユースケース
 public final class NoticeUseCase {
     public static let s = NoticeUseCase()
 

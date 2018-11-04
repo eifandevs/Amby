@@ -17,6 +17,9 @@ public final class MemoUseCase {
     /// オープンリクエスト通知用RX
     public let rx_memoUseCaseDidRequestOpen = PublishSubject<Memo>()
 
+    /// メモ画面クローズ通知用RX
+    public let rx_memoUseCaseDidClose = PublishSubject<()>()
+
     private init() {}
 
     public func delete() {
@@ -25,6 +28,10 @@ public final class MemoUseCase {
 
     public func open(memo: Memo) {
         rx_memoUseCaseDidRequestOpen.onNext(memo)
+    }
+
+    public func close() {
+        rx_memoUseCaseDidClose.onNext(())
     }
 
     public func insert(memo: Memo) {

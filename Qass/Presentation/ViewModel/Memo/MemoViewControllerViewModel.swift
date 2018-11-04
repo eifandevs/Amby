@@ -28,4 +28,9 @@ final class MemoViewControllerViewModel {
             _ = MemoUseCase.s.delete(memo: memo)
         }
     }
+
+    /// クローズ通知
+    func close() {
+        MemoUseCase.s.close()
+    }
 }

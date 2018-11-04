@@ -12,15 +12,13 @@ import Model
 final class OptionMenuFormTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     /// セル情報
-    var rows: [Row] = []
+    var rows: [Row] {
+        return FormUseCase.s.select().map({ Row(data: $0) })
+    }
 
     /// セル数
     var cellCount: Int {
         return rows.count
-    }
-
-    init() {
-        rows = FormUseCase.s.select().map({ Row(data: $0) })
     }
 
     /// セル情報取得
@@ -29,10 +27,9 @@ final class OptionMenuFormTableViewModel {
     }
 
     /// セル削除
-    /// セルの有無を返却する
-    func removeRow(indexPath: IndexPath, row: Row) {
-        rows.remove(at: indexPath.row)
+    func removeRow(indexPath: IndexPath) {
         // モデルから削除
+        let row = getRow(indexPath: indexPath)
         FormUseCase.s.delete(forms: [row.data])
     }
 

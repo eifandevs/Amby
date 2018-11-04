@@ -129,9 +129,6 @@ class BaseView: UIView {
         return front.scrollView.contentSize.height > AppConst.BASE_LAYER.BASE_HEIGHT
     }
 
-    /// Observable自動解放
-    let disposeBag = DisposeBag()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         EGApplication.sharedMyApplication.egDelegate = self
@@ -207,7 +204,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidInsertWebView")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // 自動入力監視
         viewModel.rx_baseViewModelDidAutoFill
@@ -236,7 +233,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidAutoFill")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ページ追加監視
         viewModel.rx_baseViewModelDidAppendWebView
@@ -270,7 +267,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidAppendWebView")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // リロード監視
         viewModel.rx_baseViewModelDidReloadWebView
@@ -286,7 +283,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidReloadWebView")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ページ変更監視
         viewModel.rx_baseViewModelDidChangeWebView
@@ -313,7 +310,7 @@ class BaseView: UIView {
 
                 log.eventOut(chain: "rx_baseViewModelDidChangeWebView")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ページ削除監視
         viewModel.rx_baseViewModelDidRemoveWebView
@@ -354,7 +351,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidRemoveWebView")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // 検索監視
         viewModel.rx_baseViewModelDidSearchWebView
@@ -366,7 +363,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidSearchWebView")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // トレンド表示監視
         viewModel.rx_baseViewModelDidLoadTrend
@@ -378,7 +375,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidLoadTrend")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ソースコード表示監視
         viewModel.rx_baseViewModelDidLoadSourceCode
@@ -390,7 +387,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidLoadSourceCode")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // Issue表示監視
         viewModel.rx_baseViewModelDidLoadIssue
@@ -402,7 +399,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidLoadIssue")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ロードリクエスト監視(favorite)
         viewModel.rx_baseViewModelDidLoadFavorite
@@ -414,7 +411,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidLoadFavorite")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ロードリクエスト監視(form)
         viewModel.rx_baseViewModelDidLoadForm
@@ -426,7 +423,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidLoadForm")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ロードリクエスト監視(form)
         viewModel.rx_baseViewModelDidLoadHistory
@@ -438,7 +435,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidLoadHistory")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // observe history back
         viewModel.rx_baseViewModelDidHistoryBackWebView
@@ -465,7 +462,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidHistoryBackWebView")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // ヒストリーフォワード監視
         viewModel.rx_baseViewModelDidHistoryForwardWebView
@@ -477,7 +474,7 @@ class BaseView: UIView {
                     _ = self.front.load(urlStr: url)
                 }
                 log.eventOut(chain: "rx_baseViewModelDidHistoryForwardWebView")
-            }.disposed(by: disposeBag)
+            }.disposed(by: rx.disposeBag)
 
         // フォーム登録監視
         viewModel.rx_baseViewModelDidRegisterAsForm
@@ -491,7 +488,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidRegisterAsForm")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // 自動スクロール監視
         viewModel.rx_baseViewModelDidAutoScroll
@@ -507,7 +504,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidAutoScroll")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // observe scroll up
         viewModel.rx_baseViewModelDidScrollUp
@@ -521,7 +518,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidScrollUp")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // 全文検索監視
         viewModel.rx_baseViewModelDidGrep
@@ -533,7 +530,7 @@ class BaseView: UIView {
                 }
                 log.eventOut(chain: "rx_baseViewModelDidGrep")
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
     }
 
     deinit {

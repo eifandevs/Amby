@@ -64,10 +64,8 @@ class OptionMenuFormTableView: UIView, ShadowView, OptionMenuView {
                         let point: CGPoint = sender.location(in: self.tableView)
                         let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
                         if let indexPath = indexPath {
-                            let row = self.viewModel.getRow(indexPath: indexPath)
-
                             self.tableView.beginUpdates()
-                            self.viewModel.removeRow(indexPath: indexPath, row: row)
+                            self.viewModel.removeRow(indexPath: indexPath)
                             self.tableView.deleteRows(at: [indexPath], with: .automatic)
 
                             self.tableView.endUpdates()

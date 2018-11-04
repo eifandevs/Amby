@@ -55,6 +55,7 @@ class MemoViewController: UIViewController {
                 self.viewModel.update(text: self.textView.text)
                 self.textView.resignFirstResponder()
                 self.dismiss(animated: true, completion: nil)
+                self.viewModel.close()
                 log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)

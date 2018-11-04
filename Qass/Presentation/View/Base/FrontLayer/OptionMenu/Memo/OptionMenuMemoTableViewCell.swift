@@ -23,6 +23,6 @@ class OptionMenuMemoTableViewCell: UITableViewCell {
     }
 
     func setRow(row: OptionMenuMemoTableViewModel.Row) {
-        titleLabel.text = row.memo.text
+        titleLabel.text = row.data.text
     }
 }

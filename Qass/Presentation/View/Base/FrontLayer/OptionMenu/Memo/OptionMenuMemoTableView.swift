@@ -52,25 +52,65 @@ class OptionMenuMemoTableView: UIView, ShadowView, OptionMenuView {
             // カスタムビュー登録
             tableView.register(R.nib.optionMenuMemoTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuMemoCell.identifier)
 
-            // pull to refresh
-            refreshControl.attributedTitle = NSAttributedString(string: MessageConst.OPTION_MENU.MEMO_REFRESH_TEXT)
-            refreshControl.tintColor = UIColor.ultraViolet
-            tableView.refreshControl = refreshControl
-            refreshControl.rx.controlEvent(.valueChanged)
-                .subscribe(onNext: { [weak self] in
-                    log.eventIn(chain: "rx_valueChanged")
-                    guard let `self` = self else { return }
-                    DispatchQueue.mainSyncSafe {
-                        self.tableView.setContentOffset(self.defaultContentOffset, animated: true)
-                        self.refreshControl.endRefreshing()
-                        self.viewModel.openMemo()
-                    }
-                    log.eventOut(chain: "rx_valueChanged")
-                })
-                .disposed(by: rx.disposeBag)
+            setupRx()
 
             addSubview(view)
         }
+    }
+
+    func setupRx() {
+        // pull to refresh
+        refreshControl.attributedTitle = NSAttributedString(string: MessageConst.OPTION_MENU.MEMO_REFRESH_TEXT)
+        refreshControl.tintColor = UIColor.ultraViolet
+        tableView.refreshControl = refreshControl
+        refreshControl.rx.controlEvent(.valueChanged)
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_valueChanged")
+                guard let `self` = self else { return }
+                DispatchQueue.mainSyncSafe {
+                    self.tableView.setContentOffset(self.defaultContentOffset, animated: true)
+                    self.refreshControl.endRefreshing()
+                    self.viewModel.openMemo()
+                }
+                log.eventOut(chain: "rx_valueChanged")
+            })
+            .disposed(by: rx.disposeBag)
+
+        // ロングプレスで削除
+        let longPressRecognizer = UILongPressGestureRecognizer()
+
+        longPressRecognizer.rx.event
+            .subscribe { [weak self] sender in
+                log.eventIn(chain: "rx_longPress")
+                guard let `self` = self else { return }
+                if let sender = sender.element {
+                    if sender.state == .began {
+                        let point: CGPoint = sender.location(in: self.tableView)
+                        let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
+                        if let indexPath = indexPath {
+                            self.tableView.beginUpdates()
+                            self.viewModel.removeRow(indexPath: indexPath)
+                            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+
+                            self.tableView.endUpdates()
+                        }
+                    }
+                }
+                log.eventOut(chain: "rx_longPress")
+            }
+            .disposed(by: rx.disposeBag)
+
+        addGestureRecognizer(longPressRecognizer)
+
+        // リロード監視
+        viewModel.rx_optionMenuMemoTableViewModelWillReload
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_optionMenuMemoTableViewModelWillReload")
+                guard let `self` = self else { return }
+                self.tableView.reloadData()
+                log.eventOut(chain: "rx_optionMenuMemoTableViewModelWillReload")
+            }
+            .disposed(by: rx.disposeBag)
     }
 }
 
@@ -104,6 +144,6 @@ extension OptionMenuMemoTableView: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セル情報取得
         let row = viewModel.getRow(indexPath: indexPath)
-        viewModel.openMemo(memo: row.memo)
+        viewModel.openMemo(memo: row.data)
     }
 }
