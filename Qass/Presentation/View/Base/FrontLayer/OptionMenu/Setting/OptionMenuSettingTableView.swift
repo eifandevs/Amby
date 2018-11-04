@@ -32,24 +32,25 @@ class OptionMenuSettingTableView: UIView, ShadowView, OptionMenuView {
     }
 
     func loadNib() {
-        let view = Bundle.main.loadNibNamed(R.nib.optionMenuSettingTableView.name, owner: self, options: nil)?.first as! UIView
-        view.frame = bounds
+        if let view = Bundle.main.loadNibNamed(R.nib.optionMenuSettingTableView.name, owner: self, options: nil)?.first as? UIView {
+            view.frame = bounds
 
-        // 影
-        addMenuShadow()
+            // 影
+            addMenuShadow()
 
-        // テーブルビュー監視
-        tableView.delegate = self
-        tableView.dataSource = self
+            // テーブルビュー監視
+            tableView.delegate = self
+            tableView.dataSource = self
 
-        // OptionMenuProtocol
-        _ = setup(tableView: tableView)
+            // OptionMenuProtocol
+            _ = setup(tableView: tableView)
 
-        // カスタムビュー登録
-        tableView.register(R.nib.optionMenuSettingSliderTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingSliderCell.identifier)
-        tableView.register(R.nib.optionMenuSettingTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingCell.identifier)
+            // カスタムビュー登録
+            tableView.register(R.nib.optionMenuSettingSliderTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingSliderCell.identifier)
+            tableView.register(R.nib.optionMenuSettingTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingCell.identifier)
 
-        addSubview(view)
+            addSubview(view)
+        }
     }
 }
 
