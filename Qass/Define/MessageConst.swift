@@ -52,6 +52,7 @@ struct MessageConst {
         static let MENU_ORDER_CANNOT_SORT = "メニュー並び替えエラー。メニューアイコンは必須です"
         static let MENU_ORDER_ERROR = "メニュー並び替えエラー。12個選択してください"
         static let PASSCODE_REGISTERED = "パスコードを登録しました"
+        static let PASSCODE_NOT_REGISTERED = "パスコードが設定されていません"
         static let PASSCODE_INPUT_ERROR = "パスコードエラー"
     }
 

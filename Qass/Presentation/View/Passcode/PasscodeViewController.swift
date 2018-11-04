@@ -106,6 +106,7 @@ class PasscodeViewController: UIViewController {
                 log.eventIn(chain: "rx_passcodeViewControllerViewModelDidConfirmError")
                 guard let `self` = self else { return }
                 self.passcodeContainerView.wrongPassword()
+                self.passcodeContainerView.clearInput()
                 log.eventOut(chain: "rx_passcodeViewControllerViewModelDidConfirmError")
             }
             .disposed(by: rx.disposeBag)

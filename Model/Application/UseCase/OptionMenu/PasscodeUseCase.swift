@@ -30,6 +30,21 @@ public final class PasscodeUseCase {
         }
     }
 
+    /// パスコート認証済みフラグ
+    public var isInputPasscode: Bool {
+        get {
+            return AuthDataModel.s.isInputPasscode
+        }
+        set(value) {
+            AuthDataModel.s.isInputPasscode = value
+        }
+    }
+
+    /// パスコード登録済みフラグ
+    public var isRegisterdPasscode: Bool {
+        return !rootPasscode.isEmpty
+    }
+
     private init() {}
 
     /// ライセンス表示

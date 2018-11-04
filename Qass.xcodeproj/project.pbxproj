@@ -207,7 +207,7 @@
 		A19506332143F8A60091DF23 /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7F8212CD76400320048 /* KeychainRepository.swift */; };
 		A19506342143F8AF0091DF23 /* SettingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97B21319C7800320048 /* SettingDataModel.swift */; };
 		A19506352143F8AF0091DF23 /* ArticleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97721319C7800320048 /* ArticleDataModel.swift */; };
-		A19506362143F8AF0091DF23 /* AuthTokenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97D21319C7800320048 /* AuthTokenDataModel.swift */; };
+		A19506362143F8AF0091DF23 /* AuthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97D21319C7800320048 /* AuthDataModel.swift */; };
 		A19506372143F8AF0091DF23 /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97421319C7700320048 /* CommonHistoryDataModel.swift */; };
 		A19506382143F8AF0091DF23 /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97521319C7700320048 /* FavoriteDataModel.swift */; };
 		A19506392143F8AF0091DF23 /* FormDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97821319C7800320048 /* FormDataModel.swift */; };
@@ -452,7 +452,7 @@
 		A112E97921319C7800320048 /* PageHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModel.swift; sourceTree = "<group>"; };
 		A112E97B21319C7800320048 /* SettingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDataModel.swift; sourceTree = "<group>"; };
 		A112E97C21319C7800320048 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
-		A112E97D21319C7800320048 /* AuthTokenDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTokenDataModel.swift; sourceTree = "<group>"; };
+		A112E97D21319C7800320048 /* AuthDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthDataModel.swift; sourceTree = "<group>"; };
 		A112E9982132EF8F00320048 /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
 		A112E99B2132F00E00320048 /* EncryptUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptUseCase.swift; sourceTree = "<group>"; };
 		A112E99E2132FE3900320048 /* CacheUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheUseCase.swift; sourceTree = "<group>"; };
@@ -1061,7 +1061,7 @@
 			children = (
 				A112E97B21319C7800320048 /* SettingDataModel.swift */,
 				A112E97721319C7800320048 /* ArticleDataModel.swift */,
-				A112E97D21319C7800320048 /* AuthTokenDataModel.swift */,
+				A112E97D21319C7800320048 /* AuthDataModel.swift */,
 				A112E97421319C7700320048 /* CommonHistoryDataModel.swift */,
 				A112E97521319C7700320048 /* FavoriteDataModel.swift */,
 				A112E97821319C7800320048 /* FormDataModel.swift */,
@@ -2653,7 +2653,7 @@
 				A19506562143FA950091DF23 /* String+Extend.swift in Sources */,
 				A19506302143F89B0091DF23 /* Cache.swift in Sources */,
 				A19352A22141569C002A0865 /* App.swift in Sources */,
-				A19506362143F8AF0091DF23 /* AuthTokenDataModel.swift in Sources */,
+				A19506362143F8AF0091DF23 /* AuthDataModel.swift in Sources */,
 				A15C53F6214D4CDC001E8AB5 /* ReportUseCase.swift in Sources */,
 				A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */,
 				A19506442143F8B80091DF23 /* HistoryUseCase.swift in Sources */,

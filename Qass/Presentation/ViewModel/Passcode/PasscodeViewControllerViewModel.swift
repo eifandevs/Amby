@@ -32,7 +32,7 @@ final class PasscodeViewControllerViewModel {
 
     /// パスコード登録済みフラグ
     var isRegisterdPasscode: Bool {
-        return !passcode.isEmpty
+        return PasscodeUseCase.s.isRegisterdPasscode
     }
 
     /// パスコード入力済みフラグ
@@ -52,6 +52,7 @@ final class PasscodeViewControllerViewModel {
     func input(passcode: String) {
         if isConfirm {
             if self.passcode == passcode {
+                PasscodeUseCase.s.isInputPasscode = true
                 rx_passcodeViewControllerViewModelDidConfirmSuccess.onNext(())
             } else {
                 rx_passcodeViewControllerViewModelDidConfirmError.onNext(())

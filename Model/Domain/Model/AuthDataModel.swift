@@ -1,5 +1,5 @@
 //
-//  AuthTokenDataModel.swift
+//  AuthDataModel.swift
 //  Qas
 //
 //  Created by tenma on 2018/04/18.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-final class AuthTokenDataModel {
-    static let s = AuthTokenDataModel()
+final class AuthDataModel {
+    static let s = AuthDataModel()
 
     /// DBトークン
     let realmEncryptionToken: String!
@@ -17,6 +17,8 @@ final class AuthTokenDataModel {
     let keychainServiceToken: String!
     /// キーチェーンIVトークン
     let keychainIvToken: String!
+    /// パスコード認証済みフラグ
+    public var isInputPasscode = false
 
     private init() {
         let repository = KeychainRepository()

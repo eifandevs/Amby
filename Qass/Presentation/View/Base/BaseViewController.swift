@@ -153,6 +153,17 @@ class BaseViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
 
+        // パスコード確認監視
+        viewModel.rx_baseViewControllerViewModelDidPresentPasscodeConfirm
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentPasscodeConfirm")
+                guard let `self` = self else { return }
+                let vc = PasscodeViewController(isConfirm: true)
+                self.present(vc, animated: true)
+                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentPasscodeConfirm")
+            }
+            .disposed(by: rx.disposeBag)
+
         // フォーム閲覧画面表示監視
         viewModel.rx_baseViewControllerViewModelDidPresentForm
             .subscribe { [weak self] form in

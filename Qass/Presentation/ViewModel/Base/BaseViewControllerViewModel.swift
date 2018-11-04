@@ -31,6 +31,12 @@ final class BaseViewControllerViewModel {
             return Observable.just(())
         }
 
+    // パスコード確認表示通知用RX
+    let rx_baseViewControllerViewModelDidPresentPasscodeConfirm = PasscodeUseCase.s.rx_passcodeUseCaseDidRequestConfirm
+        .flatMap { _ -> Observable<()> in
+            return Observable.just(())
+        }
+
     // フォーム閲覧通知用RX
     let rx_baseViewControllerViewModelDidPresentForm = FormUseCase.s.rx_formUseCaseDidRequestRead
         .flatMap { id -> Observable<Form> in

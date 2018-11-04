@@ -1,5 +1,5 @@
 ////
-////  AuthTokenDataModelTests.swift
+////  AuthDataModelTests.swift
 ////  QassTests
 ////
 ////  Created by tenma on 2018/06/17.
@@ -12,7 +12,7 @@
 //
 //@testable import Qass
 //
-//class AuthTokenDataModelTests: XCTestCase {
+//class AuthDataModelTests: XCTestCase {
 //
 //    override func setUp() {
 //        super.setUp()
@@ -25,6 +25,6 @@
 //    }
 //
 //    func testInit() {
-//        _ = AuthTokenDataModel.s
+//        _ = AuthDataModel.s
 //    }
 //}
