@@ -19,22 +19,52 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya7-XZ-FjA">
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWo-Ff-5UR">
                         <rect key="frame" x="10" y="0.0" width="305" height="43.5"/>
-                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xL3-9n-7Bt">
+                                <rect key="frame" x="0.0" y="0.0" width="44" height="43.5"/>
+                                <color key="backgroundColor" red="1" green="0.27588119189999999" blue="0.088055094759999994" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="LdU-XJ-NkJ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya7-XZ-FjA">
+                                <rect key="frame" x="44" y="0.0" width="231" height="43.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzz-co-8Tv">
+                                <rect key="frame" x="275" y="0.0" width="30" height="43.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="P4h-6j-2rb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="施錠"/>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Ya7-XZ-FjA" firstAttribute="top" secondItem="wWo-Ff-5UR" secondAttribute="top" id="83y-sG-FLp"/>
+                            <constraint firstItem="qzz-co-8Tv" firstAttribute="top" secondItem="wWo-Ff-5UR" secondAttribute="top" id="CGB-FC-c20"/>
+                            <constraint firstAttribute="bottom" secondItem="xL3-9n-7Bt" secondAttribute="bottom" id="FEb-fy-cMQ"/>
+                            <constraint firstItem="xL3-9n-7Bt" firstAttribute="top" secondItem="wWo-Ff-5UR" secondAttribute="top" id="UZx-6Z-bxk"/>
+                            <constraint firstAttribute="bottom" secondItem="qzz-co-8Tv" secondAttribute="bottom" id="cIU-I5-U9N"/>
+                            <constraint firstAttribute="bottom" secondItem="Ya7-XZ-FjA" secondAttribute="bottom" id="sy5-cI-9Wj"/>
+                        </constraints>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Ya7-XZ-FjA" secondAttribute="trailing" constant="5" id="9wr-hw-cjo"/>
-                    <constraint firstItem="Ya7-XZ-FjA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="FFv-IP-20q"/>
-                    <constraint firstAttribute="bottom" secondItem="Ya7-XZ-FjA" secondAttribute="bottom" id="Jhp-2p-5Rp"/>
-                    <constraint firstItem="Ya7-XZ-FjA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="cMS-JA-eJg"/>
+                    <constraint firstAttribute="trailing" secondItem="wWo-Ff-5UR" secondAttribute="trailing" constant="5" id="HKO-cI-9Fi"/>
+                    <constraint firstItem="wWo-Ff-5UR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="J0v-EU-KLF"/>
+                    <constraint firstAttribute="bottom" secondItem="wWo-Ff-5UR" secondAttribute="bottom" id="Y1t-D5-Faa"/>
+                    <constraint firstItem="wWo-Ff-5UR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="nNk-6S-rmx"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="lockButton" destination="qzz-co-8Tv" id="04Q-5T-OQF"/>
+                <outlet property="lockImageView" destination="xL3-9n-7Bt" id="5tV-MD-K14"/>
                 <outlet property="titleLabel" destination="Ya7-XZ-FjA" id="A9f-x5-PSU"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="121.4392803598201"/>

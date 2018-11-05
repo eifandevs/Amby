@@ -13,7 +13,26 @@ import RxSwift
 
 final class OptionMenuMemoTableViewModel {
     /// ページリロード通知用RX
-    let rx_optionMenuMemoTableViewModelWillReload = MemoUseCase.s.rx_memoUseCaseDidClose.flatMap { _ in Observable.just(()) }
+    let rx_optionMenuMemoTableViewModelWillReload = PublishSubject<()>()
+
+    /// Observable自動解放
+    private let disposeBag = DisposeBag()
+
+    init() {
+        setupRx()
+    }
+
+    func setupRx() {
+        // リロード監視
+        MemoUseCase.s.rx_memoUseCaseDidClose
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                log.eventIn(chain: "rx_memoUseCaseDidClose")
+                self.rx_optionMenuMemoTableViewModelWillReload.onNext(())
+                log.eventOut(chain: "rx_memoUseCaseDidClose")
+            }
+            .disposed(by: disposeBag)
+    }
 
     // セル情報
     struct Row {
@@ -42,6 +61,12 @@ final class OptionMenuMemoTableViewModel {
         // モデルから削除
         let row = getRow(indexPath: indexPath)
         MemoUseCase.s.delete(memo: row.data)
+    }
+
+    /// ロック or アンロック
+    func invertLock(memo: Memo) {
+        MemoUseCase.s.invertLock(memo: memo)
+        rx_optionMenuMemoTableViewModelWillReload.onNext(())
     }
 
     /// お問い合わせ表示

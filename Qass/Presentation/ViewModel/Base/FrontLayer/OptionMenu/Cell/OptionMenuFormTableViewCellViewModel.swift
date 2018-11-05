@@ -10,6 +10,8 @@ import Foundation
 import Model
 
 final class OptionMenuFormTableViewCellViewModel {
+    var form: Form!
+
     /// 閲覧リクエスト
     func readForm(id: String) {
         if PasscodeUseCase.s.isRegisterdPasscode {

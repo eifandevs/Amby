@@ -126,6 +126,8 @@ extension OptionMenuMemoTableView: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuMemoTableViewCell {
             let row = viewModel.getRow(indexPath: indexPath)
             cell.setRow(row: row)
+            // 重複呼び出しを考慮し、Rxではなくデリゲートパターン
+            cell.delegate = self
 
             return cell
         }
@@ -135,6 +137,14 @@ extension OptionMenuMemoTableView: UITableViewDataSource {
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return viewModel.cellCount
+    }
+}
+
+// MARK: - OptionMenuMemoTableViewCellDelegate
+
+extension OptionMenuMemoTableView: OptionMenuMemoTableViewCellDelegate {
+    func optionMenuMemoTableViewCellDidInvertLock(row: OptionMenuMemoTableViewModel.Row) {
+        viewModel.invertLock(memo: row.data)
     }
 }
 

@@ -52,12 +52,12 @@ final class MemoDataModel {
     }
 
     /// select memo
-    func select(id: String) -> [Memo] {
+    func select(id: String) -> Memo? {
         if let memos = repository.select(type: Memo.self) as? [Memo] {
-            return memos.filter({ $0.id == id })
+            return memos.filter({ $0.id == id }).first ?? nil
         } else {
             log.error("fail to select memo")
-            return []
+            return nil
         }
     }
 
@@ -65,6 +65,13 @@ final class MemoDataModel {
     func update(memo: Memo, text: String) {
         _ = repository.update {
             memo.text = text
+        }
+    }
+
+    // lock or unlock
+    func invertLock(memo: Memo) {
+        _ = repository.update {
+            memo.isLocked = !memo.isLocked
         }
     }
 

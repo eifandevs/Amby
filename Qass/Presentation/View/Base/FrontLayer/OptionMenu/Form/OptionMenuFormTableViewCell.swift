@@ -16,7 +16,6 @@ class OptionMenuFormTableViewCell: UITableViewCell {
     @IBOutlet var openButton: UIButton!
 
     let viewModel = OptionMenuFormTableViewCellViewModel()
-    var formId = ""
 
     /// Observable自動解放
     private let disposeBag = DisposeBag()
@@ -38,7 +37,7 @@ class OptionMenuFormTableViewCell: UITableViewCell {
             .subscribe(onNext: { [weak self] in
                 log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
-                self.viewModel.readForm(id: self.formId)
+                self.viewModel.readForm(id: self.viewModel.form.id)
                 log.eventOut(chain: "rx_tap")
             })
             .disposed(by: disposeBag)
@@ -46,7 +45,7 @@ class OptionMenuFormTableViewCell: UITableViewCell {
 
     // ビューモデルデータ設定
     func setRow(row: OptionMenuFormTableViewModel.Row) {
-        formId = row.data.id
+        viewModel.form = row.data
         titleLabel.text = row.data.title
         urlLabel.text = row.data.url
     }

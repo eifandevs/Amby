@@ -40,7 +40,7 @@ public final class MemoUseCase {
 
     public func update(memo: Memo, text: String) {
         // 新規作成の場合は、データが存在しないのでinsertに変更する
-        if MemoDataModel.s.select(id: memo.id).count > 0 {
+        if MemoDataModel.s.select(id: memo.id) != nil {
             log.debug("memo update. before: \(memo.text) after: \(text)")
             MemoDataModel.s.update(memo: memo, text: text)
         } else {
@@ -50,8 +50,12 @@ public final class MemoUseCase {
         }
     }
 
+    public func invertLock(memo: Memo) {
+        MemoDataModel.s.invertLock(memo: memo)
+    }
+
     public func delete(memo: Memo) {
-        if MemoDataModel.s.select(id: memo.id).count > 0 {
+        if MemoDataModel.s.select(id: memo.id) != nil {
             log.debug("delete memo. memo: \(memo)")
             MemoDataModel.s.delete(memo: memo)
         } else {
@@ -63,7 +67,7 @@ public final class MemoUseCase {
         return MemoDataModel.s.select()
     }
 
-    public func select(id: String) -> [Memo] {
+    public func select(id: String) -> Memo? {
         return MemoDataModel.s.select(id: id)
     }
 }
