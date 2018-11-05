@@ -34,9 +34,6 @@ class BaseView: UIView {
     /// 編集状態にするクロージャ
     private var beginSearchingWorkItem: DispatchWorkItem?
 
-    /// yポジションの最大最小値
-    private let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER.HEADER_HEIGHT, AppConst.DEVICE.STATUS_BAR_HEIGHT)
-
     /// 最前面のWebView
     private var front: EGWebView! {
         willSet {
@@ -106,12 +103,12 @@ class BaseView: UIView {
 
     /// ベースビューがMaxポジションにあるかどうかのフラグ
     var isLocateMax: Bool {
-        return frame.origin.y == positionY.max
+        return frame.origin.y == viewModel.positionY.max
     }
 
     /// ベースビューがMinポジションにあるかどうかのフラグ
     var isLocateMin: Bool {
-        return frame.origin.y == positionY.min
+        return frame.origin.y == viewModel.positionY.min
     }
 
     /// 逆順方向のスクロールが可能かどうかのフラグ
@@ -927,7 +924,7 @@ extension BaseView: UIScrollViewDelegate {
                         if speed > 0 {
                             // ベースビューがスライド可能な場合にスライドさせる
                             if !isLocateMax {
-                                if frame.origin.y + speed > positionY.max {
+                                if frame.origin.y + speed > viewModel.positionY.max {
                                     // スライドした結果、Maxを超える場合は、調整する
                                     slideToMax()
                                 } else {
@@ -943,7 +940,7 @@ extension BaseView: UIScrollViewDelegate {
                             // 順方向(未来)のスクロール
                             // ベースビューがスライド可能な場合にスライドさせる
                             if !isLocateMin {
-                                if frame.origin.y + speed < positionY.min {
+                                if frame.origin.y + speed < viewModel.positionY.min {
                                     // スライドした結果、Minを下回る場合は、調整する
                                     slideToMin()
                                 } else {
@@ -974,7 +971,7 @@ extension BaseView: UIScrollViewDelegate {
                         isScrolling = false
                         if isMoving {
                             isAnimating = true
-                            if frame.origin.y > positionY.max / 2 {
+                            if frame.origin.y > viewModel.positionY.max / 2 {
                                 UIView.animate(withDuration: 0.2, animations: {
                                     self.slideToMax()
                                 }, completion: { finished in
@@ -1010,7 +1007,7 @@ extension BaseView: UIScrollViewDelegate {
                         isScrolling = false
                         if isMoving {
                             isAnimating = true
-                            if frame.origin.y > positionY.max / 2 {
+                            if frame.origin.y > viewModel.positionY.max / 2 {
                                 UIView.animate(withDuration: 0.2, animations: {
                                     self.slideToMax()
                                 }, completion: { finished in

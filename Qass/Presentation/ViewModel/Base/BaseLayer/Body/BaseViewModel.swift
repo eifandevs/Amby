@@ -142,6 +142,9 @@ final class BaseViewModel {
     /// 自動スクロールスピード
     let autoScrollSpeed: CGFloat = 0.6
 
+    /// yポジションの最大最小値
+    let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER.HEADER_HEIGHT, AppConst.DEVICE.STATUS_BAR_HEIGHT)
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
