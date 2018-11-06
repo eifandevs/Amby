@@ -17,6 +17,7 @@ class Thumbnail: UIButton {
         }
     }
 
+    var isFloated = false
     private let thumbnailInfo = UIButton()
 
     private let underLine = UIView()
@@ -99,6 +100,11 @@ class Thumbnail: UIButton {
         UIView.animate(withDuration: 0.2, animations: {
             self.thumbnailInfo.alpha = 0
         })
+    }
+
+    func float() {
+        isFloated = true
+        transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
     }
 
     required init?(coder _: NSCoder) {

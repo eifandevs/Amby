@@ -355,8 +355,8 @@ class FooterView: UIView, ShadowView {
                 if let sender = sender.element {
                     if sender.state == .began {
                         for thumbnail in self.thumbnails where sender.view == thumbnail {
-                            thumbnail.transform = CGAffineTransform(scaleX: 1.2, y: 1.2) // サイズを1.2倍にする
-//                            self.viewModel.remove(context: thumbnail.context)
+//                            thumbnail.float()
+                            self.viewModel.remove(context: thumbnail.context)
                             break
                         }
                     }

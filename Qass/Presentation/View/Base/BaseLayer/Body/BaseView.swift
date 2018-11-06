@@ -336,10 +336,10 @@ class BaseView: UIView {
 
                         if isFrontDelete && object.currentContext != nil {
                             // フロントの削除で、削除後にwebviewが存在する場合
-                            if let current = self.webViews.find({ $0?.context == TabUseCase.s.currentContext })! {
-                                current.observeEstimatedProgress(observer: self)
+                            if let current = self.webViews.find({ $0?.context == TabUseCase.s.currentContext }), let currentWebView = current {
+                                currentWebView.observeEstimatedProgress(observer: self)
                                 self.front = current
-                                self.bringSubview(toFront: current)
+                                self.bringSubview(toFront: currentWebView)
                             } else {
                                 self.loadWebView()
                             }

@@ -100,10 +100,4 @@ final class OptionMenuTableViewModel {
     func loadTrend() {
         TrendUseCase.s.load()
     }
-
-    /// 履歴情報永続化
-    func storeHistory() {
-        HistoryUseCase.s.store()
-        TabUseCase.s.store()
-    }
 }

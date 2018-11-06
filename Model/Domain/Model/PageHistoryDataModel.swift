@@ -361,13 +361,13 @@ final class PageHistoryDataModel {
     func store() {
         if histories.count > 0 {
             let pageHistoryData = NSKeyedArchiver.archivedData(withRootObject: histories)
-            localStorageRepository.write(.pageHistory, data: pageHistoryData)
+            _ = localStorageRepository.write(.pageHistory, data: pageHistoryData)
         }
     }
 
     /// 全データの削除
     func delete() {
         histories = []
-        localStorageRepository.delete(.pageHistory)
+        _ = localStorageRepository.delete(.pageHistory)
     }
 }

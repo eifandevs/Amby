@@ -86,6 +86,7 @@ public final class TabUseCase {
     /// 現在のタブをクローズ
     public func close() {
         PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)
+        store()
     }
 
     /// 全てのタブをクローズ
@@ -95,21 +96,25 @@ public final class TabUseCase {
             PageHistoryDataModel.s.remove(context: pageHistory.context)
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.25))
         }
+        store()
     }
 
     /// 現在のタブをコピー
     public func copy() {
         PageHistoryDataModel.s.copy()
+        store()
     }
 
     /// 現在のタブを削除
     public func remove() {
         PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)
+        store()
     }
 
     /// 特定のタブを削除
     public func remove(context: String) {
         PageHistoryDataModel.s.remove(context: context)
+        store()
     }
 
     /// タブ変更
@@ -120,16 +125,19 @@ public final class TabUseCase {
     /// タブの追加
     public func add(url: String? = nil) {
         PageHistoryDataModel.s.append(url: url)
+        store()
     }
 
     /// タブの挿入
     public func insert(url: String? = nil) {
         PageHistoryDataModel.s.insert(url: url)
+        store()
     }
 
     /// タブの全削除
     public func delete() {
         PageHistoryDataModel.s.delete()
+        store()
     }
 
     /// ページインデックス取得
@@ -172,6 +180,7 @@ public final class TabUseCase {
 
     public func endRendering(context: String) {
         PageHistoryDataModel.s.endRendering(context: context)
+        store()
     }
 
     public func updateProgress(object: CGFloat) {
@@ -199,7 +208,7 @@ public final class TabUseCase {
     }
 
     /// 閲覧、ページ履歴の永続化
-    public func store() {
+    private func store() {
         PageHistoryDataModel.s.store()
     }
 

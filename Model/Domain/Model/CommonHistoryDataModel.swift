@@ -91,7 +91,7 @@ final class CommonHistoryDataModel {
                 }()
 
                 let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
+                _ = localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
             }
             histories = []
         }

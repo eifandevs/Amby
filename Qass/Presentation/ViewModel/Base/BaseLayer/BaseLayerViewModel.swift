@@ -19,11 +19,6 @@ final class BaseLayerViewModel {
         FormUseCase.s.autoFill()
     }
 
-    func store() {
-        HistoryUseCase.s.store()
-        TabUseCase.s.store()
-    }
-
     /// baseViewControllerの状態取得
     var canAutoFill: Bool {
         if let delegate = UIApplication.shared.delegate as? AppDelegate, let baseViewController = delegate.window?.rootViewController {

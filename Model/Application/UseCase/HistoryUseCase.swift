@@ -45,10 +45,11 @@ public final class HistoryUseCase {
     /// update common history
     public func insert(url: URL?, title: String?) {
         CommonHistoryDataModel.s.insert(url: url, title: title)
+        store()
     }
 
     /// 閲覧、ページ履歴の永続化
-    public func store() {
+    private func store() {
         CommonHistoryDataModel.s.store()
     }
 
@@ -63,10 +64,12 @@ public final class HistoryUseCase {
 
     public func delete() {
         CommonHistoryDataModel.s.delete()
+        store()
     }
 
     public func delete(historyIds: [String: [String]]) {
         CommonHistoryDataModel.s.delete(historyIds: historyIds)
+        store()
     }
 
     public func expireCheck() {

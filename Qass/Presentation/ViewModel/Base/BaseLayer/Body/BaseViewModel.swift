@@ -148,22 +148,6 @@ final class BaseViewModel {
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
-    init() {
-        setupRx()
-    }
-
-    private func setupRx() {
-        // バックグラウンドに入るときに履歴を保存する
-        center.rx.notification(.UIApplicationWillResignActive, object: nil)
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_UIApplicationWillResignActive")
-                guard let `self` = self else { return }
-                self.store()
-                log.eventOut(chain: "rx_UIApplicationWillResignActive")
-            }
-            .disposed(by: disposeBag)
-    }
-
     deinit {
         log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)
@@ -210,7 +194,6 @@ final class BaseViewModel {
 
     func endRendering(context: String) {
         TabUseCase.s.endRendering(context: context)
-        store() // 描画終了時に永続化
     }
 
     func updateProgress(progress: CGFloat) {
@@ -320,12 +303,6 @@ final class BaseViewModel {
     /// update common history
     func insertHistory(url: URL?, title: String?) {
         HistoryUseCase.s.insert(url: url, title: title)
-    }
-
-    /// 閲覧、ページ履歴の永続化
-    func store() {
-        HistoryUseCase.s.store()
-        TabUseCase.s.store()
     }
 
     /// サムネイルの削除
