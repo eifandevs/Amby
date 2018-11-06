@@ -132,6 +132,7 @@ class BaseLayer: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_headerViewDidbeginSearching")
                 guard let `self` = self else { return }
+                self.baseView.slideToMax()
 
                 self.isHeaderViewEditing = true
                 self.searchMenuTableView = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
@@ -182,6 +183,8 @@ class BaseLayer: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_headerViewDidBeginGreping")
                 guard let `self` = self else { return }
+                self.baseView.slideToMax()
+
                 self.isHeaderViewGreping = true
                 self.grepOverlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
 

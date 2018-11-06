@@ -336,7 +336,6 @@ class HeaderView: UIView, ShadowView {
     /// 検索開始
     private func startEditing() {
         if !isEditing {
-            slideToMax()
             isEditing = true
             headerField.removeContent()
             rx_headerViewDidbeginSearching.onNext(())
@@ -353,7 +352,6 @@ class HeaderView: UIView, ShadowView {
     /// グレップ開始
     private func startGreping() {
         if !isGreping {
-            slideToMax()
             isGreping = true
             headerField.removeContent()
             rx_headerViewDidBeginGreping.onNext(())
