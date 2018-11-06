@@ -79,8 +79,6 @@ class BaseView: UIView {
     private var scrollMovingPointY: CGFloat = 0
     /// 自動入力ダイアログ表示済みフラグ
     private var isDoneAutoFill = false
-    /// タッチ中フラグ
-    private var isTouching = false
     /// アニメーション中フラグ
     private var isAnimating = false
     /// 自動スクロール
@@ -793,11 +791,11 @@ extension BaseView: EGApplicationDelegate {
     internal func screenTouchBegan(touch: UITouch) {
         if !viewModel.canSwipe {
             log.warning("cannot swipe.")
-            isTouching = false
+            viewModel.isTouching = false
             return
         }
 
-        isTouching = true
+        viewModel.isTouching = true
         isChangingFront = false
         touchBeganPoint = touch.location(in: self)
         if touchBeganPoint!.x < AppConst.FRONT_LAYER.EDGE_SWIPE_EREA {
@@ -810,7 +808,7 @@ extension BaseView: EGApplicationDelegate {
     }
 
     internal func screenTouchMoved(touch: UITouch) {
-        if !isTouching { return }
+        if !viewModel.isTouching { return }
 
         if let touchBeganPoint = touchBeganPoint, front.scrollView.isScrollEnabled {
             let touchPoint = touch.location(in: self)
@@ -823,7 +821,7 @@ extension BaseView: EGApplicationDelegate {
 //                }
 
                 if viewModel.isHistorySwipe(touchPoint: touchBeganPoint) {
-                    isTouching = false
+                    viewModel.isTouching = false
                     // 画面上半分のスワイプの場合は、履歴移動
                     if swipeDirection == .left {
                         viewModel.historyBack()
@@ -865,9 +863,9 @@ extension BaseView: EGApplicationDelegate {
     }
 
     internal func screenTouchEnded(touch _: UITouch) {
-        if !isTouching { return }
+        if !viewModel.isTouching { return }
 
-        isTouching = false
+        viewModel.isTouching = false
         if isChangingFront {
             isChangingFront = false
             let targetOriginX = { () -> CGFloat in
@@ -966,7 +964,7 @@ extension BaseView: UIScrollViewDelegate {
         // フロントのみ通知する
         if let front = front {
             if front.scrollView == scrollView {
-                if velocity.y == 0 && !isTouching {
+                if velocity.y == 0 && !viewModel.isTouching {
                     // タッチ終了時にベースビューの高さを調整する
                     if isScrolling && !isAnimating {
                         isScrolling = false
@@ -1002,7 +1000,7 @@ extension BaseView: UIScrollViewDelegate {
         // フロントのみ通知する
         if let front = front {
             if front.scrollView == scrollView {
-                if !isTouching && !isAnimating {
+                if !viewModel.isTouching && !isAnimating {
                     // タッチ終了時にベースビューの高さを調整する
                     if isScrolling && !isAnimating {
                         isScrolling = false

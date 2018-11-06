@@ -145,6 +145,9 @@ final class BaseViewModel {
     /// yポジションの最大最小値
     let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER.HEADER_HEIGHT, AppConst.DEVICE.STATUS_BAR_HEIGHT)
 
+    /// タッチ中フラグ
+    var isTouching = false
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
