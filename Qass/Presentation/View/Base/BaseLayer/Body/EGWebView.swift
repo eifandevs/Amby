@@ -212,9 +212,13 @@ class EGWebView: WKWebView {
                     log.error("js setup error: \(error!)")
                 }
             }
-            evaluateJavaScript("MyApp_HighlightAllOccurencesOfString('\(word)')") { (_: Any?, error: Error?) in
-                if error != nil {
-                    log.error("js grep error: \(error!)")
+            evaluateJavaScript("MyApp_HighlightAllOccurencesOfString('\(word)')") { (result: Any?, error: Error?) in
+                if let error = error {
+                    log.error("js grep error: \(error.localizedDescription)")
+                    NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_ERROR, isSuccess: false)
+                } else {
+                    let num = result as? NSNumber ?? 0
+                    NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SUCCESS(num), isSuccess: true)
                 }
             }
         } catch let error as NSError {

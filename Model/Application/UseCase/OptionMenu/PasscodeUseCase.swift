@@ -20,6 +20,9 @@ public final class PasscodeUseCase {
     /// オープンリクエスト通知用RX
     public let rx_passcodeUseCaseDidRequestConfirm = PublishSubject<()>()
 
+    /// 認証チャレンジ失敗通知用RX
+    let rx_passcodeUseCaseDidAuthFailure = PublishSubject<()>()
+
     /// パスコード
     public var rootPasscode: String {
         get {
@@ -55,5 +58,19 @@ public final class PasscodeUseCase {
     /// 確認画面表示
     public func confirm() {
         rx_passcodeUseCaseDidRequestConfirm.onNext(())
+    }
+
+    /// 表示可能判定
+    public func authentificationChallenge() -> Bool {
+        if PasscodeUseCase.s.isRegisterdPasscode {
+            if PasscodeUseCase.s.isInputPasscode {
+                return true
+            } else {
+                confirm()
+            }
+        } else {
+            rx_passcodeUseCaseDidAuthFailure.onNext(())
+        }
+        return false
     }
 }

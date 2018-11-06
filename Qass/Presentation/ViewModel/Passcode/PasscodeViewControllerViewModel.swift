@@ -54,6 +54,9 @@ final class PasscodeViewControllerViewModel {
             if self.passcode == passcode {
                 PasscodeUseCase.s.isInputPasscode = true
                 rx_passcodeViewControllerViewModelDidConfirmSuccess.onNext(())
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_AUTHENTIFICATED, isSuccess: true)
+                }
             } else {
                 rx_passcodeViewControllerViewModelDidConfirmError.onNext(())
             }

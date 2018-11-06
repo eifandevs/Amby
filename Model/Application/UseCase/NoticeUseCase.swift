@@ -41,6 +41,16 @@ public final class NoticeUseCase {
             }
             .disposed(by: disposeBag)
 
+        // 認証チャレンジ失敗監視
+        PasscodeUseCase.s.rx_passcodeUseCaseDidAuthFailure
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_passcodeUseCaseDidAuthFailure")
+                guard let `self` = self else { return }
+                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.PASSCODE_NOT_REGISTERED, isSuccess: false))
+                log.eventOut(chain: "rx_passcodeUseCaseDidAuthFailure")
+            }
+            .disposed(by: disposeBag)
+
         // フォーム削除監視
         FormDataModel.s.rx_formDataModelDidDeleteAll
             .subscribe { [weak self] _ in

@@ -191,6 +191,9 @@ extension OptionMenuTableView: UITableViewDelegate {
                 })
                 .disposed(by: rx.disposeBag)
             detailView = helpTableView
+        case .cooperation:
+            rx_optionMenuTableViewDidClose.onNext(())
+            return
         case .app:
             let appTableView = OptionMenuAppTableView(frame: detailViewFrame)
             appTableView.rx_optionMenuAppDidClose

@@ -25,6 +25,7 @@ struct MessageConst {
         static let DELETE_CACHES = "キャッシュ情報を削除しました"
         static let DELETE_FORM = "フォーム情報を削除しました"
         static let DELETE_FORM_ERROR = "フォーム情報の削除に失敗しました"
+        static let PASSCODE_NOT_REGISTERED = "パスコードが設定されていません"
         static let REGISTER_BOOK_MARK_ERROR = "ページ情報を取得できませんでした"
         static let REGISTER_FORM = "フォーム情報を登録しました"
         static let REGISTER_FORM_ERROR_INPUT = "フォーム情報の入力を確認できませんでした"

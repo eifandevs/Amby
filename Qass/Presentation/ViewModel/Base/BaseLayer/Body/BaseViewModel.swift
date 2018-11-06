@@ -210,6 +210,7 @@ final class BaseViewModel {
 
     func endRendering(context: String) {
         TabUseCase.s.endRendering(context: context)
+        store() // 描画終了時に永続化
     }
 
     func updateProgress(progress: CGFloat) {

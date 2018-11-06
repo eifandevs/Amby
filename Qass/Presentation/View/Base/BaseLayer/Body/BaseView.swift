@@ -564,12 +564,13 @@ class BaseView: UIView {
             } else if keyPath == "URL" {
                 log.debug("receive url change.")
                 if let change = change, let url = change[NSKeyValueChangeKey.newKey] as? URL, !url.absoluteString.isEmpty {
-                    if let targetWebView = self.webViews.find({ $0?.context == contextPtr.pointee })! {
-                        viewModel.updatePageUrl(context: contextPtr.pointee, url: url.absoluteString, operation: targetWebView.operation)
+                    if let targetWebView = self.webViews.find({ $0?.context == contextPtr.pointee }) {
+                        guard let target = targetWebView else { return }
+                        viewModel.updatePageUrl(context: contextPtr.pointee, url: url.absoluteString, operation: target.operation)
                         // 操作種別はnormalに戻しておく
                         // ヒストリーバック or ヒストリーフォワードで遷移したときは、リダイレクトを除きタップから連続してのURL変更がないはず
-                        if targetWebView.operation != .normal {
-                            targetWebView.operation = .normal
+                        if target.operation != .normal {
+                            target.operation = .normal
                         }
                     }
                 }

@@ -236,48 +236,11 @@ class FooterView: UIView, ShadowView {
         let additionalPtX = (thumbnails.count - 1 < 0 ? 0 : thumbnails.count - 1).f * AppConst.BASE_LAYER.THUMBNAIL_SIZE.width / 2
         let btnPtX = (frame.size.width / 2) - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width / 2.0) + (basePtX - additionalPtX)
         let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: btnPtX, y: 0), size: AppConst.BASE_LAYER.THUMBNAIL_SIZE))
-        btn.backgroundColor = UIColor.darkGray
-        btn.setImage(image: R.image.footerThumbnailBack(), color: UIColor.gray)
-        let inset: CGFloat = btn.frame.size.width / 9
-        btn.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-
-        // ボタンタップ
-        btn.rx.tap
-            .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
-                guard let `self` = self else { return }
-                let tappedContext = btn.context
-                if tappedContext == self.viewModel.currentContext {
-                    log.debug("selected same page.")
-                } else {
-                    self.viewModel.change(context: btn.context)
-                }
-                log.eventIn(chain: "rx_tap")
-            })
-            .disposed(by: rx.disposeBag)
-
-        let longPressRecognizer = UILongPressGestureRecognizer()
-
-        // ロングプレス
-        longPressRecognizer.rx.event
-            .subscribe { [weak self] sender in
-                log.eventIn(chain: "rx_longPress")
-                guard let `self` = self else { return }
-                if let sender = sender.element {
-                    if sender.state == .began {
-                        for thumbnail in self.thumbnails where sender.view == thumbnail {
-                            self.viewModel.remove(context: thumbnail.context)
-                            break
-                        }
-                    }
-                }
-                log.eventOut(chain: "rx_longPress")
-            }
-            .disposed(by: rx.disposeBag)
-
-        btn.addGestureRecognizer(longPressRecognizer)
-
         btn.context = context
+
+        // セットアップ
+        setUpThumbnail(thumbnail: btn)
+
         thumbnails.append(btn)
 
         // スクロールビューのコンテンツサイズを大きくする
@@ -295,6 +258,7 @@ class FooterView: UIView, ShadowView {
                 })
             }
         }
+
         scrollView.scroll(to: .right, animated: true)
         return btn
     }
@@ -318,48 +282,12 @@ class FooterView: UIView, ShadowView {
 
         // 間に挿入
         let preBtn = thumbnails[at - 1] // 左隣のボタン
-        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: preBtn.frame.origin.x + AppConst.BASE_LAYER.THUMBNAIL_SIZE.width, y: AppConst.BASE_LAYER.THUMBNAIL_SIZE.height), size: AppConst.BASE_LAYER.THUMBNAIL_SIZE))
-        btn.backgroundColor = UIColor.darkGray
-        btn.setImage(image: R.image.footerThumbnailBack(), color: UIColor.gray)
-        let inset: CGFloat = btn.frame.size.width / 9
-        btn.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-
-        // ボタンタップ
-        btn.rx.tap
-            .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
-                guard let `self` = self else { return }
-                let tappedContext = btn.context
-                if tappedContext == self.viewModel.currentContext {
-                    log.debug("selected same page.")
-                } else {
-                    self.viewModel.change(context: btn.context)
-                }
-                log.eventOut(chain: "rx_tap")
-            })
-            .disposed(by: rx.disposeBag)
-
-        let longPressRecognizer = UILongPressGestureRecognizer()
-
-        // ロングプレス
-        longPressRecognizer.rx.event
-            .subscribe { [weak self] sender in
-                log.eventIn(chain: "rx_longPress")
-                guard let `self` = self else { return }
-                if let sender = sender.element {
-                    if sender.state == .began {
-                        for thumbnail in self.thumbnails where sender.view == thumbnail {
-                            self.viewModel.remove(context: thumbnail.context)
-                            break
-                        }
-                    }
-                }
-                log.eventOut(chain: "rx_longPress")
-            }
-            .disposed(by: rx.disposeBag)
-
-        btn.addGestureRecognizer(longPressRecognizer)
+        let btn = Thumbnail(frame: CGRect(origin: CGPoint(x: preBtn.frame.origin.x + AppConst.BASE_LAYER.THUMBNAIL_SIZE.width, y: AppConst.BASE_LAYER.THUMBNAIL_SIZE.height), size: AppConst.BASE_LAYER.THUMBNAIL_SIZE)) // 下から表示するアニメーションにするので、yは0ではない
         btn.context = context
+
+        // セットアップ
+        setUpThumbnail(thumbnail: btn)
+
         thumbnails.insert(btn, at: at)
 
         // スクロールビューのコンテンツサイズを大きくする
@@ -393,6 +321,51 @@ class FooterView: UIView, ShadowView {
                 indicator.startAnimating()
             }
         }
+    }
+
+    /// サムネイルセットアップ
+    private func setUpThumbnail(thumbnail: Thumbnail) {
+        thumbnail.backgroundColor = UIColor.darkGray
+        thumbnail.setImage(image: R.image.footerThumbnailBack(), color: UIColor.gray)
+        let inset: CGFloat = thumbnail.frame.size.width / 9
+        thumbnail.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+
+        // ボタンタップ
+        thumbnail.rx.tap
+            .subscribe(onNext: { [weak self] in
+                log.eventIn(chain: "rx_tap")
+                guard let `self` = self else { return }
+                let tappedContext = thumbnail.context
+                if tappedContext == self.viewModel.currentContext {
+                    log.debug("selected same page.")
+                } else {
+                    self.viewModel.change(context: thumbnail.context)
+                }
+                log.eventOut(chain: "rx_tap")
+            })
+            .disposed(by: rx.disposeBag)
+
+        let longPressRecognizer = UILongPressGestureRecognizer()
+
+        // ロングプレス
+        longPressRecognizer.rx.event
+            .subscribe { [weak self] sender in
+                log.eventIn(chain: "rx_longPress")
+                guard let `self` = self else { return }
+                if let sender = sender.element {
+                    if sender.state == .began {
+                        for thumbnail in self.thumbnails where sender.view == thumbnail {
+                            thumbnail.transform = CGAffineTransform(scaleX: 1.2, y: 1.2) // サイズを1.2倍にする
+//                            self.viewModel.remove(context: thumbnail.context)
+                            break
+                        }
+                    }
+                }
+                log.eventOut(chain: "rx_longPress")
+            }
+            .disposed(by: rx.disposeBag)
+
+        thumbnail.addGestureRecognizer(longPressRecognizer)
     }
 
     /// フロントバーの変更

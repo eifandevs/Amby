@@ -40,6 +40,7 @@ function MyApp_HighlightAllOccurencesOfStringForElement(element,keyword) {
 function MyApp_HighlightAllOccurencesOfString(keyword) {
     MyApp_RemoveAllHighlights();
     MyApp_HighlightAllOccurencesOfStringForElement(document.body, keyword.toLowerCase());
+    return MyApp_SearchResultCount;
 }
 
 // helper function, recursively removes the highlights in elements and their childs

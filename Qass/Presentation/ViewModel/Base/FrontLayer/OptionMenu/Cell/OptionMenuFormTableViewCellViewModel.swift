@@ -14,15 +14,8 @@ final class OptionMenuFormTableViewCellViewModel {
 
     /// 閲覧リクエスト
     func readForm(id: String) {
-        if PasscodeUseCase.s.isRegisterdPasscode {
-            if PasscodeUseCase.s.isInputPasscode {
-                // パスコード入力済みの場合は表示
-                FormUseCase.s.read(id: id)
-            } else {
-                PasscodeUseCase.s.confirm()
-            }
-        } else {
-            NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_NOT_REGISTERED, isSuccess: false)
+        if PasscodeUseCase.s.authentificationChallenge() {
+            FormUseCase.s.read(id: id)
         }
     }
 }

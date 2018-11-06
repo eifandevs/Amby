@@ -18,7 +18,7 @@ final class FooterViewModel {
             return Observable.just(pageHistory)
         }
 
-    /// サムネイル追加用RX
+    /// サムネイル挿入用RX
     let rx_footerViewModelDidInsertThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidInsertThumbnail
         .flatMap { object -> Observable<(at: Int, pageHistory: PageHistory)> in
             return Observable.just((at: object.at, pageHistory: object.pageHistory))

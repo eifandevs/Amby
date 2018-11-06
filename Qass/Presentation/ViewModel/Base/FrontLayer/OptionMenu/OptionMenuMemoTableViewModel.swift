@@ -65,14 +65,22 @@ final class OptionMenuMemoTableViewModel {
 
     /// ロック or アンロック
     func invertLock(memo: Memo) {
-        MemoUseCase.s.invertLock(memo: memo)
-        rx_optionMenuMemoTableViewModelWillReload.onNext(())
+        if PasscodeUseCase.s.authentificationChallenge() {
+            MemoUseCase.s.invertLock(memo: memo)
+            rx_optionMenuMemoTableViewModelWillReload.onNext(())
+        }
     }
 
     /// お問い合わせ表示
     func openMemo(memo: Memo? = nil) {
         if let memo = memo {
-            MemoUseCase.s.open(memo: memo)
+            if memo.isLocked {
+                if PasscodeUseCase.s.authentificationChallenge() {
+                    MemoUseCase.s.open(memo: memo)
+                }
+            } else {
+                MemoUseCase.s.open(memo: memo)
+            }
         } else {
             // 新規作成
             let newMemo = Memo()
