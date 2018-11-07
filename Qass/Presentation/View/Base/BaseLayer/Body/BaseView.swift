@@ -79,8 +79,6 @@ class BaseView: UIView {
     private var scrollMovingPointY: CGFloat = 0
     /// 自動入力ダイアログ表示済みフラグ
     private var isDoneAutoFill = false
-    /// アニメーション中フラグ
-    private var isAnimating = false
     /// 自動スクロール
     private var autoScrollTimer: Timer?
     /// スワイプ方向
@@ -929,7 +927,7 @@ extension BaseView: UIScrollViewDelegate {
                                 } else {
                                     // コンテンツサイズが画面より小さい場合は、過去スクロールしない
                                     if speed >= 0 || shouldScroll {
-                                        if !isAnimating {
+                                        if !viewModel.isAnimating {
                                             slide(value: speed)
                                         }
                                     }
@@ -945,7 +943,7 @@ extension BaseView: UIScrollViewDelegate {
                                 } else {
                                     // コンテンツサイズが画面より小さい場合は、過去スクロールしない
                                     if speed >= 0 || shouldScroll {
-                                        if !isAnimating {
+                                        if !viewModel.isAnimating {
                                             slide(value: speed)
                                         }
                                     }
@@ -966,16 +964,16 @@ extension BaseView: UIScrollViewDelegate {
             if front.scrollView == scrollView {
                 if velocity.y == 0 && !viewModel.isTouching {
                     // タッチ終了時にベースビューの高さを調整する
-                    if isScrolling && !isAnimating {
+                    if isScrolling && !viewModel.isAnimating {
                         isScrolling = false
                         if isMoving {
-                            isAnimating = true
+                            viewModel.isAnimating = true
                             if frame.origin.y > viewModel.positionY.max / 2 {
                                 UIView.animate(withDuration: 0.2, animations: {
                                     self.slideToMax()
                                 }, completion: { finished in
                                     if finished {
-                                        self.isAnimating = false
+                                        self.viewModel.isAnimating = false
                                     }
                                 })
                             } else {
@@ -983,7 +981,7 @@ extension BaseView: UIScrollViewDelegate {
                                     self.slideToMin()
                                 }, completion: { finished in
                                     if finished {
-                                        self.isAnimating = false
+                                        self.viewModel.isAnimating = false
                                     }
                                 })
                             }
@@ -1000,18 +998,18 @@ extension BaseView: UIScrollViewDelegate {
         // フロントのみ通知する
         if let front = front {
             if front.scrollView == scrollView {
-                if !viewModel.isTouching && !isAnimating {
+                if !viewModel.isTouching && !viewModel.isAnimating {
                     // タッチ終了時にベースビューの高さを調整する
-                    if isScrolling && !isAnimating {
+                    if isScrolling && !viewModel.isAnimating {
                         isScrolling = false
                         if isMoving {
-                            isAnimating = true
+                            viewModel.isAnimating = true
                             if frame.origin.y > viewModel.positionY.max / 2 {
                                 UIView.animate(withDuration: 0.2, animations: {
                                     self.slideToMax()
                                 }, completion: { finished in
                                     if finished {
-                                        self.isAnimating = false
+                                        self.viewModel.isAnimating = false
                                     }
                                 })
                             } else {
@@ -1019,7 +1017,7 @@ extension BaseView: UIScrollViewDelegate {
                                     self.slideToMin()
                                 }, completion: { finished in
                                     if finished {
-                                        self.isAnimating = false
+                                        self.viewModel.isAnimating = false
                                     }
                                 })
                             }

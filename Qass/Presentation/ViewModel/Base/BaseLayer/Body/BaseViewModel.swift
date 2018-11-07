@@ -148,6 +148,9 @@ final class BaseViewModel {
     /// タッチ中フラグ
     var isTouching = false
 
+    /// アニメーション中フラグ
+    var isAnimating = false
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
