@@ -50,7 +50,9 @@ public final class HistoryUseCase {
 
     /// 閲覧、ページ履歴の永続化
     private func store() {
-        CommonHistoryDataModel.s.store()
+        DispatchQueue(label: ModelConst.APP.QUEUE).async {
+            CommonHistoryDataModel.s.store()
+        }
     }
 
     public func select(dateString: String) -> [CommonHistory] {

@@ -29,6 +29,16 @@ public final class SettingUseCase {
         }
     }
 
+    /// 新規ウィンドウ許諾フラグ
+    public var newWindowConfirm: Bool {
+        get {
+            return SettingDataModel.s.newWindowConfirm
+        }
+        set(value) {
+            SettingDataModel.s.newWindowConfirm = value
+        }
+    }
+
     /// メニュー順序
     public var menuOrder: [UserOperation] {
         get {

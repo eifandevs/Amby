@@ -589,13 +589,13 @@ class BaseView: UIView {
     }
 
     /// サイズの最大化
-    func scaleToMax() {
+    private func scaleToMax() {
         frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT
         front.frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT
     }
 
     /// サイズの最小化
-    func scaleToMin() {
+    private func scaleToMin() {
         frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + AppConst.DEVICE.STATUS_BAR_HEIGHT
         front.frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + AppConst.DEVICE.STATUS_BAR_HEIGHT
     }
@@ -1193,16 +1193,20 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
             if let url = navigationAction.request.url?.absoluteString {
                 log.debug("receive new window event. url: \(url)")
 
-                isSelectingNewTabEvent = true
+                if viewModel.newWindowConfirm {
+                    viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
+                } else {
+                    isSelectingNewTabEvent = true
 
-                // 150文字以上は省略
-                let message = url.count > 50 ? String(url.prefix(200)) + "..." : url
-                NotificationManager.presentActionSheet(title: MessageConst.NOTIFICATION.NEW_TAB, message: message, completion: {
-                    self.isSelectingNewTabEvent = false
-                    self.viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
-                }, cancel: {
-                    self.isSelectingNewTabEvent = false
-                })
+                    // 150文字以上は省略
+                    let message = url.count > 50 ? String(url.prefix(200)) + "..." : url
+                    NotificationManager.presentActionSheet(title: MessageConst.NOTIFICATION.NEW_TAB, message: message, completion: {
+                        self.isSelectingNewTabEvent = false
+                        self.viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
+                    }, cancel: {
+                        self.isSelectingNewTabEvent = false
+                    })
+                }
 
 //                if url != AppConst.URL.BLANK {
 //                    // about:blankは無視する

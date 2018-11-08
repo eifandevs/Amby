@@ -121,7 +121,7 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
 
     func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label: PaddingLabel = PaddingLabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionHeight)))
-        label.backgroundColor = UIColor.black
+        label.backgroundColor = UIColor.ultraViolet
         label.textAlignment = .left
         label.text = viewModel.getSection(section: section).dateString
         label.textColor = UIColor.white

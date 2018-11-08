@@ -126,6 +126,11 @@ final class BaseViewModel {
         return ScrollUseCase.s.autoScrollInterval
     }
 
+    /// 新規ウィンドウ許諾
+    var newWindowConfirm: Bool {
+        return SettingUseCase.s.newWindowConfirm
+    }
+
     /// baseViewControllerの状態取得
     /// ヘルプ画面表示中はfalseとなる
     var canSwipe: Bool {

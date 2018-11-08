@@ -12,6 +12,8 @@ import UIKit
 class OptionMenuSettingSliderTableViewCell: UITableViewCell {
     @IBOutlet var slider: UISlider!
 
+    let viewModel = OptionMenuSettingSliderTableViewCellViewModel()
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,7 +26,7 @@ class OptionMenuSettingSliderTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    @IBAction func changedValue(_: Any) {
-        ScrollUseCase.s.autoScrollInterval = CGFloat(-(slider.value))
+    @IBAction func valueChanged(_: Any) {
+        viewModel.changeValue(value: slider.value)
     }
 }

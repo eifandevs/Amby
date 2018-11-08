@@ -355,8 +355,10 @@ class FooterView: UIView, ShadowView {
                 if let sender = sender.element {
                     if sender.state == .began {
                         for thumbnail in self.thumbnails where sender.view == thumbnail {
-//                            thumbnail.float()
-                            self.viewModel.remove(context: thumbnail.context)
+                            self.viewModel.isReplacing = true
+                            self.scrollView.bringSubview(toFront: thumbnail)
+                            thumbnail.float()
+//                            self.viewModel.remove(context: thumbnail.context)
                             break
                         }
                     }

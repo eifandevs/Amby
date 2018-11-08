@@ -209,7 +209,9 @@ public final class TabUseCase {
 
     /// 閲覧、ページ履歴の永続化
     private func store() {
-        PageHistoryDataModel.s.store()
+        DispatchQueue(label: ModelConst.APP.QUEUE).async {
+            PageHistoryDataModel.s.store()
+        }
     }
 
     public func initialize() {

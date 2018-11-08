@@ -66,6 +66,16 @@ final class SettingDataModel {
         }
     }
 
+    /// 新規ウィンドウ許諾フラグ
+    var newWindowConfirm: Bool {
+        get {
+            return repository.get(key: .newWindowConfirm)
+        }
+        set(value) {
+            repository.set(key: .newWindowConfirm, value: value)
+        }
+    }
+
     /// ページ履歴保存日数
     var pageHistorySaveCount: Int {
         return repository.get(key: .pageHistorySaveCount)

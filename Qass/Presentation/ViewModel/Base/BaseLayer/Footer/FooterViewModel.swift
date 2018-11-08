@@ -68,6 +68,9 @@ final class FooterViewModel {
     /// 通知センター
     let center = NotificationCenter.default
 
+    /// 入れ替え中フラグ
+    var isReplacing = false
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 

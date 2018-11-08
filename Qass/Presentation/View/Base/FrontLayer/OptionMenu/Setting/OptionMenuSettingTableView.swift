@@ -47,6 +47,7 @@ class OptionMenuSettingTableView: UIView, ShadowView, OptionMenuView {
 
             // カスタムビュー登録
             tableView.register(R.nib.optionMenuSettingSliderTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingSliderCell.identifier)
+            tableView.register(R.nib.optionMenuSettingSwitchTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingSwitchCell.identifier)
             tableView.register(R.nib.optionMenuSettingTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingCell.identifier)
 
             addSubview(view)
@@ -67,6 +68,13 @@ extension OptionMenuSettingTableView: UITableViewDataSource {
         if row.cellType == .autoScroll {
             let identifier = R.reuseIdentifier.optionMenuSettingSliderCell.identifier
             if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuSettingSliderTableViewCell {
+                cell.selectionStyle = .none
+                return cell
+            }
+        } else if row.cellType == .windowConfirm {
+            let identifier = R.reuseIdentifier.optionMenuSettingSwitchCell.identifier
+            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuSettingSwitchTableViewCell {
+                cell.selectionStyle = .none
                 return cell
             }
         } else {
@@ -82,7 +90,7 @@ extension OptionMenuSettingTableView: UITableViewDataSource {
 
     func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label: PaddingLabel = PaddingLabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: viewModel.sectionHeight)))
-        label.backgroundColor = UIColor.black
+        label.backgroundColor = UIColor.ultraViolet
         label.textAlignment = .left
         label.text = viewModel.getSection(section: section).title
         label.textColor = UIColor.white

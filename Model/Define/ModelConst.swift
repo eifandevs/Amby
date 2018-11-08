@@ -39,6 +39,7 @@ struct ModelConst {
         let COMMON_HISTORY_SAVE_COUNT = "commonHistorySaveCount"
         let SEARCH_HISTORY_SAVE_COUNT = "searchHistorySaveCount"
         let PAGE_HISTORY_SAVE_COUNT = "pageHistorySaveCount"
+        let NEW_WINDOW_CONFIRM = "newWindowConfirm"
         let MENU_ORDER = "menuOrder"
         let NOTIFICATION_SUBTITLE = "subtitle"
         let NOTIFICATION_MESSAGE = "message"
@@ -59,22 +60,23 @@ struct ModelConst {
         let LAST_REPORT_DATE = Date.distantPast
         let AUTO_SCROLL_INTERVAL = 0.06
         let MENU_ORDER: [UserOperation] = [
-            UserOperation.menu,
-            UserOperation.close,
-            UserOperation.historyBack,
-            UserOperation.copy,
-            UserOperation.search,
-            UserOperation.add,
-            UserOperation.scrollUp,
-            UserOperation.autoScroll,
-            UserOperation.historyForward,
-            UserOperation.form,
-            UserOperation.closeAll,
-            UserOperation.grep
+            .menu,
+            .close,
+            .historyBack,
+            .copy,
+            .search,
+            .add,
+            .scrollUp,
+            .autoScroll,
+            .historyForward,
+            .form,
+            .closeAll,
+            .grep
         ]
         let COMMON_HISTORY_SAVE_COUNT = 90
         let SEARCH_HISTORY_SAVE_COUNT = 90
         let PAGE_HISTORY_SAVE_COUNT = 30
+        let NEW_WINDOW_CONFIRM = false
     }
 
     // MARK: - DEVICE情報
