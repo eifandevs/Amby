@@ -296,6 +296,10 @@
 		A1FFA65C2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA65A2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.xib */; };
 		A1FFA65E219455BC0092C4D6 /* OptionMenuSettingSliderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA65D219455BC0092C4D6 /* OptionMenuSettingSliderTableViewCellViewModel.swift */; };
 		A1FFA660219455D20092C4D6 /* OptionMenuSettingSwitchTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA65F219455D20092C4D6 /* OptionMenuSettingSwitchTableViewCellViewModel.swift */; };
+		A1FFA66321945A090092C4D6 /* OptionMenuCooperationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA66221945A090092C4D6 /* OptionMenuCooperationTableView.swift */; };
+		A1FFA66521945A150092C4D6 /* OptionMenuCooperationTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA66421945A150092C4D6 /* OptionMenuCooperationTableView.xib */; };
+		A1FFA66821945A280092C4D6 /* OptionMenuCooperationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA66621945A280092C4D6 /* OptionMenuCooperationTableViewCell.swift */; };
+		A1FFA66921945A280092C4D6 /* OptionMenuCooperationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA66721945A280092C4D6 /* OptionMenuCooperationTableViewCell.xib */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		DD7A96C7A47EEF104EFBE48C /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 /* End PBXBuildFile section */
@@ -678,6 +682,10 @@
 		A1FFA65A2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuSettingSwitchTableViewCell.xib; sourceTree = "<group>"; };
 		A1FFA65D219455BC0092C4D6 /* OptionMenuSettingSliderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingSliderTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		A1FFA65F219455D20092C4D6 /* OptionMenuSettingSwitchTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingSwitchTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		A1FFA66221945A090092C4D6 /* OptionMenuCooperationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuCooperationTableView.swift; sourceTree = "<group>"; };
+		A1FFA66421945A150092C4D6 /* OptionMenuCooperationTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuCooperationTableView.xib; sourceTree = "<group>"; };
+		A1FFA66621945A280092C4D6 /* OptionMenuCooperationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuCooperationTableViewCell.swift; sourceTree = "<group>"; };
+		A1FFA66721945A280092C4D6 /* OptionMenuCooperationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuCooperationTableViewCell.xib; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		A89CE5916F45D8661B08C445 /* Pods-All-Logger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Logger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Logger/Pods-All-Logger.debug.xcconfig"; sourceTree = "<group>"; };
@@ -935,6 +943,7 @@
 		A112E7AD212CD76400320048 /* OptionMenu */ = {
 			isa = PBXGroup;
 			children = (
+				A1FFA661219459D30092C4D6 /* Cooperation */,
 				A1869C1A217951B6007303B3 /* Memo */,
 				A15C5425214D699C001E8AB5 /* Base */,
 				A15C5434214D699C001E8AB5 /* App */,
@@ -1799,6 +1808,17 @@
 			path = js;
 			sourceTree = "<group>";
 		};
+		A1FFA661219459D30092C4D6 /* Cooperation */ = {
+			isa = PBXGroup;
+			children = (
+				A1FFA66221945A090092C4D6 /* OptionMenuCooperationTableView.swift */,
+				A1FFA66421945A150092C4D6 /* OptionMenuCooperationTableView.xib */,
+				A1FFA66621945A280092C4D6 /* OptionMenuCooperationTableViewCell.swift */,
+				A1FFA66721945A280092C4D6 /* OptionMenuCooperationTableViewCell.xib */,
+			);
+			path = Cooperation;
+			sourceTree = "<group>";
+		};
 		A57EFE981E3E06D300B66701 = {
 			isa = PBXGroup;
 			children = (
@@ -2122,6 +2142,7 @@
 				A15C5455214D699D001E8AB5 /* OptionMenuHelpTableView.xib in Resources */,
 				A1AD92DC2162E7BF00445FC8 /* GoogleService-Info-dummy.plist in Resources */,
 				A13D6A8B2184A43000B1832E /* FormViewController.xib in Resources */,
+				A1FFA66921945A280092C4D6 /* OptionMenuCooperationTableViewCell.xib in Resources */,
 				A15C5467214D699D001E8AB5 /* OptionMenuFavoriteTableView.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
 				A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */,
@@ -2155,6 +2176,7 @@
 				A11CD33C214F8F8500D9333F /* OpenSourceTableViewCell.xib in Resources */,
 				A15C5461214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */,
 				A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */,
+				A1FFA66521945A150092C4D6 /* OptionMenuCooperationTableView.xib in Resources */,
 				A1FFA65C2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.xib in Resources */,
 				A15C5457214D699D001E8AB5 /* OptionMenuAppTableView.xib in Resources */,
 				A15C5465214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
@@ -2793,8 +2815,10 @@
 				A112E89B212CD76500320048 /* SearchMenuTableView.swift in Sources */,
 				A11CD333214F059000D9333F /* SearchMenuTableViewModel.swift in Sources */,
 				A1903053209CF978004F1EA5 /* ShadowView.swift in Sources */,
+				A1FFA66821945A280092C4D6 /* OptionMenuCooperationTableViewCell.swift in Sources */,
 				A1903026209CF977004F1EA5 /* Array+Extend.swift in Sources */,
 				A112E8A7212CD76500320048 /* BaseView.swift in Sources */,
+				A1FFA66321945A090092C4D6 /* OptionMenuCooperationTableView.swift in Sources */,
 				A13D6A862184A3F100B1832E /* MemoViewController.swift in Sources */,
 				A11CD338214F05B000D9333F /* OpenSourceViewControllerViewModel.swift in Sources */,
 				A112E8AB212CD76500320048 /* EGGradientLabel.swift in Sources */,
