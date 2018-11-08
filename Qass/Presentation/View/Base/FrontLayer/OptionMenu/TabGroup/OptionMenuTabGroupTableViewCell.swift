@@ -1,14 +1,14 @@
 //
-//  OptionMenuCooperationTableViewCell.swift
+//  OptionMenuTabGroupTableViewCell.swift
 //  Qass
 //
-//  Created by tenma on 2018/11/08.
+//  Created by tenma on 2018/11/09.
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
 import UIKit
 
-class OptionMenuCooperationTableViewCell: UITableViewCell {
+class OptionMenuTabGroupTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

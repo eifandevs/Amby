@@ -77,8 +77,6 @@ class BaseView: UIView {
     private let viewModel = BaseViewModel()
     /// Y軸移動量を計算するための一時変数
     private var scrollMovingPointY: CGFloat = 0
-    /// 自動入力ダイアログ表示済みフラグ
-    private var isDoneAutoFill = false
     /// 自動スクロール
     private var autoScrollTimer: Timer?
     /// スワイプ方向
@@ -204,7 +202,7 @@ class BaseView: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidAutoFill")
                 guard let `self` = self else { return }
-                if !self.isDoneAutoFill {
+                if !self.viewModel.isDoneAutoFill {
                     if let url = self.front.url?.absoluteString, let inputForm = FormUseCase.s.select(url: url).first {
                         NotificationManager.presentAlert(title: MessageConst.ALERT.FORM_TITLE, message: MessageConst.ALERT.FORM_EXIST, completion: { [weak self] in
                             guard let `self` = self else { return }
@@ -221,7 +219,7 @@ class BaseView: UIView {
                                 }
                             }
                         })
-                        self.isDoneAutoFill = true
+                        self.viewModel.isDoneAutoFill = true
                     }
                 }
                 log.eventOut(chain: "rx_baseViewModelDidAutoFill")
@@ -1072,7 +1070,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
 
         // プログレス更新
         if wv.context == front.context {
-            isDoneAutoFill = false
+            viewModel.isDoneAutoFill = false
             viewModel.updateProgress(progress: 1.0)
         }
         updateNetworkActivityIndicator()
