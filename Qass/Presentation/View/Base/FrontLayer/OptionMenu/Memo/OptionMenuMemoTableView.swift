@@ -61,7 +61,7 @@ class OptionMenuMemoTableView: UIView, ShadowView, OptionMenuView {
     func setupRx() {
         // pull to refresh
         refreshControl.attributedTitle = NSAttributedString(string: MessageConst.OPTION_MENU.MEMO_REFRESH_TEXT)
-        refreshControl.tintColor = UIColor.ultraViolet
+        refreshControl.tintColor = UIColor.darkGray
         tableView.refreshControl = refreshControl
         refreshControl.rx.controlEvent(.valueChanged)
             .subscribe(onNext: { [weak self] in

@@ -220,7 +220,7 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label: UILabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: 11)))
-        label.backgroundColor = UIColor.ultraViolet
+        label.backgroundColor = UIColor.darkGray
         label.text = "   \(viewModel.sectionItem[section])"
         label.textColor = UIColor.white
         label.font = UIFont(name: AppConst.APP.FONT, size: 12)

@@ -61,6 +61,9 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
         case .urlCopy:
             // TODO: URLコピーの画像
             setImage(image: R.image.circlemenuFavorite(), color: UIColor.darkGray)
+        case .tabGroup:
+            // TODO: タブグループの画像
+            setImage(image: R.image.circlemenuFavorite(), color: UIColor.darkGray)
         }
 
         #if UT
@@ -108,6 +111,9 @@ class CircleMenuItem: UIButton, ShadowView, CircleView {
                 accessibilityIdentifier = R.image.circlemenuHome.name
                 log.debug("set accessibility. name: \(R.image.circlemenuHome.name)")
             case .urlCopy:
+                accessibilityIdentifier = R.image.circlemenuHome.name
+                log.debug("set accessibility. name: \(R.image.circlemenuHome.name)")
+            case .tabGroup:
                 accessibilityIdentifier = R.image.circlemenuHome.name
                 log.debug("set accessibility. name: \(R.image.circlemenuHome.name)")
             }

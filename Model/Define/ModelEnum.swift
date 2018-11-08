@@ -28,6 +28,7 @@ public enum UserOperation: Int, CaseIterable, DefaultsSerializable {
     case scrollUp
     case historyBack
     case historyForward
+    case tabGroup
 
     public func title() -> String {
         switch self {
@@ -59,6 +60,8 @@ public enum UserOperation: Int, CaseIterable, DefaultsSerializable {
             return "前ページに戻る"
         case .historyForward:
             return "次ページに進む"
+        case .tabGroup:
+            return "タブグループ"
         }
     }
 }
