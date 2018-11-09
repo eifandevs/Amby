@@ -295,6 +295,8 @@
 		A1FFA6752195BB6B0092C4D6 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A1FFA6762195BB7A0092C4D6 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
 		A1FFA6772195BB890092C4D6 /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */; };
+		A1FFA67C2195FCC90092C4D6 /* FooterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA67A2195FCC90092C4D6 /* FooterCollectionViewCell.swift */; };
+		A1FFA67D2195FCC90092C4D6 /* FooterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA67B2195FCC90092C4D6 /* FooterCollectionViewCell.xib */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		DD7A96C7A47EEF104EFBE48C /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 /* End PBXBuildFile section */
@@ -676,6 +678,8 @@
 		A1FFA66F2194FD500092C4D6 /* OptionMenuTabGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuTabGroupTableViewCell.swift; sourceTree = "<group>"; };
 		A1FFA6702194FD500092C4D6 /* OptionMenuTabGroupTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuTabGroupTableViewCell.xib; sourceTree = "<group>"; };
 		A1FFA6732195B9680092C4D6 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		A1FFA67A2195FCC90092C4D6 /* FooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCollectionViewCell.swift; sourceTree = "<group>"; };
+		A1FFA67B2195FCC90092C4D6 /* FooterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterCollectionViewCell.xib; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		A89CE5916F45D8661B08C445 /* Pods-All-Logger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Logger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Logger/Pods-All-Logger.debug.xcconfig"; sourceTree = "<group>"; };
@@ -847,10 +851,10 @@
 		A112E771212CD76400320048 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A112E7A6212CD76400320048 /* Base */,
 				A13D6A832184A3B100B1832E /* Form */,
 				A13D6A822184A3B000B1832E /* Memo */,
 				A14F2F9E217B7E7800EB95FE /* Passcode */,
-				A112E7A6212CD76400320048 /* Base */,
 				A19506952146B6A40091DF23 /* OpenSource */,
 				A19506872146A0480091DF23 /* Policy */,
 				A112E772212CD76400320048 /* Splash */,
@@ -965,6 +969,8 @@
 			children = (
 				A112E7C1212CD76400320048 /* FooterView.swift */,
 				A112E7C2212CD76400320048 /* Thumbnail.swift */,
+				A1FFA67A2195FCC90092C4D6 /* FooterCollectionViewCell.swift */,
+				A1FFA67B2195FCC90092C4D6 /* FooterCollectionViewCell.xib */,
 			);
 			path = Footer;
 			sourceTree = "<group>";
@@ -2136,6 +2142,7 @@
 				A1AD92DC2162E7BF00445FC8 /* GoogleService-Info-dummy.plist in Resources */,
 				A13D6A8B2184A43000B1832E /* FormViewController.xib in Resources */,
 				A1FFA66921945A280092C4D6 /* OptionMenuCooperationTableViewCell.xib in Resources */,
+				A1FFA67D2195FCC90092C4D6 /* FooterCollectionViewCell.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
 				A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */,
 				A1B778392173C57100BED141 /* MenuOrderTableViewCell.xib in Resources */,
@@ -2819,6 +2826,7 @@
 				A11CD32D214F059000D9333F /* OptionMenuHistoryTableViewModel.swift in Sources */,
 				A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */,
 				A190302A209CF977004F1EA5 /* Data+Extend.swift in Sources */,
+				A1FFA67C2195FCC90092C4D6 /* FooterCollectionViewCell.swift in Sources */,
 				A112E82D212CD76500320048 /* SplashViewController.swift in Sources */,
 				A1FFA66C2194FD000092C4D6 /* OptionMenuTabGroupTableView.swift in Sources */,
 				A190302D209CF977004F1EA5 /* DispatchQueue+Extend.swift in Sources */,
