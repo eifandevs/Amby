@@ -14,43 +14,46 @@ class OptionMenuSettingTableView: UIView, ShadowView, OptionMenuView {
     // メニュークローズ通知用RX
     let rx_optionMenuSettingDidClose = PublishSubject<()>()
 
-    let viewModel = OptionMenuSettingTableViewModel()
-    @IBOutlet var tableView: UITableView!
+    private let viewModel = OptionMenuSettingTableViewModel()
+    private let tableView = UITableView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        loadNib()
+        setup()
     }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        loadNib()
+        setup()
     }
 
     deinit {
         log.debug("deinit called.")
     }
 
-    func loadNib() {
-        if let view = Bundle.main.loadNibNamed(R.nib.optionMenuSettingTableView.name, owner: self, options: nil)?.first as? UIView {
-            view.frame = bounds
+    func setup() {
+        // 影
+        addMenuShadow()
 
-            // 影
-            addMenuShadow()
+        // テーブルビュー監視
+        tableView.delegate = self
+        tableView.dataSource = self
 
-            // テーブルビュー監視
-            tableView.delegate = self
-            tableView.dataSource = self
+        // OptionMenuProtocol
+        _ = setupLayout(tableView: tableView)
 
-            // OptionMenuProtocol
-            _ = setup(tableView: tableView)
+        // カスタムビュー登録
+        tableView.register(R.nib.optionMenuSettingSliderTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingSliderCell.identifier)
+        tableView.register(R.nib.optionMenuSettingSwitchTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingSwitchCell.identifier)
+        tableView.register(R.nib.optionMenuSettingTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingCell.identifier)
 
-            // カスタムビュー登録
-            tableView.register(R.nib.optionMenuSettingSliderTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingSliderCell.identifier)
-            tableView.register(R.nib.optionMenuSettingSwitchTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingSwitchCell.identifier)
-            tableView.register(R.nib.optionMenuSettingTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingCell.identifier)
+        addSubview(tableView)
 
-            addSubview(view)
+        tableView.snp.makeConstraints { make in
+            make.left.equalTo(snp.left).offset(0)
+            make.right.equalTo(snp.right).offset(0)
+            make.top.equalTo(snp.top).offset(0)
+            make.bottom.equalTo(snp.bottom).offset(0)
         }
     }
 }

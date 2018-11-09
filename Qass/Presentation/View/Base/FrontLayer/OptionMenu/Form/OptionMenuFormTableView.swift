@@ -14,29 +14,24 @@ class OptionMenuFormTableView: UIView, ShadowView, OptionMenuView {
     // メニュークローズ通知用RX
     let rx_optionMenuFormDidClose = PublishSubject<()>()
 
-    let viewModel = OptionMenuFormTableViewModel()
-    @IBOutlet var tableView: UITableView!
+    private let viewModel = OptionMenuFormTableViewModel()
+    private let tableView = UITableView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        loadNib()
+        setup()
     }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        loadNib()
+        setup()
     }
 
     deinit {
         log.debug("deinit called.")
     }
 
-    func loadNib() {
-        guard let view = Bundle.main.loadNibNamed(R.nib.optionMenuFormTableView.name, owner: self, options: nil)?.first as? UIView else {
-            return
-        }
-        view.frame = bounds
-
+    func setup() {
         // 影
         addMenuShadow()
 
@@ -45,12 +40,19 @@ class OptionMenuFormTableView: UIView, ShadowView, OptionMenuView {
         tableView.dataSource = self
 
         // OptionMenuProtocol
-        _ = setup(tableView: tableView)
+        _ = setupLayout(tableView: tableView)
 
         // カスタムビュー登録
         tableView.register(R.nib.optionMenuFormTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuFormCell.identifier)
 
-        addSubview(view)
+        addSubview(tableView)
+
+        tableView.snp.makeConstraints { make in
+            make.left.equalTo(snp.left).offset(0)
+            make.right.equalTo(snp.right).offset(0)
+            make.top.equalTo(snp.top).offset(0)
+            make.bottom.equalTo(snp.bottom).offset(0)
+        }
 
         // ロングプレスで削除
         let longPressRecognizer = UILongPressGestureRecognizer()

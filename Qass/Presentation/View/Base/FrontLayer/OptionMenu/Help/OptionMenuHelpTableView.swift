@@ -14,8 +14,8 @@ class OptionMenuHelpTableView: UIView, ShadowView, OptionMenuView {
     // メニュークローズ通知用RX
     let rx_optionMenuHelpDidClose = PublishSubject<()>()
 
-    let viewModel = OptionMenuHelpTableViewModel()
-    @IBOutlet var tableView: UITableView!
+    private let viewModel = OptionMenuHelpTableViewModel()
+    private let tableView = UITableView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,11 +32,6 @@ class OptionMenuHelpTableView: UIView, ShadowView, OptionMenuView {
     }
 
     func loadNib() {
-        guard let view = Bundle.main.loadNibNamed(R.nib.optionMenuHelpTableView.name, owner: self, options: nil)?.first as? UIView else {
-            return
-        }
-        view.frame = bounds
-
         // 影
         addMenuShadow()
 
@@ -45,12 +40,19 @@ class OptionMenuHelpTableView: UIView, ShadowView, OptionMenuView {
         tableView.dataSource = self
 
         // OptionMenuProtocol
-        _ = setup(tableView: tableView)
+        _ = setupLayout(tableView: tableView)
 
         // カスタムビュー登録
         tableView.register(R.nib.optionMenuHelpTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuHelpCell.identifier)
 
-        addSubview(view)
+        addSubview(tableView)
+
+        tableView.snp.makeConstraints { make in
+            make.left.equalTo(snp.left).offset(0)
+            make.right.equalTo(snp.right).offset(0)
+            make.top.equalTo(snp.top).offset(0)
+            make.bottom.equalTo(snp.bottom).offset(0)
+        }
     }
 }
 

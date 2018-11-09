@@ -8,10 +8,11 @@
 
 import RxCocoa
 import RxSwift
+import SnapKit
 import UIKit
 
 class OptionMenuMemoTableView: UIView, ShadowView, OptionMenuView {
-    @IBOutlet var tableView: UITableView!
+    private let tableView = UITableView()
     private let refreshControl = UIRefreshControl()
 
     private let viewModel = OptionMenuMemoTableViewModel()
@@ -19,43 +20,46 @@ class OptionMenuMemoTableView: UIView, ShadowView, OptionMenuView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        loadNib()
+        setup()
     }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        loadNib()
+        setup()
     }
 
     deinit {
         log.debug("deinit called.")
     }
 
-    func loadNib() {
-        if let view = Bundle.main.loadNibNamed(R.nib.optionMenuMemoTableView.name, owner: self, options: nil)?.first as? UIView {
-            view.frame = bounds
+    func setup() {
+        // 影
+        addMenuShadow()
 
-            // コンテントオフセットが(0, 0)とは限らないので保持しておく
-            // pull to refreshしたときにずれたままになる対応
-            defaultContentOffset = tableView.contentOffset
+        // テーブルビュー監視
+        tableView.delegate = self
+        tableView.dataSource = self
 
-            // 影
-            addMenuShadow()
+        // OptionMenuProtocol
+        _ = setupLayout(tableView: tableView)
 
-            // テーブルビュー監視
-            tableView.delegate = self
-            tableView.dataSource = self
+        // カスタムビュー登録
+        tableView.register(R.nib.optionMenuMemoTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuMemoCell.identifier)
 
-            // OptionMenuProtocol
-            _ = setup(tableView: tableView)
+        setupRx()
 
-            // カスタムビュー登録
-            tableView.register(R.nib.optionMenuMemoTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuMemoCell.identifier)
+        addSubview(tableView)
 
-            setupRx()
-
-            addSubview(view)
+        tableView.snp.makeConstraints { make in
+            make.left.equalTo(snp.left).offset(0)
+            make.right.equalTo(snp.right).offset(0)
+            make.top.equalTo(snp.top).offset(0)
+            make.bottom.equalTo(snp.bottom).offset(0)
         }
+
+        // コンテントオフセットが(0, 0)とは限らないので保持しておく
+        // pull to refreshしたときにずれたままになる対応
+        defaultContentOffset = tableView.contentOffset
     }
 
     func setupRx() {

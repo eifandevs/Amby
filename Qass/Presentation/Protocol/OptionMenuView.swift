@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 protocol OptionMenuView {
-    func setup(tableView: UITableView) -> UITableView
+    func setupLayout(tableView: UITableView) -> UITableView
 }
 
 extension OptionMenuView where Self: UIView {
-    func setup(tableView: UITableView) -> UITableView {
+    func setupLayout(tableView: UITableView) -> UITableView {
         tableView.isUserInteractionEnabled = true
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         tableView.showsHorizontalScrollIndicator = false

@@ -15,16 +15,16 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
     // クローズ通知用RX
     let rx_optionMenuTableViewDidClose = PublishSubject<()>()
 
-    @IBOutlet var tableView: UITableView!
-    let viewModel = OptionMenuTableViewModel()
-    var detailView: UIView?
+    private let tableView = UITableView()
+    private let viewModel = OptionMenuTableViewModel()
+    private var detailView: UIView?
     private var selectedIndexPath: IndexPath?
     private var overlay: UIButton?
 
     convenience init(frame: CGRect, swipeDirection: EdgeSwipeDirection) {
         self.init(frame: frame)
         viewModel.swipeDirection = swipeDirection
-        loadNib()
+        setup()
     }
 
     override init(frame: CGRect) {
@@ -33,17 +33,14 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        loadNib()
+        setup()
     }
 
     deinit {
         log.debug("deinit called.")
     }
 
-    func loadNib() {
-        guard let view = Bundle.main.loadNibNamed(R.nib.optionMenuTableView.name, owner: self, options: nil)?.first as? UIView else { return }
-        view.frame = bounds
-
+    func setup() {
         // 影
         addMenuShadow()
 
@@ -52,12 +49,19 @@ class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
         tableView.dataSource = self
 
         // OptionMenuProtocol
-        _ = setup(tableView: tableView)
+        _ = setupLayout(tableView: tableView)
 
         // カスタムセル登録
         tableView.register(R.nib.optionMenuTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuCell.identifier)
 
-        addSubview(view)
+        addSubview(tableView)
+
+        tableView.snp.makeConstraints { make in
+            make.left.equalTo(snp.left).offset(0)
+            make.right.equalTo(snp.right).offset(0)
+            make.top.equalTo(snp.top).offset(0)
+            make.bottom.equalTo(snp.bottom).offset(0)
+        }
     }
 
     private func back() {
