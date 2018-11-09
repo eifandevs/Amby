@@ -242,6 +242,8 @@ name: Kingfisher, nameSpecified: , owner: onevcat, version: 4.10.0
 
 name: NVActivityIndicatorView, nameSpecified: , owner: ninjaprox, version: 4.4.0
 
+name: SnapKit, nameSpecified: , owner: SnapKit, version: 4.2.0
+
 name: SVProgressHUD, nameSpecified: , owner: SVProgressHUD, version: 2.2.5
 
 name: SwiftyBeaver, nameSpecified: , owner: SwiftyBeaver, version: 1.6.1

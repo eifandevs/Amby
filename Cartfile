@@ -6,3 +6,4 @@ github "SVProgressHUD/SVProgressHUD" ~> 2.1.2
 github "ninjaprox/NVActivityIndicatorView" ~> 4.0.0
 github "radex/SwiftyUserDefaults" "4.0.0-alpha.1"
 github "bizz84/SwiftyStoreKit" ~> 0.13
+github "SnapKit/SnapKit" ~> 4.0.0

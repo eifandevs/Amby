@@ -12,7 +12,6 @@
 		62F8CE49F96E0498CD005428 /* Pods_All_Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8472F7E2E1F266BC528B8E /* Pods_All_Model.framework */; };
 		71CF37049E7E55B00EBA1BCA /* Pods_All_Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8692F7480F7AAB8F5A3CCD8D /* Pods_All_Logger.framework */; };
 		9DA1C080D94CD726F2EAAF12 /* Pods_LoggerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F8067F5DB4DDA3119AC415 /* Pods_LoggerTests.framework */; };
-		A101649720C56376007A3CC7 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
 		A112E735212AF83800320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
 		A112E82D212CD76500320048 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E773212CD76400320048 /* SplashViewController.swift */; };
 		A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A112E776212CD76400320048 /* LaunchScreen.storyboard */; };
@@ -70,7 +69,6 @@
 		A11CD33B214F8F8500D9333F /* OpenSourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD339214F8F8500D9333F /* OpenSourceTableViewCell.swift */; };
 		A11CD33C214F8F8500D9333F /* OpenSourceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11CD33A214F8F8500D9333F /* OpenSourceTableViewCell.xib */; };
 		A123451B2135ADB400C791B8 /* ResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123451A2135ADB400C791B8 /* ResourceUtil.swift */; };
-		A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
 		A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */; };
 		A12B93F8214EF7480082EEA5 /* com.mono0926.LicensePlist in Resources */ = {isa = PBXBuildFile; fileRef = A12B93F7214EF7480082EEA5 /* com.mono0926.LicensePlist */; };
@@ -96,7 +94,6 @@
 		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
 		A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */; };
 		A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */; };
-		A14F2FA6217C63F300EB95FE /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */; };
 		A14F2FAA217C91F300EB95FE /* ContactUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2FA9217C91F300EB95FE /* ContactUseCase.swift */; };
 		A152086020C5543B00201B30 /* env.plist in Resources */ = {isa = PBXBuildFile; fileRef = A152085F20C5543B00201B30 /* env.plist */; };
 		A15C53F0214D4CDC001E8AB5 /* ContactUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15C53E8214D4CDC001E8AB5 /* ContactUseCase.swift */; };
@@ -304,6 +301,10 @@
 		A1FFA66E2194FD340092C4D6 /* OptionMenuTabGroupTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA66D2194FD340092C4D6 /* OptionMenuTabGroupTableView.xib */; };
 		A1FFA6712194FD500092C4D6 /* OptionMenuTabGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA66F2194FD500092C4D6 /* OptionMenuTabGroupTableViewCell.swift */; };
 		A1FFA6722194FD500092C4D6 /* OptionMenuTabGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA6702194FD500092C4D6 /* OptionMenuTabGroupTableViewCell.xib */; };
+		A1FFA6742195B9680092C4D6 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FFA6732195B9680092C4D6 /* SnapKit.framework */; };
+		A1FFA6752195BB6B0092C4D6 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
+		A1FFA6762195BB7A0092C4D6 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
+		A1FFA6772195BB890092C4D6 /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		DD7A96C7A47EEF104EFBE48C /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 /* End PBXBuildFile section */
@@ -694,6 +695,7 @@
 		A1FFA66D2194FD340092C4D6 /* OptionMenuTabGroupTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuTabGroupTableView.xib; sourceTree = "<group>"; };
 		A1FFA66F2194FD500092C4D6 /* OptionMenuTabGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuTabGroupTableViewCell.swift; sourceTree = "<group>"; };
 		A1FFA6702194FD500092C4D6 /* OptionMenuTabGroupTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuTabGroupTableViewCell.xib; sourceTree = "<group>"; };
+		A1FFA6732195B9680092C4D6 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		A89CE5916F45D8661B08C445 /* Pods-All-Logger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Logger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Logger/Pods-All-Logger.debug.xcconfig"; sourceTree = "<group>"; };
@@ -741,6 +743,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1FFA6772195BB890092C4D6 /* SwiftyUserDefaults.framework in Frameworks */,
+				A1FFA6762195BB7A0092C4D6 /* CryptoSwift.framework in Frameworks */,
+				A1FFA6752195BB6B0092C4D6 /* KeychainAccess.framework in Frameworks */,
 				A13D6AA3218A740F00B1832E /* SwiftyStoreKit.framework in Frameworks */,
 				A1A3DE852138827400F87009 /* SwiftyBeaver.framework in Frameworks */,
 				A1A3DE842138815E00F87009 /* Logger.framework in Frameworks */,
@@ -761,15 +766,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A14F2FA6217C63F300EB95FE /* SwiftyUserDefaults.framework in Frameworks */,
+				A1FFA6742195B9680092C4D6 /* SnapKit.framework in Frameworks */,
 				A112E735212AF83800320048 /* MessageUI.framework in Frameworks */,
 				A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */,
 				A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */,
-				A12A9C9720CE955200146010 /* KeychainAccess.framework in Frameworks */,
 				A1A3DE6E213878D200F87009 /* Logger.framework in Frameworks */,
 				A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */,
 				A1ED0BFD20C94DDD00DFC55B /* Kingfisher.framework in Frameworks */,
-				A101649720C56376007A3CC7 /* CryptoSwift.framework in Frameworks */,
 				A1E33AB52137149B00C93FBE /* Model.framework in Frameworks */,
 				2D09190780127377F04D13FF /* Pods_All_Qass.framework in Frameworks */,
 			);
@@ -781,6 +784,7 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1FFA6732195B9680092C4D6 /* SnapKit.framework */,
 				A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */,
 				A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */,
 				A112E734212AF83800320048 /* MessageUI.framework */,
@@ -2423,20 +2427,18 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyUserDefaults.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 			);
 			name = Carthage;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n    /usr/local/bin/carthage copy-frameworks\nelse\n    echo \"warning: carthage not installed. install at 'brew install carthage'\"\nfi";
+			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n    /usr/local/bin/carthage copy-frameworks\nelse\n    echo \"warning: carthage not installed. install at 'brew install carthage'\"\nfi\n";
 		};
 		A138CAE32137414800AEA669 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2446,6 +2448,9 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyUserDefaults.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 			);
 			name = Carthage;
 			outputPaths = (
