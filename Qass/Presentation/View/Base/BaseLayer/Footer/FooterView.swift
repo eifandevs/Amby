@@ -41,15 +41,24 @@ class FooterView: UIView, ShadowView {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.itemSize = AppConst.BASE_LAYER.THUMBNAIL_SIZE
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.collectionViewLayout = layout
         collectionView.backgroundColor = UIColor.lightGray
+        collectionView.isScrollEnabled = true
+        collectionView.alwaysBounceHorizontal = true
         collectionView.register(R.nib.footerCollectionViewCell(), forCellWithReuseIdentifier: R.nib.footerCollectionViewCell.identifier)
+        // フッターのスペースを計算
+        let isRequireLeftMargin = (layout.itemSize.width * 3) < bounds.size.width
+        if isRequireLeftMargin {
+            let leftMargin = (bounds.size.width - (layout.itemSize.width * 3)) / 2
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0)
+        }
 
-        setupRx()
+//        setupRx()
 
         addSubview(collectionView)
 
@@ -59,67 +68,6 @@ class FooterView: UIView, ShadowView {
             make.top.equalTo(snp.top).offset(0)
             make.bottom.equalTo(snp.bottom).offset(0)
         }
-    }
-
-    private func setupRx() {
-        // サムネイル追加監視
-        viewModel.rx_footerViewModelDidAppendThumbnail
-            .observeOn(MainScheduler.asyncInstance)
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_footerViewModelDidAppendThumbnail")
-                guard let `self` = self else { return }
-                log.eventOut(chain: "rx_footerViewModelDidAppendThumbnail")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // サムネイル変更監視
-        viewModel.rx_footerViewModelDidChangeThumbnail
-            .observeOn(MainScheduler.asyncInstance)
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_footerViewModelDidChangeThumbnail")
-                guard let `self` = self else { return }
-                log.eventOut(chain: "rx_footerViewModelDidChangeThumbnail")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // サムネイルインサート監視
-        viewModel.rx_footerViewModelDidInsertThumbnail
-            .observeOn(MainScheduler.asyncInstance)
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_footerViewModelDidInsertThumbnail")
-                guard let `self` = self else { return }
-                log.eventOut(chain: "rx_footerViewModelDidInsertThumbnail")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // サムネイル削除監視
-        viewModel.rx_footerViewModelDidRemoveThumbnail
-            .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_footerViewModelDidRemoveThumbnail")
-                guard let `self` = self else { return }
-                log.eventOut(chain: "rx_footerViewModelDidRemoveThumbnail")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // ローディングスタート監視
-        viewModel.rx_footerViewModelDidStartLoading
-            .observeOn(MainScheduler.asyncInstance)
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_footerViewModelDidStartLoading")
-                guard let `self` = self else { return }
-                log.eventOut(chain: "rx_footerViewModelDidStartLoading")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // ローティング終了監視
-        viewModel.rx_footerViewModelDidEndLoading
-            .observeOn(MainScheduler.asyncInstance)
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_footerViewModelDidEndLoading")
-                log.eventOut(chain: "rx_footerViewModelDidEndLoading")
-            }
-            .disposed(by: rx.disposeBag)
     }
 }
 
