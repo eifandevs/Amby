@@ -92,9 +92,6 @@ class BaseView: UIView {
         return !isLocateMax && !isLocateMin
     }
 
-    /// スクロール中フラグ
-    var isScrolling: Bool = false
-
     /// ベースビューがMaxポジションにあるかどうかのフラグ
     var isLocateMax: Bool {
         return frame.origin.y == viewModel.positionY.max
@@ -902,13 +899,13 @@ extension BaseView: EGApplicationDelegate {
 
 extension BaseView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        isScrolling = true
+        viewModel.isScrolling = true
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // フロントのみ通知する
-        if let front = front, isScrolling {
+        if let front = front, viewModel.isScrolling {
             if front.scrollView == scrollView {
                 if scrollMovingPointY != 0 {
                     let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
@@ -962,8 +959,8 @@ extension BaseView: UIScrollViewDelegate {
             if front.scrollView == scrollView {
                 if velocity.y == 0 && !viewModel.isTouching {
                     // タッチ終了時にベースビューの高さを調整する
-                    if isScrolling && !viewModel.isAnimating {
-                        isScrolling = false
+                    if viewModel.isScrolling && !viewModel.isAnimating {
+                        viewModel.isScrolling = false
                         if isMoving {
                             viewModel.isAnimating = true
                             if frame.origin.y > viewModel.positionY.max / 2 {
@@ -998,8 +995,8 @@ extension BaseView: UIScrollViewDelegate {
             if front.scrollView == scrollView {
                 if !viewModel.isTouching && !viewModel.isAnimating {
                     // タッチ終了時にベースビューの高さを調整する
-                    if isScrolling && !viewModel.isAnimating {
-                        isScrolling = false
+                    if viewModel.isScrolling && !viewModel.isAnimating {
+                        viewModel.isScrolling = false
                         if isMoving {
                             viewModel.isAnimating = true
                             if frame.origin.y > viewModel.positionY.max / 2 {

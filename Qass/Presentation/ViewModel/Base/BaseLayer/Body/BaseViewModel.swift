@@ -159,6 +159,9 @@ final class BaseViewModel {
     /// 自動入力ダイアログ表示済みフラグ
     var isDoneAutoFill = false
 
+    /// スクロール中フラグ
+    var isScrolling = false
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
