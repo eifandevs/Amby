@@ -298,6 +298,10 @@
 		A1FFA67C2195FCC90092C4D6 /* FooterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA67A2195FCC90092C4D6 /* FooterCollectionViewCell.swift */; };
 		A1FFA67D2195FCC90092C4D6 /* FooterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA67B2195FCC90092C4D6 /* FooterCollectionViewCell.xib */; };
 		A1FFA6802199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA67F2199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift */; };
+		A1FFA685219A40180092C4D6 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA683219A40170092C4D6 /* DonationViewController.swift */; };
+		A1FFA686219A40180092C4D6 /* DonationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA684219A40170092C4D6 /* DonationViewController.xib */; };
+		A1FFA689219A40270092C4D6 /* DevelopmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA687219A40270092C4D6 /* DevelopmentViewController.swift */; };
+		A1FFA68A219A40270092C4D6 /* DevelopmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA688219A40270092C4D6 /* DevelopmentViewController.xib */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		DD7A96C7A47EEF104EFBE48C /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 /* End PBXBuildFile section */
@@ -682,6 +686,10 @@
 		A1FFA67A2195FCC90092C4D6 /* FooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCollectionViewCell.swift; sourceTree = "<group>"; };
 		A1FFA67B2195FCC90092C4D6 /* FooterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterCollectionViewCell.xib; sourceTree = "<group>"; };
 		A1FFA67F2199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuCooperationTableViewModel.swift; sourceTree = "<group>"; };
+		A1FFA683219A40170092C4D6 /* DonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
+		A1FFA684219A40170092C4D6 /* DonationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DonationViewController.xib; sourceTree = "<group>"; };
+		A1FFA687219A40270092C4D6 /* DevelopmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentViewController.swift; sourceTree = "<group>"; };
+		A1FFA688219A40270092C4D6 /* DevelopmentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevelopmentViewController.xib; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		A89CE5916F45D8661B08C445 /* Pods-All-Logger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Logger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Logger/Pods-All-Logger.debug.xcconfig"; sourceTree = "<group>"; };
@@ -853,6 +861,8 @@
 		A112E771212CD76400320048 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A1FFA681219A3FF70092C4D6 /* Development */,
+				A1FFA682219A3FF70092C4D6 /* Donation */,
 				A112E7A6212CD76400320048 /* Base */,
 				A13D6A832184A3B100B1832E /* Form */,
 				A13D6A822184A3B000B1832E /* Memo */,
@@ -1822,6 +1832,24 @@
 			path = TabGroup;
 			sourceTree = "<group>";
 		};
+		A1FFA681219A3FF70092C4D6 /* Development */ = {
+			isa = PBXGroup;
+			children = (
+				A1FFA687219A40270092C4D6 /* DevelopmentViewController.swift */,
+				A1FFA688219A40270092C4D6 /* DevelopmentViewController.xib */,
+			);
+			path = Development;
+			sourceTree = "<group>";
+		};
+		A1FFA682219A3FF70092C4D6 /* Donation */ = {
+			isa = PBXGroup;
+			children = (
+				A1FFA683219A40170092C4D6 /* DonationViewController.swift */,
+				A1FFA684219A40170092C4D6 /* DonationViewController.xib */,
+			);
+			path = Donation;
+			sourceTree = "<group>";
+		};
 		A57EFE981E3E06D300B66701 = {
 			isa = PBXGroup;
 			children = (
@@ -2172,6 +2200,8 @@
 				A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */,
 				A11CD33C214F8F8500D9333F /* OpenSourceTableViewCell.xib in Resources */,
 				A15C5461214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */,
+				A1FFA686219A40180092C4D6 /* DonationViewController.xib in Resources */,
+				A1FFA68A219A40270092C4D6 /* DevelopmentViewController.xib in Resources */,
 				A1FFA6722194FD500092C4D6 /* OptionMenuTabGroupTableViewCell.xib in Resources */,
 				A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */,
 				A1FFA65C2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.xib in Resources */,
@@ -2783,6 +2813,7 @@
 				A112E89F212CD76500320048 /* SearchMenuSuggestTableViewCell.swift in Sources */,
 				A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */,
 				A15C546A214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.swift in Sources */,
+				A1FFA689219A40270092C4D6 /* DevelopmentViewController.swift in Sources */,
 				A1FFA65E219455BC0092C4D6 /* OptionMenuSettingSliderTableViewCellViewModel.swift in Sources */,
 				A1FFA65B2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.swift in Sources */,
 				A112E8A3212CD76500320048 /* SearchMenuCommonHistoryTableViewCell.swift in Sources */,
@@ -2860,6 +2891,7 @@
 				A190303A209CF977004F1EA5 /* UIViewController+Extend.swift in Sources */,
 				A15C545B214D699D001E8AB5 /* OptionMenuSettingTableViewCell.swift in Sources */,
 				A15C5450214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.swift in Sources */,
+				A1FFA685219A40180092C4D6 /* DonationViewController.swift in Sources */,
 				A1B778352173BE9F00BED141 /* MenuOrderViewControllerViewModel.swift in Sources */,
 				A1903063209CF978004F1EA5 /* Util.swift in Sources */,
 				A1903051209CF978004F1EA5 /* EnumEnumerable.swift in Sources */,
