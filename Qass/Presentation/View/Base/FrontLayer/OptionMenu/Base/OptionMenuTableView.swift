@@ -183,18 +183,18 @@ extension OptionMenuTableView: UITableViewDelegate {
             detailView = settingTableView
         case .help:
             let helpTableView = OptionMenuHelpTableView(frame: detailViewFrame)
-            helpTableView.rx_optionMenuHelpDidClose
-                .subscribe({ [weak self] _ in
-                    log.eventIn(chain: "rx_optionMenuHelpDidClose")
-                    guard let `self` = self else { return }
-                    self.rx_optionMenuTableViewDidClose.onNext(())
-                    log.eventOut(chain: "rx_optionMenuHelpDidClose")
-                })
-                .disposed(by: rx.disposeBag)
             detailView = helpTableView
         case .cooperation:
-            rx_optionMenuTableViewDidClose.onNext(())
-            return
+            let cooperationTableView = OptionMenuCooperationTableView(frame: detailViewFrame)
+            cooperationTableView.rx_optionMenuAppDidClose
+                .subscribe({ [weak self] _ in
+                    log.eventIn(chain: "rx_optionMenuAppDidClose")
+                    guard let `self` = self else { return }
+                    self.rx_optionMenuTableViewDidClose.onNext(())
+                    log.eventOut(chain: "rx_optionMenuAppDidClose")
+                })
+                .disposed(by: rx.disposeBag)
+            detailView = cooperationTableView
         case .app:
             let appTableView = OptionMenuAppTableView(frame: detailViewFrame)
             appTableView.rx_optionMenuAppDidClose

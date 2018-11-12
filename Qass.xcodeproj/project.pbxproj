@@ -297,6 +297,7 @@
 		A1FFA6772195BB890092C4D6 /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */; };
 		A1FFA67C2195FCC90092C4D6 /* FooterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA67A2195FCC90092C4D6 /* FooterCollectionViewCell.swift */; };
 		A1FFA67D2195FCC90092C4D6 /* FooterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA67B2195FCC90092C4D6 /* FooterCollectionViewCell.xib */; };
+		A1FFA6802199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA67F2199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		DD7A96C7A47EEF104EFBE48C /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 /* End PBXBuildFile section */
@@ -680,6 +681,7 @@
 		A1FFA6732195B9680092C4D6 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		A1FFA67A2195FCC90092C4D6 /* FooterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCollectionViewCell.swift; sourceTree = "<group>"; };
 		A1FFA67B2195FCC90092C4D6 /* FooterCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterCollectionViewCell.xib; sourceTree = "<group>"; };
+		A1FFA67F2199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuCooperationTableViewModel.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		A89CE5916F45D8661B08C445 /* Pods-All-Logger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Logger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Logger/Pods-All-Logger.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1162,6 +1164,7 @@
 				A11CD314214F058F00D9333F /* OptionMenuSettingTableViewModel.swift */,
 				A11CD315214F058F00D9333F /* OptionMenuFormTableViewModel.swift */,
 				A11CD316214F058F00D9333F /* OptionMenuFavoriteTableViewModel.swift */,
+				A1FFA67F2199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift */,
 				A11CD317214F058F00D9333F /* OptionMenuHistoryTableViewModel.swift */,
 				A11CD318214F058F00D9333F /* OptionMenuHelpTableViewModel.swift */,
 				A11CD319214F058F00D9333F /* OptionMenuAppTableViewModel.swift */,
@@ -2799,6 +2802,7 @@
 				A112E899212CD76500320048 /* Thumbnail.swift in Sources */,
 				A15C5460214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift in Sources */,
 				A1903035209CF977004F1EA5 /* UIColor+Extend.swift in Sources */,
+				A1FFA6802199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift in Sources */,
 				A190305E209CF978004F1EA5 /* EGApplication.swift in Sources */,
 				A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */,
 				A1FFA660219455D20092C4D6 /* OptionMenuSettingSwitchTableViewCellViewModel.swift in Sources */,

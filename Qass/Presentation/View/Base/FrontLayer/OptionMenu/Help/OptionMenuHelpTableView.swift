@@ -11,27 +11,24 @@ import RxSwift
 import UIKit
 
 class OptionMenuHelpTableView: UIView, ShadowView, OptionMenuView {
-    // メニュークローズ通知用RX
-    let rx_optionMenuHelpDidClose = PublishSubject<()>()
-
     private let viewModel = OptionMenuHelpTableViewModel()
     private let tableView = UITableView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        loadNib()
+        setup()
     }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        loadNib()
+        setup()
     }
 
     deinit {
         log.debug("deinit called.")
     }
 
-    func loadNib() {
+    func setup() {
         // 影
         addMenuShadow()
 
