@@ -176,14 +176,21 @@ class EGWebView: WKWebView {
     }
 
     func loadHtml(code: NetWorkError) {
-        let url: URL = { () -> URL in
+        let path: String = { () -> String in
             if code == NetWorkError.timeout { return resourceUtil.timeoutHtml }
             if code == NetWorkError.dnsNotFound { return resourceUtil.dnsHtml }
             if code == NetWorkError.offline { return resourceUtil.offlineHtml }
             if code == NetWorkError.unauthorized { return resourceUtil.authorizeHtml }
             return resourceUtil.invalidHtml
         }()
-        loadFileURL(url, allowingReadAccessTo: url)
+
+        do {
+            // ローカルページはヒストリースタックに入れたくないので、文字列として読み込む
+            let htmlStr = try String(contentsOfFile: path, encoding: .utf8)
+            loadHTMLString(htmlStr, baseURL: nil)
+        } catch {
+            log.error("html to string error")
+        }
     }
 
     func loadHtml(error: NSError) {

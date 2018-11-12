@@ -18,9 +18,27 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dhQ-ql-FzO">
+                        <rect key="frame" x="0.0" y="46" width="50" height="4"/>
+                        <color key="backgroundColor" red="0.37254901960784315" green="0.29411764705882354" blue="0.54509803921568623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="4" id="sGK-E1-KsZ"/>
+                        </constraints>
+                    </view>
+                </subviews>
             </view>
             <color key="backgroundColor" red="0.23002232140000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="dhQ-ql-FzO" secondAttribute="trailing" id="3Ll-XM-tKi"/>
+                <constraint firstAttribute="bottom" secondItem="dhQ-ql-FzO" secondAttribute="bottom" id="mTd-v4-6SX"/>
+                <constraint firstItem="dhQ-ql-FzO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xKu-2A-1xV"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="frontBar" destination="dhQ-ql-FzO" id="hIn-o9-8Aq"/>
+            </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="121.4392803598201"/>
         </collectionViewCell>
     </objects>
 </document>

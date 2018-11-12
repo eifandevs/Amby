@@ -51,20 +51,20 @@ final class ResourceUtil {
     }()
 
     /// タイムアウトページ
-    var timeoutHtml: Foundation.URL = R.file.timeoutHtml()!
+    var timeoutHtml = R.file.timeoutHtml()!.path
 
     /// DNSエラーページ
-    var dnsHtml: Foundation.URL = R.file.dnsHtml()!
+    var dnsHtml = R.file.dnsHtml()!.path
 
     /// オフラインエラーページ
-    var offlineHtml: Foundation.URL = R.file.offlineHtml()!
+    var offlineHtml = R.file.offlineHtml()!.path
 
     /// 認証エラーページ
-    var authorizeHtml: Foundation.URL = R.file.authorizeHtml()!
+    var authorizeHtml = R.file.authorizeHtml()!.path
 
     /// 汎用エラーページ
-    var invalidHtml: Foundation.URL = R.file.invalidHtml()!
+    var invalidHtml = R.file.invalidHtml()!.path
 
     /// ハイライトスクリプト
-    var highlightScript: Foundation.URL = R.file.highlightJs()!
+    var highlightScript = R.file.highlightJs()!
 }

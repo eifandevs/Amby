@@ -51,12 +51,6 @@ class FooterView: UIView, ShadowView {
         collectionView.isScrollEnabled = true
         collectionView.alwaysBounceHorizontal = true
         collectionView.register(R.nib.footerCollectionViewCell(), forCellWithReuseIdentifier: R.nib.footerCollectionViewCell.identifier)
-        // フッターのスペースを計算
-        let isRequireLeftMargin = (layout.itemSize.width * 3) < bounds.size.width
-        if isRequireLeftMargin {
-            let leftMargin = (bounds.size.width - (layout.itemSize.width * 3)) / 2
-            collectionView.contentInset = UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0)
-        }
 
 //        setupRx()
 
@@ -68,17 +62,30 @@ class FooterView: UIView, ShadowView {
             make.top.equalTo(snp.top).offset(0)
             make.bottom.equalTo(snp.bottom).offset(0)
         }
+
+        adjustLeftMargin()
+    }
+
+    /// マージン調整
+    private func adjustLeftMargin() {
+        // マージン調整
+        let isRequireLeftMargin = (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(viewModel.cellCount)) < bounds.size.width
+        if isRequireLeftMargin {
+            let leftMargin = (bounds.size.width - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(viewModel.cellCount))) / 2
+            collectionView.contentInset = UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0)
+        }
     }
 }
 
 extension FooterView: UICollectionViewDataSource {
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return 3
+        return viewModel.cellCount
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let identifier = R.nib.footerCollectionViewCell.identifier
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? FooterCollectionViewCell {
+            cell.setRow(row: viewModel.getRow(indexPath: indexPath))
             return cell
         } else {
             return UICollectionViewCell()

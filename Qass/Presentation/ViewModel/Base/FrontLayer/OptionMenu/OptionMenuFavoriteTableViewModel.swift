@@ -12,15 +12,11 @@ import Model
 final class OptionMenuFavoriteTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     /// セル情報
-    var rows: [Row] = []
+    var rows: [Row] = FavoriteUseCase.s.select().map({ Row(data: $0) })
 
     /// セル数
     var cellCount: Int {
         return rows.count
-    }
-
-    init() {
-        rows = FavoriteUseCase.s.select().map({ Row(data: $0) })
     }
 
     /// セル情報取得

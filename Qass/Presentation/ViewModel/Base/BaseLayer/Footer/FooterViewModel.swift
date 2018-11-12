@@ -12,6 +12,36 @@ import RxCocoa
 import RxSwift
 
 final class FooterViewModel {
+    struct Row {
+        var context: String?
+        var title: String
+        var isFront: Bool
+        var isLoading: Bool
+        var image: UIImage?
+    }
+
+    var rows = TabUseCase.s.pageHistories.map { pageHistory -> FooterViewModel.Row in
+        let isFront = pageHistory.context == TabUseCase.s.currentContext
+
+        let thumbnail = ThumbnailUseCase.s.getThumbnail(context: pageHistory.context)
+        let image = thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
+
+        return Row(context: pageHistory.context, title: pageHistory.title, isFront: isFront, isLoading: pageHistory.isLoading, image: image)
+    }
+
+    // 数
+    var cellCount: Int {
+        return rows.count
+    }
+
+    /// セル情報取得
+    func getRow(indexPath: IndexPath) -> Row {
+        return rows[indexPath.row]
+    }
+
+    /// 更新通知用RX
+    let rx_footerViewModelWillUpdate = PublishSubject<IndexPath?>()
+
     /// サムネイル追加通知用RX
     let rx_footerViewModelDidAppendThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidAppendThumbnail
         .flatMap { pageHistory -> Observable<PageHistory> in
@@ -49,27 +79,24 @@ final class FooterViewModel {
         }
 
     /// 現在位置
-    var pageHistories: [PageHistory] {
+    private var pageHistories: [PageHistory] {
         return TabUseCase.s.pageHistories
     }
 
-    var currentHistory: PageHistory? {
+    private var currentHistory: PageHistory? {
         return TabUseCase.s.currentHistory
     }
 
-    var currentContext: String {
+    private var currentContext: String {
         return TabUseCase.s.currentContext
     }
 
-    var currentLocation: Int? {
+    private var currentLocation: Int? {
         return TabUseCase.s.currentLocation
     }
 
     /// 通知センター
     let center = NotificationCenter.default
-
-    /// 入れ替え中フラグ
-    var isReplacing = false
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -81,15 +108,15 @@ final class FooterViewModel {
 
     // MARK: Public Method
 
-    func change(context: String) {
+    private func change(context: String) {
         TabUseCase.s.change(context: context)
     }
 
-    func remove(context: String) {
+    private func remove(context: String) {
         TabUseCase.s.remove(context: context)
     }
 
-    func getThumbnail(context: String) -> UIImage? {
+    private func getThumbnail(context: String) -> UIImage? {
         let thumbnail = ThumbnailUseCase.s.getThumbnail(context: context)
         return thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
     }
