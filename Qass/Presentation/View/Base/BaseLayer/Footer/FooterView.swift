@@ -15,6 +15,7 @@ import UIKit
 class FooterView: UIView, ShadowView {
     private var viewModel = FooterViewModel()
     private var collectionView: UICollectionView!
+    private var isDragging = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +52,8 @@ class FooterView: UIView, ShadowView {
         collectionView.isScrollEnabled = true
         collectionView.alwaysBounceHorizontal = true
         collectionView.register(R.nib.footerCollectionViewCell(), forCellWithReuseIdentifier: R.nib.footerCollectionViewCell.identifier)
-
+        // タイトル用に、スクロールビューの領域外に配置できるようにする
+        collectionView.clipsToBounds = false
 //        setupRx()
 
         addSubview(collectionView)
@@ -84,12 +86,14 @@ extension FooterView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let identifier = R.nib.footerCollectionViewCell.identifier
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? FooterCollectionViewCell {
-            cell.setRow(row: viewModel.getRow(indexPath: indexPath))
-            return cell
-        } else {
-            return UICollectionViewCell()
+        // swiftlint:disable force_cast
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! FooterCollectionViewCell
+        // swiftlint:enable force_cast
+        cell.setRow(row: viewModel.getRow(indexPath: indexPath))
+        if isDragging {
+            cell.displayTitle()
         }
+        return cell
     }
 }
 
@@ -100,6 +104,28 @@ extension FooterView: UICollectionViewDelegate {
 extension FooterView: UICollectionViewDelegateFlowLayout {
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         return AppConst.BASE_LAYER.THUMBNAIL_SIZE
+    }
+}
+
+// MARK: ScrollView Delegate
+
+extension FooterView: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_: UIScrollView) {
+        isDragging = true
+        collectionView.visibleCells.forEach { cell in
+            if let footerCell = cell as? FooterCollectionViewCell {
+                footerCell.displayTitle()
+            }
+        }
+    }
+
+    func scrollViewDidEndDragging(_: UIScrollView, willDecelerate _: Bool) {
+        isDragging = false
+        collectionView.visibleCells.forEach { cell in
+            if let footerCell = cell as? FooterCollectionViewCell {
+                footerCell.undisplayTitle()
+            }
+        }
     }
 }
 

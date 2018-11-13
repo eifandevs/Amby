@@ -12,6 +12,9 @@ import UIKit
 class FooterCollectionViewCell: UICollectionViewCell {
     private var row: FooterViewModel.Row!
     private var indicator: NVActivityIndicatorView!
+    private let thumbnailInfo = UIButton()
+    private let underLine = UIView()
+
     @IBOutlet var frontBar: UIView!
 
     override func awakeFromNib() {
@@ -28,6 +31,15 @@ class FooterCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(snp.height).multipliedBy(0.7)
             make.width.equalTo(snp.width).multipliedBy(0.7)
         }
+
+        // サムネイルタイトル配置
+        layer.masksToBounds = false
+        thumbnailInfo.titleLabel?.font = UIFont(name: AppConst.APP.FONT, size: frame.size.width / 4)
+        thumbnailInfo.setTitleColor(UIColor.darkGray, for: .normal)
+        thumbnailInfo.titleLabel?.lineBreakMode = .byTruncatingTail
+        thumbnailInfo.alpha = 0
+        thumbnailInfo.layer.anchorPoint = CGPoint.zero
+        addSubview(thumbnailInfo)
     }
 
     func setRow(row: FooterViewModel.Row) {
@@ -48,5 +60,61 @@ class FooterCollectionViewCell: UICollectionViewCell {
         } else {
             frontBar.alpha = 0
         }
+
+        // タイトル表示
+        setupTitle(title: row.title)
+    }
+
+    /// タイトル初期化
+    private func setupTitle(title: String) {
+        // タイトルの長さに応じて、サイズを変更する
+        thumbnailInfo.transform = CGAffineTransform.identity
+        thumbnailInfo.alpha = 0
+        thumbnailInfo.setTitle(title, for: .normal)
+        // タイトルの横幅を調整
+        var width = (thumbnailInfo.titleLabel?.sizeThatFits(frame.size).width)!
+        if width > frame.size.width * 2 {
+            width = frame.size.width * 2
+        }
+        thumbnailInfo.frame = CGRect(x: frame.size.width / 2.8, y: -30, width: width, height: frame.size.width / 3)
+
+        // アンダーライン初期化
+        // ライン初期化
+        underLine.frame = CGRect(x: -5, y: (frame.size.width / 3) - 1, width: width + 18, height: 1)
+        underLine.backgroundColor = UIColor.ultraViolet
+        underLine.alpha = 0
+        thumbnailInfo.addSubview(underLine)
+
+        // 回転
+        let angle: CGFloat = CGFloat((-45.0 * Double.pi) / 180.0)
+        thumbnailInfo.transform = CGAffineTransform(rotationAngle: angle)
+    }
+
+    // タイトル表示
+    func displayTitle() {
+        if row.title.isEmpty { return }
+
+        // アンダーラインを横幅を保持しておく
+        let width = underLine.frame.size.width
+        underLine.frame.size.width = 0
+
+        underLine.alpha = 1
+
+        UIView.animate(withDuration: 0.2, animations: {
+            self.thumbnailInfo.alpha = 1
+        })
+
+        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseOut, animations: {
+            self.underLine.frame.size.width = width
+        }, completion: nil)
+    }
+
+    // タイトル非表示
+    func undisplayTitle() {
+        if row.title.isEmpty { return }
+
+        UIView.animate(withDuration: 0.2, animations: {
+            self.thumbnailInfo.alpha = 0
+        })
     }
 }
