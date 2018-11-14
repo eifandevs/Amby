@@ -54,8 +54,6 @@ class FooterView: UIView, ShadowView {
         collectionView.register(R.nib.footerCollectionViewCell(), forCellWithReuseIdentifier: R.nib.footerCollectionViewCell.identifier)
         // タイトル用に、スクロールビューの領域外に配置できるようにする
         collectionView.clipsToBounds = false
-//        setupRx()
-
         addSubview(collectionView)
 
         collectionView.snp.makeConstraints { make in
@@ -66,6 +64,22 @@ class FooterView: UIView, ShadowView {
         }
 
         adjustLeftMargin()
+
+        setupRx()
+    }
+
+    private func setupRx() {
+        // サムネイル追加監視
+        viewModel.rx_footerViewModelWillUpdate
+            .observeOn(MainScheduler.asyncInstance)
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_footerViewModelDidAppendThumbnail")
+                guard let `self` = self else { return }
+                self.collectionView.reloadData()
+                self.adjustLeftMargin()
+                log.eventOut(chain: "rx_footerViewModelDidAppendThumbnail")
+            }
+            .disposed(by: rx.disposeBag)
     }
 
     /// マージン調整

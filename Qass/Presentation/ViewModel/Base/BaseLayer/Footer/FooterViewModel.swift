@@ -42,12 +42,6 @@ final class FooterViewModel {
     /// 更新通知用RX
     let rx_footerViewModelWillUpdate = PublishSubject<IndexPath?>()
 
-    /// サムネイル追加通知用RX
-    let rx_footerViewModelDidAppendThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidAppendThumbnail
-        .flatMap { pageHistory -> Observable<PageHistory> in
-            return Observable.just(pageHistory)
-        }
-
     /// サムネイル挿入用RX
     let rx_footerViewModelDidInsertThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidInsertThumbnail
         .flatMap { object -> Observable<(at: Int, pageHistory: PageHistory)> in
@@ -101,12 +95,37 @@ final class FooterViewModel {
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
+    init() {
+        setupRx()
+    }
+
     deinit {
         log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)
     }
 
-    // MARK: Public Method
+    // MARK: Private Method
+
+    private func setupRx() {
+        /// サムネイル追加監視
+        ThumbnailUseCase.s.rx_thumbnailUseCaseDidAppendThumbnail
+            .subscribe { [weak self] pageHistory in
+                log.eventIn(chain: "rx_thumbnailUseCaseDidAppendThumbnail")
+                guard let `self` = self else { return }
+                if let pageHistory = pageHistory.element {
+                    let isFront = pageHistory.context == TabUseCase.s.currentContext
+
+                    let thumbnail = ThumbnailUseCase.s.getThumbnail(context: pageHistory.context)
+                    let image = thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
+
+                    let row = Row(context: pageHistory.context, title: pageHistory.title, isFront: isFront, isLoading: pageHistory.isLoading, image: image)
+                    self.rows.append(row)
+                    self.rx_footerViewModelWillUpdate.onNext(nil)
+                }
+                log.eventOut(chain: "rx_thumbnailUseCaseDidAppendThumbnail")
+            }
+            .disposed(by: disposeBag)
+    }
 
     private func change(context: String) {
         TabUseCase.s.change(context: context)
