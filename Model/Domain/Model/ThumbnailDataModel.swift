@@ -29,22 +29,22 @@ final class ThumbnailDataModel {
     /// サムネイルデータの削除
     func delete(context: String) {
         log.debug("delete thumbnail. context: \(context)")
-        localStorageRepository.delete(.thumbnails(additionalPath: context, resource: nil))
+        _ = localStorageRepository.delete(.thumbnails(additionalPath: context, resource: nil))
     }
 
     /// サムネイルデータの全削除
     func delete() {
-        localStorageRepository.delete(.thumbnails(additionalPath: nil, resource: nil))
-        localStorageRepository.create(.thumbnails(additionalPath: nil, resource: nil))
+        _ = localStorageRepository.delete(.thumbnails(additionalPath: nil, resource: nil))
+        _ = localStorageRepository.create(.thumbnails(additionalPath: nil, resource: nil))
     }
 
     /// create folder
     func create(context: String) {
-        localStorageRepository.create(.thumbnails(additionalPath: context, resource: nil))
+        _ = localStorageRepository.create(.thumbnails(additionalPath: context, resource: nil))
     }
 
     /// write
     func write(context: String, data: Data) {
-        localStorageRepository.write(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"), data: data)
+        _ = localStorageRepository.write(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"), data: data)
     }
 }

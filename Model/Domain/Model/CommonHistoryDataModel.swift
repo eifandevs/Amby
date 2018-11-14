@@ -173,7 +173,7 @@ final class CommonHistoryDataModel {
         if readFiles.count > historySaveCount {
             let deleteFiles = readFiles.prefix(readFiles.count - historySaveCount)
             deleteFiles.forEach({ key in
-                localStorageRepository.delete(.commonHistory(resource: "\(key).dat"))
+                _ = localStorageRepository.delete(.commonHistory(resource: "\(key).dat"))
             })
             log.debug("deleteCommonHistory: \(deleteFiles)")
         }
