@@ -83,8 +83,6 @@ class BaseView: UIView {
     private var swipeDirection: EdgeSwipeDirection = .none
     /// タッチ開始位置
     private var touchBeganPoint: CGPoint?
-    /// スワイプでページ切り替えを検知したかどうかのフラグ
-    private var isChangingFront: Bool = false
     /// 新規タブイベント選択中
     private var isSelectingNewTabEvent = false
     /// スライド中かどうかのフラグ
@@ -789,7 +787,7 @@ extension BaseView: EGApplicationDelegate {
         }
 
         viewModel.isTouching = true
-        isChangingFront = false
+        viewModel.isChangingFront = false
         touchBeganPoint = touch.location(in: self)
         if touchBeganPoint!.x < AppConst.FRONT_LAYER.EDGE_SWIPE_EREA {
             swipeDirection = .left
@@ -835,7 +833,7 @@ extension BaseView: EGApplicationDelegate {
                     previousImageView.image = viewModel.getPreviousCapture()
                     nextImageView.image = viewModel.getNextCapture()
                 }
-                if isChangingFront {
+                if viewModel.isChangingFront {
                     let previousTouchPoint = touch.previousLocation(in: self)
                     let distance: CGPoint = touchPoint - previousTouchPoint
                     frame.origin.x += distance.x
@@ -844,7 +842,7 @@ extension BaseView: EGApplicationDelegate {
                         if fabs(touchPoint.y - touchBeganPoint.y) < 7.5 {
                             // エッジスワイプではないスワイプを検知し、y軸に誤差7.5pxで、x軸に11px移動したらフロントビューの移動をする
                             if fabs(touchPoint.x - touchBeganPoint.x) > 11 {
-                                isChangingFront = true
+                                viewModel.isChangingFront = true
                             }
                         } else {
                             self.touchBeganPoint!.y = -1
@@ -859,8 +857,8 @@ extension BaseView: EGApplicationDelegate {
         if !viewModel.isTouching { return }
 
         viewModel.isTouching = false
-        if isChangingFront {
-            isChangingFront = false
+        if viewModel.isChangingFront {
+            viewModel.isChangingFront = false
             let targetOriginX = { () -> CGFloat in
                 if frame.origin.x > frame.size.width / 3 {
                     return frame.size.width

@@ -162,6 +162,9 @@ final class BaseViewModel {
     /// スクロール中フラグ
     var isScrolling = false
 
+    /// スワイプでページ切り替えを検知したかどうかのフラグ
+    var isChangingFront = false
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
