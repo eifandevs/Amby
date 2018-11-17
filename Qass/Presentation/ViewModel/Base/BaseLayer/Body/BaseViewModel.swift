@@ -165,6 +165,9 @@ final class BaseViewModel {
     /// スワイプでページ切り替えを検知したかどうかのフラグ
     var isChangingFront = false
 
+    /// 新規タブイベント選択中
+    var isSelectingNewTabEvent = false
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 

@@ -83,8 +83,7 @@ class BaseView: UIView {
     private var swipeDirection: EdgeSwipeDirection = .none
     /// タッチ開始位置
     private var touchBeganPoint: CGPoint?
-    /// 新規タブイベント選択中
-    private var isSelectingNewTabEvent = false
+
     /// スライド中かどうかのフラグ
     var isMoving: Bool {
         return !isLocateMax && !isLocateMin
@@ -1151,7 +1150,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
         }
 
         // 新規ウィンドウ選択中の場合はキャンセル
-        if isSelectingNewTabEvent {
+        if viewModel.isSelectingNewTabEvent {
             log.debug("cancel url: \(url)")
             decisionHandler(.cancel)
             return
@@ -1189,15 +1188,15 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
                 if viewModel.newWindowConfirm {
                     viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
                 } else {
-                    isSelectingNewTabEvent = true
+                    viewModel.isSelectingNewTabEvent = true
 
                     // 150文字以上は省略
                     let message = url.count > 50 ? String(url.prefix(200)) + "..." : url
                     NotificationManager.presentActionSheet(title: MessageConst.NOTIFICATION.NEW_TAB, message: message, completion: {
-                        self.isSelectingNewTabEvent = false
+                        self.viewModel.isSelectingNewTabEvent = false
                         self.viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
                     }, cancel: {
-                        self.isSelectingNewTabEvent = false
+                        self.viewModel.isSelectingNewTabEvent = false
                     })
                 }
 
