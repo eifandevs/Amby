@@ -35,8 +35,8 @@ final class MenuOrderViewControllerViewModel {
         return rows[index]
     }
 
-    func getOrder(operation: UserOperation) -> Int? {
-        return menuOrder.index(where: { $0 == operation })
+    func getOrder(operation: UserOperation) -> MenuOrder {
+        return MenuOrder(order: menuOrder.index(where: { $0 == operation }))
     }
 
     /// 並び替えの確定
