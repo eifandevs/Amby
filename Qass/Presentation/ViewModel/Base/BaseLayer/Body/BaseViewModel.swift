@@ -150,23 +150,24 @@ final class BaseViewModel {
     /// yポジションの最大最小値
     let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER.HEADER_HEIGHT, AppConst.DEVICE.STATUS_BAR_HEIGHT)
 
-    /// タッチ中フラグ
-    var isTouching = false
+    struct State: OptionSet {
+        let rawValue: Int
+        /// タッチ中フラグ
+        static let isTouching = State(rawValue: 1 << 0)
+        /// アニメーション中フラグ
+        static let isAnimating = State(rawValue: 1 << 1)
+        /// 自動入力ダイアログ表示済みフラグ
+        static let isDoneAutoFill = State(rawValue: 1 << 2)
+        /// スクロール中フラグ
+        static let isScrolling = State(rawValue: 1 << 3)
+        /// スワイプでページ切り替えを検知したかどうかのフラグ
+        static let isChangingFront = State(rawValue: 1 << 4)
+        /// 新規タブイベント選択中
+        static let isSelectingNewTabEvent = State(rawValue: 1 << 5)
+    }
 
-    /// アニメーション中フラグ
-    var isAnimating = false
-
-    /// 自動入力ダイアログ表示済みフラグ
-    var isDoneAutoFill = false
-
-    /// スクロール中フラグ
-    var isScrolling = false
-
-    /// スワイプでページ切り替えを検知したかどうかのフラグ
-    var isChangingFront = false
-
-    /// 新規タブイベント選択中
-    var isSelectingNewTabEvent = false
+    /// 状態管理
+    var state: State = []
 
     /// Observable自動解放
     let disposeBag = DisposeBag()

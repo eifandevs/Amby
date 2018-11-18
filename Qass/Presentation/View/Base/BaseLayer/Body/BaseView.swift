@@ -196,7 +196,7 @@ class BaseView: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidAutoFill")
                 guard let `self` = self else { return }
-                if !self.viewModel.isDoneAutoFill {
+                if !self.viewModel.state.contains(.isDoneAutoFill) {
                     if let url = self.front.url?.absoluteString, let inputForm = FormUseCase.s.select(url: url).first {
                         NotificationManager.presentAlert(title: MessageConst.ALERT.FORM_TITLE, message: MessageConst.ALERT.FORM_EXIST, completion: { [weak self] in
                             guard let `self` = self else { return }
@@ -213,7 +213,7 @@ class BaseView: UIView {
                                 }
                             }
                         })
-                        self.viewModel.isDoneAutoFill = true
+                        self.viewModel.state.insert(.isDoneAutoFill)
                     }
                 }
                 log.eventOut(chain: "rx_baseViewModelDidAutoFill")
@@ -781,12 +781,13 @@ extension BaseView: EGApplicationDelegate {
     internal func screenTouchBegan(touch: UITouch) {
         if !viewModel.canSwipe {
             log.warning("cannot swipe.")
-            viewModel.isTouching = false
+            viewModel.state.remove(.isTouching)
             return
         }
 
-        viewModel.isTouching = true
-        viewModel.isChangingFront = false
+        viewModel.state.insert(.isTouching)
+        viewModel.state.remove(.isChangingFront)
+
         touchBeganPoint = touch.location(in: self)
         if touchBeganPoint!.x < AppConst.FRONT_LAYER.EDGE_SWIPE_EREA {
             swipeDirection = .left
@@ -798,7 +799,7 @@ extension BaseView: EGApplicationDelegate {
     }
 
     internal func screenTouchMoved(touch: UITouch) {
-        if !viewModel.isTouching { return }
+        if !viewModel.state.contains(.isTouching) { return }
 
         if let touchBeganPoint = touchBeganPoint, front.scrollView.isScrollEnabled {
             let touchPoint = touch.location(in: self)
@@ -811,7 +812,8 @@ extension BaseView: EGApplicationDelegate {
 //                }
 
                 if viewModel.isHistorySwipe(touchPoint: touchBeganPoint) {
-                    viewModel.isTouching = false
+                    viewModel.state.remove(.isTouching)
+
                     // 画面上半分のスワイプの場合は、履歴移動
                     if swipeDirection == .left {
                         viewModel.historyBack()
@@ -832,7 +834,7 @@ extension BaseView: EGApplicationDelegate {
                     previousImageView.image = viewModel.getPreviousCapture()
                     nextImageView.image = viewModel.getNextCapture()
                 }
-                if viewModel.isChangingFront {
+                if viewModel.state.contains(.isChangingFront) {
                     let previousTouchPoint = touch.previousLocation(in: self)
                     let distance: CGPoint = touchPoint - previousTouchPoint
                     frame.origin.x += distance.x
@@ -841,7 +843,7 @@ extension BaseView: EGApplicationDelegate {
                         if fabs(touchPoint.y - touchBeganPoint.y) < 7.5 {
                             // エッジスワイプではないスワイプを検知し、y軸に誤差7.5pxで、x軸に11px移動したらフロントビューの移動をする
                             if fabs(touchPoint.x - touchBeganPoint.x) > 11 {
-                                viewModel.isChangingFront = true
+                                viewModel.state.insert(.isChangingFront)
                             }
                         } else {
                             self.touchBeganPoint!.y = -1
@@ -853,11 +855,12 @@ extension BaseView: EGApplicationDelegate {
     }
 
     internal func screenTouchEnded(touch _: UITouch) {
-        if !viewModel.isTouching { return }
+        if !viewModel.state.contains(.isTouching) { return }
 
-        viewModel.isTouching = false
-        if viewModel.isChangingFront {
-            viewModel.isChangingFront = false
+        viewModel.state.remove(.isTouching)
+        if viewModel.state.contains(.isChangingFront) {
+            viewModel.state.remove(.isChangingFront)
+
             let targetOriginX = { () -> CGFloat in
                 if frame.origin.x > frame.size.width / 3 {
                     return frame.size.width
@@ -896,13 +899,13 @@ extension BaseView: EGApplicationDelegate {
 
 extension BaseView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        viewModel.isScrolling = true
+        viewModel.state.insert(.isScrolling)
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // フロントのみ通知する
-        if let front = front, viewModel.isScrolling {
+        if let front = front, viewModel.state.contains(.isScrolling) {
             if front.scrollView == scrollView {
                 if scrollMovingPointY != 0 {
                     let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
@@ -919,7 +922,7 @@ extension BaseView: UIScrollViewDelegate {
                                 } else {
                                     // コンテンツサイズが画面より小さい場合は、過去スクロールしない
                                     if speed >= 0 || shouldScroll {
-                                        if !viewModel.isAnimating {
+                                        if !viewModel.state.contains(.isAnimating) {
                                             slide(value: speed)
                                         }
                                     }
@@ -935,7 +938,7 @@ extension BaseView: UIScrollViewDelegate {
                                 } else {
                                     // コンテンツサイズが画面より小さい場合は、過去スクロールしない
                                     if speed >= 0 || shouldScroll {
-                                        if !viewModel.isAnimating {
+                                        if !viewModel.state.contains(.isAnimating) {
                                             slide(value: speed)
                                         }
                                     }
@@ -954,18 +957,19 @@ extension BaseView: UIScrollViewDelegate {
         // フロントのみ通知する
         if let front = front {
             if front.scrollView == scrollView {
-                if velocity.y == 0 && !viewModel.isTouching {
+                if velocity.y == 0 && !viewModel.state.contains(.isTouching) {
                     // タッチ終了時にベースビューの高さを調整する
-                    if viewModel.isScrolling && !viewModel.isAnimating {
-                        viewModel.isScrolling = false
+                    if viewModel.state.contains(.isScrolling) && !viewModel.state.contains(.isAnimating) {
+                        viewModel.state.remove(.isScrolling)
                         if isMoving {
-                            viewModel.isAnimating = true
+                            viewModel.state.insert(.isAnimating)
+
                             if frame.origin.y > viewModel.positionY.max / 2 {
                                 UIView.animate(withDuration: 0.2, animations: {
                                     self.slideToMax()
                                 }, completion: { finished in
                                     if finished {
-                                        self.viewModel.isAnimating = false
+                                        self.viewModel.state.remove(.isAnimating)
                                     }
                                 })
                             } else {
@@ -973,7 +977,7 @@ extension BaseView: UIScrollViewDelegate {
                                     self.slideToMin()
                                 }, completion: { finished in
                                     if finished {
-                                        self.viewModel.isAnimating = false
+                                        self.viewModel.state.remove(.isAnimating)
                                     }
                                 })
                             }
@@ -990,18 +994,18 @@ extension BaseView: UIScrollViewDelegate {
         // フロントのみ通知する
         if let front = front {
             if front.scrollView == scrollView {
-                if !viewModel.isTouching && !viewModel.isAnimating {
+                if !viewModel.state.contains(.isTouching) && !viewModel.state.contains(.isAnimating) {
                     // タッチ終了時にベースビューの高さを調整する
-                    if viewModel.isScrolling && !viewModel.isAnimating {
-                        viewModel.isScrolling = false
+                    if viewModel.state.contains(.isScrolling) && !viewModel.state.contains(.isAnimating) {
+                        viewModel.state.remove(.isScrolling)
                         if isMoving {
-                            viewModel.isAnimating = true
+                            viewModel.state.insert(.isAnimating)
                             if frame.origin.y > viewModel.positionY.max / 2 {
                                 UIView.animate(withDuration: 0.2, animations: {
                                     self.slideToMax()
                                 }, completion: { finished in
                                     if finished {
-                                        self.viewModel.isAnimating = false
+                                        self.viewModel.state.remove(.isAnimating)
                                     }
                                 })
                             } else {
@@ -1009,7 +1013,7 @@ extension BaseView: UIScrollViewDelegate {
                                     self.slideToMin()
                                 }, completion: { finished in
                                     if finished {
-                                        self.viewModel.isAnimating = false
+                                        self.viewModel.state.remove(.isAnimating)
                                     }
                                 })
                             }
@@ -1064,7 +1068,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
 
         // プログレス更新
         if wv.context == front.context {
-            viewModel.isDoneAutoFill = false
+            viewModel.state.remove(.isDoneAutoFill)
             viewModel.updateProgress(progress: 1.0)
         }
         updateNetworkActivityIndicator()
@@ -1150,7 +1154,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
         }
 
         // 新規ウィンドウ選択中の場合はキャンセル
-        if viewModel.isSelectingNewTabEvent {
+        if viewModel.state.contains(.isSelectingNewTabEvent) {
             log.debug("cancel url: \(url)")
             decisionHandler(.cancel)
             return
@@ -1188,15 +1192,15 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
                 if viewModel.newWindowConfirm {
                     viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
                 } else {
-                    viewModel.isSelectingNewTabEvent = true
+                    viewModel.state.insert(.isSelectingNewTabEvent)
 
                     // 150文字以上は省略
                     let message = url.count > 50 ? String(url.prefix(200)) + "..." : url
                     NotificationManager.presentActionSheet(title: MessageConst.NOTIFICATION.NEW_TAB, message: message, completion: {
-                        self.viewModel.isSelectingNewTabEvent = false
+                        self.viewModel.state.remove(.isSelectingNewTabEvent)
                         self.viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
                     }, cancel: {
-                        self.viewModel.isSelectingNewTabEvent = false
+                        self.viewModel.state.remove(.isSelectingNewTabEvent)
                     })
                 }
 
