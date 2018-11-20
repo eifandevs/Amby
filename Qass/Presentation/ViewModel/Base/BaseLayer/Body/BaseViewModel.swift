@@ -179,6 +179,21 @@ final class BaseViewModel {
 
     // MARK: Public Method
 
+    /// スワイプ方向取得
+    func getSwipeDirection(touchBeganPoint: CGPoint?) -> EdgeSwipeDirection {
+        if let touchBeganPoint = touchBeganPoint {
+            if touchBeganPoint.x < AppConst.FRONT_LAYER.EDGE_SWIPE_EREA {
+                return .left
+            } else if touchBeganPoint.x > AppConst.DEVICE.DISPLAY_SIZE.width - AppConst.FRONT_LAYER.EDGE_SWIPE_EREA {
+                return .right
+            } else {
+                return .none
+            }
+        } else {
+            return .none
+        }
+    }
+
     func insertTab(url: String? = nil) {
         TabUseCase.s.insert(url: url)
     }

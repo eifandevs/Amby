@@ -788,14 +788,7 @@ extension BaseView: EGApplicationDelegate {
         viewModel.state.insert(.isTouching)
         viewModel.state.remove(.isChangingFront)
 
-        touchBeganPoint = touch.location(in: self)
-        if touchBeganPoint!.x < AppConst.FRONT_LAYER.EDGE_SWIPE_EREA {
-            swipeDirection = .left
-        } else if touchBeganPoint!.x > bounds.size.width - AppConst.FRONT_LAYER.EDGE_SWIPE_EREA {
-            swipeDirection = .right
-        } else {
-            swipeDirection = .none
-        }
+        swipeDirection = viewModel.getSwipeDirection(touchBeganPoint: touch.location(in: self))
     }
 
     internal func screenTouchMoved(touch: UITouch) {
