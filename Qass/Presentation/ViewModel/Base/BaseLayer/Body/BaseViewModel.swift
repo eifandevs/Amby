@@ -12,6 +12,46 @@ import RxCocoa
 import RxSwift
 
 final class BaseViewModel {
+    struct TouchState: OptionSet {
+        let rawValue: Int
+        /// タッチ中フラグ
+        static let isTouching = TouchState(rawValue: 1 << 0)
+        /// アニメーション中フラグ
+        static let isAnimating = TouchState(rawValue: 1 << 1)
+        /// 自動入力ダイアログ表示済みフラグ
+        static let isDoneAutoFill = TouchState(rawValue: 1 << 2)
+        /// スクロール中フラグ
+        static let isScrolling = TouchState(rawValue: 1 << 3)
+        /// スワイプでページ切り替えを検知したかどうかのフラグ
+        static let isChangingFront = TouchState(rawValue: 1 << 4)
+        /// 新規タブイベント選択中
+        static let isSelectingNewTabEvent = TouchState(rawValue: 1 << 5)
+    }
+
+    /// 状態管理
+    var state: TouchState = []
+
+    enum Action {
+        case insert
+        case reload
+        case append
+        case change
+        case remove
+        case historyBack
+        case historyForward
+        case trend
+        case sourceCode
+        case issue
+        case load
+        case form
+        case autoScroll
+        case autoInput
+        case scrollUp
+        case grep
+    }
+
+    let rx_action = PublishSubject<Action>()
+
     /// ページインサート通知用RX
     let rx_baseViewModelDidInsertWebView = TabUseCase.s.rx_tabUseCaseDidInsert
         .flatMap { at -> Observable<Int> in
@@ -150,24 +190,8 @@ final class BaseViewModel {
     /// yポジションの最大最小値
     let positionY: (max: CGFloat, min: CGFloat) = (AppConst.BASE_LAYER.HEADER_HEIGHT, AppConst.DEVICE.STATUS_BAR_HEIGHT)
 
-    struct State: OptionSet {
-        let rawValue: Int
-        /// タッチ中フラグ
-        static let isTouching = State(rawValue: 1 << 0)
-        /// アニメーション中フラグ
-        static let isAnimating = State(rawValue: 1 << 1)
-        /// 自動入力ダイアログ表示済みフラグ
-        static let isDoneAutoFill = State(rawValue: 1 << 2)
-        /// スクロール中フラグ
-        static let isScrolling = State(rawValue: 1 << 3)
-        /// スワイプでページ切り替えを検知したかどうかのフラグ
-        static let isChangingFront = State(rawValue: 1 << 4)
-        /// 新規タブイベント選択中
-        static let isSelectingNewTabEvent = State(rawValue: 1 << 5)
-    }
-
-    /// 状態管理
-    var state: State = []
+    /// 現在のスワイプ方向
+    var swipeDirection: EdgeSwipeDirection = .none
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -179,18 +203,24 @@ final class BaseViewModel {
 
     // MARK: Public Method
 
+    /// エッジスワイプ判定
+    func isEdgeSwiped(touchPoint: CGPoint) -> Bool {
+        return (swipeDirection == .left && touchPoint.x > AppConst.FRONT_LAYER.EDGE_SWIPE_EREA + 20) ||
+            (swipeDirection == .right && touchPoint.x < AppConst.DEVICE.DISPLAY_SIZE.width - AppConst.FRONT_LAYER.EDGE_SWIPE_EREA - 20)
+    }
+
     /// スワイプ方向取得
-    func getSwipeDirection(touchBeganPoint: CGPoint?) -> EdgeSwipeDirection {
+    func readySwipeDirection(touchBeganPoint: CGPoint?) {
         if let touchBeganPoint = touchBeganPoint {
             if touchBeganPoint.x < AppConst.FRONT_LAYER.EDGE_SWIPE_EREA {
-                return .left
+                swipeDirection = .left
             } else if touchBeganPoint.x > AppConst.DEVICE.DISPLAY_SIZE.width - AppConst.FRONT_LAYER.EDGE_SWIPE_EREA {
-                return .right
+                swipeDirection = .right
             } else {
-                return .none
+                swipeDirection = .none
             }
         } else {
-            return .none
+            swipeDirection = .none
         }
     }
 

@@ -79,8 +79,6 @@ class BaseView: UIView {
     private var scrollMovingPointY: CGFloat = 0
     /// 自動スクロール
     private var autoScrollTimer: Timer?
-    /// スワイプ方向
-    private var swipeDirection: EdgeSwipeDirection = .none
     /// タッチ開始位置
     private var touchBeganPoint: CGPoint?
 
@@ -788,7 +786,7 @@ extension BaseView: EGApplicationDelegate {
         viewModel.state.insert(.isTouching)
         viewModel.state.remove(.isChangingFront)
 
-        swipeDirection = viewModel.getSwipeDirection(touchBeganPoint: touch.location(in: self))
+        viewModel.readySwipeDirection(touchBeganPoint: touch.location(in: self))
     }
 
     internal func screenTouchMoved(touch: UITouch) {
@@ -796,8 +794,7 @@ extension BaseView: EGApplicationDelegate {
 
         if let touchBeganPoint = touchBeganPoint, front.scrollView.isScrollEnabled {
             let touchPoint = touch.location(in: self)
-            if (swipeDirection == .left && touchPoint.x > AppConst.FRONT_LAYER.EDGE_SWIPE_EREA + 20) ||
-                (swipeDirection == .right && touchPoint.x < bounds.width - AppConst.FRONT_LAYER.EDGE_SWIPE_EREA - 20) {
+            if viewModel.isEdgeSwiped(touchPoint: touchPoint) {
                 // エッジスワイプ検知
                 // 動画DL
 //                self.front.evaluateJavaScript("document.querySelector('video').currentSrc") { (object, error) in
@@ -808,7 +805,7 @@ extension BaseView: EGApplicationDelegate {
                     viewModel.state.remove(.isTouching)
 
                     // 画面上半分のスワイプの場合は、履歴移動
-                    if swipeDirection == .left {
+                    if viewModel.swipeDirection == .left {
                         viewModel.historyBack()
                     } else {
                         viewModel.historyForward()
@@ -817,11 +814,11 @@ extension BaseView: EGApplicationDelegate {
                     // 操作を無効化
                     invalidateUserInteraction()
 
-                    rx_baseViewDidEdgeSwiped.onNext(swipeDirection)
+                    rx_baseViewDidEdgeSwiped.onNext(viewModel.swipeDirection)
                 }
             }
 
-            if webViews.count > 1 && swipeDirection == .none && front.isSwiping {
+            if webViews.count > 1 && viewModel.swipeDirection == .none && front.isSwiping {
                 // フロントの左右に切り替え後のページを表示しとく
                 if previousImageView.image == nil && nextImageView.image == nil {
                     previousImageView.image = viewModel.getPreviousCapture()

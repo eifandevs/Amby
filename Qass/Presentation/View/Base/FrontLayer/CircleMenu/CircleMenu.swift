@@ -38,12 +38,12 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     let disposeBag = DisposeBag()
 
     enum CircleMenuLeftLocation: CGPoint, CaseIterable {
-        case Upper = "0,-130"
-        case UpperRight = "62,-100"
-        case RightUpper = "100,-40"
-        case RightLower = "100,40"
-        case LowerRight = "62,100"
-        case Lower = "0,130"
+        case upper = "0,-130"
+        case upperRight = "62,-100"
+        case rightUpper = "100,-40"
+        case rightLower = "100,40"
+        case lowerRight = "62,100"
+        case lower = "0,130"
 
         static func locations() -> [CGPoint] {
             return CircleMenuLeftLocation.allCases.map({ $0.rawValue })
@@ -51,12 +51,12 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     }
 
     enum CircleMenuRightLocation: CGPoint, CaseIterable {
-        case Upper = "0,-130"
-        case UpperRight = "-62,-100"
-        case RightUpper = "-100,-40"
-        case RightLower = "-100,40"
-        case LowerRight = "-62,100"
-        case Lower = "0,130"
+        case upper = "0,-130"
+        case upperRight = "-62,-100"
+        case rightUpper = "-100,-40"
+        case rightLower = "-100,40"
+        case lowerRight = "-62,100"
+        case lower = "0,130"
 
         static func locations() -> [CGPoint] {
             return CircleMenuRightLocation.allCases.map({ $0.rawValue })
