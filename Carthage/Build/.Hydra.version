@@ -1,0 +1,9 @@
+{
+  "commitish" : "1.2.1",
+  "iOS" : [
+    {
+      "name" : "Hydra",
+      "hash" : "950f145602f0b6bb5c453e6e64129ddf62ab4dd7be116cd2e7a9d425d014687c"
+    }
+  ]
+}

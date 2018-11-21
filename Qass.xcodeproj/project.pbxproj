@@ -304,6 +304,7 @@
 		A1FFA68A219A40270092C4D6 /* DevelopmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA688219A40270092C4D6 /* DevelopmentViewController.xib */; };
 		A1FFA68D21A06DCD0092C4D6 /* UserOperation+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA68C21A06DCD0092C4D6 /* UserOperation+Extend.swift */; };
 		A1FFA69021A072EF0092C4D6 /* MenuOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA68F21A072EF0092C4D6 /* MenuOrder.swift */; };
+		A1FFA69221A5B1750092C4D6 /* Hydra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FFA69121A5B1740092C4D6 /* Hydra.framework */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		DD7A96C7A47EEF104EFBE48C /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 /* End PBXBuildFile section */
@@ -694,6 +695,7 @@
 		A1FFA688219A40270092C4D6 /* DevelopmentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DevelopmentViewController.xib; sourceTree = "<group>"; };
 		A1FFA68C21A06DCD0092C4D6 /* UserOperation+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserOperation+Extend.swift"; sourceTree = "<group>"; };
 		A1FFA68F21A072EF0092C4D6 /* MenuOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrder.swift; sourceTree = "<group>"; };
+		A1FFA69121A5B1740092C4D6 /* Hydra.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hydra.framework; path = Carthage/Build/iOS/Hydra.framework; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		A89CE5916F45D8661B08C445 /* Pods-All-Logger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Logger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Logger/Pods-All-Logger.debug.xcconfig"; sourceTree = "<group>"; };
@@ -764,6 +766,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1FFA69221A5B1750092C4D6 /* Hydra.framework in Frameworks */,
 				A1FFA6742195B9680092C4D6 /* SnapKit.framework in Frameworks */,
 				A112E735212AF83800320048 /* MessageUI.framework in Frameworks */,
 				A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */,
@@ -782,6 +785,7 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1FFA69121A5B1740092C4D6 /* Hydra.framework */,
 				A1FFA6732195B9680092C4D6 /* SnapKit.framework */,
 				A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */,
 				A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */,
@@ -2446,6 +2450,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Hydra.framework",
 			);
 			name = Carthage;
 			outputPaths = (
