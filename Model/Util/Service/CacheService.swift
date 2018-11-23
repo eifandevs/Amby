@@ -1,5 +1,5 @@
 //
-//  CacheHelper.swift
+//  CacheService.swift
 //  Model
 //
 //  Created by tenma on 2018/09/08.
@@ -9,7 +9,7 @@
 import Foundation
 import WebKit
 
-class CacheHelper {
+class CacheService {
     // クッキーの共有
     static let processPool = WKProcessPool()
 

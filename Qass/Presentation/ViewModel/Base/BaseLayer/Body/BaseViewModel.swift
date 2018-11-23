@@ -52,6 +52,8 @@ final class BaseViewModel {
 
     let rx_action = PublishSubject<Action>()
 
+    let webViewService = WebViewService()
+
     /// ページインサート通知用RX
     let rx_baseViewModelDidInsertWebView = TabUseCase.s.rx_tabUseCaseDidInsert
         .flatMap { at -> Observable<Int> in
@@ -224,6 +226,12 @@ final class BaseViewModel {
         }
     }
 
+    /// フォーム情報取得
+    func takeForm(webView: EGWebView) -> Form? {
+        return webViewService.takeForm(webView: webView)
+    }
+
+    /// タブの追加
     func insertTab(url: String? = nil) {
         TabUseCase.s.insert(url: url)
     }
@@ -379,13 +387,8 @@ final class BaseViewModel {
         ThumbnailUseCase.s.delete(context: context)
     }
 
-    /// 暗号化
-    func encrypt(value: String) -> Data {
-        return EncryptHelper.encrypt(value: value)
-    }
-
     /// 複合化
     func decrypt(value: Data) -> String {
-        return EncryptHelper.decrypt(data: value)
+        return EncryptService.decrypt(data: value)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  NotificationManager.swift
+//  NotificationService.swift
 //  Qas
 //
 //  Created by temma on 2017/09/19.
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// 通知マネージャー
-class NotificationManager {
+class NotificationService {
     /// トースト表示
     static func presentToastNotification(message: String, isSuccess: Bool) {
         DispatchQueue.mainSyncSafe {

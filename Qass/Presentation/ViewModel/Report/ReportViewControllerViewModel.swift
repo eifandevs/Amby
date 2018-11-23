@@ -24,7 +24,7 @@ final class ReportViewControllerViewModel {
         } else {
             log.warning("already reported")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.REGISTER_REPORT_MULTIPLE_ERROR, isSuccess: false)
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.REGISTER_REPORT_MULTIPLE_ERROR, isSuccess: false)
             }
         }
     }

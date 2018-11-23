@@ -55,7 +55,7 @@ final class PasscodeViewControllerViewModel {
                 PasscodeUseCase.s.isInputPasscode = true
                 rx_passcodeViewControllerViewModelDidConfirmSuccess.onNext(())
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_AUTHENTIFICATED, isSuccess: true)
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_AUTHENTIFICATED, isSuccess: true)
                 }
             } else {
                 rx_passcodeViewControllerViewModelDidConfirmError.onNext(())
@@ -70,7 +70,7 @@ final class PasscodeViewControllerViewModel {
                     rx_passcodeViewControllerViewModelDidRegister.onNext(())
                     PasscodeUseCase.s.rootPasscode = passcode
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_REGISTERED, isSuccess: true)
+                        NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_REGISTERED, isSuccess: true)
                     }
                 } else {
                     inputPasscode = ""

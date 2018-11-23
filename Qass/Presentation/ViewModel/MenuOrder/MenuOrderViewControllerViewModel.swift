@@ -45,19 +45,19 @@ final class MenuOrderViewControllerViewModel {
             if menuOrder.index(where: { $0 == .menu }) == nil {
                 log.warning("cannot change menu. menu is required")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_CANNOT_SORT, isSuccess: false)
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_CANNOT_SORT, isSuccess: false)
                 }
             } else {
                 log.debug("change menu order")
                 SettingUseCase.s.menuOrder = menuOrder
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_SUCCESS, isSuccess: true)
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_SUCCESS, isSuccess: true)
                 }
             }
         } else {
             log.warning("cannot change menu order. number error")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_ERROR, isSuccess: false)
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_ERROR, isSuccess: false)
             }
         }
     }

@@ -108,49 +108,49 @@ final class OptionMenuSettingTableViewModel {
 
     /// 閲覧履歴削除
     func deleteHistory() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_COMMON_HISTORY, completion: {
+        NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_COMMON_HISTORY, completion: {
             HistoryUseCase.s.delete()
         })
     }
 
     /// お気に入り削除
     func deleteFavorite() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_BOOK_MARK, completion: {
+        NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_BOOK_MARK, completion: {
             FavoriteUseCase.s.delete()
         })
     }
 
     /// フォーム削除
     func deleteForm() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_FORM, completion: {
+        NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_FORM, completion: {
             FormUseCase.s.delete()
         })
     }
 
     /// 検索履歴削除
     func deleteSearchHistory() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SEARCH_HISTORY, completion: {
+        NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SEARCH_HISTORY, completion: {
             SearchUseCase.s.delete()
         })
     }
 
     /// クッキー削除
     func deleteCookies() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_COOKIES, completion: {
+        NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_COOKIES, completion: {
             CacheUseCase.s.deleteCookies()
         })
     }
 
     /// キャッシュ削除
     func deleteCaches() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SITE_DATA, completion: {
+        NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SITE_DATA, completion: {
             CacheUseCase.s.deleteCaches()
         })
     }
 
     /// 全て削除
     func deleteAll() {
-        NotificationManager.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_ALL, completion: {
+        NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_ALL, completion: {
             HistoryUseCase.s.delete()
             SearchUseCase.s.delete()
             FavoriteUseCase.s.delete()

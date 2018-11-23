@@ -22,13 +22,13 @@ public final class CacheUseCase {
     private init() {}
 
     public func deleteCookies() {
-        CacheHelper.deleteCookies()
+        CacheService.deleteCookies()
         rx_cacheUseCaseDidDeleteCookies.onNext(())
     }
 
     /// キャッシュ削除
     public func deleteCaches() {
-        CacheHelper.deleteCaches()
+        CacheService.deleteCaches()
         rx_cacheUseCaseDidDeleteCaches.onNext(())
     }
 }

@@ -15,16 +15,16 @@ public final class WebCacheUseCase {
     private init() {}
 
     public func cacheConfiguration() -> WKWebViewConfiguration {
-        return CacheHelper.cacheConfiguration()
+        return CacheService.cacheConfiguration()
     }
 
     /// Cacheの削除
     public func deleteCaches() {
-        CacheHelper.deleteCaches()
+        CacheService.deleteCaches()
     }
 
     /// Cookieの削除
     public func deleteCookies() {
-        CacheHelper.deleteCookies()
+        CacheService.deleteCookies()
     }
 }

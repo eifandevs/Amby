@@ -18,12 +18,12 @@
 //
 //    /// 暗号化
 //    public func encrypt(value: String) -> Data {
-//        return EncryptHelper.encrypt(value: value)!
+//        return EncryptService.encrypt(value: value)!
 //    }
 //
 //    /// 複合化
 //    public func decrypt(value: Data) -> String {
-//        if let value = EncryptHelper.decrypt(data: value) {
+//        if let value = EncryptService.decrypt(data: value) {
 //            return value
 //        }
 //        return ""

@@ -27,11 +27,11 @@ final class SettingDataModel {
         get {
             // 復号化
             let code = repository.get(key: .rootPasscode)
-            return code.bytes.count == 0 ? "" : EncryptHelper.decrypt(data: code)
+            return code.bytes.count == 0 ? "" : EncryptService.decrypt(data: code)
         }
         set(value) {
             // 暗号化
-            let code = EncryptHelper.encrypt(value: value)
+            let code = EncryptService.encrypt(value: value)
             repository.set(key: .rootPasscode, value: code)
         }
     }

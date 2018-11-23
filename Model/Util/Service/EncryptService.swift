@@ -1,5 +1,5 @@
 //
-//  EncryptHelper.swift
+//  EncryptService.swift
 //  Qas
 //
 //  Created by temma on 2017/09/27.
@@ -9,7 +9,7 @@
 import CryptoSwift
 import Foundation
 
-public class EncryptHelper {
+public class EncryptService {
     public static func encrypt(value: String) -> Data {
         let serviceToken = AuthDataModel.s.keychainServiceToken
         let ivToken = AuthDataModel.s.keychainIvToken

@@ -196,7 +196,7 @@ class BaseView: UIView {
                 guard let `self` = self else { return }
                 if !self.viewModel.state.contains(.isDoneAutoFill) {
                     if let url = self.front.url?.absoluteString, let inputForm = FormUseCase.s.select(url: url).first {
-                        NotificationManager.presentAlert(title: MessageConst.ALERT.FORM_TITLE, message: MessageConst.ALERT.FORM_EXIST, completion: { [weak self] in
+                        NotificationService.presentAlert(title: MessageConst.ALERT.FORM_TITLE, message: MessageConst.ALERT.FORM_EXIST, completion: { [weak self] in
                             guard let `self` = self else { return }
                             inputForm.inputs.forEach {
                                 let value = self.viewModel.decrypt(value: $0.value)
@@ -464,10 +464,10 @@ class BaseView: UIView {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_baseViewModelDidRegisterAsForm")
                 guard let `self` = self else { return }
-                if let form = self.takeForm(webView: self.front) {
+                if let form = self.viewModel.takeForm(webView: self.front) {
                     self.viewModel.storeForm(form: form)
                 } else {
-                    NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_CRAWL, isSuccess: false)
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_CRAWL, isSuccess: false)
                 }
                 log.eventOut(chain: "rx_baseViewModelDidRegisterAsForm")
             }
@@ -621,60 +621,6 @@ class BaseView: UIView {
     }
 
     // MARK: Private Method
-
-    private func takeForm(webView: EGWebView) -> Form? {
-        if let title = webView.title, let host = webView.url?.host, let url = webView.url?.absoluteString {
-            let form = Form()
-            form.title = title
-            form.host = host
-            form.url = url
-
-            // take form
-            // formの数
-            let inputForms = Int(truncating: (webView.evaluateSync(script: "document.forms.length") as? NSNumber) ?? NSNumber(value: 0))
-
-            // 有無判定
-            log.debug("inputForms: \(inputForms)")
-            if inputForms == 0 { return nil }
-
-            for i in 0 ... inputForms {
-                // エレメントの数
-                let elementLength = Int(truncating: (webView.evaluateSync(script: "document.forms[\(i)].elements.length") as? NSNumber) ?? NSNumber(value: 0))
-
-                // 有無判定
-                log.debug("elementLength: \(elementLength)")
-                if elementLength == 0 { continue }
-
-                for j in 0 ... elementLength {
-                    // フォームタイプ判定
-                    let type = (webView.evaluateSync(script: "document.forms[\(i)].elements[\(j)].type") as? String) ?? ""
-
-                    // 有無判定
-                    log.debug("type: \(type)")
-                    if type.isEmpty { continue }
-
-                    if (type != "hidden") && (type != "submit") && (type != "checkbox") {
-                        let input = Input()
-                        let value = (webView.evaluateSync(script: "document.forms[\(i)].elements[\(j)].value") as? String) ?? ""
-
-                        // 有無判定
-                        log.debug("value: \(value)")
-                        if value.isEmpty { continue }
-
-                        // 値の設定
-                        input.type = type
-                        input.formIndex = i
-                        input.formInputIndex = j
-                        input.value = viewModel.encrypt(value: value)
-                        form.inputs.append(input)
-                    }
-                }
-            }
-
-            return form
-        }
-        return nil
-    }
 
     private func updateNetworkActivityIndicator() {
         let loadingWebViews: [EGWebView?] = webViews.filter({ (wv) -> Bool in
@@ -1169,7 +1115,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
             (!url.absoluteString.hasPrefix("about:") && !url.absoluteString.hasPrefix("http:") && !url.absoluteString.hasPrefix("https:") && !url.absoluteString.hasPrefix("file:")) {
             log.warning("open url. url: \(url)")
             if UIApplication.shared.canOpenURL(url) {
-                NotificationManager.presentActionSheet(title: "", message: MessageConst.ALERT.OPEN_COMFIRM, completion: {
+                NotificationService.presentActionSheet(title: "", message: MessageConst.ALERT.OPEN_COMFIRM, completion: {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }, cancel: nil)
             } else {
@@ -1194,7 +1140,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
 
                     // 150文字以上は省略
                     let message = url.count > 50 ? String(url.prefix(200)) + "..." : url
-                    NotificationManager.presentActionSheet(title: MessageConst.NOTIFICATION.NEW_TAB, message: message, completion: {
+                    NotificationService.presentActionSheet(title: MessageConst.NOTIFICATION.NEW_TAB, message: message, completion: {
                         self.viewModel.state.remove(.isSelectingNewTabEvent)
                         self.viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
                     }, cancel: {

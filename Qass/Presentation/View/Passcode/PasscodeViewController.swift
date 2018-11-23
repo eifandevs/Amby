@@ -56,7 +56,7 @@ class PasscodeViewController: UIViewController {
             let cancelAction: UIAlertAction = UIAlertAction(title: MessageConst.COMMON.CANCEL, style: .cancel, handler: { (_: UIAlertAction!) -> Void in
                 self.dismiss(animated: true, completion: nil)
             })
-            NotificationManager.presentAlert(title: MessageConst.COMMON.ERROR, message: MessageConst.ALERT.PASSCODE_ALREADY_REGISTERED, actions: [initializeAction, cancelAction])
+            NotificationService.presentAlert(title: MessageConst.COMMON.ERROR, message: MessageConst.ALERT.PASSCODE_ALREADY_REGISTERED, actions: [initializeAction, cancelAction])
         }
     }
 

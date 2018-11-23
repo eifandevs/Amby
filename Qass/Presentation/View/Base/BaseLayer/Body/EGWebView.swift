@@ -237,10 +237,10 @@ class EGWebView: WKWebView {
             evaluateJavaScript("MyApp_HighlightAllOccurencesOfString('\(word)')") { (result: Any?, error: Error?) in
                 if let error = error {
                     log.error("js grep error: \(error.localizedDescription)")
-                    NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_ERROR, isSuccess: false)
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_ERROR, isSuccess: false)
                 } else {
                     let num = result as? NSNumber ?? 0
-                    NotificationManager.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SUCCESS(num), isSuccess: true)
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SUCCESS(num), isSuccess: true)
                 }
             }
         } catch let error as NSError {
