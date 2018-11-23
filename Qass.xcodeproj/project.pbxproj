@@ -305,6 +305,7 @@
 		A1FFA68D21A06DCD0092C4D6 /* UserOperation+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA68C21A06DCD0092C4D6 /* UserOperation+Extend.swift */; };
 		A1FFA69021A072EF0092C4D6 /* MenuOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA68F21A072EF0092C4D6 /* MenuOrder.swift */; };
 		A1FFA69221A5B1750092C4D6 /* Hydra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FFA69121A5B1740092C4D6 /* Hydra.framework */; };
+		A1FFA69421A8384A0092C4D6 /* AppEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA69321A8384A0092C4D6 /* AppEnum.swift */; };
 		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		DD7A96C7A47EEF104EFBE48C /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 /* End PBXBuildFile section */
@@ -696,6 +697,7 @@
 		A1FFA68C21A06DCD0092C4D6 /* UserOperation+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserOperation+Extend.swift"; sourceTree = "<group>"; };
 		A1FFA68F21A072EF0092C4D6 /* MenuOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrder.swift; sourceTree = "<group>"; };
 		A1FFA69121A5B1740092C4D6 /* Hydra.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hydra.framework; path = Carthage/Build/iOS/Hydra.framework; sourceTree = "<group>"; };
+		A1FFA69321A8384A0092C4D6 /* AppEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnum.swift; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Qass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		A89CE5916F45D8661B08C445 /* Pods-All-Logger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Logger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-All-Logger/Pods-All-Logger.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1506,6 +1508,7 @@
 			children = (
 				A1902F3B209CF976004F1EA5 /* AppConst.swift */,
 				A1902F3F209CF976004F1EA5 /* MessageConst.swift */,
+				A1FFA69321A8384A0092C4D6 /* AppEnum.swift */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -2854,6 +2857,7 @@
 				A1903035209CF977004F1EA5 /* UIColor+Extend.swift in Sources */,
 				A1FFA6802199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift in Sources */,
 				A190305E209CF978004F1EA5 /* EGApplication.swift in Sources */,
+				A1FFA69421A8384A0092C4D6 /* AppEnum.swift in Sources */,
 				A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */,
 				A1FFA660219455D20092C4D6 /* OptionMenuSettingSwitchTableViewCellViewModel.swift in Sources */,
 				A1903036209CF977004F1EA5 /* UIImage+Extend.swift in Sources */,
