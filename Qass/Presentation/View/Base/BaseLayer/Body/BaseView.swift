@@ -630,41 +630,47 @@ class BaseView: UIView {
             form.url = url
 
             // take form
-            webView.evaluate(script: "document.forms.length") { object, error in
-                if object != nil && error == nil {
-                    let formLength = Int(truncating: (object as? NSNumber)!)
-                    if formLength > 0 {
-                        for i in 0 ... (formLength - 1) {
-                            webView.evaluate(script: "document.forms[\(i)].elements.length") { object, error in
-                                if (object != nil) && (error == nil) {
-                                    let elementLength = Int(truncating: (object as? NSNumber)!)
-                                    for j in 0 ... elementLength {
-                                        webView.evaluate(script: "document.forms[\(i)].elements[\(j)].type") { object, error in
-                                            if (object != nil) && (error == nil) {
-                                                let type = object as? String
-                                                if (type != "hidden") && (type != "submit") && (type != "checkbox") {
-                                                    let input = Input()
-                                                    webView.evaluate(script: "document.forms[\(i)].elements[\(j)].value") { object, _ in
-                                                        if let value = object as? String {
-                                                            if value.count > 0 {
-                                                                input.type = type!
-                                                                input.formIndex = i
-                                                                input.formInputIndex = j
-                                                                input.value = self.viewModel.encrypt(value: value)
-                                                                form.inputs.append(input)
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+            // formの数
+            let inputForms = Int(truncating: (webView.evaluateSync(script: "document.forms.length") as? NSNumber) ?? NSNumber(value: 0))
+
+            // 有無判定
+            log.debug("inputForms: \(inputForms)")
+            if inputForms == 0 { return nil }
+
+            for i in 0 ... inputForms {
+                // エレメントの数
+                let elementLength = Int(truncating: (webView.evaluateSync(script: "document.forms[\(i)].elements.length") as? NSNumber) ?? NSNumber(value: 0))
+
+                // 有無判定
+                log.debug("elementLength: \(elementLength)")
+                if elementLength == 0 { continue }
+
+                for j in 0 ... elementLength {
+                    // フォームタイプ判定
+                    let type = (webView.evaluateSync(script: "document.forms[\(i)].elements[\(j)].type") as? String) ?? ""
+
+                    // 有無判定
+                    log.debug("type: \(type)")
+                    if type.isEmpty { continue }
+
+                    if (type != "hidden") && (type != "submit") && (type != "checkbox") {
+                        let input = Input()
+                        let value = (webView.evaluateSync(script: "document.forms[\(i)].elements[\(j)].value") as? String) ?? ""
+
+                        // 有無判定
+                        log.debug("value: \(value)")
+                        if value.isEmpty { continue }
+
+                        // 値の設定
+                        input.type = type
+                        input.formIndex = i
+                        input.formInputIndex = j
+                        input.value = viewModel.encrypt(value: value)
+                        form.inputs.append(input)
                     }
                 }
             }
+
             return form
         }
         return nil
@@ -786,7 +792,9 @@ extension BaseView: EGApplicationDelegate {
         viewModel.state.insert(.isTouching)
         viewModel.state.remove(.isChangingFront)
 
-        viewModel.readySwipeDirection(touchBeganPoint: touch.location(in: self))
+        touchBeganPoint = touch.location(in: self)
+
+        viewModel.readySwipeDirection(touchBeganPoint: touchBeganPoint)
     }
 
     internal func screenTouchMoved(touch: UITouch) {

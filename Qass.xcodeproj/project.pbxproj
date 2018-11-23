@@ -1247,6 +1247,7 @@
 				A19506542143FA8B0091DF23 /* Extension */,
 				A138CAE5213747D900AEA669 /* Service */,
 				A1950663214402B20091DF23 /* Util.swift */,
+				A1A3DE8221387D7F00F87009 /* ModelLogger.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1254,7 +1255,6 @@
 		A138CAE5213747D900AEA669 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				A1A3DE8221387D7F00F87009 /* ModelLogger.swift */,
 				A1A3DE95213AF31D00F87009 /* ResourceUtil.swift */,
 				A195066E214406430091DF23 /* CacheHelper.swift */,
 			);
@@ -1597,6 +1597,10 @@
 				A112E943212E2B8200320048 /* Protocol */,
 				A1902F4E209CF976004F1EA5 /* Extension */,
 				A1902FA7209CF976004F1EA5 /* Util.swift */,
+				A1902FA1209CF976004F1EA5 /* EGApplication.swift */,
+				A1902FA6209CF976004F1EA5 /* OnceExec.swift */,
+				A123451A2135ADB400C791B8 /* ResourceUtil.swift */,
+				A1A3DE8021387C6F00F87009 /* AppLogger.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1605,10 +1609,6 @@
 			isa = PBXGroup;
 			children = (
 				A195066A2144052B0091DF23 /* NotificationManager.swift */,
-				A1902FA1209CF976004F1EA5 /* EGApplication.swift */,
-				A1902FA6209CF976004F1EA5 /* OnceExec.swift */,
-				A123451A2135ADB400C791B8 /* ResourceUtil.swift */,
-				A1A3DE8021387C6F00F87009 /* AppLogger.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";

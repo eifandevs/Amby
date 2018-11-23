@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Hydra
 import Model
 import RxCocoa
 import RxSwift
@@ -128,22 +129,36 @@ class EGWebView: WKWebView {
         }
     }
 
-    func evaluate(script: String, completion: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) {
+    // 同期実行
+    func evaluateSync(script: String) -> Any? {
         var finished = false
+        var ret: Any?
 
         evaluateJavaScript(script) { result, error in
-            if error == nil {
-                if result != nil {
-                    completion(result as AnyObject?, nil)
-                }
-            } else {
-                completion(nil, error as NSError?)
+            if let error = error {
+                log.error("evaluate error. error: \(String(describing: error.localizedDescription))")
             }
+            ret = result
             finished = true
         }
 
         while !finished {
             RunLoop.current.run(mode: RunLoopMode(rawValue: "NSDefaultRunLoopMode"), before: NSDate.distantFuture)
+        }
+
+        return ret
+    }
+
+    // promise
+    func evaluate(script: String) -> Promise<Any?> {
+        return Promise<Any?>(in: .background, token: nil) { resolve, reject, _ in
+            self.evaluateJavaScript(script) { result, error in
+                if let error = error {
+                    reject(error)
+                } else {
+                    resolve(result)
+                }
+            }
         }
     }
 
