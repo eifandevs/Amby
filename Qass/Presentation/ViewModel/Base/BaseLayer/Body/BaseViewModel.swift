@@ -32,113 +32,24 @@ final class BaseViewModel {
     var state: TouchState = []
 
     enum Action {
-        case insert
+        case insert(at: Int)
         case reload
         case append
         case change
-        case remove
+        case remove((deleteContext: String, currentContext: String?, deleteIndex: Int))
         case historyBack
         case historyForward
-        case trend
-        case sourceCode
-        case issue
-        case load
+        case load(url: String)
         case form
         case autoScroll
-        case autoInput
+        case autoFill
         case scrollUp
-        case grep
+        case grep(text: String)
     }
 
     let rx_action = PublishSubject<Action>()
 
     let webViewService = WebViewService()
-
-    /// ページインサート通知用RX
-    let rx_baseViewModelDidInsertWebView = TabUseCase.s.rx_tabUseCaseDidInsert
-        .flatMap { at -> Observable<Int> in
-            return Observable.just(at)
-        }
-
-    /// ページリロード通知用RX
-    let rx_baseViewModelDidReloadWebView = TabUseCase.s.rx_tabUseCaseDidReload.flatMap { _ in Observable.just(()) }
-    /// ページ追加通知用RX
-    let rx_baseViewModelDidAppendWebView = TabUseCase.s.rx_tabUseCaseDidAppend.flatMap { _ in Observable.just(()) }
-    /// ページ変更通知用RX
-    let rx_baseViewModelDidChangeWebView = TabUseCase.s.rx_tabUseCaseDidChange.flatMap { _ in Observable.just(()) }
-    /// ページ削除通知用RX
-    let rx_baseViewModelDidRemoveWebView = TabUseCase.s.rx_tabUseCaseDidRemove
-        .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
-            return Observable.just(object)
-        }
-    /// ヒストリーバック通知用RX
-    let rx_baseViewModelDidHistoryBackWebView = HistoryUseCase.s.rx_historyUseCaseDidRequestHistoryBack.flatMap { _ in Observable.just(()) }
-    /// ヒストリーフォワード通知用RX
-    let rx_baseViewModelDidHistoryForwardWebView = HistoryUseCase.s.rx_historyUseCaseDidRequestHistoryForward.flatMap { _ in Observable.just(()) }
-    /// トレンド表示リクエスト通知用RX
-    let rx_baseViewModelDidLoadTrend = TrendUseCase.s.rx_trendUseCaseDidRequestLoad
-        .flatMap { url -> Observable<String> in
-            return Observable.just(url)
-        }
-    /// ソースコード表示リクエスト通知用RX
-    let rx_baseViewModelDidLoadSourceCode = SourceCodeUseCase.s.rx_sourceCodeUseCaseDidRequestOpen
-        .flatMap { url -> Observable<String> in
-            return Observable.just(url)
-        }
-    /// Issue表示リクエスト通知用RX
-    let rx_baseViewModelDidLoadIssue = ReportUseCase.s.rx_reportUseCaseDidRequestLoad
-        .flatMap { url -> Observable<String> in
-            return Observable.just(url)
-        }
-    /// ロードリクエスト通知用RX(Favorite)
-    let rx_baseViewModelDidLoadFavorite = FavoriteUseCase.s.rx_favoriteUseCaseDidRequestLoad
-        .flatMap { url -> Observable<String> in
-            return Observable.just(url)
-        }
-    /// ロードリクエスト通知用RX(Form)
-    let rx_baseViewModelDidLoadForm = FormUseCase.s.rx_formUseCaseDidRequestLoad
-        .flatMap { url -> Observable<String> in
-            return Observable.just(url)
-        }
-    /// ロードリクエスト通知用RX(History)
-    let rx_baseViewModelDidLoadHistory = HistoryUseCase.s.rx_historyUseCaseDidRequestLoad
-        .flatMap { url -> Observable<String> in
-            return Observable.just(url)
-        }
-    /// ロードリクエスト通知用RX
-    let rx_baseViewModelDidSearchWebView = SearchUseCase.s.rx_searchUseCaseDidRequestLoad
-        .flatMap { searchText -> Observable<String> in
-            return Observable.just(searchText)
-        }
-    /// フォーム登録通知用RX
-    let rx_baseViewModelDidRegisterAsForm = FormUseCase.s.rx_formUseCaseDidRequestRegisterForm
-        .flatMap { _ -> Observable<()> in
-            return Observable.just(())
-        }
-    /// 自動スクロール通知用RX
-    let rx_baseViewModelDidAutoScroll = ScrollUseCase.s.rx_scrollUseCaseDidRequestAutoScroll
-        .flatMap { _ -> Observable<()> in
-            return Observable.just(())
-        }
-    /// 自動入力通知用RX
-    let rx_baseViewModelDidAutoFill = FormUseCase.s.rx_formUseCaseDidRequestAutoFill
-        .flatMap { _ -> Observable<()> in
-            return Observable.just(())
-        }
-    /// スクロールアップ通知用RX
-    let rx_baseViewModelDidScrollUp = ScrollUseCase.s.rx_scrollUseCaseDidRequestScrollUp
-        .flatMap { _ -> Observable<()> in
-            return Observable.just(())
-        }
-    /// 全文検索通知用RX
-    let rx_baseViewModelDidGrep = GrepUseCase.s.rx_grepUseCaseDidRequestGrep
-        .flatMap { text -> Observable<String> in
-            if !text.isEmpty {
-                return Observable.just(text)
-            }
-
-            return Observable.empty()
-        }
 
     /// リクエストURL(jsのURL)
     var currentUrl: String? {
@@ -198,9 +109,151 @@ final class BaseViewModel {
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
+    init() {
+        setupRx()
+    }
+
     deinit {
         log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)
+    }
+
+    func setupRx() {
+        // ロード要求監視
+        Observable.merge([
+            TrendUseCase.s.rx_trendUseCaseDidRequestLoad,
+            SourceCodeUseCase.s.rx_sourceCodeUseCaseDidRequestLoad,
+            ReportUseCase.s.rx_reportUseCaseDidRequestLoad,
+            FavoriteUseCase.s.rx_favoriteUseCaseDidRequestLoad,
+            HistoryUseCase.s.rx_historyUseCaseDidRequestLoad,
+            SearchUseCase.s.rx_searchUseCaseDidRequestLoad
+        ]).subscribe { [weak self] url in
+            log.eventIn(chain: "rx_load")
+            guard let `self` = self, let url = url.element else { return }
+            self.rx_action.onNext(Action.load(url: url))
+            log.eventOut(chain: "rx_load")
+        }
+        .disposed(by: disposeBag)
+
+        // タブインサート監視
+        TabUseCase.s.rx_tabUseCaseDidInsert
+            .subscribe { [weak self] at in
+                log.eventIn(chain: "rx_tabUseCaseDidInsert")
+                guard let `self` = self, let at = at.element else { return }
+                self.rx_action.onNext(Action.insert(at: at))
+                log.eventOut(chain: "rx_tabUseCaseDidInsert")
+            }
+            .disposed(by: disposeBag)
+
+        // リロード通知監視
+        TabUseCase.s.rx_tabUseCaseDidReload
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_tabUseCaseDidReload")
+                guard let `self` = self else { return }
+                self.rx_action.onNext(Action.reload)
+                log.eventOut(chain: "rx_tabUseCaseDidReload")
+            }
+            .disposed(by: disposeBag)
+
+        // タブ追加監視
+        TabUseCase.s.rx_tabUseCaseDidAppend
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_tabUseCaseDidAppend")
+                guard let `self` = self else { return }
+                self.rx_action.onNext(Action.append)
+                log.eventOut(chain: "rx_tabUseCaseDidAppend")
+            }
+            .disposed(by: disposeBag)
+
+        // タブ変更監視
+        TabUseCase.s.rx_tabUseCaseDidChange
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_tabUseCaseDidChange")
+                guard let `self` = self else { return }
+                self.rx_action.onNext(Action.change)
+                log.eventOut(chain: "rx_tabUseCaseDidChange")
+            }
+            .disposed(by: disposeBag)
+
+        // タブ削除監視
+        TabUseCase.s.rx_tabUseCaseDidRemove
+            .subscribe { [weak self] object in
+                log.eventIn(chain: "rx_tabUseCaseDidRemove")
+                guard let `self` = self, let object = object.element else { return }
+                self.rx_action.onNext(Action.remove(object))
+                log.eventOut(chain: "rx_tabUseCaseDidRemove")
+            }
+            .disposed(by: disposeBag)
+
+        // ヒストリーバック監視
+        HistoryUseCase.s.rx_historyUseCaseDidRequestHistoryBack
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_historyUseCaseDidRequestHistoryBack")
+                guard let `self` = self else { return }
+                self.rx_action.onNext(Action.historyBack)
+                log.eventOut(chain: "rx_historyUseCaseDidRequestHistoryBack")
+            }
+            .disposed(by: disposeBag)
+
+        // ヒストリーフォワード監視
+        HistoryUseCase.s.rx_historyUseCaseDidRequestHistoryForward
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_historyUseCaseDidRequestHistoryForward")
+                guard let `self` = self else { return }
+                self.rx_action.onNext(Action.historyForward)
+                log.eventOut(chain: "rx_historyUseCaseDidRequestHistoryForward")
+            }
+            .disposed(by: disposeBag)
+
+        // フォーム登録監視
+        FormUseCase.s.rx_formUseCaseDidRequestRegisterForm
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_formUseCaseDidRequestRegisterForm")
+                guard let `self` = self else { return }
+                self.rx_action.onNext(Action.form)
+                log.eventOut(chain: "rx_formUseCaseDidRequestRegisterForm")
+            }
+            .disposed(by: disposeBag)
+
+        // 自動スクロール監視
+        ScrollUseCase.s.rx_scrollUseCaseDidRequestAutoScroll
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_scrollUseCaseDidRequestAutoScroll")
+                guard let `self` = self else { return }
+                self.rx_action.onNext(Action.autoScroll)
+                log.eventOut(chain: "rx_scrollUseCaseDidRequestAutoScroll")
+            }
+            .disposed(by: disposeBag)
+
+        // 自動入力監視
+        FormUseCase.s.rx_formUseCaseDidRequestAutoFill
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_formUseCaseDidRequestAutoFill")
+                guard let `self` = self else { return }
+                self.rx_action.onNext(Action.autoFill)
+                log.eventOut(chain: "rx_formUseCaseDidRequestAutoFill")
+            }
+            .disposed(by: disposeBag)
+
+        // スクロールアップ監視
+        ScrollUseCase.s.rx_scrollUseCaseDidRequestScrollUp
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_scrollUseCaseDidRequestScrollUp")
+                guard let `self` = self else { return }
+                self.rx_action.onNext(Action.scrollUp)
+                log.eventOut(chain: "rx_scrollUseCaseDidRequestScrollUp")
+            }
+            .disposed(by: disposeBag)
+
+        // 全文検索監視
+        GrepUseCase.s.rx_grepUseCaseDidRequestGrep
+            .subscribe { [weak self] word in
+                log.eventIn(chain: "rx_grepUseCaseDidRequestGrep")
+                guard let `self` = self, let word = word.element else { return }
+                self.rx_action.onNext(Action.grep(text: word))
+                log.eventOut(chain: "rx_grepUseCaseDidRequestGrep")
+            }
+            .disposed(by: disposeBag)
     }
 
     // MARK: Public Method

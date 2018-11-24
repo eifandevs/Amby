@@ -28,6 +28,8 @@ public final class GrepUseCase {
 
     /// グレップリクエスト
     public func grep(word: String) {
-        rx_grepUseCaseDidRequestGrep.onNext(word)
+        if !word.isEmpty {
+            rx_grepUseCaseDidRequestGrep.onNext(word)
+        }
     }
 }

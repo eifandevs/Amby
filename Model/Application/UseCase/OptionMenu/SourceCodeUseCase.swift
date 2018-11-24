@@ -15,12 +15,12 @@ public final class SourceCodeUseCase {
     public static let s = SourceCodeUseCase()
 
     /// ロードリクエスト通知用RX
-    public let rx_sourceCodeUseCaseDidRequestOpen = PublishSubject<String>()
+    public let rx_sourceCodeUseCaseDidRequestLoad = PublishSubject<String>()
 
     private init() {}
 
     /// ソースコードページ表示
     public func open() {
-        rx_sourceCodeUseCaseDidRequestOpen.onNext(ModelConst.URL.SOURCE_URL)
+        rx_sourceCodeUseCaseDidRequestLoad.onNext(ModelConst.URL.SOURCE_URL)
     }
 }
