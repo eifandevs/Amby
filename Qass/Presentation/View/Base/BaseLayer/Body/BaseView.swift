@@ -682,33 +682,6 @@ class BaseView: UIView {
         }
     }
 
-    private func saveThumbnail(webView: EGWebView, completion: @escaping (() -> Void)) {
-        log.debug("save thumbnail. context: \(webView.context)")
-
-        // サムネイルを保存
-        DispatchQueue.mainSyncSafe {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                webView.takeSnapshot(with: nil) { [weak self] image, error in
-                    guard let `self` = self else { return }
-                    if let img = image {
-                        let pngImageData = UIImagePNGRepresentation(img)
-                        let context = webView.context
-
-                        if let pngImageData = pngImageData {
-                            self.viewModel.writeThumbnailData(context: context, data: pngImageData)
-                        } else {
-                            log.error("image representation error.")
-                        }
-                        completion()
-                    } else {
-                        log.error("failed taking snapshot. error: \(String(describing: error?.localizedDescription))")
-                        completion()
-                    }
-                }
-            }
-        }
-    }
-
     // MARK: 自動スクロールタイマー通知
 
     @objc func updateAutoScrolling(sender: Timer) {
@@ -750,21 +723,7 @@ extension BaseView: EGApplicationDelegate {
             let touchPoint = touch.location(in: self)
             if viewModel.isEdgeSwiped(touchPoint: touchPoint) {
                 // エッジスワイプ検知
-                // 動画DL
-//                self.front.evaluateJavaScript("document.querySelector('video').currentSrc") { (object, error) in
-//                    log.warning("object: \(object)")
-//                }
-
-                if viewModel.isHistorySwipe(touchPoint: touchBeganPoint) {
-                    viewModel.state.remove(.isTouching)
-
-                    // 画面上半分のスワイプの場合は、履歴移動
-                    if viewModel.swipeDirection == .left {
-                        viewModel.historyBack()
-                    } else {
-                        viewModel.historyForward()
-                    }
-                } else {
+                if !viewModel.moveHistoryIfHistorySwipe(touchPoint: touchBeganPoint) {
                     // 操作を無効化
                     invalidateUserInteraction()
 
@@ -899,36 +858,34 @@ extension BaseView: UIScrollViewDelegate {
     /// スクロールさせずに、その場で手を離した場合
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset _: UnsafeMutablePointer<CGPoint>) {
         // フロントのみ通知する
-        if let front = front {
-            if front.scrollView == scrollView {
-                if velocity.y == 0 && !viewModel.state.contains(.isTouching) {
-                    // タッチ終了時にベースビューの高さを調整する
-                    if viewModel.state.contains(.isScrolling) && !viewModel.state.contains(.isAnimating) {
-                        viewModel.state.remove(.isScrolling)
-                        if isMoving {
-                            viewModel.state.insert(.isAnimating)
+        if let front = front, front.scrollView == scrollView {
+            if velocity.y == 0 && !viewModel.state.contains(.isTouching) {
+                // タッチ終了時にベースビューの高さを調整する
+                if viewModel.state.contains(.isScrolling) && !viewModel.state.contains(.isAnimating) {
+                    viewModel.state.remove(.isScrolling)
+                    if isMoving {
+                        viewModel.state.insert(.isAnimating)
 
-                            if frame.origin.y > viewModel.positionY.max / 2 {
-                                UIView.animate(withDuration: 0.2, animations: {
-                                    self.slideToMax()
-                                }, completion: { finished in
-                                    if finished {
-                                        self.viewModel.state.remove(.isAnimating)
-                                    }
-                                })
-                            } else {
-                                UIView.animate(withDuration: 0.2, animations: {
-                                    self.slideToMin()
-                                }, completion: { finished in
-                                    if finished {
-                                        self.viewModel.state.remove(.isAnimating)
-                                    }
-                                })
-                            }
+                        if frame.origin.y > viewModel.positionY.max / 2 {
+                            UIView.animate(withDuration: 0.2, animations: {
+                                self.slideToMax()
+                            }, completion: { finished in
+                                if finished {
+                                    self.viewModel.state.remove(.isAnimating)
+                                }
+                            })
+                        } else {
+                            UIView.animate(withDuration: 0.2, animations: {
+                                self.slideToMin()
+                            }, completion: { finished in
+                                if finished {
+                                    self.viewModel.state.remove(.isAnimating)
+                                }
+                            })
                         }
                     }
-                    scrollMovingPointY = 0
                 }
+                scrollMovingPointY = 0
             }
         }
     }
@@ -936,35 +893,33 @@ extension BaseView: UIScrollViewDelegate {
     /// 慣性スクロールをした場合
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // フロントのみ通知する
-        if let front = front {
-            if front.scrollView == scrollView {
-                if !viewModel.state.contains(.isTouching) && !viewModel.state.contains(.isAnimating) {
-                    // タッチ終了時にベースビューの高さを調整する
-                    if viewModel.state.contains(.isScrolling) && !viewModel.state.contains(.isAnimating) {
-                        viewModel.state.remove(.isScrolling)
-                        if isMoving {
-                            viewModel.state.insert(.isAnimating)
-                            if frame.origin.y > viewModel.positionY.max / 2 {
-                                UIView.animate(withDuration: 0.2, animations: {
-                                    self.slideToMax()
-                                }, completion: { finished in
-                                    if finished {
-                                        self.viewModel.state.remove(.isAnimating)
-                                    }
-                                })
-                            } else {
-                                UIView.animate(withDuration: 0.2, animations: {
-                                    self.slideToMin()
-                                }, completion: { finished in
-                                    if finished {
-                                        self.viewModel.state.remove(.isAnimating)
-                                    }
-                                })
-                            }
+        if let front = front, front.scrollView == scrollView {
+            if !viewModel.state.contains(.isTouching) && !viewModel.state.contains(.isAnimating) {
+                // タッチ終了時にベースビューの高さを調整する
+                if viewModel.state.contains(.isScrolling) && !viewModel.state.contains(.isAnimating) {
+                    viewModel.state.remove(.isScrolling)
+                    if isMoving {
+                        viewModel.state.insert(.isAnimating)
+                        if frame.origin.y > viewModel.positionY.max / 2 {
+                            UIView.animate(withDuration: 0.2, animations: {
+                                self.slideToMax()
+                            }, completion: { finished in
+                                if finished {
+                                    self.viewModel.state.remove(.isAnimating)
+                                }
+                            })
+                        } else {
+                            UIView.animate(withDuration: 0.2, animations: {
+                                self.slideToMin()
+                            }, completion: { finished in
+                                if finished {
+                                    self.viewModel.state.remove(.isAnimating)
+                                }
+                            })
                         }
                     }
-                    scrollMovingPointY = 0
                 }
+                scrollMovingPointY = 0
             }
         }
     }
@@ -1019,10 +974,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
         viewModel.endLoading(context: wv.context)
 
         // サムネイルを保存
-        saveThumbnail(webView: wv, completion: {
-            // プログレス更新
-            self.viewModel.endRendering(context: wv.context)
-        })
+        viewModel.saveThumbnailAndEndRendering(webView: wv)
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: Error) {
@@ -1111,16 +1063,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
         }
 
         // 外部アプリ起動要求
-        if (url.absoluteString.range(of: AppConst.URL.ITUNES_STORE) != nil) ||
-            (!url.absoluteString.hasPrefix("about:") && !url.absoluteString.hasPrefix("http:") && !url.absoluteString.hasPrefix("https:") && !url.absoluteString.hasPrefix("file:")) {
-            log.warning("open url. url: \(url)")
-            if UIApplication.shared.canOpenURL(url) {
-                NotificationService.presentActionSheet(title: "", message: MessageConst.ALERT.OPEN_COMFIRM, completion: {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }, cancel: nil)
-            } else {
-                log.warning("cannot open url. url: \(url)")
-            }
+        if viewModel.openAppIfAppStoreRequest(url: url) {
             decisionHandler(.cancel)
             return
         }
@@ -1128,33 +1071,11 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
         decisionHandler(.allow)
     }
 
+    /// 新規ウィンドウイベント
     func webView(_: WKWebView, createWebViewWith _: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures _: WKWindowFeatures) -> WKWebView? {
         if navigationAction.targetFrame == nil {
             if let url = navigationAction.request.url?.absoluteString {
-                log.debug("receive new window event. url: \(url)")
-
-                if viewModel.newWindowConfirm {
-                    viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
-                } else {
-                    viewModel.state.insert(.isSelectingNewTabEvent)
-
-                    // 150文字以上は省略
-                    let message = url.count > 50 ? String(url.prefix(200)) + "..." : url
-                    NotificationService.presentActionSheet(title: MessageConst.NOTIFICATION.NEW_TAB, message: message, completion: {
-                        self.viewModel.state.remove(.isSelectingNewTabEvent)
-                        self.viewModel.insertTab(url: navigationAction.request.url?.absoluteString)
-                    }, cancel: {
-                        self.viewModel.state.remove(.isSelectingNewTabEvent)
-                    })
-                }
-
-//                if url != AppConst.URL.BLANK {
-//                    // about:blankは無視する
-//                    viewModel.insertPageHistoryDataModel(url: navigationAction.request.url?.absoluteString)
-//                } else {
-//                    log.warning("about blank event.")
-//                }
-                return nil
+                viewModel.insertTabByReceiveNewWindowEvent(url: url)
             }
         }
         return nil

@@ -205,6 +205,73 @@ final class BaseViewModel {
 
     // MARK: Public Method
 
+    /// AppStore要求の場合開く
+    func openAppIfAppStoreRequest(url: URL) -> Bool {
+        let isAppStoreUrl = url.absoluteString.range(of: AppConst.URL.ITUNES_STORE) != nil ||
+            !url.absoluteString.hasPrefix("about:") && !url.absoluteString.hasPrefix("http:") && !url.absoluteString.hasPrefix("https:") && !url.absoluteString.hasPrefix("file:")
+
+        if isAppStoreUrl {
+            log.warning("open url. url: \(url)")
+            if UIApplication.shared.canOpenURL(url) {
+                NotificationService.presentActionSheet(title: "", message: MessageConst.ALERT.OPEN_COMFIRM, completion: {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }, cancel: nil)
+            } else {
+                log.warning("cannot open url. url: \(url)")
+            }
+
+            return true
+        }
+
+        return false
+    }
+
+    /// 新規ウィンドウイベント受信
+    func insertTabByReceiveNewWindowEvent(url: String) {
+        if newWindowConfirm {
+            insertTab(url: url)
+        } else {
+            state.insert(.isSelectingNewTabEvent)
+
+            // 150文字以上は省略
+            let message = url.count > 50 ? String(url.prefix(200)) + "..." : url
+            NotificationService.presentActionSheet(title: MessageConst.NOTIFICATION.NEW_TAB, message: message, completion: {
+                self.state.remove(.isSelectingNewTabEvent)
+                self.insertTab(url: url)
+            }, cancel: {
+                self.state.remove(.isSelectingNewTabEvent)
+            })
+        }
+    }
+
+    /// サムネイル保存
+    func saveThumbnailAndEndRendering(webView: EGWebView) {
+        log.debug("save thumbnail. context: \(webView.context)")
+
+        // サムネイルを保存
+        DispatchQueue.mainSyncSafe {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                webView.takeSnapshot(with: nil) { [weak self] image, error in
+                    guard let `self` = self else { return }
+                    if let img = image {
+                        let pngImageData = UIImagePNGRepresentation(img)
+                        let context = webView.context
+
+                        if let pngImageData = pngImageData {
+                            self.writeThumbnailData(context: context, data: pngImageData)
+                        } else {
+                            log.error("image representation error.")
+                        }
+                    } else {
+                        log.error("failed taking snapshot. error: \(String(describing: error?.localizedDescription))")
+                    }
+                    // レンダリング終了通知
+                    self.endRendering(context: webView.context)
+                }
+            }
+        }
+    }
+
     /// エッジスワイプ判定
     func isEdgeSwiped(touchPoint: CGPoint) -> Bool {
         return (swipeDirection == .left && touchPoint.x > AppConst.FRONT_LAYER.EDGE_SWIPE_EREA + 20) ||
@@ -282,13 +349,26 @@ final class BaseViewModel {
         SearchUseCase.s.beginAtHeader()
     }
 
+    /// フォーム情報保存
     func storeForm(form: Form) {
         FormUseCase.s.store(form: form)
     }
 
-    /// スワイプが履歴移動スワイプかを判定
-    func isHistorySwipe(touchPoint: CGPoint) -> Bool {
-        return touchPoint.y < (AppConst.DEVICE.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER.HEADER_HEIGHT
+    func moveHistoryIfHistorySwipe(touchPoint: CGPoint) -> Bool {
+        let isHistorySwipe = touchPoint.y < (AppConst.DEVICE.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER.HEADER_HEIGHT
+
+        if isHistorySwipe {
+            state.remove(.isTouching)
+
+            // 画面上半分のスワイプの場合は、履歴移動
+            if swipeDirection == .left {
+                historyBack()
+            } else {
+                historyForward()
+            }
+        }
+
+        return isHistorySwipe
     }
 
     /// 前webviewのキャプチャ取得
