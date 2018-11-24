@@ -407,6 +407,11 @@ final class BaseViewModel {
         FormUseCase.s.store(form: form)
     }
 
+    /// フォーム情報取得
+    func selectForm(url: String) -> Form? {
+        return FormUseCase.s.select(url: url).first
+    }
+
     func moveHistoryIfHistorySwipe(touchPoint: CGPoint) -> Bool {
         let isHistorySwipe = touchPoint.y < (AppConst.DEVICE.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER.HEADER_HEIGHT
 

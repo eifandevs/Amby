@@ -352,7 +352,7 @@ class BaseView: UIView {
 
             if isFrontDelete && object.currentContext != nil {
                 // フロントの削除で、削除後にwebviewが存在する場合
-                if let current = self.webViews.find({ $0?.context == TabUseCase.s.currentContext }), let currentWebView = current {
+                if let current = self.webViews.find({ $0?.context == self.viewModel.currentContext }), let currentWebView = current {
                     currentWebView.observeEstimatedProgress(observer: self)
                     front = current
                     bringSubview(toFront: currentWebView)
@@ -451,7 +451,7 @@ class BaseView: UIView {
 
     private func autoFill() {
         if !viewModel.state.contains(.isDoneAutoFill) {
-            if let url = self.front.url?.absoluteString, let inputForm = FormUseCase.s.select(url: url).first {
+            if let url = self.front.url?.absoluteString, let inputForm = self.viewModel.selectForm(url: url) {
                 NotificationService.presentAlert(title: MessageConst.ALERT.FORM_TITLE, message: MessageConst.ALERT.FORM_EXIST, completion: { [weak self] in
                     guard let `self` = self else { return }
                     inputForm.inputs.forEach {
