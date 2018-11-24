@@ -83,114 +83,25 @@ class BaseViewController: UIViewController {
             }
         }
 
-        // ヘルプ表示監視
-        viewModel.rx_baseViewControllerViewModelDidPresentHelp
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentHelp")
-                guard let `self` = self else { return }
-                if let element = object.element {
-                    let vc = HelpViewController(subtitle: element.title, message: element.message)
-                    self.present(vc, animated: true)
+        // アクション監視
+        viewModel.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "rx_action")
+                guard let `self` = self, let action = action.element else { return }
+
+                switch action {
+                case let .help(title, message): self.help(title: title, message: message)
+                case .openSource: self.openSource()
+                case .report: self.report()
+                case let .memo(memo): self.memo(memo: memo)
+                case .menuOrder: self.menuOrder()
+                case .passcode: self.passcode()
+                case .passcodeConfirm: self.passcodeConfirm()
+                case let .formReader(form): self.formReader(form: form)
+                case .mailer: self.mailer()
+                case let .notice(message, isSuccess): self.notice(message: message, isSuccess: isSuccess)
                 }
-                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentHelp")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // オープンソース表示監視
-        viewModel.rx_baseViewControllerViewModelDidPresentOpenSource
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentOpenSource")
-                guard let `self` = self else { return }
-                let vc = OpenSourceViewController()
-                self.present(vc, animated: true)
-                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentOpenSource")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // レポート起動監視
-        viewModel.rx_baseViewControllerViewModelDidPresentReport
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentReport")
-                guard let `self` = self else { return }
-                let vc = ReportViewController()
-                self.present(vc, animated: true)
-                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentReport")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // メモ画面表示監視
-        viewModel.rx_baseViewControllerViewModelDidPresentMemo
-            .subscribe { [weak self] memo in
-                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentMemo")
-                guard let `self` = self else { return }
-                if let memo = memo.element {
-                    let vc = MemoViewController(memo: memo)
-                    self.present(vc, animated: true)
-                }
-                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentMemo")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // メニュー順序表示監視
-        viewModel.rx_baseViewControllerViewModelDidPresentMenuOrder
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentMenuOrder")
-                guard let `self` = self else { return }
-                let vc = MenuOrderViewController()
-                self.present(vc, animated: true)
-                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentMenuOrder")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // パスコード表示監視
-        viewModel.rx_baseViewControllerViewModelDidPresentPasscode
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentPasscode")
-                guard let `self` = self else { return }
-                let vc = PasscodeViewController(isConfirm: false)
-                self.present(vc, animated: true)
-                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentPasscode")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // パスコード確認監視
-        viewModel.rx_baseViewControllerViewModelDidPresentPasscodeConfirm
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentPasscodeConfirm")
-                guard let `self` = self else { return }
-                let vc = PasscodeViewController(isConfirm: true)
-                self.present(vc, animated: true)
-                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentPasscodeConfirm")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // フォーム閲覧画面表示監視
-        viewModel.rx_baseViewControllerViewModelDidPresentForm
-            .subscribe { [weak self] form in
-                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentForm")
-                guard let `self` = self else { return }
-                let vc = FormViewController(form: form.element!)
-                self.present(vc, animated: true)
-                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentForm")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // メーラー起動監視
-        viewModel.rx_baseViewControllerViewModelDidPresentMail
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_baseViewControllerViewModelDidPresentMail")
-                guard let `self` = self else { return }
-                if MFMailComposeViewController.canSendMail() {
-                    let mail = MFMailComposeViewController()
-                    mail.mailComposeDelegate = self
-                    mail.setToRecipients(["eifan.devs@gmail.com"])
-                    mail.setSubject("お問い合わせ")
-                    mail.setMessageBody("ここに本文が入ります。", isHTML: false)
-                    self.present(mail, animated: true)
-                } else {
-                    log.error("cannot send mail.")
-                }
-                log.eventOut(chain: "rx_baseViewControllerViewModelDidPresentMail")
+                log.eventOut(chain: "rx_action")
             }
             .disposed(by: rx.disposeBag)
 
@@ -280,6 +191,75 @@ class BaseViewController: UIViewController {
             splash!.removeFromParentViewController()
             splash = nil
         }
+    }
+
+    // MARK: Private Method
+
+    /// 通知表示
+    private func notice(message: String, isSuccess: Bool) {
+        NotificationService.presentToastNotification(message: message, isSuccess: isSuccess)
+    }
+
+    /// メーラー画面表示
+    private func mailer() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["eifan.devs@gmail.com"])
+            mail.setSubject("お問い合わせ")
+            mail.setMessageBody("ここに本文が入ります。", isHTML: false)
+            present(mail, animated: true)
+        } else {
+            log.error("cannot send mail.")
+        }
+    }
+
+    /// フォーム閲覧画面表示
+    private func formReader(form: Form) {
+        let vc = FormViewController(form: form)
+        present(vc, animated: true)
+    }
+
+    /// パスコード確認画面表示
+    private func passcodeConfirm() {
+        let vc = PasscodeViewController(isConfirm: true)
+        present(vc, animated: true)
+    }
+
+    /// パスコード画面表示
+    private func passcode() {
+        let vc = PasscodeViewController(isConfirm: false)
+        present(vc, animated: true)
+    }
+
+    /// メニュー順序表示
+    private func menuOrder() {
+        let vc = MenuOrderViewController()
+        present(vc, animated: true)
+    }
+
+    /// メモ画面表示
+    private func memo(memo: Memo) {
+        let vc = MemoViewController(memo: memo)
+        present(vc, animated: true)
+    }
+
+    /// レポート画面表示
+    private func report() {
+        let vc = ReportViewController()
+        present(vc, animated: true)
+    }
+
+    /// ヘルプ画面表示
+    private func help(title: String, message: String) {
+        let vc = HelpViewController(subtitle: title, message: message)
+        present(vc, animated: true)
+    }
+
+    /// オープンソース表示
+    private func openSource() {
+        let vc = OpenSourceViewController()
+        present(vc, animated: true)
     }
 
     // MARK: WebView Touch

@@ -21,7 +21,7 @@ public final class FormUseCase {
     /// ロードリクエスト通知用RX
     public let rx_formUseCaseDidRequestLoad = PublishSubject<String>()
     /// 閲覧通知用RX
-    public let rx_formUseCaseDidRequestRead = PublishSubject<String>()
+    public let rx_formUseCaseDidRequestRead = PublishSubject<Form>()
 
     private init() {}
 
@@ -49,7 +49,9 @@ public final class FormUseCase {
     }
 
     public func read(id: String) {
-        rx_formUseCaseDidRequestRead.onNext(id)
+        if let form = FormUseCase.s.select(id: id).first {
+            rx_formUseCaseDidRequestRead.onNext(form)
+        }
     }
 
     public func delete(forms: [Form]) {
