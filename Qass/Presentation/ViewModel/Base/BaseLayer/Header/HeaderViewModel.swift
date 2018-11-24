@@ -12,39 +12,78 @@ import RxCocoa
 import RxSwift
 
 final class HeaderViewModel {
-    /// プログレス更新通知用RX
-    let rx_headerViewModelDidChangeProgress = ProgressUseCase.s.rx_progressUseCaseDidChangeProgress
-        .flatMap { progress -> Observable<CGFloat> in
-            return Observable.just(progress)
-        }
+    enum Action {
+        case updateProgress(progress: CGFloat)
+        case updateFavorite(flag: Bool)
+        case updateField(text: String)
+        case search(forceFlag: Bool)
+        case grep
+    }
 
-    /// お気に入り変更通知用RX
-    let rx_headerViewModelDidChangeFavorite = FavoriteUseCase.s.rx_favoriteUseCaseDidChangeFavorite
-        .flatMap { flag -> Observable<Bool> in
-            return Observable.just(flag)
-        }
+    let rx_action = PublishSubject<Action>()
 
-    /// テキストフィールド更新通知用RX
-    let rx_headerViewModelDidChangeField = ProgressUseCase.s.rx_progressUseCaseDidChangeField
-        .flatMap { text -> Observable<String> in
-            return Observable.just(text)
-        }
+    /// Observable自動解放
+    let disposeBag = DisposeBag()
 
-    /// 編集開始通知用RX
-    let rx_headerViewModelDidbeginSearching = SearchUseCase.s.rx_searchUseCaseDidBeginSearching
-        .flatMap { forceEditFlg -> Observable<Bool> in
-            return Observable.just(forceEditFlg)
-        }
-
-    /// グレップ開始通知用RX
-    let rx_headerViewModelDidBeginGreping = GrepUseCase.s.rx_grepUseCaseDidBeginGreping
-        .flatMap { _ -> Observable<()> in
-            return Observable.just(())
-        }
+    init() {
+        setupRx()
+    }
 
     deinit {
         log.debug("deinit called.")
         NotificationCenter.default.removeObserver(self)
+    }
+
+    private func setupRx() {
+        // プログレス更新監視
+        ProgressUseCase.s.rx_progressUseCaseDidChangeProgress
+            .subscribe { [weak self] progress in
+                log.eventIn(chain: "rx_progressUseCaseDidChangeProgress")
+                guard let `self` = self, let progress = progress.element else { return }
+                self.rx_action.onNext(Action.updateProgress(progress: progress))
+                log.eventOut(chain: "rx_progressUseCaseDidChangeProgress")
+            }
+            .disposed(by: disposeBag)
+
+        // お気に入り更新監視
+        FavoriteUseCase.s.rx_favoriteUseCaseDidChangeFavorite
+            .subscribe { [weak self] flag in
+                log.eventIn(chain: "rx_favoriteUseCaseDidChangeFavorite")
+                guard let `self` = self, let flag = flag.element else { return }
+                self.rx_action.onNext(Action.updateFavorite(flag: flag))
+                log.eventOut(chain: "rx_favoriteUseCaseDidChangeFavorite")
+            }
+            .disposed(by: disposeBag)
+
+        // テキストフィールド更新監視
+        ProgressUseCase.s.rx_progressUseCaseDidChangeField
+            .subscribe { [weak self] text in
+                log.eventIn(chain: "rx_progressUseCaseDidChangeField")
+                guard let `self` = self, let text = text.element else { return }
+                self.rx_action.onNext(Action.updateField(text: text))
+                log.eventOut(chain: "rx_progressUseCaseDidChangeField")
+            }
+            .disposed(by: disposeBag)
+
+        // 編集開始監視
+        SearchUseCase.s.rx_searchUseCaseDidBeginSearching
+            .subscribe { [weak self] flag in
+                log.eventIn(chain: "rx_searchUseCaseDidBeginSearching")
+                guard let `self` = self, let flag = flag.element else { return }
+                self.rx_action.onNext(Action.search(forceFlag: flag))
+                log.eventOut(chain: "rx_searchUseCaseDidBeginSearching")
+            }
+            .disposed(by: disposeBag)
+
+        // グレップ開始監視
+        GrepUseCase.s.rx_grepUseCaseDidBeginGreping
+            .subscribe { [weak self] _ in
+                log.eventIn(chain: "rx_grepUseCaseDidBeginGreping")
+                guard let `self` = self else { return }
+                self.rx_action.onNext(Action.grep)
+                log.eventOut(chain: "rx_grepUseCaseDidBeginGreping")
+            }
+            .disposed(by: disposeBag)
     }
 
     // MARK: Public Method

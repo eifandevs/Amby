@@ -82,6 +82,23 @@ class HeaderView: UIView, ShadowView {
     }
 
     private func setupRx() {
+        // アクション監視
+        viewModel.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "rx_action")
+                guard let `self` = self, let action = action.element else { return }
+
+                switch action {
+                case let .updateProgress(progress): self.updateProgress(progress: progress)
+                case let .updateFavorite(flag): self.updateFavorite(enable: flag)
+                case let .updateField(text): self.updateField(text: text)
+                case let .search(forceFlag): self.search(forceEditFlg: forceFlag)
+                case .grep: self.grep()
+                }
+                log.eventOut(chain: "rx_action")
+            }
+            .disposed(by: rx.disposeBag)
+
         // ヘッダーアイテム
         let addButton = { (button: UIButton, image: UIImage) -> Void in
             button.setImage(image: image, color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
@@ -153,78 +170,6 @@ class HeaderView: UIView, ShadowView {
                 self.startEditing()
                 log.eventOut(chain: "rx_headerTap")
             })
-            .disposed(by: rx.disposeBag)
-
-        // プログレス更新監視
-        viewModel.rx_headerViewModelDidChangeProgress
-            .subscribe { [weak self] object in
-                // ログが大量に表示されるので、コメントアウト
-                //                log.eventIn(chain: "rx_headerViewModelDidChangeProgress")
-                guard let `self` = self else { return }
-                if let progress = object.element {
-                    self.progressBar.setProgress(progress)
-                }
-                //                log.eventOut(chain: "rx_headerViewModelDidChangeProgress")
-            }.disposed(by: rx.disposeBag)
-
-        // テキストフィールド監視
-        viewModel.rx_headerViewModelDidChangeField
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_headerViewModelDidChangeField")
-                guard let `self` = self else { return }
-                if let text = object.element {
-                    self.headerField.text = text
-                }
-                log.eventOut(chain: "rx_headerViewModelDidChangeField")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // お気に入り監視
-        viewModel.rx_headerViewModelDidChangeFavorite
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_headerViewModelDidChangeFavorite")
-                guard let `self` = self else { return }
-                if let enable = object.element {
-                    if enable {
-                        // すでに登録済みの場合は、お気に入りボタンの色を変更する
-                        self.favoriteButton.setImage(image: R.image.headerFavoriteSelected(), color: UIColor.ultraViolet)
-                    } else {
-                        self.favoriteButton.setImage(image: R.image.headerFavorite(), color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
-                    }
-                }
-                log.eventOut(chain: "rx_headerViewModelDidChangeFavorite")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // 編集開始監視
-        viewModel.rx_headerViewModelDidbeginSearching
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_headerViewModelDidbeginSearching")
-                guard let `self` = self else { return }
-                if let forceEditFlg = object.element {
-                    if forceEditFlg {
-                        // サークルメニューから検索を押下したとき
-                        self.startEditing()
-                    } else {
-                        // 空のページを表示したとき
-                        // 自動で編集状態にする
-                        if self.headerField.text.isEmpty {
-                            self.startEditing()
-                        }
-                    }
-                }
-                log.eventOut(chain: "rx_headerViewModelDidbeginSearching")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // グレップ開始監視
-        viewModel.rx_headerViewModelDidBeginGreping
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_headerViewModelDidBeginGreping")
-                guard let `self` = self else { return }
-                self.startGreping()
-                log.eventOut(chain: "rx_headerViewModelDidBeginGreping")
-            }
             .disposed(by: rx.disposeBag)
 
         // ヘッダーフィールド編集終了監視
@@ -331,6 +276,42 @@ class HeaderView: UIView, ShadowView {
         headerItems.forEach { button in
             button.alpha += value / (AppConst.BASE_LAYER.HEADER_HEIGHT - AppConst.DEVICE.STATUS_BAR_HEIGHT)
         }
+    }
+
+    // MARK: - Private Method
+
+    private func grep() {
+        startGreping()
+    }
+
+    private func search(forceEditFlg: Bool) {
+        if forceEditFlg {
+            // サークルメニューから検索を押下したとき
+            startEditing()
+        } else {
+            // 空のページを表示したとき
+            // 自動で編集状態にする
+            if headerField.text.isEmpty {
+                startEditing()
+            }
+        }
+    }
+
+    private func updateField(text: String) {
+        headerField.text = text
+    }
+
+    private func updateFavorite(enable: Bool) {
+        if enable {
+            // すでに登録済みの場合は、お気に入りボタンの色を変更する
+            favoriteButton.setImage(image: R.image.headerFavoriteSelected(), color: UIColor.ultraViolet)
+        } else {
+            favoriteButton.setImage(image: R.image.headerFavorite(), color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
+        }
+    }
+
+    private func updateProgress(progress: CGFloat) {
+        progressBar.setProgress(progress)
     }
 
     /// 検索開始
