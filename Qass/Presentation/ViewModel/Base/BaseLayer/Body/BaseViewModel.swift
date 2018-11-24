@@ -36,7 +36,7 @@ final class BaseViewModel {
         case reload
         case append
         case change
-        case remove((deleteContext: String, currentContext: String?, deleteIndex: Int))
+        case remove(deleteContext: String, currentContext: String?, deleteIndex: Int)
         case historyBack
         case historyForward
         case load(url: String)
@@ -180,7 +180,7 @@ final class BaseViewModel {
             .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_tabUseCaseDidRemove")
                 guard let `self` = self, let object = object.element else { return }
-                self.rx_action.onNext(Action.remove(object))
+                self.rx_action.onNext(Action.remove(deleteContext: object.deleteContext, currentContext: object.currentContext, deleteIndex: object.deleteIndex))
                 log.eventOut(chain: "rx_tabUseCaseDidRemove")
             }
             .disposed(by: disposeBag)

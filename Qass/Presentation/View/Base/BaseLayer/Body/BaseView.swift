@@ -168,7 +168,7 @@ class BaseView: UIView {
                 case .reload: self.reload()
                 case .append: self.append()
                 case .change: self.change()
-                case let .remove(object): self.remove(object: object)
+                case let .remove(deleteContext, currentContext, deleteIndex): self.remove(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
                 case .historyBack: self.historyBack()
                 case .historyForward: self.historyForward()
                 case let .load(url): self.load(url: url)
@@ -330,9 +330,9 @@ class BaseView: UIView {
         _ = front.load(urlStr: url)
     }
 
-    private func remove(object: (deleteContext: String, currentContext: String?, deleteIndex: Int)) {
-        if let webView = self.webViews[object.deleteIndex] {
-            let isFrontDelete = object.deleteContext == front.context
+    private func remove(deleteContext: String, currentContext: String?, deleteIndex: Int) {
+        if let webView = self.webViews[deleteIndex] {
+            let isFrontDelete = deleteContext == front.context
             if isFrontDelete {
                 webView.removeObserverEstimatedProgress(observer: self)
                 viewModel.updateProgress(progress: 0)
@@ -345,12 +345,12 @@ class BaseView: UIView {
             }
 
             webView.removeFromSuperview()
-            webViews.remove(at: object.deleteIndex)
+            webViews.remove(at: deleteIndex)
 
             // くるくるを更新
             updateNetworkActivityIndicator()
 
-            if isFrontDelete && object.currentContext != nil {
+            if isFrontDelete && currentContext != nil {
                 // フロントの削除で、削除後にwebviewが存在する場合
                 if let current = self.webViews.find({ $0?.context == self.viewModel.currentContext }), let currentWebView = current {
                     currentWebView.observeEstimatedProgress(observer: self)
