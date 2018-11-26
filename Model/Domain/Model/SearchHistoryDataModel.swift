@@ -10,13 +10,34 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+enum SearchHistoryDataModelError {
+    case getList
+    case delete
+    case store
+    case select
+    case expireCheck
+}
+
+extension SearchHistoryDataModelError: ModelError {
+    var message: String {
+        switch self {
+        case .getList, .select, .expireCheck:
+            return MessageConst.NOTIFICATION.GET_SEARCH_HISTORY_ERROR
+        case .delete:
+            return MessageConst.NOTIFICATION.DELETE_SEARCH_HISTORY_ERROR
+        case .store:
+            return MessageConst.NOTIFICATION.STORE_SEARCH_HISTORY_ERROR
+        }
+    }
+}
+
 final class SearchHistoryDataModel {
     /// 削除通知用RX
     let rx_searchHistoryDataModelDidDelete = PublishSubject<()>()
     /// 全データ削除通知用RX
     let rx_searchHistoryDataModelDidDeleteAll = PublishSubject<()>()
-    /// 削除失敗通知用RX
-    let rx_searchHistoryDataModelDidDeleteFailure = PublishSubject<()>()
+    /// エラー通知用RX
+    let rx_error = PublishSubject<SearchHistoryDataModelError>()
 
     static let s = SearchHistoryDataModel()
     var histories = [SearchHistory]()
@@ -28,10 +49,15 @@ final class SearchHistoryDataModel {
 
     /// 保存済みリスト取得
     func getList() -> [String] {
-        if let list = localStorageRepository.getList(.searchHistory(resource: nil)) {
-            return list.map({ (path: String) -> String in
+        let result = localStorageRepository.getList(.searchHistory(resource: nil))
+        switch result {
+        case let .success(value):
+            return value.map({ (path: String) -> String in
                 path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).sorted(by: { $1.toDate() < $0.toDate() })
+        case .failure:
+            // 存在しないエラーかもしれないので無視する
+            break
         }
 
         return []
@@ -62,19 +88,19 @@ final class SearchHistoryDataModel {
             for (key, value) in searchHistoryByDate {
                 let filename = "\(key).dat"
 
-                let saveData: [SearchHistory] = { () -> [SearchHistory] in
-                    if let data = localStorageRepository.getData(.searchHistory(resource: filename)) {
-                        if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [SearchHistory] {
-                            let saveData: [SearchHistory] = value + old
-                            return saveData
-                        }
+                let result = localStorageRepository.getData(.searchHistory(resource: filename))
+
+                switch result {
+                case let .success(data):
+                    if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [SearchHistory] {
+                        let saveData: [SearchHistory] = value + old
+                        let searchHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
+                        _ = localStorageRepository.write(.searchHistory(resource: filename), data: searchHistoryData)
                     }
-
-                    return value
-                }()
-
-                let searchHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                _ = localStorageRepository.write(.searchHistory(resource: filename), data: searchHistoryData)
+                case .failure:
+                    // 存在しないエラーかもしれないので無視する
+                    break
+                }
             }
         }
     }
@@ -89,15 +115,22 @@ final class SearchHistoryDataModel {
         if readFiles.count > 0 {
             let latestFiles = readFiles.prefix(readNum)
             var allSearchHistory: [SearchHistory] = []
-            latestFiles.forEach({ (keyStr: String) in
+
+            for keyStr in latestFiles {
                 let filename = "\(keyStr).dat"
 
-                if let data = localStorageRepository.getData(.searchHistory(resource: filename)) {
+                let result = localStorageRepository.getData(.searchHistory(resource: filename))
+
+                switch result {
+                case let .success(data):
                     if let searchHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as? [SearchHistory] {
                         allSearchHistory += searchHistory
                     }
+                case .failure:
+                    break
                 }
-            })
+            }
+
             let hitSearchHistory = allSearchHistory.filter({ (searchHistoryItem) -> Bool in
                 searchHistoryItem.title.lowercased().contains(title.lowercased())
             })
@@ -128,13 +161,11 @@ final class SearchHistoryDataModel {
 
         if readFiles.count > saveTerm {
             let deleteFiles = readFiles.prefix(readFiles.count - saveTerm)
-            deleteFiles.forEach({ key in
+            for key in deleteFiles {
                 let filename = "\(key).dat"
-                if !localStorageRepository.delete(.searchHistory(resource: filename)) {
-                    rx_searchHistoryDataModelDidDeleteFailure.onNext(())
-                    return
-                }
-            })
+
+                _ = localStorageRepository.delete(.searchHistory(resource: filename))
+            }
             log.debug("deleteSearchHistory: \(deleteFiles)")
         }
 
@@ -143,10 +174,23 @@ final class SearchHistoryDataModel {
 
     /// 検索履歴を全て削除
     func delete() {
-        if localStorageRepository.delete(.searchHistory(resource: nil)) && localStorageRepository.create(.searchHistory(resource: nil)) {
+        let deleteResult = localStorageRepository.delete(.searchHistory(resource: nil))
+
+        switch deleteResult {
+        case .success:
+            break
+        case .failure:
+            rx_error.onNext(.delete)
+            return
+        }
+
+        let createResult = localStorageRepository.create(.searchHistory(resource: nil))
+
+        switch createResult {
+        case .success:
             rx_searchHistoryDataModelDidDeleteAll.onNext(())
-        } else {
-            rx_searchHistoryDataModelDidDeleteFailure.onNext(())
+        case .failure:
+            rx_error.onNext(.delete)
         }
     }
 }

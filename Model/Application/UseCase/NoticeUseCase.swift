@@ -101,15 +101,24 @@ public final class NoticeUseCase {
             }
             .disposed(by: disposeBag)
 
-        // 検索履歴削除失敗監視
-        SearchHistoryDataModel.s.rx_searchHistoryDataModelDidDeleteFailure
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_searchHistoryDataModelDidDeleteFailure")
-                guard let `self` = self else { return }
-                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.DELETE_SEARCH_HISTORY_ERROR, isSuccess: false))
-                log.eventOut(chain: "rx_searchHistoryDataModelDidDeleteFailure")
+        // エラー監視
+        Observable.merge([
+            SearchHistoryDataModel.s.rx_error.flatMap { searchHistoryDataModelError -> Observable<ModelError> in
+                Observable.just(searchHistoryDataModelError as ModelError)
+            },
+            CommonHistoryDataModel.s.rx_error.flatMap { commonHistoryDataModelError -> Observable<ModelError> in
+                Observable.just(commonHistoryDataModelError as ModelError)
+            },
+            PageHistoryDataModel.s.rx_error.flatMap { pageHistoryDataModelError -> Observable<ModelError> in
+                Observable.just(pageHistoryDataModelError as ModelError)
             }
-            .disposed(by: disposeBag)
+        ]).subscribe { [weak self] modelError in
+            log.eventIn(chain: "rx_error")
+            guard let `self` = self, let modelError = modelError.element else { return }
+            self.rx_noticeUseCaseDidInvoke.onNext((message: modelError.message, isSuccess: false))
+            log.eventOut(chain: "rx_error")
+        }
+        .disposed(by: disposeBag)
 
         // お気に入り登録監視
         FavoriteDataModel.s.rx_favoriteDataModelDidInsert

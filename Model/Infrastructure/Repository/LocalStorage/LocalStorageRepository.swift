@@ -10,24 +10,24 @@ import Foundation
 
 final class LocalStorageRepository<Target: LocalStorageTargetType> {
     /// get file list
-    public func getList(_ target: Target) -> [String]? {
+    public func getList(_ target: Target) -> RepositoryResult<[String]> {
         do {
             let list = try FileManager.default.contentsOfDirectory(atPath: target.absolutePath)
-            return list
+            return .success(list)
         } catch let error as NSError {
             log.error("failed to getList. base: \(target.base) error: \(error.localizedDescription)")
-            return nil
+            return .failure(error)
         }
     }
 
     /// get file data
-    public func getData(_ target: Target) -> Data? {
+    public func getData(_ target: Target) -> RepositoryResult<Data> {
         do {
             let data = try Data(contentsOf: target.url)
-            return data
+            return .success(data)
         } catch let error as NSError {
             log.warning("failed to getData. url: \(target.url) error: \(error.localizedDescription)")
-            return nil
+            return .failure(error)
         }
     }
 
@@ -37,25 +37,26 @@ final class LocalStorageRepository<Target: LocalStorageTargetType> {
     }
 
     /// write
-    public func write(_ target: Target, data: Data) -> Bool {
+    public func write(_ target: Target, data: Data) -> RepositoryResult<()> {
         do {
             try data.write(to: target.url)
             log.debug("store data. url: \(target.url)")
+            return .success(())
         } catch let error as NSError {
             log.error("failed to store: \(error.localizedDescription)")
-            return false
+            return .failure(error)
         }
-
-        return true
     }
 
     /// create folder
-    public func create(_ target: Target) -> Bool {
-        return Util.createFolder(path: target.absolutePath)
+    public func create(_ target: Target) -> RepositoryResult<()> {
+        let error = NSError(domain: "", code: 0, userInfo: nil)
+        return Util.createFolder(path: target.absolutePath) ? .success(()) : .failure(error)
     }
 
     /// delete
-    public func delete(_ target: Target) -> Bool {
-        return Util.deleteFolder(path: target.absolutePath)
+    public func delete(_ target: Target) -> RepositoryResult<()> {
+        let error = NSError(domain: "", code: 0, userInfo: nil)
+        return Util.deleteFolder(path: target.absolutePath) ? .success(()) : .failure(error)
     }
 }

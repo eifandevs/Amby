@@ -10,6 +10,22 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+enum PageHistoryDataModelError {
+    case delete
+    case store
+}
+
+extension PageHistoryDataModelError: ModelError {
+    var message: String {
+        switch self {
+        case .delete:
+            return MessageConst.NOTIFICATION.DELETE_PAGE_HISTORY_ERROR
+        case .store:
+            return MessageConst.NOTIFICATION.STORE_PAGE_HISTORY_ERROR
+        }
+    }
+}
+
 final class PageHistoryDataModel {
     /// ページインサート通知用RX
     let rx_pageHistoryDataModelDidInsert = PublishSubject<(pageHistory: PageHistory, at: Int)>()
@@ -27,6 +43,8 @@ final class PageHistoryDataModel {
     let rx_pageHistoryDataModelDidEndLoading = PublishSubject<String>()
     /// ページレンダリング終了通知用RX
     let rx_pageHistoryDataModelDidEndRendering = PublishSubject<String>()
+    /// エラー通知用RX
+    let rx_error = PublishSubject<PageHistoryDataModelError>()
 
     static let s = PageHistoryDataModel()
 
@@ -77,14 +95,16 @@ final class PageHistoryDataModel {
     /// 初期化
     func initialize() {
         // pageHistory読み込み
-        if let data = localStorageRepository.getData(.pageHistory) {
+        let result = localStorageRepository.getData(.pageHistory)
+        switch result {
+        case let .success(data):
             if let histories = NSKeyedUnarchiver.unarchiveObject(with: data) as? [PageHistory] {
                 self.histories = histories
             } else {
                 histories = []
                 log.error("unarchive histories error.")
             }
-        } else {
+        case .failure:
             let pageHistory = PageHistory()
             histories.append(pageHistory)
             currentContext = pageHistory.context
@@ -361,13 +381,25 @@ final class PageHistoryDataModel {
     func store() {
         if histories.count > 0 {
             let pageHistoryData = NSKeyedArchiver.archivedData(withRootObject: histories)
-            _ = localStorageRepository.write(.pageHistory, data: pageHistoryData)
+            let result = localStorageRepository.write(.pageHistory, data: pageHistoryData)
+            switch result {
+            case .success:
+                break
+            case .failure:
+                rx_error.onNext(.store)
+            }
         }
     }
 
     /// 全データの削除
     func delete() {
         histories = []
-        _ = localStorageRepository.delete(.pageHistory)
+        let result = localStorageRepository.delete(.pageHistory)
+        switch result {
+        case .success:
+            break
+        case .failure:
+            rx_error.onNext(.delete)
+        }
     }
 }

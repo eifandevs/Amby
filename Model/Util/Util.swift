@@ -31,6 +31,7 @@ class Util {
         if !isDir.boolValue {
             do {
                 try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+                log.debug("create directory. path: \(path)")
                 return true
             } catch let error as NSError {
                 log.error("create directory error. error: \(error.localizedDescription)")

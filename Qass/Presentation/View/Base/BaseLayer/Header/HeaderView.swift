@@ -85,7 +85,7 @@ class HeaderView: UIView, ShadowView {
         // アクション監視
         viewModel.rx_action
             .subscribe { [weak self] action in
-                log.eventIn(chain: "rx_action")
+//                log.eventIn(chain: "rx_action")
                 guard let `self` = self, let action = action.element else { return }
 
                 switch action {
@@ -95,7 +95,7 @@ class HeaderView: UIView, ShadowView {
                 case let .search(forceFlag): self.search(forceEditFlg: forceFlag)
                 case .grep: self.grep()
                 }
-                log.eventOut(chain: "rx_action")
+//                log.eventOut(chain: "rx_action")
             }
             .disposed(by: rx.disposeBag)
 

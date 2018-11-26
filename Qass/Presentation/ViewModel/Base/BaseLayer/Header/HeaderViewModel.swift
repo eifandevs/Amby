@@ -38,10 +38,10 @@ final class HeaderViewModel {
         // プログレス更新監視
         ProgressUseCase.s.rx_progressUseCaseDidChangeProgress
             .subscribe { [weak self] progress in
-                log.eventIn(chain: "rx_progressUseCaseDidChangeProgress")
+//                log.eventIn(chain: "rx_progressUseCaseDidChangeProgress")
                 guard let `self` = self, let progress = progress.element else { return }
                 self.rx_action.onNext(Action.updateProgress(progress: progress))
-                log.eventOut(chain: "rx_progressUseCaseDidChangeProgress")
+//                log.eventOut(chain: "rx_progressUseCaseDidChangeProgress")
             }
             .disposed(by: disposeBag)
 
