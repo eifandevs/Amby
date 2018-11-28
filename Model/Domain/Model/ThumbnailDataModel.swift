@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
 import UIKit
 
 enum ThumbnailDataModelError {
@@ -21,9 +23,9 @@ extension ThumbnailDataModelError: ModelError {
         case .delete:
             return MessageConst.NOTIFICATION.DELETE_PAGE_HISTORY_ERROR
         case .write:
-            return MessageConst.NOTIFICATION.STORE_PAGE_HISTORY_ERROR
+            return MessageConst.NOTIFICATION.STORE_THUMBNAIL_ERROR
         case .create:
-            return MessageConst.NOTIFICATION.STORE_PAGE_HISTORY_ERROR
+            return MessageConst.NOTIFICATION.CREATE_THUMBNAIL_ERROR
         }
     }
 }
@@ -33,6 +35,9 @@ final class ThumbnailDataModel {
 
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
+
+    /// エラー通知用RX
+    let rx_error = PublishSubject<ThumbnailDataModelError>()
 
     private init() {}
 
@@ -48,7 +53,13 @@ final class ThumbnailDataModel {
     /// サムネイルデータの削除
     func delete(context: String) {
         log.debug("delete thumbnail. context: \(context)")
-        _ = localStorageRepository.delete(.thumbnails(additionalPath: context, resource: nil))
+        let result = localStorageRepository.delete(.thumbnails(additionalPath: context, resource: nil))
+        switch result {
+        case .success:
+            break
+        case .failure:
+            rx_error.onNext(.delete)
+        }
     }
 
     /// サムネイルデータの全削除
@@ -64,6 +75,12 @@ final class ThumbnailDataModel {
 
     /// write
     func write(context: String, data: Data) {
-        _ = localStorageRepository.write(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"), data: data)
+        let result = localStorageRepository.write(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"), data: data)
+        switch result {
+        case .success:
+            break
+        case .failure:
+            rx_error.onNext(.write)
+        }
     }
 }

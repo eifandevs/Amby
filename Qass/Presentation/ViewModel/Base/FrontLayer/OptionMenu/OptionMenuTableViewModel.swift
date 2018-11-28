@@ -66,7 +66,7 @@ final class OptionMenuTableViewModel {
         Row(cellType: .setting),
         Row(cellType: .help),
         Row(cellType: .cooperation),
-        Row(cellType: .app),
+        Row(cellType: .app)
     ]
     // 高さ
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT

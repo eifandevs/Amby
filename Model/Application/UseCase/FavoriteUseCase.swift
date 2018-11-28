@@ -26,7 +26,7 @@ public final class FavoriteUseCase {
             PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove.flatMap { _ in Observable.just(()) },
             FavoriteDataModel.s.rx_favoriteDataModelDidInsert.flatMap { _ in Observable.just(()) },
             FavoriteDataModel.s.rx_favoriteDataModelDidDelete,
-            FavoriteDataModel.s.rx_favoriteDataModelDidReload.flatMap { _ in Observable.just(()) },
+            FavoriteDataModel.s.rx_favoriteDataModelDidReload.flatMap { _ in Observable.just(()) }
         ])
         .flatMap { _ -> Observable<Bool> in
             if let currentHistory = PageHistoryDataModel.s.currentHistory, !currentHistory.url.isEmpty {

@@ -66,7 +66,7 @@ final class OptionMenuSettingTableViewModel {
             Section.Row(cellType: .passcode),
             Section.Row(cellType: .menu),
             Section.Row(cellType: .autoScroll),
-            Section.Row(cellType: .windowConfirm),
+            Section.Row(cellType: .windowConfirm)
         ]),
         Section(title: AppConst.SETTING.SECTION_DELETE, rows: [
             Section.Row(cellType: .commonHistory),
@@ -75,8 +75,8 @@ final class OptionMenuSettingTableViewModel {
             Section.Row(cellType: .searchHistory),
             Section.Row(cellType: .cookies),
             Section.Row(cellType: .siteData),
-            Section.Row(cellType: .all),
-        ]),
+            Section.Row(cellType: .all)
+        ])
     ]
     // セクションフォントサイズ
     let sectionFontSize = 12.f

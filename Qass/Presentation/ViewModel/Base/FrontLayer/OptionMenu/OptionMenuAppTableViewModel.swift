@@ -39,7 +39,7 @@ final class OptionMenuAppTableViewModel {
         Row(cellType: .policy),
         Row(cellType: .source),
         Row(cellType: .report),
-        Row(cellType: .contact),
+        Row(cellType: .contact)
     ]
 
     // 高さ

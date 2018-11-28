@@ -28,7 +28,7 @@ final class OptionMenuHelpTableViewModel {
         Row(title: MessageConst.HELP.AUTO_SCROLL_TITLE, subTitle: MessageConst.HELP.AUTO_SCROLL_SUBTITLE, message: MessageConst.HELP.AUTO_SCROLL_MESSAGE),
         Row(title: MessageConst.HELP.TAB_TRANSITION_TITLE, subTitle: MessageConst.HELP.TAB_TRANSITION_SUBTITLE, message: MessageConst.HELP.TAB_TRANSITION_MESSAGE),
         Row(title: MessageConst.HELP.TAB_DELETE_TITLE, subTitle: MessageConst.HELP.TAB_DELETE_SUBTITLE, message: MessageConst.HELP.TAB_DELETE_MESSAGE),
-        Row(title: MessageConst.HELP.DATA_DELETE_TITLE, subTitle: MessageConst.HELP.DATA_DELETE_SUBTITLE, message: MessageConst.HELP.DATA_DELETE_MESSAGE),
+        Row(title: MessageConst.HELP.DATA_DELETE_TITLE, subTitle: MessageConst.HELP.DATA_DELETE_SUBTITLE, message: MessageConst.HELP.DATA_DELETE_MESSAGE)
     ]
 
     // 高さ

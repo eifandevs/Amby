@@ -126,7 +126,7 @@ final class BaseViewModel {
             ReportUseCase.s.rx_reportUseCaseDidRequestLoad,
             FavoriteUseCase.s.rx_favoriteUseCaseDidRequestLoad,
             HistoryUseCase.s.rx_historyUseCaseDidRequestLoad,
-            SearchUseCase.s.rx_searchUseCaseDidRequestLoad,
+            SearchUseCase.s.rx_searchUseCaseDidRequestLoad
         ]).subscribe { [weak self] url in
             log.eventIn(chain: "rx_load")
             guard let `self` = self, let url = url.element else { return }

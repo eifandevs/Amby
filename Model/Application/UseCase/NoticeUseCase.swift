@@ -103,15 +103,10 @@ public final class NoticeUseCase {
 
         // エラー監視
         Observable.merge([
-            SearchHistoryDataModel.s.rx_error.flatMap { searchHistoryDataModelError -> Observable<ModelError> in
-                Observable.just(searchHistoryDataModelError as ModelError)
-            },
-            CommonHistoryDataModel.s.rx_error.flatMap { commonHistoryDataModelError -> Observable<ModelError> in
-                Observable.just(commonHistoryDataModelError as ModelError)
-            },
-            PageHistoryDataModel.s.rx_error.flatMap { pageHistoryDataModelError -> Observable<ModelError> in
-                Observable.just(pageHistoryDataModelError as ModelError)
-            },
+            SearchHistoryDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
+            CommonHistoryDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
+            PageHistoryDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
+            ThumbnailDataModel.s.rx_error.flatMap({ Observable.just($0 as ModelError) })
         ]).subscribe { [weak self] modelError in
             log.eventIn(chain: "rx_error")
             guard let `self` = self, let modelError = modelError.element else { return }

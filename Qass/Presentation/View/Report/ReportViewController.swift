@@ -33,7 +33,7 @@ class ReportViewController: UIViewController {
             NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillHide)
                 .map { _ -> CGFloat in
                     0
-                },
+                }
         ])
 
     convenience init() {
