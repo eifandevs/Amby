@@ -11,9 +11,24 @@ import Moya
 import RxCocoa
 import RxSwift
 
+enum ArticleDataModelError {
+    case get
+}
+
+extension ArticleDataModelError: ModelError {
+    var message: String {
+        switch self {
+        case .get:
+            return MessageConst.NOTIFICATION.GET_ARTICLE_ERROR
+        }
+    }
+}
+
 final class ArticleDataModel {
     /// 記事取得通知用RX
     let rx_articleDataModelDidUpdate = PublishSubject<[Article]>()
+    /// エラー通知用RX
+    let rx_error = PublishSubject<ArticleDataModelError>()
 
     /// 記事
     public private(set) var articles = [Article]()
@@ -56,10 +71,13 @@ final class ArticleDataModel {
                         }
 
                         log.eventOut(chain: "rx_article")
-                    }, onError: { error in
+                    }, onError: { [weak self] error in
+                        guard let `self` = self else { return }
+
                         log.eventIn(chain: "rx_article")
 
                         log.error("get article error. error: \(error.localizedDescription)")
+                        self.rx_error.onNext(.get)
                         self.rx_articleDataModelDidUpdate.onNext([])
 
                         log.eventOut(chain: "rx_article")

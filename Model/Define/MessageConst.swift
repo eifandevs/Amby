@@ -28,6 +28,7 @@ struct MessageConst {
         static let DELETE_BOOK_MARK_ERROR = "お気に入りの削除に失敗しました"
         static let DELETE_COMMON_HISTORY = "閲覧履歴を削除しました"
         static let GET_COMMON_HISTORY_ERROR = "閲覧履歴の取得に失敗しました"
+        static let GET_ARTICLE_ERROR = "記事の取得に失敗しました"
         static let STORE_COMMON_HISTORY_ERROR = "閲覧履歴の保存に失敗しました"
         static let DELETE_COMMON_HISTORY_ERROR = "閲覧履歴の削除に失敗しました"
         static let DELETE_COOKIES = "クッキー情報を削除しました"
