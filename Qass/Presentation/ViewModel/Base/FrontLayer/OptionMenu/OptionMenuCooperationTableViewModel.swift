@@ -18,7 +18,7 @@ final class OptionMenuCooperationTableViewModel {
     // セル
     let rows = [
         Row(title: AppConst.OPTION_MENU.DONATION),
-        Row(title: AppConst.OPTION_MENU.DEVELOPMENT)
+        Row(title: AppConst.OPTION_MENU.DEVELOPMENT),
     ]
 
     // 高さ

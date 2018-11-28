@@ -9,6 +9,25 @@
 import Foundation
 import UIKit
 
+enum ThumbnailDataModelError {
+    case delete
+    case write
+    case create
+}
+
+extension ThumbnailDataModelError: ModelError {
+    var message: String {
+        switch self {
+        case .delete:
+            return MessageConst.NOTIFICATION.DELETE_PAGE_HISTORY_ERROR
+        case .write:
+            return MessageConst.NOTIFICATION.STORE_PAGE_HISTORY_ERROR
+        case .create:
+            return MessageConst.NOTIFICATION.STORE_PAGE_HISTORY_ERROR
+        }
+    }
+}
+
 final class ThumbnailDataModel {
     static let s = ThumbnailDataModel()
 

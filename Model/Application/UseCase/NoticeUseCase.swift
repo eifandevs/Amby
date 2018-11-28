@@ -111,7 +111,7 @@ public final class NoticeUseCase {
             },
             PageHistoryDataModel.s.rx_error.flatMap { pageHistoryDataModelError -> Observable<ModelError> in
                 Observable.just(pageHistoryDataModelError as ModelError)
-            }
+            },
         ]).subscribe { [weak self] modelError in
             log.eventIn(chain: "rx_error")
             guard let `self` = self, let modelError = modelError.element else { return }

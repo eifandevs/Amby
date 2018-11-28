@@ -71,7 +71,7 @@ struct ModelConst {
             .historyForward,
             .form,
             .closeAll,
-            .grep
+            .grep,
         ]
         let COMMON_HISTORY_SAVE_COUNT = 90
         let SEARCH_HISTORY_SAVE_COUNT = 90

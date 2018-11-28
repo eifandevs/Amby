@@ -265,7 +265,7 @@ class HeaderField: UIButton, ShadowView {
         let attr: [NSAttributedStringKey: Any] = [
             .foregroundColor: UIColor.black,
             .font: UIFont(name: AppConst.APP.FONT, size: frame.size.height / 2.5)!,
-            .paragraphStyle: style
+            .paragraphStyle: style,
         ]
 
         let mString = NSMutableAttributedString(string: text, attributes: attr)

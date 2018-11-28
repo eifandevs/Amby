@@ -18,7 +18,7 @@ public final class ProgressUseCase {
     public let rx_progressUseCaseDidChangeProgress = Observable
         .merge([
             ProgressDataModel.s.rx_progressDataModelDidUpdateProgress,
-            NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) }
+            NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) },
         ])
         .flatMap { progress -> Observable<CGFloat> in
             return Observable.just(progress)
