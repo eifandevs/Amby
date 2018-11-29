@@ -10,6 +10,19 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+enum FavoriteDataModelError {
+    case get
+}
+
+extension FavoriteDataModelError: ModelError {
+    var message: String {
+        switch self {
+        case .get:
+            return MessageConst.NOTIFICATION.GET_ARTICLE_ERROR
+        }
+    }
+}
+
 final class FavoriteDataModel {
     /// お気に入り追加通知用RX
     let rx_favoriteDataModelDidInsert = PublishSubject<([Favorite])>()
