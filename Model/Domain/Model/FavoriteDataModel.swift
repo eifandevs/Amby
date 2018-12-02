@@ -12,12 +12,15 @@ import RxSwift
 
 enum FavoriteDataModelError {
     case get
+    case insert
 }
 
 extension FavoriteDataModelError: ModelError {
     var message: String {
         switch self {
         case .get:
+            return MessageConst.NOTIFICATION.GET_ARTICLE_ERROR
+        case .insert:
             return MessageConst.NOTIFICATION.GET_ARTICLE_ERROR
         }
     }
@@ -38,7 +41,9 @@ final class FavoriteDataModel {
     let rx_favoriteDataModelDidInsertFailure = PublishSubject<()>()
     /// お気に入り情報取得失敗通知用RX
     let rx_favoriteDataModelDidGetFailure = PublishSubject<()>()
-
+    /// エラー通知用RX
+    let rx_error = PublishSubject<FavoriteDataModelError>()
+    
     static let s = FavoriteDataModel()
     /// 通知センター
     private let center = NotificationCenter.default
@@ -48,10 +53,12 @@ final class FavoriteDataModel {
     private init() {}
 
     func insert(favorites: [Favorite]) {
-        if repository.insert(data: favorites) {
+        let result = repository.insert(data: favorites)
+        switch result {
+        case .success(_):
             rx_favoriteDataModelDidInsert.onNext(favorites)
-        } else {
-            rx_favoriteDataModelDidInsertFailure.onNext(())
+        case .failure(_):
+            rx_error.onNext(.insert)
         }
     }
 
