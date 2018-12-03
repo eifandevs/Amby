@@ -12,16 +12,16 @@ import RxSwift
 
 enum FavoriteDataModelError {
     case get
-    case insert
+    case store
 }
 
 extension FavoriteDataModelError: ModelError {
     var message: String {
         switch self {
         case .get:
-            return MessageConst.NOTIFICATION.GET_ARTICLE_ERROR
-        case .insert:
-            return MessageConst.NOTIFICATION.GET_ARTICLE_ERROR
+            return MessageConst.NOTIFICATION.GET_FAVORITE_ERROR
+        case .store:
+            return MessageConst.NOTIFICATION.STORE_FAVORITE_ERROR
         }
     }
 }
@@ -63,10 +63,12 @@ final class FavoriteDataModel {
     }
 
     func select() -> [Favorite] {
-        if let favorites = repository.select(type: Favorite.self) as? [Favorite] {
-            return favorites
-        } else {
-            log.error("fail to select favorite")
+        let result = repository.select(type: Favorite.self)
+        switch result {
+        case let .success(favorite):
+            return favorite as! [Favorite]
+        case .failure(_):
+            rx_error.onNext(.get)
             return []
         }
     }
