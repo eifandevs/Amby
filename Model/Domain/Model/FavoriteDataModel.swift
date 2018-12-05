@@ -13,6 +13,7 @@ import RxSwift
 enum FavoriteDataModelError {
     case get
     case store
+    case delete
 }
 
 extension FavoriteDataModelError: ModelError {
@@ -22,6 +23,8 @@ extension FavoriteDataModelError: ModelError {
             return MessageConst.NOTIFICATION.GET_FAVORITE_ERROR
         case .store:
             return MessageConst.NOTIFICATION.STORE_FAVORITE_ERROR
+        case .delete:
+            return MessageConst.NOTIFICATION.DELETE_FAVORITE_ERROR
         }
     }
 }
@@ -58,7 +61,7 @@ final class FavoriteDataModel {
         case .success(_):
             rx_favoriteDataModelDidInsert.onNext(favorites)
         case .failure(_):
-            rx_error.onNext(.insert)
+            rx_error.onNext(.store)
         }
     }
 
@@ -74,37 +77,45 @@ final class FavoriteDataModel {
     }
 
     func select(id: String) -> [Favorite] {
-        if let favorites = repository.select(type: Favorite.self) as? [Favorite] {
-            return favorites.filter({ $0.id == id })
-        } else {
-            log.error("fail to select favorite")
+        let result = repository.select(type: Favorite.self)
+        switch result {
+        case let .success(favorite):
+            return (favorite as! [Favorite]).filter({ $0.id == id })
+        case .failure(_):
+            rx_error.onNext(.get)
             return []
         }
     }
 
     func select(url: String) -> [Favorite] {
-        if let favorites = repository.select(type: Favorite.self) as? [Favorite] {
-            return favorites.filter({ $0.url == url })
-        } else {
-            log.error("fail to select favorite")
+        let result = repository.select(type: Favorite.self)
+        switch result {
+        case let .success(favorite):
+            return (favorite as! [Favorite]).filter({ $0.url == url })
+        case .failure(_):
+            rx_error.onNext(.get)
             return []
         }
     }
 
     func delete() {
         // 削除対象が指定されていない場合は、すべて削除する
-        if repository.delete(data: select()) {
+        let result = repository.delete(data: select())
+        switch result {
+        case .success(_):
             rx_favoriteDataModelDidDeleteAll.onNext(())
-        } else {
-            rx_favoriteDataModelDidDeleteFailure.onNext(())
+        case .failure(_):
+            rx_error.onNext(.delete)
         }
     }
 
     func delete(favorites: [Favorite]) {
-        if repository.delete(data: favorites) {
+        let result = repository.delete(data: favorites)
+        switch result {
+        case .success(_):
             rx_favoriteDataModelDidDelete.onNext(())
-        } else {
-            rx_favoriteDataModelDidDeleteFailure.onNext(())
+        case .failure(_):
+            rx_error.onNext(.delete)
         }
     }
 
@@ -130,7 +141,7 @@ final class FavoriteDataModel {
                     insert(favorites: [fd])
                 }
             } else {
-                rx_favoriteDataModelDidGetFailure.onNext(())
+                rx_error.onNext(.get)
             }
         }
     }
