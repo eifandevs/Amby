@@ -11,6 +11,25 @@ import RealmSwift
 import RxCocoa
 import RxSwift
 
+enum FormDataModelError {
+    case get
+    case store
+    case delete
+}
+
+extension FormDataModelError: ModelError {
+    var message: String {
+        switch self {
+        case .get:
+            return MessageConst.NOTIFICATION.GET_Form_ERROR
+        case .store:
+            return MessageConst.NOTIFICATION.STORE_Form_ERROR
+        case .delete:
+            return MessageConst.NOTIFICATION.DELETE_Form_ERROR
+        }
+    }
+}
+
 final class FormDataModel {
     static let s = FormDataModel()
 
