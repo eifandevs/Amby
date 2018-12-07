@@ -45,6 +45,8 @@ final class FormDataModel {
     let rx_formDataModelDidDeleteFailure = PublishSubject<()>()
     /// フォーム情報取得失敗通知用RX
     let rx_formDataModelDidGetFailure = PublishSubject<()>()
+    /// エラー通知用RX
+    let rx_error = PublishSubject<FormDataModelError>()
 
     /// db repository
     let repository = DBRepository()
