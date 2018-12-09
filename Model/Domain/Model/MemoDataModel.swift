@@ -11,6 +11,25 @@ import RealmSwift
 import RxCocoa
 import RxSwift
 
+enum MemoDataModelError {
+    case get
+    case store
+    case delete
+}
+
+extension MemoDataModelError: ModelError {
+    var message: String {
+        switch self {
+        case .get:
+            return MessageConst.NOTIFICATION.GET_FORM_ERROR
+        case .store:
+            return MessageConst.NOTIFICATION.STORE_FORM_ERROR
+        case .delete:
+            return MessageConst.NOTIFICATION.DELETE_FORM_ERROR
+        }
+    }
+}
+
 final class MemoDataModel {
     static let s = MemoDataModel()
 
