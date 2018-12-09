@@ -21,11 +21,11 @@ extension FormDataModelError: ModelError {
     var message: String {
         switch self {
         case .get:
-            return MessageConst.NOTIFICATION.GET_Form_ERROR
+            return MessageConst.NOTIFICATION.GET_FORM_ERROR
         case .store:
-            return MessageConst.NOTIFICATION.STORE_Form_ERROR
+            return MessageConst.NOTIFICATION.STORE_FORM_ERROR
         case .delete:
-            return MessageConst.NOTIFICATION.DELETE_Form_ERROR
+            return MessageConst.NOTIFICATION.DELETE_FORM_ERROR
         }
     }
 }
@@ -55,51 +55,50 @@ final class FormDataModel {
 
     /// insert forms
     func insert(forms: [Form]) {
-        if repository.insert(data: forms) {
+        
+        let result = repository.insert(data: forms)
+        
+        switch result {
+        case .success(_):
             rx_formDataModelDidInsert.onNext(())
-        } else {
-            rx_formDataModelDidInsertFailure.onNext(())
+        case .failure(_):
+            rx_error.onNext(.store)
         }
     }
 
     /// select forms
     func select() -> [Form] {
-        if let form = repository.select(type: Form.self) as? [Form] {
-            return form
-        } else {
-            log.error("fail to select form")
+        let result = repository.select(type: Form.self)
+
+        switch result {
+        case let .success(forms):
+            return forms as! [Form]
+        case .failure(_):
+            rx_error.onNext(.get)
             return []
         }
     }
 
     func select(id: String) -> [Form] {
-        if let form = repository.select(type: Form.self) as? [Form] {
-            return form.filter({ $0.id == id })
-        } else {
-            log.error("fail to select form")
+        let result = repository.select(type: Form.self)
+        
+        switch result {
+        case let .success(forms):
+            return (forms as! [Form]).filter({ $0.id == id })
+        case .failure(_):
+            rx_error.onNext(.get)
             return []
         }
     }
 
     func select(url: String) -> [Form] {
-        if let form = repository.select(type: Form.self) as? [Form] {
-            return form.filter({ $0.url == url })
-        } else {
-            log.error("fail to select form")
-            return []
-        }
-    }
-
-    func select(id: String? = nil, url: String? = nil) -> [Form] {
-        if let forms = repository.select(type: Form.self) as? [Form] {
-            if let id = id {
-                return forms.filter({ $0.id == id })
-            } else if let url = url {
-                return forms.filter({ $0.url.domainAndPath == url.domainAndPath })
-            }
-            return forms
-        } else {
-            log.error("fail to select form")
+        let result = repository.select(type: Form.self)
+        
+        switch result {
+        case let .success(forms):
+            return (forms as! [Form]).filter({ $0.url == url })
+        case .failure(_):
+            rx_error.onNext(.get)
             return []
         }
     }
@@ -107,19 +106,25 @@ final class FormDataModel {
     /// delete forms
     func delete() {
         // 削除対象が指定されていない場合は、すべて削除する
-        if repository.delete(data: select()) {
+        let result = repository.delete(data: select())
+        
+        switch result {
+        case .success(_):
             rx_formDataModelDidDeleteAll.onNext(())
-        } else {
-            rx_formDataModelDidDeleteFailure.onNext(())
+        case .failure(_):
+            rx_error.onNext(.delete)
         }
     }
 
     /// delete forms
     func delete(forms: [Form]) {
-        if repository.delete(data: forms) {
+        let result = repository.delete(data: forms)
+        
+        switch result {
+        case .success(_):
             rx_formDataModelDidDelete.onNext(())
-        } else {
-            rx_formDataModelDidDeleteFailure.onNext(())
+        case .failure(_):
+            rx_error.onNext(.delete)
         }
     }
 
@@ -128,12 +133,12 @@ final class FormDataModel {
         // 有効なフォーム情報かを判定
         // 入力済みのフォームが一つでもあれば保存する
         if form.inputs.count > 0 {
-            if let savedForm = FormDataModel.s.select(url: form.url).first {
-                FormDataModel.s.delete(forms: [savedForm])
+            if let savedForm = select(url: form.url).first {
+                delete(forms: [savedForm])
             }
             FormDataModel.s.insert(forms: [form])
         } else {
-            rx_formDataModelDidGetFailure.onNext(())
+            rx_error.onNext(.store)
         }
     }
 }
