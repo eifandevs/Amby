@@ -21,11 +21,11 @@ extension MemoDataModelError: ModelError {
     var message: String {
         switch self {
         case .get:
-            return MessageConst.NOTIFICATION.GET_FORM_ERROR
+            return MessageConst.NOTIFICATION.GET_MEMO_ERROR
         case .store:
-            return MessageConst.NOTIFICATION.STORE_FORM_ERROR
+            return MessageConst.NOTIFICATION.STORE_MEMO_ERROR
         case .delete:
-            return MessageConst.NOTIFICATION.DELETE_FORM_ERROR
+            return MessageConst.NOTIFICATION.DELETE_MEMO_ERROR
         }
     }
 }
