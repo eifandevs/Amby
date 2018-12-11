@@ -45,7 +45,9 @@ final class MemoDataModel {
     let rx_memoDataModelDidDeleteFailure = PublishSubject<()>()
     /// メモ情報取得失敗通知用RX
     let rx_memoDataModelDidGetFailure = PublishSubject<()>()
-
+    /// エラー通知用RX
+    let rx_error = PublishSubject<MemoDataModelError>()
+    
     /// db repository
     let repository = DBRepository()
 
@@ -53,19 +55,25 @@ final class MemoDataModel {
 
     /// insert Memos
     func insert(memo: Memo) {
-        if repository.insert(data: [memo]) {
+        let result = repository.insert(data: [memo])
+        
+        switch result {
+        case .success(_):
             rx_memoDataModelDidInsert.onNext(())
-        } else {
-            rx_memoDataModelDidInsertFailure.onNext(())
+        case .failure(_):
+            rx_error.onNext(.store)
         }
     }
 
     /// select all memo
     func select() -> [Memo] {
-        if let memos = repository.select(type: Memo.self) as? [Memo] {
-            return memos
-        } else {
-            log.error("fail to select memo")
+        let result = repository.select(type: Memo.self)
+        
+        switch result {
+        case let .success(memos):
+            return memos as! [Memo]
+        case .failure(_):
+            rx_error.onNext(.get)
             return []
         }
     }
