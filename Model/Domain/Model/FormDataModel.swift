@@ -55,13 +55,12 @@ final class FormDataModel {
 
     /// insert forms
     func insert(forms: [Form]) {
-        
         let result = repository.insert(data: forms)
-        
+
         switch result {
-        case .success(_):
+        case .success:
             rx_formDataModelDidInsert.onNext(())
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.store)
         }
     }
@@ -73,7 +72,7 @@ final class FormDataModel {
         switch result {
         case let .success(forms):
             return forms as! [Form]
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.get)
             return []
         }
@@ -81,11 +80,11 @@ final class FormDataModel {
 
     func select(id: String) -> [Form] {
         let result = repository.select(type: Form.self)
-        
+
         switch result {
         case let .success(forms):
             return (forms as! [Form]).filter({ $0.id == id })
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.get)
             return []
         }
@@ -93,11 +92,11 @@ final class FormDataModel {
 
     func select(url: String) -> [Form] {
         let result = repository.select(type: Form.self)
-        
+
         switch result {
         case let .success(forms):
             return (forms as! [Form]).filter({ $0.url == url })
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.get)
             return []
         }
@@ -107,11 +106,11 @@ final class FormDataModel {
     func delete() {
         // 削除対象が指定されていない場合は、すべて削除する
         let result = repository.delete(data: select())
-        
+
         switch result {
-        case .success(_):
+        case .success:
             rx_formDataModelDidDeleteAll.onNext(())
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.delete)
         }
     }
@@ -119,11 +118,11 @@ final class FormDataModel {
     /// delete forms
     func delete(forms: [Form]) {
         let result = repository.delete(data: forms)
-        
+
         switch result {
-        case .success(_):
+        case .success:
             rx_formDataModelDidDelete.onNext(())
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.delete)
         }
     }

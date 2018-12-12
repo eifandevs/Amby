@@ -46,7 +46,7 @@ final class FavoriteDataModel {
     let rx_favoriteDataModelDidGetFailure = PublishSubject<()>()
     /// エラー通知用RX
     let rx_error = PublishSubject<FavoriteDataModelError>()
-    
+
     static let s = FavoriteDataModel()
     /// 通知センター
     private let center = NotificationCenter.default
@@ -58,9 +58,9 @@ final class FavoriteDataModel {
     func insert(favorites: [Favorite]) {
         let result = repository.insert(data: favorites)
         switch result {
-        case .success(_):
+        case .success:
             rx_favoriteDataModelDidInsert.onNext(favorites)
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.store)
         }
     }
@@ -70,7 +70,7 @@ final class FavoriteDataModel {
         switch result {
         case let .success(favorite):
             return favorite as! [Favorite]
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.get)
             return []
         }
@@ -81,7 +81,7 @@ final class FavoriteDataModel {
         switch result {
         case let .success(favorite):
             return (favorite as! [Favorite]).filter({ $0.id == id })
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.get)
             return []
         }
@@ -92,7 +92,7 @@ final class FavoriteDataModel {
         switch result {
         case let .success(favorite):
             return (favorite as! [Favorite]).filter({ $0.url == url })
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.get)
             return []
         }
@@ -102,9 +102,9 @@ final class FavoriteDataModel {
         // 削除対象が指定されていない場合は、すべて削除する
         let result = repository.delete(data: select())
         switch result {
-        case .success(_):
+        case .success:
             rx_favoriteDataModelDidDeleteAll.onNext(())
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.delete)
         }
     }
@@ -112,9 +112,9 @@ final class FavoriteDataModel {
     func delete(favorites: [Favorite]) {
         let result = repository.delete(data: favorites)
         switch result {
-        case .success(_):
+        case .success:
             rx_favoriteDataModelDidDelete.onNext(())
-        case .failure(_):
+        case .failure:
             rx_error.onNext(.delete)
         }
     }
