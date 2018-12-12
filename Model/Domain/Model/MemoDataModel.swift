@@ -59,7 +59,7 @@ final class MemoDataModel {
     /// insert Memos
     func insert(memo: Memo) {
         let result = repository.insert(data: [memo])
-        if case RepositoryResult.success = result {
+        if case .success = result {
             rx_memoDataModelDidInsert.onNext(())
         } else {
             rx_error.onNext(.store)
@@ -70,7 +70,7 @@ final class MemoDataModel {
     func select() -> [Memo] {
         let result = repository.select(type: Memo.self)
 
-        if case let RepositoryResult.success(memos) = result {
+        if case let .success(memos) = result {
             return memos as! [Memo]
         } else {
             rx_error.onNext(.get)
@@ -82,7 +82,7 @@ final class MemoDataModel {
     func select(id: String) -> Memo? {
         let result = repository.select(type: Memo.self)
 
-        if case let RepositoryResult.success(memos) = result {
+        if case let .success(memos) = result {
             return (memos as! [Memo]).filter({ $0.id == id }).first ?? nil
         } else {
             rx_error.onNext(.get)
@@ -96,7 +96,7 @@ final class MemoDataModel {
             memo.text = text
         }
 
-        if case RepositoryResult.failure = result {
+        if case .failure = result {
             rx_error.onNext(.update)
         }
     }
@@ -107,7 +107,7 @@ final class MemoDataModel {
             memo.isLocked = !memo.isLocked
         }
 
-        if case RepositoryResult.failure = result {
+        if case .failure = result {
             rx_error.onNext(.update)
         }
     }
@@ -117,7 +117,7 @@ final class MemoDataModel {
         // 削除対象が指定されていない場合は、すべて削除する
         let result = repository.delete(data: select())
 
-        if case RepositoryResult.success = result {
+        if case .success = result {
             rx_memoDataModelDidDeleteAll.onNext(())
         } else {
             rx_error.onNext(.delete)
@@ -128,7 +128,7 @@ final class MemoDataModel {
     func delete(memo: Memo) {
         let result = repository.delete(data: [memo])
 
-        if case RepositoryResult.success = result {
+        if case .success = result {
             rx_memoDataModelDidDelete.onNext(())
         } else {
             rx_error.onNext(.delete)
