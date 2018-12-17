@@ -10,6 +10,11 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+enum PageHistoryDataModelAction {
+    case delete
+    case store
+}
+
 enum PageHistoryDataModelError {
     case delete
     case store
