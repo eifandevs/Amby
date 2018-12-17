@@ -106,6 +106,9 @@ public final class NoticeUseCase {
             SearchHistoryDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
             CommonHistoryDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
             PageHistoryDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
+            FavoriteDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
+            FormDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
+            MemoDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
             ThumbnailDataModel.s.rx_error.flatMap({ Observable.just($0 as ModelError) })
         ]).subscribe { [weak self] modelError in
             log.eventIn(chain: "rx_error")
@@ -142,16 +145,6 @@ public final class NoticeUseCase {
                 guard let `self` = self else { return }
                 self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.REGISTER_REPORT, isSuccess: true))
                 log.eventOut(chain: "rx_issueDataModelDidRegisterSuccess")
-            }
-            .disposed(by: disposeBag)
-
-        // レポート登録失敗監視
-        IssueDataModel.s.rx_issueDataModelDidRegisterFailure
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_issueDataModelDidRegisterFailure")
-                guard let `self` = self else { return }
-                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.REGISTER_REPORT_ERROR, isSuccess: false))
-                log.eventOut(chain: "rx_issueDataModelDidRegisterFailure")
             }
             .disposed(by: disposeBag)
 

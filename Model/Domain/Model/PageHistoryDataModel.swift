@@ -96,15 +96,14 @@ final class PageHistoryDataModel {
     func initialize() {
         // pageHistory読み込み
         let result = localStorageRepository.getData(.pageHistory)
-        switch result {
-        case let .success(data):
+        if case let .success(data) = result {
             if let histories = NSKeyedUnarchiver.unarchiveObject(with: data) as? [PageHistory] {
                 self.histories = histories
             } else {
                 histories = []
                 log.error("unarchive histories error.")
             }
-        case .failure:
+        } else {
             let pageHistory = PageHistory()
             histories.append(pageHistory)
             currentContext = pageHistory.context
@@ -382,10 +381,8 @@ final class PageHistoryDataModel {
         if histories.count > 0 {
             let pageHistoryData = NSKeyedArchiver.archivedData(withRootObject: histories)
             let result = localStorageRepository.write(.pageHistory, data: pageHistoryData)
-            switch result {
-            case .success:
-                break
-            case .failure:
+
+            if case .failure = result {
                 rx_error.onNext(.store)
             }
         }
@@ -395,10 +392,8 @@ final class PageHistoryDataModel {
     func delete() {
         histories = []
         let result = localStorageRepository.delete(.pageHistory)
-        switch result {
-        case .success:
-            break
-        case .failure:
+
+        if case .failure = result {
             rx_error.onNext(.delete)
         }
     }

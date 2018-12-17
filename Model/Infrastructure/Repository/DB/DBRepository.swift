@@ -23,46 +23,46 @@ final class DBRepository {
         }
     }
 
-    func insert(data: [Object]) -> Bool {
+    func insert(data: [Object]) -> RepositoryResult<()> {
         do {
             try realm.write {
                 realm.add(data, update: true)
             }
         } catch let error as NSError {
             log.error("realm write error. error: \(error.localizedDescription)")
-            return false
+            return .failure(error)
         }
 
-        return true
+        return .success(())
     }
 
-    func update(action: (() -> Void)) -> Bool {
+    func update(action: (() -> Void)) -> RepositoryResult<()> {
         do {
             try realm.write {
                 action()
             }
         } catch let error as NSError {
             log.error("realm update error. error: \(error.localizedDescription)")
-            return false
+            return .failure(error)
         }
 
-        return true
+        return .success(())
     }
 
-    func delete(data: [Object]) -> Bool {
+    func delete(data: [Object]) -> RepositoryResult<()> {
         do {
             try realm.write {
                 realm.delete(data)
             }
         } catch let error as NSError {
             log.error("realm write error. error: \(error.localizedDescription)")
-            return false
+            return .failure(error)
         }
 
-        return true
+        return .success(())
     }
 
-    func select(type: Object.Type) -> [Object] {
-        return realm.objects(type).map { $0 }
+    func select(type: Object.Type) -> RepositoryResult<[Object]> {
+        return .success(realm.objects(type).map { $0 })
     }
 }

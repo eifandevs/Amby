@@ -32,8 +32,13 @@ final class LocalStorageRepository<Target: LocalStorageTargetType> {
     }
 
     /// get image data
-    public func getImage(_ target: Target) -> UIImage? {
-        return UIImage(contentsOfFile: target.absolutePath)
+    public func getImage(_ target: Target) -> RepositoryResult<UIImage> {
+        if let image = UIImage(contentsOfFile: target.absolutePath) {
+            return .success(image)
+        } else {
+            let error = NSError(domain: "", code: 0, userInfo: nil)
+            return .failure(error)
+        }
     }
 
     /// write

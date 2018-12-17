@@ -12,6 +12,19 @@ import Moya
 import RxCocoa
 import RxSwift
 
+enum SuggestDataModelError {
+    case update
+}
+
+extension SuggestDataModelError: ModelError {
+    var message: String {
+        switch self {
+        case .update:
+            return MessageConst.NOTIFICATION.GET_SUGGEST_ERROR
+        }
+    }
+}
+
 final class SuggestDataModel {
     /// サジェスト通知用RX
     let rx_suggestDataModelDidUpdate = PublishSubject<Suggest>()

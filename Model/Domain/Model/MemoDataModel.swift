@@ -11,6 +11,28 @@ import RealmSwift
 import RxCocoa
 import RxSwift
 
+enum MemoDataModelError {
+    case get
+    case store
+    case delete
+    case update
+}
+
+extension MemoDataModelError: ModelError {
+    var message: String {
+        switch self {
+        case .get:
+            return MessageConst.NOTIFICATION.GET_MEMO_ERROR
+        case .store:
+            return MessageConst.NOTIFICATION.STORE_MEMO_ERROR
+        case .delete:
+            return MessageConst.NOTIFICATION.DELETE_MEMO_ERROR
+        case .update:
+            return MessageConst.NOTIFICATION.UPDATE_MEMO_ERROR
+        }
+    }
+}
+
 final class MemoDataModel {
     static let s = MemoDataModel()
 
@@ -26,6 +48,8 @@ final class MemoDataModel {
     let rx_memoDataModelDidDeleteFailure = PublishSubject<()>()
     /// メモ情報取得失敗通知用RX
     let rx_memoDataModelDidGetFailure = PublishSubject<()>()
+    /// エラー通知用RX
+    let rx_error = PublishSubject<MemoDataModelError>()
 
     /// db repository
     let repository = DBRepository()
@@ -34,63 +58,80 @@ final class MemoDataModel {
 
     /// insert Memos
     func insert(memo: Memo) {
-        if repository.insert(data: [memo]) {
+        let result = repository.insert(data: [memo])
+        if case .success = result {
             rx_memoDataModelDidInsert.onNext(())
         } else {
-            rx_memoDataModelDidInsertFailure.onNext(())
+            rx_error.onNext(.store)
         }
     }
 
     /// select all memo
     func select() -> [Memo] {
-        if let memos = repository.select(type: Memo.self) as? [Memo] {
-            return memos
+        let result = repository.select(type: Memo.self)
+
+        if case let .success(memos) = result {
+            return memos as! [Memo]
         } else {
-            log.error("fail to select memo")
+            rx_error.onNext(.get)
             return []
         }
     }
 
     /// select memo
     func select(id: String) -> Memo? {
-        if let memos = repository.select(type: Memo.self) as? [Memo] {
-            return memos.filter({ $0.id == id }).first ?? nil
+        let result = repository.select(type: Memo.self)
+
+        if case let .success(memos) = result {
+            return (memos as! [Memo]).filter({ $0.id == id }).first ?? nil
         } else {
-            log.error("fail to select memo")
+            rx_error.onNext(.get)
             return nil
         }
     }
 
     /// update Memo
     func update(memo: Memo, text: String) {
-        _ = repository.update {
+        let result = repository.update {
             memo.text = text
+        }
+
+        if case .failure = result {
+            rx_error.onNext(.update)
         }
     }
 
     // lock or unlock
     func invertLock(memo: Memo) {
-        _ = repository.update {
+        let result = repository.update {
             memo.isLocked = !memo.isLocked
+        }
+
+        if case .failure = result {
+            rx_error.onNext(.update)
         }
     }
 
     /// delete Memos
     func delete() {
         // 削除対象が指定されていない場合は、すべて削除する
-        if repository.delete(data: select()) {
+        let result = repository.delete(data: select())
+
+        if case .success = result {
             rx_memoDataModelDidDeleteAll.onNext(())
         } else {
-            rx_memoDataModelDidDeleteFailure.onNext(())
+            rx_error.onNext(.delete)
         }
     }
 
     /// delete Memos
     func delete(memo: Memo) {
-        if repository.delete(data: [memo]) {
+        let result = repository.delete(data: [memo])
+
+        if case .success = result {
             rx_memoDataModelDidDelete.onNext(())
         } else {
-            rx_memoDataModelDidDeleteFailure.onNext(())
+            rx_error.onNext(.delete)
         }
     }
 }

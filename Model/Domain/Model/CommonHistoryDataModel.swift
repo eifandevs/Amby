@@ -103,16 +103,13 @@ final class CommonHistoryDataModel {
                 let filename = "\(key).dat"
 
                 let result = localStorageRepository.getData(.commonHistory(resource: filename))
-                switch result {
-                case let .success(data):
+
+                if case let .success(data) = result {
                     if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
                         let saveData: [CommonHistory] = value + old
                         let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
                         _ = localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
                     }
-                case .failure:
-                    // 存在しないエラーかもしれないので無視する
-                    break
                 }
             }
             histories = []
@@ -124,14 +121,10 @@ final class CommonHistoryDataModel {
     func getList() -> [String] {
         let result = localStorageRepository.getList(.commonHistory(resource: nil))
 
-        switch result {
-        case let .success(list):
+        if case let .success(list) = result {
             return list.map({ (path: String) -> String in
                 path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).sorted(by: { $1.toDate() < $0.toDate() })
-        case .failure:
-            // 存在しないエラーかもしれないので無視する
-            break
         }
 
         return []
@@ -144,13 +137,10 @@ final class CommonHistoryDataModel {
 
         let result = localStorageRepository.getData(.commonHistory(resource: filename))
 
-        switch result {
-        case let .success(data):
+        if case let .success(data) = result {
             if let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
                 return commonHistory
             }
-        case .failure:
-            break
         }
 
         return []
@@ -170,13 +160,10 @@ final class CommonHistoryDataModel {
                     let filename = "\(keyStr).dat"
                     let result = localStorageRepository.getData(.commonHistory(resource: filename))
 
-                    switch result {
-                    case let .success(data):
+                    if case let .success(data) = result {
                         if let commonHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
                             allCommonHistory += commonHistory
                         }
-                    case .failure:
-                        break
                     }
                 }
                 let hitCommonHistory = allCommonHistory.filter({ (commonHistoryItem) -> Bool in
@@ -225,29 +212,35 @@ final class CommonHistoryDataModel {
 
             let saveData: [CommonHistory]? = { () -> [CommonHistory]? in
                 let result = localStorageRepository.getData(.commonHistory(resource: filename))
-                switch result {
-                case let .success(data):
+                if case let .success(data) = result {
                     if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
                         let saveData = old.filter({ (historyItem) -> Bool in
                             !value.contains(historyItem._id)
                         })
 
                         return saveData
-                    } else {
-                        return nil
                     }
-                case .failure:
-                    return nil
                 }
+
+                return nil
             }()
 
             if let saveData = saveData {
                 if saveData.count > 0 {
                     let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                    _ = localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
+                    let result = localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
+
+                    if case .failure = result {
+                        rx_error.onNext(.delete)
+                    }
+
                 } else {
-                    _ = localStorageRepository.delete(.commonHistory(resource: filename))
-                    log.debug("remove common history file. date: \(key)")
+                    let result = localStorageRepository.delete(.commonHistory(resource: filename))
+
+                    if case .failure = result {
+                        log.debug("remove common history file. date: \(key)")
+                        rx_error.onNext(.delete)
+                    }
                 }
             }
         }
@@ -257,20 +250,17 @@ final class CommonHistoryDataModel {
     func delete() {
         histories = []
         let deleteResult = localStorageRepository.delete(.commonHistory(resource: nil))
-        switch deleteResult {
-        case .success:
-            break
-        case .failure:
+
+        if case .failure = deleteResult {
             rx_error.onNext(.delete)
             return
         }
 
         let createResult = localStorageRepository.create(.commonHistory(resource: nil))
 
-        switch createResult {
-        case .success:
+        if case .success = createResult {
             rx_commonHistoryDataModelDidDeleteAll.onNext(())
-        case .failure:
+        } else {
             rx_error.onNext(.delete)
         }
     }

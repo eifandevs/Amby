@@ -11,12 +11,25 @@ import GithubAPI
 import RxCocoa
 import RxSwift
 
+enum IssueDataModelError {
+    case post
+}
+
+extension IssueDataModelError: ModelError {
+    var message: String {
+        switch self {
+        case .post:
+            return MessageConst.NOTIFICATION.POST_ISSUE_ERROR
+        }
+    }
+}
+
 final class IssueDataModel {
     /// Issue登録成功通知用RX
     let rx_issueDataModelDidRegisterSuccess = PublishSubject<()>()
 
-    /// Issue登録失敗通知用RX
-    let rx_issueDataModelDidRegisterFailure = PublishSubject<Error?>()
+    /// エラー通知用RX
+    let rx_error = PublishSubject<IssueDataModelError>()
 
     static let s = IssueDataModel()
     private let disposeBag = DisposeBag()
@@ -39,7 +52,7 @@ final class IssueDataModel {
                 self.rx_issueDataModelDidRegisterSuccess.onNext(())
             } else {
                 log.error("issue register failed. error: \(String(describing: error?.localizedDescription))")
-                self.rx_issueDataModelDidRegisterFailure.onNext(error)
+                self.rx_error.onNext(.post)
             }
         }
     }
