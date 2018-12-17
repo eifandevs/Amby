@@ -50,14 +50,11 @@ final class SearchHistoryDataModel {
     /// 保存済みリスト取得
     func getList() -> [String] {
         let result = localStorageRepository.getList(.searchHistory(resource: nil))
-        switch result {
-        case let .success(value):
+
+        if case let .success(value) = result {
             return value.map({ (path: String) -> String in
                 path.substring(to: path.index(path.startIndex, offsetBy: 8))
             }).sorted(by: { $1.toDate() < $0.toDate() })
-        case .failure:
-            // 存在しないエラーかもしれないので無視する
-            break
         }
 
         return []
@@ -90,16 +87,12 @@ final class SearchHistoryDataModel {
 
                 let result = localStorageRepository.getData(.searchHistory(resource: filename))
 
-                switch result {
-                case let .success(data):
+                if case let .success(data) = result {
                     if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [SearchHistory] {
                         let saveData: [SearchHistory] = value + old
                         let searchHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
                         _ = localStorageRepository.write(.searchHistory(resource: filename), data: searchHistoryData)
                     }
-                case .failure:
-                    // 存在しないエラーかもしれないので無視する
-                    break
                 }
             }
         }
@@ -121,13 +114,10 @@ final class SearchHistoryDataModel {
 
                 let result = localStorageRepository.getData(.searchHistory(resource: filename))
 
-                switch result {
-                case let .success(data):
+                if case let .success(data) = result {
                     if let searchHistory = NSKeyedUnarchiver.unarchiveObject(with: data) as? [SearchHistory] {
                         allSearchHistory += searchHistory
                     }
-                case .failure:
-                    break
                 }
             }
 
@@ -176,20 +166,16 @@ final class SearchHistoryDataModel {
     func delete() {
         let deleteResult = localStorageRepository.delete(.searchHistory(resource: nil))
 
-        switch deleteResult {
-        case .success:
-            break
-        case .failure:
+        if case .failure = deleteResult {
             rx_error.onNext(.delete)
             return
         }
 
         let createResult = localStorageRepository.create(.searchHistory(resource: nil))
 
-        switch createResult {
-        case .success:
+        if case .success = createResult {
             rx_searchHistoryDataModelDidDeleteAll.onNext(())
-        case .failure:
+        } else {
             rx_error.onNext(.delete)
         }
     }

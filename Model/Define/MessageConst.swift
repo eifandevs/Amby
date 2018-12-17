@@ -16,8 +16,9 @@ struct MessageConst {
     struct NOTIFICATION {
         static let REGISTER_BOOK_MARK = "お気に入りに登録しました"
         static let DELETE_SEARCH_HISTORY = "検索履歴を削除しました"
-        static let STORE_PAGE_HISTORY_ERROR = "タブ情報の保存に失敗しました"
         static let DELETE_PAGE_HISTORY_ERROR = "タブ情報の削除に失敗しました"
+        static let STORE_PAGE_HISTORY_ERROR = "タブ情報の保存に失敗しました"
+        static let POST_ISSUE_ERROR = "送信に失敗しました"
         static let DELETE_THUMBNAIL_ERROR = "サムネイルの削除に失敗しました"
         static let STORE_THUMBNAIL_ERROR = "サムネイルの保存に失敗しました"
         static let CREATE_THUMBNAIL_ERROR = "サムネイルふフォルダの作成に失敗しました"
@@ -26,6 +27,7 @@ struct MessageConst {
         static let STORE_MEMO_ERROR = "メモ情報の保存に失敗しました"
         static let DELETE_MEMO_ERROR = "メモ情報の削除に失敗しました"
         static let GET_SEARCH_HISTORY_ERROR = "検索履歴の取得に失敗しました"
+        static let GET_SUGGEST_ERROR = "サジェストの取得に失敗しました"
         static let STORE_SEARCH_HISTORY_ERROR = "検索履歴の保存に失敗しました"
         static let DELETE_SEARCH_HISTORY_ERROR = "検索履歴の削除に失敗しました"
         static let DELETE_BOOK_MARK = "お気に入りを削除しました"

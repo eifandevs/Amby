@@ -21,7 +21,7 @@ extension ThumbnailDataModelError: ModelError {
     var message: String {
         switch self {
         case .delete:
-            return MessageConst.NOTIFICATION.DELETE_PAGE_HISTORY_ERROR
+            return MessageConst.NOTIFICATION.DELETE_THUMBNAIL_ERROR
         case .write:
             return MessageConst.NOTIFICATION.STORE_THUMBNAIL_ERROR
         case .create:
@@ -42,44 +42,60 @@ final class ThumbnailDataModel {
     private init() {}
 
     func getThumbnail(context: String) -> UIImage? {
-        let image = localStorageRepository.getImage(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"))
-        return image
+        let result = localStorageRepository.getImage(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"))
+
+        if case let .success(image) = result {
+            return image
+        } else {
+            return nil
+        }
     }
 
     func getCapture(context: String) -> UIImage? {
-        return localStorageRepository.getImage(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"))
+        let result = localStorageRepository.getImage(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"))
+
+        if case let .success(image) = result {
+            return image
+        } else {
+            return nil
+        }
     }
 
     /// サムネイルデータの削除
     func delete(context: String) {
         log.debug("delete thumbnail. context: \(context)")
         let result = localStorageRepository.delete(.thumbnails(additionalPath: context, resource: nil))
-        switch result {
-        case .success:
-            break
-        case .failure:
+
+        if case .failure = result {
             rx_error.onNext(.delete)
         }
     }
 
     /// サムネイルデータの全削除
     func delete() {
-        _ = localStorageRepository.delete(.thumbnails(additionalPath: nil, resource: nil))
-        _ = localStorageRepository.create(.thumbnails(additionalPath: nil, resource: nil))
+        let deleteResult = localStorageRepository.delete(.thumbnails(additionalPath: nil, resource: nil))
+        if case .failure = deleteResult {
+            rx_error.onNext(.delete)
+        }
+
+        let createResult = localStorageRepository.create(.thumbnails(additionalPath: nil, resource: nil))
+        if case .failure = createResult {
+            rx_error.onNext(.create)
+        }
     }
 
     /// create folder
     func create(context: String) {
-        _ = localStorageRepository.create(.thumbnails(additionalPath: context, resource: nil))
+        let result = localStorageRepository.create(.thumbnails(additionalPath: context, resource: nil))
+        if case .failure = result {
+            rx_error.onNext(.create)
+        }
     }
 
     /// write
     func write(context: String, data: Data) {
         let result = localStorageRepository.write(.thumbnails(additionalPath: "\(context)", resource: "thumbnail.png"), data: data)
-        switch result {
-        case .success:
-            break
-        case .failure:
+        if case .failure = result {
             rx_error.onNext(.write)
         }
     }
