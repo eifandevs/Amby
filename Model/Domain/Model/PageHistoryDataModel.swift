@@ -11,8 +11,15 @@ import RxCocoa
 import RxSwift
 
 enum PageHistoryDataModelAction {
-    case delete
-    case store
+    case insert(pageHistory: PageHistory, at: Int)
+    case append(pageHistory: PageHistory)
+    case change(context: String)
+    case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case reload
+    case load(url: String)
+    case startLoading(context: String)
+    case endLoading(context: String)
+    case endRendering(context: String)
 }
 
 enum PageHistoryDataModelError {
@@ -48,6 +55,8 @@ final class PageHistoryDataModel {
     let rx_pageHistoryDataModelDidEndLoading = PublishSubject<String>()
     /// ページレンダリング終了通知用RX
     let rx_pageHistoryDataModelDidEndRendering = PublishSubject<String>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<PageHistoryDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<PageHistoryDataModelError>()
 
