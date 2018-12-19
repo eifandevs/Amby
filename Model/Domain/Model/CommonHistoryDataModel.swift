@@ -10,6 +10,10 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+enum CommonHistoryDataModelAction {
+    case delete
+}
+
 enum CommonHistoryDataModelError {
     case getList
     case delete
@@ -32,10 +36,8 @@ extension CommonHistoryDataModelError: ModelError {
 }
 
 final class CommonHistoryDataModel {
-    /// 削除通知用RX
-    let rx_commonHistoryDataModelDidDeleteAll = PublishSubject<()>()
-    /// 削除失敗通知用RX
-    let rx_commonHistoryDataModelDidDeleteFailure = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<CommonHistoryDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<CommonHistoryDataModelError>()
 
@@ -259,7 +261,7 @@ final class CommonHistoryDataModel {
         let createResult = localStorageRepository.create(.commonHistory(resource: nil))
 
         if case .success = createResult {
-            rx_commonHistoryDataModelDidDeleteAll.onNext(())
+            rx_action.onNext(.delete)
         } else {
             rx_error.onNext(.delete)
         }

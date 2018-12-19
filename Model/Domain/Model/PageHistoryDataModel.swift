@@ -39,22 +39,6 @@ extension PageHistoryDataModelError: ModelError {
 }
 
 final class PageHistoryDataModel {
-    /// ページインサート通知用RX
-    let rx_pageHistoryDataModelDidInsert = PublishSubject<(pageHistory: PageHistory, at: Int)>()
-    /// ページ追加通知用RX
-    let rx_pageHistoryDataModelDidAppend = PublishSubject<PageHistory>()
-    /// ページ変更通知用RX
-    let rx_pageHistoryDataModelDidChange = PublishSubject<String>()
-    /// ページ削除通知用RX
-    let rx_pageHistoryDataModelDidRemove = PublishSubject<(deleteContext: String, currentContext: String?, deleteIndex: Int)>()
-    /// ページリロード通知用RX
-    let rx_pageHistoryDataModelDidReload = PublishSubject<()>()
-    /// ページロード開始通知用RX
-    let rx_pageHistoryDataModelDidStartLoading = PublishSubject<String>()
-    /// ページロード終了通知用RX
-    let rx_pageHistoryDataModelDidEndLoading = PublishSubject<String>()
-    /// ページレンダリング終了通知用RX
-    let rx_pageHistoryDataModelDidEndRendering = PublishSubject<String>()
     /// アクション通知用RX
     let rx_action = PublishSubject<PageHistoryDataModelAction>()
     /// エラー通知用RX
@@ -146,7 +130,7 @@ final class PageHistoryDataModel {
     func startLoading(context: String) {
         if let history = histories.find({ $0.context == context }) {
             history.isLoading = true
-            rx_pageHistoryDataModelDidStartLoading.onNext(context)
+            rx_action.onNext(.startLoading(context: context))
         }
     }
 
@@ -154,7 +138,7 @@ final class PageHistoryDataModel {
     func endLoading(context: String) {
         if let history = histories.find({ $0.context == context }) {
             history.isLoading = false
-            rx_pageHistoryDataModelDidEndLoading.onNext(context)
+            rx_action.onNext(.endLoading(context: context))
         } else {
             log.error("pageHistoryDataModelDidEndLoading not fired. history is deleted.")
         }
@@ -163,7 +147,7 @@ final class PageHistoryDataModel {
     /// 描画終了
     func endRendering(context: String) {
         if histories.find({ $0.context == context }) != nil {
-            rx_pageHistoryDataModelDidEndRendering.onNext(context)
+            rx_action.onNext(.endRendering(context: context))
         } else {
             log.error("pageHistoryDataModelDidEndRendering not fired. history is deleted.")
         }
@@ -290,7 +274,7 @@ final class PageHistoryDataModel {
                 let newPage = PageHistory(url: url ?? "", title: title ?? "")
                 histories.insert(newPage, at: currentLocation + 1)
                 currentContext = newPage.context
-                rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation + 1))
+                rx_action.onNext(.insert(pageHistory: newPage, at: currentLocation + 1))
             }
         }
     }
@@ -300,7 +284,7 @@ final class PageHistoryDataModel {
         let newPage = PageHistory(url: url ?? "", title: title ?? "")
         histories.append(newPage)
         currentContext = newPage.context
-        rx_pageHistoryDataModelDidAppend.onNext(newPage)
+        rx_action.onNext(.append(pageHistory: newPage))
     }
 
     /// ページコピー
@@ -311,13 +295,13 @@ final class PageHistoryDataModel {
                 let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
                 histories.append(newPage)
                 currentContext = newPage.context
-                rx_pageHistoryDataModelDidAppend.onNext(newPage)
+                rx_action.onNext(.append(pageHistory: newPage))
             } else {
                 if let currentLocation = currentLocation {
                     let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
                     histories.insert(newPage, at: currentLocation + 1)
                     currentContext = newPage.context
-                    rx_pageHistoryDataModelDidInsert.onNext((pageHistory: newPage, at: currentLocation + 1))
+                    rx_action.onNext(.insert(pageHistory: newPage, at: currentLocation + 1))
                 }
             }
         }
@@ -342,11 +326,11 @@ final class PageHistoryDataModel {
                 histories.remove(at: deleteIndex)
                 // 削除した結果、ページが存在しない場合は作成する
                 if histories.count == 0 {
-                    rx_pageHistoryDataModelDidRemove.onNext((deleteContext: context, currentContext: nil, deleteIndex: deleteIndex))
+                    rx_action.onNext(.delete(deleteContext: context, currentContext: nil, deleteIndex: deleteIndex))
                     let pageHistory = PageHistory()
                     histories.append(pageHistory)
                     currentContext = pageHistory.context
-                    rx_pageHistoryDataModelDidAppend.onNext(pageHistory)
+                    rx_action.onNext(.append(pageHistory: pageHistory))
 
                     return
                 } else {
@@ -360,7 +344,7 @@ final class PageHistoryDataModel {
             } else {
                 histories.remove(at: deleteIndex)
             }
-            rx_pageHistoryDataModelDidRemove.onNext((deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
+            rx_action.onNext(.delete(deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
         } else {
             log.error("cannot find delete context.")
         }
@@ -369,7 +353,7 @@ final class PageHistoryDataModel {
     /// 表示中ページの変更
     func change(context: String) {
         currentContext = context
-        rx_pageHistoryDataModelDidChange.onNext(currentContext)
+        rx_action.onNext(.change(context: currentContext))
     }
 
     /// 前ページに変更
@@ -377,7 +361,7 @@ final class PageHistoryDataModel {
         if let currentLocation = currentLocation, histories.count > 0 {
             let targetContext = histories[0 ... histories.count - 1 ~= currentLocation - 1 ? currentLocation - 1 : histories.count - 1].context
             currentContext = targetContext
-            rx_pageHistoryDataModelDidChange.onNext(currentContext)
+            rx_action.onNext(.change(context: currentContext))
         }
     }
 
@@ -386,7 +370,7 @@ final class PageHistoryDataModel {
         if let currentLocation = currentLocation, histories.count > 0 {
             let targetContext = histories[0 ... histories.count - 1 ~= currentLocation + 1 ? currentLocation + 1 : 0].context
             currentContext = targetContext
-            rx_pageHistoryDataModelDidChange.onNext(currentContext)
+            rx_action.onNext(.change(context: currentContext))
         }
     }
 
