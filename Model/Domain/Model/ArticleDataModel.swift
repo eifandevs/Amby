@@ -11,6 +11,10 @@ import Moya
 import RxCocoa
 import RxSwift
 
+enum ArticleDataModelAction {
+    case update(articles: [Article])
+}
+
 enum ArticleDataModelError {
     case get
 }
@@ -25,8 +29,8 @@ extension ArticleDataModelError: ModelError {
 }
 
 final class ArticleDataModel {
-    /// 記事取得通知用RX
-    let rx_articleDataModelDidUpdate = PublishSubject<[Article]>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<ArticleDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<ArticleDataModelError>()
 
@@ -64,10 +68,11 @@ final class ArticleDataModel {
                         if response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                             log.debug("get article success.")
                             self.articles = response.data
-                            self.rx_articleDataModelDidUpdate.onNext(response.data)
+                            self.rx_action.onNext(.update(articles: response.data))
                         } else {
                             log.error("get article error. code: \(response.code)")
-                            self.rx_articleDataModelDidUpdate.onNext([])
+                            self.rx_error.onNext(.get)
+                            self.rx_action.onNext(.update(articles: []))
                         }
 
                         log.eventOut(chain: "rx_article")
@@ -78,14 +83,14 @@ final class ArticleDataModel {
 
                         log.error("get article error. error: \(error.localizedDescription)")
                         self.rx_error.onNext(.get)
-                        self.rx_articleDataModelDidUpdate.onNext([])
+                        self.rx_action.onNext(.update(articles: []))
 
                         log.eventOut(chain: "rx_article")
                 })
                 .disposed(by: disposeBag)
         } else {
             // 取得済みルート
-            rx_articleDataModelDidUpdate.onNext(articles)
+            rx_action.onNext(.update(articles: articles))
         }
     }
 }
