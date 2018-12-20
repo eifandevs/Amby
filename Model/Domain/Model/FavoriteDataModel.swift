@@ -10,6 +10,10 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+enum FavoriteDataModelAction {
+    case update(articles: [Article])
+}
+
 enum FavoriteDataModelError {
     case get
     case store
