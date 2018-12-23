@@ -11,6 +11,12 @@ import RealmSwift
 import RxCocoa
 import RxSwift
 
+enum MemoDataModelAction {
+    case insert
+    case delete
+    case deleteAll
+}
+
 enum MemoDataModelError {
     case get
     case store
@@ -35,19 +41,9 @@ extension MemoDataModelError: ModelError {
 
 final class MemoDataModel {
     static let s = MemoDataModel()
-
-    /// メモ登録通知用RX
-    let rx_memoDataModelDidInsert = PublishSubject<()>()
-    /// メモ登録失敗通知用RX
-    let rx_memoDataModelDidInsertFailure = PublishSubject<()>()
-    /// メモ削除通知用RX
-    let rx_memoDataModelDidDelete = PublishSubject<()>()
-    /// メモ全削除通知用RX
-    let rx_memoDataModelDidDeleteAll = PublishSubject<()>()
-    /// メモ削除失敗通知用RX
-    let rx_memoDataModelDidDeleteFailure = PublishSubject<()>()
-    /// メモ情報取得失敗通知用RX
-    let rx_memoDataModelDidGetFailure = PublishSubject<()>()
+    
+    /// アクション通知用RX
+    let rx_action = PublishSubject<MemoDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<MemoDataModelError>()
 
@@ -60,7 +56,7 @@ final class MemoDataModel {
     func insert(memo: Memo) {
         let result = repository.insert(data: [memo])
         if case .success = result {
-            rx_memoDataModelDidInsert.onNext(())
+            rx_action.onNext(.insert)
         } else {
             rx_error.onNext(.store)
         }
@@ -118,7 +114,7 @@ final class MemoDataModel {
         let result = repository.delete(data: select())
 
         if case .success = result {
-            rx_memoDataModelDidDeleteAll.onNext(())
+            rx_action.onNext(.deleteAll)
         } else {
             rx_error.onNext(.delete)
         }
@@ -129,7 +125,7 @@ final class MemoDataModel {
         let result = repository.delete(data: [memo])
 
         if case .success = result {
-            rx_memoDataModelDidDelete.onNext(())
+            rx_action.onNext(.delete)
         } else {
             rx_error.onNext(.delete)
         }

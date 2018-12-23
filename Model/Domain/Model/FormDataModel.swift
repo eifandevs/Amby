@@ -11,6 +11,12 @@ import RealmSwift
 import RxCocoa
 import RxSwift
 
+enum FormDataModelAction {
+    case insert
+    case delete
+    case deleteAll
+}
+
 enum FormDataModelError {
     case get
     case store
@@ -33,18 +39,8 @@ extension FormDataModelError: ModelError {
 final class FormDataModel {
     static let s = FormDataModel()
 
-    /// フォーム登録通知用RX
-    let rx_formDataModelDidInsert = PublishSubject<()>()
-    /// フォーム登録失敗通知用RX
-    let rx_formDataModelDidInsertFailure = PublishSubject<()>()
-    /// フォーム削除通知用RX
-    let rx_formDataModelDidDelete = PublishSubject<()>()
-    /// フォーム全削除通知用RX
-    let rx_formDataModelDidDeleteAll = PublishSubject<()>()
-    /// フォーム削除失敗通知用RX
-    let rx_formDataModelDidDeleteFailure = PublishSubject<()>()
-    /// フォーム情報取得失敗通知用RX
-    let rx_formDataModelDidGetFailure = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<FormDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<FormDataModelError>()
 
@@ -58,7 +54,7 @@ final class FormDataModel {
         let result = repository.insert(data: forms)
 
         if case .success = result {
-            rx_formDataModelDidInsert.onNext(())
+            rx_action.onNext(.insert)
         } else {
             rx_error.onNext(.store)
         }
@@ -104,7 +100,7 @@ final class FormDataModel {
         let result = repository.delete(data: select())
 
         if case .success = result {
-            rx_formDataModelDidDeleteAll.onNext(())
+            rx_action.onNext(.deleteAll)
         } else {
             rx_error.onNext(.delete)
         }
@@ -115,7 +111,7 @@ final class FormDataModel {
         let result = repository.delete(data: forms)
 
         if case .success = result {
-            rx_formDataModelDidDelete.onNext(())
+            rx_action.onNext(.delete)
         } else {
             rx_error.onNext(.delete)
         }

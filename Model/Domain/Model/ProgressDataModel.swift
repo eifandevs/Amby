@@ -10,12 +10,15 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+enum ProgressDataModelAction {
+    case update(progress: CGFloat)
+    case update(text: String)
+}
+
 /// プログレスデータモデル
 final class ProgressDataModel {
-    /// プログレス更新通知用RX
-    let rx_progressDataModelDidUpdateProgress = PublishSubject<CGFloat>()
-    /// ヘッダーテキストの更新通知用RX
-    let rx_progressDataModelDidUpdateText = PublishSubject<String>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<ProgressDataModelAction>()
 
     static let s = ProgressDataModel()
     let center = NotificationCenter.default
@@ -31,14 +34,14 @@ final class ProgressDataModel {
     /// update header progress
     func updateProgress(progress: CGFloat) {
         self.progress = progress
-        rx_progressDataModelDidUpdateProgress.onNext(progress)
+        rx_action.onNext(.update(progress: progress))
     }
 
     /// update header field text
     func updateText(text: String) {
         if !text.isEmpty && text != headerFieldText {
             headerFieldText = text
-            rx_progressDataModelDidUpdateText.onNext(text)
+            rx_action.onNext(.update(text: text))
         }
     }
 
@@ -47,7 +50,7 @@ final class ProgressDataModel {
         if let url = PageHistoryDataModel.s.currentHistory?.url {
             if url != headerFieldText {
                 headerFieldText = url
-                rx_progressDataModelDidUpdateText.onNext(url)
+                rx_action.onNext(.update(text: url))
             }
         }
     }

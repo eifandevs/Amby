@@ -11,7 +11,10 @@ import RxCocoa
 import RxSwift
 
 enum FavoriteDataModelAction {
-    case update(articles: [Article])
+    case insert(favorites: [Favorite])
+    case delete
+    case deleteAll
+    case reload(url: String)
 }
 
 enum FavoriteDataModelError {
@@ -34,20 +37,8 @@ extension FavoriteDataModelError: ModelError {
 }
 
 final class FavoriteDataModel {
-    /// お気に入り追加通知用RX
-    let rx_favoriteDataModelDidInsert = PublishSubject<([Favorite])>()
-    /// お気に入り削除通知用RX
-    let rx_favoriteDataModelDidDelete = PublishSubject<()>()
-    /// お気に入り全削除通知用RX
-    let rx_favoriteDataModelDidDeleteAll = PublishSubject<()>()
-    /// お気に入り削除失敗通知用RX
-    let rx_favoriteDataModelDidDeleteFailure = PublishSubject<()>()
-    /// お気に入り更新通知用RX
-    let rx_favoriteDataModelDidReload = PublishSubject<String>()
-    /// お気に入り登録失敗通知用RX
-    let rx_favoriteDataModelDidInsertFailure = PublishSubject<()>()
-    /// お気に入り情報取得失敗通知用RX
-    let rx_favoriteDataModelDidGetFailure = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<FavoriteDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<FavoriteDataModelError>()
 
@@ -63,7 +54,7 @@ final class FavoriteDataModel {
         let result = repository.insert(data: favorites)
 
         if case .success = result {
-            rx_favoriteDataModelDidInsert.onNext(favorites)
+            rx_action.onNext(.insert(favorites: favorites))
         } else {
             rx_error.onNext(.store)
         }
@@ -103,7 +94,7 @@ final class FavoriteDataModel {
         // 削除対象が指定されていない場合は、すべて削除する
         let result = repository.delete(data: select())
         if case .success = result {
-            rx_favoriteDataModelDidDeleteAll.onNext(())
+            rx_action.onNext(.deleteAll)
         } else {
             rx_error.onNext(.delete)
         }
@@ -112,7 +103,7 @@ final class FavoriteDataModel {
     func delete(favorites: [Favorite]) {
         let result = repository.delete(data: favorites)
         if case .success = result {
-            rx_favoriteDataModelDidDelete.onNext(())
+            rx_action.onNext(.delete)
         } else {
             rx_error.onNext(.delete)
         }
@@ -121,7 +112,7 @@ final class FavoriteDataModel {
     /// お気に入りの更新チェック
     func reload() {
         if let currentHistory = PageHistoryDataModel.s.currentHistory {
-            rx_favoriteDataModelDidReload.onNext(currentHistory.url)
+            rx_action.onNext(.reload(url: currentHistory.url))
         }
     }
 

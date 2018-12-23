@@ -12,6 +12,10 @@ import Moya
 import RxCocoa
 import RxSwift
 
+enum SuggestDataModelAction {
+    case update(suggest: Suggest)
+}
+
 enum SuggestDataModelError {
     case update
 }
@@ -26,8 +30,8 @@ extension SuggestDataModelError: ModelError {
 }
 
 final class SuggestDataModel {
-    /// サジェスト通知用RX
-    let rx_suggestDataModelDidUpdate = PublishSubject<Suggest>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<SuggestDataModelAction>()
 
     static let s = SuggestDataModel()
     private let disposeBag = DisposeBag()
@@ -49,9 +53,9 @@ final class SuggestDataModel {
                     guard let `self` = self else { return }
                     log.debug("get suggest success.")
                     if let unwrappedResponse = response, let suggests = unwrappedResponse.data[safe: 1] {
-                        self.rx_suggestDataModelDidUpdate.onNext(Suggest(token: token, data: suggests as? [String]))
+                        self.rx_action.onNext(.update(suggest: Suggest(token: token, data: suggests as? [String])))
                     } else {
-                        self.rx_suggestDataModelDidUpdate.onNext(Suggest(token: token, data: nil))
+                        self.rx_action.onNext(.update(suggest: Suggest(token: token, data: nil)))
                     }
 
                     log.eventOut(chain: "rx_suggest")
@@ -59,7 +63,7 @@ final class SuggestDataModel {
                     log.eventIn(chain: "rx_suggest")
 
                     log.error("get suggest error. error: \(error.localizedDescription)")
-                    self.rx_suggestDataModelDidUpdate.onNext(Suggest(token: token, data: nil))
+                    self.rx_action.onNext(.update(suggest: Suggest(token: token, data: nil)))
 
                     log.eventOut(chain: "rx_suggest")
             })

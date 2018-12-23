@@ -11,6 +11,10 @@ import GithubAPI
 import RxCocoa
 import RxSwift
 
+enum IssueDataModelAction {
+    case registered
+}
+
 enum IssueDataModelError {
     case post
 }
@@ -25,8 +29,8 @@ extension IssueDataModelError: ModelError {
 }
 
 final class IssueDataModel {
-    /// Issue登録成功通知用RX
-    let rx_issueDataModelDidRegisterSuccess = PublishSubject<()>()
+    /// RXアクション通知用RX
+    let rx_action = PublishSubject<IssueDataModelAction>()
 
     /// エラー通知用RX
     let rx_error = PublishSubject<IssueDataModelError>()
@@ -49,7 +53,7 @@ final class IssueDataModel {
 
             if let response = response {
                 log.debug("issue register success. response: \(response)")
-                self.rx_issueDataModelDidRegisterSuccess.onNext(())
+                self.rx_action.onNext(.registered)
             } else {
                 log.error("issue register failed. error: \(String(describing: error?.localizedDescription))")
                 self.rx_error.onNext(.post)
