@@ -309,7 +309,7 @@ final class PageHistoryDataModel {
 
     /// ページリロード
     func reload() {
-        rx_pageHistoryDataModelDidReload.onNext(())
+        rx_action.onNext(.reload)
     }
 
     /// ぺージインデックス取得
