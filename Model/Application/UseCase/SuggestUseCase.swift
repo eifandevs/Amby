@@ -10,24 +10,40 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum SuggestUseCaseAction {
+    case request(word: String)
+    case update(suggest: Suggest)
+}
+
 /// サジェストユースケース
 public final class SuggestUseCase {
     public static let s = SuggestUseCase()
 
-    /// サジェストリクエスト通知用RX
-    public let rx_suggestUseCaseDidRequestSuggest = PublishSubject<String>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<SuggestUseCaseAction>()
 
-    /// サジェスト通知用RX
-    public let rx_suggestUseCaseDidUpdate = SuggestDataModel.s.rx_suggestDataModelDidUpdate
-        .flatMap { suggest -> Observable<Suggest> in
-            return Observable.just(suggest)
-        }
+    /// Observable自動解放
+    let disposeBag = DisposeBag()
 
-    private init() {}
+    private init() {
+        setupRx()
+    }
 
+    private func setupRx() {
+        // サジェスト監視
+        SuggestDataModel.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self else { return }
+                if let action = action.element, case let .update(suggest) = action {
+                    self.rx_action.onNext(.update(suggest: suggest))
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+    
     /// サジェストリクエスト
     public func suggest(word: String) {
-        rx_suggestUseCaseDidRequestSuggest.onNext(word)
+        rx_action.onNext(.request(word: word))
     }
 
     /// 取得
