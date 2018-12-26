@@ -11,43 +11,43 @@ import Model
 import RxCocoa
 import RxSwift
 
+enum BaseViewModelAction {
+    case insert(at: Int)
+    case reload
+    case append
+    case change
+    case remove(deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case historyBack
+    case historyForward
+    case load(url: String)
+    case form
+    case autoScroll
+    case autoFill
+    case scrollUp
+    case grep(text: String)
+}
+
+struct BaseViewModelState: OptionSet {
+    let rawValue: Int
+    /// タッチ中フラグ
+    static let isTouching = BaseViewModelState(rawValue: 1 << 0)
+    /// アニメーション中フラグ
+    static let isAnimating = BaseViewModelState(rawValue: 1 << 1)
+    /// 自動入力ダイアログ表示済みフラグ
+    static let isDoneAutoFill = BaseViewModelState(rawValue: 1 << 2)
+    /// スクロール中フラグ
+    static let isScrolling = BaseViewModelState(rawValue: 1 << 3)
+    /// スワイプでページ切り替えを検知したかどうかのフラグ
+    static let isChangingFront = BaseViewModelState(rawValue: 1 << 4)
+    /// 新規タブイベント選択中
+    static let isSelectingNewTabEvent = BaseViewModelState(rawValue: 1 << 5)
+}
+
 final class BaseViewModel {
-    struct TouchState: OptionSet {
-        let rawValue: Int
-        /// タッチ中フラグ
-        static let isTouching = TouchState(rawValue: 1 << 0)
-        /// アニメーション中フラグ
-        static let isAnimating = TouchState(rawValue: 1 << 1)
-        /// 自動入力ダイアログ表示済みフラグ
-        static let isDoneAutoFill = TouchState(rawValue: 1 << 2)
-        /// スクロール中フラグ
-        static let isScrolling = TouchState(rawValue: 1 << 3)
-        /// スワイプでページ切り替えを検知したかどうかのフラグ
-        static let isChangingFront = TouchState(rawValue: 1 << 4)
-        /// 新規タブイベント選択中
-        static let isSelectingNewTabEvent = TouchState(rawValue: 1 << 5)
-    }
-
     /// 状態管理
-    var state: TouchState = []
-
-    enum Action {
-        case insert(at: Int)
-        case reload
-        case append
-        case change
-        case remove(deleteContext: String, currentContext: String?, deleteIndex: Int)
-        case historyBack
-        case historyForward
-        case load(url: String)
-        case form
-        case autoScroll
-        case autoFill
-        case scrollUp
-        case grep(text: String)
-    }
-
-    let rx_action = PublishSubject<Action>()
+    var state: BaseViewModelState = []
+    
+    let rx_action = PublishSubject<BaseViewModelAction>()
 
     let webViewService = WebViewService()
 
@@ -130,7 +130,7 @@ final class BaseViewModel {
         ]).subscribe { [weak self] url in
             log.eventIn(chain: "rx_load")
             guard let `self` = self, let url = url.element else { return }
-            self.rx_action.onNext(Action.load(url: url))
+            self.rx_action.onNext(.load(url: url))
             log.eventOut(chain: "rx_load")
         }
         .disposed(by: disposeBag)
@@ -140,7 +140,7 @@ final class BaseViewModel {
             .subscribe { [weak self] at in
                 log.eventIn(chain: "rx_tabUseCaseDidInsert")
                 guard let `self` = self, let at = at.element else { return }
-                self.rx_action.onNext(Action.insert(at: at))
+                self.rx_action.onNext(.insert(at: at))
                 log.eventOut(chain: "rx_tabUseCaseDidInsert")
             }
             .disposed(by: disposeBag)
@@ -150,7 +150,7 @@ final class BaseViewModel {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_tabUseCaseDidReload")
                 guard let `self` = self else { return }
-                self.rx_action.onNext(Action.reload)
+                self.rx_action.onNext(.reload)
                 log.eventOut(chain: "rx_tabUseCaseDidReload")
             }
             .disposed(by: disposeBag)
@@ -160,7 +160,7 @@ final class BaseViewModel {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_tabUseCaseDidAppend")
                 guard let `self` = self else { return }
-                self.rx_action.onNext(Action.append)
+                self.rx_action.onNext(.append)
                 log.eventOut(chain: "rx_tabUseCaseDidAppend")
             }
             .disposed(by: disposeBag)
@@ -170,7 +170,7 @@ final class BaseViewModel {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_tabUseCaseDidChange")
                 guard let `self` = self else { return }
-                self.rx_action.onNext(Action.change)
+                self.rx_action.onNext(.change)
                 log.eventOut(chain: "rx_tabUseCaseDidChange")
             }
             .disposed(by: disposeBag)
@@ -180,7 +180,7 @@ final class BaseViewModel {
             .subscribe { [weak self] object in
                 log.eventIn(chain: "rx_tabUseCaseDidRemove")
                 guard let `self` = self, let object = object.element else { return }
-                self.rx_action.onNext(Action.remove(deleteContext: object.deleteContext, currentContext: object.currentContext, deleteIndex: object.deleteIndex))
+                self.rx_action.onNext(.remove(deleteContext: object.deleteContext, currentContext: object.currentContext, deleteIndex: object.deleteIndex))
                 log.eventOut(chain: "rx_tabUseCaseDidRemove")
             }
             .disposed(by: disposeBag)
@@ -190,7 +190,7 @@ final class BaseViewModel {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_historyUseCaseDidRequestHistoryBack")
                 guard let `self` = self else { return }
-                self.rx_action.onNext(Action.historyBack)
+                self.rx_action.onNext(.historyBack)
                 log.eventOut(chain: "rx_historyUseCaseDidRequestHistoryBack")
             }
             .disposed(by: disposeBag)
@@ -200,7 +200,7 @@ final class BaseViewModel {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_historyUseCaseDidRequestHistoryForward")
                 guard let `self` = self else { return }
-                self.rx_action.onNext(Action.historyForward)
+                self.rx_action.onNext(.historyForward)
                 log.eventOut(chain: "rx_historyUseCaseDidRequestHistoryForward")
             }
             .disposed(by: disposeBag)
@@ -210,7 +210,7 @@ final class BaseViewModel {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_formUseCaseDidRequestRegisterForm")
                 guard let `self` = self else { return }
-                self.rx_action.onNext(Action.form)
+                self.rx_action.onNext(.form)
                 log.eventOut(chain: "rx_formUseCaseDidRequestRegisterForm")
             }
             .disposed(by: disposeBag)
@@ -220,7 +220,7 @@ final class BaseViewModel {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_scrollUseCaseDidRequestAutoScroll")
                 guard let `self` = self else { return }
-                self.rx_action.onNext(Action.autoScroll)
+                self.rx_action.onNext(.autoScroll)
                 log.eventOut(chain: "rx_scrollUseCaseDidRequestAutoScroll")
             }
             .disposed(by: disposeBag)
@@ -230,7 +230,7 @@ final class BaseViewModel {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_formUseCaseDidRequestAutoFill")
                 guard let `self` = self else { return }
-                self.rx_action.onNext(Action.autoFill)
+                self.rx_action.onNext(.autoFill)
                 log.eventOut(chain: "rx_formUseCaseDidRequestAutoFill")
             }
             .disposed(by: disposeBag)
@@ -240,7 +240,7 @@ final class BaseViewModel {
             .subscribe { [weak self] _ in
                 log.eventIn(chain: "rx_scrollUseCaseDidRequestScrollUp")
                 guard let `self` = self else { return }
-                self.rx_action.onNext(Action.scrollUp)
+                self.rx_action.onNext(.scrollUp)
                 log.eventOut(chain: "rx_scrollUseCaseDidRequestScrollUp")
             }
             .disposed(by: disposeBag)
@@ -250,7 +250,7 @@ final class BaseViewModel {
             .subscribe { [weak self] word in
                 log.eventIn(chain: "rx_grepUseCaseDidRequestGrep")
                 guard let `self` = self, let word = word.element else { return }
-                self.rx_action.onNext(Action.grep(text: word))
+                self.rx_action.onNext(.grep(text: word))
                 log.eventOut(chain: "rx_grepUseCaseDidRequestGrep")
             }
             .disposed(by: disposeBag)
