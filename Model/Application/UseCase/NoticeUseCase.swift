@@ -31,16 +31,6 @@ public final class NoticeUseCase {
             }
             .disposed(by: disposeBag)
 
-        // 閲覧履歴削除失敗監視
-        CommonHistoryDataModel.s.rx_commonHistoryDataModelDidDeleteFailure
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_commonHistoryDataModelDidDeleteAllFailure")
-                guard let `self` = self else { return }
-                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.DELETE_COMMON_HISTORY_ERROR, isSuccess: false))
-                log.eventOut(chain: "rx_commonHistoryDataModelDidDeleteAllFailure")
-            }
-            .disposed(by: disposeBag)
-
         // 認証チャレンジ失敗監視
         PasscodeUseCase.s.rx_passcodeUseCaseDidAuthFailure
             .subscribe { [weak self] _ in
@@ -61,16 +51,6 @@ public final class NoticeUseCase {
             }
             .disposed(by: disposeBag)
 
-        // フォーム削除失敗監視
-        FormDataModel.s.rx_formDataModelDidDeleteFailure
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_formDataModelDidDeleteFailure")
-                guard let `self` = self else { return }
-                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.DELETE_FORM_ERROR, isSuccess: false))
-                log.eventOut(chain: "rx_formDataModelDidDeleteFailure")
-            }
-            .disposed(by: disposeBag)
-
         // お気に入り削除監視
         FavoriteDataModel.s.rx_favoriteDataModelDidDeleteAll
             .subscribe { [weak self] _ in
@@ -78,16 +58,6 @@ public final class NoticeUseCase {
                 guard let `self` = self else { return }
                 self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.DELETE_BOOK_MARK, isSuccess: true))
                 log.eventOut(chain: "rx_favoriteDataModelDidDeleteAll")
-            }
-            .disposed(by: disposeBag)
-
-        // お気に入り削除失敗監視
-        FavoriteDataModel.s.rx_favoriteDataModelDidDeleteFailure
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_favoriteDataModelDidDeleteFailure")
-                guard let `self` = self else { return }
-                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.DELETE_BOOK_MARK_ERROR, isSuccess: false))
-                log.eventOut(chain: "rx_favoriteDataModelDidDeleteFailure")
             }
             .disposed(by: disposeBag)
 
@@ -109,7 +79,8 @@ public final class NoticeUseCase {
             FavoriteDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
             FormDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
             MemoDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
-            ThumbnailDataModel.s.rx_error.flatMap({ Observable.just($0 as ModelError) })
+            ThumbnailDataModel.s.rx_error.flatMap({ Observable.just($0 as ModelError) }),
+            IssueDataModel.s.rx_error.flatMap({ Observable.just($0 as ModelError) })
         ]).subscribe { [weak self] modelError in
             log.eventIn(chain: "rx_error")
             guard let `self` = self, let modelError = modelError.element else { return }
@@ -128,16 +99,6 @@ public final class NoticeUseCase {
             }
             .disposed(by: disposeBag)
 
-        // お気に入り情報取得失敗監視
-        FavoriteDataModel.s.rx_favoriteDataModelDidGetFailure
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_favoriteDataModelDidGetFailure")
-                guard let `self` = self else { return }
-                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.REGISTER_BOOK_MARK_ERROR, isSuccess: false))
-                log.eventOut(chain: "rx_favoriteDataModelDidGetFailure")
-            }
-            .disposed(by: disposeBag)
-
         // レポート登録成功監視
         IssueDataModel.s.rx_issueDataModelDidRegisterSuccess
             .subscribe { [weak self] _ in
@@ -148,25 +109,6 @@ public final class NoticeUseCase {
             }
             .disposed(by: disposeBag)
 
-        // フォーム登録成功監視
-        FormDataModel.s.rx_formDataModelDidInsert
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_formDataModelDidRegisterSuccess")
-                guard let `self` = self else { return }
-                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.REGISTER_FORM, isSuccess: true))
-                log.eventOut(chain: "rx_formDataModelDidRegisterSuccess")
-            }
-            .disposed(by: disposeBag)
-
-        // フォーム情報取得失敗監視
-        FormDataModel.s.rx_formDataModelDidGetFailure
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_formDataModelDidGetFailure")
-                guard let `self` = self else { return }
-                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_INPUT, isSuccess: false))
-                log.eventOut(chain: "rx_formDataModelDidGetFailure")
-            }
-            .disposed(by: disposeBag)
 
         // クッキー削除成功監視
         CacheUseCase.s.rx_cacheUseCaseDidDeleteCookies

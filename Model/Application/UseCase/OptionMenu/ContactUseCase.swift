@@ -10,17 +10,21 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum ContactCaseAction {
+    case open
+}
+
 /// コンタクトユースケース
 public final class ContactUseCase {
     public static let s = ContactUseCase()
 
-    /// コンタクト画面表示通知用RX
-    public let rx_operationUseCaseDidRequestOpen = PublishSubject<()>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<ContactCaseAction>()
 
     private init() {}
 
     /// コンタクト画面表示
     public func open() {
-        rx_operationUseCaseDidRequestOpen.onNext(())
+        rx_action.onNext(.open)
     }
 }

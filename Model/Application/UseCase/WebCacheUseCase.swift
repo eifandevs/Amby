@@ -8,10 +8,20 @@
 
 import Foundation
 import WebKit
+import RxCocoa
+import RxSwift
+
+public enum WebCacheUseCaseAction {
+    case deleteCookies
+    case deleteCaches
+}
 
 public final class WebCacheUseCase {
     public static let s = WebCacheUseCase()
 
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<WebCacheUseCaseAction>()
+    
     private init() {}
 
     public func cacheConfiguration() -> WKWebViewConfiguration {
@@ -21,10 +31,12 @@ public final class WebCacheUseCase {
     /// Cacheの削除
     public func deleteCaches() {
         CacheService.deleteCaches()
+        rx_action.onNext(.deleteCaches)
     }
 
     /// Cookieの削除
     public func deleteCookies() {
         CacheService.deleteCookies()
+        rx_action.onNext(.deleteCookies)
     }
 }
