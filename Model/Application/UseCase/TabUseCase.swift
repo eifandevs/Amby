@@ -83,9 +83,7 @@ public final class TabUseCase {
                             } else {
                                 log.warning("start loading while saving thumbnails.")
                             }
-                        }
-                        
-                        return Observable.empty()
+                        }                        
                     default: break
                     }
                 }

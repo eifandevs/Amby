@@ -11,8 +11,8 @@ import RxCocoa
 import RxSwift
 
 enum ProgressDataModelAction {
-    case update(progress: CGFloat)
-    case update(text: String)
+    case updateProgress(progress: CGFloat)
+    case updateText(text: String)
 }
 
 /// プログレスデータモデル
@@ -34,14 +34,14 @@ final class ProgressDataModel {
     /// update header progress
     func updateProgress(progress: CGFloat) {
         self.progress = progress
-        rx_action.onNext(.update(progress: progress))
+        rx_action.onNext(.updateProgress(progress: progress))
     }
 
     /// update header field text
     func updateText(text: String) {
         if !text.isEmpty && text != headerFieldText {
             headerFieldText = text
-            rx_action.onNext(.update(text: text))
+            rx_action.onNext(.updateText(text: text))
         }
     }
 
@@ -50,7 +50,7 @@ final class ProgressDataModel {
         if let url = PageHistoryDataModel.s.currentHistory?.url {
             if url != headerFieldText {
                 headerFieldText = url
-                rx_action.onNext(.update(text: url))
+                rx_action.onNext(.updateText(text: url))
             }
         }
     }

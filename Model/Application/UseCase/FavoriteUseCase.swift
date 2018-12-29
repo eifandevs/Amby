@@ -28,27 +28,28 @@ public final class FavoriteUseCase {
 
     private func setupRx() {
         // エラー監視
-        Observable.merge([
-            PageHistoryDataModel.s.rx_action
-                .filter { action -> Bool in
-                    switch action {
-                    case .append, .change, .insert, .delete:
-                        return true
-                    default:
-                        return false
+        Observable
+            .merge([
+                PageHistoryDataModel.s.rx_action
+                    .filter { action -> Bool in
+                        switch action {
+                        case .append, .change, .insert, .delete:
+                            return true
+                        default:
+                            return false
+                        }
                     }
-                }
-                .flatMap { _ in Observable.just(()) },
-            FavoriteDataModel.s.rx_action
-                .filter { action -> Bool in
-                    switch action {
-                    case .insert, .delete, .reload:
-                        return true
-                    default:
-                        return false
+                    .flatMap { _ in Observable.just(()) },
+                FavoriteDataModel.s.rx_action
+                    .filter { action -> Bool in
+                        switch action {
+                        case .insert, .delete, .reload:
+                            return true
+                        default:
+                            return false
+                        }
                     }
-                }
-                .flatMap { _ in Observable.just(()) },
+                    .flatMap { _ in Observable.just(()) },
             ])
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
