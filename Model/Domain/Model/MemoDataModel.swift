@@ -41,7 +41,7 @@ extension MemoDataModelError: ModelError {
 
 final class MemoDataModel {
     static let s = MemoDataModel()
-    
+
     /// アクション通知用RX
     let rx_action = PublishSubject<MemoDataModelAction>()
     /// エラー通知用RX

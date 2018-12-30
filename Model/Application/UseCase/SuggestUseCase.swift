@@ -40,7 +40,7 @@ public final class SuggestUseCase {
             }
             .disposed(by: disposeBag)
     }
-    
+
     /// サジェストリクエスト
     public func suggest(word: String) {
         rx_action.onNext(.request(word: word))

@@ -23,7 +23,7 @@ public final class ThumbnailUseCase {
 
     /// アクション通知用RX
     public let rx_action = PublishSubject<ThumbnailUseCaseAction>()
-    
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
@@ -49,7 +49,7 @@ public final class ThumbnailUseCase {
             }
             .disposed(by: disposeBag)
     }
-    
+
     public func getCapture(context: String) -> UIImage? {
         return ThumbnailDataModel.s.getCapture(context: context)
     }

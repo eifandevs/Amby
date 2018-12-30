@@ -21,7 +21,7 @@ public final class ProgressUseCase {
 
     /// アクション通知用RX
     public let rx_action = PublishSubject<ProgressUseCaseAction>()
-    
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
@@ -41,17 +41,17 @@ public final class ProgressUseCase {
                             return Observable.empty()
                         }
                     },
-                NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) }
-                ])
+                NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) },
+            ])
             .subscribe { [weak self] progress in
                 guard let `self` = self else { return }
-                
+
                 if let progress = progress.element {
                     self.rx_action.onNext(.updateProgress(progress: progress))
                 }
             }
             .disposed(by: disposeBag)
-        
+
         // テキストフィールド監視
         ProgressDataModel.s.rx_action
             .subscribe { [weak self] action in
@@ -62,7 +62,7 @@ public final class ProgressUseCase {
             }
             .disposed(by: disposeBag)
     }
-    
+
     public func updateProgress(progress: CGFloat) {
         ProgressDataModel.s.updateProgress(progress: progress)
     }

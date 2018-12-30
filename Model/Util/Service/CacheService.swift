@@ -34,7 +34,7 @@ class CacheService {
             WKWebsiteDataTypeSessionStorage,
             WKWebsiteDataTypeLocalStorage,
             WKWebsiteDataTypeWebSQLDatabases,
-            WKWebsiteDataTypeIndexedDBDatabases
+            WKWebsiteDataTypeIndexedDBDatabases,
         ], modifiedSince: dateFrom) {}
     }
 

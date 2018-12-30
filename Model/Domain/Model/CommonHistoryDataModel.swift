@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 enum CommonHistoryDataModelAction {
-    case delete
+    case deleteAll
 }
 
 enum CommonHistoryDataModelError {
@@ -261,7 +261,7 @@ final class CommonHistoryDataModel {
         let createResult = localStorageRepository.create(.commonHistory(resource: nil))
 
         if case .success = createResult {
-            rx_action.onNext(.delete)
+            rx_action.onNext(.deleteAll)
         } else {
             rx_error.onNext(.delete)
         }

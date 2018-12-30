@@ -20,7 +20,7 @@ public final class SourceCodeUseCase {
 
     /// アクション通知用RX
     public let rx_action = PublishSubject<SourceCodeUseCaseAction>()
-    
+
     private init() {}
 
     /// ソースコードページ表示

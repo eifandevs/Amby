@@ -57,7 +57,7 @@ public final class TabUseCase {
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
-    
+
     private func setupRx() {
         // インサート監視
         PageHistoryDataModel.s.rx_action
@@ -83,13 +83,14 @@ public final class TabUseCase {
                             } else {
                                 log.warning("start loading while saving thumbnails.")
                             }
-                        }                        
+                        }
                     default: break
                     }
                 }
             }
             .disposed(by: disposeBag)
     }
+
     /// 現在のタブをクローズ
     public func close() {
         PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)

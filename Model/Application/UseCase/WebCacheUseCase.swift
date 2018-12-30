@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import WebKit
 import RxCocoa
 import RxSwift
+import WebKit
 
 public enum WebCacheUseCaseAction {
     case deleteCookies
@@ -21,7 +21,7 @@ public final class WebCacheUseCase {
 
     /// アクション通知用RX
     public let rx_action = PublishSubject<WebCacheUseCaseAction>()
-    
+
     private init() {}
 
     public func cacheConfiguration() -> WKWebViewConfiguration {

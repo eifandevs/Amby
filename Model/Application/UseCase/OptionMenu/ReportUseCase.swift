@@ -21,7 +21,7 @@ public final class ReportUseCase {
 
     /// アクション通知用RX
     public let rx_action = PublishSubject<ReportUseCaseAction>()
-    
+
     /// 最終お問い合わせ日
     public var lastReportDate: Date {
         get {

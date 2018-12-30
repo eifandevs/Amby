@@ -38,7 +38,7 @@ public final class NewsUseCase {
             }
             .disposed(by: disposeBag)
     }
-    
+
     public func get() {
         ArticleDataModel.s.get()
     }

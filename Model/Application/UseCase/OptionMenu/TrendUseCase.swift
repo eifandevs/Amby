@@ -20,7 +20,7 @@ public final class TrendUseCase {
 
     /// アクション通知用RX
     public let rx_action = PublishSubject<TrendUseCaseAction>()
-    
+
     private init() {}
 
     /// トレンドページ表示

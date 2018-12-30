@@ -18,12 +18,12 @@ public enum FavoriteUseCaseAction {
 /// お気に入りユースケース
 public final class FavoriteUseCase {
     public static let s = FavoriteUseCase()
-    
+
     public let rx_action = PublishSubject<FavoriteUseCaseAction>()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
-    
+
     private init() {}
 
     private func setupRx() {
@@ -53,7 +53,7 @@ public final class FavoriteUseCase {
             ])
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
-                
+
                 if let currentHistory = PageHistoryDataModel.s.currentHistory, !currentHistory.url.isEmpty {
                     self.rx_action.onNext(.update(isSwitch: FavoriteDataModel.s.select().map({ $0.url }).contains(currentHistory.url)))
                 } else {
@@ -62,7 +62,7 @@ public final class FavoriteUseCase {
             }
             .disposed(by: disposeBag)
     }
-    
+
     public func select() -> [Favorite] {
         return FavoriteDataModel.s.select()
     }

@@ -22,7 +22,7 @@ public final class SearchUseCase {
 
     /// アクション通知用RX
     public let rx_action = PublishSubject<SearchUseCaseAction>()
-    
+
     private init() {}
 
     /// ロードリクエスト
