@@ -10,17 +10,21 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum TrendUseCaseAction {
+    case load(url: String)
+}
+
 /// トレンドユースケース
 public final class TrendUseCase {
     public static let s = TrendUseCase()
 
-    /// ロードリクエスト通知用RX
-    public let rx_trendUseCaseDidRequestLoad = PublishSubject<String>()
-
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<TrendUseCaseAction>()
+    
     private init() {}
 
     /// トレンドページ表示
     public func load() {
-        rx_trendUseCaseDidRequestLoad.onNext(ModelConst.URL.TREND_HOME_URL)
+        rx_action.onNext(.load(url: ModelConst.URL.TREND_HOME_URL))
     }
 }

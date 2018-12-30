@@ -10,12 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum NoticeUseCaseAction {
+    case notice(message: String, isSuccess: Bool)
+}
+
 /// 汎用通知ユースケース
 public final class NoticeUseCase {
     public static let s = NoticeUseCase()
 
-    /// メッセージ通知用RX
-    public let rx_noticeUseCaseDidInvoke = PublishSubject<(message: String, isSuccess: Bool)>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<NoticeUseCaseAction>()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -28,16 +32,6 @@ public final class NoticeUseCase {
                 guard let `self` = self else { return }
                 self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.DELETE_COMMON_HISTORY, isSuccess: true))
                 log.eventOut(chain: "rx_commonHistoryDataModelDidDeleteAll")
-            }
-            .disposed(by: disposeBag)
-
-        // 認証チャレンジ失敗監視
-        PasscodeUseCase.s.rx_passcodeUseCaseDidAuthFailure
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_passcodeUseCaseDidAuthFailure")
-                guard let `self` = self else { return }
-                self.rx_noticeUseCaseDidInvoke.onNext((message: MessageConst.NOTIFICATION.PASSCODE_NOT_REGISTERED, isSuccess: false))
-                log.eventOut(chain: "rx_passcodeUseCaseDidAuthFailure")
             }
             .disposed(by: disposeBag)
 
@@ -71,6 +65,8 @@ public final class NoticeUseCase {
             }
             .disposed(by: disposeBag)
 
+        // 正常終了監視
+        
         // エラー監視
         Observable.merge([
             SearchHistoryDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
@@ -80,12 +76,11 @@ public final class NoticeUseCase {
             FormDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
             MemoDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
             ThumbnailDataModel.s.rx_error.flatMap({ Observable.just($0 as ModelError) }),
-            IssueDataModel.s.rx_error.flatMap({ Observable.just($0 as ModelError) })
+            IssueDataModel.s.rx_error.flatMap({ Observable.just($0 as ModelError) }),
+            PasscodeUseCase.s.rx_error.flatMap({ Observable.just($0 as ModelError) })
         ]).subscribe { [weak self] modelError in
-            log.eventIn(chain: "rx_error")
             guard let `self` = self, let modelError = modelError.element else { return }
-            self.rx_noticeUseCaseDidInvoke.onNext((message: modelError.message, isSuccess: false))
-            log.eventOut(chain: "rx_error")
+            self.rx_action.onNext(.notice(message: modelError.message, isSuccess: false))
         }
         .disposed(by: disposeBag)
 
