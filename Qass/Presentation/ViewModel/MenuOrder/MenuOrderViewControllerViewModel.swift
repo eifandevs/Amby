@@ -11,9 +11,13 @@ import Model
 import RxCocoa
 import RxSwift
 
+enum MenuOrderViewControllerViewModelAction {
+    case reload
+}
+
 final class MenuOrderViewControllerViewModel {
-    /// ページリロード通知用RX
-    let rx_menuOrderViewControllerViewModelDidReload = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<MenuOrderViewControllerViewModelAction>()
 
     // セル情報
     struct Row {
@@ -72,13 +76,13 @@ final class MenuOrderViewControllerViewModel {
             menuOrder.append(operation)
         }
 
-        rx_menuOrderViewControllerViewModelDidReload.onNext(())
+        rx_action.onNext(.reload)
     }
 
     /// 初期化
     func initialize() {
         SettingUseCase.s.initializeMenuOrder()
         menuOrder = SettingUseCase.s.menuOrder
-        rx_menuOrderViewControllerViewModelDidReload.onNext(())
+        rx_action.onNext(.reload)
     }
 }

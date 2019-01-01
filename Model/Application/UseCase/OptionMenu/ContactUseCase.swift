@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 public enum ContactCaseAction {
-    case open
+    case present
 }
 
 /// コンタクトユースケース
@@ -25,6 +25,6 @@ public final class ContactUseCase {
 
     /// コンタクト画面表示
     public func open() {
-        rx_action.onNext(.open)
+        rx_action.onNext(.present)
     }
 }

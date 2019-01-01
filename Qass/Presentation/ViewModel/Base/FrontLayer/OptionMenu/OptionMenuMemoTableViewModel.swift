@@ -11,9 +11,13 @@ import Model
 import RxCocoa
 import RxSwift
 
+enum OptionMenuMemoTableViewModelAction {
+    case reload
+}
+
 final class OptionMenuMemoTableViewModel {
-    /// ページリロード通知用RX
-    let rx_optionMenuMemoTableViewModelWillReload = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<OptionMenuMemoTableViewModelAction>()
 
     /// Observable自動解放
     private let disposeBag = DisposeBag()
@@ -24,12 +28,10 @@ final class OptionMenuMemoTableViewModel {
 
     func setupRx() {
         // リロード監視
-        MemoUseCase.s.rx_memoUseCaseDidClose
-            .subscribe { [weak self] _ in
-                guard let `self` = self else { return }
-                log.eventIn(chain: "rx_memoUseCaseDidClose")
-                self.rx_optionMenuMemoTableViewModelWillReload.onNext(())
-                log.eventOut(chain: "rx_memoUseCaseDidClose")
+        MemoUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case .close = action else { return }
+                self.rx_action.onNext(.reload)
             }
             .disposed(by: disposeBag)
     }

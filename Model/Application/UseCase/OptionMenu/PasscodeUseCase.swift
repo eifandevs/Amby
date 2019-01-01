@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-enum PasscodeUseCaseAction {
+public enum PasscodeUseCaseAction {
     case present
     case confirm
 }
@@ -33,7 +33,7 @@ public final class PasscodeUseCase {
     public static let s = PasscodeUseCase()
 
     /// アクション通知用RX
-    let rx_action = PublishSubject<PasscodeUseCaseAction>()
+    public let rx_action = PublishSubject<PasscodeUseCaseAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<PasscodeUseCaseError>()
 

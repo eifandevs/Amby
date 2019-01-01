@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 public enum MemoUseCaseAction {
-    case open(memo: Memo)
+    case present(memo: Memo)
     case close
 }
 
@@ -29,7 +29,7 @@ public final class MemoUseCase {
     }
 
     public func open(memo: Memo) {
-        rx_action.onNext(.open(memo: memo))
+        rx_action.onNext(.present(memo: memo))
     }
 
     public func close() {

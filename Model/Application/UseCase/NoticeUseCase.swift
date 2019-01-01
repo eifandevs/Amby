@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 public enum NoticeUseCaseAction {
-    case notice(message: String, isSuccess: Bool)
+    case present(message: String, isSuccess: Bool)
 }
 
 /// 汎用通知ユースケース
@@ -72,7 +72,7 @@ public final class NoticeUseCase {
             ])
             .subscribe { [weak self] message in
                 guard let `self` = self, let message = message.element else { return }
-                self.rx_action.onNext(.notice(message: message, isSuccess: true))
+                self.rx_action.onNext(.present(message: message, isSuccess: true))
             }
             .disposed(by: disposeBag)
 
@@ -89,7 +89,7 @@ public final class NoticeUseCase {
             PasscodeUseCase.s.rx_error.flatMap({ Observable.just($0 as ModelError) }),
         ]).subscribe { [weak self] modelError in
             guard let `self` = self, let modelError = modelError.element else { return }
-            self.rx_action.onNext(.notice(message: modelError.message, isSuccess: false))
+            self.rx_action.onNext(.present(message: modelError.message, isSuccess: false))
         }
         .disposed(by: disposeBag)
     }

@@ -11,21 +11,22 @@ import Model
 import RxCocoa
 import RxSwift
 
-final class BaseViewControllerViewModel {
-    enum Action {
-        case help(title: String, message: String)
-        case menuOrder
-        case passcode
-        case passcodeConfirm
-        case formReader(form: Form)
-        case mailer
-        case openSource
-        case report
-        case memo(memo: Memo)
-        case notice(message: String, isSuccess: Bool)
-    }
+enum BaseViewControllerViewModelAction {
+    case help(title: String, message: String)
+    case menuOrder
+    case passcode
+    case passcodeConfirm
+    case formReader(form: Form)
+    case mailer
+    case openSource
+    case report
+    case memo(memo: Memo)
+    case notice(message: String, isSuccess: Bool)
+}
 
-    let rx_action = PublishSubject<Action>()
+final class BaseViewControllerViewModel {
+
+    let rx_action = PublishSubject<BaseViewControllerViewModelAction>()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -40,102 +41,80 @@ final class BaseViewControllerViewModel {
 
     private func setupRx() {
         // ヘルプ監視
-        HelpUseCase.s.rx_helpUseCaseDidRequestPresentHelpScreen
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_helpUseCaseDidRequestPresentHelpScreen")
-                guard let `self` = self, let object = object.element else { return }
-                self.rx_action.onNext(Action.help(title: object.title, message: object.message))
-                log.eventOut(chain: "rx_helpUseCaseDidRequestPresentHelpScreen")
+        HelpUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case let .present(title, message) = action else { return }
+                self.rx_action.onNext(.help(title: title, message: message))
+            }
+            .disposed(by: disposeBag)
+        
+        // 表示順序監視
+        MenuOrderUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case .present = action else { return }
+                self.rx_action.onNext(.menuOrder)
             }
             .disposed(by: disposeBag)
 
-        // メニュー順序表示監視
-        MenuOrderUseCase.s.rx_menuOrderUseCaseDidRequestOpen
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_menuOrderUseCaseDidRequestOpen")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(Action.menuOrder)
-                log.eventOut(chain: "rx_menuOrderUseCaseDidRequestOpen")
-            }
-            .disposed(by: disposeBag)
-
-        // パスコード表示監視
-        PasscodeUseCase.s.rx_passcodeUseCaseDidRequestOpen
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_passcodeUseCaseDidRequestOpen")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(Action.passcode)
-                log.eventOut(chain: "rx_passcodeUseCaseDidRequestOpen")
-            }
-            .disposed(by: disposeBag)
-
-        // パスコード確認表示監視
-        PasscodeUseCase.s.rx_passcodeUseCaseDidRequestConfirm
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_passcodeUseCaseDidRequestConfirm")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(Action.passcodeConfirm)
-                log.eventOut(chain: "rx_passcodeUseCaseDidRequestConfirm")
+        
+        // パスコード監視
+        PasscodeUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                
+                if case .present = action {
+                    self.rx_action.onNext(.passcode)
+                } else if case .confirm = action {
+                    self.rx_action.onNext(.passcodeConfirm)
+                }
             }
             .disposed(by: disposeBag)
 
         // フォーム閲覧表示監視
-        FormUseCase.s.rx_formUseCaseDidRequestRead
-            .subscribe { [weak self] form in
-                log.eventIn(chain: "rx_formUseCaseDidRequestRead")
-                guard let `self` = self, let form = form.element else { return }
-                self.rx_action.onNext(Action.formReader(form: form))
-                log.eventOut(chain: "rx_formUseCaseDidRequestRead")
+        FormUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case let .read(form) = action else { return }
+                self.rx_action.onNext(.formReader(form: form))
             }
             .disposed(by: disposeBag)
-
+        
         // メーラー表示監視
-        ContactUseCase.s.rx_operationUseCaseDidRequestOpen
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_operationUseCaseDidRequestOpen")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(Action.mailer)
-                log.eventOut(chain: "rx_operationUseCaseDidRequestOpen")
+        ContactUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case .present = action else { return }
+                self.rx_action.onNext(.mailer)
             }
             .disposed(by: disposeBag)
 
         // オープンソース表示監視
-        OpenSourceUseCase.s.rx_openSourceUseCaseDidRequestOpen
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_openSourceUseCaseDidRequestOpen")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(Action.openSource)
-                log.eventOut(chain: "rx_openSourceUseCaseDidRequestOpen")
+        OpenSourceUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case .present = action else { return }
+                self.rx_action.onNext(.openSource)
             }
             .disposed(by: disposeBag)
 
         // レポート表示監視
-        ReportUseCase.s.rx_reportUseCaseDidRequestOpen
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_reportUseCaseDidRequestOpen")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(Action.report)
-                log.eventOut(chain: "rx_reportUseCaseDidRequestOpen")
+        ReportUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case .present = action else { return }
+                self.rx_action.onNext(.report)
             }
             .disposed(by: disposeBag)
-
+        
         // メモ表示監視
-        MemoUseCase.s.rx_memoUseCaseDidRequestOpen
-            .subscribe { [weak self] memo in
-                log.eventIn(chain: "rx_memoUseCaseDidRequestOpen")
-                guard let `self` = self, let memo = memo.element else { return }
-                self.rx_action.onNext(Action.memo(memo: memo))
-                log.eventOut(chain: "rx_memoUseCaseDidRequestOpen")
+        MemoUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case let .present(memo) = action else { return }
+                self.rx_action.onNext(.memo(memo: memo))
             }
             .disposed(by: disposeBag)
-
+        
         // 通知監視
-        NoticeUseCase.s.rx_noticeUseCaseDidInvoke
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_noticeUseCaseDidInvoke")
-                guard let `self` = self, let object = object.element else { return }
-                self.rx_action.onNext(Action.notice(message: object.message, isSuccess: object.isSuccess))
-                log.eventOut(chain: "rx_noticeUseCaseDidInvoke")
+        NoticeUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case let .present(message, isSuccess) = action else { return }
+                self.rx_action.onNext(.notice(message: message, isSuccess: isSuccess))
             }
             .disposed(by: disposeBag)
     }
