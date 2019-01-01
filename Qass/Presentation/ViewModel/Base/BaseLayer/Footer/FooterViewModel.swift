@@ -11,7 +11,17 @@ import Model
 import RxCocoa
 import RxSwift
 
+enum FooterViewModelAction {
+    case update(indexPath: IndexPath?)
+    case insert(at: Int, pageHistory: PageHistory)
+    case change(context: String)
+    case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case startLoading(context: String)
+    case endLoading(context: String, title: String)
+}
+
 final class FooterViewModel {
+    
     struct Row {
         var context: String?
         var title: String
@@ -20,6 +30,9 @@ final class FooterViewModel {
         var image: UIImage?
     }
 
+    /// アクション通知用RX
+    let rx_action = PublishSubject<FooterViewModelAction>()
+    
     var rows = TabUseCase.s.pageHistories.map { pageHistory -> FooterViewModel.Row in
         let isFront = pageHistory.context == TabUseCase.s.currentContext
 
@@ -38,39 +51,6 @@ final class FooterViewModel {
     func getRow(indexPath: IndexPath) -> Row {
         return rows[indexPath.row]
     }
-
-    /// 更新通知用RX
-    let rx_footerViewModelWillUpdate = PublishSubject<IndexPath?>()
-
-    /// サムネイル挿入用RX
-    let rx_footerViewModelDidInsertThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidInsertThumbnail
-        .flatMap { object -> Observable<(at: Int, pageHistory: PageHistory)> in
-            return Observable.just((at: object.at, pageHistory: object.pageHistory))
-        }
-
-    /// サムネイル変更通知用RX
-    let rx_footerViewModelDidChangeThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidChangeThumbnail
-        .flatMap { context -> Observable<String> in
-            return Observable.just(context)
-        }
-
-    /// サムネイル削除用RX
-    let rx_footerViewModelDidRemoveThumbnail = ThumbnailUseCase.s.rx_thumbnailUseCaseDidRemoveThumbnail
-        .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
-            return Observable.just(object)
-        }
-
-    /// ローディング開始通知用RX
-    let rx_footerViewModelDidStartLoading = TabUseCase.s.rx_tabUseCaseDidStartLoading
-        .flatMap { context -> Observable<String> in
-            return Observable.just(context)
-        }
-
-    /// ローディング終了通知用RX
-    let rx_footerViewModelDidEndLoading = TabUseCase.s.rx_tabUseCaseDidEndLoading
-        .flatMap { context -> Observable<(context: String, title: String)> in
-            return Observable.just(context)
-        }
 
     /// 現在位置
     private var pageHistories: [PageHistory] {
@@ -107,26 +87,44 @@ final class FooterViewModel {
     // MARK: Private Method
 
     private func setupRx() {
-        /// サムネイル追加監視
-        ThumbnailUseCase.s.rx_thumbnailUseCaseDidAppendThumbnail
-            .subscribe { [weak self] pageHistory in
-                log.eventIn(chain: "rx_thumbnailUseCaseDidAppendThumbnail")
-                guard let `self` = self else { return }
-                if let pageHistory = pageHistory.element {
-                    let isFront = pageHistory.context == TabUseCase.s.currentContext
-
-                    let thumbnail = ThumbnailUseCase.s.getThumbnail(context: pageHistory.context)
-                    let image = thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
-
-                    let row = Row(context: pageHistory.context, title: pageHistory.title, isFront: isFront, isLoading: pageHistory.isLoading, image: image)
-                    self.rows.append(row)
-                    self.rx_footerViewModelWillUpdate.onNext(nil)
+        /// サムネイル監視
+        ThumbnailUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .append(pageHistory): self.append(pageHistory: pageHistory)
+                case let .insert(at, pageHistory): self.rx_action.onNext(.insert(at: at, pageHistory: pageHistory))
+                case let .change(context): self.rx_action.onNext(.change(context: context))
+                case let .delete(deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
                 }
-                log.eventOut(chain: "rx_thumbnailUseCaseDidAppendThumbnail")
             }
             .disposed(by: disposeBag)
+        
+        /// ローディング監視
+        TabUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))
+                case let .endLoading(context, title): self.rx_action.onNext(.endLoading(context: context, title: title))
+                default: break
+                }
+            }
+            .disposed(by: disposeBag)
+
     }
 
+    private func append(pageHistory: PageHistory) {
+        let isFront = pageHistory.context == TabUseCase.s.currentContext
+        
+        let thumbnail = ThumbnailUseCase.s.getThumbnail(context: pageHistory.context)
+        let image = thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
+        
+        let row = Row(context: pageHistory.context, title: pageHistory.title, isFront: isFront, isLoading: pageHistory.isLoading, image: image)
+        self.rows.append(row)
+        self.rx_action.onNext(.update(indexPath: nil))
+    }
+    
     private func change(context: String) {
         TabUseCase.s.change(context: context)
     }
