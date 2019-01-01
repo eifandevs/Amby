@@ -12,7 +12,7 @@ import RxSwift
 
 public enum SearchUseCaseAction {
     case searchAtMenu
-    case serachAtHeader
+    case searchAtHeader
     case load(text: String)
 }
 
@@ -51,7 +51,7 @@ public final class SearchUseCase {
 
     /// ヘッダーフィールドをタップして検索開始
     public func beginAtHeader() {
-        rx_action.onNext(.serachAtHeader)
+        rx_action.onNext(.searchAtHeader)
     }
 
     public func delete() {

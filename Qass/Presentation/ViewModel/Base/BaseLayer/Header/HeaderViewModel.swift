@@ -11,16 +11,19 @@ import Model
 import RxCocoa
 import RxSwift
 
-final class HeaderViewModel {
-    enum Action {
-        case updateProgress(progress: CGFloat)
-        case updateFavorite(flag: Bool)
-        case updateField(text: String)
-        case search(forceFlag: Bool)
-        case grep
-    }
+enum HeaderViewModelAction {
+    case updateProgress(progress: CGFloat)
+    case updateFavorite(isSwitch: Bool)
+    case updateField(text: String)
+    case searchAtMenu
+    case searchAtHeader
+    case grep
+}
 
-    let rx_action = PublishSubject<Action>()
+final class HeaderViewModel {
+
+    /// アクション通知用RX
+    let rx_action = PublishSubject<HeaderViewModelAction>()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -35,53 +38,46 @@ final class HeaderViewModel {
     }
 
     private func setupRx() {
-        // プログレス更新監視
-        ProgressUseCase.s.rx_progressUseCaseDidChangeProgress
-            .subscribe { [weak self] progress in
-//                log.eventIn(chain: "rx_progressUseCaseDidChangeProgress")
-                guard let `self` = self, let progress = progress.element else { return }
-                self.rx_action.onNext(Action.updateProgress(progress: progress))
-//                log.eventOut(chain: "rx_progressUseCaseDidChangeProgress")
+        // プログレス監視
+        ProgressUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .updateProgress(progress):
+                    self.rx_action.onNext(.updateProgress(progress: progress))
+                case let .updateText(text):
+                    self.rx_action.onNext(.updateField(text: text))
+                }
             }
             .disposed(by: disposeBag)
 
         // お気に入り更新監視
-        FavoriteUseCase.s.rx_favoriteUseCaseDidChangeFavorite
-            .subscribe { [weak self] flag in
-                log.eventIn(chain: "rx_favoriteUseCaseDidChangeFavorite")
-                guard let `self` = self, let flag = flag.element else { return }
-                self.rx_action.onNext(Action.updateFavorite(flag: flag))
-                log.eventOut(chain: "rx_favoriteUseCaseDidChangeFavorite")
-            }
-            .disposed(by: disposeBag)
-
-        // テキストフィールド更新監視
-        ProgressUseCase.s.rx_progressUseCaseDidChangeField
-            .subscribe { [weak self] text in
-                log.eventIn(chain: "rx_progressUseCaseDidChangeField")
-                guard let `self` = self, let text = text.element else { return }
-                self.rx_action.onNext(Action.updateField(text: text))
-                log.eventOut(chain: "rx_progressUseCaseDidChangeField")
+        FavoriteUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case let .update(isSwitch) = action else { return }
+                self.rx_action.onNext(.updateFavorite(isSwitch: isSwitch))
             }
             .disposed(by: disposeBag)
 
         // 編集開始監視
-        SearchUseCase.s.rx_searchUseCaseDidBeginSearching
-            .subscribe { [weak self] flag in
-                log.eventIn(chain: "rx_searchUseCaseDidBeginSearching")
-                guard let `self` = self, let flag = flag.element else { return }
-                self.rx_action.onNext(Action.search(forceFlag: flag))
-                log.eventOut(chain: "rx_searchUseCaseDidBeginSearching")
+        SearchUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case .searchAtMenu:
+                    self.rx_action.onNext(.searchAtMenu)
+                case .searchAtHeader:
+                    self.rx_action.onNext(.searchAtHeader)
+                default: break;
+                }
             }
             .disposed(by: disposeBag)
 
         // グレップ開始監視
-        GrepUseCase.s.rx_grepUseCaseDidBeginGreping
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_grepUseCaseDidBeginGreping")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(Action.grep)
-                log.eventOut(chain: "rx_grepUseCaseDidBeginGreping")
+        GrepUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case .begin = action else { return }
+                self.rx_action.onNext(.grep)
             }
             .disposed(by: disposeBag)
     }
