@@ -121,137 +121,115 @@ final class BaseViewModel {
     func setupRx() {
         // ロード要求監視
         Observable.merge([
-            TrendUseCase.s.rx_trendUseCaseDidRequestLoad,
-            SourceCodeUseCase.s.rx_sourceCodeUseCaseDidRequestLoad,
-            ReportUseCase.s.rx_reportUseCaseDidRequestLoad,
-            FavoriteUseCase.s.rx_favoriteUseCaseDidRequestLoad,
-            HistoryUseCase.s.rx_historyUseCaseDidRequestLoad,
-            SearchUseCase.s.rx_searchUseCaseDidRequestLoad
+            TrendUseCase.s.rx_action
+                .flatMap { action -> Observable<String> in
+                    if case let .load(url) = action {
+                        return Observable.just(url)
+                    } else {
+                        return Observable.empty()
+                    }
+                },
+            SourceCodeUseCase.s.rx_action
+                .flatMap { action -> Observable<String> in
+                    if case let .load(url) = action {
+                        return Observable.just(url)
+                    } else {
+                        return Observable.empty()
+                    }
+                },
+            ReportUseCase.s.rx_action
+                .flatMap { action -> Observable<String> in
+                    if case let .load(url) = action {
+                        return Observable.just(url)
+                    } else {
+                        return Observable.empty()
+                    }
+                },
+            FavoriteUseCase.s.rx_action
+                .flatMap { action -> Observable<String> in
+                    if case let .load(url) = action {
+                        return Observable.just(url)
+                    } else {
+                        return Observable.empty()
+                    }
+                },
+            HistoryUseCase.s.rx_action
+                .flatMap { action -> Observable<String> in
+                    if case let .load(url) = action {
+                        return Observable.just(url)
+                    } else {
+                        return Observable.empty()
+                    }
+                },
+            SearchUseCase.s.rx_action
+                .flatMap { action -> Observable<String> in
+                    if case let .load(text) = action {
+                        return Observable.just(text)
+                    } else {
+                        return Observable.empty()
+                    }
+                }
         ]).subscribe { [weak self] url in
-            log.eventIn(chain: "rx_load")
             guard let `self` = self, let url = url.element else { return }
             self.rx_action.onNext(.load(url: url))
-            log.eventOut(chain: "rx_load")
         }
         .disposed(by: disposeBag)
 
-        // タブインサート監視
-        TabUseCase.s.rx_tabUseCaseDidInsert
-            .subscribe { [weak self] at in
-                log.eventIn(chain: "rx_tabUseCaseDidInsert")
-                guard let `self` = self, let at = at.element else { return }
-                self.rx_action.onNext(.insert(at: at))
-                log.eventOut(chain: "rx_tabUseCaseDidInsert")
+        // タブ監視
+        TabUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .insert(at): self.rx_action.onNext(.insert(at: at))
+                case .reload: self.rx_action.onNext(.reload)
+                case .append: self.rx_action.onNext(.append)
+                case .change: self.rx_action.onNext(.change)
+                case let .delete(deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.remove(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
+                default: break
+                }
             }
             .disposed(by: disposeBag)
 
-        // リロード通知監視
-        TabUseCase.s.rx_tabUseCaseDidReload
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_tabUseCaseDidReload")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(.reload)
-                log.eventOut(chain: "rx_tabUseCaseDidReload")
+        // ヒストリー監視
+        HistoryUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case .back: self.rx_action.onNext(.historyBack)
+                case .forward: self.rx_action.onNext(.historyForward)
+                default: break
+                }
             }
             .disposed(by: disposeBag)
 
-        // タブ追加監視
-        TabUseCase.s.rx_tabUseCaseDidAppend
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_tabUseCaseDidAppend")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(.append)
-                log.eventOut(chain: "rx_tabUseCaseDidAppend")
+        // フォーム監視
+        FormUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case .register: self.rx_action.onNext(.form)
+                case .autoFill: self.rx_action.onNext(.autoFill)
+                default: break
+                }
             }
             .disposed(by: disposeBag)
-
-        // タブ変更監視
-        TabUseCase.s.rx_tabUseCaseDidChange
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_tabUseCaseDidChange")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(.change)
-                log.eventOut(chain: "rx_tabUseCaseDidChange")
-            }
-            .disposed(by: disposeBag)
-
-        // タブ削除監視
-        TabUseCase.s.rx_tabUseCaseDidRemove
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_tabUseCaseDidRemove")
-                guard let `self` = self, let object = object.element else { return }
-                self.rx_action.onNext(.remove(deleteContext: object.deleteContext, currentContext: object.currentContext, deleteIndex: object.deleteIndex))
-                log.eventOut(chain: "rx_tabUseCaseDidRemove")
-            }
-            .disposed(by: disposeBag)
-
-        // ヒストリーバック監視
-        HistoryUseCase.s.rx_historyUseCaseDidRequestHistoryBack
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_historyUseCaseDidRequestHistoryBack")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(.historyBack)
-                log.eventOut(chain: "rx_historyUseCaseDidRequestHistoryBack")
-            }
-            .disposed(by: disposeBag)
-
-        // ヒストリーフォワード監視
-        HistoryUseCase.s.rx_historyUseCaseDidRequestHistoryForward
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_historyUseCaseDidRequestHistoryForward")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(.historyForward)
-                log.eventOut(chain: "rx_historyUseCaseDidRequestHistoryForward")
-            }
-            .disposed(by: disposeBag)
-
-        // フォーム登録監視
-        FormUseCase.s.rx_formUseCaseDidRequestRegisterForm
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_formUseCaseDidRequestRegisterForm")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(.form)
-                log.eventOut(chain: "rx_formUseCaseDidRequestRegisterForm")
-            }
-            .disposed(by: disposeBag)
-
-        // 自動スクロール監視
-        ScrollUseCase.s.rx_scrollUseCaseDidRequestAutoScroll
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_scrollUseCaseDidRequestAutoScroll")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(.autoScroll)
-                log.eventOut(chain: "rx_scrollUseCaseDidRequestAutoScroll")
-            }
-            .disposed(by: disposeBag)
-
-        // 自動入力監視
-        FormUseCase.s.rx_formUseCaseDidRequestAutoFill
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_formUseCaseDidRequestAutoFill")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(.autoFill)
-                log.eventOut(chain: "rx_formUseCaseDidRequestAutoFill")
-            }
-            .disposed(by: disposeBag)
-
-        // スクロールアップ監視
-        ScrollUseCase.s.rx_scrollUseCaseDidRequestScrollUp
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_scrollUseCaseDidRequestScrollUp")
-                guard let `self` = self else { return }
-                self.rx_action.onNext(.scrollUp)
-                log.eventOut(chain: "rx_scrollUseCaseDidRequestScrollUp")
+        
+        // スクロール監視
+        ScrollUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case .autoScroll: self.rx_action.onNext(.autoScroll)
+                case .scrollUp: self.rx_action.onNext(.scrollUp)
+                }
             }
             .disposed(by: disposeBag)
 
         // 全文検索監視
-        GrepUseCase.s.rx_grepUseCaseDidRequestGrep
-            .subscribe { [weak self] word in
-                log.eventIn(chain: "rx_grepUseCaseDidRequestGrep")
-                guard let `self` = self, let word = word.element else { return }
+        GrepUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case let .request(word) = action else { return }
                 self.rx_action.onNext(.grep(text: word))
-                log.eventOut(chain: "rx_grepUseCaseDidRequestGrep")
             }
             .disposed(by: disposeBag)
     }

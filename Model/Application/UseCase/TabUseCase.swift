@@ -62,30 +62,28 @@ public final class TabUseCase {
         // インサート監視
         PageHistoryDataModel.s.rx_action
             .subscribe { [weak self] action in
-                guard let `self` = self else { return }
-                if let action = action.element {
-                    switch action {
-                    case let .insert(_, at):
-                        self.rx_action.onNext(.insert(at: at))
-                    case .reload: self.rx_action.onNext(.reload)
-                    case .append: self.rx_action.onNext(.append)
-                    case .change: self.rx_action.onNext(.change)
-                    case let .delete(deleteContext, currentContext, deleteIndex):
-                        self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
-                    case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))
-                    case let .endLoading(context):
-                        if let isLoading = PageHistoryDataModel.s.getIsLoading(context: context) {
-                            if !isLoading {
-                                // When loading is completed and loading has started while saving thumbnails, skip
-                                if let pageHistory = PageHistoryDataModel.s.getHistory(context: context) {
-                                    self.rx_action.onNext(.endLoading(context: context, title: pageHistory.title))
-                                }
-                            } else {
-                                log.warning("start loading while saving thumbnails.")
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .insert(_, at):
+                    self.rx_action.onNext(.insert(at: at))
+                case .reload: self.rx_action.onNext(.reload)
+                case .append: self.rx_action.onNext(.append)
+                case .change: self.rx_action.onNext(.change)
+                case let .delete(deleteContext, currentContext, deleteIndex):
+                    self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
+                case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))
+                case let .endLoading(context):
+                    if let isLoading = PageHistoryDataModel.s.getIsLoading(context: context) {
+                        if !isLoading {
+                            // When loading is completed and loading has started while saving thumbnails, skip
+                            if let pageHistory = PageHistoryDataModel.s.getHistory(context: context) {
+                                self.rx_action.onNext(.endLoading(context: context, title: pageHistory.title))
                             }
+                        } else {
+                            log.warning("start loading while saving thumbnails.")
                         }
-                    default: break
                     }
+                default: break
                 }
             }
             .disposed(by: disposeBag)
