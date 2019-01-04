@@ -11,11 +11,14 @@ import Model
 import RxCocoa
 import RxSwift
 
+enum SearchMenuTableViewModelAction {
+    case update
+    case hide
+}
+
 final class SearchMenuTableViewModel {
-    /// 画面更新通知用RX
-    let rx_searchMenuViewWillUpdateLayout = PublishSubject<()>()
-    /// 画面無効化通知用RX
-    let rx_searchMenuViewWillHide = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<SearchMenuTableViewModelAction>()
 
     /// ニュースセル高さ
     let newsCellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_NEWS_CELL_HEIGHT
@@ -48,69 +51,56 @@ final class SearchMenuTableViewModel {
     let disposeBag = DisposeBag()
 
     init() {
-        // webview検索
-        // オペレーション監視
-        SuggestUseCase.s.rx_suggestUseCaseDidRequestSuggest
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_operationUseCaseDidRequestSuggest")
-                guard let `self` = self else { return }
-                if let token = object.element {
+        // サジェスト監視
+        SuggestUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+
+                switch action {
+                case let .request(word):
                     // 閲覧履歴と検索履歴の検索
-                    self.commonHistoryCellItem = HistoryUseCase.s.select(title: token, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
-                    self.searchHistoryCellItem = SearchUseCase.s.select(title: token, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
-
+                    self.commonHistoryCellItem = HistoryUseCase.s.select(title: word, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
+                    self.searchHistoryCellItem = SearchUseCase.s.select(title: word, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
+                    
                     // とりあえずここで画面更新
-                    self.rx_searchMenuViewWillUpdateLayout.onNext(())
-
+                    self.rx_action.onNext(.update)
+                    
                     // オートサジェスト
-                    self.requestSearchQueue.append(token)
+                    self.requestSearchQueue.append(word)
                     self.requestSearch()
+
+                case let .update(suggest):
+                    if let data = suggest.data, data.count > 0 {
+                        // suggestあり
+                        self.suggestCellItem = data.objects(for: self.cellNum)
+                    } else {
+                        self.suggestCellItem = []
+                    }
+                    self.isRequesting = false
+                    // キューに積まれている場合は、再度検索にいく
+                    if self.requestSearchQueue.count > 0 {
+                        self.requestSearch()
+                    } else {
+                        self.rx_action.onNext(.update)
+                    }
                 }
-                log.eventOut(chain: "rx_operationUseCaseDidRequestSuggest")
             }
             .disposed(by: disposeBag)
-
-        // サジェスト検索監視
-        SuggestUseCase.s.rx_suggestUseCaseDidUpdate
-            .subscribe { [weak self] suggest in
-                log.eventIn(chain: "rx_suggestDataModelDidUpdate")
-
-                guard let `self` = self else { return }
-                if let suggest = suggest.element, let data = suggest.data, data.count > 0 {
-                    // suggestあり
-                    self.suggestCellItem = data.objects(for: self.cellNum)
-                } else {
-                    self.suggestCellItem = []
-                }
-                self.isRequesting = false
-                // キューに積まれている場合は、再度検索にいく
-                if self.requestSearchQueue.count > 0 {
-                    self.requestSearch()
-                } else {
-                    self.rx_searchMenuViewWillUpdateLayout.onNext(())
-                }
-
-                log.eventOut(chain: "rx_suggestDataModelDidUpdate")
-            }
-            .disposed(by: disposeBag)
-
+        
         // 記事取得監視
-        NewsUseCase.s.rx_newsUseCaseDidUpdate
-            .subscribe { [weak self] element in
-                log.eventIn(chain: "rx_articleDataModelDidUpdate")
-
-                guard let `self` = self else { return }
-                if let articles = element.element, articles.count > 0 {
+        NewsUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case let .update(articles) = action else { return }
+                if articles.count > 0 {
                     // exist article
                     self.newsItem = articles
                 } else {
                     self.newsItem = []
                 }
-
+                
                 // 画面更新
-                self.rx_searchMenuViewWillUpdateLayout.onNext(())
+                self.rx_action.onNext(.update)
 
-                log.eventOut(chain: "rx_articleDataModelDidUpdate")
             }
             .disposed(by: disposeBag)
     }
@@ -145,7 +135,7 @@ final class SearchMenuTableViewModel {
                 if requestSearchQueue.count > 0 {
                     requestSearch()
                 } else {
-                    rx_searchMenuViewWillHide.onNext(())
+                    rx_action.onNext(.hide)
                 }
             }
         }
