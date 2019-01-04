@@ -11,11 +11,15 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum BaseLayerAction {
+    case invalidate(swipeDirection: EdgeSwipeDirection)
+}
+
 /// ヘッダーとボディとフッターの管理
 /// BaseViewからの通知をHeaderViewに伝える
 class BaseLayer: UIView {
-    /// 無効化通知用RX
-    let rx_baseLayerDidInvalidate = PublishSubject<EdgeSwipeDirection>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<BaseLayerAction>()
 
     let viewModel = BaseLayerViewModel()
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.BASE_LAYER.HEADER_HEIGHT - AppConst.DEVICE.STATUS_BAR_HEIGHT))
@@ -51,7 +55,6 @@ class BaseLayer: UIView {
         // キーボード表示の処理(フォームの自動設定)
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_UIKeyboardDidShow")
                 guard let `self` = self else { return }
                 if !self.isHeaderViewEditing && self.viewModel.canAutoFill {
                     // 自動入力オペ要求
@@ -59,17 +62,14 @@ class BaseLayer: UIView {
                 } else {
                     log.warning("cannot autofill")
                 }
-                log.eventOut(chain: "rx_UIKeyboardDidShow")
             }
             .disposed(by: rx.disposeBag)
 
         // フォアグラウンド時にベースビューの位置をMinにする
         NotificationCenter.default.rx.notification(.UIApplicationWillEnterForeground, object: nil)
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_UIApplicationWillEnterForeground")
                 guard let `self` = self else { return }
                 self.baseView.slideToMax()
-                log.eventOut(chain: "rx_UIApplicationWillEnterForeground")
             }
             .disposed(by: rx.disposeBag)
 
@@ -85,7 +85,7 @@ class BaseLayer: UIView {
                         self.endEditing()
                         self.validateUserInteraction()
                     } else {
-                        self.rx_baseLayerDidInvalidate.onNext(swipeDirection)
+                        self.rx_action.onNext(.invalidate(swipeDirection: swipeDirection))
                     }
                 }
                 log.eventOut(chain: "rx_baseViewDidEdgeSwiped")

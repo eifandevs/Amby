@@ -10,9 +10,12 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum OptionMenuSettingTableViewAction {
+    case close
+}
 class OptionMenuSettingTableView: UIView, ShadowView, OptionMenuView {
-    // メニュークローズ通知用RX
-    let rx_optionMenuSettingDidClose = PublishSubject<()>()
+    // アクション通知用RX
+    let rx_action = PublishSubject<OptionMenuSettingTableViewAction>()
 
     private let viewModel = OptionMenuSettingTableViewModel()
     private let tableView = UITableView()
@@ -142,6 +145,6 @@ extension OptionMenuSettingTableView: UITableViewDelegate {
             break
         }
         // メニューは閉じない
-//        rx_optionMenuSettingDidClose.onNext(())
+//        rx_action.onNext(.close)
     }
 }

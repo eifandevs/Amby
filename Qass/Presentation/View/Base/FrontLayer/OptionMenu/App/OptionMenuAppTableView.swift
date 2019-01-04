@@ -10,10 +10,14 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-class OptionMenuAppTableView: UIView, ShadowView, OptionMenuView {
-    // メニュークローズ通知用RX
-    let rx_optionMenuAppDidClose = PublishSubject<()>()
+enum OptionMenuAppTableViewAction {
+    case close
+}
 
+class OptionMenuAppTableView: UIView, ShadowView, OptionMenuView {
+    // アクション通知用RX
+    let rx_action = PublishSubject<OptionMenuAppTableViewAction>()
+    
     private let viewModel = OptionMenuAppTableViewModel()
     private let tableView = UITableView()
 
@@ -105,6 +109,6 @@ extension OptionMenuAppTableView: UITableViewDelegate {
         case .contact:
             viewModel.openContact()
         }
-        rx_optionMenuAppDidClose.onNext(())
+        rx_action.onNext(.close)
     }
 }

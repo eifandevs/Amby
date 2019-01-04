@@ -10,9 +10,13 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum OptionMenuFormTableViewAction {
+    case close
+}
+
 class OptionMenuFormTableView: UIView, ShadowView, OptionMenuView {
-    // メニュークローズ通知用RX
-    let rx_optionMenuFormDidClose = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<OptionMenuFormTableViewAction>()
 
     private let viewModel = OptionMenuFormTableViewModel()
     private let tableView = UITableView()
@@ -113,6 +117,6 @@ extension OptionMenuFormTableView: UITableViewDelegate {
         let row = viewModel.getRow(indexPath: indexPath)
         // ページを表示
         viewModel.loadRequest(url: row.data.url)
-        rx_optionMenuFormDidClose.onNext(())
+        rx_action.onNext(.close)
     }
 }

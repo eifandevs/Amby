@@ -10,9 +10,13 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum OptionMenuHistoryTableViewAction {
+    case close
+}
+
 class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
-    // メニュークローズ通知用RX
-    let rx_optionMenuHistoryDidClose = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<OptionMenuHistoryTableViewAction>()
 
     private let viewModel = OptionMenuHistoryTableViewModel()
     private let tableView = UITableView()
@@ -152,7 +156,7 @@ extension OptionMenuHistoryTableView: UITableViewDelegate {
         // ページを表示
         viewModel.loadRequest(url: row.data.url)
 
-        rx_optionMenuHistoryDidClose.onNext(())
+        rx_action.onNext(.close)
     }
 }
 

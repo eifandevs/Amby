@@ -11,9 +11,13 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum OptionMenuCooperationTableViewAction {
+    case close
+}
+
 class OptionMenuCooperationTableView: UIView, ShadowView, OptionMenuView {
-    // メニュークローズ通知用RX
-    let rx_optionMenuAppDidClose = PublishSubject<()>()
+    // アクション通知用RX
+    let rx_action = PublishSubject<OptionMenuCooperationTableViewAction>()
 
     private let viewModel = OptionMenuCooperationTableViewModel()
     private let tableView = UITableView()
@@ -87,6 +91,6 @@ extension OptionMenuCooperationTableView: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = viewModel.getRow(indexPath: indexPath)
         // TODO: 処理
-        rx_optionMenuAppDidClose.onNext(())
+        rx_action.onNext(.close)
     }
 }

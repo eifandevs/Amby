@@ -10,9 +10,13 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum OptionMenuFavoriteTableViewAction {
+    case close
+}
+
 class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
     // メニュークローズ通知用RX
-    let rx_optionMenuFavoriteDidClose = PublishSubject<()>()
+    let rx_action = PublishSubject<OptionMenuFavoriteTableViewAction>()
 
     private let viewModel = OptionMenuFavoriteTableViewModel()
     private let tableView = UITableView()
@@ -117,6 +121,6 @@ extension OptionMenuFavoriteTableView: UITableViewDelegate {
         // ページを表示
         viewModel.loadRequest(url: row.data.url)
         // 通知
-        rx_optionMenuFavoriteDidClose.onNext(())
+        rx_action.onNext(.close)
     }
 }

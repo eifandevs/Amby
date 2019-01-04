@@ -13,13 +13,15 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum CircleMenuAction {
+    case close
+    case active
+    case select(operation: UserOperation, point: CGPoint)
+}
+
 class CircleMenu: UIButton, ShadowView, CircleView {
-    // メニュークローズ通知用RX
-    let rx_circleMenuDidClose = PublishSubject<()>()
-    // メニューアクティブ通知用RX
-    let rx_circleMenuDidActive = PublishSubject<()>()
-    // ボタン押下通知用RX
-    let rx_circleMenuDidSelect = PublishSubject<(operation: UserOperation, point: CGPoint)>()
+    // アクション通知用RX
+    let rx_action = PublishSubject<CircleMenuAction>()
 
     private let viewModel = CircleMenuViewModel()
 
@@ -95,10 +97,10 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     }
 
     private func setupRx() {
-        progress.rx_circleProgressDidFinish
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_circleProgressDidFinish")
-                guard let `self` = self else { return }
+        progress.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "CircleProgress.rx_action")
+                guard let `self` = self, let action = action.element, case .finish = action else { return }
                 UIView.animate(withDuration: 0.2, animations: {
                     self.alpha = 0
                     self.circleMenuItems.forEach({ menuItem in
@@ -107,10 +109,10 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                     })
                 }, completion: { finished in
                     if finished {
-                        self.rx_circleMenuDidClose.onNext(())
+                        self.rx_action.onNext(.close)
                     }
                 })
-                log.eventOut(chain: "rx_circleProgressDidFinish")
+                log.eventOut(chain: "CircleProgress.rx_action")
             }
             .disposed(by: disposeBag)
     }
@@ -168,7 +170,6 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                     // ボタンタップ
                     nextCircleMenuItems[index].rx.tap
                         .subscribe(onNext: { [weak self] in
-                            log.eventIn(chain: "rx_tap")
                             guard let `self` = self else { return }
                             if !self.isClosing {
                                 nextCircleMenuItems[index].scheduledAction = true
@@ -176,7 +177,6 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                             } else {
                                 log.warning("circlemenu already closing.")
                             }
-                            log.eventOut(chain: "rx_tap")
                         })
                         .disposed(by: rx.disposeBag)
 
@@ -223,7 +223,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                                 menuItem.alpha = 0
                             }, completion: { finished in
                                 if finished {
-                                    self.rx_circleMenuDidClose.onNext(())
+                                    self.rx_action.onNext(.close)
                                 }
                             })
                         } else {
@@ -251,7 +251,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
             // エッジスワイプしたが、すぐに離したためMOVEまでイベントがいかないパターン
             log.debug("edge swipe cancelled.")
             isClosing = true
-            rx_circleMenuDidClose.onNext(())
+            rx_action.onNext(.close)
         }
     }
 
@@ -267,7 +267,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                 })
             }, completion: { finished in
                 if finished {
-                    self.rx_circleMenuDidClose.onNext(())
+                    self.rx_action.onNext(.close)
                 }
             })
         } else if center.x > AppConst.DEVICE.DISPLAY_SIZE.width * 0.98 {
@@ -280,7 +280,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
                 })
             }, completion: { finished in
                 if finished {
-                    self.rx_circleMenuDidClose.onNext(())
+                    self.rx_action.onNext(.close)
                 }
             })
         }
@@ -339,7 +339,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
     private func executeCircleMenuAction() -> Bool {
         for item in circleMenuItems where item.scheduledAction {
             isClosing = true
-            rx_circleMenuDidSelect.onNext((operation: item.operation, point: initialPt!))
+            rx_action.onNext(.select(operation: item.operation, point: initialPt!))
             return true
         }
         return false
@@ -360,7 +360,7 @@ extension CircleMenu: EGApplicationDelegate {
             // CircleMenuItemを作成する
             if initialPt == nil {
                 // サークルメニューが作成されることを伝える
-                rx_circleMenuDidActive.onNext(())
+                rx_action.onNext(.active)
                 initialPt = pt
                 let circleMenuLocations = swipeDirection == .left ? CircleMenuLeftLocation.locations() : CircleMenuRightLocation.locations()
                 for (index, circleMenuItem) in circleMenuItems.enumerated() {
