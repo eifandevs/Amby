@@ -104,12 +104,10 @@ class SearchMenuTableView: UIView {
                     // ボタンタップ
                     button.rx.tap
                         .subscribe(onNext: { [weak self] in
-                            log.eventIn(chain: "rx_tap")
                             guard let `self` = self else { return }
                             // サーチメニューが透明になっている時にタップ
                             self.rx_searchMenuDidClose.onNext(())
                             button.removeFromSuperview()
-                            log.eventOut(chain: "rx_tap")
                         })
                         .disposed(by: self.rx.disposeBag)
 

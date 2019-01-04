@@ -50,33 +50,27 @@ class MemoViewController: UIViewController {
         // ボタンタップ
         closeButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.viewModel.update(text: self.textView.text)
                 self.textView.resignFirstResponder()
                 self.dismiss(animated: true, completion: nil)
                 self.viewModel.close()
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
 
         // ボタンタップ
         cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 // キャンセル
                 self.textView.resignFirstResponder()
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
 
         rx_keyboardHeight
             .observeOn(MainScheduler.instance)
             .subscribe { [weak self] keyboardHeight in
-                log.eventIn(chain: "rx_keyboardHeight")
                 guard let `self` = self else { return }
-
                 if let keyboardHeight = keyboardHeight.element {
                     if keyboardHeight == 0 {
                         self.stackViewBottomConstraint.constant = self.initialStackViewBottomConstraint
@@ -85,7 +79,6 @@ class MemoViewController: UIViewController {
                         self.stackViewBottomConstraint.constant = keyboardHeight + margin
                     }
                 }
-                log.eventOut(chain: "rx_keyboardHeight")
             }
             .disposed(by: rx.disposeBag)
     }

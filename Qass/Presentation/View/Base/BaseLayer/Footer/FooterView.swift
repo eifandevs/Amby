@@ -464,7 +464,6 @@ extension FooterView: UIScrollViewDelegate {
 //        // ボタンタップ
 //        thumbnail.rx.tap
 //            .subscribe(onNext: { [weak self] in
-//                log.eventIn(chain: "rx_tap")
 //                guard let `self` = self else { return }
 //                let tappedContext = thumbnail.context
 //                if tappedContext == self.viewModel.currentContext {
@@ -472,7 +471,6 @@ extension FooterView: UIScrollViewDelegate {
 //                } else {
 //                    self.viewModel.change(context: thumbnail.context)
 //                }
-//                log.eventOut(chain: "rx_tap")
 //            })
 //            .disposed(by: rx.disposeBag)
 //

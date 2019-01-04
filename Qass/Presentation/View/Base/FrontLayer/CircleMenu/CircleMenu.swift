@@ -370,7 +370,6 @@ extension CircleMenu: EGApplicationDelegate {
                     // ボタンタップ
                     circleMenuItem.rx.tap
                         .subscribe(onNext: { [weak self] in
-                            log.eventIn(chain: "rx_tap")
                             guard let `self` = self else { return }
                             if !self.isClosing {
                                 circleMenuItem.scheduledAction = true
@@ -378,7 +377,6 @@ extension CircleMenu: EGApplicationDelegate {
                             } else {
                                 log.warning("circlemenu already closing.")
                             }
-                            log.eventOut(chain: "rx_tap")
                         })
                         .disposed(by: rx.disposeBag)
 

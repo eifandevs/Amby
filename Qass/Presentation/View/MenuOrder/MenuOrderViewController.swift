@@ -43,29 +43,23 @@ class MenuOrderViewController: UIViewController {
     private func setupRx() {
         initButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.viewModel.initialize()
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: disposeBag)
 
         closeButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.dismiss(animated: true, completion: nil)
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: disposeBag)
 
         okButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.viewModel.changeOrder()
                 self.dismiss(animated: true, completion: nil)
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: disposeBag)
 

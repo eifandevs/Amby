@@ -188,10 +188,8 @@ class FrontLayer: UIView {
         // ボタンタップ
         self.overlay.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.closeWithOptionMenu()
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: self.rx.disposeBag)
         

@@ -63,7 +63,6 @@ class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
 
         longPressRecognizer.rx.event
             .subscribe { [weak self] sender in
-                log.eventIn(chain: "rx_longPress")
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
@@ -80,7 +79,6 @@ class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
                         }
                     }
                 }
-                log.eventOut(chain: "rx_longPress")
             }
             .disposed(by: rx.disposeBag)
 
