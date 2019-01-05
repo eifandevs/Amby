@@ -24,7 +24,9 @@ public final class FavoriteUseCase {
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
-    private init() {}
+    private init() {
+        setupRx()
+    }
 
     private func setupRx() {
         // エラー監視
