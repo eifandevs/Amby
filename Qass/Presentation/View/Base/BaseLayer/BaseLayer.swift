@@ -11,11 +11,15 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum BaseLayerAction {
+    case invalidate(swipeDirection: EdgeSwipeDirection)
+}
+
 /// ヘッダーとボディとフッターの管理
 /// BaseViewからの通知をHeaderViewに伝える
 class BaseLayer: UIView {
-    /// 無効化通知用RX
-    let rx_baseLayerDidInvalidate = PublishSubject<EdgeSwipeDirection>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<BaseLayerAction>()
 
     let viewModel = BaseLayerViewModel()
     let headerViewOriginY: (max: CGFloat, min: CGFloat) = (0, -(AppConst.BASE_LAYER.HEADER_HEIGHT - AppConst.DEVICE.STATUS_BAR_HEIGHT))
@@ -51,7 +55,6 @@ class BaseLayer: UIView {
         // キーボード表示の処理(フォームの自動設定)
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_UIKeyboardDidShow")
                 guard let `self` = self else { return }
                 if !self.isHeaderViewEditing && self.viewModel.canAutoFill {
                     // 自動入力オペ要求
@@ -59,162 +62,61 @@ class BaseLayer: UIView {
                 } else {
                     log.warning("cannot autofill")
                 }
-                log.eventOut(chain: "rx_UIKeyboardDidShow")
             }
             .disposed(by: rx.disposeBag)
 
         // フォアグラウンド時にベースビューの位置をMinにする
         NotificationCenter.default.rx.notification(.UIApplicationWillEnterForeground, object: nil)
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_UIApplicationWillEnterForeground")
                 guard let `self` = self else { return }
                 self.baseView.slideToMax()
-                log.eventOut(chain: "rx_UIApplicationWillEnterForeground")
             }
             .disposed(by: rx.disposeBag)
 
-        // BaseViewスワイプ監視
-        baseView.rx_baseViewDidEdgeSwiped
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_baseViewDidEdgeSwiped")
-                guard let `self` = self else { return }
-                if let swipeDirection = object.element {
+        // BaseViewアクション監視
+        baseView.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "BaseView.rx_action")
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .swipe(direction):
                     // 検索中の場合は、検索画面を閉じる
                     if self.searchMenuTableView != nil {
                         log.debug("close search menu.")
-                        self.endEditing()
+                        self.endEditingWithHeader()
                         self.validateUserInteraction()
                     } else {
-                        self.rx_baseLayerDidInvalidate.onNext(swipeDirection)
+                        self.rx_action.onNext(.invalidate(swipeDirection: direction))
                     }
+                case let .slide(distance):
+                    self.headerView.slide(value: distance)
+                case .slideToMax: self.headerView.slideToMax()
+                case .slideToMin: self.headerView.slideToMin()
+                default: break
                 }
-                log.eventOut(chain: "rx_baseViewDidEdgeSwiped")
+                log.eventOut(chain: "BaseView.rx_action")
             }
             .disposed(by: rx.disposeBag)
 
-        // BaseViewスライド監視
-        baseView.rx_baseViewDidSlide
-            .subscribe { [weak self] object in
-                // ログが大量に出るので、コメントアウト
-                //                log.eventIn(chain: "rx_baseViewDidSlide")
-                guard let `self` = self else { return }
-                if let speed = object.element {
-                    self.headerView.slide(value: speed)
+        // HeaderViewアクション監視
+        headerView.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "HeaderView.rx_action")
+                guard let `self` = self, let action = action.element else { return }
+
+                switch action {
+                case .beginSearching: self.beginSearching(frame: frame)
+                case .endEditing:
+                    // ヘッダーのクローズボタン押下 or 検索開始
+                    // ヘッダーフィールドやヘッダービューはすでにクローズ処理を実施しているので、サーチメニューの削除をする
+                    self.endEditing()
+                case .beginGreping: self.beginGreping(frame: frame)
+                case .endGreping:
+                    // ヘッダーのクローズボタン押下 or 検索開始
+                    // ヘッダーフィールドやヘッダービューはすでにクローズ処理を実施しているので、サーチメニューの削除をする
+                    self.endGreping()
                 }
-                //                log.eventOut(chain: "rx_baseViewDidSlide")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // BaseViewスライドMax監視
-        baseView.rx_baseViewDidSlideToMax
-            .subscribe { [weak self] _ in
-                // ログが大量に出るので、コメントアウト
-                //                log.eventIn(chain: "rx_baseViewDidSlideToMax")
-                guard let `self` = self else { return }
-                self.headerView.slideToMax()
-                //                log.eventOut(chain: "rx_baseViewDidSlideToMax")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // BaseViewスライドMin監視
-        baseView.rx_baseViewDidSlideToMin
-            .subscribe { [weak self] _ in
-                // ログが大量に出るので、コメントアウト
-                //                log.eventIn(chain: "rx_baseViewDidSlideToMin")
-                guard let `self` = self else { return }
-                self.headerView.slideToMin()
-                //                log.eventOut(chain: "rx_baseViewDidSlideToMin")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // HeaderView編集開始監視
-        headerView.rx_headerViewDidbeginSearching
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_headerViewDidbeginSearching")
-                guard let `self` = self else { return }
-                self.baseView.slideToMax()
-
-                self.isHeaderViewEditing = true
-                self.searchMenuTableView = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
-                // サーチメニュー編集終了監視
-                self.searchMenuTableView!.rx_searchMenuDidEndEditing
-                    .subscribe { [weak self] _ in
-                        log.eventIn(chain: "rx_searchMenuDidEndEditing")
-                        guard let `self` = self else { return }
-                        self.headerView.closeKeyBoard()
-                        log.eventOut(chain: "rx_searchMenuDidEndEditing")
-                    }
-                    .disposed(by: self.rx.disposeBag)
-
-                // サーチメニュークローズ監視
-                // サーチメニューのクローズ要求を受けて、ヘッダービューにクローズ要求を送り、自分はサーチメニューの削除をする
-                self.searchMenuTableView!.rx_searchMenuDidClose
-                    .subscribe { [weak self] _ in
-                        log.eventIn(chain: "rx_searchMenuDidClose")
-                        guard let `self` = self else { return }
-                        self.endEditing()
-                        log.eventOut(chain: "rx_searchMenuDidClose")
-                    }
-                    .disposed(by: self.rx.disposeBag)
-
-                self.addSubview(self.searchMenuTableView!)
-                self.searchMenuTableView!.getModelData()
-                log.eventOut(chain: "rx_headerViewDidbeginSearching")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // HeaderView編集終了監視
-        // ヘッダーのクローズボタン押下 or 検索開始
-        // ヘッダーフィールドやヘッダービューはすでにクローズ処理を実施しているので、サーチメニューの削除をする
-        headerView.rx_headerViewDidEndEditing
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_headerViewDidEndEditing")
-                guard let `self` = self else { return }
-                EGApplication.sharedMyApplication.egDelegate = self.baseView
-                self.isHeaderViewEditing = false
-                self.searchMenuTableView!.removeFromSuperview()
-                self.searchMenuTableView = nil
-                log.eventOut(chain: "rx_headerViewDidEndEditing")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // HeaderViewグレップ開始監視
-        headerView.rx_headerViewDidBeginGreping
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_headerViewDidBeginGreping")
-                guard let `self` = self else { return }
-                self.baseView.slideToMax()
-
-                self.isHeaderViewGreping = true
-                self.grepOverlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: self.headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - self.headerView.frame.size.height)))
-
-                // グレップ中に画面をタップ
-                self.grepOverlay!.rx.tap
-                    .subscribe(onNext: { [weak self] in
-                        log.eventIn(chain: "rx_tap")
-                        guard let `self` = self else { return }
-                        self.endGreping()
-                        log.eventOut(chain: "rx_tap")
-                    })
-                    .disposed(by: self.rx.disposeBag)
-
-                self.addSubview(self.grepOverlay!)
-                log.eventOut(chain: "rx_headerViewDidBeginGreping")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // HeaderViewグレップ終了監視
-        // ヘッダーのクローズボタン押下 or 検索開始
-        // ヘッダーフィールドやヘッダービューはすでにクローズ処理を実施しているので、サーチメニューの削除をする
-        headerView.rx_headerViewDidEndGreping
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_headerViewDidEndGreping")
-                guard let `self` = self else { return }
-                EGApplication.sharedMyApplication.egDelegate = self.baseView
-                self.isHeaderViewGreping = false
-                self.grepOverlay!.removeFromSuperview()
-                self.grepOverlay = nil
-                log.eventOut(chain: "rx_headerViewDidEndGreping")
+                log.eventOut(chain: "HeaderView.rx_action")
             }
             .disposed(by: rx.disposeBag)
     }
@@ -243,13 +145,61 @@ class BaseLayer: UIView {
 
     // MARK: Private Method
 
+    /// 検索開始
+    private func beginSearching(frame: CGRect) {
+        baseView.slideToMax()
+
+        isHeaderViewEditing = true
+        searchMenuTableView = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - headerView.frame.size.height)))
+        // サーチメニューアクション監視
+        searchMenuTableView!.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "SearchMenuTableView.rx_action")
+                guard let `self` = self, let action = action.element else { return }
+
+                switch action {
+                case .endEditing:
+                    self.headerView.closeKeyBoard()
+                case .close:
+                    // サーチメニューのクローズ要求を受けて、ヘッダービューにクローズ要求を送り、自分はサーチメニューの削除をする
+                    self.endEditingWithHeader()
+                }
+                log.eventOut(chain: "SearchMenuTableView.rx_action")
+            }
+            .disposed(by: rx.disposeBag)
+
+        addSubview(searchMenuTableView!)
+        searchMenuTableView!.getModelData()
+    }
+
     /// 編集モード終了
     private func endEditing() {
         EGApplication.sharedMyApplication.egDelegate = baseView
         isHeaderViewEditing = false
         searchMenuTableView!.removeFromSuperview()
         searchMenuTableView = nil
+    }
+
+    private func endEditingWithHeader() {
+        endEditing()
         headerView.endEditing(headerFieldUpdate: false)
+    }
+
+    private func beginGreping(frame: CGRect) {
+        baseView.slideToMax()
+
+        isHeaderViewGreping = true
+        grepOverlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - headerView.frame.size.height)))
+
+        // グレップ中に画面をタップ
+        grepOverlay!.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.endGrepingWithHeader()
+            })
+            .disposed(by: rx.disposeBag)
+
+        addSubview(grepOverlay!)
     }
 
     /// グレップモード終了
@@ -258,6 +208,10 @@ class BaseLayer: UIView {
         isHeaderViewGreping = false
         grepOverlay!.removeFromSuperview()
         grepOverlay = nil
+    }
+
+    private func endGrepingWithHeader() {
+        endGreping()
         headerView.endGreping()
     }
 }

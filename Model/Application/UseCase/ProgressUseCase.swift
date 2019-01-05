@@ -10,27 +10,58 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum ProgressUseCaseAction {
+    case updateProgress(progress: CGFloat)
+    case updateText(text: String)
+}
+
 /// ヘッダーユースケース
 public final class ProgressUseCase {
     public static let s = ProgressUseCase()
 
-    /// プログレス更新通知用RX
-    public let rx_progressUseCaseDidChangeProgress = Observable
-        .merge([
-            ProgressDataModel.s.rx_progressDataModelDidUpdateProgress,
-            NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) }
-        ])
-        .flatMap { progress -> Observable<CGFloat> in
-            return Observable.just(progress)
-        }
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<ProgressUseCaseAction>()
 
-    /// テキストフィールド更新通知用RX
-    public let rx_progressUseCaseDidChangeField = ProgressDataModel.s.rx_progressDataModelDidUpdateText
-        .flatMap { text -> Observable<String> in
-            return Observable.just(text)
-        }
+    /// Observable自動解放
+    let disposeBag = DisposeBag()
 
-    private init() {}
+    private init() {
+        setupRx()
+    }
+
+    private func setupRx() {
+        // プログレス監視
+        Observable
+            .merge([
+                ProgressDataModel.s.rx_action
+                    .flatMap { action -> Observable<CGFloat> in
+                        if case let .updateProgress(progress) = action {
+                            return Observable.just(progress)
+                        } else {
+                            return Observable.empty()
+                        }
+                    },
+                NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) }
+            ])
+            .subscribe { [weak self] progress in
+                guard let `self` = self else { return }
+
+                if let progress = progress.element {
+                    self.rx_action.onNext(.updateProgress(progress: progress))
+                }
+            }
+            .disposed(by: disposeBag)
+
+        // テキストフィールド監視
+        ProgressDataModel.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self else { return }
+                if let action = action.element, case let .updateText(text) = action {
+                    self.rx_action.onNext(.updateText(text: text))
+                }
+            }
+            .disposed(by: disposeBag)
+    }
 
     public func updateProgress(progress: CGFloat) {
         ProgressDataModel.s.updateProgress(progress: progress)

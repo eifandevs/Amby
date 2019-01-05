@@ -11,6 +11,10 @@ import Moya
 import RxCocoa
 import RxSwift
 
+enum ArticleDataModelAction {
+    case update(articles: [Article])
+}
+
 enum ArticleDataModelError {
     case get
 }
@@ -25,8 +29,8 @@ extension ArticleDataModelError: ModelError {
 }
 
 final class ArticleDataModel {
-    /// 記事取得通知用RX
-    let rx_articleDataModelDidUpdate = PublishSubject<[Article]>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<ArticleDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<ArticleDataModelError>()
 
@@ -58,34 +62,26 @@ final class ArticleDataModel {
                 }
                 .subscribe(
                     onSuccess: { [weak self] response in
-                        log.eventIn(chain: "rx_article")
-
                         guard let `self` = self else { return }
                         if response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                             log.debug("get article success.")
                             self.articles = response.data
-                            self.rx_articleDataModelDidUpdate.onNext(response.data)
+                            self.rx_action.onNext(.update(articles: response.data))
                         } else {
                             log.error("get article error. code: \(response.code)")
-                            self.rx_articleDataModelDidUpdate.onNext([])
+                            self.rx_error.onNext(.get)
+                            self.rx_action.onNext(.update(articles: []))
                         }
-
-                        log.eventOut(chain: "rx_article")
                     }, onError: { [weak self] error in
                         guard let `self` = self else { return }
-
-                        log.eventIn(chain: "rx_article")
-
                         log.error("get article error. error: \(error.localizedDescription)")
                         self.rx_error.onNext(.get)
-                        self.rx_articleDataModelDidUpdate.onNext([])
-
-                        log.eventOut(chain: "rx_article")
+                        self.rx_action.onNext(.update(articles: []))
                 })
                 .disposed(by: disposeBag)
         } else {
             // 取得済みルート
-            rx_articleDataModelDidUpdate.onNext(articles)
+            rx_action.onNext(.update(articles: articles))
         }
     }
 }

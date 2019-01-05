@@ -10,14 +10,17 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum ScrollUseCaseAction {
+    case scrollUp
+    case autoScroll
+}
+
 /// スクロールユースケース
 public final class ScrollUseCase {
     public static let s = ScrollUseCase()
 
-    /// スクロールアップ通知用RX
-    public let rx_scrollUseCaseDidRequestScrollUp = PublishSubject<()>()
-    /// 自動スクロール通知用RX
-    public let rx_scrollUseCaseDidRequestAutoScroll = PublishSubject<()>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<ScrollUseCaseAction>()
 
     public var autoScrollInterval: CGFloat {
         get {
@@ -32,11 +35,11 @@ public final class ScrollUseCase {
 
     /// スクロールアップ
     public func scrollUp() {
-        rx_scrollUseCaseDidRequestScrollUp.onNext(())
+        rx_action.onNext(.scrollUp)
     }
 
     /// 自動スクロール
     public func autoScroll() {
-        rx_scrollUseCaseDidRequestAutoScroll.onNext(())
+        rx_action.onNext(.autoScroll)
     }
 }

@@ -37,10 +37,8 @@ class OptionMenuMemoTableViewCell: UITableViewCell {
     func setupRx() {
         lockButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.delegate?.optionMenuMemoTableViewCellDidInvertLock(row: self.row)
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
     }

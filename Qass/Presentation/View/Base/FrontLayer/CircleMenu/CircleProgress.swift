@@ -10,11 +10,17 @@ import Foundation
 import RxSwift
 import UIKit
 
+enum CircleProgressAction {
+    case finish
+}
+
 class CircleProgress: UIView {
     private var circle: UIView
     private var progress: CAShapeLayer!
     private var progressTimer: Timer!
-    let rx_circleProgressDidFinish = PublishSubject<()>()
+
+    /// アクション通知用RX
+    let rx_action = PublishSubject<CircleProgressAction>()
 
     override init(frame: CGRect) {
         circle = UIView()
@@ -85,7 +91,7 @@ class CircleProgress: UIView {
             log.debug("circle animation stop")
             progressTimer.invalidate()
             progressTimer = nil
-            rx_circleProgressDidFinish.onNext(())
+            rx_action.onNext(.finish)
         }
     }
 }

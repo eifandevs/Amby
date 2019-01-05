@@ -10,32 +10,34 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum HistoryUseCaseAction {
+    case back
+    case forward
+    case load(url: String)
+}
+
 /// ヒストリーユースケース
 public final class HistoryUseCase {
     public static let s = HistoryUseCase()
 
-    /// ヒストリーバック通知用RX
-    public let rx_historyUseCaseDidRequestHistoryBack = PublishSubject<()>()
-    /// ヒストリーフォワード通知用RX
-    public let rx_historyUseCaseDidRequestHistoryForward = PublishSubject<()>()
-    /// ロードリクエスト通知用RX
-    public let rx_historyUseCaseDidRequestLoad = PublishSubject<String>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<HistoryUseCaseAction>()
 
     private init() {}
 
     /// ヒストリーバック
     public func goBack() {
-        rx_historyUseCaseDidRequestHistoryBack.onNext(())
+        rx_action.onNext(.back)
     }
 
     /// ヒストリーフォワード
     public func goForward() {
-        rx_historyUseCaseDidRequestHistoryForward.onNext(())
+        rx_action.onNext(.forward)
     }
 
     /// ロードリクエスト
     public func load(url: String) {
-        rx_historyUseCaseDidRequestLoad.onNext(url)
+        rx_action.onNext(.load(url: url))
     }
 
     public func getList() -> [String] {

@@ -10,15 +10,17 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum MemoUseCaseAction {
+    case present(memo: Memo)
+    case close
+}
+
 /// メモユースケース
 public final class MemoUseCase {
     public static let s = MemoUseCase()
 
-    /// オープンリクエスト通知用RX
-    public let rx_memoUseCaseDidRequestOpen = PublishSubject<Memo>()
-
-    /// メモ画面クローズ通知用RX
-    public let rx_memoUseCaseDidClose = PublishSubject<()>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<MemoUseCaseAction>()
 
     private init() {}
 
@@ -27,11 +29,11 @@ public final class MemoUseCase {
     }
 
     public func open(memo: Memo) {
-        rx_memoUseCaseDidRequestOpen.onNext(memo)
+        rx_action.onNext(.present(memo: memo))
     }
 
     public func close() {
-        rx_memoUseCaseDidClose.onNext(())
+        rx_action.onNext(.close)
     }
 
     public func insert(memo: Memo) {

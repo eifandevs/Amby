@@ -10,17 +10,34 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-/// 通知ユースケース
+public enum NewsUseCaseAction {
+    case update(articles: [Article])
+}
+
+/// ニュースユースケース
 public final class NewsUseCase {
     public static let s = NewsUseCase()
 
-    /// プログレス更新通知用RX
-    public let rx_newsUseCaseDidUpdate = ArticleDataModel.s.rx_articleDataModelDidUpdate
-        .flatMap { articles -> Observable<[Article]> in
-            return Observable.just(articles)
-        }
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<NewsUseCaseAction>()
 
-    private init() {}
+    /// Observable自動解放
+    let disposeBag = DisposeBag()
+
+    private init() {
+        setupRx()
+    }
+
+    private func setupRx() {
+        ArticleDataModel.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self else { return }
+                if let action = action.element, case let .update(articles) = action {
+                    self.rx_action.onNext(.update(articles: articles))
+                }
+            }
+            .disposed(by: disposeBag)
+    }
 
     public func get() {
         ArticleDataModel.s.get()

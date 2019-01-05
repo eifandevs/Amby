@@ -77,10 +77,8 @@ class PasscodeViewController: UIViewController {
     private func setupRx() {
         closeButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.dismiss(animated: true, completion: nil)
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: disposeBag)
 
@@ -90,44 +88,31 @@ class PasscodeViewController: UIViewController {
             .bind(to: titleLabel.rx.text)
             .disposed(by: disposeBag)
 
-        // 確認コード入力要求監視
-        viewModel.rx_passcodeViewControllerViewModelWillConfirm
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_passcodeViewControllerViewModelWillConfirm")
-                guard let `self` = self else { return }
-                self.passcodeContainerView.clearInput()
-                log.eventOut(chain: "rx_passcodeViewControllerViewModelWillConfirm")
+        // アクション監視
+        viewModel.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn("PasscodeViewControllerViewModel.rx_action")
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case .confirm:
+                    self.passcodeContainerView.clearInput()
+                case .confirmSuccess:
+                    self.dismiss(animated: true, completion: nil)
+                case .register:
+                    self.dismiss(animated: true, completion: nil)
+                }
+                log.eventOut("PasscodeViewControllerViewModel.rx_action")
             }
             .disposed(by: rx.disposeBag)
 
-        // 確認コード入力失敗監視
-        viewModel.rx_passcodeViewControllerViewModelDidConfirmError
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_passcodeViewControllerViewModelDidConfirmError")
-                guard let `self` = self else { return }
+        // エラー監視
+        viewModel.rx_error
+            .subscribe { [weak self] error in
+                log.eventIn("PasscodeViewControllerViewModel.rx_error")
+                guard let `self` = self, let error = error.element, case .confirm = error else { return }
                 self.passcodeContainerView.wrongPassword()
                 self.passcodeContainerView.clearInput()
-                log.eventOut(chain: "rx_passcodeViewControllerViewModelDidConfirmError")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // 確認コード入力成功監視
-        viewModel.rx_passcodeViewControllerViewModelDidConfirmSuccess
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_passcodeViewControllerViewModelDidConfirmSuccess")
-                guard let `self` = self else { return }
-                self.dismiss(animated: true, completion: nil)
-                log.eventOut(chain: "rx_passcodeViewControllerViewModelDidConfirmSuccess")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // パスコード登録成功監視
-        viewModel.rx_passcodeViewControllerViewModelDidRegister
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_passcodeViewControllerViewModelDidRegister")
-                guard let `self` = self else { return }
-                self.dismiss(animated: true, completion: nil)
-                log.eventOut(chain: "rx_passcodeViewControllerViewModelDidRegister")
+                log.eventOut("PasscodeViewControllerViewModel.rx_error")
             }
             .disposed(by: rx.disposeBag)
     }

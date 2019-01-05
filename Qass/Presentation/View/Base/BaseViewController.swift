@@ -86,7 +86,6 @@ class BaseViewController: UIViewController {
         // アクション監視
         viewModel.rx_action
             .subscribe { [weak self] action in
-                log.eventIn(chain: "rx_action")
                 guard let `self` = self, let action = action.element else { return }
 
                 switch action {
@@ -101,7 +100,6 @@ class BaseViewController: UIViewController {
                 case .mailer: self.mailer()
                 case let .notice(message, isSuccess): self.notice(message: message, isSuccess: isSuccess)
                 }
-                log.eventOut(chain: "rx_action")
             }
             .disposed(by: rx.disposeBag)
 
@@ -110,23 +108,19 @@ class BaseViewController: UIViewController {
         splash!.view.frame.origin = CGPoint.zero
 
         // スプラッシュ終了監視
-        splash!.rx_splashViewControllerDidEndDrawing
+        splash!.rx_action
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_splashViewControllerDidEndDrawing")
-                guard let `self` = self else { return }
-                if let splash = self.splash {
-                    UIView.animate(withDuration: 0.3, animations: {
-                        splash.view.alpha = 0
-                    }, completion: { finished in
-                        if finished {
-                            splash.view.removeFromSuperview()
-                            splash.removeFromParentViewController()
-                            self.splash = nil
-                        }
-                    })
-                }
-                log.eventOut(chain: "rx_splashViewControllerDidEndDrawing")
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, let splash = self.splash, case .endDrawing = action else { return }
+                UIView.animate(withDuration: 0.3, animations: {
+                    splash.view.alpha = 0
+                }, completion: { finished in
+                    if finished {
+                        splash.view.removeFromSuperview()
+                        splash.removeFromParentViewController()
+                        self.splash = nil
+                    }
+                })
             }
             .disposed(by: rx.disposeBag)
 
@@ -139,25 +133,23 @@ class BaseViewController: UIViewController {
         baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: view.bounds.size))
 
         // ベースレイヤー無効化監視
-        baseLayer!.rx_baseLayerDidInvalidate
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_baseLayerDidInvalidate")
-                guard let `self` = self else { return }
-                if let direction = object.element {
-                    self.frontLayer = FrontLayer(frame: self.baseLayer!.frame, swipeDirection: direction)
-                    self.frontLayer!.rx_frontLayerDidInvalidate
-                        .subscribe({ [weak self] _ in
-                            log.eventIn(chain: "rx_frontLayerDidInvalidate")
-                            guard let `self` = self else { return }
-                            self.frontLayer!.removeFromSuperview()
-                            self.frontLayer = nil
-                            self.baseLayer!.validateUserInteraction()
-                            log.eventOut(chain: "rx_frontLayerDidInvalidate")
-                        })
-                        .disposed(by: self.rx.disposeBag)
-                    self.view.addSubview(self.frontLayer!)
-                }
-                log.eventOut(chain: "rx_baseLayerDidInvalidate")
+        baseLayer!.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "baseLayer.rx_action")
+                guard let `self` = self, let action = action.element, case let .invalidate(swipeDirection) = action else { return }
+                self.frontLayer = FrontLayer(frame: self.baseLayer!.frame, swipeDirection: swipeDirection)
+                self.frontLayer!.rx_action
+                    .subscribe({ [weak self] action in
+                        log.eventIn(chain: "frontLayer.rx_action")
+                        guard let `self` = self, let action = action.element, case .invalidate = action else { return }
+                        self.frontLayer!.removeFromSuperview()
+                        self.frontLayer = nil
+                        self.baseLayer!.validateUserInteraction()
+                        log.eventOut(chain: "frontLayer.rx_action")
+                    })
+                    .disposed(by: self.rx.disposeBag)
+                self.view.addSubview(self.frontLayer!)
+                log.eventOut(chain: "baseLayer.rx_action")
             }
             .disposed(by: rx.disposeBag)
 

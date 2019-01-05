@@ -11,9 +11,13 @@ import Model
 import RxCocoa
 import RxSwift
 
+enum OptionMenuHistoryTableViewModelAction {
+    case gotData
+}
+
 final class OptionMenuHistoryTableViewModel {
-    /// データ取得通知用RX
-    let rx_optionMenuHistoryTableViewModelDidGetData = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<OptionMenuHistoryTableViewModelAction>()
     /// セルの高さ
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     /// セクション数
@@ -74,7 +78,7 @@ final class OptionMenuHistoryTableViewModel {
                     sections.append(Section(dateString: dateString, rows: rows))
                 }
             })
-            rx_optionMenuHistoryTableViewModelDidGetData.onNext(())
+            rx_action.onNext(.gotData)
         }
     }
 

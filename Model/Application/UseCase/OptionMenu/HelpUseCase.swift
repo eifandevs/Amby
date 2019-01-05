@@ -10,17 +10,21 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum HelpUseCaseAction {
+    case present(title: String, message: String)
+}
+
 /// ヘルプユースケース
 public final class HelpUseCase {
     public static let s = HelpUseCase()
 
-    /// ヘルプ画面表示通知用RX
-    public let rx_helpUseCaseDidRequestPresentHelpScreen = PublishSubject<(title: String, message: String)>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<HelpUseCaseAction>()
 
     private init() {}
 
     /// ヘルプ画面表示
     public func open(title: String, message: String) {
-        rx_helpUseCaseDidRequestPresentHelpScreen.onNext((title: title, message: message))
+        rx_action.onNext(.present(title: title, message: message))
     }
 }

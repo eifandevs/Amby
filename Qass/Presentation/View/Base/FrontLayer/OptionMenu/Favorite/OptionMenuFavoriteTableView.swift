@@ -10,9 +10,13 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum OptionMenuFavoriteTableViewAction {
+    case close
+}
+
 class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
     // メニュークローズ通知用RX
-    let rx_optionMenuFavoriteDidClose = PublishSubject<()>()
+    let rx_action = PublishSubject<OptionMenuFavoriteTableViewAction>()
 
     private let viewModel = OptionMenuFavoriteTableViewModel()
     private let tableView = UITableView()
@@ -59,7 +63,6 @@ class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
 
         longPressRecognizer.rx.event
             .subscribe { [weak self] sender in
-                log.eventIn(chain: "rx_longPress")
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
@@ -76,7 +79,6 @@ class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
                         }
                     }
                 }
-                log.eventOut(chain: "rx_longPress")
             }
             .disposed(by: rx.disposeBag)
 
@@ -117,6 +119,6 @@ extension OptionMenuFavoriteTableView: UITableViewDelegate {
         // ページを表示
         viewModel.loadRequest(url: row.data.url)
         // 通知
-        rx_optionMenuFavoriteDidClose.onNext(())
+        rx_action.onNext(.close)
     }
 }

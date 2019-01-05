@@ -10,17 +10,21 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum PolicyUseCaseAction {
+    case load
+}
+
 /// ポリシーユースケース
 public final class PolicyUseCase {
     public static let s = PolicyUseCase()
 
-    /// オープンリクエスト通知用RX
-    public let rx_policyUseCaseDidRequestOpen = PublishSubject<()>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<PolicyUseCaseAction>()
 
     private init() {}
 
     /// ライセンス表示
     public func open() {
-        rx_policyUseCaseDidRequestOpen.onNext(())
+        rx_action.onNext(.load)
     }
 }

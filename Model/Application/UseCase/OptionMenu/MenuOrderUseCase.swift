@@ -10,17 +10,21 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum MenuOrderUseCaseAction {
+    case present
+}
+
 /// メニューオーダーユースケース
 public final class MenuOrderUseCase {
     public static let s = MenuOrderUseCase()
 
-    /// オープンリクエスト通知用RX
-    public let rx_menuOrderUseCaseDidRequestOpen = PublishSubject<()>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<MenuOrderUseCaseAction>()
 
     private init() {}
 
-    /// ライセンス表示
+    /// 表示
     public func open() {
-        rx_menuOrderUseCaseDidRequestOpen.onNext(())
+        rx_action.onNext(.present)
     }
 }

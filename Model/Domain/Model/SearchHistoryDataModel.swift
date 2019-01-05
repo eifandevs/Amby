@@ -10,6 +10,11 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+enum SearchHistoryDataModelAction {
+    case delete
+    case deleteAll
+}
+
 enum SearchHistoryDataModelError {
     case getList
     case delete
@@ -32,10 +37,8 @@ extension SearchHistoryDataModelError: ModelError {
 }
 
 final class SearchHistoryDataModel {
-    /// 削除通知用RX
-    let rx_searchHistoryDataModelDidDelete = PublishSubject<()>()
-    /// 全データ削除通知用RX
-    let rx_searchHistoryDataModelDidDeleteAll = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<SearchHistoryDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<SearchHistoryDataModelError>()
 
@@ -159,7 +162,7 @@ final class SearchHistoryDataModel {
             log.debug("deleteSearchHistory: \(deleteFiles)")
         }
 
-        rx_searchHistoryDataModelDidDelete.onNext(())
+        rx_action.onNext(.delete)
     }
 
     /// 検索履歴を全て削除
@@ -174,7 +177,7 @@ final class SearchHistoryDataModel {
         let createResult = localStorageRepository.create(.searchHistory(resource: nil))
 
         if case .success = createResult {
-            rx_searchHistoryDataModelDidDeleteAll.onNext(())
+            rx_action.onNext(.deleteAll)
         } else {
             rx_error.onNext(.delete)
         }

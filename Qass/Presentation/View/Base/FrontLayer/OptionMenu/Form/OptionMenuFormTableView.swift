@@ -10,9 +10,13 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum OptionMenuFormTableViewAction {
+    case close
+}
+
 class OptionMenuFormTableView: UIView, ShadowView, OptionMenuView {
-    // メニュークローズ通知用RX
-    let rx_optionMenuFormDidClose = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<OptionMenuFormTableViewAction>()
 
     private let viewModel = OptionMenuFormTableViewModel()
     private let tableView = UITableView()
@@ -59,22 +63,18 @@ class OptionMenuFormTableView: UIView, ShadowView, OptionMenuView {
 
         longPressRecognizer.rx.event
             .subscribe { [weak self] sender in
-                log.eventIn(chain: "rx_longPress")
-                guard let `self` = self else { return }
-                if let sender = sender.element {
-                    if sender.state == .began {
-                        let point: CGPoint = sender.location(in: self.tableView)
-                        let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
-                        if let indexPath = indexPath {
-                            self.tableView.beginUpdates()
-                            self.viewModel.removeRow(indexPath: indexPath)
-                            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                guard let `self` = self, let sender = sender.element else { return }
+                if sender.state == .began {
+                    let point: CGPoint = sender.location(in: self.tableView)
+                    let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
+                    if let indexPath = indexPath {
+                        self.tableView.beginUpdates()
+                        self.viewModel.removeRow(indexPath: indexPath)
+                        self.tableView.deleteRows(at: [indexPath], with: .automatic)
 
-                            self.tableView.endUpdates()
-                        }
+                        self.tableView.endUpdates()
                     }
                 }
-                log.eventOut(chain: "rx_longPress")
             }
             .disposed(by: rx.disposeBag)
 
@@ -113,6 +113,6 @@ extension OptionMenuFormTableView: UITableViewDelegate {
         let row = viewModel.getRow(indexPath: indexPath)
         // ページを表示
         viewModel.loadRequest(url: row.data.url)
-        rx_optionMenuFormDidClose.onNext(())
+        rx_action.onNext(.close)
     }
 }

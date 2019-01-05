@@ -11,9 +11,13 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum OptionMenuTableViewAction {
+    case close
+}
+
 class OptionMenuTableView: UIView, ShadowView, OptionMenuView {
-    // クローズ通知用RX
-    let rx_optionMenuTableViewDidClose = PublishSubject<()>()
+    // アクション通知用RX
+    let rx_action = PublishSubject<OptionMenuTableViewAction>()
 
     private let tableView = UITableView()
     private let viewModel = OptionMenuTableViewModel()
@@ -131,39 +135,39 @@ extension OptionMenuTableView: UITableViewDelegate {
         switch viewModel.getRow(indexPath: indexPath).cellType {
         case .trend:
             viewModel.loadTrend()
-            rx_optionMenuTableViewDidClose.onNext(())
+            rx_action.onNext(.close)
             return
         case .history:
             let historyTableView = OptionMenuHistoryTableView(frame: detailViewFrame)
-            historyTableView.rx_optionMenuHistoryDidClose
-                .subscribe({ [weak self] _ in
-                    log.eventIn(chain: "rx_optionMenuHistoryDidClose")
-                    guard let `self` = self else { return }
-                    self.rx_optionMenuTableViewDidClose.onNext(())
-                    log.eventOut(chain: "rx_optionMenuHistoryDidClose")
+            historyTableView.rx_action
+                .subscribe({ [weak self] action in
+                    log.eventIn(chain: "OptionMenuHistoryTableView.rx_action")
+                    guard let `self` = self, let action = action.element, case .close = action else { return }
+                    self.rx_action.onNext(.close)
+                    log.eventOut(chain: "OptionMenuHistoryTableView.rx_action")
                 })
                 .disposed(by: rx.disposeBag)
             // 詳細ビューは保持しておく
             detailView = historyTableView
         case .favorite:
             let favoriteTableView = OptionMenuFavoriteTableView(frame: detailViewFrame)
-            favoriteTableView.rx_optionMenuFavoriteDidClose
-                .subscribe({ [weak self] _ in
-                    log.eventIn(chain: "rx_optionMenuFavoriteDidClose")
-                    guard let `self` = self else { return }
-                    self.rx_optionMenuTableViewDidClose.onNext(())
-                    log.eventOut(chain: "rx_optionMenuFavoriteDidClose")
+            favoriteTableView.rx_action
+                .subscribe({ [weak self] action in
+                    log.eventIn(chain: "OptionMenuFavoriteTableView.rx_action")
+                    guard let `self` = self, let action = action.element, case .close = action else { return }
+                    self.rx_action.onNext(.close)
+                    log.eventOut(chain: "OptionMenuFavoriteTableView.rx_action")
                 })
                 .disposed(by: rx.disposeBag)
             detailView = favoriteTableView
         case .form:
             let formTableView = OptionMenuFormTableView(frame: detailViewFrame)
-            formTableView.rx_optionMenuFormDidClose
-                .subscribe({ [weak self] _ in
-                    log.eventIn(chain: "rx_optionMenuFormDidClose")
-                    guard let `self` = self else { return }
-                    self.rx_optionMenuTableViewDidClose.onNext(())
-                    log.eventOut(chain: "rx_optionMenuFormDidClose")
+            formTableView.rx_action
+                .subscribe({ [weak self] action in
+                    log.eventIn(chain: "OptionMenuFormTableView.rx_action")
+                    guard let `self` = self, let action = action.element, case .close = action else { return }
+                    self.rx_action.onNext(.close)
+                    log.eventOut(chain: "OptionMenuFormTableView.rx_action")
                 })
                 .disposed(by: rx.disposeBag)
             detailView = formTableView
@@ -172,12 +176,12 @@ extension OptionMenuTableView: UITableViewDelegate {
             detailView = memoTableView
         case .setting:
             let settingTableView = OptionMenuSettingTableView(frame: detailViewFrame)
-            settingTableView.rx_optionMenuSettingDidClose
-                .subscribe({ [weak self] _ in
-                    log.eventIn(chain: "rx_optionMenuSettingDidClose")
-                    guard let `self` = self else { return }
-                    self.rx_optionMenuTableViewDidClose.onNext(())
-                    log.eventOut(chain: "rx_optionMenuSettingDidClose")
+            settingTableView.rx_action
+                .subscribe({ [weak self] action in
+                    log.eventIn(chain: "OptionMenuSettingTableView.rx_action")
+                    guard let `self` = self, let action = action.element, case .close = action else { return }
+                    self.rx_action.onNext(.close)
+                    log.eventOut(chain: "OptionMenuSettingTableView.rx_action")
                 })
                 .disposed(by: rx.disposeBag)
             detailView = settingTableView
@@ -186,23 +190,23 @@ extension OptionMenuTableView: UITableViewDelegate {
             detailView = helpTableView
         case .cooperation:
             let cooperationTableView = OptionMenuCooperationTableView(frame: detailViewFrame)
-            cooperationTableView.rx_optionMenuAppDidClose
-                .subscribe({ [weak self] _ in
-                    log.eventIn(chain: "rx_optionMenuAppDidClose")
-                    guard let `self` = self else { return }
-                    self.rx_optionMenuTableViewDidClose.onNext(())
-                    log.eventOut(chain: "rx_optionMenuAppDidClose")
+            cooperationTableView.rx_action
+                .subscribe({ [weak self] action in
+                    log.eventIn(chain: "OptionMenuCooperationTableView.rx_action")
+                    guard let `self` = self, let action = action.element, case .close = action else { return }
+                    self.rx_action.onNext(.close)
+                    log.eventOut(chain: "OptionMenuCooperationTableView.rx_action")
                 })
                 .disposed(by: rx.disposeBag)
             detailView = cooperationTableView
         case .app:
             let appTableView = OptionMenuAppTableView(frame: detailViewFrame)
-            appTableView.rx_optionMenuAppDidClose
-                .subscribe({ [weak self] _ in
-                    log.eventIn(chain: "rx_optionMenuAppDidClose")
-                    guard let `self` = self else { return }
-                    self.rx_optionMenuTableViewDidClose.onNext(())
-                    log.eventOut(chain: "rx_optionMenuAppDidClose")
+            appTableView.rx_action
+                .subscribe({ [weak self] action in
+                    log.eventIn(chain: "OptionMenuAppTableView.rx_action")
+                    guard let `self` = self, let action = action.element, case .close = action else { return }
+                    self.rx_action.onNext(.close)
+                    log.eventOut(chain: "OptionMenuAppTableView.rx_action")
                 })
                 .disposed(by: rx.disposeBag)
             detailView = appTableView
@@ -218,10 +222,8 @@ extension OptionMenuTableView: UITableViewDelegate {
         overlay!.rx.tap
             .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.back()
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
 

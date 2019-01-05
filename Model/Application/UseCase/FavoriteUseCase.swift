@@ -10,33 +10,60 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum FavoriteUseCaseAction {
+    case load(url: String)
+    case update(isSwitch: Bool)
+}
+
 /// お気に入りユースケース
 public final class FavoriteUseCase {
     public static let s = FavoriteUseCase()
 
-    /// ロードリクエスト通知用RX
-    public let rx_favoriteUseCaseDidRequestLoad = PublishSubject<String>()
+    public let rx_action = PublishSubject<FavoriteUseCaseAction>()
 
-    /// お気に入り更新通知用RX
-    public let rx_favoriteUseCaseDidChangeFavorite = Observable
-        .merge([
-            PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend.flatMap { _ in Observable.just(()) },
-            PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange.flatMap { _ in Observable.just(()) },
-            PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert.flatMap { _ in Observable.just(()) },
-            PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove.flatMap { _ in Observable.just(()) },
-            FavoriteDataModel.s.rx_favoriteDataModelDidInsert.flatMap { _ in Observable.just(()) },
-            FavoriteDataModel.s.rx_favoriteDataModelDidDelete,
-            FavoriteDataModel.s.rx_favoriteDataModelDidReload.flatMap { _ in Observable.just(()) }
-        ])
-        .flatMap { _ -> Observable<Bool> in
-            if let currentHistory = PageHistoryDataModel.s.currentHistory, !currentHistory.url.isEmpty {
-                return Observable.just(FavoriteDataModel.s.select().map({ $0.url }).contains(currentHistory.url))
-            } else {
-                return Observable.just(false)
+    /// Observable自動解放
+    let disposeBag = DisposeBag()
+
+    private init() {
+        setupRx()
+    }
+
+    private func setupRx() {
+        // エラー監視
+        Observable
+            .merge([
+                PageHistoryDataModel.s.rx_action
+                    .filter { action -> Bool in
+                        switch action {
+                        case .append, .change, .insert, .delete:
+                            return true
+                        default:
+                            return false
+                        }
+                    }
+                    .flatMap { _ in Observable.just(()) },
+                FavoriteDataModel.s.rx_action
+                    .filter { action -> Bool in
+                        switch action {
+                        case .insert, .delete, .reload:
+                            return true
+                        default:
+                            return false
+                        }
+                    }
+                    .flatMap { _ in Observable.just(()) }
+            ])
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+
+                if let currentHistory = PageHistoryDataModel.s.currentHistory, !currentHistory.url.isEmpty {
+                    self.rx_action.onNext(.update(isSwitch: FavoriteDataModel.s.select().map({ $0.url }).contains(currentHistory.url)))
+                } else {
+                    self.rx_action.onNext(.update(isSwitch: false))
+                }
             }
-        }
-
-    private init() {}
+            .disposed(by: disposeBag)
+    }
 
     public func select() -> [Favorite] {
         return FavoriteDataModel.s.select()
@@ -57,7 +84,7 @@ public final class FavoriteUseCase {
 
     /// ロードリクエスト
     public func load(url: String) {
-        rx_favoriteUseCaseDidRequestLoad.onNext(url)
+        rx_action.onNext(.load(url: url))
     }
 
     public func delete() {
