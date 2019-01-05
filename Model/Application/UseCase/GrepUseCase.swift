@@ -10,26 +10,29 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum GrepUseCaseAction {
+    case begin
+    case request(word: String)
+}
+
 /// グレップユースケース
 public final class GrepUseCase {
     public static let s = GrepUseCase()
 
-    /// グレップ開始通知用RX
-    public let rx_grepUseCaseDidBeginGreping = PublishSubject<()>()
-    /// グレップリクエスト通知用RX
-    public let rx_grepUseCaseDidRequestGrep = PublishSubject<String>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<GrepUseCaseAction>()
 
     private init() {}
 
     /// グレップ開始
     public func begin() {
-        rx_grepUseCaseDidBeginGreping.onNext(())
+        rx_action.onNext(.begin)
     }
 
     /// グレップリクエスト
     public func grep(word: String) {
         if !word.isEmpty {
-            rx_grepUseCaseDidRequestGrep.onNext(word)
+            rx_action.onNext(.request(word: word))
         }
     }
 }

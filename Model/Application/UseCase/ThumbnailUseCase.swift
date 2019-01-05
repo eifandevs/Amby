@@ -10,37 +10,45 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum ThumbnailUseCaseAction {
+    case append(pageHistory: PageHistory)
+    case insert(at: Int, pageHistory: PageHistory)
+    case change(context: String)
+    case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
+}
+
 /// フッターユースケース
 public final class ThumbnailUseCase {
     public static let s = ThumbnailUseCase()
 
-    /// サムネイル追加通知用RX
-    public let rx_thumbnailUseCaseDidAppendThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidAppend
-        .flatMap { pageHistory -> Observable<PageHistory> in
-            return Observable.just(pageHistory)
-        }
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<ThumbnailUseCaseAction>()
 
-    /// サムネイル追加用RX
-    public let rx_thumbnailUseCaseDidInsertThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidInsert
-        .flatMap { object -> Observable<(at: Int, pageHistory: PageHistory)> in
-            return Observable.just((at: object.at, pageHistory: object.pageHistory))
-        }
+    /// Observable自動解放
+    let disposeBag = DisposeBag()
 
-    /// サムネイル変更通知用RX
-    public let rx_thumbnailUseCaseDidChangeThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidChange
-        .flatMap { context -> Observable<String> in
-            return Observable.just(context)
-        }
+    private init() {
+        setupRx()
+    }
 
-    /// サムネイル削除用RX
-    public let rx_thumbnailUseCaseDidRemoveThumbnail = PageHistoryDataModel.s.rx_pageHistoryDataModelDidRemove
-        .flatMap { object -> Observable<(deleteContext: String, currentContext: String?, deleteIndex: Int)> in
-            // 実データの削除
-            ThumbnailDataModel.s.delete(context: object.deleteContext)
-            return Observable.just(object)
-        }
-
-    private init() {}
+    private func setupRx() {
+        PageHistoryDataModel.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self else { return }
+                if let action = action.element {
+                    switch action {
+                    case let .insert(pageHistory, at):
+                        self.rx_action.onNext(.insert(at: at, pageHistory: pageHistory))
+                    case let .append(pageHistory): self.rx_action.onNext(.append(pageHistory: pageHistory))
+                    case let .change(context): self.rx_action.onNext(.change(context: context))
+                    case let .delete(deleteContext, currentContext, deleteIndex):
+                        self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
+                    default: break
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+    }
 
     public func getCapture(context: String) -> UIImage? {
         return ThumbnailDataModel.s.getCapture(context: context)

@@ -10,15 +10,17 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum ReportUseCaseAction {
+    case present
+    case load(url: String)
+}
+
 /// レポートユースケース
 public final class ReportUseCase {
     public static let s = ReportUseCase()
 
-    /// レポート画面表示通知用RX
-    public let rx_reportUseCaseDidRequestOpen = PublishSubject<()>()
-
-    /// 一覧表示通知用RX
-    public let rx_reportUseCaseDidRequestLoad = PublishSubject<String>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<ReportUseCaseAction>()
 
     /// 最終お問い合わせ日
     public var lastReportDate: Date {
@@ -34,12 +36,12 @@ public final class ReportUseCase {
 
     /// レポート画面表示
     public func open() {
-        rx_reportUseCaseDidRequestOpen.onNext(())
+        rx_action.onNext(.present)
     }
 
     /// レポート一覧表示
     public func openList() {
-        rx_reportUseCaseDidRequestLoad.onNext(ModelConst.URL.ISSUE_URL)
+        rx_action.onNext(.load(url: ModelConst.URL.ISSUE_URL))
     }
 
     /// Issue登録

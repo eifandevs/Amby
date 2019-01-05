@@ -10,34 +10,35 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum FormUseCaseAction {
+    case register
+    case autoFill
+    case load(url: String)
+    case read(form: Form)
+}
+
 /// フォームユースケース
 public final class FormUseCase {
     public static let s = FormUseCase()
 
-    /// フォーム登録通知用RX
-    public let rx_formUseCaseDidRequestRegisterForm = PublishSubject<()>()
-    /// 自動入力通知用RX
-    public let rx_formUseCaseDidRequestAutoFill = PublishSubject<()>()
-    /// ロードリクエスト通知用RX
-    public let rx_formUseCaseDidRequestLoad = PublishSubject<String>()
-    /// 閲覧通知用RX
-    public let rx_formUseCaseDidRequestRead = PublishSubject<Form>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<FormUseCaseAction>()
 
     private init() {}
 
     /// フォーム登録
     public func registerForm() {
-        rx_formUseCaseDidRequestRegisterForm.onNext(())
+        rx_action.onNext(.register)
     }
 
     /// 自動入力
     public func autoFill() {
-        rx_formUseCaseDidRequestAutoFill.onNext(())
+        rx_action.onNext(.autoFill)
     }
 
     /// ロードリクエスト
     public func load(url: String) {
-        rx_formUseCaseDidRequestLoad.onNext(url)
+        rx_action.onNext(.load(url: url))
     }
 
     public func store(form: Form) {
@@ -50,7 +51,7 @@ public final class FormUseCase {
 
     public func read(id: String) {
         if let form = FormUseCase.s.select(id: id).first {
-            rx_formUseCaseDidRequestRead.onNext(form)
+            rx_action.onNext(.read(form: form))
         }
     }
 

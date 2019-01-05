@@ -35,10 +35,8 @@ class OptionMenuFormTableViewCell: UITableViewCell {
     func setupRx() {
         openButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.viewModel.readForm(id: self.viewModel.form.id)
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: disposeBag)
     }

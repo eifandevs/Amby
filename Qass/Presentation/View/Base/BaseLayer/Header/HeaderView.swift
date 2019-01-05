@@ -12,15 +12,16 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum HeaderViewAction {
+    case beginSearching
+    case endEditing
+    case beginGreping
+    case endGreping
+}
+
 class HeaderView: UIView, ShadowView {
-    /// 編集開始監視用RX
-    let rx_headerViewDidbeginSearching = PublishSubject<()>()
-    /// 編集終了監視用RX
-    let rx_headerViewDidEndEditing = PublishSubject<()>()
-    /// グレップ開始監視用RX
-    let rx_headerViewDidBeginGreping = PublishSubject<()>()
-    /// グレップ終了監視用RX
-    let rx_headerViewDidEndGreping = PublishSubject<()>()
+    /// アクション監視用RX
+    let rx_action = PublishSubject<HeaderViewAction>()
 
     private let headerField: HeaderField
     private var isEditing = false
@@ -85,6 +86,7 @@ class HeaderView: UIView, ShadowView {
         // アクション監視
         viewModel.rx_action
             .subscribe { [weak self] action in
+                // ログが大量にでるのでコメントアウト
 //                log.eventIn(chain: "rx_action")
                 guard let `self` = self, let action = action.element else { return }
 
@@ -92,7 +94,8 @@ class HeaderView: UIView, ShadowView {
                 case let .updateProgress(progress): self.updateProgress(progress: progress)
                 case let .updateFavorite(flag): self.updateFavorite(enable: flag)
                 case let .updateField(text): self.updateField(text: text)
-                case let .search(forceFlag): self.search(forceEditFlg: forceFlag)
+                case .searchAtMenu: self.searchAtMenu()
+                case .searchAtHeader: self.searchAtHeader()
                 case .grep: self.grep()
                 }
 //                log.eventOut(chain: "rx_action")
@@ -113,11 +116,9 @@ class HeaderView: UIView, ShadowView {
         // ボタンタップ
         historyBackButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_historyBackTap")
                 guard let `self` = self else { return }
                 // サーチメニューが透明になっている時にタップ
                 self.viewModel.historyBack()
-                log.eventOut(chain: "rx_historyBackTap")
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
@@ -127,10 +128,8 @@ class HeaderView: UIView, ShadowView {
         // ボタンタップ
         historyForwardButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_historyForwardTap")
                 guard let `self` = self else { return }
                 self.viewModel.historyForward()
-                log.eventOut(chain: "rx_historyForwardTap")
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
@@ -140,10 +139,8 @@ class HeaderView: UIView, ShadowView {
         // ボタンタップ
         favoriteButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_favoriteTap")
                 guard let `self` = self else { return }
                 self.viewModel.updateFavorite()
-                log.eventOut(chain: "rx_favoriteTap")
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
@@ -153,10 +150,8 @@ class HeaderView: UIView, ShadowView {
         // ボタンタップ
         deleteButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_deleteTap")
                 guard let `self` = self else { return }
                 self.viewModel.remove()
-                log.eventOut(chain: "rx_deleteTap")
             })
             .disposed(by: rx.disposeBag)
         // ボタン追加
@@ -165,42 +160,29 @@ class HeaderView: UIView, ShadowView {
         // ヘッダーフィールド
         headerField.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_headerTap")
                 guard let `self` = self else { return }
                 self.startEditing()
-                log.eventOut(chain: "rx_headerTap")
             })
             .disposed(by: rx.disposeBag)
 
-        // ヘッダーフィールド編集終了監視
-        // ヘッダーのクローズボタンタップ or 検索開始
-        headerField.rx_headerFieldDidEndEditing
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_headerFieldDidEndEditing")
-                guard let `self` = self else { return }
-                if let text = object.element {
+        headerField.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "HeaderField.rx_action")
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .endEditing(text):
+                    self.rx_action.onNext(.endEditing)
+                    // ヘッダーのクローズボタンタップ or 検索開始
                     if let text = text, !text.isEmpty {
                         log.debug("suggest word: \(text)")
-                        self.rx_headerViewDidEndEditing.onNext(())
                         self.endEditing(headerFieldUpdate: true)
                         self.viewModel.loadRequest(text: text)
                     } else {
-                        self.rx_headerViewDidEndEditing.onNext(())
                         self.endEditing(headerFieldUpdate: false)
                     }
-                }
-                log.eventOut(chain: "rx_headerFieldDidEndEditing")
-            }
-            .disposed(by: rx.disposeBag)
-
-        // ヘッダーフィールド編集終了監視
-        // ヘッダーのクローズボタンタップ or 検索軽視
-        headerField.rx_headerFieldDidEndGreping
-            .subscribe { [weak self] object in
-                log.eventIn(chain: "rx_headerFieldDidEndGreping")
-                guard let `self` = self else { return }
-                if let text = object.element {
-                    self.rx_headerViewDidEndGreping.onNext(())
+                case let .endGreping(text):
+                    // ヘッダーのクローズボタンタップ or 検索開始
+                    self.rx_action.onNext(.endGreping)
                     self.endGreping()
 
                     if let text = text, !text.isEmpty {
@@ -208,7 +190,7 @@ class HeaderView: UIView, ShadowView {
                         self.viewModel.grepRequest(word: text)
                     }
                 }
-                log.eventOut(chain: "rx_headerFieldDidEndGreping")
+                log.eventOut(chain: "HeaderField.rx_action")
             }
             .disposed(by: rx.disposeBag)
     }
@@ -284,16 +266,16 @@ class HeaderView: UIView, ShadowView {
         startGreping()
     }
 
-    private func search(forceEditFlg: Bool) {
-        if forceEditFlg {
-            // サークルメニューから検索を押下したとき
+    private func searchAtMenu() {
+        // サークルメニューから検索を押下したとき
+        startEditing()
+    }
+
+    private func searchAtHeader() {
+        // 空のページを表示したとき
+        // 自動で編集状態にする
+        if headerField.text.isEmpty {
             startEditing()
-        } else {
-            // 空のページを表示したとき
-            // 自動で編集状態にする
-            if headerField.text.isEmpty {
-                startEditing()
-            }
         }
     }
 
@@ -319,7 +301,7 @@ class HeaderView: UIView, ShadowView {
         if !isEditing {
             isEditing = true
             headerField.removeContent()
-            rx_headerViewDidbeginSearching.onNext(())
+            rx_action.onNext(.beginSearching)
             UIView.animate(withDuration: 0.11, delay: 0, options: .curveLinear, animations: {
                 self.headerField.frame = self.frame
                 self.headerField.layer.shadowColor = UIColor.clear.cgColor
@@ -335,7 +317,7 @@ class HeaderView: UIView, ShadowView {
         if !isGreping {
             isGreping = true
             headerField.removeContent()
-            rx_headerViewDidBeginGreping.onNext(())
+            rx_action.onNext(.beginGreping)
             UIView.animate(withDuration: 0.11, delay: 0, options: .curveLinear, animations: {
                 self.headerField.frame = self.frame
                 self.headerField.layer.shadowColor = UIColor.clear.cgColor

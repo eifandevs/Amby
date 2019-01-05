@@ -69,14 +69,12 @@ class OptionMenuMemoTableView: UIView, ShadowView, OptionMenuView {
         tableView.refreshControl = refreshControl
         refreshControl.rx.controlEvent(.valueChanged)
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_valueChanged")
                 guard let `self` = self else { return }
                 DispatchQueue.mainSyncSafe {
                     self.tableView.setContentOffset(self.defaultContentOffset, animated: true)
                     self.refreshControl.endRefreshing()
                     self.viewModel.openMemo()
                 }
-                log.eventOut(chain: "rx_valueChanged")
             })
             .disposed(by: rx.disposeBag)
 
@@ -85,7 +83,6 @@ class OptionMenuMemoTableView: UIView, ShadowView, OptionMenuView {
 
         longPressRecognizer.rx.event
             .subscribe { [weak self] sender in
-                log.eventIn(chain: "rx_longPress")
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
@@ -100,19 +97,18 @@ class OptionMenuMemoTableView: UIView, ShadowView, OptionMenuView {
                         }
                     }
                 }
-                log.eventOut(chain: "rx_longPress")
             }
             .disposed(by: rx.disposeBag)
 
         addGestureRecognizer(longPressRecognizer)
 
         // リロード監視
-        viewModel.rx_optionMenuMemoTableViewModelWillReload
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_optionMenuMemoTableViewModelWillReload")
-                guard let `self` = self else { return }
+        viewModel.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "OptionMenuMemoTableViewModel.rx_action")
+                guard let `self` = self, let action = action.element, case .reload = action else { return }
                 self.tableView.reloadData()
-                log.eventOut(chain: "rx_optionMenuMemoTableViewModelWillReload")
+                log.eventOut(chain: "OptionMenuMemoTableViewModel.rx_action")
             }
             .disposed(by: rx.disposeBag)
     }

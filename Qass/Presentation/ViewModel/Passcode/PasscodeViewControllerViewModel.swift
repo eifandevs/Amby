@@ -11,15 +11,21 @@ import Model
 import RxCocoa
 import RxSwift
 
+enum PasscodeViewControllerViewModelAction {
+    case confirm
+    case confirmSuccess
+    case register
+}
+
+enum PasscodeViewControllerViewModelError {
+    case confirm
+}
+
 final class PasscodeViewControllerViewModel {
-    /// 確認コード入力要求通知用RX
-    let rx_passcodeViewControllerViewModelWillConfirm = PublishSubject<()>()
-    /// 確認コード入力失敗通知用RX
-    let rx_passcodeViewControllerViewModelDidConfirmError = PublishSubject<()>()
-    /// 確認コード入力成功通知用RX
-    let rx_passcodeViewControllerViewModelDidConfirmSuccess = PublishSubject<()>()
-    /// パスコード登録成功通知用RX
-    let rx_passcodeViewControllerViewModelDidRegister = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<PasscodeViewControllerViewModelAction>()
+    /// エラー通知用RX
+    let rx_error = PublishSubject<PasscodeViewControllerViewModelError>()
 
     var title = Variable(MessageConst.PASSCODE.TITLE_REGISTER)
 
@@ -53,21 +59,21 @@ final class PasscodeViewControllerViewModel {
         if isConfirm {
             if self.passcode == passcode {
                 PasscodeUseCase.s.isInputPasscode = true
-                rx_passcodeViewControllerViewModelDidConfirmSuccess.onNext(())
+                rx_action.onNext(.confirmSuccess)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_AUTHENTIFICATED, isSuccess: true)
                 }
             } else {
-                rx_passcodeViewControllerViewModelDidConfirmError.onNext(())
+                rx_error.onNext(.confirm)
             }
         } else {
             if inputPasscode.isEmpty {
                 inputPasscode = passcode
                 title.value = MessageConst.PASSCODE.TITLE_CONFIRM
-                rx_passcodeViewControllerViewModelWillConfirm.onNext(())
+                rx_action.onNext(.confirm)
             } else {
                 if inputPasscode == passcode {
-                    rx_passcodeViewControllerViewModelDidRegister.onNext(())
+                    rx_action.onNext(.register)
                     PasscodeUseCase.s.rootPasscode = passcode
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_REGISTERED, isSuccess: true)
@@ -75,7 +81,7 @@ final class PasscodeViewControllerViewModel {
                 } else {
                     inputPasscode = ""
                     title.value = MessageConst.PASSCODE.TITLE_REGISTER
-                    rx_passcodeViewControllerViewModelDidConfirmError.onNext(())
+                    rx_error.onNext(.confirm)
                 }
             }
         }

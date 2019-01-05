@@ -69,17 +69,26 @@ class FooterView: UIView, ShadowView {
     }
 
     private func setupRx() {
-        // サムネイル追加監視
-        viewModel.rx_footerViewModelWillUpdate
-            .observeOn(MainScheduler.asyncInstance)
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_footerViewModelDidAppendThumbnail")
-                guard let `self` = self else { return }
-                self.collectionView.reloadData()
-                self.adjustLeftMargin()
-                log.eventOut(chain: "rx_footerViewModelDidAppendThumbnail")
+        // サムネイル監視
+        viewModel.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "FooterViewModel.rx_action")
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .update(indexPath): self.update(indexPath: indexPath)
+                default: break
+                }
+                log.eventOut(chain: "FooterViewModel.rx_action")
             }
             .disposed(by: rx.disposeBag)
+    }
+
+    /// 画面更新
+    private func update(indexPath _: IndexPath?) {
+        DispatchQueue.mainSyncSafe {
+            collectionView.reloadData()
+            adjustLeftMargin()
+        }
     }
 
     /// マージン調整
@@ -464,7 +473,6 @@ extension FooterView: UIScrollViewDelegate {
 //        // ボタンタップ
 //        thumbnail.rx.tap
 //            .subscribe(onNext: { [weak self] in
-//                log.eventIn(chain: "rx_tap")
 //                guard let `self` = self else { return }
 //                let tappedContext = thumbnail.context
 //                if tappedContext == self.viewModel.currentContext {
@@ -472,7 +480,6 @@ extension FooterView: UIScrollViewDelegate {
 //                } else {
 //                    self.viewModel.change(context: thumbnail.context)
 //                }
-//                log.eventOut(chain: "rx_tap")
 //            })
 //            .disposed(by: rx.disposeBag)
 //

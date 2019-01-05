@@ -60,49 +60,40 @@ class ReportViewController: UIViewController {
     private func setupRx() {
         closeButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.textView.resignFirstResponder()
                 self.dismiss(animated: true, completion: nil)
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
 
         listButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.viewModel.openList()
                 self.textView.resignFirstResponder()
                 self.dismiss(animated: true, completion: nil)
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
 
         sendButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.viewModel.send(title: MessageConst.REPORT.TITLE, message: self.textView.text)
                 self.textView.resignFirstResponder()
                 self.dismiss(animated: true, completion: nil)
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
 
         cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.textView.resignFirstResponder()
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: rx.disposeBag)
 
         rx_keyboardHeight
             .observeOn(MainScheduler.instance)
             .subscribe { [weak self] keyboardHeight in
-                log.eventIn(chain: "rx_keyboardHeight")
                 guard let `self` = self else { return }
 
                 if let keyboardHeight = keyboardHeight.element {
@@ -117,7 +108,6 @@ class ReportViewController: UIViewController {
                         self.subTitleLabel.isHidden = true
                     }
                 }
-                log.eventOut(chain: "rx_keyboardHeight")
             }
             .disposed(by: rx.disposeBag)
     }

@@ -10,9 +10,13 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum OptionMenuHistoryTableViewAction {
+    case close
+}
+
 class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
-    // メニュークローズ通知用RX
-    let rx_optionMenuHistoryDidClose = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<OptionMenuHistoryTableViewAction>()
 
     private let viewModel = OptionMenuHistoryTableViewModel()
     private let tableView = UITableView()
@@ -40,12 +44,12 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
         tableView.dataSource = self
 
         // データ更新監視
-        viewModel.rx_optionMenuHistoryTableViewModelDidGetData
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_optionMenuHistoryTableViewModelDidGetData")
-                guard let `self` = self else { return }
+        viewModel.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "OptionMenuHistoryTableViewModel.rx_action")
+                guard let `self` = self, let action = action.element, case .gotData = action else { return }
                 self.tableView.reloadData()
-                log.eventOut(chain: "rx_optionMenuHistoryTableViewModelDidGetData")
+                log.eventOut(chain: "OptionMenuHistoryTableViewModel.rx_action")
             }
             .disposed(by: rx.disposeBag)
 
@@ -69,7 +73,6 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
 
         longPressRecognizer.rx.event
             .subscribe { [weak self] sender in
-                log.eventIn(chain: "rx_longPress")
                 guard let `self` = self else { return }
                 if let sender = sender.element {
                     if sender.state == .began {
@@ -91,7 +94,6 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
                         }
                     }
                 }
-                log.eventOut(chain: "rx_longPress")
             }
             .disposed(by: rx.disposeBag)
 
@@ -152,7 +154,7 @@ extension OptionMenuHistoryTableView: UITableViewDelegate {
         // ページを表示
         viewModel.loadRequest(url: row.data.url)
 
-        rx_optionMenuHistoryDidClose.onNext(())
+        rx_action.onNext(.close)
     }
 }
 

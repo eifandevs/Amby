@@ -10,18 +10,32 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum PasscodeUseCaseAction {
+    case present
+    case confirm
+}
+
+enum PasscodeUseCaseError {
+    case notRegistered
+}
+
+extension PasscodeUseCaseError: ModelError {
+    var message: String {
+        switch self {
+        case .notRegistered:
+            return MessageConst.NOTIFICATION.PASSCODE_NOT_REGISTERED
+        }
+    }
+}
+
 /// パスコードユースケース
 public final class PasscodeUseCase {
     public static let s = PasscodeUseCase()
 
-    /// オープンリクエスト通知用RX
-    public let rx_passcodeUseCaseDidRequestOpen = PublishSubject<()>()
-
-    /// オープンリクエスト通知用RX
-    public let rx_passcodeUseCaseDidRequestConfirm = PublishSubject<()>()
-
-    /// 認証チャレンジ失敗通知用RX
-    let rx_passcodeUseCaseDidAuthFailure = PublishSubject<()>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<PasscodeUseCaseAction>()
+    /// エラー通知用RX
+    let rx_error = PublishSubject<PasscodeUseCaseError>()
 
     /// パスコード
     public var rootPasscode: String {
@@ -52,12 +66,12 @@ public final class PasscodeUseCase {
 
     /// ライセンス表示
     public func open() {
-        rx_passcodeUseCaseDidRequestOpen.onNext(())
+        rx_action.onNext(.present)
     }
 
     /// 確認画面表示
     public func confirm() {
-        rx_passcodeUseCaseDidRequestConfirm.onNext(())
+        rx_action.onNext(.confirm)
     }
 
     /// 表示可能判定
@@ -69,7 +83,7 @@ public final class PasscodeUseCase {
                 confirm()
             }
         } else {
-            rx_passcodeUseCaseDidAuthFailure.onNext(())
+            rx_error.onNext(.notRegistered)
         }
         return false
     }

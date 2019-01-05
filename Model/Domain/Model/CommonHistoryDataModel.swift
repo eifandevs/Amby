@@ -10,6 +10,10 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+enum CommonHistoryDataModelAction {
+    case deleteAll
+}
+
 enum CommonHistoryDataModelError {
     case getList
     case delete
@@ -32,10 +36,8 @@ extension CommonHistoryDataModelError: ModelError {
 }
 
 final class CommonHistoryDataModel {
-    /// 削除通知用RX
-    let rx_commonHistoryDataModelDidDeleteAll = PublishSubject<()>()
-    /// 削除失敗通知用RX
-    let rx_commonHistoryDataModelDidDeleteFailure = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<CommonHistoryDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<CommonHistoryDataModelError>()
 
@@ -102,15 +104,19 @@ final class CommonHistoryDataModel {
             for (key, value) in commonHistoryByDate {
                 let filename = "\(key).dat"
 
-                let result = localStorageRepository.getData(.commonHistory(resource: filename))
-
-                if case let .success(data) = result {
-                    if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
-                        let saveData: [CommonHistory] = value + old
-                        let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                        _ = localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
+                let saveData: [CommonHistory] = { () -> [CommonHistory] in
+                    let result = localStorageRepository.getData(.commonHistory(resource: filename))
+                    if case let .success(data) = result {
+                        if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
+                            let saveData: [CommonHistory] = value + old
+                            return saveData
+                        }
                     }
-                }
+
+                    return value
+                }()
+                let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
+                _ = localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
             }
             histories = []
         }
@@ -259,7 +265,7 @@ final class CommonHistoryDataModel {
         let createResult = localStorageRepository.create(.commonHistory(resource: nil))
 
         if case .success = createResult {
-            rx_commonHistoryDataModelDidDeleteAll.onNext(())
+            rx_action.onNext(.deleteAll)
         } else {
             rx_error.onNext(.delete)
         }

@@ -51,10 +51,8 @@ class OpenSourceViewController: UIViewController {
         // ボタンタップ
         closeButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
                 self.dismiss(animated: true, completion: nil)
-                log.eventOut(chain: "rx_tap")
             })
             .disposed(by: disposeBag)
     }

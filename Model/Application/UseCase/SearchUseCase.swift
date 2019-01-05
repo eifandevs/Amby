@@ -10,14 +10,18 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum SearchUseCaseAction {
+    case searchAtMenu
+    case searchAtHeader
+    case load(text: String)
+}
+
 /// 検索ユースケース
 public final class SearchUseCase {
     public static let s = SearchUseCase()
 
-    /// 検索開始通知用RX
-    public let rx_searchUseCaseDidBeginSearching = PublishSubject<Bool>()
-    /// ロードリクエスト通知用RX
-    public let rx_searchUseCaseDidRequestLoad = PublishSubject<String>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<SearchUseCaseAction>()
 
     private init() {}
 
@@ -37,17 +41,17 @@ public final class SearchUseCase {
         }()
         ProgressUseCase.s.updateText(text: searchText)
 
-        rx_searchUseCaseDidRequestLoad.onNext(searchText)
+        rx_action.onNext(.load(text: searchText))
     }
 
     /// サークルメニューから検索開始押下
     public func beginAtCircleMenu() {
-        rx_searchUseCaseDidBeginSearching.onNext(true)
+        rx_action.onNext(.searchAtMenu)
     }
 
     /// ヘッダーフィールドをタップして検索開始
     public func beginAtHeader() {
-        rx_searchUseCaseDidBeginSearching.onNext(false)
+        rx_action.onNext(.searchAtHeader)
     }
 
     public func delete() {

@@ -11,10 +11,14 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum HeaderFieldAction {
+    case endEditing(text: String?)
+    case endGreping(text: String?)
+}
+
 class HeaderField: UIButton, ShadowView {
-    /// 編集終了通知用RX
-    let rx_headerFieldDidEndEditing = PublishSubject<String?>()
-    let rx_headerFieldDidEndGreping = PublishSubject<String?>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<HeaderFieldAction>()
 
     private var icon: UIImageView?
     private let iconSize: CGSize = CGSize(width: AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT, height: AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT)
@@ -86,33 +90,27 @@ class HeaderField: UIButton, ShadowView {
         // テキストフィールドの変更監視
         textField.rx.controlEvent(UIControlEvents.editingChanged)
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_editingDidChanged")
                 guard let `self` = self else { return }
                 // 表示している履歴情報の更新
                 if let text = self.textField.text {
                     self.viewModel.suggest(word: text)
                 }
-                log.eventOut(chain: "rx_editingDidChanged")
             })
             .disposed(by: rx.disposeBag)
 
         // テキストフィールドの編集開始を監視
         textField.rx.controlEvent(UIControlEvents.editingDidBegin)
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_editingDidBegin")
                 guard let `self` = self else { return }
                 self.textField.selectedTextRange = self.textField.textRange(from: self.textField.beginningOfDocument, to: self.textField.endOfDocument)
-                log.eventOut(chain: "rx_editingDidBegin")
             })
             .disposed(by: rx.disposeBag)
 
         // テキストフィールドの編集終了を監視
         textField.rx.controlEvent(UIControlEvents.editingDidEndOnExit)
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_editingDidEndOnExit")
                 guard let `self` = self else { return }
-                self.rx_headerFieldDidEndEditing.onNext(self.textField.text)
-                log.eventOut(chain: "rx_editingDidEndOnExit")
+                self.rx_action.onNext(.endEditing(text: self.textField.text))
             })
             .disposed(by: rx.disposeBag)
 
@@ -129,10 +127,8 @@ class HeaderField: UIButton, ShadowView {
         // ボタンタップ
         closeMenuButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
-                self.rx_headerFieldDidEndEditing.onNext(nil)
-                log.eventOut(chain: "rx_tap")
+                self.rx_action.onNext(.endEditing(text: nil))
             })
             .disposed(by: rx.disposeBag)
 
@@ -156,10 +152,8 @@ class HeaderField: UIButton, ShadowView {
         // テキストフィールドの編集終了を監視
         textField.rx.controlEvent(UIControlEvents.editingDidEndOnExit)
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_editingDidEndOnExit")
                 guard let `self` = self else { return }
-                self.rx_headerFieldDidEndGreping.onNext(self.textField.text)
-                log.eventOut(chain: "rx_editingDidEndOnExit")
+                self.rx_action.onNext(.endGreping(text: self.textField.text))
             })
             .disposed(by: rx.disposeBag)
 
@@ -176,10 +170,8 @@ class HeaderField: UIButton, ShadowView {
         // ボタンタップ
         closeMenuButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_tap")
                 guard let `self` = self else { return }
-                self.rx_headerFieldDidEndGreping.onNext(nil)
-                log.eventOut(chain: "rx_tap")
+                self.rx_action.onNext(.endGreping(text: nil))
             })
             .disposed(by: rx.disposeBag)
 

@@ -10,17 +10,21 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+public enum OpenSourceUseCaseAction {
+    case present
+}
+
 /// オープンソースユースケース
 public final class OpenSourceUseCase {
     public static let s = OpenSourceUseCase()
 
-    /// オープンソース画面表示通知用RX
-    public let rx_openSourceUseCaseDidRequestOpen = PublishSubject<()>()
+    /// アクション通知用RX
+    public let rx_action = PublishSubject<OpenSourceUseCaseAction>()
 
     private init() {}
 
     /// オープンソース画面表示
     public func open() {
-        rx_openSourceUseCaseDidRequestOpen.onNext(())
+        rx_action.onNext(.present)
     }
 }

@@ -10,9 +10,13 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum SplashViewControllerAction {
+    case endDrawing
+}
+
 class SplashViewController: UIViewController {
-    // スプラッシュ終了通知用RX
-    let rx_splashViewControllerDidEndDrawing = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<SplashViewControllerAction>()
 
     @IBOutlet var contentView: UIView!
 
@@ -22,7 +26,7 @@ class SplashViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        rx_splashViewControllerDidEndDrawing.onNext(())
+        rx_action.onNext(.endDrawing)
     }
 
     override func didReceiveMemoryWarning() {

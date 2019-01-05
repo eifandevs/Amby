@@ -19,17 +19,17 @@ enum EdgeSwipeDirection: CGFloat {
     case none = 0
 }
 
+enum BaseViewAction {
+    case changeFront
+    case slide(distance: CGFloat)
+    case slideToMax
+    case slideToMin
+    case swipe(direction: EdgeSwipeDirection)
+}
+
 class BaseView: UIView {
-    /// フロント変更通知用RX
-    let rx_baseViewDidChangeFront = PublishSubject<()>()
-    /// スライド通知用RX
-    let rx_baseViewDidSlide = PublishSubject<CGFloat>()
-    /// Maxスライド通知用RX
-    let rx_baseViewDidSlideToMax = PublishSubject<()>()
-    /// Minスライド通知用RX
-    let rx_baseViewDidSlideToMin = PublishSubject<()>()
-    /// ページスワイプ通知用RX
-    let rx_baseViewDidEdgeSwiped = PublishSubject<EdgeSwipeDirection>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<BaseViewAction>()
 
     /// 編集状態にするクロージャ
     private var beginSearchingWorkItem: DispatchWorkItem?
@@ -49,7 +49,7 @@ class BaseView: UIView {
                 // 移動量の初期化
                 scrollMovingPointY = 0
                 // プライベートモードならデザインを変更する
-                rx_baseViewDidChangeFront.onNext(())
+                rx_action.onNext(.changeFront)
                 // ヘッダーフィールドを更新する
                 viewModel.reloadProgress()
                 // 空ページの場合は、編集状態にする
@@ -160,7 +160,7 @@ class BaseView: UIView {
         // アクション監視
         viewModel.rx_action
             .subscribe { [weak self] action in
-                log.eventIn(chain: "rx_baseViewModelDidReloadWebView")
+                log.eventIn(chain: "baseViewModel.rx_action")
                 guard let `self` = self, let action = action.element else { return }
 
                 switch action {
@@ -178,7 +178,7 @@ class BaseView: UIView {
                 case .scrollUp: self.scrollUp()
                 case let .grep(text): self.grep(text: text)
                 }
-                log.eventOut(chain: "rx_baseViewModelDidReloadWebView")
+                log.eventOut(chain: "baseViewModel.rx_action")
             }
             .disposed(by: rx.disposeBag)
     }
@@ -240,7 +240,7 @@ class BaseView: UIView {
     /// 高さの最大位置までスライド
     func slideToMax() {
         if !isLocateMax {
-            rx_baseViewDidSlideToMax.onNext(())
+            rx_action.onNext(.slideToMax)
             frame.origin.y = AppConst.BASE_LAYER.HEADER_HEIGHT
             scaleToMin()
         }
@@ -249,7 +249,7 @@ class BaseView: UIView {
     /// 高さの最小位置までスライド
     func slideToMin() {
         if !isLocateMin {
-            rx_baseViewDidSlideToMin.onNext(())
+            rx_action.onNext(.slideToMin)
             frame.origin.y = AppConst.DEVICE.STATUS_BAR_HEIGHT
             scaleToMax()
         }
@@ -533,7 +533,7 @@ class BaseView: UIView {
     }
 
     private func slide(value: CGFloat) {
-        rx_baseViewDidSlide.onNext(value)
+        rx_action.onNext(.slide(distance: value))
         frame.origin.y += value
         front.frame.size.height -= value
         // スライドと同時にスクロールが発生しているので、逆方向にスクロールし、スクロールを無効化する
@@ -597,7 +597,7 @@ extension BaseView: EGApplicationDelegate {
                     // 操作を無効化
                     invalidateUserInteraction()
 
-                    rx_baseViewDidEdgeSwiped.onNext(viewModel.swipeDirection)
+                    rx_action.onNext(.swipe(direction: viewModel.swipeDirection))
                 }
             }
 
