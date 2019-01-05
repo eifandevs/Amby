@@ -68,7 +68,7 @@ public final class NoticeUseCase {
                     case .deleteCookies: return Observable.just(MessageConst.NOTIFICATION.DELETE_COOKIES)
                     case .deleteCaches: return Observable.just(MessageConst.NOTIFICATION.DELETE_CACHES)
                     }
-                },
+                }
             ])
             .subscribe { [weak self] message in
                 guard let `self` = self, let message = message.element else { return }
@@ -86,7 +86,7 @@ public final class NoticeUseCase {
             MemoDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
             ThumbnailDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
             IssueDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
-            PasscodeUseCase.s.rx_error.flatMap { Observable.just($0 as ModelError) },
+            PasscodeUseCase.s.rx_error.flatMap { Observable.just($0 as ModelError) }
         ]).subscribe { [weak self] modelError in
             guard let `self` = self, let modelError = modelError.element else { return }
             self.rx_action.onNext(.present(message: modelError.message, isSuccess: false))

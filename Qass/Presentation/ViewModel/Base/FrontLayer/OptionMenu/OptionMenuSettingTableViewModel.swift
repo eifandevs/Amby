@@ -137,14 +137,14 @@ final class OptionMenuSettingTableViewModel {
     /// クッキー削除
     func deleteCookies() {
         NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_COOKIES, completion: {
-            CacheUseCase.s.deleteCookies()
+            WebCacheUseCase.s.deleteCookies()
         })
     }
 
     /// キャッシュ削除
     func deleteCaches() {
         NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SITE_DATA, completion: {
-            CacheUseCase.s.deleteCaches()
+            WebCacheUseCase.s.deleteCaches()
         })
     }
 

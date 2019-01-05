@@ -62,8 +62,6 @@ final class ArticleDataModel {
                 }
                 .subscribe(
                     onSuccess: { [weak self] response in
-                        log.eventIn(chain: "rx_article")
-
                         guard let `self` = self else { return }
                         if response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                             log.debug("get article success.")
@@ -74,18 +72,11 @@ final class ArticleDataModel {
                             self.rx_error.onNext(.get)
                             self.rx_action.onNext(.update(articles: []))
                         }
-
-                        log.eventOut(chain: "rx_article")
                     }, onError: { [weak self] error in
                         guard let `self` = self else { return }
-
-                        log.eventIn(chain: "rx_article")
-
                         log.error("get article error. error: \(error.localizedDescription)")
                         self.rx_error.onNext(.get)
                         self.rx_action.onNext(.update(articles: []))
-
-                        log.eventOut(chain: "rx_article")
                 })
                 .disposed(by: disposeBag)
         } else {

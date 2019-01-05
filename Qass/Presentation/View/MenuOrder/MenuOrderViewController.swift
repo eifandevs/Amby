@@ -64,13 +64,13 @@ class MenuOrderViewController: UIViewController {
             .disposed(by: disposeBag)
 
         // リロード監視
-        viewModel.rx_menuOrderViewControllerViewModelDidReload
-            .subscribe(onNext: { [weak self] in
-                log.eventIn(chain: "rx_menuOrderViewControllerViewModelDidReload")
-                guard let `self` = self else { return }
+        viewModel.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "MenuOrderViewControllerViewModel.rx_action")
+                guard let `self` = self, let action = action.element, case .reload = action else { return }
                 self.tableView.reloadData()
-                log.eventOut(chain: "rx_menuOrderViewControllerViewModelDidReload")
-            })
+                log.eventOut(chain: "MenuOrderViewControllerViewModel.rx_action")
+            }
             .disposed(by: disposeBag)
     }
 }

@@ -25,7 +25,6 @@ enum BaseViewControllerViewModelAction {
 }
 
 final class BaseViewControllerViewModel {
-
     let rx_action = PublishSubject<BaseViewControllerViewModelAction>()
 
     /// Observable自動解放
@@ -47,7 +46,7 @@ final class BaseViewControllerViewModel {
                 self.rx_action.onNext(.help(title: title, message: message))
             }
             .disposed(by: disposeBag)
-        
+
         // 表示順序監視
         MenuOrderUseCase.s.rx_action
             .subscribe { [weak self] action in
@@ -56,12 +55,11 @@ final class BaseViewControllerViewModel {
             }
             .disposed(by: disposeBag)
 
-        
         // パスコード監視
         PasscodeUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
-                
+
                 if case .present = action {
                     self.rx_action.onNext(.passcode)
                 } else if case .confirm = action {
@@ -77,7 +75,7 @@ final class BaseViewControllerViewModel {
                 self.rx_action.onNext(.formReader(form: form))
             }
             .disposed(by: disposeBag)
-        
+
         // メーラー表示監視
         ContactUseCase.s.rx_action
             .subscribe { [weak self] action in
@@ -101,7 +99,7 @@ final class BaseViewControllerViewModel {
                 self.rx_action.onNext(.report)
             }
             .disposed(by: disposeBag)
-        
+
         // メモ表示監視
         MemoUseCase.s.rx_action
             .subscribe { [weak self] action in
@@ -109,7 +107,7 @@ final class BaseViewControllerViewModel {
                 self.rx_action.onNext(.memo(memo: memo))
             }
             .disposed(by: disposeBag)
-        
+
         // 通知監視
         NoticeUseCase.s.rx_action
             .subscribe { [weak self] action in

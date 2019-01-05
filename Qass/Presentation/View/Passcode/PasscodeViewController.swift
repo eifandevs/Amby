@@ -104,7 +104,7 @@ class PasscodeViewController: UIViewController {
                 log.eventOut("PasscodeViewControllerViewModel.rx_action")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // エラー監視
         viewModel.rx_error
             .subscribe { [weak self] error in

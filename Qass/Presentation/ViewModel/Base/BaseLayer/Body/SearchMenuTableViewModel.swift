@@ -61,10 +61,10 @@ final class SearchMenuTableViewModel {
                     // 閲覧履歴と検索履歴の検索
                     self.commonHistoryCellItem = HistoryUseCase.s.select(title: word, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
                     self.searchHistoryCellItem = SearchUseCase.s.select(title: word, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
-                    
+
                     // とりあえずここで画面更新
                     self.rx_action.onNext(.update)
-                    
+
                     // オートサジェスト
                     self.requestSearchQueue.append(word)
                     self.requestSearch()
@@ -86,7 +86,7 @@ final class SearchMenuTableViewModel {
                 }
             }
             .disposed(by: disposeBag)
-        
+
         // 記事取得監視
         NewsUseCase.s.rx_action
             .subscribe { [weak self] action in
@@ -97,10 +97,9 @@ final class SearchMenuTableViewModel {
                 } else {
                     self.newsItem = []
                 }
-                
+
                 // 画面更新
                 self.rx_action.onNext(.update)
-
             }
             .disposed(by: disposeBag)
     }

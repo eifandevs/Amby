@@ -21,7 +21,6 @@ enum FooterViewModelAction {
 }
 
 final class FooterViewModel {
-    
     struct Row {
         var context: String?
         var title: String
@@ -32,7 +31,7 @@ final class FooterViewModel {
 
     /// アクション通知用RX
     let rx_action = PublishSubject<FooterViewModelAction>()
-    
+
     var rows = TabUseCase.s.pageHistories.map { pageHistory -> FooterViewModel.Row in
         let isFront = pageHistory.context == TabUseCase.s.currentContext
 
@@ -99,7 +98,7 @@ final class FooterViewModel {
                 }
             }
             .disposed(by: disposeBag)
-        
+
         /// ローディング監視
         TabUseCase.s.rx_action
             .subscribe { [weak self] action in
@@ -111,20 +110,19 @@ final class FooterViewModel {
                 }
             }
             .disposed(by: disposeBag)
-
     }
 
     private func append(pageHistory: PageHistory) {
         let isFront = pageHistory.context == TabUseCase.s.currentContext
-        
+
         let thumbnail = ThumbnailUseCase.s.getThumbnail(context: pageHistory.context)
         let image = thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
-        
+
         let row = Row(context: pageHistory.context, title: pageHistory.title, isFront: isFront, isLoading: pageHistory.isLoading, image: image)
-        self.rows.append(row)
-        self.rx_action.onNext(.update(indexPath: nil))
+        rows.append(row)
+        rx_action.onNext(.update(indexPath: nil))
     }
-    
+
     private func change(context: String) {
         TabUseCase.s.change(context: context)
     }

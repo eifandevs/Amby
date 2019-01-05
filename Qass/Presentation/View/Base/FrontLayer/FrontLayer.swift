@@ -8,10 +8,10 @@
 
 import CoreLocation
 import Foundation
+import Model
 import RxCocoa
 import RxSwift
 import UIKit
-import Model
 
 enum FrontLayerAction {
     case invalidate
@@ -64,7 +64,7 @@ class FrontLayer: UIView {
                 log.eventOut("CircleMenu.rx_action")
             }
             .disposed(by: rx.disposeBag)
-        
+
         // サークルメニューアクティブ監視
         circleMenu.rx_action
             .filter { action in
@@ -122,7 +122,7 @@ class FrontLayer: UIView {
         case .menu:
             let initialPt = point
             // オプションメニューの表示位置を計算
-            let ptX = self.swipeDirection == .left ? initialPt.x / 6 : AppConst.DEVICE.DISPLAY_SIZE.width - 250 - (AppConst.DEVICE.DISPLAY_SIZE.width - initialPt.x) / 6
+            let ptX = swipeDirection == .left ? initialPt.x / 6 : AppConst.DEVICE.DISPLAY_SIZE.width - 250 - (AppConst.DEVICE.DISPLAY_SIZE.width - initialPt.x) / 6
             let ptY: CGFloat = { () -> CGFloat in
                 let y = initialPt.y - AppConst.FRONT_LAYER.OPTION_MENU_SIZE.height / 2
                 if y < 0 {
@@ -137,72 +137,72 @@ class FrontLayer: UIView {
             let width = AppConst.FRONT_LAYER.OPTION_MENU_SIZE.width
             let height = AppConst.FRONT_LAYER.OPTION_MENU_SIZE.height
             let optionMenuRect = CGRect(x: ptX, y: ptY, width: width, height: height)
-            self.optionMenu = OptionMenuTableView(frame: optionMenuRect, swipeDirection: swipeDirection)
+            optionMenu = OptionMenuTableView(frame: optionMenuRect, swipeDirection: swipeDirection)
             // クローズ監視
-            self.optionMenu!.rx_action
+            optionMenu!.rx_action
                 .subscribe { [weak self] action in
                     log.eventIn("OptionMenuTableView.rx_action")
                     guard let `self` = self, let action = action.element, case .close = action else { return }
                     self.closeWithOptionMenu()
                     log.eventOut("OptionMenuTableView.rx_action")
                 }
-                .disposed(by: self.rx.disposeBag)
+                .disposed(by: rx.disposeBag)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self.addSubview(self.optionMenu!)
             }
         case .close:
-            self.viewModel.close()
+            viewModel.close()
         case .closeAll:
-            self.viewModel.closeAll()
+            viewModel.closeAll()
         case .historyBack:
-            self.viewModel.historyBack()
+            viewModel.historyBack()
         case .copy:
-            self.viewModel.copy()
+            viewModel.copy()
         case .search:
-            self.viewModel.beginSearching()
+            viewModel.beginSearching()
         case .add:
-            self.viewModel.add()
+            viewModel.add()
         case .scrollUp:
-            self.viewModel.scrollUp()
+            viewModel.scrollUp()
         case .autoScroll:
-            self.viewModel.autoScroll()
+            viewModel.autoScroll()
         case .historyForward:
-            self.viewModel.historyForward()
+            viewModel.historyForward()
         case .form:
-            self.viewModel.registerForm()
+            viewModel.registerForm()
         case .favorite:
-            self.viewModel.updateFavorite()
+            viewModel.updateFavorite()
         case .grep:
-            self.viewModel.beginGreping()
+            viewModel.beginGreping()
         default:
             break
         }
     }
-    
+
     private func active() {
         // オーバーレイの作成
-        self.overlay = UIButton(frame: frame)
-        self.overlay.backgroundColor = UIColor.darkGray
-        self.overlay.alpha = 0
-        
+        overlay = UIButton(frame: frame)
+        overlay.backgroundColor = UIColor.darkGray
+        overlay.alpha = 0
+
         // ボタンタップ
-        self.overlay.rx.tap
+        overlay.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
                 self.closeWithOptionMenu()
             })
-            .disposed(by: self.rx.disposeBag)
-        
-        self.addSubview(self.overlay)
+            .disposed(by: rx.disposeBag)
+
+        addSubview(overlay)
         // addSubviewした段階だと、サークルメニューより前面に配置されているので、最背面に移動する
-        self.sendSubview(toBack: self.overlay)
+        sendSubview(toBack: overlay)
         UIView.animate(withDuration: 0.35) {
             self.overlay.alpha = 0.2
         }
     }
-    
+
     private func closeWithCircleMenu() {
-        if self.optionMenu == nil {
+        if optionMenu == nil {
             if let overlay = self.overlay {
                 UIView.animate(withDuration: 0.15, animations: {
                     // ここでおちる
@@ -213,11 +213,11 @@ class FrontLayer: UIView {
                     }
                 })
             } else {
-                self.rx_action.onNext(.invalidate)
+                rx_action.onNext(.invalidate)
             }
         }
     }
-    
+
     private func closeWithOptionMenu() {
         circleMenu.invalidate()
         UIView.animate(withDuration: 0.15, animations: {

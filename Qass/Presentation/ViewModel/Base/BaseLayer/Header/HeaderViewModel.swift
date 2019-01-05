@@ -21,7 +21,6 @@ enum HeaderViewModelAction {
 }
 
 final class HeaderViewModel {
-
     /// アクション通知用RX
     let rx_action = PublishSubject<HeaderViewModelAction>()
 
@@ -68,7 +67,7 @@ final class HeaderViewModel {
                     self.rx_action.onNext(.searchAtMenu)
                 case .searchAtHeader:
                     self.rx_action.onNext(.searchAtHeader)
-                default: break;
+                default: break
                 }
             }
             .disposed(by: disposeBag)

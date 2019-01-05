@@ -13,6 +13,7 @@ import UIKit
 enum OptionMenuSettingTableViewAction {
     case close
 }
+
 class OptionMenuSettingTableView: UIView, ShadowView, OptionMenuView {
     // アクション通知用RX
     let rx_action = PublishSubject<OptionMenuSettingTableViewAction>()

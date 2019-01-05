@@ -18,7 +18,7 @@ class CircleProgress: UIView {
     private var circle: UIView
     private var progress: CAShapeLayer!
     private var progressTimer: Timer!
-    
+
     /// アクション通知用RX
     let rx_action = PublishSubject<CircleProgressAction>()
 

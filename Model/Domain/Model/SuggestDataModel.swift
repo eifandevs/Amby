@@ -48,8 +48,6 @@ final class SuggestDataModel {
             }
             .subscribe(
                 onSuccess: { [weak self] response in
-                    log.eventIn(chain: "rx_suggest")
-
                     guard let `self` = self else { return }
                     log.debug("get suggest success.")
                     if let unwrappedResponse = response, let suggests = unwrappedResponse.data[safe: 1] {
@@ -57,15 +55,9 @@ final class SuggestDataModel {
                     } else {
                         self.rx_action.onNext(.update(suggest: Suggest(token: token, data: nil)))
                     }
-
-                    log.eventOut(chain: "rx_suggest")
                 }, onError: { error in
-                    log.eventIn(chain: "rx_suggest")
-
                     log.error("get suggest error. error: \(error.localizedDescription)")
                     self.rx_action.onNext(.update(suggest: Suggest(token: token, data: nil)))
-
-                    log.eventOut(chain: "rx_suggest")
             })
             .disposed(by: disposeBag)
     }

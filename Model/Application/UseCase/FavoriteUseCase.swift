@@ -49,7 +49,7 @@ public final class FavoriteUseCase {
                             return false
                         }
                     }
-                    .flatMap { _ in Observable.just(()) },
+                    .flatMap { _ in Observable.just(()) }
             ])
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }

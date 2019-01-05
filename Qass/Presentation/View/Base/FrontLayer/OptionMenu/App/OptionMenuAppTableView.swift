@@ -17,7 +17,7 @@ enum OptionMenuAppTableViewAction {
 class OptionMenuAppTableView: UIView, ShadowView, OptionMenuView {
     // アクション通知用RX
     let rx_action = PublishSubject<OptionMenuAppTableViewAction>()
-    
+
     private let viewModel = OptionMenuAppTableViewModel()
     private let tableView = UITableView()
 

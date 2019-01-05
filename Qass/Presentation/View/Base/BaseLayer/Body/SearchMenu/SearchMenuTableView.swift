@@ -11,11 +11,14 @@ import RxCocoa
 import RxSwift
 import UIKit
 
+enum SearchMenuTableViewAction {
+    case endEditing
+    case close
+}
+
 class SearchMenuTableView: UIView {
-    /// 編集終了通知用RX
-    let rx_searchMenuDidEndEditing = PublishSubject<()>()
-    /// メニュークローズ通知用RX
-    let rx_searchMenuDidClose = PublishSubject<()>()
+    /// アクション通知用RX
+    let rx_action = PublishSubject<SearchMenuTableViewAction>()
 
     private let viewModel: SearchMenuTableViewModel = SearchMenuTableViewModel()
     private var tapRecognizer: UITapGestureRecognizer!
@@ -57,65 +60,58 @@ class SearchMenuTableView: UIView {
         // キーボード表示の処理
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_UIKeyboardDidShow")
                 guard let `self` = self else { return }
                 // ジェスチャーを登録する
                 self.addGestureRecognizer(self.tapRecognizer)
-                log.eventOut(chain: "rx_UIKeyboardDidShow")
             }
             .disposed(by: rx.disposeBag)
 
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardWillHide, object: nil)
             .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_UIKeyboardWillHide")
                 guard let `self` = self else { return }
                 // ジェスチャーを解除する
                 self.removeGestureRecognizer(self.tapRecognizer)
-                log.eventIn(chain: "rx_UIKeyboardWillHide")
             }
             .disposed(by: rx.disposeBag)
 
         addSubview(tableView)
 
         // 画面更新通知監視
-        viewModel.rx_searchMenuViewWillUpdateLayout
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_searchMenuViewWillUpdateLayout")
-                guard let `self` = self else { return }
-                self.tableView.reloadData()
-                self.alpha = 1
-                if let overlay = self.overlay {
-                    overlay.removeFromSuperview()
-                    self.overlay = nil
+        viewModel.rx_action
+            .subscribe { [weak self] action in
+                log.eventIn(chain: "SearchMenuTableViewModel.rx_action")
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case .update:
+                    self.tableView.reloadData()
+                    self.alpha = 1
+                    if let overlay = self.overlay {
+                        overlay.removeFromSuperview()
+                        self.overlay = nil
+                    }
+                case .hide:
+                    if self.overlay == nil {
+                        self.alpha = 0
+                        let button = UIButton(frame: frame)
+                        button.backgroundColor = UIColor.clear
+
+                        // ボタンタップ
+                        button.rx.tap
+                            .subscribe(onNext: { [weak self] in
+                                guard let `self` = self else { return }
+                                // サーチメニューが透明になっている時にタップ
+                                self.rx_action.onNext(.close)
+                                button.removeFromSuperview()
+                            })
+                            .disposed(by: self.rx.disposeBag)
+
+                        self.overlay = button
+                        self.superview?.addSubview(button)
+                    }
                 }
-                log.eventOut(chain: "rx_searchMenuViewWillUpdateLayout")
-            }.disposed(by: rx.disposeBag)
-
-        // 画面無効化監視
-        viewModel.rx_searchMenuViewWillHide
-            .subscribe { [weak self] _ in
-                log.eventIn(chain: "rx_searchMenuViewWillHide")
-                guard let `self` = self else { return }
-                if self.overlay == nil {
-                    self.alpha = 0
-                    let button = UIButton(frame: frame)
-                    button.backgroundColor = UIColor.clear
-
-                    // ボタンタップ
-                    button.rx.tap
-                        .subscribe(onNext: { [weak self] in
-                            guard let `self` = self else { return }
-                            // サーチメニューが透明になっている時にタップ
-                            self.rx_searchMenuDidClose.onNext(())
-                            button.removeFromSuperview()
-                        })
-                        .disposed(by: self.rx.disposeBag)
-
-                    self.overlay = button
-                    self.superview?.addSubview(button)
-                }
-                log.eventOut(chain: "rx_searchMenuViewWillHide")
-            }.disposed(by: rx.disposeBag)
+                log.eventOut(chain: "SearchMenuTableViewModel.rx_action")
+            }
+            .disposed(by: rx.disposeBag)
     }
 
     deinit {
@@ -139,7 +135,7 @@ class SearchMenuTableView: UIView {
     // MARK: Touch Event
 
     @objc func tapped(sender _: UITapGestureRecognizer) {
-        rx_searchMenuDidEndEditing.onNext(())
+        rx_action.onNext(.endEditing)
     }
 }
 
@@ -227,7 +223,7 @@ extension SearchMenuTableView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // とりあえずメニューを閉じる
-        rx_searchMenuDidClose.onNext(())
+        rx_action.onNext(.close)
 
         let cell = tableView.cellForRow(at: indexPath)!
         if cell.className == SearchMenuCommonHistoryTableViewCell.className {

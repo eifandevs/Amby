@@ -46,7 +46,7 @@ struct BaseViewModelState: OptionSet {
 final class BaseViewModel {
     /// 状態管理
     var state: BaseViewModelState = []
-    
+
     let rx_action = PublishSubject<BaseViewModelAction>()
 
     let webViewService = WebViewService()
@@ -213,7 +213,7 @@ final class BaseViewModel {
                 }
             }
             .disposed(by: disposeBag)
-        
+
         // スクロール監視
         ScrollUseCase.s.rx_action
             .subscribe { [weak self] action in

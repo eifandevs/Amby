@@ -41,7 +41,7 @@ public final class ProgressUseCase {
                             return Observable.empty()
                         }
                     },
-                NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) },
+                NotificationCenter.default.rx.notification(.UIApplicationDidBecomeActive, object: nil).flatMap { _ in Observable.just(0) }
             ])
             .subscribe { [weak self] progress in
                 guard let `self` = self else { return }
