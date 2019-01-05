@@ -104,15 +104,19 @@ final class CommonHistoryDataModel {
             for (key, value) in commonHistoryByDate {
                 let filename = "\(key).dat"
 
-                let result = localStorageRepository.getData(.commonHistory(resource: filename))
-
-                if case let .success(data) = result {
-                    if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
-                        let saveData: [CommonHistory] = value + old
-                        let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                        _ = localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
+                let saveData: [CommonHistory] = { () -> [CommonHistory] in
+                    let result = localStorageRepository.getData(.commonHistory(resource: filename))
+                    if case let .success(data) = result {
+                        if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CommonHistory] {
+                            let saveData: [CommonHistory] = value + old
+                            return saveData
+                        }
                     }
-                }
+
+                    return value
+                }()
+                let commonHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
+                _ = localStorageRepository.write(.commonHistory(resource: filename), data: commonHistoryData)
             }
             histories = []
         }
