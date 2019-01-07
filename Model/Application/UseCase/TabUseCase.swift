@@ -11,10 +11,10 @@ import RxCocoa
 import RxSwift
 
 public enum TabUseCaseAction {
-    case insert(at: Int)
+    case append(pageHistory: PageHistory)
+    case insert(at: Int, pageHistory: PageHistory)
+    case change(context: String)
     case reload
-    case append
-    case change
     case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
     case startLoading(context: String)
     case endLoading(context: String, title: String)
@@ -64,11 +64,10 @@ public final class TabUseCase {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .insert(_, at):
-                    self.rx_action.onNext(.insert(at: at))
+                case let .insert(pageHistory, at): self.rx_action.onNext(.insert(at: at, pageHistory: pageHistory))
                 case .reload: self.rx_action.onNext(.reload)
-                case .append: self.rx_action.onNext(.append)
-                case .change: self.rx_action.onNext(.change)
+                case let .append(pageHistory): self.rx_action.onNext(.append(pageHistory: pageHistory))
+                case let .change(context): self.rx_action.onNext(.change(context: context))
                 case let .delete(deleteContext, currentContext, deleteIndex):
                     self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
                 case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))

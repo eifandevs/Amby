@@ -86,8 +86,8 @@ final class FooterViewModel {
     // MARK: Private Method
 
     private func setupRx() {
-        /// サムネイル監視
-        ThumbnailUseCase.s.rx_action
+        /// ローディング監視
+        TabUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -95,15 +95,6 @@ final class FooterViewModel {
                 case let .insert(at, pageHistory): self.rx_action.onNext(.insert(at: at, pageHistory: pageHistory))
                 case let .change(context): self.rx_action.onNext(.change(context: context))
                 case let .delete(deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
-                }
-            }
-            .disposed(by: disposeBag)
-
-        /// ローディング監視
-        TabUseCase.s.rx_action
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element else { return }
-                switch action {
                 case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))
                 case let .endLoading(context, title): self.rx_action.onNext(.endLoading(context: context, title: title))
                 default: break
