@@ -18,6 +18,7 @@ public enum TabUseCaseAction {
     case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
     case startLoading(context: String)
     case endLoading(context: String, title: String)
+    case endRendering(context: String)
 }
 
 /// タブユースケース
@@ -82,6 +83,7 @@ public final class TabUseCase {
                             log.warning("start loading while saving thumbnails.")
                         }
                     }
+                case let .endRendering(context): self.rx_action.onNext(.endRendering(context: context))
                 default: break
                 }
             }

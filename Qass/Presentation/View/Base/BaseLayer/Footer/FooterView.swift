@@ -20,7 +20,7 @@ class FooterView: UIView, ShadowView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setup()
+        setup(frame: frame)
     }
 
     required init(coder _: NSCoder) {
@@ -31,7 +31,7 @@ class FooterView: UIView, ShadowView {
         log.debug("deinit called.")
     }
 
-    private func setup() {
+    private func setup(frame: CGRect) {
         // layout
         addAreaShadow()
         backgroundColor = UIColor.lightGray
@@ -41,10 +41,10 @@ class FooterView: UIView, ShadowView {
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        layout.itemSize = AppConst.BASE_LAYER.THUMBNAIL_SIZE
+        layout.itemSize = CGSize(width: AppConst.BASE_LAYER.THUMBNAIL_SIZE.width, height: frame.height)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(origin: CGPoint.zero, size: frame.size), collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.collectionViewLayout = layout
@@ -55,13 +55,6 @@ class FooterView: UIView, ShadowView {
         // タイトル用に、スクロールビューの領域外に配置できるようにする
         collectionView.clipsToBounds = false
         addSubview(collectionView)
-
-        collectionView.snp.makeConstraints { make in
-            make.left.equalTo(snp.left).offset(0)
-            make.right.equalTo(snp.right).offset(0)
-            make.top.equalTo(snp.top).offset(0)
-            make.bottom.equalTo(snp.bottom).offset(0)
-        }
 
         adjustLeftMargin()
 
@@ -76,6 +69,7 @@ class FooterView: UIView, ShadowView {
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
                 case let .update(indexPath): self.update(indexPath: indexPath)
+                case let .append(indexPath): self.append(indexPath: indexPath)
                 default: break
                 }
                 log.eventOut(chain: "FooterViewModel.rx_action")
@@ -83,11 +77,19 @@ class FooterView: UIView, ShadowView {
             .disposed(by: rx.disposeBag)
     }
 
-    /// 画面更新
-    private func update(indexPath _: IndexPath?) {
+    /// アペンド
+    private func append(indexPath: IndexPath) {
         DispatchQueue.mainSyncSafe {
-            collectionView.reloadData()
-            adjustLeftMargin()
+            self.collectionView.insertItems(at: [indexPath])
+            self.adjustLeftMargin()
+        }
+    }
+
+    /// 画面更新
+    private func update(indexPath: IndexPath) {
+        // 部分更新
+        DispatchQueue.mainSyncSafe {
+            collectionView.reloadItems(at: [indexPath])
         }
     }
 
@@ -96,8 +98,10 @@ class FooterView: UIView, ShadowView {
         // マージン調整
         let isRequireLeftMargin = (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(viewModel.cellCount)) < bounds.size.width
         if isRequireLeftMargin {
-            let leftMargin = (bounds.size.width - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(viewModel.cellCount))) / 2
-            collectionView.contentInset = UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0)
+            UIView.animate(withDuration: 0.3, animations: {
+                let leftMargin = (self.bounds.size.width - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(self.viewModel.cellCount))) / 2
+                self.collectionView.contentInset = UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0)
+            })
         }
     }
 }
@@ -126,7 +130,7 @@ extension FooterView: UICollectionViewDelegate {
 // cellのサイズの設定
 extension FooterView: UICollectionViewDelegateFlowLayout {
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
-        return AppConst.BASE_LAYER.THUMBNAIL_SIZE
+        return CGSize(width: AppConst.BASE_LAYER.THUMBNAIL_SIZE.width, height: frame.height)
     }
 }
 

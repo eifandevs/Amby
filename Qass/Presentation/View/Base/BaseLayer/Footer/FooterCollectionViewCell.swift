@@ -16,6 +16,7 @@ class FooterCollectionViewCell: UICollectionViewCell {
     private let underLine = UIView()
 
     @IBOutlet var frontBar: UIView!
+    @IBOutlet var thumbnailButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +32,12 @@ class FooterCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(snp.height).multipliedBy(0.7)
             make.width.equalTo(snp.width).multipliedBy(0.7)
         }
+
+        // デフォルト背景設定
+        thumbnailButton.backgroundColor = UIColor.darkGray
+        thumbnailButton.setImage(image: R.image.footerThumbnailBack(), color: UIColor.gray)
+        let inset: CGFloat = thumbnailButton.frame.size.width / 9
+        thumbnailButton.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
 
         // サムネイルタイトル配置
         layer.masksToBounds = false
@@ -52,6 +59,12 @@ class FooterCollectionViewCell: UICollectionViewCell {
         } else {
             indicator.alpha = 0
             indicator.stopAnimating()
+        }
+
+        // サムネイル表示
+        if let thumbnail = row.thumbnail {
+            thumbnailButton.setImage(nil, for: .normal)
+            thumbnailButton.setBackgroundImage(thumbnail, for: .normal)
         }
 
         // フロントバー表示

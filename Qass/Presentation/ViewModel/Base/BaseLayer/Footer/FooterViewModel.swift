@@ -12,7 +12,8 @@ import RxCocoa
 import RxSwift
 
 enum FooterViewModelAction {
-    case update(indexPath: IndexPath?)
+    case update(indexPath: IndexPath)
+    case append(indexPath: IndexPath)
     case insert(at: Int, pageHistory: PageHistory)
     case change(context: String)
     case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
@@ -22,11 +23,11 @@ enum FooterViewModelAction {
 
 final class FooterViewModel {
     struct Row {
-        var context: String?
+        var context: String
         var title: String
         var isFront: Bool
         var isLoading: Bool
-        var image: UIImage?
+        var thumbnail: UIImage?
     }
 
     /// アクション通知用RX
@@ -38,7 +39,7 @@ final class FooterViewModel {
         let thumbnail = ThumbnailUseCase.s.getThumbnail(context: pageHistory.context)
         let image = thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
 
-        return Row(context: pageHistory.context, title: pageHistory.title, isFront: isFront, isLoading: pageHistory.isLoading, image: image)
+        return Row(context: pageHistory.context, title: pageHistory.title, isFront: isFront, isLoading: pageHistory.isLoading, thumbnail: image)
     }
 
     // 数
@@ -95,8 +96,9 @@ final class FooterViewModel {
                 case let .insert(at, pageHistory): self.rx_action.onNext(.insert(at: at, pageHistory: pageHistory))
                 case let .change(context): self.rx_action.onNext(.change(context: context))
                 case let .delete(deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
-                case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))
-                case let .endLoading(context, title): self.rx_action.onNext(.endLoading(context: context, title: title))
+                case let .startLoading(context): self.startLoading(context: context)
+                case let .endLoading(context, title): self.endLoading(context: context, title: title)
+                case let .endRendering(context): self.endRendering(context: context)
                 default: break
                 }
             }
@@ -104,14 +106,45 @@ final class FooterViewModel {
     }
 
     private func append(pageHistory: PageHistory) {
-        let isFront = pageHistory.context == TabUseCase.s.currentContext
+        // まずはフロントバーを削除する
+        deleteFrontBar()
 
         let thumbnail = ThumbnailUseCase.s.getThumbnail(context: pageHistory.context)
-        let image = thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
-
-        let row = Row(context: pageHistory.context, title: pageHistory.title, isFront: isFront, isLoading: pageHistory.isLoading, image: image)
+        let row = Row(context: pageHistory.context, title: pageHistory.title, isFront: true, isLoading: pageHistory.isLoading, thumbnail: thumbnail)
         rows.append(row)
-        rx_action.onNext(.update(indexPath: nil))
+        rx_action.onNext(.append(indexPath: IndexPath(row: rows.count - 1, section: 0)))
+    }
+
+    private func deleteFrontBar() {
+        for i in 0 ... rows.count - 1 where rows[i].isFront {
+            rows[i].isFront = false
+            rx_action.onNext(.update(indexPath: IndexPath(row: i, section: 0)))
+            return
+        }
+    }
+
+    private func startLoading(context: String) {
+        if let index = rows.index(where: { $0.context == context }) {
+            rows[index].isLoading = true
+            rx_action.onNext(.update(indexPath: IndexPath(row: index, section: 0)))
+        }
+    }
+
+    private func endLoading(context: String, title: String) {
+        if let index = rows.index(where: { $0.context == context }) {
+            rows[index].isLoading = false
+            rows[index].title = title
+
+            rx_action.onNext(.update(indexPath: IndexPath(row: index, section: 0)))
+        }
+    }
+
+    private func endRendering(context: String) {
+        if let index = rows.index(where: { $0.context == context }) {
+            rows[index].thumbnail = getThumbnail(context: context)
+
+            rx_action.onNext(.update(indexPath: IndexPath(row: index, section: 0)))
+        }
     }
 
     private func change(context: String) {
