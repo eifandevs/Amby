@@ -125,6 +125,9 @@ extension FooterView: UICollectionViewDataSource {
 }
 
 extension FooterView: UICollectionViewDelegate {
+    func collectionView(_: UICollectionView, didSelectItemAt _: IndexPath) {
+        log.debug("tapped")
+    }
 }
 
 // cellのサイズの設定
