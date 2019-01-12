@@ -86,10 +86,17 @@ class FooterView: UIView, ShadowView {
     }
 
     /// 画面更新
-    private func update(indexPath: IndexPath) {
-        // 部分更新
-        DispatchQueue.mainSyncSafe {
-            collectionView.reloadItems(at: [indexPath])
+    private func update(indexPath: IndexPath?) {
+        if let indexPath = indexPath {
+            // 部分更新
+            DispatchQueue.mainSyncSafe {
+                collectionView.reloadItems(at: [indexPath])
+            }
+        } else {
+            // 全更新
+            DispatchQueue.mainSyncSafe {
+                collectionView.reloadData()
+            }
         }
     }
 
@@ -125,8 +132,8 @@ extension FooterView: UICollectionViewDataSource {
 }
 
 extension FooterView: UICollectionViewDelegate {
-    func collectionView(_: UICollectionView, didSelectItemAt _: IndexPath) {
-        log.debug("tapped")
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.change(indexPath: indexPath)
     }
 }
 

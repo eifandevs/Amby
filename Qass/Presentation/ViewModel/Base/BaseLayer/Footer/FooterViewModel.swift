@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 enum FooterViewModelAction {
-    case update(indexPath: IndexPath)
+    case update(indexPath: IndexPath?)
     case append(indexPath: IndexPath)
     case insert(at: Int, pageHistory: PageHistory)
     case change(context: String)
@@ -94,7 +94,7 @@ final class FooterViewModel {
                 switch action {
                 case let .append(pageHistory): self.append(pageHistory: pageHistory)
                 case let .insert(at, pageHistory): self.rx_action.onNext(.insert(at: at, pageHistory: pageHistory))
-                case let .change(context): self.rx_action.onNext(.change(context: context))
+                case .change: self.updateFrontBar()
                 case let .delete(deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
                 case let .startLoading(context): self.startLoading(context: context)
                 case let .endLoading(context, title): self.endLoading(context: context, title: title)
@@ -113,6 +113,17 @@ final class FooterViewModel {
         let row = Row(context: pageHistory.context, title: pageHistory.title, isFront: true, isLoading: pageHistory.isLoading, thumbnail: thumbnail)
         rows.append(row)
         rx_action.onNext(.append(indexPath: IndexPath(row: rows.count - 1, section: 0)))
+    }
+
+    private func updateFrontBar() {
+        for i in 0 ... rows.count - 1 {
+            if rows[i].context == currentContext {
+                rows[i].isFront = true
+            } else {
+                rows[i].isFront = false
+            }
+            rx_action.onNext(.update(indexPath: nil))
+        }
     }
 
     private func deleteFrontBar() {
@@ -147,8 +158,8 @@ final class FooterViewModel {
         }
     }
 
-    private func change(context: String) {
-        TabUseCase.s.change(context: context)
+    func change(indexPath: IndexPath) {
+        TabUseCase.s.change(context: rows[indexPath.row].context)
     }
 
     private func remove(context: String) {
