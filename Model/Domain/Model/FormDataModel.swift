@@ -62,10 +62,10 @@ final class FormDataModel {
 
     /// select forms
     func select() -> [Form] {
-        let result = repository.select(type: Form.self)
+        let result = repository.select(Form.self)
 
         if case let .success(forms) = result {
-            return forms as! [Form]
+            return forms
         } else {
             rx_error.onNext(.get)
             return []
@@ -73,10 +73,10 @@ final class FormDataModel {
     }
 
     func select(id: String) -> [Form] {
-        let result = repository.select(type: Form.self)
+        let result = repository.select(Form.self)
 
         if case let .success(forms) = result {
-            return (forms as! [Form]).filter({ $0.id == id })
+            return forms.filter({ $0.id == id })
         } else {
             rx_error.onNext(.get)
             return []
@@ -84,10 +84,10 @@ final class FormDataModel {
     }
 
     func select(url: String) -> [Form] {
-        let result = repository.select(type: Form.self)
+        let result = repository.select(Form.self)
 
         if case let .success(forms) = result {
-            return (forms as! [Form]).filter({ $0.url == url })
+            return forms.filter({ $0.url == url })
         } else {
             rx_error.onNext(.get)
             return []

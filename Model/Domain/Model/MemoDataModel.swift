@@ -64,10 +64,10 @@ final class MemoDataModel {
 
     /// select all memo
     func select() -> [Memo] {
-        let result = repository.select(type: Memo.self)
+        let result = repository.select(Memo.self)
 
         if case let .success(memos) = result {
-            return memos as! [Memo]
+            return memos
         } else {
             rx_error.onNext(.get)
             return []
@@ -76,10 +76,10 @@ final class MemoDataModel {
 
     /// select memo
     func select(id: String) -> Memo? {
-        let result = repository.select(type: Memo.self)
+        let result = repository.select(Memo.self)
 
         if case let .success(memos) = result {
-            return (memos as! [Memo]).filter({ $0.id == id }).first ?? nil
+            return memos.filter({ $0.id == id }).first ?? nil
         } else {
             rx_error.onNext(.get)
             return nil
