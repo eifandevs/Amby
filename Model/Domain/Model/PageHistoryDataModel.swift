@@ -11,9 +11,9 @@ import RxCocoa
 import RxSwift
 
 enum PageHistoryDataModelAction {
-    case insert(pageHistory: PageHistory, at: Int)
-    case append(pageHistory: PageHistory)
-    case change(context: String)
+    case insert(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
+    case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
+    case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
     case reload
     case load(url: String)
@@ -77,6 +77,15 @@ final class PageHistoryDataModel {
         return histories.index(where: { $0.context == currentContext })
     }
 
+    /// 現在のデータ
+    private var currentData: (pageHistory: PageHistory, index: Int)? {
+        if let currentHistory = self.currentHistory, let currentLocation = self.currentLocation {
+            return (pageHistory: currentHistory, index: currentLocation)
+        } else {
+            return nil
+        }
+    }
+    
     /// 最新ページを見ているかフラグ
     private var isViewingLatest: Bool {
         return currentLocation == histories.count - 1
@@ -281,10 +290,11 @@ final class PageHistoryDataModel {
 
     /// add page
     func append(url: String?, title: String? = nil) {
+        let before = self.currentData
         let newPage = PageHistory(url: url ?? "", title: title ?? "")
         histories.append(newPage)
         currentContext = newPage.context
-        rx_action.onNext(.append(pageHistory: newPage))
+        rx_action.onNext(.append(before: before, after: self.currentData!))
     }
 
     /// ページコピー
