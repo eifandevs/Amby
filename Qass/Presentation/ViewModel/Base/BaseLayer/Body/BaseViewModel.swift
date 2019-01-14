@@ -180,7 +180,7 @@ final class BaseViewModel {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .insert(at, _): self.rx_action.onNext(.insert(at: at))
+                case let .insert(before, _): self.rx_action.onNext(.insert(at: before.index + 1))
                 case .reload: self.rx_action.onNext(.reload)
                 case .append: self.rx_action.onNext(.append)
                 case .change: self.rx_action.onNext(.change)

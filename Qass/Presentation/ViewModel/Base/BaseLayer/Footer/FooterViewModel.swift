@@ -92,8 +92,8 @@ final class FooterViewModel {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .append(pageHistory): self.append(pageHistory: pageHistory)
-                case let .insert(at, pageHistory): self.rx_action.onNext(.insert(at: at, pageHistory: pageHistory))
+                case let .append(_, after): self.append(pageHistory: after.pageHistory)
+                case let .insert(before, after): self.rx_action.onNext(.insert(at: before.index + 1, pageHistory: after.pageHistory))
                 case .change: self.updateFrontBar()
                 case let .delete(deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
                 case let .startLoading(context): self.startLoading(context: context)

@@ -11,9 +11,9 @@ import RxCocoa
 import RxSwift
 
 public enum TabUseCaseAction {
-    case append(pageHistory: PageHistory)
-    case insert(at: Int, pageHistory: PageHistory)
-    case change(context: String)
+    case insert(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
+    case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
+    case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case reload
     case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
     case startLoading(context: String)
@@ -65,10 +65,10 @@ public final class TabUseCase {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .insert(pageHistory, at): self.rx_action.onNext(.insert(at: at, pageHistory: pageHistory))
+                case let .insert(before, after): self.rx_action.onNext(.insert(before: before, after: after))
                 case .reload: self.rx_action.onNext(.reload)
-                case let .append(pageHistory): self.rx_action.onNext(.append(pageHistory: pageHistory))
-                case let .change(context): self.rx_action.onNext(.change(context: context))
+                case let .append(before, after): self.rx_action.onNext(.append(before: before, after: after))
+                case let .change(before, after): self.rx_action.onNext(.change(before: before, after: after))
                 case let .delete(deleteContext, currentContext, deleteIndex):
                     self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
                 case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))
