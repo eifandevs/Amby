@@ -20,7 +20,7 @@ class FooterView: UIView, ShadowView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setup()
+        setup(frame: frame)
     }
 
     required init(coder _: NSCoder) {
@@ -31,7 +31,7 @@ class FooterView: UIView, ShadowView {
         log.debug("deinit called.")
     }
 
-    private func setup() {
+    private func setup(frame: CGRect) {
         // layout
         addAreaShadow()
         backgroundColor = UIColor.lightGray
@@ -41,10 +41,10 @@ class FooterView: UIView, ShadowView {
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        layout.itemSize = AppConst.BASE_LAYER.THUMBNAIL_SIZE
+        layout.itemSize = CGSize(width: AppConst.BASE_LAYER.THUMBNAIL_SIZE.width, height: frame.height)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(origin: CGPoint.zero, size: frame.size), collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.collectionViewLayout = layout
@@ -56,15 +56,6 @@ class FooterView: UIView, ShadowView {
         collectionView.clipsToBounds = false
         addSubview(collectionView)
 
-        collectionView.snp.makeConstraints { make in
-            make.left.equalTo(snp.left).offset(0)
-            make.right.equalTo(snp.right).offset(0)
-            make.top.equalTo(snp.top).offset(0)
-            make.bottom.equalTo(snp.bottom).offset(0)
-        }
-
-        adjustLeftMargin()
-
         setupRx()
     }
 
@@ -75,7 +66,10 @@ class FooterView: UIView, ShadowView {
                 log.eventIn(chain: "FooterViewModel.rx_action")
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .update(indexPath): self.update(indexPath: indexPath)
+                case let .update(indexPath, animated): self.update(indexPath: indexPath, animated: animated)
+                case let .append(indexPath): self.append(indexPath: indexPath)
+                case let .insert(indexPath): self.insert(indexPath: indexPath)
+                case let .delete(indexPath): self.delete(indexPath: indexPath)
                 default: break
                 }
                 log.eventOut(chain: "FooterViewModel.rx_action")
@@ -83,21 +77,54 @@ class FooterView: UIView, ShadowView {
             .disposed(by: rx.disposeBag)
     }
 
-    /// 画面更新
-    private func update(indexPath _: IndexPath?) {
+    /// アペンド
+    private func append(indexPath: IndexPath) {
         DispatchQueue.mainSyncSafe {
-            collectionView.reloadData()
-            adjustLeftMargin()
+            self.collectionView.insertItems(at: [indexPath])
+            self.viewModel.updateFrontBar()
         }
     }
 
-    /// マージン調整
-    private func adjustLeftMargin() {
-        // マージン調整
-        let isRequireLeftMargin = (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(viewModel.cellCount)) < bounds.size.width
-        if isRequireLeftMargin {
-            let leftMargin = (bounds.size.width - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(viewModel.cellCount))) / 2
-            collectionView.contentInset = UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0)
+    /// 挿入
+    private func insert(indexPath: IndexPath) {
+        DispatchQueue.mainSyncSafe {
+            self.collectionView.insertItems(at: [indexPath])
+            self.viewModel.updateFrontBar()
+        }
+    }
+
+    /// 削除
+    private func delete(indexPath: IndexPath) {
+        DispatchQueue.mainSyncSafe {
+            self.collectionView.deleteItems(at: [indexPath])
+            self.viewModel.updateFrontBar()
+        }
+    }
+
+    /// 画面更新
+    private func update(indexPath: [IndexPath]?, animated: Bool) {
+        if let indexPath = indexPath {
+            // 部分更新
+            DispatchQueue.mainSyncSafe {
+                if animated {
+                    collectionView.reloadItems(at: indexPath)
+                } else {
+                    UIView.performWithoutAnimation {
+                        collectionView.reloadItems(at: indexPath)
+                    }
+                }
+            }
+        } else {
+            // 全更新
+            DispatchQueue.mainSyncSafe {
+                if animated {
+                    collectionView.reloadData()
+                } else {
+                    UIView.performWithoutAnimation {
+                        collectionView.reloadData()
+                    }
+                }
+            }
         }
     }
 }
@@ -121,12 +148,25 @@ extension FooterView: UICollectionViewDataSource {
 }
 
 extension FooterView: UICollectionViewDelegate {
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.change(indexPath: indexPath)
+    }
 }
 
 // cellのサイズの設定
 extension FooterView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, insetForSectionAt _: Int) -> UIEdgeInsets {
+        let isRequireLeftMargin = (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(viewModel.cellCount)) < bounds.size.width
+        if isRequireLeftMargin {
+            let leftMargin = (bounds.size.width - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(viewModel.cellCount))) / 2
+            return UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0)
+        } else {
+            return .zero
+        }
+    }
+
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
-        return AppConst.BASE_LAYER.THUMBNAIL_SIZE
+        return CGSize(width: AppConst.BASE_LAYER.THUMBNAIL_SIZE.width, height: frame.height)
     }
 }
 

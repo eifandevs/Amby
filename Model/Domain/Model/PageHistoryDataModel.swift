@@ -11,10 +11,10 @@ import RxCocoa
 import RxSwift
 
 enum PageHistoryDataModelAction {
-    case insert(pageHistory: PageHistory, at: Int)
-    case append(pageHistory: PageHistory)
-    case change(context: String)
-    case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case insert(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
+    case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
+    case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
+    case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case reload
     case load(url: String)
     case startLoading(context: String)
@@ -75,6 +75,15 @@ final class PageHistoryDataModel {
     /// 現在の位置
     var currentLocation: Int? {
         return histories.index(where: { $0.context == currentContext })
+    }
+
+    /// 現在のデータ
+    private var currentData: (pageHistory: PageHistory, index: Int)? {
+        if let currentHistory = self.currentHistory, let currentLocation = self.currentLocation {
+            return (pageHistory: currentHistory, index: currentLocation)
+        } else {
+            return nil
+        }
     }
 
     /// 最新ページを見ているかフラグ
@@ -271,20 +280,22 @@ final class PageHistoryDataModel {
             append(url: url, title: title ?? "")
         } else {
             if let currentLocation = currentLocation {
+                let before = currentData!
                 let newPage = PageHistory(url: url ?? "", title: title ?? "")
                 histories.insert(newPage, at: currentLocation + 1)
                 currentContext = newPage.context
-                rx_action.onNext(.insert(pageHistory: newPage, at: currentLocation + 1))
+                rx_action.onNext(.insert(before: before, after: currentData!))
             }
         }
     }
 
     /// add page
-    func append(url: String?, title: String? = nil) {
+    func append(url: String? = nil, title: String? = nil) {
+        let before = currentData
         let newPage = PageHistory(url: url ?? "", title: title ?? "")
         histories.append(newPage)
         currentContext = newPage.context
-        rx_action.onNext(.append(pageHistory: newPage))
+        rx_action.onNext(.append(before: before, after: currentData!))
     }
 
     /// ページコピー
@@ -292,17 +303,9 @@ final class PageHistoryDataModel {
         if let currentHistory = currentHistory {
             if isViewingLatest {
                 // 最新ページを見ているなら、insertではないので、appendに切り替える
-                let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
-                histories.append(newPage)
-                currentContext = newPage.context
-                rx_action.onNext(.append(pageHistory: newPage))
+                append(url: currentHistory.url, title: currentHistory.title)
             } else {
-                if let currentLocation = currentLocation {
-                    let newPage = PageHistory(url: currentHistory.url, title: currentHistory.title)
-                    histories.insert(newPage, at: currentLocation + 1)
-                    currentContext = newPage.context
-                    rx_action.onNext(.insert(pageHistory: newPage, at: currentLocation + 1))
-                }
+                insert(url: currentHistory.url, title: currentHistory.title)
             }
         }
     }
@@ -326,12 +329,8 @@ final class PageHistoryDataModel {
                 histories.remove(at: deleteIndex)
                 // 削除した結果、ページが存在しない場合は作成する
                 if histories.count == 0 {
-                    rx_action.onNext(.delete(deleteContext: context, currentContext: nil, deleteIndex: deleteIndex))
-                    let pageHistory = PageHistory()
-                    histories.append(pageHistory)
-                    currentContext = pageHistory.context
-                    rx_action.onNext(.append(pageHistory: pageHistory))
-
+                    rx_action.onNext(.delete(isFront: true, deleteContext: context, currentContext: nil, deleteIndex: deleteIndex))
+                    append()
                     return
                 } else {
                     // 最後の要素を削除した場合は、前のページに戻る
@@ -340,11 +339,13 @@ final class PageHistoryDataModel {
                     } else {
                         currentContext = histories[deleteIndex].context
                     }
+
+                    rx_action.onNext(.delete(isFront: true, deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
                 }
             } else {
                 histories.remove(at: deleteIndex)
+                rx_action.onNext(.delete(isFront: false, deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
             }
-            rx_action.onNext(.delete(deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
         } else {
             log.error("cannot find delete context.")
         }
@@ -352,25 +353,28 @@ final class PageHistoryDataModel {
 
     /// 表示中ページの変更
     func change(context: String) {
+        let before = currentData!
         currentContext = context
-        rx_action.onNext(.change(context: currentContext))
+        rx_action.onNext(.change(before: before, after: currentData!))
     }
 
     /// 前ページに変更
     func goBack() {
         if let currentLocation = currentLocation, histories.count > 0 {
+            let before = currentData!
             let targetContext = histories[0 ... histories.count - 1 ~= currentLocation - 1 ? currentLocation - 1 : histories.count - 1].context
             currentContext = targetContext
-            rx_action.onNext(.change(context: currentContext))
+            rx_action.onNext(.change(before: before, after: currentData!))
         }
     }
 
     /// 次ページに変更
     func goNext() {
         if let currentLocation = currentLocation, histories.count > 0 {
+            let before = currentData!
             let targetContext = histories[0 ... histories.count - 1 ~= currentLocation + 1 ? currentLocation + 1 : 0].context
             currentContext = targetContext
-            rx_action.onNext(.change(context: currentContext))
+            rx_action.onNext(.change(before: before, after: currentData!))
         }
     }
 

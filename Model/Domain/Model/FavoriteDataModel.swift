@@ -61,9 +61,9 @@ final class FavoriteDataModel {
     }
 
     func select() -> [Favorite] {
-        let result = repository.select(type: Favorite.self)
+        let result = repository.select(Favorite.self)
         if case let .success(favorite) = result {
-            return favorite as! [Favorite]
+            return favorite
         } else {
             rx_error.onNext(.get)
             return []
@@ -71,9 +71,9 @@ final class FavoriteDataModel {
     }
 
     func select(id: String) -> [Favorite] {
-        let result = repository.select(type: Favorite.self)
+        let result = repository.select(Favorite.self)
         if case let .success(favorite) = result {
-            return (favorite as! [Favorite]).filter({ $0.id == id })
+            return favorite.filter({ $0.id == id })
         } else {
             rx_error.onNext(.get)
             return []
@@ -81,9 +81,9 @@ final class FavoriteDataModel {
     }
 
     func select(url: String) -> [Favorite] {
-        let result = repository.select(type: Favorite.self)
+        let result = repository.select(Favorite.self)
         if case let .success(favorite) = result {
-            return (favorite as! [Favorite]).filter({ $0.url == url })
+            return favorite.filter({ $0.url == url })
         } else {
             rx_error.onNext(.get)
             return []

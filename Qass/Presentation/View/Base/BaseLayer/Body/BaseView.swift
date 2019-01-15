@@ -168,7 +168,7 @@ class BaseView: UIView {
                 case .reload: self.reload()
                 case .append: self.append()
                 case .change: self.change()
-                case let .remove(deleteContext, currentContext, deleteIndex): self.remove(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
+                case let .remove(isFront, deleteContext, currentContext, deleteIndex): self.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
                 case .historyBack: self.historyBack()
                 case .historyForward: self.historyForward()
                 case let .load(url): self.load(url: url)
@@ -330,10 +330,9 @@ class BaseView: UIView {
         _ = front.load(urlStr: url)
     }
 
-    private func remove(deleteContext: String, currentContext: String?, deleteIndex: Int) {
+    private func remove(isFront: Bool, deleteContext _: String, currentContext: String?, deleteIndex: Int) {
         if let webView = self.webViews[deleteIndex] {
-            let isFrontDelete = deleteContext == front.context
-            if isFrontDelete {
+            if isFront {
                 webView.removeObserverEstimatedProgress(observer: self)
                 viewModel.updateProgress(progress: 0)
                 front = nil
@@ -350,9 +349,9 @@ class BaseView: UIView {
             // くるくるを更新
             updateNetworkActivityIndicator()
 
-            if isFrontDelete && currentContext != nil {
+            if isFront && currentContext != nil {
                 // フロントの削除で、削除後にwebviewが存在する場合
-                if let current = self.webViews.find({ $0?.context == self.viewModel.currentContext }), let currentWebView = current {
+                if let current = self.webViews.find({ $0?.context == currentContext }), let currentWebView = current {
                     currentWebView.observeEstimatedProgress(observer: self)
                     front = current
                     bringSubview(toFront: currentWebView)
