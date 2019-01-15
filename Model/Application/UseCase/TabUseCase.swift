@@ -11,13 +11,14 @@ import RxCocoa
 import RxSwift
 
 public enum TabUseCaseAction {
-    case insert(at: Int)
+    case insert(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
+    case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
+    case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case reload
-    case append
-    case change
-    case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case startLoading(context: String)
     case endLoading(context: String, title: String)
+    case endRendering(context: String)
 }
 
 /// タブユースケース
@@ -64,13 +65,12 @@ public final class TabUseCase {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .insert(_, at):
-                    self.rx_action.onNext(.insert(at: at))
+                case let .insert(before, after): self.rx_action.onNext(.insert(before: before, after: after))
                 case .reload: self.rx_action.onNext(.reload)
-                case .append: self.rx_action.onNext(.append)
-                case .change: self.rx_action.onNext(.change)
-                case let .delete(deleteContext, currentContext, deleteIndex):
-                    self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
+                case let .append(before, after): self.rx_action.onNext(.append(before: before, after: after))
+                case let .change(before, after): self.rx_action.onNext(.change(before: before, after: after))
+                case let .delete(isFront, deleteContext, currentContext, deleteIndex):
+                    self.rx_action.onNext(.delete(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
                 case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))
                 case let .endLoading(context):
                     if let isLoading = PageHistoryDataModel.s.getIsLoading(context: context) {
@@ -83,6 +83,7 @@ public final class TabUseCase {
                             log.warning("start loading while saving thumbnails.")
                         }
                     }
+                case let .endRendering(context): self.rx_action.onNext(.endRendering(context: context))
                 default: break
                 }
             }

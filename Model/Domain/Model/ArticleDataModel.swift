@@ -44,7 +44,6 @@ final class ArticleDataModel {
 
     /// 記事取得
     func get() {
-        /// TODO: 前回の取得から3時間経過していたら取得する
         if articles.count == 0 {
             let repository = ApiRepository<App>()
 

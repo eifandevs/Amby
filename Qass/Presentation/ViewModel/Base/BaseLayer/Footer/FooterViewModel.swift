@@ -12,34 +12,38 @@ import RxCocoa
 import RxSwift
 
 enum FooterViewModelAction {
-    case update(indexPath: IndexPath?)
-    case insert(at: Int, pageHistory: PageHistory)
-    case change(context: String)
-    case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case update(indexPath: [IndexPath]?, animated: Bool)
+    case append(indexPath: IndexPath)
+    case insert(indexPath: IndexPath)
+    case delete(indexPath: IndexPath)
     case startLoading(context: String)
     case endLoading(context: String, title: String)
 }
 
 final class FooterViewModel {
     struct Row {
-        var context: String?
+        var context: String
         var title: String
         var isFront: Bool
         var isLoading: Bool
-        var image: UIImage?
+        var thumbnail: UIImage?
+
+        init(pageHistory: PageHistory) {
+            let baseImage = ThumbnailUseCase.s.getThumbnail(context: pageHistory.context)
+            let image = baseImage?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
+
+            context = pageHistory.context
+            title = pageHistory.title
+            isFront = pageHistory.context == TabUseCase.s.currentContext
+            isLoading = pageHistory.isLoading
+            thumbnail = image
+        }
     }
 
     /// アクション通知用RX
     let rx_action = PublishSubject<FooterViewModelAction>()
 
-    var rows = TabUseCase.s.pageHistories.map { pageHistory -> FooterViewModel.Row in
-        let isFront = pageHistory.context == TabUseCase.s.currentContext
-
-        let thumbnail = ThumbnailUseCase.s.getThumbnail(context: pageHistory.context)
-        let image = thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
-
-        return Row(context: pageHistory.context, title: pageHistory.title, isFront: isFront, isLoading: pageHistory.isLoading, image: image)
-    }
+    var rows = TabUseCase.s.pageHistories.map { Row(pageHistory: $0) }
 
     // 数
     var cellCount: Int {
@@ -86,49 +90,101 @@ final class FooterViewModel {
     // MARK: Private Method
 
     private func setupRx() {
-        /// サムネイル監視
-        ThumbnailUseCase.s.rx_action
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element else { return }
-                switch action {
-                case let .append(pageHistory): self.append(pageHistory: pageHistory)
-                case let .insert(at, pageHistory): self.rx_action.onNext(.insert(at: at, pageHistory: pageHistory))
-                case let .change(context): self.rx_action.onNext(.change(context: context))
-                case let .delete(deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
-                }
-            }
-            .disposed(by: disposeBag)
-
         /// ローディング監視
         TabUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))
-                case let .endLoading(context, title): self.rx_action.onNext(.endLoading(context: context, title: title))
+                case let .append(before, after): self.append(before: before, after: after)
+                case let .insert(before, after): self.insert(before: before, after: after)
+                case let .change(before, after): self.change(before: before, after: after)
+                case let .delete(isFront, deleteContext, currentContext, deleteIndex): self.delete(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
+                case let .startLoading(context): self.startLoading(context: context)
+                case let .endLoading(context, title): self.endLoading(context: context, title: title)
+                case let .endRendering(context): self.endRendering(context: context)
                 default: break
                 }
             }
             .disposed(by: disposeBag)
     }
 
-    private func append(pageHistory: PageHistory) {
-        let isFront = pageHistory.context == TabUseCase.s.currentContext
+    private func delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex _: Int) {
+        for i in 0 ... rows.count - 1 where rows[i].context == deleteContext {
+            rows.remove(at: i)
+            rx_action.onNext(.delete(indexPath: IndexPath(row: i, section: 0)))
+            return
+        }
+    }
 
-        let thumbnail = ThumbnailUseCase.s.getThumbnail(context: pageHistory.context)
-        let image = thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
-
-        let row = Row(context: pageHistory.context, title: pageHistory.title, isFront: isFront, isLoading: pageHistory.isLoading, image: image)
+    private func append(before _: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int)) {
+        let row = Row(pageHistory: after.pageHistory)
         rows.append(row)
-        rx_action.onNext(.update(indexPath: nil))
+
+        rx_action.onNext(.append(indexPath: IndexPath(row: after.index, section: 0)))
     }
 
-    private func change(context: String) {
-        TabUseCase.s.change(context: context)
+    private func insert(before _: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int)) {
+        let row = Row(pageHistory: after.pageHistory)
+        rows.insert(row, at: after.index)
+
+        rx_action.onNext(.insert(indexPath: IndexPath(row: after.index, section: 0)))
     }
 
-    private func remove(context: String) {
-        TabUseCase.s.remove(context: context)
+    private func change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int)) {
+        rows[before.index].isFront = false
+        rows[after.index].isFront = true
+
+        rx_action.onNext(.update(indexPath: [before, after].map { IndexPath(row: $0.index, section: 0) }, animated: false))
+    }
+
+    private func startLoading(context: String) {
+        if let index = rows.index(where: { $0.context == context }) {
+            rows[index].isLoading = true
+            rx_action.onNext(.update(indexPath: [IndexPath(row: index, section: 0)], animated: false))
+        }
+    }
+
+    private func endLoading(context: String, title: String) {
+        if let index = rows.index(where: { $0.context == context }) {
+            rows[index].isLoading = false
+            rows[index].title = title
+        }
+    }
+
+    private func endRendering(context: String) {
+        if let index = rows.index(where: { $0.context == context }) {
+            rows[index].thumbnail = getThumbnail(context: context)
+
+            rx_action.onNext(.update(indexPath: [IndexPath(row: index, section: 0)], animated: false))
+        }
+    }
+
+    func updateFrontBar() {
+        guard rows.count > 0 else { return }
+
+        var updateIndexPath = [IndexPath]()
+
+        for i in 0 ... rows.count - 1 {
+            if rows[i].context == currentContext {
+                if !rows[i].isFront {
+                    rows[i].isFront = true
+                    updateIndexPath.append(IndexPath(row: i, section: 0))
+                }
+            } else {
+                if rows[i].isFront {
+                    rows[i].isFront = false
+                    updateIndexPath.append(IndexPath(row: i, section: 0))
+                }
+            }
+        }
+
+        if updateIndexPath.count > 0 {
+            rx_action.onNext(.update(indexPath: updateIndexPath, animated: false))
+        }
+    }
+
+    func change(indexPath: IndexPath) {
+        TabUseCase.s.change(context: rows[indexPath.row].context)
     }
 
     private func getThumbnail(context: String) -> UIImage? {

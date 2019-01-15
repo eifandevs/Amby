@@ -16,7 +16,7 @@ enum BaseViewModelAction {
     case reload
     case append
     case change
-    case remove(deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case remove(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case historyBack
     case historyForward
     case load(url: String)
@@ -180,11 +180,11 @@ final class BaseViewModel {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .insert(at): self.rx_action.onNext(.insert(at: at))
+                case let .insert(before, _): self.rx_action.onNext(.insert(at: before.index + 1))
                 case .reload: self.rx_action.onNext(.reload)
                 case .append: self.rx_action.onNext(.append)
                 case .change: self.rx_action.onNext(.change)
-                case let .delete(deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.remove(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
+                case let .delete(isFront, deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
                 default: break
                 }
             }
@@ -281,7 +281,7 @@ final class BaseViewModel {
 
         // サムネイルを保存
         DispatchQueue.mainSyncSafe {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 webView.takeSnapshot(with: nil) { [weak self] image, error in
                     guard let `self` = self else { return }
                     if let img = image {
@@ -390,21 +390,23 @@ final class BaseViewModel {
         return FormUseCase.s.select(url: url).first
     }
 
-    func moveHistoryIfHistorySwipe(touchPoint: CGPoint) -> Bool {
-        let isHistorySwipe = touchPoint.y < (AppConst.DEVICE.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER.HEADER_HEIGHT
-
-        if isHistorySwipe {
-            state.remove(.isTouching)
-
-            // 画面上半分のスワイプの場合は、履歴移動
-            if swipeDirection == .left {
-                historyBack()
-            } else {
-                historyForward()
-            }
-        }
-
-        return isHistorySwipe
+    func moveHistoryIfHistorySwipe(touchPoint _: CGPoint) -> Bool {
+        return false
+        // ヒストリースワイプはやめる
+//        let isHistorySwipe = touchPoint.y < (AppConst.DEVICE.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER.HEADER_HEIGHT
+//
+//        if isHistorySwipe {
+//            state.remove(.isTouching)
+//
+//            // 画面上半分のスワイプの場合は、履歴移動
+//            if swipeDirection == .left {
+//                historyBack()
+//            } else {
+//                historyForward()
+//            }
+//        }
+//
+//        return isHistorySwipe
     }
 
     /// 前webviewのキャプチャ取得

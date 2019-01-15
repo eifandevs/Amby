@@ -62,7 +62,8 @@ final class DBRepository {
         return .success(())
     }
 
-    func select(type: Object.Type) -> RepositoryResult<[Object]> {
-        return .success(realm.objects(type).map { $0 })
+    public func select<T>(_ type: T.Type) -> RepositoryResult<[T]> {
+        let favorite = Array(realm.objects(type as! Object.Type))
+        return .success(favorite as! [T])
     }
 }
