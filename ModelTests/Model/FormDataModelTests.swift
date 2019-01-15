@@ -1,6 +1,6 @@
 ////
 ////  FormDataModelTests.swift
-////  QassTests
+////  AmbyTests
 ////
 ////  Created by tenma on 2018/04/19.
 ////  Copyright © 2018年 eifandevs. All rights reserved.
@@ -12,7 +12,7 @@
 //import Realm
 //import RealmSwift
 //
-//@testable import Qass
+//@testable import Amby
 //
 //class FormDataModelTests: XCTestCase {
 //

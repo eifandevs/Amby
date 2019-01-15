@@ -154,11 +154,11 @@ _symbolic So7NSValueC
 _$SSo8NSNumberCMF
 _$SSo16UILayoutPriorityaMF
 Apple LLVM version 10.0.0 (clang-1000.11.45.1)
--emit-bc /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintInsets.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMakerFinalizable.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintConstantTarget.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintView+Extensions.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMakerRelatable.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintAttributes.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintOffsetTarget.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuideDSL.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMakerEditable.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuide.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMaker.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintPriority.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintRelatableTarget.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintDSL.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMakerExtendable.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintItem.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/Typealiases.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintPriorityTarget.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutSupport.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuide+Extensions.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintConfig.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/Constraint.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintView.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/LayoutConstraintItem.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMakerPriortizable.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/LayoutConstraint.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintInsetTarget.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMultiplierTarget.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintViewDSL.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/Debugging.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutSupportDSL.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintRelation.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/UILayoutSupport+Extensions.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintDescription.swift -supplementary-output-file-map <temporary-file> -target arm64-apple-ios8.0 -Xllvm -aarch64-use-tbi -enable-objc-interop -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk -I /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/BuildProductsPath/Release-iphoneos -F /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/BuildProductsPath/Release-iphoneos -application-extension -g -import-underlying-module -module-cache-path /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/ModuleCache.noindex -swift-version 4.2 -O -serialize-debugging-options -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/SnapKit-generated-files.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/SnapKit-own-target-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/SnapKit-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/all-product-headers.yaml -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/SnapKit-project-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/BuildProductsPath/Release-iphoneos/include -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/DerivedSources/arm64 -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/DerivedSources -Xcc -ivfsoverlay -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/unextended-module-overlay.yaml -Xcc -working-directory/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit -module-name SnapKit -num-threads 4 -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintInsets.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMakerFinalizable.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintConstantTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintView+Extensions.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMakerRelatable.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintAttributes.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintOffsetTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintLayoutGuideDSL.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMakerEditable.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintLayoutGuide.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMaker.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintPriority.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintRelatableTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintDSL.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMakerExtendable.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintItem.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/Typealiases.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintPriorityTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintLayoutSupport.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintLayoutGuide+Extensions.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintConfig.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/Constraint.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintView.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/LayoutConstraintItem.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMakerPriortizable.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/LayoutConstraint.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintInsetTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMultiplierTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintViewDSL.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/Debugging.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintLayoutSupportDSL.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintRelation.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/UILayoutSupport+Extensions.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintDescription.bc -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift
+-emit-bc /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintInsets.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMakerFinalizable.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintConstantTarget.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintView+Extensions.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMakerRelatable.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintAttributes.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintOffsetTarget.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuideDSL.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMakerEditable.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuide.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMaker.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintPriority.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintRelatableTarget.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintDSL.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMakerExtendable.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintItem.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/Typealiases.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintPriorityTarget.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutSupport.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuide+Extensions.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintConfig.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/Constraint.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintView.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/LayoutConstraintItem.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMakerPriortizable.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/LayoutConstraint.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintInsetTarget.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMultiplierTarget.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintViewDSL.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/Debugging.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutSupportDSL.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintRelation.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/UILayoutSupport+Extensions.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintDescription.swift -supplementary-output-file-map <temporary-file> -target arm64-apple-ios8.0 -Xllvm -aarch64-use-tbi -enable-objc-interop -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk -I /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/BuildProductsPath/Release-iphoneos -F /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/BuildProductsPath/Release-iphoneos -application-extension -g -import-underlying-module -module-cache-path /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/ModuleCache.noindex -swift-version 4.2 -O -serialize-debugging-options -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/SnapKit-generated-files.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/SnapKit-own-target-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/SnapKit-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/all-product-headers.yaml -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/SnapKit-project-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/BuildProductsPath/Release-iphoneos/include -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/DerivedSources/arm64 -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/DerivedSources -Xcc -ivfsoverlay -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/unextended-module-overlay.yaml -Xcc -working-directory/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit -module-name SnapKit -num-threads 4 -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintInsets.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMakerFinalizable.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintConstantTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintView+Extensions.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMakerRelatable.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintAttributes.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintOffsetTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintLayoutGuideDSL.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMakerEditable.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintLayoutGuide.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMaker.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintPriority.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintRelatableTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintDSL.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMakerExtendable.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintItem.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/Typealiases.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintPriorityTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintLayoutSupport.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintLayoutGuide+Extensions.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintConfig.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/Constraint.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintView.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/LayoutConstraintItem.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMakerPriortizable.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/LayoutConstraint.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintInsetTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintMultiplierTarget.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintViewDSL.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/Debugging.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintLayoutSupportDSL.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintRelation.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/UILayoutSupport+Extensions.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/Objects-normal/arm64/ConstraintDescription.bc -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift
 <swift-imported-modules>
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit
 Apple Swift version 4.2 (swiftlang-1000.11.37.1 clang-1000.11.45.1)
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintInsets.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintInsets.swift
 $SSfSQsSQ2eeoiySbx_xtFZTW
 <compiler-generated>
 hash
@@ -235,11 +235,11 @@ _symbolic ____ 7SnapKit26ConstraintMakerFinalizableC
 _symbolic 7SnapKit21ConstraintDescriptionC
 _$S7SnapKit26ConstraintMakerFinalizableCMF
 _objc_classes
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMakerFinalizable.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMakerFinalizable.swift
 $S7SnapKit26ConstraintMakerFinalizableCMa
 deinit
 ConstraintMakerFinalizable.swift
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source
 constraint.get
 ConstraintDescription.swift
 labeled
@@ -279,7 +279,7 @@ _symbolic So6CGSizeV
 _$SSo6CGSizeVMF
 _symbolic So12UIEdgeInsetsV
 _$SSo12UIEdgeInsetsVMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintConstantTarget.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintConstantTarget.swift
 $SSo17NSLayoutAttributeVwui
 $SSo17NSLayoutAttributeVwug
 $SSo17NSLayoutAttributeVwst
@@ -307,7 +307,7 @@ _$SSo6UIViewC7SnapKitE21snp_remakeConstraintsyyyAC15ConstraintMakerCXEFTm
 _$S7SnapKit15ConstraintMakerC18prepareConstraints4item7closureSayAA0C0CGAA06LayoutC4Item_p_yACXEtFZTf4nnd_n
 _$S7SnapKit15ConstraintMakerC17remakeConstraints4item7closureyAA06LayoutC4Item_p_yACXEtFZTf4nnd_n
 _$S7SnapKit15ConstraintMakerC17updateConstraints4item7closureyAA06LayoutC4Item_p_yACXEtFZTf4nnd_n
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintView+Extensions.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintView+Extensions.swift
 snp_removeConstraints
 ConstraintView+Extensions.swift
 snp_remakeConstraints
@@ -345,7 +345,7 @@ _$S7SnapKit25ConstraintRelatableTarget_pML
 _$S7SnapKit24ConstraintConstantTarget_pML
 _$Ss23_ContiguousArrayStorageCySSGML
 _$SSo13UILayoutGuideCML
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMakerRelatable.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMakerRelatable.swift
 $S7SnapKit24ConstraintConstantTarget_pWOb
 $Ss23_ContiguousArrayStorageCySSGMa
 $S7SnapKit24ConstraintConstantTarget_pSgWOh
@@ -457,7 +457,7 @@ _$S7SnapKit20ConstraintAttributesVs27ExpressibleByIntegerLiteralAAMA
 _symbolic $Ss9OptionSetP
 _$S7SnapKit20ConstraintAttributesVs9OptionSetAAMA
 _$S7SnapKit20ConstraintAttributesVN
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintAttributes.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintAttributes.swift
 $Ss16IndexingIteratorVyxGs0B8ProtocolsSt4next7ElementQzSgyFTWSay7SnapKit20ConstraintAttributesVG_Tg5
 next
 $SSayxGs10CollectionsSl9formIndex5aftery0C0Qzz_tFTW7SnapKit20ConstraintAttributesV_Tg5
@@ -547,7 +547,7 @@ _$S7SnapKit22ConstraintOffsetTargetPAAE010constraintdE5Value12CoreGraphics7CGFlo
 _symbolic $S7SnapKit22ConstraintOffsetTargetP
 _$S7SnapKit22ConstraintOffsetTarget_pMF
 _$S7SnapKit22ConstraintOffsetTargetWR
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintOffsetTarget.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintOffsetTarget.swift
 constraintOffsetTargetValue.get
 ConstraintOffsetTarget.swift
 $S12CoreGraphics7CGFloatV7SnapKit24ConstraintConstantTargetADWa
@@ -578,7 +578,7 @@ _symbolic So13UILayoutGuideC
 _$S7SnapKit24ConstraintLayoutGuideDSLVMF
 _symbolic So8NSObjectC
 _$SSo13UILayoutGuideCMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuideDSL.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuideDSL.swift
 $S7SnapKit24ConstraintLayoutGuideDSLVMa
 $S7SnapKit24ConstraintLayoutGuideDSLVAA0cF0AAWa
 $S7SnapKit24ConstraintLayoutGuideDSLVAA0c15BasicAttributesF0AAWa
@@ -624,7 +624,7 @@ _symbolic ____ 7SnapKit23ConstraintMakerEditableC
 _symbolic 7SnapKit27ConstraintMakerPriortizableC
 _$S7SnapKit23ConstraintMakerEditableCMF
 _$SSo12UIEdgeInsetsVMB
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMakerEditable.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMakerEditable.swift
 $S7SnapKit23ConstraintMakerEditableCMa
 objectdestroy
 inset
@@ -633,7 +633,7 @@ __swift_project_boxed_opaque_existential_1
 dividedBy
 multipliedBy
 __swift_assign_boxed_opaque_existential_1
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuide.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuide.swift
 _$S7SnapKit15ConstraintMakerC4leftAA0cD10ExtendableCvgTm
 _$S7SnapKit20LayoutConstraintItemPAAE7prepareyyF
 _$S7SnapKit10ConstraintC16activateIfNeeded16updatingExistingySb_tF
@@ -671,7 +671,7 @@ _symbolic 7SnapKit20LayoutConstraintItem_p
 _symbolic Say7SnapKit21ConstraintDescriptionCG
 _$S7SnapKit15ConstraintMakerCMF
 _$Ss23_ContiguousArrayStorageCy7SnapKit21ConstraintDescriptionCGML
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMaker.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMaker.swift
 $S7SnapKit24ConstraintConstantTarget_pWOc
 $Ss20_ArrayBufferProtocolPsE22_arrayOutOfPlaceUpdateyys011_ContiguousaB0Vy7ElementQzGz_S2iqd__ts16_PointerFunctionRd__AFQyd__AGRSlFs01_aB0Vy7SnapKit10ConstraintCG_s07_IgnoreK0VyAOGTg5Tf4nnndn_n
 $Ss12_ArrayBufferVyxGs01_aB8ProtocolssADP13_copyContents8subRange12initializingSpy7ElementQzGSnySiG_AKtFTW7SnapKit10ConstraintC_Tg5
@@ -756,7 +756,7 @@ _$S7SnapKit18ConstraintPriorityVs25ExpressibleByFloatLiteralAAMA
 _symbolic $Ss10StrideableP
 _symbolic s5NeverO
 _$S7SnapKit18ConstraintPriorityVSxAAMA
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintPriority.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintPriority.swift
 $S7SnapKit18ConstraintPriorityVMa
 <
 $SSfSLsSL1goiySbx_xtFZTW
@@ -780,7 +780,7 @@ required.get
 value.get
 _symbolic $S7SnapKit25ConstraintRelatableTargetP
 _$S7SnapKit25ConstraintRelatableTarget_pMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintRelatableTarget.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintRelatableTarget.swift
 $SSo13UILayoutGuideC7SnapKit25ConstraintRelatableTargetACWa
 $S7SnapKit14ConstraintItemCAA0C15RelatableTargetAAWa
 $SSo12UIEdgeInsetsV7SnapKit25ConstraintRelatableTargetACWa
@@ -814,7 +814,7 @@ _$S7SnapKit28ConstraintBasicAttributesDSLWR
 _symbolic $S7SnapKit23ConstraintAttributesDSLP
 _$S7SnapKit23ConstraintAttributesDSL_pMF
 _$S7SnapKit23ConstraintAttributesDSLWR
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintDSL.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintDSL.swift
 label
 setLabel
 ConstraintLayoutSupportDSL.swift
@@ -829,7 +829,7 @@ _$S7SnapKit25ConstraintMakerExtendableCMf
 _symbolic ____ 7SnapKit25ConstraintMakerExtendableC
 _symbolic 7SnapKit24ConstraintMakerRelatableC
 _$S7SnapKit25ConstraintMakerExtendableCMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMakerExtendable.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMakerExtendable.swift
 $S7SnapKit25ConstraintMakerExtendableCMa
 centerWithinMargins.get
 +=
@@ -844,12 +844,12 @@ _$S7SnapKit14ConstraintItemCMf
 _symbolic ____ 7SnapKit14ConstraintItemC
 _symbolic yXlSgXw
 _$S7SnapKit14ConstraintItemCMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintItem.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintItem.swift
 $S7SnapKit14ConstraintItemCMa
 ===
 !==
 $SyXlSgXwWOh
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/Typealiases.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/Typealiases.swift
 _$SSi7SnapKit24ConstraintPriorityTargetA2aBP010constraintdE5ValueSfvgTW
 _$SSu7SnapKit24ConstraintPriorityTargetA2aBP010constraintdE5ValueSfvgTW
 _$SSf7SnapKit24ConstraintPriorityTargetA2aBP010constraintdE5ValueSfvgTW
@@ -859,7 +859,7 @@ _$SSd7SnapKit24ConstraintPriorityTargetA2aBP010constraintdE5ValueSfvgTW
 _symbolic $S7SnapKit24ConstraintPriorityTargetP
 _$S7SnapKit24ConstraintPriorityTarget_pMF
 _$S7SnapKit24ConstraintPriorityTargetWR
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintPriorityTarget.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintPriorityTarget.swift
 $SSo16UILayoutPrioritya7SnapKit010ConstraintB6TargetACWa
 constraintPriorityTargetValue.get
 $S12CoreGraphics7CGFloatV7SnapKit24ConstraintPriorityTargetADWa
@@ -868,13 +868,13 @@ $SSf7SnapKit24ConstraintPriorityTargetAAWa
 $SSu7SnapKit24ConstraintPriorityTargetAAWa
 $SSi7SnapKit24ConstraintPriorityTargetAAWa
 ConstraintPriorityTarget.swift
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutSupport.swift
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuide+Extensions.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutSupport.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutGuide+Extensions.swift
 ConstraintLayoutGuide+Extensions.swift
 _$S7SnapKit16ConstraintConfigVMf
 _symbolic ____ 7SnapKit16ConstraintConfigV
 _$S7SnapKit16ConstraintConfigVMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintConfig.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintConfig.swift
 $S7SnapKit16ConstraintConfigVMa
 interfaceLayoutDirection.materialize
 interfaceLayoutDirection.set
@@ -921,7 +921,7 @@ _symbolic Say7SnapKit16LayoutConstraintCG
 _$S7SnapKit10ConstraintCMF
 _$Ss23_ContiguousArrayStorageCy7SnapKit16LayoutConstraintCGML
 _$S7SnapKit16LayoutConstraintC10constraintAA0D0CSgXwvpWvd
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/Constraint.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/Constraint.swift
 __swift_project_boxed_opaque_existential_0
 $Ss22_ContiguousArrayBufferV24storesOnlyElementsOfTypeySbqd__mlF7SnapKit16LayoutConstraintC_So08NSLayoutL0CTg5Tf4dn_n
 $Ss20_ArrayBufferProtocolPsE20_arrayAppendSequenceyyqd__s0F0Rd__7ElementQyd__AERtzlFs01_aB0Vy7SnapKit16LayoutConstraintCG_s08IteratorF0Vys08IndexingL0VySayALGGGTg5Tf4xn_n
@@ -1028,7 +1028,7 @@ first
 $S7SnapKit16LayoutConstraintCSbs5Error_pIggdzo_ACSbsAD_pIegndzo_TR
 $S7SnapKit10ConstraintC16activateIfNeeded16updatingExistingySb_tFSbAA06LayoutC0CXEfU_
 $SSayxGs26RangeReplaceableCollectionsSm6append10contentsOfyqd___ts8SequenceRd__7ElementQyd__AFRtzlFTW7SnapKit16LayoutConstraintC_SayAKGTg5
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintView.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintView.swift
 _$S7SnapKit20LayoutConstraintItemPAAE3add11constraintsySayAA0D0CG_tFTm
 _$S7SnapKit20LayoutConstraintItemPAAE14constraintsSet33_3197050075DDE9AB31F4A20B428AEA1FLLSo09NSMutableG0Cvg
 _$S7SnapKit20LayoutConstraintItemPAAE14constraintsSet33_3197050075DDE9AB31F4A20B428AEA1FLLSo09NSMutableG0CvgSo6UIViewC_Tg5
@@ -1036,7 +1036,7 @@ _$S7SnapKit14constraintsKey33_3197050075DDE9AB31F4A20B428AEA1FLLs5UInt8Vvp
 _symbolic $S7SnapKit20LayoutConstraintItemP
 _$S7SnapKit20LayoutConstraintItem_pMF
 _$SSo12NSMutableSetCML
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/LayoutConstraintItem.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/LayoutConstraintItem.swift
 constraintsSet.get
 $SSo12NSMutableSetCMa
 add
@@ -1050,7 +1050,7 @@ _$S7SnapKit27ConstraintMakerPriortizableCMf
 _symbolic ____ 7SnapKit27ConstraintMakerPriortizableC
 _symbolic 7SnapKit26ConstraintMakerFinalizableC
 _$S7SnapKit27ConstraintMakerPriortizableCMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMakerPriortizable.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMakerPriortizable.swift
 $S7SnapKit27ConstraintMakerPriortizableCMa
 priorityRequired
 priority
@@ -1063,14 +1063,14 @@ _symbolic ____ 7SnapKit16LayoutConstraintC
 _symbolic So18NSLayoutConstraintC
 _symbolic 7SnapKit10ConstraintCSgXw
 _$S7SnapKit16LayoutConstraintCMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/LayoutConstraint.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/LayoutConstraint.swift
 $S7SnapKit16LayoutConstraintCMa
 label.materialize
 label.get
 _symbolic $S7SnapKit21ConstraintInsetTargetP
 _$S7SnapKit21ConstraintInsetTarget_pMF
 _$S7SnapKit21ConstraintInsetTargetWR
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintInsetTarget.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintInsetTarget.swift
 constraintInsetTargetValue.get
 ConstraintInsetTarget.swift
 $SSo12UIEdgeInsetsV7SnapKit21ConstraintInsetTargetACWa
@@ -1087,7 +1087,7 @@ _$SSd7SnapKit26ConstraintMultiplierTargetA2aBP010constraintdE5Value12CoreGraphic
 _symbolic $S7SnapKit26ConstraintMultiplierTargetP
 _$S7SnapKit26ConstraintMultiplierTarget_pMF
 _$S7SnapKit26ConstraintMultiplierTargetWR
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintMultiplierTarget.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintMultiplierTarget.swift
 $SSd7SnapKit26ConstraintMultiplierTargetAAWa
 $SSf7SnapKit26ConstraintMultiplierTargetAAWa
 $SSu7SnapKit26ConstraintMultiplierTargetAAWa
@@ -1113,7 +1113,7 @@ _symbolic So6UIViewC
 _$S7SnapKit17ConstraintViewDSLVMF
 _symbolic So11UIResponderC
 _$SSo6UIViewCMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintViewDSL.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintViewDSL.swift
 $SypWOc
 $S7SnapKit17ConstraintViewDSLVMa
 $S7SnapKit17ConstraintViewDSLVAA0cE0AAWa
@@ -1170,7 +1170,7 @@ _$Ss26_toStringReadOnlyPrintableySSxs06CustomB11ConvertibleRzlF12CoreGraphics7CG
 _$Ss23_ContiguousArrayStorageCys7CVarArg_pGML
 _$Ss7CVarArg_pML
 _objc_categories
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/Debugging.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/Debugging.swift
 $SSa11_getElement_20wasNativeTypeChecked22matchingSubscriptCheckxSi_Sbs16_DependenceTokenVtFSS_Tgq5
 $SSa9_getCountSiyFSS_Tgq5
 $Ss26_toStringReadOnlyPrintableySSxs06CustomB11ConvertibleRzlF12CoreGraphics7CGFloatV_Tg5
@@ -1203,7 +1203,7 @@ _symbolic $SSo15UILayoutSupportP
 _$SSo15UILayoutSupport_pMF
 l_OBJC_LABEL_PROTOCOL_$_NSObject
 l_OBJC_PROTOCOL_REFERENCE_$_NSObject
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutSupportDSL.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintLayoutSupportDSL.swift
 $S7SnapKit26ConstraintLayoutSupportDSLVMa
 $S7SnapKit26ConstraintLayoutSupportDSLVAA0cF0AAWa
 ___swift_memcpy1_1
@@ -1244,7 +1244,7 @@ _$S7SnapKit18ConstraintRelationOSQAAWG
 _$S7SnapKit18ConstraintRelationOSQAAWr
 _$S7SnapKit18ConstraintRelationOSYAAMA
 _$S7SnapKit18ConstraintRelationON
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintRelation.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintRelation.swift
 $S7SnapKit18ConstraintRelationOSQAAWa
 $S7SnapKit18ConstraintRelationOSHAAWI
 $S7SnapKit18ConstraintRelationOACSQAAWl
@@ -1262,7 +1262,7 @@ $S7SnapKit18ConstraintRelationOwxs
 $S7SnapKit18ConstraintRelationOwst
 $S7SnapKit18ConstraintRelationOwet
 __swift_memcpy1_1
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/UILayoutSupport+Extensions.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/UILayoutSupport+Extensions.swift
 UILayoutSupport+Extensions.swift
 _$S7SnapKit26ConstraintMultiplierTarget_pWOb
 _$S7SnapKit21ConstraintDescriptionC4itemAA06LayoutC4Item_pvpWvd
@@ -1283,7 +1283,7 @@ _symbolic SS_SutSg
 _symbolic 7SnapKit14ConstraintItemCSg
 _symbolic 7SnapKit10ConstraintCSgSg
 _$S7SnapKit21ConstraintDescriptionCMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SnapKit/Source/ConstraintDescription.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SnapKit/Source/ConstraintDescription.swift
 $S7SnapKit21ConstraintDescriptionCMa
 Apple LLVM version 10.0.0 (clang-1000.11.45.2)
 /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/SnapKit/4.2.0/Build/Intermediates.noindex/ArchiveIntermediates/SnapKit/IntermediateBuildFilesPath/SnapKit.build/Release-iphoneos/SnapKit.build/DerivedSources/SnapKit_vers.c

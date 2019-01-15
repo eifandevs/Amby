@@ -1,6 +1,6 @@
 ////
 ////  SearchHistoryDataModelTests.swift
-////  QassTests
+////  AmbyTests
 ////
 ////  Created by tenma on 2018/06/17.
 ////  Copyright © 2018年 eifandevs. All rights reserved.
@@ -8,7 +8,7 @@
 //
 //import XCTest
 //
-//@testable import Qass
+//@testable import Amby
 //
 //class SearchHistoryDataModelTests: XCTestCase {
 //

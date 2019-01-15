@@ -109,11 +109,11 @@ _symbolic 5Hydra7PromiseCySayq_GGs5Error_pIegozo_
 _symbolic x5Hydra7PromiseCyq_Gs5Error_pIgnozo_
 ___swift_reflection_version
 Apple LLVM version 10.0.0 (clang-1000.11.45.1)
--emit-bc /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Map.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Any.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Always.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Defer.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Reduce.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Timeout.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Commons.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Cancel.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Context.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Zip.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Async.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Catch.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Await.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Pass.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Validate.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+All.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Recover.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Then.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+State.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Retry.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/DispatchTimerWrapper.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Observer.swift -supplementary-output-file-map <temporary-file> -target armv7-apple-ios8.0 -enable-objc-interop -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk -I /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/BuildProductsPath/Release-iphoneos -F /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/BuildProductsPath/Release-iphoneos -application-extension -g -module-cache-path /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/ModuleCache.noindex -swift-version 4 -O -serialize-debugging-options -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Hydra-generated-files.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Hydra-own-target-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Hydra-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/all-product-headers.yaml -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Hydra-project-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/BuildProductsPath/Release-iphoneos/include -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/DerivedSources/armv7 -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/DerivedSources -Xcc -working-directory/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra -module-name Hydra -num-threads 4 -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Map.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Any.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Always.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Defer.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Reduce.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Timeout.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Commons.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Cancel.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Context.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Zip.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Async.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Catch.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Await.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Pass.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Validate.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+All.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Recover.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Then.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+State.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Retry.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/DispatchTimerWrapper.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Observer.bc -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift
+-emit-bc /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Map.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Any.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Always.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Defer.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Reduce.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Timeout.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Commons.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Cancel.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Context.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Zip.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Async.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Catch.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Await.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Pass.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Validate.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+All.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Recover.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Then.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+State.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Retry.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/DispatchTimerWrapper.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Observer.swift -supplementary-output-file-map <temporary-file> -target armv7-apple-ios8.0 -enable-objc-interop -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk -I /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/BuildProductsPath/Release-iphoneos -F /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/BuildProductsPath/Release-iphoneos -application-extension -g -module-cache-path /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/ModuleCache.noindex -swift-version 4 -O -serialize-debugging-options -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Hydra-generated-files.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Hydra-own-target-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Hydra-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/all-product-headers.yaml -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Hydra-project-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/BuildProductsPath/Release-iphoneos/include -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/DerivedSources/armv7 -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/DerivedSources -Xcc -working-directory/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra -module-name Hydra -num-threads 4 -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Map.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Any.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Always.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Defer.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Reduce.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Timeout.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Commons.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Cancel.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Context.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Zip.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Async.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Catch.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Await.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Pass.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Validate.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+All.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Recover.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Then.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+State.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Retry.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/DispatchTimerWrapper.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Hydra/1.2.1/Build/Intermediates.noindex/ArchiveIntermediates/Hydra-iOS/IntermediateBuildFilesPath/Hydra.build/Release-iphoneos/Hydra-iOS.build/Objects-normal/armv7/Promise+Observer.bc -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift
 <swift-imported-modules>
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra
 Apple Swift version 4.2 effective-4.1.50 (swiftlang-1000.11.37.1 clang-1000.11.45.1)
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Map.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Map.swift
 $Sx5Hydra7PromiseCyq_Gs5Error_pIgnozo_xADsAE_pIegnrzo_7ElementQy0_RszSTR0_r1_lTRTA
 <compiler-generated>
 $Sx5Hydra7PromiseCyq_Gs5Error_pIgnozo_xADsAE_pIegnrzo_7ElementQy0_RszSTR0_r1_lTR
@@ -121,7 +121,7 @@ objectdestroy.26
 $S5Hydra12map_parallel7context5items9transformAA7PromiseCySayq_GGAA7ContextO_q0_AGyq_GxKct7ElementQy0_RszSTR0_r1_lFAIycfU_ALxKXEfU_TA
 $S5Hydra12map_parallel7context5items9transformAA7PromiseCySayq_GGAA7ContextO_q0_AGyq_GxKct7ElementQy0_RszSTR0_r1_lFAIycfU_ALxKXEfU_
 Promise+Map.swift
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra
 $S5Hydra7PromiseCySayq_GGs5Error_pIegozo_ytAEsAF_pIegnozo_7ElementQy0_RszSTR0_r1_lTRTA
 $S5Hydra7PromiseCySayq_GGs5Error_pIegozo_ytAEsAF_pIegnozo_7ElementQy0_RszSTR0_r1_lTR
 $S5Hydra12map_parallel7context5items9transformAA7PromiseCySayq_GGAA7ContextO_q0_AGyq_GxKct7ElementQy0_RszSTR0_r1_lFAIycfU_TA
@@ -228,7 +228,7 @@ _$S5Hydra3any2in_AA7PromiseCyxGAA7ContextOSg_SayAFGtlFyyxc_ys5Error_pcAA0D6Statu
 _$S5Hydra12PromiseErrorOACs0C0AAWL
 _symbolic Say5Hydra7PromiseCyxGG
 _symbolic 5Hydra7ContextOSg
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Any.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Any.swift
 $S5Hydra3any2in_AA7PromiseCyxGAA7ContextOSg_SayAFGtlFyyxc_ys5Error_pcAA0D6StatusVtcfU_TA
 $S5Hydra3any2in_AA7PromiseCyxGAA7ContextOSg_SayAFGtlFyyxc_ys5Error_pcAA0D6StatusVtcfU_
 Promise+Any.swift
@@ -255,7 +255,7 @@ _symbolic xIegn_
 _symbolic s5Error_pIegg_
 _symbolic 5Hydra7ContextO_s5Error_pIegg_t
 _symbolic 5Hydra7ContextO_Ieg_t
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Always.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Always.swift
 $S5Hydra7PromiseC6always2in4bodyACyxGAA7ContextOSg_yyKctFyyxc_ys5Error_pcAA0B6StatusVtcfU_ysAK_pcfU0_TA
 $S5Hydra7PromiseC6always2in4bodyACyxGAA7ContextOSg_yyKctFyyxc_ys5Error_pcAA0B6StatusVtcfU_ysAK_pcfU0_
 Promise+Always.swift
@@ -274,7 +274,7 @@ _block_destroy_helper
 _$Ss10SetAlgebraPsEyxqd__cs8SequenceRd__7ElementQyd__ADRtzlufC8Dispatch0E13WorkItemFlagsV_SayAIGTgq5Tf4gd_n
 _symbolic Sd
 _block_descriptor
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Defer.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Defer.swift
 block_destroy_helper
 block_copy_helper
 $S5Hydra7PromiseC5defer2in_ACyxGAA7ContextOSg_SdtFAFxcfU_yyxc_ys5Error_pcAA0B6StatusVtcfU_yycfU_TA
@@ -293,7 +293,7 @@ _$S5Hydra6reduce2in___AA7PromiseCyq_GAA7ContextOSg_q0_q_AFq__xtKct7ElementQy0_Rs
 _symbolic q_x5Hydra7PromiseCyq_Gs5Error_pIegnnozo_
 _symbolic G0R0_
 _symbolic 5Hydra7PromiseCyq_GxADs5Error_pIggnozo_
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Reduce.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Reduce.swift
 $S5Hydra6reduce2in___AA7PromiseCyq_GAA7ContextOSg_q0_q_AFq__xtKct7ElementQy0_RszSTR0_r1_lFA2F_xtXEfU_AFq_KcfU_TA
 $S5Hydra6reduce2in___AA7PromiseCyq_GAA7ContextOSg_q0_q_AFq__xtKct7ElementQy0_RszSTR0_r1_lFA2F_xtXEfU_AFq_KcfU_
 Promise+Reduce.swift
@@ -311,7 +311,7 @@ _symbolic s5Error_pSg
 _symbolic G0R6_
 _$SSo18OS_dispatch_sourceCML
 _symbolic 5Hydra20DispatchTimerWrapperC
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Timeout.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Timeout.swift
 $S5Hydra7PromiseC7timeout2inAD5errorACyxGAA7ContextOSg_Sds5Error_pSgtFyyxc_ysAK_pcAA0B6StatusVtcfU_yxcfU0_TA
 $S5Hydra7PromiseC7timeout2inAD5errorACyxGAA7ContextOSg_Sds5Error_pSgtFyyxc_ysAK_pcAA0B6StatusVtcfU_yxcfU0_
 Promise+Timeout.swift
@@ -415,7 +415,7 @@ _symbolic yyc
 _$S5Hydra13PromiseStatusVMF
 _$S5Hydra12PromiseErrorOmML
 _objc_classes
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Commons.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Commons.swift
 $S5Hydra13PromiseStatusVMa
 $S5Hydra13PromiseStatusVwxg
 $S5Hydra13PromiseStatusVwxs
@@ -475,7 +475,7 @@ _$Ss23_ContiguousArrayStorageCy5Hydra7PromiseC8ObserverOyyt_GSgGML
 _$S5Hydra7PromiseC8ObserverOyyt_GSgML
 _$S5Hydra7PromiseC8ObserverOyyt_GML
 _symbolic ytIegn_
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Cancel.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Cancel.swift
 $S5Hydra7PromiseC9cancelled2in_ACyytGAA7ContextOSg_yyctFyyyt_tc_ys5Error_pcAA0B6StatusVtcfU_yxcfU_TA
 $S5Hydra7PromiseC9cancelled2in_ACyytGAA7ContextOSg_yyctFyyyt_tc_ys5Error_pcAA0B6StatusVtcfU_yxcfU_
 Promise+Cancel.swift
@@ -518,7 +518,7 @@ _$S5Hydra7ContextOMF
 _symbolic So17OS_dispatch_queueC
 _symbolic So18OS_dispatch_objectC
 _$SSo17OS_dispatch_queueCMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Context.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Context.swift
 $S5Hydra7ContextOMa
 $S5Hydra7ContextOwui
 $S5Hydra7ContextOwup
@@ -588,7 +588,7 @@ _symbolic G0R4_
 _symbolic SayytG5Hydra7PromiseCyqd___qd_0_qd_1_qd_2_tGs5Error_pIeggozo_
 _symbolic B4
 _symbolic SayytGIegn_
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Zip.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Zip.swift
 $Sqd___qd_0_tr_0_lWOh
 $SSayxGIegn_AAIegg_s8SequenceR_5Hydra7PromiseCyxG7ElementRt_r0_lTRyt_SayAEyytGGTg5TA
 $SSayxGIegn_AAIegg_s8SequenceR_5Hydra7PromiseCyxG7ElementRt_r0_lTRyt_SayAEyytGGTg5
@@ -638,7 +638,7 @@ _$S5Hydra5async2in5after_yAA7ContextO_SdSgyyctFyycfU_TA
 _block_copy_helper.7
 _symbolic 5Hydra13PromiseStatusVxs5Error_pIeggrzo_
 _block_descriptor.9
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Async.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Async.swift
 $S5Hydra5async2in5after_yAA7ContextO_SdSgyyctFyycfU0_TA
 $S5Hydra5async2in5after_yAA7ContextO_SdSgyyctFyycfU0_
 $Ss10SetAlgebraPsEyxqd__cs8SequenceRd__7ElementQyd__ADRtzlufC8Dispatch0E13WorkItemFlagsV_SayAIGTgq5Tf4gd_n
@@ -653,7 +653,7 @@ _$S5Hydra7PromiseC5catch2in_ACyytGAA7ContextOSg_ys5Error_pKctFyyyt_tc_ysAJ_pcAA0
 _$S5Hydra7PromiseC5catch2in_ACyytGAA7ContextOSg_ys5Error_pKctFyyyt_tc_ysAJ_pcAA0B6StatusVtcfU_yxcfU_TA
 _$S5Hydra7PromiseC5catch2in_ACyytGAA7ContextOSg_ys5Error_pKctFyyyt_tc_ysAJ_pcAA0B6StatusVtcfU_ysAJ_pcfU0_TA
 _symbolic s5Error_psAA_pIeggzo_
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Catch.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Catch.swift
 $S5Hydra7PromiseC5catch2in_ACyytGAA7ContextOSg_ys5Error_pKctFyyyt_tc_ysAJ_pcAA0B6StatusVtcfU_ysAJ_pcfU0_TA
 $S5Hydra7PromiseC5catch2in_ACyytGAA7ContextOSg_ys5Error_pKctFyyyt_tc_ysAJ_pcAA0B6StatusVtcfU_ysAJ_pcfU0_
 Promise+Catch.swift
@@ -814,7 +814,7 @@ _symbolic SayytG
 _block_descriptor.114
 _block_descriptor.121
 _block_descriptor.124
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise.swift
 $S5Hydra7PromiseC7runBodyyyFyyXEfU_yycfU_ys5Error_pcfU0_yt_Tg5TA
 $S5Hydra7PromiseC7runBodyyyFyyXEfU_yycfU_ys5Error_pcfU0_yt_Tg5
 $S5Hydra7PromiseC7runBodyyyFyyXEfU_yycfU_yxcfU_TA
@@ -977,7 +977,7 @@ _symbolic xSgXb
 _symbolic So21OS_dispatch_semaphoreC
 _symbolic s5Error_pSgXb
 _$SSo21OS_dispatch_semaphoreCMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Await.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Await.swift
 $SxSglWOd
 $SxSglWOh
 $SxSglWOc
@@ -997,7 +997,7 @@ _$S5Hydra7PromiseC4pass2in_ACyxGAA7ContextOSg_ACyqd__GxKctlFAFxKcfU_AFqd__cfU_
 _$S5Hydra7PromiseC4pass2in_ACyxGAA7ContextOSg_yxKctFACyytGxKcfU_TA
 _$S5Hydra7PromiseC4pass2in_ACyxGAA7ContextOSg_ACyqd__GxKctlFAFxKcfU_AFqd__cfU_TA
 _symbolic x5Hydra7PromiseCyqd__Gs5Error_pIegnozo_
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Pass.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Pass.swift
 $S5Hydra7PromiseC4pass2in_ACyxGAA7ContextOSg_ACyqd__GxKctlFAFxKcfU_AFqd__cfU_TA
 $S5Hydra7PromiseC4pass2in_ACyxGAA7ContextOSg_yxKctFACyytGxKcfU_TA
 $S5Hydra7PromiseC4pass2in_ACyxGAA7ContextOSg_yxKctFACyytGxKcfU_
@@ -1008,7 +1008,7 @@ $S5Hydra7PromiseC4pass2in_ACyxGAA7ContextOSg_ACyqd__GxKctlFAFxKcfU_TA
 $S5Hydra7PromiseC4pass2in_ACyxGAA7ContextOSg_ACyqd__GxKctlFAFxKcfU_
 _$S5Hydra7PromiseC8validate2in_ACyxGAA7ContextOSg_SbxKctFxxKcfU_TA
 _symbolic xSbs5Error_pIegndzo_
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Validate.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Validate.swift
 $S5Hydra7PromiseC8validate2in_ACyxGAA7ContextOSg_SbxKctFxxKcfU_TA
 $S5Hydra7PromiseC8validate2in_ACyxGAA7ContextOSg_SbxKctFxxKcfU_
 Promise+Validate.swift
@@ -1048,7 +1048,7 @@ _symbolic SayxGIegn_
 _symbolic SayxGIegg_
 _symbolic 5Hydra7PromiseCyxGSbs5Error_pIggdzo_
 _symbolic 5Hydra7PromiseCyxGxs5Error_pIggrzo_
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+All.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+All.swift
 $S5Hydra7PromiseCyxGxs5Error_pIggrzo_ADxsAE_pIegnrzo_STR_AD7ElementRt_r0_lTRTA
 $S5Hydra7PromiseCyxGxs5Error_pIggrzo_ADxsAE_pIegnrzo_STR_AD7ElementRt_r0_lTR
 $S5Hydra3all_11concurrencyAA7PromiseCySayxGGq__SutSTR_AEyxG7ElementRt_r0_lFyyAFc_ys5Error_pcAA0D6StatusVtcfU_yxcfU_xAHXEfU_TA
@@ -1133,7 +1133,7 @@ _$S5Hydra7PromiseC7recover2in_ACyxGAA7ContextOSg_AFs5Error_pKctFyyxc_ysAJ_pcAA0B
 _$S5Hydra7PromiseC7recover2in_ACyxGAA7ContextOSg_AFs5Error_pKctFyyxc_ysAJ_pcAA0B6StatusVtcfU_yycfU1_TA
 _$S5Hydra7PromiseC9cancelled2in_ACyytGAA7ContextOSg_yyctFyyyt_tc_ys5Error_pcAA0B6StatusVtcfU_yt_Tg5TA
 _symbolic s5Error_p5Hydra7PromiseCyxGsAA_pIeggozo_
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Recover.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Recover.swift
 $S5Hydra7PromiseC9cancelled2in_ACyytGAA7ContextOSg_yyctFyyyt_tc_ys5Error_pcAA0B6StatusVtcfU_yt_Tg5TA
 $S5Hydra7PromiseC7recover2in_ACyxGAA7ContextOSg_AFs5Error_pKctFyyxc_ysAJ_pcAA0B6StatusVtcfU_yycfU1_TA
 $S5Hydra7PromiseC7recover2in_ACyxGAA7ContextOSg_AFs5Error_pKctFyyxc_ysAJ_pcAA0B6StatusVtcfU_yycfU1_
@@ -1157,7 +1157,7 @@ _$S5Hydra7PromiseC4then2in_ACyqd__GAA7ContextOSg_AFxKctlFyyqd__c_ys5Error_pcAA0B
 _symbolic xqd__s5Error_pIegnrzo_
 _symbolic qd__Iegn_
 _symbolic 5Hydra7ContextO_qd__Iegn_t
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Then.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Then.swift
 $S5Hydra7PromiseC4then2in_ACyqd__GAA7ContextOSg_AFxKctlFyyqd__c_ys5Error_pcAA0B6StatusVtcfU_yxcfU_TA
 objectdestroy.23
 $S5Hydra7PromiseC4then2in_ACyxGAA7ContextOSg_yxKctFyyxc_ys5Error_pcAA0B6StatusVtcfU_yxcfU_TA
@@ -1176,7 +1176,7 @@ _$S5Hydra7PromiseC5StateOMF
 _$S5Hydra7PromiseC5StateOMn
 _symbolic 5Hydra7PromiseC5StateO
 _$S5Hydra7PromiseC5StateOMB
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+State.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+State.swift
 Promise+State.swift
 value.get
 _$S5Hydra7PromiseC5retryyACyxGSi_SbSi_s5Error_ptKctFyyxc_ysAF_pcAA0B6StatusVtcfU_
@@ -1187,7 +1187,7 @@ _symbolic 5Hydra7PromiseCyxGSg
 _symbolic 5Hydra7PromiseCyxGSgXb
 _symbolic Sis5Error_pSbsAA_pIegygdzo_
 _symbolic 5Hydra7PromiseCyxGXo
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Retry.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Retry.swift
 $S5Hydra7PromiseC5retryyACyxGSi_SbSi_s5Error_ptKctFyyxc_ysAF_pcAA0B6StatusVtcfU_AEsAF_pKcfU_TA
 $S5Hydra7PromiseC5retryyACyxGSi_SbSi_s5Error_ptKctFyyxc_ysAF_pcAA0B6StatusVtcfU_AEsAF_pKcfU_
 Promise+Retry.swift
@@ -1219,7 +1219,7 @@ l_OBJC_PROTOCOL_REFERENCE_$_OS_dispatch_source
 l_OBJC_LABEL_PROTOCOL_$_NSObject
 l_OBJC_PROTOCOL_REFERENCE_$_NSObject
 _$S5Hydra20DispatchTimerWrapperCN
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/DispatchTimerWrapper.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/DispatchTimerWrapper.swift
 $S5Hydra20DispatchTimerWrapperCMa
 $S5Hydra20DispatchTimerWrapperCfdyyXEfU_
 _$S5Hydra7PromiseC8ObserverOMi
@@ -1263,7 +1263,7 @@ _symbolic ytXb
 _block_descriptor.32
 _symbolic 5Hydra7PromiseC8ObserverO
 _$S5Hydra7PromiseC8ObserverOMB
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Observer.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Hydra/Sources/Hydra/Promise+Observer.swift
 $S5Hydra7PromiseC8ObserverO4callyyAC5StateOyx_GFyycfU_yt_Tg5TA
 $S5Hydra7PromiseC8ObserverO4callyyAC5StateOyx_GFyycfU_yt_Tg5
 Promise+Observer.swift
