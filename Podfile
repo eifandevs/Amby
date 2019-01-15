@@ -10,7 +10,7 @@ abstract_target 'All' do
 
   common_pods
 
-  target 'Qass' do
+  target 'Amby' do
     use_frameworks!
 #    inhibit_all_warnings!
   
@@ -27,7 +27,7 @@ abstract_target 'All' do
     pod 'Crashlytics', '~> 3.10.7'
     pod 'SmileLock', '~> 3.0'
 
-    target 'Qass-UITests' do
+    target 'Amby-UITests' do
       inherit! :search_paths
     end
   end

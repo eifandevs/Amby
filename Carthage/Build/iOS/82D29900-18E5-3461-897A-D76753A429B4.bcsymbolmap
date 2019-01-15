@@ -891,11 +891,11 @@ _$SSo12UIRectCornerVMB
 _objc_classes
 _$S10Kingfisher11ImageSourceCN
 Apple LLVM version 10.0.0 (clang-1000.11.45.1)
--emit-bc /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Image.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/RequestModifier.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Filter.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/AnimatedImageView.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Kingfisher.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageCache.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageDownloader.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageProcessor.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Indicator.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageTransition.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageView+Kingfisher.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/KingfisherManager.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/KingfisherOptionsInfo.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Box.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImagePrefetcher.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Resource.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/String+MD5.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/CacheSerializer.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ThreadHelper.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Placeholder.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageModifier.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/FormatIndicatedCacheSerializer.swift /Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/UIButton+Kingfisher.swift -supplementary-output-file-map <temporary-file> -target arm64-apple-ios8.0 -Xllvm -aarch64-use-tbi -enable-objc-interop -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk -I /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/BuildProductsPath/Release-iphoneos -F /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/BuildProductsPath/Release-iphoneos -application-extension -g -import-underlying-module -module-cache-path /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/ModuleCache.noindex -swift-version 4.2 -O -serialize-debugging-options -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Kingfisher-generated-files.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Kingfisher-own-target-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Kingfisher-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/all-product-headers.yaml -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Kingfisher-project-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/BuildProductsPath/Release-iphoneos/include -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/DerivedSources/arm64 -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/DerivedSources -Xcc -ivfsoverlay -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/unextended-module-overlay.yaml -Xcc -working-directory/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher -module-name Kingfisher -num-threads 4 -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Image.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/RequestModifier.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Filter.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/AnimatedImageView.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Kingfisher.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageCache.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageDownloader.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageProcessor.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Indicator.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageTransition.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageView+Kingfisher.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/KingfisherManager.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/KingfisherOptionsInfo.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Box.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImagePrefetcher.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Resource.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/String+MD5.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/CacheSerializer.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ThreadHelper.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Placeholder.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageModifier.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/FormatIndicatedCacheSerializer.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/UIButton+Kingfisher.bc -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift
+-emit-bc /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Image.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/RequestModifier.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Filter.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/AnimatedImageView.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Kingfisher.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageCache.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageDownloader.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageProcessor.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Indicator.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageTransition.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageView+Kingfisher.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/KingfisherManager.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/KingfisherOptionsInfo.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Box.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImagePrefetcher.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Resource.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/String+MD5.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/CacheSerializer.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ThreadHelper.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Placeholder.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageModifier.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/FormatIndicatedCacheSerializer.swift /Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/UIButton+Kingfisher.swift -supplementary-output-file-map <temporary-file> -target arm64-apple-ios8.0 -Xllvm -aarch64-use-tbi -enable-objc-interop -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk -I /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/BuildProductsPath/Release-iphoneos -F /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/BuildProductsPath/Release-iphoneos -application-extension -g -import-underlying-module -module-cache-path /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/ModuleCache.noindex -swift-version 4.2 -O -serialize-debugging-options -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Kingfisher-generated-files.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Kingfisher-own-target-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Kingfisher-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/all-product-headers.yaml -Xcc -iquote -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Kingfisher-project-headers.hmap -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/BuildProductsPath/Release-iphoneos/include -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/DerivedSources/arm64 -Xcc -I/Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/DerivedSources -Xcc -ivfsoverlay -Xcc /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/unextended-module-overlay.yaml -Xcc -working-directory/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher -module-name Kingfisher -num-threads 4 -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Image.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/RequestModifier.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Filter.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/AnimatedImageView.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Kingfisher.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageCache.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageDownloader.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageProcessor.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Indicator.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageTransition.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageView+Kingfisher.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/KingfisherManager.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/KingfisherOptionsInfo.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Box.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImagePrefetcher.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Resource.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/String+MD5.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/CacheSerializer.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ThreadHelper.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/Placeholder.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/ImageModifier.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/FormatIndicatedCacheSerializer.bc -o /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/Kingfisher/4.10.0/Build/Intermediates.noindex/ArchiveIntermediates/Kingfisher/IntermediateBuildFilesPath/Kingfisher.build/Release-iphoneos/Kingfisher-iOS.build/Objects-normal/arm64/UIButton+Kingfisher.bc -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift
 <swift-imported-modules>
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher
 Apple Swift version 4.2 (swiftlang-1000.11.37.1 clang-1000.11.45.1)
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Image.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Image.swift
 __swift_project_boxed_opaque_existential_0
 <compiler-generated>
 init
@@ -915,7 +915,7 @@ $SSa8endIndexSivgSo12UIRectCornerV_Tgq5
 $SSa9_getCountSiyFSo12UIRectCornerV_Tgq5
 crop
 Image.swift
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources
 image
 scale.get
 scaled
@@ -1379,7 +1379,7 @@ _$S10Kingfisher10NoModifierVMf
 _$S10Kingfisher10NoModifierVAA020ImageDownloadRequestC0AAMc
 _$S10Kingfisher10NoModifierVAA020ImageDownloadRequestC0AAWP
 _$S10Kingfisher10NoModifierVN
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/RequestModifier.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/RequestModifier.swift
 $S10Kingfisher10NoModifierVAA020ImageDownloadRequestC0AAWa
 $S10Kingfisher10NoModifierVMa
 $S10Kingfisher11AnyModifierVMa
@@ -1462,7 +1462,7 @@ _symbolic So26InlineRefCountsPlaceholdera
 _$SSo10HeapObjectVMF
 _$SSo26InlineRefCountsPlaceholderaMF
 _$SSo26InlineRefCountsPlaceholderaMB
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Filter.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Filter.swift
 $SSo26InlineRefCountsPlaceholderaMa
 $S10Kingfisher6FilterV4tintyACSo7UIColorCcvpZfiAcFcfU_So7CIImageCSgAHcfU_TA
 $SSo10HeapObjectVwst
@@ -1727,7 +1727,7 @@ _$SSo17UIViewContentModeVMB
 _$S10Kingfisher17AnimatedImageViewC11TargetProxyCN
 _$S10Kingfisher8AnimatorCN
 _$S10Kingfisher13AnimatedFrameVN
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/AnimatedImageView.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/AnimatedImageView.swift
 $S10Kingfisher16AnimatorDelegate_pSgXwWOh
 $S10Kingfisher8AnimatorC27prepareFramesAsynchronouslyyyFyycfU_TA
 $S10Kingfisher8AnimatorC27prepareFramesAsynchronouslyyyFyycfU_
@@ -1942,7 +1942,7 @@ _$SSo8UIButtonC10Kingfisher0B10CompatibleACMA
 _$SSo11UIImageViewCMF
 _symbolic So9UIControlC
 _$SSo8UIButtonCMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Kingfisher.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Kingfisher.swift
 $S10KingfisherAACySSGMa
 $S10KingfisherAACMa
 $S10KingfisherAACMr
@@ -2241,7 +2241,7 @@ _$SSo7NSCacheCMF
 _symbolic So13NSFileManagerC
 _$SSo13NSFileManagerCMF
 _$SSo26UIBackgroundTaskIdentifieraMB
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageCache.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageCache.swift
 objectdestroy.183
 objectdestroy.175
 $S10Kingfisher10ImageCacheC4name4path04diskC11PathClosureACSS_SSSgSSAG_SStXEtcfcyyXEfU_TA
@@ -2977,7 +2977,7 @@ l_OBJC_PROTOCOL_REFERENCE_$_NSObject
 _$S10Kingfisher15ImageDownloaderC0B9FetchLoadCN
 _$S10Kingfisher29ImageDownloaderSessionHandlerCN
 _OBJC_CLASS_$__TtC10Kingfisher29ImageDownloaderSessionHandler
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageDownloader.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageDownloader.swift
 $S10Kingfisher25RetrieveImageDownloadTaskVSgWOf
 $Ss5Int64VABIegyy_AB_ABtytIegnr_TRTA
 $Ss5Int64VABIegyy_AB_ABtytIegnr_TR
@@ -3581,7 +3581,7 @@ _$SSo7CGPointVMF
 _symbolic 10Kingfisher16ImageProcessItemO
 _$S10Kingfisher16ImageProcessItemOMB
 _$SSo7CGPointVMB
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageProcessor.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageProcessor.swift
 $S10Kingfisher14ImageProcessorPAAE6append7anotherAaB_pAaB_p_tFSo7UIImageCSgAA0B11ProcessItemO_SayAA0a11OptionsInfoH0OGtcfU_AA07DefaultbC0V_Tg5TA
 objectdestroy.31
 objectdestroy.27
@@ -3845,7 +3845,7 @@ _symbolic 10Kingfisher13IndicatorTypeO
 _$S10Kingfisher13IndicatorTypeOMB
 _$S10Kingfisher17ActivityIndicatorCN
 _$S10Kingfisher14ImageIndicatorCN
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Indicator.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Indicator.swift
 Indicator.swift
 $S10Kingfisher14ImageIndicatorCMa
 $SSa37_appendElementAssumeUniqueAndCapacity_03newB0ySi_xtF10Kingfisher0H15OptionsInfoItemO_Tg5
@@ -3894,7 +3894,7 @@ _symbolic Sd8duration_So22UIViewAnimationOptionsV7optionsySo11UIImageViewC_So0F0
 _$S10Kingfisher15ImageTransitionOMF
 _symbolic 10Kingfisher15ImageTransitionO
 _$S10Kingfisher15ImageTransitionOMB
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageTransition.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageTransition.swift
 $S10Kingfisher15ImageTransitionO10animationsySo11UIImageViewC_So0E0CtcSgvgyAF_AHtcfU_
 ImageTransition.swift
 $S10Kingfisher15ImageTransitionOMa
@@ -4007,7 +4007,7 @@ _$Ss23_ContiguousArrayStorageCySo22UIViewAnimationOptionsVGML
 _block_descriptor.36
 _block_descriptor.42
 _objc_categories
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageView+Kingfisher.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageView+Kingfisher.swift
 $S10Kingfisher11Placeholder_pWOb
 $S10Kingfisher0A15OptionsInfoItemOSgWOd
 $S10Kingfisher0A15OptionsInfoItemOSgWOc
@@ -4198,7 +4198,7 @@ _symbolic 10Kingfisher17RetrieveImageTaskC
 _block_descriptor.44
 _block_descriptor.53
 _block_descriptor.66
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/KingfisherManager.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/KingfisherManager.swift
 $S10Kingfisher0A7ManagerC27tryToRetrieveImageFromCache6forKey4with08retrieveF4Task13progressBlock17completionHandler7optionsySS_10Foundation3URLVAA0efM0Cys5Int64V_AQtcSgySo7UIImageCSg_So7NSErrorCSgAA0H4TypeOAMSgtcSgSayAA0A15OptionsInfoItemOGtFyAU_AZtcfU0_yAU_AZtcfU_yycfU_yycfU0_yycfU_TA
 $S10Kingfisher0A7ManagerC27tryToRetrieveImageFromCache6forKey4with08retrieveF4Task13progressBlock17completionHandler7optionsySS_10Foundation3URLVAA0efM0Cys5Int64V_AQtcSgySo7UIImageCSg_So7NSErrorCSgAA0H4TypeOAMSgtcSgSayAA0A15OptionsInfoItemOGtFyAU_AZtcfU0_yAU_AZtcfU_yycfU_yycfU0_yycfU_
 objectdestroy.68
@@ -4301,7 +4301,7 @@ _symbolic 10Kingfisher28ImageDownloadRequestModifier_p
 _$S10Kingfisher0A15OptionsInfoItemOMF
 _symbolic 10Kingfisher0A15OptionsInfoItemO
 _$S10Kingfisher0A15OptionsInfoItemOMB
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/KingfisherOptionsInfo.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/KingfisherOptionsInfo.swift
 $Ss20_ArrayBufferProtocolPsE22_arrayOutOfPlaceUpdateyys011_ContiguousaB0Vy7ElementQzGz_S2iqd__ts16_PointerFunctionRd__AFQyd__AGRSlFAEy10Kingfisher0M15OptionsInfoItemOG_s07_IgnoreK0VyAMGTg5Tf4nnndn_n
 $Ss22_ContiguousArrayBufferVyxGs01_bC8ProtocolssADP13_copyContents8subRange12initializingSpy7ElementQzGSnySiG_AKtFTW10Kingfisher0K15OptionsInfoItemO_Tg5
 $Ss22_ContiguousArrayBufferVyxGs01_bC8ProtocolssADP19firstElementAddressSpy0F0QzGvgTW10Kingfisher0H15OptionsInfoItemO_Tg5
@@ -4388,7 +4388,7 @@ _$S10Kingfisher3BoxCMn
 _$S10Kingfisher3BoxCMP
 _symbolic ____ 10Kingfisher3BoxC
 _$S10Kingfisher3BoxCMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Box.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Box.swift
 $S10Kingfisher3BoxCMa
 $S10Kingfisher3BoxCMr
 $S10Kingfisher3BoxCMi
@@ -4466,7 +4466,7 @@ _block_descriptor.9
 _$Ss23_ContiguousArrayStorageCy10Kingfisher8Resource_pGML
 _symbolic 10Kingfisher15ImagePrefetcherC
 _$Ss37_HashableTypedNativeDictionaryStorageCy10Foundation3URLV10Kingfisher25RetrieveImageDownloadTaskVGML
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImagePrefetcher.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImagePrefetcher.swift
 $S10Kingfisher8Resource_pSgWOd
 $Ss16IteratorSequenceVys08IndexingA0Vys10ArraySliceVy10Kingfisher8Resource_pGGGWOs
 $S10Kingfisher8Resource_pSgWOc
@@ -4626,7 +4626,7 @@ _$S10Kingfisher13ImageResourceVWV
 _$S10Kingfisher13ImageResourceVMf
 _symbolic ____ 10Kingfisher13ImageResourceV
 _$S10Kingfisher13ImageResourceVMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Resource.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Resource.swift
 $S10Kingfisher13ImageResourceVMa
 $S10Kingfisher13ImageResourceVwxg
 $S10Kingfisher13ImageResourceVwxs
@@ -4700,7 +4700,7 @@ _$Ss23_ContiguousArrayStorageCys6UInt32VGML
 _symbolic 10KingfisherAACySSG
 _$SSS10Kingfisher0A10CompatibleAAMA
 _$S10Kingfisher3MD5CN
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/String+MD5.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/String+MD5.swift
 $Ss22_ContiguousArrayBufferV19_uninitializedCount15minimumCapacityAByxGSi_SitcfCs5UInt8V_Tg5Tf4nnd_n
 $Ss20_ArrayBufferProtocolPsSnySiG7IndicesRtzrlE7copyingxx_tcfCs01_aB0Vys6UInt32VG_Tg5Tf4gd_n
 $Ss12_ArrayBufferVyxGs22RandomAccessCollectionsSk7indices7IndicesQzvgTWs6UInt32V_Tg5
@@ -4875,14 +4875,14 @@ _$S10Kingfisher15CacheSerializerWR
 _$S10Kingfisher22DefaultCacheSerializerVMf
 _symbolic ____ 10Kingfisher22DefaultCacheSerializerV
 _$S10Kingfisher22DefaultCacheSerializerVMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/CacheSerializer.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/CacheSerializer.swift
 $S10Kingfisher22DefaultCacheSerializerVMa
 $S10Kingfisher22DefaultCacheSerializerVAA0cD0AAWa
 CacheSerializer.swift
 data
 $S10Kingfisher22DefaultCacheSerializerV7defaultACvG
 $S10Kingfisher22DefaultCacheSerializerV7defaultACvau
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ThreadHelper.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ThreadHelper.swift
 $SSo17OS_dispatch_queueC10KingfisherE9safeAsyncyyyycFyycfU_
 _$SSo7UIImageC10Kingfisher11PlaceholderA2cDP3add2toySo0A4ViewC_tFTW
 _$SSo7UIImageC10Kingfisher11PlaceholderA2cDP6remove4fromySo0A4ViewC_tFTW
@@ -4891,7 +4891,7 @@ _$SSo18NSLayoutConstraintCML
 _symbolic $S10Kingfisher11PlaceholderP
 _$S10Kingfisher11Placeholder_pMF
 _$S10Kingfisher11PlaceholderWR
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/Placeholder.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/Placeholder.swift
 $SSo7UIImageC10Kingfisher11PlaceholderACWa
 Placeholder.swift
 add
@@ -4965,7 +4965,7 @@ _$S10Kingfisher15GeneralModifier33_6F951FC3F95441E24D43C5F4456D69AFLLVMn
 _$SSo12UIEdgeInsetsVMF
 _$SSo20UIImageRenderingModeVMB
 _$SSo12UIEdgeInsetsVMB
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/ImageModifier.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/ImageModifier.swift
 $SSo20UIImageRenderingModeVwup
 $SSo20UIImageRenderingModeVwug
 $SSo20UIImageRenderingModeVwst
@@ -5015,7 +5015,7 @@ _$S10Kingfisher30FormatIndicatedCacheSerializerVMf
 _symbolic ____ 10Kingfisher30FormatIndicatedCacheSerializerV
 _symbolic 10Kingfisher11ImageFormatO
 _$S10Kingfisher30FormatIndicatedCacheSerializerVMF
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/FormatIndicatedCacheSerializer.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/FormatIndicatedCacheSerializer.swift
 $S10Kingfisher30FormatIndicatedCacheSerializerVMa
 $S10Kingfisher30FormatIndicatedCacheSerializerVwxg
 $S10Kingfisher30FormatIndicatedCacheSerializerVwxs
@@ -5075,7 +5075,7 @@ _$SSo19NSMutableDictionaryCML
 _block_descriptor.33
 _$SSo9UIControlCMF
 _$SSo14UIControlStateVMB
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/Kingfisher/Sources/UIButton+Kingfisher.swift
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/Kingfisher/Sources/UIButton+Kingfisher.swift
 $S10KingfisherAACAASo8UIButtonCRbzlE18setBackgroundImage4with3for11placeholder7options13progressBlock17completionHandlerAA08RetrieveE4TaskCAA8Resource_pSg_So14UIControlStateVSo7UIImageCSgSayAA0A15OptionsInfoItemOGSgys5Int64V_AZtcSgyAT_So7NSErrorCSgAA9CacheTypeO10Foundation3URLVSgtcSgtFyAT_A2_A4_A8_tcfU0_yycfU_TA
 objectdestroy.22
 webURLs.get

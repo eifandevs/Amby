@@ -19,7 +19,7 @@ struct ModelConst {
         let FONT = "Avenir"
         let DATE_FORMAT = "yyyyMMdd"
         let LOCALE = "ja_JP"
-        let QUEUE = "com.eifandevs.qass.queue"
+        let QUEUE = "com.eifandevs.amby.queue"
     }
 
     // MARK: - キー情報
