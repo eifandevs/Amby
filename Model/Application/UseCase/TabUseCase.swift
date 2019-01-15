@@ -15,7 +15,7 @@ public enum TabUseCaseAction {
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case reload
-    case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case startLoading(context: String)
     case endLoading(context: String, title: String)
     case endRendering(context: String)
@@ -69,8 +69,8 @@ public final class TabUseCase {
                 case .reload: self.rx_action.onNext(.reload)
                 case let .append(before, after): self.rx_action.onNext(.append(before: before, after: after))
                 case let .change(before, after): self.rx_action.onNext(.change(before: before, after: after))
-                case let .delete(deleteContext, currentContext, deleteIndex):
-                    self.rx_action.onNext(.delete(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
+                case let .delete(isFront, deleteContext, currentContext, deleteIndex):
+                    self.rx_action.onNext(.delete(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
                 case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))
                 case let .endLoading(context):
                     if let isLoading = PageHistoryDataModel.s.getIsLoading(context: context) {

@@ -16,7 +16,7 @@ enum BaseViewModelAction {
     case reload
     case append
     case change
-    case remove(deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case remove(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case historyBack
     case historyForward
     case load(url: String)
@@ -184,7 +184,7 @@ final class BaseViewModel {
                 case .reload: self.rx_action.onNext(.reload)
                 case .append: self.rx_action.onNext(.append)
                 case .change: self.rx_action.onNext(.change)
-                case let .delete(deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.remove(deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
+                case let .delete(isFront, deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
                 default: break
                 }
             }
@@ -281,7 +281,7 @@ final class BaseViewModel {
 
         // サムネイルを保存
         DispatchQueue.mainSyncSafe {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 webView.takeSnapshot(with: nil) { [weak self] image, error in
                     guard let `self` = self else { return }
                     if let img = image {

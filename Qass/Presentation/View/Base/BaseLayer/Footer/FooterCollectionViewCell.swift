@@ -65,6 +65,9 @@ class FooterCollectionViewCell: UICollectionViewCell {
         if let thumbnail = row.thumbnail {
             thumbnailButton.setImage(nil, for: .normal)
             thumbnailButton.setBackgroundImage(thumbnail, for: .normal)
+        } else {
+            thumbnailButton.setImage(image: R.image.footerThumbnailBack(), color: UIColor.gray)
+            thumbnailButton.setBackgroundImage(nil, for: .normal)
         }
 
         // フロントバー表示

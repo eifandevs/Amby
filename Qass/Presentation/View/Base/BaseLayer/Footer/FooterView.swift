@@ -56,8 +56,6 @@ class FooterView: UIView, ShadowView {
         collectionView.clipsToBounds = false
         addSubview(collectionView)
 
-        adjustLeftMargin()
-
         setupRx()
     }
 
@@ -68,8 +66,10 @@ class FooterView: UIView, ShadowView {
                 log.eventIn(chain: "FooterViewModel.rx_action")
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .update(indexPath): self.update(indexPath: indexPath)
+                case let .update(indexPath, animated): self.update(indexPath: indexPath, animated: animated)
                 case let .append(indexPath): self.append(indexPath: indexPath)
+                case let .insert(indexPath): self.insert(indexPath: indexPath)
+                case let .delete(indexPath): self.delete(indexPath: indexPath)
                 default: break
                 }
                 log.eventOut(chain: "FooterViewModel.rx_action")
@@ -81,34 +81,50 @@ class FooterView: UIView, ShadowView {
     private func append(indexPath: IndexPath) {
         DispatchQueue.mainSyncSafe {
             self.collectionView.insertItems(at: [indexPath])
-            self.adjustLeftMargin()
+            self.viewModel.updateFrontBar()
+        }
+    }
+
+    /// 挿入
+    private func insert(indexPath: IndexPath) {
+        DispatchQueue.mainSyncSafe {
+            self.collectionView.insertItems(at: [indexPath])
+            self.viewModel.updateFrontBar()
+        }
+    }
+
+    /// 削除
+    private func delete(indexPath: IndexPath) {
+        DispatchQueue.mainSyncSafe {
+            self.collectionView.deleteItems(at: [indexPath])
+            self.viewModel.updateFrontBar()
         }
     }
 
     /// 画面更新
-    private func update(indexPath: IndexPath?) {
+    private func update(indexPath: [IndexPath]?, animated: Bool) {
         if let indexPath = indexPath {
             // 部分更新
             DispatchQueue.mainSyncSafe {
-                collectionView.reloadItems(at: [indexPath])
+                if animated {
+                    collectionView.reloadItems(at: indexPath)
+                } else {
+                    UIView.performWithoutAnimation {
+                        collectionView.reloadItems(at: indexPath)
+                    }
+                }
             }
         } else {
             // 全更新
             DispatchQueue.mainSyncSafe {
-                collectionView.reloadData()
+                if animated {
+                    collectionView.reloadData()
+                } else {
+                    UIView.performWithoutAnimation {
+                        collectionView.reloadData()
+                    }
+                }
             }
-        }
-    }
-
-    /// マージン調整
-    private func adjustLeftMargin() {
-        // マージン調整
-        let isRequireLeftMargin = (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(viewModel.cellCount)) < bounds.size.width
-        if isRequireLeftMargin {
-            UIView.animate(withDuration: 0.3, animations: {
-                let leftMargin = (self.bounds.size.width - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(self.viewModel.cellCount))) / 2
-                self.collectionView.contentInset = UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0)
-            })
         }
     }
 }
@@ -139,6 +155,16 @@ extension FooterView: UICollectionViewDelegate {
 
 // cellのサイズの設定
 extension FooterView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, insetForSectionAt _: Int) -> UIEdgeInsets {
+        let isRequireLeftMargin = (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(viewModel.cellCount)) < bounds.size.width
+        if isRequireLeftMargin {
+            let leftMargin = (bounds.size.width - (AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * CGFloat(viewModel.cellCount))) / 2
+            return UIEdgeInsets(top: 0, left: leftMargin, bottom: 0, right: 0)
+        } else {
+            return .zero
+        }
+    }
+
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         return CGSize(width: AppConst.BASE_LAYER.THUMBNAIL_SIZE.width, height: frame.height)
     }

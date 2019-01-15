@@ -14,7 +14,7 @@ enum PageHistoryDataModelAction {
     case insert(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
-    case delete(deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case reload
     case load(url: String)
     case startLoading(context: String)
@@ -329,7 +329,7 @@ final class PageHistoryDataModel {
                 histories.remove(at: deleteIndex)
                 // 削除した結果、ページが存在しない場合は作成する
                 if histories.count == 0 {
-                    rx_action.onNext(.delete(deleteContext: context, currentContext: nil, deleteIndex: deleteIndex))
+                    rx_action.onNext(.delete(isFront: true, deleteContext: context, currentContext: nil, deleteIndex: deleteIndex))
                     append()
                     return
                 } else {
@@ -339,11 +339,13 @@ final class PageHistoryDataModel {
                     } else {
                         currentContext = histories[deleteIndex].context
                     }
+
+                    rx_action.onNext(.delete(isFront: true, deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
                 }
             } else {
                 histories.remove(at: deleteIndex)
+                rx_action.onNext(.delete(isFront: false, deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
             }
-            rx_action.onNext(.delete(deleteContext: context, currentContext: currentContext, deleteIndex: deleteIndex))
         } else {
             log.error("cannot find delete context.")
         }
