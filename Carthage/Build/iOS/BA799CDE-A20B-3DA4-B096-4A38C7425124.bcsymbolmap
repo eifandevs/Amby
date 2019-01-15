@@ -285,9 +285,9 @@ _OBJC_IVAR_$_SVProgressHUD._offsetFromCenter
 _OBJC_IVAR_$_SVProgressHUD._progress
 _OBJC_IVAR_$_SVProgressHUD._activityCount
 Apple LLVM version 9.1.0 (clang-902.0.39.2)
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVProgressHUD.m
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SVProgressHUD
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVProgressHUD.h
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVProgressHUD.m
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SVProgressHUD
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVProgressHUD.h
 __CGSizeEqualToSize
 /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CGGeometry.h
 __destroy_helper_block_
@@ -322,8 +322,8 @@ __27+[SVProgressHUD sharedView]_block_invoke
 -[SVRadialGradientLayer gradientCenter]
 -[SVRadialGradientLayer setGradientCenter:]
 _OBJC_IVAR_$_SVRadialGradientLayer._gradientCenter
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVRadialGradientLayer.m
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVRadialGradientLayer.h
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVRadialGradientLayer.m
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVRadialGradientLayer.h
 -[SVIndefiniteAnimatedView willMoveToSuperview:]
 -[SVIndefiniteAnimatedView layoutAnimatedLayer]
 -[SVIndefiniteAnimatedView indefiniteAnimatedLayer]
@@ -341,8 +341,8 @@ _OBJC_IVAR_$_SVIndefiniteAnimatedView._indefiniteAnimatedLayer
 _OBJC_IVAR_$_SVIndefiniteAnimatedView._radius
 _OBJC_IVAR_$_SVIndefiniteAnimatedView._strokeColor
 _OBJC_IVAR_$_SVIndefiniteAnimatedView._strokeThickness
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVIndefiniteAnimatedView.m
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVIndefiniteAnimatedView.h
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVIndefiniteAnimatedView.m
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVIndefiniteAnimatedView.h
 CGSizeMake
 -[SVProgressAnimatedView willMoveToSuperview:]
 -[SVProgressAnimatedView layoutAnimatedLayer]
@@ -364,8 +364,8 @@ _OBJC_IVAR_$_SVProgressAnimatedView._radius
 _OBJC_IVAR_$_SVProgressAnimatedView._strokeColor
 _OBJC_IVAR_$_SVProgressAnimatedView._strokeThickness
 _OBJC_IVAR_$_SVProgressAnimatedView._strokeEnd
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVProgressAnimatedView.m
-/Users/tenma/dev/projects/Qass/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVProgressAnimatedView.h
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVProgressAnimatedView.m
+/Users/tenma/dev/projects/Amby/Carthage/Checkouts/SVProgressHUD/SVProgressHUD/SVProgressAnimatedView.h
 /Users/tenma/Library/Caches/org.carthage.CarthageKit/DerivedData/9.4_9F1027a/SVProgressHUD/2.2.5/Build/Intermediates.noindex/ArchiveIntermediates/SVProgressHUD-Framework/IntermediateBuildFilesPath/SVProgressHUD.build/Release-iphoneos/SVProgressHUD-Framework.build/DerivedSources/SVProgressHUD_vers.c
 __ZL15__ARCLite__loadv
 __ZL30add_image_hook_autoreleasepoolPK11mach_headerl

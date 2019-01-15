@@ -12,8 +12,8 @@ excluded:
 - Gemfile
 - Gemfile.lock
 - Carthage
-- Qass-DevelopTests
-- Qass-DevelopUITests
+- Amby-DevelopTests
+- Amby-DevelopUITests
 
 disabled_rules:
 - variable_name

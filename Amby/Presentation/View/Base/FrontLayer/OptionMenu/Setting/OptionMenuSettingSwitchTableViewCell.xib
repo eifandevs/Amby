@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OptionMenuSettingSwitchCell" rowHeight="50" id="KGk-i7-Jjw" customClass="OptionMenuSettingSwitchTableViewCell" customModule="Amby" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="250" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zIF-2c-k4Y">
+                        <rect key="frame" x="196" y="9.5" width="51" height="31"/>
+                        <connections>
+                            <action selector="valueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="Xl8-jo-36f"/>
+                        </connections>
+                    </switch>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新規ウィンドウ許諾" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZT-hH-9Ed">
+                        <rect key="frame" x="10" y="16" width="117" height="18"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="zIF-2c-k4Y" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Gil-Tv-ObN"/>
+                    <constraint firstItem="sZT-hH-9Ed" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="hix-lC-kuU"/>
+                    <constraint firstAttribute="trailing" secondItem="zIF-2c-k4Y" secondAttribute="trailing" constant="5" id="x6Z-5N-NVr"/>
+                    <constraint firstItem="sZT-hH-9Ed" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="yHK-V2-QKP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="permissionSwitch" destination="zIF-2c-k4Y" id="T9g-1k-g9A"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

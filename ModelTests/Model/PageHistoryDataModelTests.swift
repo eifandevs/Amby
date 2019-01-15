@@ -1,6 +1,6 @@
 ////
 ////  PageHistoryDataModelTests.swift
-////  QassTests
+////  AmbyTests
 ////
 ////  Created by tenma on 2018/03/30.
 ////  Copyright © 2018年 eifandevs. All rights reserved.
@@ -10,7 +10,7 @@
 //import RxSwift
 //import RxCocoa
 //
-//@testable import Qass
+//@testable import Amby
 //
 //class PageHistoryDataModelTests: XCTestCase {
 //

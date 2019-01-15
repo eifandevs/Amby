@@ -18,9 +18,9 @@ default_platform(:ios)
 platform :ios do
   lane :test do
     scan(
-      workspace: "Qass.xcworkspace",
+      workspace: "Amby.xcworkspace",
       devices: ["iPhone 6s"],
-      scheme: "Qass-Develop[UT]",
+      scheme: "Amby-Develop[UT]",
       code_coverage: true,
       output_types: "html",
       clean: true
@@ -29,9 +29,9 @@ platform :ios do
     slather(
       cobertura_xml: true,
       output_directory: "./slather/reports",
-      proj: "Qass.xcodeproj",
-      workspace: "Qass.xcworkspace",
-      scheme: "Qass-Develop[UT]"
+      proj: "Amby.xcodeproj",
+      workspace: "Amby.xcworkspace",
+      scheme: "Amby-Develop[UT]"
     )
   end
 end

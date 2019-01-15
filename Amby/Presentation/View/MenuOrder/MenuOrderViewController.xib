@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuOrderViewController" customModule="Amby" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="LRL-Le-pGB" id="VSy-b9-eCf"/>
+                <outlet property="initButton" destination="0UR-La-jeQ" id="Bfo-Fd-Qsr"/>
+                <outlet property="okButton" destination="aPb-S6-bZK" id="mOr-oB-0XH"/>
+                <outlet property="tableView" destination="3af-kH-0TX" id="eTA-8G-g87"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9FM-se-fLu">
+                    <rect key="frame" x="0.0" y="20" width="375" height="625"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3af-kH-0TX">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="475"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0UR-La-jeQ" customClass="CornerRadiusButton" customModule="Amby" customModuleProvider="target">
+                            <rect key="frame" x="22" y="485" width="331" height="40"/>
+                            <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="6az-JA-LFw"/>
+                            </constraints>
+                            <state key="normal" title="初期化">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPb-S6-bZK" customClass="CornerRadiusButton" customModule="Amby" customModuleProvider="target">
+                            <rect key="frame" x="22" y="535" width="331" height="40"/>
+                            <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="7Qp-Cv-ILW"/>
+                            </constraints>
+                            <state key="normal" title="並び替え">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRL-Le-pGB" customClass="CornerRadiusButton" customModule="Amby" customModuleProvider="target">
+                            <rect key="frame" x="22" y="585" width="331" height="40"/>
+                            <color key="backgroundColor" red="0.42418062740000001" green="0.55642033540000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="blq-sO-CIM"/>
+                            </constraints>
+                            <state key="normal" title="閉じる">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="3af-kH-0TX" secondAttribute="trailing" id="3SH-zu-2Go"/>
+                        <constraint firstItem="3af-kH-0TX" firstAttribute="leading" secondItem="9FM-se-fLu" secondAttribute="leading" id="ICP-yu-SJg"/>
+                        <constraint firstAttribute="trailing" secondItem="0UR-La-jeQ" secondAttribute="trailing" constant="22" id="Rks-sw-vBb"/>
+                        <constraint firstAttribute="trailing" secondItem="aPb-S6-bZK" secondAttribute="trailing" constant="22" id="UcG-FG-9EI"/>
+                        <constraint firstItem="0UR-La-jeQ" firstAttribute="leading" secondItem="9FM-se-fLu" secondAttribute="leading" constant="22" id="WCr-lU-NQj"/>
+                        <constraint firstAttribute="trailing" secondItem="LRL-Le-pGB" secondAttribute="trailing" constant="22" id="at1-n9-Q0L"/>
+                        <constraint firstItem="aPb-S6-bZK" firstAttribute="leading" secondItem="9FM-se-fLu" secondAttribute="leading" constant="22" id="cxH-hD-Y4i"/>
+                        <constraint firstItem="LRL-Le-pGB" firstAttribute="leading" secondItem="9FM-se-fLu" secondAttribute="leading" constant="22" id="jpa-ty-yH4"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="9FM-se-fLu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5tg-LM-XcK"/>
+                <constraint firstItem="9FM-se-fLu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fxD-2Q-RhN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9FM-se-fLu" secondAttribute="trailing" id="nXb-ug-zdd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9FM-se-fLu" secondAttribute="bottom" constant="22" id="xcN-90-TOW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>
