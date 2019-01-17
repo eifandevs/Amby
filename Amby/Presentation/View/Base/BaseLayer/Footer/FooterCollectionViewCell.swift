@@ -77,8 +77,15 @@ class FooterCollectionViewCell: UICollectionViewCell {
             frontBar.alpha = 0
         }
 
-        // タイトル表示
+        // タイトルセットアップ
         setupTitle(title: row.title)
+
+        // タイトル表示
+        if row.isDragging {
+            displayTitle()
+        } else {
+            undisplayTitle()
+        }
     }
 
     /// タイトル初期化
@@ -107,7 +114,7 @@ class FooterCollectionViewCell: UICollectionViewCell {
     }
 
     // タイトル表示
-    func displayTitle() {
+    private func displayTitle() {
         if row.title.isEmpty { return }
 
         // アンダーラインを横幅を保持しておく
@@ -126,7 +133,7 @@ class FooterCollectionViewCell: UICollectionViewCell {
     }
 
     // タイトル非表示
-    func undisplayTitle() {
+    private func undisplayTitle() {
         if row.title.isEmpty { return }
 
         UIView.animate(withDuration: 0.2, animations: {

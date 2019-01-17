@@ -140,9 +140,6 @@ extension FooterView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! FooterCollectionViewCell
         // swiftlint:enable force_cast
         cell.setRow(row: viewModel.getRow(indexPath: indexPath))
-        if isDragging {
-            cell.displayTitle()
-        }
         return cell
     }
 }
@@ -174,21 +171,13 @@ extension FooterView: UICollectionViewDelegateFlowLayout {
 
 extension FooterView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_: UIScrollView) {
-        isDragging = true
-        collectionView.visibleCells.forEach { cell in
-            if let footerCell = cell as? FooterCollectionViewCell {
-                footerCell.displayTitle()
-            }
-        }
+        viewModel.startDragging()
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
     }
 
     func scrollViewDidEndDragging(_: UIScrollView, willDecelerate _: Bool) {
-        isDragging = false
-        collectionView.visibleCells.forEach { cell in
-            if let footerCell = cell as? FooterCollectionViewCell {
-                footerCell.undisplayTitle()
-            }
-        }
+        viewModel.endDragging()
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
     }
 }
 
