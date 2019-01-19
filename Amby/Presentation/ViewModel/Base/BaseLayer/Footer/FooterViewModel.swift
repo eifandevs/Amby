@@ -26,6 +26,7 @@ final class FooterViewModel {
         var title: String
         var isFront: Bool
         var isLoading: Bool
+        var isDragging: Bool
         var thumbnail: UIImage?
 
         init(pageHistory: PageHistory) {
@@ -36,6 +37,7 @@ final class FooterViewModel {
             title = pageHistory.title
             isFront = pageHistory.context == TabUseCase.s.currentContext
             isLoading = pageHistory.isLoading
+            isDragging = false
             thumbnail = image
         }
     }
@@ -156,6 +158,18 @@ final class FooterViewModel {
             rows[index].thumbnail = getThumbnail(context: context)
 
             rx_action.onNext(.update(indexPath: [IndexPath(row: index, section: 0)], animated: false))
+        }
+    }
+
+    func startDragging() {
+        for i in 0 ... rows.count - 1 {
+            rows[i].isDragging = true
+        }
+    }
+
+    func endDragging() {
+        for i in 0 ... rows.count - 1 {
+            rows[i].isDragging = false
         }
     }
 

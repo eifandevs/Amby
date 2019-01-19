@@ -76,8 +76,8 @@ class BaseLayer: UIView {
         // BaseViewアクション監視
         baseView.rx_action
             .subscribe { [weak self] action in
-                log.eventIn(chain: "BaseView.rx_action")
                 guard let `self` = self, let action = action.element else { return }
+                log.eventIn(chain: "BaseView.rx_action. action: \(action)")
                 switch action {
                 case let .swipe(direction):
                     // 検索中の場合は、検索画面を閉じる
@@ -94,7 +94,7 @@ class BaseLayer: UIView {
                 case .slideToMin: self.headerView.slideToMin()
                 default: break
                 }
-                log.eventOut(chain: "BaseView.rx_action")
+                log.eventOut(chain: "BaseView.rx_action. action: \(action)")
             }
             .disposed(by: rx.disposeBag)
 

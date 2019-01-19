@@ -14,7 +14,7 @@ class FooterCollectionViewCell: UICollectionViewCell {
     private var indicator: NVActivityIndicatorView!
     private let thumbnailInfo = UIButton()
     private let underLine = UIView()
-
+    private var originalTransform = CGAffineTransform.identity
     @IBOutlet var frontBar: UIView!
     @IBOutlet var thumbnailButton: UIButton!
 
@@ -77,9 +77,31 @@ class FooterCollectionViewCell: UICollectionViewCell {
             frontBar.alpha = 0
         }
 
-        // タイトル表示
+        // タイトルセットアップ
         setupTitle(title: row.title)
+
+        // タイトル表示
+        if row.isDragging {
+            displayTitle()
+        } else {
+            undisplayTitle()
+        }
     }
+
+    func startDrag() {
+        originalTransform = transform
+        UIView.animate(withDuration: 0.2) {
+            self.transform = self.transform.scaledBy(x: 1.2, y: 1.2)
+        }
+    }
+
+    func endDrag() {
+        UIView.animate(withDuration: 0.2) {
+            self.transform = self.originalTransform
+        }
+    }
+
+    // MARK: - Private Method
 
     /// タイトル初期化
     private func setupTitle(title: String) {
@@ -107,7 +129,7 @@ class FooterCollectionViewCell: UICollectionViewCell {
     }
 
     // タイトル表示
-    func displayTitle() {
+    private func displayTitle() {
         if row.title.isEmpty { return }
 
         // アンダーラインを横幅を保持しておく
@@ -126,7 +148,7 @@ class FooterCollectionViewCell: UICollectionViewCell {
     }
 
     // タイトル非表示
-    func undisplayTitle() {
+    private func undisplayTitle() {
         if row.title.isEmpty { return }
 
         UIView.animate(withDuration: 0.2, animations: {

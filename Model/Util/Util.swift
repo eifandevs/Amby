@@ -26,15 +26,17 @@ class Util {
         let fileManager = FileManager.default
         var isDir: ObjCBool = false
 
-        fileManager.fileExists(atPath: path, isDirectory: &isDir)
-
-        if !isDir.boolValue {
-            do {
-                try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-                log.debug("create directory. path: \(path)")
-                return true
-            } catch let error as NSError {
-                log.error("create directory error. error: \(error.localizedDescription)")
+        if fileManager.fileExists(atPath: path, isDirectory: &isDir) {
+            return true
+        } else {
+            if !isDir.boolValue {
+                do {
+                    try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+                    log.debug("create directory. path: \(path)")
+                    return true
+                } catch let error as NSError {
+                    log.error("create directory error. error: \(error.localizedDescription)")
+                }
             }
         }
 

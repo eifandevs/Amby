@@ -2,12 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/tenma/dev/projects/Amby/Amby.xcodeproj">
+      location = "group:Amby.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Amby.xcodeproj">
    </FileRef>
 </Workspace>
