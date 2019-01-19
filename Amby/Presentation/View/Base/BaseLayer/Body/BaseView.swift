@@ -160,8 +160,8 @@ class BaseView: UIView {
         // アクション監視
         viewModel.rx_action
             .subscribe { [weak self] action in
-                log.eventIn(chain: "baseViewModel.rx_action")
                 guard let `self` = self, let action = action.element else { return }
+                log.eventIn(chain: "baseViewModel.rx_action. action: \(action)")
 
                 switch action {
                 case let .insert(at): self.insert(at: at)
@@ -178,7 +178,7 @@ class BaseView: UIView {
                 case .scrollUp: self.scrollUp()
                 case let .grep(text): self.grep(text: text)
                 }
-                log.eventOut(chain: "baseViewModel.rx_action")
+                log.eventOut(chain: "baseViewModel.rx_action. action: \(action)")
             }
             .disposed(by: rx.disposeBag)
     }

@@ -14,7 +14,7 @@ class FooterCollectionViewCell: UICollectionViewCell {
     private var indicator: NVActivityIndicatorView!
     private let thumbnailInfo = UIButton()
     private let underLine = UIView()
-
+    private var originalTransform = CGAffineTransform.identity
     @IBOutlet var frontBar: UIView!
     @IBOutlet var thumbnailButton: UIButton!
 
@@ -87,6 +87,21 @@ class FooterCollectionViewCell: UICollectionViewCell {
             undisplayTitle()
         }
     }
+
+    func startDrag() {
+        originalTransform = transform
+        UIView.animate(withDuration: 0.2) {
+            self.transform = self.transform.scaledBy(x: 1.2, y: 1.2)
+        }
+    }
+
+    func endDrag() {
+        UIView.animate(withDuration: 0.2) {
+            self.transform = self.originalTransform
+        }
+    }
+
+    // MARK: - Private Method
 
     /// タイトル初期化
     private func setupTitle(title: String) {

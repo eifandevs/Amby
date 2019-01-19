@@ -16,6 +16,7 @@ class FooterView: UIView, ShadowView {
     private var viewModel = FooterViewModel()
     private var collectionView: UICollectionView!
     private var isDragging = false
+    private var cell: FooterCollectionViewCell!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,6 +55,36 @@ class FooterView: UIView, ShadowView {
         collectionView.register(R.nib.footerCollectionViewCell(), forCellWithReuseIdentifier: R.nib.footerCollectionViewCell.identifier)
         // タイトル用に、スクロールビューの領域外に配置できるようにする
         collectionView.clipsToBounds = false
+
+        // ロングプレスで削除
+        let longPressRecognizer = UILongPressGestureRecognizer()
+
+        longPressRecognizer.rx.event
+            .subscribe { [weak self] sender in
+                guard let `self` = self else { return }
+                if let sender = sender.element {
+                    switch sender.state {
+                    case .began:
+                        guard let selectedIndexPath = self.collectionView.indexPathForItem(at: sender.location(in: self.collectionView)), let cell = self.collectionView.cellForItem(at: selectedIndexPath) as? FooterCollectionViewCell else {
+                            break
+                        }
+                        self.cell = cell
+                        self.cell.startDrag()
+                        self.collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
+                    case .changed:
+                        self.collectionView.updateInteractiveMovementTargetPosition(sender.location(in: sender.view!))
+                    case .ended:
+                        self.cell.endDrag()
+                        self.collectionView.endInteractiveMovement()
+                    default:
+                        self.collectionView.cancelInteractiveMovement()
+                    }
+                }
+            }
+            .disposed(by: rx.disposeBag)
+
+        collectionView.addGestureRecognizer(longPressRecognizer)
+
         addSubview(collectionView)
 
         setupRx()
@@ -145,6 +176,15 @@ extension FooterView: UICollectionViewDataSource {
 }
 
 extension FooterView: UICollectionViewDelegate {
+    func collectionView(_: UICollectionView, canMoveItemAt _: IndexPath) -> Bool {
+        return true
+    }
+
+    func collectionView(_: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        log.debug("start index: \(sourceIndexPath.item)")
+        log.debug("end index: \(destinationIndexPath.item)")
+    }
+
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.change(indexPath: indexPath)
     }
