@@ -353,6 +353,10 @@ final class PageHistoryDataModel {
 
     /// 表示中ページの変更
     func change(context: String) {
+        guard currentContext != context else {
+            log.debug("change front faild. same page")
+            return
+        }
         let before = currentData!
         currentContext = context
         rx_action.onNext(.change(before: before, after: currentData!))

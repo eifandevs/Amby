@@ -63,8 +63,8 @@ class FooterView: UIView, ShadowView {
         // サムネイル監視
         viewModel.rx_action
             .subscribe { [weak self] action in
-                log.eventIn(chain: "FooterViewModel.rx_action")
                 guard let `self` = self, let action = action.element else { return }
+                log.eventIn(chain: "FooterViewModel.rx_action. action: \(action)")
                 switch action {
                 case let .update(indexPath, animated): self.update(indexPath: indexPath, animated: animated)
                 case let .append(indexPath): self.append(indexPath: indexPath)
@@ -72,7 +72,7 @@ class FooterView: UIView, ShadowView {
                 case let .delete(indexPath): self.delete(indexPath: indexPath)
                 default: break
                 }
-                log.eventOut(chain: "FooterViewModel.rx_action")
+                log.eventOut(chain: "FooterViewModel.rx_action. action: \(action)")
             }
             .disposed(by: rx.disposeBag)
     }
