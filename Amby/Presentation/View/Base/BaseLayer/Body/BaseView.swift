@@ -168,6 +168,7 @@ class BaseView: UIView {
                 case .reload: self.reload()
                 case .append: self.append()
                 case .change: self.change()
+                case let .swap(start, end): self.swap(start: start, end: end)
                 case let .remove(isFront, deleteContext, currentContext, deleteIndex): self.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
                 case .historyBack: self.historyBack()
                 case .historyForward: self.historyForward()
@@ -392,6 +393,10 @@ class BaseView: UIView {
         }
     }
 
+    private func swap(start: Int, end: Int) {
+        webViews.swapAt(start, <#T##j: Int##Int#>)
+    }
+    
     private func insert(at: Int) {
         // 現フロントのプログレス監視を削除
         if let front = self.front {

@@ -16,6 +16,7 @@ public enum TabUseCaseAction {
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case reload
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case swap(start: Int, end: Int)
     case startLoading(context: String)
     case endLoading(context: String, title: String)
     case endRendering(context: String)
@@ -71,6 +72,7 @@ public final class TabUseCase {
                 case let .change(before, after): self.rx_action.onNext(.change(before: before, after: after))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex):
                     self.rx_action.onNext(.delete(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
+                case let .swap(start, end): self.rx_action.onNext(.swap(start: start, end: end))
                 case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))
                 case let .endLoading(context):
                     if let isLoading = PageHistoryDataModel.s.getIsLoading(context: context) {
@@ -109,6 +111,12 @@ public final class TabUseCase {
     /// 現在のタブをコピー
     public func copy() {
         PageHistoryDataModel.s.copy()
+        store()
+    }
+
+    /// タブ入れ替え
+    public func swap(start: Int, end: Int) {
+        PageHistoryDataModel.s.swap(start: start, end: end)
         store()
     }
 

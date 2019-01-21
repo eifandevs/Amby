@@ -181,8 +181,7 @@ extension FooterView: UICollectionViewDelegate {
     }
 
     func collectionView(_: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        log.debug("start index: \(sourceIndexPath.item)")
-        log.debug("end index: \(destinationIndexPath.item)")
+        viewModel.swap(start: sourceIndexPath.item, end: destinationIndexPath.item)
     }
 
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {

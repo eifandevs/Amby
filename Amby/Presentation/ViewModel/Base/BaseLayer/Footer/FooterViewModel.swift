@@ -161,6 +161,11 @@ final class FooterViewModel {
         }
     }
 
+    func swap(start: Int, end: Int) {
+        rows.swapAt(start, end) // セルの更新がすぐ動くので、もう入れ替えておく
+        TabUseCase.s.swap(start: start, end: end)
+    }
+
     func startDragging() {
         for i in 0 ... rows.count - 1 {
             rows[i].isDragging = true

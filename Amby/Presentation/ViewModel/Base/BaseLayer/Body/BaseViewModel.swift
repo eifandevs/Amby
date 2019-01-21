@@ -17,6 +17,7 @@ enum BaseViewModelAction {
     case append
     case change
     case remove(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case swap(start: Int, end: Int)
     case historyBack
     case historyForward
     case load(url: String)
@@ -184,6 +185,7 @@ final class BaseViewModel {
                 case .reload: self.rx_action.onNext(.reload)
                 case .append: self.rx_action.onNext(.append)
                 case .change: self.rx_action.onNext(.change)
+                case let .swap(start, end): self.rx_action.onNext(.swap(start: start, end: end))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
                 default: break
                 }
