@@ -62,8 +62,11 @@ final class DBRepository {
         return .success(())
     }
 
+    // swiftlint:disable force_cast
     public func select<T>(_ type: T.Type) -> RepositoryResult<[T]> {
-        let favorite = Array(realm.objects(type as! Object.Type))
-        return .success(favorite as! [T])
+        let data = Array(realm.objects(type as! Object.Type))
+        return .success(data as! [T])
     }
+
+    // swiftlint:enable force_cast
 }

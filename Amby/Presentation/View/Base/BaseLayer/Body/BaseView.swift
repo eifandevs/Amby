@@ -394,9 +394,9 @@ class BaseView: UIView {
     }
 
     private func swap(start: Int, end: Int) {
-        webViews.swapAt(start, <#T##j: Int##Int#>)
+        webViews.swapAt(start, end)
     }
-    
+
     private func insert(at: Int) {
         // 現フロントのプログレス監視を削除
         if let front = self.front {
