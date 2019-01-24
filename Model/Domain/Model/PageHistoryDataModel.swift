@@ -203,7 +203,7 @@ final class PageHistoryDataModel {
 
     /// タブの入れ替え
     func swap(start: Int, end: Int) {
-        histories.swapAt(start, end)
+        histories = histories.move(from: start, to: end)
         rx_action.onNext(.swap(start: start, end: end))
     }
 

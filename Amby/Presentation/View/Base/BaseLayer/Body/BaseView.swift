@@ -394,7 +394,7 @@ class BaseView: UIView {
     }
 
     private func swap(start: Int, end: Int) {
-        webViews.swapAt(start, end)
+        webViews = webViews.move(from: start, to: end)
     }
 
     private func insert(at: Int) {

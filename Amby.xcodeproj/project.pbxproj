@@ -135,6 +135,7 @@
 		A15C5484214D935E001E8AB5 /* com.mono0926.LicensePlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C546D214D935E001E8AB5 /* com.mono0926.LicensePlist.plist */; };
 		A15C5499214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt in Resources */ = {isa = PBXBuildFile; fileRef = A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */; };
 		A16AB90821692DB60036863C /* ReportViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */; };
+		A16B12D821FA09B600CB0C45 /* Array+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16B12D721FA09B600CB0C45 /* Array+Extend.swift */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
 		A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */; };
@@ -556,6 +557,7 @@
 		A15C546D214D935E001E8AB5 /* com.mono0926.LicensePlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.mono0926.LicensePlist.plist; sourceTree = "<group>"; };
 		A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = com.mono0926.LicensePlist.latest_result.txt; sourceTree = "<group>"; };
 		A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewControllerViewModel.swift; sourceTree = "<group>"; };
+		A16B12D721FA09B600CB0C45 /* Array+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extend.swift"; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
 		A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuMemoTableViewCell.xib; sourceTree = "<group>"; };
@@ -1658,6 +1660,7 @@
 				A195065F2143FC920091DF23 /* Data+Extend.swift */,
 				A19506612143FF5B0091DF23 /* Collection+Extend.swift */,
 				A1950672214406980091DF23 /* NSObject+Extend.swift */,
+				A16B12D721FA09B600CB0C45 /* Array+Extend.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2752,6 +2755,7 @@
 				A19506582143FB800091DF23 /* Double+Extend.swift in Sources */,
 				A19506352143F8AF0091DF23 /* ArticleDataModel.swift in Sources */,
 				A19506602143FC920091DF23 /* Data+Extend.swift in Sources */,
+				A16B12D821FA09B600CB0C45 /* Array+Extend.swift in Sources */,
 				A19506282142D9A90091DF23 /* CommonHistory.swift in Sources */,
 				A19506492143F8B80091DF23 /* SuggestUseCase.swift in Sources */,
 				A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */,
