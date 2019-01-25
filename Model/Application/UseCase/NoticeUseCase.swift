@@ -21,42 +21,68 @@ public final class NoticeUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<NoticeUseCaseAction>()
 
+    /// models
+    private var pageHistoryDataModel: PageHistoryDataModelProtocol!
+    private var commonHistoryDataModel: CommonHistoryDataModelProtocol!
+    private var favoriteDataModel: FavoriteDataModelProtocol!
+    private var searchHistoryDataModel: SearchHistoryDataModelProtocol!
+    private var formDataModel: FormDataModelProtocol!
+    private var memoDataModel: MemoDataModelProtocol!
+    private var thumbnailDataModel: ThumbnailDataModelProtocol!
+    private var issueDataModel: IssueDataModelProtocol!
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
     private init() {
+        setupProtocolImpl()
+        setupRx()
+    }
+
+    private func setupProtocolImpl() {
+        pageHistoryDataModel = PageHistoryDataModel.s
+        commonHistoryDataModel = CommonHistoryDataModel.s
+        favoriteDataModel = FavoriteDataModel.s
+        searchHistoryDataModel = SearchHistoryDataModel.s
+        formDataModel = FormDataModel.s
+        memoDataModel = MemoDataModel.s
+        thumbnailDataModel = ThumbnailDataModel.s
+        issueDataModel = IssueDataModel.s
+    }
+
+    private func setupRx() {
         // 正常終了監視
         Observable
             .merge([
-                FavoriteDataModel.s.rx_action.flatMap { action -> Observable<String> in
+                favoriteDataModel.rx_action.flatMap { action -> Observable<String> in
                     switch action {
                     case .deleteAll: return Observable.just(MessageConst.NOTIFICATION.DELETE_BOOK_MARK)
                     case .insert: return Observable.just(MessageConst.NOTIFICATION.REGISTER_BOOK_MARK)
                     default: return Observable.empty()
                     }
                 },
-                CommonHistoryDataModel.s.rx_action.flatMap { action -> Observable<String> in
+                commonHistoryDataModel.rx_action.flatMap { action -> Observable<String> in
                     if case .deleteAll = action {
                         return Observable.just(MessageConst.NOTIFICATION.DELETE_COMMON_HISTORY)
                     } else {
                         return Observable.empty()
                     }
                 },
-                FormDataModel.s.rx_action.flatMap { action -> Observable<String> in
+                formDataModel.rx_action.flatMap { action -> Observable<String> in
                     if case .deleteAll = action {
                         return Observable.just(MessageConst.NOTIFICATION.DELETE_FORM)
                     } else {
                         return Observable.empty()
                     }
                 },
-                SearchHistoryDataModel.s.rx_action.flatMap { action -> Observable<String> in
+                searchHistoryDataModel.rx_action.flatMap { action -> Observable<String> in
                     if case .deleteAll = action {
                         return Observable.just(MessageConst.NOTIFICATION.DELETE_SEARCH_HISTORY)
                     } else {
                         return Observable.empty()
                     }
                 },
-                IssueDataModel.s.rx_action.flatMap { action -> Observable<String> in
+                issueDataModel.rx_action.flatMap { action -> Observable<String> in
                     if case .registered = action {
                         return Observable.just(MessageConst.NOTIFICATION.REGISTER_REPORT)
                     } else {
@@ -78,14 +104,14 @@ public final class NoticeUseCase {
 
         // エラー監視
         Observable.merge([
-            SearchHistoryDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
-            CommonHistoryDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
-            PageHistoryDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
-            FavoriteDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
-            FormDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
-            MemoDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
-            ThumbnailDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
-            IssueDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
+            searchHistoryDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
+            commonHistoryDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
+            pageHistoryDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
+            favoriteDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
+            formDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
+            memoDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
+            thumbnailDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
+            issueDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             PasscodeUseCase.s.rx_error.flatMap { Observable.just($0 as ModelError) }
         ]).subscribe { [weak self] modelError in
             guard let `self` = self, let modelError = modelError.element else { return }

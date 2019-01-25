@@ -21,18 +21,28 @@ public final class FavoriteUseCase {
 
     public let rx_action = PublishSubject<FavoriteUseCaseAction>()
 
+    // models
+    private var pageHistoryDataModel: PageHistoryDataModelProtocol!
+    private var favoriteDataModel: FavoriteDataModelProtocol!
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
     private init() {
+        setupProtocolImpl()
         setupRx()
+    }
+
+    private func setupProtocolImpl() {
+        pageHistoryDataModel = PageHistoryDataModel.s
+        favoriteDataModel = FavoriteDataModel.s
     }
 
     private func setupRx() {
         // エラー監視
         Observable
             .merge([
-                PageHistoryDataModel.s.rx_action
+                pageHistoryDataModel.rx_action
                     .filter { action -> Bool in
                         switch action {
                         case .append, .change, .insert, .delete:
@@ -42,7 +52,7 @@ public final class FavoriteUseCase {
                         }
                     }
                     .flatMap { _ in Observable.just(()) },
-                FavoriteDataModel.s.rx_action
+                favoriteDataModel.rx_action
                     .filter { action -> Bool in
                         switch action {
                         case .insert, .delete, .reload:
@@ -56,8 +66,8 @@ public final class FavoriteUseCase {
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
 
-                if let currentHistory = PageHistoryDataModel.s.currentHistory, !currentHistory.url.isEmpty {
-                    self.rx_action.onNext(.update(isSwitch: FavoriteDataModel.s.select().map({ $0.url }).contains(currentHistory.url)))
+                if let currentHistory = self.pageHistoryDataModel.currentHistory, !currentHistory.url.isEmpty {
+                    self.rx_action.onNext(.update(isSwitch: self.favoriteDataModel.select().map({ $0.url }).contains(currentHistory.url)))
                 } else {
                     self.rx_action.onNext(.update(isSwitch: false))
                 }
@@ -66,20 +76,22 @@ public final class FavoriteUseCase {
     }
 
     public func select() -> [Favorite] {
-        return FavoriteDataModel.s.select()
+        return favoriteDataModel.select()
     }
 
     public func select(id: String) -> [Favorite] {
-        return FavoriteDataModel.s.select(id: id)
+        return favoriteDataModel.select(id: id)
     }
 
     public func select(url: String) -> [Favorite] {
-        return FavoriteDataModel.s.select(url: url)
+        return favoriteDataModel.select(url: url)
     }
 
     /// お気に入り更新
     public func update() {
-        FavoriteDataModel.s.update()
+        if let currentHistory = pageHistoryDataModel.currentHistory {
+            favoriteDataModel.update(currentHistory: currentHistory)
+        }
     }
 
     /// ロードリクエスト

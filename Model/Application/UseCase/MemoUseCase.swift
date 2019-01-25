@@ -22,10 +22,17 @@ public final class MemoUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<MemoUseCaseAction>()
 
+    /// models
+    private var memoDataModel: MemoDataModelProtocol!
+
     private init() {}
 
+    private func setupProtocolImpl() {
+        memoDataModel = MemoDataModel.s
+    }
+
     public func delete() {
-        MemoDataModel.s.delete()
+        memoDataModel.delete()
     }
 
     public func open(memo: Memo) {
@@ -37,39 +44,39 @@ public final class MemoUseCase {
     }
 
     public func insert(memo: Memo) {
-        MemoDataModel.s.insert(memo: memo)
+        memoDataModel.insert(memo: memo)
     }
 
     public func update(memo: Memo, text: String) {
         // 新規作成の場合は、データが存在しないのでinsertに変更する
-        if MemoDataModel.s.select(id: memo.id) != nil {
+        if memoDataModel.select(id: memo.id) != nil {
             log.debug("memo update. before: \(memo.text) after: \(text)")
-            MemoDataModel.s.update(memo: memo, text: text)
+            memoDataModel.update(memo: memo, text: text)
         } else {
             memo.text = text
             log.debug("memo insert. memo: \(memo)")
-            MemoDataModel.s.insert(memo: memo)
+            memoDataModel.insert(memo: memo)
         }
     }
 
     public func invertLock(memo: Memo) {
-        MemoDataModel.s.invertLock(memo: memo)
+        memoDataModel.invertLock(memo: memo)
     }
 
     public func delete(memo: Memo) {
-        if MemoDataModel.s.select(id: memo.id) != nil {
+        if memoDataModel.select(id: memo.id) != nil {
             log.debug("delete memo. memo: \(memo)")
-            MemoDataModel.s.delete(memo: memo)
+            memoDataModel.delete(memo: memo)
         } else {
             log.debug("not delete memo")
         }
     }
 
     public func select() -> [Memo] {
-        return MemoDataModel.s.select()
+        return memoDataModel.select()
     }
 
     public func select(id: String) -> Memo? {
-        return MemoDataModel.s.select(id: id)
+        return memoDataModel.select(id: id)
     }
 }

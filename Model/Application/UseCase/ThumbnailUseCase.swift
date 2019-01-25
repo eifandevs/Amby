@@ -14,32 +14,41 @@ import RxSwift
 public final class ThumbnailUseCase {
     public static let s = ThumbnailUseCase()
 
-    private init() {}
+    /// models
+    private var thumbnailDataModel: ThumbnailDataModelProtocol!
+
+    private init() {
+        setupProtocolImpl()
+    }
+
+    private func setupProtocolImpl() {
+        thumbnailDataModel = ThumbnailDataModel.s
+    }
 
     public func getCapture(context: String) -> UIImage? {
-        return ThumbnailDataModel.s.getCapture(context: context)
+        return thumbnailDataModel.getCapture(context: context)
     }
 
     /// create thumbnail folder
     public func createFolder(context: String) {
-        ThumbnailDataModel.s.create(context: context)
+        thumbnailDataModel.create(context: context)
     }
 
     /// write thumbnail data
     public func write(context: String, data: Data) {
-        ThumbnailDataModel.s.write(context: context, data: data)
+        thumbnailDataModel.write(context: context, data: data)
     }
 
     public func delete() {
-        ThumbnailDataModel.s.delete()
+        thumbnailDataModel.delete()
     }
 
     /// サムネイルの削除
     public func delete(context: String) {
-        ThumbnailDataModel.s.delete(context: context)
+        thumbnailDataModel.delete(context: context)
     }
 
     public func getThumbnail(context: String) -> UIImage? {
-        return ThumbnailDataModel.s.getThumbnail(context: context)
+        return thumbnailDataModel.getThumbnail(context: context)
     }
 }

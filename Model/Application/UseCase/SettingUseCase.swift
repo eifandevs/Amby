@@ -16,51 +16,59 @@ public final class SettingUseCase {
 
     /// 閲覧履歴保存日数
     public var commonHistorySaveCount: Int {
-        return SettingDataModel.s.commonHistorySaveCount
+        return settingDataModel.commonHistorySaveCount
     }
 
     /// 自動スクロールインターバル
     public var autoScrollInterval: Float {
         get {
-            return SettingDataModel.s.autoScrollInterval
+            return settingDataModel.autoScrollInterval
         }
         set(value) {
-            SettingDataModel.s.autoScrollInterval = value
+            settingDataModel.autoScrollInterval = value
         }
     }
 
     /// 新規ウィンドウ許諾フラグ
     public var newWindowConfirm: Bool {
         get {
-            return SettingDataModel.s.newWindowConfirm
+            return settingDataModel.newWindowConfirm
         }
         set(value) {
-            SettingDataModel.s.newWindowConfirm = value
+            settingDataModel.newWindowConfirm = value
         }
     }
 
     /// メニュー順序
     public var menuOrder: [UserOperation] {
         get {
-            return SettingDataModel.s.menuOrder
+            return settingDataModel.menuOrder
         }
         set(value) {
-            SettingDataModel.s.menuOrder = value
+            settingDataModel.menuOrder = value
         }
     }
 
     /// 検索履歴保存日数
     public var searchHistorySaveCount: Int {
-        return SettingDataModel.s.searchHistorySaveCount
+        return settingDataModel.searchHistorySaveCount
     }
 
     public func initialize() {
-        SettingDataModel.s.initialize()
+        settingDataModel.initialize()
     }
 
     public func initializeMenuOrder() {
-        SettingDataModel.s.initializeMenuOrder()
+        settingDataModel.initializeMenuOrder()
     }
 
-    private init() {}
+    private var settingDataModel: SettingDataModelProtocol!
+
+    private init() {
+        setupProtocolImpl()
+    }
+
+    private func setupProtocolImpl() {
+        settingDataModel = SettingDataModel.s
+    }
 }

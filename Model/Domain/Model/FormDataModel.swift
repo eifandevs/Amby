@@ -36,7 +36,19 @@ extension FormDataModelError: ModelError {
     }
 }
 
-final class FormDataModel {
+protocol FormDataModelProtocol {
+    var rx_action: PublishSubject<FormDataModelAction> { get }
+    var rx_error: PublishSubject<FormDataModelError> { get }
+    func insert(forms: [Form])
+    func select() -> [Form]
+    func select(id: String) -> [Form]
+    func select(url: String) -> [Form]
+    func delete()
+    func delete(forms: [Form])
+    func store(form: Form)
+}
+
+final class FormDataModel: FormDataModelProtocol {
     static let s = FormDataModel()
 
     /// アクション通知用RX
@@ -45,7 +57,7 @@ final class FormDataModel {
     let rx_error = PublishSubject<FormDataModelError>()
 
     /// db repository
-    let repository = DBRepository()
+    private let repository = DBRepository()
 
     private init() {}
 

@@ -37,23 +37,27 @@ public final class PasscodeUseCase {
     /// エラー通知用RX
     let rx_error = PublishSubject<PasscodeUseCaseError>()
 
+    /// models
+    private var settingDataModel: SettingDataModelProtocol!
+    private var authDataModel: AuthDataModelProtocol!
+
     /// パスコード
     public var rootPasscode: String {
         get {
-            return SettingDataModel.s.rootPasscode
+            return settingDataModel.rootPasscode
         }
         set(value) {
-            SettingDataModel.s.rootPasscode = value
+            settingDataModel.rootPasscode = value
         }
     }
 
     /// パスコート認証済みフラグ
     public var isInputPasscode: Bool {
         get {
-            return AuthDataModel.s.isInputPasscode
+            return authDataModel.isInputPasscode
         }
         set(value) {
-            AuthDataModel.s.isInputPasscode = value
+            authDataModel.isInputPasscode = value
         }
     }
 
@@ -62,7 +66,14 @@ public final class PasscodeUseCase {
         return !rootPasscode.isEmpty
     }
 
-    private init() {}
+    private init() {
+        setupProtocolImpl()
+    }
+
+    private func setupProtocolImpl() {
+        settingDataModel = SettingDataModel.s
+        authDataModel = AuthDataModel.s
+    }
 
     /// ライセンス表示
     public func open() {
@@ -76,8 +87,8 @@ public final class PasscodeUseCase {
 
     /// 表示可能判定
     public func authentificationChallenge() -> Bool {
-        if PasscodeUseCase.s.isRegisterdPasscode {
-            if PasscodeUseCase.s.isInputPasscode {
+        if isRegisterdPasscode {
+            if isInputPasscode {
                 return true
             } else {
                 confirm()

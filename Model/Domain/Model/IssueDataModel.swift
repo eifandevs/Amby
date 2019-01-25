@@ -28,7 +28,13 @@ extension IssueDataModelError: ModelError {
     }
 }
 
-final class IssueDataModel {
+protocol IssueDataModelProtocol {
+    var rx_action: PublishSubject<IssueDataModelAction> { get }
+    var rx_error: PublishSubject<IssueDataModelError> { get }
+    func post(title: String, body: String)
+}
+
+final class IssueDataModel: IssueDataModelProtocol {
     /// RXアクション通知用RX
     let rx_action = PublishSubject<IssueDataModelAction>()
 

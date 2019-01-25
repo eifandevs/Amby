@@ -36,7 +36,19 @@ extension SearchHistoryDataModelError: ModelError {
     }
 }
 
-final class SearchHistoryDataModel {
+protocol SearchHistoryDataModelProtocol {
+    var rx_action: PublishSubject<SearchHistoryDataModelAction> { get }
+    var rx_error: PublishSubject<SearchHistoryDataModelError> { get }
+    var histories: [SearchHistory] { get }
+    func getList() -> [String]
+    func store(text: String)
+    func store(histories: [SearchHistory])
+    func select(title: String, readNum: Int) -> [SearchHistory]
+    func expireCheck()
+    func delete()
+}
+
+final class SearchHistoryDataModel: SearchHistoryDataModelProtocol {
     /// アクション通知用RX
     let rx_action = PublishSubject<SearchHistoryDataModelAction>()
     /// エラー通知用RX
@@ -47,6 +59,8 @@ final class SearchHistoryDataModel {
 
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
+
+    private let userDefaultRepository = UserDefaultRepository()
 
     private init() {}
 
@@ -149,7 +163,7 @@ final class SearchHistoryDataModel {
 
     /// 閲覧履歴の期限切れ削除
     func expireCheck() {
-        let saveTerm = SettingDataModel.s.searchHistorySaveCount
+        let saveTerm = userDefaultRepository.get(key: .searchHistorySaveCount)
         let readFiles = getList().reversed()
 
         if readFiles.count > saveTerm {
