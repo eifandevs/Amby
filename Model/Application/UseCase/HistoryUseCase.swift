@@ -23,7 +23,18 @@ public final class HistoryUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<HistoryUseCaseAction>()
 
-    private init() {}
+    /// models
+    private var commonHistoryDataModel: CommonHistoryDataModelProtocol!
+    private var settingDataModel: SettingDataModelProtocol!
+
+    private init() {
+        setupProtocolImpl()
+    }
+
+    private func setupProtocolImpl() {
+        commonHistoryDataModel = CommonHistoryDataModel.s
+        settingDataModel = SettingDataModel.s
+    }
 
     /// ヒストリーバック
     public func goBack() {
@@ -41,42 +52,42 @@ public final class HistoryUseCase {
     }
 
     public func getList() -> [String] {
-        return CommonHistoryDataModel.s.getList()
+        return commonHistoryDataModel.getList()
     }
 
     /// update common history
     public func insert(url: URL?, title: String?) {
-        CommonHistoryDataModel.s.insert(url: url, title: title)
+        commonHistoryDataModel.insert(url: url, title: title)
         store()
     }
 
     /// 閲覧、ページ履歴の永続化
     private func store() {
         DispatchQueue(label: ModelConst.APP.QUEUE).async {
-            CommonHistoryDataModel.s.store()
+            self.commonHistoryDataModel.store()
         }
     }
 
     public func select(dateString: String) -> [CommonHistory] {
-        return CommonHistoryDataModel.s.select(dateString: dateString)
+        return commonHistoryDataModel.select(dateString: dateString)
     }
 
     /// 検索ワードと検索件数を指定する
     public func select(title: String, readNum: Int) -> [CommonHistory] {
-        return CommonHistoryDataModel.s.select(title: title, readNum: readNum)
+        return commonHistoryDataModel.select(title: title, readNum: readNum)
     }
 
     public func delete() {
-        CommonHistoryDataModel.s.delete()
+        commonHistoryDataModel.delete()
         store()
     }
 
     public func delete(historyIds: [String: [String]]) {
-        CommonHistoryDataModel.s.delete(historyIds: historyIds)
+        commonHistoryDataModel.delete(historyIds: historyIds)
         store()
     }
 
     public func expireCheck() {
-        CommonHistoryDataModel.s.expireCheck()
+        commonHistoryDataModel.expireCheck(historySaveCount: settingDataModel.commonHistorySaveCount)
     }
 }

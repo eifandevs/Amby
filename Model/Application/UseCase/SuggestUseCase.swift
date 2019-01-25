@@ -22,16 +22,24 @@ public final class SuggestUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<SuggestUseCaseAction>()
 
+    /// models
+    private var suggestDataModel: SuggestDataModelProtocol!
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
     private init() {
+        setupProtocolImpl()
         setupRx()
+    }
+
+    private func setupProtocolImpl() {
+        suggestDataModel = SuggestDataModel.s
     }
 
     private func setupRx() {
         // サジェスト監視
-        SuggestDataModel.s.rx_action
+        suggestDataModel.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self else { return }
                 if let action = action.element, case let .update(suggest) = action {

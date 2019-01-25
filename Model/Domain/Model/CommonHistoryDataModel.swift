@@ -35,13 +35,29 @@ extension CommonHistoryDataModelError: ModelError {
     }
 }
 
-final class CommonHistoryDataModel {
+protocol CommonHistoryDataModelProtocol {
+    var rx_action: PublishSubject<CommonHistoryDataModelAction> { get }
+    var rx_error: PublishSubject<CommonHistoryDataModelError> { get }
+    var histories: [CommonHistory] { get }
+    func insert(url: URL?, title: String?)
+    func insert(url: URL?, title: String?, date: Date)
+    func getHistory(index: Int) -> CommonHistory?
+    func store()
+    func getList() -> [String]
+    func select(dateString: String) -> [CommonHistory]
+    func select(title: String, readNum: Int) -> [CommonHistory]
+    func expireCheck(historySaveCount: Int)
+    func delete(historyIds: [String: [String]])
+    func delete()
+}
+
+final class CommonHistoryDataModel: CommonHistoryDataModelProtocol {
     /// アクション通知用RX
     let rx_action = PublishSubject<CommonHistoryDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<CommonHistoryDataModelError>()
 
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     static let s = CommonHistoryDataModel()
 
@@ -196,8 +212,7 @@ final class CommonHistoryDataModel {
 
     /// 閲覧履歴の件数チェック
     // デフォルトで90日分の履歴を超えたら削除する
-    func expireCheck() {
-        let historySaveCount = SettingDataModel.s.commonHistorySaveCount
+    func expireCheck(historySaveCount: Int) {
         let readFiles = getList().reversed()
 
         if readFiles.count > historySaveCount {

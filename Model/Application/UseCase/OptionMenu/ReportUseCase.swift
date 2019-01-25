@@ -25,14 +25,25 @@ public final class ReportUseCase {
     /// 最終お問い合わせ日
     public var lastReportDate: Date {
         get {
-            return SettingDataModel.s.lastReportDate
+            return settingDataModel.lastReportDate
         }
         set(value) {
-            SettingDataModel.s.lastReportDate = value
+            settingDataModel.lastReportDate = value
         }
     }
 
-    private init() {}
+    /// models
+    private var issueDataModel: IssueDataModelProtocol!
+    private var settingDataModel: SettingDataModelProtocol!
+
+    private init() {
+        setupProtocolImpl()
+    }
+
+    private func setupProtocolImpl() {
+        issueDataModel = IssueDataModel.s
+        settingDataModel = SettingDataModel.s
+    }
 
     /// レポート画面表示
     public func open() {

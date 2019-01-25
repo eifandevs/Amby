@@ -16,6 +16,7 @@ public enum TabUseCaseAction {
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case reload
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case swap(start: Int, end: Int)
     case startLoading(context: String)
     case endLoading(context: String, title: String)
     case endRendering(context: String)
@@ -24,44 +25,55 @@ public enum TabUseCaseAction {
 /// タブユースケース
 public final class TabUseCase {
     public static let s = TabUseCase()
-
     /// アクション通知用RX
     public let rx_action = PublishSubject<TabUseCaseAction>()
 
     public var currentUrl: String? {
-        return PageHistoryDataModel.s.currentHistory?.url
+        return pageHistoryDataModel.currentHistory?.url
     }
 
     public var pageHistories: [PageHistory] {
-        return PageHistoryDataModel.s.histories
+        return pageHistoryDataModel.histories
     }
 
     public var currentHistory: PageHistory? {
-        return PageHistoryDataModel.s.currentHistory
+        return pageHistoryDataModel.currentHistory
     }
 
     public var currentContext: String {
-        return PageHistoryDataModel.s.currentContext
+        return pageHistoryDataModel.currentContext
     }
 
     public var currentLocation: Int? {
-        return PageHistoryDataModel.s.currentLocation
+        return pageHistoryDataModel.currentLocation
     }
 
     public var currentTabCount: Int {
-        return PageHistoryDataModel.s.histories.count
+        return pageHistoryDataModel.histories.count
     }
 
+    // models
+    private var pageHistoryDataModel: PageHistoryDataModelProtocol!
+    private var favoriteDataModel: FavoriteDataModelProtocol!
+    private var progressDataModel: ProgressDataModelProtocol!
+
     private init() {
+        setupProtocolImpl()
         setupRx()
     }
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
+    private func setupProtocolImpl() {
+        pageHistoryDataModel = PageHistoryDataModel.s
+        favoriteDataModel = FavoriteDataModel.s
+        progressDataModel = ProgressDataModel.s
+    }
+
     private func setupRx() {
         // インサート監視
-        PageHistoryDataModel.s.rx_action
+        pageHistoryDataModel.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -71,12 +83,13 @@ public final class TabUseCase {
                 case let .change(before, after): self.rx_action.onNext(.change(before: before, after: after))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex):
                     self.rx_action.onNext(.delete(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
+                case let .swap(start, end): self.rx_action.onNext(.swap(start: start, end: end))
                 case let .startLoading(context): self.rx_action.onNext(.startLoading(context: context))
                 case let .endLoading(context):
-                    if let isLoading = PageHistoryDataModel.s.getIsLoading(context: context) {
+                    if let isLoading = self.pageHistoryDataModel.getIsLoading(context: context) {
                         if !isLoading {
                             // When loading is completed and loading has started while saving thumbnails, skip
-                            if let pageHistory = PageHistoryDataModel.s.getHistory(context: context) {
+                            if let pageHistory = self.pageHistoryDataModel.getHistory(context: context) {
                                 self.rx_action.onNext(.endLoading(context: context, title: pageHistory.title))
                             }
                         } else {
@@ -92,15 +105,15 @@ public final class TabUseCase {
 
     /// 現在のタブをクローズ
     public func close() {
-        PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)
+        pageHistoryDataModel.remove(context: pageHistoryDataModel.currentContext)
         store()
     }
 
     /// 全てのタブをクローズ
     public func closeAll() {
-        let histories = PageHistoryDataModel.s.histories
+        let histories = pageHistoryDataModel.histories
         histories.forEach { pageHistory in
-            PageHistoryDataModel.s.remove(context: pageHistory.context)
+            self.pageHistoryDataModel.remove(context: pageHistory.context)
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.25))
         }
         store()
@@ -108,120 +121,131 @@ public final class TabUseCase {
 
     /// 現在のタブをコピー
     public func copy() {
-        PageHistoryDataModel.s.copy()
+        pageHistoryDataModel.copy()
+        store()
+    }
+
+    /// タブ入れ替え
+    public func swap(start: Int, end: Int) {
+        pageHistoryDataModel.swap(start: start, end: end)
         store()
     }
 
     /// 現在のタブを削除
     public func remove() {
-        PageHistoryDataModel.s.remove(context: PageHistoryDataModel.s.currentContext)
+        pageHistoryDataModel.remove(context: pageHistoryDataModel.currentContext)
         store()
     }
 
     /// 特定のタブを削除
     public func remove(context: String) {
-        PageHistoryDataModel.s.remove(context: context)
+        pageHistoryDataModel.remove(context: context)
         store()
     }
 
     /// タブ変更
     public func change(context: String) {
-        PageHistoryDataModel.s.change(context: context)
+        pageHistoryDataModel.change(context: context)
     }
 
     /// タブの追加
     public func add(url: String? = nil) {
-        PageHistoryDataModel.s.append(url: url)
+        pageHistoryDataModel.append(url: url, title: nil)
         store()
     }
 
     /// タブの挿入
     public func insert(url: String? = nil) {
-        PageHistoryDataModel.s.insert(url: url)
+        pageHistoryDataModel.insert(url: url, title: nil)
         store()
     }
 
     /// タブの全削除
     public func delete() {
-        PageHistoryDataModel.s.delete()
+        pageHistoryDataModel.delete()
         store()
     }
 
     /// ページインデックス取得
     public func getIndex(context: String) -> Int? {
-        return PageHistoryDataModel.s.getIndex(context: context)
+        return pageHistoryDataModel.getIndex(context: context)
     }
 
     /// 履歴取得
     public func getHistory(index: Int) -> PageHistory? {
-        return PageHistoryDataModel.s.getHistory(index: index)
+        return pageHistoryDataModel.getHistory(index: index)
     }
 
     /// 直近URL取得
     public func getMostForwardUrl(context: String) -> String? {
-        return PageHistoryDataModel.s.getMostForwardUrl(context: context)
+        return pageHistoryDataModel.getMostForwardUrl(context: context)
     }
 
     /// 過去ページ閲覧中フラグ取得
     public func getIsPastViewing(context: String) -> Bool? {
-        return PageHistoryDataModel.s.isPastViewing(context: context)
+        return pageHistoryDataModel.isPastViewing(context: context)
     }
 
     /// 前回URL取得
     public func getBackUrl(context: String) -> String? {
-        return PageHistoryDataModel.s.getBackUrl(context: context)
+        return pageHistoryDataModel.getBackUrl(context: context)
     }
 
     /// 次URL取得
     public func getForwardUrl(context: String) -> String? {
-        return PageHistoryDataModel.s.getForwardUrl(context: context)
+        return pageHistoryDataModel.getForwardUrl(context: context)
     }
 
     public func startLoading(context: String) {
-        PageHistoryDataModel.s.startLoading(context: context)
+        pageHistoryDataModel.startLoading(context: context)
     }
 
     public func endLoading(context: String) {
-        PageHistoryDataModel.s.endLoading(context: context)
+        pageHistoryDataModel.endLoading(context: context)
     }
 
     public func endRendering(context: String) {
-        PageHistoryDataModel.s.endRendering(context: context)
+        pageHistoryDataModel.endRendering(context: context)
         store()
     }
 
     public func updateProgress(object: CGFloat) {
-        ProgressDataModel.s.updateProgress(progress: object)
+        progressDataModel.updateProgress(progress: object)
     }
 
     /// 前WebViewに切り替え
     public func goBack() {
-        PageHistoryDataModel.s.goBack()
+        pageHistoryDataModel.goBack()
     }
 
     /// 後WebViewに切り替え
     public func goNext() {
-        PageHistoryDataModel.s.goNext()
+        pageHistoryDataModel.goNext()
     }
 
     /// update url in page history
     public func updateUrl(context: String, url: String, operation: PageHistory.Operation) {
-        PageHistoryDataModel.s.updateUrl(context: context, url: url, operation: operation)
+        if pageHistoryDataModel.updateUrl(context: context, url: url, operation: operation) {
+            progressDataModel.updateText(text: url)
+            if let currentHistory = pageHistoryDataModel.currentHistory {
+                favoriteDataModel.reload(currentHistory: currentHistory)
+            }
+        }
     }
 
     /// update title in page history
     public func updateTitle(context: String, title: String) {
-        PageHistoryDataModel.s.updateTitle(context: context, title: title)
+        pageHistoryDataModel.updateTitle(context: context, title: title)
     }
 
     /// 閲覧、ページ履歴の永続化
     private func store() {
         DispatchQueue(label: ModelConst.APP.QUEUE).async {
-            PageHistoryDataModel.s.store()
+            self.pageHistoryDataModel.store()
         }
     }
 
     public func initialize() {
-        PageHistoryDataModel.s.initialize()
+        pageHistoryDataModel.initialize()
     }
 }

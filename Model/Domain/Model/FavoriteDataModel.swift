@@ -36,7 +36,20 @@ extension FavoriteDataModelError: ModelError {
     }
 }
 
-final class FavoriteDataModel {
+protocol FavoriteDataModelProtocol {
+    var rx_action: PublishSubject<FavoriteDataModelAction> { get }
+    var rx_error: PublishSubject<FavoriteDataModelError> { get }
+    func insert(favorites: [Favorite])
+    func select() -> [Favorite]
+    func select(id: String) -> [Favorite]
+    func select(url: String) -> [Favorite]
+    func delete()
+    func delete(favorites: [Favorite])
+    func reload(currentHistory: PageHistory)
+    func update(currentHistory: PageHistory)
+}
+
+final class FavoriteDataModel: FavoriteDataModelProtocol {
     /// アクション通知用RX
     let rx_action = PublishSubject<FavoriteDataModelAction>()
     /// エラー通知用RX
@@ -45,8 +58,8 @@ final class FavoriteDataModel {
     static let s = FavoriteDataModel()
     /// 通知センター
     private let center = NotificationCenter.default
-    /// DBプロバイダー
-    let repository = DBRepository()
+    /// DBリポジトリ
+    private let repository = DBRepository()
 
     private init() {}
 
@@ -110,29 +123,25 @@ final class FavoriteDataModel {
     }
 
     /// お気に入りの更新チェック
-    func reload() {
-        if let currentHistory = PageHistoryDataModel.s.currentHistory {
-            rx_action.onNext(.reload(url: currentHistory.url))
-        }
+    func reload(currentHistory: PageHistory) {
+        rx_action.onNext(.reload(url: currentHistory.url))
     }
 
     /// update favorite
-    func update() {
-        if let currentHistory = PageHistoryDataModel.s.currentHistory {
-            if !currentHistory.url.isEmpty && !currentHistory.title.isEmpty {
-                let fd = Favorite()
-                fd.title = currentHistory.title
-                fd.url = currentHistory.url
+    func update(currentHistory: PageHistory) {
+        if !currentHistory.url.isEmpty && !currentHistory.title.isEmpty {
+            let fd = Favorite()
+            fd.title = currentHistory.title
+            fd.url = currentHistory.url
 
-                if let favorite = select(url: fd.url).first {
-                    // すでに登録済みの場合は、お気に入りから削除する
-                    delete(favorites: [favorite])
-                } else {
-                    insert(favorites: [fd])
-                }
+            if let favorite = select(url: fd.url).first {
+                // すでに登録済みの場合は、お気に入りから削除する
+                delete(favorites: [favorite])
             } else {
-                rx_error.onNext(.get)
+                insert(favorites: [fd])
             }
+        } else {
+            rx_error.onNext(.get)
         }
     }
 }

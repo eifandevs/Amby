@@ -29,7 +29,12 @@ extension SuggestDataModelError: ModelError {
     }
 }
 
-final class SuggestDataModel {
+protocol SuggestDataModelProtocol {
+    var rx_action: PublishSubject<SuggestDataModelAction> { get }
+    func get(token: String)
+}
+
+final class SuggestDataModel: SuggestDataModelProtocol {
     /// アクション通知用RX
     let rx_action = PublishSubject<SuggestDataModelAction>()
 

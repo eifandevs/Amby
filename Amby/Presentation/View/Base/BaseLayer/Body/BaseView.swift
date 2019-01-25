@@ -168,6 +168,7 @@ class BaseView: UIView {
                 case .reload: self.reload()
                 case .append: self.append()
                 case .change: self.change()
+                case let .swap(start, end): self.swap(start: start, end: end)
                 case let .remove(isFront, deleteContext, currentContext, deleteIndex): self.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
                 case .historyBack: self.historyBack()
                 case .historyForward: self.historyForward()
@@ -390,6 +391,10 @@ class BaseView: UIView {
         } else {
             log.error("cannot find current location.")
         }
+    }
+
+    private func swap(start: Int, end: Int) {
+        webViews = webViews.move(from: start, to: end)
     }
 
     private func insert(at: Int) {

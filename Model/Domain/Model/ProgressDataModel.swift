@@ -15,13 +15,19 @@ enum ProgressDataModelAction {
     case updateText(text: String)
 }
 
+protocol ProgressDataModelProtocol {
+    var rx_action: PublishSubject<ProgressDataModelAction> { get }
+    func updateProgress(progress: CGFloat)
+    func updateText(text: String)
+    func reload(currentHistory: PageHistory)
+}
+
 /// プログレスデータモデル
-final class ProgressDataModel {
+final class ProgressDataModel: ProgressDataModelProtocol {
     /// アクション通知用RX
     let rx_action = PublishSubject<ProgressDataModelAction>()
 
     static let s = ProgressDataModel()
-    let center = NotificationCenter.default
 
     // プログレス
     private var progress = 0.f
@@ -46,12 +52,10 @@ final class ProgressDataModel {
     }
 
     /// reload
-    func reload() {
-        if let url = PageHistoryDataModel.s.currentHistory?.url {
-            if url != headerFieldText {
-                headerFieldText = url
-                rx_action.onNext(.updateText(text: url))
-            }
+    func reload(currentHistory: PageHistory) {
+        if currentHistory.url != headerFieldText {
+            headerFieldText = currentHistory.url
+            rx_action.onNext(.updateText(text: currentHistory.url))
         }
     }
 }

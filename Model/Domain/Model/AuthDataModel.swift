@@ -8,7 +8,14 @@
 
 import Foundation
 
-final class AuthDataModel {
+protocol AuthDataModelProtocol {
+    var realmEncryptionToken: String! { get }
+    var keychainServiceToken: String! { get }
+    var keychainIvToken: String! { get }
+    var isInputPasscode: Bool { get set }
+}
+
+final class AuthDataModel: AuthDataModelProtocol {
     static let s = AuthDataModel()
 
     /// DBトークン
@@ -18,7 +25,7 @@ final class AuthDataModel {
     /// キーチェーンIVトークン
     let keychainIvToken: String!
     /// パスコード認証済みフラグ
-    public var isInputPasscode = false
+    var isInputPasscode = false
 
     private init() {
         let repository = KeychainRepository()

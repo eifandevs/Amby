@@ -24,7 +24,16 @@ public final class FormUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<FormUseCaseAction>()
 
-    private init() {}
+    /// models
+    private var formDataModel: FormDataModelProtocol!
+
+    private init() {
+        setupProtocolImpl()
+    }
+
+    private func setupProtocolImpl() {
+        formDataModel = FormDataModel.s
+    }
 
     /// フォーム登録
     public func registerForm() {
@@ -42,11 +51,11 @@ public final class FormUseCase {
     }
 
     public func store(form: Form) {
-        FormDataModel.s.store(form: form)
+        formDataModel.store(form: form)
     }
 
     public func delete() {
-        FormDataModel.s.delete()
+        formDataModel.delete()
     }
 
     public func read(id: String) {
@@ -56,18 +65,18 @@ public final class FormUseCase {
     }
 
     public func delete(forms: [Form]) {
-        FormDataModel.s.delete(forms: forms)
+        formDataModel.delete(forms: forms)
     }
 
     public func select() -> [Form] {
-        return FormDataModel.s.select()
+        return formDataModel.select()
     }
 
     public func select(id: String) -> [Form] {
-        return FormDataModel.s.select(id: id)
+        return formDataModel.select(id: id)
     }
 
     public func select(url: String) -> [Form] {
-        return FormDataModel.s.select(url: url)
+        return formDataModel.select(url: url)
     }
 }

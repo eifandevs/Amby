@@ -21,7 +21,7 @@ enum FooterViewModelAction {
 }
 
 final class FooterViewModel {
-    struct Row {
+    struct Row: Equatable {
         var context: String
         var title: String
         var isFront: Bool
@@ -39,6 +39,10 @@ final class FooterViewModel {
             isLoading = pageHistory.isLoading
             isDragging = false
             thumbnail = image
+        }
+
+        static func == (lhs: Row, rhs: Row) -> Bool {
+            return lhs.context == rhs.context
         }
     }
 
@@ -159,6 +163,11 @@ final class FooterViewModel {
 
             rx_action.onNext(.update(indexPath: [IndexPath(row: index, section: 0)], animated: false))
         }
+    }
+
+    func swap(start: Int, end: Int) {
+        rows = rows.move(from: start, to: end) // セルの更新がすぐ動くので、もう入れ替えておく
+        TabUseCase.s.swap(start: start, end: end)
     }
 
     func startDragging() {

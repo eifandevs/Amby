@@ -25,15 +25,24 @@ public final class ProgressUseCase {
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
+    private var pageHistoryDataModel: PageHistoryDataModelProtocol!
+    private var progressDataModel: ProgressDataModelProtocol!
+
     private init() {
+        setupProtocolImpl()
         setupRx()
+    }
+
+    private func setupProtocolImpl() {
+        pageHistoryDataModel = PageHistoryDataModel.s
+        progressDataModel = ProgressDataModel.s
     }
 
     private func setupRx() {
         // プログレス監視
         Observable
             .merge([
-                ProgressDataModel.s.rx_action
+                progressDataModel.rx_action
                     .flatMap { action -> Observable<CGFloat> in
                         if case let .updateProgress(progress) = action {
                             return Observable.just(progress)
@@ -53,7 +62,7 @@ public final class ProgressUseCase {
             .disposed(by: disposeBag)
 
         // テキストフィールド監視
-        ProgressDataModel.s.rx_action
+        progressDataModel.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self else { return }
                 if let action = action.element, case let .updateText(text) = action {
@@ -64,16 +73,18 @@ public final class ProgressUseCase {
     }
 
     public func updateProgress(progress: CGFloat) {
-        ProgressDataModel.s.updateProgress(progress: progress)
+        progressDataModel.updateProgress(progress: progress)
     }
 
     /// reload ProgressDataModel
     public func reloadProgress() {
-        ProgressDataModel.s.reload()
+        if let currentHistory = pageHistoryDataModel.currentHistory {
+            progressDataModel.reload(currentHistory: currentHistory)
+        }
     }
 
     /// update text in ProgressDataModel
     public func updateText(text: String) {
-        ProgressDataModel.s.updateText(text: text)
+        progressDataModel.updateText(text: text)
     }
 }

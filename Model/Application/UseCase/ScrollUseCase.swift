@@ -24,14 +24,23 @@ public final class ScrollUseCase {
 
     public var autoScrollInterval: CGFloat {
         get {
-            return CGFloat(SettingDataModel.s.autoScrollInterval)
+            return CGFloat(settingDataModel.autoScrollInterval)
         }
         set(value) {
-            SettingDataModel.s.autoScrollInterval = Float(value)
+            settingDataModel.autoScrollInterval = Float(value)
         }
     }
 
-    private init() {}
+    /// models
+    private var settingDataModel: SettingDataModelProtocol!
+
+    private init() {
+        setupProtocolImpl()
+    }
+
+    private func setupProtocolImpl() {
+        settingDataModel = SettingDataModel.s
+    }
 
     /// スクロールアップ
     public func scrollUp() {

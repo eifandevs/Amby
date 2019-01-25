@@ -15,6 +15,7 @@ enum PageHistoryDataModelAction {
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case swap(start: Int, end: Int)
     case reload
     case load(url: String)
     case startLoading(context: String)
@@ -38,7 +39,42 @@ extension PageHistoryDataModelError: ModelError {
     }
 }
 
-final class PageHistoryDataModel {
+protocol PageHistoryDataModelProtocol {
+    var rx_action: PublishSubject<PageHistoryDataModelAction> { get }
+    var rx_error: PublishSubject<PageHistoryDataModelError> { get }
+    var currentContext: String { get set }
+    var previousContext: String? { get set }
+    var histories: [PageHistory] { get }
+    var currentHistory: PageHistory? { get }
+    var currentLocation: Int? { get }
+    func initialize()
+    func getHistory(context: String) -> PageHistory?
+    func getHistory(index: Int) -> PageHistory?
+    func getIsLoading(context: String) -> Bool?
+    func startLoading(context: String)
+    func endLoading(context: String)
+    func endRendering(context: String)
+    func isPastViewing(context: String) -> Bool?
+    func getMostForwardUrl(context: String) -> String?
+    func getBackUrl(context: String) -> String?
+    func getForwardUrl(context: String) -> String?
+    func swap(start: Int, end: Int)
+    func updateUrl(context: String, url: String, operation: PageHistory.Operation) -> Bool
+    func updateTitle(context: String, title: String)
+    func insert(url: String?, title: String?)
+    func append(url: String?, title: String?)
+    func copy()
+    func reload()
+    func getIndex(context: String) -> Int?
+    func remove(context: String)
+    func change(context: String)
+    func goBack()
+    func goNext()
+    func store()
+    func delete()
+}
+
+final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     /// アクション通知用RX
     let rx_action = PublishSubject<PageHistoryDataModelAction>()
     /// エラー通知用RX
@@ -46,19 +82,21 @@ final class PageHistoryDataModel {
 
     static let s = PageHistoryDataModel()
 
+    private let repository = UserDefaultRepository()
+
     /// 通知センター
     private let center = NotificationCenter.default
 
     /// 現在表示しているwebviewのコンテキスト
     var currentContext: String {
         get {
-            return SettingDataModel.s.currentContext
+            return repository.get(key: .currentContext)
         }
         set(value) {
             let context = currentContext
             log.debug("current context changed. \(currentContext) -> \(value)")
             previousContext = context
-            SettingDataModel.s.currentContext = value
+            repository.set(key: .currentContext, value: value)
         }
     }
 
@@ -92,7 +130,7 @@ final class PageHistoryDataModel {
     }
 
     /// ページヒストリー保存件数
-    private let pageHistorySaveCount = SettingDataModel.s.pageHistorySaveCount
+    private let pageHistorySaveCount = UserDefaultRepository().get(key: .pageHistorySaveCount)
 
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
@@ -200,8 +238,14 @@ final class PageHistoryDataModel {
         return nil
     }
 
+    /// タブの入れ替え
+    func swap(start: Int, end: Int) {
+        histories = histories.move(from: start, to: end)
+        rx_action.onNext(.swap(start: start, end: end))
+    }
+
     /// update url with context
-    func updateUrl(context: String, url: String, operation: PageHistory.Operation) {
+    func updateUrl(context: String, url: String, operation: PageHistory.Operation) -> Bool {
         var isChanged = false
 
         /// 通常の遷移の場合（ヒストリバックやフォワードではない）
@@ -254,8 +298,9 @@ final class PageHistoryDataModel {
 
         // if change front context, reload header view
         if isChanged && context == currentContext {
-            ProgressDataModel.s.updateText(text: url)
-            FavoriteDataModel.s.reload()
+            return true
+        } else {
+            return false
         }
     }
 
