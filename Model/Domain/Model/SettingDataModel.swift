@@ -8,9 +8,23 @@
 
 import Foundation
 
-final class SettingDataModel {
+protocol SettingDataModelProtocol {
+    var currentContext: String { get set }
+    var rootPasscode: String { get set }
+    var lastReportDate: Date { get set }
+    var autoScrollInterval: Float { get set }
+    var menuOrder: [UserOperation] { get set }
+    var newWindowConfirm: Bool { get set }
+    var pageHistorySaveCount: Int { get }
+    var commonHistorySaveCount: Int { get }
+    var searchHistorySaveCount: Int { get }
+    func initialize()
+    func initializeMenuOrder()
+}
+
+final class SettingDataModel: SettingDataModelProtocol {
     static let s = SettingDataModel()
-    let repository = UserDefaultRepository()
+    private let repository = UserDefaultRepository()
 
     /// カレントコンテキスト
     var currentContext: String {

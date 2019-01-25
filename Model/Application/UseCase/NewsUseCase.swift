@@ -21,15 +21,23 @@ public final class NewsUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<NewsUseCaseAction>()
 
+    /// models
+    private var articleDataModel: ArticleDataModelProtocol!
+
     /// Observable自動解放
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     private init() {
+        setupProtocolImpl()
         setupRx()
     }
 
+    private func setupProtocolImpl() {
+        articleDataModel = ArticleDataModel.s
+    }
+
     private func setupRx() {
-        ArticleDataModel.s.rx_action
+        articleDataModel.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self else { return }
                 if let action = action.element, case let .update(articles) = action {
@@ -40,6 +48,6 @@ public final class NewsUseCase {
     }
 
     public func get() {
-        ArticleDataModel.s.get()
+        articleDataModel.get()
     }
 }

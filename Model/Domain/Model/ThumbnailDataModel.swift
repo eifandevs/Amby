@@ -30,7 +30,17 @@ extension ThumbnailDataModelError: ModelError {
     }
 }
 
-final class ThumbnailDataModel {
+protocol ThumbnailDataModelProtocol {
+    var rx_error: PublishSubject<ThumbnailDataModelError> { get }
+    func getThumbnail(context: String) -> UIImage?
+    func getCapture(context: String) -> UIImage?
+    func delete(context: String)
+    func delete()
+    func create(context: String)
+    func write(context: String, data: Data)
+}
+
+final class ThumbnailDataModel: ThumbnailDataModelProtocol {
     static let s = ThumbnailDataModel()
 
     /// local storage repository

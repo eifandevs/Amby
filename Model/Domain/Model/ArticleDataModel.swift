@@ -28,7 +28,14 @@ extension ArticleDataModelError: ModelError {
     }
 }
 
-final class ArticleDataModel {
+protocol ArticleDataModelProtocol {
+    var rx_action: PublishSubject<ArticleDataModelAction> { get }
+    var rx_error: PublishSubject<ArticleDataModelError> { get }
+    var articles: [Article] { get }
+    func get()
+}
+
+final class ArticleDataModel: ArticleDataModelProtocol {
     /// アクション通知用RX
     let rx_action = PublishSubject<ArticleDataModelAction>()
     /// エラー通知用RX

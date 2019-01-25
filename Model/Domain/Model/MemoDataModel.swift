@@ -39,7 +39,19 @@ extension MemoDataModelError: ModelError {
     }
 }
 
-final class MemoDataModel {
+protocol MemoDataModelProtocol {
+    var rx_action: PublishSubject<MemoDataModelAction> { get }
+    var rx_error: PublishSubject<MemoDataModelError> { get }
+    func insert(memo: Memo)
+    func select() -> [Memo]
+    func select(id: String) -> Memo?
+    func update(memo: Memo, text: String)
+    func invertLock(memo: Memo)
+    func delete()
+    func delete(memo: Memo)
+}
+
+final class MemoDataModel: MemoDataModelProtocol {
     static let s = MemoDataModel()
 
     /// アクション通知用RX
@@ -48,7 +60,7 @@ final class MemoDataModel {
     let rx_error = PublishSubject<MemoDataModelError>()
 
     /// db repository
-    let repository = DBRepository()
+    private let repository = DBRepository()
 
     private init() {}
 

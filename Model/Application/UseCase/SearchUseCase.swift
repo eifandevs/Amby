@@ -23,7 +23,17 @@ public final class SearchUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<SearchUseCaseAction>()
 
-    private init() {}
+    /// models
+    private var searchHistoryDataModel: SearchHistoryDataModelProtocol!
+
+    private init() {
+        setupProtocolImpl()
+    }
+
+    /// プロトコル実装
+    private func setupProtocolImpl() {
+        searchHistoryDataModel = SearchHistoryDataModel.s
+    }
 
     /// ロードリクエスト
     public func load(text: String) {
@@ -33,7 +43,7 @@ public final class SearchUseCase {
             } else {
                 // 検索ワードによる検索
                 // 閲覧履歴を保存する
-                SearchHistoryDataModel.s.store(text: text)
+                searchHistoryDataModel.store(text: text)
 
                 let encodedText = "\(ModelConst.URL.SEARCH_PATH)\(text)"
                 return encodedText
@@ -55,17 +65,17 @@ public final class SearchUseCase {
     }
 
     public func delete() {
-        SearchHistoryDataModel.s.delete()
+        searchHistoryDataModel.delete()
     }
 
     /// 検索履歴の検索
     /// 検索ワードと検索件数を指定する
     /// 指定ワードを含むかどうか
     public func select(title: String, readNum: Int) -> [SearchHistory] {
-        return SearchHistoryDataModel.s.select(title: title, readNum: readNum)
+        return searchHistoryDataModel.select(title: title, readNum: readNum)
     }
 
     public func expireCheck() {
-        SearchHistoryDataModel.s.expireCheck()
+        searchHistoryDataModel.expireCheck()
     }
 }
