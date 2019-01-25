@@ -15,6 +15,7 @@ enum PageHistoryDataModelAction {
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
+    case swap(start: Int, end: Int)
     case reload
     case load(url: String)
     case startLoading(context: String)
@@ -198,6 +199,12 @@ final class PageHistoryDataModel {
             return history.backForwardList[history.listIndex]
         }
         return nil
+    }
+
+    /// タブの入れ替え
+    func swap(start: Int, end: Int) {
+        histories = histories.move(from: start, to: end)
+        rx_action.onNext(.swap(start: start, end: end))
     }
 
     /// update url with context
