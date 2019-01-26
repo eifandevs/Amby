@@ -133,6 +133,9 @@ extension OptionMenuTableView: UITableViewDelegate {
         let detailViewFrame = CGRect(x: frameX, y: frameY, width: width, height: height)
         // 詳細ビュー作成
         switch viewModel.getRow(indexPath: indexPath).cellType {
+        case .tabGroup:
+            rx_action.onNext(.close)
+            return
         case .trend:
             viewModel.loadTrend()
             rx_action.onNext(.close)
