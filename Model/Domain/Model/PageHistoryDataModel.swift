@@ -84,9 +84,6 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     private let repository = UserDefaultRepository()
 
-    /// 通知センター
-    private let center = NotificationCenter.default
-
     /// 現在表示しているwebviewのコンテキスト
     var currentContext: String {
         get {

@@ -120,7 +120,6 @@ class SearchMenuTableView: UIView {
             overlay.removeFromSuperview()
             self.overlay = nil
         }
-        NotificationCenter.default.removeObserver(self)
     }
 
     required init?(coder _: NSCoder) {

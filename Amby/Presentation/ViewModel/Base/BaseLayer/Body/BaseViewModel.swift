@@ -72,9 +72,6 @@ final class BaseViewModel {
         return TabUseCase.s.currentTabCount
     }
 
-    /// 通知センター
-    private let center = NotificationCenter.default
-
     /// 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
         return ScrollUseCase.s.autoScrollInterval
@@ -116,7 +113,6 @@ final class BaseViewModel {
 
     deinit {
         log.debug("deinit called.")
-        NotificationCenter.default.removeObserver(self)
     }
 
     func setupRx() {

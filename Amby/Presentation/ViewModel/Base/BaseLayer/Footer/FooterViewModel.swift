@@ -78,9 +78,6 @@ final class FooterViewModel {
         return TabUseCase.s.currentLocation
     }
 
-    /// 通知センター
-    let center = NotificationCenter.default
-
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
@@ -90,7 +87,6 @@ final class FooterViewModel {
 
     deinit {
         log.debug("deinit called.")
-        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: Private Method
