@@ -126,9 +126,6 @@ class BaseViewController: UIViewController {
 
         view.addSubview(splash!.view)
 
-        // ページ情報初期化
-        TabUseCase.s.initialize()
-
         // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
         baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: view.bounds.size))
 

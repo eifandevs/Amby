@@ -47,7 +47,6 @@ protocol PageHistoryDataModelProtocol {
     var histories: [PageHistory] { get }
     var currentHistory: PageHistory? { get }
     var currentLocation: Int? { get }
-    func initialize()
     func getHistory(context: String) -> PageHistory?
     func getHistory(index: Int) -> PageHistory?
     func getIsLoading(context: String) -> Bool?
@@ -144,10 +143,12 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
 
-    private init() {}
+    private init() {
+        initialize()
+    }
 
     /// 初期化
-    func initialize() {
+    private func initialize() {
         // pageHistory読み込み
         let result = localStorageRepository.getData(.pageHistory)
         if case let .success(data) = result {

@@ -244,8 +244,4 @@ public final class TabUseCase {
             self.pageHistoryDataModel.store()
         }
     }
-
-    public func initialize() {
-        pageHistoryDataModel.initialize()
-    }
 }
