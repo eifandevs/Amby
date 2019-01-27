@@ -81,7 +81,7 @@ class SearchMenuTableView: UIView {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 log.eventIn(chain: "SearchMenuTableViewModel.rx_action. action: \(action)")
-                
+
                 switch action {
                 case .update:
                     self.tableView.reloadData()

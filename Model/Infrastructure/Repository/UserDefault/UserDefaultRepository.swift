@@ -10,6 +10,7 @@ import Foundation
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
+    static let currentGroup = DefaultsKey<Int>(ModelConst.KEY.CURRENT_GROUP, defaultValue: ModelConst.UD.CURRENT_GROUP)
     static let currentContext = DefaultsKey<String>(ModelConst.KEY.CURRENT_CONTEXT, defaultValue: ModelConst.UD.CURRENT_CONTEXT)
     static let rootPasscode = DefaultsKey<Data>(ModelConst.KEY.ROOT_PASSCODE, defaultValue: ModelConst.UD.ROOT_PASSCODE)
     static let lastReportDate = DefaultsKey<Date>(ModelConst.KEY.LAST_REPORT_DATE, defaultValue: ModelConst.UD.LAST_REPORT_DATE)
