@@ -84,14 +84,10 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     private let repository = UserDefaultRepository()
 
     /// 現在表示しているタブグループ
-    var currentGroup: Int {
-        get {
-            return repository.get(key: .currentGroup)
-        }
-        set(value) {
-            let group = currentGroup
-            log.debug("current group changed. \(group) -> \(value)")
-            repository.set(key: .currentGroup, value: value)
+    var currentGroup: Int = UserDefaultRepository().get(key: .currentGroup) {
+        didSet {
+            log.debug("current group changed. current: \(currentGroup)")
+            repository.set(key: .currentGroup, value: currentGroup)
         }
     }
 
