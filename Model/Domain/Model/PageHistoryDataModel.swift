@@ -94,13 +94,13 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     /// 現在表示しているwebviewのコンテキスト
     var currentContext: String {
         get {
-            return repository.get(key: .currentContext)
+            return SettingDataModel.s.currentContext
         }
         set(value) {
             let context = currentContext
             log.debug("current context changed. \(currentContext) -> \(value)")
             previousContext = context
-            repository.set(key: .currentContext, value: value)
+            SettingDataModel.s.currentContext = value
         }
     }
 
