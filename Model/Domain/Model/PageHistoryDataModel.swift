@@ -17,6 +17,7 @@ enum PageHistoryDataModelAction {
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
     case reload
+    case rebuild
     case load(url: String)
     case startLoading(context: String)
     case endLoading(context: String)
@@ -64,6 +65,7 @@ protocol PageHistoryDataModelProtocol {
     func append(url: String?, title: String?)
     func copy()
     func reload()
+    func rebuild()
     func getIndex(context: String) -> Int?
     func remove(context: String)
     func change(context: String)
@@ -107,7 +109,15 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     var previousContext: String?
 
     /// webViewそれぞれの履歴とカレントページインデックス
-    public private(set) var histories = [PageHistory]()
+    private var historyData: [[PageHistory]] = [[]]
+    public private(set) var histories: [PageHistory] {
+        get {
+            return historyData[currentGroup]
+        }
+        set(value) {
+            historyData[currentGroup] = value
+        }
+    }
 
     /// 現在のページ情報
     var currentHistory: PageHistory? {
@@ -364,6 +374,11 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     /// ページリロード
     func reload() {
         rx_action.onNext(.reload)
+    }
+
+    /// ヒストリー再構築
+    func rebuild() {
+        rx_action.onNext(.rebuild)
     }
 
     /// ぺージインデックス取得

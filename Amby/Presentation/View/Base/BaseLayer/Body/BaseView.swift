@@ -166,6 +166,7 @@ class BaseView: UIView {
                 switch action {
                 case let .insert(at): self.insert(at: at)
                 case .reload: self.reload()
+                case .rebuild: self.rebuild()
                 case .append: self.append()
                 case .change: self.change()
                 case let .swap(start, end): self.swap(start: start, end: end)
@@ -371,6 +372,10 @@ class BaseView: UIView {
                 _ = front.load(urlStr: url)
             }
         }
+    }
+
+    private func rebuild() {
+        // 再構築
     }
 
     private func change() {
