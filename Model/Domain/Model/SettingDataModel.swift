@@ -27,12 +27,9 @@ final class SettingDataModel: SettingDataModelProtocol {
     private let repository = UserDefaultRepository()
 
     /// カレントコンテキスト
-    var currentContext: String {
-        get {
-            return repository.get(key: .currentContext)
-        }
-        set(value) {
-            repository.set(key: .currentContext, value: value)
+    var currentContext: String = UserDefaultRepository().get(key: .currentContext) {
+        didSet {
+            repository.set(key: .currentContext, value: currentContext)
         }
     }
 
@@ -51,12 +48,9 @@ final class SettingDataModel: SettingDataModelProtocol {
     }
 
     /// 最終お問い合わせ日
-    var lastReportDate: Date {
-        get {
-            return repository.get(key: .lastReportDate)
-        }
-        set(value) {
-            repository.set(key: .lastReportDate, value: value)
+    var lastReportDate: Date = UserDefaultRepository().get(key: .lastReportDate) {
+        didSet {
+            repository.set(key: .lastReportDate, value: lastReportDate)
         }
     }
 
@@ -71,22 +65,16 @@ final class SettingDataModel: SettingDataModelProtocol {
     }
 
     /// メニュー順序
-    var menuOrder: [UserOperation] {
-        get {
-            return repository.get(key: .menuOrder)
-        }
-        set(value) {
-            repository.set(key: .menuOrder, value: value)
+    var menuOrder: [UserOperation] = UserDefaultRepository().get(key: .menuOrder) {
+        didSet {
+            repository.set(key: .menuOrder, value: menuOrder)
         }
     }
 
     /// 新規ウィンドウ許諾フラグ
-    var newWindowConfirm: Bool {
-        get {
-            return repository.get(key: .newWindowConfirm)
-        }
-        set(value) {
-            repository.set(key: .newWindowConfirm, value: value)
+    var newWindowConfirm: Bool = UserDefaultRepository().get(key: .newWindowConfirm) {
+        didSet {
+            repository.set(key: .newWindowConfirm, value: newWindowConfirm)
         }
     }
 
