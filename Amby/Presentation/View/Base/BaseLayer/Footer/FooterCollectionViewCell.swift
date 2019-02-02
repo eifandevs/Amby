@@ -120,7 +120,6 @@ class FooterCollectionViewCell: UICollectionViewCell {
         // ライン初期化
         underLine.frame = CGRect(x: -5, y: (frame.size.width / 3) - 1, width: width + 18, height: 1)
         underLine.backgroundColor = UIColor.ultraViolet
-        underLine.alpha = 0
         thumbnailInfo.addSubview(underLine)
 
         // 回転
@@ -131,28 +130,12 @@ class FooterCollectionViewCell: UICollectionViewCell {
     // タイトル表示
     private func displayTitle() {
         if row.title.isEmpty { return }
-
-        // アンダーラインを横幅を保持しておく
-        let width = underLine.frame.size.width
-        underLine.frame.size.width = 0
-
-        underLine.alpha = 1
-
-        UIView.animate(withDuration: 0.2, animations: {
-            self.thumbnailInfo.alpha = 1
-        })
-
-        UIView.animate(withDuration: 0.35, delay: 0, options: .curveEaseOut, animations: {
-            self.underLine.frame.size.width = width
-        }, completion: nil)
+        thumbnailInfo.alpha = 1
     }
 
     // タイトル非表示
     private func undisplayTitle() {
         if row.title.isEmpty { return }
-
-        UIView.animate(withDuration: 0.2, animations: {
-            self.thumbnailInfo.alpha = 0
-        })
+        thumbnailInfo.alpha = 0
     }
 }

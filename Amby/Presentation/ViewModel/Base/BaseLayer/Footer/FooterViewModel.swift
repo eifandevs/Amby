@@ -113,6 +113,9 @@ final class FooterViewModel {
 
     private func rebuild() {
         // 再構築
+        rows.removeAll()
+        rows = TabUseCase.s.pageHistories.map { Row(pageHistory: $0) }
+        rx_action.onNext(.update(indexPath: nil, animated: false))
     }
 
     private func delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex _: Int) {

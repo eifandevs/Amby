@@ -168,6 +168,12 @@ public final class TabUseCase {
         store()
     }
 
+    /// タブ情報再構築
+    public func rebuild() {
+        pageHistoryDataModel.rebuild()
+        store()
+    }
+
     /// ページインデックス取得
     public func getIndex(context: String) -> Int? {
         return pageHistoryDataModel.getIndex(context: context)
