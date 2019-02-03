@@ -134,9 +134,9 @@
 		A15C546B214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A15C5469214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib */; };
 		A15C5484214D935E001E8AB5 /* com.mono0926.LicensePlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = A15C546D214D935E001E8AB5 /* com.mono0926.LicensePlist.plist */; };
 		A15C5499214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt in Resources */ = {isa = PBXBuildFile; fileRef = A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */; };
-		A16A6E952205E85A00FFCB5B /* PageGroupItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16A6E922205E85A00FFCB5B /* PageGroupItem.swift */; };
 		A16A6E962205E85A00FFCB5B /* PageHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16A6E932205E85A00FFCB5B /* PageHistory.swift */; };
 		A16A6E972205E85A00FFCB5B /* PageGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16A6E942205E85A00FFCB5B /* PageGroup.swift */; };
+		A16A6E9922070D5300FFCB5B /* PageGroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16A6E9822070D5300FFCB5B /* PageGroupList.swift */; };
 		A16AB90821692DB60036863C /* ReportViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */; };
 		A16B12D821FA09B600CB0C45 /* Array+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16B12D721FA09B600CB0C45 /* Array+Extend.swift */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
@@ -557,9 +557,9 @@
 		A15C5469214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuAppTableViewFooterCell.xib; sourceTree = "<group>"; };
 		A15C546D214D935E001E8AB5 /* com.mono0926.LicensePlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.mono0926.LicensePlist.plist; sourceTree = "<group>"; };
 		A15C5483214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = com.mono0926.LicensePlist.latest_result.txt; sourceTree = "<group>"; };
-		A16A6E922205E85A00FFCB5B /* PageGroupItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageGroupItem.swift; sourceTree = "<group>"; };
 		A16A6E932205E85A00FFCB5B /* PageHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageHistory.swift; sourceTree = "<group>"; };
 		A16A6E942205E85A00FFCB5B /* PageGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageGroup.swift; sourceTree = "<group>"; };
+		A16A6E9822070D5300FFCB5B /* PageGroupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageGroupList.swift; sourceTree = "<group>"; };
 		A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A16B12D721FA09B600CB0C45 /* Array+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extend.swift"; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
@@ -1465,9 +1465,9 @@
 		A16A6E912205E85A00FFCB5B /* Tab */ = {
 			isa = PBXGroup;
 			children = (
-				A16A6E922205E85A00FFCB5B /* PageGroupItem.swift */,
 				A16A6E932205E85A00FFCB5B /* PageHistory.swift */,
 				A16A6E942205E85A00FFCB5B /* PageGroup.swift */,
+				A16A6E9822070D5300FFCB5B /* PageGroupList.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -2811,7 +2811,6 @@
 				A195062D2143F8840091DF23 /* DBRepository.swift in Sources */,
 				A1950673214406980091DF23 /* NSObject+Extend.swift in Sources */,
 				A195064A2143F8B80091DF23 /* TabUseCase.swift in Sources */,
-				A16A6E952205E85A00FFCB5B /* PageGroupItem.swift in Sources */,
 				A195065A2143FBA00091DF23 /* Fload+Extend.swift in Sources */,
 				A19506292142D9A90091DF23 /* Favorite.swift in Sources */,
 				A19352A32141569C002A0865 /* ApiRepository.swift in Sources */,
@@ -2824,6 +2823,7 @@
 				A19506472143F8B80091DF23 /* SearchUseCase.swift in Sources */,
 				A195065C2143FBD40091DF23 /* Int+Extend.swift in Sources */,
 				A1A3DE8321387D7F00F87009 /* ModelLogger.swift in Sources */,
+				A16A6E9922070D5300FFCB5B /* PageGroupList.swift in Sources */,
 				A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */,
 				A15C53F4214D4CDC001E8AB5 /* OpenSourceUseCase.swift in Sources */,
 				A195067721444E150091DF23 /* NewsUseCase.swift in Sources */,
