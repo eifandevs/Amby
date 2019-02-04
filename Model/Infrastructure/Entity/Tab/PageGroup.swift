@@ -18,10 +18,11 @@ public class PageGroup: NSObject, NSCoding {
 
     override init() {
         super.init()
+        setup()
     }
 
-    public init(isPrivate: Bool = false) {
-        self.isPrivate = isPrivate
+    private func setup() {
+        isPrivate = false
         let pageHistory = PageHistory()
         histories = [pageHistory]
         currentContext = pageHistory.context
@@ -34,7 +35,7 @@ public class PageGroup: NSObject, NSCoding {
     }
 
     public required convenience init?(coder decoder: NSCoder) {
-        let isPrivate = decoder.decodeObject(forKey: "isPrivate") as! Bool
+        let isPrivate = decoder.decodeBool(forKey: "isPrivate") as! Bool
         let histories = decoder.decodeObject(forKey: "histories") as! [PageHistory]
         let currentContext = decoder.decodeObject(forKey: "currentContext") as! String
         self.init(isPrivate: isPrivate, currentContext: currentContext, histories: histories)

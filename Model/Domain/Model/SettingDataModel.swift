@@ -9,7 +9,6 @@
 import Foundation
 
 protocol SettingDataModelProtocol {
-    var currentContext: String { get set }
     var rootPasscode: String { get set }
     var lastReportDate: Date { get set }
     var autoScrollInterval: Float { get set }
@@ -25,13 +24,6 @@ protocol SettingDataModelProtocol {
 final class SettingDataModel: SettingDataModelProtocol {
     static let s = SettingDataModel()
     private let repository = UserDefaultRepository()
-
-    /// カレントコンテキスト
-    var currentContext: String = UserDefaultRepository().get(key: .currentContext) {
-        didSet {
-            repository.set(key: .currentContext, value: currentContext)
-        }
-    }
 
     /// パスコード
     var rootPasscode: String {

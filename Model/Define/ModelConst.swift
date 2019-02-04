@@ -32,8 +32,6 @@ struct ModelConst {
         let GITHUB_ACCESS_TOKEN = ResourceUtil().get(key: "GITHUB_ACCESS_TOKEN")
         let OWNER = "eifandevs"
         let REPOSITORY = "IssueTest"
-        let CURRENT_GROUP = "currentGroup"
-        let CURRENT_CONTEXT = "currentContext"
         let ROOT_PASSCODE = "rootPasscode"
         let LAST_REPORT_DATE = "lastReportDate"
         let AUTO_SCROLL_INTERVAL = "autoScrollInterval"
@@ -56,8 +54,6 @@ struct ModelConst {
 
     static let UD = UD_VALUE()
     struct UD_VALUE {
-        let CURRENT_GROUP = 0
-        let CURRENT_CONTEXT = ""
         let ROOT_PASSCODE = Data()
         let LAST_REPORT_DATE = Date.distantPast
         let AUTO_SCROLL_INTERVAL = 0.06
