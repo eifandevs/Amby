@@ -56,7 +56,7 @@ class FooterView: UIView, ShadowView {
         // タイトル用に、スクロールビューの領域外に配置できるようにする
         collectionView.clipsToBounds = false
 
-        // ロングプレスで削除
+        // ロングプレスで移動
         let longPressRecognizer = UILongPressGestureRecognizer()
 
         longPressRecognizer.rx.event

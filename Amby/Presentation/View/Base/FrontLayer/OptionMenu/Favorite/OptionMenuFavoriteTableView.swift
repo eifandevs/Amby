@@ -57,32 +57,6 @@ class OptionMenuFavoriteTableView: UIView, ShadowView, OptionMenuView {
             make.top.equalTo(snp.top).offset(0)
             make.bottom.equalTo(snp.bottom).offset(0)
         }
-
-        // ロングプレスで削除
-        let longPressRecognizer = UILongPressGestureRecognizer()
-
-        longPressRecognizer.rx.event
-            .subscribe { [weak self] sender in
-                guard let `self` = self else { return }
-                if let sender = sender.element {
-                    if sender.state == .began {
-                        let point: CGPoint = sender.location(in: self.tableView)
-                        let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
-                        if let indexPath = indexPath {
-                            let row = self.viewModel.getRow(indexPath: indexPath)
-
-                            self.tableView.beginUpdates()
-                            self.viewModel.removeRow(indexPath: indexPath, row: row)
-                            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-
-                            self.tableView.endUpdates()
-                        }
-                    }
-                }
-            }
-            .disposed(by: rx.disposeBag)
-
-        addGestureRecognizer(longPressRecognizer)
     }
 }
 
@@ -113,6 +87,16 @@ extension OptionMenuFavoriteTableView: UITableViewDataSource {
 // MARK: - TableViewDelegate
 
 extension OptionMenuFavoriteTableView: UITableViewDelegate {
+    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (_, _) -> Void in
+            self.viewModel.removeRow(indexPath: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        deleteButton.backgroundColor = UIColor.red
+
+        return [deleteButton]
+    }
+
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セル情報取得
         let row = viewModel.getRow(indexPath: indexPath)

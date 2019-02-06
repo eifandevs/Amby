@@ -26,7 +26,8 @@ final class OptionMenuFavoriteTableViewModel {
 
     /// セル削除
     /// セルの有無を返却する
-    func removeRow(indexPath: IndexPath, row: Row) {
+    func removeRow(indexPath: IndexPath) {
+        let row = getRow(indexPath: indexPath)
         rows.remove(at: indexPath.row)
         // モデルから削除
         FavoriteUseCase.s.delete(favorites: [row.data])

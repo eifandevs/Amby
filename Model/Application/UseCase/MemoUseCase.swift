@@ -25,7 +25,9 @@ public final class MemoUseCase {
     /// models
     private var memoDataModel: MemoDataModelProtocol!
 
-    private init() {}
+    private init() {
+        setupProtocolImpl()
+    }
 
     private func setupProtocolImpl() {
         memoDataModel = MemoDataModel.s

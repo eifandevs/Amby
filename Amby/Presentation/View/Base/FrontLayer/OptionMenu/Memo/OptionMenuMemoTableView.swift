@@ -78,30 +78,6 @@ class OptionMenuMemoTableView: UIView, ShadowView, OptionMenuView {
             })
             .disposed(by: rx.disposeBag)
 
-        // ロングプレスで削除
-        let longPressRecognizer = UILongPressGestureRecognizer()
-
-        longPressRecognizer.rx.event
-            .subscribe { [weak self] sender in
-                guard let `self` = self else { return }
-                if let sender = sender.element {
-                    if sender.state == .began {
-                        let point: CGPoint = sender.location(in: self.tableView)
-                        let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
-                        if let indexPath = indexPath {
-                            self.tableView.beginUpdates()
-                            self.viewModel.removeRow(indexPath: indexPath)
-                            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-
-                            self.tableView.endUpdates()
-                        }
-                    }
-                }
-            }
-            .disposed(by: rx.disposeBag)
-
-        addGestureRecognizer(longPressRecognizer)
-
         // リロード監視
         viewModel.rx_action
             .subscribe { [weak self] action in
@@ -151,6 +127,16 @@ extension OptionMenuMemoTableView: OptionMenuMemoTableViewCellDelegate {
 // MARK: - TableViewDelegate
 
 extension OptionMenuMemoTableView: UITableViewDelegate {
+    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (_, _) -> Void in
+            self.viewModel.removeRow(indexPath: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        deleteButton.backgroundColor = UIColor.red
+
+        return [deleteButton]
+    }
+
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セル情報取得
         let row = viewModel.getRow(indexPath: indexPath)
