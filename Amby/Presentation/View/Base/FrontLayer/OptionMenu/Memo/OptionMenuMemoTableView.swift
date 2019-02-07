@@ -102,8 +102,6 @@ extension OptionMenuMemoTableView: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuMemoTableViewCell {
             let row = viewModel.getRow(indexPath: indexPath)
             cell.setRow(row: row)
-            // 重複呼び出しを考慮し、Rxではなくデリゲートパターン
-            cell.delegate = self
 
             return cell
         }
@@ -113,14 +111,6 @@ extension OptionMenuMemoTableView: UITableViewDataSource {
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return viewModel.cellCount
-    }
-}
-
-// MARK: - OptionMenuMemoTableViewCellDelegate
-
-extension OptionMenuMemoTableView: OptionMenuMemoTableViewCellDelegate {
-    func optionMenuMemoTableViewCellDidInvertLock(row: OptionMenuMemoTableViewModel.Row) {
-        viewModel.invertLock(memo: row.data)
     }
 }
 
@@ -134,7 +124,14 @@ extension OptionMenuMemoTableView: UITableViewDelegate {
         }
         deleteButton.backgroundColor = UIColor.red
 
-        return [deleteButton]
+        let row = viewModel.getRow(indexPath: indexPath)
+        let title = row.data.isLocked ? "解除" : "ロック"
+        let lockButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: title) { (_, _) -> Void in
+            self.viewModel.invertLock(memo: row.data)
+        }
+        lockButton.backgroundColor = UIColor.purple
+
+        return [deleteButton, lockButton]
     }
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
