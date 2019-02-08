@@ -1472,6 +1472,15 @@
 			path = Tab;
 			sourceTree = "<group>";
 		};
+		A16A6E9A220DC9AA00FFCB5B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				A19352992141569B002A0865 /* ArticleResponse.swift */,
+				A193529A2141569B002A0865 /* SuggestResponse.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		A16AB90621692D8D0036863C /* Report */ = {
 			isa = PBXGroup;
 			children = (
@@ -1638,20 +1647,10 @@
 		A19352972141569B002A0865 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				A19352982141569B002A0865 /* Response */,
 				A193529B2141569B002A0865 /* Target */,
 				A193529E2141569B002A0865 /* ApiRepository.swift */,
 			);
 			path = API;
-			sourceTree = "<group>";
-		};
-		A19352982141569B002A0865 /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				A19352992141569B002A0865 /* ArticleResponse.swift */,
-				A193529A2141569B002A0865 /* SuggestResponse.swift */,
-			);
-			path = Response;
 			sourceTree = "<group>";
 		};
 		A193529B2141569B002A0865 /* Target */ = {
@@ -1750,6 +1749,7 @@
 		A1A3DE8D213AEC9400F87009 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				A16A6E9A220DC9AA00FFCB5B /* API */,
 				A16A6E912205E85A00FFCB5B /* Tab */,
 				A112E8EE212CD7D100320048 /* SearchHistory.swift */,
 				A112E8EF212CD7D100320048 /* CommonHistory.swift */,
