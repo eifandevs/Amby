@@ -1,4 +1,0 @@
-framework module Hydra {
-  header "Hydra-Swift.h"
-  requires objc
-}

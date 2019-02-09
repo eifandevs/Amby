@@ -36,8 +36,6 @@ abstract_target 'All' do
     use_frameworks!
 #    inhibit_all_warnings!
 
-    pod 'Realm', '~> 2.4'
-    pod 'RealmSwift', '~> 2.4'
     pod 'RxSwift', '~> 4.0'
     pod 'RxCocoa', '~> 4.0'
     pod 'NSObject+Rx', '~> 4.2'
@@ -53,8 +51,13 @@ abstract_target 'All' do
     use_frameworks!
 #    inhibit_all_warnings!
   
-      target 'LoggerTests' do
-        inherit! :search_paths
-      end
+    target 'LoggerTests' do
+      inherit! :search_paths
     end
+  end
+
+  target 'Entity' do
+    use_frameworks!
+#    inhibit_all_warnings!
+  end
 end

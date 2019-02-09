@@ -6,6 +6,7 @@
 //  Copyright © 2018年 eifaniori. All rights reserved.
 //
 
+import Entity
 import Foundation
 import Moya
 import RxCocoa
