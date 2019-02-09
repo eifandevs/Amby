@@ -71,6 +71,7 @@ struct AppConst {
     // MARK: - メニュー画面
 
     struct OPTION_MENU {
+        static let TAB_GROUP = "タブグループ"
         static let TREND = "トレンド"
         static let HISTORY = "閲覧履歴"
         static let MENU = "メニュー並び替え"

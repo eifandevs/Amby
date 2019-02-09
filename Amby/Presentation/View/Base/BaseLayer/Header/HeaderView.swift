@@ -41,15 +41,6 @@ class HeaderView: UIView, ShadowView {
         return AppConst.DEVICE.STATUS_BAR_HEIGHT + ((frame.size.height - AppConst.DEVICE.STATUS_BAR_HEIGHT - (AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT)) / 2) - (AppConst.BASE_LAYER.HEADER_PROGRESS_MARGIN)
     }
 
-    var fieldAlpha: CGFloat {
-        get {
-            return headerField.alpha
-        }
-        set {
-            headerField.alpha = newValue
-        }
-    }
-
     override init(frame: CGRect) {
         // ヘッダーフィールド
         let headerFieldHeight = (frame.size.height - AppConst.DEVICE.STATUS_BAR_HEIGHT - (AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT)) / 2

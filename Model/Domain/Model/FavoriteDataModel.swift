@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import Entity
 import Foundation
 import RxCocoa
 import RxSwift
@@ -56,8 +57,7 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
     let rx_error = PublishSubject<FavoriteDataModelError>()
 
     static let s = FavoriteDataModel()
-    /// 通知センター
-    private let center = NotificationCenter.default
+
     /// DBリポジトリ
     private let repository = DBRepository()
 

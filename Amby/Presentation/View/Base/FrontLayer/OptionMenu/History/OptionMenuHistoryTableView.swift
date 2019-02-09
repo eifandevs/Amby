@@ -68,37 +68,6 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
             make.bottom.equalTo(snp.bottom).offset(0)
         }
 
-        // ロングプレスで削除
-        let longPressRecognizer = UILongPressGestureRecognizer()
-
-        longPressRecognizer.rx.event
-            .subscribe { [weak self] sender in
-                guard let `self` = self else { return }
-                if let sender = sender.element {
-                    if sender.state == .began {
-                        let point: CGPoint = sender.location(in: self.tableView)
-                        let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
-                        if let indexPath = indexPath {
-                            let row = self.viewModel.getRow(indexPath: indexPath)
-
-                            self.tableView.beginUpdates()
-                            let rowExist = self.viewModel.removeRow(indexPath: indexPath, row: row)
-                            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-
-                            if !rowExist {
-                                self.viewModel.removeSection(section: indexPath.section)
-                                self.tableView.deleteSections([indexPath.section], with: .automatic)
-                            }
-
-                            self.tableView.endUpdates()
-                        }
-                    }
-                }
-            }
-            .disposed(by: rx.disposeBag)
-
-        addGestureRecognizer(longPressRecognizer)
-
         // モデルデータ取得
         viewModel.getModelData()
     }
@@ -109,6 +78,21 @@ class OptionMenuHistoryTableView: UIView, ShadowView, OptionMenuView {
 extension OptionMenuHistoryTableView: UITableViewDataSource {
     func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return viewModel.cellHeight
+    }
+
+    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (_, _) -> Void in
+            let rowExist = self.viewModel.removeRow(indexPath: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+
+            if !rowExist {
+                self.viewModel.removeSection(section: indexPath.section)
+                self.tableView.deleteSections([indexPath.section], with: .automatic)
+            }
+        }
+        deleteButton.backgroundColor = UIColor.red
+
+        return [deleteButton]
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

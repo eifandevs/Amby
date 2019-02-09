@@ -17,6 +17,7 @@ final class OptionMenuTableViewModel {
 
     /// セルタイプ
     enum CellType {
+        case tabGroup
         case trend
         case history
         case form
@@ -29,6 +30,7 @@ final class OptionMenuTableViewModel {
 
         var imageName: String {
             switch self {
+            case .tabGroup: return R.image.optionmenuHistory.name
             case .trend: return R.image.optionmenuHistory.name
             case .history: return R.image.optionmenuHistory.name
             case .form: return R.image.optionmenuForm.name
@@ -43,6 +45,7 @@ final class OptionMenuTableViewModel {
 
         var title: String {
             switch self {
+            case .tabGroup: return AppConst.OPTION_MENU.TAB_GROUP
             case .trend: return AppConst.OPTION_MENU.TREND
             case .history: return AppConst.OPTION_MENU.HISTORY
             case .form: return AppConst.OPTION_MENU.FORM
@@ -58,6 +61,7 @@ final class OptionMenuTableViewModel {
 
     // セル
     let rows = [
+        Row(cellType: .tabGroup),
         Row(cellType: .history),
         Row(cellType: .form),
         Row(cellType: .favorite),

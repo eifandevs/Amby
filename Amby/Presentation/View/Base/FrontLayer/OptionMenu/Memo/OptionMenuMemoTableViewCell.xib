@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,26 +30,16 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya7-XZ-FjA">
-                                <rect key="frame" x="44" y="0.0" width="231" height="43.5"/>
+                                <rect key="frame" x="44" y="0.0" width="261" height="43.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzz-co-8Tv">
-                                <rect key="frame" x="275" y="0.0" width="30" height="43.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="P4h-6j-2rb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="施錠"/>
-                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Ya7-XZ-FjA" firstAttribute="top" secondItem="wWo-Ff-5UR" secondAttribute="top" id="83y-sG-FLp"/>
-                            <constraint firstItem="qzz-co-8Tv" firstAttribute="top" secondItem="wWo-Ff-5UR" secondAttribute="top" id="CGB-FC-c20"/>
                             <constraint firstAttribute="bottom" secondItem="xL3-9n-7Bt" secondAttribute="bottom" id="FEb-fy-cMQ"/>
                             <constraint firstItem="xL3-9n-7Bt" firstAttribute="top" secondItem="wWo-Ff-5UR" secondAttribute="top" id="UZx-6Z-bxk"/>
-                            <constraint firstAttribute="bottom" secondItem="qzz-co-8Tv" secondAttribute="bottom" id="cIU-I5-U9N"/>
                             <constraint firstAttribute="bottom" secondItem="Ya7-XZ-FjA" secondAttribute="bottom" id="sy5-cI-9Wj"/>
                         </constraints>
                     </stackView>
@@ -63,7 +53,6 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="lockButton" destination="qzz-co-8Tv" id="04Q-5T-OQF"/>
                 <outlet property="lockImageView" destination="xL3-9n-7Bt" id="5tV-MD-K14"/>
                 <outlet property="titleLabel" destination="Ya7-XZ-FjA" id="A9f-x5-PSU"/>
             </connections>

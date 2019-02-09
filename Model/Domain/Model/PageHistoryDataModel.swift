@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import Entity
 import Foundation
 import RxCocoa
 import RxSwift
@@ -17,6 +18,7 @@ enum PageHistoryDataModelAction {
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
     case reload
+    case rebuild
     case load(url: String)
     case startLoading(context: String)
     case endLoading(context: String)
@@ -43,11 +45,9 @@ protocol PageHistoryDataModelProtocol {
     var rx_action: PublishSubject<PageHistoryDataModelAction> { get }
     var rx_error: PublishSubject<PageHistoryDataModelError> { get }
     var currentContext: String { get set }
-    var previousContext: String? { get set }
     var histories: [PageHistory] { get }
     var currentHistory: PageHistory? { get }
     var currentLocation: Int? { get }
-    func initialize()
     func getHistory(context: String) -> PageHistory?
     func getHistory(index: Int) -> PageHistory?
     func getIsLoading(context: String) -> Bool?
@@ -65,6 +65,7 @@ protocol PageHistoryDataModelProtocol {
     func append(url: String?, title: String?)
     func copy()
     func reload()
+    func rebuild()
     func getIndex(context: String) -> Int?
     func remove(context: String)
     func change(context: String)
@@ -84,26 +85,27 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     private let repository = UserDefaultRepository()
 
-    /// 通知センター
-    private let center = NotificationCenter.default
+    /// webViewそれぞれの履歴とカレントページインデックス
+    private var pageGroupList: PageGroupList!
+    public private(set) var histories: [PageHistory] {
+        get {
+            return pageGroupList.currentGroup.histories
+        }
+        set(value) {
+            pageGroupList.currentGroup.histories = value
+        }
+    }
 
     /// 現在表示しているwebviewのコンテキスト
     var currentContext: String {
         get {
-            return repository.get(key: .currentContext)
+            return pageGroupList.currentGroup.currentContext
         }
         set(value) {
-            let context = currentContext
             log.debug("current context changed. \(currentContext) -> \(value)")
-            previousContext = context
-            repository.set(key: .currentContext, value: value)
+            pageGroupList.currentGroup.currentContext = value
         }
     }
-
-    var previousContext: String?
-
-    /// webViewそれぞれの履歴とカレントページインデックス
-    public private(set) var histories = [PageHistory]()
 
     /// 現在のページ情報
     var currentHistory: PageHistory? {
@@ -135,23 +137,23 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
 
-    private init() {}
+    private init() {
+        initialize()
+    }
 
     /// 初期化
-    func initialize() {
+    private func initialize() {
         // pageHistory読み込み
         let result = localStorageRepository.getData(.pageHistory)
         if case let .success(data) = result {
-            if let histories = NSKeyedUnarchiver.unarchiveObject(with: data) as? [PageHistory] {
-                self.histories = histories
+            if let pageGroupList = NSKeyedUnarchiver.unarchiveObject(with: data) as? PageGroupList {
+                self.pageGroupList = pageGroupList
             } else {
-                histories = []
+                self.pageGroupList = PageGroupList()
                 log.error("unarchive histories error.")
             }
         } else {
-            let pageHistory = PageHistory()
-            histories.append(pageHistory)
-            currentContext = pageHistory.context
+            pageGroupList = PageGroupList()
         }
     }
 
@@ -360,6 +362,11 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         rx_action.onNext(.reload)
     }
 
+    /// ヒストリー再構築
+    func rebuild() {
+        rx_action.onNext(.rebuild)
+    }
+
     /// ぺージインデックス取得
     func getIndex(context: String) -> Int? {
         return histories.index(where: { $0.context == context })
@@ -427,21 +434,21 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         }
     }
 
-    /// 表示中ページの保存
+    /// タブ情報の保存
     func store() {
-        if histories.count > 0 {
-            let pageHistoryData = NSKeyedArchiver.archivedData(withRootObject: histories)
-            let result = localStorageRepository.write(.pageHistory, data: pageHistoryData)
+        let pageGroupListData = NSKeyedArchiver.archivedData(withRootObject: pageGroupList)
+        let result = localStorageRepository.write(.pageHistory, data: pageGroupListData)
 
-            if case .failure = result {
-                rx_error.onNext(.store)
-            }
+        if case .failure = result {
+            // ハンドリングしない
+//            rx_error.onNext(.store)
         }
     }
 
     /// 全データの削除
     func delete() {
-        histories = []
+        pageGroupList.groups.removeAll()
+        pageGroupList = PageGroupList()
         let result = localStorageRepository.delete(.pageHistory)
 
         if case .failure = result {

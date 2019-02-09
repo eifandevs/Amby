@@ -146,8 +146,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BaseAPI/BaseAPI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GithubAPI/GithubAPI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Moya/Moya.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Result/Result.framework"
 fi
 if [[ "$CONFIGURATION" == "Debug-Local" ]]; then
@@ -163,8 +161,6 @@ if [[ "$CONFIGURATION" == "Debug-Local" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BaseAPI/BaseAPI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GithubAPI/GithubAPI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Moya/Moya.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Result/Result.framework"
 fi
 if [[ "$CONFIGURATION" == "Debug-UT" ]]; then
@@ -180,8 +176,6 @@ if [[ "$CONFIGURATION" == "Debug-UT" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BaseAPI/BaseAPI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GithubAPI/GithubAPI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Moya/Moya.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Result/Result.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -197,8 +191,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/BaseAPI/BaseAPI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GithubAPI/GithubAPI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Moya/Moya.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Result/Result.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

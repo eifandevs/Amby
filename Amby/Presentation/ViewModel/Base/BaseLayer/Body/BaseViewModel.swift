@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import Entity
 import Foundation
 import Model
 import RxCocoa
@@ -14,6 +15,7 @@ import RxSwift
 enum BaseViewModelAction {
     case insert(at: Int)
     case reload
+    case rebuild
     case append
     case change
     case remove(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
@@ -72,9 +74,6 @@ final class BaseViewModel {
         return TabUseCase.s.currentTabCount
     }
 
-    /// 通知センター
-    private let center = NotificationCenter.default
-
     /// 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
         return ScrollUseCase.s.autoScrollInterval
@@ -116,7 +115,6 @@ final class BaseViewModel {
 
     deinit {
         log.debug("deinit called.")
-        NotificationCenter.default.removeObserver(self)
     }
 
     func setupRx() {
@@ -182,6 +180,7 @@ final class BaseViewModel {
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
                 case let .insert(before, _): self.rx_action.onNext(.insert(at: before.index + 1))
+                case .rebuild: self.rx_action.onNext(.rebuild)
                 case .reload: self.rx_action.onNext(.reload)
                 case .append: self.rx_action.onNext(.append)
                 case .change: self.rx_action.onNext(.change)

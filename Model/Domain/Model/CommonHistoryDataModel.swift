@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import Entity
 import Foundation
 import RxCocoa
 import RxSwift
@@ -66,9 +67,6 @@ final class CommonHistoryDataModel: CommonHistoryDataModelProtocol {
 
     /// 閲覧履歴
     public private(set) var histories = [CommonHistory]()
-
-    // 通知センター
-    private let center = NotificationCenter.default
 
     private init() {}
 

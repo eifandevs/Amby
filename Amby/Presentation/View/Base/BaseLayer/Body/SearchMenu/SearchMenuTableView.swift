@@ -79,8 +79,9 @@ class SearchMenuTableView: UIView {
         // 画面更新通知監視
         viewModel.rx_action
             .subscribe { [weak self] action in
-                log.eventIn(chain: "SearchMenuTableViewModel.rx_action")
                 guard let `self` = self, let action = action.element else { return }
+                log.eventIn(chain: "SearchMenuTableViewModel.rx_action. action: \(action)")
+
                 switch action {
                 case .update:
                     self.tableView.reloadData()
@@ -109,7 +110,7 @@ class SearchMenuTableView: UIView {
                         self.superview?.addSubview(button)
                     }
                 }
-                log.eventOut(chain: "SearchMenuTableViewModel.rx_action")
+                log.eventOut(chain: "SearchMenuTableViewModel.rx_action. action: \(action)")
             }
             .disposed(by: rx.disposeBag)
     }
@@ -120,7 +121,6 @@ class SearchMenuTableView: UIView {
             overlay.removeFromSuperview()
             self.overlay = nil
         }
-        NotificationCenter.default.removeObserver(self)
     }
 
     required init?(coder _: NSCoder) {

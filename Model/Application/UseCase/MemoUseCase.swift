@@ -6,6 +6,7 @@
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
+import Entity
 import Foundation
 import RxCocoa
 import RxSwift
@@ -25,7 +26,9 @@ public final class MemoUseCase {
     /// models
     private var memoDataModel: MemoDataModelProtocol!
 
-    private init() {}
+    private init() {
+        setupProtocolImpl()
+    }
 
     private func setupProtocolImpl() {
         memoDataModel = MemoDataModel.s

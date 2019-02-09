@@ -6,6 +6,7 @@
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
+import Entity
 import Foundation
 import RxCocoa
 import RxSwift
@@ -15,6 +16,7 @@ public enum TabUseCaseAction {
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case reload
+    case rebuild
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
     case startLoading(context: String)
@@ -79,6 +81,7 @@ public final class TabUseCase {
                 switch action {
                 case let .insert(before, after): self.rx_action.onNext(.insert(before: before, after: after))
                 case .reload: self.rx_action.onNext(.reload)
+                case .rebuild: self.rx_action.onNext(.rebuild)
                 case let .append(before, after): self.rx_action.onNext(.append(before: before, after: after))
                 case let .change(before, after): self.rx_action.onNext(.change(before: before, after: after))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex):
@@ -101,12 +104,19 @@ public final class TabUseCase {
                 }
             }
             .disposed(by: disposeBag)
+
+        // バックグラウンド時にタブ情報を保存
+        NotificationCenter.default.rx.notification(.UIApplicationWillResignActive, object: nil)
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                self.store()
+            }
+            .disposed(by: disposeBag)
     }
 
     /// 現在のタブをクローズ
     public func close() {
         pageHistoryDataModel.remove(context: pageHistoryDataModel.currentContext)
-        store()
     }
 
     /// 全てのタブをクローズ
@@ -116,31 +126,26 @@ public final class TabUseCase {
             self.pageHistoryDataModel.remove(context: pageHistory.context)
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.25))
         }
-        store()
     }
 
     /// 現在のタブをコピー
     public func copy() {
         pageHistoryDataModel.copy()
-        store()
     }
 
     /// タブ入れ替え
     public func swap(start: Int, end: Int) {
         pageHistoryDataModel.swap(start: start, end: end)
-        store()
     }
 
     /// 現在のタブを削除
     public func remove() {
         pageHistoryDataModel.remove(context: pageHistoryDataModel.currentContext)
-        store()
     }
 
     /// 特定のタブを削除
     public func remove(context: String) {
         pageHistoryDataModel.remove(context: context)
-        store()
     }
 
     /// タブ変更
@@ -151,19 +156,21 @@ public final class TabUseCase {
     /// タブの追加
     public func add(url: String? = nil) {
         pageHistoryDataModel.append(url: url, title: nil)
-        store()
     }
 
     /// タブの挿入
     public func insert(url: String? = nil) {
         pageHistoryDataModel.insert(url: url, title: nil)
-        store()
     }
 
     /// タブの全削除
     public func delete() {
         pageHistoryDataModel.delete()
-        store()
+    }
+
+    /// タブ情報再構築
+    public func rebuild() {
+        pageHistoryDataModel.rebuild()
     }
 
     /// ページインデックス取得
@@ -206,7 +213,6 @@ public final class TabUseCase {
 
     public func endRendering(context: String) {
         pageHistoryDataModel.endRendering(context: context)
-        store()
     }
 
     public func updateProgress(object: CGFloat) {
@@ -243,9 +249,5 @@ public final class TabUseCase {
         DispatchQueue(label: ModelConst.APP.QUEUE).async {
             self.pageHistoryDataModel.store()
         }
-    }
-
-    public func initialize() {
-        pageHistoryDataModel.initialize()
     }
 }

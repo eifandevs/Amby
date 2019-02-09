@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import Entity
 import Foundation
 import Model
 import RxCocoa
@@ -48,7 +49,9 @@ final class OptionMenuHistoryTableViewModel {
 
     /// セル削除
     /// セルの有無を返却する
-    func removeRow(indexPath: IndexPath, row: Section.Row) -> Bool {
+    func removeRow(indexPath: IndexPath) -> Bool {
+        let row = getRow(indexPath: indexPath)
+
         sections[indexPath.section].rows.remove(at: indexPath.row)
         // モデルから削除
         HistoryUseCase.s.delete(historyIds: [getSection(section: indexPath.section).dateString: [row.data._id]])

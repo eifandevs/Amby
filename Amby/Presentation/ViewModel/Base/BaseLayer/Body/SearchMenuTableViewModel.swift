@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import Entity
 import Foundation
 import Model
 import RxCocoa
@@ -107,7 +108,6 @@ final class SearchMenuTableViewModel {
     deinit {
         log.debug("deinit called.")
         requestSearchQueue.removeAll()
-        NotificationCenter.default.removeObserver(self)
     }
 
     /// 記事取得
