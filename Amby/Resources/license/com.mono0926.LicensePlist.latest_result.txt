@@ -114,42 +114,6 @@ name: R.swift.Library, nameSpecified:
 body: The MIT License (MIT…
 version: 4.0.0
 
-name: Realm, nameSpecified: 
-body: TABLE OF CONTENTS
-
-1…
-version: 2.10.2
-
-name: Realm, nameSpecified: 
-body: TABLE OF CONTENTS
-
-1…
-version: 2.10.2
-
-name: Realm, nameSpecified: 
-body: TABLE OF CONTENTS
-
-1…
-version: 2.10.2
-
-name: RealmSwift, nameSpecified: 
-body: TABLE OF CONTENTS
-
-1…
-version: 2.10.2
-
-name: RealmSwift, nameSpecified: 
-body: TABLE OF CONTENTS
-
-1…
-version: 2.10.2
-
-name: RealmSwift, nameSpecified: 
-body: TABLE OF CONTENTS
-
-1…
-version: 2.10.2
-
 name: Result, nameSpecified: 
 body: The MIT License (MIT…
 version: 3.2.4
@@ -226,6 +190,12 @@ body: MIT License
 Copyrig…
 version: 0.33.4
 
+name: SwiftFormat, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 0.33.4
+
 name: SwiftLint, nameSpecified: 
 body: The MIT License (MIT…
 version: 0.26.0
@@ -243,6 +213,8 @@ name: KeychainAccess, nameSpecified: , owner: kishikawakatsumi, version: v3.1.2
 name: Kingfisher, nameSpecified: , owner: onevcat, version: 4.10.0
 
 name: NVActivityIndicatorView, nameSpecified: , owner: ninjaprox, version: 4.4.0
+
+name: realm-cocoa, nameSpecified: , owner: realm, version: v3.13.1
 
 name: SnapKit, nameSpecified: , owner: SnapKit, version: 4.2.0
 

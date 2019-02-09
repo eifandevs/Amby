@@ -22,7 +22,7 @@ DerivedData
 
 # Carthage
 Carthage/Checkouts
-!Carthage/Build
+Carthage/Build
 
 # others
 *.swp

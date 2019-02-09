@@ -99,6 +99,16 @@
                ReferencedContainer = "container:Amby.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A16A6EBA220F246500FFCB5B"
+               BuildableName = "EntityTests.xctest"
+               BlueprintName = "EntityTests"
+               ReferencedContainer = "container:Amby.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
