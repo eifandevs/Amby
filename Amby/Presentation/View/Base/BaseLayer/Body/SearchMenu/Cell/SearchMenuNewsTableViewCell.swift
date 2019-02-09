@@ -6,8 +6,8 @@
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
+import Entity
 import Kingfisher
-import Model
 import UIKit
 
 class SearchMenuNewsTableViewCell: UITableViewCell {

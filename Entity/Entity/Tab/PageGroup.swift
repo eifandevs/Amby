@@ -35,7 +35,7 @@ public class PageGroup: NSObject, NSCoding {
     }
 
     public required convenience init?(coder decoder: NSCoder) {
-        let isPrivate = decoder.decodeBool(forKey: "isPrivate") as! Bool
+        let isPrivate = decoder.decodeBool(forKey: "isPrivate")
         let histories = decoder.decodeObject(forKey: "histories") as! [PageHistory]
         let currentContext = decoder.decodeObject(forKey: "currentContext") as! String
         self.init(isPrivate: isPrivate, currentContext: currentContext, histories: histories)

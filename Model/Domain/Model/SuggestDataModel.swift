@@ -7,6 +7,7 @@
 //
 
 import Alamofire
+import Entity
 import Foundation
 import Moya
 import RxCocoa

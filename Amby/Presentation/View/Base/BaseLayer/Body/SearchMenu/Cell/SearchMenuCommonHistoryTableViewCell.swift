@@ -6,7 +6,7 @@
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
-import Model
+import Entity
 import UIKit
 
 class SearchMenuCommonHistoryTableViewCell: UITableViewCell {

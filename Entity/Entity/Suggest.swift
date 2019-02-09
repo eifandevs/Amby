@@ -11,4 +11,9 @@ import Foundation
 public struct Suggest {
     public var token: String
     public var data: [String]?
+
+    public init(token: String, data: [String]?) {
+        self.token = token
+        self.data = data
+    }
 }

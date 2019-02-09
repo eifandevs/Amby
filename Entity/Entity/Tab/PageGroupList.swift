@@ -18,7 +18,7 @@ public class PageGroupList: NSObject, NSCoding {
         return groups[currentIndex]
     }
 
-    override init() {
+    public override init() {
         super.init()
         setup()
     }
@@ -35,7 +35,7 @@ public class PageGroupList: NSObject, NSCoding {
     }
 
     public required convenience init?(coder decoder: NSCoder) {
-        let currentIndex = decoder.decodeInteger(forKey: "currentIndex") as! Int
+        let currentIndex = decoder.decodeInteger(forKey: "currentIndex")
         let groups = decoder.decodeObject(forKey: "groups") as! [PageGroup]
         self.init(currentIndex: currentIndex, groups: groups)
     }
