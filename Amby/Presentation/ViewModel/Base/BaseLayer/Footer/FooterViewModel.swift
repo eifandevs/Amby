@@ -78,9 +78,6 @@ final class FooterViewModel {
         return TabUseCase.s.currentLocation
     }
 
-    /// 通知センター
-    let center = NotificationCenter.default
-
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
@@ -90,7 +87,6 @@ final class FooterViewModel {
 
     deinit {
         log.debug("deinit called.")
-        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: Private Method
@@ -107,11 +103,19 @@ final class FooterViewModel {
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex): self.delete(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
                 case let .startLoading(context): self.startLoading(context: context)
                 case let .endLoading(context, title): self.endLoading(context: context, title: title)
+                case .rebuild: self.rebuild()
                 case let .endRendering(context): self.endRendering(context: context)
                 default: break
                 }
             }
             .disposed(by: disposeBag)
+    }
+
+    private func rebuild() {
+        // 再構築
+        rows.removeAll()
+        rows = TabUseCase.s.pageHistories.map { Row(pageHistory: $0) }
+        rx_action.onNext(.update(indexPath: nil, animated: false))
     }
 
     private func delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex _: Int) {

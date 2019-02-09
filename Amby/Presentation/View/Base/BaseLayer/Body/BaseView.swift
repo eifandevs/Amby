@@ -119,9 +119,7 @@ class BaseView: UIView {
         setupRx()
     }
 
-    private func setup() {
-        EGApplication.sharedMyApplication.egDelegate = self
-
+    private func setupTabs() {
         // webviewsに初期値を入れる
         (0 ... viewModel.currentTabCount - 1).forEach { _ in
             webViews.append(nil)
@@ -133,12 +131,6 @@ class BaseView: UIView {
         } else {
             log.error("cannot get currentLocation.")
         }
-
-        // 前後のページ
-        previousImageView.frame = CGRect(origin: CGPoint(x: -frame.size.width, y: 0), size: frame.size)
-        nextImageView.frame = CGRect(origin: CGPoint(x: frame.size.width, y: 0), size: frame.size)
-        addSubview(previousImageView)
-        addSubview(nextImageView)
 
         // ロードする
         if !viewModel.currentUrl.isEmpty {
@@ -156,6 +148,32 @@ class BaseView: UIView {
         }
     }
 
+    private func removeTabs() {
+        webViews.forEach { webView in
+            if let unwrappedWebView = webView {
+                unwrappedWebView.removeObserverEstimatedProgress(observer: self)
+                unwrappedWebView.removeObserverTitle(observer: self)
+                unwrappedWebView.removeObserverUrl(observer: self)
+                unwrappedWebView.removeFromSuperview()
+            }
+        }
+        webViews.removeAll()
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    private func setup() {
+        // タッチイベントを監視
+        EGApplication.sharedMyApplication.egDelegate = self
+
+        // 前後のページ
+        previousImageView.frame = CGRect(origin: CGPoint(x: -frame.size.width, y: 0), size: frame.size)
+        nextImageView.frame = CGRect(origin: CGPoint(x: frame.size.width, y: 0), size: frame.size)
+        addSubview(previousImageView)
+        addSubview(nextImageView)
+
+        setupTabs()
+    }
+
     private func setupRx() {
         // アクション監視
         viewModel.rx_action
@@ -166,6 +184,7 @@ class BaseView: UIView {
                 switch action {
                 case let .insert(at): self.insert(at: at)
                 case .reload: self.reload()
+                case .rebuild: self.rebuild()
                 case .append: self.append()
                 case .change: self.change()
                 case let .swap(start, end): self.swap(start: start, end: end)
@@ -186,14 +205,7 @@ class BaseView: UIView {
 
     deinit {
         log.debug("deinit called.")
-        webViews.forEach { webView in
-            if let unwrappedWebView = webView {
-                unwrappedWebView.removeObserverEstimatedProgress(observer: self)
-                unwrappedWebView.removeObserverTitle(observer: self)
-                unwrappedWebView.removeObserverUrl(observer: self)
-            }
-        }
-        NotificationCenter.default.removeObserver(self)
+        removeTabs()
     }
 
     required init(coder _: NSCoder) {
@@ -371,6 +383,12 @@ class BaseView: UIView {
                 _ = front.load(urlStr: url)
             }
         }
+    }
+
+    private func rebuild() {
+        // 再構築
+        removeTabs()
+        setupTabs()
     }
 
     private func change() {

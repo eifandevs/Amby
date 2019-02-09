@@ -56,8 +56,7 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
     let rx_error = PublishSubject<FavoriteDataModelError>()
 
     static let s = FavoriteDataModel()
-    /// 通知センター
-    private let center = NotificationCenter.default
+
     /// DBリポジトリ
     private let repository = DBRepository()
 

@@ -57,28 +57,6 @@ class OptionMenuFormTableView: UIView, ShadowView, OptionMenuView {
             make.top.equalTo(snp.top).offset(0)
             make.bottom.equalTo(snp.bottom).offset(0)
         }
-
-        // ロングプレスで削除
-        let longPressRecognizer = UILongPressGestureRecognizer()
-
-        longPressRecognizer.rx.event
-            .subscribe { [weak self] sender in
-                guard let `self` = self, let sender = sender.element else { return }
-                if sender.state == .began {
-                    let point: CGPoint = sender.location(in: self.tableView)
-                    let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
-                    if let indexPath = indexPath {
-                        self.tableView.beginUpdates()
-                        self.viewModel.removeRow(indexPath: indexPath)
-                        self.tableView.deleteRows(at: [indexPath], with: .automatic)
-
-                        self.tableView.endUpdates()
-                    }
-                }
-            }
-            .disposed(by: rx.disposeBag)
-
-        addGestureRecognizer(longPressRecognizer)
     }
 }
 
@@ -114,5 +92,15 @@ extension OptionMenuFormTableView: UITableViewDelegate {
         // ページを表示
         viewModel.loadRequest(url: row.data.url)
         rx_action.onNext(.close)
+    }
+
+    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (_, _) -> Void in
+            self.viewModel.removeRow(indexPath: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        deleteButton.backgroundColor = UIColor.red
+
+        return [deleteButton]
     }
 }

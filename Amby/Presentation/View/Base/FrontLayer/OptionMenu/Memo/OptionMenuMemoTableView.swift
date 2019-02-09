@@ -78,30 +78,6 @@ class OptionMenuMemoTableView: UIView, ShadowView, OptionMenuView {
             })
             .disposed(by: rx.disposeBag)
 
-        // ロングプレスで削除
-        let longPressRecognizer = UILongPressGestureRecognizer()
-
-        longPressRecognizer.rx.event
-            .subscribe { [weak self] sender in
-                guard let `self` = self else { return }
-                if let sender = sender.element {
-                    if sender.state == .began {
-                        let point: CGPoint = sender.location(in: self.tableView)
-                        let indexPath: IndexPath? = self.tableView.indexPathForRow(at: point)
-                        if let indexPath = indexPath {
-                            self.tableView.beginUpdates()
-                            self.viewModel.removeRow(indexPath: indexPath)
-                            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-
-                            self.tableView.endUpdates()
-                        }
-                    }
-                }
-            }
-            .disposed(by: rx.disposeBag)
-
-        addGestureRecognizer(longPressRecognizer)
-
         // リロード監視
         viewModel.rx_action
             .subscribe { [weak self] action in
@@ -126,8 +102,6 @@ extension OptionMenuMemoTableView: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuMemoTableViewCell {
             let row = viewModel.getRow(indexPath: indexPath)
             cell.setRow(row: row)
-            // 重複呼び出しを考慮し、Rxではなくデリゲートパターン
-            cell.delegate = self
 
             return cell
         }
@@ -140,17 +114,26 @@ extension OptionMenuMemoTableView: UITableViewDataSource {
     }
 }
 
-// MARK: - OptionMenuMemoTableViewCellDelegate
-
-extension OptionMenuMemoTableView: OptionMenuMemoTableViewCellDelegate {
-    func optionMenuMemoTableViewCellDidInvertLock(row: OptionMenuMemoTableViewModel.Row) {
-        viewModel.invertLock(memo: row.data)
-    }
-}
-
 // MARK: - TableViewDelegate
 
 extension OptionMenuMemoTableView: UITableViewDelegate {
+    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (_, _) -> Void in
+            self.viewModel.removeRow(indexPath: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        deleteButton.backgroundColor = UIColor.red
+
+        let row = viewModel.getRow(indexPath: indexPath)
+        let title = row.data.isLocked ? "解除" : "ロック"
+        let lockButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: title) { (_, _) -> Void in
+            self.viewModel.invertLock(memo: row.data)
+        }
+        lockButton.backgroundColor = UIColor.purple
+
+        return [deleteButton, lockButton]
+    }
+
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セル情報取得
         let row = viewModel.getRow(indexPath: indexPath)

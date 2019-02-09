@@ -52,7 +52,7 @@ struct MessageConst {
         static let MENU_ORDER_CANNOT_SORT = "メニュー並び替えエラー。メニューアイコンは必須です"
         static let MENU_ORDER_ERROR = "メニュー並び替えエラー。12個選択してください"
         static let PASSCODE_REGISTERED = "パスコードを登録しました"
-        static let PASSCODE_AUTHENTIFICATED = "パスコート認証されました"
+        static let PASSCODE_AUTHENTIFICATED = "パスコート認証されました。再度実行してください。"
         static let PASSCODE_INPUT_ERROR = "パスコードエラー"
         static let GREP_ERROR = "ページ内検索に失敗しました"
         static let GREP_SUCCESS = { (result: NSNumber) -> String in
