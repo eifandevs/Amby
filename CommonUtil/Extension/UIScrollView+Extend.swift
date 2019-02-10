@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UIScrollView {
+public extension UIScrollView {
     public enum ScrollDirection {
         case top
         case bottom

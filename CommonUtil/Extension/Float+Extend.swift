@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension Float {
+public extension Float {
     public var f: CGFloat {
         return CGFloat(self)
     }

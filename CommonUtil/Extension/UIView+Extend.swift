@@ -7,18 +7,17 @@
 //
 
 import Foundation
-import NSObject_Rx
 import UIKit
 
-extension UIView {
+public extension UIView {
     /// 全てのサブビュー削除
-    func removeAllSubviews() {
+    public func removeAllSubviews() {
         subviews.forEach {
             $0.removeFromSuperview()
         }
     }
 
-    func getImage() -> UIImage {
+    public func getImage() -> UIImage {
         // キャプチャする範囲を取得.
         let rect = bounds
 

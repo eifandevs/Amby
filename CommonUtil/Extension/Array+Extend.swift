@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension Array {
+public extension Array {
     /// 移動
-    mutating func move(from: Int, to: Int) -> Array {
+    public mutating func move(from: Int, to: Int) -> Array {
         let item = self[from]
         remove(at: from)
         insert(item, at: to)
@@ -18,7 +18,7 @@ extension Array {
     }
 
     /// 複数のオブジェクトを安全にとりだす
-    func objects(for: Int) -> Array {
+    public func objects(for: Int) -> Array {
         if count == 0 {
             return self
         }
@@ -30,9 +30,9 @@ extension Array {
 }
 
 // 配列の重複を削除
-extension Array where Element: Equatable {
+public extension Array where Element: Equatable {
     /// オブジェクト指定で削除
-    mutating func remove<T: Equatable>(obj: T) -> Array {
+    public mutating func remove<T: Equatable>(obj: T) -> Array {
         self = filter({ $0 as? T != obj })
         return self
     }

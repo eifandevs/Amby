@@ -8,37 +8,37 @@
 
 import Foundation
 
-extension Date {
-    func toString(format: String = AppConst.APP.DATE_FORMAT) -> String {
+public extension Date {
+    public func toString(format: String = "yyyyMMdd") -> String {
         let formatter = DateFormatter()
-        let jaLocale = Locale(identifier: AppConst.APP.LOCALE)
+        let jaLocale = Locale(identifier: "ja_JP")
         formatter.locale = jaLocale
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
 
-    var yesterday: Date {
+    public var yesterday: Date {
         return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
     }
 
-    var tomorrow: Date {
+    public var tomorrow: Date {
         return Calendar.current.date(byAdding: .day, value: 1, to: noon)!
     }
 
-    var noon: Date {
+    public var noon: Date {
         return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
     }
 
-    var month: Int {
+    public var month: Int {
         return Calendar.current.component(.month, from: self)
     }
 
-    var isLastDayOfMonth: Bool {
+    public var isLastDayOfMonth: Bool {
         return tomorrow.month != month
     }
 
     /// インターバル(h)取得
-    var intervalHourSinceNow: Double {
+    public var intervalHourSinceNow: Double {
         return -(timeIntervalSinceNow / 60 / 60)
     }
 }

@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-extension String {
+public extension String {
     /// ランダム文字列作成
-    static func getRandomStringWithLength(length: Int) -> String {
+    public static func getRandomStringWithLength(length: Int) -> String {
         let alphabet = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         let upperBound = UInt32(alphabet.count)
 
@@ -20,51 +20,51 @@ extension String {
         })
     }
 
-    var isValidUrl: Bool {
+    public var isValidUrl: Bool {
         return self != "http://" &&
             self != "https://" &&
             !isEmpty &&
             (hasPrefix("http://") == true || hasPrefix("https://") == true)
     }
 
-    var isLocalUrl: Bool {
+    public var isLocalUrl: Bool {
         return hasPrefix("file://")
     }
 
-    var isUrl: Bool {
+    public var isUrl: Bool {
         return contains("://")
     }
 
-    var isHttpsUrl: Bool {
+    public var isHttpsUrl: Bool {
         return hasPrefix("https://")
     }
 
-    var domainAndPath: String {
+    public var domainAndPath: String {
         return components(separatedBy: "?").first!
     }
 
-    var toInt: Int {
+    public var toInt: Int {
         return Int(self)!
     }
 
-    var tofloat: CGFloat {
+    public var tofloat: CGFloat {
         return CGFloat(Double(self)!)
     }
 
     /// 文字列からDate型作成
-    func toDate(format: String = AppConst.APP.DATE_FORMAT) -> Date {
+    public func toDate(format: String = "yyyyMMdd") -> Date {
         let formatter = DateFormatter()
-        let jaLocale = Locale(identifier: AppConst.APP.LOCALE)
+        let jaLocale = Locale(identifier: "ja_JP")
         formatter.locale = jaLocale
         formatter.dateFormat = format
         return formatter.date(from: self)!
     }
 
-    func index(from: Int) -> Index {
+    public func index(from: Int) -> Index {
         return index(startIndex, offsetBy: from)
     }
 
-    func encodeUrl() -> String? {
+    public func encodeUrl() -> String? {
         if contains("%") {
             return self
         } else {
@@ -72,7 +72,7 @@ extension String {
         }
     }
 
-    func decodeUrl() -> String? {
+    public func decodeUrl() -> String? {
         return removingPercentEncoding
     }
 }

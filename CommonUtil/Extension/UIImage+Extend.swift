@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-extension UIImage {
-    func crop(w: Int, h: Int) -> UIImage {
+public extension UIImage {
+    public func crop(w: Int, h: Int) -> UIImage {
         let origRef = cgImage
         let origWidth = Int(origRef!.width)
         let origHeight = Int(origRef!.height)

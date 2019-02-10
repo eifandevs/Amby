@@ -8,18 +8,18 @@
 
 import Foundation
 
-protocol StringOptionalProtocol {}
+public protocol StringOptionalProtocol {}
 extension String: StringOptionalProtocol {}
 
-extension Optional where Wrapped: StringOptionalProtocol {
-    var isEmpty: Bool {
+public extension Optional where Wrapped: StringOptionalProtocol {
+    public var isEmpty: Bool {
         if let str = self as? String {
             return str.isEmpty
         }
         return true
     }
 
-    var isNotEmpty: Bool {
+    public var isNotEmpty: Bool {
         guard let str = self as? String else {
             return false
         }

@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension DispatchQueue {
-    class func mainSyncSafe(execute work: () -> Void) {
+public extension DispatchQueue {
+    public class func mainSyncSafe(execute work: () -> Void) {
         if Thread.isMainThread {
             work()
         } else {
@@ -17,7 +17,7 @@ extension DispatchQueue {
         }
     }
 
-    class func mainSyncSafe<T>(execute work: () throws -> T) rethrows -> T {
+    public class func mainSyncSafe<T>(execute work: () throws -> T) rethrows -> T {
         if Thread.isMainThread {
             return try work()
         } else {

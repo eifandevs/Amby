@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-extension UIImageView {
-    func setImage(image: UIImage?, color: UIColor) {
+public extension UIImageView {
+    public func setImage(image: UIImage?, color: UIColor) {
         let tintedImage = image?.withRenderingMode(.alwaysTemplate)
         tintColor = color
         self.image = tintedImage

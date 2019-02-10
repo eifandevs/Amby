@@ -137,6 +137,16 @@
                ReferencedContainer = "container:Amby.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A1C0E000220F67F300E7A7B6"
+               BuildableName = "CommonUtilTests.xctest"
+               BlueprintName = "CommonUtilTests"
+               ReferencedContainer = "container:Amby.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

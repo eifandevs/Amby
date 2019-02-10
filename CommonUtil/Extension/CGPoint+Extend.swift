@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-extension CGPoint {
-    func distance(pt: CGPoint) -> CGFloat {
+public extension CGPoint {
+    public func distance(pt: CGPoint) -> CGFloat {
         let x = pow(pt.x - self.x, 2)
         let y = pow(pt.y - self.y, 2)
         return sqrt(x + y)
@@ -25,9 +25,9 @@ extension CGPoint: ExpressibleByStringLiteral {
 
         let point: CGPoint
         if value[value.startIndex] != "{" {
-            point = CGPointFromString("{\(value)}")
+            point = NSCoder.cgPoint(for: "{\(value)}")
         } else {
-            point = CGPointFromString(value)
+            point = NSCoder.cgPoint(for: value)
         }
         x = point.x
         y = point.y
