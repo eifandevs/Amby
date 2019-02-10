@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import CommonUtil
 import Foundation
 import NVActivityIndicatorView
 import RxCocoa
@@ -35,7 +36,7 @@ class FooterView: UIView, ShadowView {
     private func setup(frame: CGRect) {
         // layout
         addAreaShadow()
-        backgroundColor = UIColor.lightGray
+        backgroundColor = UIColor.mediumGray
 
         // cell layout
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -49,7 +50,7 @@ class FooterView: UIView, ShadowView {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.collectionViewLayout = layout
-        collectionView.backgroundColor = UIColor.lightGray
+        collectionView.backgroundColor = UIColor.mediumGray
         collectionView.isScrollEnabled = true
         collectionView.alwaysBounceHorizontal = true
         collectionView.register(R.nib.footerCollectionViewCell(), forCellWithReuseIdentifier: R.nib.footerCollectionViewCell.identifier)

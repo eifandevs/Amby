@@ -50,10 +50,6 @@ abstract_target 'All' do
   target 'Logger' do
     use_frameworks!
 #    inhibit_all_warnings!
-  
-    target 'LoggerTests' do
-      inherit! :search_paths
-    end
   end
 
   target 'Entity' do

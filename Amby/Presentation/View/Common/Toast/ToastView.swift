@@ -6,6 +6,7 @@
 //  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
+import NSObject_Rx
 import RxCocoa
 import RxSwift
 import UIKit

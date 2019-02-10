@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import CommonUtil
 import CoreLocation
 import Foundation
 import RxCocoa
@@ -62,7 +63,7 @@ class HeaderView: UIView, ShadowView {
 
         super.init(frame: frame)
         addShadow()
-        backgroundColor = UIColor.lightGray
+        backgroundColor = UIColor.mediumGray
 
         setupRx()
 

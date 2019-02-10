@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import CommonUtil
 import CryptoSwift
 import Foundation
 
