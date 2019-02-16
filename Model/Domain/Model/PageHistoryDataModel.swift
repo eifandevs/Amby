@@ -45,6 +45,7 @@ extension PageHistoryDataModelError: ModelError {
 protocol PageHistoryDataModelProtocol {
     var rx_action: PublishSubject<PageHistoryDataModelAction> { get }
     var rx_error: PublishSubject<PageHistoryDataModelError> { get }
+    var pageGroupList: PageGroupList { get }
     var currentContext: String { get set }
     var histories: [PageHistory] { get }
     var currentHistory: PageHistory? { get }
@@ -87,7 +88,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     private let repository = UserDefaultRepository()
 
     /// webViewそれぞれの履歴とカレントページインデックス
-    private var pageGroupList: PageGroupList!
+    var pageGroupList: PageGroupList
     public private(set) var histories: [PageHistory] {
         get {
             return pageGroupList.currentGroup.histories
@@ -139,7 +140,18 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     private let localStorageRepository = LocalStorageRepository<Cache>()
 
     private init() {
-        initialize()
+        // pageHistory読み込み
+        let result = localStorageRepository.getData(.pageHistory)
+        if case let .success(data) = result {
+            if let pageGroupList = NSKeyedUnarchiver.unarchiveObject(with: data) as? PageGroupList {
+                self.pageGroupList = pageGroupList
+            } else {
+                self.pageGroupList = PageGroupList()
+                log.error("unarchive histories error.")
+            }
+        } else {
+            pageGroupList = PageGroupList()
+        }
     }
 
     /// 初期化

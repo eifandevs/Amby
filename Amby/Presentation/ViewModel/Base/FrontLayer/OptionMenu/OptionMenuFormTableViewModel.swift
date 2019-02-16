@@ -13,9 +13,7 @@ import Model
 final class OptionMenuFormTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     /// セル情報
-    var rows: [Row] {
-        return FormUseCase.s.select().map({ Row(data: $0) })
-    }
+    var rows: [Row] = FormUseCase.s.select().map({ Row(data: $0) })
 
     /// セル数
     var cellCount: Int {

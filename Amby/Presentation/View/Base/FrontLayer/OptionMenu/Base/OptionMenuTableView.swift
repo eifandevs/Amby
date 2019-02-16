@@ -143,7 +143,6 @@ extension OptionMenuTableView: UITableViewDelegate {
                 .disposed(by: rx.disposeBag)
             // 詳細ビューは保持しておく
             detailView = historyTableView
-            return
         case .trend:
             viewModel.loadTrend()
             rx_action.onNext(.close)

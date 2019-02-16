@@ -34,6 +34,10 @@ public final class TabUseCase {
         return pageHistoryDataModel.currentHistory?.url
     }
 
+    public var pageGroupList: PageGroupList {
+        return pageHistoryDataModel.pageGroupList
+    }
+
     public var pageHistories: [PageHistory] {
         return pageHistoryDataModel.histories
     }

@@ -7,18 +7,17 @@
 //
 
 import Foundation
+import Model
 
 final class OptionMenuTabGroupTableViewModel {
     // セル情報
     struct Row {
         let title: String
+        let groupContext: String
     }
 
     // セル
-    let rows = [
-        Row(title: AppConst.OPTION_MENU.DONATION),
-        Row(title: AppConst.OPTION_MENU.DEVELOPMENT)
-    ]
+    var rows: [Row] = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext) })
 
     // 高さ
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
