@@ -13,20 +13,20 @@ final class OptionMenuTabGroupTableViewModel {
     struct Row {
         let title: String
     }
-    
+
     // セル
     let rows = [
         Row(title: AppConst.OPTION_MENU.DONATION),
         Row(title: AppConst.OPTION_MENU.DEVELOPMENT)
     ]
-    
+
     // 高さ
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     // 数
     var cellCount: Int {
         return rows.count
     }
-    
+
     /// セル情報取得
     func getRow(indexPath: IndexPath) -> Row {
         return rows[indexPath.row]

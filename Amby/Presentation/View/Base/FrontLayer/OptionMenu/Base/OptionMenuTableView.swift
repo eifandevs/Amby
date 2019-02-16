@@ -134,7 +134,15 @@ extension OptionMenuTableView: UITableViewDelegate {
         // 詳細ビュー作成
         switch viewModel.getRow(indexPath: indexPath).cellType {
         case .tabGroup:
-            rx_action.onNext(.close)
+            let historyTableView = OptionMenuTabGroupTableView(frame: detailViewFrame)
+            historyTableView.rx_action
+                .subscribe({ [weak self] action in
+                    guard let `self` = self, let action = action.element, case .close = action else { return }
+                    self.rx_action.onNext(.close)
+                })
+                .disposed(by: rx.disposeBag)
+            // 詳細ビューは保持しておく
+            detailView = historyTableView
             return
         case .trend:
             viewModel.loadTrend()

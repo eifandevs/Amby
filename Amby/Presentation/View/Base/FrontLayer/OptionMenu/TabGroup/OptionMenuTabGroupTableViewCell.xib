@@ -18,8 +18,30 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XuR-Kv-ehZ">
+                        <rect key="frame" x="10" y="5" width="305" height="33.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ut5-fl-Nqi">
+                                <rect key="frame" x="0.0" y="0.0" width="305" height="33.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="XuR-Kv-ehZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Cv3-vG-QUf"/>
+                    <constraint firstAttribute="trailing" secondItem="XuR-Kv-ehZ" secondAttribute="trailing" constant="5" id="Ez4-bo-Wf5"/>
+                    <constraint firstItem="XuR-Kv-ehZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="qfg-OW-xSd"/>
+                    <constraint firstAttribute="bottom" secondItem="XuR-Kv-ehZ" secondAttribute="bottom" constant="5" id="rCR-LJ-ywJ"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="titleLabel" destination="ut5-fl-Nqi" id="mMO-ci-k1n"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

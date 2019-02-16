@@ -65,14 +65,14 @@ class OptionMenuTabGroupTableView: UIView, ShadowView, OptionMenuView {
 
 extension OptionMenuTabGroupTableView: UITableViewDataSource {
     func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
-        return 1
+        return viewModel.cellHeight
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = R.reuseIdentifier.optionMenuTabGroupCell.identifier
         if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuTabGroupTableViewCell {
-//            let row = viewModel.getRow(indexPath: indexPath)
-//            cell.setRow(row: row)
+            let row = viewModel.getRow(indexPath: indexPath)
+            cell.setRow(row: row)
 
             return cell
         }
@@ -81,15 +81,15 @@ extension OptionMenuTabGroupTableView: UITableViewDataSource {
     }
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return 1
+        return viewModel.cellCount
     }
 }
 
 // MARK: - TableViewDelegate
 
 extension OptionMenuTabGroupTableView: UITableViewDelegate {
-    func tableView(_: UITableView, didSelectRowAt _: IndexPath) {
-        //        let row = viewModel.getRow(indexPath: indexPath)
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = viewModel.getRow(indexPath: indexPath)
         // TODO: 処理
         rx_action.onNext(.close)
     }
