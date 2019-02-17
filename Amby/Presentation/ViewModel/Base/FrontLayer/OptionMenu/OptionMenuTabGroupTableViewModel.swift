@@ -14,10 +14,11 @@ final class OptionMenuTabGroupTableViewModel {
     struct Row {
         let title: String
         let groupContext: String
+        var isFront: Bool
     }
 
     // セル
-    var rows: [Row] = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext) })
+    var rows: [Row] = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.pageGroupList.currentGroupContext == $0.groupContext) })
 
     // 高さ
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT

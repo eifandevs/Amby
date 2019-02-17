@@ -10,6 +10,7 @@ import UIKit
 
 class OptionMenuTabGroupTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var frontBar: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,5 +25,12 @@ class OptionMenuTabGroupTableViewCell: UITableViewCell {
 
     func setRow(row: OptionMenuTabGroupTableViewModel.Row) {
         titleLabel.text = row.title
+        
+        // フロントバー表示
+        if row.isFront {
+            frontBar.alpha = 1
+        } else {
+            frontBar.alpha = 0
+        }
     }
 }
