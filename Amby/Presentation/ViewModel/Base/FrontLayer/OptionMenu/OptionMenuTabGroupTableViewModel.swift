@@ -64,4 +64,10 @@ final class OptionMenuTabGroupTableViewModel {
     func addGroup() {
         TabUseCase.s.addGroup()
     }
+
+    /// セル押下
+    func changeGroup(indexPath: IndexPath) {
+        let row = getRow(indexPath: indexPath)
+        TabUseCase.s.changeGroup(groupContext: row.groupContext)
+    }
 }

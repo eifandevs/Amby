@@ -117,8 +117,7 @@ extension OptionMenuTabGroupTableView: UITableViewDataSource {
 
 extension OptionMenuTabGroupTableView: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row = viewModel.getRow(indexPath: indexPath)
-        // TODO: 処理
+        viewModel.changeGroup(indexPath: indexPath)
         rx_action.onNext(.close)
     }
 }

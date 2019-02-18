@@ -159,6 +159,15 @@ public final class TabUseCase {
         pageHistoryDataModel.change(context: context)
     }
 
+    /// グループ変更
+    public func changeGroup(groupContext: String) {
+        if pageHistoryDataModel.pageGroupList.currentGroupContext != groupContext {
+            pageHistoryDataModel.changeGroup(groupContext: groupContext)
+        } else {
+            log.warning("selected same group.")
+        }
+    }
+
     /// タブの追加
     public func add(url: String? = nil) {
         pageHistoryDataModel.append(url: url, title: nil)

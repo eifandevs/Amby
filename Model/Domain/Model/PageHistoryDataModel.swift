@@ -438,7 +438,10 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     }
 
     /// 表示中グループの変更
-    func changeGroup(groupContext _: String) {
+    func changeGroup(groupContext: String) {
+        if let selectedGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
+            pageGroupList.currentGroupContext = selectedGroup.groupContext
+        }
     }
 
     /// 前ページに変更
