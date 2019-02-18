@@ -89,8 +89,10 @@ extension OptionMenuFavoriteTableView: UITableViewDataSource {
 extension OptionMenuFavoriteTableView: UITableViewDelegate {
     func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (_, _) -> Void in
+            self.tableView.beginUpdates()
             self.viewModel.removeRow(indexPath: indexPath)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.endUpdates()
         }
         deleteButton.backgroundColor = UIColor.red
 
