@@ -18,7 +18,7 @@ public class PageGroup: NSObject, NSCoding {
     public var currentContext = ""
     public var histories = [PageHistory]()
 
-    override init() {
+    public override init() {
         super.init()
         setup()
     }

@@ -15,6 +15,7 @@ import RxSwift
 enum PageHistoryDataModelAction {
     case insert(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
+    case appendGroup
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
@@ -65,12 +66,14 @@ protocol PageHistoryDataModelProtocol {
     func updateTitle(context: String, title: String)
     func insert(url: String?, title: String?)
     func append(url: String?, title: String?)
+    func appendGroup()
     func copy()
     func reload()
     func rebuild()
     func getIndex(context: String) -> Int?
     func remove(context: String)
     func change(context: String)
+    func changeGroup(groupContext: String)
     func goBack()
     func goNext()
     func store()
@@ -358,6 +361,13 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         rx_action.onNext(.append(before: before, after: currentData!))
     }
 
+    /// タブグループ作成
+    func appendGroup() {
+        let pageGroup = PageGroup()
+        pageGroupList.groups.append(pageGroup)
+        rx_action.onNext(.appendGroup)
+    }
+
     /// ページコピー
     func copy() {
         if let currentHistory = currentHistory {
@@ -425,6 +435,10 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         let before = currentData!
         currentContext = context
         rx_action.onNext(.change(before: before, after: currentData!))
+    }
+
+    /// 表示中グループの変更
+    func changeGroup(groupContext _: String) {
     }
 
     /// 前ページに変更

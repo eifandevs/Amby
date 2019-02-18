@@ -71,6 +71,7 @@ struct MessageConst {
 
     struct OPTION_MENU {
         static let MEMO_REFRESH_TEXT = "新規メモの作成"
+        static let TAB_GROUP_REFRESH_TEXT = "新規グループの作成"
     }
 
     // MARK: - お問い合わせ画面

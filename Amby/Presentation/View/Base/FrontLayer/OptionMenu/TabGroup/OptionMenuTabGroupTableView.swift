@@ -19,6 +19,8 @@ class OptionMenuTabGroupTableView: UIView, ShadowView, OptionMenuView {
     // アクション通知用RX
     let rx_action = PublishSubject<OptionMenuTabGroupTableViewAction>()
 
+    private let refreshControl = UIRefreshControl()
+
     private let viewModel = OptionMenuTabGroupTableViewModel()
     private let tableView = UITableView()
 
@@ -58,6 +60,32 @@ class OptionMenuTabGroupTableView: UIView, ShadowView, OptionMenuView {
             make.top.equalTo(snp.top).offset(0)
             make.bottom.equalTo(snp.bottom).offset(0)
         }
+
+        setupRx()
+    }
+
+    func setupRx() {
+        // pull to refresh
+        refreshControl.attributedTitle = NSAttributedString(string: MessageConst.OPTION_MENU.TAB_GROUP_REFRESH_TEXT)
+        refreshControl.tintColor = UIColor.darkGray
+        tableView.refreshControl = refreshControl
+        refreshControl.rx.controlEvent(.valueChanged)
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                DispatchQueue.mainSyncSafe {
+                    self.refreshControl.endRefreshing()
+                    self.viewModel.addGroup()
+                }
+            })
+            .disposed(by: rx.disposeBag)
+
+        // リロード監視
+        viewModel.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case .reload = action else { return }
+                self.tableView.reloadData()
+            }
+            .disposed(by: rx.disposeBag)
     }
 }
 

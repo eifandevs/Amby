@@ -20,16 +20,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XuR-Kv-ehZ">
-                        <rect key="frame" x="10" y="0.0" width="305" height="43.5"/>
+                        <rect key="frame" x="10" y="0.0" width="310" height="43.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ut5-fl-Nqi">
-                                <rect key="frame" x="0.0" y="0.0" width="295" height="43.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="43.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KtD-K0-Gys">
-                                <rect key="frame" x="300" y="0.0" width="5" height="43.5"/>
+                                <rect key="frame" x="305" y="0.0" width="5" height="43.5"/>
                                 <color key="backgroundColor" red="0.37254901960784315" green="0.29411764705882354" blue="0.54509803921568623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="5" id="Mdx-Or-7is"/>
@@ -41,7 +41,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="XuR-Kv-ehZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Cv3-vG-QUf"/>
-                    <constraint firstAttribute="trailing" secondItem="XuR-Kv-ehZ" secondAttribute="trailing" constant="5" id="Ez4-bo-Wf5"/>
+                    <constraint firstAttribute="trailing" secondItem="XuR-Kv-ehZ" secondAttribute="trailing" id="Ez4-bo-Wf5"/>
                     <constraint firstItem="XuR-Kv-ehZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="qfg-OW-xSd"/>
                     <constraint firstAttribute="bottom" secondItem="XuR-Kv-ehZ" secondAttribute="bottom" id="rCR-LJ-ywJ"/>
                 </constraints>

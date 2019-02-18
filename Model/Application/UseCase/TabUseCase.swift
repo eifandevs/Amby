@@ -14,6 +14,7 @@ import RxSwift
 public enum TabUseCaseAction {
     case insert(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
+    case appendGroup
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case reload
     case rebuild
@@ -87,6 +88,7 @@ public final class TabUseCase {
                 case .reload: self.rx_action.onNext(.reload)
                 case .rebuild: self.rx_action.onNext(.rebuild)
                 case let .append(before, after): self.rx_action.onNext(.append(before: before, after: after))
+                case .appendGroup: self.rx_action.onNext(.appendGroup)
                 case let .change(before, after): self.rx_action.onNext(.change(before: before, after: after))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex):
                     self.rx_action.onNext(.delete(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
@@ -160,6 +162,11 @@ public final class TabUseCase {
     /// タブの追加
     public func add(url: String? = nil) {
         pageHistoryDataModel.append(url: url, title: nil)
+    }
+
+    /// グループの追加
+    public func addGroup() {
+        pageHistoryDataModel.appendGroup()
     }
 
     /// タブの挿入
