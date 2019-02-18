@@ -31,7 +31,7 @@ final class OptionMenuMemoTableViewModel {
         // リロード監視
         MemoUseCase.s.rx_action
             .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case .close = action else { return }
+                guard let `self` = self, let action = action.element, case .update = action else { return }
                 self.rx_action.onNext(.reload)
             }
             .disposed(by: disposeBag)

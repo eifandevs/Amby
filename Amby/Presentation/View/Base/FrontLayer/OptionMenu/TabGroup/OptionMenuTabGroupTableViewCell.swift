@@ -25,7 +25,7 @@ class OptionMenuTabGroupTableViewCell: UITableViewCell {
 
     func setRow(row: OptionMenuTabGroupTableViewModel.Row) {
         titleLabel.text = row.title
-        
+
         // フロントバー表示
         if row.isFront {
             frontBar.alpha = 1
