@@ -95,7 +95,7 @@ extension OptionMenuFormTableView: UITableViewDelegate {
     }
 
     func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (_, _) -> Void in
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: AppConst.OPTION_MENU.DELETE) { (_, _) -> Void in
             self.tableView.beginUpdates()
             self.viewModel.removeRow(indexPath: indexPath)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)

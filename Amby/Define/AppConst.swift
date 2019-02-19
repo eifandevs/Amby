@@ -87,6 +87,7 @@ struct AppConst {
         static let APP_INFORMATION = "Amby"
         static let LOCK = "開錠"
         static let UNLOCK = "施錠"
+        static let DELETE = "削除"
     }
 
     // MARK: - アプリ情報
