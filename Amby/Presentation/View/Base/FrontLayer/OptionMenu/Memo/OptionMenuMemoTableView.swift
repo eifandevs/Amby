@@ -127,7 +127,7 @@ extension OptionMenuMemoTableView: UITableViewDelegate {
         deleteButton.backgroundColor = UIColor.red
 
         let row = viewModel.getRow(indexPath: indexPath)
-        let title = row.data.isLocked ? "解除" : "ロック"
+        let title = row.data.isLocked ? AppConst.OPTION_MENU.UNLOCK : AppConst.OPTION_MENU.LOCK
         let lockButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: title) { (_, _) -> Void in
             self.viewModel.invertLock(memo: row.data)
         }

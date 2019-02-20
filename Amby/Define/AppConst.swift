@@ -85,8 +85,8 @@ struct AppConst {
         static let DONATION = "寄付"
         static let DEVELOPMENT = "開発"
         static let APP_INFORMATION = "Amby"
-        static let LOCK = "開錠"
-        static let UNLOCK = "施錠"
+        static let UNLOCK = "開錠"
+        static let LOCK = "施錠"
         static let DELETE = "削除"
     }
 
