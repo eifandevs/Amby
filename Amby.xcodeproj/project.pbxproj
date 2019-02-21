@@ -275,6 +275,8 @@
 		A1E33AB52137149B00C93FBE /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; };
 		A1E33AB62137149B00C93FBE /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A1E5B0BB221306F6007172D8 /* OptionMenuTabGroupTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5B0BA221306F6007172D8 /* OptionMenuTabGroupTableViewModel.swift */; };
+		A1E5B0BD221F6B90007172D8 /* TrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5B0BC221F6B90007172D8 /* TrackingService.swift */; };
+		A1E5B0BF221F6BB1007172D8 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5B0BE221F6BB1007172D8 /* PurchaseService.swift */; };
 		A1ED0BFD20C94DDD00DFC55B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */; };
 		A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
 		A1EF692221A84FD600726371 /* WebViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF692121A84FD600726371 /* WebViewService.swift */; };
@@ -699,6 +701,8 @@
 		A1E562D820D679E1007B5B1C /* SettingDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDataModelTests.swift; sourceTree = "<group>"; };
 		A1E562DA20D67C11007B5B1C /* SuggestDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestDataModelTests.swift; sourceTree = "<group>"; };
 		A1E5B0BA221306F6007172D8 /* OptionMenuTabGroupTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuTabGroupTableViewModel.swift; sourceTree = "<group>"; };
+		A1E5B0BC221F6B90007172D8 /* TrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingService.swift; sourceTree = "<group>"; };
+		A1E5B0BE221F6BB1007172D8 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
 		A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		A1EF692121A84FD600726371 /* WebViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewService.swift; sourceTree = "<group>"; };
@@ -1643,6 +1647,8 @@
 			children = (
 				A195066A2144052B0091DF23 /* NotificationService.swift */,
 				A1EF692121A84FD600726371 /* WebViewService.swift */,
+				A1E5B0BC221F6B90007172D8 /* TrackingService.swift */,
+				A1E5B0BE221F6BB1007172D8 /* PurchaseService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -3055,6 +3061,7 @@
 				A1FFA660219455D20092C4D6 /* OptionMenuSettingSwitchTableViewCellViewModel.swift in Sources */,
 				A15C5454214D699D001E8AB5 /* OptionMenuHelpTableViewCell.swift in Sources */,
 				A112E865212CD76500320048 /* MenuOrderViewController.swift in Sources */,
+				A1E5B0BF221F6BB1007172D8 /* PurchaseService.swift in Sources */,
 				A15C544F214D699D001E8AB5 /* OptionMenuHistoryTableView.swift in Sources */,
 				A112E89B212CD76500320048 /* SearchMenuTableView.swift in Sources */,
 				A11CD333214F059000D9333F /* SearchMenuTableViewModel.swift in Sources */,
@@ -3107,6 +3114,7 @@
 				A13D6AE6218B35F900B1832E /* MemoViewControllerViewModel.swift in Sources */,
 				A15C5464214D699D001E8AB5 /* OptionMenuFavoriteTableView.swift in Sources */,
 				A112E895212CD76500320048 /* FrontLayer.swift in Sources */,
+				A1E5B0BD221F6B90007172D8 /* TrackingService.swift in Sources */,
 				A15C544B214D699D001E8AB5 /* OptionMenuTableViewCell.swift in Sources */,
 				A19506922146A0DF0091DF23 /* PolicyViewController.swift in Sources */,
 				A1A3DE8121387C6F00F87009 /* AppLogger.swift in Sources */,
