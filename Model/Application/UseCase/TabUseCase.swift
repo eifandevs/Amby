@@ -18,6 +18,7 @@ public enum TabUseCaseAction {
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case reload
     case rebuild
+    case rebuildThumbnail
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
     case startLoading(context: String)
@@ -87,6 +88,7 @@ public final class TabUseCase {
                 case let .insert(before, after): self.rx_action.onNext(.insert(before: before, after: after))
                 case .reload: self.rx_action.onNext(.reload)
                 case .rebuild: self.rx_action.onNext(.rebuild)
+                case .rebuildThumbnail: self.rx_action.onNext(.rebuildThumbnail)
                 case let .append(before, after): self.rx_action.onNext(.append(before: before, after: after))
                 case .appendGroup: self.rx_action.onNext(.appendGroup)
                 case let .change(before, after): self.rx_action.onNext(.change(before: before, after: after))

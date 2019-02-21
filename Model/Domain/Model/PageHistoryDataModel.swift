@@ -21,6 +21,7 @@ enum PageHistoryDataModelAction {
     case swap(start: Int, end: Int)
     case reload
     case rebuild
+    case rebuildThumbnail
     case load(url: String)
     case startLoading(context: String)
     case endLoading(context: String)
@@ -387,6 +388,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// ヒストリー再構築
     func rebuild() {
+        rx_action.onNext(.rebuildThumbnail)
         rx_action.onNext(.rebuild)
     }
 

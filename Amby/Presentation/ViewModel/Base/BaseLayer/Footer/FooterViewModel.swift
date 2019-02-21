@@ -104,7 +104,7 @@ final class FooterViewModel {
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex): self.delete(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
                 case let .startLoading(context): self.startLoading(context: context)
                 case let .endLoading(context, title): self.endLoading(context: context, title: title)
-                case .rebuild: self.rebuild()
+                case .rebuildThumbnail: self.rebuild()
                 case let .endRendering(context): self.endRendering(context: context)
                 default: break
                 }
