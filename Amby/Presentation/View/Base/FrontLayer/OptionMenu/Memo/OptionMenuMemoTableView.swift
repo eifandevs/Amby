@@ -117,6 +117,12 @@ extension OptionMenuMemoTableView: UITableViewDataSource {
 // MARK: - TableViewDelegate
 
 extension OptionMenuMemoTableView: UITableViewDelegate {
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // セル情報取得
+        let row = viewModel.getRow(indexPath: indexPath)
+        viewModel.openMemo(memo: row.data)
+    }
+
     func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: AppConst.OPTION_MENU.DELETE) { (_, _) -> Void in
             self.tableView.beginUpdates()
@@ -136,9 +142,26 @@ extension OptionMenuMemoTableView: UITableViewDelegate {
         return [deleteButton, lockButton]
     }
 
-    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // セル情報取得
+    @available(iOS 11.0, *)
+    func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.DELETE, handler: { _, _, completion in
+            self.tableView.beginUpdates()
+            self.viewModel.removeRow(indexPath: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.endUpdates()
+            completion(true)
+        })
+
         let row = viewModel.getRow(indexPath: indexPath)
-        viewModel.openMemo(memo: row.data)
+        let title = row.data.isLocked ? AppConst.OPTION_MENU.UNLOCK : AppConst.OPTION_MENU.LOCK
+        let lockAction = UIContextualAction(style: UIContextualAction.Style.normal, title: title, handler: { _, _, completion in
+            self.viewModel.invertLock(memo: row.data)
+            completion(true)
+        })
+
+        let config = UISwipeActionsConfiguration(actions: [deleteAction, lockAction])
+
+        config.performsFirstActionWithFullSwipe = false
+        return config
     }
 }

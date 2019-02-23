@@ -80,24 +80,6 @@ extension OptionMenuHistoryTableView: UITableViewDataSource {
         return viewModel.cellHeight
     }
 
-    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: AppConst.OPTION_MENU.DELETE) { (_, _) -> Void in
-            self.tableView.beginUpdates()
-
-            let rowExist = self.viewModel.removeRow(indexPath: indexPath)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-
-            if !rowExist {
-                self.viewModel.removeSection(section: indexPath.section)
-                self.tableView.deleteSections([indexPath.section], with: .automatic)
-            }
-            self.tableView.endUpdates()
-        }
-        deleteButton.backgroundColor = UIColor.red
-
-        return [deleteButton]
-    }
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.optionMenuHistoryCell.identifier, for: indexPath) as? OptionMenuHistoryTableViewCell {
             let row = viewModel.getRow(indexPath: indexPath)
@@ -142,6 +124,47 @@ extension OptionMenuHistoryTableView: UITableViewDelegate {
         viewModel.loadRequest(url: row.data.url)
 
         rx_action.onNext(.close)
+    }
+
+    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: AppConst.OPTION_MENU.DELETE) { (_, _) -> Void in
+            self.tableView.beginUpdates()
+
+            let rowExist = self.viewModel.removeRow(indexPath: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+
+            if !rowExist {
+                self.viewModel.removeSection(section: indexPath.section)
+                self.tableView.deleteSections([indexPath.section], with: .automatic)
+            }
+            self.tableView.endUpdates()
+        }
+        deleteButton.backgroundColor = UIColor.red
+
+        return [deleteButton]
+    }
+
+    @available(iOS 11.0, *)
+    func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.DELETE, handler: { _, _, completion in
+            self.tableView.beginUpdates()
+
+            let rowExist = self.viewModel.removeRow(indexPath: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+
+            if !rowExist {
+                self.viewModel.removeSection(section: indexPath.section)
+                self.tableView.deleteSections([indexPath.section], with: .automatic)
+            }
+            self.tableView.endUpdates()
+
+            completion(true)
+        })
+
+        let config = UISwipeActionsConfiguration(actions: [deleteAction])
+
+        config.performsFirstActionWithFullSwipe = false
+        return config
     }
 }
 

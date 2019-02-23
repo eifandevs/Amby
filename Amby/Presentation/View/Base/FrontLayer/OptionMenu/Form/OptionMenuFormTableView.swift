@@ -105,4 +105,20 @@ extension OptionMenuFormTableView: UITableViewDelegate {
 
         return [deleteButton]
     }
+
+    @available(iOS 11.0, *)
+    func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.DELETE, handler: { _, _, completion in
+            self.tableView.beginUpdates()
+            self.viewModel.removeRow(indexPath: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.endUpdates()
+            completion(true)
+        })
+
+        let config = UISwipeActionsConfiguration(actions: [deleteAction])
+
+        config.performsFirstActionWithFullSwipe = false
+        return config
+    }
 }
