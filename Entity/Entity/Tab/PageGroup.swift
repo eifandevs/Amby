@@ -48,7 +48,7 @@ public class PageGroup: NSObject, NSCoding {
 
     public func encode(with encoder: NSCoder) {
         encoder.encode(groupContext, forKey: "groupContext")
-        encoder.encode(currentContext, forKey: "title")
+        encoder.encode(title, forKey: "title")
         encoder.encode(isPrivate, forKey: "isPrivate")
         encoder.encode(currentContext, forKey: "currentContext")
         encoder.encode(histories, forKey: "histories")
