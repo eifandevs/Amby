@@ -14,6 +14,11 @@ final class BaseLayerViewModel {
         log.debug("deinit called.")
     }
 
+    /// 画面構築
+    func rebuild() {
+        TabUseCase.s.rebuild()
+    }
+
     /// 自動入力
     func autoFill() {
         FormUseCase.s.autoFill()

@@ -444,6 +444,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     func changeGroup(groupContext: String) {
         if let selectedGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
             pageGroupList.currentGroupContext = selectedGroup.groupContext
+            rebuild()
         }
     }
 

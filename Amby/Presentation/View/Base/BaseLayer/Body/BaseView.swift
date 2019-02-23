@@ -82,6 +82,11 @@ class BaseView: UIView {
     /// タッチ開始位置
     private var touchBeganPoint: CGPoint?
 
+    /// 初期化済みフラグ
+    var isBuilt: Bool {
+        return webViews.count > 0
+    }
+
     /// スライド中かどうかのフラグ
     var isMoving: Bool {
         return !isLocateMax && !isLocateMin
@@ -170,8 +175,6 @@ class BaseView: UIView {
         nextImageView.frame = CGRect(origin: CGPoint(x: frame.size.width, y: 0), size: frame.size)
         addSubview(previousImageView)
         addSubview(nextImageView)
-
-        setupTabs()
     }
 
     private func setupRx() {

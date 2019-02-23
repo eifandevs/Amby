@@ -50,7 +50,7 @@ final class FooterViewModel {
     /// アクション通知用RX
     let rx_action = PublishSubject<FooterViewModelAction>()
 
-    var rows = TabUseCase.s.pageHistories.map { Row(pageHistory: $0) }
+    var rows = [Row]()
 
     // 数
     var cellCount: Int {
@@ -116,7 +116,7 @@ final class FooterViewModel {
         // 再構築
         rows.removeAll()
         rows = TabUseCase.s.pageHistories.map { Row(pageHistory: $0) }
-        rx_action.onNext(.update(indexPath: nil, animated: false))
+        rx_action.onNext(.update(indexPath: nil, animated: true))
     }
 
     private func delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex _: Int) {
