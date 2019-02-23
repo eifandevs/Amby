@@ -388,6 +388,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// ヒストリー再構築
     func rebuild() {
+        // フッターから構築しないと、ローディングアニメーションが動かない
         rx_action.onNext(.rebuildThumbnail)
         rx_action.onNext(.rebuild)
     }
