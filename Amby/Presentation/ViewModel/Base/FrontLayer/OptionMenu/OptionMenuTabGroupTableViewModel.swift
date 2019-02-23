@@ -30,10 +30,7 @@ final class OptionMenuTabGroupTableViewModel {
     private let disposeBag = DisposeBag()
 
     // セル
-    private var rows: [Row] {
-        return TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.pageGroupList.currentGroupContext == $0.groupContext) })
-    }
-
+    private var rows: [Row] = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.pageGroupList.currentGroupContext == $0.groupContext) })
     // 高さ
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     // 数
@@ -49,7 +46,8 @@ final class OptionMenuTabGroupTableViewModel {
         // リロード監視
         TabUseCase.s.rx_action
             .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case .appendGroup = action else { return }
+                guard let `self` = self, let action = action.element, case .appendGroup = action, case .changeGroupTitle = action else { return }
+                self.rows = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.pageGroupList.currentGroupContext == $0.groupContext) })
                 self.rx_action.onNext(.reload)
             }
             .disposed(by: disposeBag)

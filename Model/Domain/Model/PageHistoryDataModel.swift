@@ -16,6 +16,7 @@ enum PageHistoryDataModelAction {
     case insert(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
     case appendGroup
+    case changeGroupTitle(groupContext: String, title: String)
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
@@ -68,6 +69,7 @@ protocol PageHistoryDataModelProtocol {
     func insert(url: String?, title: String?)
     func append(url: String?, title: String?)
     func appendGroup()
+    func changeGroupTitle(groupContext: String, title: String)
     func copy()
     func reload()
     func rebuild()
@@ -367,6 +369,14 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         let pageGroup = PageGroup()
         pageGroupList.groups.append(pageGroup)
         rx_action.onNext(.appendGroup)
+    }
+
+    /// タブグループタイトル変更
+    func changeGroupTitle(groupContext: String, title: String) {
+        if let targetGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
+            targetGroup.title = title
+            rx_action.onNext(.changeGroupTitle(groupContext: groupContext, title: title))
+        }
     }
 
     /// ページコピー
