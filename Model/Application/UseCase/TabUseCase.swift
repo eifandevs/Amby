@@ -25,6 +25,7 @@ public enum TabUseCaseAction {
     case startLoading(context: String)
     case endLoading(context: String, title: String)
     case endRendering(context: String)
+    case presentGroupTitleEdit(groupContext: String)
 }
 
 /// タブユースケース
@@ -122,6 +123,11 @@ public final class TabUseCase {
                 self.store()
             }
             .disposed(by: disposeBag)
+    }
+
+    /// タブグループたタイトル編集画面表示要求
+    public func presentGroupTitleEdit(groupContext: String) {
+        rx_action.onNext(.presentGroupTitleEdit(groupContext: groupContext))
     }
 
     /// 現在のタブをクローズ

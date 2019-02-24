@@ -100,6 +100,7 @@ class BaseViewController: UIViewController {
                 case let .formReader(form): self.formReader(form: form)
                 case .mailer: self.mailer()
                 case let .notice(message, isSuccess): self.notice(message: message, isSuccess: isSuccess)
+                case let .pageGroupTitle(groupContext): self.pageGroupTitle(groupContext: groupContext)
                 }
             }
             .disposed(by: rx.disposeBag)
@@ -184,6 +185,29 @@ class BaseViewController: UIViewController {
     }
 
     // MARK: Private Method
+
+    /// グループタイトル編集
+    private func pageGroupTitle(groupContext _: String) {
+        // TODO: 処理
+//        let alertController = UIAlertController(title: "Add New Name", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+//        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+//            textField.placeholder = "Enter Second Name"
+//        }
+//        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: { alert -> Void in
+//            let firstTextField = alertController.textFields![0] as UITextField
+//            let secondTextField = alertController.textFields![1] as UITextField
+//        })
+//        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {
+//            (action : UIAlertAction!) -> Void in })
+//        alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+//            textField.placeholder = "Enter First Name"
+//        }
+//
+//        alertController.addAction(saveAction)
+//        alertController.addAction(cancelAction)
+//
+//        self.presentViewController(alertController, animated: true, completion: nil)
+    }
 
     /// 通知表示
     private func notice(message: String, isSuccess: Bool) {

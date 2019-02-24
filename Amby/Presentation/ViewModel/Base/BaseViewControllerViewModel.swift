@@ -23,6 +23,7 @@ enum BaseViewControllerViewModelAction {
     case report
     case memo(memo: Memo)
     case notice(message: String, isSuccess: Bool)
+    case pageGroupTitle(groupContext: String)
 }
 
 final class BaseViewControllerViewModel {
@@ -40,6 +41,14 @@ final class BaseViewControllerViewModel {
     }
 
     private func setupRx() {
+        // タブグループタイトル編集ダイアログ
+        TabUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case let .presentGroupTitleEdit(groupContext) = action else { return }
+                self.rx_action.onNext(.pageGroupTitle(groupContext: groupContext))
+            }
+            .disposed(by: disposeBag)
+
         // ヘルプ監視
         HelpUseCase.s.rx_action
             .subscribe { [weak self] action in
