@@ -16,6 +16,7 @@ public enum TabUseCaseAction {
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
     case appendGroup
     case changeGroupTitle(groupContext: String, title: String)
+    case deleteGroup(groupContext: String)
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case reload
     case rebuild
@@ -94,6 +95,7 @@ public final class TabUseCase {
                 case let .append(before, after): self.rx_action.onNext(.append(before: before, after: after))
                 case .appendGroup: self.rx_action.onNext(.appendGroup)
                 case let .changeGroupTitle(groupContext, title): self.rx_action.onNext(.changeGroupTitle(groupContext: groupContext, title: title))
+                case let .deleteGroup(groupContext): self.rx_action.onNext(.deleteGroup(groupContext: groupContext))
                 case let .change(before, after): self.rx_action.onNext(.change(before: before, after: after))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex):
                     self.rx_action.onNext(.delete(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
@@ -181,6 +183,11 @@ public final class TabUseCase {
     /// グループのタイトル変更
     public func changeGroupTitle(groupContext: String, title: String) {
         pageHistoryDataModel.changeGroupTitle(groupContext: groupContext, title: title)
+    }
+
+    /// グループ削除
+    public func deleteGroup(groupContext: String) {
+        pageHistoryDataModel.removeGroup(groupContext: groupContext)
     }
 
     /// タブの追加

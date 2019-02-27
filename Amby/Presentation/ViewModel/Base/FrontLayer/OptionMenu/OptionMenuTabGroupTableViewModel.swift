@@ -46,9 +46,13 @@ final class OptionMenuTabGroupTableViewModel {
         // リロード監視
         TabUseCase.s.rx_action
             .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case .appendGroup = action, case .changeGroupTitle = action else { return }
-                self.rows = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.pageGroupList.currentGroupContext == $0.groupContext) })
-                self.rx_action.onNext(.reload)
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case .appendGroup, .changeGroupTitle, .deleteGroup:
+                    self.rows = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.pageGroupList.currentGroupContext == $0.groupContext) })
+                    self.rx_action.onNext(.reload)
+                default: break
+                }
             }
             .disposed(by: disposeBag)
     }
@@ -56,6 +60,13 @@ final class OptionMenuTabGroupTableViewModel {
     /// セル情報取得
     func getRow(indexPath: IndexPath) -> Row {
         return rows[indexPath.row]
+    }
+
+    /// セル削除
+    func removeRow(indexPath: IndexPath) {
+        // モデルから削除
+        let row = getRow(indexPath: indexPath)
+        TabUseCase.s.deleteGroup(groupContext: row.groupContext)
     }
 
     /// グループ作成

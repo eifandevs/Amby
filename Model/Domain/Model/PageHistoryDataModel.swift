@@ -17,6 +17,7 @@ enum PageHistoryDataModelAction {
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
     case appendGroup
     case changeGroupTitle(groupContext: String, title: String)
+    case deleteGroup(groupContext: String)
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
@@ -70,6 +71,7 @@ protocol PageHistoryDataModelProtocol {
     func append(url: String?, title: String?)
     func appendGroup()
     func changeGroupTitle(groupContext: String, title: String)
+    func removeGroup(groupContext: String)
     func copy()
     func reload()
     func rebuild()
@@ -376,6 +378,27 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         if let targetGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
             targetGroup.title = title
             rx_action.onNext(.changeGroupTitle(groupContext: groupContext, title: title))
+        }
+    }
+
+    /// タブグループ削除
+    func removeGroup(groupContext: String) {
+        if let deleteIndex = pageGroupList.groups.index(where: { $0.groupContext == groupContext }) {
+            let isCurrentDelete = groupContext == pageGroupList.currentGroupContext
+
+            pageGroupList.groups.remove(at: deleteIndex)
+
+            // 削除後にデータなし
+            let isAllDelete = pageGroupList.groups.count == 0
+            if isAllDelete {
+                pageGroupList = PageGroupList()
+            }
+            rx_action.onNext(.deleteGroup(groupContext: groupContext))
+
+            if isCurrentDelete || isAllDelete {
+                rebuild()
+            }
+            store()
         }
     }
 

@@ -2758,7 +2758,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/Amby\"";
+			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/Amby\"\n";
 		};
 		A544ACA02046F74C00D2C310 /* Lint */ = {
 			isa = PBXShellScriptBuildPhase;
