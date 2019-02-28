@@ -123,10 +123,15 @@ extension OptionMenuTabGroupTableView: UITableViewDelegate {
 
     func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: AppConst.OPTION_MENU.DELETE) { (_, _) -> Void in
-            self.tableView.beginUpdates()
-            self.viewModel.removeRow(indexPath: indexPath)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-            self.tableView.endUpdates()
+            if self.viewModel.cellCount > 1 {
+                self.tableView.beginUpdates()
+                self.viewModel.removeRow(indexPath: indexPath)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.tableView.endUpdates()
+            } else {
+                self.viewModel.removeRow(indexPath: indexPath)
+                self.rx_action.onNext(.close)
+            }
         }
         deleteButton.backgroundColor = UIColor.red
 
@@ -136,10 +141,15 @@ extension OptionMenuTabGroupTableView: UITableViewDelegate {
     @available(iOS 11.0, *)
     func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.DELETE, handler: { _, _, completion in
-            self.tableView.beginUpdates()
-            self.viewModel.removeRow(indexPath: indexPath)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-            self.tableView.endUpdates()
+            if self.viewModel.cellCount > 1 {
+                self.tableView.beginUpdates()
+                self.viewModel.removeRow(indexPath: indexPath)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.tableView.endUpdates()
+            } else {
+                self.viewModel.removeRow(indexPath: indexPath)
+                self.rx_action.onNext(.close)
+            }
             completion(true)
         })
 

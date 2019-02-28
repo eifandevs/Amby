@@ -71,6 +71,7 @@ final class OptionMenuHistoryTableViewModel {
 
     /// モデルデータ(閲覧履歴)取得
     func getModelData() {
+        // TODO: ロジックをhistorydatamodelにもっていく
         if readFiles.count > 0 {
             log.debug("common history additional loaded.")
             let latestFiles = readFiles.prefix(readInterval)

@@ -392,6 +392,13 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
             let isAllDelete = pageGroupList.groups.count == 0
             if isAllDelete {
                 pageGroupList = PageGroupList()
+            } else if isCurrentDelete {
+                // 最後の要素を削除した場合は、前のページに戻る
+                if deleteIndex == pageGroupList.groups.count {
+                    pageGroupList.currentGroupContext = pageGroupList.groups[deleteIndex - 1].groupContext
+                } else {
+                    pageGroupList.currentGroupContext = pageGroupList.groups[deleteIndex].groupContext
+                }
             }
             rx_action.onNext(.deleteGroup(groupContext: groupContext))
 
