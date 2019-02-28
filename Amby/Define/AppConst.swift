@@ -100,6 +100,13 @@ struct AppConst {
         static let REPORT = "問題の報告/ご意見"
     }
 
+    // MARK: - メール
+    struct MAIL {
+        static let ADDRESS = "eifan.devs@gmail.com"
+        static let SUBJECT = "お問い合わせ"
+        static let MESSAGE = "ここに本文が入ります。"
+    }
+    
     // MARK: - 設定画面
 
     struct SETTING {

@@ -201,9 +201,9 @@ class BaseViewController: UIViewController {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["eifan.devs@gmail.com"])
-            mail.setSubject("お問い合わせ")
-            mail.setMessageBody("ここに本文が入ります。", isHTML: false)
+            mail.setToRecipients([AppConst.MAIL.ADDRESS])
+            mail.setSubject(AppConst.MAIL.SUBJECT)
+            mail.setMessageBody(AppConst.MAIL.MESSAGE, isHTML: false)
             present(mail, animated: true)
         } else {
             log.error("cannot send mail.")
