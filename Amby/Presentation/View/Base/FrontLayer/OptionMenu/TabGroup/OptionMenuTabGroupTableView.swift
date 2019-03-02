@@ -140,6 +140,14 @@ extension OptionMenuTabGroupTableView: UITableViewDelegate {
         }
         editButton.backgroundColor = UIColor.lightGreen
 
+        // TODO: lock
+//        let row = viewModel.getRow(indexPath: indexPath)
+//        let title = row.data.isLocked ? AppConst.OPTION_MENU.UNLOCK : AppConst.OPTION_MENU.LOCK
+//        let lockButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: title) { (_, _) -> Void in
+//            self.viewModel.invertLock(memo: row.data)
+//        }
+//        lockButton.backgroundColor = UIColor.purple
+
         return [deleteButton, editButton]
     }
 

@@ -70,7 +70,6 @@ final class OptionMenuMemoTableViewModel {
     func invertLock(memo: Memo) {
         if PasscodeUseCase.s.authentificationChallenge() {
             MemoUseCase.s.invertLock(memo: memo)
-            rx_action.onNext(.reload)
         }
     }
 

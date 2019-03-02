@@ -21,6 +21,7 @@ final class OptionMenuTabGroupTableViewModel {
         let title: String
         let groupContext: String
         var isFront: Bool
+        var isPrivate: Bool
     }
 
     /// アクション通知用RX
@@ -30,7 +31,7 @@ final class OptionMenuTabGroupTableViewModel {
     private let disposeBag = DisposeBag()
 
     // セル
-    private var rows: [Row] = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.pageGroupList.currentGroupContext == $0.groupContext) })
+    private var rows: [Row] = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.pageGroupList.currentGroupContext == $0.groupContext, isPrivate: $0.isPrivate) })
     // 高さ
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     // 数
@@ -49,7 +50,7 @@ final class OptionMenuTabGroupTableViewModel {
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
                 case .appendGroup, .changeGroupTitle, .deleteGroup:
-                    self.rows = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.pageGroupList.currentGroupContext == $0.groupContext) })
+                    self.rows = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.pageGroupList.currentGroupContext == $0.groupContext, isPrivate: $0.isPrivate) })
                     self.rx_action.onNext(.reload)
                 default: break
                 }
