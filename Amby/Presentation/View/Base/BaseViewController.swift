@@ -187,8 +187,10 @@ class BaseViewController: UIViewController {
     // MARK: Private Method
 
     /// グループタイトル編集
-    private func pageGroupTitle(groupContext _: String) {
-        CustomDialogService.presentTextFieldAlert()
+    private func pageGroupTitle(groupContext: String) {
+        CustomDialogService.presentTextFieldAlert(title: MessageConst.ALERT.CHANGE_GROUP_TITLE, message: "", placeholder: MessageConst.ALERT.CHANGE_GROUP_TITLE_PLACEHOLDER) { text in
+            self.viewModel.changeGroupTitle(groupContext: groupContext, title: text)
+        }
     }
 
     /// 通知表示

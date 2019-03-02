@@ -376,8 +376,10 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     /// タブグループタイトル変更
     func changeGroupTitle(groupContext: String, title: String) {
         if let targetGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
-            targetGroup.title = title
-            rx_action.onNext(.changeGroupTitle(groupContext: groupContext, title: title))
+            if targetGroup.title != title {
+                targetGroup.title = title
+                rx_action.onNext(.changeGroupTitle(groupContext: groupContext, title: title))
+            }
         }
     }
 
@@ -485,6 +487,8 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         if let selectedGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
             pageGroupList.currentGroupContext = selectedGroup.groupContext
             rebuild()
+        } else {
+            log.warning("selected same group.")
         }
     }
 

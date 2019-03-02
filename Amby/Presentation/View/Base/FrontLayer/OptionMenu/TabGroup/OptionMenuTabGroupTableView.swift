@@ -135,7 +135,12 @@ extension OptionMenuTabGroupTableView: UITableViewDelegate {
         }
         deleteButton.backgroundColor = UIColor.red
 
-        return [deleteButton]
+        let editButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: AppConst.OPTION_MENU.EDIT) { (_, _) -> Void in
+            self.viewModel.changeGroupTitle(indexPath: indexPath)
+        }
+        editButton.backgroundColor = UIColor.lightGreen
+
+        return [deleteButton, editButton]
     }
 
     @available(iOS 11.0, *)
@@ -153,9 +158,15 @@ extension OptionMenuTabGroupTableView: UITableViewDelegate {
             completion(true)
         })
 
-        let config = UISwipeActionsConfiguration(actions: [deleteAction])
+        let editButton = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.EDIT, handler: { _, _, completion in
+            self.viewModel.changeGroupTitle(indexPath: indexPath)
+            completion(false)
+        })
+        editButton.backgroundColor = UIColor.lightGreen
 
+        let config = UISwipeActionsConfiguration(actions: [deleteAction, editButton])
         config.performsFirstActionWithFullSwipe = false
+
         return config
     }
 }

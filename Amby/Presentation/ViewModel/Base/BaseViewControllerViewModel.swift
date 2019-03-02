@@ -130,4 +130,8 @@ final class BaseViewControllerViewModel {
     func insertTab(url: String) {
         TabUseCase.s.insert(url: url)
     }
+
+    func changeGroupTitle(groupContext: String, title: String) {
+        TabUseCase.s.changeGroupTitle(groupContext: groupContext, title: title)
+    }
 }

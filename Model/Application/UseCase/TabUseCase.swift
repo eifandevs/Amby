@@ -173,11 +173,7 @@ public final class TabUseCase {
 
     /// グループ変更
     public func changeGroup(groupContext: String) {
-        if pageHistoryDataModel.pageGroupList.currentGroupContext != groupContext {
-            pageHistoryDataModel.changeGroup(groupContext: groupContext)
-        } else {
-            log.warning("selected same group.")
-        }
+        pageHistoryDataModel.changeGroup(groupContext: groupContext)
     }
 
     /// グループのタイトル変更

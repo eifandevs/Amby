@@ -22,6 +22,8 @@ struct MessageConst {
     // MARK: - アラート
 
     struct ALERT {
+        static let CHANGE_GROUP_TITLE = "グループ名の変更"
+        static let CHANGE_GROUP_TITLE_PLACEHOLDER = "enter new name"
         static let FORM_TITLE = "フォーム自動入力"
         static let FORM_SAVE_TITLE = "フォームデータ保存"
         static let FORM_EXIST = "保存済みフォームが存在します。自動入力しますか？"

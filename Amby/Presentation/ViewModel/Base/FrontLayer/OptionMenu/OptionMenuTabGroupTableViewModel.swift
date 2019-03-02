@@ -79,4 +79,10 @@ final class OptionMenuTabGroupTableViewModel {
         let row = getRow(indexPath: indexPath)
         TabUseCase.s.changeGroup(groupContext: row.groupContext)
     }
+
+    /// グループ名変更
+    func changeGroupTitle(indexPath: IndexPath) {
+        let row = getRow(indexPath: indexPath)
+        TabUseCase.s.presentGroupTitleEdit(groupContext: row.groupContext)
+    }
 }
