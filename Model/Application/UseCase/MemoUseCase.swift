@@ -43,7 +43,7 @@ public final class MemoUseCase {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case .insert, .update, .delete, .deleteAll:
+                case .insert, .update, .delete, .deleteAll, .invertLock:
                     self.rx_action.onNext(.update)
                 }
             }
@@ -75,7 +75,9 @@ public final class MemoUseCase {
     }
 
     public func invertLock(memo: Memo) {
-        memoDataModel.invertLock(memo: memo)
+        if PasscodeUseCase.s.authentificationChallenge() {
+            memoDataModel.invertLock(memo: memo)
+        }
     }
 
     public func delete(memo: Memo) {

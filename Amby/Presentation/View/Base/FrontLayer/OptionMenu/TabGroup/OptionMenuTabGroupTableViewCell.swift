@@ -11,6 +11,7 @@ import UIKit
 class OptionMenuTabGroupTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var frontBar: UIView!
+    @IBOutlet var privateModeImageView: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,5 +33,8 @@ class OptionMenuTabGroupTableViewCell: UITableViewCell {
         } else {
             frontBar.alpha = 0
         }
+
+        // プライベートモード
+        privateModeImageView.isHidden = !row.isPrivate
     }
 }

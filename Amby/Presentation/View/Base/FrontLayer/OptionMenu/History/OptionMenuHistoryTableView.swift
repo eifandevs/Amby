@@ -132,11 +132,11 @@ extension OptionMenuHistoryTableView: UITableViewDelegate {
             self.tableView.beginUpdates()
 
             let rowExist = self.viewModel.removeRow(indexPath: indexPath)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.deleteRows(at: [indexPath], with: .none)
 
             if !rowExist {
                 self.viewModel.removeSection(section: indexPath.section)
-                self.tableView.deleteSections([indexPath.section], with: .automatic)
+                self.tableView.deleteSections([indexPath.section], with: .none)
             }
             self.tableView.endUpdates()
 

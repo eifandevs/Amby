@@ -49,7 +49,7 @@ final class OptionMenuTabGroupTableViewModel {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case .appendGroup, .changeGroupTitle, .deleteGroup:
+                case .appendGroup, .changeGroupTitle, .deleteGroup, .invertPrivateMode:
                     self.rows = TabUseCase.s.pageGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.pageGroupList.currentGroupContext == $0.groupContext, isPrivate: $0.isPrivate) })
                     self.rx_action.onNext(.reload)
                 default: break
@@ -85,5 +85,11 @@ final class OptionMenuTabGroupTableViewModel {
     func changeGroupTitle(indexPath: IndexPath) {
         let row = getRow(indexPath: indexPath)
         TabUseCase.s.presentGroupTitleEdit(groupContext: row.groupContext)
+    }
+
+    /// グループ名変更
+    func invertPrivateMode(indexPath: IndexPath) {
+        let row = getRow(indexPath: indexPath)
+        TabUseCase.s.invertPrivateMode(groupContext: row.groupContext)
     }
 }

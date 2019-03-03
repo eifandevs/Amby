@@ -18,6 +18,7 @@ enum PageHistoryDataModelAction {
     case appendGroup
     case changeGroupTitle(groupContext: String, title: String)
     case deleteGroup(groupContext: String)
+    case invertPrivateMode
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
@@ -72,6 +73,7 @@ protocol PageHistoryDataModelProtocol {
     func appendGroup()
     func changeGroupTitle(groupContext: String, title: String)
     func removeGroup(groupContext: String)
+    func invertPrivateMode(groupContext: String)
     func copy()
     func reload()
     func rebuild()
@@ -408,6 +410,21 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
                 rebuild()
             }
             store()
+        }
+    }
+
+    /// change private mode
+    func invertPrivateMode(groupContext: String) {
+        if let targetGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
+            let isCurrentInvert = groupContext == pageGroupList.currentGroupContext
+
+            targetGroup.isPrivate = !targetGroup.isPrivate
+
+            if isCurrentInvert && targetGroup.isPrivate {
+                rebuild()
+            }
+
+            rx_action.onNext(.invertPrivateMode)
         }
     }
 

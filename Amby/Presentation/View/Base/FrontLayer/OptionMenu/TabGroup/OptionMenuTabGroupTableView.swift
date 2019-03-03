@@ -127,7 +127,7 @@ extension OptionMenuTabGroupTableView: UITableViewDelegate {
             if self.viewModel.cellCount > 1 {
                 self.tableView.beginUpdates()
                 self.viewModel.removeRow(indexPath: indexPath)
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.tableView.deleteRows(at: [indexPath], with: .none)
                 self.tableView.endUpdates()
                 completion(true)
             } else {
@@ -142,15 +142,15 @@ extension OptionMenuTabGroupTableView: UITableViewDelegate {
         })
         editButton.backgroundColor = UIColor.lightGreen
 
-        // TODO: lock
-        //        let row = viewModel.getRow(indexPath: indexPath)
-        //        let title = row.data.isLocked ? AppConst.OPTION_MENU.UNLOCK : AppConst.OPTION_MENU.LOCK
-        //        let lockButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: title) { (_, _) -> Void in
-        //            self.viewModel.invertLock(memo: row.data)
-        //        }
-        //        lockButton.backgroundColor = UIColor.purple
+        let row = viewModel.getRow(indexPath: indexPath)
+        let title = row.isPrivate ? AppConst.OPTION_MENU.UNLOCK : AppConst.OPTION_MENU.LOCK
+        let lockButton = UIContextualAction(style: UIContextualAction.Style.destructive, title: title, handler: { _, _, completion in
+            self.viewModel.invertPrivateMode(indexPath: indexPath)
+            completion(false)
+        })
+        lockButton.backgroundColor = UIColor.purple
 
-        let config = UISwipeActionsConfiguration(actions: [deleteAction, editButton])
+        let config = UISwipeActionsConfiguration(actions: [deleteAction, editButton, lockButton])
         config.performsFirstActionWithFullSwipe = false
 
         return config

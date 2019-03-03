@@ -16,6 +16,7 @@ enum MemoDataModelAction {
     case insert
     case delete
     case deleteAll
+    case invertLock
 }
 
 enum MemoDataModelError {
@@ -119,7 +120,7 @@ final class MemoDataModel: MemoDataModelProtocol {
         }
 
         if case .success = result {
-            rx_action.onNext(.update)
+            rx_action.onNext(.invertLock)
         } else {
             rx_error.onNext(.update)
         }

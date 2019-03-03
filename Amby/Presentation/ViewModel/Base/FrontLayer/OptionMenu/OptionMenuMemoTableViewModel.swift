@@ -68,9 +68,7 @@ final class OptionMenuMemoTableViewModel {
 
     /// ロック or アンロック
     func invertLock(memo: Memo) {
-        if PasscodeUseCase.s.authentificationChallenge() {
-            MemoUseCase.s.invertLock(memo: memo)
-        }
+        MemoUseCase.s.invertLock(memo: memo)
     }
 
     /// お問い合わせ表示

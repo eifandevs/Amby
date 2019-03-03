@@ -19,11 +19,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XuR-Kv-ehZ">
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XuR-Kv-ehZ">
                         <rect key="frame" x="10" y="0.0" width="310" height="43.5"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cak-By-VyB">
+                                <rect key="frame" x="0.0" y="0.0" width="44" height="43.5"/>
+                                <color key="backgroundColor" red="1" green="0.08251867182" blue="0.090343085150000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Mui-Oa-1qW"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ut5-fl-Nqi">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="43.5"/>
+                                <rect key="frame" x="44" y="0.0" width="261" height="43.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -37,6 +44,10 @@
                                 <viewLayoutGuide key="safeArea" id="gfZ-BV-7pE"/>
                             </view>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="cak-By-VyB" secondAttribute="bottom" id="7R1-QQ-8ss"/>
+                            <constraint firstItem="cak-By-VyB" firstAttribute="top" secondItem="XuR-Kv-ehZ" secondAttribute="top" id="nEE-cC-iPr"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
@@ -49,6 +60,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="frontBar" destination="KtD-K0-Gys" id="bUU-GP-p9C"/>
+                <outlet property="privateModeImageView" destination="cak-By-VyB" id="qeP-uQ-4Th"/>
                 <outlet property="titleLabel" destination="ut5-fl-Nqi" id="mMO-ci-k1n"/>
             </connections>
         </tableViewCell>

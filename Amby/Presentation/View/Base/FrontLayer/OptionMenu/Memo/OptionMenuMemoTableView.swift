@@ -81,10 +81,8 @@ class OptionMenuMemoTableView: UIView, ShadowView, OptionMenuView {
         // リロード監視
         viewModel.rx_action
             .subscribe { [weak self] action in
-                log.eventIn(chain: "OptionMenuMemoTableViewModel.rx_action")
                 guard let `self` = self, let action = action.element, case .reload = action else { return }
                 self.tableView.reloadData()
-                log.eventOut(chain: "OptionMenuMemoTableViewModel.rx_action")
             }
             .disposed(by: rx.disposeBag)
     }
@@ -128,7 +126,7 @@ extension OptionMenuMemoTableView: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.DELETE, handler: { _, _, completion in
             self.tableView.beginUpdates()
             self.viewModel.removeRow(indexPath: indexPath)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.deleteRows(at: [indexPath], with: .none)
             self.tableView.endUpdates()
             completion(true)
         })
@@ -137,7 +135,7 @@ extension OptionMenuMemoTableView: UITableViewDelegate {
         let title = row.data.isLocked ? AppConst.OPTION_MENU.UNLOCK : AppConst.OPTION_MENU.LOCK
         let lockAction = UIContextualAction(style: UIContextualAction.Style.normal, title: title, handler: { _, _, completion in
             self.viewModel.invertLock(memo: row.data)
-            completion(true)
+            completion(false)
         })
 
         let config = UISwipeActionsConfiguration(actions: [deleteAction, lockAction])

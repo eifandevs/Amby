@@ -99,7 +99,7 @@ extension OptionMenuFormTableView: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.DELETE, handler: { _, _, completion in
             self.tableView.beginUpdates()
             self.viewModel.removeRow(indexPath: indexPath)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.deleteRows(at: [indexPath], with: .none)
             self.tableView.endUpdates()
             completion(true)
         })

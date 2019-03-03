@@ -17,6 +17,7 @@ public enum TabUseCaseAction {
     case appendGroup
     case changeGroupTitle(groupContext: String, title: String)
     case deleteGroup(groupContext: String)
+    case invertPrivateMode
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case reload
     case rebuild
@@ -96,6 +97,7 @@ public final class TabUseCase {
                 case .appendGroup: self.rx_action.onNext(.appendGroup)
                 case let .changeGroupTitle(groupContext, title): self.rx_action.onNext(.changeGroupTitle(groupContext: groupContext, title: title))
                 case let .deleteGroup(groupContext): self.rx_action.onNext(.deleteGroup(groupContext: groupContext))
+                case .invertPrivateMode: self.rx_action.onNext(.invertPrivateMode)
                 case let .change(before, after): self.rx_action.onNext(.change(before: before, after: after))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex):
                     self.rx_action.onNext(.delete(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
@@ -280,6 +282,13 @@ public final class TabUseCase {
     /// update title in page history
     public func updateTitle(context: String, title: String) {
         pageHistoryDataModel.updateTitle(context: context, title: title)
+    }
+
+    /// change private mode
+    public func invertPrivateMode(groupContext: String) {
+        if PasscodeUseCase.s.authentificationChallenge() {
+            pageHistoryDataModel.invertPrivateMode(groupContext: groupContext)
+        }
     }
 
     /// 閲覧、ページ履歴の永続化
