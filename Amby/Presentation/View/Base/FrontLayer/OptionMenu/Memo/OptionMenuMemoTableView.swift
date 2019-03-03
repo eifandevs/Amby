@@ -123,25 +123,6 @@ extension OptionMenuMemoTableView: UITableViewDelegate {
         viewModel.openMemo(memo: row.data)
     }
 
-    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: AppConst.OPTION_MENU.DELETE) { (_, _) -> Void in
-            self.tableView.beginUpdates()
-            self.viewModel.removeRow(indexPath: indexPath)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-            self.tableView.endUpdates()
-        }
-        deleteButton.backgroundColor = UIColor.red
-
-        let row = viewModel.getRow(indexPath: indexPath)
-        let title = row.data.isLocked ? AppConst.OPTION_MENU.UNLOCK : AppConst.OPTION_MENU.LOCK
-        let lockButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: title) { (_, _) -> Void in
-            self.viewModel.invertLock(memo: row.data)
-        }
-        lockButton.backgroundColor = UIColor.purple
-
-        return [deleteButton, lockButton]
-    }
-
     @available(iOS 11.0, *)
     func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.DELETE, handler: { _, _, completion in

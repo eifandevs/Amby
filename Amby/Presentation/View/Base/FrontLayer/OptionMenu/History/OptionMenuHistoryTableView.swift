@@ -126,24 +126,6 @@ extension OptionMenuHistoryTableView: UITableViewDelegate {
         rx_action.onNext(.close)
     }
 
-    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: AppConst.OPTION_MENU.DELETE) { (_, _) -> Void in
-            self.tableView.beginUpdates()
-
-            let rowExist = self.viewModel.removeRow(indexPath: indexPath)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-
-            if !rowExist {
-                self.viewModel.removeSection(section: indexPath.section)
-                self.tableView.deleteSections([indexPath.section], with: .automatic)
-            }
-            self.tableView.endUpdates()
-        }
-        deleteButton.backgroundColor = UIColor.red
-
-        return [deleteButton]
-    }
-
     @available(iOS 11.0, *)
     func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.DELETE, handler: { _, _, completion in

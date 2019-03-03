@@ -121,36 +121,6 @@ extension OptionMenuTabGroupTableView: UITableViewDelegate {
         rx_action.onNext(.close)
     }
 
-    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: AppConst.OPTION_MENU.DELETE) { (_, _) -> Void in
-            if self.viewModel.cellCount > 1 {
-                self.tableView.beginUpdates()
-                self.viewModel.removeRow(indexPath: indexPath)
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                self.tableView.endUpdates()
-            } else {
-                self.viewModel.removeRow(indexPath: indexPath)
-                self.rx_action.onNext(.close)
-            }
-        }
-        deleteButton.backgroundColor = UIColor.red
-
-        let editButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: AppConst.OPTION_MENU.EDIT) { (_, _) -> Void in
-            self.viewModel.changeGroupTitle(indexPath: indexPath)
-        }
-        editButton.backgroundColor = UIColor.lightGreen
-
-        // TODO: lock
-//        let row = viewModel.getRow(indexPath: indexPath)
-//        let title = row.data.isLocked ? AppConst.OPTION_MENU.UNLOCK : AppConst.OPTION_MENU.LOCK
-//        let lockButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: title) { (_, _) -> Void in
-//            self.viewModel.invertLock(memo: row.data)
-//        }
-//        lockButton.backgroundColor = UIColor.purple
-
-        return [deleteButton, editButton]
-    }
-
     @available(iOS 11.0, *)
     func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.DELETE, handler: { _, _, completion in
@@ -159,11 +129,11 @@ extension OptionMenuTabGroupTableView: UITableViewDelegate {
                 self.viewModel.removeRow(indexPath: indexPath)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 self.tableView.endUpdates()
+                completion(true)
             } else {
                 self.viewModel.removeRow(indexPath: indexPath)
-                self.rx_action.onNext(.close)
+                completion(false)
             }
-            completion(true)
         })
 
         let editButton = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.EDIT, handler: { _, _, completion in
@@ -171,6 +141,14 @@ extension OptionMenuTabGroupTableView: UITableViewDelegate {
             completion(false)
         })
         editButton.backgroundColor = UIColor.lightGreen
+
+        // TODO: lock
+        //        let row = viewModel.getRow(indexPath: indexPath)
+        //        let title = row.data.isLocked ? AppConst.OPTION_MENU.UNLOCK : AppConst.OPTION_MENU.LOCK
+        //        let lockButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: title) { (_, _) -> Void in
+        //            self.viewModel.invertLock(memo: row.data)
+        //        }
+        //        lockButton.backgroundColor = UIColor.purple
 
         let config = UISwipeActionsConfiguration(actions: [deleteAction, editButton])
         config.performsFirstActionWithFullSwipe = false
