@@ -55,6 +55,7 @@ protocol PageHistoryDataModelProtocol {
     var histories: [PageHistory] { get }
     var currentHistory: PageHistory? { get }
     var currentLocation: Int? { get }
+    var isPrivate: Bool { get }
     func getHistory(context: String) -> PageHistory?
     func getHistory(index: Int) -> PageHistory?
     func getIsLoading(context: String) -> Bool?
@@ -127,6 +128,11 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     /// 現在の位置
     var currentLocation: Int? {
         return histories.index(where: { $0.context == currentContext })
+    }
+
+    /// 現在の閲覧モード
+    var isPrivate: Bool {
+        return pageGroupList.currentGroup.isPrivate
     }
 
     /// 現在のデータ

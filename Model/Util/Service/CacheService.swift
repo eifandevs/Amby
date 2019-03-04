@@ -13,11 +13,11 @@ class CacheService {
     // クッキーの共有
     static let processPool = WKProcessPool()
 
-    static func cacheConfiguration() -> WKWebViewConfiguration {
+    static func cacheConfiguration(dataStore: WKWebsiteDataStore) -> WKWebViewConfiguration {
         let configuration = WKWebViewConfiguration()
         configuration.processPool = processPool
         // Cookie, Cache, その他Webデータを端末内に残す
-        configuration.websiteDataStore = WKWebsiteDataStore.default()
+        configuration.websiteDataStore = dataStore
         configuration.allowsPictureInPictureMediaPlayback = true
         configuration.allowsInlineMediaPlayback = true
         configuration.allowsAirPlayForMediaPlayback = true
