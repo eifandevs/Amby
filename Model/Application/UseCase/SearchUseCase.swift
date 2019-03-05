@@ -47,6 +47,7 @@ public final class SearchUseCase {
             } else {
                 // 検索ワードによる検索
                 // 閲覧履歴を保存する
+                // プライベートモードの場合は保存しない
                 if pageHistoryDataModel.isPrivate {
                     log.debug("search history will not insert. ")
                 } else {

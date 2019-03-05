@@ -60,6 +60,7 @@ public final class HistoryUseCase {
 
     /// update common history
     public func insert(url: URL?, title: String?) {
+        // プライベートモードの場合は保存しない
         if pageHistoryDataModel.isPrivate {
             log.debug("common history will not insert. ")
         } else {
