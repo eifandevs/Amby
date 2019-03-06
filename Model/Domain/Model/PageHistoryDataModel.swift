@@ -115,7 +115,12 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
             return pageGroupList.currentGroup.currentContext
         }
         set(value) {
+            if let deleteIndex = pageGroupList.currentGroup.backForwardContextList.index(where: { $0 == value }) {
+                pageGroupList.currentGroup.backForwardContextList.remove(at: deleteIndex)
+            }
+            pageGroupList.currentGroup.backForwardContextList.append(value)
             log.debug("current context changed. \(currentContext) -> \(value)")
+            log.debug("current group backforwardlist: \(pageGroupList.currentGroup.backForwardContextList)")
             pageGroupList.currentGroup.currentContext = value
         }
     }
