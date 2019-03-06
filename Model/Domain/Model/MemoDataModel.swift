@@ -12,9 +12,11 @@ import RxCocoa
 import RxSwift
 
 enum MemoDataModelAction {
+    case update
     case insert
     case delete
     case deleteAll
+    case invertLock
 }
 
 enum MemoDataModelError {
@@ -104,7 +106,9 @@ final class MemoDataModel: MemoDataModelProtocol {
             memo.text = text
         }
 
-        if case .failure = result {
+        if case .success = result {
+            rx_action.onNext(.update)
+        } else {
             rx_error.onNext(.update)
         }
     }
@@ -115,7 +119,9 @@ final class MemoDataModel: MemoDataModelProtocol {
             memo.isLocked = !memo.isLocked
         }
 
-        if case .failure = result {
+        if case .success = result {
+            rx_action.onNext(.invertLock)
+        } else {
             rx_error.onNext(.update)
         }
     }

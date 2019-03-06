@@ -9,6 +9,10 @@
 import UIKit
 
 class OptionMenuTabGroupTableViewCell: UITableViewCell {
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var frontBar: UIView!
+    @IBOutlet var privateModeImageView: UIImageView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -18,5 +22,19 @@ class OptionMenuTabGroupTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    func setRow(row: OptionMenuTabGroupTableViewModel.Row) {
+        titleLabel.text = row.title
+
+        // フロントバー表示
+        if row.isFront {
+            frontBar.alpha = 1
+        } else {
+            frontBar.alpha = 0
+        }
+
+        // プライベートモード
+        privateModeImageView.isHidden = !row.isPrivate
     }
 }

@@ -6,16 +6,17 @@
 //  Copyright © 2019 eifandevs. All rights reserved.
 //
 
+import CommonUtil
 import Foundation
 import UIKit
 
 // swiftlint:disable force_cast
 
 public class PageGroupList: NSObject, NSCoding {
-    public var currentIndex: Int = 0
+    public var currentGroupContext = ""
     public var groups = [PageGroup]()
     public var currentGroup: PageGroup {
-        return groups[currentIndex]
+        return groups.find({ $0.groupContext == currentGroupContext })!
     }
 
     public override init() {
@@ -24,24 +25,24 @@ public class PageGroupList: NSObject, NSCoding {
     }
 
     private func setup() {
-        currentIndex = 0
         let pageGroup = PageGroup()
         groups = [pageGroup]
+        currentGroupContext = pageGroup.groupContext
     }
 
-    public init(currentIndex: Int, groups: [PageGroup]) {
-        self.currentIndex = currentIndex
+    public init(currentGroupContext: String, groups: [PageGroup]) {
+        self.currentGroupContext = currentGroupContext
         self.groups = groups
     }
 
     public required convenience init?(coder decoder: NSCoder) {
-        let currentIndex = decoder.decodeInteger(forKey: "currentIndex")
+        let currentGroupContext = decoder.decodeObject(forKey: "currentGroupContext") as! String
         let groups = decoder.decodeObject(forKey: "groups") as! [PageGroup]
-        self.init(currentIndex: currentIndex, groups: groups)
+        self.init(currentGroupContext: currentGroupContext, groups: groups)
     }
 
-    public func encode(with aCoder: NSCoder) {
-        aCoder.encode(currentIndex, forKey: "currentIndex")
-        aCoder.encode(groups, forKey: "groups")
+    public func encode(with encoder: NSCoder) {
+        encoder.encode(currentGroupContext, forKey: "currentGroupContext")
+        encoder.encode(groups, forKey: "groups")
     }
 }

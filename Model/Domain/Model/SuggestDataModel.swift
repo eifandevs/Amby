@@ -7,6 +7,7 @@
 //
 
 import Alamofire
+import CommonUtil
 import Entity
 import Foundation
 import Moya

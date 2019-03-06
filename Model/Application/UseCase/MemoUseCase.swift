@@ -13,7 +13,7 @@ import RxSwift
 
 public enum MemoUseCaseAction {
     case present(memo: Memo)
-    case close
+    case update
 }
 
 /// メモユースケース
@@ -26,12 +26,28 @@ public final class MemoUseCase {
     /// models
     private var memoDataModel: MemoDataModelProtocol!
 
+    /// Observable自動解放
+    private let disposeBag = DisposeBag()
+
     private init() {
         setupProtocolImpl()
+        setupRx()
     }
 
     private func setupProtocolImpl() {
         memoDataModel = MemoDataModel.s
+    }
+
+    private func setupRx() {
+        memoDataModel.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case .insert, .update, .delete, .deleteAll, .invertLock:
+                    self.rx_action.onNext(.update)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 
     public func delete() {
@@ -40,10 +56,6 @@ public final class MemoUseCase {
 
     public func open(memo: Memo) {
         rx_action.onNext(.present(memo: memo))
-    }
-
-    public func close() {
-        rx_action.onNext(.close)
     }
 
     public func insert(memo: Memo) {
@@ -63,7 +75,9 @@ public final class MemoUseCase {
     }
 
     public func invertLock(memo: Memo) {
-        memoDataModel.invertLock(memo: memo)
+        if PasscodeUseCase.s.authentificationChallenge() {
+            memoDataModel.invertLock(memo: memo)
+        }
     }
 
     public func delete(memo: Memo) {

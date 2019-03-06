@@ -87,16 +87,6 @@ extension OptionMenuFavoriteTableView: UITableViewDataSource {
 // MARK: - TableViewDelegate
 
 extension OptionMenuFavoriteTableView: UITableViewDelegate {
-    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (_, _) -> Void in
-            self.viewModel.removeRow(indexPath: indexPath)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-        deleteButton.backgroundColor = UIColor.red
-
-        return [deleteButton]
-    }
-
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セル情報取得
         let row = viewModel.getRow(indexPath: indexPath)
@@ -104,5 +94,21 @@ extension OptionMenuFavoriteTableView: UITableViewDelegate {
         viewModel.loadRequest(url: row.data.url)
         // 通知
         rx_action.onNext(.close)
+    }
+
+    @available(iOS 11.0, *)
+    func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.DELETE, handler: { _, _, completion in
+            self.tableView.beginUpdates()
+            self.viewModel.removeRow(indexPath: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .none)
+            self.tableView.endUpdates()
+            completion(true)
+        })
+
+        let config = UISwipeActionsConfiguration(actions: [deleteAction])
+
+        config.performsFirstActionWithFullSwipe = false
+        return config
     }
 }

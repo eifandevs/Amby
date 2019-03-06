@@ -100,6 +100,7 @@ class BaseViewController: UIViewController {
                 case let .formReader(form): self.formReader(form: form)
                 case .mailer: self.mailer()
                 case let .notice(message, isSuccess): self.notice(message: message, isSuccess: isSuccess)
+                case let .pageGroupTitle(groupContext): self.pageGroupTitle(groupContext: groupContext)
                 }
             }
             .disposed(by: rx.disposeBag)
@@ -185,6 +186,13 @@ class BaseViewController: UIViewController {
 
     // MARK: Private Method
 
+    /// グループタイトル編集
+    private func pageGroupTitle(groupContext: String) {
+        CustomDialogService.presentTextFieldAlert(title: MessageConst.ALERT.CHANGE_GROUP_TITLE, message: "", placeholder: MessageConst.ALERT.CHANGE_GROUP_TITLE_PLACEHOLDER) { text in
+            self.viewModel.changeGroupTitle(groupContext: groupContext, title: text)
+        }
+    }
+
     /// 通知表示
     private func notice(message: String, isSuccess: Bool) {
         NotificationService.presentToastNotification(message: message, isSuccess: isSuccess)
@@ -195,9 +203,9 @@ class BaseViewController: UIViewController {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["eifan.devs@gmail.com"])
-            mail.setSubject("お問い合わせ")
-            mail.setMessageBody("ここに本文が入ります。", isHTML: false)
+            mail.setToRecipients([AppConst.MAIL.ADDRESS])
+            mail.setSubject(AppConst.MAIL.SUBJECT)
+            mail.setMessageBody(AppConst.MAIL.MESSAGE, isHTML: false)
             present(mail, animated: true)
         } else {
             log.error("cannot send mail.")

@@ -22,10 +22,20 @@ public final class WebCacheUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<WebCacheUseCaseAction>()
 
-    private init() {}
+    private var pageHistoryDataModel: PageHistoryDataModelProtocol!
+
+    private init() {
+        setupProtocolImpl()
+    }
+
+    private func setupProtocolImpl() {
+        pageHistoryDataModel = PageHistoryDataModel.s
+    }
 
     public func cacheConfiguration() -> WKWebViewConfiguration {
-        return CacheService.cacheConfiguration()
+        let dataStore = pageHistoryDataModel.isPrivate ? WKWebsiteDataStore.nonPersistent() : WKWebsiteDataStore.default()
+        log.debug("set data store mode: \(dataStore.isPersistent ? "persistent" : "nonpersistent")")
+        return CacheService.cacheConfiguration(dataStore: dataStore)
     }
 
     /// Cacheの削除
