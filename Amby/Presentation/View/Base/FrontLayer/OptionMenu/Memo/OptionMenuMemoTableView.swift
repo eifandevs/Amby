@@ -81,10 +81,8 @@ class OptionMenuMemoTableView: UIView, ShadowView, OptionMenuView {
         // リロード監視
         viewModel.rx_action
             .subscribe { [weak self] action in
-                log.eventIn(chain: "OptionMenuMemoTableViewModel.rx_action")
                 guard let `self` = self, let action = action.element, case .reload = action else { return }
                 self.tableView.reloadData()
-                log.eventOut(chain: "OptionMenuMemoTableViewModel.rx_action")
             }
             .disposed(by: rx.disposeBag)
     }
@@ -117,26 +115,32 @@ extension OptionMenuMemoTableView: UITableViewDataSource {
 // MARK: - TableViewDelegate
 
 extension OptionMenuMemoTableView: UITableViewDelegate {
-    func tableView(_: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (_, _) -> Void in
-            self.viewModel.removeRow(indexPath: indexPath)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-        }
-        deleteButton.backgroundColor = UIColor.red
-
-        let row = viewModel.getRow(indexPath: indexPath)
-        let title = row.data.isLocked ? "解除" : "ロック"
-        let lockButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: title) { (_, _) -> Void in
-            self.viewModel.invertLock(memo: row.data)
-        }
-        lockButton.backgroundColor = UIColor.purple
-
-        return [deleteButton, lockButton]
-    }
-
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セル情報取得
         let row = viewModel.getRow(indexPath: indexPath)
         viewModel.openMemo(memo: row.data)
+    }
+
+    @available(iOS 11.0, *)
+    func tableView(_: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: UIContextualAction.Style.destructive, title: AppConst.OPTION_MENU.DELETE, handler: { _, _, completion in
+            self.tableView.beginUpdates()
+            self.viewModel.removeRow(indexPath: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .none)
+            self.tableView.endUpdates()
+            completion(true)
+        })
+
+        let row = viewModel.getRow(indexPath: indexPath)
+        let title = row.data.isLocked ? AppConst.OPTION_MENU.UNLOCK : AppConst.OPTION_MENU.LOCK
+        let lockAction = UIContextualAction(style: UIContextualAction.Style.normal, title: title, handler: { _, _, completion in
+            self.viewModel.invertLock(memo: row.data)
+            completion(false)
+        })
+
+        let config = UISwipeActionsConfiguration(actions: [deleteAction, lockAction])
+
+        config.performsFirstActionWithFullSwipe = false
+        return config
     }
 }

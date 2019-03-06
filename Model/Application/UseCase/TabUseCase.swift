@@ -14,14 +14,20 @@ import RxSwift
 public enum TabUseCaseAction {
     case insert(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
+    case appendGroup
+    case changeGroupTitle(groupContext: String, title: String)
+    case deleteGroup(groupContext: String)
+    case invertPrivateMode
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case reload
     case rebuild
+    case rebuildThumbnail
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
     case startLoading(context: String)
     case endLoading(context: String, title: String)
     case endRendering(context: String)
+    case presentGroupTitleEdit(groupContext: String)
 }
 
 /// タブユースケース
@@ -32,6 +38,10 @@ public final class TabUseCase {
 
     public var currentUrl: String? {
         return pageHistoryDataModel.currentHistory?.url
+    }
+
+    public var pageGroupList: PageGroupList {
+        return pageHistoryDataModel.pageGroupList
     }
 
     public var pageHistories: [PageHistory] {
@@ -82,7 +92,12 @@ public final class TabUseCase {
                 case let .insert(before, after): self.rx_action.onNext(.insert(before: before, after: after))
                 case .reload: self.rx_action.onNext(.reload)
                 case .rebuild: self.rx_action.onNext(.rebuild)
+                case .rebuildThumbnail: self.rx_action.onNext(.rebuildThumbnail)
                 case let .append(before, after): self.rx_action.onNext(.append(before: before, after: after))
+                case .appendGroup: self.rx_action.onNext(.appendGroup)
+                case let .changeGroupTitle(groupContext, title): self.rx_action.onNext(.changeGroupTitle(groupContext: groupContext, title: title))
+                case let .deleteGroup(groupContext): self.rx_action.onNext(.deleteGroup(groupContext: groupContext))
+                case .invertPrivateMode: self.rx_action.onNext(.invertPrivateMode)
                 case let .change(before, after): self.rx_action.onNext(.change(before: before, after: after))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex):
                     self.rx_action.onNext(.delete(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
@@ -112,6 +127,11 @@ public final class TabUseCase {
                 self.store()
             }
             .disposed(by: disposeBag)
+    }
+
+    /// タブグループたタイトル編集画面表示要求
+    public func presentGroupTitleEdit(groupContext: String) {
+        rx_action.onNext(.presentGroupTitleEdit(groupContext: groupContext))
     }
 
     /// 現在のタブをクローズ
@@ -153,9 +173,29 @@ public final class TabUseCase {
         pageHistoryDataModel.change(context: context)
     }
 
+    /// グループ変更
+    public func changeGroup(groupContext: String) {
+        pageHistoryDataModel.changeGroup(groupContext: groupContext)
+    }
+
+    /// グループのタイトル変更
+    public func changeGroupTitle(groupContext: String, title: String) {
+        pageHistoryDataModel.changeGroupTitle(groupContext: groupContext, title: title)
+    }
+
+    /// グループ削除
+    public func deleteGroup(groupContext: String) {
+        pageHistoryDataModel.removeGroup(groupContext: groupContext)
+    }
+
     /// タブの追加
     public func add(url: String? = nil) {
         pageHistoryDataModel.append(url: url, title: nil)
+    }
+
+    /// グループの追加
+    public func addGroup() {
+        pageHistoryDataModel.appendGroup()
     }
 
     /// タブの挿入
@@ -242,6 +282,13 @@ public final class TabUseCase {
     /// update title in page history
     public func updateTitle(context: String, title: String) {
         pageHistoryDataModel.updateTitle(context: context, title: title)
+    }
+
+    /// change private mode
+    public func invertPrivateMode(groupContext: String) {
+        if PasscodeUseCase.s.authentificationChallenge() {
+            pageHistoryDataModel.invertPrivateMode(groupContext: groupContext)
+        }
     }
 
     /// 閲覧、ページ履歴の永続化

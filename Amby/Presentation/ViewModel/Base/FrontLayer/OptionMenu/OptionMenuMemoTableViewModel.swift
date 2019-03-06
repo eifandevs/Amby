@@ -31,7 +31,7 @@ final class OptionMenuMemoTableViewModel {
         // リロード監視
         MemoUseCase.s.rx_action
             .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case .close = action else { return }
+                guard let `self` = self, let action = action.element, case .update = action else { return }
                 self.rx_action.onNext(.reload)
             }
             .disposed(by: disposeBag)
@@ -68,10 +68,7 @@ final class OptionMenuMemoTableViewModel {
 
     /// ロック or アンロック
     func invertLock(memo: Memo) {
-        if PasscodeUseCase.s.authentificationChallenge() {
-            MemoUseCase.s.invertLock(memo: memo)
-            rx_action.onNext(.reload)
-        }
+        MemoUseCase.s.invertLock(memo: memo)
     }
 
     /// お問い合わせ表示

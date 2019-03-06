@@ -15,11 +15,16 @@ import RxSwift
 enum PageHistoryDataModelAction {
     case insert(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
+    case appendGroup
+    case changeGroupTitle(groupContext: String, title: String)
+    case deleteGroup(groupContext: String)
+    case invertPrivateMode
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
     case reload
     case rebuild
+    case rebuildThumbnail
     case load(url: String)
     case startLoading(context: String)
     case endLoading(context: String)
@@ -45,10 +50,12 @@ extension PageHistoryDataModelError: ModelError {
 protocol PageHistoryDataModelProtocol {
     var rx_action: PublishSubject<PageHistoryDataModelAction> { get }
     var rx_error: PublishSubject<PageHistoryDataModelError> { get }
+    var pageGroupList: PageGroupList { get }
     var currentContext: String { get set }
     var histories: [PageHistory] { get }
     var currentHistory: PageHistory? { get }
     var currentLocation: Int? { get }
+    var isPrivate: Bool { get }
     func getHistory(context: String) -> PageHistory?
     func getHistory(index: Int) -> PageHistory?
     func getIsLoading(context: String) -> Bool?
@@ -64,12 +71,17 @@ protocol PageHistoryDataModelProtocol {
     func updateTitle(context: String, title: String)
     func insert(url: String?, title: String?)
     func append(url: String?, title: String?)
+    func appendGroup()
+    func changeGroupTitle(groupContext: String, title: String)
+    func removeGroup(groupContext: String)
+    func invertPrivateMode(groupContext: String)
     func copy()
     func reload()
     func rebuild()
     func getIndex(context: String) -> Int?
     func remove(context: String)
     func change(context: String)
+    func changeGroup(groupContext: String)
     func goBack()
     func goNext()
     func store()
@@ -87,7 +99,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     private let repository = UserDefaultRepository()
 
     /// webViewそれぞれの履歴とカレントページインデックス
-    private var pageGroupList: PageGroupList!
+    var pageGroupList: PageGroupList
     public private(set) var histories: [PageHistory] {
         get {
             return pageGroupList.currentGroup.histories
@@ -118,6 +130,11 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         return histories.index(where: { $0.context == currentContext })
     }
 
+    /// 現在の閲覧モード
+    var isPrivate: Bool {
+        return pageGroupList.currentGroup.isPrivate
+    }
+
     /// 現在のデータ
     private var currentData: (pageHistory: PageHistory, index: Int)? {
         if let currentHistory = self.currentHistory, let currentLocation = self.currentLocation {
@@ -139,7 +156,18 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     private let localStorageRepository = LocalStorageRepository<Cache>()
 
     private init() {
-        initialize()
+        // pageHistory読み込み
+        let result = localStorageRepository.getData(.pageHistory)
+        if case let .success(data) = result {
+            if let pageGroupList = NSKeyedUnarchiver.unarchiveObject(with: data) as? PageGroupList {
+                self.pageGroupList = pageGroupList
+            } else {
+                self.pageGroupList = PageGroupList()
+                log.error("unarchive histories error.")
+            }
+        } else {
+            pageGroupList = PageGroupList()
+        }
     }
 
     /// 初期化
@@ -346,6 +374,66 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         rx_action.onNext(.append(before: before, after: currentData!))
     }
 
+    /// タブグループ作成
+    func appendGroup() {
+        let pageGroup = PageGroup()
+        pageGroupList.groups.append(pageGroup)
+        rx_action.onNext(.appendGroup)
+    }
+
+    /// タブグループタイトル変更
+    func changeGroupTitle(groupContext: String, title: String) {
+        if let targetGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
+            if targetGroup.title != title {
+                targetGroup.title = title
+                rx_action.onNext(.changeGroupTitle(groupContext: groupContext, title: title))
+            }
+        }
+    }
+
+    /// タブグループ削除
+    func removeGroup(groupContext: String) {
+        if let deleteIndex = pageGroupList.groups.index(where: { $0.groupContext == groupContext }) {
+            let isCurrentDelete = groupContext == pageGroupList.currentGroupContext
+
+            pageGroupList.groups.remove(at: deleteIndex)
+
+            // 削除後にデータなし
+            let isAllDelete = pageGroupList.groups.count == 0
+            if isAllDelete {
+                pageGroupList = PageGroupList()
+            } else if isCurrentDelete {
+                // 最後の要素を削除した場合は、前のページに戻る
+                if deleteIndex == pageGroupList.groups.count {
+                    pageGroupList.currentGroupContext = pageGroupList.groups[deleteIndex - 1].groupContext
+                } else {
+                    pageGroupList.currentGroupContext = pageGroupList.groups[deleteIndex].groupContext
+                }
+            }
+            rx_action.onNext(.deleteGroup(groupContext: groupContext))
+
+            if isCurrentDelete || isAllDelete {
+                rebuild()
+            }
+            store()
+        }
+    }
+
+    /// change private mode
+    func invertPrivateMode(groupContext: String) {
+        if let targetGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
+            let isCurrentInvert = groupContext == pageGroupList.currentGroupContext
+
+            targetGroup.isPrivate = !targetGroup.isPrivate
+
+            if isCurrentInvert && targetGroup.isPrivate {
+                rebuild()
+            }
+
+            rx_action.onNext(.invertPrivateMode)
+        }
+    }
+
     /// ページコピー
     func copy() {
         if let currentHistory = currentHistory {
@@ -365,6 +453,8 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// ヒストリー再構築
     func rebuild() {
+        // フッターから構築しないと、ローディングアニメーションが動かない
+        rx_action.onNext(.rebuildThumbnail)
         rx_action.onNext(.rebuild)
     }
 
@@ -413,6 +503,16 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         let before = currentData!
         currentContext = context
         rx_action.onNext(.change(before: before, after: currentData!))
+    }
+
+    /// 表示中グループの変更
+    func changeGroup(groupContext: String) {
+        if let selectedGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
+            pageGroupList.currentGroupContext = selectedGroup.groupContext
+            rebuild()
+        } else {
+            log.warning("selected same group.")
+        }
     }
 
     /// 前ページに変更

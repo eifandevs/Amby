@@ -12,6 +12,7 @@
 		2D09190780127377F04D13FF /* Pods_All_Amby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3142C4F33D0DBAE0859EDF26 /* Pods_All_Amby.framework */; };
 		62F8CE49F96E0498CD005428 /* Pods_All_Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8472F7E2E1F266BC528B8E /* Pods_All_Model.framework */; };
 		71CF37049E7E55B00EBA1BCA /* Pods_All_Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8692F7480F7AAB8F5A3CCD8D /* Pods_All_Logger.framework */; };
+		A111F8FB2222CEBD00DE457F /* CustomDialogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */; };
 		A112E735212AF83800320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
 		A112E82D212CD76500320048 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E773212CD76400320048 /* SplashViewController.swift */; };
 		A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A112E776212CD76400320048 /* LaunchScreen.storyboard */; };
@@ -274,6 +275,9 @@
 		A1E33AB22137149B00C93FBE /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = A1E33AA22137149A00C93FBE /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A1E33AB52137149B00C93FBE /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; };
 		A1E33AB62137149B00C93FBE /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A1E5B0BB221306F6007172D8 /* OptionMenuTabGroupTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5B0BA221306F6007172D8 /* OptionMenuTabGroupTableViewModel.swift */; };
+		A1E5B0BD221F6B90007172D8 /* TrackingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5B0BC221F6B90007172D8 /* TrackingService.swift */; };
+		A1E5B0BF221F6BB1007172D8 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5B0BE221F6BB1007172D8 /* PurchaseService.swift */; };
 		A1ED0BFD20C94DDD00DFC55B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */; };
 		A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */; };
 		A1EF692221A84FD600726371 /* WebViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF692121A84FD600726371 /* WebViewService.swift */; };
@@ -434,6 +438,7 @@
 		96AFF35B99825259F1DDFADD /* Pods-All-Amby.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Amby.release.xcconfig"; path = "Pods/Target Support Files/Pods-All-Amby/Pods-All-Amby.release.xcconfig"; sourceTree = "<group>"; };
 		9C94DDA525D53D355C743374 /* Pods-All-Amby.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-All-Amby.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-All-Amby/Pods-All-Amby.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDialogService.swift; sourceTree = "<group>"; };
 		A112E734212AF83800320048 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A112E773212CD76400320048 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		A112E777212CD76400320048 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -697,6 +702,9 @@
 		A1E562D620D56BF8007B5B1C /* SearchHistoryDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModelTests.swift; sourceTree = "<group>"; };
 		A1E562D820D679E1007B5B1C /* SettingDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDataModelTests.swift; sourceTree = "<group>"; };
 		A1E562DA20D67C11007B5B1C /* SuggestDataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestDataModelTests.swift; sourceTree = "<group>"; };
+		A1E5B0BA221306F6007172D8 /* OptionMenuTabGroupTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuTabGroupTableViewModel.swift; sourceTree = "<group>"; };
+		A1E5B0BC221F6B90007172D8 /* TrackingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingService.swift; sourceTree = "<group>"; };
+		A1E5B0BE221F6BB1007172D8 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
 		A1ED0BFC20C94DDD00DFC55B /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		A1ED0BFF20CBCAAC00DFC55B /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
 		A1EF692121A84FD600726371 /* WebViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewService.swift; sourceTree = "<group>"; };
@@ -1226,6 +1234,7 @@
 			children = (
 				A13D6A9321872B6F00B1832E /* Cell */,
 				A11CD313214F058F00D9333F /* OptionMenuTableViewModel.swift */,
+				A1E5B0BA221306F6007172D8 /* OptionMenuTabGroupTableViewModel.swift */,
 				A11CD314214F058F00D9333F /* OptionMenuSettingTableViewModel.swift */,
 				A11CD315214F058F00D9333F /* OptionMenuFormTableViewModel.swift */,
 				A11CD316214F058F00D9333F /* OptionMenuFavoriteTableViewModel.swift */,
@@ -1640,6 +1649,9 @@
 			children = (
 				A195066A2144052B0091DF23 /* NotificationService.swift */,
 				A1EF692121A84FD600726371 /* WebViewService.swift */,
+				A1E5B0BC221F6B90007172D8 /* TrackingService.swift */,
+				A1E5B0BE221F6BB1007172D8 /* PurchaseService.swift */,
+				A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -2746,7 +2758,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/Amby\"";
+			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" \"${SRCROOT}/Amby\"\n";
 		};
 		A544ACA02046F74C00D2C310 /* Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3052,6 +3064,7 @@
 				A1FFA660219455D20092C4D6 /* OptionMenuSettingSwitchTableViewCellViewModel.swift in Sources */,
 				A15C5454214D699D001E8AB5 /* OptionMenuHelpTableViewCell.swift in Sources */,
 				A112E865212CD76500320048 /* MenuOrderViewController.swift in Sources */,
+				A1E5B0BF221F6BB1007172D8 /* PurchaseService.swift in Sources */,
 				A15C544F214D699D001E8AB5 /* OptionMenuHistoryTableView.swift in Sources */,
 				A112E89B212CD76500320048 /* SearchMenuTableView.swift in Sources */,
 				A11CD333214F059000D9333F /* SearchMenuTableViewModel.swift in Sources */,
@@ -3078,12 +3091,14 @@
 				A112E86B212CD76500320048 /* ReportViewController.swift in Sources */,
 				A11CD332214F059000D9333F /* BaseViewModel.swift in Sources */,
 				A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */,
+				A1E5B0BB221306F6007172D8 /* OptionMenuTabGroupTableViewModel.swift in Sources */,
 				A15C545C214D699D001E8AB5 /* OptionMenuSettingTableView.swift in Sources */,
 				A123451B2135ADB400C791B8 /* ResourceUtil.swift in Sources */,
 				A112E897212CD76500320048 /* FooterView.swift in Sources */,
 				A112E8AF212CD76500320048 /* EGProgressBar.swift in Sources */,
 				A112E871212CD76500320048 /* CircleMenu.swift in Sources */,
 				A112E869212CD76500320048 /* CornerRadiusButton.swift in Sources */,
+				A111F8FB2222CEBD00DE457F /* CustomDialogService.swift in Sources */,
 				A12B93FB214EFD710082EEA5 /* OpenSourceViewController.swift in Sources */,
 				A11CD328214F059000D9333F /* CircleMenuViewModel.swift in Sources */,
 				A11CD331214F059000D9333F /* FooterViewModel.swift in Sources */,
@@ -3103,6 +3118,7 @@
 				A13D6AE6218B35F900B1832E /* MemoViewControllerViewModel.swift in Sources */,
 				A15C5464214D699D001E8AB5 /* OptionMenuFavoriteTableView.swift in Sources */,
 				A112E895212CD76500320048 /* FrontLayer.swift in Sources */,
+				A1E5B0BD221F6B90007172D8 /* TrackingService.swift in Sources */,
 				A15C544B214D699D001E8AB5 /* OptionMenuTableViewCell.swift in Sources */,
 				A19506922146A0DF0091DF23 /* PolicyViewController.swift in Sources */,
 				A1A3DE8121387C6F00F87009 /* AppLogger.swift in Sources */,

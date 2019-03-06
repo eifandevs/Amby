@@ -47,6 +47,8 @@ class BaseLayer: UIView {
         addSubview(footerView)
 
         setupRx(frame: frame)
+
+        viewModel.rebuild()
     }
 
     /// setup rx
@@ -146,6 +148,8 @@ class BaseLayer: UIView {
 
     /// 検索開始
     private func beginSearching(frame: CGRect) {
+        guard baseView.isBuilt else { return }
+
         baseView.slideToMax()
 
         isHeaderViewEditing = true

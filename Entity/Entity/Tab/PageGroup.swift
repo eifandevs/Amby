@@ -12,38 +12,45 @@ import UIKit
 // swiftlint:disable force_cast
 
 public class PageGroup: NSObject, NSCoding {
+    public var groupContext: String = NSUUID().uuidString
+    public var title = "新しいグループ"
     public var isPrivate = false
     public var currentContext = ""
     public var histories = [PageHistory]()
 
-    override init() {
+    public override init() {
         super.init()
         setup()
     }
 
     private func setup() {
-        isPrivate = false
         let pageHistory = PageHistory()
         histories = [pageHistory]
         currentContext = pageHistory.context
     }
 
-    public init(isPrivate: Bool, currentContext: String, histories: [PageHistory]) {
+    public init(groupContext: String, title: String, isPrivate: Bool, currentContext: String, histories: [PageHistory]) {
+        self.groupContext = groupContext
+        self.title = title
         self.isPrivate = isPrivate
         self.currentContext = currentContext
         self.histories = histories
     }
 
     public required convenience init?(coder decoder: NSCoder) {
+        let groupContext = decoder.decodeObject(forKey: "groupContext") as! String
+        let title = decoder.decodeObject(forKey: "title") as! String
         let isPrivate = decoder.decodeBool(forKey: "isPrivate")
         let histories = decoder.decodeObject(forKey: "histories") as! [PageHistory]
         let currentContext = decoder.decodeObject(forKey: "currentContext") as! String
-        self.init(isPrivate: isPrivate, currentContext: currentContext, histories: histories)
+        self.init(groupContext: groupContext, title: title, isPrivate: isPrivate, currentContext: currentContext, histories: histories)
     }
 
-    public func encode(with aCoder: NSCoder) {
-        aCoder.encode(isPrivate, forKey: "isPrivate")
-        aCoder.encode(currentContext, forKey: "currentContext")
-        aCoder.encode(histories, forKey: "histories")
+    public func encode(with encoder: NSCoder) {
+        encoder.encode(groupContext, forKey: "groupContext")
+        encoder.encode(title, forKey: "title")
+        encoder.encode(isPrivate, forKey: "isPrivate")
+        encoder.encode(currentContext, forKey: "currentContext")
+        encoder.encode(histories, forKey: "histories")
     }
 }

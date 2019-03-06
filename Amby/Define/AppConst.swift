@@ -18,6 +18,8 @@ struct AppConst {
         static let FONT = "Avenir"
         static let DATE_FORMAT = "yyyyMMdd"
         static let LOCALE = "ja_JP"
+        static let OK = "OK"
+        static let CANCEL = "Cancel"
     }
 
     // MARK: - フロントレイヤーの定数
@@ -85,8 +87,10 @@ struct AppConst {
         static let DONATION = "寄付"
         static let DEVELOPMENT = "開発"
         static let APP_INFORMATION = "Amby"
-        static let LOCK = "開錠"
-        static let UNLOCK = "施錠"
+        static let UNLOCK = "開錠"
+        static let LOCK = "施錠"
+        static let DELETE = "削除"
+        static let EDIT = "編集"
     }
 
     // MARK: - アプリ情報
@@ -97,6 +101,14 @@ struct AppConst {
         static let SOURCE = "ソースコード"
         static let CONTACT = "お問い合わせ"
         static let REPORT = "問題の報告/ご意見"
+    }
+
+    // MARK: - メール
+
+    struct MAIL {
+        static let ADDRESS = "eifan.devs@gmail.com"
+        static let SUBJECT = "お問い合わせ"
+        static let MESSAGE = "ここに本文が入ります。"
     }
 
     // MARK: - 設定画面
