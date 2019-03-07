@@ -20,8 +20,8 @@ enum BaseViewModelAction {
     case change
     case remove(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
-    case historyBack
-    case historyForward
+    case historyBack(url: String)
+    case historyForward(url: String)
     case load(url: String)
     case form
     case autoScroll
@@ -179,6 +179,8 @@ final class BaseViewModel {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
+                case let .historyBack(url): self.rx_action.onNext(.historyBack(url: url))
+                case let .historyForward(url): self.rx_action.onNext(.historyForward(url: url))
                 case let .insert(before, _): self.rx_action.onNext(.insert(at: before.index + 1))
                 case .rebuild: self.rx_action.onNext(.rebuild)
                 case .reload: self.rx_action.onNext(.reload)
@@ -186,18 +188,6 @@ final class BaseViewModel {
                 case .change: self.rx_action.onNext(.change)
                 case let .swap(start, end): self.rx_action.onNext(.swap(start: start, end: end))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
-                default: break
-                }
-            }
-            .disposed(by: disposeBag)
-
-        // ヒストリー監視
-        HistoryUseCase.s.rx_action
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element else { return }
-                switch action {
-                case .back: self.rx_action.onNext(.historyBack)
-                case .forward: self.rx_action.onNext(.historyForward)
                 default: break
                 }
             }
@@ -340,26 +330,6 @@ final class BaseViewModel {
         return TabUseCase.s.getIndex(context: context)
     }
 
-    /// 直近URL取得
-    func getMostForwardUrl(context: String) -> String? {
-        return TabUseCase.s.getMostForwardUrl(context: context)
-    }
-
-    /// 過去ページ閲覧中フラグ取得
-    func getIsPastViewing(context: String) -> Bool? {
-        return TabUseCase.s.getIsPastViewing(context: context)
-    }
-
-    /// 前回URL取得
-    func getBackUrl(context: String) -> String? {
-        return TabUseCase.s.getBackUrl(context: context)
-    }
-
-    /// 次URL取得
-    func getForwardUrl(context: String) -> String? {
-        return TabUseCase.s.getForwardUrl(context: context)
-    }
-
     func startLoading(context: String) {
         TabUseCase.s.startLoading(context: context)
     }
@@ -464,16 +434,6 @@ final class BaseViewModel {
     /// 後WebViewに切り替え
     func goNextTab() {
         TabUseCase.s.goNext()
-    }
-
-    /// 前ページに戻る
-    func historyBack() {
-        HistoryUseCase.s.goBack()
-    }
-
-    /// 次ページに進む
-    func historyForward() {
-        HistoryUseCase.s.goForward()
     }
 
     /// create thumbnail folder

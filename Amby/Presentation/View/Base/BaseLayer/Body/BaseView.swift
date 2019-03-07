@@ -192,8 +192,8 @@ class BaseView: UIView {
                 case .change: self.change()
                 case let .swap(start, end): self.swap(start: start, end: end)
                 case let .remove(isFront, deleteContext, currentContext, deleteIndex): self.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
-                case .historyBack: self.historyBack()
-                case .historyForward: self.historyForward()
+                case let .historyBack(url): self.historyBack(url: url)
+                case let .historyForward(url): self.historyForward(url: url)
                 case let .load(url): self.load(url: url)
                 case .form: self.takeForm()
                 case .autoScroll: self.autoScroll()
@@ -314,32 +314,16 @@ class BaseView: UIView {
         }
     }
 
-    private func historyForward() {
-        if let url = self.viewModel.getForwardUrl(context: self.front.context) {
-            front.operation = .forward
-            _ = front.load(urlStr: url)
-        }
+    private func historyForward(url: String) {
+        log.debug("go forward.")
+        front.operation = .forward
+        _ = front.load(urlStr: url)
     }
 
-    private func historyBack() {
-        if let isPastViewing = self.viewModel.getIsPastViewing(context: self.front.context) {
-            if front.isLoading && front.operation == .normal && !isPastViewing {
-                // 新規ページ表示中に戻るを押下したルート
-                log.debug("go back on loading.")
-
-                if let url = self.viewModel.getMostForwardUrl(context: self.front.context) {
-                    front.operation = .back
-                    _ = front.load(urlStr: url)
-                }
-            } else {
-                log.debug("go back.")
-                // 有効なURLを探す
-                if let url = self.viewModel.getBackUrl(context: self.front.context) {
-                    front.operation = .back
-                    _ = front.load(urlStr: url)
-                }
-            }
-        }
+    private func historyBack(url: String) {
+        log.debug("go back.")
+        front.operation = .back
+        _ = front.load(urlStr: url)
     }
 
     private func load(url: String) {

@@ -28,6 +28,8 @@ public enum TabUseCaseAction {
     case endLoading(context: String, title: String)
     case endRendering(context: String)
     case presentGroupTitleEdit(groupContext: String)
+    case historyBack(url: String)
+    case historyForward(url: String)
 }
 
 /// タブユースケース
@@ -115,6 +117,8 @@ public final class TabUseCase {
                         }
                     }
                 case let .endRendering(context): self.rx_action.onNext(.endRendering(context: context))
+                case let .historyBack(url): self.rx_action.onNext(.historyBack(url: url))
+                case let .historyForward(url): self.rx_action.onNext(.historyForward(url: url))
                 default: break
                 }
             }
@@ -223,26 +227,6 @@ public final class TabUseCase {
         return pageHistoryDataModel.getHistory(index: index)
     }
 
-    /// 直近URL取得
-    public func getMostForwardUrl(context: String) -> String? {
-        return pageHistoryDataModel.getMostForwardUrl(context: context)
-    }
-
-    /// 過去ページ閲覧中フラグ取得
-    public func getIsPastViewing(context: String) -> Bool? {
-        return pageHistoryDataModel.isPastViewing(context: context)
-    }
-
-    /// 前回URL取得
-    public func getBackUrl(context: String) -> String? {
-        return pageHistoryDataModel.getBackUrl(context: context)
-    }
-
-    /// 次URL取得
-    public func getForwardUrl(context: String) -> String? {
-        return pageHistoryDataModel.getForwardUrl(context: context)
-    }
-
     public func startLoading(context: String) {
         pageHistoryDataModel.startLoading(context: context)
     }
@@ -267,6 +251,16 @@ public final class TabUseCase {
     /// 後WebViewに切り替え
     public func goNext() {
         pageHistoryDataModel.goNext()
+    }
+
+    /// 前ページに切り替え
+    public func historyBack() {
+        pageHistoryDataModel.historyBack()
+    }
+
+    /// 後ページに切り替え
+    public func historyForward() {
+        pageHistoryDataModel.historyForward()
     }
 
     /// update url in page history
