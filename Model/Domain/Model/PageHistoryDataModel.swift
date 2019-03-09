@@ -29,8 +29,6 @@ enum PageHistoryDataModelAction {
     case startLoading(context: String)
     case endLoading(context: String)
     case endRendering(context: String)
-    case historyBack(url: String)
-    case historyForward(url: String)
 }
 
 enum PageHistoryDataModelError {
@@ -65,7 +63,7 @@ protocol PageHistoryDataModelProtocol {
     func endLoading(context: String)
     func endRendering(context: String)
     func swap(start: Int, end: Int)
-    func updateUrl(context: String, url: String, operation: PageHistory.Operation) -> Bool
+    func updateUrl(context: String, url: String)
     func updateTitle(context: String, title: String)
     func insert(url: String?, title: String?)
     func append(url: String?, title: String?)
@@ -82,8 +80,6 @@ protocol PageHistoryDataModelProtocol {
     func changeGroup(groupContext: String)
     func goBack()
     func goNext()
-    func historyBack()
-    func historyForward()
     func store()
     func delete()
 }
@@ -243,62 +239,16 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     }
 
     /// update url with context
-    func updateUrl(context: String, url: String, operation: PageHistory.Operation) -> Bool {
-        var isChanged = false
-
-        /// 通常の遷移の場合（ヒストリバックやフォワードではない）
+    func updateUrl(context: String, url: String) {
         if !url.isEmpty && url.isValidUrl {
             histories.forEach({
                 if $0.context == context {
-                    isChanged = true
                     $0.url = url
-
                     log.debug("save page history url. url: \(url)")
 
-                    if let isPastViewing = isPastViewing(context: context) {
-                        if operation == .normal {
-                            // 更新判定
-                            if let lastUrl = $0.backForwardList.last, lastUrl == url {
-                                return
-                            }
-
-                            // リスト更新
-                            if !isPastViewing {
-                                log.debug("add backForwardList.")
-                                $0.backForwardList.append(url)
-                            } else {
-                                log.debug("refactor backForwardList.")
-                                // ヒストリーバック -> 通常遷移の場合は、履歴リストを再構築する
-                                $0.backForwardList = Array($0.backForwardList.prefix($0.listIndex + 1))
-                                $0.backForwardList.append(url)
-                            }
-
-                            // 保存件数を超えた場合は、削除する
-                            if $0.backForwardList.count > pageHistorySaveCount {
-                                log.warning("over backForwardList max.")
-                                $0.backForwardList = Array($0.backForwardList.suffix(pageHistorySaveCount))
-                            }
-
-                            // インデックス調整
-                            $0.listIndex = $0.backForwardList.count - 1
-
-                            log.debug("change backForwardList. listIndex: \($0.listIndex) backForwardList: \($0.backForwardList)")
-                        } else {
-                            log.debug("not change backForwardList.")
-                        }
-                    } else {
-                        log.error("isPastViewing error.")
-                    }
                     return
                 }
             })
-        }
-
-        // if change front context, reload header view
-        if isChanged && context == currentContext {
-            return true
-        } else {
-            return false
         }
     }
 
@@ -502,22 +452,6 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         }
     }
 
-    /// ヒストリーバック
-    func historyBack() {
-        // 有効なURLを探す
-        if let url = getBackUrl(context: currentContext) {
-            rx_action.onNext(.historyBack(url: url))
-        }
-    }
-
-    /// ヒストリーバック
-    func historyForward() {
-        // 有効なURLを探す
-        if let url = getForwardUrl(context: currentContext) {
-            rx_action.onNext(.historyForward(url: url))
-        }
-    }
-
     /// タブ情報の保存
     func store() {
         let pageGroupListData = NSKeyedArchiver.archivedData(withRootObject: pageGroupList)
@@ -538,37 +472,5 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         if case .failure = result {
             rx_error.onNext(.delete)
         }
-    }
-
-    // MARK: - Private Method
-
-    /// 過去のページを閲覧しているかのフラグ
-    private func isPastViewing(context: String) -> Bool? {
-        if let history = histories.find({ $0.context == context }) {
-            return history.backForwardList.count != 0 && history.listIndex != history.backForwardList.count - 1
-        }
-        return nil
-    }
-
-    /// 前回URL取得
-    private func getBackUrl(context: String) -> String? {
-        if let history = histories.find({ $0.context == context }), history.listIndex > 0 {
-            // インデックス調整
-            history.listIndex -= 1
-
-            return history.backForwardList[history.listIndex]
-        }
-        return nil
-    }
-
-    /// 次URL取得
-    private func getForwardUrl(context: String) -> String? {
-        if let history = histories.find({ $0.context == context }), history.listIndex < history.backForwardList.count - 1 {
-            // インデックス調整
-            history.listIndex += 1
-
-            return history.backForwardList[history.listIndex]
-        }
-        return nil
     }
 }

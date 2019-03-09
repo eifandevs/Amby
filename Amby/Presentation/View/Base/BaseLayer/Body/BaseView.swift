@@ -192,8 +192,8 @@ class BaseView: UIView {
                 case .change: self.change()
                 case let .swap(start, end): self.swap(start: start, end: end)
                 case let .remove(isFront, deleteContext, currentContext, deleteIndex): self.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
-                case let .historyBack(url): self.historyBack(url: url)
-                case let .historyForward(url): self.historyForward(url: url)
+                case .historyBack: self.historyBack()
+                case .historyForward: self.historyForward()
                 case let .load(url): self.load(url: url)
                 case .form: self.takeForm()
                 case .autoScroll: self.autoScroll()
@@ -233,15 +233,7 @@ class BaseView: UIView {
             } else if keyPath == "URL" {
                 log.debug("receive url change.")
                 if let change = change, let url = change[NSKeyValueChangeKey.newKey] as? URL, !url.absoluteString.isEmpty {
-                    if let targetWebView = self.webViews.find({ $0?.context == contextPtr.pointee }) {
-                        guard let target = targetWebView else { return }
-                        viewModel.updatePageUrl(context: contextPtr.pointee, url: url.absoluteString, operation: target.operation)
-                        // 操作種別はnormalに戻しておく
-                        // ヒストリーバック or ヒストリーフォワードで遷移したときは、リダイレクトを除きタップから連続してのURL変更がないはず
-                        if target.operation != .normal {
-                            target.operation = .normal
-                        }
-                    }
+                    viewModel.updatePageUrl(context: contextPtr.pointee, url: url.absoluteString)
                 }
             }
         }
@@ -314,16 +306,18 @@ class BaseView: UIView {
         }
     }
 
-    private func historyForward(url: String) {
+    private func historyForward() {
         log.debug("go forward.")
-        front.operation = .forward
-        _ = front.load(urlStr: url)
+        if front.canGoForward {
+            front.goForward()
+        }
     }
 
-    private func historyBack(url: String) {
+    private func historyBack() {
         log.debug("go back.")
-        front.operation = .back
-        _ = front.load(urlStr: url)
+        if front.canGoBack {
+            front.goBack()
+        }
     }
 
     private func load(url: String) {

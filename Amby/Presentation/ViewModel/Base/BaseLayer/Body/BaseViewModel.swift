@@ -20,8 +20,8 @@ enum BaseViewModelAction {
     case change
     case remove(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
-    case historyBack(url: String)
-    case historyForward(url: String)
+    case historyBack
+    case historyForward
     case load(url: String)
     case form
     case autoScroll
@@ -179,8 +179,8 @@ final class BaseViewModel {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .historyBack(url): self.rx_action.onNext(.historyBack(url: url))
-                case let .historyForward(url): self.rx_action.onNext(.historyForward(url: url))
+                case .historyBack: self.rx_action.onNext(.historyBack)
+                case .historyForward: self.rx_action.onNext(.historyForward)
                 case let .insert(before, _): self.rx_action.onNext(.insert(at: before.index + 1))
                 case .rebuild: self.rx_action.onNext(.rebuild)
                 case .reload: self.rx_action.onNext(.reload)
@@ -447,8 +447,8 @@ final class BaseViewModel {
     }
 
     /// update url in page history
-    func updatePageUrl(context: String, url: String, operation: PageHistory.Operation) {
-        TabUseCase.s.updateUrl(context: context, url: url, operation: operation)
+    func updatePageUrl(context: String, url: String) {
+        TabUseCase.s.updateUrl(context: context, url: url)
     }
 
     /// update title in page history

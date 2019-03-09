@@ -29,9 +29,6 @@ class EGWebView: WKWebView {
     // スワイプ中かどうか
     var isSwiping: Bool = false
 
-    /// オペレーション
-    var operation: PageHistory.Operation = .normal
-
     /// observing estimatedprogress flag
     var isObservingEstimagedProgress = false
 

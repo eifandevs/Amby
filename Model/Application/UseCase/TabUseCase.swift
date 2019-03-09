@@ -28,8 +28,8 @@ public enum TabUseCaseAction {
     case endLoading(context: String, title: String)
     case endRendering(context: String)
     case presentGroupTitleEdit(groupContext: String)
-    case historyBack(url: String)
-    case historyForward(url: String)
+    case historyBack
+    case historyForward
 }
 
 /// タブユースケース
@@ -117,8 +117,6 @@ public final class TabUseCase {
                         }
                     }
                 case let .endRendering(context): self.rx_action.onNext(.endRendering(context: context))
-                case let .historyBack(url): self.rx_action.onNext(.historyBack(url: url))
-                case let .historyForward(url): self.rx_action.onNext(.historyForward(url: url))
                 default: break
                 }
             }
@@ -255,21 +253,20 @@ public final class TabUseCase {
 
     /// 前ページに切り替え
     public func historyBack() {
-        pageHistoryDataModel.historyBack()
+        rx_action.onNext(.historyBack)
     }
 
     /// 後ページに切り替え
     public func historyForward() {
-        pageHistoryDataModel.historyForward()
+        rx_action.onNext(.historyForward)
     }
 
     /// update url in page history
-    public func updateUrl(context: String, url: String, operation: PageHistory.Operation) {
-        if pageHistoryDataModel.updateUrl(context: context, url: url, operation: operation) {
+    public func updateUrl(context: String, url: String) {
+        pageHistoryDataModel.updateUrl(context: context, url: url)
+        if let currentHistory = currentHistory, context == currentContext {
             progressDataModel.updateText(text: url)
-            if let currentHistory = pageHistoryDataModel.currentHistory {
-                favoriteDataModel.reload(currentHistory: currentHistory)
-            }
+            favoriteDataModel.reload(currentHistory: currentHistory)
         }
     }
 
