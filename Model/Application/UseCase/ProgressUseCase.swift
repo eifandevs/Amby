@@ -13,6 +13,8 @@ import RxSwift
 public enum ProgressUseCaseAction {
     case updateProgress(progress: CGFloat)
     case updateText(text: String)
+    case updateCanGoBack(canGoBack: Bool)
+    case updateCanGoForward(canGoForward: Bool)
 }
 
 /// ヘッダーユースケース
@@ -21,6 +23,10 @@ public final class ProgressUseCase {
 
     /// アクション通知用RX
     public let rx_action = PublishSubject<ProgressUseCaseAction>()
+
+    private var currentContext: String {
+        return pageHistoryDataModel.currentContext
+    }
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -86,5 +92,19 @@ public final class ProgressUseCase {
     /// update text in ProgressDataModel
     public func updateText(text: String) {
         progressDataModel.updateText(text: text)
+    }
+
+    /// update cangoback
+    public func updateCanGoBack(context: String, canGoBack: Bool) {
+        if context == currentContext {
+            rx_action.onNext(.updateCanGoBack(canGoBack: canGoBack))
+        }
+    }
+
+    /// update cangoforward
+    public func updateCanGoForward(context: String, canGoForward: Bool) {
+        if context == currentContext {
+            rx_action.onNext(.updateCanGoForward(canGoForward: canGoForward))
+        }
     }
 }

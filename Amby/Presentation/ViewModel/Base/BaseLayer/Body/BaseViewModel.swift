@@ -456,6 +456,16 @@ final class BaseViewModel {
         TabUseCase.s.updateTitle(context: context, title: title)
     }
 
+    /// update canGoBack
+    func updateCanGoBack(context: String, canGoBack: Bool) {
+        ProgressUseCase.s.updateCanGoBack(context: context, canGoBack: canGoBack)
+    }
+
+    /// update canGoForward
+    func updateCanGoForward(context: String, canGoForward: Bool) {
+        ProgressUseCase.s.updateCanGoForward(context: context, canGoForward: canGoForward)
+    }
+
     /// update common history
     func insertHistory(url: URL?, title: String?) {
         HistoryUseCase.s.insert(url: url, title: title)

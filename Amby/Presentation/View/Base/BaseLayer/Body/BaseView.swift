@@ -159,6 +159,8 @@ class BaseView: UIView {
                 unwrappedWebView.removeObserverEstimatedProgress(observer: self)
                 unwrappedWebView.removeObserverTitle(observer: self)
                 unwrappedWebView.removeObserverUrl(observer: self)
+                unwrappedWebView.removeObserverCanGoBack(observer: self)
+                unwrappedWebView.removeObserverCanGoForward(observer: self)
                 unwrappedWebView.removeFromSuperview()
             }
         }
@@ -234,6 +236,16 @@ class BaseView: UIView {
                 log.debug("receive url change.")
                 if let change = change, let url = change[NSKeyValueChangeKey.newKey] as? URL, !url.absoluteString.isEmpty {
                     viewModel.updatePageUrl(context: contextPtr.pointee, url: url.absoluteString)
+                }
+            } else if keyPath == "canGoBack" {
+                log.debug("receive canGoBack change.")
+                if let change = change, let canGoBack = change[NSKeyValueChangeKey.newKey] as? Bool {
+                    viewModel.updateCanGoBack(context: contextPtr.pointee, canGoBack: canGoBack)
+                }
+            } else if keyPath == "canGoForward" {
+                log.debug("receive canGoFoward change.")
+                if let change = change, let canGoFoward = change[NSKeyValueChangeKey.newKey] as? Bool {
+                    viewModel.updateCanGoForward(context: contextPtr.pointee, canGoForward: canGoFoward)
                 }
             }
         }
@@ -499,6 +511,8 @@ class BaseView: UIView {
         target.observeEstimatedProgress(observer: self)
         target.observeTitle(observer: self)
         target.observeUrl(observer: self)
+        target.observeCanGoBack(observer: self)
+        target.observeCanGoForward(observer: self)
 
         if target.isLoading == true {
             viewModel.updateProgress(progress: CGFloat(target.estimatedProgress))
