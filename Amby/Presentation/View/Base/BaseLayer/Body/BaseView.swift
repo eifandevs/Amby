@@ -156,11 +156,7 @@ class BaseView: UIView {
     private func removeTabs() {
         webViews.forEach { webView in
             if let unwrappedWebView = webView {
-                unwrappedWebView.removeObserverEstimatedProgress(observer: self)
-                unwrappedWebView.removeObserverTitle(observer: self)
-                unwrappedWebView.removeObserverUrl(observer: self)
-                unwrappedWebView.removeObserverCanGoBack(observer: self)
-                unwrappedWebView.removeObserverCanGoForward(observer: self)
+                removeObserving(target: unwrappedWebView)
                 unwrappedWebView.removeFromSuperview()
             }
         }
@@ -503,6 +499,14 @@ class BaseView: UIView {
         isUserInteractionEnabled = false
         front.scrollView.isScrollEnabled = false
         front.scrollView.bounces = false
+    }
+
+    private func removeObserving(target: EGWebView) {
+        target.removeObserverEstimatedProgress(observer: self)
+        target.removeObserverTitle(observer: self)
+        target.removeObserverUrl(observer: self)
+        target.removeObserverCanGoBack(observer: self)
+        target.removeObserverCanGoForward(observer: self)
     }
 
     private func startObserving(target: EGWebView) {
