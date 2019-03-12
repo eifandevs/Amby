@@ -14,6 +14,8 @@ import RxSwift
 enum HeaderViewModelAction {
     case updateProgress(progress: CGFloat)
     case updateFavorite(isSwitch: Bool)
+    case updateCanGoBack(canGoBack: Bool)
+    case updateCanGoForward(canGoForward: Bool)
     case updateField(text: String)
     case searchAtMenu
     case searchAtHeader
@@ -45,6 +47,10 @@ final class HeaderViewModel {
                     self.rx_action.onNext(.updateProgress(progress: progress))
                 case let .updateText(text):
                     self.rx_action.onNext(.updateField(text: text))
+                case let .updateCanGoBack(canGoBack):
+                    self.rx_action.onNext(.updateCanGoBack(canGoBack: canGoBack))
+                case let .updateCanGoForward(canGoForward):
+                    self.rx_action.onNext(.updateCanGoForward(canGoForward: canGoForward))
                 }
             }
             .disposed(by: disposeBag)
@@ -83,11 +89,11 @@ final class HeaderViewModel {
     // MARK: Public Method
 
     func historyBack() {
-        HistoryUseCase.s.goBack()
+        TabUseCase.s.historyBack()
     }
 
     func historyForward() {
-        HistoryUseCase.s.goForward()
+        TabUseCase.s.historyForward()
     }
 
     func loadRequest(text: String) {

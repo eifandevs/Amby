@@ -12,8 +12,6 @@ import RxCocoa
 import RxSwift
 
 public enum HistoryUseCaseAction {
-    case back
-    case forward
     case load(url: String)
 }
 
@@ -37,16 +35,6 @@ public final class HistoryUseCase {
         pageHistoryDataModel = PageHistoryDataModel.s
         commonHistoryDataModel = CommonHistoryDataModel.s
         settingDataModel = SettingDataModel.s
-    }
-
-    /// ヒストリーバック
-    public func goBack() {
-        rx_action.onNext(.back)
-    }
-
-    /// ヒストリーフォワード
-    public func goForward() {
-        rx_action.onNext(.forward)
     }
 
     /// ロードリクエスト

@@ -29,9 +29,6 @@ class EGWebView: WKWebView {
     // スワイプ中かどうか
     var isSwiping: Bool = false
 
-    /// オペレーション
-    var operation: PageHistory.Operation = .normal
-
     /// observing estimatedprogress flag
     var isObservingEstimagedProgress = false
 
@@ -40,6 +37,12 @@ class EGWebView: WKWebView {
 
     /// observing url flag
     var isObservingUrl = false
+
+    /// observing cangoback
+    var isObservingCanGoBack = false
+
+    /// observing cangoforward
+    var isObservingCanGoForward = false
 
     let resourceUtil = ResourceUtil()
 
@@ -127,6 +130,38 @@ class EGWebView: WKWebView {
         if isObservingUrl {
             removeObserver(observer, forKeyPath: "URL")
             isObservingUrl = false
+        }
+    }
+
+    /// start observe 'canGoBack'
+    func observeCanGoBack(observer: NSObject) {
+        if !isObservingCanGoBack {
+            addObserver(observer, forKeyPath: "canGoBack", options: .new, context: &context)
+            isObservingCanGoBack = true
+        }
+    }
+
+    /// remove observe 'canGoBack'
+    func removeObserverCanGoBack(observer: NSObject) {
+        if isObservingCanGoBack {
+            removeObserver(observer, forKeyPath: "canGoBack")
+            isObservingCanGoBack = false
+        }
+    }
+
+    /// start observe 'canGoForward'
+    func observeCanGoForward(observer: NSObject) {
+        if !isObservingCanGoForward {
+            addObserver(observer, forKeyPath: "canGoForward", options: .new, context: &context)
+            isObservingCanGoForward = true
+        }
+    }
+
+    /// remove observe 'canGoBack'
+    func removeObserverCanGoForward(observer: NSObject) {
+        if isObservingCanGoForward {
+            removeObserver(observer, forKeyPath: "canGoForward")
+            isObservingCanGoForward = false
         }
     }
 

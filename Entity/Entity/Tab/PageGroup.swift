@@ -17,6 +17,7 @@ public class PageGroup: NSObject, NSCoding {
     public var isPrivate = false
     public var currentContext = ""
     public var histories = [PageHistory]()
+    public var backForwardContextList = [String]()
 
     public override init() {
         super.init()
@@ -27,14 +28,16 @@ public class PageGroup: NSObject, NSCoding {
         let pageHistory = PageHistory()
         histories = [pageHistory]
         currentContext = pageHistory.context
+        backForwardContextList.append(pageHistory.context)
     }
 
-    public init(groupContext: String, title: String, isPrivate: Bool, currentContext: String, histories: [PageHistory]) {
+    public init(groupContext: String, title: String, isPrivate: Bool, currentContext: String, histories: [PageHistory], backForwardContextList: [String]) {
         self.groupContext = groupContext
         self.title = title
         self.isPrivate = isPrivate
         self.currentContext = currentContext
         self.histories = histories
+        self.backForwardContextList = backForwardContextList
     }
 
     public required convenience init?(coder decoder: NSCoder) {
@@ -43,7 +46,8 @@ public class PageGroup: NSObject, NSCoding {
         let isPrivate = decoder.decodeBool(forKey: "isPrivate")
         let histories = decoder.decodeObject(forKey: "histories") as! [PageHistory]
         let currentContext = decoder.decodeObject(forKey: "currentContext") as! String
-        self.init(groupContext: groupContext, title: title, isPrivate: isPrivate, currentContext: currentContext, histories: histories)
+        let backForwardContextList = decoder.decodeObject(forKey: "backForwardContextList") as! [String]
+        self.init(groupContext: groupContext, title: title, isPrivate: isPrivate, currentContext: currentContext, histories: histories, backForwardContextList: backForwardContextList)
     }
 
     public func encode(with encoder: NSCoder) {
@@ -52,5 +56,6 @@ public class PageGroup: NSObject, NSCoding {
         encoder.encode(isPrivate, forKey: "isPrivate")
         encoder.encode(currentContext, forKey: "currentContext")
         encoder.encode(histories, forKey: "histories")
+        encoder.encode(backForwardContextList, forKey: "backForwardContextList")
     }
 }

@@ -86,6 +86,8 @@ class HeaderView: UIView, ShadowView {
                 case let .updateProgress(progress): self.updateProgress(progress: progress)
                 case let .updateFavorite(flag): self.updateFavorite(enable: flag)
                 case let .updateField(text): self.updateField(text: text)
+                case let .updateCanGoBack(canGoBack): self.updateCanGoBack(canGoBack: canGoBack)
+                case let .updateCanGoForward(canGoForward): self.updateCanGoForward(canGoForward: canGoForward)
                 case .searchAtMenu: self.searchAtMenu()
                 case .searchAtHeader: self.searchAtHeader()
                 case .grep: self.grep()
@@ -113,6 +115,7 @@ class HeaderView: UIView, ShadowView {
                 self.viewModel.historyBack()
             })
             .disposed(by: rx.disposeBag)
+        historyBackButton.isEnabled = false // default cannot historyback
         // ボタン追加
         addButton(historyBackButton, R.image.circlemenuHistoryback()!)
 
@@ -124,6 +127,7 @@ class HeaderView: UIView, ShadowView {
                 self.viewModel.historyForward()
             })
             .disposed(by: rx.disposeBag)
+        historyForwardButton.isEnabled = false // default cannot historyforward
         // ボタン追加
         addButton(historyForwardButton, R.image.circlemenuHistoryforward()!)
 
@@ -253,6 +257,14 @@ class HeaderView: UIView, ShadowView {
     }
 
     // MARK: - Private Method
+
+    private func updateCanGoBack(canGoBack: Bool) {
+        historyBackButton.isEnabled = canGoBack
+    }
+
+    private func updateCanGoForward(canGoForward: Bool) {
+        historyForwardButton.isEnabled = canGoForward
+    }
 
     private func grep() {
         startGreping()

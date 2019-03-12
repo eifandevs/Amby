@@ -156,9 +156,7 @@ class BaseView: UIView {
     private func removeTabs() {
         webViews.forEach { webView in
             if let unwrappedWebView = webView {
-                unwrappedWebView.removeObserverEstimatedProgress(observer: self)
-                unwrappedWebView.removeObserverTitle(observer: self)
-                unwrappedWebView.removeObserverUrl(observer: self)
+                removeObserving(target: unwrappedWebView)
                 unwrappedWebView.removeFromSuperview()
             }
         }
@@ -233,15 +231,17 @@ class BaseView: UIView {
             } else if keyPath == "URL" {
                 log.debug("receive url change.")
                 if let change = change, let url = change[NSKeyValueChangeKey.newKey] as? URL, !url.absoluteString.isEmpty {
-                    if let targetWebView = self.webViews.find({ $0?.context == contextPtr.pointee }) {
-                        guard let target = targetWebView else { return }
-                        viewModel.updatePageUrl(context: contextPtr.pointee, url: url.absoluteString, operation: target.operation)
-                        // 操作種別はnormalに戻しておく
-                        // ヒストリーバック or ヒストリーフォワードで遷移したときは、リダイレクトを除きタップから連続してのURL変更がないはず
-                        if target.operation != .normal {
-                            target.operation = .normal
-                        }
-                    }
+                    viewModel.updatePageUrl(context: contextPtr.pointee, url: url.absoluteString)
+                }
+            } else if keyPath == "canGoBack" {
+                log.debug("receive canGoBack change.")
+                if let change = change, let canGoBack = change[NSKeyValueChangeKey.newKey] as? Bool {
+                    viewModel.updateCanGoBack(context: contextPtr.pointee, canGoBack: canGoBack)
+                }
+            } else if keyPath == "canGoForward" {
+                log.debug("receive canGoFoward change.")
+                if let change = change, let canGoFoward = change[NSKeyValueChangeKey.newKey] as? Bool {
+                    viewModel.updateCanGoForward(context: contextPtr.pointee, canGoForward: canGoFoward)
                 }
             }
         }
@@ -315,30 +315,16 @@ class BaseView: UIView {
     }
 
     private func historyForward() {
-        if let url = self.viewModel.getForwardUrl(context: self.front.context) {
-            front.operation = .forward
-            _ = front.load(urlStr: url)
+        log.debug("go forward.")
+        if front.canGoForward {
+            front.goForward()
         }
     }
 
     private func historyBack() {
-        if let isPastViewing = self.viewModel.getIsPastViewing(context: self.front.context) {
-            if front.isLoading && front.operation == .normal && !isPastViewing {
-                // 新規ページ表示中に戻るを押下したルート
-                log.debug("go back on loading.")
-
-                if let url = self.viewModel.getMostForwardUrl(context: self.front.context) {
-                    front.operation = .back
-                    _ = front.load(urlStr: url)
-                }
-            } else {
-                log.debug("go back.")
-                // 有効なURLを探す
-                if let url = self.viewModel.getBackUrl(context: self.front.context) {
-                    front.operation = .back
-                    _ = front.load(urlStr: url)
-                }
-            }
+        log.debug("go back.")
+        if front.canGoBack {
+            front.goBack()
         }
     }
 
@@ -515,12 +501,22 @@ class BaseView: UIView {
         front.scrollView.bounces = false
     }
 
+    private func removeObserving(target: EGWebView) {
+        target.removeObserverEstimatedProgress(observer: self)
+        target.removeObserverTitle(observer: self)
+        target.removeObserverUrl(observer: self)
+        target.removeObserverCanGoBack(observer: self)
+        target.removeObserverCanGoForward(observer: self)
+    }
+
     private func startObserving(target: EGWebView) {
         log.debug("start observe. target: \(target.context)")
 
         target.observeEstimatedProgress(observer: self)
         target.observeTitle(observer: self)
         target.observeUrl(observer: self)
+        target.observeCanGoBack(observer: self)
+        target.observeCanGoForward(observer: self)
 
         if target.isLoading == true {
             viewModel.updateProgress(progress: CGFloat(target.estimatedProgress))

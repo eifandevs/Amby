@@ -66,11 +66,11 @@ final class FrontLayerViewModel {
 
     /// ヒストリーフォワード
     func historyForward() {
-        HistoryUseCase.s.goForward()
+        TabUseCase.s.historyForward()
     }
 
     /// ヒストリーバック
     func historyBack() {
-        HistoryUseCase.s.goBack()
+        TabUseCase.s.historyBack()
     }
 }
