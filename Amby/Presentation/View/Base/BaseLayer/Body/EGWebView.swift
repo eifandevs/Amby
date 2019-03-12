@@ -270,7 +270,7 @@ class EGWebView: WKWebView {
                     log.error("js setup error: \(error!)")
                 }
             }
-            evaluateJavaScript("MyApp_HighlightAllOccurencesOfString('\(word)')") { (result: Any?, error: Error?) in
+            evaluateJavaScript("highlightAllOccurencesOfString('\(word)')") { (result: Any?, error: Error?) in
                 if let error = error {
                     log.error("js grep error: \(error.localizedDescription)")
                     NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_ERROR, isSuccess: false)
@@ -290,16 +290,16 @@ class EGWebView: WKWebView {
 //    NSString *jsCode = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
 //    [self stringByEvaluatingJavaScriptFromString:jsCode];
 //
-//    NSString *startSearch = [NSString stringWithFormat:@"MyApp_HighlightAllOccurencesOfString('%@')",str];
+//    NSString *startSearch = [NSString stringWithFormat:@"highlightAllOccurencesOfString('%@')",str];
 //    [self stringByEvaluatingJavaScriptFromString:startSearch];
 //
-//    NSString *result = [self stringByEvaluatingJavaScriptFromString:@"MyApp_SearchResultCount"];
+//    NSString *result = [self stringByEvaluatingJavaScriptFromString:@"searchResultCount"];
 //    return [result integerValue];
 //    }
 //
 //    - (void)removeAllHighlights
 //    {
-//    [self stringByEvaluatingJavaScriptFromString:@"MyApp_RemoveAllHighlights()"];
+//    [self stringByEvaluatingJavaScriptFromString:@"removeAllHighlights()"];
 //    }
 
     func takeThumbnail() -> UIImage? {
