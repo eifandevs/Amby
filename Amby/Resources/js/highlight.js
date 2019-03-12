@@ -1,21 +1,24 @@
 
-// We're using a global variable to store the number of occurrences
 var searchResultCount = 0;
+const highLightClassName = "AmbyHighlight";
 
-// helper function, recursively searches in elements and their child nodes
+function scrollIntoViewWithIndex(index) {
+    document.getElementsByClassName(highLightClassName)[index].scrollIntoView(true);
+}
+
 function highlightAllOccurencesOfStringForElement(element,keyword) {
     if (element) {
-        if (element.nodeType == 3) {        // Text node
+        if (element.nodeType == 3) {
             while (true) {
-                var value = element.nodeValue;  // Search for keyword in text node
+                var value = element.nodeValue;
                 var idx = value.toLowerCase().indexOf(keyword);
                 
-                if (idx < 0) break;             // not found, abort
+                if (idx < 0) break;
                 
                 var span = document.createElement("span");
                 var text = document.createTextNode(value.substr(idx,keyword.length));
                 span.appendChild(text);
-                span.setAttribute("class","AmbyHighlight");
+                span.setAttribute("class",highLightClassName);
                 span.style.backgroundColor="yellow";
                 span.style.color="black";
                 text = document.createTextNode(value.substr(idx+keyword.length));
@@ -24,9 +27,9 @@ function highlightAllOccurencesOfStringForElement(element,keyword) {
                 element.parentNode.insertBefore(span, next);
                 element.parentNode.insertBefore(text, next);
                 element = text;
-                searchResultCount++;    // update the counter
+                searchResultCount++;
             }
-        } else if (element.nodeType == 1) { // Element node
+        } else if (element.nodeType == 1) {
             if (element.style.display != "none" && element.nodeName.toLowerCase() != 'select') {
                 for (var i=element.childNodes.length-1; i>=0; i--) {
                     highlightAllOccurencesOfStringForElement(element.childNodes[i],keyword);
@@ -36,14 +39,12 @@ function highlightAllOccurencesOfStringForElement(element,keyword) {
     }
 }
 
-// the main entry point to start the search
 function highlightAllOccurencesOfString(keyword) {
     removeAllHighlights();
     highlightAllOccurencesOfStringForElement(document.body, keyword.toLowerCase());
     return searchResultCount;
 }
 
-// helper function, recursively removes the highlights in elements and their childs
 function removeAllHighlightsForElement(element) {
     if (element) {
         if (element.nodeType == 1) {
@@ -68,7 +69,6 @@ function removeAllHighlightsForElement(element) {
     return false;
 }
 
-// the main entry point to remove the highlights
 function removeAllHighlights() {
     searchResultCount = 0;
     removeAllHighlightsForElement(document.body);
