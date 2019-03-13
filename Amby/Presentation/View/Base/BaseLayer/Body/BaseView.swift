@@ -286,7 +286,9 @@ class BaseView: UIView {
     // MARK: Private Method
 
     private func grep(text: String) {
-        front.highlight(word: text)
+        front.highlight(word: text) { hitNum in
+            self.viewModel.endGrepping(hitNum: hitNum)
+        }
     }
 
     private func scrollUp() {
@@ -526,7 +528,7 @@ class BaseView: UIView {
 
     /// webviewを新規作成
     private func createWebView(size: CGSize? = nil, context: String?) -> EGWebView {
-        let newWv = EGWebView(id: context)
+        let newWv = EGWebView(id: context, configuration: viewModel.cacheConfiguration)
         newWv.frame = CGRect(origin: CGPoint.zero, size: size ?? frame.size)
         // RXで自身をもらえず循環参照になるので、RX化しない
         newWv.navigationDelegate = self

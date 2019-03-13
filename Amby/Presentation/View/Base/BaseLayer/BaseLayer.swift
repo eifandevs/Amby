@@ -29,9 +29,16 @@ class BaseLayer: UIView {
     private let baseView: BaseView
     private var searchMenuTableView: SearchMenuTableView? // 検索ビュー
     private var grepOverlay: UIButton? // グレップ中のオーバーレイ
-    private var isTouchEndAnimating = false
-    private var isHeaderViewEditing = false // 検索中
-    private var isHeaderViewGreping = false // グレップ中
+
+    struct BaseLayerState: OptionSet {
+        let rawValue: Int
+        /// 検索中フラグ
+        static let isHeaderViewEditing = BaseLayerState(rawValue: 1 << 0)
+        /// グレップ中フラグ
+        static let isHeaderViewGreping = BaseLayerState(rawValue: 1 << 1)
+    }
+
+    private var state: BaseLayerState = []
 
     override init(frame: CGRect) {
         // ヘッダービュー
@@ -58,7 +65,7 @@ class BaseLayer: UIView {
         NotificationCenter.default.rx.notification(NSNotification.Name.UIKeyboardDidShow, object: nil)
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
-                if !self.isHeaderViewEditing && self.viewModel.canAutoFill {
+                if !self.state.contains(.isHeaderViewEditing) && self.viewModel.canAutoFill {
                     // 自動入力オペ要求
                     self.viewModel.autoFill()
                 } else {
@@ -152,7 +159,7 @@ class BaseLayer: UIView {
 
         baseView.slideToMax()
 
-        isHeaderViewEditing = true
+        state.insert(.isHeaderViewEditing)
         searchMenuTableView = SearchMenuTableView(frame: CGRect(origin: CGPoint(x: 0, y: headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - headerView.frame.size.height)))
         // サーチメニューアクション監視
         searchMenuTableView!.rx_action
@@ -178,7 +185,7 @@ class BaseLayer: UIView {
     /// 編集モード終了
     private func endEditing() {
         EGApplication.sharedMyApplication.egDelegate = baseView
-        isHeaderViewEditing = false
+        state.remove(.isHeaderViewEditing)
         searchMenuTableView!.removeFromSuperview()
         searchMenuTableView = nil
     }
@@ -191,7 +198,7 @@ class BaseLayer: UIView {
     private func beginGreping(frame: CGRect) {
         baseView.slideToMax()
 
-        isHeaderViewGreping = true
+        state.insert(.isHeaderViewGreping)
         grepOverlay = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: headerView.frame.size.height), size: CGSize(width: frame.size.width, height: frame.size.height - headerView.frame.size.height)))
 
         // グレップ中に画面をタップ
@@ -208,7 +215,7 @@ class BaseLayer: UIView {
     /// グレップモード終了
     private func endGreping() {
         EGApplication.sharedMyApplication.egDelegate = baseView
-        isHeaderViewGreping = false
+        state.remove(.isHeaderViewGreping)
         grepOverlay!.removeFromSuperview()
         grepOverlay = nil
     }

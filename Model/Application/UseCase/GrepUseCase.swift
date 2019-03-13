@@ -13,6 +13,7 @@ import RxSwift
 public enum GrepUseCaseAction {
     case begin
     case request(word: String)
+    case finish(hitNum: Int)
 }
 
 /// グレップユースケース
@@ -27,6 +28,11 @@ public final class GrepUseCase {
     /// グレップ開始
     public func begin() {
         rx_action.onNext(.begin)
+    }
+
+    /// グレップ完了
+    public func finish(hitNum: Int) {
+        rx_action.onNext(.finish(hitNum: hitNum))
     }
 
     /// グレップリクエスト

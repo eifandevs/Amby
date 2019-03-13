@@ -47,7 +47,6 @@ struct BaseViewModelState: OptionSet {
 }
 
 final class BaseViewModel {
-    /// 状態管理
     var state: BaseViewModelState = []
 
     let rx_action = PublishSubject<BaseViewModelAction>()
@@ -105,6 +104,11 @@ final class BaseViewModel {
 
     /// 現在のスワイプ方向
     var swipeDirection: EdgeSwipeDirection = .none
+
+    /// webview configuration
+    var cacheConfiguration: WKWebViewConfiguration {
+        return WebCacheUseCase.s.cacheConfiguration()
+    }
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -328,6 +332,10 @@ final class BaseViewModel {
     /// ページインデックス取得
     func getTabIndex(context: String) -> Int? {
         return TabUseCase.s.getIndex(context: context)
+    }
+
+    func endGrepping(hitNum: Int) {
+        GrepUseCase.s.finish(hitNum: hitNum)
     }
 
     func startLoading(context: String) {
