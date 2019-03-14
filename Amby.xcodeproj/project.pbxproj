@@ -139,6 +139,7 @@
 		A16AB90821692DB60036863C /* ReportViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */; };
 		A16C2D12220F36410050C1DD /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C2D11220F36400050C1DD /* Realm.framework */; };
 		A16C2D14220F36650050C1DD /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C2D13220F36640050C1DD /* RealmSwift.framework */; };
+		A16D5556223B1F7A0065C394 /* GrepOperationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A16D5555223B1F7A0065C394 /* GrepOperationView.xib */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
 		A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */; };
@@ -592,6 +593,8 @@
 		A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A16C2D11220F36400050C1DD /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		A16C2D13220F36640050C1DD /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		A16D5553223B1F480065C394 /* GrepOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrepOperationView.swift; sourceTree = "<group>"; };
+		A16D5555223B1F7A0065C394 /* GrepOperationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GrepOperationView.xib; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
 		A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuMemoTableViewCell.xib; sourceTree = "<group>"; };
@@ -1064,6 +1067,7 @@
 		A112E7C3212CD76400320048 /* Body */ = {
 			isa = PBXGroup;
 			children = (
+				A16D5554223B1F480065C394 /* GrepOperation */,
 				A15C5424214D684C001E8AB5 /* SearchMenu */,
 				A112E7C5212CD76400320048 /* EGWebView.swift */,
 				A112E7CB212CD76400320048 /* BaseView.swift */,
@@ -1528,6 +1532,16 @@
 			);
 			path = Report;
 			sourceTree = "<group>";
+		};
+		A16D5554223B1F480065C394 /* GrepOperation */ = {
+			isa = PBXGroup;
+			children = (
+				A16D5553223B1F480065C394 /* GrepOperationView.swift */,
+				A16D5555223B1F7A0065C394 /* GrepOperationView.xib */,
+			);
+			name = GrepOperation;
+			path = /Users/tenma/dev/projects/Amby/Amby/Presentation/View/Base/BaseLayer/Body/GrepOperation;
+			sourceTree = "<absolute>";
 		};
 		A1869C1A217951B6007303B3 /* Memo */ = {
 			isa = PBXGroup;
@@ -2358,6 +2372,7 @@
 				A13D6A8B2184A43000B1832E /* FormViewController.xib in Resources */,
 				A1FFA66921945A280092C4D6 /* OptionMenuCooperationTableViewCell.xib in Resources */,
 				A1FFA67D2195FCC90092C4D6 /* FooterCollectionViewCell.xib in Resources */,
+				A16D5556223B1F7A0065C394 /* GrepOperationView.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
 				A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */,
 				A1B778392173C57100BED141 /* MenuOrderTableViewCell.xib in Resources */,
