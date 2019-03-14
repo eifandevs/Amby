@@ -29,6 +29,7 @@ class BaseLayer: UIView {
     private let baseView: BaseView
     private var searchMenuTableView: SearchMenuTableView? // 検索ビュー
     private var grepOverlay: UIButton? // グレップ中のオーバーレイ
+    private var grepOperationButton: UIButton? // グレップ中の操作ボタン
 
     struct BaseLayerState: OptionSet {
         let rawValue: Int
@@ -79,6 +80,29 @@ class BaseLayer: UIView {
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
                 self.baseView.slideToMax()
+            }
+            .disposed(by: rx.disposeBag)
+
+        // グレップ完了監視
+        viewModel.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                log.eventIn(chain: "BaseViewModel.rx_action. action: \(action)")
+                switch action {
+                case .finishGrep:
+                    if let grepOverlay = self.grepOverlay {
+                        self.grepOperationButton = UIButton(frame: CGRect(x: 30, y: 200, width: 40, height: 90))
+                        self.grepOperationButton!.backgroundColor = UIColor.red
+                        self.grepOperationButton!.rx.tap
+                            .subscribe(onNext: { [weak self] in
+                                guard let `self` = self else { return }
+                                log.debug("tapp!!!!!!!!!!1")
+                            })
+                            .disposed(by: self.rx.disposeBag)
+                        grepOverlay.addSubview(self.grepOperationButton!)
+                    }
+                    log.debug("add grep operation view.")
+                }
             }
             .disposed(by: rx.disposeBag)
 
