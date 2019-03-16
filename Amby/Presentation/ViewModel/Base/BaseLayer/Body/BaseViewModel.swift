@@ -28,6 +28,8 @@ enum BaseViewModelAction {
     case autoFill
     case scrollUp
     case grep(text: String)
+    case grepPrevious(index: Int)
+    case grepNext(index: Int)
 }
 
 struct BaseViewModelState: OptionSet {
@@ -223,8 +225,13 @@ final class BaseViewModel {
         // 全文検索監視
         GrepUseCase.s.rx_action
             .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case let .request(word) = action else { return }
-                self.rx_action.onNext(.grep(text: word))
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .request(word): self.rx_action.onNext(.grep(text: word))
+                case let .previous(index): self.rx_action.onNext(.grepPrevious(index: index))
+                case let .next(index): self.rx_action.onNext(.grepNext(index: index))
+                default: break
+                }
             }
             .disposed(by: disposeBag)
     }

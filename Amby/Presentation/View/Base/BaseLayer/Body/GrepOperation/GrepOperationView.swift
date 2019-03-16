@@ -10,6 +10,8 @@ import UIKit
 
 class GrepOperationView: UIView {
     @IBOutlet var upButton: UIButton!
+    @IBOutlet var downButton: UIButton!
+    @IBOutlet var countLabel: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)

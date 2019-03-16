@@ -198,6 +198,7 @@ class BaseView: UIView {
                 case .autoFill: self.autoFill()
                 case .scrollUp: self.scrollUp()
                 case let .grep(text): self.grep(text: text)
+                case let .grepPrevious(index), let .grepNext(index): self.grepScroll(index: index)
                 }
                 log.eventOut(chain: "baseViewModel.rx_action. action: \(action)")
             }
@@ -289,6 +290,10 @@ class BaseView: UIView {
         front.highlight(word: text) { hitNum in
             self.viewModel.endGrepping(hitNum: hitNum)
         }
+    }
+
+    private func grepScroll(index: Int) {
+        front.scrollIntoViewWithIndex(index: index)
     }
 
     private func scrollUp() {

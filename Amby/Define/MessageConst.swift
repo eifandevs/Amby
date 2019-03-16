@@ -57,6 +57,7 @@ struct MessageConst {
         static let PASSCODE_AUTHENTIFICATED = "パスコート認証されました。再度実行してください。"
         static let PASSCODE_INPUT_ERROR = "パスコードエラー"
         static let GREP_ERROR = "ページ内検索に失敗しました"
+        static let GREP_SCROLL_ERROR = "スクロールに失敗しました"
         static let GREP_SUCCESS = { (result: NSNumber) -> String in
             "\(result)件ヒットしました"
         }

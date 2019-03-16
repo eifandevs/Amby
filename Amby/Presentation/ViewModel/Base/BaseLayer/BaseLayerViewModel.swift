@@ -52,6 +52,16 @@ final class BaseLayerViewModel {
         FormUseCase.s.autoFill()
     }
 
+    /// 前に移動(グレップ)
+    func grepPrevious() {
+        GrepUseCase.s.previous()
+    }
+
+    /// 次に移動(グレップ)
+    func grepNext() {
+        GrepUseCase.s.next()
+    }
+
     /// baseViewControllerの状態取得
     var canAutoFill: Bool {
         if let delegate = UIApplication.shared.delegate as? AppDelegate, let baseViewController = delegate.window?.rootViewController {

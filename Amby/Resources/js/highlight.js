@@ -1,9 +1,8 @@
 
 var searchResultCount = 0;
-const highLightClassName = "AmbyHighlight";
 
 function scrollIntoViewWithIndex(index) {
-    document.getElementsByClassName(highLightClassName)[index].scrollIntoView(true);
+    document.getElementsByClassName("AmbyHighlight")[index].scrollIntoView(true);
 }
 
 function highlightAllOccurencesOfStringForElement(element,keyword) {
@@ -18,7 +17,7 @@ function highlightAllOccurencesOfStringForElement(element,keyword) {
                 var span = document.createElement("span");
                 var text = document.createTextNode(value.substr(idx,keyword.length));
                 span.appendChild(text);
-                span.setAttribute("class",highLightClassName);
+                span.setAttribute("class","AmbyHighlight");
                 span.style.backgroundColor="yellow";
                 span.style.color="black";
                 text = document.createTextNode(value.substr(idx+keyword.length));

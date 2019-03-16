@@ -261,6 +261,26 @@ class EGWebView: WKWebView {
         loadHtml(code: errorType)
     }
 
+    func scrollIntoViewWithIndex(index: Int) {
+        let scriptPath = resourceUtil.highlightScript
+        do {
+            let script = try String(contentsOf: scriptPath, encoding: .utf8)
+            evaluateJavaScript(script) { (_: Any?, error: Error?) in
+                if error != nil {
+                    log.error("js setup error: \(error!)")
+                }
+            }
+            evaluateJavaScript("scrollIntoViewWithIndex(\(index))") { (_: Any?, error: Error?) in
+                if let error = error {
+                    log.error("js scrollIntoView error: \(error.localizedDescription)")
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SCROLL_ERROR, isSuccess: false)
+                }
+            }
+        } catch let error as NSError {
+            log.error("failed to get script. error: \(error.localizedDescription)")
+        }
+    }
+
     func highlight(word: String, completion: @escaping ((Int) -> Void)) {
         let scriptPath = resourceUtil.highlightScript
         do {

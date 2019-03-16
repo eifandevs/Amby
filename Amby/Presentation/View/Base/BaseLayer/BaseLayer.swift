@@ -91,11 +91,17 @@ class BaseLayer: UIView {
                 switch action {
                 case .finishGrep:
                     if let grepOverlay = self.grepOverlay {
-                        self.grepOperationView = GrepOperationView(frame: CGRect(x: 30, y: 200, width: 40, height: 90))
+                        self.grepOperationView = GrepOperationView(frame: CGRect(x: 30, y: 200, width: 90, height: 170))
                         self.grepOperationView!.upButton.rx.tap
                             .subscribe(onNext: { [weak self] in
                                 guard let `self` = self else { return }
-                                log.debug("tapp!!!!!!!!!!1")
+                                self.viewModel.grepPrevious()
+                            })
+                            .disposed(by: self.rx.disposeBag)
+                        self.grepOperationView!.downButton.rx.tap
+                            .subscribe(onNext: { [weak self] in
+                                guard let `self` = self else { return }
+                                self.viewModel.grepNext()
                             })
                             .disposed(by: self.rx.disposeBag)
                         grepOverlay.addSubview(self.grepOperationView!)
