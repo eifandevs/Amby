@@ -140,6 +140,7 @@
 		A16C2D12220F36410050C1DD /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C2D11220F36400050C1DD /* Realm.framework */; };
 		A16C2D14220F36650050C1DD /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C2D13220F36640050C1DD /* RealmSwift.framework */; };
 		A16D5556223B1F7A0065C394 /* GrepOperationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A16D5555223B1F7A0065C394 /* GrepOperationView.xib */; };
+		A1724191223D399B00472477 /* GrepOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1724190223D399B00472477 /* GrepOperationView.swift */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
 		A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */; };
@@ -593,8 +594,8 @@
 		A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A16C2D11220F36400050C1DD /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		A16C2D13220F36640050C1DD /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
-		A16D5553223B1F480065C394 /* GrepOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrepOperationView.swift; sourceTree = "<group>"; };
 		A16D5555223B1F7A0065C394 /* GrepOperationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GrepOperationView.xib; sourceTree = "<group>"; };
+		A1724190223D399B00472477 /* GrepOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrepOperationView.swift; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
 		A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuMemoTableViewCell.xib; sourceTree = "<group>"; };
@@ -1536,8 +1537,8 @@
 		A16D5554223B1F480065C394 /* GrepOperation */ = {
 			isa = PBXGroup;
 			children = (
-				A16D5553223B1F480065C394 /* GrepOperationView.swift */,
 				A16D5555223B1F7A0065C394 /* GrepOperationView.xib */,
+				A1724190223D399B00472477 /* GrepOperationView.swift */,
 			);
 			name = GrepOperation;
 			path = /Users/tenma/dev/projects/Amby/Amby/Presentation/View/Base/BaseLayer/Body/GrepOperation;
@@ -3131,6 +3132,7 @@
 				A1B778352173BE9F00BED141 /* MenuOrderViewControllerViewModel.swift in Sources */,
 				A1903063209CF978004F1EA5 /* Util.swift in Sources */,
 				A13D6AE6218B35F900B1832E /* MemoViewControllerViewModel.swift in Sources */,
+				A1724191223D399B00472477 /* GrepOperationView.swift in Sources */,
 				A15C5464214D699D001E8AB5 /* OptionMenuFavoriteTableView.swift in Sources */,
 				A112E895212CD76500320048 /* FrontLayer.swift in Sources */,
 				A1E5B0BD221F6B90007172D8 /* TrackingService.swift in Sources */,

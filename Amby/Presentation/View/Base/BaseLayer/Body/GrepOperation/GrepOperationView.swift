@@ -9,13 +9,21 @@
 import UIKit
 
 class GrepOperationView: UIView {
+    @IBOutlet var upButton: UIButton!
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        loadNib()
     }
-    */
 
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        loadNib()
+    }
+
+    func loadNib() {
+        let view = Bundle.main.loadNibNamed(R.nib.grepOperationView.name, owner: self, options: nil)?.first as! UIView
+        view.frame = bounds
+        addSubview(view)
+    }
 }
