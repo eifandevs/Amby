@@ -46,12 +46,12 @@ class EGWebView: WKWebView {
 
     let resourceUtil = ResourceUtil()
 
-    init(id: String?) {
+    init(id: String?, configuration: WKWebViewConfiguration) {
         if let id = id, !id.isEmpty {
             // コンテキストを復元
             context = id
         }
-        super.init(frame: CGRect.zero, configuration: WebCacheUseCase.s.cacheConfiguration())
+        super.init(frame: CGRect.zero, configuration: configuration)
         isOpaque = true
         allowsLinkPreview = true
 
@@ -261,7 +261,7 @@ class EGWebView: WKWebView {
         loadHtml(code: errorType)
     }
 
-    func highlight(word: String) {
+    func scrollIntoViewWithIndex(index: Int) {
         let scriptPath = resourceUtil.highlightScript
         do {
             let script = try String(contentsOf: scriptPath, encoding: .utf8)
@@ -270,13 +270,10 @@ class EGWebView: WKWebView {
                     log.error("js setup error: \(error!)")
                 }
             }
-            evaluateJavaScript("MyApp_HighlightAllOccurencesOfString('\(word)')") { (result: Any?, error: Error?) in
+            evaluateJavaScript("scrollIntoViewWithIndex(\(index))") { (_: Any?, error: Error?) in
                 if let error = error {
-                    log.error("js grep error: \(error.localizedDescription)")
-                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_ERROR, isSuccess: false)
-                } else {
-                    let num = result as? NSNumber ?? 0
-                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SUCCESS(num), isSuccess: true)
+                    log.error("js scrollIntoView error: \(error.localizedDescription)")
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SCROLL_ERROR, isSuccess: false)
                 }
             }
         } catch let error as NSError {
@@ -284,23 +281,29 @@ class EGWebView: WKWebView {
         }
     }
 
-//    - (NSInteger)highlightAllOccurencesOfString:(NSString*)str
-//    {
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"SearchWebView" ofType:@"js"];
-//    NSString *jsCode = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-//    [self stringByEvaluatingJavaScriptFromString:jsCode];
-//
-//    NSString *startSearch = [NSString stringWithFormat:@"MyApp_HighlightAllOccurencesOfString('%@')",str];
-//    [self stringByEvaluatingJavaScriptFromString:startSearch];
-//
-//    NSString *result = [self stringByEvaluatingJavaScriptFromString:@"MyApp_SearchResultCount"];
-//    return [result integerValue];
-//    }
-//
-//    - (void)removeAllHighlights
-//    {
-//    [self stringByEvaluatingJavaScriptFromString:@"MyApp_RemoveAllHighlights()"];
-//    }
+    func highlight(word: String, completion: @escaping ((Int) -> Void)) {
+        let scriptPath = resourceUtil.highlightScript
+        do {
+            let script = try String(contentsOf: scriptPath, encoding: .utf8)
+            evaluateJavaScript(script) { (_: Any?, error: Error?) in
+                if error != nil {
+                    log.error("js setup error: \(error!)")
+                }
+            }
+            evaluateJavaScript("highlightAllOccurencesOfString('\(word)')") { (result: Any?, error: Error?) in
+                if let error = error {
+                    log.error("js grep error: \(error.localizedDescription)")
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_ERROR, isSuccess: false)
+                } else {
+                    let num = result as? NSNumber ?? 0
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SUCCESS(num), isSuccess: true)
+                    completion(Int(truncating: num))
+                }
+            }
+        } catch let error as NSError {
+            log.error("failed to get script. error: \(error.localizedDescription)")
+        }
+    }
 
     func takeThumbnail() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(frame.size, true, 0)

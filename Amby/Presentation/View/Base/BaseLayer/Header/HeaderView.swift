@@ -178,8 +178,8 @@ class HeaderView: UIView, ShadowView {
                     }
                 case let .endGreping(text):
                     // ヘッダーのクローズボタンタップ or 検索開始
-                    self.rx_action.onNext(.endGreping)
-                    self.endGreping()
+//                    self.rx_action.onNext(.endGreping)
+//                    self.endGreping()
 
                     if let text = text, !text.isEmpty {
                         log.debug("grep word: \(text)")

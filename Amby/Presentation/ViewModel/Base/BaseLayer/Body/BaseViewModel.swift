@@ -28,6 +28,8 @@ enum BaseViewModelAction {
     case autoFill
     case scrollUp
     case grep(text: String)
+    case grepPrevious(index: Int)
+    case grepNext(index: Int)
 }
 
 struct BaseViewModelState: OptionSet {
@@ -47,7 +49,6 @@ struct BaseViewModelState: OptionSet {
 }
 
 final class BaseViewModel {
-    /// 状態管理
     var state: BaseViewModelState = []
 
     let rx_action = PublishSubject<BaseViewModelAction>()
@@ -105,6 +106,11 @@ final class BaseViewModel {
 
     /// 現在のスワイプ方向
     var swipeDirection: EdgeSwipeDirection = .none
+
+    /// webview configuration
+    var cacheConfiguration: WKWebViewConfiguration {
+        return WebCacheUseCase.s.cacheConfiguration()
+    }
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -219,8 +225,13 @@ final class BaseViewModel {
         // 全文検索監視
         GrepUseCase.s.rx_action
             .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case let .request(word) = action else { return }
-                self.rx_action.onNext(.grep(text: word))
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .request(word): self.rx_action.onNext(.grep(text: word))
+                case let .previous(index): self.rx_action.onNext(.grepPrevious(index: index))
+                case let .next(index): self.rx_action.onNext(.grepNext(index: index))
+                default: break
+                }
             }
             .disposed(by: disposeBag)
     }
@@ -328,6 +339,10 @@ final class BaseViewModel {
     /// ページインデックス取得
     func getTabIndex(context: String) -> Int? {
         return TabUseCase.s.getIndex(context: context)
+    }
+
+    func endGrepping(hitNum: Int) {
+        GrepUseCase.s.finish(hitNum: hitNum)
     }
 
     func startLoading(context: String) {
