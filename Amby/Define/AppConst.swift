@@ -84,6 +84,7 @@ struct AppConst {
         static let SETTING = "設定"
         static let HELP = "ヘルプ"
         static let COORERATION = "協力"
+        static let ANALYTICS = "解析"
         static let DONATION = "寄付"
         static let DEVELOPMENT = "開発"
         static let APP_INFORMATION = "Amby"
