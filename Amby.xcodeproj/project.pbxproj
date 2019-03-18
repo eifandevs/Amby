@@ -142,6 +142,8 @@
 		A1724193223E751A00472477 /* HtmlAnalysisUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1724192223E751A00472477 /* HtmlAnalysisUseCase.swift */; };
 		A1724197223FABC400472477 /* GrepOperationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1724195223FABC400472477 /* GrepOperationView.xib */; };
 		A1724198223FABC400472477 /* GrepOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1724196223FABC400472477 /* GrepOperationView.swift */; };
+		A172419C223FB68200472477 /* HtmlAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A172419A223FB68200472477 /* HtmlAnalysisViewController.swift */; };
+		A172419D223FB68300472477 /* HtmlAnalysisViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A172419B223FB68200472477 /* HtmlAnalysisViewController.xib */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
 		A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */; };
@@ -598,6 +600,8 @@
 		A1724192223E751A00472477 /* HtmlAnalysisUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlAnalysisUseCase.swift; sourceTree = "<group>"; };
 		A1724195223FABC400472477 /* GrepOperationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GrepOperationView.xib; sourceTree = "<group>"; };
 		A1724196223FABC400472477 /* GrepOperationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrepOperationView.swift; sourceTree = "<group>"; };
+		A172419A223FB68200472477 /* HtmlAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlAnalysisViewController.swift; sourceTree = "<group>"; };
+		A172419B223FB68200472477 /* HtmlAnalysisViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HtmlAnalysisViewController.xib; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
 		A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuMemoTableViewCell.xib; sourceTree = "<group>"; };
@@ -940,6 +944,7 @@
 		A112E771212CD76400320048 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A1724199223FB61100472477 /* HtmlAnalysis */,
 				A1FFA681219A3FF70092C4D6 /* Development */,
 				A1FFA682219A3FF70092C4D6 /* Donation */,
 				A112E7A6212CD76400320048 /* Base */,
@@ -1544,6 +1549,15 @@
 				A1724196223FABC400472477 /* GrepOperationView.swift */,
 			);
 			path = GrepOperation;
+			sourceTree = "<group>";
+		};
+		A1724199223FB61100472477 /* HtmlAnalysis */ = {
+			isa = PBXGroup;
+			children = (
+				A172419A223FB68200472477 /* HtmlAnalysisViewController.swift */,
+				A172419B223FB68200472477 /* HtmlAnalysisViewController.xib */,
+			);
+			path = HtmlAnalysis;
 			sourceTree = "<group>";
 		};
 		A1869C1A217951B6007303B3 /* Memo */ = {
@@ -2381,6 +2395,7 @@
 				A1B778392173C57100BED141 /* MenuOrderTableViewCell.xib in Resources */,
 				A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A1FE87DE211B015800B258A3 /* timeout.html in Resources */,
+				A172419D223FB68300472477 /* HtmlAnalysisViewController.xib in Resources */,
 				A1FE87E4211B015800B258A3 /* authorize.html in Resources */,
 				A12B93FC214EFD710082EEA5 /* OpenSourceViewController.xib in Resources */,
 				A15C541E214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
@@ -3077,6 +3092,7 @@
 				A11CD32C214F059000D9333F /* OptionMenuFavoriteTableViewModel.swift in Sources */,
 				A112E899212CD76500320048 /* Thumbnail.swift in Sources */,
 				A15C5460214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift in Sources */,
+				A172419C223FB68200472477 /* HtmlAnalysisViewController.swift in Sources */,
 				A1FFA6802199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift in Sources */,
 				A190305E209CF978004F1EA5 /* EGApplication.swift in Sources */,
 				A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */,
