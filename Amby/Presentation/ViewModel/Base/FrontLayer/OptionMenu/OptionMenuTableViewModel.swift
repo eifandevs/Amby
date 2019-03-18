@@ -26,7 +26,7 @@ final class OptionMenuTableViewModel {
         case setting
         case help
         case cooperation
-        case analytics
+        case analysisHtml
         case app
 
         var imageName: String {
@@ -40,7 +40,7 @@ final class OptionMenuTableViewModel {
             case .setting: return R.image.optionmenuSetting.name
             case .help: return R.image.optionmenuHelp.name
             case .cooperation: return R.image.optionmenuApp.name
-            case .analytics: return R.image.optionmenuApp.name
+            case .analysisHtml: return R.image.optionmenuApp.name
             case .app: return R.image.optionmenuApp.name
             }
         }
@@ -56,7 +56,7 @@ final class OptionMenuTableViewModel {
             case .setting: return AppConst.OPTION_MENU.SETTING
             case .help: return AppConst.OPTION_MENU.HELP
             case .cooperation: return AppConst.OPTION_MENU.COORERATION
-            case .analytics: return AppConst.OPTION_MENU.ANALYTICS
+            case .analysisHtml: return AppConst.OPTION_MENU.ANALYTICS
             case .app: return AppConst.OPTION_MENU.APP_INFORMATION
             }
         }
@@ -73,7 +73,7 @@ final class OptionMenuTableViewModel {
         Row(cellType: .setting),
         Row(cellType: .help),
         Row(cellType: .cooperation),
-        Row(cellType: .analytics),
+        Row(cellType: .analysisHtml),
         Row(cellType: .app)
     ]
     // 高さ
@@ -110,6 +110,7 @@ final class OptionMenuTableViewModel {
     }
 
     /// html表示
-    func analyticsHtml() {
+    func analysisHtml() {
+        HtmlAnalysisUseCase.s.analytics()
     }
 }

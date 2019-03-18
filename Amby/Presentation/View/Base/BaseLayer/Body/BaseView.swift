@@ -199,6 +199,7 @@ class BaseView: UIView {
                 case .scrollUp: self.scrollUp()
                 case let .grep(text): self.grep(text: text)
                 case let .grepPrevious(index), let .grepNext(index): self.grepScroll(index: index)
+                case .analysisHtml: self.analysisHtml()
                 }
                 log.eventOut(chain: "baseViewModel.rx_action. action: \(action)")
             }
@@ -287,19 +288,39 @@ class BaseView: UIView {
     // MARK: Private Method
 
     private func grep(text: String) {
-        front.highlight(word: text) { hitNum in
-            self.viewModel.endGrepping(hitNum: hitNum)
+        front.highlight(word: text) { hitNum, error in
+            if error == nil {
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SUCCESS(hitNum), isSuccess: true)
+                self.viewModel.endGrepping(hitNum: hitNum)
+            } else {
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_ERROR, isSuccess: false)
+            }
         }
     }
 
     private func grepScroll(index: Int) {
-        front.scrollIntoViewWithIndex(index: index)
+        front.scrollIntoViewWithIndex(index: index) { error in
+            if error != nil {
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SCROLL_ERROR, isSuccess: false)
+            }
+        }
+    }
+
+    private func analysisHtml() {
+        front.parseHtml { [weak self] html, error in
+            guard let `self` = self else { return }
+
+            if error != nil {
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.ANALYTICS_HTML_ERROR, isSuccess: false)
+            } else {
+                self.viewModel.presentHtmlAnalysis(html: html)
+            }
+        }
     }
 
     private func scrollUp() {
         DispatchQueue.mainSyncSafe {
-            self.front.evaluateJavaScript("window.scrollTo(0, 0)") { _, _ in
-            }
+            self.front.scrollUp()
         }
     }
 

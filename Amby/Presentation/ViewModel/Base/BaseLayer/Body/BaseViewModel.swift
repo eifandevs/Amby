@@ -30,6 +30,7 @@ enum BaseViewModelAction {
     case grep(text: String)
     case grepPrevious(index: Int)
     case grepNext(index: Int)
+    case analysisHtml
 }
 
 struct BaseViewModelState: OptionSet {
@@ -234,6 +235,17 @@ final class BaseViewModel {
                 }
             }
             .disposed(by: disposeBag)
+
+        // html解析監視
+        HtmlAnalysisUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case .analytics: self.rx_action.onNext(.analysisHtml)
+                default: break
+                }
+            }
+            .disposed(by: disposeBag)
     }
 
     // MARK: Public Method
@@ -329,6 +341,11 @@ final class BaseViewModel {
     /// フォーム情報取得
     func takeForm(webView: EGWebView) -> Form? {
         return webViewService.takeForm(webView: webView)
+    }
+
+    /// html解析画面表示
+    func presentHtmlAnalysis(html: String) {
+        HtmlAnalysisUseCase.s.present(html: html)
     }
 
     /// タブの追加
