@@ -24,7 +24,9 @@ class GrepOperationView: UIView {
     }
 
     func loadNib() {
+        // swiftlint:disable force_cast
         let view = Bundle.main.loadNibNamed(R.nib.grepOperationView.name, owner: self, options: nil)?.first as! UIView
+        // swiftlint:enable force_cast
         view.frame = bounds
         addSubview(view)
     }
