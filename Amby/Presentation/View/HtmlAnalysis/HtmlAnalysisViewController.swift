@@ -6,22 +6,43 @@
 //  Copyright © 2019 eifandevs. All rights reserved.
 //
 
+import CommonUtil
+import RxCocoa
+import RxSwift
 import UIKit
 
 class HtmlAnalysisViewController: UIViewController {
+    @IBOutlet var htmlTextView: UITextView!
+    @IBOutlet var closeButton: CornerRadiusButton!
+
+    private var html: String!
+
+    convenience init(html: String) {
+        self.init(nibName: R.nib.htmlAnalysisViewController.name, bundle: nil)
+        self.html = html.html2String
+    }
+
+    deinit {
+        log.debug("deinit called.")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // データ投入
+        htmlTextView.text = html
+
+        // ボタンタップ
+        closeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: rx.disposeBag)
     }
 
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 }

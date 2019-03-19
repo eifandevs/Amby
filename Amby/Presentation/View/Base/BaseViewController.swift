@@ -101,6 +101,7 @@ class BaseViewController: UIViewController {
                 case .mailer: self.mailer()
                 case let .notice(message, isSuccess): self.notice(message: message, isSuccess: isSuccess)
                 case let .pageGroupTitle(groupContext): self.pageGroupTitle(groupContext: groupContext)
+                case let .htmlAnalysis(html): self.htmlAnalysis(html: html)
                 }
             }
             .disposed(by: rx.disposeBag)
@@ -210,6 +211,12 @@ class BaseViewController: UIViewController {
         } else {
             log.error("cannot send mail.")
         }
+    }
+
+    /// メーラー画面表示
+    private func htmlAnalysis(html: String) {
+        let vc = HtmlAnalysisViewController(html: html)
+        present(vc, animated: true)
     }
 
     /// フォーム閲覧画面表示
