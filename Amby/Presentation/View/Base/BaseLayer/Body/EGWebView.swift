@@ -262,17 +262,43 @@ class EGWebView: WKWebView {
     }
 
     func parseHtml(completion: @escaping ((String, Error?) -> Void)) {
-        evaluateJavaScript("document.body.innerHTML") { (result: Any?, error: Error?) in
-            if let error = error {
-                log.error("js parse html error: \(error.localizedDescription)")
-                completion("", error)
-            } else {
-                if let html = result as? String {
-                    completion(html, nil)
-                } else {
-                    completion("", NSError(domain: "", code: 0, userInfo: nil))
+        let scriptPath = resourceUtil.bundleScript
+        do {
+            let script = try String(contentsOf: scriptPath, encoding: .utf8)
+            evaluateJavaScript(script) { (_: Any?, error: Error?) in
+                if let error = error {
+                    log.error("js setup error: \(error)")
+                    completion("", error)
                 }
             }
+
+            evaluateJavaScript("document.body.innerHTML") { (result: Any?, error: Error?) in
+                if let error = error {
+                    log.error("js parse html error: \(error.localizedDescription)")
+                    completion("", error)
+                } else {
+                    if let html = result as? String {
+                        self.evaluateJavaScript("beautify(\(html))") { (result: Any?, error: Error?) in
+                            if let error = error {
+                                log.error("html beautify error: \(error.localizedDescription)")
+                                completion("", error)
+                            } else {
+                                if let html = result as? String {
+                                    completion(html, nil)
+                                } else {
+                                    completion("", NSError(domain: "", code: 0, userInfo: nil))
+                                }
+                            }
+                        }
+                    } else {
+                        completion("", NSError(domain: "", code: 0, userInfo: nil))
+                    }
+                }
+            }
+
+        } catch let error as NSError {
+            log.error("failed to get script. error: \(error.localizedDescription)")
+            completion("", error)
         }
     }
 

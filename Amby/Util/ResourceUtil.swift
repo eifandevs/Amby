@@ -67,4 +67,7 @@ final class ResourceUtil {
 
     /// ハイライトスクリプト
     var highlightScript = R.file.highlightJs()!
+
+    /// スクリプト
+    var bundleScript = R.file.bundleJs()!
 }
