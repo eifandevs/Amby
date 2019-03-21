@@ -144,7 +144,6 @@
 		A1724198223FABC400472477 /* GrepOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1724196223FABC400472477 /* GrepOperationView.swift */; };
 		A172419C223FB68200472477 /* HtmlAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A172419A223FB68200472477 /* HtmlAnalysisViewController.swift */; };
 		A172419D223FB68300472477 /* HtmlAnalysisViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A172419B223FB68200472477 /* HtmlAnalysisViewController.xib */; };
-		A17241A12243D6DE00472477 /* beautify.js in Resources */ = {isa = PBXBuildFile; fileRef = A172419E2243D6DD00472477 /* beautify.js */; };
 		A17241A22243D6DE00472477 /* bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = A17241A02243D6DD00472477 /* bundle.js */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
@@ -604,7 +603,6 @@
 		A1724196223FABC400472477 /* GrepOperationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrepOperationView.swift; sourceTree = "<group>"; };
 		A172419A223FB68200472477 /* HtmlAnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlAnalysisViewController.swift; sourceTree = "<group>"; };
 		A172419B223FB68200472477 /* HtmlAnalysisViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HtmlAnalysisViewController.xib; sourceTree = "<group>"; };
-		A172419E2243D6DD00472477 /* beautify.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = beautify.js; sourceTree = "<group>"; };
 		A17241A02243D6DD00472477 /* bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bundle.js; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
@@ -1939,7 +1937,6 @@
 		A1FE87DB211B015800B258A3 /* js */ = {
 			isa = PBXGroup;
 			children = (
-				A172419E2243D6DD00472477 /* beautify.js */,
 				A172419F2243D6DD00472477 /* dist */,
 				A1FE87E6211B019D00B258A3 /* highlight.js */,
 			);
@@ -2407,7 +2404,6 @@
 				A1724197223FABC400472477 /* GrepOperationView.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
 				A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */,
-				A17241A12243D6DE00472477 /* beautify.js in Resources */,
 				A1B778392173C57100BED141 /* MenuOrderTableViewCell.xib in Resources */,
 				A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A1FE87DE211B015800B258A3 /* timeout.html in Resources */,

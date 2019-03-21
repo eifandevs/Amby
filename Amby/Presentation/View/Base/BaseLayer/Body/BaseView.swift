@@ -288,34 +288,35 @@ class BaseView: UIView {
     // MARK: Private Method
 
     private func grep(text: String) {
-        front.highlight(word: text) { hitNum, error in
-            if error == nil {
-                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SUCCESS(hitNum), isSuccess: true)
-                self.viewModel.endGrepping(hitNum: hitNum)
-            } else {
+        front.highlight(word: text)
+            .then { hitNum in
+                if let hitNum = hitNum as? NSNumber {
+                    let num = Int(truncating: hitNum)
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SUCCESS(num), isSuccess: true)
+                    self.viewModel.endGrepping(hitNum: num)
+                }
+            }.catch { _ in
                 NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_ERROR, isSuccess: false)
             }
-        }
     }
 
     private func grepScroll(index: Int) {
-        front.scrollIntoViewWithIndex(index: index) { error in
-            if error != nil {
+        front.scrollIntoViewWithIndex(index: index)
+            .catch { _ in
                 NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SCROLL_ERROR, isSuccess: false)
             }
-        }
     }
 
     private func analysisHtml() {
-        front.parseHtml { [weak self] html, error in
-            guard let `self` = self else { return }
-
-            if error != nil {
-                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.ANALYTICS_HTML_ERROR, isSuccess: false)
-            } else {
-                self.viewModel.presentHtmlAnalysis(html: html)
-            }
-        }
+//        front.parseHtml { [weak self] html, error in
+//            guard let `self` = self else { return }
+//
+//            if error != nil {
+//                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.ANALYTICS_HTML_ERROR, isSuccess: false)
+//            } else {
+//                self.viewModel.presentHtmlAnalysis(html: html)
+//            }
+//        }
     }
 
     private func scrollUp() {
@@ -498,11 +499,7 @@ class BaseView: UIView {
                         let input = $0
                         // set form
                         DispatchQueue.mainSyncSafe {
-                            self.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value='\(value)'") { (_: Any?, error: Error?) in
-                                if error != nil {
-                                    log.error("set form error: \(error!)")
-                                }
-                            }
+                            _ = self.front.evaluate(script: "document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value='\(value)'")
                         }
                     }
                 })
