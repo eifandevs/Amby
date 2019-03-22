@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import Entity
 import Foundation
 import Model
 import RxCocoa
@@ -186,7 +187,7 @@ class BaseView: UIView {
                 case let .insert(at): self.insert(at: at)
                 case .reload: self.reload()
                 case .rebuild: self.rebuild()
-                case .append: self.append()
+                case let .append(currentHistory): self.append(currentHistory: currentHistory)
                 case .change: self.change()
                 case let .swap(start, end): self.swap(start: start, end: end)
                 case let .remove(isFront, deleteContext, currentContext, deleteIndex): self.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
@@ -462,15 +463,15 @@ class BaseView: UIView {
         }
     }
 
-    private func append() {
+    private func append(currentHistory: PageHistory) {
         // 現フロントのプログレス監視を削除
         if let front = self.front {
             front.removeObserverEstimatedProgress(observer: self)
         }
         viewModel.updateProgress(progress: 0)
-        let newWv = createWebView(context: viewModel.currentContext)
+        let newWv = createWebView(context: currentHistory.context)
         webViews.append(newWv)
-        if viewModel.currentUrl.isEmpty {
+        if currentHistory.url.isEmpty {
             // 編集状態にする
             if let beginSearchingWorkItem = self.beginSearchingWorkItem {
                 beginSearchingWorkItem.cancel()
@@ -482,8 +483,8 @@ class BaseView: UIView {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginSearchingWorkItem!)
         } else {
-            if let url = self.viewModel.currentUrl {
-                _ = newWv.load(urlStr: url)
+            if !currentHistory.url.isEmpty {
+                _ = newWv.load(urlStr: currentHistory.url)
             } else {
                 log.error("cannot get currentUrl.")
             }

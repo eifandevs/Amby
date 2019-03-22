@@ -228,8 +228,7 @@ class EGWebView: WKWebView {
     }
 
 //    func loadTestHtml() {
-//        // ローカルページはヒストリースタックに入れたくないので、文字列として読み込む
-//        let url = Bundle.main.url(forResource: "beautify", withExtension: "html")!
+//        let url = Bundle.main.url(forResource: "shaper", withExtension: "html")!
 //        loadFileURL(url, allowingReadAccessTo: url)
 //        let request = URLRequest(url: url)
 //        load(request)
