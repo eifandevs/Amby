@@ -263,10 +263,12 @@ public final class TabUseCase {
 
     /// update url in page history
     public func updateUrl(context: String, url: String) {
-        pageHistoryDataModel.updateUrl(context: context, url: url)
-        if let currentHistory = currentHistory, context == currentContext {
-            progressDataModel.updateText(text: url)
-            favoriteDataModel.reload(currentHistory: currentHistory)
+        if !url.isEmpty && url.isValidUrl {
+            pageHistoryDataModel.updateUrl(context: context, url: url)
+            if let currentHistory = currentHistory, context == currentContext {
+                progressDataModel.updateText(text: url)
+                favoriteDataModel.reload(currentHistory: currentHistory)
+            }
         }
     }
 

@@ -308,6 +308,7 @@ class BaseView: UIView {
     }
 
     private func analysisHtml() {
+//        front.loadTestHtml()
 //        front.parseHtml { [weak self] html, error in
 //            guard let `self` = self else { return }
 //
@@ -844,6 +845,56 @@ extension BaseView: UIScrollViewDelegate {
 // MARK: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate
 
 extension BaseView: WKNavigationDelegate, WKUIDelegate {
+    // display alert dialog
+    func webView(_: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let otherAction = UIAlertAction(title: "OK", style: .default) {
+            _ in completionHandler()
+        }
+        alertController.addAction(otherAction)
+        NotificationService.presentAlert(alertController: alertController)
+    }
+
+    // display confirm dialog
+    func webView(_: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
+            _ in completionHandler(false)
+        }
+        let okAction = UIAlertAction(title: "OK", style: .default) {
+            _ in completionHandler(true)
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        NotificationService.presentAlert(alertController: alertController)
+    }
+
+    // display prompt dialog
+    func webView(_: WKWebView,
+                 runJavaScriptTextInputPanelWithPrompt prompt: String,
+                 defaultText: String?,
+                 initiatedByFrame _: WKFrameInfo,
+                 completionHandler: @escaping (String?) -> Void) {
+        let alertController = UIAlertController(title: "", message: prompt, preferredStyle: .alert)
+        let okHandler = { () -> Void in
+            if let textField = alertController.textFields?.first {
+                completionHandler(textField.text)
+            } else {
+                completionHandler("")
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
+            _ in completionHandler("")
+        }
+        let okAction = UIAlertAction(title: "OK", style: .default) {
+            _ in okHandler()
+        }
+        alertController.addTextField { $0.text = defaultText }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        NotificationService.presentAlert(alertController: alertController)
+    }
+
     /// force touchを無効にする
     func webView(_: WKWebView, shouldPreviewElement _: WKPreviewElementInfo) -> Bool {
         return false

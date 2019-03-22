@@ -145,13 +145,15 @@
 		A172419D223FB68300472477 /* HtmlAnalysisViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A172419B223FB68200472477 /* HtmlAnalysisViewController.xib */; };
 		A17241B722452CD800472477 /* bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = A17241AD22452CD600472477 /* bundle.js */; };
 		A17241B822452CD800472477 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = A17241AE22452CD600472477 /* highlight.js */; };
-		A17241B922452CD800472477 /* beautify.js in Resources */ = {isa = PBXBuildFile; fileRef = A17241AF22452CD600472477 /* beautify.js */; };
 		A17241BA22452CD800472477 /* post.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B122452CD800472477 /* post.html */; };
 		A17241BB22452CD800472477 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B222452CD800472477 /* offline.html */; };
 		A17241BC22452CD800472477 /* timeout.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B322452CD800472477 /* timeout.html */; };
 		A17241BD22452CD800472477 /* invalid.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B422452CD800472477 /* invalid.html */; };
 		A17241BE22452CD800472477 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B522452CD800472477 /* dns.html */; };
 		A17241BF22452CD800472477 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B622452CD800472477 /* authorize.html */; };
+		A17241C32245639200472477 /* shaper.js in Resources */ = {isa = PBXBuildFile; fileRef = A17241C22245639100472477 /* shaper.js */; };
+		A17241C6224563A200472477 /* alertTest.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241C4224563A200472477 /* alertTest.html */; };
+		A17241C7224563A200472477 /* shaper.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241C5224563A200472477 /* shaper.html */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
 		A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */; };
@@ -605,13 +607,15 @@
 		A172419B223FB68200472477 /* HtmlAnalysisViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HtmlAnalysisViewController.xib; sourceTree = "<group>"; };
 		A17241AD22452CD600472477 /* bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bundle.js; sourceTree = "<group>"; };
 		A17241AE22452CD600472477 /* highlight.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = highlight.js; sourceTree = "<group>"; };
-		A17241AF22452CD600472477 /* beautify.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = beautify.js; sourceTree = "<group>"; };
 		A17241B122452CD800472477 /* post.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = post.html; sourceTree = "<group>"; };
 		A17241B222452CD800472477 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
 		A17241B322452CD800472477 /* timeout.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = timeout.html; sourceTree = "<group>"; };
 		A17241B422452CD800472477 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
 		A17241B522452CD800472477 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
 		A17241B622452CD800472477 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
+		A17241C22245639100472477 /* shaper.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shaper.js; sourceTree = "<group>"; };
+		A17241C4224563A200472477 /* alertTest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = alertTest.html; sourceTree = "<group>"; };
+		A17241C5224563A200472477 /* shaper.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = shaper.html; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
 		A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuMemoTableViewCell.xib; sourceTree = "<group>"; };
@@ -1577,8 +1581,8 @@
 			isa = PBXGroup;
 			children = (
 				A17241AC22452CD600472477 /* dist */,
+				A17241C22245639100472477 /* shaper.js */,
 				A17241AE22452CD600472477 /* highlight.js */,
-				A17241AF22452CD600472477 /* beautify.js */,
 			);
 			path = js;
 			sourceTree = "<group>";
@@ -1594,6 +1598,8 @@
 		A17241B022452CD600472477 /* html */ = {
 			isa = PBXGroup;
 			children = (
+				A17241C4224563A200472477 /* alertTest.html */,
+				A17241C5224563A200472477 /* shaper.html */,
 				A17241B122452CD800472477 /* post.html */,
 				A17241B222452CD800472477 /* offline.html */,
 				A17241B322452CD800472477 /* timeout.html */,
@@ -2403,10 +2409,12 @@
 				A112E831212CD76500320048 /* SplashViewController.xib in Resources */,
 				A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */,
 				A15C5451214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */,
+				A17241C32245639200472477 /* shaper.js in Resources */,
 				A17241BF22452CD800472477 /* authorize.html in Resources */,
 				A15C5420214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib in Resources */,
 				A17241BD22452CD800472477 /* invalid.html in Resources */,
 				A15C5484214D935E001E8AB5 /* com.mono0926.LicensePlist.plist in Resources */,
+				A17241C6224563A200472477 /* alertTest.html in Resources */,
 				A112E837212CD76500320048 /* ReportViewController.xib in Resources */,
 				A1AD92DC2162E7BF00445FC8 /* GoogleService-Info-dummy.plist in Resources */,
 				A13D6A8B2184A43000B1832E /* FormViewController.xib in Resources */,
@@ -2429,6 +2437,7 @@
 				A15C545F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
 				A15C541F214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib in Resources */,
 				A12B93F8214EF7480082EEA5 /* com.mono0926.LicensePlist in Resources */,
+				A17241C7224563A200472477 /* shaper.html in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
 				A15C5459214D699D001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
@@ -2448,7 +2457,6 @@
 				A1FFA65C2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.xib in Resources */,
 				A15C5465214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
 				A1903056209CF978004F1EA5 /* article_stub.json in Resources */,
-				A17241B922452CD800472477 /* beautify.js in Resources */,
 				A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */,
 				A17241BA22452CD800472477 /* post.html in Resources */,
 				A15C5499214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt in Resources */,

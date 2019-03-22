@@ -240,16 +240,14 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// update url with context
     func updateUrl(context: String, url: String) {
-        if !url.isEmpty && url.isValidUrl {
-            histories.forEach({
-                if $0.context == context {
-                    $0.url = url
-                    log.debug("save page history url. url: \(url)")
+        histories.forEach({
+            if $0.context == context {
+                $0.url = url
+                log.debug("save page history url. url: \(url)")
 
-                    return
-                }
-            })
-        }
+                return
+            }
+        })
     }
 
     /// update title with context

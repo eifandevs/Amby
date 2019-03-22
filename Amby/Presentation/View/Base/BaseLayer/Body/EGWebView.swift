@@ -228,15 +228,11 @@ class EGWebView: WKWebView {
     }
 
 //    func loadTestHtml() {
-//        do {
-//            // ローカルページはヒストリースタックに入れたくないので、文字列として読み込む
-//            let url = Bundle.main.url(forResource: "test", withExtension: "html")!
-//            loadFileURL(url, allowingReadAccessTo: url)
-//            let request = URLRequest(url: url)
-//            load(request)
-//        } catch {
-//            log.error("html to string error")
-//        }
+//        // ローカルページはヒストリースタックに入れたくないので、文字列として読み込む
+//        let url = Bundle.main.url(forResource: "beautify", withExtension: "html")!
+//        loadFileURL(url, allowingReadAccessTo: url)
+//        let request = URLRequest(url: url)
+//        load(request)
 //    }
 
     func loadHtml(code: NetWorkError) {

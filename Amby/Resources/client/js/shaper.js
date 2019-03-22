@@ -1,4 +1,5 @@
 var beautify = require('js-beautify').html;
+// var $ = require('jquery');
 
 function shapeHtml(html) {
     const beautifyOptions = {
@@ -13,3 +14,4 @@ function shapeHtml(html) {
 
   return beautify(html, beautifyOptions);
 }
+
