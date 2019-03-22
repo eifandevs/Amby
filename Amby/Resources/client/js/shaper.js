@@ -1,7 +1,6 @@
 var beautify = require('js-beautify').html;
-// var $ = require('jquery');
 
-function shapeHtml(html) {
+export function shapeHtml(html) {
     const beautifyOptions = {
     indent_size: 2,
     end_with_newline: true,

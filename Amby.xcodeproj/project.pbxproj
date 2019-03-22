@@ -146,14 +146,14 @@
 		A17241B722452CD800472477 /* bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = A17241AD22452CD600472477 /* bundle.js */; };
 		A17241B822452CD800472477 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = A17241AE22452CD600472477 /* highlight.js */; };
 		A17241BA22452CD800472477 /* post.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B122452CD800472477 /* post.html */; };
-		A17241BB22452CD800472477 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B222452CD800472477 /* offline.html */; };
-		A17241BC22452CD800472477 /* timeout.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B322452CD800472477 /* timeout.html */; };
-		A17241BD22452CD800472477 /* invalid.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B422452CD800472477 /* invalid.html */; };
-		A17241BE22452CD800472477 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B522452CD800472477 /* dns.html */; };
-		A17241BF22452CD800472477 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B622452CD800472477 /* authorize.html */; };
 		A17241C32245639200472477 /* shaper.js in Resources */ = {isa = PBXBuildFile; fileRef = A17241C22245639100472477 /* shaper.js */; };
 		A17241C6224563A200472477 /* alertTest.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241C4224563A200472477 /* alertTest.html */; };
 		A17241C7224563A200472477 /* shaper.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241C5224563A200472477 /* shaper.html */; };
+		A17241CE2245708A00472477 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241C92245708A00472477 /* offline.html */; };
+		A17241CF2245708A00472477 /* timeout.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CA2245708A00472477 /* timeout.html */; };
+		A17241D02245708A00472477 /* invalid.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CB2245708A00472477 /* invalid.html */; };
+		A17241D12245708A00472477 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CC2245708A00472477 /* dns.html */; };
+		A17241D22245708A00472477 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CD2245708A00472477 /* authorize.html */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
 		A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */; };
@@ -608,14 +608,14 @@
 		A17241AD22452CD600472477 /* bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bundle.js; sourceTree = "<group>"; };
 		A17241AE22452CD600472477 /* highlight.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = highlight.js; sourceTree = "<group>"; };
 		A17241B122452CD800472477 /* post.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = post.html; sourceTree = "<group>"; };
-		A17241B222452CD800472477 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
-		A17241B322452CD800472477 /* timeout.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = timeout.html; sourceTree = "<group>"; };
-		A17241B422452CD800472477 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
-		A17241B522452CD800472477 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
-		A17241B622452CD800472477 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
 		A17241C22245639100472477 /* shaper.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shaper.js; sourceTree = "<group>"; };
 		A17241C4224563A200472477 /* alertTest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = alertTest.html; sourceTree = "<group>"; };
 		A17241C5224563A200472477 /* shaper.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = shaper.html; sourceTree = "<group>"; };
+		A17241C92245708A00472477 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
+		A17241CA2245708A00472477 /* timeout.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = timeout.html; sourceTree = "<group>"; };
+		A17241CB2245708A00472477 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
+		A17241CC2245708A00472477 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
+		A17241CD2245708A00472477 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
 		A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuMemoTableViewCell.xib; sourceTree = "<group>"; };
@@ -1598,16 +1598,24 @@
 		A17241B022452CD600472477 /* html */ = {
 			isa = PBXGroup;
 			children = (
+				A17241C82245708A00472477 /* error */,
 				A17241C4224563A200472477 /* alertTest.html */,
 				A17241C5224563A200472477 /* shaper.html */,
 				A17241B122452CD800472477 /* post.html */,
-				A17241B222452CD800472477 /* offline.html */,
-				A17241B322452CD800472477 /* timeout.html */,
-				A17241B422452CD800472477 /* invalid.html */,
-				A17241B522452CD800472477 /* dns.html */,
-				A17241B622452CD800472477 /* authorize.html */,
 			);
 			path = html;
+			sourceTree = "<group>";
+		};
+		A17241C82245708A00472477 /* error */ = {
+			isa = PBXGroup;
+			children = (
+				A17241C92245708A00472477 /* offline.html */,
+				A17241CA2245708A00472477 /* timeout.html */,
+				A17241CB2245708A00472477 /* invalid.html */,
+				A17241CC2245708A00472477 /* dns.html */,
+				A17241CD2245708A00472477 /* authorize.html */,
+			);
+			path = error;
 			sourceTree = "<group>";
 		};
 		A1869C1A217951B6007303B3 /* Memo */ = {
@@ -2405,14 +2413,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17241D12245708A00472477 /* dns.html in Resources */,
 				A152086020C5543B00201B30 /* env.plist in Resources */,
 				A112E831212CD76500320048 /* SplashViewController.xib in Resources */,
 				A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */,
 				A15C5451214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */,
 				A17241C32245639200472477 /* shaper.js in Resources */,
-				A17241BF22452CD800472477 /* authorize.html in Resources */,
 				A15C5420214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib in Resources */,
-				A17241BD22452CD800472477 /* invalid.html in Resources */,
+				A17241CF2245708A00472477 /* timeout.html in Resources */,
 				A15C5484214D935E001E8AB5 /* com.mono0926.LicensePlist.plist in Resources */,
 				A17241C6224563A200472477 /* alertTest.html in Resources */,
 				A112E837212CD76500320048 /* ReportViewController.xib in Resources */,
@@ -2423,8 +2431,8 @@
 				A1724197223FABC400472477 /* GrepOperationView.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
 				A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */,
-				A17241BC22452CD800472477 /* timeout.html in Resources */,
 				A1B778392173C57100BED141 /* MenuOrderTableViewCell.xib in Resources */,
+				A17241CE2245708A00472477 /* offline.html in Resources */,
 				A17241B822452CD800472477 /* highlight.js in Resources */,
 				A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A172419D223FB68300472477 /* HtmlAnalysisViewController.xib in Resources */,
@@ -2436,20 +2444,20 @@
 				A13D6A872184A3F100B1832E /* MemoViewController.xib in Resources */,
 				A15C545F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
 				A15C541F214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib in Resources */,
+				A17241D22245708A00472477 /* authorize.html in Resources */,
 				A12B93F8214EF7480082EEA5 /* com.mono0926.LicensePlist in Resources */,
 				A17241C7224563A200472477 /* shaper.html in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
 				A15C5459214D699D001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
-				A17241BE22452CD800472477 /* dns.html in Resources */,
 				A17241B722452CD800472477 /* bundle.js in Resources */,
 				A13D6A9921872C7500B1832E /* FormTableViewCell.xib in Resources */,
 				A15C5452214D699D001E8AB5 /* OptionMenuHelpTableViewCell.xib in Resources */,
 				A1869C27217B5B86007303B3 /* ToastView.xib in Resources */,
 				A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */,
 				A11CD33C214F8F8500D9333F /* OpenSourceTableViewCell.xib in Resources */,
-				A17241BB22452CD800472477 /* offline.html in Resources */,
 				A15C5461214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */,
+				A17241D02245708A00472477 /* invalid.html in Resources */,
 				A1FFA686219A40180092C4D6 /* DonationViewController.xib in Resources */,
 				A1FFA68A219A40270092C4D6 /* DevelopmentViewController.xib in Resources */,
 				A1FFA6722194FD500092C4D6 /* OptionMenuTabGroupTableViewCell.xib in Resources */,
