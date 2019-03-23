@@ -154,6 +154,7 @@
 		A17241D02245708A00472477 /* invalid.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CB2245708A00472477 /* invalid.html */; };
 		A17241D12245708A00472477 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CC2245708A00472477 /* dns.html */; };
 		A17241D22245708A00472477 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CD2245708A00472477 /* authorize.html */; };
+		A17241D42246619C00472477 /* URL+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17241D32246619B00472477 /* URL+Extend.swift */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
 		A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */; };
@@ -616,6 +617,7 @@
 		A17241CB2245708A00472477 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
 		A17241CC2245708A00472477 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
 		A17241CD2245708A00472477 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
+		A17241D32246619B00472477 /* URL+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extend.swift"; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
 		A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuMemoTableViewCell.xib; sourceTree = "<group>"; };
@@ -1928,6 +1930,7 @@
 				A1C0E024220F698900E7A7B6 /* UIImageView+Extend.swift */,
 				A1C0E02C220F698A00E7A7B6 /* UIScrollView+Extend.swift */,
 				A1C0E02A220F698A00E7A7B6 /* UIView+Extend.swift */,
+				A17241D32246619B00472477 /* URL+Extend.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -3018,6 +3021,7 @@
 				A1C0E037220F698B00E7A7B6 /* Optional+Extend.swift in Sources */,
 				A1C0E043220F698B00E7A7B6 /* Double+Extend.swift in Sources */,
 				A1C0E047220F698B00E7A7B6 /* CollectionType+Extend.swift in Sources */,
+				A17241D42246619C00472477 /* URL+Extend.swift in Sources */,
 				A1C0E03D220F698B00E7A7B6 /* Data+Extend.swift in Sources */,
 				A1C0E01F220F690800E7A7B6 /* CommonUtil.swift in Sources */,
 				A1C0E044220F698B00E7A7B6 /* String+Extend.swift in Sources */,

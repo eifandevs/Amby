@@ -141,7 +141,9 @@ struct AppConst {
     // MARK: - URL情報
 
     struct URL {
+        static let ABOUT_SCHEME = "about"
         static let BLANK = "about:blank"
+        static let ANALYSIS_URL_PREFIX = "parser_"
         static let ITUNES_STORE = "//itunes.apple.com/"
         static let DB_PATH = AppConst.DEVICE.CACHES_PATH + "/database"
         static let SEARCH_PATH = "https://www.google.co.jp/search?q="

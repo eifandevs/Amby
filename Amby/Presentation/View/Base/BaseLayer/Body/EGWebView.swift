@@ -26,8 +26,10 @@ class EGWebView: WKWebView {
 
     var context = "" // 監視ID
 
+    // ソース解析中
+    var isAnalysis = false
     // スワイプ中かどうか
-    var isSwiping: Bool = false
+    var isSwiping = false
 
     /// observing estimatedprogress flag
     var isObservingEstimagedProgress = false
@@ -225,6 +227,11 @@ class EGWebView: WKWebView {
         }
         loadHtml(code: NetWorkError.invalidUrl)
         return false
+    }
+
+    @discardableResult
+    func load(url: URL) -> Bool {
+        return load(urlStr: url.absoluteString)
     }
 
 //    func loadTestHtml() {

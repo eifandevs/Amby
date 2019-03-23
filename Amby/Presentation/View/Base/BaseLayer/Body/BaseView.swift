@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import CommonUtil
 import Entity
 import Foundation
 import Model
@@ -200,7 +201,7 @@ class BaseView: UIView {
                 case .scrollUp: self.scrollUp()
                 case let .grep(text): self.grep(text: text)
                 case let .grepPrevious(index), let .grepNext(index): self.grepScroll(index: index)
-                case .analysisHtml: self.analysisHtml()
+                case let .analysisHtml(url): self.analysisHtml(url: url)
                 }
                 log.eventOut(chain: "baseViewModel.rx_action. action: \(action)")
             }
@@ -308,7 +309,12 @@ class BaseView: UIView {
             }
     }
 
-    private func analysisHtml() {
+    private func analysisHtml(url: String) {
+        _ = front.load(urlStr: "\(AppConst.URL.ANALYSIS_URL_PREFIX)\(url)")
+//        if let url = URL(string: url), let analysisUrl = url.ext_set(scheme: AppConst.URL.ANALYSIS_URL_PREFIX) {
+//            _ = front.load(url: analysisUrl)
+//        }
+
 //        front.loadTestHtml()
 //        front.parseHtml { [weak self] html, error in
 //            guard let `self` = self else { return }
@@ -1017,6 +1023,12 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
             return
         }
 
+        // aboutスキームは無視
+        if let scheme = url.scheme, scheme == AppConst.URL.ABOUT_SCHEME {
+            decisionHandler(.cancel)
+            return
+        }
+
         // 新規ウィンドウ選択中の場合はキャンセル
         if viewModel.state.contains(.isSelectingNewTabEvent) {
             log.debug("cancel url: \(url)")
@@ -1032,6 +1044,12 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
 
         // 外部アプリ起動要求
         if viewModel.openAppIfAppStoreRequest(url: url) {
+            decisionHandler(.cancel)
+            return
+        }
+
+        // 解析要求
+        if viewModel.isAnalysisUrl(url: url.absoluteString) {
             decisionHandler(.cancel)
             return
         }

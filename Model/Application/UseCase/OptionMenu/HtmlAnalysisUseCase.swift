@@ -12,7 +12,20 @@ import RxSwift
 
 public enum HtmlAnalysisUseCaseAction {
     case present(html: String)
-    case analytics
+    case analytics(url: String)
+}
+
+enum HtmlAnalysisUseCaseError {
+    case notExistUrl
+}
+
+extension HtmlAnalysisUseCaseError: ModelError {
+    var message: String {
+        switch self {
+        case .notExistUrl:
+            return MessageConst.NOTIFICATION.HTML_ANALYSIS_NOT_EXIST_URL
+        }
+    }
 }
 
 /// レポートユースケース
@@ -22,6 +35,23 @@ public final class HtmlAnalysisUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<HtmlAnalysisUseCaseAction>()
 
+    /// エラー通知用RX
+    let rx_error = PublishSubject<HtmlAnalysisUseCaseError>()
+
+    // models
+    private var pageHistoryDataModel: PageHistoryDataModelProtocol!
+
+    /// Observable自動解放
+    let disposeBag = DisposeBag()
+
+    private init() {
+        setupProtocolImpl()
+    }
+
+    private func setupProtocolImpl() {
+        pageHistoryDataModel = PageHistoryDataModel.s
+    }
+
     /// HTML画面表示
     public func present(html: String) {
         log.debug("analytics html. html: \(html)")
@@ -30,6 +60,10 @@ public final class HtmlAnalysisUseCase {
 
     /// HTML解析
     public func analytics() {
-        rx_action.onNext(.analytics)
+        if let currentHistory = pageHistoryDataModel.currentHistory {
+            rx_action.onNext(.analytics(url: currentHistory.url))
+        } else {
+            rx_error.onNext(.notExistUrl)
+        }
     }
 }
