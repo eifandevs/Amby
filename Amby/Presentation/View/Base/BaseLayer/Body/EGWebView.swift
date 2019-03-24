@@ -26,8 +26,6 @@ class EGWebView: WKWebView {
 
     var context = "" // 監視ID
 
-    // ソース解析中
-    var isAnalysis = false
     // スワイプ中かどうか
     var isSwiping = false
 
@@ -234,12 +232,11 @@ class EGWebView: WKWebView {
         return load(urlStr: url.absoluteString)
     }
 
-//    func loadTestHtml() {
-//        let url = Bundle.main.url(forResource: "shaper", withExtension: "html")!
-//        loadFileURL(url, allowingReadAccessTo: url)
-//        let request = URLRequest(url: url)
-//        load(request)
-//    }
+    func loadShaperHtml() {
+        loadFileURL(resourceUtil.shaperURL, allowingReadAccessTo: resourceUtil.shaperURL)
+        let request = URLRequest(url: resourceUtil.shaperURL)
+        load(request)
+    }
 
     func loadHtml(code: NetWorkError) {
         let path: String = { () -> String in
@@ -296,6 +293,10 @@ class EGWebView: WKWebView {
         }
     }
 
+    func analysisHtml() -> Promise<Any?> {
+        return evaluate(script: "document.body.innerHTML")
+    }
+
     func scrollUp() -> Promise<Any?> {
         return evaluate(script: "window.scrollTo(0, 0)")
     }
@@ -312,6 +313,10 @@ class EGWebView: WKWebView {
             .then { _ in
                 self.evaluate(script: "highlightAllOccurencesOfString('\(word)')")
             }
+    }
+
+    func shape(html: String) -> Promise<Any?> {
+        return evaluate(script: "shapeWapper('\(html)')")
     }
 
     func takeThumbnail() -> UIImage? {

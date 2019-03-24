@@ -310,26 +310,18 @@ class BaseView: UIView {
     }
 
     private func analysisHtml(url: String) {
-        _ = front.load(urlStr: "\(AppConst.URL.ANALYSIS_URL_PREFIX)\(url)")
-//        if let url = URL(string: url), let analysisUrl = url.ext_set(scheme: AppConst.URL.ANALYSIS_URL_PREFIX) {
-//            _ = front.load(url: analysisUrl)
-//        }
-
-//        front.loadTestHtml()
-//        front.parseHtml { [weak self] html, error in
-//            guard let `self` = self else { return }
-//
-//            if error != nil {
-//                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.ANALYTICS_HTML_ERROR, isSuccess: false)
-//            } else {
-//                self.viewModel.presentHtmlAnalysis(html: html)
+        if let url = URL(string: "\(AppConst.URL.ANALYSIS_URL_PREFIX)://\(url)") {
+            front.load(URLRequest(url: url))
+        }
+//        front.analysisHtml()
+//            .then { _ in
+//                self.front.loadShaperHtml()
 //            }
-//        }
     }
 
     private func scrollUp() {
         DispatchQueue.mainSyncSafe {
-            self.front.scrollUp()
+            self.front.scrollUp().then { _ in }
         }
     }
 
@@ -949,6 +941,11 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
 
         // サムネイルを保存
         viewModel.saveThumbnailAndEndRendering(webView: wv)
+
+        // TODO: 解析要求か判定
+        if let url = wv.url, let scheme = url.scheme, scheme == AppConst.URL.LOCAL_SCHEME, url.path.contains("shaper.html") {
+            _ = wv.shape(html: "<html><body>bbb</body></html>").then { _ in }
+        }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: Error) {

@@ -12,11 +12,10 @@
     <script>
         function shapeWapper(html) {
             const shapedHtml = shaper.shapeHtml(html);
-            console.log(shapedHtml);
             var elem = document.getElementById("shaped-content");
             elem.innerText = shapedHtml;
+            return shapedHtml
         }
-        // shapeWapper("<html><body>aaa</body></html>");
     </script>
 </body>
 </html>
