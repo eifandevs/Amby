@@ -1046,6 +1046,11 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
         }
 
         // 解析要求
+        // TODO: 新規windowで開く
+        //       通常のページと同じようにhistory back and forwardする
+        //       view-source:のようなcustom url schemeを設定し、そのスキームではソースを表示する
+        //       common historyには管理しない
+        //       このスキームの履歴は起動時に復元しない
         if viewModel.isAnalysisUrl(url: url.absoluteString) {
             decisionHandler(.cancel)
             return
