@@ -250,6 +250,11 @@ final class BaseViewModel {
 
     // MARK: Public Method
 
+    /// ページ追加
+    func addTab() {
+        TabUseCase.s.add()
+    }
+    
     /// html解析要求のurlか判定
     func isAnalysisUrl(url: String) -> Bool {
         return url.hasPrefix(AppConst.URL.ANALYSIS_URL_PREFIX)

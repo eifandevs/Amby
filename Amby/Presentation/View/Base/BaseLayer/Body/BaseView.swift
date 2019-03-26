@@ -1053,6 +1053,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
         //       このスキームの履歴は起動時に復元しない
         if viewModel.isAnalysisUrl(url: url.absoluteString) {
             decisionHandler(.cancel)
+            viewModel.addTab()
             return
         }
 
