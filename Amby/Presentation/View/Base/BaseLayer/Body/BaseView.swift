@@ -310,7 +310,7 @@ class BaseView: UIView {
     }
 
     private func analysisHtml(url: String) {
-        if let url = URL(string: "\(AppConst.URL.ANALYSIS_URL_PREFIX)://\(url)") {
+        if let url = URL(string: "\(AppConst.URL.ANALYSIS_URL_PREFIX)\(url)") {
             front.load(URLRequest(url: url))
         }
 //        front.analysisHtml()
@@ -1039,12 +1039,6 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
             self.autoScrollTimer = nil
         }
 
-        // 外部アプリ起動要求
-        if viewModel.openAppIfAppStoreRequest(url: url) {
-            decisionHandler(.cancel)
-            return
-        }
-
         // 解析要求
         // TODO: 新規windowで開く
         //       通常のページと同じようにhistory back and forwardする
@@ -1054,6 +1048,12 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
         if viewModel.isAnalysisUrl(url: url.absoluteString) {
             decisionHandler(.cancel)
             viewModel.addTab()
+            return
+        }
+
+        // 外部アプリ起動要求
+        if viewModel.openAppIfAppStoreRequest(url: url) {
+            decisionHandler(.cancel)
             return
         }
 

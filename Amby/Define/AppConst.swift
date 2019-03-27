@@ -144,7 +144,7 @@ struct AppConst {
         static let ABOUT_SCHEME = "about"
         static let LOCAL_SCHEME = "file"
         static let BLANK = "about:blank"
-        static let ANALYSIS_URL_PREFIX = "amby-parser"
+        static let ANALYSIS_URL_PREFIX = "ap-"
         static let ITUNES_STORE = "//itunes.apple.com/"
         static let DB_PATH = AppConst.DEVICE.CACHES_PATH + "/database"
         static let SEARCH_PATH = "https://www.google.co.jp/search?q="
