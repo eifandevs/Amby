@@ -320,7 +320,7 @@ class BaseView: UIView {
     }
 
     private func scrollUp() {
-        DispatchQueue.mainSyncSafe {
+        _ = DispatchQueue.mainSyncSafe {
             self.front.scrollUp().then { _ in }
         }
     }
