@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 public enum HtmlAnalysisUseCaseAction {
+    case present(html: String)
     case analytics(url: String)
 }
 
@@ -39,7 +40,6 @@ public final class HtmlAnalysisUseCase {
 
     // models
     private var pageHistoryDataModel: PageHistoryDataModelProtocol!
-    private var htmlAnalysisDataModel: HtmlAnalysisDataModelProtocol!
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -50,7 +50,12 @@ public final class HtmlAnalysisUseCase {
 
     private func setupProtocolImpl() {
         pageHistoryDataModel = PageHistoryDataModel.s
-        htmlAnalysisDataModel = HtmlAnalysisDataModel.s
+    }
+
+    /// HTML画面表示
+    public func present(html: String) {
+        log.debug("analytics html. html: \(html)")
+        rx_action.onNext(.present(html: html))
     }
 
     /// HTML解析
@@ -60,13 +65,5 @@ public final class HtmlAnalysisUseCase {
         } else {
             rx_error.onNext(.notExistUrl)
         }
-    }
-
-    public func insertHtml(url: String, value: String) {
-        htmlAnalysisDataModel.insertHtml(url: url, value: value)
-    }
-
-    public func getHtml(url: String) -> String? {
-        return htmlAnalysisDataModel.getHtml(url: url)
     }
 }

@@ -254,7 +254,7 @@ final class BaseViewModel {
     func addTab() {
         TabUseCase.s.add()
     }
-
+    
     /// html解析要求のurlか判定
     func isAnalysisUrl(url: String) -> Bool {
         return url.hasPrefix(AppConst.URL.ANALYSIS_URL_PREFIX)
@@ -351,6 +351,11 @@ final class BaseViewModel {
     /// フォーム情報取得
     func takeForm(webView: EGWebView) -> Form? {
         return webViewService.takeForm(webView: webView)
+    }
+
+    /// html解析画面表示
+    func presentHtmlAnalysis(html: String) {
+        HtmlAnalysisUseCase.s.present(html: html)
     }
 
     /// タブの追加
