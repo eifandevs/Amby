@@ -313,10 +313,6 @@ class BaseView: UIView {
         if let url = URL(string: "\(AppConst.URL.ANALYSIS_URL_PREFIX)\(url)") {
             front.load(URLRequest(url: url))
         }
-//        front.analysisHtml()
-//            .then { _ in
-//                self.front.loadShaperHtml()
-//            }
     }
 
     private func scrollUp() {
@@ -1047,7 +1043,11 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
         //       このスキームの履歴は起動時に復元しない
         if viewModel.isAnalysisUrl(url: url.absoluteString) {
             decisionHandler(.cancel)
-            viewModel.addTab()
+            front.analysisHtml()
+                .then { result in
+                    log.warning(result)
+//                    self.front.loadShaperHtml()
+                }
             return
         }
 

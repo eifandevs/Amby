@@ -7,8 +7,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>ap-http</string>
-				<string>ap-https</string>
+				<string>amby</string>
 			</array>
 			<key>CFBundleURLName</key>
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
