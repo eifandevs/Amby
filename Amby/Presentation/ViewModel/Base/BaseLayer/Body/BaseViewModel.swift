@@ -30,7 +30,7 @@ enum BaseViewModelAction {
     case grep(text: String)
     case grepPrevious(index: Int)
     case grepNext(index: Int)
-    case analysisHtml(url: String)
+    case analysisHtml
 }
 
 struct BaseViewModelState: OptionSet {
@@ -241,7 +241,7 @@ final class BaseViewModel {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .analytics(url): self.rx_action.onNext(.analysisHtml(url: url))
+                case .analytics: self.rx_action.onNext(.analysisHtml)
                 default: break
                 }
             }
@@ -254,7 +254,7 @@ final class BaseViewModel {
     func addTab() {
         TabUseCase.s.add()
     }
-    
+
     /// html解析要求のurlか判定
     func isAnalysisUrl(url: String) -> Bool {
         return url.hasPrefix(AppConst.URL.ANALYSIS_URL_PREFIX)

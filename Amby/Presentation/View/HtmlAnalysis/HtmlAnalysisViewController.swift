@@ -12,14 +12,14 @@ import RxSwift
 import UIKit
 
 class HtmlAnalysisViewController: UIViewController {
-    @IBOutlet var htmlTextView: UITextView!
     @IBOutlet var closeButton: CornerRadiusButton!
+    @IBOutlet var webView: WKWebView!
 
     private var html: String!
 
     convenience init(html: String) {
         self.init(nibName: R.nib.htmlAnalysisViewController.name, bundle: nil)
-        self.html = html.html2String
+        self.html = html
     }
 
     deinit {
@@ -28,9 +28,6 @@ class HtmlAnalysisViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // データ投入
-        htmlTextView.text = html
 
         // ボタンタップ
         closeButton.rx.tap

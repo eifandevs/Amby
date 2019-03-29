@@ -201,7 +201,7 @@ class BaseView: UIView {
                 case .scrollUp: self.scrollUp()
                 case let .grep(text): self.grep(text: text)
                 case let .grepPrevious(index), let .grepNext(index): self.grepScroll(index: index)
-                case let .analysisHtml(url): self.analysisHtml(url: url)
+                case .analysisHtml: self.analysisHtml()
                 }
                 log.eventOut(chain: "baseViewModel.rx_action. action: \(action)")
             }
@@ -309,14 +309,13 @@ class BaseView: UIView {
             }
     }
 
-    private func analysisHtml(url: String) {
-        if let url = URL(string: "\(AppConst.URL.ANALYSIS_URL_PREFIX)\(url)") {
-            front.load(URLRequest(url: url))
-        }
-//        front.analysisHtml()
-//            .then { _ in
-//                self.front.loadShaperHtml()
-//            }
+    private func analysisHtml() {
+        front.analysisHtml()
+            .then { result in
+                if let result = result, let html = result as? String {
+                    self.viewModel.presentHtmlAnalysis(html: html)
+                }
+            }
     }
 
     private func scrollUp() {
@@ -941,11 +940,6 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
 
         // サムネイルを保存
         viewModel.saveThumbnailAndEndRendering(webView: wv)
-
-        // TODO: 解析要求か判定
-        if let url = wv.url, let scheme = url.scheme, scheme == AppConst.URL.LOCAL_SCHEME, url.path.contains("shaper.html") {
-            _ = wv.shape(html: "<html><body>bbb</body></html>").then { _ in }
-        }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: Error) {
@@ -1037,18 +1031,6 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
         if let autoScrollTimer = autoScrollTimer, autoScrollTimer.isValid {
             autoScrollTimer.invalidate()
             self.autoScrollTimer = nil
-        }
-
-        // 解析要求
-        // TODO: 新規windowで開く
-        //       通常のページと同じようにhistory back and forwardする
-        //       view-source:のようなcustom url schemeを設定し、そのスキームではソースを表示する
-        //       common historyには管理しない
-        //       このスキームの履歴は起動時に復元しない
-        if viewModel.isAnalysisUrl(url: url.absoluteString) {
-            decisionHandler(.cancel)
-            viewModel.addTab()
-            return
         }
 
         // 外部アプリ起動要求
