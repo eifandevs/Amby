@@ -257,6 +257,7 @@
 		A1B7F2DD220F45A0008F3850 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2D0220F45A0008F3850 /* Favorite.swift */; };
 		A1B7F2DE220F45A0008F3850 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2D1220F45A0008F3850 /* Article.swift */; };
 		A1B7F2DF220F4704008F3850 /* Entity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16A6ED9220F248000FFCB5B /* Entity.framework */; };
+		A1B9B6E1224FA9F900970D6B /* HtmlAnalysisWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B9B6E0224FA9F900970D6B /* HtmlAnalysisWebView.swift */; };
 		A1C0E002220F67F300E7A7B6 /* CommonUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C0DFF9220F67F200E7A7B6 /* CommonUtil.framework */; };
 		A1C0E009220F67F300E7A7B6 /* CommonUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C0E008220F67F300E7A7B6 /* CommonUtilTests.swift */; };
 		A1C0E00B220F67F300E7A7B6 /* CommonUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = A1C0DFFB220F67F300E7A7B6 /* CommonUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -688,6 +689,7 @@
 		A1B7F2CF220F45A0008F3850 /* SuggestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestResponse.swift; sourceTree = "<group>"; };
 		A1B7F2D0220F45A0008F3850 /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A1B7F2D1220F45A0008F3850 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		A1B9B6E0224FA9F900970D6B /* HtmlAnalysisWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlAnalysisWebView.swift; sourceTree = "<group>"; };
 		A1C0DFF9220F67F200E7A7B6 /* CommonUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1C0DFFB220F67F300E7A7B6 /* CommonUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonUtil.h; sourceTree = "<group>"; };
 		A1C0DFFC220F67F300E7A7B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1566,6 +1568,7 @@
 			children = (
 				A172419A223FB68200472477 /* HtmlAnalysisViewController.swift */,
 				A172419B223FB68200472477 /* HtmlAnalysisViewController.xib */,
+				A1B9B6E0224FA9F900970D6B /* HtmlAnalysisWebView.swift */,
 			);
 			path = HtmlAnalysis;
 			sourceTree = "<group>";
@@ -3166,6 +3169,7 @@
 				A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */,
 				A1FFA67C2195FCC90092C4D6 /* FooterCollectionViewCell.swift in Sources */,
 				A112E82D212CD76500320048 /* SplashViewController.swift in Sources */,
+				A1B9B6E1224FA9F900970D6B /* HtmlAnalysisWebView.swift in Sources */,
 				A1FFA66C2194FD000092C4D6 /* OptionMenuTabGroupTableView.swift in Sources */,
 				A112E86B212CD76500320048 /* ReportViewController.swift in Sources */,
 				A11CD332214F059000D9333F /* BaseViewModel.swift in Sources */,

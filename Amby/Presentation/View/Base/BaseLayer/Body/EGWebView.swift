@@ -232,12 +232,6 @@ class EGWebView: WKWebView {
         return load(urlStr: url.absoluteString)
     }
 
-    func loadShaperHtml() {
-        loadFileURL(resourceUtil.shaperURL, allowingReadAccessTo: resourceUtil.shaperURL)
-        let request = URLRequest(url: resourceUtil.shaperURL)
-        load(request)
-    }
-
     func loadHtml(code: NetWorkError) {
         let path: String = { () -> String in
             if code == NetWorkError.timeout { return resourceUtil.timeoutHtml }
@@ -313,10 +307,6 @@ class EGWebView: WKWebView {
             .then { _ in
                 self.evaluate(script: "highlightAllOccurencesOfString('\(word)')")
             }
-    }
-
-    func shape(html: String) -> Promise<Any?> {
-        return evaluate(script: "shapeWapper('\(html)')")
     }
 
     func takeThumbnail() -> UIImage? {

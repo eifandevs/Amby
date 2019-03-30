@@ -27,7 +27,6 @@ public final class HtmlAnalysisUseCase {
 
     /// HTML画面表示
     public func present(html: String) {
-        log.debug("analytics html. html: \(html)")
         rx_action.onNext(.present(html: html))
     }
 

@@ -319,9 +319,7 @@ class BaseView: UIView {
     }
 
     private func scrollUp() {
-        _ = DispatchQueue.mainSyncSafe {
-            self.front.scrollUp().then { _ in }
-        }
+        front.scrollUp().then { _ in }
     }
 
     private func autoScroll() {

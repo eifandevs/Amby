@@ -14,7 +14,7 @@
             <connections>
                 <outlet property="closeButton" destination="Kfi-th-sVk" id="YfA-YI-vby"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="webView" destination="ote-Fu-GUM" id="88Z-GL-7Pi"/>
+                <outlet property="webView" destination="ote-Fu-GUM" id="JDe-ep-Fa3"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -40,7 +40,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Hrf-Gk-RTW">
                     <rect key="frame" x="16" y="35" width="343" height="555"/>
                     <subviews>
-                        <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ote-Fu-GUM">
+                        <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ote-Fu-GUM" customClass="HtmlAnalysisWebView" customModule="Amby" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="343" height="555"/>
                             <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <wkWebViewConfiguration key="configuration">
