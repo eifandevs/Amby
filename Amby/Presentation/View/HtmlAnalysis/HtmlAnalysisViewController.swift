@@ -65,7 +65,8 @@ extension HtmlAnalysisViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
         guard let wv = webView as? HtmlAnalysisWebView else { return }
         log.debug("loading finish. html: \(html)")
-        wv.shape(html: "<html><body>aaa</body></html>").then { _ in }
+//        wv.shape(html: html).then { _ in }
+        wv.shape(html: html).then { _ in }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: Error) {

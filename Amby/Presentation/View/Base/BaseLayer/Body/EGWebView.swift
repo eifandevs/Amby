@@ -288,7 +288,7 @@ class EGWebView: WKWebView {
     }
 
     func analysisHtml() -> Promise<Any?> {
-        return evaluate(script: "document.body.innerHTML")
+        return evaluate(script: "document.documentElement.outerHTML")
     }
 
     func scrollUp() -> Promise<Any?> {
