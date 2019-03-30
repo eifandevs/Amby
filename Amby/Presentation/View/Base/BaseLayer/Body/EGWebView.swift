@@ -288,7 +288,10 @@ class EGWebView: WKWebView {
     }
 
     func analysisHtml() -> Promise<Any?> {
-        return evaluate(script: "document.documentElement.outerHTML")
+        return setupScript(url: resourceUtil.bundleScript)
+            .then { _ in
+                self.evaluate(script: "shaper.printHtml()")
+            }
     }
 
     func scrollUp() -> Promise<Any?> {
@@ -307,6 +310,16 @@ class EGWebView: WKWebView {
             .then { _ in
                 self.evaluate(script: "highlightAllOccurencesOfString('\(word)')")
             }
+    }
+
+    func shape(html: String) -> Promise<Any?> {
+        return evaluate(script: "shapeWapper('\(html)')")
+    }
+
+    func loadShaperHtml() {
+        loadFileURL(resourceUtil.shaperURL, allowingReadAccessTo: resourceUtil.shaperURL)
+        let request = URLRequest(url: resourceUtil.shaperURL)
+        load(request)
     }
 
     func takeThumbnail() -> UIImage? {

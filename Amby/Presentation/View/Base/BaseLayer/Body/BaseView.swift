@@ -310,12 +310,7 @@ class BaseView: UIView {
     }
 
     private func analysisHtml() {
-        front.analysisHtml()
-            .then { result in
-                if let result = result, let html = result as? String {
-                    self.viewModel.presentHtmlAnalysis(html: html)
-                }
-            }
+        front.analysisHtml().then { _ in }
     }
 
     private func scrollUp() {

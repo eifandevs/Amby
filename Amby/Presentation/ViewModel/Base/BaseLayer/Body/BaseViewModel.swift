@@ -353,11 +353,6 @@ final class BaseViewModel {
         return webViewService.takeForm(webView: webView)
     }
 
-    /// html解析画面表示
-    func presentHtmlAnalysis(html: String) {
-        HtmlAnalysisUseCase.s.present(html: html)
-    }
-
     /// タブの追加
     func insertTab(url: String? = nil) {
         TabUseCase.s.insert(url: url)

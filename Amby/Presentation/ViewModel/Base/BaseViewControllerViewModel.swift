@@ -24,7 +24,6 @@ enum BaseViewControllerViewModelAction {
     case memo(memo: Memo)
     case notice(message: String, isSuccess: Bool)
     case pageGroupTitle(groupContext: String)
-    case htmlAnalysis(html: String)
 }
 
 final class BaseViewControllerViewModel {
@@ -42,14 +41,6 @@ final class BaseViewControllerViewModel {
     }
 
     private func setupRx() {
-        // HTML解析
-        HtmlAnalysisUseCase.s.rx_action
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case let .present(html) = action else { return }
-                self.rx_action.onNext(.htmlAnalysis(html: html))
-            }
-            .disposed(by: disposeBag)
-
         // タブグループタイトル編集ダイアログ
         TabUseCase.s.rx_action
             .subscribe { [weak self] action in

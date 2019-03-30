@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 
 public enum HtmlAnalysisUseCaseAction {
-    case present(html: String)
     case analytics
 }
 
@@ -24,11 +23,6 @@ public final class HtmlAnalysisUseCase {
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
-
-    /// HTML画面表示
-    public func present(html: String) {
-        rx_action.onNext(.present(html: html))
-    }
 
     /// HTML解析
     public func analytics() {
