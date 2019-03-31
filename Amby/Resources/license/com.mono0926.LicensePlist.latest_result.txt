@@ -2,6 +2,22 @@ name: Alamofire, nameSpecified:
 body: Copyright (c) 2014-2…
 version: 4.7.3
 
+name: Alamofire, nameSpecified: 
+body: Copyright (c) 2014-2…
+version: 4.7.3
+
+name: Alamofire, nameSpecified: 
+body: Copyright (c) 2014-2…
+version: 4.7.3
+
+name: BaseAPI, nameSpecified: 
+body: Copyright (c) 2018 s…
+version: 0.1.2
+
+name: BaseAPI, nameSpecified: 
+body: Copyright (c) 2018 s…
+version: 0.1.2
+
 name: BaseAPI, nameSpecified: 
 body: Copyright (c) 2018 s…
 version: 0.1.2
@@ -35,6 +51,14 @@ name: GithubAPI, nameSpecified:
 body: Copyright (c) 2018 s…
 version: 0.0.5
 
+name: GithubAPI, nameSpecified: 
+body: Copyright (c) 2018 s…
+version: 0.0.5
+
+name: GithubAPI, nameSpecified: 
+body: Copyright (c) 2018 s…
+version: 0.0.5
+
 name: Google-Mobile-Ads-SDK, nameSpecified: 
 body: Copyright 2018 Googl…
 version: 7.34.0
@@ -58,17 +82,29 @@ name: Moya, nameSpecified:
 body: The MIT License (MIT…
 version: 11.0.1
 
+name: Moya, nameSpecified: 
+body: The MIT License (MIT…
+version: 11.0.1
+
+name: Moya, nameSpecified: 
+body: The MIT License (MIT…
+version: 11.0.1
+
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…
 version: 0.3.8
 
 name: NSObject+Rx, nameSpecified: 
 body: The MIT License (MIT…
-version: 
+version: 4.2.0
 
 name: NSObject+Rx, nameSpecified: 
 body: The MIT License (MIT…
-version: 
+version: 4.2.0
+
+name: NSObject+Rx, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.2.0
 
 name: R.swift, nameSpecified: 
 body: The MIT License (MIT…
@@ -82,12 +118,30 @@ name: Result, nameSpecified:
 body: The MIT License (MIT…
 version: 3.2.4
 
+name: Result, nameSpecified: 
+body: The MIT License (MIT…
+version: 3.2.4
+
+name: Result, nameSpecified: 
+body: The MIT License (MIT…
+version: 3.2.4
+
 name: RxCocoa, nameSpecified: 
 body: **The MIT License**
 …
 version: 4.0.0
 
 name: RxCocoa, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.0.0
+
+name: RxCocoa, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.0.0
+
+name: RxSwift, nameSpecified: 
 body: **The MIT License**
 …
 version: 4.0.0

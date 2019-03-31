@@ -1,6 +1,7 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Firebase"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Crashlytics" "${PODS_ROOT}/Headers/Public/Fabric" "${PODS_ROOT}/Headers/Public/Firebase" "${PODS_ROOT}/Headers/Public/FirebaseAnalytics" "${PODS_ROOT}/Headers/Public/FirebaseInstanceID" "${PODS_ROOT}/Headers/Public/Google-Mobile-Ads-SDK" "${PODS_ROOT}/Headers/Public/GoogleAppMeasurement" "${PODS_ROOT}/Headers/Public/LicensePlist" "${PODS_ROOT}/Headers/Public/R.swift" "${PODS_ROOT}/Headers/Public/SwiftFormat" "${PODS_ROOT}/Headers/Public/SwiftLint"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks' '@executable_path/../../Frameworks'
+OTHER_CFLAGS = $(inherited)  -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Crashlytics" -isystem "${PODS_ROOT}/Headers/Public/Fabric" -isystem "${PODS_ROOT}/Headers/Public/Firebase" -isystem "${PODS_ROOT}/Headers/Public/FirebaseAnalytics" -isystem "${PODS_ROOT}/Headers/Public/FirebaseInstanceID" -isystem "${PODS_ROOT}/Headers/Public/Google-Mobile-Ads-SDK" -isystem "${PODS_ROOT}/Headers/Public/GoogleAppMeasurement" -isystem "${PODS_ROOT}/Headers/Public/LicensePlist" -isystem "${PODS_ROOT}/Headers/Public/R.swift" -isystem "${PODS_ROOT}/Headers/Public/SwiftFormat" -isystem "${PODS_ROOT}/Headers/Public/SwiftLint"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

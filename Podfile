@@ -56,14 +56,4 @@ abstract_target 'All' do
     use_frameworks!
 #    inhibit_all_warnings!
   end
-
-  target 'CommonUtil' do
-  use_frameworks!
-
-    target 'CommonUtilTests' do
-      inherit! :search_paths
-      # Pods for testing
-    end
-  end
-
 end
