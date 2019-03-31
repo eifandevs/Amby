@@ -47,6 +47,7 @@ struct MessageConst {
         static let GET_FORM_ERROR = "フォーム情報の取得に失敗しました"
         static let STORE_FORM_ERROR = "フォーム情報の保存に失敗しました"
         static let PASSCODE_NOT_REGISTERED = "パスコードが設定されていません"
+        static let HTML_ANALYSIS_NOT_EXIST_URL = "URLの取得に失敗しました"
         static let REGISTER_BOOK_MARK_ERROR = "ページ情報を取得できませんでした"
         static let REGISTER_FORM = "フォーム情報を登録しました"
         static let REGISTER_FORM_ERROR_INPUT = "フォーム情報の入力を確認できませんでした"

@@ -27,10 +27,7 @@ class EGWebView: WKWebView {
     var context = "" // 監視ID
 
     // スワイプ中かどうか
-    var isSwiping: Bool = false
-
-    /// オペレーション
-    var operation: PageHistory.Operation = .normal
+    var isSwiping = false
 
     /// observing estimatedprogress flag
     var isObservingEstimagedProgress = false
@@ -41,14 +38,20 @@ class EGWebView: WKWebView {
     /// observing url flag
     var isObservingUrl = false
 
+    /// observing cangoback
+    var isObservingCanGoBack = false
+
+    /// observing cangoforward
+    var isObservingCanGoForward = false
+
     let resourceUtil = ResourceUtil()
 
-    init(id: String?) {
+    init(id: String?, configuration: WKWebViewConfiguration) {
         if let id = id, !id.isEmpty {
             // コンテキストを復元
             context = id
         }
-        super.init(frame: CGRect.zero, configuration: WebCacheUseCase.s.cacheConfiguration())
+        super.init(frame: CGRect.zero, configuration: configuration)
         isOpaque = true
         allowsLinkPreview = true
 
@@ -130,6 +133,38 @@ class EGWebView: WKWebView {
         }
     }
 
+    /// start observe 'canGoBack'
+    func observeCanGoBack(observer: NSObject) {
+        if !isObservingCanGoBack {
+            addObserver(observer, forKeyPath: "canGoBack", options: .new, context: &context)
+            isObservingCanGoBack = true
+        }
+    }
+
+    /// remove observe 'canGoBack'
+    func removeObserverCanGoBack(observer: NSObject) {
+        if isObservingCanGoBack {
+            removeObserver(observer, forKeyPath: "canGoBack")
+            isObservingCanGoBack = false
+        }
+    }
+
+    /// start observe 'canGoForward'
+    func observeCanGoForward(observer: NSObject) {
+        if !isObservingCanGoForward {
+            addObserver(observer, forKeyPath: "canGoForward", options: .new, context: &context)
+            isObservingCanGoForward = true
+        }
+    }
+
+    /// remove observe 'canGoBack'
+    func removeObserverCanGoForward(observer: NSObject) {
+        if isObservingCanGoForward {
+            removeObserver(observer, forKeyPath: "canGoForward")
+            isObservingCanGoForward = false
+        }
+    }
+
     // 同期実行
     func evaluateSync(script: String) -> Any? {
         var finished = false
@@ -152,9 +187,10 @@ class EGWebView: WKWebView {
 
     // promise
     func evaluate(script: String) -> Promise<Any?> {
-        return Promise<Any?>(in: .background, token: nil) { resolve, reject, _ in
+        return Promise<Any?>(in: .main, token: nil) { resolve, reject, _ in
             self.evaluateJavaScript(script) { result, error in
                 if let error = error {
+                    log.error("js evaluate error. error: \(error)")
                     reject(error)
                 } else {
                     resolve(result)
@@ -189,6 +225,11 @@ class EGWebView: WKWebView {
         }
         loadHtml(code: NetWorkError.invalidUrl)
         return false
+    }
+
+    @discardableResult
+    func load(url: URL) -> Bool {
+        return load(urlStr: url.absoluteString)
     }
 
     func loadHtml(code: NetWorkError) {
@@ -226,46 +267,60 @@ class EGWebView: WKWebView {
         loadHtml(code: errorType)
     }
 
-    func highlight(word: String) {
-        let scriptPath = resourceUtil.highlightScript
-        do {
-            let script = try String(contentsOf: scriptPath, encoding: .utf8)
-            evaluateJavaScript(script) { (_: Any?, error: Error?) in
-                if error != nil {
-                    log.error("js setup error: \(error!)")
+    // promise
+    func setupScript(url: Foundation.URL) -> Promise<Any?> {
+        return Promise<Any?>(in: .main, token: nil) { resolve, reject, _ in
+            do {
+                let script = try String(contentsOf: url, encoding: .utf8)
+                self.evaluateJavaScript(script) { (_: Any?, error: Error?) in
+                    if let error = error {
+                        log.error("js setup error: \(error)")
+                        reject(error)
+                    } else {
+                        resolve(nil)
+                    }
                 }
+            } catch let error as NSError {
+                log.error("failed to get script. error: \(error.localizedDescription)")
+                reject(error)
             }
-            evaluateJavaScript("MyApp_HighlightAllOccurencesOfString('\(word)')") { (result: Any?, error: Error?) in
-                if let error = error {
-                    log.error("js grep error: \(error.localizedDescription)")
-                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_ERROR, isSuccess: false)
-                } else {
-                    let num = result as? NSNumber ?? 0
-                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SUCCESS(num), isSuccess: true)
-                }
-            }
-        } catch let error as NSError {
-            log.error("failed to get script. error: \(error.localizedDescription)")
         }
     }
 
-//    - (NSInteger)highlightAllOccurencesOfString:(NSString*)str
-//    {
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"SearchWebView" ofType:@"js"];
-//    NSString *jsCode = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-//    [self stringByEvaluatingJavaScriptFromString:jsCode];
-//
-//    NSString *startSearch = [NSString stringWithFormat:@"MyApp_HighlightAllOccurencesOfString('%@')",str];
-//    [self stringByEvaluatingJavaScriptFromString:startSearch];
-//
-//    NSString *result = [self stringByEvaluatingJavaScriptFromString:@"MyApp_SearchResultCount"];
-//    return [result integerValue];
-//    }
-//
-//    - (void)removeAllHighlights
-//    {
-//    [self stringByEvaluatingJavaScriptFromString:@"MyApp_RemoveAllHighlights()"];
-//    }
+    func analysisHtml() -> Promise<Any?> {
+        return setupScript(url: resourceUtil.bundleScript)
+            .then { _ in
+                self.evaluate(script: "shaper.printHtml()")
+            }
+    }
+
+    func scrollUp() -> Promise<Any?> {
+        return evaluate(script: "window.scrollTo(0, 0)")
+    }
+
+    func scrollIntoViewWithIndex(index: Int) -> Promise<Any?> {
+        return setupScript(url: resourceUtil.highlightScript)
+            .then { _ in
+                self.evaluate(script: "scrollIntoViewWithIndex(\(index))")
+            }
+    }
+
+    func highlight(word: String) -> Promise<Any?> {
+        return setupScript(url: resourceUtil.highlightScript)
+            .then { _ in
+                self.evaluate(script: "highlightAllOccurencesOfString('\(word)')")
+            }
+    }
+
+    func shape(html: String) -> Promise<Any?> {
+        return evaluate(script: "shapeWapper('\(html)')")
+    }
+
+    func loadShaperHtml() {
+        loadFileURL(resourceUtil.shaperURL, allowingReadAccessTo: resourceUtil.shaperURL)
+        let request = URLRequest(url: resourceUtil.shaperURL)
+        load(request)
+    }
 
     func takeThumbnail() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(frame.size, true, 0)

@@ -16,7 +16,7 @@ enum BaseViewModelAction {
     case insert(at: Int)
     case reload
     case rebuild
-    case append
+    case append(currentHistory: PageHistory)
     case change
     case remove(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
@@ -28,6 +28,9 @@ enum BaseViewModelAction {
     case autoFill
     case scrollUp
     case grep(text: String)
+    case grepPrevious(index: Int)
+    case grepNext(index: Int)
+    case analysisHtml
 }
 
 struct BaseViewModelState: OptionSet {
@@ -47,7 +50,6 @@ struct BaseViewModelState: OptionSet {
 }
 
 final class BaseViewModel {
-    /// 状態管理
     var state: BaseViewModelState = []
 
     let rx_action = PublishSubject<BaseViewModelAction>()
@@ -105,6 +107,11 @@ final class BaseViewModel {
 
     /// 現在のスワイプ方向
     var swipeDirection: EdgeSwipeDirection = .none
+
+    /// webview configuration
+    var cacheConfiguration: WKWebViewConfiguration {
+        return WebCacheUseCase.s.cacheConfiguration()
+    }
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -179,25 +186,15 @@ final class BaseViewModel {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
+                case .historyBack: self.rx_action.onNext(.historyBack)
+                case .historyForward: self.rx_action.onNext(.historyForward)
                 case let .insert(before, _): self.rx_action.onNext(.insert(at: before.index + 1))
                 case .rebuild: self.rx_action.onNext(.rebuild)
                 case .reload: self.rx_action.onNext(.reload)
-                case .append: self.rx_action.onNext(.append)
+                case let .append(_, after): self.rx_action.onNext(.append(currentHistory: after.pageHistory))
                 case .change: self.rx_action.onNext(.change)
                 case let .swap(start, end): self.rx_action.onNext(.swap(start: start, end: end))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
-                default: break
-                }
-            }
-            .disposed(by: disposeBag)
-
-        // ヒストリー監視
-        HistoryUseCase.s.rx_action
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element else { return }
-                switch action {
-                case .back: self.rx_action.onNext(.historyBack)
-                case .forward: self.rx_action.onNext(.historyForward)
                 default: break
                 }
             }
@@ -229,13 +226,39 @@ final class BaseViewModel {
         // 全文検索監視
         GrepUseCase.s.rx_action
             .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case let .request(word) = action else { return }
-                self.rx_action.onNext(.grep(text: word))
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .request(word): self.rx_action.onNext(.grep(text: word))
+                case let .previous(index): self.rx_action.onNext(.grepPrevious(index: index))
+                case let .next(index): self.rx_action.onNext(.grepNext(index: index))
+                default: break
+                }
+            }
+            .disposed(by: disposeBag)
+
+        // html解析監視
+        HtmlAnalysisUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case .analytics: self.rx_action.onNext(.analysisHtml)
+                default: break
+                }
             }
             .disposed(by: disposeBag)
     }
 
     // MARK: Public Method
+
+    /// ページ追加
+    func addTab() {
+        TabUseCase.s.add()
+    }
+
+    /// html解析要求のurlか判定
+    func isAnalysisUrl(url: String) -> Bool {
+        return url.hasPrefix(AppConst.URL.ANALYSIS_URL_PREFIX)
+    }
 
     /// AppStore要求の場合開く
     func openAppIfAppStoreRequest(url: URL) -> Bool {
@@ -340,24 +363,8 @@ final class BaseViewModel {
         return TabUseCase.s.getIndex(context: context)
     }
 
-    /// 直近URL取得
-    func getMostForwardUrl(context: String) -> String? {
-        return TabUseCase.s.getMostForwardUrl(context: context)
-    }
-
-    /// 過去ページ閲覧中フラグ取得
-    func getIsPastViewing(context: String) -> Bool? {
-        return TabUseCase.s.getIsPastViewing(context: context)
-    }
-
-    /// 前回URL取得
-    func getBackUrl(context: String) -> String? {
-        return TabUseCase.s.getBackUrl(context: context)
-    }
-
-    /// 次URL取得
-    func getForwardUrl(context: String) -> String? {
-        return TabUseCase.s.getForwardUrl(context: context)
+    func endGrepping(hitNum: Int) {
+        GrepUseCase.s.finish(hitNum: hitNum)
     }
 
     func startLoading(context: String) {
@@ -466,16 +473,6 @@ final class BaseViewModel {
         TabUseCase.s.goNext()
     }
 
-    /// 前ページに戻る
-    func historyBack() {
-        HistoryUseCase.s.goBack()
-    }
-
-    /// 次ページに進む
-    func historyForward() {
-        HistoryUseCase.s.goForward()
-    }
-
     /// create thumbnail folder
     func createThumbnailFolder(context: String) {
         ThumbnailUseCase.s.createFolder(context: context)
@@ -487,13 +484,23 @@ final class BaseViewModel {
     }
 
     /// update url in page history
-    func updatePageUrl(context: String, url: String, operation: PageHistory.Operation) {
-        TabUseCase.s.updateUrl(context: context, url: url, operation: operation)
+    func updatePageUrl(context: String, url: String) {
+        TabUseCase.s.updateUrl(context: context, url: url)
     }
 
     /// update title in page history
     func updatePageTitle(context: String, title: String) {
         TabUseCase.s.updateTitle(context: context, title: title)
+    }
+
+    /// update canGoBack
+    func updateCanGoBack(context: String, canGoBack: Bool) {
+        ProgressUseCase.s.updateCanGoBack(context: context, canGoBack: canGoBack)
+    }
+
+    /// update canGoForward
+    func updateCanGoForward(context: String, canGoForward: Bool) {
+        ProgressUseCase.s.updateCanGoForward(context: context, canGoForward: canGoForward)
     }
 
     /// update common history

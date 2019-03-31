@@ -6,6 +6,8 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import CommonUtil
+import Entity
 import Foundation
 import Model
 import RxCocoa
@@ -156,9 +158,7 @@ class BaseView: UIView {
     private func removeTabs() {
         webViews.forEach { webView in
             if let unwrappedWebView = webView {
-                unwrappedWebView.removeObserverEstimatedProgress(observer: self)
-                unwrappedWebView.removeObserverTitle(observer: self)
-                unwrappedWebView.removeObserverUrl(observer: self)
+                removeObserving(target: unwrappedWebView)
                 unwrappedWebView.removeFromSuperview()
             }
         }
@@ -188,7 +188,7 @@ class BaseView: UIView {
                 case let .insert(at): self.insert(at: at)
                 case .reload: self.reload()
                 case .rebuild: self.rebuild()
-                case .append: self.append()
+                case let .append(currentHistory): self.append(currentHistory: currentHistory)
                 case .change: self.change()
                 case let .swap(start, end): self.swap(start: start, end: end)
                 case let .remove(isFront, deleteContext, currentContext, deleteIndex): self.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
@@ -200,6 +200,8 @@ class BaseView: UIView {
                 case .autoFill: self.autoFill()
                 case .scrollUp: self.scrollUp()
                 case let .grep(text): self.grep(text: text)
+                case let .grepPrevious(index), let .grepNext(index): self.grepScroll(index: index)
+                case .analysisHtml: self.analysisHtml()
                 }
                 log.eventOut(chain: "baseViewModel.rx_action. action: \(action)")
             }
@@ -233,15 +235,17 @@ class BaseView: UIView {
             } else if keyPath == "URL" {
                 log.debug("receive url change.")
                 if let change = change, let url = change[NSKeyValueChangeKey.newKey] as? URL, !url.absoluteString.isEmpty {
-                    if let targetWebView = self.webViews.find({ $0?.context == contextPtr.pointee }) {
-                        guard let target = targetWebView else { return }
-                        viewModel.updatePageUrl(context: contextPtr.pointee, url: url.absoluteString, operation: target.operation)
-                        // 操作種別はnormalに戻しておく
-                        // ヒストリーバック or ヒストリーフォワードで遷移したときは、リダイレクトを除きタップから連続してのURL変更がないはず
-                        if target.operation != .normal {
-                            target.operation = .normal
-                        }
-                    }
+                    viewModel.updatePageUrl(context: contextPtr.pointee, url: url.absoluteString)
+                }
+            } else if keyPath == "canGoBack" {
+                log.debug("receive canGoBack change.")
+                if let change = change, let canGoBack = change[NSKeyValueChangeKey.newKey] as? Bool {
+                    viewModel.updateCanGoBack(context: contextPtr.pointee, canGoBack: canGoBack)
+                }
+            } else if keyPath == "canGoForward" {
+                log.debug("receive canGoFoward change.")
+                if let change = change, let canGoFoward = change[NSKeyValueChangeKey.newKey] as? Bool {
+                    viewModel.updateCanGoForward(context: contextPtr.pointee, canGoForward: canGoFoward)
                 }
             }
         }
@@ -287,13 +291,30 @@ class BaseView: UIView {
 
     private func grep(text: String) {
         front.highlight(word: text)
+            .then { hitNum in
+                if let hitNum = hitNum as? NSNumber {
+                    let num = Int(truncating: hitNum)
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SUCCESS(num), isSuccess: true)
+                    self.viewModel.endGrepping(hitNum: num)
+                }
+            }.catch { _ in
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_ERROR, isSuccess: false)
+            }
+    }
+
+    private func grepScroll(index: Int) {
+        front.scrollIntoViewWithIndex(index: index)
+            .catch { _ in
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SCROLL_ERROR, isSuccess: false)
+            }
+    }
+
+    private func analysisHtml() {
+        front.analysisHtml().then { _ in }
     }
 
     private func scrollUp() {
-        DispatchQueue.mainSyncSafe {
-            self.front.evaluateJavaScript("window.scrollTo(0, 0)") { _, _ in
-            }
-        }
+        front.scrollUp().then { _ in }
     }
 
     private func autoScroll() {
@@ -315,30 +336,16 @@ class BaseView: UIView {
     }
 
     private func historyForward() {
-        if let url = self.viewModel.getForwardUrl(context: self.front.context) {
-            front.operation = .forward
-            _ = front.load(urlStr: url)
+        log.debug("go forward.")
+        if front.canGoForward {
+            front.goForward()
         }
     }
 
     private func historyBack() {
-        if let isPastViewing = self.viewModel.getIsPastViewing(context: self.front.context) {
-            if front.isLoading && front.operation == .normal && !isPastViewing {
-                // 新規ページ表示中に戻るを押下したルート
-                log.debug("go back on loading.")
-
-                if let url = self.viewModel.getMostForwardUrl(context: self.front.context) {
-                    front.operation = .back
-                    _ = front.load(urlStr: url)
-                }
-            } else {
-                log.debug("go back.")
-                // 有効なURLを探す
-                if let url = self.viewModel.getBackUrl(context: self.front.context) {
-                    front.operation = .back
-                    _ = front.load(urlStr: url)
-                }
-            }
+        log.debug("go back.")
+        if front.canGoBack {
+            front.goBack()
         }
     }
 
@@ -446,15 +453,15 @@ class BaseView: UIView {
         }
     }
 
-    private func append() {
+    private func append(currentHistory: PageHistory) {
         // 現フロントのプログレス監視を削除
         if let front = self.front {
             front.removeObserverEstimatedProgress(observer: self)
         }
         viewModel.updateProgress(progress: 0)
-        let newWv = createWebView(context: viewModel.currentContext)
+        let newWv = createWebView(context: currentHistory.context)
         webViews.append(newWv)
-        if viewModel.currentUrl.isEmpty {
+        if currentHistory.url.isEmpty {
             // 編集状態にする
             if let beginSearchingWorkItem = self.beginSearchingWorkItem {
                 beginSearchingWorkItem.cancel()
@@ -466,8 +473,8 @@ class BaseView: UIView {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginSearchingWorkItem!)
         } else {
-            if let url = self.viewModel.currentUrl {
-                _ = newWv.load(urlStr: url)
+            if !currentHistory.url.isEmpty {
+                _ = newWv.load(urlStr: currentHistory.url)
             } else {
                 log.error("cannot get currentUrl.")
             }
@@ -484,11 +491,7 @@ class BaseView: UIView {
                         let input = $0
                         // set form
                         DispatchQueue.mainSyncSafe {
-                            self.front.evaluateJavaScript("document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value='\(value)'") { (_: Any?, error: Error?) in
-                                if error != nil {
-                                    log.error("set form error: \(error!)")
-                                }
-                            }
+                            _ = self.front.evaluate(script: "document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value='\(value)'")
                         }
                     }
                 })
@@ -515,12 +518,22 @@ class BaseView: UIView {
         front.scrollView.bounces = false
     }
 
+    private func removeObserving(target: EGWebView) {
+        target.removeObserverEstimatedProgress(observer: self)
+        target.removeObserverTitle(observer: self)
+        target.removeObserverUrl(observer: self)
+        target.removeObserverCanGoBack(observer: self)
+        target.removeObserverCanGoForward(observer: self)
+    }
+
     private func startObserving(target: EGWebView) {
         log.debug("start observe. target: \(target.context)")
 
         target.observeEstimatedProgress(observer: self)
         target.observeTitle(observer: self)
         target.observeUrl(observer: self)
+        target.observeCanGoBack(observer: self)
+        target.observeCanGoForward(observer: self)
 
         if target.isLoading == true {
             viewModel.updateProgress(progress: CGFloat(target.estimatedProgress))
@@ -530,7 +543,7 @@ class BaseView: UIView {
 
     /// webviewを新規作成
     private func createWebView(size: CGSize? = nil, context: String?) -> EGWebView {
-        let newWv = EGWebView(id: context)
+        let newWv = EGWebView(id: context, configuration: viewModel.cacheConfiguration)
         newWv.frame = CGRect(origin: CGPoint.zero, size: size ?? frame.size)
         // RXで自身をもらえず循環参照になるので、RX化しない
         newWv.navigationDelegate = self
@@ -823,6 +836,56 @@ extension BaseView: UIScrollViewDelegate {
 // MARK: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate
 
 extension BaseView: WKNavigationDelegate, WKUIDelegate {
+    // display alert dialog
+    func webView(_: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let otherAction = UIAlertAction(title: "OK", style: .default) {
+            _ in completionHandler()
+        }
+        alertController.addAction(otherAction)
+        NotificationService.presentAlert(alertController: alertController)
+    }
+
+    // display confirm dialog
+    func webView(_: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
+            _ in completionHandler(false)
+        }
+        let okAction = UIAlertAction(title: "OK", style: .default) {
+            _ in completionHandler(true)
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        NotificationService.presentAlert(alertController: alertController)
+    }
+
+    // display prompt dialog
+    func webView(_: WKWebView,
+                 runJavaScriptTextInputPanelWithPrompt prompt: String,
+                 defaultText: String?,
+                 initiatedByFrame _: WKFrameInfo,
+                 completionHandler: @escaping (String?) -> Void) {
+        let alertController = UIAlertController(title: "", message: prompt, preferredStyle: .alert)
+        let okHandler = { () -> Void in
+            if let textField = alertController.textFields?.first {
+                completionHandler(textField.text)
+            } else {
+                completionHandler("")
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
+            _ in completionHandler("")
+        }
+        let okAction = UIAlertAction(title: "OK", style: .default) {
+            _ in okHandler()
+        }
+        alertController.addTextField { $0.text = defaultText }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        NotificationService.presentAlert(alertController: alertController)
+    }
+
     /// force touchを無効にする
     func webView(_: WKWebView, shouldPreviewElement _: WKPreviewElementInfo) -> Bool {
         return false
@@ -940,6 +1003,12 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
 
     func webView(_: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard let url = navigationAction.request.url else {
+            decisionHandler(.cancel)
+            return
+        }
+
+        // aboutスキームは無視
+        if let scheme = url.scheme, scheme == AppConst.URL.ABOUT_SCHEME {
             decisionHandler(.cancel)
             return
         }

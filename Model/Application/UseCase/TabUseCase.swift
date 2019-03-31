@@ -28,6 +28,8 @@ public enum TabUseCaseAction {
     case endLoading(context: String, title: String)
     case endRendering(context: String)
     case presentGroupTitleEdit(groupContext: String)
+    case historyBack
+    case historyForward
 }
 
 /// タブユースケース
@@ -223,26 +225,6 @@ public final class TabUseCase {
         return pageHistoryDataModel.getHistory(index: index)
     }
 
-    /// 直近URL取得
-    public func getMostForwardUrl(context: String) -> String? {
-        return pageHistoryDataModel.getMostForwardUrl(context: context)
-    }
-
-    /// 過去ページ閲覧中フラグ取得
-    public func getIsPastViewing(context: String) -> Bool? {
-        return pageHistoryDataModel.isPastViewing(context: context)
-    }
-
-    /// 前回URL取得
-    public func getBackUrl(context: String) -> String? {
-        return pageHistoryDataModel.getBackUrl(context: context)
-    }
-
-    /// 次URL取得
-    public func getForwardUrl(context: String) -> String? {
-        return pageHistoryDataModel.getForwardUrl(context: context)
-    }
-
     public func startLoading(context: String) {
         pageHistoryDataModel.startLoading(context: context)
     }
@@ -269,11 +251,22 @@ public final class TabUseCase {
         pageHistoryDataModel.goNext()
     }
 
+    /// 前ページに切り替え
+    public func historyBack() {
+        rx_action.onNext(.historyBack)
+    }
+
+    /// 後ページに切り替え
+    public func historyForward() {
+        rx_action.onNext(.historyForward)
+    }
+
     /// update url in page history
-    public func updateUrl(context: String, url: String, operation: PageHistory.Operation) {
-        if pageHistoryDataModel.updateUrl(context: context, url: url, operation: operation) {
-            progressDataModel.updateText(text: url)
-            if let currentHistory = pageHistoryDataModel.currentHistory {
+    public func updateUrl(context: String, url: String) {
+        if !url.isEmpty && url.isValidUrl {
+            pageHistoryDataModel.updateUrl(context: context, url: url)
+            if let currentHistory = currentHistory, context == currentContext {
+                progressDataModel.updateText(text: url)
                 favoriteDataModel.reload(currentHistory: currentHistory)
             }
         }
