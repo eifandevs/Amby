@@ -16,7 +16,7 @@ enum BaseViewModelAction {
     case insert(at: Int)
     case reload
     case rebuild
-    case append
+    case append(currentHistory: PageHistory)
     case change
     case remove(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
@@ -30,6 +30,7 @@ enum BaseViewModelAction {
     case grep(text: String)
     case grepPrevious(index: Int)
     case grepNext(index: Int)
+    case analysisHtml
 }
 
 struct BaseViewModelState: OptionSet {
@@ -190,7 +191,7 @@ final class BaseViewModel {
                 case let .insert(before, _): self.rx_action.onNext(.insert(at: before.index + 1))
                 case .rebuild: self.rx_action.onNext(.rebuild)
                 case .reload: self.rx_action.onNext(.reload)
-                case .append: self.rx_action.onNext(.append)
+                case let .append(_, after): self.rx_action.onNext(.append(currentHistory: after.pageHistory))
                 case .change: self.rx_action.onNext(.change)
                 case let .swap(start, end): self.rx_action.onNext(.swap(start: start, end: end))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
@@ -234,9 +235,30 @@ final class BaseViewModel {
                 }
             }
             .disposed(by: disposeBag)
+
+        // html解析監視
+        HtmlAnalysisUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case .analytics: self.rx_action.onNext(.analysisHtml)
+                default: break
+                }
+            }
+            .disposed(by: disposeBag)
     }
 
     // MARK: Public Method
+
+    /// ページ追加
+    func addTab() {
+        TabUseCase.s.add()
+    }
+
+    /// html解析要求のurlか判定
+    func isAnalysisUrl(url: String) -> Bool {
+        return url.hasPrefix(AppConst.URL.ANALYSIS_URL_PREFIX)
+    }
 
     /// AppStore要求の場合開く
     func openAppIfAppStoreRequest(url: URL) -> Bool {

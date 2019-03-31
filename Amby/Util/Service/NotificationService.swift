@@ -28,6 +28,15 @@ class NotificationService {
     }
 
     /// アラート表示
+    static func presentPlainAlert(title: String, message: String) {
+        DispatchQueue.mainSyncSafe {
+            let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let defaultAction: UIAlertAction = UIAlertAction(title: MessageConst.COMMON.OK, style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            Util.foregroundViewController().present(alert, animated: true, completion: nil)
+        }
+    }
+
     /// 選択肢がある場合はこちらを使用する
     static func presentAlert(title: String, message: String, completion: (() -> Void)?) {
         DispatchQueue.mainSyncSafe {
@@ -51,6 +60,13 @@ class NotificationService {
                 alert.addAction(action)
             })
             Util.foregroundViewController().present(alert, animated: true, completion: nil)
+        }
+    }
+
+    /// アラート表示(コントローラー指定)
+    static func presentAlert(alertController: UIAlertController) {
+        DispatchQueue.mainSyncSafe {
+            Util.foregroundViewController().present(alertController, animated: true, completion: nil)
         }
     }
 

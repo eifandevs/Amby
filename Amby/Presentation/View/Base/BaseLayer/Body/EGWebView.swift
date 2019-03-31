@@ -27,7 +27,7 @@ class EGWebView: WKWebView {
     var context = "" // 監視ID
 
     // スワイプ中かどうか
-    var isSwiping: Bool = false
+    var isSwiping = false
 
     /// observing estimatedprogress flag
     var isObservingEstimagedProgress = false
@@ -187,9 +187,10 @@ class EGWebView: WKWebView {
 
     // promise
     func evaluate(script: String) -> Promise<Any?> {
-        return Promise<Any?>(in: .background, token: nil) { resolve, reject, _ in
+        return Promise<Any?>(in: .main, token: nil) { resolve, reject, _ in
             self.evaluateJavaScript(script) { result, error in
                 if let error = error {
+                    log.error("js evaluate error. error: \(error)")
                     reject(error)
                 } else {
                     resolve(result)
@@ -224,6 +225,11 @@ class EGWebView: WKWebView {
         }
         loadHtml(code: NetWorkError.invalidUrl)
         return false
+    }
+
+    @discardableResult
+    func load(url: URL) -> Bool {
+        return load(urlStr: url.absoluteString)
     }
 
     func loadHtml(code: NetWorkError) {
@@ -261,48 +267,59 @@ class EGWebView: WKWebView {
         loadHtml(code: errorType)
     }
 
-    func scrollIntoViewWithIndex(index: Int) {
-        let scriptPath = resourceUtil.highlightScript
-        do {
-            let script = try String(contentsOf: scriptPath, encoding: .utf8)
-            evaluateJavaScript(script) { (_: Any?, error: Error?) in
-                if error != nil {
-                    log.error("js setup error: \(error!)")
+    // promise
+    func setupScript(url: Foundation.URL) -> Promise<Any?> {
+        return Promise<Any?>(in: .main, token: nil) { resolve, reject, _ in
+            do {
+                let script = try String(contentsOf: url, encoding: .utf8)
+                self.evaluateJavaScript(script) { (_: Any?, error: Error?) in
+                    if let error = error {
+                        log.error("js setup error: \(error)")
+                        reject(error)
+                    } else {
+                        resolve(nil)
+                    }
                 }
+            } catch let error as NSError {
+                log.error("failed to get script. error: \(error.localizedDescription)")
+                reject(error)
             }
-            evaluateJavaScript("scrollIntoViewWithIndex(\(index))") { (_: Any?, error: Error?) in
-                if let error = error {
-                    log.error("js scrollIntoView error: \(error.localizedDescription)")
-                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SCROLL_ERROR, isSuccess: false)
-                }
-            }
-        } catch let error as NSError {
-            log.error("failed to get script. error: \(error.localizedDescription)")
         }
     }
 
-    func highlight(word: String, completion: @escaping ((Int) -> Void)) {
-        let scriptPath = resourceUtil.highlightScript
-        do {
-            let script = try String(contentsOf: scriptPath, encoding: .utf8)
-            evaluateJavaScript(script) { (_: Any?, error: Error?) in
-                if error != nil {
-                    log.error("js setup error: \(error!)")
-                }
+    func analysisHtml() -> Promise<Any?> {
+        return setupScript(url: resourceUtil.bundleScript)
+            .then { _ in
+                self.evaluate(script: "shaper.printHtml()")
             }
-            evaluateJavaScript("highlightAllOccurencesOfString('\(word)')") { (result: Any?, error: Error?) in
-                if let error = error {
-                    log.error("js grep error: \(error.localizedDescription)")
-                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_ERROR, isSuccess: false)
-                } else {
-                    let num = result as? NSNumber ?? 0
-                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.GREP_SUCCESS(num), isSuccess: true)
-                    completion(Int(truncating: num))
-                }
+    }
+
+    func scrollUp() -> Promise<Any?> {
+        return evaluate(script: "window.scrollTo(0, 0)")
+    }
+
+    func scrollIntoViewWithIndex(index: Int) -> Promise<Any?> {
+        return setupScript(url: resourceUtil.highlightScript)
+            .then { _ in
+                self.evaluate(script: "scrollIntoViewWithIndex(\(index))")
             }
-        } catch let error as NSError {
-            log.error("failed to get script. error: \(error.localizedDescription)")
-        }
+    }
+
+    func highlight(word: String) -> Promise<Any?> {
+        return setupScript(url: resourceUtil.highlightScript)
+            .then { _ in
+                self.evaluate(script: "highlightAllOccurencesOfString('\(word)')")
+            }
+    }
+
+    func shape(html: String) -> Promise<Any?> {
+        return evaluate(script: "shapeWapper('\(html)')")
+    }
+
+    func loadShaperHtml() {
+        loadFileURL(resourceUtil.shaperURL, allowingReadAccessTo: resourceUtil.shaperURL)
+        let request = URLRequest(url: resourceUtil.shaperURL)
+        load(request)
     }
 
     func takeThumbnail() -> UIImage? {

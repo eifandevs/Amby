@@ -72,6 +72,13 @@ public extension String {
         }
     }
 
+    var html2AttributedString: NSAttributedString? {
+        return Data(utf8).html2AttributedString
+    }
+    var html2String: String {
+        return html2AttributedString?.string ?? ""
+    }
+
     public func decodeUrl() -> String? {
         return removingPercentEncoding
     }

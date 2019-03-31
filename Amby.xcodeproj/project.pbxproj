@@ -88,7 +88,6 @@
 		A13D6A9F21874D2000B1832E /* MemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9E21874D2000B1832E /* MemoUseCase.swift */; };
 		A13D6AA12189F7A000B1832E /* OptionMenuMemoTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */; };
 		A13D6AA3218A740F00B1832E /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */; };
-		A13D6AA5218B350700B1832E /* post.html in Resources */ = {isa = PBXBuildFile; fileRef = A13D6AA4218B350700B1832E /* post.html */; };
 		A13D6AE6218B35F900B1832E /* MemoViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6AE5218B35F900B1832E /* MemoViewControllerViewModel.swift */; };
 		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
 		A14F2FA2217B7F2D00EB95FE /* PasscodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */; };
@@ -139,8 +138,21 @@
 		A16AB90821692DB60036863C /* ReportViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */; };
 		A16C2D12220F36410050C1DD /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C2D11220F36400050C1DD /* Realm.framework */; };
 		A16C2D14220F36650050C1DD /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16C2D13220F36640050C1DD /* RealmSwift.framework */; };
-		A16D5556223B1F7A0065C394 /* GrepOperationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A16D5555223B1F7A0065C394 /* GrepOperationView.xib */; };
-		A1724191223D399B00472477 /* GrepOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1724190223D399B00472477 /* GrepOperationView.swift */; };
+		A1724193223E751A00472477 /* HtmlAnalysisUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1724192223E751A00472477 /* HtmlAnalysisUseCase.swift */; };
+		A1724197223FABC400472477 /* GrepOperationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1724195223FABC400472477 /* GrepOperationView.xib */; };
+		A1724198223FABC400472477 /* GrepOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1724196223FABC400472477 /* GrepOperationView.swift */; };
+		A17241B722452CD800472477 /* bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = A17241AD22452CD600472477 /* bundle.js */; };
+		A17241B822452CD800472477 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = A17241AE22452CD600472477 /* highlight.js */; };
+		A17241BA22452CD800472477 /* post.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241B122452CD800472477 /* post.html */; };
+		A17241C32245639200472477 /* shaper.js in Resources */ = {isa = PBXBuildFile; fileRef = A17241C22245639100472477 /* shaper.js */; };
+		A17241C6224563A200472477 /* alertTest.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241C4224563A200472477 /* alertTest.html */; };
+		A17241C7224563A200472477 /* shaper.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241C5224563A200472477 /* shaper.html */; };
+		A17241CE2245708A00472477 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241C92245708A00472477 /* offline.html */; };
+		A17241CF2245708A00472477 /* timeout.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CA2245708A00472477 /* timeout.html */; };
+		A17241D02245708A00472477 /* invalid.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CB2245708A00472477 /* invalid.html */; };
+		A17241D12245708A00472477 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CC2245708A00472477 /* dns.html */; };
+		A17241D22245708A00472477 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CD2245708A00472477 /* authorize.html */; };
+		A17241D42246619C00472477 /* URL+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17241D32246619B00472477 /* URL+Extend.swift */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
 		A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */; };
@@ -286,12 +298,6 @@
 		A1EF692421AC3A2000726371 /* RepositoryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF692321AC3A2000726371 /* RepositoryResult.swift */; };
 		A1EF692721AC3A8E00726371 /* ModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF692621AC3A8E00726371 /* ModelError.swift */; };
 		A1F518BC213593E20029ACB7 /* env-dummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1F518BB213593E20029ACB7 /* env-dummy.plist */; };
-		A1FE87DC211B015800B258A3 /* offline.html in Resources */ = {isa = PBXBuildFile; fileRef = A1FE87D6211B015700B258A3 /* offline.html */; };
-		A1FE87DE211B015800B258A3 /* timeout.html in Resources */ = {isa = PBXBuildFile; fileRef = A1FE87D7211B015700B258A3 /* timeout.html */; };
-		A1FE87E0211B015800B258A3 /* invalid.html in Resources */ = {isa = PBXBuildFile; fileRef = A1FE87D8211B015700B258A3 /* invalid.html */; };
-		A1FE87E2211B015800B258A3 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A1FE87D9211B015700B258A3 /* dns.html */; };
-		A1FE87E4211B015800B258A3 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A1FE87DA211B015700B258A3 /* authorize.html */; };
-		A1FE87E7211B019D00B258A3 /* highlight.js in Resources */ = {isa = PBXBuildFile; fileRef = A1FE87E6211B019D00B258A3 /* highlight.js */; };
 		A1FFA65B2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA6592194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.swift */; };
 		A1FFA65C2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA65A2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.xib */; };
 		A1FFA65E219455BC0092C4D6 /* OptionMenuSettingSliderTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA65D219455BC0092C4D6 /* OptionMenuSettingSliderTableViewCellViewModel.swift */; };
@@ -542,7 +548,6 @@
 		A13D6A9E21874D2000B1832E /* MemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoUseCase.swift; sourceTree = "<group>"; };
 		A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewModel.swift; sourceTree = "<group>"; };
 		A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
-		A13D6AA4218B350700B1832E /* post.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = post.html; sourceTree = "<group>"; };
 		A13D6AE5218B35F900B1832E /* MemoViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		A14F2FA0217B7F2D00EB95FE /* PasscodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasscodeViewController.xib; sourceTree = "<group>"; };
@@ -594,8 +599,21 @@
 		A16AB90721692DB60036863C /* ReportViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A16C2D11220F36400050C1DD /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		A16C2D13220F36640050C1DD /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
-		A16D5555223B1F7A0065C394 /* GrepOperationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GrepOperationView.xib; sourceTree = "<group>"; };
-		A1724190223D399B00472477 /* GrepOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrepOperationView.swift; sourceTree = "<group>"; };
+		A1724192223E751A00472477 /* HtmlAnalysisUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlAnalysisUseCase.swift; sourceTree = "<group>"; };
+		A1724195223FABC400472477 /* GrepOperationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GrepOperationView.xib; sourceTree = "<group>"; };
+		A1724196223FABC400472477 /* GrepOperationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrepOperationView.swift; sourceTree = "<group>"; };
+		A17241AD22452CD600472477 /* bundle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bundle.js; sourceTree = "<group>"; };
+		A17241AE22452CD600472477 /* highlight.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = highlight.js; sourceTree = "<group>"; };
+		A17241B122452CD800472477 /* post.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = post.html; sourceTree = "<group>"; };
+		A17241C22245639100472477 /* shaper.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shaper.js; sourceTree = "<group>"; };
+		A17241C4224563A200472477 /* alertTest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = alertTest.html; sourceTree = "<group>"; };
+		A17241C5224563A200472477 /* shaper.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = shaper.html; sourceTree = "<group>"; };
+		A17241C92245708A00472477 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
+		A17241CA2245708A00472477 /* timeout.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = timeout.html; sourceTree = "<group>"; };
+		A17241CB2245708A00472477 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
+		A17241CC2245708A00472477 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
+		A17241CD2245708A00472477 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
+		A17241D32246619B00472477 /* URL+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extend.swift"; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
 		A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuMemoTableViewCell.xib; sourceTree = "<group>"; };
@@ -715,12 +733,6 @@
 		A1EF692321AC3A2000726371 /* RepositoryResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryResult.swift; sourceTree = "<group>"; };
 		A1EF692621AC3A8E00726371 /* ModelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelError.swift; sourceTree = "<group>"; };
 		A1F518BB213593E20029ACB7 /* env-dummy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "env-dummy.plist"; sourceTree = "<group>"; };
-		A1FE87D6211B015700B258A3 /* offline.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = offline.html; sourceTree = "<group>"; };
-		A1FE87D7211B015700B258A3 /* timeout.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = timeout.html; sourceTree = "<group>"; };
-		A1FE87D8211B015700B258A3 /* invalid.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = invalid.html; sourceTree = "<group>"; };
-		A1FE87D9211B015700B258A3 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
-		A1FE87DA211B015700B258A3 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
-		A1FE87E6211B019D00B258A3 /* highlight.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlight.js; sourceTree = "<group>"; };
 		A1FFA6592194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		A1FFA65A2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuSettingSwitchTableViewCell.xib; sourceTree = "<group>"; };
 		A1FFA65D219455BC0092C4D6 /* OptionMenuSettingSliderTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingSliderTableViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -1068,7 +1080,7 @@
 		A112E7C3212CD76400320048 /* Body */ = {
 			isa = PBXGroup;
 			children = (
-				A16D5554223B1F480065C394 /* GrepOperation */,
+				A1724194223FABC400472477 /* GrepOperation */,
 				A15C5424214D684C001E8AB5 /* SearchMenu */,
 				A112E7C5212CD76400320048 /* EGWebView.swift */,
 				A112E7CB212CD76400320048 /* BaseView.swift */,
@@ -1417,6 +1429,7 @@
 				A15C53EF214D4CDC001E8AB5 /* PolicyUseCase.swift */,
 				A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */,
 				A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */,
+				A1724192223E751A00472477 /* HtmlAnalysisUseCase.swift */,
 			);
 			path = OptionMenu;
 			sourceTree = "<group>";
@@ -1534,15 +1547,64 @@
 			path = Report;
 			sourceTree = "<group>";
 		};
-		A16D5554223B1F480065C394 /* GrepOperation */ = {
+		A1724194223FABC400472477 /* GrepOperation */ = {
 			isa = PBXGroup;
 			children = (
-				A16D5555223B1F7A0065C394 /* GrepOperationView.xib */,
-				A1724190223D399B00472477 /* GrepOperationView.swift */,
+				A1724195223FABC400472477 /* GrepOperationView.xib */,
+				A1724196223FABC400472477 /* GrepOperationView.swift */,
 			);
-			name = GrepOperation;
-			path = /Users/tenma/dev/projects/Amby/Amby/Presentation/View/Base/BaseLayer/Body/GrepOperation;
-			sourceTree = "<absolute>";
+			path = GrepOperation;
+			sourceTree = "<group>";
+		};
+		A17241AA22452CD600472477 /* client */ = {
+			isa = PBXGroup;
+			children = (
+				A17241AB22452CD600472477 /* js */,
+				A17241B022452CD600472477 /* html */,
+			);
+			path = client;
+			sourceTree = "<group>";
+		};
+		A17241AB22452CD600472477 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				A17241AC22452CD600472477 /* dist */,
+				A17241C22245639100472477 /* shaper.js */,
+				A17241AE22452CD600472477 /* highlight.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		A17241AC22452CD600472477 /* dist */ = {
+			isa = PBXGroup;
+			children = (
+				A17241AD22452CD600472477 /* bundle.js */,
+			);
+			path = dist;
+			sourceTree = "<group>";
+		};
+		A17241B022452CD600472477 /* html */ = {
+			isa = PBXGroup;
+			children = (
+				A17241C82245708A00472477 /* error */,
+				A17241C4224563A200472477 /* alertTest.html */,
+				A17241C5224563A200472477 /* shaper.html */,
+				A17241B122452CD800472477 /* post.html */,
+			);
+			path = html;
+			sourceTree = "<group>";
+		};
+		A17241C82245708A00472477 /* error */ = {
+			isa = PBXGroup;
+			children = (
+				A17241C92245708A00472477 /* offline.html */,
+				A17241CA2245708A00472477 /* timeout.html */,
+				A17241CB2245708A00472477 /* invalid.html */,
+				A17241CC2245708A00472477 /* dns.html */,
+				A17241CD2245708A00472477 /* authorize.html */,
+			);
+			path = error;
+			sourceTree = "<group>";
 		};
 		A1869C1A217951B6007303B3 /* Memo */ = {
 			isa = PBXGroup;
@@ -1627,10 +1689,9 @@
 		A1902F92209CF976004F1EA5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A17241AA22452CD600472477 /* client */,
 				A1902F93209CF976004F1EA5 /* Assets.xcassets */,
 				A15C546C214D935E001E8AB5 /* license */,
-				A1FE87D5211B015700B258A3 /* html */,
-				A1FE87DB211B015800B258A3 /* js */,
 				A1902F95209CF976004F1EA5 /* stub */,
 			);
 			path = Resources;
@@ -1855,6 +1916,7 @@
 				A1C0E024220F698900E7A7B6 /* UIImageView+Extend.swift */,
 				A1C0E02C220F698A00E7A7B6 /* UIScrollView+Extend.swift */,
 				A1C0E02A220F698A00E7A7B6 /* UIView+Extend.swift */,
+				A17241D32246619B00472477 /* URL+Extend.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1893,27 +1955,6 @@
 				A1EF692621AC3A8E00726371 /* ModelError.swift */,
 			);
 			path = Protocol;
-			sourceTree = "<group>";
-		};
-		A1FE87D5211B015700B258A3 /* html */ = {
-			isa = PBXGroup;
-			children = (
-				A1FE87D6211B015700B258A3 /* offline.html */,
-				A1FE87D7211B015700B258A3 /* timeout.html */,
-				A1FE87D8211B015700B258A3 /* invalid.html */,
-				A1FE87D9211B015700B258A3 /* dns.html */,
-				A1FE87DA211B015700B258A3 /* authorize.html */,
-				A13D6AA4218B350700B1832E /* post.html */,
-			);
-			path = html;
-			sourceTree = "<group>";
-		};
-		A1FE87DB211B015800B258A3 /* js */ = {
-			isa = PBXGroup;
-			children = (
-				A1FE87E6211B019D00B258A3 /* highlight.js */,
-			);
-			path = js;
 			sourceTree = "<group>";
 		};
 		A1FFA661219459D30092C4D6 /* Cooperation */ = {
@@ -2361,25 +2402,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17241D12245708A00472477 /* dns.html in Resources */,
 				A152086020C5543B00201B30 /* env.plist in Resources */,
 				A112E831212CD76500320048 /* SplashViewController.xib in Resources */,
 				A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */,
-				A1FE87E2211B015800B258A3 /* dns.html in Resources */,
 				A15C5451214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */,
+				A17241C32245639200472477 /* shaper.js in Resources */,
 				A15C5420214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib in Resources */,
+				A17241CF2245708A00472477 /* timeout.html in Resources */,
 				A15C5484214D935E001E8AB5 /* com.mono0926.LicensePlist.plist in Resources */,
+				A17241C6224563A200472477 /* alertTest.html in Resources */,
 				A112E837212CD76500320048 /* ReportViewController.xib in Resources */,
 				A1AD92DC2162E7BF00445FC8 /* GoogleService-Info-dummy.plist in Resources */,
 				A13D6A8B2184A43000B1832E /* FormViewController.xib in Resources */,
 				A1FFA66921945A280092C4D6 /* OptionMenuCooperationTableViewCell.xib in Resources */,
 				A1FFA67D2195FCC90092C4D6 /* FooterCollectionViewCell.xib in Resources */,
-				A16D5556223B1F7A0065C394 /* GrepOperationView.xib in Resources */,
+				A1724197223FABC400472477 /* GrepOperationView.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
 				A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */,
 				A1B778392173C57100BED141 /* MenuOrderTableViewCell.xib in Resources */,
+				A17241CE2245708A00472477 /* offline.html in Resources */,
+				A17241B822452CD800472477 /* highlight.js in Resources */,
 				A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
-				A1FE87DE211B015800B258A3 /* timeout.html in Resources */,
-				A1FE87E4211B015800B258A3 /* authorize.html in Resources */,
 				A12B93FC214EFD710082EEA5 /* OpenSourceViewController.xib in Resources */,
 				A15C541E214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
 				A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */,
@@ -2388,18 +2432,20 @@
 				A13D6A872184A3F100B1832E /* MemoViewController.xib in Resources */,
 				A15C545F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
 				A15C541F214D5E4D001E8AB5 /* SearchMenuSuggestTableViewCell.xib in Resources */,
+				A17241D22245708A00472477 /* authorize.html in Resources */,
 				A12B93F8214EF7480082EEA5 /* com.mono0926.LicensePlist in Resources */,
+				A17241C7224563A200472477 /* shaper.html in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
 				A15C5459214D699D001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
-				A1FE87E0211B015800B258A3 /* invalid.html in Resources */,
-				A1FE87E7211B019D00B258A3 /* highlight.js in Resources */,
+				A17241B722452CD800472477 /* bundle.js in Resources */,
 				A13D6A9921872C7500B1832E /* FormTableViewCell.xib in Resources */,
 				A15C5452214D699D001E8AB5 /* OptionMenuHelpTableViewCell.xib in Resources */,
 				A1869C27217B5B86007303B3 /* ToastView.xib in Resources */,
 				A112E82F212CD76500320048 /* LaunchScreen.storyboard in Resources */,
 				A11CD33C214F8F8500D9333F /* OpenSourceTableViewCell.xib in Resources */,
 				A15C5461214D699D001E8AB5 /* OptionMenuFormTableViewCell.xib in Resources */,
+				A17241D02245708A00472477 /* invalid.html in Resources */,
 				A1FFA686219A40180092C4D6 /* DonationViewController.xib in Resources */,
 				A1FFA68A219A40270092C4D6 /* DevelopmentViewController.xib in Resources */,
 				A1FFA6722194FD500092C4D6 /* OptionMenuTabGroupTableViewCell.xib in Resources */,
@@ -2407,11 +2453,10 @@
 				A1FFA65C2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.xib in Resources */,
 				A15C5465214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
 				A1903056209CF978004F1EA5 /* article_stub.json in Resources */,
-				A13D6AA5218B350700B1832E /* post.html in Resources */,
 				A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */,
+				A17241BA22452CD800472477 /* post.html in Resources */,
 				A15C5499214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt in Resources */,
 				A15C544C214D699D001E8AB5 /* OptionMenuTableViewCell.xib in Resources */,
-				A1FE87DC211B015800B258A3 /* offline.html in Resources */,
 				A15C546B214D6A45001E8AB5 /* OptionMenuAppTableViewFooterCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2961,6 +3006,7 @@
 				A1C0E037220F698B00E7A7B6 /* Optional+Extend.swift in Sources */,
 				A1C0E043220F698B00E7A7B6 /* Double+Extend.swift in Sources */,
 				A1C0E047220F698B00E7A7B6 /* CollectionType+Extend.swift in Sources */,
+				A17241D42246619C00472477 /* URL+Extend.swift in Sources */,
 				A1C0E03D220F698B00E7A7B6 /* Data+Extend.swift in Sources */,
 				A1C0E01F220F690800E7A7B6 /* CommonUtil.swift in Sources */,
 				A1C0E044220F698B00E7A7B6 /* String+Extend.swift in Sources */,
@@ -2988,6 +3034,7 @@
 				A19506442143F8B80091DF23 /* HistoryUseCase.swift in Sources */,
 				A1950679214453AB0091DF23 /* WebCacheUseCase.swift in Sources */,
 				A195064D2143F8B80091DF23 /* ThumbnailUseCase.swift in Sources */,
+				A1724193223E751A00472477 /* HtmlAnalysisUseCase.swift in Sources */,
 				A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */,
 				A19506352143F8AF0091DF23 /* ArticleDataModel.swift in Sources */,
 				A19506492143F8B80091DF23 /* SuggestUseCase.swift in Sources */,
@@ -3132,7 +3179,7 @@
 				A1B778352173BE9F00BED141 /* MenuOrderViewControllerViewModel.swift in Sources */,
 				A1903063209CF978004F1EA5 /* Util.swift in Sources */,
 				A13D6AE6218B35F900B1832E /* MemoViewControllerViewModel.swift in Sources */,
-				A1724191223D399B00472477 /* GrepOperationView.swift in Sources */,
+				A1724198223FABC400472477 /* GrepOperationView.swift in Sources */,
 				A15C5464214D699D001E8AB5 /* OptionMenuFavoriteTableView.swift in Sources */,
 				A112E895212CD76500320048 /* FrontLayer.swift in Sources */,
 				A1E5B0BD221F6B90007172D8 /* TrackingService.swift in Sources */,
