@@ -10,7 +10,6 @@ import Foundation
 
 /// メッセージ定数クラス
 struct MessageConst {
-
     // MARK: - 汎用
 
     struct COMMON {

@@ -349,8 +349,7 @@ class CircleMenu: UIButton, ShadowView, CircleView {
 // MARK: EGApplication Delegate
 
 extension CircleMenu: EGApplicationDelegate {
-    internal func screenTouchBegan(touch _: UITouch) {
-    }
+    internal func screenTouchBegan(touch _: UITouch) {}
 
     internal func screenTouchMoved(touch: UITouch) {
         if !isEdgeClosing && isEdgeSwiping {

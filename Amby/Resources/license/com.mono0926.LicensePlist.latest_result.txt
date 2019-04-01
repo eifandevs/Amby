@@ -6,6 +6,10 @@ name: Alamofire, nameSpecified:
 body: Copyright (c) 2014-2…
 version: 4.7.3
 
+name: Alamofire, nameSpecified: 
+body: Copyright (c) 2014-2…
+version: 4.7.3
+
 name: BaseAPI, nameSpecified: 
 body: Copyright (c) 2018 s…
 version: 0.1.2
@@ -13,6 +17,14 @@ version: 0.1.2
 name: BaseAPI, nameSpecified: 
 body: Copyright (c) 2018 s…
 version: 0.1.2
+
+name: BaseAPI, nameSpecified: 
+body: Copyright (c) 2018 s…
+version: 0.1.2
+
+name: GithubAPI, nameSpecified: 
+body: Copyright (c) 2018 s…
+version: 0.0.5
 
 name: GithubAPI, nameSpecified: 
 body: Copyright (c) 2018 s…
@@ -26,23 +38,31 @@ name: LicensePlist, nameSpecified:
 body: MIT License
 
 Copyrig…
-version: 1.8.3
+version: 1.8.8
 
 name: Moya, nameSpecified: 
 body: The MIT License (MIT…
-version: 11.0.1
+version: 11.0.2
 
 name: Moya, nameSpecified: 
 body: The MIT License (MIT…
-version: 11.0.1
+version: 11.0.2
+
+name: Moya, nameSpecified: 
+body: The MIT License (MIT…
+version: 11.0.2
 
 name: NSObject+Rx, nameSpecified: 
 body: The MIT License (MIT…
-version: 4.2.0
+version: 4.4.1
 
 name: NSObject+Rx, nameSpecified: 
 body: The MIT License (MIT…
-version: 4.2.0
+version: 4.4.1
+
+name: NSObject+Rx, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.4.1
 
 name: R.swift, nameSpecified: 
 body: The MIT License (MIT…
@@ -60,25 +80,39 @@ name: Result, nameSpecified:
 body: The MIT License (MIT…
 version: 3.2.4
 
-name: RxCocoa, nameSpecified: 
-body: **The MIT License**
-…
-version: 4.0.0
+name: Result, nameSpecified: 
+body: The MIT License (MIT…
+version: 3.2.4
 
 name: RxCocoa, nameSpecified: 
 body: **The MIT License**
 …
-version: 4.0.0
+version: 4.3.1
+
+name: RxCocoa, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.3.1
+
+name: RxCocoa, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.3.1
 
 name: RxSwift, nameSpecified: 
 body: **The MIT License**
 …
-version: 4.0.0
+version: 4.3.1
 
 name: RxSwift, nameSpecified: 
 body: **The MIT License**
 …
-version: 4.0.0
+version: 4.3.1
+
+name: RxSwift, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.3.1
 
 name: SmileLock, nameSpecified: 
 body:                     …
@@ -88,17 +122,23 @@ name: SwiftFormat, nameSpecified:
 body: MIT License
 
 Copyrig…
-version: 0.33.4
+version: 0.35.5
 
 name: SwiftFormat, nameSpecified: 
 body: MIT License
 
 Copyrig…
-version: 0.33.4
+version: 0.35.5
+
+name: SwiftFormat, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 0.35.5
 
 name: SwiftLint, nameSpecified: 
 body: The MIT License (MIT…
-version: 0.26.0
+version: 0.27.0
 
 name: VerticalAlignmentLabel, nameSpecified: 
 body: Copyright (c) 2017 d…

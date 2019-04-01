@@ -11,7 +11,6 @@ import UIKit
 
 /// アプリ内定数構造体
 struct AppConst {
-
     // MARK: - 共通
 
     struct APP {
@@ -49,7 +48,7 @@ struct AppConst {
         static let HEADER_PROGRESS_BAR_HEIGHT = 2.1.f
         static var HEADER_PROGRESS_MARGIN = 2.1.f // プログレスバーの高さをマージンにする
         static var FOOTER_HEIGHT = ((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height) // サムネイルの高さ
-        static let BASE_HEIGHT = AppConst.DEVICE.DISPLAY_SIZE.height - (((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)) - AppConst.DEVICE.STATUS_BAR_HEIGHT // デバイスの高さ - フッターの高さ - ステータスバーの高さ
+        static let BASE_HEIGHT = AppConst.DEVICE.DISPLAY_SIZE.height - ((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height) - AppConst.DEVICE.STATUS_BAR_HEIGHT // デバイスの高さ - フッターの高さ - ステータスバーの高さ
         static let HEADER_FIELD_WIDTH = AppConst.DEVICE.DISPLAY_SIZE.width / 1.8
         static var THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
     }
