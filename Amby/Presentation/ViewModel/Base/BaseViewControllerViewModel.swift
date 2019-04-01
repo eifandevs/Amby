@@ -127,6 +127,10 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
     }
 
+    func initializeTab() {
+        TabUseCase.s.initialize()
+    }
+
     func insertTab(url: String) {
         TabUseCase.s.insert(url: url)
     }

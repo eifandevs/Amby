@@ -131,6 +131,11 @@ public final class TabUseCase {
             .disposed(by: disposeBag)
     }
 
+    /// タブ初期化
+    public func initialize() {
+        pageHistoryDataModel.initialize()
+    }
+
     /// タブグループたタイトル編集画面表示要求
     public func presentGroupTitleEdit(groupContext: String) {
         rx_action.onNext(.presentGroupTitleEdit(groupContext: groupContext))

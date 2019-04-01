@@ -56,6 +56,7 @@ protocol PageHistoryDataModelProtocol {
     var currentHistory: PageHistory? { get }
     var currentLocation: Int? { get }
     var isPrivate: Bool { get }
+    func initialize()
     func getHistory(context: String) -> PageHistory?
     func getHistory(index: Int) -> PageHistory?
     func getIsLoading(context: String) -> Bool?
@@ -95,7 +96,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     private let repository = UserDefaultRepository()
 
     /// webViewそれぞれの履歴とカレントページインデックス
-    var pageGroupList: PageGroupList
+    var pageGroupList = PageGroupList()
     public private(set) var histories: [PageHistory] {
         get {
             return pageGroupList.currentGroup.histories
@@ -156,23 +157,10 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
 
-    private init() {
-        // pageHistory読み込み
-        let result = localStorageRepository.getData(.pageHistory)
-        if case let .success(data) = result {
-            if let pageGroupList = NSKeyedUnarchiver.unarchiveObject(with: data) as? PageGroupList {
-                self.pageGroupList = pageGroupList
-            } else {
-                self.pageGroupList = PageGroupList()
-                log.error("unarchive histories error.")
-            }
-        } else {
-            pageGroupList = PageGroupList()
-        }
-    }
+    private init() {}
 
     /// 初期化
-    private func initialize() {
+    func initialize() {
         // pageHistory読み込み
         let result = localStorageRepository.getData(.pageHistory)
         if case let .success(data) = result {
