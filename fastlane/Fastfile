@@ -16,22 +16,20 @@
 default_platform(:ios)
 
 platform :ios do
-  lane :test do
-    scan(
+  desc "run test"
+  lane :tests do
+    run_tests(
+      xcargs: "-UseNewBuildSystem=NO",
       workspace: "Amby.xcworkspace",
       devices: ["iPhone 6s"],
-      scheme: "Amby[Local]",
       code_coverage: true,
-      output_types: "html",
-      clean: true
+      scheme: "Amby[Local]",
+      clean: false
     )
-
     slather(
-      cobertura_xml: true,
-      output_directory: "./slather/reports",
-      proj: "Amby.xcodeproj",
       workspace: "Amby.xcworkspace",
-      scheme: "Amby[Local]"
+      scheme: "Amby[Local]",
+      html: true
     )
   end
 end
