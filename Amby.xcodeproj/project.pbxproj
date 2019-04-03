@@ -347,6 +347,13 @@
 			remoteGlobalIDString = A1A3DE58213878D100F87009;
 			remoteInfo = Logger;
 		};
+		A1B458B62254E93500A0364B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1C0DFF8220F67F200E7A7B6;
+			remoteInfo = CommonUtil;
+		};
 		A1B7F2E0220F4714008F3850 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
@@ -2019,6 +2026,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A1B458B72254E93500A0364B /* PBXTargetDependency */,
 			);
 			name = Entity;
 			productName = Entity;
@@ -2109,10 +2117,10 @@
 			buildRules = (
 			);
 			dependencies = (
-				A1E33AB42137149B00C93FBE /* PBXTargetDependency */,
-				A1A3DE6D213878D200F87009 /* PBXTargetDependency */,
-				A16A6EDF220F248100FFCB5B /* PBXTargetDependency */,
 				A1C0E00D220F67F300E7A7B6 /* PBXTargetDependency */,
+				A16A6EDF220F248100FFCB5B /* PBXTargetDependency */,
+				A1A3DE6D213878D200F87009 /* PBXTargetDependency */,
+				A1E33AB42137149B00C93FBE /* PBXTargetDependency */,
 			);
 			name = Amby;
 			productName = Eiger;
@@ -2969,6 +2977,11 @@
 			isa = PBXTargetDependency;
 			target = A1A3DE58213878D100F87009 /* Logger */;
 			targetProxy = A1A3DE6C213878D200F87009 /* PBXContainerItemProxy */;
+		};
+		A1B458B72254E93500A0364B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1C0DFF8220F67F200E7A7B6 /* CommonUtil */;
+			targetProxy = A1B458B62254E93500A0364B /* PBXContainerItemProxy */;
 		};
 		A1B7F2E1220F4714008F3850 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
