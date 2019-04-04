@@ -233,4 +233,13 @@ class PageHistoryDataModelTests: XCTestCase {
         PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
         PageHistoryDataModel.s.store()
     }
+
+    func testDelete() {
+        let dummyUrl = "https://abc/"
+        let dummyTitle = "dummy"
+        PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        PageHistoryDataModel.s.store()
+        PageHistoryDataModel.s.delete()
+    }
 }
