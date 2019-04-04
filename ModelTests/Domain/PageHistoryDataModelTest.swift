@@ -225,4 +225,12 @@ class PageHistoryDataModelTests: XCTestCase {
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
+
+    func testStore() {
+        let dummyUrl = "https://abc/"
+        let dummyTitle = "dummy"
+        PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        PageHistoryDataModel.s.store()
+    }
 }
