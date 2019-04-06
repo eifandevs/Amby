@@ -12,6 +12,7 @@
 		40DC748BD179960B0CF27593 /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 		71A90F5EED54E40F2C51B4EA /* Pods_Amby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769A089A76E185BB6109B3E4 /* Pods_Amby.framework */; };
 		84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90A22EEAE1476346BDB6D1 /* Pods_CommonUtil.framework */; };
+		A1042F442258E70400DA6E78 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1042F432258E70400DA6E78 /* R.generated.swift */; };
 		A111F8FB2222CEBD00DE457F /* CustomDialogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */; };
 		A112E735212AF83800320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
 		A112E82D212CD76500320048 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E773212CD76400320048 /* SplashViewController.swift */; };
@@ -44,9 +45,6 @@
 		A112E8AF212CD76500320048 /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7D0212CD76400320048 /* EGProgressBar.swift */; };
 		A112E8B1212CD76500320048 /* HeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7D1212CD76400320048 /* HeaderField.swift */; };
 		A112E8B3212CD76500320048 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7D3212CD76400320048 /* HelpViewController.swift */; };
-		A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11A7DE62162585D00646185 /* GoogleService-Info.plist */; };
-		A11A7DEA2162585E00646185 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11A7DE62162585D00646185 /* GoogleService-Info.plist */; };
-		A11A7DEC2162585E00646185 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A11A7DE62162585D00646185 /* GoogleService-Info.plist */; };
 		A11CD327214F059000D9333F /* FrontLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD30F214F058F00D9333F /* FrontLayerViewModel.swift */; };
 		A11CD328214F059000D9333F /* CircleMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD311214F058F00D9333F /* CircleMenuViewModel.swift */; };
 		A11CD329214F059000D9333F /* OptionMenuTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD313214F058F00D9333F /* OptionMenuTableViewModel.swift */; };
@@ -226,9 +224,6 @@
 		A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE8E213AEDBC00F87009 /* UserDefaultRepository.swift */; };
 		A1A3DE94213AF06300F87009 /* ModelConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE93213AF06300F87009 /* ModelConst.swift */; };
 		A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE95213AF31D00F87009 /* ResourceUtil.swift */; };
-		A1AD92DC2162E7BF00445FC8 /* GoogleService-Info-dummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1AD92DB2162E7BE00445FC8 /* GoogleService-Info-dummy.plist */; };
-		A1AD92DF2162E7BF00445FC8 /* GoogleService-Info-dummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1AD92DB2162E7BE00445FC8 /* GoogleService-Info-dummy.plist */; };
-		A1AD92E12162E7BF00445FC8 /* GoogleService-Info-dummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1AD92DB2162E7BE00445FC8 /* GoogleService-Info-dummy.plist */; };
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */; };
 		A1B778322173A6DA00BED141 /* UserOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778312173A6DA00BED141 /* UserOperation.swift */; };
@@ -314,7 +309,6 @@
 		A1FFA68D21A06DCD0092C4D6 /* UserOperation+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA68C21A06DCD0092C4D6 /* UserOperation+Extend.swift */; };
 		A1FFA69021A072EF0092C4D6 /* MenuOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA68F21A072EF0092C4D6 /* MenuOrder.swift */; };
 		A1FFA69221A5B1750092C4D6 /* Hydra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FFA69121A5B1740092C4D6 /* Hydra.framework */; };
-		A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6F2C51F1F92DD00A4620C /* R.generated.swift */; };
 		E1ED643E757B70B55E53B4CA /* Pods_Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEF9A0EF72552CE32B246BC /* Pods_Model.framework */; };
 /* End PBXBuildFile section */
 
@@ -431,6 +425,7 @@
 		8E7C858DA7FEA863296A603D /* Pods-Model.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Model.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-Model/Pods-Model.debug-local.xcconfig"; sourceTree = "<group>"; };
 		93D0114BB59CFBCCAC13CB7A /* Pods-Model.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Model.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Model/Pods-Model.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		A1042F432258E70400DA6E78 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDialogService.swift; sourceTree = "<group>"; };
 		A112E734212AF83800320048 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A112E773212CD76400320048 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -492,7 +487,6 @@
 		A112E97C21319C7800320048 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
 		A112E97D21319C7800320048 /* AuthDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthDataModel.swift; sourceTree = "<group>"; };
 		A112E9A12133015F00320048 /* SettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUseCase.swift; sourceTree = "<group>"; };
-		A11A7DE62162585D00646185 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A11CD30F214F058F00D9333F /* FrontLayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModel.swift; sourceTree = "<group>"; };
 		A11CD311214F058F00D9333F /* CircleMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenuViewModel.swift; sourceTree = "<group>"; };
 		A11CD313214F058F00D9333F /* OptionMenuTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewModel.swift; sourceTree = "<group>"; };
@@ -645,7 +639,6 @@
 		A1A3DE8E213AEDBC00F87009 /* UserDefaultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultRepository.swift; sourceTree = "<group>"; };
 		A1A3DE93213AF06300F87009 /* ModelConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConst.swift; sourceTree = "<group>"; };
 		A1A3DE95213AF31D00F87009 /* ResourceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceUtil.swift; sourceTree = "<group>"; };
-		A1AD92DB2162E7BE00445FC8 /* GoogleService-Info-dummy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-dummy.plist"; sourceTree = "<group>"; };
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderUseCase.swift; sourceTree = "<group>"; };
 		A1B778312173A6DA00BED141 /* UserOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOperation.swift; sourceTree = "<group>"; };
@@ -723,7 +716,6 @@
 		A1FFA68F21A072EF0092C4D6 /* MenuOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrder.swift; sourceTree = "<group>"; };
 		A1FFA69121A5B1740092C4D6 /* Hydra.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hydra.framework; path = Carthage/Build/iOS/Hydra.framework; sourceTree = "<group>"; };
 		A57EFEA11E3E06D300B66701 /* Amby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amby.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5A6F2C51F1F92DD00A4620C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		AA8472F7E2E1F266BC528B8E /* Pods_All_Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_All_Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB90A22EEAE1476346BDB6D1 /* Pods_CommonUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CommonUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F8067F5DB4DDA3119AC415 /* Pods_LoggerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoggerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1577,8 +1569,7 @@
 		A1902F36209CF976004F1EA5 /* Amby */ = {
 			isa = PBXGroup;
 			children = (
-				A1AD92DB2162E7BE00445FC8 /* GoogleService-Info-dummy.plist */,
-				A11A7DE62162585D00646185 /* GoogleService-Info.plist */,
+				A1042F432258E70400DA6E78 /* R.generated.swift */,
 				A1902F38209CF976004F1EA5 /* AppDelegate.swift */,
 				A1902F39209CF976004F1EA5 /* Amby-Bridging-Header.h */,
 				A112E757212CD76400320048 /* Presentation */,
@@ -1926,7 +1917,6 @@
 			isa = PBXGroup;
 			children = (
 				A1902F36209CF976004F1EA5 /* Amby */,
-				A5A6F2C51F1F92DD00A4620C /* R.generated.swift */,
 				A1E33AA12137149A00C93FBE /* Model */,
 				A16A6EDA220F248100FFCB5B /* Entity */,
 				A1C0DFFA220F67F300E7A7B6 /* CommonUtil */,
@@ -2101,8 +2091,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A57EFEB31E3E06D300B66701 /* Build configuration list for PBXNativeTarget "Amby" */;
 			buildPhases = (
-				57D8DA48BB701B7EFB84CDD9 /* [CP] Check Pods Manifest.lock */,
 				A5A6F2C41F1F917600A4620C /* RSwift */,
+				57D8DA48BB701B7EFB84CDD9 /* [CP] Check Pods Manifest.lock */,
 				A57EFE9D1E3E06D300B66701 /* Sources */,
 				A57EFE9E1E3E06D300B66701 /* Frameworks */,
 				A57EFE9F1E3E06D300B66701 /* Resources */,
@@ -2180,6 +2170,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -2217,8 +2208,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1AD92E12162E7BF00445FC8 /* GoogleService-Info-dummy.plist in Resources */,
-				A11A7DEC2162585E00646185 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2233,10 +2222,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1AD92DF2162E7BF00445FC8 /* GoogleService-Info-dummy.plist in Resources */,
 				A1A3DE89213ACBF200F87009 /* env.plist in Resources */,
 				A1A3DE88213ACBF200F87009 /* env-dummy.plist in Resources */,
-				A11A7DEA2162585E00646185 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2255,13 +2242,11 @@
 				A15C5484214D935E001E8AB5 /* com.mono0926.LicensePlist.plist in Resources */,
 				A17241C6224563A200472477 /* alertTest.html in Resources */,
 				A112E837212CD76500320048 /* ReportViewController.xib in Resources */,
-				A1AD92DC2162E7BF00445FC8 /* GoogleService-Info-dummy.plist in Resources */,
 				A13D6A8B2184A43000B1832E /* FormViewController.xib in Resources */,
 				A1FFA66921945A280092C4D6 /* OptionMenuCooperationTableViewCell.xib in Resources */,
 				A1FFA67D2195FCC90092C4D6 /* FooterCollectionViewCell.xib in Resources */,
 				A1724197223FABC400472477 /* GrepOperationView.xib in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
-				A11A7DE72162585E00646185 /* GoogleService-Info.plist in Resources */,
 				A1B778392173C57100BED141 /* MenuOrderTableViewCell.xib in Resources */,
 				A17241CE2245708A00472477 /* offline.html in Resources */,
 				A17241B822452CD800472477 /* highlight.js in Resources */,
@@ -2669,7 +2654,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT\"\n";
+			shellScript = "$PODS_ROOT/R.swift/rswift generate $SRCROOT\n";
 		};
 		B1447DCDBC1BCF85DAE3B565 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2938,7 +2923,6 @@
 				A11CD32F214F059000D9333F /* OptionMenuAppTableViewModel.swift in Sources */,
 				A112E8A5212CD76500320048 /* SearchMenuNewsTableViewCell.swift in Sources */,
 				A190301B209CF977004F1EA5 /* MessageConst.swift in Sources */,
-				A5A6F2C61F1F92DD00A4620C /* R.generated.swift in Sources */,
 				A112E8AD212CD76500320048 /* HeaderView.swift in Sources */,
 				A13D6A8A2184A43000B1832E /* FormViewController.swift in Sources */,
 				A11CD33B214F8F8500D9333F /* OpenSourceTableViewCell.swift in Sources */,
@@ -2951,6 +2935,7 @@
 				A112E875212CD76500320048 /* CircleMenuItem.swift in Sources */,
 				A15C5463214D699D001E8AB5 /* OptionMenuFormTableView.swift in Sources */,
 				A112E867212CD76500320048 /* PaddingLabel.swift in Sources */,
+				A1042F442258E70400DA6E78 /* R.generated.swift in Sources */,
 				A11CD330214F059000D9333F /* BaseViewControllerViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
