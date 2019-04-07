@@ -1,5 +1,7 @@
 #!/bin/sh
 
+pushd `dirname $0`
+
 TARGET_NAME=Amby
 XCODE_SETTINGS="${TARGET_NAME}.settings"
  
@@ -25,3 +27,5 @@ fi
 
 # carthage
 carthage bootstrap  --platform ios
+
+popd
