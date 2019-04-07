@@ -262,6 +262,26 @@ class PageHistoryDataModelTests: XCTestCase {
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
+    func testInvertPrivateMode() {
+        weak var expectation = self.expectation(description: #function)
+
+        PageHistoryDataModel.s.rx_action
+            .subscribe { object in
+                if let action = object.element, case .invertPrivateMode = action {
+                    if let expectation = expectation {
+                        expectation.fulfill()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        PageHistoryDataModel.s.append(url: dummyUrl)
+        PageHistoryDataModel.s.appendGroup()
+        PageHistoryDataModel.s.invertPrivateMode(groupContext: PageHistoryDataModel.s.pageGroupList.groups[1].groupContext)
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+
     func testChange() {
         weak var expectation = self.expectation(description: #function)
 
