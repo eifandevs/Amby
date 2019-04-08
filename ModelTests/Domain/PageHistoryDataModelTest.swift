@@ -282,6 +282,49 @@ class PageHistoryDataModelTests: XCTestCase {
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
+    func testCopy() {
+        PageHistoryDataModel.s.append(url: dummyUrl)
+        PageHistoryDataModel.s.append(url: dummyUrl2)
+
+        weak var expectation = self.expectation(description: #function)
+
+        PageHistoryDataModel.s.rx_action
+            .subscribe { object in
+                if let action = object.element, case .append = action {
+                    if let expectation = expectation {
+                        expectation.fulfill()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        PageHistoryDataModel.s.copy()
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testCopyWithInsert() {
+        PageHistoryDataModel.s.append(url: dummyUrl)
+        PageHistoryDataModel.s.append(url: dummyUrl2)
+        PageHistoryDataModel.s.change(context: PageHistoryDataModel.s.histories[1].context)
+
+        weak var expectation = self.expectation(description: #function)
+
+        PageHistoryDataModel.s.rx_action
+            .subscribe { object in
+                if let action = object.element, case .insert = action {
+                    if let expectation = expectation {
+                        expectation.fulfill()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        PageHistoryDataModel.s.copy()
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+
     func testChange() {
         weak var expectation = self.expectation(description: #function)
 
