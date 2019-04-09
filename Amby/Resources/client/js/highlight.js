@@ -1,8 +1,40 @@
-
 var searchResultCount = 0;
+var IGNORE_NODE_NAMES = {
+EMBED: 1,
+OBJECT: 1,
+SCRIPT: 1,
+STYLE: 1,
+};
 
 function scrollIntoViewWithIndex(index) {
     document.getElementsByClassName("AmbyHighlight")[index].scrollIntoView(true);
+}
+
+function isVisible(element) {
+    var style = element.ownerDocument.defaultView.getComputedStyle(element, null);
+    if (element.style.display == "none" || element.style.visibility == "hidden" || style.display == "none" || style.visibility == "hidden") {
+        return false;
+    }
+    var rect = element.getBoundingClientRect();
+    if (rect.width == 0 || rect.height == 0 || rect.left < 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function frameDocuments() {
+    var docs = [];
+    var wins = [window];
+    while (wins.length > 0) {
+        var win = wins.pop();
+        for (var i = 0; i < win.frames.length; i++) {
+            try {
+                win.frames[i].document && docs.push(win.frames[i].document); wins.push(win.frames[i]);
+            } catch (e) { }
+        }
+    }
+    return docs;
 }
 
 function highlightAllOccurencesOfStringForElement(element,keyword) {
@@ -29,7 +61,7 @@ function highlightAllOccurencesOfStringForElement(element,keyword) {
                 searchResultCount++;
             }
         } else if (element.nodeType == 1) {
-            if (element.style.display != "none" && element.nodeName.toLowerCase() != 'select') {
+            if (isVisible(element) && element.nodeName.toLowerCase() != 'select' && !IGNORE_NODE_NAMES[element.tagName]) {
                 for (var i=element.childNodes.length-1; i>=0; i--) {
                     highlightAllOccurencesOfStringForElement(element.childNodes[i],keyword);
                 }
@@ -40,7 +72,11 @@ function highlightAllOccurencesOfStringForElement(element,keyword) {
 
 function highlightAllOccurencesOfString(keyword) {
     removeAllHighlights();
-    highlightAllOccurencesOfStringForElement(document.body, keyword.toLowerCase());
+    var docs = [document].concat(frameDocuments());
+    for (var i = 0; i < docs.length; i++) {
+        var doc = docs[i];
+        highlightAllOccurencesOfStringForElement(doc.body, keyword.toLowerCase());
+    }
     return searchResultCount;
 }
 
