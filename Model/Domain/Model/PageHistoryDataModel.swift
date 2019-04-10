@@ -22,7 +22,6 @@ enum PageHistoryDataModelAction {
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
-    case reload
     case rebuild
     case rebuildThumbnail
     case load(url: String)
@@ -73,7 +72,6 @@ protocol PageHistoryDataModelProtocol {
     func removeGroup(groupContext: String)
     func invertPrivateMode(groupContext: String)
     func copy()
-    func reload()
     func rebuild()
     func getIndex(context: String) -> Int?
     func remove(context: String)
@@ -349,11 +347,6 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
                 insert(url: currentHistory.url, title: currentHistory.title)
             }
         }
-    }
-
-    /// ページリロード
-    func reload() {
-        rx_action.onNext(.reload)
     }
 
     /// ヒストリー再構築

@@ -243,6 +243,9 @@ class PageHistoryDataModelTests: XCTestCase {
     }
 
     func testRemoveGroup() {
+        PageHistoryDataModel.s.append(url: dummyUrl)
+        PageHistoryDataModel.s.appendGroup()
+
         weak var expectation = self.expectation(description: #function)
 
         PageHistoryDataModel.s.rx_action
@@ -255,8 +258,6 @@ class PageHistoryDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.append(url: dummyUrl)
-        PageHistoryDataModel.s.appendGroup()
         PageHistoryDataModel.s.removeGroup(groupContext: PageHistoryDataModel.s.pageGroupList.groups[1].groupContext)
 
         self.waitForExpectations(timeout: 10, handler: nil)
@@ -323,6 +324,33 @@ class PageHistoryDataModelTests: XCTestCase {
         PageHistoryDataModel.s.copy()
 
         self.waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testRebuild() {
+        // NSInternalInconsistencyExceptionが発生する
+        //        PageHistoryDataModel.s.append(url: dummyUrl)
+
+        //        weak var expectation = self.expectation(description: #function)
+        //
+        //        PageHistoryDataModel.s.rx_action
+        //            .subscribe { object in
+        //                if let action = object.element, case .rebuildThumbnail = action {
+        //                    if let expectation = expectation {
+        //                        expectation.fulfill()
+        //                    }
+        //                }
+        //            }
+        //            .disposed(by: disposeBag)
+        //
+        //        PageHistoryDataModel.s.rebuild()
+        //
+        //        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testGetIndex() {
+        PageHistoryDataModel.s.append(url: dummyUrl)
+        PageHistoryDataModel.s.append(url: dummyUrl2)
+        _ = PageHistoryDataModel.s.getIndex(context: PageHistoryDataModel.s.histories[1].context)
     }
 
     func testChange() {
