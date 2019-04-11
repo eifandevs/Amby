@@ -53,8 +53,8 @@ final class ResourceUtil {
     /// タイムアウトページ
     var timeoutHtml = R.file.timeoutHtml()!.path
 
-    /// 解析ページ
-    var shaperURL = R.file.shaperHtml()!
+    /// リストアページ
+    var restoreHistoryURL = R.file.restoreHistoryHtml()!
 
     /// DNSエラーページ
     var dnsHtml = R.file.dnsHtml()!.path

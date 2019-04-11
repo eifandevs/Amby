@@ -162,6 +162,8 @@ name: SVProgressHUD, nameSpecified: , owner: SVProgressHUD, version: 2.2.5
 
 name: SwiftyBeaver, nameSpecified: , owner: SwiftyBeaver, version: 1.7.0
 
+name: SwiftyJSON, nameSpecified: , owner: SwiftyJSON, version: 4.3.0
+
 name: SwiftyStoreKit, nameSpecified: , owner: bizz84, version: 0.14.2
 
 name: SwiftyUserDefaults, nameSpecified: , owner: radex, version: 4.0.0-alpha.1

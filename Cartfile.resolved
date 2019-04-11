@@ -1,6 +1,7 @@
 github "SVProgressHUD/SVProgressHUD" "2.2.5"
 github "SnapKit/SnapKit" "4.2.0"
 github "SwiftyBeaver/SwiftyBeaver" "1.7.0"
+github "SwiftyJSON/SwiftyJSON" "4.3.0"
 github "bizz84/SwiftyStoreKit" "0.14.2"
 github "kishikawakatsumi/KeychainAccess" "v3.2.0"
 github "krzyzanowskim/CryptoSwift" "1.0.0"

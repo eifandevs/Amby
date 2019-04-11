@@ -6,12 +6,14 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import CommonUtil
 import Entity
 import Foundation
 import Hydra
 import Model
 import RxCocoa
 import RxSwift
+import SwiftyJSON
 import UIKit
 import WebKit
 
@@ -294,6 +296,20 @@ class EGWebView: WKWebView {
             }
     }
 
+    func restore(urls: [String], currentPage: String) {
+        var jsonDict = [String: AnyObject]()
+        jsonDict["history"] = urls as AnyObject?
+        jsonDict["currentPage"] = currentPage as AnyObject?
+        guard let json = JSON(jsonDict).toString() else {
+            return
+        }
+        let escapedJSON = json.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let url = resourceUtil.restoreHistoryURL.queryItemAdded(name: "restore", value: escapedJSON)!
+        loadFileURL(url, allowingReadAccessTo: url)
+        let request = URLRequest(url: url)
+        load(request)
+    }
+
     func scrollUp() -> Promise<Any?> {
         return evaluate(script: "window.scrollTo(0, 0)")
     }
@@ -314,12 +330,6 @@ class EGWebView: WKWebView {
 
     func shape(html: String) -> Promise<Any?> {
         return evaluate(script: "shapeWapper('\(html)')")
-    }
-
-    func loadShaperHtml() {
-        loadFileURL(resourceUtil.shaperURL, allowingReadAccessTo: resourceUtil.shaperURL)
-        let request = URLRequest(url: resourceUtil.shaperURL)
-        load(request)
     }
 
     func takeThumbnail() -> UIImage? {

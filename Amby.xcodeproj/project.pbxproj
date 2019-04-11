@@ -150,6 +150,10 @@
 		A17241D12245708A00472477 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CC2245708A00472477 /* dns.html */; };
 		A17241D22245708A00472477 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CD2245708A00472477 /* authorize.html */; };
 		A17241D42246619C00472477 /* URL+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17241D32246619B00472477 /* URL+Extend.swift */; };
+		A17AC348225F617900E4262E /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17AC347225F617900E4262E /* SwiftyJSON.framework */; };
+		A17AC34A225F61CC00E4262E /* JSON+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17AC349225F61CC00E4262E /* JSON+Extend.swift */; };
+		A17AC34B225F621300E4262E /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17AC347225F617900E4262E /* SwiftyJSON.framework */; };
+		A17AC34D225F656E00E4262E /* RestoreHistory.html in Resources */ = {isa = PBXBuildFile; fileRef = A17AC34C225F656E00E4262E /* RestoreHistory.html */; };
 		A1846B58225239E90031E635 /* PageHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1846B57225239E90031E635 /* PageHistoryDataModelTest.swift */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
@@ -595,6 +599,9 @@
 		A17241CC2245708A00472477 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
 		A17241CD2245708A00472477 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
 		A17241D32246619B00472477 /* URL+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extend.swift"; sourceTree = "<group>"; };
+		A17AC347225F617900E4262E /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		A17AC349225F61CC00E4262E /* JSON+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extend.swift"; sourceTree = "<group>"; };
+		A17AC34C225F656E00E4262E /* RestoreHistory.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RestoreHistory.html; sourceTree = "<group>"; };
 		A1846B57225239E90031E635 /* PageHistoryDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModelTest.swift; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
@@ -760,6 +767,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17AC348225F617900E4262E /* SwiftyJSON.framework in Frameworks */,
 				84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -786,6 +794,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17AC34B225F621300E4262E /* SwiftyJSON.framework in Frameworks */,
 				A1B7F2A0220F3BB9008F3850 /* Realm.framework in Frameworks */,
 				A1B7F2A1220F3BB9008F3850 /* RealmSwift.framework in Frameworks */,
 				A1FFA69221A5B1750092C4D6 /* Hydra.framework in Frameworks */,
@@ -809,6 +818,7 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A17AC347225F617900E4262E /* SwiftyJSON.framework */,
 				A16C2D13220F36640050C1DD /* RealmSwift.framework */,
 				A16C2D11220F36400050C1DD /* Realm.framework */,
 				A1FFA69121A5B1740092C4D6 /* Hydra.framework */,
@@ -1523,6 +1533,7 @@
 				A17241C4224563A200472477 /* alertTest.html */,
 				A17241C5224563A200472477 /* shaper.html */,
 				A17241B122452CD800472477 /* post.html */,
+				A17AC34C225F656E00E4262E /* RestoreHistory.html */,
 			);
 			path = html;
 			sourceTree = "<group>";
@@ -1838,6 +1849,7 @@
 				A1C0E02C220F698A00E7A7B6 /* UIScrollView+Extend.swift */,
 				A1C0E02A220F698A00E7A7B6 /* UIView+Extend.swift */,
 				A17241D32246619B00472477 /* URL+Extend.swift */,
+				A17AC349225F61CC00E4262E /* JSON+Extend.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2054,6 +2066,7 @@
 				A1C0DFF6220F67F200E7A7B6 /* Frameworks */,
 				A1C0DFF7220F67F200E7A7B6 /* Resources */,
 				A562F9002902863CA4320094 /* [CP] Copy Pods Resources */,
+				A17AC346225F612800E4262E /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -2253,6 +2266,7 @@
 				A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A12B93FC214EFD710082EEA5 /* OpenSourceViewController.xib in Resources */,
 				A15C541E214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
+				A17AC34D225F656E00E4262E /* RestoreHistory.html in Resources */,
 				A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */,
 				A1F518BC213593E20029ACB7 /* env-dummy.plist in Resources */,
 				A15C5421214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
@@ -2525,6 +2539,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Hydra.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -2567,6 +2582,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ $CONFIGURATION = \"Debug\" -o $CONFIGURATION = \"Debug-Local\" ]; then\n${PODS_ROOT}/LicensePlist/license-plist --output-path ${SRCROOT}/Amby/Resources/license\nfi";
+		};
+		A17AC346225F612800E4262E /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n/usr/local/bin/carthage copy-frameworks\nelse\necho \"warning: carthage not installed. install at 'brew install carthage'\"\nfi\n";
 		};
 		A1A3DE7B2138795A00F87009 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2739,6 +2773,7 @@
 				A1C0E038220F698B00E7A7B6 /* UIColor+Extend.swift in Sources */,
 				A1C0E041220F698B00E7A7B6 /* UIScrollView+Extend.swift in Sources */,
 				A1C0E036220F698B00E7A7B6 /* Collection+Extend.swift in Sources */,
+				A17AC34A225F61CC00E4262E /* JSON+Extend.swift in Sources */,
 				A1C0E03E220F698B00E7A7B6 /* UIImage+Extend.swift in Sources */,
 				A1C0E03A220F698B00E7A7B6 /* DispatchQueue+Extend.swift in Sources */,
 				A1C0E049220F698B00E7A7B6 /* UIButton+Extend.swift in Sources */,
@@ -3442,6 +3477,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CommonUtil/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3477,6 +3516,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CommonUtil/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3512,6 +3555,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CommonUtil/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3547,6 +3594,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CommonUtil/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

@@ -9,3 +9,4 @@ github "bizz84/SwiftyStoreKit"
 github "SnapKit/SnapKit"
 github "malcommac/Hydra"
 github "realm/realm-cocoa"
+github "SwiftyJSON/SwiftyJSON" ~> 4.0
