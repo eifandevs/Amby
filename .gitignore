@@ -15,6 +15,8 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+*.dSYM.zip
+*.dSYM
 
 # CocoaPod
 # Pods/*
@@ -40,14 +42,18 @@ env.plist
 
 # fastlane
 fastlane/report.xml
+fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
 # slather
-# slather/reports
+slather/reports
 
 # firebase
 GoogleService-Info.plist
 
 # node_modules
 /node_modules
+
+# env value
+/*.settings

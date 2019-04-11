@@ -92,7 +92,6 @@ public final class TabUseCase {
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
                 case let .insert(before, after): self.rx_action.onNext(.insert(before: before, after: after))
-                case .reload: self.rx_action.onNext(.reload)
                 case .rebuild: self.rx_action.onNext(.rebuild)
                 case .rebuildThumbnail: self.rx_action.onNext(.rebuildThumbnail)
                 case let .append(before, after): self.rx_action.onNext(.append(before: before, after: after))
@@ -131,6 +130,11 @@ public final class TabUseCase {
             .disposed(by: disposeBag)
     }
 
+    /// タブ初期化
+    public func initialize() {
+        pageHistoryDataModel.initialize()
+    }
+
     /// タブグループたタイトル編集画面表示要求
     public func presentGroupTitleEdit(groupContext: String) {
         rx_action.onNext(.presentGroupTitleEdit(groupContext: groupContext))
@@ -148,6 +152,11 @@ public final class TabUseCase {
             self.pageHistoryDataModel.remove(context: pageHistory.context)
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.25))
         }
+    }
+
+    /// リロード
+    public func reload() {
+        self.rx_action.onNext(.reload)
     }
 
     /// 現在のタブをコピー

@@ -22,7 +22,6 @@ enum PageHistoryDataModelAction {
     case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
-    case reload
     case rebuild
     case rebuildThumbnail
     case load(url: String)
@@ -56,6 +55,7 @@ protocol PageHistoryDataModelProtocol {
     var currentHistory: PageHistory? { get }
     var currentLocation: Int? { get }
     var isPrivate: Bool { get }
+    func initialize()
     func getHistory(context: String) -> PageHistory?
     func getHistory(index: Int) -> PageHistory?
     func getIsLoading(context: String) -> Bool?
@@ -72,7 +72,6 @@ protocol PageHistoryDataModelProtocol {
     func removeGroup(groupContext: String)
     func invertPrivateMode(groupContext: String)
     func copy()
-    func reload()
     func rebuild()
     func getIndex(context: String) -> Int?
     func remove(context: String)
@@ -95,7 +94,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     private let repository = UserDefaultRepository()
 
     /// webViewそれぞれの履歴とカレントページインデックス
-    var pageGroupList: PageGroupList
+    var pageGroupList = PageGroupList()
     public private(set) var histories: [PageHistory] {
         get {
             return pageGroupList.currentGroup.histories
@@ -156,23 +155,10 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
 
-    private init() {
-        // pageHistory読み込み
-        let result = localStorageRepository.getData(.pageHistory)
-        if case let .success(data) = result {
-            if let pageGroupList = NSKeyedUnarchiver.unarchiveObject(with: data) as? PageGroupList {
-                self.pageGroupList = pageGroupList
-            } else {
-                self.pageGroupList = PageGroupList()
-                log.error("unarchive histories error.")
-            }
-        } else {
-            pageGroupList = PageGroupList()
-        }
-    }
+    private init() {}
 
     /// 初期化
-    private func initialize() {
+    func initialize() {
         // pageHistory読み込み
         let result = localStorageRepository.getData(.pageHistory)
         if case let .success(data) = result {
@@ -361,11 +347,6 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
                 insert(url: currentHistory.url, title: currentHistory.title)
             }
         }
-    }
-
-    /// ページリロード
-    func reload() {
-        rx_action.onNext(.reload)
     }
 
     /// ヒストリー再構築

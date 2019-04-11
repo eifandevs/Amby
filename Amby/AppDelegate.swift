@@ -6,7 +6,6 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
-import Firebase
 import Logger
 import Model
 import SVProgressHUD
@@ -37,8 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         #if RELEASE
             log.info("RELEASE BUILD")
-            // firebase setup
-            FirebaseApp.configure()
         #else
             UIViewController.swizzle() // ログ出力
             #if DEBUG

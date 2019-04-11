@@ -1,6 +1,0 @@
-framework module Pods_All_Entity {
-  umbrella header "Pods-All-Entity-umbrella.h"
-
-  export *
-  module * { export * }
-}

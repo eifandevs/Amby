@@ -62,6 +62,9 @@ class BaseViewController: UIViewController {
     }
 
     private func setup() {
+        // タブデータ復元
+        viewModel.initializeTab()
+
         // iPhoneX対応
         if #available(iOS 11.0, *) {
             let insets = self.view.safeAreaInsets
