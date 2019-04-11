@@ -265,7 +265,8 @@ class HeaderField: UIButton, ShadowView {
         mString.addAttribute(
             NSAttributedStringKey.foregroundColor,
             value: UIColor.lightGreen,
-            range: (text as NSString).range(of: "https"))
+            range: (text as NSString).range(of: "https")
+        )
 
         return mString
     }

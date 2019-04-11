@@ -258,18 +258,13 @@ class BaseLayer: UIView {
 // MARK: EGApplication Delegate
 
 extension BaseLayer: EGApplicationDelegate {
-
     // MARK: Screen Event
 
-    func screenTouchBegan(touch _: UITouch) {
-    }
+    func screenTouchBegan(touch _: UITouch) {}
 
-    func screenTouchEnded(touch _: UITouch) {
-    }
+    func screenTouchEnded(touch _: UITouch) {}
 
-    func screenTouchMoved(touch _: UITouch) {
-    }
+    func screenTouchMoved(touch _: UITouch) {}
 
-    func screenTouchCancelled(touch _: UITouch) {
-    }
+    func screenTouchCancelled(touch _: UITouch) {}
 }
