@@ -328,10 +328,6 @@ class EGWebView: WKWebView {
             }
     }
 
-    func shape(html: String) -> Promise<Any?> {
-        return evaluate(script: "shapeWapper('\(html)')")
-    }
-
     func takeThumbnail() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(frame.size, true, 0)
         drawHierarchy(in: bounds, afterScreenUpdates: false)
