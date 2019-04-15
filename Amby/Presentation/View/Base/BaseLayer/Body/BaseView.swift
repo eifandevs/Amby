@@ -590,6 +590,14 @@ class BaseView: UIView {
         front.frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + AppConst.DEVICE.STATUS_BAR_HEIGHT
     }
 
+    /// store session
+    private func storeSession() {
+//        let backList = tab.webView?.backForwardList.backList ?? []
+//        let forwardList = tab.webView?.backForwardList.forwardList ?? []
+//        let urls = (backList + [currentItem] + forwardList).map { $0.url }
+//        let currentPage = -forwardList.count
+    }
+    
     // MARK: 自動スクロールタイマー通知
 
     @objc func updateAutoScrolling(sender: Timer) {
