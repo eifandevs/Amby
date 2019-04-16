@@ -296,9 +296,9 @@ class EGWebView: WKWebView {
             }
     }
 
-    func restore(urls: [String], currentPage: String) {
+    func restore(urls: [String], currentPage: Int) {
         var jsonDict = [String: AnyObject]()
-        jsonDict["history"] = urls as AnyObject?
+        jsonDict["history"] = urls.map({ resourceUtil.restoreHistoryURL.absoluteString + "?url=\($0)" }) as AnyObject?
         jsonDict["currentPage"] = currentPage as AnyObject?
         guard let json = JSON(jsonDict).toString() else {
             return
