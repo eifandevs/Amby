@@ -23,7 +23,7 @@ public final class FavoriteUseCase {
     public let rx_action = PublishSubject<FavoriteUseCaseAction>()
 
     // models
-    private var pageHistoryDataModel: PageHistoryDataModelProtocol!
+    private var tabDataModel: TabDataModelProtocol!
     private var favoriteDataModel: FavoriteDataModelProtocol!
 
     /// Observable自動解放
@@ -35,7 +35,7 @@ public final class FavoriteUseCase {
     }
 
     private func setupProtocolImpl() {
-        pageHistoryDataModel = PageHistoryDataModel.s
+        tabDataModel = TabDataModel.s
         favoriteDataModel = FavoriteDataModel.s
     }
 
@@ -43,7 +43,7 @@ public final class FavoriteUseCase {
         // エラー監視
         Observable
             .merge([
-                pageHistoryDataModel.rx_action
+                tabDataModel.rx_action
                     .filter { action -> Bool in
                         switch action {
                         case .append, .change, .insert, .delete:
@@ -67,7 +67,7 @@ public final class FavoriteUseCase {
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
 
-                if let currentHistory = self.pageHistoryDataModel.currentHistory, !currentHistory.url.isEmpty {
+                if let currentHistory = self.tabDataModel.currentHistory, !currentHistory.url.isEmpty {
                     self.rx_action.onNext(.update(isSwitch: self.favoriteDataModel.select().map({ $0.url }).contains(currentHistory.url)))
                 } else {
                     self.rx_action.onNext(.update(isSwitch: false))
@@ -90,7 +90,7 @@ public final class FavoriteUseCase {
 
     /// お気に入り更新
     public func update() {
-        if let currentHistory = pageHistoryDataModel.currentHistory {
+        if let currentHistory = tabDataModel.currentHistory {
             favoriteDataModel.update(currentHistory: currentHistory)
         }
     }

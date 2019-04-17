@@ -21,7 +21,7 @@ protocol ProgressDataModelProtocol {
     var rx_action: PublishSubject<ProgressDataModelAction> { get }
     func updateProgress(progress: CGFloat)
     func updateText(text: String)
-    func reload(currentHistory: PageHistory)
+    func reload(currentHistory: Tab)
 }
 
 /// プログレスデータモデル
@@ -54,7 +54,7 @@ final class ProgressDataModel: ProgressDataModelProtocol {
     }
 
     /// reload
-    func reload(currentHistory: PageHistory) {
+    func reload(currentHistory: Tab) {
         if currentHistory.url != headerFieldText {
             headerFieldText = currentHistory.url
             rx_action.onNext(.updateText(text: currentHistory.url))

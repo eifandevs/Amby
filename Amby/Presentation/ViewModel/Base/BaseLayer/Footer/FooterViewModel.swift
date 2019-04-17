@@ -30,14 +30,14 @@ final class FooterViewModel {
         var isDragging: Bool
         var thumbnail: UIImage?
 
-        init(pageHistory: PageHistory) {
-            let baseImage = ThumbnailUseCase.s.getThumbnail(context: pageHistory.context)
+        init(tab: Tab) {
+            let baseImage = ThumbnailUseCase.s.getThumbnail(context: tab.context)
             let image = baseImage?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
 
-            context = pageHistory.context
-            title = pageHistory.title
-            isFront = pageHistory.context == TabUseCase.s.currentContext
-            isLoading = pageHistory.isLoading
+            context = tab.context
+            title = tab.title
+            isFront = tab.context == TabUseCase.s.currentContext
+            isLoading = tab.isLoading
             isDragging = false
             thumbnail = image
         }
@@ -63,11 +63,11 @@ final class FooterViewModel {
     }
 
     /// 現在位置
-    private var pageHistories: [PageHistory] {
+    private var pageHistories: [Tab] {
         return TabUseCase.s.pageHistories
     }
 
-    private var currentHistory: PageHistory? {
+    private var currentHistory: Tab? {
         return TabUseCase.s.currentHistory
     }
 
@@ -115,7 +115,7 @@ final class FooterViewModel {
     private func rebuild() {
         // 再構築
         rows.removeAll()
-        rows = TabUseCase.s.pageHistories.map { Row(pageHistory: $0) }
+        rows = TabUseCase.s.pageHistories.map { Row(tab: $0) }
         rx_action.onNext(.update(indexPath: nil, animated: true))
     }
 
@@ -127,21 +127,21 @@ final class FooterViewModel {
         }
     }
 
-    private func append(before _: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int)) {
-        let row = Row(pageHistory: after.pageHistory)
+    private func append(before _: (tab: Tab, index: Int)?, after: (tab: Tab, index: Int)) {
+        let row = Row(tab: after.tab)
         rows.append(row)
 
         rx_action.onNext(.append(indexPath: IndexPath(row: after.index, section: 0)))
     }
 
-    private func insert(before _: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int)) {
-        let row = Row(pageHistory: after.pageHistory)
+    private func insert(before _: (tab: Tab, index: Int), after: (tab: Tab, index: Int)) {
+        let row = Row(tab: after.tab)
         rows.insert(row, at: after.index)
 
         rx_action.onNext(.insert(indexPath: IndexPath(row: after.index, section: 0)))
     }
 
-    private func change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int)) {
+    private func change(before: (tab: Tab, index: Int), after: (tab: Tab, index: Int)) {
         rows[before.index].isFront = false
         rows[after.index].isFront = true
 

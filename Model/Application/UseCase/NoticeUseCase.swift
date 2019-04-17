@@ -23,7 +23,7 @@ public final class NoticeUseCase {
     public let rx_action = PublishSubject<NoticeUseCaseAction>()
 
     /// models
-    private var pageHistoryDataModel: PageHistoryDataModelProtocol!
+    private var tabDataModel: TabDataModelProtocol!
     private var commonHistoryDataModel: CommonHistoryDataModelProtocol!
     private var favoriteDataModel: FavoriteDataModelProtocol!
     private var searchHistoryDataModel: SearchHistoryDataModelProtocol!
@@ -41,7 +41,7 @@ public final class NoticeUseCase {
     }
 
     private func setupProtocolImpl() {
-        pageHistoryDataModel = PageHistoryDataModel.s
+        tabDataModel = TabDataModel.s
         commonHistoryDataModel = CommonHistoryDataModel.s
         favoriteDataModel = FavoriteDataModel.s
         searchHistoryDataModel = SearchHistoryDataModel.s
@@ -107,7 +107,7 @@ public final class NoticeUseCase {
         Observable.merge([
             searchHistoryDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             commonHistoryDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
-            pageHistoryDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
+            tabDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             favoriteDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             formDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             memoDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },

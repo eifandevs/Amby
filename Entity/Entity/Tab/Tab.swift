@@ -1,5 +1,5 @@
 //
-//  PageHistory.swift
+//  Tab.swift
 //  Qas
 //
 //  Created by temma on 2017/11/12.
@@ -11,7 +11,7 @@ import UIKit
 
 // swiftlint:disable force_cast
 
-public class PageHistory: NSObject, NSCoding {
+public class Tab: NSObject, NSCoding {
     public var context: String
     public var url: String
     public var title: String

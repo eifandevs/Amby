@@ -1,5 +1,5 @@
 //
-//  PageHistoryDataModelTests.swift
+//  TabDataModelTests.swift
 //  ModelTests
 //
 //  Created by tenma on 2019/04/01.
@@ -13,7 +13,7 @@ import RxCocoa
 
 @testable import Model
 
-class PageHistoryDataModelTests: XCTestCase {
+class TabDataModelTests: XCTestCase {
 
     let disposeBag = DisposeBag()
 
@@ -25,8 +25,8 @@ class PageHistoryDataModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        PageHistoryDataModel.s.delete()
-        PageHistoryDataModel.s.initialize()
+        TabDataModel.s.delete()
+        TabDataModel.s.initialize()
     }
 
     override func tearDown() {
@@ -35,38 +35,38 @@ class PageHistoryDataModelTests: XCTestCase {
     }
 
     func testInitialize() {
-        PageHistoryDataModel.s.initialize()
-        XCTAssertTrue(PageHistoryDataModel.s.histories.count == 1)
+        TabDataModel.s.initialize()
+        XCTAssertTrue(TabDataModel.s.histories.count == 1)
     }
 
     func testGetHistory() {
-        PageHistoryDataModel.s.append(url: dummyUrl)
-        XCTAssertTrue(PageHistoryDataModel.s.getHistory(context: PageHistoryDataModel.s.getHistory(index: 1)!.context)!.url == dummyUrl)
-        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 1)!.url == dummyUrl)
+        TabDataModel.s.append(url: dummyUrl)
+        XCTAssertTrue(TabDataModel.s.getHistory(context: TabDataModel.s.getHistory(index: 1)!.context)!.url == dummyUrl)
+        XCTAssertTrue(TabDataModel.s.getHistory(index: 1)!.url == dummyUrl)
     }
 
     func testGetIsLoading() {
-        PageHistoryDataModel.s.append()
-        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 1)!.isLoading == false)
+        TabDataModel.s.append()
+        XCTAssertTrue(TabDataModel.s.getHistory(index: 1)!.isLoading == false)
     }
 
     func testStartLoading() {
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case let .startLoading(context) = action {
                     if let expectation = expectation {
-                        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 1)!.context == context)
-                        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 1)!.isLoading == true)
+                        XCTAssertTrue(TabDataModel.s.getHistory(index: 1)!.context == context)
+                        XCTAssertTrue(TabDataModel.s.getHistory(index: 1)!.isLoading == true)
                         expectation.fulfill()
                     }
                 }
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.append()
-        PageHistoryDataModel.s.startLoading(context: PageHistoryDataModel.s.histories[1].context)
+        TabDataModel.s.append()
+        TabDataModel.s.startLoading(context: TabDataModel.s.histories[1].context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -74,21 +74,21 @@ class PageHistoryDataModelTests: XCTestCase {
     func testEndLoading() {
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case let .endLoading(context) = action {
                     if let expectation = expectation {
-                        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 1)!.context == context)
-                        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 1)!.isLoading == false)
+                        XCTAssertTrue(TabDataModel.s.getHistory(index: 1)!.context == context)
+                        XCTAssertTrue(TabDataModel.s.getHistory(index: 1)!.isLoading == false)
                         expectation.fulfill()
                     }
                 }
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.append()
-        PageHistoryDataModel.s.startLoading(context: PageHistoryDataModel.s.getHistory(index: 1)!.context)
-        PageHistoryDataModel.s.endLoading(context: PageHistoryDataModel.s.getHistory(index: 1)!.context)
+        TabDataModel.s.append()
+        TabDataModel.s.startLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
+        TabDataModel.s.endLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -96,21 +96,21 @@ class PageHistoryDataModelTests: XCTestCase {
     func testEndRendering() {
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case let .endRendering(context) = action {
                     if let expectation = expectation {
-                        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 1)!.context == context)
+                        XCTAssertTrue(TabDataModel.s.getHistory(index: 1)!.context == context)
                         expectation.fulfill()
                     }
                 }
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.append()
-        PageHistoryDataModel.s.startLoading(context: PageHistoryDataModel.s.getHistory(index: 1)!.context)
-        PageHistoryDataModel.s.endLoading(context: PageHistoryDataModel.s.getHistory(index: 1)!.context)
-        PageHistoryDataModel.s.endRendering(context: PageHistoryDataModel.s.getHistory(index: 1)!.context)
+        TabDataModel.s.append()
+        TabDataModel.s.startLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
+        TabDataModel.s.endLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
+        TabDataModel.s.endRendering(context: TabDataModel.s.getHistory(index: 1)!.context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -118,65 +118,65 @@ class PageHistoryDataModelTests: XCTestCase {
     func testSwap() {
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case let .swap(start, end) = action {
                     if let expectation = expectation {
                         XCTAssertTrue(start == 1)
                         XCTAssertTrue(end == 0)
-                        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 0)!.isLoading == true)
-                        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 1)!.isLoading == false)
+                        XCTAssertTrue(TabDataModel.s.getHistory(index: 0)!.isLoading == true)
+                        XCTAssertTrue(TabDataModel.s.getHistory(index: 1)!.isLoading == false)
                         expectation.fulfill()
                     }
                 }
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.append()
-        PageHistoryDataModel.s.append()
-        PageHistoryDataModel.s.startLoading(context: PageHistoryDataModel.s.getHistory(index: 1)!.context)
-        PageHistoryDataModel.s.swap(start: 1, end: 0)
+        TabDataModel.s.append()
+        TabDataModel.s.append()
+        TabDataModel.s.startLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
+        TabDataModel.s.swap(start: 1, end: 0)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testUpdateUrl() {
-        PageHistoryDataModel.s.append(url: dummyUrl)
-        PageHistoryDataModel.s.updateUrl(context: PageHistoryDataModel.s.getHistory(index: 1)!.context, url: dummyUrl2)
-        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 1)!.url == dummyUrl2)
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.updateUrl(context: TabDataModel.s.getHistory(index: 1)!.context, url: dummyUrl2)
+        XCTAssertTrue(TabDataModel.s.getHistory(index: 1)!.url == dummyUrl2)
     }
 
     func testUpdateTitle() {
-        PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
-        PageHistoryDataModel.s.updateTitle(context: PageHistoryDataModel.s.getHistory(index: 1)!.context, title: dummyTitle2)
-        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 1)!.title == dummyTitle2)
+        TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        TabDataModel.s.updateTitle(context: TabDataModel.s.getHistory(index: 1)!.context, title: dummyTitle2)
+        XCTAssertTrue(TabDataModel.s.getHistory(index: 1)!.title == dummyTitle2)
     }
 
     func testInsert() {
-        PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
-        PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
-        PageHistoryDataModel.s.insert(url: dummyUrl, title: nil)
-        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 3)!.title == "")
+        TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        TabDataModel.s.insert(url: dummyUrl, title: nil)
+        XCTAssertTrue(TabDataModel.s.getHistory(index: 3)!.title == "")
 
         weak var expectation = self.expectation(description: #function)
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case let .insert(before, after) = action {
                     if let expectation = expectation {
-                        XCTAssertTrue(before.pageHistory.url == self.dummyUrl)
-                        XCTAssertTrue(before.pageHistory.title == self.dummyTitle)
-                        XCTAssertTrue(after.pageHistory.url == "")
-                        XCTAssertTrue(after.pageHistory.title == self.dummyTitle)
-                        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 2)!.url == "")
-                        XCTAssertTrue(PageHistoryDataModel.s.getHistory(index: 2)!.title == self.dummyTitle)
+                        XCTAssertTrue(before.tab.url == self.dummyUrl)
+                        XCTAssertTrue(before.tab.title == self.dummyTitle)
+                        XCTAssertTrue(after.tab.url == "")
+                        XCTAssertTrue(after.tab.title == self.dummyTitle)
+                        XCTAssertTrue(TabDataModel.s.getHistory(index: 2)!.url == "")
+                        XCTAssertTrue(TabDataModel.s.getHistory(index: 2)!.title == self.dummyTitle)
                         expectation.fulfill()
                     }
                 }
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.change(context: PageHistoryDataModel.s.getHistory(index: 1)!.context)
-        PageHistoryDataModel.s.insert(url: nil, title: dummyTitle)
+        TabDataModel.s.change(context: TabDataModel.s.getHistory(index: 1)!.context)
+        TabDataModel.s.insert(url: nil, title: dummyTitle)
         self.waitForExpectations(timeout: 10, handler: nil)
 
     }
@@ -184,19 +184,19 @@ class PageHistoryDataModelTests: XCTestCase {
     func testAppend() {
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case let .append(before, after) = action {
                     if let expectation = expectation {
-                        XCTAssertTrue(after.pageHistory.url == self.dummyUrl)
-                        XCTAssertTrue(before!.pageHistory.url == "")
+                        XCTAssertTrue(after.tab.url == self.dummyUrl)
+                        XCTAssertTrue(before!.tab.url == "")
                         expectation.fulfill()
                     }
                 }
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.append(url: dummyUrl)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -204,7 +204,7 @@ class PageHistoryDataModelTests: XCTestCase {
     func testAppendGroup() {
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case .appendGroup = action {
                     if let expectation = expectation {
@@ -214,8 +214,8 @@ class PageHistoryDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.append(url: dummyUrl)
-        PageHistoryDataModel.s.appendGroup()
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.appendGroup()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -223,32 +223,32 @@ class PageHistoryDataModelTests: XCTestCase {
     func testChangeGroupTitle() {
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case let .changeGroupTitle(groupContext, title) = action {
                     if let expectation = expectation {
                         XCTAssertTrue(title == self.dummyTitle)
-                        XCTAssertTrue(groupContext == PageHistoryDataModel.s.pageGroupList.groups[1].groupContext)
+                        XCTAssertTrue(groupContext == TabDataModel.s.tabGroupList.groups[1].groupContext)
                         expectation.fulfill()
                     }
                 }
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.append(url: dummyUrl)
-        PageHistoryDataModel.s.appendGroup()
-        PageHistoryDataModel.s.changeGroupTitle(groupContext: PageHistoryDataModel.s.pageGroupList.groups[1].groupContext, title: dummyTitle)
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.appendGroup()
+        TabDataModel.s.changeGroupTitle(groupContext: TabDataModel.s.tabGroupList.groups[1].groupContext, title: dummyTitle)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testRemoveGroup() {
-        PageHistoryDataModel.s.append(url: dummyUrl)
-        PageHistoryDataModel.s.appendGroup()
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.appendGroup()
 
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case .deleteGroup = action {
                     if let expectation = expectation {
@@ -258,7 +258,7 @@ class PageHistoryDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.removeGroup(groupContext: PageHistoryDataModel.s.pageGroupList.groups[1].groupContext)
+        TabDataModel.s.removeGroup(groupContext: TabDataModel.s.tabGroupList.groups[1].groupContext)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -266,7 +266,7 @@ class PageHistoryDataModelTests: XCTestCase {
     func testInvertPrivateMode() {
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case .invertPrivateMode = action {
                     if let expectation = expectation {
@@ -276,20 +276,20 @@ class PageHistoryDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.append(url: dummyUrl)
-        PageHistoryDataModel.s.appendGroup()
-        PageHistoryDataModel.s.invertPrivateMode(groupContext: PageHistoryDataModel.s.pageGroupList.groups[1].groupContext)
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.appendGroup()
+        TabDataModel.s.invertPrivateMode(groupContext: TabDataModel.s.tabGroupList.groups[1].groupContext)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testCopy() {
-        PageHistoryDataModel.s.append(url: dummyUrl)
-        PageHistoryDataModel.s.append(url: dummyUrl2)
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.append(url: dummyUrl2)
 
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case .append = action {
                     if let expectation = expectation {
@@ -299,19 +299,19 @@ class PageHistoryDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.copy()
+        TabDataModel.s.copy()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testCopyWithInsert() {
-        PageHistoryDataModel.s.append(url: dummyUrl)
-        PageHistoryDataModel.s.append(url: dummyUrl2)
-        PageHistoryDataModel.s.change(context: PageHistoryDataModel.s.histories[1].context)
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.append(url: dummyUrl2)
+        TabDataModel.s.change(context: TabDataModel.s.histories[1].context)
 
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case .insert = action {
                     if let expectation = expectation {
@@ -321,18 +321,18 @@ class PageHistoryDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.copy()
+        TabDataModel.s.copy()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testRebuild() {
         // NSInternalInconsistencyExceptionが発生する
-        //        PageHistoryDataModel.s.append(url: dummyUrl)
+        //        TabDataModel.s.append(url: dummyUrl)
 
         //        weak var expectation = self.expectation(description: #function)
         //
-        //        PageHistoryDataModel.s.rx_action
+        //        TabDataModel.s.rx_action
         //            .subscribe { object in
         //                if let action = object.element, case .rebuildThumbnail = action {
         //                    if let expectation = expectation {
@@ -342,49 +342,49 @@ class PageHistoryDataModelTests: XCTestCase {
         //            }
         //            .disposed(by: disposeBag)
         //
-        //        PageHistoryDataModel.s.rebuild()
+        //        TabDataModel.s.rebuild()
         //
         //        self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testGetIndex() {
-        PageHistoryDataModel.s.append(url: dummyUrl)
-        PageHistoryDataModel.s.append(url: dummyUrl2)
-        _ = PageHistoryDataModel.s.getIndex(context: PageHistoryDataModel.s.histories[1].context)
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.append(url: dummyUrl2)
+        _ = TabDataModel.s.getIndex(context: TabDataModel.s.histories[1].context)
     }
 
     func testChange() {
         weak var expectation = self.expectation(description: #function)
 
-        PageHistoryDataModel.s.rx_action
+        TabDataModel.s.rx_action
             .subscribe { object in
                 if let action = object.element, case let .change(before, after) = action {
                     if let expectation = expectation {
-                        XCTAssertTrue(after.pageHistory.url == self.dummyUrl)
-                        XCTAssertTrue(before.pageHistory.url == self.dummyUrl2)
+                        XCTAssertTrue(after.tab.url == self.dummyUrl)
+                        XCTAssertTrue(before.tab.url == self.dummyUrl2)
                         expectation.fulfill()
                     }
                 }
             }
             .disposed(by: disposeBag)
 
-        PageHistoryDataModel.s.append(url: dummyUrl)
-        PageHistoryDataModel.s.append(url: dummyUrl2)
-        PageHistoryDataModel.s.change(context: PageHistoryDataModel.s.histories[1].context)
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.append(url: dummyUrl2)
+        TabDataModel.s.change(context: TabDataModel.s.histories[1].context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testStore() {
-        PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
-        PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
-        PageHistoryDataModel.s.store()
+        TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        TabDataModel.s.store()
     }
 
     func testDelete() {
-        PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
-        PageHistoryDataModel.s.append(url: dummyUrl, title: dummyTitle)
-        PageHistoryDataModel.s.store()
-        PageHistoryDataModel.s.delete()
+        TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        TabDataModel.s.store()
+        TabDataModel.s.delete()
     }
 }

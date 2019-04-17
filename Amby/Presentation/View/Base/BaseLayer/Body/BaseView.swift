@@ -430,7 +430,7 @@ class BaseView: UIView {
         }
     }
 
-    private func append(currentHistory: PageHistory) {
+    private func append(currentHistory: Tab) {
         // 現フロントのプログレス監視を削除
         if let front = self.front {
             front.removeObserverEstimatedProgress(observer: self)

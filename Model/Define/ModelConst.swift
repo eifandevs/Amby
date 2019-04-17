@@ -37,7 +37,7 @@ struct ModelConst {
         let AUTO_SCROLL_INTERVAL = "autoScrollInterval"
         let COMMON_HISTORY_SAVE_COUNT = "commonHistorySaveCount"
         let SEARCH_HISTORY_SAVE_COUNT = "searchHistorySaveCount"
-        let PAGE_HISTORY_SAVE_COUNT = "pageHistorySaveCount"
+        let PAGE_HISTORY_SAVE_COUNT = "tabSaveCount"
         let NEW_WINDOW_CONFIRM = "newWindowConfirm"
         let MENU_ORDER = "menuOrder"
         let NOTIFICATION_SUBTITLE = "subtitle"

@@ -14,7 +14,7 @@ protocol SettingDataModelProtocol {
     var autoScrollInterval: Float { get set }
     var menuOrder: [UserOperation] { get set }
     var newWindowConfirm: Bool { get set }
-    var pageHistorySaveCount: Int { get }
+    var tabSaveCount: Int { get }
     var commonHistorySaveCount: Int { get }
     var searchHistorySaveCount: Int { get }
     func initialize()
@@ -71,8 +71,8 @@ final class SettingDataModel: SettingDataModelProtocol {
     }
 
     /// ページ履歴保存日数
-    var pageHistorySaveCount: Int {
-        return repository.get(key: .pageHistorySaveCount)
+    var tabSaveCount: Int {
+        return repository.get(key: .tabSaveCount)
     }
 
     /// 閲覧履歴保存日数

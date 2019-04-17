@@ -46,8 +46,8 @@ protocol FavoriteDataModelProtocol {
     func select(url: String) -> [Favorite]
     func delete()
     func delete(favorites: [Favorite])
-    func reload(currentHistory: PageHistory)
-    func update(currentHistory: PageHistory)
+    func reload(currentHistory: Tab)
+    func update(currentHistory: Tab)
 }
 
 final class FavoriteDataModel: FavoriteDataModelProtocol {
@@ -123,12 +123,12 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
     }
 
     /// お気に入りの更新チェック
-    func reload(currentHistory: PageHistory) {
+    func reload(currentHistory: Tab) {
         rx_action.onNext(.reload(url: currentHistory.url))
     }
 
     /// update favorite
-    func update(currentHistory: PageHistory) {
+    func update(currentHistory: Tab) {
         if !currentHistory.url.isEmpty && !currentHistory.title.isEmpty {
             let fd = Favorite()
             fd.title = currentHistory.title

@@ -1,5 +1,5 @@
 //
-//  PageGroupList.swift
+//  TabGroupList.swift
 //  Model
 //
 //  Created by tenma on 2019/02/03.
@@ -12,27 +12,27 @@ import UIKit
 
 // swiftlint:disable force_cast
 
-public class PageGroupList: NSObject, NSCoding {
+public class TabGroupList: NSObject, NSCoding {
     public var currentGroupContext: String
-    public var groups: [PageGroup]
-    public var currentGroup: PageGroup {
+    public var groups: [TabGroup]
+    public var currentGroup: TabGroup {
         return groups.find({ $0.groupContext == currentGroupContext })!
     }
 
     public override init() {
-        let pageGroup = PageGroup()
-        groups = [pageGroup]
-        currentGroupContext = pageGroup.groupContext
+        let tabGroup = TabGroup()
+        groups = [tabGroup]
+        currentGroupContext = tabGroup.groupContext
     }
 
-    public init(currentGroupContext: String, groups: [PageGroup]) {
+    public init(currentGroupContext: String, groups: [TabGroup]) {
         self.currentGroupContext = currentGroupContext
         self.groups = groups
     }
 
     public required convenience init?(coder decoder: NSCoder) {
         let currentGroupContext = decoder.decodeObject(forKey: "currentGroupContext") as! String
-        let groups = decoder.decodeObject(forKey: "groups") as! [PageGroup]
+        let groups = decoder.decodeObject(forKey: "groups") as! [TabGroup]
         self.init(currentGroupContext: currentGroupContext, groups: groups)
     }
 
