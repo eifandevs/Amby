@@ -12,13 +12,9 @@ import UIKit
 // swiftlint:disable force_cast
 
 public class SearchHistory: NSObject, NSCoding {
-    public var _id: String = NSUUID().uuidString
-    public var title: String = ""
-    public var date: Date = Date()
-
-    override init() {
-        super.init()
-    }
+    public var _id: String
+    public var title: String
+    public var date: Date
 
     public init(_id: String = NSUUID().uuidString, title: String, date: Date) {
         self._id = _id

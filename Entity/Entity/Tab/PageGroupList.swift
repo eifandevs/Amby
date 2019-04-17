@@ -13,18 +13,13 @@ import UIKit
 // swiftlint:disable force_cast
 
 public class PageGroupList: NSObject, NSCoding {
-    public var currentGroupContext = ""
-    public var groups = [PageGroup]()
+    public var currentGroupContext: String
+    public var groups: [PageGroup]
     public var currentGroup: PageGroup {
         return groups.find({ $0.groupContext == currentGroupContext })!
     }
 
     public override init() {
-        super.init()
-        setup()
-    }
-
-    private func setup() {
         let pageGroup = PageGroup()
         groups = [pageGroup]
         currentGroupContext = pageGroup.groupContext

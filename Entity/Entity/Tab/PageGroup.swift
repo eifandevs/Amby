@@ -15,16 +15,11 @@ public class PageGroup: NSObject, NSCoding {
     public var groupContext: String = NSUUID().uuidString
     public var title = "新しいグループ"
     public var isPrivate = false
-    public var currentContext = ""
-    public var histories = [PageHistory]()
+    public var currentContext: String
+    public var histories: [PageHistory]
     public var backForwardContextList = [String]()
 
     public override init() {
-        super.init()
-        setup()
-    }
-
-    private func setup() {
         let pageHistory = PageHistory()
         histories = [pageHistory]
         currentContext = pageHistory.context

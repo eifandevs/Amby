@@ -222,31 +222,8 @@ class BaseView: UIView {
     override func observeValue(forKeyPath keyPath: String?, of _: Any?, change: [NSKeyValueChangeKey: Any]?, context pointer: UnsafeMutableRawPointer?) {
         let opaquePtr = OpaquePointer(pointer)
         if let contextPtr = UnsafeMutablePointer<String>(opaquePtr) {
-            if keyPath == "estimatedProgress" && contextPtr.pointee == front.context {
-                if let change = change, let progress = change[NSKeyValueChangeKey.newKey] as? CGFloat {
-                    // estimatedProgressが変更されたときに、プログレスバーの値を変更する。
-                    viewModel.updateProgress(progress: progress)
-                }
-            } else if keyPath == "title" {
-                log.debug("receive title change.")
-                if let change = change, let title = change[NSKeyValueChangeKey.newKey] as? String {
-                    viewModel.updatePageTitle(context: contextPtr.pointee, title: title)
-                }
-            } else if keyPath == "URL" {
-                log.debug("receive url change.")
-                if let change = change, let url = change[NSKeyValueChangeKey.newKey] as? URL, !url.absoluteString.isEmpty {
-                    viewModel.updatePageUrl(context: contextPtr.pointee, url: url.absoluteString)
-                }
-            } else if keyPath == "canGoBack" {
-                log.debug("receive canGoBack change.")
-                if let change = change, let canGoBack = change[NSKeyValueChangeKey.newKey] as? Bool {
-                    viewModel.updateCanGoBack(context: contextPtr.pointee, canGoBack: canGoBack)
-                }
-            } else if keyPath == "canGoForward" {
-                log.debug("receive canGoFoward change.")
-                if let change = change, let canGoFoward = change[NSKeyValueChangeKey.newKey] as? Bool {
-                    viewModel.updateCanGoForward(context: contextPtr.pointee, canGoForward: canGoFoward)
-                }
+            if let target = webViews.find({ $0?.context == contextPtr.pointee }), let unwrappedTarget = target {
+                viewModel.observeValue(context: contextPtr.pointee, frontContext: front.context, isRestoreHistoryUrl: unwrappedTarget.isRestoreHistoryUrl, keyPath: keyPath, change: change)
             }
         }
     }
@@ -597,7 +574,7 @@ class BaseView: UIView {
 //        let urls = (backList + [currentItem] + forwardList).map { $0.url }
 //        let currentPage = -forwardList.count
     }
-    
+
     // MARK: 自動スクロールタイマー通知
 
     @objc func updateAutoScrolling(sender: Timer) {
@@ -900,7 +877,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
-        guard let wv = webView as? EGWebView else { return }
+        guard let wv = webView as? EGWebView, !wv.isRestoreHistoryUrl else { return }
         log.debug("loading start. context: \(wv.context)")
 
         if wv.context == front.context {
@@ -919,7 +896,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
-        guard let wv = webView as? EGWebView else { return }
+        guard let wv = webView as? EGWebView, !wv.isRestoreHistoryUrl else { return }
         log.debug("loading finish. context: \(wv.context)")
 
         // 削除済みチェック
@@ -940,13 +917,36 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
         viewModel.endLoading(context: wv.context)
 
         // サムネイルを保存
-        viewModel.saveThumbnailAndEndRendering(webView: wv)
+        log.debug("save thumbnail. context: \(wv.context)")
+
+        // サムネイルを保存
+        DispatchQueue.mainSyncSafe {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                wv.takeSnapshot(with: nil) { [weak self] image, error in
+                    guard let `self` = self else { return }
+                    if let img = image {
+                        let pngImageData = UIImagePNGRepresentation(img)
+                        let context = wv.context
+
+                        if let pngImageData = pngImageData {
+                            self.viewModel.writeThumbnailData(context: context, data: pngImageData)
+                        } else {
+                            log.error("image representation error.")
+                        }
+                    } else {
+                        log.error("failed taking snapshot. error: \(String(describing: error?.localizedDescription))")
+                    }
+                    // レンダリング終了通知
+                    self.viewModel.endRendering(context: wv.context)
+                }
+            }
+        }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: Error) {
         log.error("[error url]\(String(describing: (error as NSError).userInfo["NSErrorFailingURLKey"])). code: \((error as NSError).code)")
 
-        guard let wv = webView as? EGWebView else { return }
+        guard let wv = webView as? EGWebView, !wv.isRestoreHistoryUrl else { return }
 
         // 連打したら-999 "(null)"になる対応
         if (error as NSError).code == NSURLErrorCancelled {

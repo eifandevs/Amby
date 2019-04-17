@@ -215,6 +215,13 @@ class EGWebView: WKWebView {
         return false
     }
 
+    var isRestoreHistoryUrl: Bool {
+        if let url = url, url.absoluteString.isLocalUrl {
+            return url.absoluteString.contains("RestoreHistory")
+        }
+        return false
+    }
+
     @discardableResult
     func load(urlStr: String) -> Bool {
         if urlStr.isValidUrl {
