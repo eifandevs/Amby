@@ -223,7 +223,7 @@ class BaseView: UIView {
         let opaquePtr = OpaquePointer(pointer)
         if let contextPtr = UnsafeMutablePointer<String>(opaquePtr) {
             if let target = webViews.find({ $0?.context == contextPtr.pointee }), let unwrappedTarget = target {
-                viewModel.observeValue(context: contextPtr.pointee, frontContext: front.context, isRestoreHistoryUrl: unwrappedTarget.isRestoreHistoryUrl, keyPath: keyPath, change: change)
+                viewModel.observeValue(context: contextPtr.pointee, frontContext: front.context, isRestoreSessionUrl: unwrappedTarget.isRestoreSessionUrl, keyPath: keyPath, change: change)
             }
         }
     }
@@ -877,7 +877,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation _: WKNavigation!) {
-        guard let wv = webView as? EGWebView, !wv.isRestoreHistoryUrl else { return }
+        guard let wv = webView as? EGWebView, !wv.isRestoreSessionUrl else { return }
         log.debug("loading start. context: \(wv.context)")
 
         if wv.context == front.context {
@@ -896,7 +896,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
-        guard let wv = webView as? EGWebView, !wv.isRestoreHistoryUrl else { return }
+        guard let wv = webView as? EGWebView, !wv.isRestoreSessionUrl else { return }
         log.debug("loading finish. context: \(wv.context)")
 
         // 削除済みチェック
@@ -946,7 +946,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: Error) {
         log.error("[error url]\(String(describing: (error as NSError).userInfo["NSErrorFailingURLKey"])). code: \((error as NSError).code)")
 
-        guard let wv = webView as? EGWebView, !wv.isRestoreHistoryUrl else { return }
+        guard let wv = webView as? EGWebView, !wv.isRestoreSessionUrl else { return }
 
         // 連打したら-999 "(null)"になる対応
         if (error as NSError).code == NSURLErrorCancelled {

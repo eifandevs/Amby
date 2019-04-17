@@ -154,7 +154,7 @@
 		A17AC348225F617900E4262E /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17AC347225F617900E4262E /* SwiftyJSON.framework */; };
 		A17AC34A225F61CC00E4262E /* JSON+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17AC349225F61CC00E4262E /* JSON+Extend.swift */; };
 		A17AC34B225F621300E4262E /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17AC347225F617900E4262E /* SwiftyJSON.framework */; };
-		A17AC34D225F656E00E4262E /* RestoreHistory.html in Resources */ = {isa = PBXBuildFile; fileRef = A17AC34C225F656E00E4262E /* RestoreHistory.html */; };
+		A17AC34D225F656E00E4262E /* RestoreSession.html in Resources */ = {isa = PBXBuildFile; fileRef = A17AC34C225F656E00E4262E /* RestoreSession.html */; };
 		A1846B58225239E90031E635 /* PageHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1846B57225239E90031E635 /* PageHistoryDataModelTest.swift */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
@@ -603,7 +603,7 @@
 		A17241D32246619B00472477 /* URL+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extend.swift"; sourceTree = "<group>"; };
 		A17AC347225F617900E4262E /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		A17AC349225F61CC00E4262E /* JSON+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extend.swift"; sourceTree = "<group>"; };
-		A17AC34C225F656E00E4262E /* RestoreHistory.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RestoreHistory.html; sourceTree = "<group>"; };
+		A17AC34C225F656E00E4262E /* RestoreSession.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RestoreSession.html; sourceTree = "<group>"; };
 		A1846B57225239E90031E635 /* PageHistoryDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModelTest.swift; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
@@ -1535,7 +1535,7 @@
 				A17241C4224563A200472477 /* alertTest.html */,
 				A17241C5224563A200472477 /* shaper.html */,
 				A17241B122452CD800472477 /* post.html */,
-				A17AC34C225F656E00E4262E /* RestoreHistory.html */,
+				A17AC34C225F656E00E4262E /* RestoreSession.html */,
 			);
 			path = html;
 			sourceTree = "<group>";
@@ -2269,7 +2269,7 @@
 				A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A12B93FC214EFD710082EEA5 /* OpenSourceViewController.xib in Resources */,
 				A15C541E214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
-				A17AC34D225F656E00E4262E /* RestoreHistory.html in Resources */,
+				A17AC34D225F656E00E4262E /* RestoreSession.html in Resources */,
 				A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */,
 				A1F518BC213593E20029ACB7 /* env-dummy.plist in Resources */,
 				A15C5421214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,

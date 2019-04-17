@@ -54,7 +54,7 @@ final class ResourceUtil {
     var timeoutHtml = R.file.timeoutHtml()!.path
 
     /// リストアページ
-    var restoreHistoryURL = R.file.restoreHistoryHtml()!
+    var restoreSessionURL = R.file.restoreSessionHtml()!
 
     /// DNSエラーページ
     var dnsHtml = R.file.dnsHtml()!.path

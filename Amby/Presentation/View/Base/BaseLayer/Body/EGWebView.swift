@@ -215,9 +215,9 @@ class EGWebView: WKWebView {
         return false
     }
 
-    var isRestoreHistoryUrl: Bool {
+    var isRestoreSessionUrl: Bool {
         if let url = url, url.absoluteString.isLocalUrl {
-            return url.absoluteString.contains("RestoreHistory")
+            return url.absoluteString.contains("RestoreSession")
         }
         return false
     }
@@ -305,13 +305,13 @@ class EGWebView: WKWebView {
 
     func restore(urls: [String], currentPage: Int) {
         var jsonDict = [String: AnyObject]()
-        jsonDict["history"] = urls.map({ resourceUtil.restoreHistoryURL.absoluteString + "?url=\($0)" }) as AnyObject?
+        jsonDict["history"] = urls.map({ resourceUtil.restoreSessionURL.absoluteString + "?url=\($0)" }) as AnyObject?
         jsonDict["currentPage"] = currentPage as AnyObject?
         guard let json = JSON(jsonDict).toString() else {
             return
         }
         let escapedJSON = json.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let url = resourceUtil.restoreHistoryURL.queryItemAdded(name: "restore", value: escapedJSON)!
+        let url = resourceUtil.restoreSessionURL.queryItemAdded(name: "restore", value: escapedJSON)!
         loadFileURL(url, allowingReadAccessTo: url)
         let request = URLRequest(url: url)
         load(request)

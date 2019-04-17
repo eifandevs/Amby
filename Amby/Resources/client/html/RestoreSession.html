@@ -10,9 +10,9 @@ if (url) {
     this.document.location.href = url;
 }
 
-const restoreHistory = getParam("restore");
-if (restoreHistory) {
-    var data = JSON.parse(unescape(restoreHistory));
+const restoreSession = getParam("restore");
+if (restoreSession) {
+    var data = JSON.parse(unescape(restoreSession));
     if (data) {
         var urlList = data['history'];
         var currentPage = data['currentPage'];

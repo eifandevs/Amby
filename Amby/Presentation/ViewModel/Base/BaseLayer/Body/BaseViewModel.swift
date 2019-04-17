@@ -300,8 +300,8 @@ final class BaseViewModel {
     }
 
     /// KVO処理
-    func observeValue(context: String, frontContext: String, isRestoreHistoryUrl: Bool, keyPath: String?, change: [NSKeyValueChangeKey: Any]?) {
-        if keyPath == "estimatedProgress" || keyPath == "title" || keyPath == "URL", isRestoreHistoryUrl {
+    func observeValue(context: String, frontContext: String, isRestoreSessionUrl: Bool, keyPath: String?, change: [NSKeyValueChangeKey: Any]?) {
+        if keyPath == "estimatedProgress" || keyPath == "title" || keyPath == "URL", isRestoreSessionUrl {
             log.warning("observe restore request. key: \(keyPath ?? "nokey")")
             return
         }
