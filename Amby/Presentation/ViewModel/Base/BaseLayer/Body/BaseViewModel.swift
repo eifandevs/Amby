@@ -242,7 +242,6 @@ final class BaseViewModel {
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
                 case .analytics: self.rx_action.onNext(.analysisHtml)
-                default: break
                 }
             }
             .disposed(by: disposeBag)
