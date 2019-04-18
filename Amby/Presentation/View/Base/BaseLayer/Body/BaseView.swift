@@ -188,7 +188,7 @@ class BaseView: UIView {
                 case let .insert(at): self.insert(at: at)
                 case .reload: self.reload()
                 case .rebuild: self.rebuild()
-                case let .append(currentHistory): self.append(currentHistory: currentHistory)
+                case let .append(currentTab): self.append(currentTab: currentTab)
                 case .change: self.change()
                 case let .swap(start, end): self.swap(start: start, end: end)
                 case let .remove(isFront, deleteContext, currentContext, deleteIndex): self.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex)
@@ -430,15 +430,15 @@ class BaseView: UIView {
         }
     }
 
-    private func append(currentHistory: Tab) {
+    private func append(currentTab: Tab) {
         // 現フロントのプログレス監視を削除
         if let front = self.front {
             front.removeObserverEstimatedProgress(observer: self)
         }
         viewModel.updateProgress(progress: 0)
-        let newWv = createWebView(context: currentHistory.context)
+        let newWv = createWebView(context: currentTab.context)
         webViews.append(newWv)
-        if currentHistory.url.isEmpty {
+        if currentTab.url.isEmpty {
             // 編集状態にする
             if let beginSearchingWorkItem = self.beginSearchingWorkItem {
                 beginSearchingWorkItem.cancel()
@@ -450,8 +450,8 @@ class BaseView: UIView {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginSearchingWorkItem!)
         } else {
-            if !currentHistory.url.isEmpty {
-                _ = newWv.load(urlStr: currentHistory.url)
+            if !currentTab.url.isEmpty {
+                _ = newWv.load(urlStr: currentTab.url)
             } else {
                 log.error("cannot get currentUrl.")
             }
@@ -568,11 +568,14 @@ class BaseView: UIView {
     }
 
     /// store session
-    private func storeSession() {
-//        let backList = tab.webView?.backForwardList.backList ?? []
-//        let forwardList = tab.webView?.backForwardList.forwardList ?? []
-//        let urls = (backList + [currentItem] + forwardList).map { $0.url }
-//        let currentPage = -forwardList.count
+    private func storeSession(webView: EGWebView) {
+        if let currentItem = webView.backForwardList.currentItem {
+            let backList = webView.backForwardList.backList
+            let forwardList = webView.backForwardList.forwardList
+            let urls = (backList + [currentItem] + forwardList).map { $0.url.absoluteString }
+            let currentPage = -forwardList.count
+            viewModel.updateSession(context: webView.context, urls: urls, currentPage: currentPage)
+        }
     }
 
     // MARK: 自動スクロールタイマー通知
@@ -914,6 +917,7 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
             viewModel.updateProgress(progress: 1.0)
         }
         updateNetworkActivityIndicator()
+        storeSession(webView: wv)
         viewModel.endLoading(context: wv.context)
 
         // サムネイルを保存

@@ -16,7 +16,7 @@ enum BaseViewModelAction {
     case insert(at: Int)
     case reload
     case rebuild
-    case append(currentHistory: Tab)
+    case append(currentTab: Tab)
     case change
     case remove(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
@@ -191,7 +191,7 @@ final class BaseViewModel {
                 case let .insert(before, _): self.rx_action.onNext(.insert(at: before.index + 1))
                 case .rebuild: self.rx_action.onNext(.rebuild)
                 case .reload: self.rx_action.onNext(.reload)
-                case let .append(_, after): self.rx_action.onNext(.append(currentHistory: after.tab))
+                case let .append(_, after): self.rx_action.onNext(.append(currentTab: after.tab))
                 case .change: self.rx_action.onNext(.change)
                 case let .swap(start, end): self.rx_action.onNext(.swap(start: start, end: end))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
@@ -507,6 +507,11 @@ final class BaseViewModel {
     /// update canGoForward
     func updateCanGoForward(context: String, canGoForward: Bool) {
         ProgressUseCase.s.updateCanGoForward(context: context, canGoForward: canGoForward)
+    }
+
+    /// update session
+    func updateSession(context: String, urls: [String], currentPage: Int) {
+        TabUseCase.s.updateSession(context: context, urls: urls, currentPage: currentPage)
     }
 
     /// update common history

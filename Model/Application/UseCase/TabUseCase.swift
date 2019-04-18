@@ -39,7 +39,7 @@ public final class TabUseCase {
     public let rx_action = PublishSubject<TabUseCaseAction>()
 
     public var currentUrl: String? {
-        return tabDataModel.currentHistory?.url
+        return tabDataModel.currentTab?.url
     }
 
     public var tabGroupList: TabGroupList {
@@ -50,8 +50,8 @@ public final class TabUseCase {
         return tabDataModel.histories
     }
 
-    public var currentHistory: Tab? {
-        return tabDataModel.currentHistory
+    public var currentTab: Tab? {
+        return tabDataModel.currentTab
     }
 
     public var currentContext: String {
@@ -274,9 +274,9 @@ public final class TabUseCase {
     public func updateUrl(context: String, url: String) {
         if !url.isEmpty && url.isValidUrl {
             tabDataModel.updateUrl(context: context, url: url)
-            if let currentHistory = currentHistory, context == currentContext {
+            if let currentTab = currentTab, context == currentContext {
                 progressDataModel.updateText(text: url)
-                favoriteDataModel.reload(currentHistory: currentHistory)
+                favoriteDataModel.reload(currentTab: currentTab)
             }
         }
     }
@@ -284,6 +284,11 @@ public final class TabUseCase {
     /// update title in page history
     public func updateTitle(context: String, title: String) {
         tabDataModel.updateTitle(context: context, title: title)
+    }
+
+    /// update session
+    public func updateSession(context: String, urls: [String], currentPage: Int) {
+        tabDataModel.updateSession(context: context, urls: urls, currentPage: currentPage)
     }
 
     /// change private mode

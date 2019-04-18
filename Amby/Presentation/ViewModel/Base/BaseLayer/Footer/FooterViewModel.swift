@@ -67,8 +67,8 @@ final class FooterViewModel {
         return TabUseCase.s.pageHistories
     }
 
-    private var currentHistory: Tab? {
-        return TabUseCase.s.currentHistory
+    private var currentTab: Tab? {
+        return TabUseCase.s.currentTab
     }
 
     private var currentContext: String {

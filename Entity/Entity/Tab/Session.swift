@@ -13,22 +13,22 @@ import UIKit
 
 public class Session: NSObject, NSCoding {
     public var urls: [String]
-    public var currentIndex: Int
+    public var currentPage: Int
 
     public init(urls: [String] = [],
-                currentIndex: Int = 0) {
+                currentPage: Int = 0) {
         self.urls = urls
-        self.currentIndex = currentIndex
+        self.currentPage = currentPage
     }
 
     public required convenience init?(coder decoder: NSCoder) {
         let urls = decoder.decodeObject(forKey: "urls") as! [String]
-        let currentIndex = decoder.decodeInteger(forKey: "currentIndex")
-        self.init(urls: urls, currentIndex: currentIndex)
+        let currentPage = decoder.decodeInteger(forKey: "currentPage")
+        self.init(urls: urls, currentPage: currentPage)
     }
 
     public func encode(with aCoder: NSCoder) {
         aCoder.encode(urls, forKey: "urls")
-        aCoder.encode(currentIndex, forKey: "currentIndex")
+        aCoder.encode(currentPage, forKey: "currentPage")
     }
 }

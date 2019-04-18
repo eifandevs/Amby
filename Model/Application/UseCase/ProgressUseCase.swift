@@ -84,8 +84,8 @@ public final class ProgressUseCase {
 
     /// reload ProgressDataModel
     public func reloadProgress() {
-        if let currentHistory = tabDataModel.currentHistory {
-            progressDataModel.reload(currentHistory: currentHistory)
+        if let currentTab = tabDataModel.currentTab {
+            progressDataModel.reload(currentTab: currentTab)
         }
     }
 

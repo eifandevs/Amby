@@ -67,8 +67,8 @@ public final class FavoriteUseCase {
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
 
-                if let currentHistory = self.tabDataModel.currentHistory, !currentHistory.url.isEmpty {
-                    self.rx_action.onNext(.update(isSwitch: self.favoriteDataModel.select().map({ $0.url }).contains(currentHistory.url)))
+                if let currentTab = self.tabDataModel.currentTab, !currentTab.url.isEmpty {
+                    self.rx_action.onNext(.update(isSwitch: self.favoriteDataModel.select().map({ $0.url }).contains(currentTab.url)))
                 } else {
                     self.rx_action.onNext(.update(isSwitch: false))
                 }
@@ -90,8 +90,8 @@ public final class FavoriteUseCase {
 
     /// お気に入り更新
     public func update() {
-        if let currentHistory = tabDataModel.currentHistory {
-            favoriteDataModel.update(currentHistory: currentHistory)
+        if let currentTab = tabDataModel.currentTab {
+            favoriteDataModel.update(currentTab: currentTab)
         }
     }
 

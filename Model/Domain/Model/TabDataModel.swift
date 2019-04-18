@@ -52,7 +52,7 @@ protocol TabDataModelProtocol {
     var tabGroupList: TabGroupList { get }
     var currentContext: String { get set }
     var histories: [Tab] { get }
-    var currentHistory: Tab? { get }
+    var currentTab: Tab? { get }
     var currentLocation: Int? { get }
     var isPrivate: Bool { get }
     func initialize()
@@ -65,6 +65,7 @@ protocol TabDataModelProtocol {
     func swap(start: Int, end: Int)
     func updateUrl(context: String, url: String)
     func updateTitle(context: String, title: String)
+    func updateSession(context: String, urls: [String], currentPage: Int)
     func insert(url: String?, title: String?)
     func append(url: String?, title: String?)
     func appendGroup()
@@ -121,7 +122,7 @@ final class TabDataModel: TabDataModelProtocol {
     }
 
     /// 現在のページ情報
-    var currentHistory: Tab? {
+    var currentTab: Tab? {
         return histories.find({ $0.context == currentContext })
     }
 
@@ -137,8 +138,8 @@ final class TabDataModel: TabDataModelProtocol {
 
     /// 現在のデータ
     private var currentData: (tab: Tab, index: Int)? {
-        if let currentHistory = self.currentHistory, let currentLocation = self.currentLocation {
-            return (tab: currentHistory, index: currentLocation)
+        if let currentTab = self.currentTab, let currentLocation = self.currentLocation {
+            return (tab: currentTab, index: currentLocation)
         } else {
             return nil
         }
@@ -252,6 +253,16 @@ final class TabDataModel: TabDataModelProtocol {
         }
     }
 
+    /// update session
+    func updateSession(context: String, urls: [String], currentPage: Int) {
+        histories.forEach({
+            if $0.context == context {
+                $0.session = Session(urls: urls, currentPage: currentPage)
+                return
+            }
+        })
+    }
+
     /// ページ挿入(new window event)
     func insert(url: String?, title: String? = nil) {
         if isViewingLatest {
@@ -318,7 +329,6 @@ final class TabDataModel: TabDataModelProtocol {
             if isCurrentDelete || isAllDelete {
                 rebuild()
             }
-            store()
         }
     }
 
@@ -339,12 +349,12 @@ final class TabDataModel: TabDataModelProtocol {
 
     /// ページコピー
     func copy() {
-        if let currentHistory = currentHistory {
+        if let currentTab = currentTab {
             if isViewingLatest {
                 // 最新ページを見ているなら、insertではないので、appendに切り替える
-                append(url: currentHistory.url, title: currentHistory.title)
+                append(url: currentTab.url, title: currentTab.title)
             } else {
-                insert(url: currentHistory.url, title: currentHistory.title)
+                insert(url: currentTab.url, title: currentTab.title)
             }
         }
     }
