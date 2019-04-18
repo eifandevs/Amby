@@ -356,7 +356,7 @@ class BaseView: UIView {
                     front = current
                     bringSubview(toFront: currentWebView)
                 } else {
-                    loadWebView()
+                    makeWebView()
                 }
             }
         }
@@ -391,7 +391,7 @@ class BaseView: UIView {
                 front = current
                 bringSubview(toFront: current)
             } else {
-                loadWebView()
+                makeWebView()
             }
         } else {
             log.error("cannot find current location.")
@@ -536,8 +536,8 @@ class BaseView: UIView {
         return newWv
     }
 
-    // loadWebViewはwebviewスペースがある状態で新規作成するときにコールする
-    private func loadWebView() {
+    // makeWebViewはwebviewスペースがある状態で新規作成するときにコールする
+    private func makeWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
         webViews[viewModel.currentLocation!] = newWv
         if let url = viewModel.currentUrl, !url.isEmpty {
