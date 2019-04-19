@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 
 @testable import Model
+@testable import Entity
 
 class TabDataModelTests: XCTestCase {
 
@@ -21,6 +22,10 @@ class TabDataModelTests: XCTestCase {
     let dummyUrl2 = "https://def/"
     let dummyTitle = "dummyTitle"
     let dummyTitle2 = "dummyTitle2"
+
+    var histories: [Tab] {
+        return TabDataModel.s.histories
+    }
 
     override func setUp() {
         super.setUp()
@@ -36,7 +41,7 @@ class TabDataModelTests: XCTestCase {
 
     func testInitialize() {
         TabDataModel.s.initialize()
-        XCTAssertTrue(TabDataModel.s.histories.count == 1)
+        XCTAssertTrue(histories.count == 1)
     }
 
     func testGetHistory() {
@@ -51,6 +56,8 @@ class TabDataModelTests: XCTestCase {
     }
 
     func testStartLoading() {
+        TabDataModel.s.append()
+
         weak var expectation = self.expectation(description: #function)
 
         TabDataModel.s.rx_action
@@ -65,13 +72,15 @@ class TabDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        TabDataModel.s.append()
-        TabDataModel.s.startLoading(context: TabDataModel.s.histories[1].context)
+        TabDataModel.s.startLoading(context: histories[1].context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testEndLoading() {
+        TabDataModel.s.append()
+        TabDataModel.s.startLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
+
         weak var expectation = self.expectation(description: #function)
 
         TabDataModel.s.rx_action
@@ -86,14 +95,16 @@ class TabDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        TabDataModel.s.append()
-        TabDataModel.s.startLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
         TabDataModel.s.endLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testEndRendering() {
+        TabDataModel.s.append()
+        TabDataModel.s.startLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
+        TabDataModel.s.endLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
+
         weak var expectation = self.expectation(description: #function)
 
         TabDataModel.s.rx_action
@@ -107,15 +118,16 @@ class TabDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        TabDataModel.s.append()
-        TabDataModel.s.startLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
-        TabDataModel.s.endLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
         TabDataModel.s.endRendering(context: TabDataModel.s.getHistory(index: 1)!.context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testSwap() {
+        TabDataModel.s.append()
+        TabDataModel.s.append()
+        TabDataModel.s.startLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
+
         weak var expectation = self.expectation(description: #function)
 
         TabDataModel.s.rx_action
@@ -132,9 +144,6 @@ class TabDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        TabDataModel.s.append()
-        TabDataModel.s.append()
-        TabDataModel.s.startLoading(context: TabDataModel.s.getHistory(index: 1)!.context)
         TabDataModel.s.swap(start: 1, end: 0)
 
         self.waitForExpectations(timeout: 10, handler: nil)
@@ -156,6 +165,8 @@ class TabDataModelTests: XCTestCase {
         TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
         TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
         TabDataModel.s.insert(url: dummyUrl, title: nil)
+        TabDataModel.s.change(context: TabDataModel.s.getHistory(index: 1)!.context)
+
         XCTAssertTrue(TabDataModel.s.getHistory(index: 3)!.title == "")
 
         weak var expectation = self.expectation(description: #function)
@@ -175,7 +186,6 @@ class TabDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        TabDataModel.s.change(context: TabDataModel.s.getHistory(index: 1)!.context)
         TabDataModel.s.insert(url: nil, title: dummyTitle)
         self.waitForExpectations(timeout: 10, handler: nil)
 
@@ -202,6 +212,8 @@ class TabDataModelTests: XCTestCase {
     }
 
     func testAppendGroup() {
+        TabDataModel.s.append(url: dummyUrl)
+
         weak var expectation = self.expectation(description: #function)
 
         TabDataModel.s.rx_action
@@ -214,13 +226,15 @@ class TabDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        TabDataModel.s.append(url: dummyUrl)
         TabDataModel.s.appendGroup()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testChangeGroupTitle() {
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.appendGroup()
+
         weak var expectation = self.expectation(description: #function)
 
         TabDataModel.s.rx_action
@@ -235,8 +249,6 @@ class TabDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        TabDataModel.s.append(url: dummyUrl)
-        TabDataModel.s.appendGroup()
         TabDataModel.s.changeGroupTitle(groupContext: TabDataModel.s.tabGroupList.groups[1].groupContext, title: dummyTitle)
 
         self.waitForExpectations(timeout: 10, handler: nil)
@@ -264,6 +276,9 @@ class TabDataModelTests: XCTestCase {
     }
 
     func testInvertPrivateMode() {
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.appendGroup()
+
         weak var expectation = self.expectation(description: #function)
 
         TabDataModel.s.rx_action
@@ -276,8 +291,6 @@ class TabDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        TabDataModel.s.append(url: dummyUrl)
-        TabDataModel.s.appendGroup()
         TabDataModel.s.invertPrivateMode(groupContext: TabDataModel.s.tabGroupList.groups[1].groupContext)
 
         self.waitForExpectations(timeout: 10, handler: nil)
@@ -307,7 +320,7 @@ class TabDataModelTests: XCTestCase {
     func testCopyWithInsert() {
         TabDataModel.s.append(url: dummyUrl)
         TabDataModel.s.append(url: dummyUrl2)
-        TabDataModel.s.change(context: TabDataModel.s.histories[1].context)
+        TabDataModel.s.change(context: histories[1].context)
 
         weak var expectation = self.expectation(description: #function)
 
@@ -327,7 +340,7 @@ class TabDataModelTests: XCTestCase {
     }
 
     func testRebuild() {
-        // NSInternalInconsistencyExceptionが発生する
+        // NSInternalInconsistencyExceptionが発生する(rebuild)
         //        TabDataModel.s.append(url: dummyUrl)
 
         //        weak var expectation = self.expectation(description: #function)
@@ -350,10 +363,21 @@ class TabDataModelTests: XCTestCase {
     func testGetIndex() {
         TabDataModel.s.append(url: dummyUrl)
         TabDataModel.s.append(url: dummyUrl2)
-        _ = TabDataModel.s.getIndex(context: TabDataModel.s.histories[1].context)
+        _ = TabDataModel.s.getIndex(context: histories[1].context)
+    }
+
+    func testRemove() {
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.append(url: dummyUrl2)
+        TabDataModel.s.remove(context: histories[1].context)
+        TabDataModel.s.remove(context: histories[1].context)
+        TabDataModel.s.remove(context: histories[0].context)
     }
 
     func testChange() {
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.append(url: dummyUrl2)
+
         weak var expectation = self.expectation(description: #function)
 
         TabDataModel.s.rx_action
@@ -368,22 +392,70 @@ class TabDataModelTests: XCTestCase {
             }
             .disposed(by: disposeBag)
 
+        TabDataModel.s.change(context: histories[1].context)
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testChangeGroup() {
+        // NSInternalInconsistencyExceptionが発生する(rebuild)
+        //        TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        //        TabDataModel.s.appendGroup()
+        //        TabDataModel.s.changeGroup(groupContext: TabDataModel.s.tabGroupList.groups[1].groupContext)
+    }
+
+    func testGoBack() {
         TabDataModel.s.append(url: dummyUrl)
         TabDataModel.s.append(url: dummyUrl2)
-        TabDataModel.s.change(context: TabDataModel.s.histories[1].context)
+
+        weak var expectation = self.expectation(description: #function)
+
+        TabDataModel.s.rx_action
+            .subscribe { object in
+                if let action = object.element, case .change = action {
+                    if let expectation = expectation {
+                        expectation.fulfill()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        TabDataModel.s.goBack()
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testGoNext() {
+        TabDataModel.s.append(url: dummyUrl)
+        TabDataModel.s.append(url: dummyUrl2)
+        TabDataModel.s.change(context: histories[1].context)
+
+        weak var expectation = self.expectation(description: #function)
+
+        TabDataModel.s.rx_action
+            .subscribe { object in
+                if let action = object.element, case .change = action {
+                    if let expectation = expectation {
+                        expectation.fulfill()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        TabDataModel.s.goNext()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testStore() {
         TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
-        TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        TabDataModel.s.append(url: dummyUrl2, title: dummyTitle2)
         TabDataModel.s.store()
     }
 
     func testDelete() {
         TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
-        TabDataModel.s.append(url: dummyUrl, title: dummyTitle)
+        TabDataModel.s.append(url: dummyUrl2, title: dummyTitle2)
         TabDataModel.s.store()
         TabDataModel.s.delete()
     }
