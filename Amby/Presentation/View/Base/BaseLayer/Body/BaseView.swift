@@ -54,6 +54,9 @@ class BaseView: UIView {
                 rx_action.onNext(.changeFront)
                 // ヘッダーフィールドを更新する
                 viewModel.reloadProgress()
+                viewModel.updateCanGoBack(context: front.context, canGoBack: front.canGoBack)
+                viewModel.updateCanGoForward(context: front.context, canGoForward: front.canGoForward)
+
                 // 空ページの場合は、編集状態にする
                 if viewModel.currentUrl.isEmpty {
                     if let beginSearchingWorkItem = self.beginSearchingWorkItem {
