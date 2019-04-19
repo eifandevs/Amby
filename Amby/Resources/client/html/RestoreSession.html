@@ -5,10 +5,10 @@
 </head>
 <body>
     <script type="text/javascript">
-        const url = getParam("url");
-        if (url) {
-            this.document.location.href = url;
-        }
+    const url = getParam("url");
+    if (url) {
+        this.document.location.href = window.atob(url);;
+    }
     
     const restoreSession = getParam("restore");
     if (restoreSession) {

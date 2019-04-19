@@ -203,21 +203,21 @@ class EGWebView: WKWebView {
 
     var isValidUrl: Bool {
         if let url = url {
-            return url.absoluteString.isValidUrl
+            return url.isValidUrl
         }
         return false
     }
 
     var isLocalUrl: Bool {
         if let url = url {
-            return url.absoluteString.isLocalUrl
+            return url.isLocalUrl
         }
         return false
     }
 
     var isRestoreSessionUrl: Bool {
-        if let url = url, url.absoluteString.isLocalUrl {
-            return url.absoluteString.contains("RestoreSession")
+        if let url = url {
+            return url.isRestoreSessionUrl
         }
         return false
     }
@@ -225,7 +225,7 @@ class EGWebView: WKWebView {
     @discardableResult
     func load(urlStr: String) -> Bool {
         if urlStr.isValidUrl {
-            guard let url = URL(string: urlStr.encodeUrl()!) else {
+            guard let url = URL(string: urlStr.encodeUrl) else {
                 log.error("invalid url load. url: \(urlStr)")
                 return false
             }
@@ -305,7 +305,7 @@ class EGWebView: WKWebView {
 
     func restore(urls: [String], currentPage: Int) {
         var jsonDict = [String: AnyObject]()
-        jsonDict["history"] = urls.map({ resourceUtil.restoreSessionURL.absoluteString + "?url=\($0)" }) as AnyObject?
+        jsonDict["history"] = urls.map({ resourceUtil.restoreSessionURL.absoluteString + "?url=\($0.base64Encode)" }) as AnyObject?
         jsonDict["currentPage"] = currentPage as AnyObject?
         guard let json = JSON(jsonDict).toString() else {
             return

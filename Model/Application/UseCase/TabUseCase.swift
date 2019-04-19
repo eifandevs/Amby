@@ -42,6 +42,10 @@ public final class TabUseCase {
         return tabDataModel.currentTab?.url
     }
 
+    public var currentSession: Session? {
+        return tabDataModel.currentTab?.session
+    }
+
     public var tabGroupList: TabGroupList {
         return tabDataModel.tabGroupList
     }

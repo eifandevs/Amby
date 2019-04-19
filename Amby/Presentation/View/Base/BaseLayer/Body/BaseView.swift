@@ -139,20 +139,7 @@ class BaseView: UIView {
             log.error("cannot get currentLocation.")
         }
 
-        // ロードする
-        if !viewModel.currentUrl.isEmpty {
-            if let url = viewModel.currentUrl {
-                _ = newWv.load(urlStr: url)
-            } else {
-                log.error("cannot get currentUrl.")
-            }
-        } else {
-            // 1秒後にwillbeginSearchingする
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                guard let `self` = self else { return }
-                self.viewModel.beginSearching()
-            }
-        }
+        loadOrSearchWebView(webView: newWv)
     }
 
     private func removeTabs() {
@@ -356,7 +343,7 @@ class BaseView: UIView {
                     front = current
                     bringSubview(toFront: currentWebView)
                 } else {
-                    makeWebView()
+                    createAndLoadWebView()
                 }
             }
         }
@@ -391,7 +378,7 @@ class BaseView: UIView {
                 front = current
                 bringSubview(toFront: current)
             } else {
-                makeWebView()
+                createAndLoadWebView()
             }
         } else {
             log.error("cannot find current location.")
@@ -410,24 +397,7 @@ class BaseView: UIView {
         viewModel.updateProgress(progress: 0)
         let newWv = createWebView(context: viewModel.currentContext)
         webViews.insert(newWv, at: at)
-        if viewModel.currentUrl.isEmpty {
-            // 編集状態にする
-            if let beginSearchingWorkItem = self.beginSearchingWorkItem {
-                beginSearchingWorkItem.cancel()
-            }
-            beginSearchingWorkItem = DispatchWorkItem { [weak self] in
-                guard let `self` = self else { return }
-                self.viewModel.beginSearching()
-                self.beginSearchingWorkItem = nil
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginSearchingWorkItem!)
-        } else {
-            if let url = self.viewModel.currentUrl {
-                _ = newWv.load(urlStr: url)
-            } else {
-                log.error("cannot get currentUrl.")
-            }
-        }
+        loadOrSearchWebView(webView: newWv)
     }
 
     private func append(currentTab: Tab) {
@@ -536,14 +506,39 @@ class BaseView: UIView {
         return newWv
     }
 
-    // makeWebViewはwebviewスペースがある状態で新規作成するときにコールする
-    private func makeWebView() {
+    private func createAndLoadWebView() {
         let newWv = createWebView(context: viewModel.currentContext)
         webViews[viewModel.currentLocation!] = newWv
-        if let url = viewModel.currentUrl, !url.isEmpty {
-            newWv.load(urlStr: url)
+        loadWebViewFromStore(webView: newWv)
+    }
+
+    private func loadOrSearchWebView(webView: EGWebView) {
+        if viewModel.currentUrl.isEmpty {
+            // 編集状態にする
+            if let beginSearchingWorkItem = self.beginSearchingWorkItem {
+                beginSearchingWorkItem.cancel()
+            }
+            beginSearchingWorkItem = DispatchWorkItem { [weak self] in
+                guard let `self` = self else { return }
+                self.viewModel.beginSearching()
+                self.beginSearchingWorkItem = nil
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: beginSearchingWorkItem!)
         } else {
-            log.error("cannot get currentUrl.")
+            loadWebViewFromStore(webView: webView)
+        }
+    }
+
+    private func loadWebViewFromStore(webView: EGWebView) {
+        if let session = self.viewModel.currentSession, session.urls.count > 1 {
+            // セッションから復元
+            webView.restore(urls: session.urls, currentPage: session.currentPage)
+        } else {
+            if let url = self.viewModel.currentUrl {
+                _ = webView.load(urlStr: url)
+            } else {
+                log.error("cannot get currentUrl.")
+            }
         }
     }
 
@@ -572,7 +567,12 @@ class BaseView: UIView {
         if let currentItem = webView.backForwardList.currentItem {
             let backList = webView.backForwardList.backList
             let forwardList = webView.backForwardList.forwardList
-            let urls = (backList + [currentItem] + forwardList).map { $0.url.absoluteString }
+            let urls = (backList + [currentItem] + forwardList).map({ item -> String in
+                if item.url.isRestoreSessionUrl {
+                    return item.url.queryParams()["url"] ?? item.url.absoluteString
+                }
+                return item.url.absoluteString
+            })
             let currentPage = -forwardList.count
             viewModel.updateSession(context: webView.context, urls: urls, currentPage: currentPage)
         }
@@ -900,14 +900,14 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
 
     func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
         guard let wv = webView as? EGWebView else { return }
-        
+
         // セッションの保存
         storeSession(webView: wv)
 
         if wv.isRestoreSessionUrl {
             return
         }
-        
+
         log.debug("loading finish. context: \(wv.context)")
 
         // 削除済みチェック

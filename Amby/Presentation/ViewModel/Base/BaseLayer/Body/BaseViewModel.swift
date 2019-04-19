@@ -56,9 +56,12 @@ final class BaseViewModel {
 
     let webViewService = WebViewService()
 
-    /// リクエストURL(jsのURL)
     var currentUrl: String? {
         return TabUseCase.s.currentUrl
+    }
+
+    var currentSession: Session? {
+        return TabUseCase.s.currentSession
     }
 
     /// 現在のコンテキスト
