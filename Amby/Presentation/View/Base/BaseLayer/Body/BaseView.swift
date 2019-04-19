@@ -899,7 +899,15 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
     }
 
     func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
-        guard let wv = webView as? EGWebView, !wv.isRestoreSessionUrl else { return }
+        guard let wv = webView as? EGWebView else { return }
+        
+        // セッションの保存
+        storeSession(webView: wv)
+
+        if wv.isRestoreSessionUrl {
+            return
+        }
+        
         log.debug("loading finish. context: \(wv.context)")
 
         // 削除済みチェック
@@ -917,7 +925,6 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
             viewModel.updateProgress(progress: 1.0)
         }
         updateNetworkActivityIndicator()
-        storeSession(webView: wv)
         viewModel.endLoading(context: wv.context)
 
         // サムネイルを保存
