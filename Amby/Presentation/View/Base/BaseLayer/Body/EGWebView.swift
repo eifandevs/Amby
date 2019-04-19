@@ -6,12 +6,14 @@
 //  Copyright © 2017年 eifaniori. All rights reserved.
 //
 
+import CommonUtil
 import Entity
 import Foundation
 import Hydra
 import Model
 import RxCocoa
 import RxSwift
+import SwiftyJSON
 import UIKit
 import WebKit
 
@@ -201,14 +203,21 @@ class EGWebView: WKWebView {
 
     var isValidUrl: Bool {
         if let url = url {
-            return url.absoluteString.isValidUrl
+            return url.isValidUrl
         }
         return false
     }
 
     var isLocalUrl: Bool {
         if let url = url {
-            return url.absoluteString.isLocalUrl
+            return url.isLocalUrl
+        }
+        return false
+    }
+
+    var isRestoreSessionUrl: Bool {
+        if let url = url {
+            return url.isRestoreSessionUrl
         }
         return false
     }
@@ -216,7 +225,7 @@ class EGWebView: WKWebView {
     @discardableResult
     func load(urlStr: String) -> Bool {
         if urlStr.isValidUrl {
-            guard let url = URL(string: urlStr.encodeUrl()!) else {
+            guard let url = URL(string: urlStr.encodeUrl) else {
                 log.error("invalid url load. url: \(urlStr)")
                 return false
             }
@@ -294,6 +303,20 @@ class EGWebView: WKWebView {
             }
     }
 
+    func restore(urls: [String], currentPage: Int) {
+        var jsonDict = [String: AnyObject]()
+        jsonDict["history"] = urls.map({ resourceUtil.restoreSessionURL.absoluteString + "?url=\($0.base64Encode)" }) as AnyObject?
+        jsonDict["currentPage"] = currentPage as AnyObject?
+        guard let json = JSON(jsonDict).toString() else {
+            return
+        }
+        let escapedJSON = json.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let url = resourceUtil.restoreSessionURL.queryItemAdded(name: "restore", value: escapedJSON)!
+        loadFileURL(url, allowingReadAccessTo: url)
+        let request = URLRequest(url: url)
+        load(request)
+    }
+
     func scrollUp() -> Promise<Any?> {
         return evaluate(script: "window.scrollTo(0, 0)")
     }
@@ -310,16 +333,6 @@ class EGWebView: WKWebView {
             .then { _ in
                 self.evaluate(script: "highlightAllOccurencesOfString('\(word)')")
             }
-    }
-
-    func shape(html: String) -> Promise<Any?> {
-        return evaluate(script: "shapeWapper('\(html)')")
-    }
-
-    func loadShaperHtml() {
-        loadFileURL(resourceUtil.shaperURL, allowingReadAccessTo: resourceUtil.shaperURL)
-        let request = URLRequest(url: resourceUtil.shaperURL)
-        load(request)
     }
 
     func takeThumbnail() -> UIImage? {

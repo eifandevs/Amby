@@ -25,13 +25,13 @@ public final class ProgressUseCase {
     public let rx_action = PublishSubject<ProgressUseCaseAction>()
 
     private var currentContext: String {
-        return pageHistoryDataModel.currentContext
+        return tabDataModel.currentContext
     }
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
-    private var pageHistoryDataModel: PageHistoryDataModelProtocol!
+    private var tabDataModel: TabDataModelProtocol!
     private var progressDataModel: ProgressDataModelProtocol!
 
     private init() {
@@ -40,7 +40,7 @@ public final class ProgressUseCase {
     }
 
     private func setupProtocolImpl() {
-        pageHistoryDataModel = PageHistoryDataModel.s
+        tabDataModel = TabDataModel.s
         progressDataModel = ProgressDataModel.s
     }
 
@@ -84,8 +84,8 @@ public final class ProgressUseCase {
 
     /// reload ProgressDataModel
     public func reloadProgress() {
-        if let currentHistory = pageHistoryDataModel.currentHistory {
-            progressDataModel.reload(currentHistory: currentHistory)
+        if let currentTab = tabDataModel.currentTab {
+            progressDataModel.reload(currentTab: currentTab)
         }
     }
 

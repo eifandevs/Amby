@@ -1,5 +1,5 @@
 //
-//  PageHistoryModel.swift
+//  TabModel.swift
 //  Qas
 //
 //  Created by temma on 2017/10/29.
@@ -12,14 +12,14 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-enum PageHistoryDataModelAction {
-    case insert(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
-    case append(before: (pageHistory: PageHistory, index: Int)?, after: (pageHistory: PageHistory, index: Int))
+enum TabDataModelAction {
+    case insert(before: (tab: Tab, index: Int), after: (tab: Tab, index: Int))
+    case append(before: (tab: Tab, index: Int)?, after: (tab: Tab, index: Int))
     case appendGroup
     case changeGroupTitle(groupContext: String, title: String)
     case deleteGroup(groupContext: String)
     case invertPrivateMode
-    case change(before: (pageHistory: PageHistory, index: Int), after: (pageHistory: PageHistory, index: Int))
+    case change(before: (tab: Tab, index: Int), after: (tab: Tab, index: Int))
     case delete(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
     case rebuild
@@ -30,12 +30,12 @@ enum PageHistoryDataModelAction {
     case endRendering(context: String)
 }
 
-enum PageHistoryDataModelError {
+enum TabDataModelError {
     case delete
     case store
 }
 
-extension PageHistoryDataModelError: ModelError {
+extension TabDataModelError: ModelError {
     var message: String {
         switch self {
         case .delete:
@@ -46,18 +46,18 @@ extension PageHistoryDataModelError: ModelError {
     }
 }
 
-protocol PageHistoryDataModelProtocol {
-    var rx_action: PublishSubject<PageHistoryDataModelAction> { get }
-    var rx_error: PublishSubject<PageHistoryDataModelError> { get }
-    var pageGroupList: PageGroupList { get }
+protocol TabDataModelProtocol {
+    var rx_action: PublishSubject<TabDataModelAction> { get }
+    var rx_error: PublishSubject<TabDataModelError> { get }
+    var tabGroupList: TabGroupList { get }
     var currentContext: String { get set }
-    var histories: [PageHistory] { get }
-    var currentHistory: PageHistory? { get }
+    var histories: [Tab] { get }
+    var currentTab: Tab? { get }
     var currentLocation: Int? { get }
     var isPrivate: Bool { get }
     func initialize()
-    func getHistory(context: String) -> PageHistory?
-    func getHistory(index: Int) -> PageHistory?
+    func getHistory(context: String) -> Tab?
+    func getHistory(index: Int) -> Tab?
     func getIsLoading(context: String) -> Bool?
     func startLoading(context: String)
     func endLoading(context: String)
@@ -65,6 +65,7 @@ protocol PageHistoryDataModelProtocol {
     func swap(start: Int, end: Int)
     func updateUrl(context: String, url: String)
     func updateTitle(context: String, title: String)
+    func updateSession(context: String, urls: [String], currentPage: Int)
     func insert(url: String?, title: String?)
     func append(url: String?, title: String?)
     func appendGroup()
@@ -83,45 +84,45 @@ protocol PageHistoryDataModelProtocol {
     func delete()
 }
 
-final class PageHistoryDataModel: PageHistoryDataModelProtocol {
+final class TabDataModel: TabDataModelProtocol {
     /// アクション通知用RX
-    let rx_action = PublishSubject<PageHistoryDataModelAction>()
+    let rx_action = PublishSubject<TabDataModelAction>()
     /// エラー通知用RX
-    let rx_error = PublishSubject<PageHistoryDataModelError>()
+    let rx_error = PublishSubject<TabDataModelError>()
 
-    static let s = PageHistoryDataModel()
+    static let s = TabDataModel()
 
     private let repository = UserDefaultRepository()
 
     /// webViewそれぞれの履歴とカレントページインデックス
-    var pageGroupList = PageGroupList()
-    public private(set) var histories: [PageHistory] {
+    var tabGroupList = TabGroupList()
+    public private(set) var histories: [Tab] {
         get {
-            return pageGroupList.currentGroup.histories
+            return tabGroupList.currentGroup.histories
         }
         set(value) {
-            pageGroupList.currentGroup.histories = value
+            tabGroupList.currentGroup.histories = value
         }
     }
 
     /// 現在表示しているwebviewのコンテキスト
     var currentContext: String {
         get {
-            return pageGroupList.currentGroup.currentContext
+            return tabGroupList.currentGroup.currentContext
         }
         set(value) {
-            if let deleteIndex = pageGroupList.currentGroup.backForwardContextList.index(where: { $0 == value }) {
-                pageGroupList.currentGroup.backForwardContextList.remove(at: deleteIndex)
+            if let deleteIndex = tabGroupList.currentGroup.backForwardContextList.index(where: { $0 == value }) {
+                tabGroupList.currentGroup.backForwardContextList.remove(at: deleteIndex)
             }
-            pageGroupList.currentGroup.backForwardContextList.append(value)
+            tabGroupList.currentGroup.backForwardContextList.append(value)
             log.debug("current context changed. \(currentContext) -> \(value)")
-            log.debug("current group backforwardlist: \(pageGroupList.currentGroup.backForwardContextList)")
-            pageGroupList.currentGroup.currentContext = value
+            log.debug("current group backforwardlist: \(tabGroupList.currentGroup.backForwardContextList)")
+            tabGroupList.currentGroup.currentContext = value
         }
     }
 
     /// 現在のページ情報
-    var currentHistory: PageHistory? {
+    var currentTab: Tab? {
         return histories.find({ $0.context == currentContext })
     }
 
@@ -132,13 +133,13 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// 現在の閲覧モード
     var isPrivate: Bool {
-        return pageGroupList.currentGroup.isPrivate
+        return tabGroupList.currentGroup.isPrivate
     }
 
     /// 現在のデータ
-    private var currentData: (pageHistory: PageHistory, index: Int)? {
-        if let currentHistory = self.currentHistory, let currentLocation = self.currentLocation {
-            return (pageHistory: currentHistory, index: currentLocation)
+    private var currentData: (tab: Tab, index: Int)? {
+        if let currentTab = self.currentTab, let currentLocation = self.currentLocation {
+            return (tab: currentTab, index: currentLocation)
         } else {
             return nil
         }
@@ -150,7 +151,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     }
 
     /// ページヒストリー保存件数
-    private let pageHistorySaveCount = UserDefaultRepository().get(key: .pageHistorySaveCount)
+    private let tabSaveCount = UserDefaultRepository().get(key: .tabSaveCount)
 
     /// local storage repository
     private let localStorageRepository = LocalStorageRepository<Cache>()
@@ -159,27 +160,27 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// 初期化
     func initialize() {
-        // pageHistory読み込み
-        let result = localStorageRepository.getData(.pageHistory)
+        // tab読み込み
+        let result = localStorageRepository.getData(.tab)
         if case let .success(data) = result {
-            if let pageGroupList = NSKeyedUnarchiver.unarchiveObject(with: data) as? PageGroupList {
-                self.pageGroupList = pageGroupList
+            if let tabGroupList = NSKeyedUnarchiver.unarchiveObject(with: data) as? TabGroupList {
+                self.tabGroupList = tabGroupList
             } else {
-                self.pageGroupList = PageGroupList()
+                self.tabGroupList = TabGroupList()
                 log.error("unarchive histories error.")
             }
         } else {
-            pageGroupList = PageGroupList()
+            tabGroupList = TabGroupList()
         }
     }
 
     /// get the history with context
-    func getHistory(context: String) -> PageHistory? {
+    func getHistory(context: String) -> Tab? {
         return histories.find({ $0.context == context })
     }
 
     /// get the history with index
-    func getHistory(index: Int) -> PageHistory? {
+    func getHistory(index: Int) -> Tab? {
         return histories[index]
     }
 
@@ -205,7 +206,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
             history.isLoading = false
             rx_action.onNext(.endLoading(context: context))
         } else {
-            log.error("pageHistoryDataModelDidEndLoading not fired. history is deleted.")
+            log.error("tabDataModelDidEndLoading not fired. history is deleted.")
         }
     }
 
@@ -214,7 +215,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         if histories.find({ $0.context == context }) != nil {
             rx_action.onNext(.endRendering(context: context))
         } else {
-            log.error("pageHistoryDataModelDidEndRendering not fired. history is deleted.")
+            log.error("tabDataModelDidEndRendering not fired. history is deleted.")
         }
     }
 
@@ -252,6 +253,16 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         }
     }
 
+    /// update session
+    func updateSession(context: String, urls: [String], currentPage: Int) {
+        histories.forEach({
+            if $0.context == context {
+                $0.session = Session(urls: urls, currentPage: currentPage)
+                return
+            }
+        })
+    }
+
     /// ページ挿入(new window event)
     func insert(url: String?, title: String? = nil) {
         if isViewingLatest {
@@ -260,7 +271,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
         } else {
             if let currentLocation = currentLocation {
                 let before = currentData!
-                let newPage = PageHistory(url: url ?? "", title: title ?? "")
+                let newPage = Tab(url: url ?? "", title: title ?? "")
                 histories.insert(newPage, at: currentLocation + 1)
                 currentContext = newPage.context
                 rx_action.onNext(.insert(before: before, after: currentData!))
@@ -271,7 +282,7 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
     /// add page
     func append(url: String? = nil, title: String? = nil) {
         let before = currentData
-        let newPage = PageHistory(url: url ?? "", title: title ?? "")
+        let newPage = Tab(url: url ?? "", title: title ?? "")
         histories.append(newPage)
         currentContext = newPage.context
         rx_action.onNext(.append(before: before, after: currentData!))
@@ -279,14 +290,14 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// タブグループ作成
     func appendGroup() {
-        let pageGroup = PageGroup()
-        pageGroupList.groups.append(pageGroup)
+        let tabGroup = TabGroup()
+        tabGroupList.groups.append(tabGroup)
         rx_action.onNext(.appendGroup)
     }
 
     /// タブグループタイトル変更
     func changeGroupTitle(groupContext: String, title: String) {
-        if let targetGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
+        if let targetGroup = tabGroupList.groups.find({ $0.groupContext == groupContext }) {
             if targetGroup.title != title {
                 targetGroup.title = title
                 rx_action.onNext(.changeGroupTitle(groupContext: groupContext, title: title))
@@ -296,21 +307,21 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// タブグループ削除
     func removeGroup(groupContext: String) {
-        if let deleteIndex = pageGroupList.groups.index(where: { $0.groupContext == groupContext }) {
-            let isCurrentDelete = groupContext == pageGroupList.currentGroupContext
+        if let deleteIndex = tabGroupList.groups.index(where: { $0.groupContext == groupContext }) {
+            let isCurrentDelete = groupContext == tabGroupList.currentGroupContext
 
-            pageGroupList.groups.remove(at: deleteIndex)
+            tabGroupList.groups.remove(at: deleteIndex)
 
             // 削除後にデータなし
-            let isAllDelete = pageGroupList.groups.count == 0
+            let isAllDelete = tabGroupList.groups.count == 0
             if isAllDelete {
-                pageGroupList = PageGroupList()
+                tabGroupList = TabGroupList()
             } else if isCurrentDelete {
                 // 最後の要素を削除した場合は、前のページに戻る
-                if deleteIndex == pageGroupList.groups.count {
-                    pageGroupList.currentGroupContext = pageGroupList.groups[deleteIndex - 1].groupContext
+                if deleteIndex == tabGroupList.groups.count {
+                    tabGroupList.currentGroupContext = tabGroupList.groups[deleteIndex - 1].groupContext
                 } else {
-                    pageGroupList.currentGroupContext = pageGroupList.groups[deleteIndex].groupContext
+                    tabGroupList.currentGroupContext = tabGroupList.groups[deleteIndex].groupContext
                 }
             }
             rx_action.onNext(.deleteGroup(groupContext: groupContext))
@@ -318,14 +329,13 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
             if isCurrentDelete || isAllDelete {
                 rebuild()
             }
-            store()
         }
     }
 
     /// change private mode
     func invertPrivateMode(groupContext: String) {
-        if let targetGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
-            let isCurrentInvert = groupContext == pageGroupList.currentGroupContext
+        if let targetGroup = tabGroupList.groups.find({ $0.groupContext == groupContext }) {
+            let isCurrentInvert = groupContext == tabGroupList.currentGroupContext
 
             targetGroup.isPrivate = !targetGroup.isPrivate
 
@@ -339,12 +349,12 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// ページコピー
     func copy() {
-        if let currentHistory = currentHistory {
+        if let currentTab = currentTab {
             if isViewingLatest {
                 // 最新ページを見ているなら、insertではないので、appendに切り替える
-                append(url: currentHistory.url, title: currentHistory.title)
+                append(url: currentTab.url, title: currentTab.title)
             } else {
-                insert(url: currentHistory.url, title: currentHistory.title)
+                insert(url: currentTab.url, title: currentTab.title)
             }
         }
     }
@@ -405,8 +415,8 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// 表示中グループの変更
     func changeGroup(groupContext: String) {
-        if let selectedGroup = pageGroupList.groups.find({ $0.groupContext == groupContext }) {
-            pageGroupList.currentGroupContext = selectedGroup.groupContext
+        if let selectedGroup = tabGroupList.groups.find({ $0.groupContext == groupContext }) {
+            tabGroupList.currentGroupContext = selectedGroup.groupContext
             rebuild()
         } else {
             log.warning("selected same group.")
@@ -435,8 +445,8 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// タブ情報の保存
     func store() {
-        let pageGroupListData = NSKeyedArchiver.archivedData(withRootObject: pageGroupList)
-        let result = localStorageRepository.write(.pageHistory, data: pageGroupListData)
+        let tabGroupListData = NSKeyedArchiver.archivedData(withRootObject: tabGroupList)
+        let result = localStorageRepository.write(.tab, data: tabGroupListData)
 
         if case .failure = result {
             // ハンドリングしない
@@ -446,9 +456,9 @@ final class PageHistoryDataModel: PageHistoryDataModelProtocol {
 
     /// 全データの削除
     func delete() {
-        pageGroupList.groups.removeAll()
-        pageGroupList = PageGroupList()
-        let result = localStorageRepository.delete(.pageHistory)
+        tabGroupList.groups.removeAll()
+        tabGroupList = TabGroupList()
+        let result = localStorageRepository.delete(.tab)
 
         if case .failure = result {
             rx_error.onNext(.delete)

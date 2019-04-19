@@ -27,7 +27,7 @@ public final class SearchUseCase {
 
     /// models
     private var searchHistoryDataModel: SearchHistoryDataModelProtocol!
-    private var pageHistoryDataModel: PageHistoryDataModelProtocol!
+    private var tabDataModel: TabDataModelProtocol!
 
     private init() {
         setupProtocolImpl()
@@ -36,7 +36,7 @@ public final class SearchUseCase {
     /// プロトコル実装
     private func setupProtocolImpl() {
         searchHistoryDataModel = SearchHistoryDataModel.s
-        pageHistoryDataModel = PageHistoryDataModel.s
+        tabDataModel = TabDataModel.s
     }
 
     /// ロードリクエスト
@@ -48,7 +48,7 @@ public final class SearchUseCase {
                 // 検索ワードによる検索
                 // 閲覧履歴を保存する
                 // プライベートモードの場合は保存しない
-                if pageHistoryDataModel.isPrivate {
+                if tabDataModel.isPrivate {
                     log.debug("search history will not insert. ")
                 } else {
                     searchHistoryDataModel.store(text: text)
