@@ -1,44 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
+    <meta name="referrer" content="never">
 </head>
 <body>
-<script type="text/javascript">
-const url = getParam("url");
-if (url) {
-    this.document.location.href = url;
-}
-
-const restoreSession = getParam("restore");
-if (restoreSession) {
-    var data = JSON.parse(unescape(restoreSession));
-    if (data) {
-        var urlList = data['history'];
-        var currentPage = data['currentPage'];
-        history.replaceState({}, "", urlList[0]);
-        for (var i = 1; i < urlList.length; i++) {
-            history.pushState({}, '', urlList[i]);
+    <script type="text/javascript">
+        const url = getParam("url");
+        if (url) {
+            this.document.location.href = url;
         }
-        
-        history.go(currentPage);
-        
-        setTimeout(function () {
-            location.reload();
-        }, 0);
+    
+    const restoreSession = getParam("restore");
+    if (restoreSession) {
+        var data = JSON.parse(unescape(restoreSession));
+        if (data) {
+            var urlList = data['history'];
+            var currentPage = data['currentPage'];
+            history.replaceState({}, "", urlList[0]);
+            for (var i = 1; i < urlList.length; i++) {
+                history.pushState({}, '', urlList[i]);
+            }
+            
+            history.go(currentPage);
+            
+            setTimeout(function () {
+                       location.reload();
+                       }, 0);
+        }
     }
-}
-
-function getParam(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-    results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-
-</script>
+    
+    function getParam(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    
+    </script>
 </body>
 </html>
