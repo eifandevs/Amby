@@ -16,7 +16,7 @@ enum BaseViewModelAction {
     case insert(at: Int)
     case reload
     case rebuild
-    case append(currentHistory: PageHistory)
+    case append(currentTab: Tab)
     case change
     case remove(isFront: Bool, deleteContext: String, currentContext: String?, deleteIndex: Int)
     case swap(start: Int, end: Int)
@@ -56,9 +56,12 @@ final class BaseViewModel {
 
     let webViewService = WebViewService()
 
-    /// リクエストURL(jsのURL)
     var currentUrl: String? {
         return TabUseCase.s.currentUrl
+    }
+
+    var currentSession: Session? {
+        return TabUseCase.s.currentSession
     }
 
     /// 現在のコンテキスト
@@ -191,7 +194,7 @@ final class BaseViewModel {
                 case let .insert(before, _): self.rx_action.onNext(.insert(at: before.index + 1))
                 case .rebuild: self.rx_action.onNext(.rebuild)
                 case .reload: self.rx_action.onNext(.reload)
-                case let .append(_, after): self.rx_action.onNext(.append(currentHistory: after.pageHistory))
+                case let .append(_, after): self.rx_action.onNext(.append(currentTab: after.tab))
                 case .change: self.rx_action.onNext(.change)
                 case let .swap(start, end): self.rx_action.onNext(.swap(start: start, end: end))
                 case let .delete(isFront, deleteContext, currentContext, deleteIndex): self.rx_action.onNext(.remove(isFront: isFront, deleteContext: deleteContext, currentContext: currentContext, deleteIndex: deleteIndex))
@@ -242,7 +245,6 @@ final class BaseViewModel {
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
                 case .analytics: self.rx_action.onNext(.analysisHtml)
-                default: break
                 }
             }
             .disposed(by: disposeBag)
@@ -299,30 +301,37 @@ final class BaseViewModel {
         }
     }
 
-    /// サムネイル保存
-    func saveThumbnailAndEndRendering(webView: EGWebView) {
-        log.debug("save thumbnail. context: \(webView.context)")
+    /// KVO処理
+    func observeValue(context: String, frontContext: String, isRestoreSessionUrl: Bool, keyPath: String?, change: [NSKeyValueChangeKey: Any]?) {
+        if keyPath == "estimatedProgress" || keyPath == "title" || keyPath == "URL", isRestoreSessionUrl {
+            log.warning("observe restore request. key: \(keyPath ?? "nokey")")
+            return
+        }
 
-        // サムネイルを保存
-        DispatchQueue.mainSyncSafe {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                webView.takeSnapshot(with: nil) { [weak self] image, error in
-                    guard let `self` = self else { return }
-                    if let img = image {
-                        let pngImageData = UIImagePNGRepresentation(img)
-                        let context = webView.context
-
-                        if let pngImageData = pngImageData {
-                            self.writeThumbnailData(context: context, data: pngImageData)
-                        } else {
-                            log.error("image representation error.")
-                        }
-                    } else {
-                        log.error("failed taking snapshot. error: \(String(describing: error?.localizedDescription))")
-                    }
-                    // レンダリング終了通知
-                    self.endRendering(context: webView.context)
-                }
+        if keyPath == "estimatedProgress" && context == frontContext {
+            if let change = change, let progress = change[NSKeyValueChangeKey.newKey] as? CGFloat {
+                // estimatedProgressが変更されたときに、プログレスバーの値を変更する。
+                updateProgress(progress: progress)
+            }
+        } else if keyPath == "title" {
+            log.debug("receive title change.")
+            if let change = change, let title = change[NSKeyValueChangeKey.newKey] as? String {
+                updatePageTitle(context: context, title: title)
+            }
+        } else if keyPath == "URL" {
+            log.debug("receive url change.")
+            if let change = change, let url = change[NSKeyValueChangeKey.newKey] as? URL, !url.absoluteString.isEmpty {
+                updatePageUrl(context: context, url: url.absoluteString)
+            }
+        } else if keyPath == "canGoBack" {
+            log.debug("receive canGoBack change.")
+            if let change = change, let canGoBack = change[NSKeyValueChangeKey.newKey] as? Bool {
+                updateCanGoBack(context: context, canGoBack: canGoBack)
+            }
+        } else if keyPath == "canGoForward" {
+            log.debug("receive canGoFoward change.")
+            if let change = change, let canGoFoward = change[NSKeyValueChangeKey.newKey] as? Bool {
+                updateCanGoForward(context: context, canGoForward: canGoFoward)
             }
         }
     }
@@ -501,6 +510,11 @@ final class BaseViewModel {
     /// update canGoForward
     func updateCanGoForward(context: String, canGoForward: Bool) {
         ProgressUseCase.s.updateCanGoForward(context: context, canGoForward: canGoForward)
+    }
+
+    /// update session
+    func updateSession(context: String, urls: [String], currentPage: Int) {
+        TabUseCase.s.updateSession(context: context, urls: urls, currentPage: currentPage)
     }
 
     /// update common history

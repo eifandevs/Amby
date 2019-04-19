@@ -13,6 +13,7 @@
 		71A90F5EED54E40F2C51B4EA /* Pods_Amby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769A089A76E185BB6109B3E4 /* Pods_Amby.framework */; };
 		84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90A22EEAE1476346BDB6D1 /* Pods_CommonUtil.framework */; };
 		A1042F442258E70400DA6E78 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1042F432258E70400DA6E78 /* R.generated.swift */; };
+		A10DB09122674D3B0088F4D1 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10DB09022674D3B0088F4D1 /* Session.swift */; };
 		A111F8FB2222CEBD00DE457F /* CustomDialogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */; };
 		A112E735212AF83800320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
 		A112E82D212CD76500320048 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E773212CD76400320048 /* SplashViewController.swift */; };
@@ -150,7 +151,11 @@
 		A17241D12245708A00472477 /* dns.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CC2245708A00472477 /* dns.html */; };
 		A17241D22245708A00472477 /* authorize.html in Resources */ = {isa = PBXBuildFile; fileRef = A17241CD2245708A00472477 /* authorize.html */; };
 		A17241D42246619C00472477 /* URL+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17241D32246619B00472477 /* URL+Extend.swift */; };
-		A1846B58225239E90031E635 /* PageHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1846B57225239E90031E635 /* PageHistoryDataModelTest.swift */; };
+		A17AC348225F617900E4262E /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17AC347225F617900E4262E /* SwiftyJSON.framework */; };
+		A17AC34A225F61CC00E4262E /* JSON+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17AC349225F61CC00E4262E /* JSON+Extend.swift */; };
+		A17AC34B225F621300E4262E /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17AC347225F617900E4262E /* SwiftyJSON.framework */; };
+		A17AC34D225F656E00E4262E /* RestoreSession.html in Resources */ = {isa = PBXBuildFile; fileRef = A17AC34C225F656E00E4262E /* RestoreSession.html */; };
+		A1846B58225239E90031E635 /* TabDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1846B57225239E90031E635 /* TabDataModelTest.swift */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
 		A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */; };
@@ -186,7 +191,7 @@
 		A19506382143F8AF0091DF23 /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97521319C7700320048 /* FavoriteDataModel.swift */; };
 		A19506392143F8AF0091DF23 /* FormDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97821319C7800320048 /* FormDataModel.swift */; };
 		A195063A2143F8AF0091DF23 /* ProgressDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97321319C7700320048 /* ProgressDataModel.swift */; };
-		A195063B2143F8AF0091DF23 /* PageHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97921319C7800320048 /* PageHistoryDataModel.swift */; };
+		A195063B2143F8AF0091DF23 /* TabDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97921319C7800320048 /* TabDataModel.swift */; };
 		A195063C2143F8AF0091DF23 /* SearchHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97121319C7700320048 /* SearchHistoryDataModel.swift */; };
 		A195063D2143F8AF0091DF23 /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97221319C7700320048 /* SuggestDataModel.swift */; };
 		A195063E2143F8AF0091DF23 /* ThumbnailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97C21319C7800320048 /* ThumbnailDataModel.swift */; };
@@ -238,9 +243,9 @@
 		A1B7F2D3220F45A0008F3850 /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2C4220F45A0008F3850 /* SearchHistory.swift */; };
 		A1B7F2D4220F45A0008F3850 /* CommonHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2C5220F45A0008F3850 /* CommonHistory.swift */; };
 		A1B7F2D5220F45A0008F3850 /* Suggest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2C6220F45A0008F3850 /* Suggest.swift */; };
-		A1B7F2D6220F45A0008F3850 /* PageHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2C8220F45A0008F3850 /* PageHistory.swift */; };
-		A1B7F2D7220F45A0008F3850 /* PageGroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2C9220F45A0008F3850 /* PageGroupList.swift */; };
-		A1B7F2D8220F45A0008F3850 /* PageGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CA220F45A0008F3850 /* PageGroup.swift */; };
+		A1B7F2D6220F45A0008F3850 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2C8220F45A0008F3850 /* Tab.swift */; };
+		A1B7F2D7220F45A0008F3850 /* TabGroupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2C9220F45A0008F3850 /* TabGroupList.swift */; };
+		A1B7F2D8220F45A0008F3850 /* TabGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CA220F45A0008F3850 /* TabGroup.swift */; };
 		A1B7F2D9220F45A0008F3850 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CB220F45A0008F3850 /* Input.swift */; };
 		A1B7F2DA220F45A0008F3850 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CC220F45A0008F3850 /* Form.swift */; };
 		A1B7F2DB220F45A0008F3850 /* ArticleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CE220F45A0008F3850 /* ArticleResponse.swift */; };
@@ -426,6 +431,7 @@
 		93D0114BB59CFBCCAC13CB7A /* Pods-Model.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Model.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Model/Pods-Model.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		A1042F432258E70400DA6E78 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		A10DB09022674D3B0088F4D1 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDialogService.swift; sourceTree = "<group>"; };
 		A112E734212AF83800320048 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A112E773212CD76400320048 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -482,7 +488,7 @@
 		A112E97521319C7700320048 /* FavoriteDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteDataModel.swift; sourceTree = "<group>"; };
 		A112E97721319C7800320048 /* ArticleDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleDataModel.swift; sourceTree = "<group>"; };
 		A112E97821319C7800320048 /* FormDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDataModel.swift; sourceTree = "<group>"; };
-		A112E97921319C7800320048 /* PageHistoryDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModel.swift; sourceTree = "<group>"; };
+		A112E97921319C7800320048 /* TabDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabDataModel.swift; sourceTree = "<group>"; };
 		A112E97B21319C7800320048 /* SettingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDataModel.swift; sourceTree = "<group>"; };
 		A112E97C21319C7800320048 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
 		A112E97D21319C7800320048 /* AuthDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthDataModel.swift; sourceTree = "<group>"; };
@@ -595,7 +601,10 @@
 		A17241CC2245708A00472477 /* dns.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dns.html; sourceTree = "<group>"; };
 		A17241CD2245708A00472477 /* authorize.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = authorize.html; sourceTree = "<group>"; };
 		A17241D32246619B00472477 /* URL+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extend.swift"; sourceTree = "<group>"; };
-		A1846B57225239E90031E635 /* PageHistoryDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHistoryDataModelTest.swift; sourceTree = "<group>"; };
+		A17AC347225F617900E4262E /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		A17AC349225F61CC00E4262E /* JSON+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extend.swift"; sourceTree = "<group>"; };
+		A17AC34C225F656E00E4262E /* RestoreSession.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RestoreSession.html; sourceTree = "<group>"; };
+		A1846B57225239E90031E635 /* TabDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabDataModelTest.swift; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
 		A1869C2021795242007303B3 /* OptionMenuMemoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuMemoTableViewCell.xib; sourceTree = "<group>"; };
@@ -649,9 +658,9 @@
 		A1B7F2C4220F45A0008F3850 /* SearchHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHistory.swift; sourceTree = "<group>"; };
 		A1B7F2C5220F45A0008F3850 /* CommonHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonHistory.swift; sourceTree = "<group>"; };
 		A1B7F2C6220F45A0008F3850 /* Suggest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Suggest.swift; sourceTree = "<group>"; };
-		A1B7F2C8220F45A0008F3850 /* PageHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageHistory.swift; sourceTree = "<group>"; };
-		A1B7F2C9220F45A0008F3850 /* PageGroupList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageGroupList.swift; sourceTree = "<group>"; };
-		A1B7F2CA220F45A0008F3850 /* PageGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageGroup.swift; sourceTree = "<group>"; };
+		A1B7F2C8220F45A0008F3850 /* Tab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		A1B7F2C9220F45A0008F3850 /* TabGroupList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabGroupList.swift; sourceTree = "<group>"; };
+		A1B7F2CA220F45A0008F3850 /* TabGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabGroup.swift; sourceTree = "<group>"; };
 		A1B7F2CB220F45A0008F3850 /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		A1B7F2CC220F45A0008F3850 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		A1B7F2CE220F45A0008F3850 /* ArticleResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleResponse.swift; sourceTree = "<group>"; };
@@ -760,6 +769,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17AC348225F617900E4262E /* SwiftyJSON.framework in Frameworks */,
 				84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -786,6 +796,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17AC34B225F621300E4262E /* SwiftyJSON.framework in Frameworks */,
 				A1B7F2A0220F3BB9008F3850 /* Realm.framework in Frameworks */,
 				A1B7F2A1220F3BB9008F3850 /* RealmSwift.framework in Frameworks */,
 				A1FFA69221A5B1750092C4D6 /* Hydra.framework in Frameworks */,
@@ -809,6 +820,7 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A17AC347225F617900E4262E /* SwiftyJSON.framework */,
 				A16C2D13220F36640050C1DD /* RealmSwift.framework */,
 				A16C2D11220F36400050C1DD /* Realm.framework */,
 				A1FFA69121A5B1740092C4D6 /* Hydra.framework */,
@@ -1133,7 +1145,7 @@
 				A112E97521319C7700320048 /* FavoriteDataModel.swift */,
 				A112E97821319C7800320048 /* FormDataModel.swift */,
 				A112E97321319C7700320048 /* ProgressDataModel.swift */,
-				A112E97921319C7800320048 /* PageHistoryDataModel.swift */,
+				A112E97921319C7800320048 /* TabDataModel.swift */,
 				A112E97121319C7700320048 /* SearchHistoryDataModel.swift */,
 				A112E97221319C7700320048 /* SuggestDataModel.swift */,
 				A112E97C21319C7800320048 /* ThumbnailDataModel.swift */,
@@ -1523,6 +1535,7 @@
 				A17241C4224563A200472477 /* alertTest.html */,
 				A17241C5224563A200472477 /* shaper.html */,
 				A17241B122452CD800472477 /* post.html */,
+				A17AC34C225F656E00E4262E /* RestoreSession.html */,
 			);
 			path = html;
 			sourceTree = "<group>";
@@ -1542,7 +1555,7 @@
 		A1846B56225239C10031E635 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				A1846B57225239E90031E635 /* PageHistoryDataModelTest.swift */,
+				A1846B57225239E90031E635 /* TabDataModelTest.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1787,9 +1800,10 @@
 		A1B7F2C7220F45A0008F3850 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
-				A1B7F2C8220F45A0008F3850 /* PageHistory.swift */,
-				A1B7F2C9220F45A0008F3850 /* PageGroupList.swift */,
-				A1B7F2CA220F45A0008F3850 /* PageGroup.swift */,
+				A1B7F2C8220F45A0008F3850 /* Tab.swift */,
+				A1B7F2C9220F45A0008F3850 /* TabGroupList.swift */,
+				A1B7F2CA220F45A0008F3850 /* TabGroup.swift */,
+				A10DB09022674D3B0088F4D1 /* Session.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -1838,6 +1852,7 @@
 				A1C0E02C220F698A00E7A7B6 /* UIScrollView+Extend.swift */,
 				A1C0E02A220F698A00E7A7B6 /* UIView+Extend.swift */,
 				A17241D32246619B00472477 /* URL+Extend.swift */,
+				A17AC349225F61CC00E4262E /* JSON+Extend.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2054,6 +2069,7 @@
 				A1C0DFF6220F67F200E7A7B6 /* Frameworks */,
 				A1C0DFF7220F67F200E7A7B6 /* Resources */,
 				A562F9002902863CA4320094 /* [CP] Copy Pods Resources */,
+				A17AC346225F612800E4262E /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -2253,6 +2269,7 @@
 				A15C545D214D699D001E8AB5 /* OptionMenuSettingTableViewCell.xib in Resources */,
 				A12B93FC214EFD710082EEA5 /* OpenSourceViewController.xib in Resources */,
 				A15C541E214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
+				A17AC34D225F656E00E4262E /* RestoreSession.html in Resources */,
 				A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */,
 				A1F518BC213593E20029ACB7 /* env-dummy.plist in Resources */,
 				A15C5421214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
@@ -2525,6 +2542,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Hydra.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -2567,6 +2585,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ $CONFIGURATION = \"Debug\" -o $CONFIGURATION = \"Debug-Local\" ]; then\n${PODS_ROOT}/LicensePlist/license-plist --output-path ${SRCROOT}/Amby/Resources/license\nfi";
+		};
+		A17AC346225F612800E4262E /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			name = Carthage;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n/usr/local/bin/carthage copy-frameworks\nelse\necho \"warning: carthage not installed. install at 'brew install carthage'\"\nfi\n";
 		};
 		A1A3DE7B2138795A00F87009 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2697,7 +2734,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A14C8C6C22522F4300967E78 /* ModelTests.swift in Sources */,
-				A1846B58225239E90031E635 /* PageHistoryDataModelTest.swift in Sources */,
+				A1846B58225239E90031E635 /* TabDataModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2705,16 +2742,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10DB09122674D3B0088F4D1 /* Session.swift in Sources */,
 				A1B7F2DE220F45A0008F3850 /* Article.swift in Sources */,
 				A1B7F2D4220F45A0008F3850 /* CommonHistory.swift in Sources */,
-				A1B7F2D6220F45A0008F3850 /* PageHistory.swift in Sources */,
+				A1B7F2D6220F45A0008F3850 /* Tab.swift in Sources */,
 				A1B7F2D3220F45A0008F3850 /* SearchHistory.swift in Sources */,
 				A1B7F2D5220F45A0008F3850 /* Suggest.swift in Sources */,
-				A1B7F2D7220F45A0008F3850 /* PageGroupList.swift in Sources */,
+				A1B7F2D7220F45A0008F3850 /* TabGroupList.swift in Sources */,
 				A1B7F2DA220F45A0008F3850 /* Form.swift in Sources */,
 				A1B7F2D2220F45A0008F3850 /* Memo.swift in Sources */,
 				A1B7F2D9220F45A0008F3850 /* Input.swift in Sources */,
-				A1B7F2D8220F45A0008F3850 /* PageGroup.swift in Sources */,
+				A1B7F2D8220F45A0008F3850 /* TabGroup.swift in Sources */,
 				A1B7F2DD220F45A0008F3850 /* Favorite.swift in Sources */,
 				A1B7F2DC220F45A0008F3850 /* SuggestResponse.swift in Sources */,
 				A1B7F2DB220F45A0008F3850 /* ArticleResponse.swift in Sources */,
@@ -2739,6 +2777,7 @@
 				A1C0E038220F698B00E7A7B6 /* UIColor+Extend.swift in Sources */,
 				A1C0E041220F698B00E7A7B6 /* UIScrollView+Extend.swift in Sources */,
 				A1C0E036220F698B00E7A7B6 /* Collection+Extend.swift in Sources */,
+				A17AC34A225F61CC00E4262E /* JSON+Extend.swift in Sources */,
 				A1C0E03E220F698B00E7A7B6 /* UIImage+Extend.swift in Sources */,
 				A1C0E03A220F698B00E7A7B6 /* DispatchQueue+Extend.swift in Sources */,
 				A1C0E049220F698B00E7A7B6 /* UIButton+Extend.swift in Sources */,
@@ -2795,7 +2834,7 @@
 				A19506382143F8AF0091DF23 /* FavoriteDataModel.swift in Sources */,
 				A138CAE12137281800AEA669 /* Model.swift in Sources */,
 				A19506342143F8AF0091DF23 /* SettingDataModel.swift in Sources */,
-				A195063B2143F8AF0091DF23 /* PageHistoryDataModel.swift in Sources */,
+				A195063B2143F8AF0091DF23 /* TabDataModel.swift in Sources */,
 				A15C53F7214D4CDC001E8AB5 /* PolicyUseCase.swift in Sources */,
 				A19352A12141569C002A0865 /* Google.swift in Sources */,
 				A19506372143F8AF0091DF23 /* CommonHistoryDataModel.swift in Sources */,
@@ -3442,6 +3481,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CommonUtil/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3477,6 +3520,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CommonUtil/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3512,6 +3559,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CommonUtil/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3547,6 +3598,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CommonUtil/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

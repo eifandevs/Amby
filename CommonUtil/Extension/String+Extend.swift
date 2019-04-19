@@ -64,11 +64,11 @@ public extension String {
         return index(startIndex, offsetBy: from)
     }
 
-    public func encodeUrl() -> String? {
+    var encodeUrl: String {
         if contains("%") {
             return self
         } else {
-            return addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)
+            return addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)!
         }
     }
 
@@ -79,7 +79,13 @@ public extension String {
         return html2AttributedString?.string ?? ""
     }
 
-    public func decodeUrl() -> String? {
-        return removingPercentEncoding
+    var decodeUrl: String {
+        return removingPercentEncoding!
+    }
+
+    var base64Encode: String {
+        let data = self.data(using: .utf8)
+        let encodedString = data?.base64EncodedString()
+        return encodedString!
     }
 }

@@ -22,18 +22,18 @@ public final class WebCacheUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<WebCacheUseCaseAction>()
 
-    private var pageHistoryDataModel: PageHistoryDataModelProtocol!
+    private var tabDataModel: TabDataModelProtocol!
 
     private init() {
         setupProtocolImpl()
     }
 
     private func setupProtocolImpl() {
-        pageHistoryDataModel = PageHistoryDataModel.s
+        tabDataModel = TabDataModel.s
     }
 
     public func cacheConfiguration() -> WKWebViewConfiguration {
-        let dataStore = pageHistoryDataModel.isPrivate ? WKWebsiteDataStore.nonPersistent() : WKWebsiteDataStore.default()
+        let dataStore = tabDataModel.isPrivate ? WKWebsiteDataStore.nonPersistent() : WKWebsiteDataStore.default()
         log.debug("set data store mode: \(dataStore.isPersistent ? "persistent" : "nonpersistent")")
         return CacheService.cacheConfiguration(dataStore: dataStore)
     }

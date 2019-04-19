@@ -23,7 +23,7 @@ enum BaseViewControllerViewModelAction {
     case report
     case memo(memo: Memo)
     case notice(message: String, isSuccess: Bool)
-    case pageGroupTitle(groupContext: String)
+    case tabGroupTitle(groupContext: String)
 }
 
 final class BaseViewControllerViewModel {
@@ -45,7 +45,7 @@ final class BaseViewControllerViewModel {
         TabUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case let .presentGroupTitleEdit(groupContext) = action else { return }
-                self.rx_action.onNext(.pageGroupTitle(groupContext: groupContext))
+                self.rx_action.onNext(.tabGroupTitle(groupContext: groupContext))
             }
             .disposed(by: disposeBag)
 

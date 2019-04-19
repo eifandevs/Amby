@@ -103,7 +103,7 @@ class BaseViewController: UIViewController {
                 case let .formReader(form): self.formReader(form: form)
                 case .mailer: self.mailer()
                 case let .notice(message, isSuccess): self.notice(message: message, isSuccess: isSuccess)
-                case let .pageGroupTitle(groupContext): self.pageGroupTitle(groupContext: groupContext)
+                case let .tabGroupTitle(groupContext): self.tabGroupTitle(groupContext: groupContext)
                 }
             }
             .disposed(by: rx.disposeBag)
@@ -190,7 +190,7 @@ class BaseViewController: UIViewController {
     // MARK: Private Method
 
     /// グループタイトル編集
-    private func pageGroupTitle(groupContext: String) {
+    private func tabGroupTitle(groupContext: String) {
         CustomDialogService.presentTextFieldAlert(title: MessageConst.ALERT.CHANGE_GROUP_TITLE, message: "", placeholder: MessageConst.ALERT.CHANGE_GROUP_TITLE_PLACEHOLDER) { text in
             self.viewModel.changeGroupTitle(groupContext: groupContext, title: text)
         }

@@ -23,7 +23,7 @@ public final class HistoryUseCase {
     public let rx_action = PublishSubject<HistoryUseCaseAction>()
 
     /// models
-    private var pageHistoryDataModel: PageHistoryDataModel!
+    private var tabDataModel: TabDataModel!
     private var commonHistoryDataModel: CommonHistoryDataModelProtocol!
     private var settingDataModel: SettingDataModelProtocol!
 
@@ -32,7 +32,7 @@ public final class HistoryUseCase {
     }
 
     private func setupProtocolImpl() {
-        pageHistoryDataModel = PageHistoryDataModel.s
+        tabDataModel = TabDataModel.s
         commonHistoryDataModel = CommonHistoryDataModel.s
         settingDataModel = SettingDataModel.s
     }
@@ -49,7 +49,7 @@ public final class HistoryUseCase {
     /// update common history
     public func insert(url: URL?, title: String?) {
         // プライベートモードの場合は保存しない
-        if pageHistoryDataModel.isPrivate {
+        if tabDataModel.isPrivate {
             log.debug("common history will not insert. ")
         } else {
             commonHistoryDataModel.insert(url: url, title: title)
