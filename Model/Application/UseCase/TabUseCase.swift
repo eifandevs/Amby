@@ -80,7 +80,6 @@ public final class TabUseCase {
         setupRx()
     }
 
-    /// Observable自動解放
     let disposeBag = DisposeBag()
 
     private func setupProtocolImpl() {

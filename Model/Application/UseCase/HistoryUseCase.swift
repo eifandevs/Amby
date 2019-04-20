@@ -27,8 +27,18 @@ public final class HistoryUseCase {
     private var commonHistoryDataModel: CommonHistoryDataModelProtocol!
     private var settingDataModel: SettingDataModelProtocol!
 
+    let disposeBag = DisposeBag()
+
     private init() {
         setupProtocolImpl()
+
+        // バックグラウンド時にタブ情報を保存
+        NotificationCenter.default.rx.notification(.UIApplicationWillResignActive, object: nil)
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                self.store()
+            }
+            .disposed(by: disposeBag)
     }
 
     private func setupProtocolImpl() {
@@ -53,7 +63,6 @@ public final class HistoryUseCase {
             log.debug("common history will not insert. ")
         } else {
             commonHistoryDataModel.insert(url: url, title: title)
-            store()
         }
     }
 
@@ -75,12 +84,10 @@ public final class HistoryUseCase {
 
     public func delete() {
         commonHistoryDataModel.delete()
-        store()
     }
 
     public func delete(historyIds: [String: [String]]) {
         commonHistoryDataModel.delete(historyIds: historyIds)
-        store()
     }
 
     public func expireCheck() {
