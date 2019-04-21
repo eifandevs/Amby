@@ -104,15 +104,20 @@ final class SearchHistoryDataModel: SearchHistoryDataModelProtocol {
             for (key, value) in searchHistoryByDate {
                 let filename = "\(key).dat"
 
-                let result = localStorageRepository.getData(.searchHistory(resource: filename))
+                let saveData: [SearchHistory] = { () -> [SearchHistory] in
+                    let result = localStorageRepository.getData(.searchHistory(resource: filename))
 
-                if case let .success(data) = result {
-                    if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [SearchHistory] {
-                        let saveData: [SearchHistory] = value + old
-                        let searchHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
-                        _ = localStorageRepository.write(.searchHistory(resource: filename), data: searchHistoryData)
+                    if case let .success(data) = result {
+                        if let old = NSKeyedUnarchiver.unarchiveObject(with: data) as? [SearchHistory] {
+                            return value + old
+                        }
                     }
-                }
+
+                    return value
+                }()
+
+                let searchHistoryData = NSKeyedArchiver.archivedData(withRootObject: saveData)
+                _ = localStorageRepository.write(.searchHistory(resource: filename), data: searchHistoryData)
             }
         }
     }
