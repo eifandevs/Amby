@@ -126,7 +126,6 @@ final class SearchHistoryDataModel: SearchHistoryDataModelProtocol {
     /// 検索ワードと検索件数を指定する
     /// 指定ワードを含むかどうか
     func select(title: String, readNum: Int) -> [SearchHistory] {
-        var result: [SearchHistory] = []
         let readFiles = getList().reversed()
 
         if readFiles.count > 0 {
@@ -147,25 +146,16 @@ final class SearchHistoryDataModel: SearchHistoryDataModelProtocol {
 
             let hitSearchHistory = allSearchHistory.filter({ (searchHistoryItem) -> Bool in
                 searchHistoryItem.title.lowercased().contains(title.lowercased())
-            })
+            }).reduce([]) { (result, value) -> [SearchHistory] in
+                return result.map { $0.title }.contains(value.title) ? result : result + [value]
+            }
 
-            // 重複の削除
-            hitSearchHistory.forEach({ item in
-                if result.count == 0 {
-                    result.append(item)
-                } else {
-                    let resultTitles: [String] = result.map({ (item) -> String in
-                        item.title
-                    })
-                    if !resultTitles.contains(item.title) {
-                        result.append(item)
-                    }
-                }
-            })
+            histories = hitSearchHistory
+            return hitSearchHistory
+
         }
 
-        histories = result
-        return result
+        return []
     }
 
     /// 閲覧履歴の期限切れ削除
