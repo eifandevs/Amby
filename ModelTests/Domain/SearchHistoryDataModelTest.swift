@@ -33,6 +33,12 @@ class SearchHistoryDataModelTest: XCTestCase {
         return formatter.string(from: Date())
     }
 
+    // 過去何日分かの日付を取得
+    func dateWithCount(beforeCount: Int) -> [Date] {
+        guard beforeCount > 0 else { fatalError() }
+        return (1...beforeCount).map { Date(timeIntervalSinceNow: Double($0) * -1 * 60 * 60 * 24) }
+    }
+
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         searchHistoryDataModel.delete()
@@ -81,5 +87,34 @@ class SearchHistoryDataModelTest: XCTestCase {
         let result = searchHistoryDataModel.select(title: dummyText, readNum: 10)
         XCTAssertTrue(result.count == 2)
         XCTAssertTrue(result.first!.title == dummyText)
+    }
+
+    func testExpireCheck() {
+        searchHistoryDataModel.store(histories: dateWithCount(beforeCount: 100).map { SearchHistory(title: dummyText2, date: $0) })
+        searchHistoryDataModel.expireCheck()
+        let list = searchHistoryDataModel.getList()
+        XCTAssertTrue(list.count == 90)
+    }
+
+    func testDelete() {
+        let data = SearchHistory(title: dummyText, date: Date())
+        let data2 = SearchHistory(title: dummyText2, date: Date().yesterday)
+        searchHistoryDataModel.store(histories: [data, data2])
+
+        weak var expectation = self.expectation(description: #function)
+
+        searchHistoryDataModel.rx_action
+            .subscribe { object in
+                if let action = object.element, case .deleteAll = action {
+                    if let expectation = expectation {
+                        expectation.fulfill()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        searchHistoryDataModel.delete()
+
+        self.waitForExpectations(timeout: 10, handler: nil)
     }
 }

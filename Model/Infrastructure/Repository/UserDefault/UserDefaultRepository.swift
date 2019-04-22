@@ -16,7 +16,7 @@ extension DefaultsKeys {
     static let menuOrder = DefaultsKey<[UserOperation]>(ModelConst.KEY.MENU_ORDER, defaultValue: ModelConst.UD.MENU_ORDER)
     static let commonhistorySaveCount = DefaultsKey<Int>(ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.COMMON_HISTORY_SAVE_COUNT)
     static let searchHistorySaveCount = DefaultsKey<Int>(ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.SEARCH_HISTORY_SAVE_COUNT)
-    static let tabSaveCount = DefaultsKey<Int>(ModelConst.KEY.PAGE_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.PAGE_HISTORY_SAVE_COUNT)
+    static let tabSaveCount = DefaultsKey<Int>(ModelConst.KEY.TAB_SAVE_COUNT, defaultValue: ModelConst.UD.TAB_SAVE_COUNT)
     static let newWindowConfirm = DefaultsKey<Bool>(ModelConst.KEY.NEW_WINDOW_CONFIRM, defaultValue: ModelConst.UD.NEW_WINDOW_CONFIRM)
 }
 

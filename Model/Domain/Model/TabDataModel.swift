@@ -39,9 +39,9 @@ extension TabDataModelError: ModelError {
     var message: String {
         switch self {
         case .delete:
-            return MessageConst.NOTIFICATION.DELETE_PAGE_HISTORY_ERROR
+            return MessageConst.NOTIFICATION.DELETE_TAB_ERROR
         case .store:
-            return MessageConst.NOTIFICATION.STORE_PAGE_HISTORY_ERROR
+            return MessageConst.NOTIFICATION.STORE_TAB_ERROR
         }
     }
 }
