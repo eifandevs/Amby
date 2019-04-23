@@ -29,14 +29,12 @@ class UserDefaultRepository {
 
     func set<T>(key: DefaultsKey<T>, value: T) {
         Defaults[key] = value
+        Defaults.synchronize()
     }
 
     /// ユーザーデフォルト初期化
     func initialize() {
-        if let bundleId = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: bundleId)
-        } else {
-            log.error("userdefault initialize error")
-        }
+        Defaults.removeAll()
+        Defaults.synchronize()
     }
 }
