@@ -34,6 +34,8 @@ class ApiRepository<T: TargetType>: MoyaProvider<T> {
         #if LOCAL
             // ローカルターゲットはモックを使用
             stubClosure = ApiRepository.immediatelyStub
+        #elseif UT
+            stubClosure = ApiRepository.immediatelyStub
         #else
             stubClosure = ApiRepository.neverStub
         #endif
