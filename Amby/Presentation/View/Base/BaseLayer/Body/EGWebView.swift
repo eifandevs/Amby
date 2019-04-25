@@ -317,6 +317,64 @@ class EGWebView: WKWebView {
         load(request)
     }
 
+    func fillForm(input: Input, value: String) -> Promise<Any?> {
+        return evaluate(script: "document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value='\(value)'")
+    }
+
+    func takeForm() -> Form? {
+        if let title = title, let host = url?.host, let url = url?.absoluteString {
+            let form = Form()
+            form.title = title
+            form.host = host
+            form.url = url
+
+            // take form
+            // formの数
+            let inputForms = Int(truncating: (evaluateSync(script: "document.forms.length") as? NSNumber) ?? NSNumber(value: 0))
+
+            // 有無判定
+            log.debug("inputForms: \(inputForms)")
+            if inputForms == 0 { return nil }
+
+            for i in 0 ... inputForms {
+                // エレメントの数
+                let elementLength = Int(truncating: (evaluateSync(script: "document.forms[\(i)].elements.length") as? NSNumber) ?? NSNumber(value: 0))
+
+                // 有無判定
+                log.debug("elementLength: \(elementLength)")
+                if elementLength == 0 { continue }
+
+                for j in 0 ... elementLength {
+                    // フォームタイプ判定
+                    let type = (evaluateSync(script: "document.forms[\(i)].elements[\(j)].type") as? String) ?? ""
+
+                    // 有無判定
+                    log.debug("type: \(type)")
+                    if type.isEmpty { continue }
+
+                    if (type != "hidden") && (type != "submit") && (type != "checkbox") {
+                        let input = Input()
+                        let value = (evaluateSync(script: "document.forms[\(i)].elements[\(j)].value") as? String) ?? ""
+
+                        // 有無判定
+                        log.debug("value: \(value)")
+                        if value.isEmpty { continue }
+
+                        // 値の設定
+                        input.type = type
+                        input.formIndex = i
+                        input.formInputIndex = j
+                        input.value = EncryptService.encrypt(value: value)
+                        form.inputs.append(input)
+                    }
+                }
+            }
+
+            return form
+        }
+        return nil
+    }
+
     func scrollUp() -> Promise<Any?> {
         return evaluate(script: "window.scrollTo(0, 0)")
     }
