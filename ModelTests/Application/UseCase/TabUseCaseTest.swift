@@ -15,14 +15,40 @@ import RxCocoa
 @testable import Entity
 
 class TabUseCaseTest: XCTestCase {
+    let dummyUrl = "https://abc/"
+    let dummyUrl2 = "https://def/"
+    let dummyTitle = "dummyTitle"
+    let dummyTitle2 = "dummyTitle2"
+
     var tabUseCase: TabUseCase {
         return TabUseCase.s
     }
-    
+
     let disposeBag = DisposeBag()
-    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        tabUseCase.delete()
+        tabUseCase.initialize()
+    }
+
+    func testPresentGroupTitleEdit() {
+        weak var expectation = self.expectation(description: #function)
+
+        tabUseCase.rx_action
+            .subscribe { object in
+                if let action = object.element, case let .presentGroupTitleEdit(groupContext) = action {
+                    if let expectation = expectation {
+                        XCTAssertTrue(groupContext == self.tabUseCase.currentContext)
+                        expectation.fulfill()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        tabUseCase.presentGroupTitleEdit(groupContext: tabUseCase.currentContext)
+
+        self.waitForExpectations(timeout: 10, handler: nil)
     }
 }
