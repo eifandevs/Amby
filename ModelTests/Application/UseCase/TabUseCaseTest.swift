@@ -51,4 +51,100 @@ class TabUseCaseTest: XCTestCase {
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
+
+    func testClose() {
+        weak var expectation = self.expectation(description: #function)
+
+        tabUseCase.rx_action
+            .subscribe { object in
+                if let action = object.element, case .delete = action {
+                    if let expectation = expectation {
+                        expectation.fulfill()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        tabUseCase.close()
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testCloseAll() {
+        weak var expectation = self.expectation(description: #function)
+
+        tabUseCase.rx_action
+            .subscribe { object in
+                if let action = object.element, case .delete = action {
+                    if let expectation = expectation {
+                        expectation.fulfill()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        tabUseCase.closeAll()
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testReload() {
+        weak var expectation = self.expectation(description: #function)
+
+        tabUseCase.rx_action
+            .subscribe { object in
+                if let action = object.element, case .reload = action {
+                    if let expectation = expectation {
+                        expectation.fulfill()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        tabUseCase.reload()
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testCopy() {
+        weak var expectation = self.expectation(description: #function)
+
+        tabUseCase.rx_action
+            .subscribe { object in
+                if let action = object.element, case .append = action {
+                    if let expectation = expectation {
+                        expectation.fulfill()
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        tabUseCase.copy()
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testSwap() {
+        weak var expectation = self.expectation(description: #function)
+        expectation?.expectedFulfillmentCount = 2
+
+        tabUseCase.rx_action
+            .subscribe { object in
+                if let action = object.element {
+                    switch action {
+                    case .append, .swap:
+                        if let expectation = expectation {
+                            expectation.fulfill()
+                        }
+                    default: break
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        tabUseCase.add()
+        tabUseCase.swap(start: 0, end: 1)
+
+        self.waitForExpectations(timeout: 10, handler: nil)
+    }
 }
