@@ -24,6 +24,10 @@
 		A106155B226D3CAC00AB371F /* ThumbnailDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106155A226D3CAC00AB371F /* ThumbnailDataModelTest.swift */; };
 		A106155F226D3CD300AB371F /* MemoDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106155E226D3CD300AB371F /* MemoDataModelTest.swift */; };
 		A10615652274B92000AB371F /* TabUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10615642274B92000AB371F /* TabUseCaseTest.swift */; };
+		A106156722785F7E00AB371F /* HistoryUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106156622785F7E00AB371F /* HistoryUseCaseTest.swift */; };
+		A10615692278708A00AB371F /* FavoriteUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10615682278708A00AB371F /* FavoriteUseCaseTest.swift */; };
+		A106156B2278725500AB371F /* FormUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106156A2278725500AB371F /* FormUseCaseTest.swift */; };
+		A106156D2278736D00AB371F /* GrepUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106156C2278736D00AB371F /* GrepUseCaseTest.swift */; };
 		A10DB09122674D3B0088F4D1 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10DB09022674D3B0088F4D1 /* Session.swift */; };
 		A111F8FB2222CEBD00DE457F /* CustomDialogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */; };
 		A112E735212AF83800320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
@@ -453,6 +457,10 @@
 		A106155A226D3CAC00AB371F /* ThumbnailDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModelTest.swift; sourceTree = "<group>"; };
 		A106155E226D3CD300AB371F /* MemoDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDataModelTest.swift; sourceTree = "<group>"; };
 		A10615642274B92000AB371F /* TabUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabUseCaseTest.swift; sourceTree = "<group>"; };
+		A106156622785F7E00AB371F /* HistoryUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryUseCaseTest.swift; sourceTree = "<group>"; };
+		A10615682278708A00AB371F /* FavoriteUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteUseCaseTest.swift; sourceTree = "<group>"; };
+		A106156A2278725500AB371F /* FormUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUseCaseTest.swift; sourceTree = "<group>"; };
+		A106156C2278736D00AB371F /* GrepUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrepUseCaseTest.swift; sourceTree = "<group>"; };
 		A10DB09022674D3B0088F4D1 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDialogService.swift; sourceTree = "<group>"; };
 		A112E734212AF83800320048 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -916,6 +924,10 @@
 			isa = PBXGroup;
 			children = (
 				A10615642274B92000AB371F /* TabUseCaseTest.swift */,
+				A106156622785F7E00AB371F /* HistoryUseCaseTest.swift */,
+				A10615682278708A00AB371F /* FavoriteUseCaseTest.swift */,
+				A106156A2278725500AB371F /* FormUseCaseTest.swift */,
+				A106156C2278736D00AB371F /* GrepUseCaseTest.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -2786,6 +2798,8 @@
 				A10615652274B92000AB371F /* TabUseCaseTest.swift in Sources */,
 				A1061555226D3C7A00AB371F /* FormDataModelTest.swift in Sources */,
 				A106154D226B62AF00AB371F /* SearchHistoryDataModelTest.swift in Sources */,
+				A10615692278708A00AB371F /* FavoriteUseCaseTest.swift in Sources */,
+				A106156722785F7E00AB371F /* HistoryUseCaseTest.swift in Sources */,
 				A1061557226D3C8E00AB371F /* ProgressDataModelTest.swift in Sources */,
 				A106154B226B4A5400AB371F /* CommonHistoryDataModelTest.swift in Sources */,
 				A14C8C6C22522F4300967E78 /* ModelTests.swift in Sources */,
@@ -2793,7 +2807,9 @@
 				A106155B226D3CAC00AB371F /* ThumbnailDataModelTest.swift in Sources */,
 				A1061559226D3CA000AB371F /* SuggestDataModelTest.swift in Sources */,
 				A1061553226D3C6000AB371F /* ArticleDataModelTest.swift in Sources */,
+				A106156B2278725500AB371F /* FormUseCaseTest.swift in Sources */,
 				A1846B58225239E90031E635 /* TabDataModelTest.swift in Sources */,
+				A106156D2278736D00AB371F /* GrepUseCaseTest.swift in Sources */,
 				A106154F226D3C3200AB371F /* FavoriteDataModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
