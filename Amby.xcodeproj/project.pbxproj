@@ -250,6 +250,7 @@
 		A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE8E213AEDBC00F87009 /* UserDefaultRepository.swift */; };
 		A1A3DE94213AF06300F87009 /* ModelConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE93213AF06300F87009 /* ModelConst.swift */; };
 		A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE95213AF31D00F87009 /* ResourceUtil.swift */; };
+		A1A65E5A227B2B64000FACA7 /* Springboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A65E59227B2B64000FACA7 /* Springboard.swift */; };
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */; };
 		A1B778322173A6DA00BED141 /* UserOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778312173A6DA00BED141 /* UserOperation.swift */; };
@@ -699,6 +700,7 @@
 		A1A3DE8E213AEDBC00F87009 /* UserDefaultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultRepository.swift; sourceTree = "<group>"; };
 		A1A3DE93213AF06300F87009 /* ModelConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConst.swift; sourceTree = "<group>"; };
 		A1A3DE95213AF31D00F87009 /* ResourceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceUtil.swift; sourceTree = "<group>"; };
+		A1A65E59227B2B64000FACA7 /* Springboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Springboard.swift; sourceTree = "<group>"; };
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderUseCase.swift; sourceTree = "<group>"; };
 		A1B778312173A6DA00BED141 /* UserOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOperation.swift; sourceTree = "<group>"; };
@@ -970,6 +972,7 @@
 			children = (
 				A106157E227B0FEA00AB371F /* AmbyUITests.swift */,
 				A1061580227B0FEA00AB371F /* Info.plist */,
+				A1A65E59227B2B64000FACA7 /* Springboard.swift */,
 			);
 			path = AmbyUITests;
 			sourceTree = "<group>";
@@ -2871,6 +2874,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A106157F227B0FEA00AB371F /* AmbyUITests.swift in Sources */,
+				A1A65E5A227B2B64000FACA7 /* Springboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
