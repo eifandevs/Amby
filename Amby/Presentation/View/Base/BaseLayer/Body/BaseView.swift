@@ -440,7 +440,7 @@ class BaseView: UIView {
                         let value = self.viewModel.decrypt(value: $0.value)
                         let input = $0
                         // set form
-                        DispatchQueue.mainSyncSafe {
+                        _ = DispatchQueue.mainSyncSafe {
                             self.front.fillForm(input: input, value: value).then { _ in }
                         }
                     }
