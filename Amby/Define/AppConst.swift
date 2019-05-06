@@ -134,7 +134,7 @@ struct AppConst {
         static let AUTO_SCROLL = 0.06
         static let COMMON_HISTORY_SAVE_COUNT = 90
         static let SEARCH_HISTORY_SAVE_COUNT = 90
-        static let PAGE_HISTORY_SAVE_COUNT = 30
+        static let TAB_SAVE_COUNT = 30
     }
 
     // MARK: - URL情報

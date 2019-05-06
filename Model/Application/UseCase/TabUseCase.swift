@@ -50,7 +50,7 @@ public final class TabUseCase {
         return tabDataModel.tabGroupList
     }
 
-    public var pageHistories: [Tab] {
+    public var tabs: [Tab] {
         return tabDataModel.histories
     }
 
@@ -80,7 +80,6 @@ public final class TabUseCase {
         setupRx()
     }
 
-    /// Observable自動解放
     let disposeBag = DisposeBag()
 
     private func setupProtocolImpl() {
@@ -248,10 +247,6 @@ public final class TabUseCase {
 
     public func endRendering(context: String) {
         tabDataModel.endRendering(context: context)
-    }
-
-    public func updateProgress(object: CGFloat) {
-        progressDataModel.updateProgress(progress: object)
     }
 
     /// 前WebViewに切り替え

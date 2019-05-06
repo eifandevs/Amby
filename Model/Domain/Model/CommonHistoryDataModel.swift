@@ -154,6 +154,8 @@ final class CommonHistoryDataModel: CommonHistoryDataModelProtocol {
     /// 閲覧履歴の検索
     /// 日付指定
     func select(dateString: String) -> [CommonHistory] {
+        store()
+
         let filename = "\(dateString).dat"
 
         let result = localStorageRepository.getData(.commonHistory(resource: filename))
@@ -169,6 +171,8 @@ final class CommonHistoryDataModel: CommonHistoryDataModelProtocol {
 
     /// 検索ワードと検索件数を指定する
     func select(title: String, readNum: Int) -> [CommonHistory] {
+        store()
+
         var result: [CommonHistory] = []
         do {
             let readFiles = getList().reversed()

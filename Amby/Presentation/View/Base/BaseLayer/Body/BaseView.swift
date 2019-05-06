@@ -54,6 +54,9 @@ class BaseView: UIView {
                 rx_action.onNext(.changeFront)
                 // ヘッダーフィールドを更新する
                 viewModel.reloadProgress()
+                viewModel.updateCanGoBack(context: front.context, canGoBack: front.canGoBack)
+                viewModel.updateCanGoForward(context: front.context, canGoForward: front.canGoForward)
+
                 // 空ページの場合は、編集状態にする
                 if viewModel.currentUrl.isEmpty {
                     if let beginSearchingWorkItem = self.beginSearchingWorkItem {
@@ -292,7 +295,7 @@ class BaseView: UIView {
     }
 
     private func takeForm() {
-        if let form = self.viewModel.takeForm(webView: self.front) {
+        if let form = front.takeForm() {
             viewModel.storeForm(form: form)
         } else {
             NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_CRAWL, isSuccess: false)
@@ -437,8 +440,8 @@ class BaseView: UIView {
                         let value = self.viewModel.decrypt(value: $0.value)
                         let input = $0
                         // set form
-                        DispatchQueue.mainSyncSafe {
-                            _ = self.front.evaluate(script: "document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value='\(value)'")
+                        _ = DispatchQueue.mainSyncSafe {
+                            self.front.fillForm(input: input, value: value).then { _ in }
                         }
                     }
                 })

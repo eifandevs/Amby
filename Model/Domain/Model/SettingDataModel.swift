@@ -40,9 +40,12 @@ final class SettingDataModel: SettingDataModelProtocol {
     }
 
     /// 最終お問い合わせ日
-    var lastReportDate: Date = UserDefaultRepository().get(key: .lastReportDate) {
-        didSet {
-            repository.set(key: .lastReportDate, value: lastReportDate)
+    var lastReportDate: Date {
+        get {
+            return repository.get(key: .lastReportDate)
+        }
+        set(value) {
+            repository.set(key: .lastReportDate, value: value)
         }
     }
 
@@ -57,16 +60,22 @@ final class SettingDataModel: SettingDataModelProtocol {
     }
 
     /// メニュー順序
-    var menuOrder: [UserOperation] = UserDefaultRepository().get(key: .menuOrder) {
-        didSet {
-            repository.set(key: .menuOrder, value: menuOrder)
+    var menuOrder: [UserOperation] {
+        get {
+            return repository.get(key: .menuOrder)
+        }
+        set(value) {
+            repository.set(key: .menuOrder, value: value)
         }
     }
 
     /// 新規ウィンドウ許諾フラグ
-    var newWindowConfirm: Bool = UserDefaultRepository().get(key: .newWindowConfirm) {
-        didSet {
-            repository.set(key: .newWindowConfirm, value: newWindowConfirm)
+    var newWindowConfirm: Bool {
+        get {
+            return UserDefaultRepository().get(key: .newWindowConfirm)
+        }
+        set(value) {
+            repository.set(key: .newWindowConfirm, value: value)
         }
     }
 
