@@ -13,6 +13,27 @@
 		71A90F5EED54E40F2C51B4EA /* Pods_Amby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769A089A76E185BB6109B3E4 /* Pods_Amby.framework */; };
 		84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90A22EEAE1476346BDB6D1 /* Pods_CommonUtil.framework */; };
 		A1042F442258E70400DA6E78 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1042F432258E70400DA6E78 /* R.generated.swift */; };
+		A106154B226B4A5400AB371F /* CommonHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106154A226B4A5400AB371F /* CommonHistoryDataModelTest.swift */; };
+		A106154D226B62AF00AB371F /* SearchHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106154C226B62AF00AB371F /* SearchHistoryDataModelTest.swift */; };
+		A106154F226D3C3200AB371F /* FavoriteDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106154E226D3C3200AB371F /* FavoriteDataModelTest.swift */; };
+		A1061551226D3C5300AB371F /* SettingDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1061550226D3C5300AB371F /* SettingDataModelTest.swift */; };
+		A1061553226D3C6000AB371F /* ArticleDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1061552226D3C6000AB371F /* ArticleDataModelTest.swift */; };
+		A1061555226D3C7A00AB371F /* FormDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1061554226D3C7A00AB371F /* FormDataModelTest.swift */; };
+		A1061557226D3C8E00AB371F /* ProgressDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1061556226D3C8E00AB371F /* ProgressDataModelTest.swift */; };
+		A1061559226D3CA000AB371F /* SuggestDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1061558226D3CA000AB371F /* SuggestDataModelTest.swift */; };
+		A106155B226D3CAC00AB371F /* ThumbnailDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106155A226D3CAC00AB371F /* ThumbnailDataModelTest.swift */; };
+		A106155F226D3CD300AB371F /* MemoDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106155E226D3CD300AB371F /* MemoDataModelTest.swift */; };
+		A10615652274B92000AB371F /* TabUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10615642274B92000AB371F /* TabUseCaseTest.swift */; };
+		A106156722785F7E00AB371F /* HistoryUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106156622785F7E00AB371F /* HistoryUseCaseTest.swift */; };
+		A10615692278708A00AB371F /* FavoriteUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10615682278708A00AB371F /* FavoriteUseCaseTest.swift */; };
+		A106156B2278725500AB371F /* FormUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106156A2278725500AB371F /* FormUseCaseTest.swift */; };
+		A106156D2278736D00AB371F /* GrepUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106156C2278736D00AB371F /* GrepUseCaseTest.swift */; };
+		A106156F227998DA00AB371F /* ScrollUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106156E227998DA00AB371F /* ScrollUseCaseTest.swift */; };
+		A106157122799E4E00AB371F /* SearchUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106157022799E4E00AB371F /* SearchUseCaseTest.swift */; };
+		A106157322799FEA00AB371F /* SuggestUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106157222799FEA00AB371F /* SuggestUseCaseTest.swift */; };
+		A10615752279A47000AB371F /* ProgressUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10615742279A47000AB371F /* ProgressUseCaseTest.swift */; };
+		A10615772279BAD800AB371F /* MemoUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10615762279BAD800AB371F /* MemoUseCaseTest.swift */; };
+		A106157F227B0FEA00AB371F /* AmbyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106157E227B0FEA00AB371F /* AmbyUITests.swift */; };
 		A10DB09122674D3B0088F4D1 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10DB09022674D3B0088F4D1 /* Session.swift */; };
 		A111F8FB2222CEBD00DE457F /* CustomDialogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */; };
 		A112E735212AF83800320048 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112E734212AF83800320048 /* MessageUI.framework */; };
@@ -229,6 +250,7 @@
 		A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE8E213AEDBC00F87009 /* UserDefaultRepository.swift */; };
 		A1A3DE94213AF06300F87009 /* ModelConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE93213AF06300F87009 /* ModelConst.swift */; };
 		A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE95213AF31D00F87009 /* ResourceUtil.swift */; };
+		A1A65E5A227B2B64000FACA7 /* Springboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A65E59227B2B64000FACA7 /* Springboard.swift */; };
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */; };
 		A1B778322173A6DA00BED141 /* UserOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778312173A6DA00BED141 /* UserOperation.swift */; };
@@ -318,6 +340,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A1061581227B0FEA00AB371F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A57EFEA01E3E06D300B66701;
+			remoteInfo = Amby;
+		};
 		A14C8C6F22522F4300967E78 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A57EFE991E3E06D300B66701 /* Project object */;
@@ -431,6 +460,29 @@
 		93D0114BB59CFBCCAC13CB7A /* Pods-Model.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Model.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Model/Pods-Model.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		A1042F432258E70400DA6E78 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		A106154A226B4A5400AB371F /* CommonHistoryDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTest.swift; sourceTree = "<group>"; };
+		A106154C226B62AF00AB371F /* SearchHistoryDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryDataModelTest.swift; sourceTree = "<group>"; };
+		A106154E226D3C3200AB371F /* FavoriteDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDataModelTest.swift; sourceTree = "<group>"; };
+		A1061550226D3C5300AB371F /* SettingDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDataModelTest.swift; sourceTree = "<group>"; };
+		A1061552226D3C6000AB371F /* ArticleDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataModelTest.swift; sourceTree = "<group>"; };
+		A1061554226D3C7A00AB371F /* FormDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDataModelTest.swift; sourceTree = "<group>"; };
+		A1061556226D3C8E00AB371F /* ProgressDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDataModelTest.swift; sourceTree = "<group>"; };
+		A1061558226D3CA000AB371F /* SuggestDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestDataModelTest.swift; sourceTree = "<group>"; };
+		A106155A226D3CAC00AB371F /* ThumbnailDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModelTest.swift; sourceTree = "<group>"; };
+		A106155E226D3CD300AB371F /* MemoDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDataModelTest.swift; sourceTree = "<group>"; };
+		A10615642274B92000AB371F /* TabUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabUseCaseTest.swift; sourceTree = "<group>"; };
+		A106156622785F7E00AB371F /* HistoryUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryUseCaseTest.swift; sourceTree = "<group>"; };
+		A10615682278708A00AB371F /* FavoriteUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteUseCaseTest.swift; sourceTree = "<group>"; };
+		A106156A2278725500AB371F /* FormUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUseCaseTest.swift; sourceTree = "<group>"; };
+		A106156C2278736D00AB371F /* GrepUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrepUseCaseTest.swift; sourceTree = "<group>"; };
+		A106156E227998DA00AB371F /* ScrollUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollUseCaseTest.swift; sourceTree = "<group>"; };
+		A106157022799E4E00AB371F /* SearchUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCaseTest.swift; sourceTree = "<group>"; };
+		A106157222799FEA00AB371F /* SuggestUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestUseCaseTest.swift; sourceTree = "<group>"; };
+		A10615742279A47000AB371F /* ProgressUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressUseCaseTest.swift; sourceTree = "<group>"; };
+		A10615762279BAD800AB371F /* MemoUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoUseCaseTest.swift; sourceTree = "<group>"; };
+		A106157C227B0FEA00AB371F /* AmbyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmbyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A106157E227B0FEA00AB371F /* AmbyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbyUITests.swift; sourceTree = "<group>"; };
+		A1061580227B0FEA00AB371F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A10DB09022674D3B0088F4D1 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDialogService.swift; sourceTree = "<group>"; };
 		A112E734212AF83800320048 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -648,6 +700,7 @@
 		A1A3DE8E213AEDBC00F87009 /* UserDefaultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultRepository.swift; sourceTree = "<group>"; };
 		A1A3DE93213AF06300F87009 /* ModelConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConst.swift; sourceTree = "<group>"; };
 		A1A3DE95213AF31D00F87009 /* ResourceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceUtil.swift; sourceTree = "<group>"; };
+		A1A65E59227B2B64000FACA7 /* Springboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Springboard.swift; sourceTree = "<group>"; };
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderUseCase.swift; sourceTree = "<group>"; };
 		A1B778312173A6DA00BED141 /* UserOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOperation.swift; sourceTree = "<group>"; };
@@ -737,6 +790,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A1061579227B0FEA00AB371F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A14C8C6622522F4200967E78 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -880,6 +940,41 @@
 				2010104C9D4C8A5D109A6599 /* Pods-ModelTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A10615622274B81B00AB371F /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				A10615632274B81B00AB371F /* UseCase */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		A10615632274B81B00AB371F /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				A10615642274B92000AB371F /* TabUseCaseTest.swift */,
+				A106156622785F7E00AB371F /* HistoryUseCaseTest.swift */,
+				A10615682278708A00AB371F /* FavoriteUseCaseTest.swift */,
+				A106156A2278725500AB371F /* FormUseCaseTest.swift */,
+				A106156C2278736D00AB371F /* GrepUseCaseTest.swift */,
+				A106156E227998DA00AB371F /* ScrollUseCaseTest.swift */,
+				A106157022799E4E00AB371F /* SearchUseCaseTest.swift */,
+				A106157222799FEA00AB371F /* SuggestUseCaseTest.swift */,
+				A10615742279A47000AB371F /* ProgressUseCaseTest.swift */,
+				A10615762279BAD800AB371F /* MemoUseCaseTest.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		A106157D227B0FEA00AB371F /* AmbyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A106157E227B0FEA00AB371F /* AmbyUITests.swift */,
+				A1061580227B0FEA00AB371F /* Info.plist */,
+				A1A65E59227B2B64000FACA7 /* Springboard.swift */,
+			);
+			path = AmbyUITests;
 			sourceTree = "<group>";
 		};
 		A112E757212CD76400320048 /* Presentation */ = {
@@ -1346,6 +1441,7 @@
 		A14C8C6A22522F4300967E78 /* ModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				A10615622274B81B00AB371F /* Application */,
 				A1846B56225239C10031E635 /* Domain */,
 				A14C8C6B22522F4300967E78 /* ModelTests.swift */,
 				A14C8C6D22522F4300967E78 /* Info.plist */,
@@ -1556,6 +1652,16 @@
 			isa = PBXGroup;
 			children = (
 				A1846B57225239E90031E635 /* TabDataModelTest.swift */,
+				A106154A226B4A5400AB371F /* CommonHistoryDataModelTest.swift */,
+				A106154C226B62AF00AB371F /* SearchHistoryDataModelTest.swift */,
+				A106154E226D3C3200AB371F /* FavoriteDataModelTest.swift */,
+				A1061550226D3C5300AB371F /* SettingDataModelTest.swift */,
+				A1061552226D3C6000AB371F /* ArticleDataModelTest.swift */,
+				A1061554226D3C7A00AB371F /* FormDataModelTest.swift */,
+				A1061556226D3C8E00AB371F /* ProgressDataModelTest.swift */,
+				A1061558226D3CA000AB371F /* SuggestDataModelTest.swift */,
+				A106155A226D3CAC00AB371F /* ThumbnailDataModelTest.swift */,
+				A106155E226D3CD300AB371F /* MemoDataModelTest.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1937,6 +2043,7 @@
 				A1C0DFFA220F67F300E7A7B6 /* CommonUtil */,
 				A1A3DE5A213878D200F87009 /* Logger */,
 				A14C8C6A22522F4300967E78 /* ModelTests */,
+				A106157D227B0FEA00AB371F /* AmbyUITests */,
 				A57EFEA21E3E06D300B66701 /* Products */,
 				2D6EC82ACCDEE92B54408E2F /* Pods */,
 				1BAE9B5DD71F0DF92296651C /* Frameworks */,
@@ -1952,6 +2059,7 @@
 				A16A6ED9220F248000FFCB5B /* Entity.framework */,
 				A1C0DFF9220F67F200E7A7B6 /* CommonUtil.framework */,
 				A14C8C6922522F4200967E78 /* ModelTests.xctest */,
+				A106157C227B0FEA00AB371F /* AmbyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1994,6 +2102,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		A106157B227B0FEA00AB371F /* AmbyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1061583227B0FEA00AB371F /* Build configuration list for PBXNativeTarget "AmbyUITests" */;
+			buildPhases = (
+				A1061578227B0FEA00AB371F /* Sources */,
+				A1061579227B0FEA00AB371F /* Frameworks */,
+				A106157A227B0FEA00AB371F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1061582227B0FEA00AB371F /* PBXTargetDependency */,
+			);
+			name = AmbyUITests;
+			productName = AmbyUITests;
+			productReference = A106157C227B0FEA00AB371F /* AmbyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		A14C8C6822522F4200967E78 /* ModelTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A14C8C7122522F4300967E78 /* Build configuration list for PBXNativeTarget "ModelTests" */;
@@ -2143,6 +2269,12 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = eifandevs;
 				TargetAttributes = {
+					A106157B227B0FEA00AB371F = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = TBQA5RANYY;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A57EFEA01E3E06D300B66701;
+					};
 					A14C8C6822522F4200967E78 = {
 						CreatedOnToolsVersion = 10.1;
 						DevelopmentTeam = TBQA5RANYY;
@@ -2201,11 +2333,19 @@
 				A16A6ED8220F248000FFCB5B /* Entity */,
 				A1C0DFF8220F67F200E7A7B6 /* CommonUtil */,
 				A14C8C6822522F4200967E78 /* ModelTests */,
+				A106157B227B0FEA00AB371F /* AmbyUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A106157A227B0FEA00AB371F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A14C8C6722522F4200967E78 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2729,12 +2869,41 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A1061578227B0FEA00AB371F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A106157F227B0FEA00AB371F /* AmbyUITests.swift in Sources */,
+				A1A65E5A227B2B64000FACA7 /* Springboard.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A14C8C6522522F4200967E78 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1061551226D3C5300AB371F /* SettingDataModelTest.swift in Sources */,
+				A10615652274B92000AB371F /* TabUseCaseTest.swift in Sources */,
+				A1061555226D3C7A00AB371F /* FormDataModelTest.swift in Sources */,
+				A106154D226B62AF00AB371F /* SearchHistoryDataModelTest.swift in Sources */,
+				A10615692278708A00AB371F /* FavoriteUseCaseTest.swift in Sources */,
+				A10615752279A47000AB371F /* ProgressUseCaseTest.swift in Sources */,
+				A106156722785F7E00AB371F /* HistoryUseCaseTest.swift in Sources */,
+				A1061557226D3C8E00AB371F /* ProgressDataModelTest.swift in Sources */,
+				A106154B226B4A5400AB371F /* CommonHistoryDataModelTest.swift in Sources */,
 				A14C8C6C22522F4300967E78 /* ModelTests.swift in Sources */,
+				A106155F226D3CD300AB371F /* MemoDataModelTest.swift in Sources */,
+				A106157122799E4E00AB371F /* SearchUseCaseTest.swift in Sources */,
+				A106155B226D3CAC00AB371F /* ThumbnailDataModelTest.swift in Sources */,
+				A1061559226D3CA000AB371F /* SuggestDataModelTest.swift in Sources */,
+				A106156F227998DA00AB371F /* ScrollUseCaseTest.swift in Sources */,
+				A1061553226D3C6000AB371F /* ArticleDataModelTest.swift in Sources */,
+				A106156B2278725500AB371F /* FormUseCaseTest.swift in Sources */,
 				A1846B58225239E90031E635 /* TabDataModelTest.swift in Sources */,
+				A106156D2278736D00AB371F /* GrepUseCaseTest.swift in Sources */,
+				A10615772279BAD800AB371F /* MemoUseCaseTest.swift in Sources */,
+				A106157322799FEA00AB371F /* SuggestUseCaseTest.swift in Sources */,
+				A106154F226D3C3200AB371F /* FavoriteDataModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2982,6 +3151,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A1061582227B0FEA00AB371F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A57EFEA01E3E06D300B66701 /* Amby */;
+			targetProxy = A1061581227B0FEA00AB371F /* PBXContainerItemProxy */;
+		};
 		A14C8C7022522F4300967E78 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A1E33A9F2137149A00C93FBE /* Model */;
@@ -3041,6 +3215,101 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A1061584227B0FEA00AB371F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AmbyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.enfandevs.AmbyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Amby;
+			};
+			name = Debug;
+		};
+		A1061585227B0FEA00AB371F /* Debug-Local */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AmbyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.enfandevs.AmbyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Amby;
+			};
+			name = "Debug-Local";
+		};
+		A1061586227B0FEA00AB371F /* Debug-UT */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AmbyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.enfandevs.AmbyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Amby;
+			};
+			name = "Debug-UT";
+		};
+		A1061587227B0FEA00AB371F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TBQA5RANYY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AmbyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.enfandevs.AmbyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Amby;
+			};
+			name = Release;
+		};
 		A14C8C7222522F4300967E78 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 01632704590A0C3D56067ABA /* Pods-ModelTests.debug.xcconfig */;
@@ -4132,6 +4401,17 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A1061583227B0FEA00AB371F /* Build configuration list for PBXNativeTarget "AmbyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1061584227B0FEA00AB371F /* Debug */,
+				A1061585227B0FEA00AB371F /* Debug-Local */,
+				A1061586227B0FEA00AB371F /* Debug-UT */,
+				A1061587227B0FEA00AB371F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A14C8C7122522F4300967E78 /* Build configuration list for PBXNativeTarget "ModelTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

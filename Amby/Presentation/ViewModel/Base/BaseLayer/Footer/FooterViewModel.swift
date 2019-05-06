@@ -63,8 +63,8 @@ final class FooterViewModel {
     }
 
     /// 現在位置
-    private var pageHistories: [Tab] {
-        return TabUseCase.s.pageHistories
+    private var tabs: [Tab] {
+        return TabUseCase.s.tabs
     }
 
     private var currentTab: Tab? {
@@ -115,7 +115,7 @@ final class FooterViewModel {
     private func rebuild() {
         // 再構築
         rows.removeAll()
-        rows = TabUseCase.s.pageHistories.map { Row(tab: $0) }
+        rows = TabUseCase.s.tabs.map { Row(tab: $0) }
         rx_action.onNext(.update(indexPath: nil, animated: true))
     }
 

@@ -357,11 +357,6 @@ final class BaseViewModel {
         }
     }
 
-    /// フォーム情報取得
-    func takeForm(webView: EGWebView) -> Form? {
-        return webViewService.takeForm(webView: webView)
-    }
-
     /// タブの追加
     func insertTab(url: String? = nil) {
         TabUseCase.s.insert(url: url)

@@ -295,7 +295,7 @@ class BaseView: UIView {
     }
 
     private func takeForm() {
-        if let form = self.viewModel.takeForm(webView: self.front) {
+        if let form = front.takeForm() {
             viewModel.storeForm(form: form)
         } else {
             NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.REGISTER_FORM_ERROR_CRAWL, isSuccess: false)
@@ -440,8 +440,8 @@ class BaseView: UIView {
                         let value = self.viewModel.decrypt(value: $0.value)
                         let input = $0
                         // set form
-                        DispatchQueue.mainSyncSafe {
-                            _ = self.front.evaluate(script: "document.forms[\(input.formIndex)].elements[\(input.formInputIndex)].value='\(value)'")
+                        _ = DispatchQueue.mainSyncSafe {
+                            self.front.fillForm(input: input, value: value).then { _ in }
                         }
                     }
                 })
