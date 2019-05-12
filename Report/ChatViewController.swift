@@ -1,6 +1,6 @@
 //
-//  ChatReportViewController.swift
-//  Amby
+//  ChatViewController.swift
+//  Report
 //
 //  Created by iori tenma on 2019/05/12.
 //  Copyright © 2019 eifandevs. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatReportViewController: UIViewController {
+class ChatViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
