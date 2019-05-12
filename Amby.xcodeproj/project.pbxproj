@@ -251,6 +251,8 @@
 		A1A3DE94213AF06300F87009 /* ModelConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE93213AF06300F87009 /* ModelConst.swift */; };
 		A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3DE95213AF31D00F87009 /* ResourceUtil.swift */; };
 		A1A65E5A227B2B64000FACA7 /* Springboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A65E59227B2B64000FACA7 /* Springboard.swift */; };
+		A1A65E5D22884693000FACA7 /* ChatReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A65E5B22884693000FACA7 /* ChatReportViewController.swift */; };
+		A1A65E5E22884693000FACA7 /* ChatReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1A65E5C22884693000FACA7 /* ChatReportViewController.xib */; };
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */; };
 		A1B778322173A6DA00BED141 /* UserOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778312173A6DA00BED141 /* UserOperation.swift */; };
@@ -701,6 +703,8 @@
 		A1A3DE93213AF06300F87009 /* ModelConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelConst.swift; sourceTree = "<group>"; };
 		A1A3DE95213AF31D00F87009 /* ResourceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceUtil.swift; sourceTree = "<group>"; };
 		A1A65E59227B2B64000FACA7 /* Springboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Springboard.swift; sourceTree = "<group>"; };
+		A1A65E5B22884693000FACA7 /* ChatReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatReportViewController.swift; sourceTree = "<group>"; };
+		A1A65E5C22884693000FACA7 /* ChatReportViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatReportViewController.xib; sourceTree = "<group>"; };
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderUseCase.swift; sourceTree = "<group>"; };
 		A1B778312173A6DA00BED141 /* UserOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOperation.swift; sourceTree = "<group>"; };
@@ -1059,6 +1063,8 @@
 			children = (
 				A112E77E212CD76400320048 /* ReportViewController.xib */,
 				A112E7A3212CD76400320048 /* ReportViewController.swift */,
+				A1A65E5B22884693000FACA7 /* ChatReportViewController.swift */,
+				A1A65E5C22884693000FACA7 /* ChatReportViewController.xib */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -2411,6 +2417,7 @@
 				A15C541E214D5E4D001E8AB5 /* SearchMenuCommonHistoryTableViewCell.xib in Resources */,
 				A17AC34D225F656E00E4262E /* RestoreSession.html in Resources */,
 				A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */,
+				A1A65E5E22884693000FACA7 /* ChatReportViewController.xib in Resources */,
 				A1F518BC213593E20029ACB7 /* env-dummy.plist in Resources */,
 				A15C5421214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
 				A13D6A872184A3F100B1832E /* MemoViewController.xib in Resources */,
@@ -3122,6 +3129,7 @@
 				A19506922146A0DF0091DF23 /* PolicyViewController.swift in Sources */,
 				A1A3DE8121387C6F00F87009 /* AppLogger.swift in Sources */,
 				A195066C2144052B0091DF23 /* NotificationService.swift in Sources */,
+				A1A65E5D22884693000FACA7 /* ChatReportViewController.swift in Sources */,
 				A1903050209CF978004F1EA5 /* CircleView.swift in Sources */,
 				A112E873212CD76500320048 /* CircleProgress.swift in Sources */,
 				A11CD32E214F059000D9333F /* OptionMenuHelpTableViewModel.swift in Sources */,
