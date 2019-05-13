@@ -176,6 +176,7 @@
 		A17AC34A225F61CC00E4262E /* JSON+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17AC349225F61CC00E4262E /* JSON+Extend.swift */; };
 		A17AC34B225F621300E4262E /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A17AC347225F617900E4262E /* SwiftyJSON.framework */; };
 		A17AC34D225F656E00E4262E /* RestoreSession.html in Resources */ = {isa = PBXBuildFile; fileRef = A17AC34C225F656E00E4262E /* RestoreSession.html */; };
+		A182B1F62289A68500D182A7 /* dist in Resources */ = {isa = PBXBuildFile; fileRef = A182B1F52289A68500D182A7 /* dist */; };
 		A1846B58225239E90031E635 /* TabDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1846B57225239E90031E635 /* TabDataModelTest.swift */; };
 		A1869C1C217951E3007303B3 /* OptionMenuMemoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */; };
 		A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */; };
@@ -669,6 +670,7 @@
 		A17AC347225F617900E4262E /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		A17AC349225F61CC00E4262E /* JSON+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extend.swift"; sourceTree = "<group>"; };
 		A17AC34C225F656E00E4262E /* RestoreSession.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RestoreSession.html; sourceTree = "<group>"; };
+		A182B1F52289A68500D182A7 /* dist */ = {isa = PBXFileReference; lastKnownFileType = folder; name = dist; path = client/dist; sourceTree = "<group>"; };
 		A1846B57225239E90031E635 /* TabDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabDataModelTest.swift; sourceTree = "<group>"; };
 		A1869C1B217951E3007303B3 /* OptionMenuMemoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableView.swift; sourceTree = "<group>"; };
 		A1869C1F21795242007303B3 /* OptionMenuMemoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewCell.swift; sourceTree = "<group>"; };
@@ -1907,6 +1909,7 @@
 		A1A65E6522886705000FACA7 /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				A182B1F52289A68500D182A7 /* dist */,
 				A1A65E6622886705000FACA7 /* Report.h */,
 				A1A65E6722886705000FACA7 /* Info.plist */,
 				A1A65E722288688F000FACA7 /* ChatViewController.swift */,
@@ -2444,6 +2447,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A182B1F62289A68500D182A7 /* dist in Resources */,
 				A1A65E752288688F000FACA7 /* ChatViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
