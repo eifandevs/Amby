@@ -45,7 +45,7 @@
 .wrapper {
   display: flex;
 }
-.wrapper input[type="text"] {
-  background: gray;
+.wrapper textarea {
+  background: white;
   flex: 1 1 auto;
 }

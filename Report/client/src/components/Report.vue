@@ -52,8 +52,8 @@
       </div>
       <div class="send-message">
         <div class="wrapper">
-          <input type="text" id="text">
-          <button v-on:click="send">send</button>
+          <textarea id="comment" placeholder="ご意見・ご感想をご記入ください"></textarea>
+          <button v-on:click="send">送信</button>
         </div>
       </div>
     </div>
@@ -127,8 +127,8 @@ export default {
 .wrapper {
   display: flex;
 }
-.wrapper input[type="text"] {
-  background: gray;
+.wrapper textarea {
+  background: white;
   flex: 1 1 auto;
 }
 
