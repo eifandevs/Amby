@@ -4,7 +4,7 @@
       <div>
         <div class="message user">
           <div class="data">
-            <span>{{ this.counter }}</span>
+            <span>{{ this.msg }}</span>
           </div>
         </div>
       </div>
@@ -60,28 +60,17 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Report',
-  props: {
-    msg: String
-  },
-  data: function () {
-    return {
-      counter: 0
-    }
-  },
-  methods: {
-    send: function () {
-      this.counter = this.counter + 1
-    }
-  }
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+
+@Component
+export default class Report extends Vue {
+  @Prop() private msg!: string;
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style scoped lang="scss">
 .base {
   display: block;
   margin: 0px;
