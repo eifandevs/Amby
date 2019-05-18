@@ -1,59 +1,13 @@
 <template>
   <div class="base">
     <div class="content">
-      <div>
-        <div class="message user">
-          <div class="data">
-            <span>{{ this.msg }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="mt10">
-        <div class="message user">
-          <div class="data">
-            <span>{{ this.counter }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="mt10 tar">
-        <div class="message system">
-          <div class="data">
-            <span>{{ this.counter }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="mt10">
-        <div class="message user">
-          <div class="data">
-            <span>{{ this.counter }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="mt10">
-        <div class="message user">
-          <div class="data">
-            <span>{{ this.counter }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="mt10">
-        <div class="message user">
-          <div class="data">
-            <span>{{ this.counter }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="mt10">
-        <div class="message user">
-          <div class="data">
-            <span>{{ this.counter }}</span>
-          </div>
-        </div>
-      </div>
+      <UserMessage message="UserMessage"/>
+      <UserMessage message="UserMessage" class="mt10"/>
+      <SystemMessage message="SystemMessage" class="mt10"/>
       <div class="send-message">
         <div class="wrapper">
           <textarea id="comment" placeholder="ご意見・ご感想をご記入ください"></textarea>
-          <button v-on:click="send">送信</button>
+          <button @click="send">送信</button>
         </div>
       </div>
     </div>
@@ -62,10 +16,22 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import UserMessage from '@/components/UserMessage.vue';
+import SystemMessage from '@/components/SystemMessage.vue';
 
-@Component
+@Component({
+  components: {
+    UserMessage,
+    SystemMessage,
+  },
+})
+
+
 export default class Report extends Vue {
-  @Prop() private msg!: string;
+  private counter: number = 0;
+  private send() {
+    this.counter = this.counter + 1;
+  }
 }
 </script>
 
@@ -78,12 +44,6 @@ export default class Report extends Vue {
 
 .mt10 {
   margin-top: 10px;
-}
-.tal {
-  text-align: left;
-}
-.tar {
-  text-align: right;
 }
 
 .content {
