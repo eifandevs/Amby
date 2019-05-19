@@ -26,11 +26,15 @@ import SystemMessage from '@/components/SystemMessage.vue';
   },
 })
 
-
 export default class Report extends Vue {
-  private counter: number = 0;
+  private messages: Array<{msg: string, isUserMessage: boolean}> = [
+                                                                    {msg: 'test', isUserMessage: true},
+                                                                    {msg: 'test', isUserMessage: false},
+                                                                    {msg: 'test', isUserMessage: true},
+                                                                   ];
+
   private send() {
-    this.counter = this.counter + 1;
+    alert(this.messages[0].isUserMessage);
   }
 }
 </script>
