@@ -642,9 +642,9 @@ extension BaseView: EGApplicationDelegate {
                     frame.origin.x += distance.x
                 } else {
                     if touchBeganPoint.y != -1 {
-                        if fabs(touchPoint.y - touchBeganPoint.y) < 7.5 {
+                        if abs(touchPoint.y - touchBeganPoint.y) < 7.5 {
                             // エッジスワイプではないスワイプを検知し、y軸に誤差7.5pxで、x軸に11px移動したらフロントビューの移動をする
-                            if fabs(touchPoint.x - touchBeganPoint.x) > 11 {
+                            if abs(touchPoint.x - touchBeganPoint.x) > 11 {
                                 viewModel.state.insert(.isChangingFront)
                             }
                         } else {
