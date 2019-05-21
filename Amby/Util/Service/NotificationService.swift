@@ -76,12 +76,10 @@ class NotificationService {
             let alertSheet = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.actionSheet)
 
             // 自分の選択肢を生成
-            let action1 = UIAlertAction(title: MessageConst.COMMON.OK, style: UIAlertActionStyle.default, handler: {
-                (_: UIAlertAction!) in
+            let action1 = UIAlertAction(title: MessageConst.COMMON.OK, style: UIAlertActionStyle.default, handler: { (_: UIAlertAction!) in
                 completion?()
             })
-            let action2 = UIAlertAction(title: MessageConst.COMMON.CANCEL, style: UIAlertActionStyle.cancel, handler: {
-                (_: UIAlertAction!) in
+            let action2 = UIAlertAction(title: MessageConst.COMMON.CANCEL, style: UIAlertActionStyle.cancel, handler: { (_: UIAlertAction!) in
                 cancel?()
             })
 
