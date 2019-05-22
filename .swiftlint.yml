@@ -18,7 +18,6 @@ excluded:
 disabled_rules:
 - variable_name
 - type_name
-- nesting
 - cyclomatic_complexity
 - type_body_length
 - function_body_length
