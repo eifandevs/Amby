@@ -22,7 +22,6 @@ disabled_rules:
 - type_body_length
 - function_body_length
 - multiple_closures_with_trailing_closure
-- file_length
 - notification_center_detachment
 
 # error to warning
