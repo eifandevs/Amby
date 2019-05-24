@@ -1,9 +1,14 @@
 <template>
   <div class="base">
     <div class="content">
-      <UserMessage message="UserMessage"/>
-      <UserMessage message="UserMessage" class="mt10"/>
-      <SystemMessage message="SystemMessage" class="mt10"/>
+      <div v-for="(object, index) in this.messages">
+        <div v-if="object.isUserMessage">
+          <UserMessage class="mt10" v-bind:message="object.msg"/>
+        </div>
+        <div v-else>
+          <SystemMessage class="mt10" v-bind:message="object.msg"/>
+        </div>
+      </div>
       <div class="send-message">
         <div class="wrapper">
           <textarea id="comment" placeholder="ご意見・ご感想をご記入ください"></textarea>
@@ -28,9 +33,9 @@ import SystemMessage from '@/components/SystemMessage.vue';
 
 export default class Report extends Vue {
   private messages: Array<{msg: string, isUserMessage: boolean}> = [
-                                                                    {msg: 'test', isUserMessage: true},
-                                                                    {msg: 'test', isUserMessage: false},
-                                                                    {msg: 'test', isUserMessage: true},
+                                                                    {msg: 'testtesttesttest', isUserMessage: true},
+                                                                    {msg: 'testtesttesttest', isUserMessage: false},
+                                                                    {msg: 'testtesttesttest', isUserMessage: true},
                                                                    ];
 
   private send() {
