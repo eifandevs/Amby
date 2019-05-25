@@ -1,7 +1,7 @@
 <template>
   <div class="base">
     <div class="content">
-      <div v-for="(object, index) in this.messages">
+      <div v-for="(object, index) in this.messages" :key="index">
         <div v-if="object.isUserMessage">
           <UserMessage class="mt10" v-bind:message="object.msg"/>
         </div>

@@ -2,7 +2,7 @@
   <div class="tar">
     <div class="message system">
       <div class="data">
-        <span>{{ this.message }}</span>
+        <span class="line-break">{{ this.message }}</span>
       </div>
     </div>
   </div>
@@ -38,5 +38,9 @@ export default class Message extends Vue {
 }
 .data {
   margin: 10px;
+}
+
+.line-break {
+  word-break: break-all;
 }
 </style>
