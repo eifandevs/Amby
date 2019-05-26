@@ -622,12 +622,10 @@ extension BaseView: EGApplicationDelegate {
             let touchPoint = touch.location(in: self)
             if viewModel.isEdgeSwiped(touchPoint: touchPoint) {
                 // エッジスワイプ検知
-                if !viewModel.moveHistoryIfHistorySwipe(touchPoint: touchBeganPoint) {
-                    // 操作を無効化
-                    invalidateUserInteraction()
+                // 操作を無効化
+                invalidateUserInteraction()
 
-                    rx_action.onNext(.swipe(direction: viewModel.swipeDirection))
-                }
+                rx_action.onNext(.swipe(direction: viewModel.swipeDirection))
             }
 
             if webViews.count > 1 && viewModel.swipeDirection == .none && front.isSwiping {

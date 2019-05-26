@@ -402,25 +402,6 @@ final class BaseViewModel {
         return FormUseCase.s.select(url: url).first
     }
 
-    func moveHistoryIfHistorySwipe(touchPoint _: CGPoint) -> Bool {
-        return false
-        // ヒストリースワイプはやめる
-//        let isHistorySwipe = touchPoint.y < (AppConst.DEVICE.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER.HEADER_HEIGHT
-//
-//        if isHistorySwipe {
-//            state.remove(.isTouching)
-//
-//            // 画面上半分のスワイプの場合は、履歴移動
-//            if swipeDirection == .left {
-//                historyBack()
-//            } else {
-//                historyForward()
-//            }
-//        }
-//
-//        return isHistorySwipe
-    }
-
     /// 前webviewのキャプチャ取得
     func getPreviousCapture() -> UIImage? {
         if let currentLocation = currentLocation {
