@@ -38,7 +38,7 @@ type_body_length:
 - 400 # warning
 
 file_length:
-- 500 # warning
+- 600 # warning
 
 function_body_length:
 - 100 # warning
