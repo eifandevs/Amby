@@ -16,6 +16,7 @@ excluded:
 - Amby-DevelopUITests
 
 disabled_rules:
+- nesting
 - variable_name
 - type_name
 - cyclomatic_complexity
