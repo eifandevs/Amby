@@ -1,6 +1,6 @@
 //
 //  SplashViewController.swift
-//  Qas
+//  Amby
 //
 //  Created by temma on 2017/09/04.
 //  Copyright © 2017年 eifaniori. All rights reserved.

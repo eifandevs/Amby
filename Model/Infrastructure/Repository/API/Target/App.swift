@@ -1,6 +1,6 @@
 //
 //  App.swift
-//  Qas
+//  Amby
 //
 //  Created by tenma on 2018/04/16.
 //  Copyright © 2018年 eifandevs. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  Dictionary+Extend.swift
-//  Qas
+//  Amby
 //
 //  Created by temma on 2017/07/10.
 //  Copyright © 2017年 eifaniori. All rights reserved.

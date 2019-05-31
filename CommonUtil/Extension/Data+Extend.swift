@@ -1,6 +1,6 @@
 //
 //  Data+Extension.swift
-//  Qas
+//  Amby
 //
 //  Created by temma on 2017/09/28.
 //  Copyright © 2017年 eifaniori. All rights reserved.

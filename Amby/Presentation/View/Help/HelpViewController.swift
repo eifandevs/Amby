@@ -1,6 +1,6 @@
 //
 //  HelpViewController.swift
-//  Qas
+//  Amby
 //
 //  Created by temma on 2017/08/20.
 //  Copyright © 2017年 eifaniori. All rights reserved.

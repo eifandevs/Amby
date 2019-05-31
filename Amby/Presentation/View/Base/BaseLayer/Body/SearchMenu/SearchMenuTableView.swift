@@ -1,6 +1,6 @@
 //
 //  SearchMenuTableView.swift
-//  Qas
+//  Amby
 //
 //  Created by temma on 2017/07/18.
 //  Copyright © 2017年 eifaniori. All rights reserved.
