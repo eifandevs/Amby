@@ -3,7 +3,7 @@
 //  one-hand-browsing
 //
 //  Created by user1 on 2016/07/19.
-//  Copyright © 2016年 eifaniori. All rights reserved.
+//  Copyright © 2016年 eifandevs. All rights reserved.
 //
 
 import Foundation

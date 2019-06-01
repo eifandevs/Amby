@@ -3,7 +3,7 @@
 //  Amby
 //
 //  Created by tenma on 2018/03/19.
-//  Copyright © 2018年 eifaniori. All rights reserved.
+//  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
 import Foundation

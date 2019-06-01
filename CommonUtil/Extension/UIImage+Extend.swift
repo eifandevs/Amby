@@ -3,7 +3,7 @@
 //  Eiger
 //
 //  Created by tenma on 2017/03/27.
-//  Copyright © 2017年 eifaniori. All rights reserved.
+//  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
 import Foundation

@@ -3,7 +3,7 @@
 //  Amby
 //
 //  Created by temma on 2017/12/21.
-//  Copyright © 2017年 eifaniori. All rights reserved.
+//  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
 import Entity
