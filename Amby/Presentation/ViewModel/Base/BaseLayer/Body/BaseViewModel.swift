@@ -54,8 +54,6 @@ final class BaseViewModel {
 
     let rx_action = PublishSubject<BaseViewModelAction>()
 
-    let webViewService = WebViewService()
-
     var currentUrl: String? {
         return TabUseCase.s.currentUrl
     }
