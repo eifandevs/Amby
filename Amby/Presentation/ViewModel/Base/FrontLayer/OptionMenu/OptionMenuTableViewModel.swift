@@ -26,6 +26,7 @@ final class OptionMenuTableViewModel {
         case setting
         case help
         case cooperation
+        case sync
         case analysisHtml
         case app
 
@@ -40,6 +41,7 @@ final class OptionMenuTableViewModel {
             case .setting: return R.image.optionmenuSetting.name
             case .help: return R.image.optionmenuHelp.name
             case .cooperation: return R.image.optionmenuApp.name
+            case .sync: return R.image.optionmenuApp.name
             case .analysisHtml: return R.image.optionmenuApp.name
             case .app: return R.image.optionmenuApp.name
             }
@@ -56,6 +58,8 @@ final class OptionMenuTableViewModel {
             case .setting: return AppConst.OPTION_MENU.SETTING
             case .help: return AppConst.OPTION_MENU.HELP
             case .cooperation: return AppConst.OPTION_MENU.COORERATION
+            case .sync: return AppConst.OPTION_MENU.SYNC
+            case .sync: return AppConst.OPTION_MENU.SYNC
             case .analysisHtml: return AppConst.OPTION_MENU.ANALYTICS
             case .app: return AppConst.OPTION_MENU.APP_INFORMATION
             }
@@ -74,6 +78,7 @@ final class OptionMenuTableViewModel {
         Row(cellType: .help),
         Row(cellType: .cooperation),
         Row(cellType: .analysisHtml),
+        Row(cellType: .sync),
         Row(cellType: .app)
     ]
     // 高さ
