@@ -18,7 +18,7 @@ class CustomDialogService {
             let firstTextField = alertController.textFields![0] as UITextField
             action(firstTextField.text ?? "")
         })
-        let cancelAction = UIAlertAction(title: AppConst.APP.CANCEL, style: UIAlertActionStyle.default, handler: {(_: UIAlertAction!) -> Void in })
+        let cancelAction = UIAlertAction(title: AppConst.APP.CANCEL, style: UIAlertActionStyle.default, handler: { (_: UIAlertAction!) -> Void in })
 
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)

@@ -16,14 +16,13 @@ excluded:
 - Amby-DevelopUITests
 
 disabled_rules:
+- nesting
 - variable_name
 - type_name
-- nesting
 - cyclomatic_complexity
 - type_body_length
 - function_body_length
 - multiple_closures_with_trailing_closure
-- file_length
 - notification_center_detachment
 
 # error to warning
@@ -40,7 +39,7 @@ type_body_length:
 - 400 # warning
 
 file_length:
-- 500 # warning
+- 600 # warning
 
 function_body_length:
 - 100 # warning

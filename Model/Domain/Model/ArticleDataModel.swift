@@ -1,9 +1,9 @@
 //
 //  ArticleDataModel.swift
-//  Qas
+//  Amby
 //
 //  Created by temma on 2018/02/18.
-//  Copyright © 2018年 eifaniori. All rights reserved.
+//  Copyright © 2018年 eifandevs. All rights reserved.
 //
 
 import Entity

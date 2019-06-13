@@ -3,7 +3,7 @@
 //  Eiger
 //
 //  Created by temma on 2017/02/05.
-//  Copyright © 2017年 eifaniori. All rights reserved.
+//  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
 import CommonUtil
@@ -622,12 +622,10 @@ extension BaseView: EGApplicationDelegate {
             let touchPoint = touch.location(in: self)
             if viewModel.isEdgeSwiped(touchPoint: touchPoint) {
                 // エッジスワイプ検知
-                if !viewModel.moveHistoryIfHistorySwipe(touchPoint: touchBeganPoint) {
-                    // 操作を無効化
-                    invalidateUserInteraction()
+                // 操作を無効化
+                invalidateUserInteraction()
 
-                    rx_action.onNext(.swipe(direction: viewModel.swipeDirection))
-                }
+                rx_action.onNext(.swipe(direction: viewModel.swipeDirection))
             }
 
             if webViews.count > 1 && viewModel.swipeDirection == .none && front.isSwiping {
@@ -642,9 +640,9 @@ extension BaseView: EGApplicationDelegate {
                     frame.origin.x += distance.x
                 } else {
                     if touchBeganPoint.y != -1 {
-                        if fabs(touchPoint.y - touchBeganPoint.y) < 7.5 {
+                        if abs(touchPoint.y - touchBeganPoint.y) < 7.5 {
                             // エッジスワイプではないスワイプを検知し、y軸に誤差7.5pxで、x軸に11px移動したらフロントビューの移動をする
-                            if fabs(touchPoint.x - touchBeganPoint.x) > 11 {
+                            if abs(touchPoint.x - touchBeganPoint.x) > 11 {
                                 viewModel.state.insert(.isChangingFront)
                             }
                         } else {

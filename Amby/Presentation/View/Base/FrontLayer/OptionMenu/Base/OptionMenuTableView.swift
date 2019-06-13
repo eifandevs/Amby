@@ -1,9 +1,9 @@
 //
 //  OptionMenuTableView.swift
-//  Qas
+//  Amby
 //
 //  Created by User on 2017/06/12.
-//  Copyright © 2017年 eifaniori. All rights reserved.
+//  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
 import Foundation
