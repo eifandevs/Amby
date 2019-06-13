@@ -3,7 +3,7 @@
 //  Eiger
 //
 //  Created by temma on 2017/02/05.
-//  Copyright © 2017年 eifaniori. All rights reserved.
+//  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
 import CommonUtil
@@ -622,12 +622,10 @@ extension BaseView: EGApplicationDelegate {
             let touchPoint = touch.location(in: self)
             if viewModel.isEdgeSwiped(touchPoint: touchPoint) {
                 // エッジスワイプ検知
-                if !viewModel.moveHistoryIfHistorySwipe(touchPoint: touchBeganPoint) {
-                    // 操作を無効化
-                    invalidateUserInteraction()
+                // 操作を無効化
+                invalidateUserInteraction()
 
-                    rx_action.onNext(.swipe(direction: viewModel.swipeDirection))
-                }
+                rx_action.onNext(.swipe(direction: viewModel.swipeDirection))
             }
 
             if webViews.count > 1 && viewModel.swipeDirection == .none && front.isSwiping {
@@ -642,9 +640,9 @@ extension BaseView: EGApplicationDelegate {
                     frame.origin.x += distance.x
                 } else {
                     if touchBeganPoint.y != -1 {
-                        if fabs(touchPoint.y - touchBeganPoint.y) < 7.5 {
+                        if abs(touchPoint.y - touchBeganPoint.y) < 7.5 {
                             // エッジスワイプではないスワイプを検知し、y軸に誤差7.5pxで、x軸に11px移動したらフロントビューの移動をする
-                            if fabs(touchPoint.x - touchBeganPoint.x) > 11 {
+                            if abs(touchPoint.x - touchBeganPoint.x) > 11 {
                                 viewModel.state.insert(.isChangingFront)
                             }
                         } else {
@@ -830,8 +828,8 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
     // display alert dialog
     func webView(_: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let otherAction = UIAlertAction(title: "OK", style: .default) {
-            _ in completionHandler()
+        let otherAction = UIAlertAction(title: "OK", style: .default) { _ in
+            completionHandler()
         }
         alertController.addAction(otherAction)
         NotificationService.presentAlert(alertController: alertController)
@@ -840,11 +838,11 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
     // display confirm dialog
     func webView(_: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame _: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
-            _ in completionHandler(false)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            completionHandler(false)
         }
-        let okAction = UIAlertAction(title: "OK", style: .default) {
-            _ in completionHandler(true)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            completionHandler(true)
         }
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
@@ -865,11 +863,11 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
                 completionHandler("")
             }
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
-            _ in completionHandler("")
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            completionHandler("")
         }
-        let okAction = UIAlertAction(title: "OK", style: .default) {
-            _ in okHandler()
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            okHandler()
         }
         alertController.addTextField { $0.text = defaultText }
         alertController.addAction(cancelAction)

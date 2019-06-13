@@ -1,9 +1,9 @@
 //
 //  Float+Extend.swift
-//  Qas
+//  Amby
 //
 //  Created by temma on 2017/11/11.
-//  Copyright © 2017年 eifaniori. All rights reserved.
+//  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
 import Foundation

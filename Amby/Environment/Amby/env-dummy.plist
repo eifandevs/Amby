@@ -7,7 +7,7 @@
 	<key>APP_SERVER_DOMAIN</key>
 	<string>https://</string>
 	<key>KEY_ENCRYPT_IV_TOKEN</key>
-	<string>com.eifaniori.amby-encrypt-iv-token</string>
+	<string>com.eifandevs.amby-encrypt-iv-token</string>
 	<key>KEY_ENCRYPT_SERVICE_TOKEN</key>
 	<string>com.eifandevs.amby-encrypt-service-token</string>
 	<key>KEY_REALM_TOKEN</key>

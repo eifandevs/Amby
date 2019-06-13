@@ -3,12 +3,13 @@
 //  Eiger
 //
 //  Created by temma on 2017/01/29.
-//  Copyright © 2017年 eifaniori. All rights reserved.
+//  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
 import Entity
 import MessageUI
 import Model
+import Report
 import RxCocoa
 import RxSwift
 import UIKit
@@ -247,7 +248,7 @@ class BaseViewController: UIViewController {
 
     /// レポート画面表示
     private func report() {
-        let vc = ReportViewController()
+        let vc = ChatViewController()
         present(vc, animated: true)
     }
 

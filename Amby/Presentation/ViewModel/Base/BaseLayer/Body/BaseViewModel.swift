@@ -3,7 +3,7 @@
 //  Eiger
 //
 //  Created by tenma on 2017/02/07.
-//  Copyright © 2017年 eifaniori. All rights reserved.
+//  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
 import Entity
@@ -53,8 +53,6 @@ final class BaseViewModel {
     var state: BaseViewModelState = []
 
     let rx_action = PublishSubject<BaseViewModelAction>()
-
-    let webViewService = WebViewService()
 
     var currentUrl: String? {
         return TabUseCase.s.currentUrl
@@ -400,25 +398,6 @@ final class BaseViewModel {
     /// フォーム情報取得
     func selectForm(url: String) -> Form? {
         return FormUseCase.s.select(url: url).first
-    }
-
-    func moveHistoryIfHistorySwipe(touchPoint _: CGPoint) -> Bool {
-        return false
-        // ヒストリースワイプはやめる
-//        let isHistorySwipe = touchPoint.y < (AppConst.DEVICE.DISPLAY_SIZE.height / 2) - AppConst.BASE_LAYER.HEADER_HEIGHT
-//
-//        if isHistorySwipe {
-//            state.remove(.isTouching)
-//
-//            // 画面上半分のスワイプの場合は、履歴移動
-//            if swipeDirection == .left {
-//                historyBack()
-//            } else {
-//                historyForward()
-//            }
-//        }
-//
-//        return isHistorySwipe
     }
 
     /// 前webviewのキャプチャ取得
