@@ -114,6 +114,11 @@ final class OptionMenuTableViewModel {
         TrendUseCase.s.load()
     }
 
+    /// 同期画面表示
+    func openSync() {
+        HtmlAnalysisUseCase.s.analytics()
+    }
+
     /// html表示
     func analysisHtml() {
         HtmlAnalysisUseCase.s.analytics()
