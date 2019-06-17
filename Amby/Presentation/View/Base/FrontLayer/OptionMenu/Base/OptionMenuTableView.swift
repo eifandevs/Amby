@@ -213,7 +213,7 @@ extension OptionMenuTableView: UITableViewDelegate {
             rx_action.onNext(.close)
             return
         case .analysisHtml:
-            viewModel.analysisHtml()
+            viewModel.openSync()
             rx_action.onNext(.close)
             return
         case .app:
