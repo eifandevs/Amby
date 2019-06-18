@@ -209,8 +209,11 @@ extension OptionMenuTableView: UITableViewDelegate {
                 })
                 .disposed(by: rx.disposeBag)
             detailView = cooperationTableView
+        case .sync:
+            rx_action.onNext(.close)
+            return
         case .analysisHtml:
-            viewModel.analysisHtml()
+            viewModel.openSync()
             rx_action.onNext(.close)
             return
         case .app:
