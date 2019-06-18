@@ -107,6 +107,9 @@
 		A13D6AA12189F7A000B1832E /* OptionMenuMemoTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */; };
 		A13D6AA3218A740F00B1832E /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */; };
 		A13D6AE6218B35F900B1832E /* MemoViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6AE5218B35F900B1832E /* MemoViewControllerViewModel.swift */; };
+		A1445A7D22B5290700B30A65 /* SyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7B22B5290700B30A65 /* SyncViewController.swift */; };
+		A1445A7E22B5290700B30A65 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1445A7C22B5290700B30A65 /* SyncViewController.xib */; };
+		A1445A8022B689EA00B30A65 /* SyncUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7F22B689EA00B30A65 /* SyncUseCase.swift */; };
 		A14C8C6C22522F4300967E78 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14C8C6B22522F4300967E78 /* ModelTests.swift */; };
 		A14C8C6E22522F4300967E78 /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; };
 		A14F2FA1217B7F2D00EB95FE /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14F2F9F217B7F2D00EB95FE /* PasscodeViewController.swift */; };
@@ -599,6 +602,9 @@
 		A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuMemoTableViewModel.swift; sourceTree = "<group>"; };
 		A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
 		A13D6AE5218B35F900B1832E /* MemoViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewControllerViewModel.swift; sourceTree = "<group>"; };
+		A1445A7B22B5290700B30A65 /* SyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewController.swift; sourceTree = "<group>"; };
+		A1445A7C22B5290700B30A65 /* SyncViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncViewController.xib; sourceTree = "<group>"; };
+		A1445A7F22B689EA00B30A65 /* SyncUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncUseCase.swift; sourceTree = "<group>"; };
 		A14C8C6922522F4200967E78 /* ModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14C8C6B22522F4300967E78 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		A14C8C6D22522F4300967E78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1031,6 +1037,7 @@
 		A112E771212CD76400320048 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A1445A7A22B5281500B30A65 /* Sync */,
 				A1FFA681219A3FF70092C4D6 /* Development */,
 				A1FFA682219A3FF70092C4D6 /* Donation */,
 				A112E7A6212CD76400320048 /* Base */,
@@ -1464,6 +1471,15 @@
 			path = Memo;
 			sourceTree = "<group>";
 		};
+		A1445A7A22B5281500B30A65 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				A1445A7B22B5290700B30A65 /* SyncViewController.swift */,
+				A1445A7C22B5290700B30A65 /* SyncViewController.xib */,
+			);
+			path = Sync;
+			sourceTree = "<group>";
+		};
 		A14C8C6A22522F4300967E78 /* ModelTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1497,6 +1513,7 @@
 				A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */,
 				A14F2FA3217B834000EB95FE /* PasscodeUseCase.swift */,
 				A1724192223E751A00472477 /* HtmlAnalysisUseCase.swift */,
+				A1445A7F22B689EA00B30A65 /* SyncUseCase.swift */,
 			);
 			path = OptionMenu;
 			sourceTree = "<group>";
@@ -2520,6 +2537,7 @@
 				A15C5465214D699D001E8AB5 /* OptionMenuFavoriteTableViewCell.xib in Resources */,
 				A1903056209CF978004F1EA5 /* article_stub.json in Resources */,
 				A19506932146A0DF0091DF23 /* PolicyViewController.xib in Resources */,
+				A1445A7E22B5290700B30A65 /* SyncViewController.xib in Resources */,
 				A17241BA22452CD800472477 /* post.html in Resources */,
 				A15C5499214D935E001E8AB5 /* com.mono0926.LicensePlist.latest_result.txt in Resources */,
 				A15C544C214D699D001E8AB5 /* OptionMenuTableViewCell.xib in Resources */,
@@ -3074,6 +3092,7 @@
 				A19506492143F8B80091DF23 /* SuggestUseCase.swift in Sources */,
 				A14F2FA4217B834000EB95FE /* PasscodeUseCase.swift in Sources */,
 				A195063C2143F8AF0091DF23 /* SearchHistoryDataModel.swift in Sources */,
+				A1445A8022B689EA00B30A65 /* SyncUseCase.swift in Sources */,
 				A195064C2143F8B80091DF23 /* ProgressUseCase.swift in Sources */,
 				A19506412143F8B80091DF23 /* FormUseCase.swift in Sources */,
 				A15C53F0214D4CDC001E8AB5 /* ContactUseCase.swift in Sources */,
@@ -3231,6 +3250,7 @@
 				A1903052209CF978004F1EA5 /* OptionMenuView.swift in Sources */,
 				A112E875212CD76500320048 /* CircleMenuItem.swift in Sources */,
 				A15C5463214D699D001E8AB5 /* OptionMenuFormTableView.swift in Sources */,
+				A1445A7D22B5290700B30A65 /* SyncViewController.swift in Sources */,
 				A112E867212CD76500320048 /* PaddingLabel.swift in Sources */,
 				A1042F442258E70400DA6E78 /* R.generated.swift in Sources */,
 				A11CD330214F059000D9333F /* BaseViewControllerViewModel.swift in Sources */,
