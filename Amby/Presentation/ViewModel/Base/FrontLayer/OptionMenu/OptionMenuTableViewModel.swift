@@ -59,7 +59,6 @@ final class OptionMenuTableViewModel {
             case .help: return AppConst.OPTION_MENU.HELP
             case .cooperation: return AppConst.OPTION_MENU.COORERATION
             case .sync: return AppConst.OPTION_MENU.SYNC
-            case .sync: return AppConst.OPTION_MENU.SYNC
             case .analysisHtml: return AppConst.OPTION_MENU.ANALYTICS
             case .app: return AppConst.OPTION_MENU.APP_INFORMATION
             }
