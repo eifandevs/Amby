@@ -26,6 +26,8 @@ target 'Model' do
   pod 'NSObject+Rx', '~> 4.2'
   pod 'Moya/RxSwift', '~> 11.0'
   pod 'GithubAPI', '~> 0.0.5'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
 
   target 'ModelTests' do
     inherit! :search_paths

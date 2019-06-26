@@ -1,8 +1,50 @@
 PODS:
   - Alamofire (4.7.3)
   - BaseAPI (0.1.2)
+  - Firebase/Auth (6.3.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 6.1.2)
+  - Firebase/CoreOnly (6.3.0):
+    - FirebaseCore (= 6.0.3)
+  - FirebaseAuth (6.1.2):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.2)
+    - GoogleUtilities/Environment (~> 6.2)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (6.0.3):
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/Logger (~> 6.0)
   - GithubAPI (0.0.5):
     - BaseAPI
+  - GoogleSignIn (4.4.0):
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.2.1):
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+  - GoogleToolboxForMac/Defines (2.2.1)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.2.1):
+    - GoogleToolboxForMac/DebugUtils (= 2.2.1)
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.2.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.2.1)
+  - GoogleUtilities/AppDelegateSwizzler (6.2.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.2.1)
+  - GoogleUtilities/Logger (6.2.1):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/Network (6.2.1):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/NSData+zlib
+    - GoogleUtilities/Reachability
+  - GoogleUtilities/NSData+zlib (6.2.1)
+  - GoogleUtilities/Reachability (6.2.1):
+    - GoogleUtilities/Logger
+  - GTMSessionFetcher/Core (1.2.2)
   - LicensePlist (1.8.8)
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
@@ -25,7 +67,9 @@ PODS:
   - VerticalAlignmentLabel (0.1.0)
 
 DEPENDENCIES:
+  - Firebase/Auth
   - GithubAPI (~> 0.0.5)
+  - GoogleSignIn
   - LicensePlist (~> 1.8)
   - Moya/RxSwift (~> 11.0)
   - NSObject+Rx (~> 4.2)
@@ -40,7 +84,15 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   BaseAPI: e234e06c832a85154f34f09d6b626364059b1638
+  Firebase: 8432d732974498afd5987e9001a05f90f1a3d625
+  FirebaseAuth: 7fa2cc010b93770831a4e7a60651b52c3b8d111a
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: 68f8a7f50cdae542715d4e86afa37c4067217dcb
   GithubAPI: f098a759ced36a54a49e2f5ec6ccdc89fc6a7d9b
+  GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
+  GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
+  GoogleUtilities: c7a0b08bda3bf808be823ed151f0e28ac6866e71
+  GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   LicensePlist: c30d20e39985de8600cccda21096cfa98865483b
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   NSObject+Rx: 9884a92f19b610795c431e10b4e601913b59c9e9
@@ -54,6 +106,6 @@ SPEC CHECKSUMS:
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: e439ed705b0b738f757a3c02d62cced41094326f
+PODFILE CHECKSUM: 8a55e11d6e14e6b75c2d191282388a4a1e2d23a4
 
 COCOAPODS: 1.4.0
