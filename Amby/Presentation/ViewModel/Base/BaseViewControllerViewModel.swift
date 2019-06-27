@@ -21,6 +21,7 @@ enum BaseViewControllerViewModelAction {
     case mailer
     case openSource
     case report
+    case sync
     case memo(memo: Memo)
     case notice(message: String, isSuccess: Bool)
     case tabGroupTitle(groupContext: String)
@@ -75,6 +76,14 @@ final class BaseViewControllerViewModel {
                 } else if case .confirm = action {
                     self.rx_action.onNext(.passcodeConfirm)
                 }
+            }
+            .disposed(by: disposeBag)
+
+        // 同期監視
+        SyncUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case .present = action else { return }
+                self.rx_action.onNext(.sync)
             }
             .disposed(by: disposeBag)
 

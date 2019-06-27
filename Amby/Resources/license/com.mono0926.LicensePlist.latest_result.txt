@@ -22,9 +22,62 @@ name: BaseAPI, nameSpecified:
 body: Copyright (c) 2018 s…
 version: 0.1.2
 
-name: GithubAPI, nameSpecified: 
-body: Copyright (c) 2018 s…
-version: 0.0.5
+name: Firebase, nameSpecified: 
+body: Copyright 2019 Googl…
+version: 6.3.0
+
+name: Firebase, nameSpecified: 
+body: Copyright 2019 Googl…
+version: 6.3.0
+
+name: Firebase, nameSpecified: 
+body: Copyright 2019 Googl…
+version: 6.3.0
+
+name: FirebaseAuth, nameSpecified: 
+body: 
+                   …
+version: 6.1.2
+
+name: FirebaseAuth, nameSpecified: 
+body: 
+                   …
+version: 6.1.2
+
+name: FirebaseAuth, nameSpecified: 
+body: 
+                   …
+version: 6.1.2
+
+name: FirebaseAuthInterop, nameSpecified: 
+body: 
+                   …
+version: 1.0.0
+
+name: FirebaseAuthInterop, nameSpecified: 
+body: 
+                   …
+version: 1.0.0
+
+name: FirebaseAuthInterop, nameSpecified: 
+body: 
+                   …
+version: 1.0.0
+
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.0.3
+
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.0.3
+
+name: FirebaseCore, nameSpecified: 
+body: 
+                   …
+version: 6.0.3
 
 name: GithubAPI, nameSpecified: 
 body: Copyright (c) 2018 s…
@@ -33,6 +86,67 @@ version: 0.0.5
 name: GithubAPI, nameSpecified: 
 body: Copyright (c) 2018 s…
 version: 0.0.5
+
+name: GithubAPI, nameSpecified: 
+body: Copyright (c) 2018 s…
+version: 0.0.5
+
+name: GoogleSignIn, nameSpecified: 
+body: Copyright 2018 Googl…
+version: 4.4.0
+
+name: GoogleSignIn, nameSpecified: 
+body: Copyright 2018 Googl…
+version: 4.4.0
+
+name: GoogleSignIn, nameSpecified: 
+body: Copyright 2018 Googl…
+version: 4.4.0
+
+name: GoogleToolboxForMac, nameSpecified: 
+body: 
+                   …
+version: 2.2.1
+
+name: GoogleToolboxForMac, nameSpecified: 
+body: 
+                   …
+version: 2.2.1
+
+name: GoogleToolboxForMac, nameSpecified: 
+body: 
+                   …
+version: 2.2.1
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.2.1
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.2.1
+
+name: GoogleUtilities, nameSpecified: 
+body: 
+                   …
+version: 6.2.1
+
+name: GTMSessionFetcher, nameSpecified: 
+body: 
+                   …
+version: 1.2.2
+
+name: GTMSessionFetcher, nameSpecified: 
+body: 
+                   …
+version: 1.2.2
+
+name: GTMSessionFetcher, nameSpecified: 
+body: 
+                   …
+version: 1.2.2
 
 name: LicensePlist, nameSpecified: 
 body: MIT License

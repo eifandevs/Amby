@@ -6,12 +6,20 @@
 //  Copyright © 2019 eifandevs. All rights reserved.
 //
 
+import Firebase
+import GoogleSignIn
+import SnapKit
 import UIKit
 
 class SyncViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let gidButton = GIDSignInButton(frame: CGRect.zero)
+        view.addSubview(gidButton)
+        gidButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
         // Do any additional setup after loading the view.
     }
 
