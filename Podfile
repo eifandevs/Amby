@@ -27,6 +27,7 @@ target 'Model' do
   pod 'Moya/RxSwift', '~> 11.0'
   pod 'GithubAPI', '~> 0.0.5'
   pod 'Firebase/Auth'
+  pod 'Firebase/Core'
   pod 'GoogleSignIn'
 
   target 'ModelTests' do

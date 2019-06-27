@@ -34,6 +34,18 @@ name: Firebase, nameSpecified:
 body: Copyright 2019 Googl…
 version: 6.3.0
 
+name: FirebaseAnalytics, nameSpecified: 
+body: Copyright 2019 Googl…
+version: 6.0.2
+
+name: FirebaseAnalytics, nameSpecified: 
+body: Copyright 2019 Googl…
+version: 6.0.2
+
+name: FirebaseAnalytics, nameSpecified: 
+body: Copyright 2019 Googl…
+version: 6.0.2
+
 name: FirebaseAuth, nameSpecified: 
 body: 
                    …
@@ -79,9 +91,20 @@ body:
                    …
 version: 6.0.3
 
-name: GithubAPI, nameSpecified: 
-body: Copyright (c) 2018 s…
-version: 0.0.5
+name: FirebaseInstanceID, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
+
+name: FirebaseInstanceID, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
+
+name: FirebaseInstanceID, nameSpecified: 
+body: 
+                   …
+version: 4.2.0
 
 name: GithubAPI, nameSpecified: 
 body: Copyright (c) 2018 s…
@@ -90,6 +113,22 @@ version: 0.0.5
 name: GithubAPI, nameSpecified: 
 body: Copyright (c) 2018 s…
 version: 0.0.5
+
+name: GithubAPI, nameSpecified: 
+body: Copyright (c) 2018 s…
+version: 0.0.5
+
+name: GoogleAppMeasurement, nameSpecified: 
+body: Copyright 2019 Googl…
+version: 6.0.2
+
+name: GoogleAppMeasurement, nameSpecified: 
+body: Copyright 2019 Googl…
+version: 6.0.2
+
+name: GoogleAppMeasurement, nameSpecified: 
+body: Copyright 2019 Googl…
+version: 6.0.2
 
 name: GoogleSignIn, nameSpecified: 
 body: Copyright 2018 Googl…
@@ -165,6 +204,18 @@ version: 11.0.2
 name: Moya, nameSpecified: 
 body: The MIT License (MIT…
 version: 11.0.2
+
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 0.3.901
+
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 0.3.901
+
+name: nanopb, nameSpecified: 
+body: Copyright (c) 2011 P…
+version: 0.3.901
 
 name: NSObject+Rx, nameSpecified: 
 body: The MIT License (MIT…
