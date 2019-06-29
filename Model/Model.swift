@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 let log = ModelLogger.self
 
@@ -34,5 +35,9 @@ public final class Model {
         _ = repository.create(.database(resource: nil))
         _ = repository.create(.searchHistory(resource: nil))
         _ = repository.create(.thumbnails(additionalPath: nil, resource: nil))
+
+        guard let fileopts = FirebaseOptions(contentsOfFile: ResourceUtil().firebaseConfigPath)
+            else { assert(false, "Couldn't load config file") }
+        FirebaseApp.configure(options: fileopts)
     }
 }
