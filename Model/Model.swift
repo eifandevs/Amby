@@ -27,9 +27,7 @@ public final class Model {
 
         #if RELEASE
             log.info("RELEASE BUILD")
-            guard let fileopts = FirebaseOptions(contentsOfFile: ResourceUtil().firebaseConfigPath)
-                else { assert(false, "Couldn't load config file") }
-            FirebaseApp.configure(options: fileopts)
+            AnalyticsUseCase.s.setup()
         #endif
 
         // ローカルストレージセットアップ

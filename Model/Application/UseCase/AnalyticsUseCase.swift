@@ -9,9 +9,9 @@
 import Foundation
 import Firebase
 
-public final class FirebaseUseCase {
-    public static let s = FirebaseUseCase()
-    
+public final class AnalyticsUseCase {
+    public static let s = AnalyticsUseCase()
+
     public func setup() {
         guard let fileopts = FirebaseOptions(contentsOfFile: ResourceUtil().firebaseConfigPath)
             else { assert(false, "Couldn't load config file") }
