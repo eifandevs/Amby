@@ -46,3 +46,22 @@ end
 target 'CommonUtil' do
   use_frameworks!
 end
+
+post_install do |installer|
+    installer.aggregate_targets.each do |aggregate_target|
+        puts aggregate_target.name
+        if aggregate_target.name != 'Pods-Model'
+            aggregate_target.xcconfigs.each do |config_name, config_file|
+                config_file.frameworks.delete('FirebaseAuth')
+                config_file.frameworks.delete('FirebaseCore')
+                config_file.frameworks.delete('FirebaseInstanceID')
+                config_file.frameworks.delete('GoogleToolboxForMac')
+                config_file.frameworks.delete('GoogleUtilities')
+                config_file.frameworks.delete('nanopb')
+
+                xcconfig_path = aggregate_target.xcconfig_path(config_name)
+                config_file.save_as(xcconfig_path)
+            end
+        end
+    end
+end
