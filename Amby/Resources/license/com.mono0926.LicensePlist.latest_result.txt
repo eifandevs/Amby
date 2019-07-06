@@ -26,35 +26,9 @@ name: Firebase, nameSpecified:
 body: Copyright 2019 Googl…
 version: 6.3.0
 
-name: Firebase, nameSpecified: 
-body: Copyright 2019 Googl…
-version: 6.3.0
-
-name: Firebase, nameSpecified: 
-body: Copyright 2019 Googl…
-version: 6.3.0
-
 name: FirebaseAnalytics, nameSpecified: 
 body: Copyright 2019 Googl…
 version: 6.0.2
-
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2019 Googl…
-version: 6.0.2
-
-name: FirebaseAnalytics, nameSpecified: 
-body: Copyright 2019 Googl…
-version: 6.0.2
-
-name: FirebaseAuth, nameSpecified: 
-body: 
-                   …
-version: 6.1.2
-
-name: FirebaseAuth, nameSpecified: 
-body: 
-                   …
-version: 6.1.2
 
 name: FirebaseAuth, nameSpecified: 
 body: 
@@ -66,40 +40,10 @@ body:
                    …
 version: 1.0.0
 
-name: FirebaseAuthInterop, nameSpecified: 
-body: 
-                   …
-version: 1.0.0
-
-name: FirebaseAuthInterop, nameSpecified: 
-body: 
-                   …
-version: 1.0.0
-
 name: FirebaseCore, nameSpecified: 
 body: 
                    …
 version: 6.0.3
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 6.0.3
-
-name: FirebaseCore, nameSpecified: 
-body: 
-                   …
-version: 6.0.3
-
-name: FirebaseInstanceID, nameSpecified: 
-body: 
-                   …
-version: 4.2.0
-
-name: FirebaseInstanceID, nameSpecified: 
-body: 
-                   …
-version: 4.2.0
 
 name: FirebaseInstanceID, nameSpecified: 
 body: 
@@ -122,35 +66,9 @@ name: GoogleAppMeasurement, nameSpecified:
 body: Copyright 2019 Googl…
 version: 6.0.2
 
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2019 Googl…
-version: 6.0.2
-
-name: GoogleAppMeasurement, nameSpecified: 
-body: Copyright 2019 Googl…
-version: 6.0.2
-
 name: GoogleSignIn, nameSpecified: 
 body: Copyright 2018 Googl…
 version: 4.4.0
-
-name: GoogleSignIn, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 4.4.0
-
-name: GoogleSignIn, nameSpecified: 
-body: Copyright 2018 Googl…
-version: 4.4.0
-
-name: GoogleToolboxForMac, nameSpecified: 
-body: 
-                   …
-version: 2.2.1
-
-name: GoogleToolboxForMac, nameSpecified: 
-body: 
-                   …
-version: 2.2.1
 
 name: GoogleToolboxForMac, nameSpecified: 
 body: 
@@ -161,26 +79,6 @@ name: GoogleUtilities, nameSpecified:
 body: 
                    …
 version: 6.2.1
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 6.2.1
-
-name: GoogleUtilities, nameSpecified: 
-body: 
-                   …
-version: 6.2.1
-
-name: GTMSessionFetcher, nameSpecified: 
-body: 
-                   …
-version: 1.2.2
-
-name: GTMSessionFetcher, nameSpecified: 
-body: 
-                   …
-version: 1.2.2
 
 name: GTMSessionFetcher, nameSpecified: 
 body: 
@@ -204,14 +102,6 @@ version: 11.0.2
 name: Moya, nameSpecified: 
 body: The MIT License (MIT…
 version: 11.0.2
-
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 0.3.901
-
-name: nanopb, nameSpecified: 
-body: Copyright (c) 2011 P…
-version: 0.3.901
 
 name: nanopb, nameSpecified: 
 body: Copyright (c) 2011 P…

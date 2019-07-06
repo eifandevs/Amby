@@ -199,6 +199,8 @@
 		A190305E209CF978004F1EA5 /* EGApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FA1209CF976004F1EA5 /* EGApplication.swift */; };
 		A1903062209CF978004F1EA5 /* OnceExec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FA6209CF976004F1EA5 /* OnceExec.swift */; };
 		A1903063209CF978004F1EA5 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FA7209CF976004F1EA5 /* Util.swift */; };
+		A1904FCE22D13A1900BC91B4 /* GoogleService-Info_dummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1904FCC22D13A1800BC91B4 /* GoogleService-Info_dummy.plist */; };
+		A1904FCF22D13A1900BC91B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1904FCD22D13A1800BC91B4 /* GoogleService-Info.plist */; };
 		A19352A12141569C002A0865 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = A193529C2141569B002A0865 /* Google.swift */; };
 		A19352A22141569C002A0865 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A193529D2141569B002A0865 /* App.swift */; };
 		A19352A32141569C002A0865 /* ApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A193529E2141569B002A0865 /* ApiRepository.swift */; };
@@ -260,8 +262,6 @@
 		A1A65E6C22886705000FACA7 /* Report.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1A65E6422886705000FACA7 /* Report.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A1A65E742288688F000FACA7 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A65E722288688F000FACA7 /* ChatViewController.swift */; };
 		A1A65E752288688F000FACA7 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1A65E732288688F000FACA7 /* ChatViewController.xib */; };
-		A1B1FAFB22C7B15A0047EC7C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1B1FAFA22C7B15A0047EC7C /* GoogleService-Info.plist */; };
-		A1B1FAFD22CA52DF0047EC7C /* GoogleService-Info_dummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1B1FAFC22CA52DF0047EC7C /* GoogleService-Info_dummy.plist */; };
 		A1B1FAFF22CCF4310047EC7C /* AnalyticsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1FAFE22CCF4310047EC7C /* AnalyticsUseCase.swift */; };
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */; };
@@ -700,6 +700,8 @@
 		A1902FA1209CF976004F1EA5 /* EGApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGApplication.swift; sourceTree = "<group>"; };
 		A1902FA6209CF976004F1EA5 /* OnceExec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnceExec.swift; sourceTree = "<group>"; };
 		A1902FA7209CF976004F1EA5 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		A1904FCC22D13A1800BC91B4 /* GoogleService-Info_dummy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info_dummy.plist"; sourceTree = "<group>"; };
+		A1904FCD22D13A1800BC91B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A193529C2141569B002A0865 /* Google.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Google.swift; sourceTree = "<group>"; };
 		A193529D2141569B002A0865 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		A193529E2141569B002A0865 /* ApiRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRepository.swift; sourceTree = "<group>"; };
@@ -729,8 +731,6 @@
 		A1A65E6722886705000FACA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1A65E722288688F000FACA7 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		A1A65E732288688F000FACA7 /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
-		A1B1FAFA22C7B15A0047EC7C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A1B1FAFC22CA52DF0047EC7C /* GoogleService-Info_dummy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info_dummy.plist"; sourceTree = "<group>"; };
 		A1B1FAFE22CCF4310047EC7C /* AnalyticsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsUseCase.swift; sourceTree = "<group>"; };
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderUseCase.swift; sourceTree = "<group>"; };
@@ -1738,6 +1738,8 @@
 		A1902F36209CF976004F1EA5 /* Amby */ = {
 			isa = PBXGroup;
 			children = (
+				A1904FCC22D13A1800BC91B4 /* GoogleService-Info_dummy.plist */,
+				A1904FCD22D13A1800BC91B4 /* GoogleService-Info.plist */,
 				A1042F432258E70400DA6E78 /* R.generated.swift */,
 				A1902F38209CF976004F1EA5 /* AppDelegate.swift */,
 				A1902F39209CF976004F1EA5 /* Amby-Bridging-Header.h */,
@@ -2027,8 +2029,6 @@
 		A1E33AA12137149A00C93FBE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A1B1FAFC22CA52DF0047EC7C /* GoogleService-Info_dummy.plist */,
-				A1B1FAFA22C7B15A0047EC7C /* GoogleService-Info.plist */,
 				A112E7D4212CD76400320048 /* Application */,
 				A112E7D5212CD76400320048 /* Domain */,
 				A1A3DE8A213AEC9400F87009 /* Infrastructure */,
@@ -2488,8 +2488,6 @@
 			files = (
 				A1A3DE89213ACBF200F87009 /* env.plist in Resources */,
 				A1A3DE88213ACBF200F87009 /* env-dummy.plist in Resources */,
-				A1B1FAFD22CA52DF0047EC7C /* GoogleService-Info_dummy.plist in Resources */,
-				A1B1FAFB22C7B15A0047EC7C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2502,6 +2500,7 @@
 				A112E831212CD76500320048 /* SplashViewController.xib in Resources */,
 				A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */,
 				A15C5451214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */,
+				A1904FCE22D13A1900BC91B4 /* GoogleService-Info_dummy.plist in Resources */,
 				A17241C32245639200472477 /* shaper.js in Resources */,
 				A15C5420214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib in Resources */,
 				A17241CF2245708A00472477 /* timeout.html in Resources */,
@@ -2529,6 +2528,7 @@
 				A17241D22245708A00472477 /* authorize.html in Resources */,
 				A12B93F8214EF7480082EEA5 /* com.mono0926.LicensePlist in Resources */,
 				A17241C7224563A200472477 /* shaper.html in Resources */,
+				A1904FCF22D13A1900BC91B4 /* GoogleService-Info.plist in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
 				A15C5459214D699D001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
@@ -2589,13 +2589,9 @@
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BaseAPI/BaseAPI.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GithubAPI/GithubAPI.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -2604,13 +2600,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BaseAPI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GithubAPI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2624,39 +2616,39 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Amby/Pods-Amby-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SmileLock/SmileLock.framework",
 				"${BUILT_PRODUCTS_DIR}/VerticalAlignmentLabel/VerticalAlignmentLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BaseAPI/BaseAPI.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GithubAPI/GithubAPI.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmileLock.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VerticalAlignmentLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BaseAPI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GithubAPI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

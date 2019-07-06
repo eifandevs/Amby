@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // app setup
         setup()
 
+        TrackingService.setup()
         return true
     }
 

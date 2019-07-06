@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Firebase
 
 let log = ModelLogger.self
 
@@ -27,7 +26,6 @@ public final class Model {
 
         #if RELEASE
             log.info("RELEASE BUILD")
-            AnalyticsUseCase.s.setup()
         #endif
 
         // ローカルストレージセットアップ

@@ -6,4 +6,11 @@
 //  Copyright © 2019 eifandevs. All rights reserved.
 //
 
+import Firebase
 import Foundation
+
+class TrackingService {
+    class func setup() {
+        FirebaseApp.configure()
+    }
+}
