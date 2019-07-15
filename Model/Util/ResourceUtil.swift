@@ -28,7 +28,4 @@ final class ResourceUtil {
             return plist
         }
     }()
-
-    /// Firebase path
-    var firebaseConfigPath = Bundle.main.privateFrameworksPath! + "/Model.framework/GoogleService-Info.plist"
 }

@@ -10,6 +10,7 @@ import Logger
 import Model
 import SVProgressHUD
 import UIKit
+import GoogleSignIn
 
 let log = AppLogger.self
 
@@ -57,8 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // progress setup
         SVProgressHUD.setForegroundColor(UIColor.ultraViolet)
-
-        // app setup
+        
+        // view setup
         setup()
 
         TrackingService.setup()

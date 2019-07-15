@@ -73,4 +73,6 @@ final class ResourceUtil {
 
     /// スクリプト
     var bundleScript = R.file.bundleJs()!
+    
+    var googleServiceInfo = R.file.googleServiceInfoPlist.path()!
 }
