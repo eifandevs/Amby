@@ -1,6 +1,8 @@
 PODS:
   - Alamofire (4.7.3)
   - BaseAPI (0.1.2)
+  - Firebase/Analytics (6.3.0):
+    - Firebase/Core
   - Firebase/Auth (6.3.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.1.2)
@@ -98,8 +100,8 @@ PODS:
   - VerticalAlignmentLabel (0.1.0)
 
 DEPENDENCIES:
+  - Firebase/Analytics
   - Firebase/Auth
-  - Firebase/Core
   - GithubAPI (~> 0.0.5)
   - GoogleSignIn
   - LicensePlist (~> 1.8)
@@ -142,6 +144,6 @@ SPEC CHECKSUMS:
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   VerticalAlignmentLabel: 8a13ee9970aa38868aa40fece249dbc2a9df59ed
 
-PODFILE CHECKSUM: dcfb8abe8f3cbad5b096c94cb859384da1166202
+PODFILE CHECKSUM: 7e7be6a26184940f1c1127c6aec874b91b4781db
 
 COCOAPODS: 1.4.0

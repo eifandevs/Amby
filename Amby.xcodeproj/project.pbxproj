@@ -201,6 +201,7 @@
 		A1903063209CF978004F1EA5 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1902FA7209CF976004F1EA5 /* Util.swift */; };
 		A1904FCE22D13A1900BC91B4 /* GoogleService-Info_dummy.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1904FCC22D13A1800BC91B4 /* GoogleService-Info_dummy.plist */; };
 		A1904FCF22D13A1900BC91B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1904FCD22D13A1800BC91B4 /* GoogleService-Info.plist */; };
+		A1904FD122E1647000BC91B4 /* GoogleSignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1904FD022E1647000BC91B4 /* GoogleSignInService.swift */; };
 		A19352A12141569C002A0865 /* Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = A193529C2141569B002A0865 /* Google.swift */; };
 		A19352A22141569C002A0865 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A193529D2141569B002A0865 /* App.swift */; };
 		A19352A32141569C002A0865 /* ApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A193529E2141569B002A0865 /* ApiRepository.swift */; };
@@ -702,6 +703,7 @@
 		A1902FA7209CF976004F1EA5 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		A1904FCC22D13A1800BC91B4 /* GoogleService-Info_dummy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info_dummy.plist"; sourceTree = "<group>"; };
 		A1904FCD22D13A1800BC91B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A1904FD022E1647000BC91B4 /* GoogleSignInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInService.swift; sourceTree = "<group>"; };
 		A193529C2141569B002A0865 /* Google.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Google.swift; sourceTree = "<group>"; };
 		A193529D2141569B002A0865 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		A193529E2141569B002A0865 /* ApiRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRepository.swift; sourceTree = "<group>"; };
@@ -1838,6 +1840,7 @@
 				A1E5B0BC221F6B90007172D8 /* TrackingService.swift */,
 				A1E5B0BE221F6BB1007172D8 /* PurchaseService.swift */,
 				A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */,
+				A1904FD022E1647000BC91B4 /* GoogleSignInService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -3190,6 +3193,7 @@
 				A112E8B1212CD76500320048 /* HeaderField.swift in Sources */,
 				A13D6A8121848B8900B1832E /* PasscodeViewControllerViewModel.swift in Sources */,
 				A1B778382173C57100BED141 /* MenuOrderTableViewCell.swift in Sources */,
+				A1904FD122E1647000BC91B4 /* GoogleSignInService.swift in Sources */,
 				A11CD32C214F059000D9333F /* OptionMenuFavoriteTableViewModel.swift in Sources */,
 				A112E899212CD76500320048 /* Thumbnail.swift in Sources */,
 				A15C5460214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift in Sources */,

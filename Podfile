@@ -15,7 +15,7 @@ target 'Amby' do
   pod 'LicensePlist', '~> 1.8'
   pod 'SmileLock', '~> 3.0'
   pod 'Firebase/Auth'
-  pod 'Firebase/Core'
+  pod 'Firebase/Analytics'
   pod 'GoogleSignIn'
 end
 
