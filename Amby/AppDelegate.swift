@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
+import GoogleSignIn
 import Logger
 import Model
 import SVProgressHUD
@@ -23,7 +24,7 @@ let uncaughtExceptionHandler: Void = NSSetUncaughtExceptionHandler { exception i
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
     var baseViewController: BaseViewController?
 
@@ -65,7 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         TrackingService.setup()
 
         // google sign in
-        GoogleSignInService.setup()
+        GIDSignIn.sharedInstance().clientID = GoogleSignInService.clientID()
+        GIDSignIn.sharedInstance()?.delegate = self
 
         return true
     }
@@ -122,5 +124,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+
+    func sign(_: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            print("\(error.localizedDescription)")
+        } else {
+            // Perform any operations on signed in user here.
+            let userId = user.userID // For client-side use only!
+            let idToken = user.authentication.idToken // Safe to send to the server
+            let fullName = user.profile.name
+            let givenName = user.profile.givenName
+            let familyName = user.profile.familyName
+            let email = user.profile.email
+        }
+    }
+
+    // 追記部分(デリゲートメソッド)エラー来た時
+    func sign(_: GIDSignIn!, didDisconnectWith _: GIDGoogleUser!,
+              withError error: Error!) {
+        print(error.localizedDescription)
+    }
+
+    func application(_: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url as URL?,
+                                                 sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                                                 annotation: options[UIApplication.OpenURLOptionsKey.annotation])
     }
 }
