@@ -128,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func sign(_: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
-            print("\(error.localizedDescription)")
+            log.error("\(error.localizedDescription)")
         } else {
             // Perform any operations on signed in user here.
             let userId = user.userID // For client-side use only!
@@ -137,13 +137,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             let givenName = user.profile.givenName
             let familyName = user.profile.familyName
             let email = user.profile.email
+            log.debug("userId: \(userId ?? "") idToken: \(idToken) fullName: \(fullName) givenName: \(givenName) familyName: \(familyName) email: \(email)")
         }
     }
 
     // 追記部分(デリゲートメソッド)エラー来た時
     func sign(_: GIDSignIn!, didDisconnectWith _: GIDGoogleUser!,
               withError error: Error!) {
-        print(error.localizedDescription)
+        log.error(error.localizedDescription)
     }
 
     func application(_: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
