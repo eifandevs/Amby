@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
+import Firebase
 import GoogleSignIn
 import Logger
 import Model
@@ -66,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         TrackingService.setup()
 
         // google sign in
-        GIDSignIn.sharedInstance().clientID = GoogleSignInService.clientID()
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
 
         return true
@@ -147,9 +148,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         log.error(error.localizedDescription)
     }
 
-    func application(_: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url as URL?,
+    func application(_: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url,
                                                  sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                                                 annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+                                                 annotation: [:])
     }
 }
