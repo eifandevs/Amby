@@ -87,6 +87,13 @@ struct ModelConst {
         let ASPECT_RATE = UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height
     }
 
+    // MARK: - 認証情報
+    static let CREDENTIAL = CREDENTIAL_VALUE()
+    struct CREDENTIAL_VALUE {
+        let APP_SERVER_ACCESS_ID = ResourceUtil().get(key: "APP_SERVER_ACCESS_ID")
+        let APP_SERVER_ACCESS_PASSWORD = ResourceUtil().get(key: "APP_SERVER_ACCESS_PASSWORD")
+    }
+    
     // MARK: - URL情報
 
     static let URL = URL_VALUE()

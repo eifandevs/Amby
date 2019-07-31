@@ -267,7 +267,8 @@
 		A1AA757722EA28D60089A522 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */; };
 		A1AA757822EA28D60089A522 /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */; };
 		A1AA757922EA29840089A522 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
-		A1AA757B22F0914F0089A522 /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA757A22F0914F0089A522 /* AuthUseCase.swift */; };
+		A1AA757B22F0914F0089A522 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA757A22F0914F0089A522 /* LoginUseCase.swift */; };
+		A1AA757D22F1E4B70089A522 /* AccessTokenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA757C22F1E4B70089A522 /* AccessTokenDataModel.swift */; };
 		A1B1FAFF22CCF4310047EC7C /* AnalyticsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1FAFE22CCF4310047EC7C /* AnalyticsUseCase.swift */; };
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */; };
@@ -738,7 +739,8 @@
 		A1A65E6722886705000FACA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1A65E722288688F000FACA7 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		A1A65E732288688F000FACA7 /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
-		A1AA757A22F0914F0089A522 /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
+		A1AA757A22F0914F0089A522 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		A1AA757C22F1E4B70089A522 /* AccessTokenDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenDataModel.swift; sourceTree = "<group>"; };
 		A1B1FAFE22CCF4310047EC7C /* AnalyticsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsUseCase.swift; sourceTree = "<group>"; };
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderUseCase.swift; sourceTree = "<group>"; };
@@ -1297,6 +1299,7 @@
 				A112E97C21319C7800320048 /* ThumbnailDataModel.swift */,
 				A1B7782D216B795400BED141 /* IssueDataModel.swift */,
 				A13D6A9C2187489C00B1832E /* MemoDataModel.swift */,
+				A1AA757C22F1E4B70089A522 /* AccessTokenDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1321,7 +1324,7 @@
 				A1950678214453AB0091DF23 /* WebCacheUseCase.swift */,
 				A13D6A9E21874D2000B1832E /* MemoUseCase.swift */,
 				A1B1FAFE22CCF4310047EC7C /* AnalyticsUseCase.swift */,
-				A1AA757A22F0914F0089A522 /* AuthUseCase.swift */,
+				A1AA757A22F0914F0089A522 /* LoginUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -3165,7 +3168,7 @@
 				A1EF692721AC3A8E00726371 /* ModelError.swift in Sources */,
 				A195062D2143F8840091DF23 /* DBRepository.swift in Sources */,
 				A195064A2143F8B80091DF23 /* TabUseCase.swift in Sources */,
-				A1AA757B22F0914F0089A522 /* AuthUseCase.swift in Sources */,
+				A1AA757B22F0914F0089A522 /* LoginUseCase.swift in Sources */,
 				A19352A32141569C002A0865 /* ApiRepository.swift in Sources */,
 				A195066F214406430091DF23 /* CacheService.swift in Sources */,
 				A1950664214402B20091DF23 /* Util.swift in Sources */,
@@ -3181,6 +3184,7 @@
 				A1B1FAFF22CCF4310047EC7C /* AnalyticsUseCase.swift in Sources */,
 				A1950668214404DB0091DF23 /* MessageConst.swift in Sources */,
 				A195063E2143F8AF0091DF23 /* ThumbnailDataModel.swift in Sources */,
+				A1AA757D22F1E4B70089A522 /* AccessTokenDataModel.swift in Sources */,
 				A13D6A9D2187489C00B1832E /* MemoDataModel.swift in Sources */,
 				A15C53F2214D4CDC001E8AB5 /* SourceCodeUseCase.swift in Sources */,
 				A15C53F5214D4CDC001E8AB5 /* TrendUseCase.swift in Sources */,
