@@ -13,7 +13,7 @@ import Model
 final class OptionMenuFavoriteTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     /// セル情報
-    var rows: [Row] = FavoriteHanderUseCase.s.select().map({ Row(data: $0) })
+    var rows: [Row] = SelectFavoriteUseCase().exe().map({ Row(data: $0) })
 
     /// セル数
     var cellCount: Int {

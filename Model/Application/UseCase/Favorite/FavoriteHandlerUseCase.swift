@@ -76,18 +76,6 @@ public final class FavoriteHanderUseCase {
             .disposed(by: disposeBag)
     }
 
-    public func select() -> [Favorite] {
-        return favoriteDataModel.select()
-    }
-
-    public func select(id: String) -> [Favorite] {
-        return favoriteDataModel.select(id: id)
-    }
-
-    public func select(url: String) -> [Favorite] {
-        return favoriteDataModel.select(url: url)
-    }
-
     /// お気に入り更新
     public func update() {
         if let currentTab = tabDataModel.currentTab {
