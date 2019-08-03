@@ -223,7 +223,6 @@
 		A195063C2143F8AF0091DF23 /* SearchHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97121319C7700320048 /* SearchHistoryDataModel.swift */; };
 		A195063D2143F8AF0091DF23 /* SuggestDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97221319C7700320048 /* SuggestDataModel.swift */; };
 		A195063E2143F8AF0091DF23 /* ThumbnailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97C21319C7800320048 /* ThumbnailDataModel.swift */; };
-		A19506402143F8B80091DF23 /* FavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E947212EDA6400320048 /* FavoriteUseCase.swift */; };
 		A19506412143F8B80091DF23 /* FormUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E94A212EDAA000320048 /* FormUseCase.swift */; };
 		A19506422143F8B80091DF23 /* GrepUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E94D212EDAD500320048 /* GrepUseCase.swift */; };
 		A19506442143F8B80091DF23 /* HistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E953212EDB0F00320048 /* HistoryUseCase.swift */; };
@@ -269,6 +268,7 @@
 		A1AA757922EA29840089A522 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
 		A1AA757B22F0914F0089A522 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA757A22F0914F0089A522 /* LoginUseCase.swift */; };
 		A1AA757D22F1E4B70089A522 /* AccessTokenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA757C22F1E4B70089A522 /* AccessTokenDataModel.swift */; };
+		A1AA758022F5D5FC0089A522 /* FavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA757F22F5D5FC0089A522 /* FavoriteUseCase.swift */; };
 		A1B1FAFF22CCF4310047EC7C /* AnalyticsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1FAFE22CCF4310047EC7C /* AnalyticsUseCase.swift */; };
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */; };
@@ -549,7 +549,6 @@
 		A112E7FD212CD76400320048 /* LocalStorageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageRepository.swift; sourceTree = "<group>"; };
 		A112E7FF212CD76400320048 /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		A112E800212CD76400320048 /* DBRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBRepository.swift; sourceTree = "<group>"; };
-		A112E947212EDA6400320048 /* FavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteUseCase.swift; sourceTree = "<group>"; };
 		A112E94A212EDAA000320048 /* FormUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormUseCase.swift; sourceTree = "<group>"; };
 		A112E94D212EDAD500320048 /* GrepUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrepUseCase.swift; sourceTree = "<group>"; };
 		A112E953212EDB0F00320048 /* HistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryUseCase.swift; sourceTree = "<group>"; };
@@ -741,6 +740,7 @@
 		A1A65E732288688F000FACA7 /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
 		A1AA757A22F0914F0089A522 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		A1AA757C22F1E4B70089A522 /* AccessTokenDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenDataModel.swift; sourceTree = "<group>"; };
+		A1AA757F22F5D5FC0089A522 /* FavoriteUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteUseCase.swift; sourceTree = "<group>"; };
 		A1B1FAFE22CCF4310047EC7C /* AnalyticsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsUseCase.swift; sourceTree = "<group>"; };
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderUseCase.swift; sourceTree = "<group>"; };
@@ -1307,8 +1307,8 @@
 		A112E93F212D7C1200320048 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				A1AA757E22F5D5FC0089A522 /* Favorite */,
 				A15C53E7214D4CDC001E8AB5 /* OptionMenu */,
-				A112E947212EDA6400320048 /* FavoriteUseCase.swift */,
 				A112E94A212EDAA000320048 /* FormUseCase.swift */,
 				A112E94D212EDAD500320048 /* GrepUseCase.swift */,
 				A112E953212EDB0F00320048 /* HistoryUseCase.swift */,
@@ -1956,6 +1956,14 @@
 				A1A65E732288688F000FACA7 /* ChatViewController.xib */,
 			);
 			path = Report;
+			sourceTree = "<group>";
+		};
+		A1AA757E22F5D5FC0089A522 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				A1AA757F22F5D5FC0089A522 /* FavoriteUseCase.swift */,
+			);
+			path = Favorite;
 			sourceTree = "<group>";
 		};
 		A1B778332173BE0700BED141 /* MenuOrder */ = {
@@ -3134,6 +3142,7 @@
 				A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */,
 				A19506442143F8B80091DF23 /* HistoryUseCase.swift in Sources */,
 				A1950679214453AB0091DF23 /* WebCacheUseCase.swift in Sources */,
+				A1AA758022F5D5FC0089A522 /* FavoriteUseCase.swift in Sources */,
 				A195064D2143F8B80091DF23 /* ThumbnailUseCase.swift in Sources */,
 				A1724193223E751A00472477 /* HtmlAnalysisUseCase.swift in Sources */,
 				A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */,
@@ -3150,7 +3159,6 @@
 				A19506462143F8B80091DF23 /* ScrollUseCase.swift in Sources */,
 				A1950675214439980091DF23 /* NoticeUseCase.swift in Sources */,
 				A15C53F3214D4CDC001E8AB5 /* HelpUseCase.swift in Sources */,
-				A19506402143F8B80091DF23 /* FavoriteUseCase.swift in Sources */,
 				A1EF692421AC3A2000726371 /* RepositoryResult.swift in Sources */,
 				A19506322143F8A60091DF23 /* EncryptService.swift in Sources */,
 				A19506392143F8AF0091DF23 /* FormDataModel.swift in Sources */,
