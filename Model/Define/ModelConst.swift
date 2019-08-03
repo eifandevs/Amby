@@ -93,7 +93,7 @@ struct ModelConst {
         let APP_SERVER_ACCESS_ID = ResourceUtil().get(key: "APP_SERVER_ACCESS_ID")
         let APP_SERVER_ACCESS_PASSWORD = ResourceUtil().get(key: "APP_SERVER_ACCESS_PASSWORD")
     }
-    
+
     // MARK: - URL情報
 
     static let URL = URL_VALUE()

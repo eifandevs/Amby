@@ -1,5 +1,5 @@
 //
-//  FavoriteUseCase.swift
+//  FavoriteHanderUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -11,16 +11,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum FavoriteUseCaseAction {
+public enum FavoriteHanderUseCaseAction {
     case load(url: String)
     case update(isSwitch: Bool)
 }
 
 /// お気に入りユースケース
-public final class FavoriteUseCase {
-    public static let s = FavoriteUseCase()
+public final class FavoriteHanderUseCase {
+    public static let s = FavoriteHanderUseCase()
 
-    public let rx_action = PublishSubject<FavoriteUseCaseAction>()
+    public let rx_action = PublishSubject<FavoriteHanderUseCaseAction>()
 
     // models
     private var tabDataModel: TabDataModelProtocol!

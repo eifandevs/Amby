@@ -56,7 +56,7 @@ final class HeaderViewModel {
             .disposed(by: disposeBag)
 
         // お気に入り更新監視
-        FavoriteUseCase.s.rx_action
+        FavoriteHanderUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case let .update(isSwitch) = action else { return }
                 self.rx_action.onNext(.updateFavorite(isSwitch: isSwitch))
@@ -105,7 +105,7 @@ final class HeaderViewModel {
     }
 
     func updateFavorite() {
-        FavoriteUseCase.s.update()
+        FavoriteHanderUseCase.s.update()
     }
 
     func remove() {

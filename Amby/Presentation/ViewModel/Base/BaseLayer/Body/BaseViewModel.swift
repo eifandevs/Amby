@@ -152,7 +152,7 @@ final class BaseViewModel {
                         return Observable.empty()
                     }
                 },
-            FavoriteUseCase.s.rx_action
+            FavoriteHanderUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(url) = action {
                         return Observable.just(url)
