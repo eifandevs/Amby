@@ -36,7 +36,7 @@ final class FrontLayerViewModel {
 
     /// お気に入り切り替え
     func updateFavorite() {
-        FavoriteHanderUseCase.s.update()
+        UpdateFavoriteUseCase().exe()
     }
 
     /// 現在のタブを削除

@@ -105,7 +105,7 @@ final class HeaderViewModel {
     }
 
     func updateFavorite() {
-        FavoriteHanderUseCase.s.update()
+        UpdateFavoriteUseCase().exe()
     }
 
     func remove() {

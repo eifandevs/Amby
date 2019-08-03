@@ -116,7 +116,7 @@ final class OptionMenuSettingTableViewModel {
     /// お気に入り削除
     func deleteFavorite() {
         NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_BOOK_MARK, completion: {
-            FavoriteHanderUseCase.s.delete()
+            DeleteFavoriteUseCase().exe()
         })
     }
 
@@ -153,7 +153,7 @@ final class OptionMenuSettingTableViewModel {
         NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_ALL, completion: {
             HistoryUseCase.s.delete()
             SearchUseCase.s.delete()
-            FavoriteHanderUseCase.s.delete()
+            DeleteFavoriteUseCase().exe()
             FormUseCase.s.delete()
             WebCacheUseCase.s.deleteCookies()
             WebCacheUseCase.s.deleteCaches()

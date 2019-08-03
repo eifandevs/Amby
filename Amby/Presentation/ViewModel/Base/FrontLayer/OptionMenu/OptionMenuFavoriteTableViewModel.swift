@@ -31,7 +31,7 @@ final class OptionMenuFavoriteTableViewModel {
         let row = getRow(indexPath: indexPath)
         rows.remove(at: indexPath.row)
         // モデルから削除
-        FavoriteHanderUseCase.s.delete(favorites: [row.data])
+        DeleteFavoriteUseCase().exe(favorites: [row.data])
     }
 
     /// セル情報
