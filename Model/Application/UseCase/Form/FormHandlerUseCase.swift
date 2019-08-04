@@ -51,33 +51,17 @@ public final class FormHandlerUseCase {
         rx_action.onNext(.load(url: url))
     }
 
-    public func store(form: Form) {
-        formDataModel.store(form: form)
-    }
-
     public func delete() {
         formDataModel.delete()
     }
 
     public func read(id: String) {
-        if let form = FormHandlerUseCase.s.select(id: id).first {
+        if let form = SelectFormUseCase().exe(id: id).first {
             rx_action.onNext(.read(form: form))
         }
     }
 
     public func delete(forms: [Form]) {
         formDataModel.delete(forms: forms)
-    }
-
-    public func select() -> [Form] {
-        return formDataModel.select()
-    }
-
-    public func select(id: String) -> [Form] {
-        return formDataModel.select(id: id)
-    }
-
-    public func select(url: String) -> [Form] {
-        return formDataModel.select(url: url)
     }
 }

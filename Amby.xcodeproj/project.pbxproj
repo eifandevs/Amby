@@ -286,6 +286,9 @@
 		A1AA75CE22F6A6EE0089A522 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75AF22F6A6EE0089A522 /* SearchUseCase.swift */; };
 		A1AA75CF22F6A6EE0089A522 /* HistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75B122F6A6EE0089A522 /* HistoryUseCase.swift */; };
 		A1AA75D022F6A6EE0089A522 /* NewsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75B322F6A6EE0089A522 /* NewsUseCase.swift */; };
+		A1AA75D222F6A8630089A522 /* SelectFormUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75D122F6A8630089A522 /* SelectFormUseCase.swift */; };
+		A1AA75D422F6B2E60089A522 /* StoreFormUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75D322F6B2E60089A522 /* StoreFormUseCase.swift */; };
+		A1AA75D622F6BA500089A522 /* DeleteFormUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75D522F6BA500089A522 /* DeleteFormUseCase.swift */; };
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */; };
 		A1B778322173A6DA00BED141 /* UserOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778312173A6DA00BED141 /* UserOperation.swift */; };
@@ -774,6 +777,9 @@
 		A1AA75AF22F6A6EE0089A522 /* SearchUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		A1AA75B122F6A6EE0089A522 /* HistoryUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryUseCase.swift; sourceTree = "<group>"; };
 		A1AA75B322F6A6EE0089A522 /* NewsUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsUseCase.swift; sourceTree = "<group>"; };
+		A1AA75D122F6A8630089A522 /* SelectFormUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFormUseCase.swift; sourceTree = "<group>"; };
+		A1AA75D322F6B2E60089A522 /* StoreFormUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreFormUseCase.swift; sourceTree = "<group>"; };
+		A1AA75D522F6BA500089A522 /* DeleteFormUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFormUseCase.swift; sourceTree = "<group>"; };
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderUseCase.swift; sourceTree = "<group>"; };
 		A1B778312173A6DA00BED141 /* UserOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOperation.swift; sourceTree = "<group>"; };
@@ -2064,6 +2070,9 @@
 			isa = PBXGroup;
 			children = (
 				A1AA759922F6A6ED0089A522 /* FormHandlerUseCase.swift */,
+				A1AA75D122F6A8630089A522 /* SelectFormUseCase.swift */,
+				A1AA75D322F6B2E60089A522 /* StoreFormUseCase.swift */,
+				A1AA75D522F6BA500089A522 /* DeleteFormUseCase.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -3326,6 +3335,7 @@
 				A1AA75B422F6A6EE0089A522 /* TabUseCase.swift in Sources */,
 				A1AA75C022F6A6EE0089A522 /* MenuOrderUseCase.swift in Sources */,
 				A195063C2143F8AF0091DF23 /* SearchHistoryDataModel.swift in Sources */,
+				A1AA75D222F6A8630089A522 /* SelectFormUseCase.swift in Sources */,
 				A1445A8022B689EA00B30A65 /* SyncUseCase.swift in Sources */,
 				A1AA75BB22F6A6EE0089A522 /* DeleteFavoriteUseCase.swift in Sources */,
 				A15C53F0214D4CDC001E8AB5 /* ContactUseCase.swift in Sources */,
@@ -3341,6 +3351,7 @@
 				A1AA75BA22F6A6EE0089A522 /* UpdateFavoriteUseCase.swift in Sources */,
 				A1AA75BE22F6A6EE0089A522 /* FormHandlerUseCase.swift in Sources */,
 				A1AA75C522F6A6EE0089A522 /* HelpUseCase.swift in Sources */,
+				A1AA75D422F6B2E60089A522 /* StoreFormUseCase.swift in Sources */,
 				A1AA75CC22F6A6EE0089A522 /* MemoUseCase.swift in Sources */,
 				A195063A2143F8AF0091DF23 /* ProgressDataModel.swift in Sources */,
 				A19506382143F8AF0091DF23 /* FavoriteDataModel.swift in Sources */,
@@ -3367,6 +3378,7 @@
 				A1A3DE8321387D7F00F87009 /* ModelLogger.swift in Sources */,
 				A1AA75B722F6A6EE0089A522 /* NoticeUseCase.swift in Sources */,
 				A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */,
+				A1AA75D622F6BA500089A522 /* DeleteFormUseCase.swift in Sources */,
 				A15C53F4214D4CDC001E8AB5 /* OpenSourceUseCase.swift in Sources */,
 				A1AA758622F60FF10089A522 /* DeleteFavoriteUseCase.swift in Sources */,
 				A1A3DE94213AF06300F87009 /* ModelConst.swift in Sources */,

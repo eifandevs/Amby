@@ -392,12 +392,12 @@ final class BaseViewModel {
 
     /// フォーム情報保存
     func storeForm(form: Form) {
-        FormHandlerUseCase.s.store(form: form)
+        StoreFormUseCase().exe(form: form)
     }
 
     /// フォーム情報取得
     func selectForm(url: String) -> Form? {
-        return FormHandlerUseCase.s.select(url: url).first
+        return SelectFormUseCase().exe(url: url).first
     }
 
     /// 前webviewのキャプチャ取得
