@@ -1,5 +1,5 @@
 //
-//  FormUseCase.swift
+//  FormHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -11,7 +11,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum FormUseCaseAction {
+public enum FormHandlerUseCaseAction {
     case register
     case autoFill
     case load(url: String)
@@ -19,11 +19,11 @@ public enum FormUseCaseAction {
 }
 
 /// フォームユースケース
-public final class FormUseCase {
-    public static let s = FormUseCase()
+public final class FormHandlerUseCase {
+    public static let s = FormHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<FormUseCaseAction>()
+    public let rx_action = PublishSubject<FormHandlerUseCaseAction>()
 
     /// models
     private var formDataModel: FormDataModelProtocol!
@@ -60,7 +60,7 @@ public final class FormUseCase {
     }
 
     public func read(id: String) {
-        if let form = FormUseCase.s.select(id: id).first {
+        if let form = FormHandlerUseCase.s.select(id: id).first {
             rx_action.onNext(.read(form: form))
         }
     }

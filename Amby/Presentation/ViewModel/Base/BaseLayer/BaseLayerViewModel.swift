@@ -49,7 +49,7 @@ final class BaseLayerViewModel {
 
     /// 自動入力
     func autoFill() {
-        FormUseCase.s.autoFill()
+        FormHandlerUseCase.s.autoFill()
     }
 
     /// 前に移動(グレップ)

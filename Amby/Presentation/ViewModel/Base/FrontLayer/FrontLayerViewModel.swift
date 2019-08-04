@@ -31,7 +31,7 @@ final class FrontLayerViewModel {
 
     /// フォーム登録
     func registerForm() {
-        FormUseCase.s.registerForm()
+        FormHandlerUseCase.s.registerForm()
     }
 
     /// お気に入り切り替え

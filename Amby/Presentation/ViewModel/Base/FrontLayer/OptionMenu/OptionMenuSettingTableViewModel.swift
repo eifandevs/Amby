@@ -123,7 +123,7 @@ final class OptionMenuSettingTableViewModel {
     /// フォーム削除
     func deleteForm() {
         NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_FORM, completion: {
-            FormUseCase.s.delete()
+            FormHandlerUseCase.s.delete()
         })
     }
 
@@ -154,7 +154,7 @@ final class OptionMenuSettingTableViewModel {
             HistoryUseCase.s.delete()
             SearchUseCase.s.delete()
             DeleteFavoriteUseCase().exe()
-            FormUseCase.s.delete()
+            FormHandlerUseCase.s.delete()
             WebCacheUseCase.s.deleteCookies()
             WebCacheUseCase.s.deleteCaches()
             ThumbnailUseCase.s.delete()

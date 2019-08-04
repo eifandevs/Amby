@@ -1,5 +1,5 @@
 //
-//  FormUseCaseTest.swift
+//  FormHandlerUseCaseTest.swift
 //  ModelTests
 //
 //  Created by iori tenma on 2019/04/30.
@@ -14,14 +14,14 @@ import RxCocoa
 @testable import Model
 @testable import Entity
 
-class FormUseCaseTest: XCTestCase {
+class FormHandlerUseCaseTest: XCTestCase {
     let dummyUrl = "https://abc/"
     let dummyUrl2 = "https://def/"
     let dummyTitle = "dummyTitle"
     let dummyTitle2 = "dummyTitle2"
 
-    var formUseCase: FormUseCase {
-        return FormUseCase.s
+    var formHandlerUseCase: FormHandlerUseCase {
+        return FormHandlerUseCase.s
     }
 
     let disposeBag = DisposeBag()
@@ -29,13 +29,13 @@ class FormUseCaseTest: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        formUseCase.delete()
+        formHandlerUseCase.delete()
     }
 
     func testRegisterForm() {
         weak var expectation = self.expectation(description: #function)
 
-        formUseCase.rx_action
+        formHandlerUseCase.rx_action
             .subscribe { object in
                 if let action = object.element, case .register = action {
                     if let expectation = expectation {
@@ -45,7 +45,7 @@ class FormUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        formUseCase.registerForm()
+        formHandlerUseCase.registerForm()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -53,7 +53,7 @@ class FormUseCaseTest: XCTestCase {
     func testAutofill() {
         weak var expectation = self.expectation(description: #function)
 
-        formUseCase.rx_action
+        formHandlerUseCase.rx_action
             .subscribe { object in
                 if let action = object.element, case .autoFill = action {
                     if let expectation = expectation {
@@ -63,7 +63,7 @@ class FormUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        formUseCase.autoFill()
+        formHandlerUseCase.autoFill()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -71,7 +71,7 @@ class FormUseCaseTest: XCTestCase {
     func testLoad() {
         weak var expectation = self.expectation(description: #function)
 
-        formUseCase.rx_action
+        formHandlerUseCase.rx_action
             .subscribe { object in
                 if let action = object.element, case .load = action {
                     if let expectation = expectation {
@@ -81,7 +81,7 @@ class FormUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        formUseCase.load(url: dummyUrl)
+        formHandlerUseCase.load(url: dummyUrl)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }

@@ -92,7 +92,7 @@ final class PasscodeViewControllerViewModel {
         HistoryUseCase.s.delete()
         SearchUseCase.s.delete()
         DeleteFavoriteUseCase().exe()
-        FormUseCase.s.delete()
+        FormHandlerUseCase.s.delete()
         WebCacheUseCase.s.deleteCookies()
         WebCacheUseCase.s.deleteCaches()
         ThumbnailUseCase.s.delete()

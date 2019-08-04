@@ -202,7 +202,7 @@ final class BaseViewModel {
             .disposed(by: disposeBag)
 
         // フォーム監視
-        FormUseCase.s.rx_action
+        FormHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -392,12 +392,12 @@ final class BaseViewModel {
 
     /// フォーム情報保存
     func storeForm(form: Form) {
-        FormUseCase.s.store(form: form)
+        FormHandlerUseCase.s.store(form: form)
     }
 
     /// フォーム情報取得
     func selectForm(url: String) -> Form? {
-        return FormUseCase.s.select(url: url).first
+        return FormHandlerUseCase.s.select(url: url).first
     }
 
     /// 前webviewのキャプチャ取得

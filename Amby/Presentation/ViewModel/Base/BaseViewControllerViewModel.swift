@@ -88,7 +88,7 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
 
         // フォーム閲覧表示監視
-        FormUseCase.s.rx_action
+        FormHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case let .read(form) = action else { return }
                 self.rx_action.onNext(.formReader(form: form))
