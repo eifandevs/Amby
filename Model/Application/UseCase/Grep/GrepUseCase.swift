@@ -25,11 +25,27 @@ public final class GrepUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<GrepUseCaseAction>()
 
-    /// grep counter
-    private var grepResultCount: (current: Int, total: Int) = (0, 0)
-
     private init() {}
 
+    private var grepDataModel: GrepDataModelProtocol!
+    
+    private var grepResultCount: (current: Int, total: Int) {
+        get {
+            grepDataModel.grepResultCount
+        }
+        set(value) {
+            grepDataModel.grepResultCount = value
+        }
+    }
+    
+    public init() {
+        setupProtocolImpl()
+    }
+    
+    private func setupProtocolImpl() {
+        grepDataModel = GrepDataModel.s
+    }
+    
     /// グレップ開始
     public func begin() {
         rx_action.onNext(.begin)
