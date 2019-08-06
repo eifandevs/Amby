@@ -51,17 +51,9 @@ public final class FormHandlerUseCase {
         rx_action.onNext(.load(url: url))
     }
 
-    public func delete() {
-        formDataModel.delete()
-    }
-
     public func read(id: String) {
         if let form = SelectFormUseCase().exe(id: id).first {
             rx_action.onNext(.read(form: form))
         }
-    }
-
-    public func delete(forms: [Form]) {
-        formDataModel.delete(forms: forms)
     }
 }

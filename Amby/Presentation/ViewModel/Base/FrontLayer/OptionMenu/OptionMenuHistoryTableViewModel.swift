@@ -31,7 +31,7 @@ final class OptionMenuHistoryTableViewModel {
     /// セル情報
     var sections: [Section] = []
     /// 保持データリスト
-    private var readFiles = HistoryUseCase.s.getList()
+    private var readFiles = GetListHistoryUseCase().exe()
     /// ファイル読み込みインターバル
     private let readInterval = 6
     /// セクションフォントサイズ

@@ -25,27 +25,25 @@ public final class GrepUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<GrepUseCaseAction>()
 
-    private init() {}
+    public init() {
+        setupProtocolImpl()
+    }
 
     private var grepDataModel: GrepDataModelProtocol!
-    
+
     private var grepResultCount: (current: Int, total: Int) {
         get {
-            grepDataModel.grepResultCount
+            return grepDataModel.grepResultCount
         }
         set(value) {
             grepDataModel.grepResultCount = value
         }
     }
-    
-    public init() {
-        setupProtocolImpl()
-    }
-    
+
     private func setupProtocolImpl() {
         grepDataModel = GrepDataModel.s
     }
-    
+
     /// グレップ開始
     public func begin() {
         rx_action.onNext(.begin)
@@ -53,7 +51,7 @@ public final class GrepUseCase {
 
     /// グレップ完了
     public func finish(hitNum: Int) {
-        grepResultCount = (0, hitNum)
+        grepDataModel.finish(hitNum: hitNum)
         rx_action.onNext(.finish)
     }
 
@@ -66,15 +64,14 @@ public final class GrepUseCase {
 
     /// 前に移動
     public func previous() {
-        guard grepResultCount.current > 0 else { return }
-        grepResultCount.current -= 1
-        rx_action.onNext(.previous(index: grepResultCount.current))
+        if grepDataModel.previous() {
+            rx_action.onNext(.previous(index: grepResultCount.current))
+        }
     }
 
     /// 次に移動
     public func next() {
-        let index = grepResultCount.current == grepResultCount.total ? 0 : grepResultCount.current + 1
-        grepResultCount.current = index
+        grepDataModel.next()
         rx_action.onNext(.next(index: grepResultCount.current))
     }
 }

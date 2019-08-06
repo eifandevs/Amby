@@ -29,7 +29,7 @@ final class OptionMenuFormTableViewModel {
     func removeRow(indexPath: IndexPath) {
         // モデルから削除
         let row = getRow(indexPath: indexPath)
-        FormHandlerUseCase.s.delete(forms: [row.data])
+        DeleteFormUseCase().exe(forms: [row.data])
     }
 
     /// セル情報

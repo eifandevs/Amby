@@ -60,7 +60,7 @@ class HistoryUseCaseTest: XCTestCase {
 
     func testGetList() {
         historyUseCase.insert(url: URL(string: dummyUrl), title: dummyTitle)
-        XCTAssertTrue(historyUseCase.getList().count == 0)
+        XCTAssertTrue(GetListHistoryUseCase().exe().count == 0)
     }
 
     func testSelect() {

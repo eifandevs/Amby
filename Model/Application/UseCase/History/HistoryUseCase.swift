@@ -52,10 +52,6 @@ public final class HistoryUseCase {
         rx_action.onNext(.load(url: url))
     }
 
-    public func getList() -> [String] {
-        return commonHistoryDataModel.getList()
-    }
-
     /// update common history
     public func insert(url: URL?, title: String?) {
         // プライベートモードの場合は保存しない
