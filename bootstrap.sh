@@ -25,7 +25,17 @@ if [ ! -e ${SRCROOT}/Amby/Environment/Amby/env.plist ]; then
   cp -pR ${SRCROOT}/Amby/Environment/Amby/env-dummy.plist ${SRCROOT}/Amby/Environment/Amby/env.plist
 fi
 
+# google service
+if [ ! -e ${SRCROOT}/Amby/Amby/GoogleService-Info.plist ]; then
+  cp -pR ${SRCROOT}/Amby/Amby/GoogleService-Info_dummy.plist ${SRCROOT}/Amby/Amby/GoogleService-Info.plist
+fi
+
 # carthage
 carthage bootstrap  --platform ios
+
+# report
+pushd Report/client
+npm install
+npm run build
 
 popd
