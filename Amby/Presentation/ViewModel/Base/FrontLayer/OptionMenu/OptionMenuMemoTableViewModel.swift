@@ -63,7 +63,7 @@ final class OptionMenuMemoTableViewModel {
     func removeRow(indexPath: IndexPath) {
         // モデルから削除
         let row = getRow(indexPath: indexPath)
-        MemoUseCase.s.delete(memo: row.data)
+        DeleteMemoUseCase().exe(memo: row.data)
     }
 
     /// ロック or アンロック

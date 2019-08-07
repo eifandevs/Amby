@@ -26,7 +26,7 @@ final class MemoViewControllerViewModel {
         if text.count > 0 {
             _ = MemoUseCase.s.update(memo: memo, text: text)
         } else {
-            _ = MemoUseCase.s.delete(memo: memo)
+            _ = DeleteMemoUseCase().exe(memo: memo)
         }
     }
 }

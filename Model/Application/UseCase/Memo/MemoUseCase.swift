@@ -50,10 +50,6 @@ public final class MemoUseCase {
             .disposed(by: disposeBag)
     }
 
-    public func delete() {
-        memoDataModel.delete()
-    }
-
     public func open(memo: Memo) {
         rx_action.onNext(.present(memo: memo))
     }
@@ -77,15 +73,6 @@ public final class MemoUseCase {
     public func invertLock(memo: Memo) {
         if PasscodeUseCase.s.authentificationChallenge() {
             memoDataModel.invertLock(memo: memo)
-        }
-    }
-
-    public func delete(memo: Memo) {
-        if memoDataModel.select(id: memo.id) != nil {
-            log.debug("delete memo. memo: \(memo)")
-            memoDataModel.delete(memo: memo)
-        } else {
-            log.debug("not delete memo")
         }
     }
 
