@@ -37,7 +37,7 @@ class HistoryUseCaseTest: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        historyUseCase.delete()
+        DeleteHistoryUseCase().exe()
     }
 
     func testLoad() {
@@ -59,12 +59,12 @@ class HistoryUseCaseTest: XCTestCase {
     }
 
     func testGetList() {
-        historyUseCase.insert(url: URL(string: dummyUrl), title: dummyTitle)
+        InsertHistoryUseCase().exe(url: URL(string: dummyUrl), title: dummyTitle)
         XCTAssertTrue(GetListHistoryUseCase().exe().count == 0)
     }
 
     func testSelect() {
-        historyUseCase.insert(url: URL(string: dummyUrl), title: dummyTitle)
-        XCTAssertTrue(historyUseCase.select(dateString: todayString).count == 1)
+        InsertHistoryUseCase().exe(url: URL(string: dummyUrl), title: dummyTitle)
+        XCTAssertTrue(SelectHistoryUseCase().exe(dateString: todayString).count == 1)
     }
 }

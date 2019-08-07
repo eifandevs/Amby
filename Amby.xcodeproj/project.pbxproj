@@ -291,6 +291,10 @@
 		A1AA75D422F6B2E60089A522 /* StoreFormUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75D322F6B2E60089A522 /* StoreFormUseCase.swift */; };
 		A1AA75D622F6BA500089A522 /* DeleteFormUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75D522F6BA500089A522 /* DeleteFormUseCase.swift */; };
 		A1AA75D822F7267F0089A522 /* GrepDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75D722F7267E0089A522 /* GrepDataModel.swift */; };
+		A1AA75DA22FAF3510089A522 /* ExpireCheckHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75D922FAF3510089A522 /* ExpireCheckHistoryUseCase.swift */; };
+		A1AA75DC22FAF3720089A522 /* DeleteHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75DB22FAF3720089A522 /* DeleteHistoryUseCase.swift */; };
+		A1AA75E022FAF3B40089A522 /* InsertHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75DF22FAF3B40089A522 /* InsertHistoryUseCase.swift */; };
+		A1AA75E222FAF3C60089A522 /* SelectHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75E122FAF3C60089A522 /* SelectHistoryUseCase.swift */; };
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */; };
 		A1B778322173A6DA00BED141 /* UserOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778312173A6DA00BED141 /* UserOperation.swift */; };
@@ -784,6 +788,10 @@
 		A1AA75D322F6B2E60089A522 /* StoreFormUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreFormUseCase.swift; sourceTree = "<group>"; };
 		A1AA75D522F6BA500089A522 /* DeleteFormUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFormUseCase.swift; sourceTree = "<group>"; };
 		A1AA75D722F7267E0089A522 /* GrepDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrepDataModel.swift; sourceTree = "<group>"; };
+		A1AA75D922FAF3510089A522 /* ExpireCheckHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpireCheckHistoryUseCase.swift; sourceTree = "<group>"; };
+		A1AA75DB22FAF3720089A522 /* DeleteHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteHistoryUseCase.swift; sourceTree = "<group>"; };
+		A1AA75DF22FAF3B40089A522 /* InsertHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertHistoryUseCase.swift; sourceTree = "<group>"; };
+		A1AA75E122FAF3C60089A522 /* SelectHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHistoryUseCase.swift; sourceTree = "<group>"; };
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderUseCase.swift; sourceTree = "<group>"; };
 		A1B778312173A6DA00BED141 /* UserOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOperation.swift; sourceTree = "<group>"; };
@@ -2145,6 +2153,10 @@
 			children = (
 				A1AA75B122F6A6EE0089A522 /* HistoryUseCase.swift */,
 				9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */,
+				A1AA75D922FAF3510089A522 /* ExpireCheckHistoryUseCase.swift */,
+				A1AA75DB22FAF3720089A522 /* DeleteHistoryUseCase.swift */,
+				A1AA75DF22FAF3B40089A522 /* InsertHistoryUseCase.swift */,
+				A1AA75E122FAF3C60089A522 /* SelectHistoryUseCase.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -3366,6 +3378,7 @@
 				A195063B2143F8AF0091DF23 /* TabDataModel.swift in Sources */,
 				A15C53F7214D4CDC001E8AB5 /* PolicyUseCase.swift in Sources */,
 				A1AA75D822F7267F0089A522 /* GrepDataModel.swift in Sources */,
+				A1AA75E222FAF3C60089A522 /* SelectHistoryUseCase.swift in Sources */,
 				A1AA75CA22F6A6EE0089A522 /* SettingUseCase.swift in Sources */,
 				A19352A12141569C002A0865 /* Google.swift in Sources */,
 				A19506372143F8AF0091DF23 /* CommonHistoryDataModel.swift in Sources */,
@@ -3406,7 +3419,10 @@
 				9D4136F722F9459E00277E2D /* GetListHistoryUseCase.swift in Sources */,
 				A1AA75C422F6A6EE0089A522 /* SyncUseCase.swift in Sources */,
 				A1AA758222F6073B0089A522 /* SelectFavoriteUseCase.swift in Sources */,
+				A1AA75E022FAF3B40089A522 /* InsertHistoryUseCase.swift in Sources */,
 				A1AA75C722F6A6EE0089A522 /* TrendUseCase.swift in Sources */,
+				A1AA75DC22FAF3720089A522 /* DeleteHistoryUseCase.swift in Sources */,
+				A1AA75DA22FAF3510089A522 /* ExpireCheckHistoryUseCase.swift in Sources */,
 				A1AA75BF22F6A6EE0089A522 /* PasscodeUseCase.swift in Sources */,
 				A1AA75CB22F6A6EE0089A522 /* ScrollUseCase.swift in Sources */,
 				A1AA75C322F6A6EE0089A522 /* SourceCodeUseCase.swift in Sources */,

@@ -114,6 +114,8 @@ final class BaseViewModel {
         return WebCacheUseCase.s.cacheConfiguration()
     }
 
+    let insertHistoryUseCase = InsertHistoryUseCase()
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
@@ -493,7 +495,7 @@ final class BaseViewModel {
 
     /// update common history
     func insertHistory(url: URL?, title: String?) {
-        HistoryUseCase.s.insert(url: url, title: title)
+        insertHistoryUseCase.exe(url: url, title: title)
     }
 
     /// サムネイルの削除

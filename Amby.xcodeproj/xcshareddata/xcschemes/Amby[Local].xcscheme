@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "$PODS_ROOT/R.swift/rswift generate $SRCROOT&#10;"
+               scriptText = "if [ ! -e ${SRCROOT}/Amby/R.generated.swift ]; then&#10;$PODS_ROOT/R.swift/rswift generate $SRCROOT&#10;fi&#10;"
                shellToInvoke = "/bin/sh">
                <EnvironmentBuildable>
                   <BuildableReference

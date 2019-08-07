@@ -89,7 +89,7 @@ final class PasscodeViewControllerViewModel {
 
     /// アプリ初期化
     func initializeApp() {
-        HistoryUseCase.s.delete()
+        DeleteHistoryUseCase().exe()
         SearchUseCase.s.delete()
         DeleteFavoriteUseCase().exe()
         DeleteFormUseCase().exe()

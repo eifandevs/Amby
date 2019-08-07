@@ -60,7 +60,7 @@ final class SearchMenuTableViewModel {
                 switch action {
                 case let .request(word):
                     // 閲覧履歴と検索履歴の検索
-                    self.commonHistoryCellItem = HistoryUseCase.s.select(title: word, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
+                    self.commonHistoryCellItem = SelectHistoryUseCase().exe(title: word, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
                     self.searchHistoryCellItem = SearchUseCase.s.select(title: word, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
 
                     // とりあえずここで画面更新
