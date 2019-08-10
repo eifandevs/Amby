@@ -54,33 +54,9 @@ public final class MemoUseCase {
         rx_action.onNext(.present(memo: memo))
     }
 
-    public func insert(memo: Memo) {
-        memoDataModel.insert(memo: memo)
-    }
-
-    public func update(memo: Memo, text: String) {
-        // 新規作成の場合は、データが存在しないのでinsertに変更する
-        if memoDataModel.select(id: memo.id) != nil {
-            log.debug("memo update. before: \(memo.text) after: \(text)")
-            memoDataModel.update(memo: memo, text: text)
-        } else {
-            memo.text = text
-            log.debug("memo insert. memo: \(memo)")
-            memoDataModel.insert(memo: memo)
-        }
-    }
-
     public func invertLock(memo: Memo) {
         if PasscodeUseCase.s.authentificationChallenge() {
             memoDataModel.invertLock(memo: memo)
         }
-    }
-
-    public func select() -> [Memo] {
-        return memoDataModel.select()
-    }
-
-    public func select(id: String) -> Memo? {
-        return memoDataModel.select(id: id)
     }
 }

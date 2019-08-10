@@ -44,7 +44,7 @@ final class OptionMenuMemoTableViewModel {
 
     // セル
     private var rows: [Row] {
-        return MemoUseCase.s.select().map { Row(data: $0) }
+        return SelectMemoUseCase().exe().map { Row(data: $0) }
     }
 
     // 高さ

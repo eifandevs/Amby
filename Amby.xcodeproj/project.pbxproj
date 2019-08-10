@@ -12,7 +12,10 @@
 		40DC748BD179960B0CF27593 /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 		71A90F5EED54E40F2C51B4EA /* Pods_Amby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769A089A76E185BB6109B3E4 /* Pods_Amby.framework */; };
 		84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90A22EEAE1476346BDB6D1 /* Pods_CommonUtil.framework */; };
+		9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */; };
+		9D2E211F22FD7B610024F45D /* InvertLockMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */; };
 		9D4136F722F9459E00277E2D /* GetListHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */; };
+		9DD2433422FD6966006A6F8B /* SelectMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */; };
 		A1042F442258E70400DA6E78 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1042F432258E70400DA6E78 /* R.generated.swift */; };
 		A106154B226B4A5400AB371F /* CommonHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106154A226B4A5400AB371F /* CommonHistoryDataModelTest.swift */; };
 		A106154D226B62AF00AB371F /* SearchHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106154C226B62AF00AB371F /* SearchHistoryDataModelTest.swift */; };
@@ -296,6 +299,7 @@
 		A1AA75E022FAF3B40089A522 /* InsertHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75DF22FAF3B40089A522 /* InsertHistoryUseCase.swift */; };
 		A1AA75E222FAF3C60089A522 /* SelectHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75E122FAF3C60089A522 /* SelectHistoryUseCase.swift */; };
 		A1AA75E422FAF4750089A522 /* DeletaMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75E322FAF4750089A522 /* DeletaMemoUseCase.swift */; };
+		A1AA75E622FF124F0089A522 /* InsertMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75E522FF124F0089A522 /* InsertMemoUseCase.swift */; };
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */; };
 		A1B778322173A6DA00BED141 /* UserOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778312173A6DA00BED141 /* UserOperation.swift */; };
@@ -510,7 +514,10 @@
 		8CFAE618442B97B2C1580990 /* Pods-CommonUtil.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommonUtil.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-CommonUtil/Pods-CommonUtil.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		8E7C858DA7FEA863296A603D /* Pods-Model.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Model.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-Model/Pods-Model.debug-local.xcconfig"; sourceTree = "<group>"; };
 		93D0114BB59CFBCCAC13CB7A /* Pods-Model.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Model.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Model/Pods-Model.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoUseCase.swift; sourceTree = "<group>"; };
+		9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertLockMemoUseCase.swift; sourceTree = "<group>"; };
 		9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListHistoryUseCase.swift; sourceTree = "<group>"; };
+		9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemoUseCase.swift; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		A1042F432258E70400DA6E78 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		A106154A226B4A5400AB371F /* CommonHistoryDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTest.swift; sourceTree = "<group>"; };
@@ -794,6 +801,7 @@
 		A1AA75DF22FAF3B40089A522 /* InsertHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertHistoryUseCase.swift; sourceTree = "<group>"; };
 		A1AA75E122FAF3C60089A522 /* SelectHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHistoryUseCase.swift; sourceTree = "<group>"; };
 		A1AA75E322FAF4750089A522 /* DeletaMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletaMemoUseCase.swift; sourceTree = "<group>"; };
+		A1AA75E522FF124F0089A522 /* InsertMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertMemoUseCase.swift; sourceTree = "<group>"; };
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderUseCase.swift; sourceTree = "<group>"; };
 		A1B778312173A6DA00BED141 /* UserOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOperation.swift; sourceTree = "<group>"; };
@@ -2131,6 +2139,10 @@
 			children = (
 				A1AA75AB22F6A6ED0089A522 /* MemoUseCase.swift */,
 				A1AA75E322FAF4750089A522 /* DeletaMemoUseCase.swift */,
+				9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */,
+				9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */,
+				9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */,
+				A1AA75E522FF124F0089A522 /* InsertMemoUseCase.swift */,
 			);
 			path = Memo;
 			sourceTree = "<group>";
@@ -3358,12 +3370,14 @@
 				A1AA75C022F6A6EE0089A522 /* MenuOrderUseCase.swift in Sources */,
 				A195063C2143F8AF0091DF23 /* SearchHistoryDataModel.swift in Sources */,
 				A1AA75D222F6A8630089A522 /* SelectFormUseCase.swift in Sources */,
+				9DD2433422FD6966006A6F8B /* SelectMemoUseCase.swift in Sources */,
 				A1445A8022B689EA00B30A65 /* SyncUseCase.swift in Sources */,
 				A1AA75BB22F6A6EE0089A522 /* DeleteFavoriteUseCase.swift in Sources */,
 				A15C53F0214D4CDC001E8AB5 /* ContactUseCase.swift in Sources */,
 				A195062E2143F8880091DF23 /* RealmHelper.swift in Sources */,
 				A1B77830216F8C8F00BED141 /* MenuOrderUseCase.swift in Sources */,
 				A15C53F3214D4CDC001E8AB5 /* HelpUseCase.swift in Sources */,
+				A1AA75E622FF124F0089A522 /* InsertMemoUseCase.swift in Sources */,
 				A1EF692421AC3A2000726371 /* RepositoryResult.swift in Sources */,
 				A19506322143F8A60091DF23 /* EncryptService.swift in Sources */,
 				A19506392143F8AF0091DF23 /* FormDataModel.swift in Sources */,
@@ -3400,6 +3414,7 @@
 				A1AA758422F60CF70089A522 /* UpdateFavoriteUseCase.swift in Sources */,
 				A1AA75B622F6A6EE0089A522 /* ThumbnailUseCase.swift in Sources */,
 				A1A3DE8321387D7F00F87009 /* ModelLogger.swift in Sources */,
+				9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */,
 				A1AA75B722F6A6EE0089A522 /* NoticeUseCase.swift in Sources */,
 				A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */,
 				A1AA75D622F6BA500089A522 /* DeleteFormUseCase.swift in Sources */,
@@ -3414,6 +3429,7 @@
 				A1AA75C622F6A6EE0089A522 /* OpenSourceUseCase.swift in Sources */,
 				A1AA75CE22F6A6EE0089A522 /* SearchUseCase.swift in Sources */,
 				A1AA75CD22F6A6EE0089A522 /* WebCacheUseCase.swift in Sources */,
+				9D2E211F22FD7B610024F45D /* InvertLockMemoUseCase.swift in Sources */,
 				A15C53F2214D4CDC001E8AB5 /* SourceCodeUseCase.swift in Sources */,
 				A1AA75BD22F6A6EE0089A522 /* GrepUseCase.swift in Sources */,
 				A15C53F5214D4CDC001E8AB5 /* TrendUseCase.swift in Sources */,
