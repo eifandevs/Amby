@@ -1,5 +1,5 @@
 //
-//  HelpUseCase.swift
+//  HelpHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -10,16 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum HelpUseCaseAction {
+public enum HelpHandlerUseCaseAction {
     case present(title: String, message: String)
 }
 
 /// ヘルプユースケース
-public final class HelpUseCase {
-    public static let s = HelpUseCase()
+public final class HelpHandlerUseCase {
+    public static let s = HelpHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<HelpUseCaseAction>()
+    public let rx_action = PublishSubject<HelpHandlerUseCaseAction>()
 
     private init() {}
 

@@ -1,5 +1,5 @@
 //
-//  OpenSourceUseCase.swift
+//  OpenSourceHandlerUseCase.swift
 //  Model
 //
 //  Created by tenma on 2018/09/12.
@@ -10,16 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum OpenSourceUseCaseAction {
+public enum OpenSourceHandlerUseCaseAction {
     case present
 }
 
 /// オープンソースユースケース
-public final class OpenSourceUseCase {
-    public static let s = OpenSourceUseCase()
+public final class OpenSourceHandlerUseCase {
+    public static let s = OpenSourceHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<OpenSourceUseCaseAction>()
+    public let rx_action = PublishSubject<OpenSourceHandlerUseCaseAction>()
 
     private init() {}
 

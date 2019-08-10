@@ -98,12 +98,12 @@ final class OptionMenuSettingTableViewModel {
 
     /// パスコード設定
     func openPasscodeSetting() {
-        PasscodeUseCase.s.open()
+        PasscodeHandlerUseCase.s.open()
     }
 
     /// メニュ-順序
     func openMenuOrder() {
-        MenuOrderUseCase.s.open()
+        MenuOrderHandlerUseCase.s.open()
     }
 
     /// 閲覧履歴削除

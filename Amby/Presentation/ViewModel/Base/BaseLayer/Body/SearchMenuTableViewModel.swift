@@ -48,6 +48,9 @@ final class SearchMenuTableViewModel {
     private var requestSearchQueue = [String?]()
     /// サジェスト取得中フラグ
     private var isRequesting = false
+
+    private let getNewsUseCase = GetNewsUseCase()
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
@@ -89,7 +92,7 @@ final class SearchMenuTableViewModel {
             .disposed(by: disposeBag)
 
         // 記事取得監視
-        NewsUseCase.s.rx_action
+        NewsHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case let .update(articles) = action else { return }
                 if articles.count > 0 {
@@ -113,7 +116,7 @@ final class SearchMenuTableViewModel {
     /// 記事取得
     public func getArticle() {
         // 記事取得
-        NewsUseCase.s.get()
+        getNewsUseCase.exe()
     }
 
     /// 検索開始

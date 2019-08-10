@@ -51,7 +51,7 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
 
         // ヘルプ監視
-        HelpUseCase.s.rx_action
+        HelpHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case let .present(title, message) = action else { return }
                 self.rx_action.onNext(.help(title: title, message: message))
@@ -59,7 +59,7 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
 
         // 表示順序監視
-        MenuOrderUseCase.s.rx_action
+        MenuOrderHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case .present = action else { return }
                 self.rx_action.onNext(.menuOrder)
@@ -67,7 +67,7 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
 
         // パスコード監視
-        PasscodeUseCase.s.rx_action
+        PasscodeHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
 
@@ -80,7 +80,7 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
 
         // 同期監視
-        SyncUseCase.s.rx_action
+        SyncHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case .present = action else { return }
                 self.rx_action.onNext(.sync)
@@ -96,7 +96,7 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
 
         // メーラー表示監視
-        ContactUseCase.s.rx_action
+        ContactHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case .present = action else { return }
                 self.rx_action.onNext(.mailer)
@@ -104,7 +104,7 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
 
         // オープンソース表示監視
-        OpenSourceUseCase.s.rx_action
+        OpenSourceHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case .present = action else { return }
                 self.rx_action.onNext(.openSource)
@@ -112,7 +112,7 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
 
         // レポート表示監視
-        ReportUseCase.s.rx_action
+        ReportHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case .present = action else { return }
                 self.rx_action.onNext(.report)
@@ -120,7 +120,7 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
 
         // メモ表示監視
-        MemoUseCase.s.rx_action
+        MemoHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case let .present(memo) = action else { return }
                 self.rx_action.onNext(.memo(memo: memo))
@@ -128,7 +128,7 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
 
         // 通知監視
-        NoticeUseCase.s.rx_action
+        NoticeHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case let .present(message, isSuccess) = action else { return }
                 self.rx_action.onNext(.notice(message: message, isSuccess: isSuccess))

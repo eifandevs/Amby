@@ -10,16 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum HtmlAnalysisUseCaseAction {
+public enum HtmlAnalysisHandlerUseCaseAction {
     case analytics
 }
 
 /// レポートユースケース
-public final class HtmlAnalysisUseCase {
-    public static let s = HtmlAnalysisUseCase()
+public final class HtmlAnalysisHandlerUseCase {
+    public static let s = HtmlAnalysisHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<HtmlAnalysisUseCaseAction>()
+    public let rx_action = PublishSubject<HtmlAnalysisHandlerUseCaseAction>()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()

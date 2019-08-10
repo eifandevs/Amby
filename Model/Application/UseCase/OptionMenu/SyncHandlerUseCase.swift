@@ -1,5 +1,5 @@
 //
-//  SyncUseCase.swift
+//  SyncHandlerUseCase.swift
 //  Model
 //
 //  Created by iori tenma on 2019/06/16.
@@ -10,16 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum SyncUseCaseAction {
+public enum SyncHandlerUseCaseAction {
     case present
 }
 
 /// レポートユースケース
-public final class SyncUseCase {
-    public static let s = SyncUseCase()
+public final class SyncHandlerUseCase {
+    public static let s = SyncHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<SyncUseCaseAction>()
+    public let rx_action = PublishSubject<SyncHandlerUseCaseAction>()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()

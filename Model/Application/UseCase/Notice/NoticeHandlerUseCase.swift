@@ -1,5 +1,5 @@
 //
-//  NoticeUseCase.swift
+//  NoticeHandlerUseCase.swift
 //  Model
 //
 //  Created by tenma on 2018/09/09.
@@ -11,16 +11,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum NoticeUseCaseAction {
+public enum NoticeHandlerUseCaseAction {
     case present(message: String, isSuccess: Bool)
 }
 
 /// 汎用通知ユースケース
-public final class NoticeUseCase {
-    public static let s = NoticeUseCase()
+public final class NoticeHandlerUseCase {
+    public static let s = NoticeHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<NoticeUseCaseAction>()
+    public let rx_action = PublishSubject<NoticeHandlerUseCaseAction>()
 
     /// models
     private var tabDataModel: TabDataModelProtocol!
@@ -113,7 +113,7 @@ public final class NoticeUseCase {
             memoDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             thumbnailDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             issueDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
-            PasscodeUseCase.s.rx_error.flatMap { Observable.just($0 as ModelError) }
+            PasscodeHandlerUseCase.s.rx_error.flatMap { Observable.just($0 as ModelError) }
         ]).subscribe { [weak self] modelError in
             guard let `self` = self, let modelError = modelError.element else { return }
             self.rx_action.onNext(.present(message: modelError.message, isSuccess: false))

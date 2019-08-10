@@ -23,8 +23,8 @@ public final class InvertLockMemoUseCase {
         memoDataModel = MemoDataModel.s
     }
 
-    public func invertLock(memo: Memo) {
-        if PasscodeUseCase.s.authentificationChallenge() {
+    public func exe(memo: Memo) {
+        if PasscodeHandlerUseCase.s.authentificationChallenge() {
             memoDataModel.invertLock(memo: memo)
         }
     }

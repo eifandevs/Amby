@@ -61,7 +61,7 @@ final class FrontLayerViewModel {
 
     /// グレップ開始
     func beginGreping() {
-        GrepUseCase.s.begin()
+        GrepHandlerUseCase.s.begin()
     }
 
     /// ヒストリーフォワード

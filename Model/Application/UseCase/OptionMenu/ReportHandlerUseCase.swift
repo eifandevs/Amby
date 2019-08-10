@@ -1,5 +1,5 @@
 //
-//  ReportUseCase.swift
+//  ReportHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -10,17 +10,17 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum ReportUseCaseAction {
+public enum ReportHandlerUseCaseAction {
     case present
     case load(url: String)
 }
 
 /// レポートユースケース
-public final class ReportUseCase {
-    public static let s = ReportUseCase()
+public final class ReportHandlerUseCase {
+    public static let s = ReportHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<ReportUseCaseAction>()
+    public let rx_action = PublishSubject<ReportHandlerUseCaseAction>()
 
     /// 最終お問い合わせ日
     public var lastReportDate: Date {

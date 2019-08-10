@@ -20,6 +20,8 @@ final class OptionMenuMemoTableViewModel {
     /// アクション通知用RX
     let rx_action = PublishSubject<OptionMenuMemoTableViewModelAction>()
 
+    let invertLockMemoUseCase = InvertLockMemoUseCase()
+
     /// Observable自動解放
     private let disposeBag = DisposeBag()
 
@@ -29,7 +31,7 @@ final class OptionMenuMemoTableViewModel {
 
     func setupRx() {
         // リロード監視
-        MemoUseCase.s.rx_action
+        MemoHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case .update = action else { return }
                 self.rx_action.onNext(.reload)
@@ -68,23 +70,23 @@ final class OptionMenuMemoTableViewModel {
 
     /// ロック or アンロック
     func invertLock(memo: Memo) {
-        MemoUseCase.s.invertLock(memo: memo)
+        invertLockMemoUseCase.exe(memo: memo)
     }
 
     /// お問い合わせ表示
     func openMemo(memo: Memo? = nil) {
         if let memo = memo {
             if memo.isLocked {
-                if PasscodeUseCase.s.authentificationChallenge() {
-                    MemoUseCase.s.open(memo: memo)
+                if PasscodeHandlerUseCase.s.authentificationChallenge() {
+                    MemoHandlerUseCase.s.open(memo: memo)
                 }
             } else {
-                MemoUseCase.s.open(memo: memo)
+                MemoHandlerUseCase.s.open(memo: memo)
             }
         } else {
             // 新規作成
             let newMemo = Memo()
-            MemoUseCase.s.open(memo: newMemo)
+            MemoHandlerUseCase.s.open(memo: newMemo)
         }
     }
 }

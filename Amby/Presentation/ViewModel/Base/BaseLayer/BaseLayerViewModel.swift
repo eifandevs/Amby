@@ -31,7 +31,7 @@ final class BaseLayerViewModel {
     }
 
     func setupRx() {
-        GrepUseCase.s.rx_action
+        GrepHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -54,12 +54,12 @@ final class BaseLayerViewModel {
 
     /// 前に移動(グレップ)
     func grepPrevious() {
-        GrepUseCase.s.previous()
+        GrepHandlerUseCase.s.previous()
     }
 
     /// 次に移動(グレップ)
     func grepNext() {
-        GrepUseCase.s.next()
+        GrepHandlerUseCase.s.next()
     }
 
     /// baseViewControllerの状態取得

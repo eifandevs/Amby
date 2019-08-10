@@ -1,5 +1,5 @@
 //
-//  MenuOrderUseCase.swift
+//  MenuOrderHandlerUseCase.swift
 //  Model
 //
 //  Created by tenma on 2018/10/11.
@@ -10,16 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum MenuOrderUseCaseAction {
+public enum MenuOrderHandlerUseCaseAction {
     case present
 }
 
 /// メニューオーダーユースケース
-public final class MenuOrderUseCase {
-    public static let s = MenuOrderUseCase()
+public final class MenuOrderHandlerUseCase {
+    public static let s = MenuOrderHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<MenuOrderUseCaseAction>()
+    public let rx_action = PublishSubject<MenuOrderHandlerUseCaseAction>()
 
     private init() {}
 

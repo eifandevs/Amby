@@ -15,7 +15,7 @@ final class OptionMenuFormTableViewCellViewModel {
 
     /// 閲覧リクエスト
     func readForm(id: String) {
-        if PasscodeUseCase.s.authentificationChallenge() {
+        if PasscodeHandlerUseCase.s.authentificationChallenge() {
             FormHandlerUseCase.s.read(id: id)
         }
     }

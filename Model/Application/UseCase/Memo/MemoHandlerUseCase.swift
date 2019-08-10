@@ -1,5 +1,5 @@
 //
-//  MemoUseCase.swift
+//   MemoHandlerUseCase.swift
 //  Model
 //
 //  Created by tenma on 2018/10/29.
@@ -11,17 +11,17 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum MemoUseCaseAction {
+public enum  MemoHandlerUseCaseAction {
     case present(memo: Memo)
     case update
 }
 
 /// メモユースケース
-public final class MemoUseCase {
-    public static let s = MemoUseCase()
+public final class  MemoHandlerUseCase {
+    public static let s =  MemoHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<MemoUseCaseAction>()
+    public let rx_action = PublishSubject<MemoHandlerUseCaseAction>()
 
     /// models
     private var memoDataModel: MemoDataModelProtocol!
@@ -52,11 +52,5 @@ public final class MemoUseCase {
 
     public func open(memo: Memo) {
         rx_action.onNext(.present(memo: memo))
-    }
-
-    public func invertLock(memo: Memo) {
-        if PasscodeUseCase.s.authentificationChallenge() {
-            memoDataModel.invertLock(memo: memo)
-        }
     }
 }

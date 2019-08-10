@@ -1,5 +1,5 @@
 //
-//  PasscodeUseCase.swift
+//  PasscodeHandlerUseCase.swift
 //  Model
 //
 //  Created by tenma on 2018/10/21.
@@ -10,16 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum PasscodeUseCaseAction {
+public enum PasscodeHandlerUseCaseAction {
     case present
     case confirm
 }
 
-enum PasscodeUseCaseError {
+enum PasscodeHandlerUseCaseError {
     case notRegistered
 }
 
-extension PasscodeUseCaseError: ModelError {
+extension PasscodeHandlerUseCaseError: ModelError {
     var message: String {
         switch self {
         case .notRegistered:
@@ -29,13 +29,13 @@ extension PasscodeUseCaseError: ModelError {
 }
 
 /// パスコードユースケース
-public final class PasscodeUseCase {
-    public static let s = PasscodeUseCase()
+public final class PasscodeHandlerUseCase {
+    public static let s = PasscodeHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<PasscodeUseCaseAction>()
+    public let rx_action = PublishSubject<PasscodeHandlerUseCaseAction>()
     /// エラー通知用RX
-    let rx_error = PublishSubject<PasscodeUseCaseError>()
+    let rx_error = PublishSubject<PasscodeHandlerUseCaseError>()
 
     /// models
     private var settingDataModel: SettingDataModelProtocol!

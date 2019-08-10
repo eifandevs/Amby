@@ -1,5 +1,5 @@
 //
-//  SourceCodeUseCase.swift
+//  SourceCodeHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -10,16 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum SourceCodeUseCaseAction {
+public enum SourceCodeHandlerUseCaseAction {
     case load(url: String)
 }
 
 /// ソースコードユースケース
-public final class SourceCodeUseCase {
-    public static let s = SourceCodeUseCase()
+public final class SourceCodeHandlerUseCase {
+    public static let s = SourceCodeHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<SourceCodeUseCaseAction>()
+    public let rx_action = PublishSubject<SourceCodeHandlerUseCaseAction>()
 
     private init() {}
 

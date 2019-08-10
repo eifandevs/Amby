@@ -1,5 +1,5 @@
 //
-//  HistoryUseCaseTest.swift
+//  HistoryHandlerUseCaseTest.swift
 //  ModelTests
 //
 //  Created by iori tenma on 2019/04/30.
@@ -14,14 +14,14 @@ import RxCocoa
 @testable import Model
 @testable import Entity
 
-class HistoryUseCaseTest: XCTestCase {
+class HistoryHandlerUseCaseTest: XCTestCase {
     let dummyUrl = "https://abc/"
     let dummyUrl2 = "https://def/"
     let dummyTitle = "dummyTitle"
     let dummyTitle2 = "dummyTitle2"
 
-    var historyUseCase: HistoryUseCase {
-        return HistoryUseCase.s
+    var historyUseCase: HistoryHandlerUseCase {
+        return HistoryHandlerUseCase.s
     }
 
     let disposeBag = DisposeBag()

@@ -130,7 +130,7 @@ final class BaseViewModel {
     func setupRx() {
         // ロード要求監視
         Observable.merge([
-            TrendUseCase.s.rx_action
+            TrendHandlerUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(url) = action {
                         return Observable.just(url)
@@ -138,7 +138,7 @@ final class BaseViewModel {
                         return Observable.empty()
                     }
                 },
-            SourceCodeUseCase.s.rx_action
+            SourceCodeHandlerUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(url) = action {
                         return Observable.just(url)
@@ -146,7 +146,7 @@ final class BaseViewModel {
                         return Observable.empty()
                     }
                 },
-            ReportUseCase.s.rx_action
+            ReportHandlerUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(url) = action {
                         return Observable.just(url)
@@ -162,7 +162,7 @@ final class BaseViewModel {
                         return Observable.empty()
                     }
                 },
-            HistoryUseCase.s.rx_action
+            HistoryHandlerUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(url) = action {
                         return Observable.just(url)
@@ -227,7 +227,7 @@ final class BaseViewModel {
             .disposed(by: disposeBag)
 
         // 全文検索監視
-        GrepUseCase.s.rx_action
+        GrepHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -240,7 +240,7 @@ final class BaseViewModel {
             .disposed(by: disposeBag)
 
         // html解析監視
-        HtmlAnalysisUseCase.s.rx_action
+        HtmlAnalysisHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -368,7 +368,7 @@ final class BaseViewModel {
     }
 
     func endGrepping(hitNum: Int) {
-        GrepUseCase.s.finish(hitNum: hitNum)
+        GrepHandlerUseCase.s.finish(hitNum: hitNum)
     }
 
     func startLoading(context: String) {

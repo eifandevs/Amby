@@ -38,7 +38,7 @@ final class PasscodeViewControllerViewModel {
 
     /// パスコード登録済みフラグ
     var isRegisterdPasscode: Bool {
-        return PasscodeUseCase.s.isRegisterdPasscode
+        return PasscodeHandlerUseCase.s.isRegisterdPasscode
     }
 
     /// パスコード入力済みフラグ
@@ -51,14 +51,14 @@ final class PasscodeViewControllerViewModel {
 
     /// パスコード
     private var passcode: String {
-        return PasscodeUseCase.s.rootPasscode
+        return PasscodeHandlerUseCase.s.rootPasscode
     }
 
     /// パスコード入力
     func input(passcode: String) {
         if isConfirm {
             if self.passcode == passcode {
-                PasscodeUseCase.s.isInputPasscode = true
+                PasscodeHandlerUseCase.s.isInputPasscode = true
                 rx_action.onNext(.confirmSuccess)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_AUTHENTIFICATED, isSuccess: true)
@@ -74,7 +74,7 @@ final class PasscodeViewControllerViewModel {
             } else {
                 if inputPasscode == passcode {
                     rx_action.onNext(.register)
-                    PasscodeUseCase.s.rootPasscode = passcode
+                    PasscodeHandlerUseCase.s.rootPasscode = passcode
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_REGISTERED, isSuccess: true)
                     }

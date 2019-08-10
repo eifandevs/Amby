@@ -1,5 +1,5 @@
 //
-//  NewsUseCase.swift
+//    NewsHandlerUseCase.swift
 //  Model
 //
 //  Created by tenma on 2018/09/09.
@@ -11,16 +11,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum NewsUseCaseAction {
+public enum   NewsHandlerUseCaseAction {
     case update(articles: [Article])
 }
 
 /// ニュースユースケース
-public final class NewsUseCase {
-    public static let s = NewsUseCase()
+public final class   NewsHandlerUseCase {
+    public static let s =   NewsHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<NewsUseCaseAction>()
+    public let rx_action = PublishSubject<  NewsHandlerUseCaseAction>()
 
     /// models
     private var articleDataModel: ArticleDataModelProtocol!
@@ -46,9 +46,5 @@ public final class NewsUseCase {
                 }
             }
             .disposed(by: disposeBag)
-    }
-
-    public func get() {
-        articleDataModel.get()
     }
 }

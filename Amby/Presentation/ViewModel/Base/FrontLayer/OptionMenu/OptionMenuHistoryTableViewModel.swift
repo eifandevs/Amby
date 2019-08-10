@@ -87,7 +87,7 @@ final class OptionMenuHistoryTableViewModel {
 
     /// ロードリクエスト
     func loadRequest(url: String) {
-        HistoryUseCase.s.load(url: url)
+        HistoryHandlerUseCase.s.load(url: url)
     }
 
     /// セル情報

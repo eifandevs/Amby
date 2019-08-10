@@ -1,5 +1,5 @@
 //
-//  TrendUseCase.swift
+//  TrendHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -10,16 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum TrendUseCaseAction {
+public enum TrendHandlerUseCaseAction {
     case load(url: String)
 }
 
 /// トレンドユースケース
-public final class TrendUseCase {
-    public static let s = TrendUseCase()
+public final class TrendHandlerUseCase {
+    public static let s = TrendHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<TrendUseCaseAction>()
+    public let rx_action = PublishSubject<TrendHandlerUseCaseAction>()
 
     private init() {}
 

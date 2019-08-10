@@ -292,7 +292,7 @@ public final class TabUseCase {
 
     /// change private mode
     public func invertPrivateMode(groupContext: String) {
-        if PasscodeUseCase.s.authentificationChallenge() {
+        if PasscodeHandlerUseCase.s.authentificationChallenge() {
             tabDataModel.invertPrivateMode(groupContext: groupContext)
         }
     }

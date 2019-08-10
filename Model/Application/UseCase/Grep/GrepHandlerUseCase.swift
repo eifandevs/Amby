@@ -1,5 +1,5 @@
 //
-//  GrepUseCase.swift
+//  GrepHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum GrepUseCaseAction {
+public enum GrepHandlerUseCaseAction {
     case begin
     case request(word: String)
     case finish
@@ -19,11 +19,11 @@ public enum GrepUseCaseAction {
 }
 
 /// グレップユースケース
-public final class GrepUseCase {
-    public static let s = GrepUseCase()
+public final class GrepHandlerUseCase {
+    public static let s = GrepHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<GrepUseCaseAction>()
+    public let rx_action = PublishSubject<GrepHandlerUseCaseAction>()
 
     public init() {
         setupProtocolImpl()

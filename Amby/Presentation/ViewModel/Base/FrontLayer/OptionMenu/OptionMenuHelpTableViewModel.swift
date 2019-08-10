@@ -45,6 +45,6 @@ final class OptionMenuHelpTableViewModel {
 
     /// ヘルプ表示
     func openHelpScreen(title: String, message: String) {
-        HelpUseCase.s.open(title: title, message: message)
+        HelpHandlerUseCase.s.open(title: title, message: message)
     }
 }

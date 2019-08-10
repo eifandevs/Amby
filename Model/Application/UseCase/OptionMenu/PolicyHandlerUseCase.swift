@@ -1,5 +1,5 @@
 //
-//  PolicyUseCase.swift
+//  PolicyHandlerUseCase.swift
 //  Model
 //
 //  Created by tenma on 2018/09/09.
@@ -10,16 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum PolicyUseCaseAction {
+public enum PolicyHandlerUseCaseAction {
     case load
 }
 
 /// ポリシーユースケース
-public final class PolicyUseCase {
-    public static let s = PolicyUseCase()
+public final class PolicyHandlerUseCase {
+    public static let s = PolicyHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<PolicyUseCaseAction>()
+    public let rx_action = PublishSubject<PolicyHandlerUseCaseAction>()
 
     private init() {}
 

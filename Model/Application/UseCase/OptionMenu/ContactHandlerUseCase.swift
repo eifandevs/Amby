@@ -1,5 +1,5 @@
 //
-//  ContactUseCase.swift
+//  ContactHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -15,8 +15,8 @@ public enum ContactCaseAction {
 }
 
 /// コンタクトユースケース
-public final class ContactUseCase {
-    public static let s = ContactUseCase()
+public final class ContactHandlerUseCase {
+    public static let s = ContactHandlerUseCase()
 
     /// アクション通知用RX
     public let rx_action = PublishSubject<ContactCaseAction>()

@@ -1,5 +1,5 @@
 //
-//  HistoryUseCase.swift
+//  HistoryHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -11,16 +11,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum HistoryUseCaseAction {
+public enum HistoryHandlerUseCaseAction {
     case load(url: String)
 }
 
 /// ヒストリーユースケース
-public final class HistoryUseCase {
-    public static let s = HistoryUseCase()
+public final class HistoryHandlerUseCase {
+    public static let s = HistoryHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<HistoryUseCaseAction>()
+    public let rx_action = PublishSubject<HistoryHandlerUseCaseAction>()
 
     /// models
     private var commonHistoryDataModel: CommonHistoryDataModelProtocol!

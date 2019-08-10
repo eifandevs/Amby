@@ -78,7 +78,7 @@ final class HeaderViewModel {
             .disposed(by: disposeBag)
 
         // グレップ開始監視
-        GrepUseCase.s.rx_action
+        GrepHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case .begin = action else { return }
                 self.rx_action.onNext(.grep)
@@ -101,7 +101,7 @@ final class HeaderViewModel {
     }
 
     func grepRequest(word: String) {
-        GrepUseCase.s.grep(word: word)
+        GrepHandlerUseCase.s.grep(word: word)
     }
 
     func updateFavorite() {
