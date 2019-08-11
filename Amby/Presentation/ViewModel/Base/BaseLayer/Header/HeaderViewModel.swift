@@ -39,7 +39,7 @@ final class HeaderViewModel {
 
     private func setupRx() {
         // プログレス監視
-        ProgressUseCase.s.rx_action
+        ProgressHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -64,7 +64,7 @@ final class HeaderViewModel {
             .disposed(by: disposeBag)
 
         // 編集開始監視
-        SearchUseCase.s.rx_action
+        SearchHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -97,7 +97,7 @@ final class HeaderViewModel {
     }
 
     func loadRequest(text: String) {
-        SearchUseCase.s.load(text: text)
+        SearchHandlerUseCase.s.load(text: text)
     }
 
     func grepRequest(word: String) {

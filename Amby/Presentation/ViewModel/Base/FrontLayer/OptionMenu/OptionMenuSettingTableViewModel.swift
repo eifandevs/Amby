@@ -130,7 +130,7 @@ final class OptionMenuSettingTableViewModel {
     /// 検索履歴削除
     func deleteSearchHistory() {
         NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SEARCH_HISTORY, completion: {
-            SearchUseCase.s.delete()
+            SearchHandlerUseCase.s.delete()
         })
     }
 
@@ -152,7 +152,7 @@ final class OptionMenuSettingTableViewModel {
     func deleteAll() {
         NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_ALL, completion: {
             DeleteHistoryUseCase().exe()
-            SearchUseCase.s.delete()
+            SearchHandlerUseCase.s.delete()
             DeleteFavoriteUseCase().exe()
             DeleteFormUseCase().exe()
             WebCacheUseCase.s.deleteCookies()

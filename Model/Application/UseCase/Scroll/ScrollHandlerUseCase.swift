@@ -1,5 +1,5 @@
 //
-//  ScrollUseCase.swift
+//  ScrollHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -10,17 +10,17 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum ScrollUseCaseAction {
+public enum ScrollHandlerUseCaseAction {
     case scrollUp
     case autoScroll
 }
 
 /// スクロールユースケース
-public final class ScrollUseCase {
-    public static let s = ScrollUseCase()
+public final class ScrollHandlerUseCase {
+    public static let s = ScrollHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<ScrollUseCaseAction>()
+    public let rx_action = PublishSubject<ScrollHandlerUseCaseAction>()
 
     public var autoScrollInterval: CGFloat {
         get {

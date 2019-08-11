@@ -21,12 +21,12 @@ final class FrontLayerViewModel {
 
     /// スクロールアップ
     func scrollUp() {
-        ScrollUseCase.s.scrollUp()
+        ScrollHandlerUseCase.s.scrollUp()
     }
 
     /// 自動スクロール
     func autoScroll() {
-        ScrollUseCase.s.autoScroll()
+        ScrollHandlerUseCase.s.autoScroll()
     }
 
     /// フォーム登録
@@ -56,7 +56,7 @@ final class FrontLayerViewModel {
 
     /// 検索開始
     func beginSearching() {
-        SearchUseCase.s.beginAtCircleMenu()
+        SearchHandlerUseCase.s.beginAtCircleMenu()
     }
 
     /// グレップ開始

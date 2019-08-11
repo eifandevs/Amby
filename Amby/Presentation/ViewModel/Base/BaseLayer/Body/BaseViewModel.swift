@@ -79,7 +79,7 @@ final class BaseViewModel {
 
     /// 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
-        return ScrollUseCase.s.autoScrollInterval
+        return ScrollHandlerUseCase.s.autoScrollInterval
     }
 
     /// 新規ウィンドウ許諾
@@ -114,7 +114,10 @@ final class BaseViewModel {
         return WebCacheUseCase.s.cacheConfiguration()
     }
 
-    let insertHistoryUseCase = InsertHistoryUseCase()
+    private let insertHistoryUseCase = InsertHistoryUseCase()
+    private let updateProgressUseCase = UpdateProgressUseCase()
+    private let reloadProgressUseCase = ReloadProgressUseCase()
+    private let updateTextProgressUseCase = UpdateTextProgressUseCase()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -170,7 +173,7 @@ final class BaseViewModel {
                         return Observable.empty()
                     }
                 },
-            SearchUseCase.s.rx_action
+            SearchHandlerUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(text) = action {
                         return Observable.just(text)
@@ -216,7 +219,7 @@ final class BaseViewModel {
             .disposed(by: disposeBag)
 
         // スクロール監視
-        ScrollUseCase.s.rx_action
+        ScrollHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -384,12 +387,12 @@ final class BaseViewModel {
     }
 
     func updateProgress(progress: CGFloat) {
-        ProgressUseCase.s.updateProgress(progress: progress)
+        updateProgressUseCase.exe(progress: progress)
     }
 
     /// 検索開始
     func beginSearching() {
-        SearchUseCase.s.beginAtHeader()
+        SearchHandlerUseCase.s.beginAtHeader()
     }
 
     /// フォーム情報保存
@@ -440,12 +443,12 @@ final class BaseViewModel {
 
     /// reload ProgressDataModel
     func reloadProgress() {
-        ProgressUseCase.s.reloadProgress()
+        reloadProgressUseCase.exe()
     }
 
     /// update text in ProgressDataModel
     func updateProgressText(text: String) {
-        ProgressUseCase.s.updateText(text: text)
+        updateTextProgressUseCase.exe(text: text)
     }
 
     /// 前WebViewに切り替え
@@ -480,12 +483,12 @@ final class BaseViewModel {
 
     /// update canGoBack
     func updateCanGoBack(context: String, canGoBack: Bool) {
-        ProgressUseCase.s.updateCanGoBack(context: context, canGoBack: canGoBack)
+        ProgressHandlerUseCase.s.updateCanGoBack(context: context, canGoBack: canGoBack)
     }
 
     /// update canGoForward
     func updateCanGoForward(context: String, canGoForward: Bool) {
-        ProgressUseCase.s.updateCanGoForward(context: context, canGoForward: canGoForward)
+        ProgressHandlerUseCase.s.updateCanGoForward(context: context, canGoForward: canGoForward)
     }
 
     /// update session

@@ -1,5 +1,5 @@
 //
-//  SearchUseCase.swift
+//  SearchHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -12,22 +12,25 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum SearchUseCaseAction {
+public enum SearchHandlerUseCaseAction {
     case searchAtMenu
     case searchAtHeader
     case load(text: String)
 }
 
 /// 検索ユースケース
-public final class SearchUseCase {
-    public static let s = SearchUseCase()
+public final class SearchHandlerUseCase {
+    public static let s = SearchHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<SearchUseCaseAction>()
+    public let rx_action = PublishSubject<SearchHandlerUseCaseAction>()
 
     /// models
     private var searchHistoryDataModel: SearchHistoryDataModelProtocol!
     private var tabDataModel: TabDataModelProtocol!
+
+    /// usecase
+    private let updateTextProgressUseCase = UpdateTextProgressUseCase()
 
     private init() {
         setupProtocolImpl()
@@ -58,7 +61,7 @@ public final class SearchUseCase {
                 return encodedText
             }
         }()
-        ProgressUseCase.s.updateText(text: searchText)
+        updateTextProgressUseCase.exe(text: searchText)
 
         rx_action.onNext(.load(text: searchText))
     }

@@ -1,5 +1,5 @@
 //
-//  SuggestUseCaseTest.swift
+//  SuggestHandlerUseCaseTest.swift
 //  ModelTests
 //
 //  Created by iori tenma on 2019/05/01.
@@ -14,10 +14,10 @@ import RxCocoa
 @testable import Model
 @testable import Entity
 
-class SuggestUseCaseTest: XCTestCase {
+class SuggestHandlerUseCaseTest: XCTestCase {
 
-    var suggestUseCase: SuggestUseCase {
-        return SuggestUseCase.s
+    var suggestUseCase: SuggestHandlerUseCase {
+        return SuggestHandlerUseCase.s
     }
 
     let disposeBag = DisposeBag()

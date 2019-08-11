@@ -1,5 +1,5 @@
 //
-//  ProgressUseCaseTest.swift
+//  ProgressHandlerUseCaseTest.swift
 //  ModelTests
 //
 //  Created by iori tenma on 2019/05/01.
@@ -14,10 +14,10 @@ import RxCocoa
 @testable import Model
 @testable import Entity
 
-class ProgressUseCaseTest: XCTestCase {
+class ProgressHandlerUseCaseTest: XCTestCase {
 
-    var progressUseCase: ProgressUseCase {
-        return ProgressUseCase.s
+    var progressUseCase: ProgressHandlerUseCase {
+        return ProgressHandlerUseCase.s
     }
 
     let disposeBag = DisposeBag()

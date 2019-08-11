@@ -49,14 +49,16 @@ final class SearchMenuTableViewModel {
     /// サジェスト取得中フラグ
     private var isRequesting = false
 
+    /// usecase
     private let getNewsUseCase = GetNewsUseCase()
+    private let getSuggestUseCase = GetSuggestUseCase()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
     init() {
         // サジェスト監視
-        SuggestUseCase.s.rx_action
+        SuggestHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
 
@@ -64,7 +66,7 @@ final class SearchMenuTableViewModel {
                 case let .request(word):
                     // 閲覧履歴と検索履歴の検索
                     self.commonHistoryCellItem = SelectHistoryUseCase().exe(title: word, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
-                    self.searchHistoryCellItem = SearchUseCase.s.select(title: word, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
+                    self.searchHistoryCellItem = SearchHandlerUseCase.s.select(title: word, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
 
                     // とりあえずここで画面更新
                     self.rx_action.onNext(.update)
@@ -127,7 +129,7 @@ final class SearchMenuTableViewModel {
                 if token.isUrl {
                     isRequesting = false
                 } else {
-                    SuggestUseCase.s.get(token: token)
+                    getSuggestUseCase.exe(token: token)
                 }
             } else {
                 suggestCellItem = []
@@ -145,6 +147,6 @@ final class SearchMenuTableViewModel {
 
     /// ロードリクエスト
     func loadRequest(url: String) {
-        SearchUseCase.s.load(text: url)
+        SearchHandlerUseCase.s.load(text: url)
     }
 }

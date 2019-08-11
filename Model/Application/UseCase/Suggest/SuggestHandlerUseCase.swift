@@ -1,5 +1,5 @@
 //
-//  SuggestUseCase.swift
+//  SuggestHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -11,17 +11,17 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum SuggestUseCaseAction {
+public enum SuggestHandlerUseCaseAction {
     case request(word: String)
     case update(suggest: Suggest)
 }
 
 /// サジェストユースケース
-public final class SuggestUseCase {
-    public static let s = SuggestUseCase()
+public final class SuggestHandlerUseCase {
+    public static let s = SuggestHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<SuggestUseCaseAction>()
+    public let rx_action = PublishSubject<SuggestHandlerUseCaseAction>()
 
     /// models
     private var suggestDataModel: SuggestDataModelProtocol!
@@ -53,10 +53,5 @@ public final class SuggestUseCase {
     /// サジェストリクエスト
     public func suggest(word: String) {
         rx_action.onNext(.request(word: word))
-    }
-
-    /// 取得
-    public func get(token: String) {
-        SuggestDataModel.s.get(token: token)
     }
 }

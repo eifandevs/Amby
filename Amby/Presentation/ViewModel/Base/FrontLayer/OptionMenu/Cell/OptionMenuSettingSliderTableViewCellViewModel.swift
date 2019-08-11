@@ -12,6 +12,6 @@ import Model
 final class OptionMenuSettingSliderTableViewCellViewModel {
     /// スクロール速度設定変更
     func changeValue(value: Float) {
-        ScrollUseCase.s.autoScrollInterval = CGFloat(-value)
+        ScrollHandlerUseCase.s.autoScrollInterval = CGFloat(-value)
     }
 }

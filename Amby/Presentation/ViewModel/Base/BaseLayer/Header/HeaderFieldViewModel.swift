@@ -12,6 +12,6 @@ import Model
 final class HeaderFieldViewModel {
     /// サジェストリクエスト
     func suggest(word: String) {
-        SuggestUseCase.s.suggest(word: word)
+        SuggestHandlerUseCase.s.suggest(word: word)
     }
 }

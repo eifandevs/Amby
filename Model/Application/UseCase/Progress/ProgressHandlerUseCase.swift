@@ -1,5 +1,5 @@
 //
-//  ProgressUseCase.swift
+//  ProgressHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/25.
@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum ProgressUseCaseAction {
+public enum ProgressHandlerUseCaseAction {
     case updateProgress(progress: CGFloat)
     case updateText(text: String)
     case updateCanGoBack(canGoBack: Bool)
@@ -18,11 +18,11 @@ public enum ProgressUseCaseAction {
 }
 
 /// ヘッダーユースケース
-public final class ProgressUseCase {
-    public static let s = ProgressUseCase()
+public final class ProgressHandlerUseCase {
+    public static let s = ProgressHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<ProgressUseCaseAction>()
+    public let rx_action = PublishSubject<ProgressHandlerUseCaseAction>()
 
     private var currentContext: String {
         return tabDataModel.currentContext
@@ -76,22 +76,6 @@ public final class ProgressUseCase {
                 }
             }
             .disposed(by: disposeBag)
-    }
-
-    public func updateProgress(progress: CGFloat) {
-        progressDataModel.updateProgress(progress: progress)
-    }
-
-    /// reload ProgressDataModel
-    public func reloadProgress() {
-        if let currentTab = tabDataModel.currentTab {
-            progressDataModel.reload(currentTab: currentTab)
-        }
-    }
-
-    /// update text in ProgressDataModel
-    public func updateText(text: String) {
-        progressDataModel.updateText(text: text)
     }
 
     /// update cangoback
