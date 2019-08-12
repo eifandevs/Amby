@@ -90,7 +90,7 @@ public final class NoticeHandlerUseCase {
                         return Observable.empty()
                     }
                 },
-                WebCacheUseCase.s.rx_action.flatMap { action -> Observable<String> in
+                WebCacheHandlerUseCase.s.rx_action.flatMap { action -> Observable<String> in
                     switch action {
                     case .deleteCookies: return Observable.just(MessageConst.NOTIFICATION.DELETE_COOKIES)
                     case .deleteCaches: return Observable.just(MessageConst.NOTIFICATION.DELETE_CACHES)

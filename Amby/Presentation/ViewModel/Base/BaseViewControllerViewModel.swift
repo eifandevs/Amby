@@ -30,6 +30,11 @@ enum BaseViewControllerViewModelAction {
 final class BaseViewControllerViewModel {
     let rx_action = PublishSubject<BaseViewControllerViewModelAction>()
 
+    /// ユースケース
+    let changeGroupTitleUseCase = ChangeGroupTitleUseCase()
+    let insertTabUseCase = InsertTabUseCase()
+    let initializeTabUseCase = InitializeTabUseCase()
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
@@ -43,7 +48,7 @@ final class BaseViewControllerViewModel {
 
     private func setupRx() {
         // タブグループタイトル編集ダイアログ
-        TabUseCase.s.rx_action
+        TabHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case let .presentGroupTitleEdit(groupContext) = action else { return }
                 self.rx_action.onNext(.tabGroupTitle(groupContext: groupContext))
@@ -137,14 +142,14 @@ final class BaseViewControllerViewModel {
     }
 
     func initializeTab() {
-        TabUseCase.s.initialize()
+        initializeTabUseCase.exe()
     }
 
     func insertTab(url: String) {
-        TabUseCase.s.insert(url: url)
+        insertTabUseCase.exe(url: url)
     }
 
     func changeGroupTitle(groupContext: String, title: String) {
-        TabUseCase.s.changeGroupTitle(groupContext: groupContext, title: title)
+        changeGroupTitleUseCase.exe(groupContext: groupContext, title: title)
     }
 }

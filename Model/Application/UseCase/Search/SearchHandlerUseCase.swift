@@ -75,19 +75,4 @@ public final class SearchHandlerUseCase {
     public func beginAtHeader() {
         rx_action.onNext(.searchAtHeader)
     }
-
-    public func delete() {
-        searchHistoryDataModel.delete()
-    }
-
-    /// 検索履歴の検索
-    /// 検索ワードと検索件数を指定する
-    /// 指定ワードを含むかどうか
-    public func select(title: String, readNum: Int) -> [SearchHistory] {
-        return searchHistoryDataModel.select(title: title, readNum: readNum)
-    }
-
-    public func expireCheck() {
-        searchHistoryDataModel.expireCheck()
-    }
 }

@@ -130,21 +130,21 @@ final class OptionMenuSettingTableViewModel {
     /// 検索履歴削除
     func deleteSearchHistory() {
         NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SEARCH_HISTORY, completion: {
-            SearchHandlerUseCase.s.delete()
+            DeleteSearchUseCase().exe()
         })
     }
 
     /// クッキー削除
     func deleteCookies() {
         NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_COOKIES, completion: {
-            WebCacheUseCase.s.deleteCookies()
+            WebCacheHandlerUseCase.s.deleteCookies()
         })
     }
 
     /// キャッシュ削除
     func deleteCaches() {
         NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_SITE_DATA, completion: {
-            WebCacheUseCase.s.deleteCaches()
+            WebCacheHandlerUseCase.s.deleteCaches()
         })
     }
 
@@ -152,13 +152,13 @@ final class OptionMenuSettingTableViewModel {
     func deleteAll() {
         NotificationService.presentAlert(title: MessageConst.ALERT.DELETE_TITLE, message: MessageConst.ALERT.DELETE_ALL, completion: {
             DeleteHistoryUseCase().exe()
-            SearchHandlerUseCase.s.delete()
+            DeleteSearchUseCase().exe()
             DeleteFavoriteUseCase().exe()
             DeleteFormUseCase().exe()
-            WebCacheUseCase.s.deleteCookies()
-            WebCacheUseCase.s.deleteCaches()
-            ThumbnailUseCase.s.delete()
-            TabUseCase.s.delete()
+            WebCacheHandlerUseCase.s.deleteCookies()
+            WebCacheHandlerUseCase.s.deleteCaches()
+            DeleteThumbnailUseCase().exe()
+            DeleteTabUseCase().exe()
             if let delegate = UIApplication.shared.delegate as? AppDelegate {
                 delegate.initialize()
             }

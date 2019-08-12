@@ -1,5 +1,5 @@
 //
-//  SettingUseCase.swift
+//  GetSettingUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/27.
@@ -11,8 +11,8 @@ import RxCocoa
 import RxSwift
 
 /// 設定ユースケース
-public final class SettingUseCase {
-    public static let s = SettingUseCase()
+public final class GetSettingUseCase {
+    public static let s = GetSettingUseCase()
 
     /// 閲覧履歴保存日数
     public var commonHistorySaveCount: Int {

@@ -114,6 +114,42 @@
 		A1422AF6230080ED002DAF52 /* ReloadProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422AF5230080ED002DAF52 /* ReloadProgressUseCase.swift */; };
 		A1422AF8230081E8002DAF52 /* UpdateTextProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422AF7230081E8002DAF52 /* UpdateTextProgressUseCase.swift */; };
 		A1422AFA230084AE002DAF52 /* GetSuggestUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422AF9230084AE002DAF52 /* GetSuggestUseCase.swift */; };
+		A1422AFC23012AA7002DAF52 /* CloseTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422AFB23012AA7002DAF52 /* CloseTabUseCase.swift */; };
+		A1422AFE23012C51002DAF52 /* CloseAllTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422AFD23012C51002DAF52 /* CloseAllTabUseCase.swift */; };
+		A1422B0023012E8C002DAF52 /* CopyTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422AFF23012E8C002DAF52 /* CopyTabUseCase.swift */; };
+		A1422B0223012F2B002DAF52 /* SwapTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B0123012F2B002DAF52 /* SwapTabUseCase.swift */; };
+		A1422B0423012F6E002DAF52 /* RemoveTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B0323012F6E002DAF52 /* RemoveTabUseCase.swift */; };
+		A1422B0623013149002DAF52 /* ChangeTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B0523013149002DAF52 /* ChangeTabUseCase.swift */; };
+		A1422B082301317E002DAF52 /* ChangeGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B072301317E002DAF52 /* ChangeGroupUseCase.swift */; };
+		A1422B0A230131B9002DAF52 /* ChangeGroupTitleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B09230131B9002DAF52 /* ChangeGroupTitleUseCase.swift */; };
+		A1422B0C2301329C002DAF52 /* DeleteGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B0B2301329C002DAF52 /* DeleteGroupUseCase.swift */; };
+		A1422B0E2301331A002DAF52 /* AddTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B0D2301331A002DAF52 /* AddTabUseCase.swift */; };
+		A1422B10230134D5002DAF52 /* AddGroupUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B0F230134D5002DAF52 /* AddGroupUseCase.swift */; };
+		A1422B1223013517002DAF52 /* InsertTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B1123013517002DAF52 /* InsertTabUseCase.swift */; };
+		A1422B142301354F002DAF52 /* DeleteTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B132301354F002DAF52 /* DeleteTabUseCase.swift */; };
+		A1422B162301357B002DAF52 /* RebuildTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B152301357B002DAF52 /* RebuildTabUseCase.swift */; };
+		A1422B1823013712002DAF52 /* GetIndexTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B1723013712002DAF52 /* GetIndexTabUseCase.swift */; };
+		A1422B1A2301374E002DAF52 /* GetHistoryTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B192301374E002DAF52 /* GetHistoryTabUseCase.swift */; };
+		A1422B2523013880002DAF52 /* StartLoadingTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B1B2301387F002DAF52 /* StartLoadingTabUseCase.swift */; };
+		A1422B2623013880002DAF52 /* UpdateUrlTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B1C2301387F002DAF52 /* UpdateUrlTabUseCase.swift */; };
+		A1422B2723013880002DAF52 /* EndRenderingTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B1D2301387F002DAF52 /* EndRenderingTabUseCase.swift */; };
+		A1422B2823013880002DAF52 /* InvertPrivateModeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B1E2301387F002DAF52 /* InvertPrivateModeUseCase.swift */; };
+		A1422B2923013880002DAF52 /* GoBackTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B1F2301387F002DAF52 /* GoBackTabUseCase.swift */; };
+		A1422B2A23013880002DAF52 /* UpdateSessionTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B2023013880002DAF52 /* UpdateSessionTabUseCase.swift */; };
+		A1422B2B23013880002DAF52 /* UpdateTitleTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B2123013880002DAF52 /* UpdateTitleTabUseCase.swift */; };
+		A1422B2C23013880002DAF52 /* StoreTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B2223013880002DAF52 /* StoreTabUseCase.swift */; };
+		A1422B2D23013880002DAF52 /* EndLoadingTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B2323013880002DAF52 /* EndLoadingTabUseCase.swift */; };
+		A1422B2E23013880002DAF52 /* GoNextTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B2423013880002DAF52 /* GoNextTabUseCase.swift */; };
+		A1422B3023013B87002DAF52 /* InitializeTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B2F23013B87002DAF52 /* InitializeTabUseCase.swift */; };
+		A1422B3223013FC6002DAF52 /* GetCaptureUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B3123013FC6002DAF52 /* GetCaptureUseCase.swift */; };
+		A1422B3423014030002DAF52 /* CreateThumbnailFolderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B3323014030002DAF52 /* CreateThumbnailFolderUseCase.swift */; };
+		A1422B362301407B002DAF52 /* WriteThumbnailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B352301407B002DAF52 /* WriteThumbnailUseCase.swift */; };
+		A1422B38230140E1002DAF52 /* GetThumbnailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B37230140E1002DAF52 /* GetThumbnailUseCase.swift */; };
+		A1422B3A2301410F002DAF52 /* DeleteThumbnailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B392301410F002DAF52 /* DeleteThumbnailUseCase.swift */; };
+		A1422B3C2301432D002DAF52 /* DeleteSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B3B2301432D002DAF52 /* DeleteSearchUseCase.swift */; };
+		A1422B3E230143CA002DAF52 /* SelectSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B3D230143CA002DAF52 /* SelectSearchUseCase.swift */; };
+		A1422B4023014402002DAF52 /* ExpireCheckSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B3F23014402002DAF52 /* ExpireCheckSearchUseCase.swift */; };
+		A1422B4223014568002DAF52 /* GetWebCacheConfigUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4123014568002DAF52 /* GetWebCacheConfigUseCase.swift */; };
 		A1445A7D22B5290700B30A65 /* SyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7B22B5290700B30A65 /* SyncViewController.swift */; };
 		A1445A7E22B5290700B30A65 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1445A7C22B5290700B30A65 /* SyncViewController.xib */; };
 		A1445A8022B689EA00B30A65 /* SyncHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */; };
@@ -265,9 +301,8 @@
 		A1AA758222F6073B0089A522 /* SelectFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA758122F6073B0089A522 /* SelectFavoriteUseCase.swift */; };
 		A1AA758422F60CF70089A522 /* UpdateFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA758322F60CF70089A522 /* UpdateFavoriteUseCase.swift */; };
 		A1AA758622F60FF10089A522 /* DeleteFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA758522F60FF10089A522 /* DeleteFavoriteUseCase.swift */; };
-		A1AA75B422F6A6EE0089A522 /* TabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA758822F6A6ED0089A522 /* TabUseCase.swift */; };
+		A1AA75B422F6A6EE0089A522 /* TabHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA758822F6A6ED0089A522 /* TabHandlerUseCase.swift */; };
 		A1AA75B522F6A6EE0089A522 /* ProgressHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA758A22F6A6ED0089A522 /* ProgressHandlerUseCase.swift */; };
-		A1AA75B622F6A6EE0089A522 /* ThumbnailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA758C22F6A6ED0089A522 /* ThumbnailUseCase.swift */; };
 		A1AA75B722F6A6EE0089A522 /* NoticeHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA758E22F6A6ED0089A522 /* NoticeHandlerUseCase.swift */; };
 		A1AA75B822F6A6EE0089A522 /* SelectFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA759022F6A6ED0089A522 /* SelectFavoriteUseCase.swift */; };
 		A1AA75B922F6A6EE0089A522 /* FavoriteHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA759122F6A6ED0089A522 /* FavoriteHandlerUseCase.swift */; };
@@ -287,10 +322,10 @@
 		A1AA75C722F6A6EE0089A522 /* TrendHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75A322F6A6ED0089A522 /* TrendHandlerUseCase.swift */; };
 		A1AA75C822F6A6EE0089A522 /* ReportHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75A422F6A6ED0089A522 /* ReportHandlerUseCase.swift */; };
 		A1AA75C922F6A6EE0089A522 /* PolicyHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75A522F6A6ED0089A522 /* PolicyHandlerUseCase.swift */; };
-		A1AA75CA22F6A6EE0089A522 /* SettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75A722F6A6ED0089A522 /* SettingUseCase.swift */; };
+		A1AA75CA22F6A6EE0089A522 /* GetSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75A722F6A6ED0089A522 /* GetSettingUseCase.swift */; };
 		A1AA75CB22F6A6EE0089A522 /* ScrollHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75A922F6A6ED0089A522 /* ScrollHandlerUseCase.swift */; };
 		A1AA75CC22F6A6EE0089A522 /* MemoHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75AB22F6A6ED0089A522 /* MemoHandlerUseCase.swift */; };
-		A1AA75CD22F6A6EE0089A522 /* WebCacheUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75AD22F6A6EE0089A522 /* WebCacheUseCase.swift */; };
+		A1AA75CD22F6A6EE0089A522 /* WebCacheHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75AD22F6A6EE0089A522 /* WebCacheHandlerUseCase.swift */; };
 		A1AA75CE22F6A6EE0089A522 /* SearchHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75AF22F6A6EE0089A522 /* SearchHandlerUseCase.swift */; };
 		A1AA75CF22F6A6EE0089A522 /* HistoryHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75B122F6A6EE0089A522 /* HistoryHandlerUseCase.swift */; };
 		A1AA75D022F6A6EE0089A522 /* NewsHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75B322F6A6EE0089A522 /* NewsHandlerUseCase.swift */; };
@@ -643,6 +678,42 @@
 		A1422AF5230080ED002DAF52 /* ReloadProgressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReloadProgressUseCase.swift; sourceTree = "<group>"; };
 		A1422AF7230081E8002DAF52 /* UpdateTextProgressUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTextProgressUseCase.swift; sourceTree = "<group>"; };
 		A1422AF9230084AE002DAF52 /* GetSuggestUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSuggestUseCase.swift; sourceTree = "<group>"; };
+		A1422AFB23012AA7002DAF52 /* CloseTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseTabUseCase.swift; sourceTree = "<group>"; };
+		A1422AFD23012C51002DAF52 /* CloseAllTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseAllTabUseCase.swift; sourceTree = "<group>"; };
+		A1422AFF23012E8C002DAF52 /* CopyTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B0123012F2B002DAF52 /* SwapTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwapTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B0323012F6E002DAF52 /* RemoveTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B0523013149002DAF52 /* ChangeTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B072301317E002DAF52 /* ChangeGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGroupUseCase.swift; sourceTree = "<group>"; };
+		A1422B09230131B9002DAF52 /* ChangeGroupTitleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGroupTitleUseCase.swift; sourceTree = "<group>"; };
+		A1422B0B2301329C002DAF52 /* DeleteGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteGroupUseCase.swift; sourceTree = "<group>"; };
+		A1422B0D2301331A002DAF52 /* AddTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B0F230134D5002DAF52 /* AddGroupUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupUseCase.swift; sourceTree = "<group>"; };
+		A1422B1123013517002DAF52 /* InsertTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B132301354F002DAF52 /* DeleteTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B152301357B002DAF52 /* RebuildTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RebuildTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B1723013712002DAF52 /* GetIndexTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIndexTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B192301374E002DAF52 /* GetHistoryTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHistoryTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B1B2301387F002DAF52 /* StartLoadingTabUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartLoadingTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B1C2301387F002DAF52 /* UpdateUrlTabUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateUrlTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B1D2301387F002DAF52 /* EndRenderingTabUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndRenderingTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B1E2301387F002DAF52 /* InvertPrivateModeUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvertPrivateModeUseCase.swift; sourceTree = "<group>"; };
+		A1422B1F2301387F002DAF52 /* GoBackTabUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoBackTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B2023013880002DAF52 /* UpdateSessionTabUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSessionTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B2123013880002DAF52 /* UpdateTitleTabUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateTitleTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B2223013880002DAF52 /* StoreTabUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B2323013880002DAF52 /* EndLoadingTabUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndLoadingTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B2423013880002DAF52 /* GoNextTabUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoNextTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B2F23013B87002DAF52 /* InitializeTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializeTabUseCase.swift; sourceTree = "<group>"; };
+		A1422B3123013FC6002DAF52 /* GetCaptureUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCaptureUseCase.swift; sourceTree = "<group>"; };
+		A1422B3323014030002DAF52 /* CreateThumbnailFolderUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateThumbnailFolderUseCase.swift; sourceTree = "<group>"; };
+		A1422B352301407B002DAF52 /* WriteThumbnailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteThumbnailUseCase.swift; sourceTree = "<group>"; };
+		A1422B37230140E1002DAF52 /* GetThumbnailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetThumbnailUseCase.swift; sourceTree = "<group>"; };
+		A1422B392301410F002DAF52 /* DeleteThumbnailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteThumbnailUseCase.swift; sourceTree = "<group>"; };
+		A1422B3B2301432D002DAF52 /* DeleteSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSearchUseCase.swift; sourceTree = "<group>"; };
+		A1422B3D230143CA002DAF52 /* SelectSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSearchUseCase.swift; sourceTree = "<group>"; };
+		A1422B3F23014402002DAF52 /* ExpireCheckSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpireCheckSearchUseCase.swift; sourceTree = "<group>"; };
+		A1422B4123014568002DAF52 /* GetWebCacheConfigUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWebCacheConfigUseCase.swift; sourceTree = "<group>"; };
 		A1445A7B22B5290700B30A65 /* SyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewController.swift; sourceTree = "<group>"; };
 		A1445A7C22B5290700B30A65 /* SyncViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncViewController.xib; sourceTree = "<group>"; };
 		A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncHandlerUseCase.swift; sourceTree = "<group>"; };
@@ -772,9 +843,8 @@
 		A1AA758122F6073B0089A522 /* SelectFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFavoriteUseCase.swift; sourceTree = "<group>"; };
 		A1AA758322F60CF70089A522 /* UpdateFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateFavoriteUseCase.swift; sourceTree = "<group>"; };
 		A1AA758522F60FF10089A522 /* DeleteFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFavoriteUseCase.swift; sourceTree = "<group>"; };
-		A1AA758822F6A6ED0089A522 /* TabUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabUseCase.swift; sourceTree = "<group>"; };
+		A1AA758822F6A6ED0089A522 /* TabHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabHandlerUseCase.swift; sourceTree = "<group>"; };
 		A1AA758A22F6A6ED0089A522 /* ProgressHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHandlerUseCase.swift; sourceTree = "<group>"; };
-		A1AA758C22F6A6ED0089A522 /* ThumbnailUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailUseCase.swift; sourceTree = "<group>"; };
 		A1AA758E22F6A6ED0089A522 /* NoticeHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeHandlerUseCase.swift; sourceTree = "<group>"; };
 		A1AA759022F6A6ED0089A522 /* SelectFavoriteUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFavoriteUseCase.swift; sourceTree = "<group>"; };
 		A1AA759122F6A6ED0089A522 /* FavoriteHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteHandlerUseCase.swift; sourceTree = "<group>"; };
@@ -794,10 +864,10 @@
 		A1AA75A322F6A6ED0089A522 /* TrendHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendHandlerUseCase.swift; sourceTree = "<group>"; };
 		A1AA75A422F6A6ED0089A522 /* ReportHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportHandlerUseCase.swift; sourceTree = "<group>"; };
 		A1AA75A522F6A6ED0089A522 /* PolicyHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyHandlerUseCase.swift; sourceTree = "<group>"; };
-		A1AA75A722F6A6ED0089A522 /* SettingUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingUseCase.swift; sourceTree = "<group>"; };
+		A1AA75A722F6A6ED0089A522 /* GetSettingUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSettingUseCase.swift; sourceTree = "<group>"; };
 		A1AA75A922F6A6ED0089A522 /* ScrollHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollHandlerUseCase.swift; sourceTree = "<group>"; };
 		A1AA75AB22F6A6ED0089A522 /* MemoHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoHandlerUseCase.swift; sourceTree = "<group>"; };
-		A1AA75AD22F6A6EE0089A522 /* WebCacheUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebCacheUseCase.swift; sourceTree = "<group>"; };
+		A1AA75AD22F6A6EE0089A522 /* WebCacheHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebCacheHandlerUseCase.swift; sourceTree = "<group>"; };
 		A1AA75AF22F6A6EE0089A522 /* SearchHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHandlerUseCase.swift; sourceTree = "<group>"; };
 		A1AA75B122F6A6EE0089A522 /* HistoryHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryHandlerUseCase.swift; sourceTree = "<group>"; };
 		A1AA75B322F6A6EE0089A522 /* NewsHandlerUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsHandlerUseCase.swift; sourceTree = "<group>"; };
@@ -2043,7 +2113,34 @@
 		A1AA758722F6A6ED0089A522 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
-				A1AA758822F6A6ED0089A522 /* TabUseCase.swift */,
+				A1422B2323013880002DAF52 /* EndLoadingTabUseCase.swift */,
+				A1422B1D2301387F002DAF52 /* EndRenderingTabUseCase.swift */,
+				A1422B1F2301387F002DAF52 /* GoBackTabUseCase.swift */,
+				A1422B2423013880002DAF52 /* GoNextTabUseCase.swift */,
+				A1422B1E2301387F002DAF52 /* InvertPrivateModeUseCase.swift */,
+				A1422B1B2301387F002DAF52 /* StartLoadingTabUseCase.swift */,
+				A1422B2223013880002DAF52 /* StoreTabUseCase.swift */,
+				A1422B2023013880002DAF52 /* UpdateSessionTabUseCase.swift */,
+				A1422B2123013880002DAF52 /* UpdateTitleTabUseCase.swift */,
+				A1422B1C2301387F002DAF52 /* UpdateUrlTabUseCase.swift */,
+				A1AA758822F6A6ED0089A522 /* TabHandlerUseCase.swift */,
+				A1422B192301374E002DAF52 /* GetHistoryTabUseCase.swift */,
+				A1422B0B2301329C002DAF52 /* DeleteGroupUseCase.swift */,
+				A1422AFB23012AA7002DAF52 /* CloseTabUseCase.swift */,
+				A1422AFD23012C51002DAF52 /* CloseAllTabUseCase.swift */,
+				A1422AFF23012E8C002DAF52 /* CopyTabUseCase.swift */,
+				A1422B0123012F2B002DAF52 /* SwapTabUseCase.swift */,
+				A1422B0323012F6E002DAF52 /* RemoveTabUseCase.swift */,
+				A1422B0523013149002DAF52 /* ChangeTabUseCase.swift */,
+				A1422B072301317E002DAF52 /* ChangeGroupUseCase.swift */,
+				A1422B09230131B9002DAF52 /* ChangeGroupTitleUseCase.swift */,
+				A1422B0D2301331A002DAF52 /* AddTabUseCase.swift */,
+				A1422B0F230134D5002DAF52 /* AddGroupUseCase.swift */,
+				A1422B1123013517002DAF52 /* InsertTabUseCase.swift */,
+				A1422B132301354F002DAF52 /* DeleteTabUseCase.swift */,
+				A1422B152301357B002DAF52 /* RebuildTabUseCase.swift */,
+				A1422B1723013712002DAF52 /* GetIndexTabUseCase.swift */,
+				A1422B2F23013B87002DAF52 /* InitializeTabUseCase.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -2062,7 +2159,11 @@
 		A1AA758B22F6A6ED0089A522 /* Thumbnail */ = {
 			isa = PBXGroup;
 			children = (
-				A1AA758C22F6A6ED0089A522 /* ThumbnailUseCase.swift */,
+				A1422B392301410F002DAF52 /* DeleteThumbnailUseCase.swift */,
+				A1422B3123013FC6002DAF52 /* GetCaptureUseCase.swift */,
+				A1422B3323014030002DAF52 /* CreateThumbnailFolderUseCase.swift */,
+				A1422B352301407B002DAF52 /* WriteThumbnailUseCase.swift */,
+				A1422B37230140E1002DAF52 /* GetThumbnailUseCase.swift */,
 			);
 			path = Thumbnail;
 			sourceTree = "<group>";
@@ -2135,7 +2236,7 @@
 		A1AA75A622F6A6ED0089A522 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				A1AA75A722F6A6ED0089A522 /* SettingUseCase.swift */,
+				A1AA75A722F6A6ED0089A522 /* GetSettingUseCase.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -2164,7 +2265,8 @@
 		A1AA75AC22F6A6EE0089A522 /* WebCache */ = {
 			isa = PBXGroup;
 			children = (
-				A1AA75AD22F6A6EE0089A522 /* WebCacheUseCase.swift */,
+				A1AA75AD22F6A6EE0089A522 /* WebCacheHandlerUseCase.swift */,
+				A1422B4123014568002DAF52 /* GetWebCacheConfigUseCase.swift */,
 			);
 			path = WebCache;
 			sourceTree = "<group>";
@@ -2173,6 +2275,9 @@
 			isa = PBXGroup;
 			children = (
 				A1AA75AF22F6A6EE0089A522 /* SearchHandlerUseCase.swift */,
+				A1422B3B2301432D002DAF52 /* DeleteSearchUseCase.swift */,
+				A1422B3D230143CA002DAF52 /* SelectSearchUseCase.swift */,
+				A1422B3F23014402002DAF52 /* ExpireCheckSearchUseCase.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -3382,89 +3487,124 @@
 				A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */,
 				A19506352143F8AF0091DF23 /* ArticleDataModel.swift in Sources */,
 				A14F2FA4217B834000EB95FE /* PasscodeHandlerUseCase.swift in Sources */,
-				A1AA75B422F6A6EE0089A522 /* TabUseCase.swift in Sources */,
+				A1AA75B422F6A6EE0089A522 /* TabHandlerUseCase.swift in Sources */,
 				A1AA75C022F6A6EE0089A522 /* MenuOrderHandlerUseCase.swift in Sources */,
+				A1422B2523013880002DAF52 /* StartLoadingTabUseCase.swift in Sources */,
 				A195063C2143F8AF0091DF23 /* SearchHistoryDataModel.swift in Sources */,
 				A1AA75D222F6A8630089A522 /* SelectFormUseCase.swift in Sources */,
 				9DD2433422FD6966006A6F8B /* SelectMemoUseCase.swift in Sources */,
 				A1445A8022B689EA00B30A65 /* SyncHandlerUseCase.swift in Sources */,
 				A1AA75BB22F6A6EE0089A522 /* DeleteFavoriteUseCase.swift in Sources */,
+				A1422B1A2301374E002DAF52 /* GetHistoryTabUseCase.swift in Sources */,
 				A15C53F0214D4CDC001E8AB5 /* ContactHandlerUseCase.swift in Sources */,
+				A1422B0A230131B9002DAF52 /* ChangeGroupTitleUseCase.swift in Sources */,
 				A195062E2143F8880091DF23 /* RealmHelper.swift in Sources */,
+				A1422B3C2301432D002DAF52 /* DeleteSearchUseCase.swift in Sources */,
 				A1B77830216F8C8F00BED141 /* MenuOrderHandlerUseCase.swift in Sources */,
 				A15C53F3214D4CDC001E8AB5 /* HelpHandlerUseCase.swift in Sources */,
 				A1AA75E622FF124F0089A522 /* InsertMemoUseCase.swift in Sources */,
 				A1EF692421AC3A2000726371 /* RepositoryResult.swift in Sources */,
+				A1422B142301354F002DAF52 /* DeleteTabUseCase.swift in Sources */,
 				A19506322143F8A60091DF23 /* EncryptService.swift in Sources */,
+				A1422B4223014568002DAF52 /* GetWebCacheConfigUseCase.swift in Sources */,
 				A19506392143F8AF0091DF23 /* FormDataModel.swift in Sources */,
+				A1422B2923013880002DAF52 /* GoBackTabUseCase.swift in Sources */,
 				A1AA75D022F6A6EE0089A522 /* NewsHandlerUseCase.swift in Sources */,
 				A1AA75CF22F6A6EE0089A522 /* HistoryHandlerUseCase.swift in Sources */,
 				A1B778322173A6DA00BED141 /* UserOperation.swift in Sources */,
 				A1AA75BA22F6A6EE0089A522 /* UpdateFavoriteUseCase.swift in Sources */,
 				A1AA75BE22F6A6EE0089A522 /* FormHandlerUseCase.swift in Sources */,
+				A1422B2623013880002DAF52 /* UpdateUrlTabUseCase.swift in Sources */,
 				A1AA75C522F6A6EE0089A522 /* HelpHandlerUseCase.swift in Sources */,
 				A1AA75D422F6B2E60089A522 /* StoreFormUseCase.swift in Sources */,
 				A1AA75CC22F6A6EE0089A522 /* MemoHandlerUseCase.swift in Sources */,
 				A195063A2143F8AF0091DF23 /* ProgressDataModel.swift in Sources */,
+				A1422AFE23012C51002DAF52 /* CloseAllTabUseCase.swift in Sources */,
+				A1422B1823013712002DAF52 /* GetIndexTabUseCase.swift in Sources */,
+				A1422B2E23013880002DAF52 /* GoNextTabUseCase.swift in Sources */,
+				A1422B0623013149002DAF52 /* ChangeTabUseCase.swift in Sources */,
+				A1422B2A23013880002DAF52 /* UpdateSessionTabUseCase.swift in Sources */,
 				A19506382143F8AF0091DF23 /* FavoriteDataModel.swift in Sources */,
 				A138CAE12137281800AEA669 /* Model.swift in Sources */,
 				A19506342143F8AF0091DF23 /* SettingDataModel.swift in Sources */,
 				A195063B2143F8AF0091DF23 /* TabDataModel.swift in Sources */,
 				A15C53F7214D4CDC001E8AB5 /* PolicyHandlerUseCase.swift in Sources */,
 				A1422AF6230080ED002DAF52 /* ReloadProgressUseCase.swift in Sources */,
+				A1422B10230134D5002DAF52 /* AddGroupUseCase.swift in Sources */,
 				A1AA75D822F7267F0089A522 /* GrepDataModel.swift in Sources */,
 				A1AA75E222FAF3C60089A522 /* SelectHistoryUseCase.swift in Sources */,
-				A1AA75CA22F6A6EE0089A522 /* SettingUseCase.swift in Sources */,
+				A1AA75CA22F6A6EE0089A522 /* GetSettingUseCase.swift in Sources */,
+				A1422B3A2301410F002DAF52 /* DeleteThumbnailUseCase.swift in Sources */,
 				A19352A12141569C002A0865 /* Google.swift in Sources */,
 				A19506372143F8AF0091DF23 /* CommonHistoryDataModel.swift in Sources */,
 				A1EF692721AC3A8E00726371 /* ModelError.swift in Sources */,
+				A1422B0423012F6E002DAF52 /* RemoveTabUseCase.swift in Sources */,
 				A195062D2143F8840091DF23 /* DBRepository.swift in Sources */,
 				A1AA75C122F6A6EE0089A522 /* ContactHandlerUseCase.swift in Sources */,
 				A1AA75C922F6A6EE0089A522 /* PolicyHandlerUseCase.swift in Sources */,
 				A19352A32141569C002A0865 /* ApiRepository.swift in Sources */,
+				A1422B3023013B87002DAF52 /* InitializeTabUseCase.swift in Sources */,
 				A195066F214406430091DF23 /* CacheService.swift in Sources */,
 				A1950664214402B20091DF23 /* Util.swift in Sources */,
 				A1AA75B522F6A6EE0089A522 /* ProgressHandlerUseCase.swift in Sources */,
 				A195063D2143F8AF0091DF23 /* SuggestDataModel.swift in Sources */,
+				A1422B2823013880002DAF52 /* InvertPrivateModeUseCase.swift in Sources */,
 				A19506312143F89B0091DF23 /* LocalStorageTargetType.swift in Sources */,
 				A195062F2143F8930091DF23 /* LocalStorageRepository.swift in Sources */,
 				A1AA758422F60CF70089A522 /* UpdateFavoriteUseCase.swift in Sources */,
-				A1AA75B622F6A6EE0089A522 /* ThumbnailUseCase.swift in Sources */,
+				A1422B2723013880002DAF52 /* EndRenderingTabUseCase.swift in Sources */,
+				A1422B362301407B002DAF52 /* WriteThumbnailUseCase.swift in Sources */,
+				A1422B082301317E002DAF52 /* ChangeGroupUseCase.swift in Sources */,
 				A1A3DE8321387D7F00F87009 /* ModelLogger.swift in Sources */,
+				A1422B38230140E1002DAF52 /* GetThumbnailUseCase.swift in Sources */,
+				A1422B4023014402002DAF52 /* ExpireCheckSearchUseCase.swift in Sources */,
+				A1422B0223012F2B002DAF52 /* SwapTabUseCase.swift in Sources */,
 				9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */,
 				A1AA75B722F6A6EE0089A522 /* NoticeHandlerUseCase.swift in Sources */,
 				A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */,
+				A1422B0C2301329C002DAF52 /* DeleteGroupUseCase.swift in Sources */,
 				A1AA75D622F6BA500089A522 /* DeleteFormUseCase.swift in Sources */,
 				A15C53F4214D4CDC001E8AB5 /* OpenSourceHandlerUseCase.swift in Sources */,
+				A1422B0E2301331A002DAF52 /* AddTabUseCase.swift in Sources */,
 				A1AA758622F60FF10089A522 /* DeleteFavoriteUseCase.swift in Sources */,
 				A1A3DE94213AF06300F87009 /* ModelConst.swift in Sources */,
 				A1AA75BC22F6A6EE0089A522 /* SuggestHandlerUseCase.swift in Sources */,
 				A1950668214404DB0091DF23 /* MessageConst.swift in Sources */,
+				A1422B0023012E8C002DAF52 /* CopyTabUseCase.swift in Sources */,
+				A1422B3223013FC6002DAF52 /* GetCaptureUseCase.swift in Sources */,
 				A195063E2143F8AF0091DF23 /* ThumbnailDataModel.swift in Sources */,
 				A1AA757D22F1E4B70089A522 /* AccessTokenDataModel.swift in Sources */,
 				A1422AF423007FD6002DAF52 /* UpdateProgressUseCase.swift in Sources */,
 				A13D6A9D2187489C00B1832E /* MemoDataModel.swift in Sources */,
+				A1422B2C23013880002DAF52 /* StoreTabUseCase.swift in Sources */,
 				A1AA75C622F6A6EE0089A522 /* OpenSourceHandlerUseCase.swift in Sources */,
 				A1422AFA230084AE002DAF52 /* GetSuggestUseCase.swift in Sources */,
+				A1422AFC23012AA7002DAF52 /* CloseTabUseCase.swift in Sources */,
 				A1AA75CE22F6A6EE0089A522 /* SearchHandlerUseCase.swift in Sources */,
 				A1422AF8230081E8002DAF52 /* UpdateTextProgressUseCase.swift in Sources */,
-				A1AA75CD22F6A6EE0089A522 /* WebCacheUseCase.swift in Sources */,
+				A1AA75CD22F6A6EE0089A522 /* WebCacheHandlerUseCase.swift in Sources */,
 				9D2E211F22FD7B610024F45D /* InvertLockMemoUseCase.swift in Sources */,
+				A1422B3E230143CA002DAF52 /* SelectSearchUseCase.swift in Sources */,
 				A15C53F2214D4CDC001E8AB5 /* SourceCodeHandlerUseCase.swift in Sources */,
 				A1AA75BD22F6A6EE0089A522 /* GrepHandlerUseCase.swift in Sources */,
 				A15C53F5214D4CDC001E8AB5 /* TrendHandlerUseCase.swift in Sources */,
+				A1422B2D23013880002DAF52 /* EndLoadingTabUseCase.swift in Sources */,
 				A1AA75C222F6A6EE0089A522 /* HtmlAnalysisHandlerUseCase.swift in Sources */,
 				A19506332143F8A60091DF23 /* KeychainRepository.swift in Sources */,
 				A1AA75B822F6A6EE0089A522 /* SelectFavoriteUseCase.swift in Sources */,
 				9D4136F722F9459E00277E2D /* GetListHistoryUseCase.swift in Sources */,
 				A1AA75C422F6A6EE0089A522 /* SyncHandlerUseCase.swift in Sources */,
+				A1422B3423014030002DAF52 /* CreateThumbnailFolderUseCase.swift in Sources */,
 				A1AA758222F6073B0089A522 /* SelectFavoriteUseCase.swift in Sources */,
 				A1AA75E022FAF3B40089A522 /* InsertHistoryUseCase.swift in Sources */,
 				A1AA75C722F6A6EE0089A522 /* TrendHandlerUseCase.swift in Sources */,
+				A1422B162301357B002DAF52 /* RebuildTabUseCase.swift in Sources */,
 				A1AA75DC22FAF3720089A522 /* DeleteHistoryUseCase.swift in Sources */,
 				A1AA75DA22FAF3510089A522 /* ExpireCheckHistoryUseCase.swift in Sources */,
+				A1422B1223013517002DAF52 /* InsertTabUseCase.swift in Sources */,
 				A1AA75BF22F6A6EE0089A522 /* PasscodeHandlerUseCase.swift in Sources */,
 				A1AA75CB22F6A6EE0089A522 /* ScrollHandlerUseCase.swift in Sources */,
+				A1422B2B23013880002DAF52 /* UpdateTitleTabUseCase.swift in Sources */,
 				A1AA75C322F6A6EE0089A522 /* SourceCodeHandlerUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

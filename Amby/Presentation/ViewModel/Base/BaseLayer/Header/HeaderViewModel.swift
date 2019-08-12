@@ -29,6 +29,9 @@ final class HeaderViewModel {
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
+    /// ユースケース
+    let closeTabUseCase = CloseTabUseCase()
+
     init() {
         setupRx()
     }
@@ -89,11 +92,11 @@ final class HeaderViewModel {
     // MARK: Public Method
 
     func historyBack() {
-        TabUseCase.s.historyBack()
+        TabHandlerUseCase.s.historyBack()
     }
 
     func historyForward() {
-        TabUseCase.s.historyForward()
+        TabHandlerUseCase.s.historyForward()
     }
 
     func loadRequest(text: String) {
@@ -109,6 +112,6 @@ final class HeaderViewModel {
     }
 
     func remove() {
-        TabUseCase.s.remove()
+        closeTabUseCase.exe()
     }
 }

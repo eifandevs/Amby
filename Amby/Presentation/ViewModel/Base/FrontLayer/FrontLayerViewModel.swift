@@ -10,13 +10,19 @@ import Foundation
 import Model
 
 final class FrontLayerViewModel {
+    /// ユースケース
+    let closeTabUseCase = CloseTabUseCase()
+    let closeTabAllUseCase = CloseTabAllUseCase()
+    let copyTabUseCase = CopyTabUseCase()
+    let addTabUseCase = AddTabUseCase()
+
     deinit {
         log.debug("deinit called.")
     }
 
     /// タブの追加
     func add() {
-        TabUseCase.s.add()
+        addTabUseCase.exe()
     }
 
     /// スクロールアップ
@@ -41,17 +47,17 @@ final class FrontLayerViewModel {
 
     /// 現在のタブを削除
     func close() {
-        TabUseCase.s.close()
+        closeTabUseCase.exe()
     }
 
     /// 現在のタブを削除
     func closeAll() {
-        TabUseCase.s.closeAll()
+        closeTabAllUseCase.exe()
     }
 
     /// 現在のタブをコピー
     func copy() {
-        TabUseCase.s.copy()
+        copyTabUseCase.exe()
     }
 
     /// 検索開始
@@ -66,11 +72,11 @@ final class FrontLayerViewModel {
 
     /// ヒストリーフォワード
     func historyForward() {
-        TabUseCase.s.historyForward()
+        TabHandlerUseCase.s.historyForward()
     }
 
     /// ヒストリーバック
     func historyBack() {
-        TabUseCase.s.historyBack()
+        TabHandlerUseCase.s.historyBack()
     }
 }

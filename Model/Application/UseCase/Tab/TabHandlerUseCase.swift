@@ -1,5 +1,5 @@
 //
-//  TabUseCase.swift
+//  TabHandlerUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/23.
@@ -11,7 +11,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum TabUseCaseAction {
+public enum TabHandlerUseCaseAction {
     case insert(before: (tab: Tab, index: Int), after: (tab: Tab, index: Int))
     case append(before: (tab: Tab, index: Int)?, after: (tab: Tab, index: Int))
     case appendGroup
@@ -33,10 +33,10 @@ public enum TabUseCaseAction {
 }
 
 /// タブユースケース
-public final class TabUseCase {
-    public static let s = TabUseCase()
+public final class TabHandlerUseCase {
+    public static let s = TabHandlerUseCase()
     /// アクション通知用RX
-    public let rx_action = PublishSubject<TabUseCaseAction>()
+    public let rx_action = PublishSubject<TabHandlerUseCaseAction>()
 
     public var currentUrl: String? {
         return tabDataModel.currentTab?.url
@@ -69,6 +69,9 @@ public final class TabUseCase {
     public var currentTabCount: Int {
         return tabDataModel.histories.count
     }
+
+    // usecase
+    private let storeTabUseCase = StoreTabUseCase()
 
     // models
     private var tabDataModel: TabDataModelProtocol!
@@ -128,14 +131,9 @@ public final class TabUseCase {
         NotificationCenter.default.rx.notification(.UIApplicationWillResignActive, object: nil)
             .subscribe { [weak self] _ in
                 guard let `self` = self else { return }
-                self.store()
+                self.storeTabUseCase.exe()
             }
             .disposed(by: disposeBag)
-    }
-
-    /// タブ初期化
-    public func initialize() {
-        tabDataModel.initialize()
     }
 
     /// タブグループたタイトル編集画面表示要求
@@ -143,120 +141,9 @@ public final class TabUseCase {
         rx_action.onNext(.presentGroupTitleEdit(groupContext: groupContext))
     }
 
-    /// 現在のタブをクローズ
-    public func close() {
-        tabDataModel.remove(context: tabDataModel.currentContext)
-    }
-
-    /// 全てのタブをクローズ
-    public func closeAll() {
-        let histories = tabDataModel.histories
-        histories.forEach { tab in
-            self.tabDataModel.remove(context: tab.context)
-            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.25))
-        }
-    }
-
     /// リロード
     public func reload() {
         self.rx_action.onNext(.reload)
-    }
-
-    /// 現在のタブをコピー
-    public func copy() {
-        tabDataModel.copy()
-    }
-
-    /// タブ入れ替え
-    public func swap(start: Int, end: Int) {
-        tabDataModel.swap(start: start, end: end)
-    }
-
-    /// 現在のタブを削除
-    public func remove() {
-        tabDataModel.remove(context: tabDataModel.currentContext)
-    }
-
-    /// 特定のタブを削除
-    public func remove(context: String) {
-        tabDataModel.remove(context: context)
-    }
-
-    /// タブ変更
-    public func change(context: String) {
-        tabDataModel.change(context: context)
-    }
-
-    /// グループ変更
-    public func changeGroup(groupContext: String) {
-        tabDataModel.changeGroup(groupContext: groupContext)
-    }
-
-    /// グループのタイトル変更
-    public func changeGroupTitle(groupContext: String, title: String) {
-        tabDataModel.changeGroupTitle(groupContext: groupContext, title: title)
-    }
-
-    /// グループ削除
-    public func deleteGroup(groupContext: String) {
-        tabDataModel.removeGroup(groupContext: groupContext)
-    }
-
-    /// タブの追加
-    public func add(url: String? = nil) {
-        tabDataModel.append(url: url, title: nil)
-    }
-
-    /// グループの追加
-    public func addGroup() {
-        tabDataModel.appendGroup()
-    }
-
-    /// タブの挿入
-    public func insert(url: String? = nil) {
-        tabDataModel.insert(url: url, title: nil)
-    }
-
-    /// タブの全削除
-    public func delete() {
-        tabDataModel.delete()
-    }
-
-    /// タブ情報再構築
-    public func rebuild() {
-        tabDataModel.rebuild()
-    }
-
-    /// ページインデックス取得
-    public func getIndex(context: String) -> Int? {
-        return tabDataModel.getIndex(context: context)
-    }
-
-    /// 履歴取得
-    public func getHistory(index: Int) -> Tab? {
-        return tabDataModel.getHistory(index: index)
-    }
-
-    public func startLoading(context: String) {
-        tabDataModel.startLoading(context: context)
-    }
-
-    public func endLoading(context: String) {
-        tabDataModel.endLoading(context: context)
-    }
-
-    public func endRendering(context: String) {
-        tabDataModel.endRendering(context: context)
-    }
-
-    /// 前WebViewに切り替え
-    public func goBack() {
-        tabDataModel.goBack()
-    }
-
-    /// 後WebViewに切り替え
-    public func goNext() {
-        tabDataModel.goNext()
     }
 
     /// 前ページに切り替え
@@ -267,40 +154,5 @@ public final class TabUseCase {
     /// 後ページに切り替え
     public func historyForward() {
         rx_action.onNext(.historyForward)
-    }
-
-    /// update url in page history
-    public func updateUrl(context: String, url: String) {
-        if !url.isEmpty && url.isValidUrl {
-            tabDataModel.updateUrl(context: context, url: url)
-            if let currentTab = currentTab, context == currentContext {
-                progressDataModel.updateText(text: url)
-                favoriteDataModel.reload(currentTab: currentTab)
-            }
-        }
-    }
-
-    /// update title in page history
-    public func updateTitle(context: String, title: String) {
-        tabDataModel.updateTitle(context: context, title: title)
-    }
-
-    /// update session
-    public func updateSession(context: String, urls: [String], currentPage: Int) {
-        tabDataModel.updateSession(context: context, urls: urls, currentPage: currentPage)
-    }
-
-    /// change private mode
-    public func invertPrivateMode(groupContext: String) {
-        if PasscodeHandlerUseCase.s.authentificationChallenge() {
-            tabDataModel.invertPrivateMode(groupContext: groupContext)
-        }
-    }
-
-    /// 閲覧、ページ履歴の永続化
-    private func store() {
-        DispatchQueue(label: ModelConst.APP.QUEUE).async {
-            self.tabDataModel.store()
-        }
     }
 }

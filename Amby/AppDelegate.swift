@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 
     func initialize() {
-        SettingUseCase.s.initialize()
+        GetSettingUseCase.s.initialize()
 
         if let baseViewController = self.window!.rootViewController as? BaseViewController {
             baseViewController.mRelease()
@@ -120,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func applicationDidBecomeActive(_: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         ExpireCheckHistoryUseCase().exe()
-        SearchHandlerUseCase.s.expireCheck()
+        ExpireCheckSearchUseCase().exe()
     }
 
     func applicationWillTerminate(_: UIApplication) {

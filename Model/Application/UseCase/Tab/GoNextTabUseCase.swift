@@ -1,5 +1,5 @@
 //
-//  ReloadProgressUseCase.swift
+//  AddGroupUsecase.swift
 //  Model
 //
 //  Created by iori tenma on 2019/08/12.
@@ -11,10 +11,9 @@ import Entity
 import RxCocoa
 import RxSwift
 
-public final class ReloadProgressUseCase {
+public final class GoNextTabUseCase {
 
     private var tabDataModel: TabDataModelProtocol!
-    private var progressDataModel: ProgressDataModelProtocol!
 
     public init() {
         setupProtocolImpl()
@@ -22,13 +21,10 @@ public final class ReloadProgressUseCase {
 
     private func setupProtocolImpl() {
         tabDataModel = TabDataModel.s
-        progressDataModel = ProgressDataModel.s
     }
 
-    /// reload ProgressDataModel
+    /// 後WebViewに切り替え
     public func exe() {
-        if let currentTab = tabDataModel.currentTab {
-            progressDataModel.reload(currentTab: currentTab)
-        }
+        tabDataModel.goNext()
     }
 }

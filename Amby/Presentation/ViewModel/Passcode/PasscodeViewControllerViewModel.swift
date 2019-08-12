@@ -90,13 +90,13 @@ final class PasscodeViewControllerViewModel {
     /// アプリ初期化
     func initializeApp() {
         DeleteHistoryUseCase().exe()
-        SearchHandlerUseCase.s.delete()
+        DeleteSearchUseCase().exe()
         DeleteFavoriteUseCase().exe()
         DeleteFormUseCase().exe()
-        WebCacheUseCase.s.deleteCookies()
-        WebCacheUseCase.s.deleteCaches()
-        ThumbnailUseCase.s.delete()
-        TabUseCase.s.delete()
+        WebCacheHandlerUseCase.s.deleteCookies()
+        WebCacheHandlerUseCase.s.deleteCaches()
+        DeleteThumbnailUseCase().exe()
+        DeleteTabUseCase().exe()
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             delegate.initialize()
         }

@@ -40,7 +40,7 @@ class ProgressHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        progressUseCase.updateCanGoBack(context: TabUseCase.s.currentContext, canGoBack: false)
+        progressUseCase.updateCanGoBack(context: TabHandlerUseCase.s.currentContext, canGoBack: false)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -58,7 +58,7 @@ class ProgressHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        progressUseCase.updateCanGoForward(context: TabUseCase.s.currentContext, canGoForward: false)
+        progressUseCase.updateCanGoForward(context: TabHandlerUseCase.s.currentContext, canGoForward: false)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }

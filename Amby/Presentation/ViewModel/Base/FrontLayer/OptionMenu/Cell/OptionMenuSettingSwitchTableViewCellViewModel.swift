@@ -12,11 +12,11 @@ import Model
 final class OptionMenuSettingSwitchTableViewCellViewModel {
     /// 新規ウィンドウ許諾フラグ
     var newWindowConfirm: Bool {
-        return SettingUseCase.s.newWindowConfirm
+        return GetSettingUseCase.s.newWindowConfirm
     }
 
     /// 新規ウィンドウ許諾フラグ変更
     func changeValue(value: Bool) {
-        SettingUseCase.s.newWindowConfirm = value
+        GetSettingUseCase.s.newWindowConfirm = value
     }
 }

@@ -31,7 +31,7 @@ final class MenuOrderViewControllerViewModel {
         return rows.count
     }
 
-    var menuOrder = SettingUseCase.s.menuOrder
+    var menuOrder = GetSettingUseCase.s.menuOrder
 
     private var rows = UserOperation.allCases.map { Row(operation: $0) }
 
@@ -53,7 +53,7 @@ final class MenuOrderViewControllerViewModel {
                 }
             } else {
                 log.debug("change menu order")
-                SettingUseCase.s.menuOrder = menuOrder
+                GetSettingUseCase.s.menuOrder = menuOrder
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_SUCCESS, isSuccess: true)
                 }
@@ -81,8 +81,8 @@ final class MenuOrderViewControllerViewModel {
 
     /// 初期化
     func initialize() {
-        SettingUseCase.s.initializeMenuOrder()
-        menuOrder = SettingUseCase.s.menuOrder
+        GetSettingUseCase.s.initializeMenuOrder()
+        menuOrder = GetSettingUseCase.s.menuOrder
         rx_action.onNext(.reload)
     }
 }

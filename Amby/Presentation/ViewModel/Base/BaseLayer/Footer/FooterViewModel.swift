@@ -31,12 +31,12 @@ final class FooterViewModel {
         var thumbnail: UIImage?
 
         init(tab: Tab) {
-            let baseImage = ThumbnailUseCase.s.getThumbnail(context: tab.context)
+            let baseImage = GetThumbnailUseCase().exe(context: tab.context)
             let image = baseImage?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
 
             context = tab.context
             title = tab.title
-            isFront = tab.context == TabUseCase.s.currentContext
+            isFront = tab.context == TabHandlerUseCase.s.currentContext
             isLoading = tab.isLoading
             isDragging = false
             thumbnail = image
@@ -64,23 +64,28 @@ final class FooterViewModel {
 
     /// 現在位置
     private var tabs: [Tab] {
-        return TabUseCase.s.tabs
+        return TabHandlerUseCase.s.tabs
     }
 
     private var currentTab: Tab? {
-        return TabUseCase.s.currentTab
+        return TabHandlerUseCase.s.currentTab
     }
 
     private var currentContext: String {
-        return TabUseCase.s.currentContext
+        return TabHandlerUseCase.s.currentContext
     }
 
     private var currentLocation: Int? {
-        return TabUseCase.s.currentLocation
+        return TabHandlerUseCase.s.currentLocation
     }
 
+    /// ユースケース
+    private let swapTabUseCase = SwapTabUseCase()
+    private let changeTabUseCase = ChangeTabUseCase()
+    private let getThumbnailUseCase = GetThumbnailUseCase()
+
     /// Observable自動解放
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     init() {
         setupRx()
@@ -94,7 +99,7 @@ final class FooterViewModel {
 
     private func setupRx() {
         /// ローディング監視
-        TabUseCase.s.rx_action
+        TabHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -115,7 +120,7 @@ final class FooterViewModel {
     private func rebuild() {
         // 再構築
         rows.removeAll()
-        rows = TabUseCase.s.tabs.map { Row(tab: $0) }
+        rows = TabHandlerUseCase.s.tabs.map { Row(tab: $0) }
         rx_action.onNext(.update(indexPath: nil, animated: true))
     }
 
@@ -172,7 +177,7 @@ final class FooterViewModel {
 
     func swap(start: Int, end: Int) {
         rows = rows.move(from: start, to: end) // セルの更新がすぐ動くので、もう入れ替えておく
-        TabUseCase.s.swap(start: start, end: end)
+        swapTabUseCase.exe(start: start, end: end)
     }
 
     func startDragging() {
@@ -212,11 +217,11 @@ final class FooterViewModel {
     }
 
     func change(indexPath: IndexPath) {
-        TabUseCase.s.change(context: rows[indexPath.row].context)
+        changeTabUseCase.exe(context: rows[indexPath.row].context)
     }
 
     private func getThumbnail(context: String) -> UIImage? {
-        let thumbnail = ThumbnailUseCase.s.getThumbnail(context: context)
+        let thumbnail = getThumbnailUseCase.exe(context: context)
         return thumbnail?.crop(w: Int(AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2), h: Int((AppConst.BASE_LAYER.THUMBNAIL_SIZE.width * 2) * AppConst.DEVICE.ASPECT_RATE))
     }
 }

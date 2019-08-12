@@ -22,6 +22,9 @@ final class BaseLayerViewModel {
     /// アクション通知用RX
     public let rx_action = PublishSubject<BaseLayerViewModelAction>()
 
+    /// ユースケース
+    private let rebuildTabUseCase = RebuildTabUseCase()
+
     deinit {
         log.debug("deinit called.")
     }
@@ -44,7 +47,7 @@ final class BaseLayerViewModel {
 
     /// 画面構築
     func rebuild() {
-        TabUseCase.s.rebuild()
+        rebuildTabUseCase.exe()
     }
 
     /// 自動入力

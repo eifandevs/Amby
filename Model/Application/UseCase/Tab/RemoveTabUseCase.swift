@@ -1,5 +1,5 @@
 //
-//  ReloadProgressUseCase.swift
+//  RemoveTabUseCase.swift
 //  Model
 //
 //  Created by iori tenma on 2019/08/12.
@@ -11,10 +11,9 @@ import Entity
 import RxCocoa
 import RxSwift
 
-public final class ReloadProgressUseCase {
+public final class RemoveTabUseCase {
 
     private var tabDataModel: TabDataModelProtocol!
-    private var progressDataModel: ProgressDataModelProtocol!
 
     public init() {
         setupProtocolImpl()
@@ -22,13 +21,15 @@ public final class ReloadProgressUseCase {
 
     private func setupProtocolImpl() {
         tabDataModel = TabDataModel.s
-        progressDataModel = ProgressDataModel.s
     }
 
-    /// reload ProgressDataModel
+    /// 現在のタブを削除
     public func exe() {
-        if let currentTab = tabDataModel.currentTab {
-            progressDataModel.reload(currentTab: currentTab)
-        }
+        tabDataModel.remove(context: tabDataModel.currentContext)
+    }
+
+    /// 特定のタブを削除
+    public func exe(context: String) {
+        tabDataModel.remove(context: context)
     }
 }

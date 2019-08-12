@@ -41,9 +41,9 @@ final class SearchMenuTableViewModel {
     /// 記事アイテム
     var newsItem: [Article] = []
     /// 閲覧履歴読み込み数
-    private let readCommonHistoryNum = SettingUseCase.s.commonHistorySaveCount
+    private let readCommonHistoryNum = GetSettingUseCase.s.commonHistorySaveCount
     /// 検索履歴読み込み数
-    private let readSearchHistoryNum = SettingUseCase.s.searchHistorySaveCount
+    private let readSearchHistoryNum = GetSettingUseCase.s.searchHistorySaveCount
     /// サジェスト取得キュー
     private var requestSearchQueue = [String?]()
     /// サジェスト取得中フラグ
@@ -52,6 +52,8 @@ final class SearchMenuTableViewModel {
     /// usecase
     private let getNewsUseCase = GetNewsUseCase()
     private let getSuggestUseCase = GetSuggestUseCase()
+    private let selectHistoryUseCase = SelectHistoryUseCase()
+    private let selectSearchUseCase = SelectSearchUseCase()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -65,8 +67,8 @@ final class SearchMenuTableViewModel {
                 switch action {
                 case let .request(word):
                     // 閲覧履歴と検索履歴の検索
-                    self.commonHistoryCellItem = SelectHistoryUseCase().exe(title: word, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
-                    self.searchHistoryCellItem = SearchHandlerUseCase.s.select(title: word, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
+                    self.commonHistoryCellItem = self.selectHistoryUseCase.exe(title: word, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
+                    self.searchHistoryCellItem = self.selectSearchUseCase.exe(title: word, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
 
                     // とりあえずここで画面更新
                     self.rx_action.onNext(.update)

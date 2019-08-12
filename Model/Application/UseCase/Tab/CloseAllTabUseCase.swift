@@ -1,5 +1,5 @@
 //
-//  ReloadProgressUseCase.swift
+//  CloseAllTabUseCase.swift
 //  Model
 //
 //  Created by iori tenma on 2019/08/12.
@@ -11,10 +11,9 @@ import Entity
 import RxCocoa
 import RxSwift
 
-public final class ReloadProgressUseCase {
+public final class CloseTabAllUseCase {
 
     private var tabDataModel: TabDataModelProtocol!
-    private var progressDataModel: ProgressDataModelProtocol!
 
     public init() {
         setupProtocolImpl()
@@ -22,13 +21,14 @@ public final class ReloadProgressUseCase {
 
     private func setupProtocolImpl() {
         tabDataModel = TabDataModel.s
-        progressDataModel = ProgressDataModel.s
     }
 
-    /// reload ProgressDataModel
+    /// 全てのタブをクローズ
     public func exe() {
-        if let currentTab = tabDataModel.currentTab {
-            progressDataModel.reload(currentTab: currentTab)
+        let histories = tabDataModel.histories
+        histories.forEach { tab in
+            self.tabDataModel.remove(context: tab.context)
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.25))
         }
     }
 }
