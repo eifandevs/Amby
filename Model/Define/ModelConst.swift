@@ -106,7 +106,10 @@ struct ModelConst {
 
         // アプリAPI
         let APP_SERVER_DOMAIN = ResourceUtil().get(key: "APP_SERVER_DOMAIN")
-        let APP_SERVER_PATH = ResourceUtil().get(key: "APP_SERVER_PATH")
+        
+        // パス
+        let ARTICLE_API_PATH = ResourceUtil().get(key: "ARTICLE_API_PATH")
+        let ACCESSTOKEN_API_PATH = ResourceUtil().get(key: "ACCESSTOKEN_API_PATH")
 
         // トレンドホーム
         let TREND_HOME_URL = ResourceUtil().get(key: "TREND_HOME_URL")

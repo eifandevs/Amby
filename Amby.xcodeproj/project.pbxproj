@@ -150,6 +150,8 @@
 		A1422B3E230143CA002DAF52 /* SelectSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B3D230143CA002DAF52 /* SelectSearchUseCase.swift */; };
 		A1422B4023014402002DAF52 /* ExpireCheckSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B3F23014402002DAF52 /* ExpireCheckSearchUseCase.swift */; };
 		A1422B4223014568002DAF52 /* GetWebCacheConfigUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4123014568002DAF52 /* GetWebCacheConfigUseCase.swift */; };
+		A1422B442301EE29002DAF52 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B432301EE29002DAF52 /* AccessToken.swift */; };
+		A1422B462301EEF5002DAF52 /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B452301EEF5002DAF52 /* AccessTokenResponse.swift */; };
 		A1445A7D22B5290700B30A65 /* SyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7B22B5290700B30A65 /* SyncViewController.swift */; };
 		A1445A7E22B5290700B30A65 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1445A7C22B5290700B30A65 /* SyncViewController.xib */; };
 		A1445A8022B689EA00B30A65 /* SyncHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */; };
@@ -714,6 +716,8 @@
 		A1422B3D230143CA002DAF52 /* SelectSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSearchUseCase.swift; sourceTree = "<group>"; };
 		A1422B3F23014402002DAF52 /* ExpireCheckSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpireCheckSearchUseCase.swift; sourceTree = "<group>"; };
 		A1422B4123014568002DAF52 /* GetWebCacheConfigUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWebCacheConfigUseCase.swift; sourceTree = "<group>"; };
+		A1422B432301EE29002DAF52 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
+		A1422B452301EEF5002DAF52 /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
 		A1445A7B22B5290700B30A65 /* SyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewController.swift; sourceTree = "<group>"; };
 		A1445A7C22B5290700B30A65 /* SyncViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncViewController.xib; sourceTree = "<group>"; };
 		A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncHandlerUseCase.swift; sourceTree = "<group>"; };
@@ -2325,6 +2329,7 @@
 				A1B7F2CD220F45A0008F3850 /* API */,
 				A1B7F2D0220F45A0008F3850 /* Favorite.swift */,
 				A1B7F2D1220F45A0008F3850 /* Article.swift */,
+				A1422B432301EE29002DAF52 /* AccessToken.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2345,6 +2350,7 @@
 			children = (
 				A1B7F2CE220F45A0008F3850 /* ArticleResponse.swift */,
 				A1B7F2CF220F45A0008F3850 /* SuggestResponse.swift */,
+				A1422B452301EEF5002DAF52 /* AccessTokenResponse.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -3412,6 +3418,7 @@
 				A1B7F2D6220F45A0008F3850 /* Tab.swift in Sources */,
 				A1B7F2D3220F45A0008F3850 /* SearchHistory.swift in Sources */,
 				A1B7F2D5220F45A0008F3850 /* Suggest.swift in Sources */,
+				A1422B462301EEF5002DAF52 /* AccessTokenResponse.swift in Sources */,
 				A1B7F2D7220F45A0008F3850 /* TabGroupList.swift in Sources */,
 				A1B7F2DA220F45A0008F3850 /* Form.swift in Sources */,
 				A1B7F2D2220F45A0008F3850 /* Memo.swift in Sources */,
@@ -3420,6 +3427,7 @@
 				A1B7F2DD220F45A0008F3850 /* Favorite.swift in Sources */,
 				A1B7F2DC220F45A0008F3850 /* SuggestResponse.swift in Sources */,
 				A1B7F2DB220F45A0008F3850 /* ArticleResponse.swift in Sources */,
+				A1422B442301EE29002DAF52 /* AccessToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

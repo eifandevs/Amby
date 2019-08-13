@@ -12,8 +12,10 @@
 	<string>https://github.com/eifandevs/Amby</string>
 	<key>ISSUE_URL</key>
 	<string>https://github.com/eifandevs/Amby/issues</string>
-	<key>APP_SERVER_PATH</key>
+	<key>ARTICLE_API_PATH</key>
 	<string>/path</string>
+	<key>ACCESSTOKEN_API_PATH</key>
+	<string></string>
 	<key>APP_SERVER_DOMAIN</key>
 	<string>https://</string>
 	<key>TREND_HOME_URL</key>

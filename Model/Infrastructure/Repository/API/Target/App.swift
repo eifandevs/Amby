@@ -11,6 +11,7 @@ import Moya
 
 enum App {
     case article
+    case accessToken
 }
 
 extension App: TargetType {
@@ -21,7 +22,9 @@ extension App: TargetType {
     var path: String {
         switch self {
         case .article:
-            return ModelConst.URL.APP_SERVER_PATH
+            return ModelConst.URL.ARTICLE_API_PATH
+        case .accessToken:
+            return ModelConst.URL.ACCESSTOKEN_API_PATH
         }
     }
 
@@ -29,6 +32,8 @@ extension App: TargetType {
     var method: Moya.Method {
         switch self {
         case .article:
+            return .get
+        case .accessToken:
             return .get
         }
     }
@@ -39,7 +44,9 @@ extension App: TargetType {
             switch self {
             case .article:
                 return Bundle.main.path(forResource: "article_stub", ofType: "json")!
-            }
+            case .accessToken:
+            return Bundle.main.path(forResource: "accessToken_stub", ofType: "json")!
+        }
         }()
         return FileHandle(forReadingAtPath: path)!.readDataToEndOfFile()
     }
@@ -49,6 +56,8 @@ extension App: TargetType {
         switch self {
         case .article:
             return .requestPlain
+        case .accessToken:
+            return .requestPlain
         }
     }
 
@@ -56,6 +65,8 @@ extension App: TargetType {
     var headers: [String: String]? {
         switch self {
         case .article:
+            return nil
+        case .accessToken:
             return nil
         }
     }
