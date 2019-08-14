@@ -152,6 +152,8 @@
 		A1422B4223014568002DAF52 /* GetWebCacheConfigUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4123014568002DAF52 /* GetWebCacheConfigUseCase.swift */; };
 		A1422B442301EE29002DAF52 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B432301EE29002DAF52 /* AccessToken.swift */; };
 		A1422B462301EEF5002DAF52 /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B452301EEF5002DAF52 /* AccessTokenResponse.swift */; };
+		A1422B4923043F01002DAF52 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4823043F01002DAF52 /* LoginUseCase.swift */; };
+		A1422B4B23043F3D002DAF52 /* accesstoken_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A1422B4A23043F3D002DAF52 /* accesstoken_stub.json */; };
 		A1445A7D22B5290700B30A65 /* SyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7B22B5290700B30A65 /* SyncViewController.swift */; };
 		A1445A7E22B5290700B30A65 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1445A7C22B5290700B30A65 /* SyncViewController.xib */; };
 		A1445A8022B689EA00B30A65 /* SyncHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */; };
@@ -718,6 +720,8 @@
 		A1422B4123014568002DAF52 /* GetWebCacheConfigUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWebCacheConfigUseCase.swift; sourceTree = "<group>"; };
 		A1422B432301EE29002DAF52 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		A1422B452301EEF5002DAF52 /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
+		A1422B4823043F01002DAF52 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		A1422B4A23043F3D002DAF52 /* accesstoken_stub.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = accesstoken_stub.json; sourceTree = "<group>"; };
 		A1445A7B22B5290700B30A65 /* SyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewController.swift; sourceTree = "<group>"; };
 		A1445A7C22B5290700B30A65 /* SyncViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncViewController.xib; sourceTree = "<group>"; };
 		A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncHandlerUseCase.swift; sourceTree = "<group>"; };
@@ -1452,6 +1456,7 @@
 		A112E93F212D7C1200320048 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				A1422B4723043EF8002DAF52 /* Login */,
 				A1AA758F22F6A6ED0089A522 /* Favorite */,
 				A1AA759822F6A6ED0089A522 /* Form */,
 				A1AA759622F6A6ED0089A522 /* Grep */,
@@ -1637,6 +1642,14 @@
 				A13D6AE5218B35F900B1832E /* MemoViewControllerViewModel.swift */,
 			);
 			path = Memo;
+			sourceTree = "<group>";
+		};
+		A1422B4723043EF8002DAF52 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				A1422B4823043F01002DAF52 /* LoginUseCase.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		A1445A7A22B5281500B30A65 /* Sync */ = {
@@ -1974,6 +1987,7 @@
 			children = (
 				A1902F96209CF976004F1EA5 /* article_stub.json */,
 				A1902F97209CF976004F1EA5 /* suggest_stub.json */,
+				A1422B4A23043F3D002DAF52 /* accesstoken_stub.json */,
 			);
 			path = stub;
 			sourceTree = "<group>";
@@ -2880,6 +2894,7 @@
 				A1FFA66921945A280092C4D6 /* OptionMenuCooperationTableViewCell.xib in Resources */,
 				A1FFA67D2195FCC90092C4D6 /* FooterCollectionViewCell.xib in Resources */,
 				A1724197223FABC400472477 /* GrepOperationView.xib in Resources */,
+				A1422B4B23043F3D002DAF52 /* accesstoken_stub.json in Resources */,
 				A112E861212CD76500320048 /* HelpViewController.xib in Resources */,
 				A1B778392173C57100BED141 /* MenuOrderTableViewCell.xib in Resources */,
 				A17241CE2245708A00472477 /* offline.html in Resources */,
@@ -3494,6 +3509,7 @@
 				A1724193223E751A00472477 /* HtmlAnalysisHandlerUseCase.swift in Sources */,
 				A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */,
 				A19506352143F8AF0091DF23 /* ArticleDataModel.swift in Sources */,
+				A1422B4923043F01002DAF52 /* LoginUseCase.swift in Sources */,
 				A14F2FA4217B834000EB95FE /* PasscodeHandlerUseCase.swift in Sources */,
 				A1AA75B422F6A6EE0089A522 /* TabHandlerUseCase.swift in Sources */,
 				A1AA75C022F6A6EE0089A522 /* MenuOrderHandlerUseCase.swift in Sources */,
