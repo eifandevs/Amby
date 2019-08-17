@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import Entity
 import Moya
 
 enum App {
     case article
-    case accessToken
+    case accessToken(request: AccessTokenRequest)
 }
 
 extension App: TargetType {
@@ -45,7 +46,7 @@ extension App: TargetType {
             case .article:
                 return Bundle.main.path(forResource: "article_stub", ofType: "json")!
             case .accessToken:
-            return Bundle.main.path(forResource: "accessToken_stub", ofType: "json")!
+            return Bundle.main.path(forResource: "accesstoken_stub", ofType: "json")!
         }
         }()
         return FileHandle(forReadingAtPath: path)!.readDataToEndOfFile()

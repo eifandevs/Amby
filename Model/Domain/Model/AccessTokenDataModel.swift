@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 
 enum AccessTokenDataModelAction {
-    case get(accessToken: AccessToken?)
+    case get(accessToken: AccessToken)
 }
 
 enum AccessTokenDataModelError {
@@ -32,8 +32,10 @@ extension AccessTokenDataModelError: ModelError {
 protocol AccessTokenDataModelProtocol {
     var rx_action: PublishSubject<AccessTokenDataModelAction> { get }
     var rx_error: PublishSubject<AccessTokenDataModelError> { get }
-    var AccessTokens: [AccessToken] { get }
-    func get()
+    var realmEncryptionToken: String! { get }
+    var keychainServiceToken: String! { get }
+    var keychainIvToken: String! { get }
+    func get(request: AccessTokenRequest)
 }
 
 final class AccessTokenDataModel: AccessTokenDataModelProtocol {
@@ -41,23 +43,50 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
     let rx_action = PublishSubject<AccessTokenDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<AccessTokenDataModelError>()
-    
-    /// 記事
-    public private(set) var AccessTokens = [AccessToken]()
-    
+
+    /// DBトークン
+    let realmEncryptionToken: String!
+    /// キーチェーントークン
+    let keychainServiceToken: String!
+    /// キーチェーンIVトークン
+    let keychainIvToken: String!
+
     static let s = AccessTokenDataModel()
     private let disposeBag = DisposeBag()
-    
-    private init() {}
-    
+
+    private init() {
+        let repository = KeychainRepository()
+
+        if let realmEncryptionToken = repository.get(key: ModelConst.KEY.REALM_TOKEN) {
+            self.realmEncryptionToken = realmEncryptionToken
+        } else {
+            realmEncryptionToken = String.getRandomStringWithLength(length: 64)
+            repository.save(key: ModelConst.KEY.REALM_TOKEN, value: realmEncryptionToken)
+        }
+
+        if let keychainServiceToken = repository.get(key: ModelConst.KEY.ENCRYPT_SERVICE_TOKEN) {
+            self.keychainServiceToken = keychainServiceToken
+        } else {
+            keychainServiceToken = String.getRandomStringWithLength(length: 32)
+            repository.save(key: ModelConst.KEY.ENCRYPT_SERVICE_TOKEN, value: keychainServiceToken)
+        }
+
+        if let keychainIvToken = repository.get(key: ModelConst.KEY.ENCRYPT_IV_TOKEN) {
+            self.keychainIvToken = keychainIvToken
+        } else {
+            keychainIvToken = String.getRandomStringWithLength(length: 16)
+            repository.save(key: ModelConst.KEY.ENCRYPT_IV_TOKEN, value: keychainIvToken)
+        }
+    }
+
     /// 記事取得
-    func get() {
+    func get(request: AccessTokenRequest) {
         let repository = ApiRepository<App>()
-        
-        repository.rx.request(.accessToken)
+
+        repository.rx.request(.accessToken(request: request))
             .observeOn(MainScheduler.asyncInstance)
             .map { (response) -> AccessTokenResponse in
-                
+
                 let decoder: JSONDecoder = JSONDecoder()
                 do {
                     let accessTokenResponse: AccessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: response.data)
@@ -71,17 +100,15 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
                     guard let `self` = self else { return }
                     if response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                         log.debug("get AccessToken success.")
-                        self.rx_action.onNext(.get(accessToken: response.data))
+                        self.rx_action.onNext(.get(accessToken: response.data!))
                     } else {
                         log.error("get AccessToken error. code: \(response.code)")
                         self.rx_error.onNext(.get)
-                        self.rx_action.onNext(.get(accessToken: nil))
                     }
                 }, onError: { [weak self] error in
                     guard let `self` = self else { return }
                     log.error("get AccessToken error. error: \(error.localizedDescription)")
                     self.rx_error.onNext(.get)
-                    self.rx_action.onNext(.get(accessToken: nil))
             })
             .disposed(by: disposeBag)
     }

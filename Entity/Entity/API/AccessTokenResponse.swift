@@ -12,9 +12,9 @@ import Foundation
 public struct AccessTokenResponse: Codable {
     public init(code: String, data: AccessToken?) {
         self.code = code
-        self.data = data ?? AccessToken(accessToken: nil, refreshToken: nil)
+        self.data = data
     }
-    
+
     public let code: String
-    public let data: AccessToken
+    public let data: AccessToken?
 }

@@ -54,6 +54,9 @@ final class BaseViewModel {
 
     let rx_action = PublishSubject<BaseViewModelAction>()
 
+    /// usecase
+    let getSettingUseCase = GetSettingUseCase()
+
     var currentUrl: String? {
         return TabHandlerUseCase.s.currentUrl
     }
@@ -84,7 +87,7 @@ final class BaseViewModel {
 
     /// 新規ウィンドウ許諾
     var newWindowConfirm: Bool {
-        return GetSettingUseCase.s.newWindowConfirm
+        return getSettingUseCase.newWindowConfirm
     }
 
     /// baseViewControllerの状態取得

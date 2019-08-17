@@ -41,9 +41,9 @@ final class SearchMenuTableViewModel {
     /// 記事アイテム
     var newsItem: [Article] = []
     /// 閲覧履歴読み込み数
-    private let readCommonHistoryNum = GetSettingUseCase.s.commonHistorySaveCount
+    private let readCommonHistoryNum = GetSettingUseCase().commonHistorySaveCount
     /// 検索履歴読み込み数
-    private let readSearchHistoryNum = GetSettingUseCase.s.searchHistorySaveCount
+    private let readSearchHistoryNum = GetSettingUseCase().searchHistorySaveCount
     /// サジェスト取得キュー
     private var requestSearchQueue = [String?]()
     /// サジェスト取得中フラグ

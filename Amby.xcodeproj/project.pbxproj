@@ -154,6 +154,8 @@
 		A1422B462301EEF5002DAF52 /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B452301EEF5002DAF52 /* AccessTokenResponse.swift */; };
 		A1422B4923043F01002DAF52 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4823043F01002DAF52 /* LoginUseCase.swift */; };
 		A1422B4B23043F3D002DAF52 /* accesstoken_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A1422B4A23043F3D002DAF52 /* accesstoken_stub.json */; };
+		A1422B4D2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4C2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift */; };
+		A1422B4F2307B1A7002DAF52 /* AccessTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4E2307B1A7002DAF52 /* AccessTokenRequest.swift */; };
 		A1445A7D22B5290700B30A65 /* SyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7B22B5290700B30A65 /* SyncViewController.swift */; };
 		A1445A7E22B5290700B30A65 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1445A7C22B5290700B30A65 /* SyncViewController.xib */; };
 		A1445A8022B689EA00B30A65 /* SyncHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */; };
@@ -261,7 +263,6 @@
 		A19506332143F8A60091DF23 /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7F8212CD76400320048 /* KeychainRepository.swift */; };
 		A19506342143F8AF0091DF23 /* SettingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97B21319C7800320048 /* SettingDataModel.swift */; };
 		A19506352143F8AF0091DF23 /* ArticleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97721319C7800320048 /* ArticleDataModel.swift */; };
-		A19506362143F8AF0091DF23 /* AuthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97D21319C7800320048 /* AuthDataModel.swift */; };
 		A19506372143F8AF0091DF23 /* CommonHistoryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97421319C7700320048 /* CommonHistoryDataModel.swift */; };
 		A19506382143F8AF0091DF23 /* FavoriteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97521319C7700320048 /* FavoriteDataModel.swift */; };
 		A19506392143F8AF0091DF23 /* FormDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E97821319C7800320048 /* FormDataModel.swift */; };
@@ -637,7 +638,6 @@
 		A112E97921319C7800320048 /* TabDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabDataModel.swift; sourceTree = "<group>"; };
 		A112E97B21319C7800320048 /* SettingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDataModel.swift; sourceTree = "<group>"; };
 		A112E97C21319C7800320048 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
-		A112E97D21319C7800320048 /* AuthDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthDataModel.swift; sourceTree = "<group>"; };
 		A11CD30F214F058F00D9333F /* FrontLayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModel.swift; sourceTree = "<group>"; };
 		A11CD311214F058F00D9333F /* CircleMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenuViewModel.swift; sourceTree = "<group>"; };
 		A11CD313214F058F00D9333F /* OptionMenuTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewModel.swift; sourceTree = "<group>"; };
@@ -722,6 +722,8 @@
 		A1422B452301EEF5002DAF52 /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
 		A1422B4823043F01002DAF52 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		A1422B4A23043F3D002DAF52 /* accesstoken_stub.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = accesstoken_stub.json; sourceTree = "<group>"; };
+		A1422B4C2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPassCodeSettingUseCase.swift; sourceTree = "<group>"; };
+		A1422B4E2307B1A7002DAF52 /* AccessTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenRequest.swift; sourceTree = "<group>"; };
 		A1445A7B22B5290700B30A65 /* SyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewController.swift; sourceTree = "<group>"; };
 		A1445A7C22B5290700B30A65 /* SyncViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncViewController.xib; sourceTree = "<group>"; };
 		A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncHandlerUseCase.swift; sourceTree = "<group>"; };
@@ -1436,7 +1438,6 @@
 				A1EF692521AC3A7D00726371 /* Protocol */,
 				A112E97B21319C7800320048 /* SettingDataModel.swift */,
 				A112E97721319C7800320048 /* ArticleDataModel.swift */,
-				A112E97D21319C7800320048 /* AuthDataModel.swift */,
 				A112E97421319C7700320048 /* CommonHistoryDataModel.swift */,
 				A112E97521319C7700320048 /* FavoriteDataModel.swift */,
 				A112E97821319C7800320048 /* FormDataModel.swift */,
@@ -1695,6 +1696,7 @@
 				A14F2FA3217B834000EB95FE /* PasscodeHandlerUseCase.swift */,
 				A1724192223E751A00472477 /* HtmlAnalysisHandlerUseCase.swift */,
 				A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */,
+				A1422B4C2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift */,
 			);
 			path = OptionMenu;
 			sourceTree = "<group>";
@@ -2365,6 +2367,7 @@
 				A1B7F2CE220F45A0008F3850 /* ArticleResponse.swift */,
 				A1B7F2CF220F45A0008F3850 /* SuggestResponse.swift */,
 				A1422B452301EEF5002DAF52 /* AccessTokenResponse.swift */,
+				A1422B4E2307B1A7002DAF52 /* AccessTokenRequest.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -3441,6 +3444,7 @@
 				A1B7F2D8220F45A0008F3850 /* TabGroup.swift in Sources */,
 				A1B7F2DD220F45A0008F3850 /* Favorite.swift in Sources */,
 				A1B7F2DC220F45A0008F3850 /* SuggestResponse.swift in Sources */,
+				A1422B4F2307B1A7002DAF52 /* AccessTokenRequest.swift in Sources */,
 				A1B7F2DB220F45A0008F3850 /* ArticleResponse.swift in Sources */,
 				A1422B442301EE29002DAF52 /* AccessToken.swift in Sources */,
 			);
@@ -3499,7 +3503,6 @@
 				A19506302143F89B0091DF23 /* Cache.swift in Sources */,
 				A19352A22141569C002A0865 /* App.swift in Sources */,
 				A1AA75E422FAF4750089A522 /* DeletaMemoUseCase.swift in Sources */,
-				A19506362143F8AF0091DF23 /* AuthDataModel.swift in Sources */,
 				A15C53F6214D4CDC001E8AB5 /* ReportHandlerUseCase.swift in Sources */,
 				A1AA75E822FF55560089A522 /* GetNewsUseCase.swift in Sources */,
 				A1AA75C822F6A6EE0089A522 /* ReportHandlerUseCase.swift in Sources */,
@@ -3584,6 +3587,7 @@
 				A1422B4023014402002DAF52 /* ExpireCheckSearchUseCase.swift in Sources */,
 				A1422B0223012F2B002DAF52 /* SwapTabUseCase.swift in Sources */,
 				9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */,
+				A1422B4D2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift in Sources */,
 				A1AA75B722F6A6EE0089A522 /* NoticeHandlerUseCase.swift in Sources */,
 				A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */,
 				A1422B0C2301329C002DAF52 /* DeleteGroupUseCase.swift in Sources */,

@@ -17,6 +17,7 @@ protocol SettingDataModelProtocol {
     var tabSaveCount: Int { get }
     var commonHistorySaveCount: Int { get }
     var searchHistorySaveCount: Int { get }
+    var isInputPasscode: Bool { get set }
     func initialize()
     func initializeMenuOrder()
 }
@@ -93,6 +94,9 @@ final class SettingDataModel: SettingDataModelProtocol {
     var searchHistorySaveCount: Int {
         return repository.get(key: .searchHistorySaveCount)
     }
+
+    /// パスコード認証済みフラグ
+    var isInputPasscode = false
 
     private init() {}
 

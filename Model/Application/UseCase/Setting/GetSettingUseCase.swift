@@ -12,7 +12,6 @@ import RxSwift
 
 /// 設定ユースケース
 public final class GetSettingUseCase {
-    public static let s = GetSettingUseCase()
 
     /// 閲覧履歴保存日数
     public var commonHistorySaveCount: Int {
@@ -64,7 +63,7 @@ public final class GetSettingUseCase {
 
     private var settingDataModel: SettingDataModelProtocol!
 
-    private init() {
+    public init() {
         setupProtocolImpl()
     }
 
