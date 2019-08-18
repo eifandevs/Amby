@@ -35,7 +35,7 @@ protocol AccessTokenDataModelProtocol {
     var realmEncryptionToken: String! { get }
     var keychainServiceToken: String! { get }
     var keychainIvToken: String! { get }
-    func get(request: AccessTokenRequest)
+    func get(request: GetAccessTokenRequest)
 }
 
 final class AccessTokenDataModel: AccessTokenDataModelProtocol {
@@ -80,19 +80,19 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
     }
 
     /// 記事取得
-    func get(request: AccessTokenRequest) {
+    func get(request: GetAccessTokenRequest) {
         let repository = ApiRepository<App>()
 
         repository.rx.request(.accessToken(request: request))
             .observeOn(MainScheduler.asyncInstance)
-            .map { (response) -> AccessTokenResponse in
+            .map { (response) -> GetAccessTokenResponse in
 
                 let decoder: JSONDecoder = JSONDecoder()
                 do {
-                    let accessTokenResponse: AccessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: response.data)
+                    let accessTokenResponse: GetAccessTokenResponse = try decoder.decode(GetAccessTokenResponse.self, from: response.data)
                     return accessTokenResponse
                 } catch {
-                    return AccessTokenResponse(code: ModelConst.APP_STATUS_CODE.PARSE_ERROR, data: nil)
+                    return GetAccessTokenResponse(code: ModelConst.APP_STATUS_CODE.PARSE_ERROR, data: nil)
                 }
             }
             .subscribe(

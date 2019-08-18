@@ -57,14 +57,14 @@ final class ArticleDataModel: ArticleDataModelProtocol {
 
             repository.rx.request(.article)
                 .observeOn(MainScheduler.asyncInstance)
-                .map { (response) -> ArticleResponse in
+                .map { (response) -> GetArticleResponse in
 
                     let decoder: JSONDecoder = JSONDecoder()
                     do {
-                        let articleResponse: ArticleResponse = try decoder.decode(ArticleResponse.self, from: response.data)
+                        let articleResponse: GetArticleResponse = try decoder.decode(GetArticleResponse.self, from: response.data)
                         return articleResponse
                     } catch {
-                        return ArticleResponse(code: ModelConst.APP_STATUS_CODE.PARSE_ERROR, data: [])
+                        return GetArticleResponse(code: ModelConst.APP_STATUS_CODE.PARSE_ERROR, data: [])
                     }
                 }
                 .subscribe(

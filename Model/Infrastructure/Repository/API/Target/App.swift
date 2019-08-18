@@ -12,7 +12,7 @@ import Moya
 
 enum App {
     case article
-    case accessToken(request: AccessTokenRequest)
+    case accessToken(request: GetAccessTokenRequest)
 }
 
 extension App: TargetType {

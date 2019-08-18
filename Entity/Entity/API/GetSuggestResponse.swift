@@ -1,5 +1,5 @@
 //
-//  SuggestResponse.swift
+//  GetSuggestResponse.swift
 //  Amby
 //
 //  Created by tenma on 2018/03/21.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// サジェストAPIレスポンス
-public struct SuggestResponse {
+public struct GetSuggestResponse {
     public init(data: [Any]) {
         self.data = data
     }

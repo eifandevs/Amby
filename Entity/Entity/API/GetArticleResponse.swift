@@ -1,5 +1,5 @@
 //
-//  ArticleResponse.swift
+//  GetArticleResponse.swift
 //  Amby
 //
 //  Created by tenma on 2018/04/16.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// 記事取得APIレスポンス
-public struct ArticleResponse: Codable {
+public struct GetArticleResponse: Codable {
     public init(code: String, data: [Article]) {
         self.code = code
         self.data = data

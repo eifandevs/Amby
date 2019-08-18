@@ -1,5 +1,5 @@
 //
-//  AccessTokenResponse.swift
+//  GetAccessTokenResponse.swift
 //  Entity
 //
 //  Created by iori tenma on 2019/08/13.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// 記事取得APIレスポンス
-public struct AccessTokenResponse: Codable {
+public struct GetAccessTokenResponse: Codable {
     public init(code: String, data: AccessToken?) {
         self.code = code
         self.data = data

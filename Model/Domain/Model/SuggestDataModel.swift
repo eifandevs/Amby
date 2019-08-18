@@ -50,8 +50,8 @@ final class SuggestDataModel: SuggestDataModelProtocol {
 
         repository.rx.request(.suggest(token: token))
             .observeOn(MainScheduler.asyncInstance)
-            .map { (response) -> SuggestResponse? in
-                return SuggestResponse(data: (try? JSONSerialization.jsonObject(with: response.data)) as? [Any] ?? [])
+            .map { (response) -> GetSuggestResponse? in
+                return GetSuggestResponse(data: (try? JSONSerialization.jsonObject(with: response.data)) as? [Any] ?? [])
             }
             .subscribe(
                 onSuccess: { [weak self] response in

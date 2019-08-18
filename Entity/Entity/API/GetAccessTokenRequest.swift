@@ -1,5 +1,5 @@
 //
-//  AccessTokenRequest.swift
+//  GetAccessTokenRequest.swift
 //  Entity
 //
 //  Created by tenma.i on 2019/08/16.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// トークン取得リクエスト
-public struct AccessTokenRequest {
+public struct GetAccessTokenRequest {
 
     public init(auth_type: Int, email: String?, refresh_token: String?) {
         self.auth_type = auth_type

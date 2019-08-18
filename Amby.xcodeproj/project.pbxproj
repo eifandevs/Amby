@@ -151,11 +151,11 @@
 		A1422B4023014402002DAF52 /* ExpireCheckSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B3F23014402002DAF52 /* ExpireCheckSearchUseCase.swift */; };
 		A1422B4223014568002DAF52 /* GetWebCacheConfigUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4123014568002DAF52 /* GetWebCacheConfigUseCase.swift */; };
 		A1422B442301EE29002DAF52 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B432301EE29002DAF52 /* AccessToken.swift */; };
-		A1422B462301EEF5002DAF52 /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B452301EEF5002DAF52 /* AccessTokenResponse.swift */; };
+		A1422B462301EEF5002DAF52 /* GetAccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B452301EEF5002DAF52 /* GetAccessTokenResponse.swift */; };
 		A1422B4923043F01002DAF52 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4823043F01002DAF52 /* LoginUseCase.swift */; };
 		A1422B4B23043F3D002DAF52 /* accesstoken_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A1422B4A23043F3D002DAF52 /* accesstoken_stub.json */; };
 		A1422B4D2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4C2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift */; };
-		A1422B4F2307B1A7002DAF52 /* AccessTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4E2307B1A7002DAF52 /* AccessTokenRequest.swift */; };
+		A1422B4F2307B1A7002DAF52 /* GetAccessTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4E2307B1A7002DAF52 /* GetAccessTokenRequest.swift */; };
 		A1445A7D22B5290700B30A65 /* SyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7B22B5290700B30A65 /* SyncViewController.swift */; };
 		A1445A7E22B5290700B30A65 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1445A7C22B5290700B30A65 /* SyncViewController.xib */; };
 		A1445A8022B689EA00B30A65 /* SyncHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */; };
@@ -364,8 +364,8 @@
 		A1B7F2D8220F45A0008F3850 /* TabGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CA220F45A0008F3850 /* TabGroup.swift */; };
 		A1B7F2D9220F45A0008F3850 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CB220F45A0008F3850 /* Input.swift */; };
 		A1B7F2DA220F45A0008F3850 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CC220F45A0008F3850 /* Form.swift */; };
-		A1B7F2DB220F45A0008F3850 /* ArticleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CE220F45A0008F3850 /* ArticleResponse.swift */; };
-		A1B7F2DC220F45A0008F3850 /* SuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CF220F45A0008F3850 /* SuggestResponse.swift */; };
+		A1B7F2DB220F45A0008F3850 /* GetArticleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CE220F45A0008F3850 /* GetArticleResponse.swift */; };
+		A1B7F2DC220F45A0008F3850 /* GetSuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2CF220F45A0008F3850 /* GetSuggestResponse.swift */; };
 		A1B7F2DD220F45A0008F3850 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2D0220F45A0008F3850 /* Favorite.swift */; };
 		A1B7F2DE220F45A0008F3850 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7F2D1220F45A0008F3850 /* Article.swift */; };
 		A1B7F2DF220F4704008F3850 /* Entity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16A6ED9220F248000FFCB5B /* Entity.framework */; };
@@ -719,11 +719,11 @@
 		A1422B3F23014402002DAF52 /* ExpireCheckSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpireCheckSearchUseCase.swift; sourceTree = "<group>"; };
 		A1422B4123014568002DAF52 /* GetWebCacheConfigUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWebCacheConfigUseCase.swift; sourceTree = "<group>"; };
 		A1422B432301EE29002DAF52 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
-		A1422B452301EEF5002DAF52 /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
+		A1422B452301EEF5002DAF52 /* GetAccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAccessTokenResponse.swift; sourceTree = "<group>"; };
 		A1422B4823043F01002DAF52 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		A1422B4A23043F3D002DAF52 /* accesstoken_stub.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = accesstoken_stub.json; sourceTree = "<group>"; };
 		A1422B4C2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPassCodeSettingUseCase.swift; sourceTree = "<group>"; };
-		A1422B4E2307B1A7002DAF52 /* AccessTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenRequest.swift; sourceTree = "<group>"; };
+		A1422B4E2307B1A7002DAF52 /* GetAccessTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAccessTokenRequest.swift; sourceTree = "<group>"; };
 		A1445A7B22B5290700B30A65 /* SyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewController.swift; sourceTree = "<group>"; };
 		A1445A7C22B5290700B30A65 /* SyncViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncViewController.xib; sourceTree = "<group>"; };
 		A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncHandlerUseCase.swift; sourceTree = "<group>"; };
@@ -907,8 +907,8 @@
 		A1B7F2CA220F45A0008F3850 /* TabGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabGroup.swift; sourceTree = "<group>"; };
 		A1B7F2CB220F45A0008F3850 /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		A1B7F2CC220F45A0008F3850 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
-		A1B7F2CE220F45A0008F3850 /* ArticleResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleResponse.swift; sourceTree = "<group>"; };
-		A1B7F2CF220F45A0008F3850 /* SuggestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestResponse.swift; sourceTree = "<group>"; };
+		A1B7F2CE220F45A0008F3850 /* GetArticleResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetArticleResponse.swift; sourceTree = "<group>"; };
+		A1B7F2CF220F45A0008F3850 /* GetSuggestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSuggestResponse.swift; sourceTree = "<group>"; };
 		A1B7F2D0220F45A0008F3850 /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A1B7F2D1220F45A0008F3850 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		A1C0DFF9220F67F200E7A7B6 /* CommonUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2364,10 +2364,10 @@
 		A1B7F2CD220F45A0008F3850 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				A1B7F2CE220F45A0008F3850 /* ArticleResponse.swift */,
-				A1B7F2CF220F45A0008F3850 /* SuggestResponse.swift */,
-				A1422B452301EEF5002DAF52 /* AccessTokenResponse.swift */,
-				A1422B4E2307B1A7002DAF52 /* AccessTokenRequest.swift */,
+				A1B7F2CE220F45A0008F3850 /* GetArticleResponse.swift */,
+				A1B7F2CF220F45A0008F3850 /* GetSuggestResponse.swift */,
+				A1422B452301EEF5002DAF52 /* GetAccessTokenResponse.swift */,
+				A1422B4E2307B1A7002DAF52 /* GetAccessTokenRequest.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -3436,16 +3436,16 @@
 				A1B7F2D6220F45A0008F3850 /* Tab.swift in Sources */,
 				A1B7F2D3220F45A0008F3850 /* SearchHistory.swift in Sources */,
 				A1B7F2D5220F45A0008F3850 /* Suggest.swift in Sources */,
-				A1422B462301EEF5002DAF52 /* AccessTokenResponse.swift in Sources */,
+				A1422B462301EEF5002DAF52 /* GetAccessTokenResponse.swift in Sources */,
 				A1B7F2D7220F45A0008F3850 /* TabGroupList.swift in Sources */,
 				A1B7F2DA220F45A0008F3850 /* Form.swift in Sources */,
 				A1B7F2D2220F45A0008F3850 /* Memo.swift in Sources */,
 				A1B7F2D9220F45A0008F3850 /* Input.swift in Sources */,
 				A1B7F2D8220F45A0008F3850 /* TabGroup.swift in Sources */,
 				A1B7F2DD220F45A0008F3850 /* Favorite.swift in Sources */,
-				A1B7F2DC220F45A0008F3850 /* SuggestResponse.swift in Sources */,
-				A1422B4F2307B1A7002DAF52 /* AccessTokenRequest.swift in Sources */,
-				A1B7F2DB220F45A0008F3850 /* ArticleResponse.swift in Sources */,
+				A1B7F2DC220F45A0008F3850 /* GetSuggestResponse.swift in Sources */,
+				A1422B4F2307B1A7002DAF52 /* GetAccessTokenRequest.swift in Sources */,
+				A1B7F2DB220F45A0008F3850 /* GetArticleResponse.swift in Sources */,
 				A1422B442301EE29002DAF52 /* AccessToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
