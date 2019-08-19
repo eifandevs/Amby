@@ -39,7 +39,7 @@ final class SearchMenuTableViewModel {
     /// 閲覧履歴アイテム
     var commonHistoryCellItem: [CommonHistory] = []
     /// 記事アイテム
-    var newsItem: [Article] = []
+    var newsItem: [GetArticleResponse.Article] = []
     /// 閲覧履歴読み込み数
     private let readCommonHistoryNum = GetSettingUseCase().commonHistorySaveCount
     /// 検索履歴読み込み数

@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 
 enum ArticleDataModelAction {
-    case update(articles: [Article])
+    case update(articles: [GetArticleResponse.Article])
 }
 
 enum ArticleDataModelError {
@@ -32,7 +32,7 @@ extension ArticleDataModelError: ModelError {
 protocol ArticleDataModelProtocol {
     var rx_action: PublishSubject<ArticleDataModelAction> { get }
     var rx_error: PublishSubject<ArticleDataModelError> { get }
-    var articles: [Article] { get }
+    var articles: [GetArticleResponse.Article] { get }
     func get()
 }
 
@@ -43,7 +43,7 @@ final class ArticleDataModel: ArticleDataModelProtocol {
     let rx_error = PublishSubject<ArticleDataModelError>()
 
     /// 記事
-    public private(set) var articles = [Article]()
+    public private(set) var articles = [GetArticleResponse.Article]()
 
     static let s = ArticleDataModel()
     private let disposeBag = DisposeBag()

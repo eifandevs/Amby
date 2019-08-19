@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 
 enum AccessTokenDataModelAction {
-    case get(accessToken: AccessToken)
+    case get(accessToken: GetAccessTokenResponse.AccessToken)
 }
 
 enum AccessTokenDataModelError {

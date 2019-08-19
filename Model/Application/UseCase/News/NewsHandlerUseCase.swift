@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 public enum   NewsHandlerUseCaseAction {
-    case update(articles: [Article])
+    case update(articles: [GetArticleResponse.Article])
 }
 
 /// ニュースユースケース
