@@ -12,6 +12,7 @@ import Moya
 
 enum App {
     case article
+    case favorite
     case accessToken(request: GetAccessTokenRequest)
 }
 
@@ -24,6 +25,8 @@ extension App: TargetType {
         switch self {
         case .article:
             return ModelConst.URL.ARTICLE_API_PATH
+        case .favorite:
+            return ModelConst.URL.FAVORITE_API_PATH
         case .accessToken:
             return ModelConst.URL.ACCESSTOKEN_API_PATH
         }
@@ -33,6 +36,8 @@ extension App: TargetType {
     var method: Moya.Method {
         switch self {
         case .article:
+            return .get
+        case .favorite:
             return .get
         case .accessToken:
             return .get
@@ -45,6 +50,8 @@ extension App: TargetType {
             switch self {
             case .article:
                 return Bundle.main.path(forResource: "article_stub", ofType: "json")!
+            case .favorite:
+                return Bundle.main.path(forResource: "favorite_stub", ofType: "json")!
             case .accessToken:
             return Bundle.main.path(forResource: "accesstoken_stub", ofType: "json")!
         }
@@ -57,6 +64,8 @@ extension App: TargetType {
         switch self {
         case .article:
             return .requestPlain
+        case .favorite:
+            return .requestPlain
         case .accessToken:
             return .requestPlain
         }
@@ -66,6 +75,8 @@ extension App: TargetType {
     var headers: [String: String]? {
         switch self {
         case .article:
+            return nil
+        case .favorite:
             return nil
         case .accessToken:
             return nil

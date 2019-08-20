@@ -109,6 +109,7 @@ struct ModelConst {
 
         // パス
         let ARTICLE_API_PATH = ResourceUtil().get(key: "ARTICLE_API_PATH")
+        let FAVORITE_API_PATH = ResourceUtil().get(key: "FAVORITE_API_PATH")
         let ACCESSTOKEN_API_PATH = ResourceUtil().get(key: "ACCESSTOKEN_API_PATH")
 
         // トレンドホーム

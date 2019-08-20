@@ -15,6 +15,7 @@
 		9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */; };
 		9D2E211F22FD7B610024F45D /* InvertLockMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */; };
 		9D4136F722F9459E00277E2D /* GetListHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */; };
+		9DABBA46230BEABF0024DA0F /* GetFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */; };
 		9DD2433422FD6966006A6F8B /* SelectMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */; };
 		A1042F442258E70400DA6E78 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1042F432258E70400DA6E78 /* R.generated.swift */; };
 		A106154B226B4A5400AB371F /* CommonHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106154A226B4A5400AB371F /* CommonHistoryDataModelTest.swift */; };
@@ -560,6 +561,7 @@
 		9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoUseCase.swift; sourceTree = "<group>"; };
 		9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertLockMemoUseCase.swift; sourceTree = "<group>"; };
 		9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListHistoryUseCase.swift; sourceTree = "<group>"; };
+		9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteResponse.swift; sourceTree = "<group>"; };
 		9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemoUseCase.swift; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		A1042F432258E70400DA6E78 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
@@ -2362,6 +2364,7 @@
 				A1B7F2CF220F45A0008F3850 /* GetSuggestResponse.swift */,
 				A1422B452301EEF5002DAF52 /* GetAccessTokenResponse.swift */,
 				A1422B4E2307B1A7002DAF52 /* GetAccessTokenRequest.swift */,
+				9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -3427,6 +3430,7 @@
 				A10DB09122674D3B0088F4D1 /* Session.swift in Sources */,
 				A1B7F2D4220F45A0008F3850 /* CommonHistory.swift in Sources */,
 				A1B7F2D6220F45A0008F3850 /* Tab.swift in Sources */,
+				9DABBA46230BEABF0024DA0F /* GetFavoriteResponse.swift in Sources */,
 				A1B7F2D3220F45A0008F3850 /* SearchHistory.swift in Sources */,
 				A1B7F2D5220F45A0008F3850 /* Suggest.swift in Sources */,
 				A1422B462301EEF5002DAF52 /* GetAccessTokenResponse.swift in Sources */,

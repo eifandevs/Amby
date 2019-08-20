@@ -85,24 +85,24 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
 
         repository.rx.request(.accessToken(request: request))
             .observeOn(MainScheduler.asyncInstance)
-            .map { (response) -> GetAccessTokenResponse in
+            .map { (response) -> GetAccessTokenResponse? in
 
                 let decoder: JSONDecoder = JSONDecoder()
                 do {
                     let accessTokenResponse: GetAccessTokenResponse = try decoder.decode(GetAccessTokenResponse.self, from: response.data)
                     return accessTokenResponse
                 } catch {
-                    return GetAccessTokenResponse(code: ModelConst.APP_STATUS_CODE.PARSE_ERROR, data: nil)
+                    return nil
                 }
             }
             .subscribe(
                 onSuccess: { [weak self] response in
                     guard let `self` = self else { return }
-                    if response.code == ModelConst.APP_STATUS_CODE.NORMAL {
+                    if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                         log.debug("get AccessToken success.")
-                        self.rx_action.onNext(.get(accessToken: response.data!))
+                        self.rx_action.onNext(.get(accessToken: response.data))
                     } else {
-                        log.error("get AccessToken error. code: \(response.code)")
+                        log.error("get AccessToken error. code: \(response?.code ?? "")")
                         self.rx_error.onNext(.get)
                     }
                 }, onError: { [weak self] error in

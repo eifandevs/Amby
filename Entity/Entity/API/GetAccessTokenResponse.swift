@@ -16,11 +16,11 @@ public struct GetAccessTokenResponse: Codable {
         public var refresh_token: String
     }
 
-    public init(code: String, data: AccessToken?) {
+    public init(code: String, data: AccessToken) {
         self.code = code
         self.data = data
     }
 
     public let code: String
-    public let data: AccessToken?
+    public let data: AccessToken
 }

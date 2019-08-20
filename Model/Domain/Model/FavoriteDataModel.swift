@@ -16,9 +16,11 @@ enum FavoriteDataModelAction {
     case delete
     case deleteAll
     case reload(url: String)
+    case fetch(favorites: [Favorite])
 }
 
 enum FavoriteDataModelError {
+    case fetch
     case get
     case store
     case delete
@@ -27,6 +29,8 @@ enum FavoriteDataModelError {
 extension FavoriteDataModelError: ModelError {
     var message: String {
         switch self {
+        case .fetch:
+            return MessageConst.NOTIFICATION.GET_FAVORITE_ERROR
         case .get:
             return MessageConst.NOTIFICATION.GET_FAVORITE_ERROR
         case .store:
@@ -48,6 +52,7 @@ protocol FavoriteDataModelProtocol {
     func delete(favorites: [Favorite])
     func reload(currentTab: Tab)
     func update(currentTab: Tab)
+    func fetch()
 }
 
 final class FavoriteDataModel: FavoriteDataModelProtocol {
@@ -55,6 +60,8 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
     let rx_action = PublishSubject<FavoriteDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<FavoriteDataModelError>()
+
+    private let disposeBag = DisposeBag()
 
     static let s = FavoriteDataModel()
 
@@ -143,5 +150,46 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
         } else {
             rx_error.onNext(.get)
         }
+    }
+
+    /// 記事取得
+    func fetch() {
+        let repository = ApiRepository<App>()
+
+        repository.rx.request(.favorite)
+            .observeOn(MainScheduler.asyncInstance)
+            .map { (response) -> GetFavoriteResponse? in
+
+                let decoder: JSONDecoder = JSONDecoder()
+                do {
+                    let favoriteResponse: GetFavoriteResponse = try decoder.decode(GetFavoriteResponse.self, from: response.data)
+                    return favoriteResponse
+                } catch {
+                    return nil
+                }
+            }
+            .subscribe(
+                onSuccess: { [weak self] response in
+                    guard let `self` = self else { return }
+                    if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
+                        log.debug("get AccessToken success.")
+                        let favorites = response.data.map({ obj -> Favorite in
+                            let favorite = Favorite()
+                            favorite.id = obj.id
+                            favorite.title = obj.title
+                            favorite.url = obj.url
+                            return favorite
+                        })
+                        self.rx_action.onNext(.fetch(favorites: favorites))
+                    } else {
+                        log.error("get AccessToken error. code: \(response?.code ?? "")")
+                        self.rx_error.onNext(.fetch)
+                    }
+                }, onError: { [weak self] error in
+                    guard let `self` = self else { return }
+                    log.error("get AccessToken error. error: \(error.localizedDescription)")
+                    self.rx_error.onNext(.fetch)
+            })
+            .disposed(by: disposeBag)
     }
 }
