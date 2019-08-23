@@ -98,7 +98,7 @@ final class SearchMenuTableViewModel {
         // 記事取得監視
         NewsHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case let .update(articles) = action else { return }
+                guard let `self` = self, let action = action.element, case let .fetch(articles) = action else { return }
                 if articles.count > 0 {
                     // exist article
                     self.newsItem = articles

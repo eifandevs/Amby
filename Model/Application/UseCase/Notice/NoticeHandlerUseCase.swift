@@ -72,6 +72,8 @@ public final class NoticeHandlerUseCase {
                 formDataModel.rx_action.flatMap { action -> Observable<String> in
                     if case .deleteAll = action {
                         return Observable.just(MessageConst.NOTIFICATION.DELETE_FORM)
+                    } else if case .insert = action {
+                        return Observable.just(MessageConst.NOTIFICATION.REGISTER_FORM)
                     } else {
                         return Observable.empty()
                     }

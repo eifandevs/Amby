@@ -14,6 +14,7 @@ import RxSwift
 public enum FavoriteHanderUseCaseAction {
     case load(url: String)
     case update(isSwitch: Bool)
+    case fetch(favorites: [Favorite])
 }
 
 /// お気に入りユースケース
@@ -71,6 +72,15 @@ public final class FavoriteHanderUseCase {
                     self.rx_action.onNext(.update(isSwitch: self.favoriteDataModel.select().map({ $0.url }).contains(currentTab.url)))
                 } else {
                     self.rx_action.onNext(.update(isSwitch: false))
+                }
+            }
+            .disposed(by: disposeBag)
+
+        favoriteDataModel.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self else { return }
+                if let action = action.element, case let .fetch(favorites) = action {
+                    self.rx_action.onNext(.fetch(favorites: favorites))
                 }
             }
             .disposed(by: disposeBag)

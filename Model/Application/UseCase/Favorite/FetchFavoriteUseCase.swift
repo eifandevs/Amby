@@ -1,8 +1,8 @@
 //
-//  GetNewsUseCase.swift
+//  FetchFavoriteUseCase.swift
 //  Model
 //
-//  Created by iori tenma on 2019/08/11.
+//  Created by iori tenma on 2019/08/24.
 //  Copyright © 2019 eifandevs. All rights reserved.
 //
 
@@ -11,19 +11,19 @@ import Entity
 import RxCocoa
 import RxSwift
 
-public final class GetNewsUseCase {
+public final class FetchFavoriteUseCase {
 
-    private var articleDataModel: ArticleDataModelProtocol!
+    private var favoriteDataModel: FavoriteDataModelProtocol!
 
     public init() {
         setupProtocolImpl()
     }
 
     private func setupProtocolImpl() {
-        articleDataModel = ArticleDataModel.s
+        favoriteDataModel = FavoriteDataModel.s
     }
 
     public func exe() {
-        articleDataModel.get()
+        favoriteDataModel.fetch()
     }
 }

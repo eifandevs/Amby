@@ -17,13 +17,13 @@ enum ArticleDataModelAction {
 }
 
 enum ArticleDataModelError {
-    case get
+    case fetch
 }
 
 extension ArticleDataModelError: ModelError {
     var message: String {
         switch self {
-        case .get:
+        case .fetch:
             return MessageConst.NOTIFICATION.GET_ARTICLE_ERROR
         }
     }
@@ -33,7 +33,7 @@ protocol ArticleDataModelProtocol {
     var rx_action: PublishSubject<ArticleDataModelAction> { get }
     var rx_error: PublishSubject<ArticleDataModelError> { get }
     var articles: [GetArticleResponse.Article] { get }
-    func get()
+    func fetch()
 }
 
 final class ArticleDataModel: ArticleDataModelProtocol {
@@ -51,7 +51,7 @@ final class ArticleDataModel: ArticleDataModelProtocol {
     private init() {}
 
     /// 記事取得
-    func get() {
+    func fetch() {
         if articles.count == 0 {
             let repository = ApiRepository<App>()
 
@@ -76,13 +76,13 @@ final class ArticleDataModel: ArticleDataModelProtocol {
                             self.rx_action.onNext(.update(articles: response.data))
                         } else {
                             log.error("get article error. code: \(response.code)")
-                            self.rx_error.onNext(.get)
+                            self.rx_error.onNext(.fetch)
                             self.rx_action.onNext(.update(articles: []))
                         }
                     }, onError: { [weak self] error in
                         guard let `self` = self else { return }
                         log.error("get article error. error: \(error.localizedDescription)")
-                        self.rx_error.onNext(.get)
+                        self.rx_error.onNext(.fetch)
                         self.rx_action.onNext(.update(articles: []))
                 })
                 .disposed(by: disposeBag)

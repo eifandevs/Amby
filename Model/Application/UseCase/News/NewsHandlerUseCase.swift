@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 public enum   NewsHandlerUseCaseAction {
-    case update(articles: [GetArticleResponse.Article])
+    case fetch(articles: [GetArticleResponse.Article])
 }
 
 /// ニュースユースケース
@@ -42,7 +42,7 @@ public final class   NewsHandlerUseCase {
             .subscribe { [weak self] action in
                 guard let `self` = self else { return }
                 if let action = action.element, case let .update(articles) = action {
-                    self.rx_action.onNext(.update(articles: articles))
+                    self.rx_action.onNext(.fetch(articles: articles))
                 }
             }
             .disposed(by: disposeBag)

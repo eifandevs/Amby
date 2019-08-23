@@ -13,17 +13,17 @@ import RxCocoa
 import RxSwift
 
 enum AccessTokenDataModelAction {
-    case get(accessToken: GetAccessTokenResponse.AccessToken)
+    case fetch(accessToken: GetAccessTokenResponse.AccessToken)
 }
 
 enum AccessTokenDataModelError {
-    case get
+    case fetch
 }
 
 extension AccessTokenDataModelError: ModelError {
     var message: String {
         switch self {
-        case .get:
+        case .fetch:
             return MessageConst.NOTIFICATION.COMMON_ERROR
         }
     }
@@ -35,7 +35,7 @@ protocol AccessTokenDataModelProtocol {
     var realmEncryptionToken: String! { get }
     var keychainServiceToken: String! { get }
     var keychainIvToken: String! { get }
-    func get(request: GetAccessTokenRequest)
+    func fetch(request: GetAccessTokenRequest)
 }
 
 final class AccessTokenDataModel: AccessTokenDataModelProtocol {
@@ -80,7 +80,7 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
     }
 
     /// 記事取得
-    func get(request: GetAccessTokenRequest) {
+    func fetch(request: GetAccessTokenRequest) {
         let repository = ApiRepository<App>()
 
         repository.rx.request(.accessToken(request: request))
@@ -100,15 +100,15 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
                     guard let `self` = self else { return }
                     if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                         log.debug("get AccessToken success.")
-                        self.rx_action.onNext(.get(accessToken: response.data))
+                        self.rx_action.onNext(.fetch(accessToken: response.data))
                     } else {
                         log.error("get AccessToken error. code: \(response?.code ?? "")")
-                        self.rx_error.onNext(.get)
+                        self.rx_error.onNext(.fetch)
                     }
                 }, onError: { [weak self] error in
                     guard let `self` = self else { return }
                     log.error("get AccessToken error. error: \(error.localizedDescription)")
-                    self.rx_error.onNext(.get)
+                    self.rx_error.onNext(.fetch)
             })
             .disposed(by: disposeBag)
     }

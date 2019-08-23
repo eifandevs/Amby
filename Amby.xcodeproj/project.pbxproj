@@ -156,6 +156,8 @@
 		A1422B4B23043F3D002DAF52 /* accesstoken_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A1422B4A23043F3D002DAF52 /* accesstoken_stub.json */; };
 		A1422B4D2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4C2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift */; };
 		A1422B4F2307B1A7002DAF52 /* GetAccessTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4E2307B1A7002DAF52 /* GetAccessTokenRequest.swift */; };
+		A1422B53231061A7002DAF52 /* favorite_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A1422B52231061A7002DAF52 /* favorite_stub.json */; };
+		A1422B55231066ED002DAF52 /* FetchFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B54231066ED002DAF52 /* FetchFavoriteUseCase.swift */; };
 		A1445A7D22B5290700B30A65 /* SyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7B22B5290700B30A65 /* SyncViewController.swift */; };
 		A1445A7E22B5290700B30A65 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1445A7C22B5290700B30A65 /* SyncViewController.xib */; };
 		A1445A8022B689EA00B30A65 /* SyncHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */; };
@@ -344,7 +346,7 @@
 		A1AA75E222FAF3C60089A522 /* SelectHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75E122FAF3C60089A522 /* SelectHistoryUseCase.swift */; };
 		A1AA75E422FAF4750089A522 /* DeletaMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75E322FAF4750089A522 /* DeletaMemoUseCase.swift */; };
 		A1AA75E622FF124F0089A522 /* InsertMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75E522FF124F0089A522 /* InsertMemoUseCase.swift */; };
-		A1AA75E822FF55560089A522 /* GetNewsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75E722FF55560089A522 /* GetNewsUseCase.swift */; };
+		A1AA75E822FF55560089A522 /* FetchNewsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA75E722FF55560089A522 /* FetchNewsUseCase.swift */; };
 		A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782D216B795400BED141 /* IssueDataModel.swift */; };
 		A1B77830216F8C8F00BED141 /* MenuOrderHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7782F216F8C8F00BED141 /* MenuOrderHandlerUseCase.swift */; };
 		A1B778322173A6DA00BED141 /* UserOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B778312173A6DA00BED141 /* UserOperation.swift */; };
@@ -723,6 +725,8 @@
 		A1422B4A23043F3D002DAF52 /* accesstoken_stub.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = accesstoken_stub.json; sourceTree = "<group>"; };
 		A1422B4C2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPassCodeSettingUseCase.swift; sourceTree = "<group>"; };
 		A1422B4E2307B1A7002DAF52 /* GetAccessTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAccessTokenRequest.swift; sourceTree = "<group>"; };
+		A1422B52231061A7002DAF52 /* favorite_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = favorite_stub.json; sourceTree = "<group>"; };
+		A1422B54231066ED002DAF52 /* FetchFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFavoriteUseCase.swift; sourceTree = "<group>"; };
 		A1445A7B22B5290700B30A65 /* SyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewController.swift; sourceTree = "<group>"; };
 		A1445A7C22B5290700B30A65 /* SyncViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncViewController.xib; sourceTree = "<group>"; };
 		A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncHandlerUseCase.swift; sourceTree = "<group>"; };
@@ -890,7 +894,7 @@
 		A1AA75E122FAF3C60089A522 /* SelectHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectHistoryUseCase.swift; sourceTree = "<group>"; };
 		A1AA75E322FAF4750089A522 /* DeletaMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletaMemoUseCase.swift; sourceTree = "<group>"; };
 		A1AA75E522FF124F0089A522 /* InsertMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertMemoUseCase.swift; sourceTree = "<group>"; };
-		A1AA75E722FF55560089A522 /* GetNewsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNewsUseCase.swift; sourceTree = "<group>"; };
+		A1AA75E722FF55560089A522 /* FetchNewsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchNewsUseCase.swift; sourceTree = "<group>"; };
 		A1B7782D216B795400BED141 /* IssueDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDataModel.swift; sourceTree = "<group>"; };
 		A1B7782F216F8C8F00BED141 /* MenuOrderHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOrderHandlerUseCase.swift; sourceTree = "<group>"; };
 		A1B778312173A6DA00BED141 /* UserOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOperation.swift; sourceTree = "<group>"; };
@@ -1985,6 +1989,7 @@
 		A1902F95209CF976004F1EA5 /* stub */ = {
 			isa = PBXGroup;
 			children = (
+				A1422B52231061A7002DAF52 /* favorite_stub.json */,
 				A1902F96209CF976004F1EA5 /* article_stub.json */,
 				A1902F97209CF976004F1EA5 /* suggest_stub.json */,
 				A1422B4A23043F3D002DAF52 /* accesstoken_stub.json */,
@@ -2198,9 +2203,10 @@
 			isa = PBXGroup;
 			children = (
 				A1AA759022F6A6ED0089A522 /* SelectFavoriteUseCase.swift */,
-				A1AA759122F6A6ED0089A522 /* FavoriteHandlerUseCase.swift */,
 				A1AA759222F6A6ED0089A522 /* UpdateFavoriteUseCase.swift */,
+				A1AA759122F6A6ED0089A522 /* FavoriteHandlerUseCase.swift */,
 				A1AA759322F6A6ED0089A522 /* DeleteFavoriteUseCase.swift */,
+				A1422B54231066ED002DAF52 /* FetchFavoriteUseCase.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -2317,7 +2323,7 @@
 			isa = PBXGroup;
 			children = (
 				A1AA75B322F6A6EE0089A522 /* NewsHandlerUseCase.swift */,
-				A1AA75E722FF55560089A522 /* GetNewsUseCase.swift */,
+				A1AA75E722FF55560089A522 /* FetchNewsUseCase.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -2905,6 +2911,7 @@
 				A17AC34D225F656E00E4262E /* RestoreSession.html in Resources */,
 				A112E835212CD76500320048 /* MenuOrderViewController.xib in Resources */,
 				A1F518BC213593E20029ACB7 /* env-dummy.plist in Resources */,
+				A1422B53231061A7002DAF52 /* favorite_stub.json in Resources */,
 				A15C5421214D5E4D001E8AB5 /* SearchMenuSearchHistoryTableViewCell.xib in Resources */,
 				A13D6A872184A3F100B1832E /* MemoViewController.xib in Resources */,
 				A15C545F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib in Resources */,
@@ -3500,7 +3507,7 @@
 				A19352A22141569C002A0865 /* App.swift in Sources */,
 				A1AA75E422FAF4750089A522 /* DeletaMemoUseCase.swift in Sources */,
 				A15C53F6214D4CDC001E8AB5 /* ReportHandlerUseCase.swift in Sources */,
-				A1AA75E822FF55560089A522 /* GetNewsUseCase.swift in Sources */,
+				A1AA75E822FF55560089A522 /* FetchNewsUseCase.swift in Sources */,
 				A1AA75C822F6A6EE0089A522 /* ReportHandlerUseCase.swift in Sources */,
 				A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */,
 				A1AA758022F5D5FC0089A522 /* FavoriteHandlerUseCase.swift in Sources */,
@@ -3549,6 +3556,7 @@
 				A1422B2A23013880002DAF52 /* UpdateSessionTabUseCase.swift in Sources */,
 				A19506382143F8AF0091DF23 /* FavoriteDataModel.swift in Sources */,
 				A138CAE12137281800AEA669 /* Model.swift in Sources */,
+				A1422B55231066ED002DAF52 /* FetchFavoriteUseCase.swift in Sources */,
 				A19506342143F8AF0091DF23 /* SettingDataModel.swift in Sources */,
 				A195063B2143F8AF0091DF23 /* TabDataModel.swift in Sources */,
 				A15C53F7214D4CDC001E8AB5 /* PolicyHandlerUseCase.swift in Sources */,

@@ -33,11 +33,11 @@ public final class LoginUseCase {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
-                case let .get(accessToken):
+                case let .fetch(accessToken):
                     log.debug("accessToken: \(accessToken)")
                 }
             }
             .disposed(by: disposeBag)
-        accessTokenDataModel.get(request: request)
+        accessTokenDataModel.fetch(request: request)
     }
 }
