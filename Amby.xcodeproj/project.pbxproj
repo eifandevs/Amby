@@ -158,6 +158,7 @@
 		A1422B4F2307B1A7002DAF52 /* GetAccessTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B4E2307B1A7002DAF52 /* GetAccessTokenRequest.swift */; };
 		A1422B53231061A7002DAF52 /* favorite_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = A1422B52231061A7002DAF52 /* favorite_stub.json */; };
 		A1422B55231066ED002DAF52 /* FetchFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B54231066ED002DAF52 /* FetchFavoriteUseCase.swift */; };
+		A1422B5723119F96002DAF52 /* GetMemoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422B5623119F96002DAF52 /* GetMemoResponse.swift */; };
 		A1445A7D22B5290700B30A65 /* SyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7B22B5290700B30A65 /* SyncViewController.swift */; };
 		A1445A7E22B5290700B30A65 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1445A7C22B5290700B30A65 /* SyncViewController.xib */; };
 		A1445A8022B689EA00B30A65 /* SyncHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */; };
@@ -727,6 +728,7 @@
 		A1422B4E2307B1A7002DAF52 /* GetAccessTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAccessTokenRequest.swift; sourceTree = "<group>"; };
 		A1422B52231061A7002DAF52 /* favorite_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = favorite_stub.json; sourceTree = "<group>"; };
 		A1422B54231066ED002DAF52 /* FetchFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFavoriteUseCase.swift; sourceTree = "<group>"; };
+		A1422B5623119F96002DAF52 /* GetMemoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMemoResponse.swift; sourceTree = "<group>"; };
 		A1445A7B22B5290700B30A65 /* SyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncViewController.swift; sourceTree = "<group>"; };
 		A1445A7C22B5290700B30A65 /* SyncViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SyncViewController.xib; sourceTree = "<group>"; };
 		A1445A7F22B689EA00B30A65 /* SyncHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncHandlerUseCase.swift; sourceTree = "<group>"; };
@@ -2369,6 +2371,7 @@
 				A1B7F2CE220F45A0008F3850 /* GetArticleResponse.swift */,
 				A1B7F2CF220F45A0008F3850 /* GetSuggestResponse.swift */,
 				A1422B452301EEF5002DAF52 /* GetAccessTokenResponse.swift */,
+				A1422B5623119F96002DAF52 /* GetMemoResponse.swift */,
 				A1422B4E2307B1A7002DAF52 /* GetAccessTokenRequest.swift */,
 				9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */,
 			);
@@ -3439,6 +3442,7 @@
 				A1B7F2D6220F45A0008F3850 /* Tab.swift in Sources */,
 				9DABBA46230BEABF0024DA0F /* GetFavoriteResponse.swift in Sources */,
 				A1B7F2D3220F45A0008F3850 /* SearchHistory.swift in Sources */,
+				A1422B5723119F96002DAF52 /* GetMemoResponse.swift in Sources */,
 				A1B7F2D5220F45A0008F3850 /* Suggest.swift in Sources */,
 				A1422B462301EEF5002DAF52 /* GetAccessTokenResponse.swift in Sources */,
 				A1B7F2D7220F45A0008F3850 /* TabGroupList.swift in Sources */,
