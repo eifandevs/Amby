@@ -65,7 +65,8 @@ platform :ios do
         provisioningProfiles: { 
             MY_APP_ID => MY_PROFILE
         }
-      }
+      },
+      xcargs: "PROVISIONING_PROFILE_SPECIFIER='#{MY_PROFILE}'"
   )
 
   end
