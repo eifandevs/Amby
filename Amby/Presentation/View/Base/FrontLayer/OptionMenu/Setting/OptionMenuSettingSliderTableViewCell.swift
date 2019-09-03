@@ -17,7 +17,7 @@ class OptionMenuSettingSliderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        slider.value = Float(-(ScrollUseCase.s.autoScrollInterval))
+        slider.value = Float(-(ScrollHandlerUseCase.s.autoScrollInterval))
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

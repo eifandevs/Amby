@@ -31,7 +31,7 @@ final class OptionMenuTabGroupTableViewModel {
     private let disposeBag = DisposeBag()
 
     // セル
-    private var rows: [Row] = TabUseCase.s.tabGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.tabGroupList.currentGroupContext == $0.groupContext, isPrivate: $0.isPrivate) })
+    private var rows: [Row] = TabHandlerUseCase.s.tabGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabHandlerUseCase.s.tabGroupList.currentGroupContext == $0.groupContext, isPrivate: $0.isPrivate) })
     // 高さ
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     // 数
@@ -39,18 +39,24 @@ final class OptionMenuTabGroupTableViewModel {
         return rows.count
     }
 
+    /// ユースケース
+    let changeGroupUseCase = ChangeGroupUseCase()
+    let deleteGroupUseCase = DeleteGroupUseCase()
+    let addGroupUseCase = AddGroupUseCase()
+    let invertPrivateModeUseCase = InvertPrivateModeUseCase()
+
     init() {
         setupRx()
     }
 
     func setupRx() {
         // リロード監視
-        TabUseCase.s.rx_action
+        TabHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
                 case .appendGroup, .changeGroupTitle, .deleteGroup, .invertPrivateMode:
-                    self.rows = TabUseCase.s.tabGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabUseCase.s.tabGroupList.currentGroupContext == $0.groupContext, isPrivate: $0.isPrivate) })
+                    self.rows = TabHandlerUseCase.s.tabGroupList.groups.map({ Row(title: $0.title, groupContext: $0.groupContext, isFront: TabHandlerUseCase.s.tabGroupList.currentGroupContext == $0.groupContext, isPrivate: $0.isPrivate) })
                     self.rx_action.onNext(.reload)
                 default: break
                 }
@@ -67,29 +73,29 @@ final class OptionMenuTabGroupTableViewModel {
     func removeRow(indexPath: IndexPath) {
         // モデルから削除
         let row = getRow(indexPath: indexPath)
-        TabUseCase.s.deleteGroup(groupContext: row.groupContext)
+        deleteGroupUseCase.exe(groupContext: row.groupContext)
     }
 
     /// グループ作成
     func addGroup() {
-        TabUseCase.s.addGroup()
+        addGroupUseCase.exe()
     }
 
     /// セル押下
     func changeGroup(indexPath: IndexPath) {
         let row = getRow(indexPath: indexPath)
-        TabUseCase.s.changeGroup(groupContext: row.groupContext)
+        changeGroupUseCase.exe(groupContext: row.groupContext)
     }
 
     /// グループ名変更
     func changeGroupTitle(indexPath: IndexPath) {
         let row = getRow(indexPath: indexPath)
-        TabUseCase.s.presentGroupTitleEdit(groupContext: row.groupContext)
+        TabHandlerUseCase.s.presentGroupTitleEdit(groupContext: row.groupContext)
     }
 
     /// グループ名変更
     func invertPrivateMode(indexPath: IndexPath) {
         let row = getRow(indexPath: indexPath)
-        TabUseCase.s.invertPrivateMode(groupContext: row.groupContext)
+        invertPrivateModeUseCase.exe(groupContext: row.groupContext)
     }
 }

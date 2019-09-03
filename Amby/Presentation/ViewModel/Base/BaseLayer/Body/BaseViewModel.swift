@@ -54,37 +54,40 @@ final class BaseViewModel {
 
     let rx_action = PublishSubject<BaseViewModelAction>()
 
+    /// usecase
+    let getSettingUseCase = GetSettingUseCase()
+
     var currentUrl: String? {
-        return TabUseCase.s.currentUrl
+        return TabHandlerUseCase.s.currentUrl
     }
 
     var currentSession: Session? {
-        return TabUseCase.s.currentSession
+        return TabHandlerUseCase.s.currentSession
     }
 
     /// 現在のコンテキスト
     var currentContext: String? {
-        return TabUseCase.s.currentContext
+        return TabHandlerUseCase.s.currentContext
     }
 
     /// 現在の位置
     var currentLocation: Int? {
-        return TabUseCase.s.currentLocation
+        return TabHandlerUseCase.s.currentLocation
     }
 
     /// webviewの数
     var currentTabCount: Int {
-        return TabUseCase.s.currentTabCount
+        return TabHandlerUseCase.s.currentTabCount
     }
 
     /// 自動スクロールのタイムインターバル
     var autoScrollInterval: CGFloat {
-        return ScrollUseCase.s.autoScrollInterval
+        return ScrollHandlerUseCase.s.autoScrollInterval
     }
 
     /// 新規ウィンドウ許諾
     var newWindowConfirm: Bool {
-        return SettingUseCase.s.newWindowConfirm
+        return getSettingUseCase.newWindowConfirm
     }
 
     /// baseViewControllerの状態取得
@@ -111,8 +114,31 @@ final class BaseViewModel {
 
     /// webview configuration
     var cacheConfiguration: WKWebViewConfiguration {
-        return WebCacheUseCase.s.cacheConfiguration()
+        return getWebConfigUseCase.exe()
     }
+
+    /// ユースケース
+    private let addTabUseCase = AddTabUseCase()
+    private let insertHistoryUseCase = InsertHistoryUseCase()
+    private let updateProgressUseCase = UpdateProgressUseCase()
+    private let reloadProgressUseCase = ReloadProgressUseCase()
+    private let updateTextProgressUseCase = UpdateTextProgressUseCase()
+    private let insertTabUseCase = InsertTabUseCase()
+    private let getIndexTabUseCase = GetIndexTabUseCase()
+    private let startLoadingTabUseCase = StartLoadingTabUseCase()
+    private let endLoadingTabUseCase = EndLoadingTabUseCase()
+    private let endRenderingTabUseCase = EndRenderingTabUseCase()
+    private let getHistoryTabUseCase = GetHistoryTabUseCase()
+    private let goBackTabUseCase = GoBackTabUseCase()
+    private let goNextTabUseCase = GoNextTabUseCase()
+    private let updateUrlTabUseCase = UpdateUrlTabUseCase()
+    private let updateTitleTabUseCase = UpdateTitleTabUseCase()
+    private let updateSessionTabUseCase = UpdateSessionTabUseCase()
+    private let getCaptureUseCase = GetCaptureUseCase()
+    private let createThumbnailFolderUseCase = CreateThumbnailFolderUseCase()
+    private let writeThumbnailUseCase = WriteThumbnailUseCase()
+    private let deleteThumbnailUseCase = DeleteThumbnailUseCase()
+    private let getWebConfigUseCase = GetWebCacheConfigUseCase()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -128,7 +154,7 @@ final class BaseViewModel {
     func setupRx() {
         // ロード要求監視
         Observable.merge([
-            TrendUseCase.s.rx_action
+            TrendHandlerUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(url) = action {
                         return Observable.just(url)
@@ -136,7 +162,7 @@ final class BaseViewModel {
                         return Observable.empty()
                     }
                 },
-            SourceCodeUseCase.s.rx_action
+            SourceCodeHandlerUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(url) = action {
                         return Observable.just(url)
@@ -144,7 +170,7 @@ final class BaseViewModel {
                         return Observable.empty()
                     }
                 },
-            ReportUseCase.s.rx_action
+            ReportHandlerUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(url) = action {
                         return Observable.just(url)
@@ -152,7 +178,7 @@ final class BaseViewModel {
                         return Observable.empty()
                     }
                 },
-            FavoriteUseCase.s.rx_action
+            FavoriteHanderUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(url) = action {
                         return Observable.just(url)
@@ -160,7 +186,7 @@ final class BaseViewModel {
                         return Observable.empty()
                     }
                 },
-            HistoryUseCase.s.rx_action
+            HistoryHandlerUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(url) = action {
                         return Observable.just(url)
@@ -168,7 +194,7 @@ final class BaseViewModel {
                         return Observable.empty()
                     }
                 },
-            SearchUseCase.s.rx_action
+            SearchHandlerUseCase.s.rx_action
                 .flatMap { action -> Observable<String> in
                     if case let .load(text) = action {
                         return Observable.just(text)
@@ -183,7 +209,7 @@ final class BaseViewModel {
         .disposed(by: disposeBag)
 
         // タブ監視
-        TabUseCase.s.rx_action
+        TabHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -202,7 +228,7 @@ final class BaseViewModel {
             .disposed(by: disposeBag)
 
         // フォーム監視
-        FormUseCase.s.rx_action
+        FormHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -214,7 +240,7 @@ final class BaseViewModel {
             .disposed(by: disposeBag)
 
         // スクロール監視
-        ScrollUseCase.s.rx_action
+        ScrollHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -225,7 +251,7 @@ final class BaseViewModel {
             .disposed(by: disposeBag)
 
         // 全文検索監視
-        GrepUseCase.s.rx_action
+        GrepHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -238,7 +264,7 @@ final class BaseViewModel {
             .disposed(by: disposeBag)
 
         // html解析監視
-        HtmlAnalysisUseCase.s.rx_action
+        HtmlAnalysisHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -252,7 +278,7 @@ final class BaseViewModel {
 
     /// ページ追加
     func addTab() {
-        TabUseCase.s.add()
+        addTabUseCase.exe()
     }
 
     /// html解析要求のurlか判定
@@ -357,55 +383,55 @@ final class BaseViewModel {
 
     /// タブの追加
     func insertTab(url: String? = nil) {
-        TabUseCase.s.insert(url: url)
+        insertTabUseCase.exe(url: url)
     }
 
     /// ページインデックス取得
     func getTabIndex(context: String) -> Int? {
-        return TabUseCase.s.getIndex(context: context)
+        return getIndexTabUseCase.exe(context: context)
     }
 
     func endGrepping(hitNum: Int) {
-        GrepUseCase.s.finish(hitNum: hitNum)
+        GrepHandlerUseCase.s.finish(hitNum: hitNum)
     }
 
     func startLoading(context: String) {
-        TabUseCase.s.startLoading(context: context)
+        startLoadingTabUseCase.exe(context: context)
     }
 
     func endLoading(context: String) {
-        TabUseCase.s.endLoading(context: context)
+        endLoadingTabUseCase.exe(context: context)
     }
 
     func endRendering(context: String) {
-        TabUseCase.s.endRendering(context: context)
+        endRenderingTabUseCase.exe(context: context)
     }
 
     func updateProgress(progress: CGFloat) {
-        ProgressUseCase.s.updateProgress(progress: progress)
+        updateProgressUseCase.exe(progress: progress)
     }
 
     /// 検索開始
     func beginSearching() {
-        SearchUseCase.s.beginAtHeader()
+        SearchHandlerUseCase.s.beginAtHeader()
     }
 
     /// フォーム情報保存
     func storeForm(form: Form) {
-        FormUseCase.s.store(form: form)
+        StoreFormUseCase().exe(form: form)
     }
 
     /// フォーム情報取得
     func selectForm(url: String) -> Form? {
-        return FormUseCase.s.select(url: url).first
+        return SelectFormUseCase().exe(url: url).first
     }
 
     /// 前webviewのキャプチャ取得
     func getPreviousCapture() -> UIImage? {
         if let currentLocation = currentLocation {
             let targetIndex = currentLocation == 0 ? currentTabCount - 1 : currentLocation - 1
-            if let targetContext = TabUseCase.s.getHistory(index: targetIndex)?.context {
-                if let image = ThumbnailUseCase.s.getCapture(context: targetContext) {
+            if let targetContext = getHistoryTabUseCase.exe(index: targetIndex)?.context {
+                if let image = getCaptureUseCase.exe(context: targetContext) {
                     return image
                 } else {
                     return UIImage()
@@ -422,8 +448,8 @@ final class BaseViewModel {
     func getNextCapture() -> UIImage? {
         if let currentLocation = currentLocation {
             let targetIndex = currentLocation == currentTabCount - 1 ? 0 : currentLocation + 1
-            if let targetContext = TabUseCase.s.getHistory(index: targetIndex)?.context {
-                if let image = ThumbnailUseCase.s.getCapture(context: targetContext) {
+            if let targetContext = getHistoryTabUseCase.exe(index: targetIndex)?.context {
+                if let image = getCaptureUseCase.exe(context: targetContext) {
                     return image
                 } else {
                     return UIImage()
@@ -438,67 +464,67 @@ final class BaseViewModel {
 
     /// reload ProgressDataModel
     func reloadProgress() {
-        ProgressUseCase.s.reloadProgress()
+        reloadProgressUseCase.exe()
     }
 
     /// update text in ProgressDataModel
     func updateProgressText(text: String) {
-        ProgressUseCase.s.updateText(text: text)
+        updateTextProgressUseCase.exe(text: text)
     }
 
     /// 前WebViewに切り替え
     func goBackTab() {
-        TabUseCase.s.goBack()
+        goBackTabUseCase.exe()
     }
 
     /// 後WebViewに切り替え
     func goNextTab() {
-        TabUseCase.s.goNext()
+        goNextTabUseCase.exe()
     }
 
     /// create thumbnail folder
     func createThumbnailFolder(context: String) {
-        ThumbnailUseCase.s.createFolder(context: context)
+        createThumbnailFolderUseCase.exe(context: context)
     }
 
     /// write thumbnail data
     func writeThumbnailData(context: String, data: Data) {
-        ThumbnailUseCase.s.write(context: context, data: data)
+        writeThumbnailUseCase.exe(context: context, data: data)
     }
 
     /// update url in page history
     func updatePageUrl(context: String, url: String) {
-        TabUseCase.s.updateUrl(context: context, url: url)
+        updateUrlTabUseCase.exe(context: context, url: url)
     }
 
     /// update title in page history
     func updatePageTitle(context: String, title: String) {
-        TabUseCase.s.updateTitle(context: context, title: title)
+        updateTitleTabUseCase.exe(context: context, title: title)
     }
 
     /// update canGoBack
     func updateCanGoBack(context: String, canGoBack: Bool) {
-        ProgressUseCase.s.updateCanGoBack(context: context, canGoBack: canGoBack)
+        ProgressHandlerUseCase.s.updateCanGoBack(context: context, canGoBack: canGoBack)
     }
 
     /// update canGoForward
     func updateCanGoForward(context: String, canGoForward: Bool) {
-        ProgressUseCase.s.updateCanGoForward(context: context, canGoForward: canGoForward)
+        ProgressHandlerUseCase.s.updateCanGoForward(context: context, canGoForward: canGoForward)
     }
 
     /// update session
     func updateSession(context: String, urls: [String], currentPage: Int) {
-        TabUseCase.s.updateSession(context: context, urls: urls, currentPage: currentPage)
+        updateSessionTabUseCase.exe(context: context, urls: urls, currentPage: currentPage)
     }
 
     /// update common history
     func insertHistory(url: URL?, title: String?) {
-        HistoryUseCase.s.insert(url: url, title: title)
+        insertHistoryUseCase.exe(url: url, title: title)
     }
 
     /// サムネイルの削除
     func deleteThumbnail(context: String) {
-        ThumbnailUseCase.s.delete(context: context)
+        deleteThumbnailUseCase.exe(context: context)
     }
 
     /// 複合化

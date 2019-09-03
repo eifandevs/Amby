@@ -13,7 +13,7 @@ import Model
 final class OptionMenuFavoriteTableViewModel {
     let cellHeight = AppConst.FRONT_LAYER.TABLE_VIEW_CELL_HEIGHT
     /// セル情報
-    var rows: [Row] = FavoriteUseCase.s.select().map({ Row(data: $0) })
+    var rows: [Row] = SelectFavoriteUseCase().exe().map({ Row(data: $0) })
 
     /// セル数
     var cellCount: Int {
@@ -31,7 +31,7 @@ final class OptionMenuFavoriteTableViewModel {
         let row = getRow(indexPath: indexPath)
         rows.remove(at: indexPath.row)
         // モデルから削除
-        FavoriteUseCase.s.delete(favorites: [row.data])
+        DeleteFavoriteUseCase().exe(favorites: [row.data])
     }
 
     /// セル情報
@@ -41,6 +41,6 @@ final class OptionMenuFavoriteTableViewModel {
 
     /// ページ表示要求
     func loadRequest(url: String) {
-        FavoriteUseCase.s.load(url: url)
+        FavoriteHanderUseCase.s.load(url: url)
     }
 }

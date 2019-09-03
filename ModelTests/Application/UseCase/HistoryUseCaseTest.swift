@@ -1,5 +1,5 @@
 //
-//  HistoryUseCaseTest.swift
+//  HistoryHandlerUseCaseTest.swift
 //  ModelTests
 //
 //  Created by iori tenma on 2019/04/30.
@@ -14,14 +14,14 @@ import RxCocoa
 @testable import Model
 @testable import Entity
 
-class HistoryUseCaseTest: XCTestCase {
+class HistoryHandlerUseCaseTest: XCTestCase {
     let dummyUrl = "https://abc/"
     let dummyUrl2 = "https://def/"
     let dummyTitle = "dummyTitle"
     let dummyTitle2 = "dummyTitle2"
 
-    var historyUseCase: HistoryUseCase {
-        return HistoryUseCase.s
+    var historyUseCase: HistoryHandlerUseCase {
+        return HistoryHandlerUseCase.s
     }
 
     let disposeBag = DisposeBag()
@@ -37,7 +37,7 @@ class HistoryUseCaseTest: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        historyUseCase.delete()
+        DeleteHistoryUseCase().exe()
     }
 
     func testLoad() {
@@ -59,12 +59,12 @@ class HistoryUseCaseTest: XCTestCase {
     }
 
     func testGetList() {
-        historyUseCase.insert(url: URL(string: dummyUrl), title: dummyTitle)
-        XCTAssertTrue(historyUseCase.getList().count == 0)
+        InsertHistoryUseCase().exe(url: URL(string: dummyUrl), title: dummyTitle)
+        XCTAssertTrue(GetListHistoryUseCase().exe().count == 0)
     }
 
     func testSelect() {
-        historyUseCase.insert(url: URL(string: dummyUrl), title: dummyTitle)
-        XCTAssertTrue(historyUseCase.select(dateString: todayString).count == 1)
+        InsertHistoryUseCase().exe(url: URL(string: dummyUrl), title: dummyTitle)
+        XCTAssertTrue(SelectHistoryUseCase().exe(dateString: todayString).count == 1)
     }
 }

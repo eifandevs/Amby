@@ -56,26 +56,26 @@ final class OptionMenuAppTableViewModel {
 
     /// ソース表示
     func openSource() {
-        SourceCodeUseCase.s.open()
+        SourceCodeHandlerUseCase.s.open()
     }
 
     /// ライセンス表示
     func openLicense() {
-        OpenSourceUseCase.s.open()
+        OpenSourceHandlerUseCase.s.open()
     }
 
     /// ポリシー表示
     func openPolicy() {
-        PolicyUseCase.s.open()
+        PolicyHandlerUseCase.s.open()
     }
 
     /// 問題の報告表示
     func openReport() {
-        ReportUseCase.s.open()
+        ReportHandlerUseCase.s.open()
     }
 
     /// お問い合わせ表示
     func openContact() {
-        ContactUseCase.s.open()
+        ContactHandlerUseCase.s.open()
     }
 }

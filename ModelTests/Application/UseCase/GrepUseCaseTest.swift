@@ -1,5 +1,5 @@
 //
-//  GrepUseCaseTest.swift
+//  GrepHandlerUseCaseTest.swift
 //  ModelTests
 //
 //  Created by iori tenma on 2019/04/30.
@@ -14,10 +14,10 @@ import RxCocoa
 @testable import Model
 @testable import Entity
 
-class GrepUseCaseTest: XCTestCase {
+class GrepHandlerUseCaseTest: XCTestCase {
 
-    var grepUseCase: GrepUseCase {
-        return GrepUseCase.s
+    var grepUseCase: GrepHandlerUseCase {
+        return GrepHandlerUseCase.s
     }
 
     let disposeBag = DisposeBag()

@@ -29,6 +29,9 @@ final class PasscodeViewControllerViewModel {
 
     var title = Variable(MessageConst.PASSCODE.TITLE_REGISTER)
 
+    /// usecase
+    let usecase = GetPassCodeSettingUseCase()
+
     /// 新規作成 or 確認
     var isConfirm = false {
         didSet {
@@ -38,7 +41,7 @@ final class PasscodeViewControllerViewModel {
 
     /// パスコード登録済みフラグ
     var isRegisterdPasscode: Bool {
-        return PasscodeUseCase.s.isRegisterdPasscode
+        return usecase.isRegisterdPasscode
     }
 
     /// パスコード入力済みフラグ
@@ -51,14 +54,14 @@ final class PasscodeViewControllerViewModel {
 
     /// パスコード
     private var passcode: String {
-        return PasscodeUseCase.s.rootPasscode
+        return usecase.rootPasscode
     }
 
     /// パスコード入力
     func input(passcode: String) {
         if isConfirm {
             if self.passcode == passcode {
-                PasscodeUseCase.s.isInputPasscode = true
+                usecase.isInputPasscode = true
                 rx_action.onNext(.confirmSuccess)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_AUTHENTIFICATED, isSuccess: true)
@@ -74,7 +77,7 @@ final class PasscodeViewControllerViewModel {
             } else {
                 if inputPasscode == passcode {
                     rx_action.onNext(.register)
-                    PasscodeUseCase.s.rootPasscode = passcode
+                    usecase.rootPasscode = passcode
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.PASSCODE_REGISTERED, isSuccess: true)
                     }
@@ -89,14 +92,14 @@ final class PasscodeViewControllerViewModel {
 
     /// アプリ初期化
     func initializeApp() {
-        HistoryUseCase.s.delete()
-        SearchUseCase.s.delete()
-        FavoriteUseCase.s.delete()
-        FormUseCase.s.delete()
-        WebCacheUseCase.s.deleteCookies()
-        WebCacheUseCase.s.deleteCaches()
-        ThumbnailUseCase.s.delete()
-        TabUseCase.s.delete()
+        DeleteHistoryUseCase().exe()
+        DeleteSearchUseCase().exe()
+        DeleteFavoriteUseCase().exe()
+        DeleteFormUseCase().exe()
+        WebCacheHandlerUseCase.s.deleteCookies()
+        WebCacheHandlerUseCase.s.deleteCaches()
+        DeleteThumbnailUseCase().exe()
+        DeleteTabUseCase().exe()
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             delegate.initialize()
         }

@@ -31,7 +31,7 @@ final class OptionMenuHistoryTableViewModel {
     /// セル情報
     var sections: [Section] = []
     /// 保持データリスト
-    private var readFiles = HistoryUseCase.s.getList()
+    private var readFiles = GetListHistoryUseCase().exe()
     /// ファイル読み込みインターバル
     private let readInterval = 6
     /// セクションフォントサイズ
@@ -54,7 +54,7 @@ final class OptionMenuHistoryTableViewModel {
 
         sections[indexPath.section].rows.remove(at: indexPath.row)
         // モデルから削除
-        HistoryUseCase.s.delete(historyIds: [getSection(section: indexPath.section).dateString: [row.data._id]])
+        DeleteHistoryUseCase().exe(historyIds: [getSection(section: indexPath.section).dateString: [row.data._id]])
 
         return sections[indexPath.section].rows.count > 0
     }
@@ -76,7 +76,7 @@ final class OptionMenuHistoryTableViewModel {
             let latestFiles = readFiles.prefix(readInterval)
             readFiles = Array(readFiles.dropFirst(readInterval))
             latestFiles.forEach({ (dateString: String) in
-                let rows = HistoryUseCase.s.select(dateString: dateString).map({ Section.Row(data: $0) })
+                let rows = SelectHistoryUseCase().exe(dateString: dateString).map({ Section.Row(data: $0) })
                 if rows.count > 0 {
                     sections.append(Section(dateString: dateString, rows: rows))
                 }
@@ -87,7 +87,7 @@ final class OptionMenuHistoryTableViewModel {
 
     /// ロードリクエスト
     func loadRequest(url: String) {
-        HistoryUseCase.s.load(url: url)
+        HistoryHandlerUseCase.s.load(url: url)
     }
 
     /// セル情報

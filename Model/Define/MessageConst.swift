@@ -14,6 +14,7 @@ struct MessageConst {
     // MARK: - 通知
 
     struct NOTIFICATION {
+        static let COMMON_ERROR = "通信に失敗しました"
         static let REGISTER_BOOK_MARK = "お気に入りに登録しました"
         static let DELETE_SEARCH_HISTORY = "検索履歴を削除しました"
         static let DELETE_TAB_ERROR = "タブ情報の削除に失敗しました"

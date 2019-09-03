@@ -13,17 +13,17 @@ import RxCocoa
 import RxSwift
 
 enum ArticleDataModelAction {
-    case update(articles: [Article])
+    case update(articles: [GetArticleResponse.Article])
 }
 
 enum ArticleDataModelError {
-    case get
+    case fetch
 }
 
 extension ArticleDataModelError: ModelError {
     var message: String {
         switch self {
-        case .get:
+        case .fetch:
             return MessageConst.NOTIFICATION.GET_ARTICLE_ERROR
         }
     }
@@ -32,8 +32,8 @@ extension ArticleDataModelError: ModelError {
 protocol ArticleDataModelProtocol {
     var rx_action: PublishSubject<ArticleDataModelAction> { get }
     var rx_error: PublishSubject<ArticleDataModelError> { get }
-    var articles: [Article] { get }
-    func get()
+    var articles: [GetArticleResponse.Article] { get }
+    func fetch()
 }
 
 final class ArticleDataModel: ArticleDataModelProtocol {
@@ -43,7 +43,7 @@ final class ArticleDataModel: ArticleDataModelProtocol {
     let rx_error = PublishSubject<ArticleDataModelError>()
 
     /// 記事
-    public private(set) var articles = [Article]()
+    public private(set) var articles = [GetArticleResponse.Article]()
 
     static let s = ArticleDataModel()
     private let disposeBag = DisposeBag()
@@ -51,20 +51,20 @@ final class ArticleDataModel: ArticleDataModelProtocol {
     private init() {}
 
     /// 記事取得
-    func get() {
+    func fetch() {
         if articles.count == 0 {
             let repository = ApiRepository<App>()
 
             repository.rx.request(.article)
                 .observeOn(MainScheduler.asyncInstance)
-                .map { (response) -> ArticleResponse in
+                .map { (response) -> GetArticleResponse in
 
                     let decoder: JSONDecoder = JSONDecoder()
                     do {
-                        let articleResponse: ArticleResponse = try decoder.decode(ArticleResponse.self, from: response.data)
+                        let articleResponse: GetArticleResponse = try decoder.decode(GetArticleResponse.self, from: response.data)
                         return articleResponse
                     } catch {
-                        return ArticleResponse(code: ModelConst.APP_STATUS_CODE.PARSE_ERROR, data: [])
+                        return GetArticleResponse(code: ModelConst.APP_STATUS_CODE.PARSE_ERROR, data: [])
                     }
                 }
                 .subscribe(
@@ -76,13 +76,13 @@ final class ArticleDataModel: ArticleDataModelProtocol {
                             self.rx_action.onNext(.update(articles: response.data))
                         } else {
                             log.error("get article error. code: \(response.code)")
-                            self.rx_error.onNext(.get)
+                            self.rx_error.onNext(.fetch)
                             self.rx_action.onNext(.update(articles: []))
                         }
                     }, onError: { [weak self] error in
                         guard let `self` = self else { return }
                         log.error("get article error. error: \(error.localizedDescription)")
-                        self.rx_error.onNext(.get)
+                        self.rx_error.onNext(.fetch)
                         self.rx_action.onNext(.update(articles: []))
                 })
                 .disposed(by: disposeBag)

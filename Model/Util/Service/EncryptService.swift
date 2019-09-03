@@ -12,8 +12,8 @@ import Foundation
 
 public class EncryptService {
     public static func encrypt(value: String) -> Data {
-        let serviceToken = AuthDataModel.s.keychainServiceToken
-        let ivToken = AuthDataModel.s.keychainIvToken
+        let serviceToken = AccessTokenDataModel.s.keychainServiceToken
+        let ivToken = AccessTokenDataModel.s.keychainIvToken
         let input = [UInt8](value.utf8)
         do {
             let aes = try AES(key: serviceToken!, iv: ivToken!)
@@ -26,8 +26,8 @@ public class EncryptService {
     }
 
     public static func decrypt(data: Data) -> String {
-        let serviceToken = AuthDataModel.s.keychainServiceToken
-        let ivToken = AuthDataModel.s.keychainIvToken
+        let serviceToken = AccessTokenDataModel.s.keychainServiceToken
+        let ivToken = AccessTokenDataModel.s.keychainIvToken
         let input = data.toArray(type: UInt8.self)
         do {
             let aes = try AES(key: serviceToken!, iv: ivToken!)

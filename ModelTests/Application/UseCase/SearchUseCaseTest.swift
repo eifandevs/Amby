@@ -1,5 +1,5 @@
 //
-//  SearchUseCaseTest.swift
+//  SearchHandlerUseCaseTest.swift
 //  ModelTests
 //
 //  Created by iori tenma on 2019/05/01.
@@ -14,10 +14,10 @@ import RxCocoa
 @testable import Model
 @testable import Entity
 
-class SearchUseCaseTest: XCTestCase {
+class SearchHandlerUseCaseTest: XCTestCase {
 
-    var searchUseCase: SearchUseCase {
-        return SearchUseCase.s
+    var searchUseCase: SearchHandlerUseCase {
+        return SearchHandlerUseCase.s
     }
 
     let disposeBag = DisposeBag()

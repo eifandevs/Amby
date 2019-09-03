@@ -1,5 +1,5 @@
 //
-//  MemoUseCaseTest.swift
+//   MemoHandlerUseCaseTest.swift
 //  ModelTests
 //
 //  Created by iori tenma on 2019/05/01.
@@ -14,10 +14,10 @@ import RxCocoa
 @testable import Model
 @testable import Entity
 
-class MemoUseCaseTest: XCTestCase {
+class  MemoHandlerUseCaseTest: XCTestCase {
 
-    var memoUseCase: MemoUseCase {
-        return MemoUseCase.s
+    var memoUseCase: MemoHandlerUseCase {
+        return  MemoHandlerUseCase.s
     }
 
     let disposeBag = DisposeBag()

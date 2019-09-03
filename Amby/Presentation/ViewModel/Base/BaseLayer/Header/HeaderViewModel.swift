@@ -29,6 +29,9 @@ final class HeaderViewModel {
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
+    /// ユースケース
+    let closeTabUseCase = CloseTabUseCase()
+
     init() {
         setupRx()
     }
@@ -39,7 +42,7 @@ final class HeaderViewModel {
 
     private func setupRx() {
         // プログレス監視
-        ProgressUseCase.s.rx_action
+        ProgressHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -56,7 +59,7 @@ final class HeaderViewModel {
             .disposed(by: disposeBag)
 
         // お気に入り更新監視
-        FavoriteUseCase.s.rx_action
+        FavoriteHanderUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case let .update(isSwitch) = action else { return }
                 self.rx_action.onNext(.updateFavorite(isSwitch: isSwitch))
@@ -64,7 +67,7 @@ final class HeaderViewModel {
             .disposed(by: disposeBag)
 
         // 編集開始監視
-        SearchUseCase.s.rx_action
+        SearchHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -78,7 +81,7 @@ final class HeaderViewModel {
             .disposed(by: disposeBag)
 
         // グレップ開始監視
-        GrepUseCase.s.rx_action
+        GrepHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case .begin = action else { return }
                 self.rx_action.onNext(.grep)
@@ -89,26 +92,26 @@ final class HeaderViewModel {
     // MARK: Public Method
 
     func historyBack() {
-        TabUseCase.s.historyBack()
+        TabHandlerUseCase.s.historyBack()
     }
 
     func historyForward() {
-        TabUseCase.s.historyForward()
+        TabHandlerUseCase.s.historyForward()
     }
 
     func loadRequest(text: String) {
-        SearchUseCase.s.load(text: text)
+        SearchHandlerUseCase.s.load(text: text)
     }
 
     func grepRequest(word: String) {
-        GrepUseCase.s.grep(word: word)
+        GrepHandlerUseCase.s.grep(word: word)
     }
 
     func updateFavorite() {
-        FavoriteUseCase.s.update()
+        UpdateFavoriteUseCase().exe()
     }
 
     func remove() {
-        TabUseCase.s.remove()
+        closeTabUseCase.exe()
     }
 }

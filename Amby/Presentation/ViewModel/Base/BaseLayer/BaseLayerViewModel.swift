@@ -22,6 +22,9 @@ final class BaseLayerViewModel {
     /// アクション通知用RX
     public let rx_action = PublishSubject<BaseLayerViewModelAction>()
 
+    /// ユースケース
+    private let rebuildTabUseCase = RebuildTabUseCase()
+
     deinit {
         log.debug("deinit called.")
     }
@@ -31,7 +34,7 @@ final class BaseLayerViewModel {
     }
 
     func setupRx() {
-        GrepUseCase.s.rx_action
+        GrepHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
                 switch action {
@@ -44,22 +47,22 @@ final class BaseLayerViewModel {
 
     /// 画面構築
     func rebuild() {
-        TabUseCase.s.rebuild()
+        rebuildTabUseCase.exe()
     }
 
     /// 自動入力
     func autoFill() {
-        FormUseCase.s.autoFill()
+        FormHandlerUseCase.s.autoFill()
     }
 
     /// 前に移動(グレップ)
     func grepPrevious() {
-        GrepUseCase.s.previous()
+        GrepHandlerUseCase.s.previous()
     }
 
     /// 次に移動(グレップ)
     func grepNext() {
-        GrepUseCase.s.next()
+        GrepHandlerUseCase.s.next()
     }
 
     /// baseViewControllerの状態取得
