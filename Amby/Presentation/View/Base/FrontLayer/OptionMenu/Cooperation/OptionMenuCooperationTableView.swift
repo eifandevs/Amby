@@ -90,7 +90,6 @@ extension OptionMenuCooperationTableView: UITableViewDataSource {
 extension OptionMenuCooperationTableView: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt _: IndexPath) {
 //        let row = viewModel.getRow(indexPath: indexPath)
-        // TODO: 処理
         rx_action.onNext(.close)
     }
 }

@@ -41,24 +41,33 @@ class AmbyUITests: XCTestCase {
 
         // ----- 検索 -----
         do {
-            app.keys["A"].tap()
-            app.keys["m"].tap()
-            app.keys["a"].tap()
-            app.keys["z"].tap()
+            app.keys["W"].tap()
+            app.keys["e"].tap()
+            app.keys["l"].tap()
+            app.keys["c"].tap()
             app.keys["o"].tap()
-            app.keys["n"].tap()
+            app.keys["m"].tap()
+            app.keys["space"].tap()
+            app.keys["t"].tap()
+            app.keys["o"].tap()
+            app.keys["space"].tap()
+            app.keys["p"].tap()
+            app.keys["r"].tap()
+            app.keys["i"].tap()
+            app.keys["m"].tap()
+            app.keys["e"].tap()
             app.buttons["Search"].tap()
 
             // 初回google検索結果表示時は、言語設定のモーダルが表示されるので、それを待つ
-            waitExist(element: app.links["Change to English"])
-
+            sleep(5)
             if app.links["Change to English"].exists {
                 app.links["Change to English"].tap()
             }
-            waitExist(element: app.links["Welcome to Prime Video"])
+
+            waitExist(element: app.links["Prime Video"])
 
             // ----- 適当にリンクタップ -----
-            app.links["Welcome to Prime Video"].tap()
+            app.links["Prime Video"].tap()
             waitExist(element: app.links["Help"])
         }
 
@@ -110,15 +119,24 @@ class AmbyUITests: XCTestCase {
             waitExist(element: app.keyboards.firstMatch)
             XCTAssertTrue(app.keys["A"].exists) // 英語キーボードのみ
 
-            app.keys["A"].tap()
-            app.keys["m"].tap()
-            app.keys["a"].tap()
-            app.keys["z"].tap()
+            app.keys["W"].tap()
+            app.keys["e"].tap()
+            app.keys["l"].tap()
+            app.keys["c"].tap()
             app.keys["o"].tap()
-            app.keys["n"].tap()
+            app.keys["m"].tap()
+            app.keys["space"].tap()
+            app.keys["t"].tap()
+            app.keys["o"].tap()
+            app.keys["space"].tap()
+            app.keys["p"].tap()
+            app.keys["r"].tap()
+            app.keys["i"].tap()
+            app.keys["m"].tap()
+            app.keys["e"].tap()
             app.buttons["Search"].tap()
 
-            waitExist(element: app.links["Welcome to Prime Video"])
+            waitExist(element: app.links["Prime Video"])
         }
 
         // ----- 自動スクロール -----
@@ -127,7 +145,7 @@ class AmbyUITests: XCTestCase {
             changeMenu()
             app.buttons["circlemenu-autoscroll"].tap()
             sleep(2)
-            app.links["Welcome to Prime Video"].tap()
+            app.links["Prime Video"].tap()
             waitExist(element: app.links["Help"])
         }
     }

@@ -11,7 +11,7 @@ import Model
 
 final class CircleMenuViewModel {
     var menuItems: [[UserOperation]] {
-        let menuOrder = SettingUseCase.s.menuOrder
+        let menuOrder = GetSettingUseCase().menuOrder
         return (1 ... AppConst.FRONT_LAYER.CIRCLEMENU_SECTION_NUM).map { menuOrder[(AppConst.FRONT_LAYER.CIRCLEMENU_ROW_NUM * ($0 - 1)) ... (AppConst.FRONT_LAYER.CIRCLEMENU_ROW_NUM * $0 - 1)].map { $0 } }
     }
 

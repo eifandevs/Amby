@@ -1,5 +1,5 @@
 //
-//  ScrollUseCaseTest.swift
+//  ScrollHandlerUseCaseTest.swift
 //  ModelTests
 //
 //  Created by iori tenma on 2019/05/01.
@@ -14,10 +14,10 @@ import RxCocoa
 @testable import Model
 @testable import Entity
 
-class ScrollUseCaseTest: XCTestCase {
+class ScrollHandlerUseCaseTest: XCTestCase {
 
-    var scrollUseCase: ScrollUseCase {
-        return ScrollUseCase.s
+    var scrollUseCase: ScrollHandlerUseCase {
+        return ScrollHandlerUseCase.s
     }
 
     let disposeBag = DisposeBag()

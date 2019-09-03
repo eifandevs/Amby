@@ -12,15 +12,15 @@ import Model
 final class ReportViewControllerViewModel {
     /// 一覧表示
     func openList() {
-        ReportUseCase.s.openList()
+        ReportHandlerUseCase.s.openList()
     }
 
     /// 送信
     func send(title: String, message: String) {
-        if ReportUseCase.s.lastReportDate.intervalHourSinceNow > Double(24) {
+        if ReportHandlerUseCase.s.lastReportDate.intervalHourSinceNow > Double(24) {
             // 前回投稿より24h経過していた場合に送信する
-            ReportUseCase.s.lastReportDate = Date()
-            ReportUseCase.s.registerReport(title: title, message: message)
+            ReportHandlerUseCase.s.lastReportDate = Date()
+            ReportHandlerUseCase.s.registerReport(title: title, message: message)
         } else {
             log.warning("already reported")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

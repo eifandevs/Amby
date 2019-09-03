@@ -87,6 +87,13 @@ struct ModelConst {
         let ASPECT_RATE = UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height
     }
 
+    // MARK: - 認証情報
+    static let CREDENTIAL = CREDENTIAL_VALUE()
+    struct CREDENTIAL_VALUE {
+        let APP_SERVER_ACCESS_ID = ResourceUtil().get(key: "APP_SERVER_ACCESS_ID")
+        let APP_SERVER_ACCESS_PASSWORD = ResourceUtil().get(key: "APP_SERVER_ACCESS_PASSWORD")
+    }
+
     // MARK: - URL情報
 
     static let URL = URL_VALUE()
@@ -99,7 +106,11 @@ struct ModelConst {
 
         // アプリAPI
         let APP_SERVER_DOMAIN = ResourceUtil().get(key: "APP_SERVER_DOMAIN")
-        let APP_SERVER_PATH = ResourceUtil().get(key: "APP_SERVER_PATH")
+
+        // パス
+        let ARTICLE_API_PATH = ResourceUtil().get(key: "ARTICLE_API_PATH")
+        let FAVORITE_API_PATH = ResourceUtil().get(key: "FAVORITE_API_PATH")
+        let ACCESSTOKEN_API_PATH = ResourceUtil().get(key: "ACCESSTOKEN_API_PATH")
 
         // トレンドホーム
         let TREND_HOME_URL = ResourceUtil().get(key: "TREND_HOME_URL")

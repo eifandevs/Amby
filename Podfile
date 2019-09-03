@@ -14,6 +14,9 @@ target 'Amby' do
   pod 'NSObject+Rx', '~> 4.2'
   pod 'LicensePlist', '~> 1.8'
   pod 'SmileLock', '~> 3.0'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Analytics'
+  pod 'GoogleSignIn'
 end
 
 target 'Model' do

@@ -10,13 +10,16 @@ import Foundation
 import Model
 
 final class OptionMenuSettingSwitchTableViewCellViewModel {
+    /// usecase
+    let usecase = GetSettingUseCase()
+
     /// 新規ウィンドウ許諾フラグ
     var newWindowConfirm: Bool {
-        return SettingUseCase.s.newWindowConfirm
+        return usecase.newWindowConfirm
     }
 
     /// 新規ウィンドウ許諾フラグ変更
     func changeValue(value: Bool) {
-        SettingUseCase.s.newWindowConfirm = value
+        usecase.newWindowConfirm = value
     }
 }

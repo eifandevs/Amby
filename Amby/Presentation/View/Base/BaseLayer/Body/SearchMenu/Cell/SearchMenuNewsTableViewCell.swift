@@ -17,7 +17,7 @@ class SearchMenuNewsTableViewCell: UITableViewCell {
     @IBOutlet var thumbnailImageView: UIImageView!
 
     /// 表示内容
-    var article: Article?
+    var article: GetArticleResponse.Article?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,7 +30,7 @@ class SearchMenuNewsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setArticle(article: Article?) {
+    func setArticle(article: GetArticleResponse.Article?) {
         self.article = article
 
         if let urlToImage = article?.image_url, !urlToImage.isEmpty {

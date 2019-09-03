@@ -39,29 +39,36 @@ final class SearchMenuTableViewModel {
     /// 閲覧履歴アイテム
     var commonHistoryCellItem: [CommonHistory] = []
     /// 記事アイテム
-    var newsItem: [Article] = []
+    var newsItem: [GetArticleResponse.Article] = []
     /// 閲覧履歴読み込み数
-    private let readCommonHistoryNum = SettingUseCase.s.commonHistorySaveCount
+    private let readCommonHistoryNum = GetSettingUseCase().commonHistorySaveCount
     /// 検索履歴読み込み数
-    private let readSearchHistoryNum = SettingUseCase.s.searchHistorySaveCount
+    private let readSearchHistoryNum = GetSettingUseCase().searchHistorySaveCount
     /// サジェスト取得キュー
     private var requestSearchQueue = [String?]()
     /// サジェスト取得中フラグ
     private var isRequesting = false
+
+    /// usecase
+    private let getNewsUseCase = GetNewsUseCase()
+    private let getSuggestUseCase = GetSuggestUseCase()
+    private let selectHistoryUseCase = SelectHistoryUseCase()
+    private let selectSearchUseCase = SelectSearchUseCase()
+
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
     init() {
         // サジェスト監視
-        SuggestUseCase.s.rx_action
+        SuggestHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
 
                 switch action {
                 case let .request(word):
                     // 閲覧履歴と検索履歴の検索
-                    self.commonHistoryCellItem = HistoryUseCase.s.select(title: word, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
-                    self.searchHistoryCellItem = SearchUseCase.s.select(title: word, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
+                    self.commonHistoryCellItem = self.selectHistoryUseCase.exe(title: word, readNum: self.readCommonHistoryNum).objects(for: self.cellNum)
+                    self.searchHistoryCellItem = self.selectSearchUseCase.exe(title: word, readNum: self.readSearchHistoryNum).objects(for: self.cellNum)
 
                     // とりあえずここで画面更新
                     self.rx_action.onNext(.update)
@@ -89,9 +96,9 @@ final class SearchMenuTableViewModel {
             .disposed(by: disposeBag)
 
         // 記事取得監視
-        NewsUseCase.s.rx_action
+        NewsHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case let .update(articles) = action else { return }
+                guard let `self` = self, let action = action.element, case let .fetch(articles) = action else { return }
                 if articles.count > 0 {
                     // exist article
                     self.newsItem = articles
@@ -113,7 +120,7 @@ final class SearchMenuTableViewModel {
     /// 記事取得
     public func getArticle() {
         // 記事取得
-        NewsUseCase.s.get()
+        getNewsUseCase.exe()
     }
 
     /// 検索開始
@@ -124,7 +131,7 @@ final class SearchMenuTableViewModel {
                 if token.isUrl {
                     isRequesting = false
                 } else {
-                    SuggestUseCase.s.get(token: token)
+                    getSuggestUseCase.exe(token: token)
                 }
             } else {
                 suggestCellItem = []
@@ -142,6 +149,6 @@ final class SearchMenuTableViewModel {
 
     /// ロードリクエスト
     func loadRequest(url: String) {
-        SearchUseCase.s.load(text: url)
+        SearchHandlerUseCase.s.load(text: url)
     }
 }

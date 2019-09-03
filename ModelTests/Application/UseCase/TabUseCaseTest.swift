@@ -1,5 +1,5 @@
 //
-//  TabUseCaseTest.swift
+//  TabHandlerUseCaseTest.swift
 //  ModelTests
 //
 //  Created by iori tenma on 2019/04/28.
@@ -14,14 +14,14 @@ import RxCocoa
 @testable import Model
 @testable import Entity
 
-class TabUseCaseTest: XCTestCase {
+class TabHandlerUseCaseTest: XCTestCase {
     let dummyUrl = "https://abc/"
     let dummyUrl2 = "https://def/"
     let dummyTitle = "dummyTitle"
     let dummyTitle2 = "dummyTitle2"
 
-    var tabUseCase: TabUseCase {
-        return TabUseCase.s
+    var tabUseCase: TabHandlerUseCase {
+        return TabHandlerUseCase.s
     }
 
     let disposeBag = DisposeBag()

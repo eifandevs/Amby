@@ -105,6 +105,7 @@ class BaseViewController: UIViewController {
                 case .mailer: self.mailer()
                 case let .notice(message, isSuccess): self.notice(message: message, isSuccess: isSuccess)
                 case let .tabGroupTitle(groupContext): self.tabGroupTitle(groupContext: groupContext)
+                case .sync: self.sync()
                 }
             }
             .disposed(by: rx.disposeBag)
@@ -237,6 +238,12 @@ class BaseViewController: UIViewController {
     /// メニュー順序表示
     private func menuOrder() {
         let vc = MenuOrderViewController()
+        present(vc, animated: true)
+    }
+
+    /// ログイン画面表示
+    private func sync() {
+        let vc = SyncViewController()
         present(vc, animated: true)
     }
 

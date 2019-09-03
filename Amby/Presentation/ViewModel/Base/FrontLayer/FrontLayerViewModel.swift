@@ -10,67 +10,73 @@ import Foundation
 import Model
 
 final class FrontLayerViewModel {
+    /// ユースケース
+    let closeTabUseCase = CloseTabUseCase()
+    let closeTabAllUseCase = CloseTabAllUseCase()
+    let copyTabUseCase = CopyTabUseCase()
+    let addTabUseCase = AddTabUseCase()
+
     deinit {
         log.debug("deinit called.")
     }
 
     /// タブの追加
     func add() {
-        TabUseCase.s.add()
+        addTabUseCase.exe()
     }
 
     /// スクロールアップ
     func scrollUp() {
-        ScrollUseCase.s.scrollUp()
+        ScrollHandlerUseCase.s.scrollUp()
     }
 
     /// 自動スクロール
     func autoScroll() {
-        ScrollUseCase.s.autoScroll()
+        ScrollHandlerUseCase.s.autoScroll()
     }
 
     /// フォーム登録
     func registerForm() {
-        FormUseCase.s.registerForm()
+        FormHandlerUseCase.s.registerForm()
     }
 
     /// お気に入り切り替え
     func updateFavorite() {
-        FavoriteUseCase.s.update()
+        UpdateFavoriteUseCase().exe()
     }
 
     /// 現在のタブを削除
     func close() {
-        TabUseCase.s.close()
+        closeTabUseCase.exe()
     }
 
     /// 現在のタブを削除
     func closeAll() {
-        TabUseCase.s.closeAll()
+        closeTabAllUseCase.exe()
     }
 
     /// 現在のタブをコピー
     func copy() {
-        TabUseCase.s.copy()
+        copyTabUseCase.exe()
     }
 
     /// 検索開始
     func beginSearching() {
-        SearchUseCase.s.beginAtCircleMenu()
+        SearchHandlerUseCase.s.beginAtCircleMenu()
     }
 
     /// グレップ開始
     func beginGreping() {
-        GrepUseCase.s.begin()
+        GrepHandlerUseCase.s.begin()
     }
 
     /// ヒストリーフォワード
     func historyForward() {
-        TabUseCase.s.historyForward()
+        TabHandlerUseCase.s.historyForward()
     }
 
     /// ヒストリーバック
     func historyBack() {
-        TabUseCase.s.historyBack()
+        TabHandlerUseCase.s.historyBack()
     }
 }

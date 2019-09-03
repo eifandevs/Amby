@@ -59,7 +59,6 @@ final class OptionMenuTableViewModel {
             case .help: return AppConst.OPTION_MENU.HELP
             case .cooperation: return AppConst.OPTION_MENU.COORERATION
             case .sync: return AppConst.OPTION_MENU.SYNC
-            case .sync: return AppConst.OPTION_MENU.SYNC
             case .analysisHtml: return AppConst.OPTION_MENU.ANALYTICS
             case .app: return AppConst.OPTION_MENU.APP_INFORMATION
             }
@@ -111,16 +110,16 @@ final class OptionMenuTableViewModel {
 
     /// トレンド表示
     func loadTrend() {
-        TrendUseCase.s.load()
+        TrendHandlerUseCase.s.load()
     }
 
     /// 同期画面表示
     func openSync() {
-        SyncUseCase.s.open()
+        SyncHandlerUseCase.s.open()
     }
 
     /// html表示
     func analysisHtml() {
-        HtmlAnalysisUseCase.s.analytics()
+        HtmlAnalysisHandlerUseCase.s.analytics()
     }
 }

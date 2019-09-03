@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "if [ ! -e ${SRCROOT}/Model/env.plist ]; then&#10;cp -pR ${SRCROOT}/Model/env-dummy.plist ${SRCROOT}/Model/env.plist&#10;fi&#10;&#10;if [ ! -e ${SRCROOT}/Amby/Environment/Amby/env.plist ]; then&#10;cp -pR ${SRCROOT}/Amby/Environment/Amby/env-dummy.plist ${SRCROOT}/Amby/Environment/Amby/env.plist&#10;fi&#10;"
+               scriptText = "if [ ! -e ${SRCROOT}/Amby/R.generated.swift ]; then&#10;$PODS_ROOT/R.swift/rswift generate $SRCROOT&#10;fi&#10;"
                shellToInvoke = "/bin/sh">
                <EnvironmentBuildable>
                   <BuildableReference

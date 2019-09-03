@@ -6,6 +6,8 @@
 //  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
+import Firebase
+import GoogleSignIn
 import Logger
 import Model
 import SVProgressHUD
@@ -23,7 +25,7 @@ let uncaughtExceptionHandler: Void = NSSetUncaughtExceptionHandler { exception i
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
     var baseViewController: BaseViewController?
 
@@ -58,8 +60,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // progress setup
         SVProgressHUD.setForegroundColor(UIColor.ultraViolet)
 
-        // app setup
+        // view setup
         setup()
+
+        // tracking service
+        TrackingService.setup()
+
+        // google sign in
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance()?.delegate = self
 
         return true
     }
@@ -73,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func initialize() {
-        SettingUseCase.s.initialize()
+        GetSettingUseCase().initialize()
 
         if let baseViewController = self.window!.rootViewController as? BaseViewController {
             baseViewController.mRelease()
@@ -110,11 +119,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        HistoryUseCase.s.expireCheck()
-        SearchUseCase.s.expireCheck()
+        ExpireCheckHistoryUseCase().exe()
+        ExpireCheckSearchUseCase().exe()
     }
 
     func applicationWillTerminate(_: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+
+    func sign(_: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            log.error("\(error.localizedDescription)")
+        } else {
+            // Perform any operations on signed in user here.
+            let userId = user.userID // For client-side use only!
+            let idToken = user.authentication.idToken // Safe to send to the server
+            let fullName = user.profile.name
+            let givenName = user.profile.givenName
+            let familyName = user.profile.familyName
+            let email = user.profile.email
+            log.debug("userId: \(userId ?? "") idToken: \(idToken) fullName: \(fullName) givenName: \(givenName) familyName: \(familyName) email: \(email)")
+        }
+    }
+
+    // 追記部分(デリゲートメソッド)エラー来た時
+    func sign(_: GIDSignIn!, didDisconnectWith _: GIDGoogleUser!,
+              withError error: Error!) {
+        log.error(error.localizedDescription)
+    }
+
+    func application(_: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url,
+                                                 sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                                                 annotation: [:])
     }
 }

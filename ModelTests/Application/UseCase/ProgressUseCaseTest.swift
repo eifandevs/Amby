@@ -1,5 +1,5 @@
 //
-//  ProgressUseCaseTest.swift
+//  ProgressHandlerUseCaseTest.swift
 //  ModelTests
 //
 //  Created by iori tenma on 2019/05/01.
@@ -14,10 +14,10 @@ import RxCocoa
 @testable import Model
 @testable import Entity
 
-class ProgressUseCaseTest: XCTestCase {
+class ProgressHandlerUseCaseTest: XCTestCase {
 
-    var progressUseCase: ProgressUseCase {
-        return ProgressUseCase.s
+    var progressUseCase: ProgressHandlerUseCase {
+        return ProgressHandlerUseCase.s
     }
 
     let disposeBag = DisposeBag()
@@ -40,7 +40,7 @@ class ProgressUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        progressUseCase.updateCanGoBack(context: TabUseCase.s.currentContext, canGoBack: false)
+        progressUseCase.updateCanGoBack(context: TabHandlerUseCase.s.currentContext, canGoBack: false)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -58,7 +58,7 @@ class ProgressUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        progressUseCase.updateCanGoForward(context: TabUseCase.s.currentContext, canGoForward: false)
+        progressUseCase.updateCanGoForward(context: TabHandlerUseCase.s.currentContext, canGoForward: false)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }

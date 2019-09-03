@@ -85,7 +85,7 @@ class Util {
 
     /// iPhoneX判定
     static func isiPhoneX() -> Bool {
-        return Util.getDeviceInfo() == "iPhone X"
+        return Util.getDeviceInfo().hasPrefix("iPhone X")
     }
 
     /// OSバージョン取得
@@ -106,9 +106,9 @@ class Util {
             "i386": "Simulator",
             "x86_64": "Simulator",
             /* iPod */
-            "iPod1,1": "iPod Touch 1th", // iPod Touch 1th Generation
-            "iPod2,1": "iPod Touch 2th", // iPod Touch 2th Generation
-            "iPod3,1": "iPod Touch 3th", // iPod Touch 3th Generation
+            "iPod1,1": "iPod Touch 1st", // iPod Touch 1st Generation
+            "iPod2,1": "iPod Touch 2nd", // iPod Touch 2nd Generation
+            "iPod3,1": "iPod Touch 3rd", // iPod Touch 3rd Generation
             "iPod4,1": "iPod Touch 4th", // iPod Touch 4th Generation
             "iPod5,1": "iPod Touch 5th", // iPod Touch 5th Generation
             "iPod7,1": "iPod Touch 6th", // iPod Touch 6th Generation
@@ -141,9 +141,10 @@ class Util {
             "iPhone10,5": "iPhone 8 Plus", // iPhone 8 Plus A1897
             "iPhone10,3": "iPhone X", // iPhone X A1865,A1902
             "iPhone10,6": "iPhone X", // iPhone X A1901
-            "iPhone11,2": "iPhone XS",
-            "iPhone11,4": "iPhone XS Max",
-            "iPhone11,8": "iPhone XR",
+            "iPhone11,8": "iPhone XR", // iPhone XR A1984,A2105,A2106,A2108
+            "iPhone11,2": "iPhone XS", // iPhone XS A2097,A2098
+            "iPhone11,4": "iPhone XS Max", // iPhone XS Max A1921,A2103
+            "iPhone11,6": "iPhone XS Max", // iPhone XS Max A2104
 
             /* iPad */
             "iPad1,1": "iPad 1 ", // iPad 1
@@ -151,7 +152,7 @@ class Util {
             "iPad2,2": "iPad 2 Cell", // iPad 2 GSM
             "iPad2,3": "iPad 2 Cell", // iPad 2 CDMA (Cellular)
             "iPad2,4": "iPad 2 WiFi", // iPad 2 Mid2012
-            "iPad2,5": "iPad Mini WiFi", // iPad Air WiFi
+            "iPad2,5": "iPad Mini WiFi", // iPad Mini WiFi
             "iPad2,6": "iPad Mini Cell", // iPad Mini GSM (Cellular)
             "iPad2,7": "iPad Mini Cell", // iPad Mini Global (Cellular)
             "iPad3,1": "iPad 3 WiFi", // iPad 3 WiFi
@@ -162,6 +163,7 @@ class Util {
             "iPad3,6": "iPad 4 Cell", // iPad 4 Global (Cellular)
             "iPad4,1": "iPad Air WiFi", // iPad Air WiFi
             "iPad4,2": "iPad Air Cell", // iPad Air Cellular
+            "iPad4,3": "iPad Air China", // iPad Air ChinaModel
             "iPad4,4": "iPad Mini 2 WiFi", // iPad mini 2 WiFi
             "iPad4,5": "iPad Mini 2 Cell", // iPad mini 2 Cellular
             "iPad4,6": "iPad Mini 2 China", // iPad mini 2 ChinaModel
@@ -175,8 +177,28 @@ class Util {
             "iPad6,3": "iPad Pro 9.7inch WiFi", // iPad Pro 9.7inch WiFi
             "iPad6,4": "iPad Pro 9.7inch Cell", // iPad Pro 9.7inch Cellular
             "iPad6,7": "iPad Pro 12.9inch WiFi", // iPad Pro 12.9inch WiFi
-            "iPad6,8": "iPad Pro 12.9inch Cell"
-        ] // iPad Pro 12.9inch Cellular
+            "iPad6,8": "iPad Pro 12.9inch Cell", // iPad Pro 12.9inch Cellular
+            "iPad6,11": "iPad 5th", // iPad 5th Generation WiFi
+            "iPad6,12": "iPad 5th", // iPad 5th Generation Cellular
+            "iPad7,1": "iPad Pro 12.9inch 2nd", // iPad Pro 12.9inch 2nd Generation WiFi
+            "iPad7,2": "iPad Pro 12.9inch 2nd", // iPad Pro 12.9inch 2nd Generation Cellular
+            "iPad7,3": "iPad Pro 10.5inch", // iPad Pro 10.5inch A1701 WiFi
+            "iPad7,4": "iPad Pro 10.5inch", // iPad Pro 10.5inch A1709 Cellular
+            "iPad7,5": "iPad 6th", // iPad 6th Generation WiFi
+            "iPad7,6": "iPad 6th", // iPad 6th Generation Cellular
+            "iPad8,1": "iPad Pro 11inch WiFi", // iPad Pro 11inch WiFi
+            "iPad8,2": "iPad Pro 11inch WiFi", // iPad Pro 11inch WiFi
+            "iPad8,3": "iPad Pro 11inch Cell", // iPad Pro 11inch Cellular
+            "iPad8,4": "iPad Pro 11inch Cell", // iPad Pro 11inch Cellular
+            "iPad8,5": "iPad Pro 12.9inch WiFi", // iPad Pro 12.9inch WiFi
+            "iPad8,6": "iPad Pro 12.9inch WiFi", // iPad Pro 12.9inch WiFi
+            "iPad8,7": "iPad Pro 12.9inch Cell", // iPad Pro 12.9inch Cellular
+            "iPad8,8": "iPad Pro 12.9inch Cell", // iPad Pro 12.9inch Cellular
+            "iPad11,1": "iPad Mini 5th WiFi", // iPad mini 5th WiFi
+            "iPad11,2": "iPad Mini 5th Cell", // iPad mini 5th Cellular
+            "iPad11,3": "iPad Air 3rd WiFi", // iPad Air 3rd generation WiFi
+            "iPad11,4": "iPad Air 3rd Cell" // iPad Air 3rd generation Cellular
+        ]
 
         if let deviceName = deviceCodeDic[code] {
             return deviceName
