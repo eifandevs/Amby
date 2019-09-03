@@ -13,7 +13,7 @@ import GoogleSignIn
 class GoogleSignInService {
     class func clientID() -> String {
         guard let fileopts = FirebaseOptions(contentsOfFile: ResourceUtil().googleServiceInfo)
-        else { assert(false, "Couldn't load config file") }
+        else { return "" }
         return fileopts.clientID!
     }
 }
