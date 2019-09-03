@@ -9,18 +9,18 @@
 import Foundation
 
 public struct GetMemoResponse: Codable {
-    
+
     public struct Memo: Codable {
         public var id: String
         public var text: String
         public var isLocked: Bool
     }
-    
+
     public init(code: String, data: [Memo]) {
         self.code = code
         self.data = data
     }
-    
+
     public let code: String
     public let data: [Memo]
 }

@@ -13,6 +13,10 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+MY_APP_ID = "com.eifandevs.amby"
+MY_PROFILE = "match AdHoc com.eifandevs.amby"
+MY_TEAM = "TBQA5RANYY"
+
 default_platform(:ios)
 
 platform :ios do
@@ -34,5 +38,36 @@ platform :ios do
       output_directory: "./slather/reports",
       html: true
     )
+  end
+
+  lane :build_local do
+    match(
+    	type: "adhoc",
+      force_for_new_devices: true,
+      app_identifier: MY_APP_ID,
+      readonly: true
+    )
+
+    settings_to_override = {
+      :BUNDLE_IDENTIFIER => MY_APP_ID,
+      :PROVISIONING_PROFILE_SPECIFIER => MY_PROFILE,
+      :DEVELOPMENT_TEAM => MY_TEAM
+    }
+
+    gym(
+      xcargs: settings_to_override,
+      workspace: "Amby.xcworkspace",
+      clean: true,
+      configuration: "Release",
+      export_method: "ad-hoc",
+      scheme: "Amby[Local]",
+      export_options: {
+        provisioningProfiles: { 
+            MY_APP_ID => MY_PROFILE
+        }
+      },
+      xcargs: "PROVISIONING_PROFILE_SPECIFIER='#{MY_PROFILE}'"
+  )
+
   end
 end
