@@ -31,7 +31,7 @@ if [ ! -e ${SRCROOT}/Amby/GoogleService-Info.plist ]; then
 fi
 
 # carthage
-carthage bootstrap  --no-use-binaries --platform ios
+carthage bootstrap --no-use-binaries --platform iOS --cache-builds
 
 # report
 pushd Report/client

@@ -1,0 +1,39 @@
+references:
+  defaults: &defaults
+    macos:
+      xcode: "10.0.0"
+    working_directory: ~/project
+    shell: /bin/bash --login -eo pipefail
+    environment:
+      TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+      LANG: "en_US.UTF-8"
+      LC_ALL: "en_US.UTF-8"
+
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    branches:
+      only:
+        - develop
+    steps:
+      - checkout:
+          path: ~/project
+      - restore_cache:
+          key: dev-ca-{{ checksum "Cartfile.resolved" }}
+      - run:
+          name: Carthage
+          command: carthage bootstrap --no-use-binaries --platform iOS --cache-builds
+      - save_cache:
+          key: dev-ca-{{ checksum "Cartfile.resolved" }}
+          paths:
+            - Carthage
+      - run:
+          name: Update bundler
+          command: sudo gem install bundler
+      - run:
+          name: install gems
+          command: bundler install --path vendor/bundle
+      - run:
+          name: Build
+          command: bundle exec fastlane ios dev
