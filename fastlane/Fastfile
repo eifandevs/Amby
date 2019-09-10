@@ -12,6 +12,8 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
+#
+# branch is develop
 
 AMBY_APP_ID = ENV['AMBY_APP_ID']
 AMBY_PROFILE = ENV['AMBY_PROFILE']
