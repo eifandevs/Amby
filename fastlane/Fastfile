@@ -9,6 +9,8 @@
 #
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
+#
+# branch is feature/ci
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
