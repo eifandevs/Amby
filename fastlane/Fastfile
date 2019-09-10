@@ -13,61 +13,72 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-MY_APP_ID = "com.eifandevs.amby"
-MY_PROFILE = "match AdHoc com.eifandevs.amby"
-MY_TEAM = "TBQA5RANYY"
+AMBY_APP_ID = ENV['AMBY_APP_ID']
+AMBY_PROFILE = ENV['AMBY_PROFILE']
+AMBY_TEAM = ENV['AMBY_TEAM']
+AMBY_SLACK_URL = ENV['AMBY_SLACK_URL']
 
 default_platform(:ios)
 
 platform :ios do
-  desc "run test"
-  lane :tests do
-    run_tests(
-      xcargs: "-UseNewBuildSystem=NO",
-      workspace: "Amby.xcworkspace",
-      devices: ["iPhone 6s"],
-      code_coverage: true,
-      scheme: "Amby[Local]",
-      clean: false
-    )
-    slather(
-      cobertura_xml: true,
-      proj: "Amby.xcodeproj",
-      workspace: "Amby.xcworkspace",
-      scheme: "Amby[Local]",
-      output_directory: "./slather/reports",
-      html: true
-    )
+  before_all do
+    ENV["SLACK_URL"] = AMBY_SLACK_URL
+    ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
+    clear_derived_data(derived_data_path: "../build_dev")
+
+    if is_ci?
+        setup_circle_ci
+    end
   end
 
-  lane :build_local do
+  lane :dev do
+
     match(
     	type: "adhoc",
       force_for_new_devices: true,
-      app_identifier: MY_APP_ID,
+      app_identifier: AMBY_APP_ID,
       readonly: true
     )
 
     settings_to_override = {
-      :BUNDLE_IDENTIFIER => MY_APP_ID,
-      :PROVISIONING_PROFILE_SPECIFIER => MY_PROFILE,
-      :DEVELOPMENT_TEAM => MY_TEAM
+      :BUNDLE_IDENTIFIER => AMBY_APP_ID,
+      :PROVISIONING_PROFILE_SPECIFIER => AMBY_PROFILE,
+      :DEVELOPMENT_TEAM => AMBY_TEAM
     }
 
     gym(
+      derived_data_path: "../build_dev",
+      archive_path: "../build_dev/Amby-dev.xcarchive",
       xcargs: settings_to_override,
-      workspace: "Amby.xcworkspace",
       clean: true,
       configuration: "Release",
       export_method: "ad-hoc",
       scheme: "Amby[Local]",
+      output_directory: "ipa",
       export_options: {
+        compileBitcode: false,
         provisioningProfiles: { 
-            MY_APP_ID => MY_PROFILE
+            AMBY_APP_ID => AMBY_PROFILE
         }
       },
-      xcargs: "PROVISIONING_PROFILE_SPECIFIER='#{MY_PROFILE}'"
-  )
-
+      xcargs: "PROVISIONING_PROFILE_SPECIFIER='#{AMBY_PROFILE}'"
+    )
   end
+
+  after_all do |lane|
+    commit = last_git_commit
+    slack(
+      message: "Successfully deployed new app update",
+      channel: "#jenkins"
+    )
+  end
+
+  error do |lane, exception|
+    slack(
+      message: exception.message,
+      channel: "#jenkins",
+      success: false
+    )
+  end
+
 end
