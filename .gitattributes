@@ -1,0 +1,3 @@
+/.circleci/config.yml merge=ours
+/fastlane/Fastfile merge=ours
+/fastlane/Matchfile merge=ours
