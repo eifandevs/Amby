@@ -63,12 +63,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // view setup
         setup()
 
-        // tracking service
-        TrackingService.setup()
+        #if RELEASE
+            // tracking service
+            TrackingService.setup()
 
-        // google sign in
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance()?.delegate = self
+            // google sign in
+            GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+            GIDSignIn.sharedInstance()?.delegate = self
+        #endif
 
         return true
     }
