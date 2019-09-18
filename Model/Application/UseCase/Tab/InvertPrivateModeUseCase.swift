@@ -25,7 +25,7 @@ public final class InvertPrivateModeUseCase {
 
     /// change private mode
     public func exe(groupContext: String) {
-        if PasscodeHandlerUseCase.s.authentificationChallenge() {
+        if ChallengeLocalAuthenticationUseCase().exe() {
             tabDataModel.invertPrivateMode(groupContext: groupContext)
         }
     }

@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 /// 設定ユースケース
-public final class GetPassCodeSettingUseCase {
+public final class GetLocalAuthenticationSettingUseCase {
 
     /// パスコード
     public var rootPasscode: String {

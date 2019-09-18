@@ -1,5 +1,5 @@
 //
-//  PasscodeHandlerUseCase.swift
+//  LocalAuthenticationHandlerUseCase.swift
 //  Model
 //
 //  Created by tenma on 2018/10/21.
@@ -10,16 +10,16 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-public enum PasscodeHandlerUseCaseAction {
+public enum LocalAuthenticationHandlerUseCaseAction {
     case present
     case confirm
 }
 
-enum PasscodeHandlerUseCaseError {
+enum LocalAuthenticationHandlerUseCaseError {
     case notRegistered
 }
 
-extension PasscodeHandlerUseCaseError: ModelError {
+extension LocalAuthenticationHandlerUseCaseError: ModelError {
     var message: String {
         switch self {
         case .notRegistered:
@@ -29,16 +29,16 @@ extension PasscodeHandlerUseCaseError: ModelError {
 }
 
 /// パスコードユースケース
-public final class PasscodeHandlerUseCase {
-    public static let s = PasscodeHandlerUseCase()
+public final class LocalAuthenticationHandlerUseCase {
+    public static let s = LocalAuthenticationHandlerUseCase()
 
     /// アクション通知用RX
-    public let rx_action = PublishSubject<PasscodeHandlerUseCaseAction>()
+    public let rx_action = PublishSubject<LocalAuthenticationHandlerUseCaseAction>()
     /// エラー通知用RX
-    let rx_error = PublishSubject<PasscodeHandlerUseCaseError>()
+    let rx_error = PublishSubject<LocalAuthenticationHandlerUseCaseError>()
 
     /// passcode setting usecase
-    let usecase = GetPassCodeSettingUseCase()
+    let usecase = GetLocalAuthenticationSettingUseCase()
 
     private init() {
         setupProtocolImpl()
@@ -57,17 +57,8 @@ public final class PasscodeHandlerUseCase {
         rx_action.onNext(.confirm)
     }
 
-    /// 表示可能判定
-    public func authentificationChallenge() -> Bool {
-        if usecase.isRegisterdPasscode {
-            if usecase.isInputPasscode {
-                return true
-            } else {
-                confirm()
-            }
-        } else {
-            rx_error.onNext(.notRegistered)
-        }
-        return false
+    /// エラー通知
+    func noticeNotRegistered() {
+        rx_error.onNext(.notRegistered)
     }
 }

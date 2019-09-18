@@ -77,7 +77,7 @@ final class OptionMenuMemoTableViewModel {
     func openMemo(memo: Memo? = nil) {
         if let memo = memo {
             if memo.isLocked {
-                if PasscodeHandlerUseCase.s.authentificationChallenge() {
+                if ChallengeLocalAuthenticationUseCase().exe() {
                     MemoHandlerUseCase.s.open(memo: memo)
                 }
             } else {
