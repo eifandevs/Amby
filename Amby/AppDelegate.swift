@@ -48,6 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 log.info("UT BUILD")
             #endif
 
+            #if STAGING
+                log.info("STAGING BUILD")
+            #endif
+
             #if LOCAL
                 log.info("LOCAL BUILD")
             #endif

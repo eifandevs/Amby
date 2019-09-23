@@ -89,6 +89,9 @@ fi
 if [[ "$CONFIGURATION" == "Debug-Local" ]]; then
   install_resource "${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle"
 fi
+if [[ "$CONFIGURATION" == "Debug-Staging" ]]; then
+  install_resource "${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle"
+fi
 if [[ "$CONFIGURATION" == "Debug-UT" ]]; then
   install_resource "${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle"
 fi
