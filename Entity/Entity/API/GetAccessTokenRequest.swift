@@ -11,13 +11,11 @@ import Foundation
 /// トークン取得リクエスト
 public struct GetAccessTokenRequest {
 
-    public init(auth_type: Int, email: String?, refresh_token: String?) {
+    public init(auth_type: Int, email: String?) {
         self.auth_type = auth_type
         self.email = email
-        self.refresh_token = refresh_token
     }
 
     public let auth_type: Int // 1: 共通, 2: Google
     public let email: String?
-    public let refresh_token: String?
 }

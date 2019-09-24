@@ -28,7 +28,7 @@ public final class LoginUseCase {
     }
 
     public func exe() {
-        let request = GetAccessTokenRequest(auth_type: 1, email: "", refresh_token: "")
+        let request = GetAccessTokenRequest(auth_type: 1, email: "")
         accessTokenDataModel.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
