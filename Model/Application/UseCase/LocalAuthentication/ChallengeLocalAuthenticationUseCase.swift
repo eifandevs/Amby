@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import LocalAuthentication
+import RxSwift
 
 public final class ChallengeLocalAuthenticationUseCase {
 
@@ -16,17 +18,23 @@ public final class ChallengeLocalAuthenticationUseCase {
 
     public init() {}
 
-    /// 表示可能判定
-    public func exe() -> Bool {
-        if usecase.isRegisterdPasscode {
-            if usecase.isInputPasscode {
-                return true
-            } else {
-                localAuthUseCase.confirm()
+    public func exe() -> Observable<Bool> {
+        var error: NSError?
+        if LocalAuthenticationService.canUseFaceID(error: &error) == false && LocalAuthenticationService.canUseTouchID(error: &error) == false {
+            localAuthUseCase.noticeCannotUse()
+            return Observable.create { observable in
+                observable.onNext(false)
+                return Disposables.create()
             }
-        } else {
-            localAuthUseCase.noticeNotRegistered()
         }
-        return false
+
+        return LocalAuthenticationService.challenge().flatMap { [weak self] success -> Observable<Bool> in
+            if success {
+                return Observable.just(true)
+            } else {
+                self?.localAuthUseCase.noticeCannotUse()
+                return Observable.just(false)
+            }
+        }
     }
 }

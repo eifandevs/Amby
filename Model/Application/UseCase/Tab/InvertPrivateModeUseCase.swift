@@ -14,6 +14,7 @@ import RxSwift
 public final class InvertPrivateModeUseCase {
 
     private var tabDataModel: TabDataModelProtocol!
+    let disposeBag = DisposeBag()
 
     public init() {
         setupProtocolImpl()
@@ -25,8 +26,13 @@ public final class InvertPrivateModeUseCase {
 
     /// change private mode
     public func exe(groupContext: String) {
-        if ChallengeLocalAuthenticationUseCase().exe() {
-            tabDataModel.invertPrivateMode(groupContext: groupContext)
-        }
+        ChallengeLocalAuthenticationUseCase().exe()
+            .subscribe { [weak self] success in
+                guard let `self` = self, let success = success.element else { return }
+                if success {
+                    self.tabDataModel.invertPrivateMode(groupContext: groupContext)
+                }
+
+            }.disposed(by: disposeBag)
     }
 }

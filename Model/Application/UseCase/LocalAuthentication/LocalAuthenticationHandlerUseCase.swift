@@ -16,14 +16,14 @@ public enum LocalAuthenticationHandlerUseCaseAction {
 }
 
 enum LocalAuthenticationHandlerUseCaseError {
-    case notRegistered
+    case cannotUse
 }
 
 extension LocalAuthenticationHandlerUseCaseError: ModelError {
     var message: String {
         switch self {
-        case .notRegistered:
-            return MessageConst.NOTIFICATION.PASSCODE_NOT_REGISTERED
+        case .cannotUse:
+            return MessageConst.NOTIFICATION.CANNOT_USE_BIOMETRICS_AUTH
         }
     }
 }
@@ -58,7 +58,7 @@ public final class LocalAuthenticationHandlerUseCase {
     }
 
     /// エラー通知
-    func noticeNotRegistered() {
-        rx_error.onNext(.notRegistered)
+    func noticeCannotUse() {
+        rx_error.onNext(.cannotUse)
     }
 }
