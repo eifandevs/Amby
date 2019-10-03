@@ -14,27 +14,24 @@ public final class ChallengeLocalAuthenticationUseCase {
 
     /// passcode setting usecase
     let usecase = GetLocalAuthenticationSettingUseCase()
-    let localAuthUseCase = LocalAuthenticationHandlerUseCase.s
 
     public init() {}
 
-    public func exe() -> Observable<Bool> {
+    public func exe() -> Observable<RepositoryResult<LABiometryType>> {
         var error: NSError?
         if LocalAuthenticationService.canUseFaceID(error: &error) == false && LocalAuthenticationService.canUseTouchID(error: &error) == false {
-            localAuthUseCase.noticeCannotUse()
+            LocalAuthenticationHandlerUseCase.s.noticeCannotUse()
             return Observable.create { observable in
-                observable.onNext(false)
+                observable.onNext(.failure(NSError.empty))
                 return Disposables.create()
             }
         }
 
-        return LocalAuthenticationService.challenge().flatMap { [weak self] success -> Observable<Bool> in
-            if success {
-                return Observable.just(true)
-            } else {
-                self?.localAuthUseCase.noticeCannotUse()
-                return Observable.just(false)
+        return LocalAuthenticationService.challenge().flatMap { result -> Observable<RepositoryResult<LABiometryType>> in
+            if case .failure = result {
+                LocalAuthenticationHandlerUseCase.s.noticeCannotUse()
             }
+            return Observable.just(result)
         }
     }
 }

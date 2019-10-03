@@ -78,9 +78,9 @@ final class OptionMenuMemoTableViewModel {
         if let memo = memo {
             if memo.isLocked {
                 ChallengeLocalAuthenticationUseCase().exe()
-                    .subscribe { success in
-                        guard let success = success.element else { return }
-                        if success {
+                    .subscribe { result in
+                        guard let result = result.element else { return }
+                        if case .success = result {
                             MemoHandlerUseCase.s.open(memo: memo)
                         }
 

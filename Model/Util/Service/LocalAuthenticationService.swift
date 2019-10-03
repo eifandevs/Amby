@@ -9,10 +9,11 @@
 import Foundation
 import LocalAuthentication
 import RxSwift
+import CommonUtil
 
 class LocalAuthenticationService {
 
-    class func challenge() -> Observable<Bool> {
+    class func challenge() -> Observable<RepositoryResult<LABiometryType>> {
         let context = LAContext()
         var error: NSError?
         let description: String = "認証します"
@@ -22,20 +23,13 @@ class LocalAuthenticationService {
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: description, reply: {success, _ in
                     if (success) {
                         // 認証成功
-                        switch context.biometryType {
-                        case .faceID:
-                            observable.onNext(true)
-                        case .touchID:
-                            observable.onNext(true)
-                        case .none:
-                            observable.onNext(false)
-                        }
+                        observable.onNext(.success(context.biometryType))
                     } else {
-                        observable.onNext(false)
+                        observable.onNext(.failure(NSError.empty))
                     }
                 })
             } else {
-                observable.onNext(false)
+                observable.onNext(.failure(NSError.empty))
             }
             return Disposables.create()
         }

@@ -27,9 +27,9 @@ public final class InvertPrivateModeUseCase {
     /// change private mode
     public func exe(groupContext: String) {
         ChallengeLocalAuthenticationUseCase().exe()
-            .subscribe { [weak self] success in
-                guard let `self` = self, let success = success.element else { return }
-                if success {
+            .subscribe { [weak self] result in
+                guard let `self` = self, let result = result.element else { return }
+                if case .success = result {
                     self.tabDataModel.invertPrivateMode(groupContext: groupContext)
                 }
 

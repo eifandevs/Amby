@@ -18,9 +18,9 @@ final class OptionMenuFormTableViewCellViewModel {
     /// 閲覧リクエスト
     func readForm(id: String) {
         ChallengeLocalAuthenticationUseCase().exe()
-            .subscribe { [weak self] success in
-                guard let `self` = self, let success = success.element else { return }
-                if success {
+            .subscribe { [weak self] result in
+                guard let result = result.element else { return }
+                if case .success = result {
                     FormHandlerUseCase.s.read(id: id)
                 }
 

@@ -91,6 +91,7 @@
 		A11CD338214F05B000D9333F /* OpenSourceViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD337214F05B000D9333F /* OpenSourceViewControllerViewModel.swift */; };
 		A11CD33B214F8F8500D9333F /* OpenSourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD339214F8F8500D9333F /* OpenSourceTableViewCell.swift */; };
 		A11CD33C214F8F8500D9333F /* OpenSourceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11CD33A214F8F8500D9333F /* OpenSourceTableViewCell.xib */; };
+		A11D130D234588DD00AE595A /* NSError+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D130C234588DD00AE595A /* NSError+Extend.swift */; };
 		A123451B2135ADB400C791B8 /* ResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123451A2135ADB400C791B8 /* ResourceUtil.swift */; };
 		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
 		A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */; };
@@ -651,6 +652,7 @@
 		A11CD337214F05B000D9333F /* OpenSourceViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A11CD339214F8F8500D9333F /* OpenSourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceTableViewCell.swift; sourceTree = "<group>"; };
 		A11CD33A214F8F8500D9333F /* OpenSourceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenSourceTableViewCell.xib; sourceTree = "<group>"; };
+		A11D130C234588DD00AE595A /* NSError+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSError+Extend.swift"; sourceTree = "<group>"; };
 		A123451A2135ADB400C791B8 /* ResourceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceUtil.swift; sourceTree = "<group>"; };
 		A12A9C9620CE955200146010 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
@@ -2379,6 +2381,7 @@
 				A1C0E02A220F698A00E7A7B6 /* UIView+Extend.swift */,
 				A17241D32246619B00472477 /* URL+Extend.swift */,
 				A17AC349225F61CC00E4262E /* JSON+Extend.swift */,
+				A11D130C234588DD00AE595A /* NSError+Extend.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -3145,25 +3148,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModelTests/Pods-ModelTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9D4978C62341D3DC0057F7AF /* Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			name = Crashlytics;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
-		};
 		A101649820C5638E007A3CC7 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3475,6 +3459,7 @@
 				A17241D42246619C00472477 /* URL+Extend.swift in Sources */,
 				A1C0E03D220F698B00E7A7B6 /* Data+Extend.swift in Sources */,
 				A1C0E01F220F690800E7A7B6 /* CommonUtil.swift in Sources */,
+				A11D130D234588DD00AE595A /* NSError+Extend.swift in Sources */,
 				A1C0E044220F698B00E7A7B6 /* String+Extend.swift in Sources */,
 				A1C0E035220F698B00E7A7B6 /* Array+Extend.swift in Sources */,
 			);
