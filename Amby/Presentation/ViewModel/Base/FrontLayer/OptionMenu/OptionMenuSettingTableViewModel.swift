@@ -98,7 +98,7 @@ final class OptionMenuSettingTableViewModel {
 
     /// パスコード設定
     func openPasscodeSetting() {
-        PasscodeHandlerUseCase.s.open()
+        LocalAuthenticationHandlerUseCase.s.open()
     }
 
     /// メニュ-順序

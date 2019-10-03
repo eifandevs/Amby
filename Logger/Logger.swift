@@ -35,6 +35,10 @@ open class Logger: SwiftyBeaver {
                 log.info("UT BUILD")
             #endif
 
+            #if STAGING
+                log.info("STAGING BUILD")
+            #endif
+
             #if LOCAL
                 log.info("LOCAL BUILD")
             #endif

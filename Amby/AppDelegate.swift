@@ -48,6 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 log.info("UT BUILD")
             #endif
 
+            #if STAGING
+                log.info("STAGING BUILD")
+            #endif
+
             #if LOCAL
                 log.info("LOCAL BUILD")
             #endif
@@ -63,12 +67,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // view setup
         setup()
 
-        // tracking service
-        TrackingService.setup()
+        #if RELEASE
+            // tracking service
+            TrackingService.setup()
 
-        // google sign in
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance()?.delegate = self
+            // google sign in
+            GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+            GIDSignIn.sharedInstance()?.delegate = self
+        #endif
 
         return true
     }

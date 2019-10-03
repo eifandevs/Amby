@@ -30,7 +30,7 @@ final class PasscodeViewControllerViewModel {
     var title = Variable(MessageConst.PASSCODE.TITLE_REGISTER)
 
     /// usecase
-    let usecase = GetPassCodeSettingUseCase()
+    let usecase = GetLocalAuthenticationSettingUseCase()
 
     /// 新規作成 or 確認
     var isConfirm = false {

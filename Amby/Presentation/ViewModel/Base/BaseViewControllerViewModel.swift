@@ -72,7 +72,7 @@ final class BaseViewControllerViewModel {
             .disposed(by: disposeBag)
 
         // パスコード監視
-        PasscodeHandlerUseCase.s.rx_action
+        LocalAuthenticationHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element else { return }
 

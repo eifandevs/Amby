@@ -22,8 +22,8 @@ jobs:
       - restore_cache:
           key: dev-ca-{{ checksum "Cartfile.resolved" }}
       - run:
-          name: Carthage
-          command: carthage bootstrap --no-use-binaries --platform iOS --cache-builds
+          name: bootstrap
+          command: ./bootstrap.sh
       - save_cache:
           key: dev-ca-{{ checksum "Cartfile.resolved" }}
           paths:

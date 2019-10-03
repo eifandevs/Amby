@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum RepositoryResult<Value> {
+public enum RepositoryResult<Value> {
     case success(Value)
     case failure(Error)
 

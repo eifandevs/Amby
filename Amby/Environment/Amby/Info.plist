@@ -40,6 +40,8 @@
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
 	</dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>パスワード解除にFace IDを使用します</string>
 	<key>NSPrincipalClass</key>
 	<string>EGApplication</string>
 	<key>UILaunchStoryboardName</key>

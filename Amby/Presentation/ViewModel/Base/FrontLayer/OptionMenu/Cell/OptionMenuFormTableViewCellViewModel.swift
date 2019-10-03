@@ -9,14 +9,21 @@
 import Entity
 import Foundation
 import Model
+import RxSwift
 
 final class OptionMenuFormTableViewCellViewModel {
     var form: Form!
+    let disposeBag = DisposeBag()
 
     /// 閲覧リクエスト
     func readForm(id: String) {
-        if PasscodeHandlerUseCase.s.authentificationChallenge() {
-            FormHandlerUseCase.s.read(id: id)
-        }
+        ChallengeLocalAuthenticationUseCase().exe()
+            .subscribe { [weak self] result in
+                guard let result = result.element else { return }
+                if case .success = result {
+                    FormHandlerUseCase.s.read(id: id)
+                }
+
+            }.disposed(by: disposeBag)
     }
 }

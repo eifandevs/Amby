@@ -5,6 +5,8 @@ target 'Amby' do
   use_frameworks!
 #    inhibit_all_warnings!
 
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.13.4'
   pod 'SwiftFormat/CLI'
   pod 'SwiftLint', '~> 0.25'
   pod 'VerticalAlignmentLabel', '~> 0.1'

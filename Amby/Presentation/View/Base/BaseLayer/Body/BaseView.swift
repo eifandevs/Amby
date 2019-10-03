@@ -990,35 +990,88 @@ extension BaseView: WKNavigationDelegate, WKUIDelegate {
 
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         guard let egWv: EGWebView = webView as? EGWebView else { return }
-
+        log.debug("webView:didReceive challenge: completionHandler called.")
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-            // SSL認証
-            let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
-            completionHandler(URLSession.AuthChallengeDisposition.useCredential, credential)
-        } else if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodHTTPBasic {
-            // Basic認証
-            let alertController = UIAlertController(title: "Authentication Required", message: webView.url!.host, preferredStyle: .alert)
-            weak var usernameTextField: UITextField!
-            alertController.addTextField { textField in
-                textField.placeholder = "Username"
-                usernameTextField = textField
+            guard let serverTrust = challenge.protectionSpace.serverTrust else {
+                completionHandler(.rejectProtectionSpace, nil)
+                return
             }
-            weak var passwordTextField: UITextField!
-            alertController.addTextField { textField in
-                textField.placeholder = "Password"
+
+            var trustResult = SecTrustResultType.invalid
+            guard SecTrustEvaluate(serverTrust, &trustResult) == noErr else {
+                completionHandler(.rejectProtectionSpace, nil)
+                return
+            }
+            switch trustResult {
+            case .recoverableTrustFailure:
+                log.error("Trust failed recoverably")
+                // TODO: 証明書エラー時の再接続処理
+                return
+            case .fatalTrustFailure:
+                completionHandler(.rejectProtectionSpace, nil)
+                return
+            case .invalid:
+                completionHandler(.rejectProtectionSpace, nil)
+                return
+            case .proceed:
+                break
+            case .deny:
+                completionHandler(.rejectProtectionSpace, nil)
+                return
+            case .unspecified:
+                break
+            default:
+                break
+            }
+
+        } else if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodHTTPBasic
+            || challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodHTTPDigest
+            || challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodDefault
+            || challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodNegotiate
+            || challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodNTLM {
+            // Basic認証等の対応
+            let alert = UIAlertController(
+                title: "認証が必要です",
+                message: "ユーザー名とパスワードを入力してください",
+                preferredStyle: .alert
+            )
+            alert.addTextField(configurationHandler: { (textField: UITextField!) -> Void in
+                textField.placeholder = "user name"
+                textField.tag = 1
+            })
+            alert.addTextField(configurationHandler: { (textField: UITextField!) -> Void in
+                textField.placeholder = "password"
                 textField.isSecureTextEntry = true
-                passwordTextField = textField
-            }
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-                completionHandler(.cancelAuthenticationChallenge, nil)
-                egWv.loadHtml(code: .unauthorized)
-            }))
-            alertController.addAction(UIAlertAction(title: "Log In", style: .default, handler: { _ in
-                let credential = URLCredential(user: usernameTextField.text!, password: passwordTextField.text!, persistence: URLCredential.Persistence.forSession)
+                textField.tag = 2
+            })
+
+            let okAction = UIAlertAction(title: "ログイン", style: .default, handler: { _ in
+                var user = ""
+                var password = ""
+
+                if let textFields = alert.textFields {
+                    for textField in textFields {
+                        if textField.tag == 1 {
+                            user = textField.text ?? ""
+                        } else if textField.tag == 2 {
+                            password = textField.text ?? ""
+                        }
+                    }
+                }
+
+                let credential = URLCredential(user: user, password: password, persistence: URLCredential.Persistence.forSession)
                 completionHandler(.useCredential, credential)
-            }))
-            Util.foregroundViewController().present(alertController, animated: true, completion: nil)
+            })
+
+            let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: { _ in
+                completionHandler(.cancelAuthenticationChallenge, nil)
+            })
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            Util.foregroundViewController().present(alert, animated: true, completion: nil)
+            return
         }
+        completionHandler(.performDefaultHandling, nil)
     }
 
     func webView(_: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

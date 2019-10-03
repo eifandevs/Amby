@@ -14,6 +14,7 @@ import RxSwift
 public final class InvertLockMemoUseCase {
 
     private var memoDataModel: MemoDataModelProtocol!
+    let disposeBag = DisposeBag()
 
     public init() {
         setupProtocolImpl()
@@ -24,8 +25,11 @@ public final class InvertLockMemoUseCase {
     }
 
     public func exe(memo: Memo) {
-        if PasscodeHandlerUseCase.s.authentificationChallenge() {
-            memoDataModel.invertLock(memo: memo)
-        }
+        ChallengeLocalAuthenticationUseCase().exe()
+            .subscribe { [weak self] _ in
+                guard let `self` = self else { return }
+                self.memoDataModel.invertLock(memo: memo)
+            }
+            .disposed(by: disposeBag)
     }
 }
