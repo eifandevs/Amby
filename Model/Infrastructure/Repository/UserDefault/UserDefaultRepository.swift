@@ -7,34 +7,43 @@
 //
 
 import Foundation
-import SwiftyUserDefaults
 
-extension DefaultsKeys {
-    static let rootPasscode = DefaultsKey<Data>(ModelConst.KEY.ROOT_PASSCODE, defaultValue: ModelConst.UD.ROOT_PASSCODE)
-    static let lastReportDate = DefaultsKey<Date>(ModelConst.KEY.LAST_REPORT_DATE, defaultValue: ModelConst.UD.LAST_REPORT_DATE)
-    static let autoScrollInterval = DefaultsKey<Double>(ModelConst.KEY.AUTO_SCROLL_INTERVAL, defaultValue: ModelConst.UD.AUTO_SCROLL_INTERVAL)
-    static let menuOrder = DefaultsKey<[UserOperation]>(ModelConst.KEY.MENU_ORDER, defaultValue: ModelConst.UD.MENU_ORDER)
-    static let commonhistorySaveCount = DefaultsKey<Int>(ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.COMMON_HISTORY_SAVE_COUNT)
-    static let searchHistorySaveCount = DefaultsKey<Int>(ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.SEARCH_HISTORY_SAVE_COUNT)
-    static let tabSaveCount = DefaultsKey<Int>(ModelConst.KEY.TAB_SAVE_COUNT, defaultValue: ModelConst.UD.TAB_SAVE_COUNT)
-    static let newWindowConfirm = DefaultsKey<Bool>(ModelConst.KEY.NEW_WINDOW_CONFIRM, defaultValue: ModelConst.UD.NEW_WINDOW_CONFIRM)
+extension DefaultKey {
+    static var rootPasscode: DefaultKey<Data> { return DefaultKey<Data>(name: ModelConst.KEY.ROOT_PASSCODE, defaultValue: ModelConst.UD.ROOT_PASSCODE) }
+    static var lastReportDate: DefaultKey<Date> { return DefaultKey<Date>(name: ModelConst.KEY.LAST_REPORT_DATE, defaultValue: ModelConst.UD.LAST_REPORT_DATE) }
+    static var autoScrollInterval: DefaultKey<Double> { return DefaultKey<Double>(name: ModelConst.KEY.AUTO_SCROLL_INTERVAL, defaultValue: ModelConst.UD.AUTO_SCROLL_INTERVAL) }
+    static var menuOrder: DefaultKey<[Int]> { return DefaultKey<[Int]>(name: ModelConst.KEY.MENU_ORDER, defaultValue: ModelConst.UD.MENU_ORDER) }
+    static var commonhistorySaveCount: DefaultKey<Int> { return DefaultKey<Int>(name: ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.COMMON_HISTORY_SAVE_COUNT) }
+    static var searchHistorySaveCount: DefaultKey<Int> { return DefaultKey<Int>(name: ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.SEARCH_HISTORY_SAVE_COUNT) }
+    static var tabSaveCount: DefaultKey<Int> { return DefaultKey<Int>(name: ModelConst.KEY.TAB_SAVE_COUNT, defaultValue: ModelConst.UD.TAB_SAVE_COUNT) }
+    static var newWindowConfirm: DefaultKey<Bool> { return DefaultKey<Bool>(name: ModelConst.KEY.NEW_WINDOW_CONFIRM, defaultValue: ModelConst.UD.NEW_WINDOW_CONFIRM) }
 }
 
 class UserDefaultRepository {
     init() {}
 
-    func get<T>(key: DefaultsKey<T>) -> T {
-        return Defaults[key]
+    func get<T>(key: DefaultKey<T>) -> T {
+        return (UserDefaults.standard.value(forKey: key.name) as? T) ?? key.defaultValue
     }
 
-    func set<T>(key: DefaultsKey<T>, value: T) {
-        Defaults[key] = value
-        Defaults.synchronize()
+    func set<T>(key: DefaultKey<T>, value: T?) {
+        if let value = value {
+            UserDefaults.standard.setValue(value, forKey: key.name)
+            UserDefaults.standard.synchronize()
+        } else {
+            UserDefaults.standard.removeObject(forKey: key.name)
+        }
+    }
+
+    func remove<T>(key: DefaultKey<T>) {
+        UserDefaults.standard.removeObject(forKey: key.name)
+        UserDefaults.standard.synchronize()
     }
 
     /// ユーザーデフォルト初期化
     func initialize() {
-        Defaults.removeAll()
-        Defaults.synchronize()
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
     }
 }

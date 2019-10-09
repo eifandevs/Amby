@@ -63,10 +63,10 @@ final class SettingDataModel: SettingDataModelProtocol {
     /// メニュー順序
     var menuOrder: [UserOperation] {
         get {
-            return repository.get(key: .menuOrder)
+            return repository.get(key: .menuOrder).map { UserOperation(rawValue: $0)! }
         }
         set(value) {
-            repository.set(key: .menuOrder, value: value)
+            repository.set(key: .menuOrder, value: value.map { $0.rawValue })
         }
     }
 

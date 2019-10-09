@@ -207,29 +207,25 @@ name: VerticalAlignmentLabel, nameSpecified:
 body: Copyright (c) 2017 d…
 version: 0.1.0
 
-name: CryptoSwift, nameSpecified: , owner: krzyzanowskim, version: 0.14.0
+name: CryptoSwift, nameSpecified: , owner: krzyzanowskim, version: 1.0.0
 
-name: Hydra, nameSpecified: , owner: malcommac, version: 1.2.1
+name: Hydra, nameSpecified: , owner: malcommac, version: 2.0.2
 
-name: KeychainAccess, nameSpecified: , owner: kishikawakatsumi, version: v3.1.2
+name: KeychainAccess, nameSpecified: , owner: kishikawakatsumi, version: v3.2.0
 
-name: Kingfisher, nameSpecified: , owner: onevcat, version: 5.1.0
+name: Kingfisher, nameSpecified: , owner: onevcat, version: 5.8.2
 
-name: NVActivityIndicatorView, nameSpecified: , owner: ninjaprox, version: 4.6.1
+name: NVActivityIndicatorView, nameSpecified: , owner: ninjaprox, version: 4.8.0
 
-name: realm-cocoa, nameSpecified: , owner: realm, version: v3.13.1
+name: realm-cocoa, nameSpecified: , owner: realm, version: v3.19.0
 
-name: SnapKit, nameSpecified: , owner: SnapKit, version: 4.2.0
+name: SnapKit, nameSpecified: , owner: SnapKit, version: 5.0.1
 
 name: SVProgressHUD, nameSpecified: , owner: SVProgressHUD, version: 2.2.5
 
-name: SwiftyBeaver, nameSpecified: , owner: SwiftyBeaver, version: 1.6.1
+name: SwiftyBeaver, nameSpecified: , owner: SwiftyBeaver, version: 1.8.2
 
-name: SwiftyJSON, nameSpecified: , owner: SwiftyJSON, version: 4.0.0
-
-name: SwiftyStoreKit, nameSpecified: , owner: bizz84, version: 0.14.2
-
-name: SwiftyUserDefaults, nameSpecified: , owner: radex, version: 4.0.0-alpha.1
+name: SwiftyJSON, nameSpecified: , owner: SwiftyJSON, version: 5.0.0
 
 add-version-numbers: false
 
