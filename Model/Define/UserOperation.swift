@@ -7,13 +7,12 @@
 //
 
 import Foundation
-import SwiftyUserDefaults
 import UIKit
 /// アプリ内Enumクラス
 
 // MARK: - オペレーション
 
-public enum UserOperation: Int, CaseIterable, DefaultsSerializable {
+public enum UserOperation: Int, CaseIterable {
     case menu = 1
     case add
     case close

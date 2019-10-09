@@ -57,19 +57,19 @@ struct ModelConst {
         let ROOT_PASSCODE = Data()
         let LAST_REPORT_DATE = Date.distantPast
         let AUTO_SCROLL_INTERVAL = 0.06
-        let MENU_ORDER: [UserOperation] = [
-            .menu,
-            .close,
-            .historyBack,
-            .copy,
-            .search,
-            .add,
-            .scrollUp,
-            .autoScroll,
-            .historyForward,
-            .form,
-            .closeAll,
-            .grep
+        let MENU_ORDER: [Int] = [
+            UserOperation.menu.rawValue,
+            UserOperation.close.rawValue,
+            UserOperation.historyBack.rawValue,
+            UserOperation.copy.rawValue,
+            UserOperation.search.rawValue,
+            UserOperation.add.rawValue,
+            UserOperation.scrollUp.rawValue,
+            UserOperation.autoScroll.rawValue,
+            UserOperation.historyForward.rawValue,
+            UserOperation.form.rawValue,
+            UserOperation.closeAll.rawValue,
+            UserOperation.grep.rawValue
         ]
         let COMMON_HISTORY_SAVE_COUNT = 90
         let SEARCH_HISTORY_SAVE_COUNT = 90

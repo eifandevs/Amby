@@ -40,7 +40,7 @@ class ArticleDataModelTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        articleDataModel.get()
+        articleDataModel.fetch()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }

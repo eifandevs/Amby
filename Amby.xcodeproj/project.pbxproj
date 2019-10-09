@@ -17,6 +17,7 @@
 		9D4136F722F9459E00277E2D /* GetListHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */; };
 		9DABBA46230BEABF0024DA0F /* GetFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */; };
 		9DD2433422FD6966006A6F8B /* SelectMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */; };
+		9DF1246B234D77C800B80BB2 /* DefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF1246A234D77C800B80BB2 /* DefaultsService.swift */; };
 		A1042F442258E70400DA6E78 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1042F432258E70400DA6E78 /* R.generated.swift */; };
 		A106154B226B4A5400AB371F /* CommonHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106154A226B4A5400AB371F /* CommonHistoryDataModelTest.swift */; };
 		A106154D226B62AF00AB371F /* SearchHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106154C226B62AF00AB371F /* SearchHistoryDataModelTest.swift */; };
@@ -72,6 +73,7 @@
 		A112E8AF212CD76500320048 /* EGProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7D0212CD76400320048 /* EGProgressBar.swift */; };
 		A112E8B1212CD76500320048 /* HeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7D1212CD76400320048 /* HeaderField.swift */; };
 		A112E8B3212CD76500320048 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A112E7D3212CD76400320048 /* HelpViewController.swift */; };
+		A1167CF0234E25C900024515 /* DefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1167CEF234E25C900024515 /* DefaultsService.swift */; };
 		A11CD327214F059000D9333F /* FrontLayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD30F214F058F00D9333F /* FrontLayerViewModel.swift */; };
 		A11CD328214F059000D9333F /* CircleMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD311214F058F00D9333F /* CircleMenuViewModel.swift */; };
 		A11CD329214F059000D9333F /* OptionMenuTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CD313214F058F00D9333F /* OptionMenuTableViewModel.swift */; };
@@ -110,7 +112,6 @@
 		A13D6A9921872C7500B1832E /* FormTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13D6A9721872C7500B1832E /* FormTableViewCell.xib */; };
 		A13D6A9D2187489C00B1832E /* MemoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6A9C2187489C00B1832E /* MemoDataModel.swift */; };
 		A13D6AA12189F7A000B1832E /* OptionMenuMemoTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6AA02189F7A000B1832E /* OptionMenuMemoTableViewModel.swift */; };
-		A13D6AA3218A740F00B1832E /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */; };
 		A13D6AE6218B35F900B1832E /* MemoViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D6AE5218B35F900B1832E /* MemoViewControllerViewModel.swift */; };
 		A1422AF423007FD6002DAF52 /* UpdateProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422AF323007FD6002DAF52 /* UpdateProgressUseCase.swift */; };
 		A1422AF6230080ED002DAF52 /* ReloadProgressUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1422AF5230080ED002DAF52 /* ReloadProgressUseCase.swift */; };
@@ -301,8 +302,6 @@
 		A1A65E742288688F000FACA7 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A65E722288688F000FACA7 /* ChatViewController.swift */; };
 		A1A65E752288688F000FACA7 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1A65E732288688F000FACA7 /* ChatViewController.xib */; };
 		A1AA757622EA28D60089A522 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
-		A1AA757722EA28D60089A522 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A13D6AA2218A740E00B1832E /* SwiftyStoreKit.framework */; };
-		A1AA757822EA28D60089A522 /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */; };
 		A1AA757922EA29840089A522 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
 		A1AA757D22F1E4B70089A522 /* AccessTokenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA757C22F1E4B70089A522 /* AccessTokenDataModel.swift */; };
 		A1AA75B422F6A6EE0089A522 /* TabHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA758822F6A6ED0089A522 /* TabHandlerUseCase.swift */; };
@@ -384,6 +383,7 @@
 		A1C0E048220F698B00E7A7B6 /* CGPoint+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C0E033220F698A00E7A7B6 /* CGPoint+Extend.swift */; };
 		A1C0E049220F698B00E7A7B6 /* UIButton+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C0E034220F698B00E7A7B6 /* UIButton+Extend.swift */; };
 		A1D001EF2340866600336A31 /* LocalAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D001EE2340866600336A31 /* LocalAuthenticationService.swift */; };
+		A1D828BF234E317E00743D57 /* XCTestCase+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D828BE234E317E00743D57 /* XCTestCase+Extend.swift */; };
 		A1E33AB22137149B00C93FBE /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = A1E33AA22137149A00C93FBE /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A1E33AB52137149B00C93FBE /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; };
 		A1E33AB62137149B00C93FBE /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -408,7 +408,6 @@
 		A1FFA6742195B9680092C4D6 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FFA6732195B9680092C4D6 /* SnapKit.framework */; };
 		A1FFA6752195BB6B0092C4D6 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9620CE955200146010 /* KeychainAccess.framework */; };
 		A1FFA6762195BB7A0092C4D6 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A101649620C56376007A3CC7 /* CryptoSwift.framework */; };
-		A1FFA6772195BB890092C4D6 /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14F2FA5217C63F200EB95FE /* SwiftyUserDefaults.framework */; };
 		A1FFA67C2195FCC90092C4D6 /* FooterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA67A2195FCC90092C4D6 /* FooterCollectionViewCell.swift */; };
 		A1FFA67D2195FCC90092C4D6 /* FooterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FFA67B2195FCC90092C4D6 /* FooterCollectionViewCell.xib */; };
 		A1FFA6802199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FFA67F2199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift */; };
@@ -558,6 +557,7 @@
 		9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListHistoryUseCase.swift; sourceTree = "<group>"; };
 		9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteResponse.swift; sourceTree = "<group>"; };
 		9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemoUseCase.swift; sourceTree = "<group>"; };
+		9DF1246A234D77C800B80BB2 /* DefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsService.swift; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		A1042F432258E70400DA6E78 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		A106154A226B4A5400AB371F /* CommonHistoryDataModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonHistoryDataModelTest.swift; sourceTree = "<group>"; };
@@ -633,6 +633,7 @@
 		A112E97921319C7800320048 /* TabDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabDataModel.swift; sourceTree = "<group>"; };
 		A112E97B21319C7800320048 /* SettingDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingDataModel.swift; sourceTree = "<group>"; };
 		A112E97C21319C7800320048 /* ThumbnailDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailDataModel.swift; sourceTree = "<group>"; };
+		A1167CEF234E25C900024515 /* DefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsService.swift; sourceTree = "<group>"; };
 		A11CD30F214F058F00D9333F /* FrontLayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrontLayerViewModel.swift; sourceTree = "<group>"; };
 		A11CD311214F058F00D9333F /* CircleMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenuViewModel.swift; sourceTree = "<group>"; };
 		A11CD313214F058F00D9333F /* OptionMenuTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionMenuTableViewModel.swift; sourceTree = "<group>"; };
@@ -919,6 +920,7 @@
 		A1C0E033220F698A00E7A7B6 /* CGPoint+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extend.swift"; sourceTree = "<group>"; };
 		A1C0E034220F698B00E7A7B6 /* UIButton+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extend.swift"; sourceTree = "<group>"; };
 		A1D001EE2340866600336A31 /* LocalAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationService.swift; sourceTree = "<group>"; };
+		A1D828BE234E317E00743D57 /* XCTestCase+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extend.swift"; sourceTree = "<group>"; };
 		A1E33AA02137149A00C93FBE /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E33AA22137149A00C93FBE /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		A1E33AA32137149A00C93FBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1025,10 +1027,8 @@
 				A1B7F2DF220F4704008F3850 /* Entity.framework in Frameworks */,
 				A16C2D14220F36650050C1DD /* RealmSwift.framework in Frameworks */,
 				A16C2D12220F36410050C1DD /* Realm.framework in Frameworks */,
-				A1FFA6772195BB890092C4D6 /* SwiftyUserDefaults.framework in Frameworks */,
 				A1FFA6762195BB7A0092C4D6 /* CryptoSwift.framework in Frameworks */,
 				A1FFA6752195BB6B0092C4D6 /* KeychainAccess.framework in Frameworks */,
-				A13D6AA3218A740F00B1832E /* SwiftyStoreKit.framework in Frameworks */,
 				A1A3DE852138827400F87009 /* SwiftyBeaver.framework in Frameworks */,
 				A1A3DE842138815E00F87009 /* Logger.framework in Frameworks */,
 				E1ED643E757B70B55E53B4CA /* Pods_Model.framework in Frameworks */,
@@ -1043,8 +1043,6 @@
 				A1AA757622EA28D60089A522 /* KeychainAccess.framework in Frameworks */,
 				A1B7F2A0220F3BB9008F3850 /* Realm.framework in Frameworks */,
 				A1B7F2A1220F3BB9008F3850 /* RealmSwift.framework in Frameworks */,
-				A1AA757722EA28D60089A522 /* SwiftyStoreKit.framework in Frameworks */,
-				A1AA757822EA28D60089A522 /* SwiftyUserDefaults.framework in Frameworks */,
 				A17AC34B225F621300E4262E /* SwiftyJSON.framework in Frameworks */,
 				A1FFA69221A5B1750092C4D6 /* Hydra.framework in Frameworks */,
 				A1FFA6742195B9680092C4D6 /* SnapKit.framework in Frameworks */,
@@ -1167,6 +1165,7 @@
 				A106157E227B0FEA00AB371F /* AmbyUITests.swift */,
 				A1061580227B0FEA00AB371F /* Info.plist */,
 				A1A65E59227B2B64000FACA7 /* Springboard.swift */,
+				A1D828BE234E317E00743D57 /* XCTestCase+Extend.swift */,
 			);
 			path = AmbyUITests;
 			sourceTree = "<group>";
@@ -1576,9 +1575,11 @@
 		A138CAE5213747D900AEA669 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				9DF1246A234D77C800B80BB2 /* DefaultsService.swift */,
 				A195066E214406430091DF23 /* CacheService.swift */,
 				A112E7F7212CD76400320048 /* EncryptService.swift */,
 				A1D001EE2340866600336A31 /* LocalAuthenticationService.swift */,
+				A1167CEF234E25C900024515 /* DefaultsService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -3163,9 +3164,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyUserDefaults.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
 			);
 			name = Carthage;
@@ -3182,8 +3181,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyUserDefaults.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainAccess.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
@@ -3242,7 +3239,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n/usr/local/bin/carthage copy-frameworks\nelse\necho \"warning: carthage not installed. install at 'brew install carthage'\"\nfi";
+			shellScript = "if which /usr/local/bin/carthage >/dev/null; then\n/usr/local/bin/carthage copy-frameworks\nelse\necho \"warning: carthage not installed. install at 'brew install carthage'\"\nfi\n";
 		};
 		A1B7F2A4220F435F008F3850 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3361,6 +3358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A106157F227B0FEA00AB371F /* AmbyUITests.swift in Sources */,
+				A1D828BF234E317E00743D57 /* XCTestCase+Extend.swift in Sources */,
 				A1A65E5A227B2B64000FACA7 /* Springboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3526,6 +3524,7 @@
 				A1422B10230134D5002DAF52 /* AddGroupUseCase.swift in Sources */,
 				A1AA75D822F7267F0089A522 /* GrepDataModel.swift in Sources */,
 				A1AA75E222FAF3C60089A522 /* SelectHistoryUseCase.swift in Sources */,
+				9DF1246B234D77C800B80BB2 /* DefaultsService.swift in Sources */,
 				A1AA75CA22F6A6EE0089A522 /* GetSettingUseCase.swift in Sources */,
 				A1422B3A2301410F002DAF52 /* DeleteThumbnailUseCase.swift in Sources */,
 				A19352A12141569C002A0865 /* Google.swift in Sources */,
@@ -3552,6 +3551,7 @@
 				9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */,
 				A1422B4D2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift in Sources */,
 				A1AA75B722F6A6EE0089A522 /* NoticeHandlerUseCase.swift in Sources */,
+				A1167CF0234E25C900024515 /* DefaultsService.swift in Sources */,
 				A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */,
 				A1422B0C2301329C002DAF52 /* DeleteGroupUseCase.swift in Sources */,
 				A1AA75D622F6BA500089A522 /* DeleteFormUseCase.swift in Sources */,
