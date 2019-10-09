@@ -383,6 +383,7 @@
 		A1C0E048220F698B00E7A7B6 /* CGPoint+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C0E033220F698A00E7A7B6 /* CGPoint+Extend.swift */; };
 		A1C0E049220F698B00E7A7B6 /* UIButton+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C0E034220F698B00E7A7B6 /* UIButton+Extend.swift */; };
 		A1D001EF2340866600336A31 /* LocalAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D001EE2340866600336A31 /* LocalAuthenticationService.swift */; };
+		A1D828BF234E317E00743D57 /* XCTestCase+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D828BE234E317E00743D57 /* XCTestCase+Extend.swift */; };
 		A1E33AB22137149B00C93FBE /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = A1E33AA22137149A00C93FBE /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A1E33AB52137149B00C93FBE /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; };
 		A1E33AB62137149B00C93FBE /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -919,6 +920,7 @@
 		A1C0E033220F698A00E7A7B6 /* CGPoint+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extend.swift"; sourceTree = "<group>"; };
 		A1C0E034220F698B00E7A7B6 /* UIButton+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extend.swift"; sourceTree = "<group>"; };
 		A1D001EE2340866600336A31 /* LocalAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationService.swift; sourceTree = "<group>"; };
+		A1D828BE234E317E00743D57 /* XCTestCase+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extend.swift"; sourceTree = "<group>"; };
 		A1E33AA02137149A00C93FBE /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E33AA22137149A00C93FBE /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		A1E33AA32137149A00C93FBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1163,6 +1165,7 @@
 				A106157E227B0FEA00AB371F /* AmbyUITests.swift */,
 				A1061580227B0FEA00AB371F /* Info.plist */,
 				A1A65E59227B2B64000FACA7 /* Springboard.swift */,
+				A1D828BE234E317E00743D57 /* XCTestCase+Extend.swift */,
 			);
 			path = AmbyUITests;
 			sourceTree = "<group>";
@@ -3355,6 +3358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A106157F227B0FEA00AB371F /* AmbyUITests.swift in Sources */,
+				A1D828BF234E317E00743D57 /* XCTestCase+Extend.swift in Sources */,
 				A1A65E5A227B2B64000FACA7 /* Springboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -29,8 +29,8 @@ class TabHandlerUseCaseTest: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        tabUseCase.delete()
-        tabUseCase.initialize()
+        DeleteTabUseCase().exe()
+        InitializeTabUseCase().exe()
     }
 
     func testPresentGroupTitleEdit() {
@@ -65,7 +65,7 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.close()
+        CloseTabUseCase().exe()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -83,7 +83,7 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.closeAll()
+        CloseTabAllUseCase().exe()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -119,7 +119,7 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.copy()
+        CopyTabUseCase().exe()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -142,8 +142,8 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.add()
-        tabUseCase.swap(start: 0, end: 1)
+        AddTabUseCase().exe()
+        SwapTabUseCase().exe(start: 0, end: 1)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -166,8 +166,8 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.add()
-        tabUseCase.remove()
+        AddTabUseCase().exe()
+        RemoveTabUseCase().exe()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -190,8 +190,8 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.add()
-        tabUseCase.remove(context: tabUseCase.getHistory(index: 1)!.context)
+        AddTabUseCase().exe()
+        RemoveTabUseCase().exe(context: GetHistoryTabUseCase().exe(index: 1)!.context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -214,15 +214,15 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.add()
-        tabUseCase.change(context: tabUseCase.getHistory(index: 0)!.context)
+        AddTabUseCase().exe()
+        ChangeTabUseCase().exe(context: GetHistoryTabUseCase().exe(index: 0)!.context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testChangeGroupTitle() {
-        tabUseCase.add()
-        tabUseCase.changeGroupTitle(groupContext: tabUseCase.tabGroupList.currentGroupContext, title: #function)
+        AddTabUseCase().exe()
+        ChangeGroupTitleUseCase().exe(groupContext: tabUseCase.tabGroupList.currentGroupContext, title: #function)
         XCTAssertTrue(tabUseCase.tabGroupList.currentGroup.title == #function)
     }
 
@@ -239,7 +239,7 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.add()
+        AddTabUseCase().exe()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -257,7 +257,7 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.addGroup()
+        AddGroupUseCase().exe()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -275,7 +275,7 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.insert()
+        InsertTabUseCase().exe()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -293,25 +293,25 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.insert(url: #function)
+        InsertTabUseCase().exe(url: #function)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testDelete() {
-        tabUseCase.add()
-        tabUseCase.delete()
+        AddTabUseCase().exe()
+        DeleteTabUseCase().exe()
         XCTAssertTrue(tabUseCase.tabs.count == 1)
     }
 
     func testGetIndex() {
-        tabUseCase.add()
-        XCTAssertTrue(tabUseCase.getIndex(context: tabUseCase.getHistory(index: 1)!.context) == 1)
+        AddTabUseCase().exe()
+        XCTAssertTrue(GetIndexTabUseCase().exe(context: GetHistoryTabUseCase().exe(index: 1)!.context) == 1)
     }
 
     func testGetHistory() {
-        tabUseCase.add(url: #function)
-        XCTAssertTrue(tabUseCase.getHistory(index: 1)!.url == #function)
+        AddTabUseCase().exe(url: #function)
+        XCTAssertTrue(GetHistoryTabUseCase().exe(index: 1)!.url == #function)
     }
 
     func testStartLoading() {
@@ -321,14 +321,14 @@ class TabHandlerUseCaseTest: XCTestCase {
             .subscribe { object in
                 if let action = object.element, case .startLoading = action {
                     if let expectation = expectation {
-                        XCTAssertTrue(self.tabUseCase.getHistory(index: 0)!.isLoading == true)
+                        XCTAssertTrue(GetHistoryTabUseCase().exe(index: 0)!.isLoading == true)
                         expectation.fulfill()
                     }
                 }
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.startLoading(context: tabUseCase.getHistory(index: 0)!.context)
+        StartLoadingTabUseCase().exe(context: GetHistoryTabUseCase().exe(index: 0)!.context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -340,14 +340,14 @@ class TabHandlerUseCaseTest: XCTestCase {
             .subscribe { object in
                 if let action = object.element, case .endLoading = action {
                     if let expectation = expectation {
-                        XCTAssertTrue(self.tabUseCase.getHistory(index: 0)!.isLoading == false)
+                        XCTAssertTrue(GetHistoryTabUseCase().exe(index: 0)!.isLoading == false)
                         expectation.fulfill()
                     }
                 }
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.endLoading(context: tabUseCase.getHistory(index: 0)!.context)
+        EndLoadingTabUseCase().exe(context: GetHistoryTabUseCase().exe(index: 0)!.context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -359,14 +359,14 @@ class TabHandlerUseCaseTest: XCTestCase {
             .subscribe { object in
                 if let action = object.element, case .endRendering = action {
                     if let expectation = expectation {
-                        XCTAssertTrue(self.tabUseCase.getHistory(index: 0)!.isLoading == false)
+                        XCTAssertTrue(GetHistoryTabUseCase().exe(index: 0)!.isLoading == false)
                         expectation.fulfill()
                     }
                 }
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.endRendering(context: tabUseCase.getHistory(index: 0)!.context)
+        EndRenderingTabUseCase().exe(context: GetHistoryTabUseCase().exe(index: 0)!.context)
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -389,8 +389,8 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.add()
-        tabUseCase.goBack()
+        AddTabUseCase().exe()
+        GoBackTabUseCase().exe()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
@@ -413,9 +413,9 @@ class TabHandlerUseCaseTest: XCTestCase {
             }
             .disposed(by: disposeBag)
 
-        tabUseCase.add()
-        tabUseCase.goBack()
-        tabUseCase.goNext()
+        AddTabUseCase().exe()
+        GoBackTabUseCase().exe()
+        GoNextTabUseCase().exe()
 
         self.waitForExpectations(timeout: 10, handler: nil)
     }
