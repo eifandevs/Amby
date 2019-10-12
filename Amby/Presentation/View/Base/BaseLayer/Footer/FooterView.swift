@@ -33,7 +33,7 @@ class FooterView: UIView, ShadowView {
         log.debug("deinit called.")
     }
 
-    private func setup(frame: CGRect) {
+    private func setup(frame _: CGRect) {
         // layout
         addAreaShadow()
         backgroundColor = UIColor.mediumGray
@@ -43,10 +43,10 @@ class FooterView: UIView, ShadowView {
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        layout.itemSize = CGSize(width: AppConst.BASE_LAYER.THUMBNAIL_SIZE.width, height: frame.height)
+        layout.itemSize = AppConst.BASE_LAYER.THUMBNAIL_SIZE
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
-        collectionView = UICollectionView(frame: CGRect(origin: CGPoint.zero, size: frame.size), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width, height: AppConst.BASE_LAYER.THUMBNAIL_SIZE.height)), collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.collectionViewLayout = layout
@@ -203,7 +203,7 @@ extension FooterView: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
-        return CGSize(width: AppConst.BASE_LAYER.THUMBNAIL_SIZE.width, height: frame.height)
+        return AppConst.BASE_LAYER.THUMBNAIL_SIZE
     }
 }
 

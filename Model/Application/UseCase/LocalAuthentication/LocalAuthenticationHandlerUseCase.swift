@@ -17,6 +17,7 @@ public enum LocalAuthenticationHandlerUseCaseAction {
 
 enum LocalAuthenticationHandlerUseCaseError {
     case cannotUse
+    case inputError
 }
 
 extension LocalAuthenticationHandlerUseCaseError: ModelError {
@@ -24,6 +25,8 @@ extension LocalAuthenticationHandlerUseCaseError: ModelError {
         switch self {
         case .cannotUse:
             return MessageConst.NOTIFICATION.CANNOT_USE_BIOMETRICS_AUTH
+        case .inputError:
+            return MessageConst.NOTIFICATION.INPUT_ERROR_AUTH
         }
     }
 }
@@ -60,5 +63,9 @@ public final class LocalAuthenticationHandlerUseCase {
     /// エラー通知
     func noticeCannotUse() {
         rx_error.onNext(.cannotUse)
+    }
+
+    func noticeInputError() {
+        rx_error.onNext(.inputError)
     }
 }

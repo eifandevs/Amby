@@ -45,12 +45,12 @@ class ToastView: UIView {
     func loadNib() {
         guard let view = Bundle.main.loadNibNamed(R.nib.toastView.name, owner: self, options: nil)?.first as? UIView else { return }
         view.frame = bounds
-        baseButton.titleLabel?.font = UIFont(name: AppConst.APP.FONT, size: frame.size.height / 4.5)
 
         addSubview(view)
     }
 
     func play() {
+        baseButton.titleLabel?.font = UIFont(name: AppConst.APP.FONT, size: (frame.size.height - (safeAreaInsets.bottom / 2)) / 4.5)
         UIView.animate(withDuration: 0.4, animations: {
             self.frame.origin.y -= self.frame.size.height
         }) { _ in

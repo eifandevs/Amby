@@ -74,17 +74,12 @@ class BaseViewController: UIViewController {
                 AppConst.BASE_LAYER.HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER.HEADER_PROGRESS_BAR_HEIGHT * 2.2
                 AppConst.BASE_LAYER.FOOTER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height + insets.bottom
                 AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT = AppConst.BASE_LAYER.HEADER_HEIGHT / 2.5
-                let width = UIScreen.main.bounds.size.width / 4.3
-                let height = (UIScreen.main.bounds.size.width / 3.4) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height
-                AppConst.BASE_LAYER.THUMBNAIL_SIZE = CGSize(width: width, height: height)
+                AppConst.BASE_LAYER.THUMBNAIL_SIZE.height += insets.bottom / 2.5
             } else {
                 AppConst.BASE_LAYER.HEADER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 1.3
                 AppConst.BASE_LAYER.HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER.HEADER_PROGRESS_BAR_HEIGHT
                 AppConst.BASE_LAYER.FOOTER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height
                 AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT = AppConst.BASE_LAYER.HEADER_HEIGHT / 2
-                let width = UIScreen.main.bounds.size.width / 4.3
-                let height = (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height
-                AppConst.BASE_LAYER.THUMBNAIL_SIZE = CGSize(width: width, height: height)
             }
         }
 
