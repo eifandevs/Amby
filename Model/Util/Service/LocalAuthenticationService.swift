@@ -19,6 +19,28 @@ class LocalAuthenticationService {
         let description: String = "認証します"
 
         return Observable.create { observable in
+            if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+                context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: description, reply: {success, _ in
+                    if (success) {
+                        // 認証成功
+                        observable.onNext(.success(context.biometryType))
+                    } else {
+                        observable.onNext(.failure(NSError.empty))
+                    }
+                })
+            } else {
+                observable.onNext(.failure(NSError.empty))
+            }
+            return Disposables.create()
+        }
+    }
+
+    class func challengeWithBiometry() -> Observable<RepositoryResult<LABiometryType>> {
+        let context = LAContext()
+        var error: NSError?
+        let description: String = "認証します"
+
+        return Observable.create { observable in
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: description, reply: {success, _ in
                     if (success) {
@@ -35,15 +57,20 @@ class LocalAuthenticationService {
         }
     }
 
+    static func canUseDevicePasscode() -> Bool {
+        let context = LAContext()
+        return context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
+    }
+
     /**
      Face IDが利用出来るかチェックします
      
      - returns Bool: true 利用可能 / false 利用不可
      */
-    class func canUseFaceID(error: inout NSError?) -> Bool {
+    class func canUseFaceID() -> Bool {
         if #available(iOS 11.0, *) {
             let context = LAContext()
-            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
                 if context.biometryType == .faceID {
                     return true
                 }
@@ -58,10 +85,10 @@ class LocalAuthenticationService {
      
      - returns Bool: true 利用可能 / false 利用不可
      */
-    class func canUseTouchID(error: inout NSError?) -> Bool {
+    class func canUseTouchID() -> Bool {
         let context = LAContext()
 
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
             if #available(iOS 11.0, *) {
                 if context.biometryType == .touchID {
                     return true

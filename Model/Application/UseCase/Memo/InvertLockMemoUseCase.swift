@@ -26,9 +26,12 @@ public final class InvertLockMemoUseCase {
 
     public func exe(memo: Memo) {
         ChallengeLocalAuthenticationUseCase().exe()
-            .subscribe { [weak self] _ in
-                guard let `self` = self else { return }
-                self.memoDataModel.invertLock(memo: memo)
+            .observeOn(MainScheduler.instance) // realmのスレッドエラー対応
+            .subscribe { [weak self] result in
+                guard let `self` = self, let result = result.element else { return }
+                if case .success(_) = result {
+                    self.memoDataModel.invertLock(memo: memo)
+                }
             }
             .disposed(by: disposeBag)
     }

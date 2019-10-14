@@ -17,7 +17,7 @@ class NotificationService {
             let notificationViewX = 0.f
             let notificationViewY = AppConst.DEVICE.DISPLAY_SIZE.height
             let notificationViewWidth = AppConst.DEVICE.DISPLAY_SIZE.width
-            let notificationViewHeight = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 0.9
+            let notificationViewHeight = AppConst.BASE_LAYER.FOOTER_HEIGHT * 0.9
             let notificationViewRect = CGRect(x: notificationViewX, y: notificationViewY, width: notificationViewWidth, height: notificationViewHeight)
             let notificationView = ToastView(frame: notificationViewRect, title: message, isSuccess: isSuccess)
             if let delegate = UIApplication.shared.delegate as? AppDelegate {
