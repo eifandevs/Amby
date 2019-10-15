@@ -145,6 +145,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             let familyName = user.profile.familyName
             let email = user.profile.email
             log.debug("userId: \(userId ?? "") idToken: \(idToken) fullName: \(fullName) givenName: \(givenName) familyName: \(familyName) email: \(email)")
+            guard let authentication = user.authentication else { return }
+            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                           accessToken: authentication.accessToken)
+            Auth.auth().signIn(with: credential) { _, error in
+                if let error = error {
+                    log.error("\(error.localizedDescription)")
+                    return
+                }
+                // User is signed in
+                // ...
+            }
         }
     }
 

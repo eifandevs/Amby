@@ -23,7 +23,6 @@ final class OptionMenuSettingTableViewModel {
 
     /// セルタイプ
     enum CellType {
-        case passcode
         case autoScroll
         case windowConfirm
         case menu
@@ -34,10 +33,12 @@ final class OptionMenuSettingTableViewModel {
         case cookies
         case siteData
         case all
+        case signIn
+        case signOut
+        case accountDelete
 
         var title: String {
             switch self {
-            case .passcode: return AppConst.OPTION_MENU.PASSCODE
             case .menu: return AppConst.OPTION_MENU.MENU
             case .commonHistory: return AppConst.OPTION_MENU.HISTORY
             case .form: return AppConst.SETTING.TITLE_FORM_DATA
@@ -46,6 +47,9 @@ final class OptionMenuSettingTableViewModel {
             case .cookies: return AppConst.SETTING.TITLE_COOKIES
             case .siteData: return AppConst.SETTING.TITLE_SITE_DATA
             case .all: return AppConst.SETTING.TITLE_ALL
+            case .signIn: return AppConst.SETTING.SIGNIN
+            case .signOut: return AppConst.SETTING.SIGNOUT
+            case .accountDelete: return AppConst.SETTING.ACCOUNT_DELETE
             default: return ""
             }
         }
@@ -63,10 +67,14 @@ final class OptionMenuSettingTableViewModel {
     // セル情報
     var sections: [Section] = [
         Section(title: AppConst.SETTING.SECTION_SETTING, rows: [
-            Section.Row(cellType: .passcode),
             Section.Row(cellType: .menu),
             Section.Row(cellType: .autoScroll),
             Section.Row(cellType: .windowConfirm)
+        ]),
+        Section(title: AppConst.SETTING.SECTION_SYNC, rows: [
+            Section.Row(cellType: .commonHistory),
+            Section.Row(cellType: .form),
+            Section.Row(cellType: .bookMark)
         ]),
         Section(title: AppConst.SETTING.SECTION_DELETE, rows: [
             Section.Row(cellType: .commonHistory),

@@ -119,6 +119,7 @@ struct AppConst {
         static let SECTION_SETTING = "初期設定"
         static let SECTION_HISTORY = "履歴保存件数（何日分）"
         static let SECTION_DELETE = "データ削除"
+        static let SECTION_SYNC = "データ同期"
         static let TITLE_COMMON_HISTORY = "閲覧履歴"
         static let TITLE_SEARCH_HISTORY = "検索履歴"
         static let TITLE_BOOK_MARK = "ブックマーク"
@@ -126,6 +127,9 @@ struct AppConst {
         static let TITLE_COOKIES = "Cookie"
         static let TITLE_SITE_DATA = "サイトデータ"
         static let TITLE_ALL = "全てのデータ"
+        static let SIGNIN = "ログイン"
+        static let SIGNOUT = "ログアウト"
+        static let ACCOUNT_DELETE = "アカウントの削除"
     }
 
     // MARK: - UD初期値
