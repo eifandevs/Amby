@@ -141,11 +141,12 @@ extension OptionMenuSettingTableView: UITableViewDelegate {
         case .all:
             viewModel.deleteAll()
         case .signIn:
-            break
+            viewModel.signIn()
+            rx_action.onNext(.close)
         case .signOut:
-            break
+            viewModel.signOut()
         case .accountDelete:
-            break
+            viewModel.deleteAccount()
         default:
             break
         }

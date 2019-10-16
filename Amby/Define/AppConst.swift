@@ -119,7 +119,7 @@ struct AppConst {
         static let SECTION_SETTING = "初期設定"
         static let SECTION_HISTORY = "履歴保存件数（何日分）"
         static let SECTION_DELETE = "データ削除"
-        static let SECTION_SYNC = "データ同期"
+        static let SECTION_SYNC = "アカウント"
         static let TITLE_COMMON_HISTORY = "閲覧履歴"
         static let TITLE_SEARCH_HISTORY = "検索履歴"
         static let TITLE_BOOK_MARK = "ブックマーク"

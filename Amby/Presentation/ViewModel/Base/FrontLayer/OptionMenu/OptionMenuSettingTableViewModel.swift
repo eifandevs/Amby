@@ -72,9 +72,9 @@ final class OptionMenuSettingTableViewModel {
             Section.Row(cellType: .windowConfirm)
         ]),
         Section(title: AppConst.SETTING.SECTION_SYNC, rows: [
-            Section.Row(cellType: .commonHistory),
-            Section.Row(cellType: .form),
-            Section.Row(cellType: .bookMark)
+            Section.Row(cellType: .signIn),
+            Section.Row(cellType: .signOut),
+            Section.Row(cellType: .accountDelete)
         ]),
         Section(title: AppConst.SETTING.SECTION_DELETE, rows: [
             Section.Row(cellType: .commonHistory),
@@ -171,5 +171,20 @@ final class OptionMenuSettingTableViewModel {
                 delegate.initialize()
             }
         })
+    }
+
+    /// ログイン
+    func signIn() {
+        SyncHandlerUseCase.s.open()
+    }
+
+    /// ログアウト
+    func signOut() {
+        LoginService().signOut()
+    }
+
+    /// アカウント削除
+    func deleteAccount() {
+        LoginService().deleteAccount()
     }
 }

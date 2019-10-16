@@ -12,6 +12,8 @@ import SnapKit
 import UIKit
 
 class SyncViewController: UIViewController, GIDSignInUIDelegate {
+    @IBOutlet var closeButton: CornerRadiusButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let gidButton = GIDSignInButton(frame: CGRect.zero)
@@ -21,7 +23,14 @@ class SyncViewController: UIViewController, GIDSignInUIDelegate {
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
         }
-        // Do any additional setup after loading the view.
+
+        // ボタンタップ
+        closeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: rx.disposeBag)
     }
 
     /*

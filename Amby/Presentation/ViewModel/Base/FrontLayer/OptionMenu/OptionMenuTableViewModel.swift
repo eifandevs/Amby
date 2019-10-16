@@ -115,7 +115,9 @@ final class OptionMenuTableViewModel {
 
     /// 同期画面表示
     func openSync() {
-        SyncHandlerUseCase.s.open()
+        if !LoginService().isLoginedIn {
+            SyncHandlerUseCase.s.open()
+        }
     }
 
     /// html表示
