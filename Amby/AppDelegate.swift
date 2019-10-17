@@ -153,6 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     log.error("\(error.localizedDescription)")
                     return
                 }
+                log.debug("firebase login success. userid: \(Auth.auth().currentUser!.uid)")
                 // User is signed in
                 // ...
             }

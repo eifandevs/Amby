@@ -11,11 +11,10 @@ import Foundation
 import GoogleSignIn
 
 class LoginService {
-    
-    var isLoginedIn: Bool {
+    var isLoggedIn: Bool {
         return Auth.auth().currentUser != nil
     }
-    
+
     func signOut() {
         GIDSignIn.sharedInstance()!.signOut()
         try! Auth.auth().signOut()

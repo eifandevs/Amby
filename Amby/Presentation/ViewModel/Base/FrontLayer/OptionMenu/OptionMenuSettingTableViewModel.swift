@@ -89,6 +89,11 @@ final class OptionMenuSettingTableViewModel {
     // セクションフォントサイズ
     let sectionFontSize = 12.f
 
+    /// ログイン中
+    var isLoggedIn: Bool {
+        return LoginService().isLoggedIn
+    }
+    
     /// セル数
     func cellCount(section: Int) -> Int {
         return sections[section].rows.count
@@ -175,11 +180,19 @@ final class OptionMenuSettingTableViewModel {
 
     /// ログイン
     func signIn() {
+        if isLoggedIn {
+            NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.ALREADY_LOGGID_IN_ERROR, isSuccess: false)
+            return
+        }
         SyncHandlerUseCase.s.open()
     }
 
     /// ログアウト
     func signOut() {
+        if !isLoggedIn {
+            NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.NOT_LOGIN_IN_ERROR, isSuccess: false)
+            return
+        }
         LoginService().signOut()
     }
 
