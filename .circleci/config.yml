@@ -26,7 +26,7 @@ jobs:
       - run: gem install danger-todoist
       - run: danger
 
-  build_dev:
+  build:
     <<: *defaults
     branches:
       only:
@@ -72,6 +72,6 @@ workflows:
           filters:
             branches:
               only: develop
-      - build_dev:
+      - build:
           requires:
             - danger
