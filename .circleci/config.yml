@@ -22,9 +22,6 @@ jobs:
           path: ~/project
       # Bundler Setup
       - run:
-          name: Update bundler
-          command: yes | sudo gem install bundler
-      - run:
           name: Which bundler?
           command: bundle -v
       # Bundler Install & Cache
