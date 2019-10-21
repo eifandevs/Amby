@@ -13,6 +13,7 @@ references:
 version: 2
 jobs:
   danger:
+    <<: *defaults
     docker:
       - image: dantoml/danger:latest
         environment:
@@ -25,7 +26,7 @@ jobs:
       - run: gem install danger-todoist
       - run: danger
 
-  build:
+  build_dev:
     <<: *defaults
     branches:
       only:
@@ -33,6 +34,16 @@ jobs:
     steps:
       - checkout:
           path: ~/project
+      # Carthage Setup
+      - restore_cache:
+          key: dev-ca-{{ checksum "Cartfile.resolved" }}
+      - run:
+          name: bootstrap
+          command: ./bootstrap.sh
+      - save_cache:
+          key: dev-ca-{{ checksum "Cartfile.resolved" }}
+          paths:
+            - Carthage
       # Bundler Setup
       - run:
           name: Which bundler?
@@ -48,17 +59,19 @@ jobs:
           key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-      # Carthage Setup
-      - restore_cache:
-          key: dev-ca-{{ checksum "Cartfile.resolved" }}
-      - run:
-          name: bootstrap
-          command: ./bootstrap.sh
-      - save_cache:
-          key: dev-ca-{{ checksum "Cartfile.resolved" }}
-          paths:
-            - Carthage
       # Build
       - run:
           name: Build
           command: bundle exec fastlane ios dev
+
+workflows:
+  version: 2
+  check_and_build:
+    jobs:
+      - danger:
+          filters:
+            branches:
+              only: develop
+      - build_dev:
+          requires:
+            - danger
