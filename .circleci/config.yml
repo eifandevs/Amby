@@ -73,3 +73,5 @@ workflows:
     jobs:
       - danger: *workflow_filters
       - build: *workflow_filters
+           requires:
+             - danger
