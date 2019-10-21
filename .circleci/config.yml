@@ -30,7 +30,7 @@ jobs:
             - Carthage
       - run:
           name: Update bundler
-          command: sudo gem install bundler
+          command: yes | sudo gem install bundler
       - run:
           name: install gems
           command: bundle install --path vendor/bundle
