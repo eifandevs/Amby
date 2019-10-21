@@ -48,4 +48,24 @@ jobs:
       # Build
       - run:
           name: Build
-          command: bundle exec fastlane ios dev
+          command: bundle exec fastlane ios dev 
+
+  danger:
+    docker:
+      - image: dantoml/danger:latest
+        environment:
+         - TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+         - LANG: ja_JP.UTF-8
+         - LC_ALL: C.UTF-8
+         - LANGUAGE: ja_JP.UTF-8
+    steps:
+      - checkout
+      - run: gem install danger-todoist
+      - run: danger
+
+workflows:
+  version: 2
+  build-test-lint:
+    jobs:
+      - danger
+      - build
