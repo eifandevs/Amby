@@ -28,9 +28,6 @@ jobs:
 
   build:
     <<: *defaults
-    branches:
-      only:
-        - develop
     steps:
       - checkout:
           path: ~/project
@@ -64,14 +61,15 @@ jobs:
           name: Build
           command: bundle exec fastlane ios dev
 
+workflow_filters: &workflow_filters
+  filters:
+    branches:
+      only:
+        - develop
+
 workflows:
   version: 2
   check_and_build:
     jobs:
-      - danger:
-          filters:
-            branches:
-              only: develop
-      - build:
-          requires:
-            - danger
+      - danger: *workflow_filters
+      - build: *workflow_filters
