@@ -43,6 +43,11 @@ struct MessageConst {
     // MARK: - 通知
 
     struct NOTIFICATION {
+        static let ACCOUNT_DELETE = "アカウント削除"
+        static let ACCOUNT_DELETE_MESSAGE = "アカウントを削除してもよろしいですか？\nこのアカウントに紐づく全てのデータが削除されます。"
+        static let DELETE_ACCOUNT_SUCCESS = "アカウントを削除しました"
+        static let DELETE_ACCOUNT_ERROR_NOT_LOGGED_IN = "アカウント削除をするために、ログインしてください"
+        static let DELETE_ACCOUNT_ERROR = "アカウント削除に失敗しました"
         static let NEW_TAB = "新規タブイベント"
         static let COPY_URL = "URLをコピーしました"
         static let REGISTER_BOOK_MARK = "お気に入りに登録しました"
@@ -56,7 +61,10 @@ struct MessageConst {
         static let PASSCODE_AUTHENTIFICATED = "パスコート認証されました。再度実行してください。"
         static let PASSCODE_INPUT_ERROR = "パスコードエラー"
         static let ANALYTICS_HTML_ERROR = "HTMLの解析に失敗しました"
-        static let ALREADY_LOGGID_IN_ERROR = "ログイン済みです"
+        static let LOG_IN_SUCCESS = "ログインしました"
+        static let LOG_IN_ERROR = "ログインに失敗しました"
+        static let LOG_OUT_SUCCESS = "ログアウトしました"
+        static let ALREADY_LOGGED_IN_ERROR = "ログイン済みです"
         static let NOT_LOGIN_IN_ERROR = "ログインしていません"
         static let GREP_ERROR = "ページ内検索に失敗しました"
         static let GREP_SCROLL_ERROR = "スクロールに失敗しました"

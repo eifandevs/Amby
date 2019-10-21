@@ -93,7 +93,7 @@ final class OptionMenuSettingTableViewModel {
     var isLoggedIn: Bool {
         return LoginService().isLoggedIn
     }
-    
+
     /// セル数
     func cellCount(section: Int) -> Int {
         return sections[section].rows.count
@@ -181,7 +181,7 @@ final class OptionMenuSettingTableViewModel {
     /// ログイン
     func signIn() {
         if isLoggedIn {
-            NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.ALREADY_LOGGID_IN_ERROR, isSuccess: false)
+            NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.ALREADY_LOGGED_IN_ERROR, isSuccess: false)
             return
         }
         SyncHandlerUseCase.s.open()

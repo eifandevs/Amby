@@ -115,9 +115,11 @@ final class OptionMenuTableViewModel {
 
     /// 同期画面表示
     func openSync() {
-        if !LoginService().isLoginedIn {
-            SyncHandlerUseCase.s.open()
+        if LoginService().isLoggedIn {
+            NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.ALREADY_LOGGED_IN_ERROR, isSuccess: false)
+            return
         }
+        SyncHandlerUseCase.s.open()
     }
 
     /// html表示
