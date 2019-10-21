@@ -5,6 +5,7 @@ references:
     working_directory: ~/project
     shell: /bin/bash --login -eo pipefail
     environment:
+      BUNDLER_VERSION: 1.17.2
       TZ: "/usr/share/zoneinfo/Asia/Tokyo"
       LANG: "en_US.UTF-8"
       LC_ALL: "en_US.UTF-8"
@@ -19,6 +20,30 @@ jobs:
     steps:
       - checkout:
           path: ~/project
+      # Bundler Setup
+      - run:
+          name: Update bundler
+          command: |
+            sudo gem update --system
+            sudo gem uninstall bundler
+            sudo rm /usr/local/bin/bundle
+            sudo rm /usr/local/bin/bundler
+            yes | sudo gem install bundler
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      # Bundler Install & Cache
+      - restore_cache:
+          keys:
+            - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1-{{ arch }}-{{ .Branch }}
+            - gem-cache-v1
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      # Carthage Setup
       - restore_cache:
           key: dev-ca-{{ checksum "Cartfile.resolved" }}
       - run:
@@ -28,12 +53,7 @@ jobs:
           key: dev-ca-{{ checksum "Cartfile.resolved" }}
           paths:
             - Carthage
-      - run:
-          name: Update bundler
-          command: yes | sudo gem install bundler
-      - run:
-          name: install gems
-          command: bundle install --path vendor/bundle
+      # Build
       - run:
           name: Build
           command: bundle exec fastlane ios dev
