@@ -124,8 +124,6 @@ extension OptionMenuSettingTableView: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = viewModel.getRow(indexPath: indexPath)
         switch row.cellType {
-        case .passcode:
-            viewModel.openPasscodeSetting()
         case .menu:
             viewModel.openMenuOrder()
         case .commonHistory:
@@ -142,6 +140,13 @@ extension OptionMenuSettingTableView: UITableViewDelegate {
             viewModel.deleteCaches()
         case .all:
             viewModel.deleteAll()
+        case .signIn:
+            viewModel.signIn()
+            rx_action.onNext(.close)
+        case .signOut:
+            viewModel.signOut()
+        case .accountDelete:
+            viewModel.deleteAccount()
         default:
             break
         }

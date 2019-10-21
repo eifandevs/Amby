@@ -1,7 +1,7 @@
 references:
   defaults: &defaults
     macos:
-      xcode: "10.0.0"
+      xcode: "11.1"
     working_directory: ~/project
     shell: /bin/bash --login -eo pipefail
     environment:
@@ -33,7 +33,7 @@ jobs:
           command: sudo gem install bundler
       - run:
           name: install gems
-          command: bundler install --path vendor/bundle
+          command: bundle install --path vendor/bundle
       - run:
           name: Build
           command: bundle exec fastlane ios dev

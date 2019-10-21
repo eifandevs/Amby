@@ -12,16 +12,28 @@ import SnapKit
 import UIKit
 
 class SyncViewController: UIViewController, GIDSignInUIDelegate {
+    @IBOutlet var closeButton: CornerRadiusButton!
+    @IBOutlet var googleButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let gidButton = GIDSignInButton(frame: CGRect.zero)
         GIDSignIn.sharedInstance().uiDelegate = self
-        view.addSubview(gidButton)
-        gidButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-        }
-        // Do any additional setup after loading the view.
+
+        googleButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.dismiss(animated: true, completion: nil)
+                GIDSignIn.sharedInstance()?.signIn()
+            })
+            .disposed(by: rx.disposeBag)
+
+        // ボタンタップ
+        closeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: rx.disposeBag)
     }
 
     /*

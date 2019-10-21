@@ -384,6 +384,7 @@
 		A1C0E049220F698B00E7A7B6 /* UIButton+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C0E034220F698B00E7A7B6 /* UIButton+Extend.swift */; };
 		A1D001EF2340866600336A31 /* LocalAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D001EE2340866600336A31 /* LocalAuthenticationService.swift */; };
 		A1D828BF234E317E00743D57 /* XCTestCase+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D828BE234E317E00743D57 /* XCTestCase+Extend.swift */; };
+		A1D828C1235767B800743D57 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D828C0235767B800743D57 /* LoginService.swift */; };
 		A1E33AB22137149B00C93FBE /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = A1E33AA22137149A00C93FBE /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A1E33AB52137149B00C93FBE /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; };
 		A1E33AB62137149B00C93FBE /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -921,6 +922,7 @@
 		A1C0E034220F698B00E7A7B6 /* UIButton+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extend.swift"; sourceTree = "<group>"; };
 		A1D001EE2340866600336A31 /* LocalAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationService.swift; sourceTree = "<group>"; };
 		A1D828BE234E317E00743D57 /* XCTestCase+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extend.swift"; sourceTree = "<group>"; };
+		A1D828C0235767B800743D57 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		A1E33AA02137149A00C93FBE /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E33AA22137149A00C93FBE /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		A1E33AA32137149A00C93FBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2008,6 +2010,7 @@
 				A1E5B0BE221F6BB1007172D8 /* PurchaseService.swift */,
 				A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */,
 				A1904FD022E1647000BC91B4 /* GoogleSignInService.swift */,
+				A1D828C0235767B800743D57 /* LoginService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -2697,6 +2700,7 @@
 				A101649820C5638E007A3CC7 /* Carthage */,
 				A1706871213487D600AAD993 /* Embed Frameworks */,
 				A15C53E6214AAAAE001E8AB5 /* License */,
+				9D27F47F2359A926006CF51E /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -3149,6 +3153,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ModelTests/Pods-ModelTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9D27F47F2359A926006CF51E /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+		};
 		A101649820C5638E007A3CC7 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3205,7 +3227,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ $CONFIGURATION = \"Debug\" -o $CONFIGURATION = \"Debug-Local\" ]; then\n${PODS_ROOT}/LicensePlist/license-plist --output-path ${SRCROOT}/Amby/Resources/license\nfi";
+			shellScript = "if [ $CONFIGURATION = \"Debug\" -o $CONFIGURATION = \"Debug-Local\" ]; then\n${PODS_ROOT}/LicensePlist/license-plist --output-path ${SRCROOT}/Amby/Resources/license\nfi\n";
 		};
 		A17AC346225F612800E4262E /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3283,7 +3305,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which \"${PODS_ROOT}/SwiftLint/swiftlint\" >/dev/null; then\n    ${PODS_ROOT}/SwiftLint/swiftlint autocorrect\n    ${PODS_ROOT}/SwiftLint/swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which \"${PODS_ROOT}/SwiftLint/swiftlint\" >/dev/null; then\n    ${PODS_ROOT}/SwiftLint/swiftlint autocorrect\n    ${PODS_ROOT}/SwiftLint/swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		A562F9002902863CA4320094 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3620,6 +3642,7 @@
 				A15C5460214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift in Sources */,
 				A1FFA6802199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift in Sources */,
 				A190305E209CF978004F1EA5 /* EGApplication.swift in Sources */,
+				A1D828C1235767B800743D57 /* LoginService.swift in Sources */,
 				A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */,
 				A1FFA660219455D20092C4D6 /* OptionMenuSettingSwitchTableViewCellViewModel.swift in Sources */,
 				A15C5454214D699D001E8AB5 /* OptionMenuHelpTableViewCell.swift in Sources */,
@@ -4540,7 +4563,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.amby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.eifandevs.amby";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG STAGING";
 				SWIFT_OBJC_BRIDGING_HEADER = "Amby/Amby-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5201,6 +5224,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = TBQA5RANYY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5215,7 +5239,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.amby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.eifandevs.amby";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG UT";
 				SWIFT_OBJC_BRIDGING_HEADER = "Amby/Amby-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5308,7 +5332,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.amby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.eifandevs.amby";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG LOCAL";
 				SWIFT_OBJC_BRIDGING_HEADER = "Amby/Amby-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5450,7 +5474,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.amby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.eifandevs.amby";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Amby/Amby-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5465,8 +5489,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = TBQA5RANYY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5481,7 +5506,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eifandevs.amby;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.eifandevs.amby";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_OBJC_BRIDGING_HEADER = "Amby/Amby-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

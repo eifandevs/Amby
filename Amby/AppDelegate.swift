@@ -134,18 +134,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 
     func sign(_: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            log.error("\(error.localizedDescription)")
-        } else {
-            // Perform any operations on signed in user here.
-            let userId = user.userID // For client-side use only!
-            let idToken = user.authentication.idToken // Safe to send to the server
-            let fullName = user.profile.name
-            let givenName = user.profile.givenName
-            let familyName = user.profile.familyName
-            let email = user.profile.email
-            log.debug("userId: \(userId ?? "") idToken: \(idToken) fullName: \(fullName) givenName: \(givenName) familyName: \(familyName) email: \(email)")
-        }
+        LoginService().signIn(nil, didSignInFor: user, withError: error)
+            .then { _ in
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
+                log.debug("signIn success")
+            }.catch { _ in
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
+                log.error("signIn error")
+            }
     }
 
     // 追記部分(デリゲートメソッド)エラー来た時
