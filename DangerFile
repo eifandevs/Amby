@@ -1,14 +1,1 @@
-#Ciスキップ
-if git.commits.first.message =~ /\[ci skip\]/ || github.pr_body =~ /\[ci skip\]/
-  warn "Test stage is skipped"
-  File.open(".ci_skip", "w")
-end
-
-#developブランチではなく、masterブランチにマージしようとしていなかの確認
-fail("The merge destination is not a `develop branch`") if github.branch_for_base == "master"
-
-#PullRequestのDescription有無を確認
-warn("There is no description for PullRequest. Please enter a description.") if !github.pr_body.include? "Description"
-
-#PullRequestにラベルが貼られているかを確認
-fail "Please add labels to this PR" if github.pr_labels.empty?
+warn('てすと')

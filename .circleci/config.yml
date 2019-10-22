@@ -66,6 +66,14 @@ workflows:
   check_and_build:
     jobs:
       - danger:
+          filters:
+            branches:
+              only:
+                - develop
       - build-and-test:
-        requires:
-          - danger
+          requires:
+            - danger
+          filters:
+            branches:
+              only:
+                - develop
