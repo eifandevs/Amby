@@ -24,6 +24,7 @@ jobs:
     steps:
       - checkout
       - run: gem install danger-todoist
+      - run: gem install danger
       - run: danger
 
   build-and-test:
