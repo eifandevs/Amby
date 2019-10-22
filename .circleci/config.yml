@@ -26,7 +26,7 @@ jobs:
       - run: gem install danger-todoist
       - run: danger
 
-  build:
+  build-and-test:
     <<: *defaults
     steps:
       - checkout:
@@ -61,17 +61,19 @@ jobs:
           name: Build
           command: bundle exec fastlane ios dev
 
-workflow_filters: &workflow_filters
-  filters:
-    branches:
-      only:
-        - develop
-
 workflows:
   version: 2
   check_and_build:
     jobs:
-      - danger: *workflow_filters
-      - build: *workflow_filters
-           requires:
-             - danger
+      - danger:
+        filters:
+          branches:
+            only:
+              - develop
+      - build-and-test:
+        filters:
+          branches:
+            only:
+              - develop
+        requires:
+          - danger
