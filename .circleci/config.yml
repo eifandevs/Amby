@@ -53,3 +53,18 @@ jobs:
     steps:
       - checkout
       - run: danger
+
+workflows:
+  version: 2
+  build-test-lint:
+    jobs:
+
+      - swiftlint
+      - danger
+      - build-and-test:
+          requires:
+            - danger
+          filters:
+            branches:
+              only:
+                - develop
