@@ -1,33 +1,9 @@
-references:
-  defaults: &defaults
-    macos:
-      xcode: "11.1.0"
-    working_directory: ~/project
-    shell: /bin/bash --login -eo pipefail
-    environment:
-      BUNDLER_VERSION: 1.17.2
-      TZ: "/usr/share/zoneinfo/Asia/Tokyo"
-      LANG: "en_US.UTF-8"
-      LC_ALL: "en_US.UTF-8"
-
 version: 2
 jobs:
-  danger:
-    <<: *defaults
-    docker:
-      - image: dantoml/danger:latest
-        environment:
-         - TZ: "/usr/share/zoneinfo/Asia/Tokyo"
-         - LANG: ja_JP.UTF-8
-         - LC_ALL: C.UTF-8
-         - LANGUAGE: ja_JP.UTF-8
-    steps:
-      - checkout
-      - run: gem install danger-todoist
-      - run: danger
-
-  build:
-    <<: *defaults
+  build-and-test:
+    working_directory: ~/project
+    macos:
+      xcode: "11.1.0"
     steps:
       - checkout:
           path: ~/project
@@ -60,16 +36,45 @@ jobs:
       - run:
           name: Build
           command: bundle exec fastlane ios dev
+          
+  swiftlint:
+    docker:
+      - image: dantoml/swiftlint:latest
+    steps:
+      - checkout
+      - run: swiftlint lint --reporter junit | tee result.xml
+      - store_artifacts:
+          path: result.xml
+      - store_test_results:
+          path: result.xml
+  danger:
+    docker:
+      - image: dantoml/danger:latest
+        environment:
+         - TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+         - LANG: ja_JP.UTF-8
+         - LC_ALL: C.UTF-8
+         - LANGUAGE: ja_JP.UTF-8
 
-workflow_filters: &workflow_filters
-  filters:
-    branches:
-      only:
-        - develop
+    steps:
+      - checkout
+      - run: danger
 
 workflows:
   version: 2
-  check_and_build:
+  build-test-lint:
     jobs:
-      - danger: *workflow_filters
-      - build: *workflow_filters
+
+      - swiftlint
+      - danger:
+          filters:
+            branches:
+              only:
+                - develop
+      - build-and-test:
+          requires:
+            - danger
+          filters:
+            branches:
+              only:
+                - develop
