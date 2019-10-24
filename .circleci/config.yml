@@ -1,9 +1,18 @@
+references:
+  defaults: &defaults
+    macos:
+      xcode: "11.1.0"
+    working_directory: ~/project
+    shell: /bin/bash --login -eo pipefail
+    environment:
+      TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+      LANG: "en_US.UTF-8"
+      LC_ALL: "en_US.UTF-8"
+
 version: 2
 jobs:
   build-and-test:
-    working_directory: ~/project
-    macos:
-      xcode: "11.1.0"
+    <<: *defaults
     steps:
       - checkout:
           path: ~/project
@@ -34,39 +43,32 @@ jobs:
       - run:
           name: Build
           command: bundle exec fastlane ios dev
-          
-  # swiftlint:
-  #   docker:
-  #     - image: dantoml/swiftlint:latest
-  #   steps:
-  #     - checkout
-  #     - run: swiftlint lint --reporter junit | tee result.xml
-  #     - store_artifacts:
-  #         path: result.xml
-  #     - store_test_results:
-  #         path: result.xml
+
   danger:
-    working_directory: ~/project
-    macos:
-      xcode: "11.1.0"
+    <<: *defaults
     steps:
       - checkout:
           path: ~/project
-      # Danger Setup
+      # Bundler Setup
       - run:
-          name: Danger Setup
-          command: |
-            gem install danger
-            gem install danger-swiftlint
+          name: Which bundler?
+          command: bundle -v
+      # Bundler Cache
+      - restore_cache:
+          keys:
+            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       # Danger
-      - run: danger
+      - run: bundle exec danger
 
 workflows:
   version: 2
   build-test-lint:
     jobs:
-
-      # - swiftlint
       - danger
       - build-and-test:
           requires:
