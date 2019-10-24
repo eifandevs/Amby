@@ -68,8 +68,6 @@ workflows:
       # - swiftlint
       - danger
       - build-and-test:
-          requires:
-            - danger
           filters:
             branches:
               only:
