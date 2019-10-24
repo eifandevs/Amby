@@ -49,8 +49,8 @@ jobs:
       - checkout
       # Bundler Setup
       - run:
-        name: Which bundler?
-        command: bundle -v
+          name: Which bundler?
+          command: bundle -v
       # Bundler Install & Cache
       - restore_cache:
           keys:
