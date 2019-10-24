@@ -46,16 +46,19 @@ jobs:
   #     - store_test_results:
   #         path: result.xml
   danger:
-    docker:
-      - image: dantoml/danger:latest
-        environment:
-         - TZ: "/usr/share/zoneinfo/Asia/Tokyo"
-         - LANG: ja_JP.UTF-8
-         - LC_ALL: C.UTF-8
-         - LANGUAGE: ja_JP.UTF-8
-
+    working_directory: ~/project
+    macos:
+      xcode: "11.1.0"
     steps:
-      - checkout
+      - checkout:
+          path: ~/project
+      # Danger Setup
+      - run:
+          name: Danger Setup
+          command: |
+            gem install danger
+            gem install danger-swiftlint
+      # Danger
       - run: danger
 
 workflows:
