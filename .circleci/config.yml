@@ -58,10 +58,10 @@ jobs:
       - checkout
       - run:
           name: Install danger-swift
-          command:
-            - npm install -g danger # This installs Danger
-            - brew install danger/tap/danger-swift # This installs Danger-Swift
-            - brew install swiftlint
+          command: |
+            npm install -g danger # This installs Danger
+            brew install danger/tap/danger-swift # This installs Danger-Swift
+            brew install swiftlint
       - run: danger
 
 workflows:
