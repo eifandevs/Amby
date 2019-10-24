@@ -8,21 +8,28 @@ references:
       TZ: "/usr/share/zoneinfo/Asia/Tokyo"
       LANG: "en_US.UTF-8"
       LC_ALL: "en_US.UTF-8"
-  setup_bundler: &setup_bundler
-    # Bundler Setup
-    - run:
-        name: Which bundler?
-        command: bundle -v
-    # Bundler Cache
-    - restore_cache:
-        keys:
-          - gem-cache-v1-{{ checksum "Gemfile.lock" }}
-    - run: bundle install --path vendor/bundle
-    - save_cache:
-        key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
-    setup_carthage: &setup_carthage
+
+version: 2
+jobs:
+  build-and-test:
+    <<: *defaults
+    steps:
+      - checkout:
+          path: ~/project
+      # Bundler Setup
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      # Bundler Cache
+      - restore_cache:
+          keys:
+            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      # Carthage Setup
       - restore_cache:
           key: carthage-cache-v1-{{ checksum "Cartfile.resolved" }}
       - run:
@@ -32,16 +39,7 @@ references:
           key: carthage-cache-v1-{{ checksum "Cartfile.resolved" }}
           paths:
             - Carthage
-
-version: 2
-jobs:
-  build-and-test:
-    <<: *defaults
-    steps:
-      - checkout:
-          path: ~/project
-      - *setup_bundler
-      - *setup_carthage
+      # Build
       - run:
           name: Build
           command: bundle exec fastlane ios dev
@@ -51,7 +49,20 @@ jobs:
     steps:
       - checkout:
           path: ~/project
-      - *setup_bundler
+      # Bundler Setup
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      # Bundler Cache
+      - restore_cache:
+          keys:
+            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      # Danger
       - run: bundle exec danger
 
 workflows:
