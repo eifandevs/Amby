@@ -60,7 +60,7 @@ jobs:
           key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-      - run: bundler exec danger
+      - run: bundle exec danger
 
 workflows:
   version: 2
