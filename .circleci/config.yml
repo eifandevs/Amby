@@ -9,12 +9,12 @@ jobs:
           path: ~/project
       # Carthage Setup
       - restore_cache:
-          key: dev-ca-{{ checksum "Cartfile.resolved" }}
+          key: carthage-cache-{{ checksum "Cartfile.resolved" }}
       - run:
           name: bootstrap
           command: ./bootstrap.sh
       - save_cache:
-          key: dev-ca-{{ checksum "Cartfile.resolved" }}
+          key: carthage-cache-{{ checksum "Cartfile.resolved" }}
           paths:
             - Carthage
       # Bundler Setup
@@ -66,11 +66,7 @@ workflows:
     jobs:
 
       # - swiftlint
-      - danger:
-          filters:
-            branches:
-              only:
-                - develop
+      - danger
       - build-and-test:
           requires:
             - danger
