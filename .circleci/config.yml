@@ -32,7 +32,7 @@ jobs:
             - vendor/bundle
       # Carthage Setup
       - restore_cache:
-          key:
+          keys:
             - carthage-cache-v2-{{ checksum "Cartfile.resolved" }}
             - carthage-cache-v2-
       - run:
