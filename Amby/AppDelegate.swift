@@ -138,6 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             .then { _ in
                 NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
                 log.debug("signIn success")
+                // TODO: ログイン
             }.catch { _ in
                 NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
                 log.error("signIn error")
