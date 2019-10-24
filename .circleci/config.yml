@@ -56,11 +56,6 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: Install danger-swift
-          command: |
-            brew install danger/tap/danger-swift # This installs Danger-Swift
-            brew install swiftlint
       - run: danger
 
 workflows:
