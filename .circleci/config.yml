@@ -23,20 +23,23 @@ jobs:
       # Bundler Cache
       - restore_cache:
           keys:
-            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v2-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v2-
       - run: bundle install --path vendor/bundle
       - save_cache:
-          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          key: gem-cache-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
       # Carthage Setup
       - restore_cache:
-          key: carthage-cache-v1-{{ checksum "Cartfile.resolved" }}
+          key:
+            - carthage-cache-v2-{{ checksum "Cartfile.resolved" }}
+            - carthage-cache-v2-
       - run:
           name: bootstrap
           command: ./bootstrap.sh
       - save_cache:
-          key: carthage-cache-v1-{{ checksum "Cartfile.resolved" }}
+          key: carthage-cache-v2-{{ checksum "Cartfile.resolved" }}
           paths:
             - Carthage
       # Build
@@ -56,10 +59,11 @@ jobs:
       # Bundler Cache
       - restore_cache:
           keys:
-            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v2-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v2-
       - run: bundle install --path vendor/bundle
       - save_cache:
-          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          key: gem-cache-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
       # Danger
