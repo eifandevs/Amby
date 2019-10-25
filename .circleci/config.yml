@@ -1,5 +1,7 @@
-references:
-  defaults: &defaults
+version: 2.1
+
+executors:
+  defaults:
     macos:
       xcode: "11.1.0"
     working_directory: ~/project
@@ -9,18 +11,22 @@ references:
       LANG: "en_US.UTF-8"
       LC_ALL: "en_US.UTF-8"
 
-version: 2
-jobs:
-  build-and-test:
-    <<: *defaults
+commands:
+  checkout_src:
     steps:
       - checkout:
           path: ~/project
-      # Bundler Setup
+
+  setup_ruby:
+    steps:
       - run:
-          name: Which bundler?
-          command: bundle -v
-      # Bundler Cache
+          name: Set Ruby Version
+          command: |
+            # echo "ruby-2.4" > ~/.ruby-version
+            ruby -v
+
+  setup_gems:
+    steps:
       - restore_cache:
           keys:
             - gem-cache-v2-{{ checksum "Gemfile.lock" }}
@@ -30,7 +36,9 @@ jobs:
           key: gem-cache-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-      # Carthage Setup
+
+  setup_carthage:
+    steps:
       - restore_cache:
           keys:
             - carthage-cache-v2-{{ checksum "Cartfile.resolved" }}
@@ -42,32 +50,30 @@ jobs:
           key: carthage-cache-v2-{{ checksum "Cartfile.resolved" }}
           paths:
             - Carthage
-      # Build
+
+jobs:
+  build-and-test:
+    executor:
+      name: defaults
+    steps:
+      - checkout_src
+      - setup_ruby
+      - setup_gems
+      - setup_carthage
       - run:
           name: Build
           command: bundle exec fastlane ios dev
 
   danger:
-    <<: *defaults
+    executor:
+      name: defaults
     steps:
-      - checkout:
-          path: ~/project
-      # Bundler Setup
+      - checkout_src
+      - setup_ruby
+      - setup_gems
       - run:
-          name: Which bundler?
-          command: bundle -v
-      # Bundler Cache
-      - restore_cache:
-          keys:
-            - gem-cache-v2-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v2-
-      - run: bundle install --path vendor/bundle
-      - save_cache:
-          key: gem-cache-v2-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      # Danger
-      - run: bundle exec danger
+          name: Danger
+          command: bundle exec danger
 
 workflows:
   version: 2
