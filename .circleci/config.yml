@@ -19,28 +19,28 @@ references:
         ruby -v
   setup_gems: &setup_gems
     steps:
-      - restore_cache:
-          keys:
-            - gem-cache-v2-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v2-
-      - run: bundle install --path vendor/bundle
-      - save_cache:
-          key: gem-cache-v2-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
+      restore_cache:
+        keys:
+          - gem-cache-v2-{{ checksum "Gemfile.lock" }}
+          - gem-cache-v2-
+      run: bundle install --path vendor/bundle
+      save_cache:
+        key: gem-cache-v2-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
   setup_carthage: &setup_carthage
     steps:
-      - restore_cache:
-          keys:
-            - carthage-cache-v2-{{ checksum "Cartfile.resolved" }}
-            - carthage-cache-v2-
-      - run:
-          name: bootstrap
-          command: ./bootstrap.sh
-      - save_cache:
-          key: carthage-cache-v2-{{ checksum "Cartfile.resolved" }}
-          paths:
-            - Carthage
+      restore_cache:
+        keys:
+          - carthage-cache-v2-{{ checksum "Cartfile.resolved" }}
+          - carthage-cache-v2-
+      run:
+        name: bootstrap
+        command: ./bootstrap.sh
+      save_cache:
+        key: carthage-cache-v2-{{ checksum "Cartfile.resolved" }}
+        paths:
+          - Carthage
 
 version: 2
 jobs:
