@@ -26,6 +26,7 @@ struct ModelConst {
 
     static let KEY = KEY_VALUE()
     struct KEY_VALUE {
+        let API_TOKEN = ResourceUtil().get(key: "KEY_API_TOKEN")
         let REALM_TOKEN = ResourceUtil().get(key: "KEY_REALM_TOKEN")
         let ENCRYPT_SERVICE_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_SERVICE_TOKEN")
         let ENCRYPT_IV_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_IV_TOKEN")

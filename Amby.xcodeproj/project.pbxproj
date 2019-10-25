@@ -15,6 +15,8 @@
 		9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */; };
 		9D2E211F22FD7B610024F45D /* InvertLockMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */; };
 		9D4136F722F9459E00277E2D /* GetListHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */; };
+		9D79168F2362F4E1000054A1 /* CommonLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D79168E2362F4E0000054A1 /* CommonLoginUseCase.swift */; };
+		9D7916912362FC1B000054A1 /* SplashViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */; };
 		9DABBA46230BEABF0024DA0F /* GetFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */; };
 		9DD2433422FD6966006A6F8B /* SelectMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */; };
 		9DF1246B234D77C800B80BB2 /* DefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF1246A234D77C800B80BB2 /* DefaultsService.swift */; };
@@ -556,6 +558,8 @@
 		9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoUseCase.swift; sourceTree = "<group>"; };
 		9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertLockMemoUseCase.swift; sourceTree = "<group>"; };
 		9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListHistoryUseCase.swift; sourceTree = "<group>"; };
+		9D79168E2362F4E0000054A1 /* CommonLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonLoginUseCase.swift; sourceTree = "<group>"; };
+		9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewControllerViewModel.swift; sourceTree = "<group>"; };
 		9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteResponse.swift; sourceTree = "<group>"; };
 		9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemoUseCase.swift; sourceTree = "<group>"; };
 		9DF1246A234D77C800B80BB2 /* DefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsService.swift; sourceTree = "<group>"; };
@@ -1478,6 +1482,7 @@
 				A11CD31A214F058F00D9333F /* BaseViewControllerViewModel.swift */,
 				A11CD30D214F058F00D9333F /* FrontLayer */,
 				A11CD31B214F058F00D9333F /* BaseLayer */,
+				9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1644,6 +1649,7 @@
 			isa = PBXGroup;
 			children = (
 				A1422B4823043F01002DAF52 /* LoginUseCase.swift */,
+				9D79168E2362F4E0000054A1 /* CommonLoginUseCase.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -3548,6 +3554,7 @@
 				A1AA75E222FAF3C60089A522 /* SelectHistoryUseCase.swift in Sources */,
 				9DF1246B234D77C800B80BB2 /* DefaultsService.swift in Sources */,
 				A1AA75CA22F6A6EE0089A522 /* GetSettingUseCase.swift in Sources */,
+				9D79168F2362F4E1000054A1 /* CommonLoginUseCase.swift in Sources */,
 				A1422B3A2301410F002DAF52 /* DeleteThumbnailUseCase.swift in Sources */,
 				A19352A12141569C002A0865 /* Google.swift in Sources */,
 				A19506372143F8AF0091DF23 /* CommonHistoryDataModel.swift in Sources */,
@@ -3672,6 +3679,7 @@
 				A112E82D212CD76500320048 /* SplashViewController.swift in Sources */,
 				A1FFA66C2194FD000092C4D6 /* OptionMenuTabGroupTableView.swift in Sources */,
 				A112E86B212CD76500320048 /* ReportViewController.swift in Sources */,
+				9D7916912362FC1B000054A1 /* SplashViewControllerViewModel.swift in Sources */,
 				A11CD332214F059000D9333F /* BaseViewModel.swift in Sources */,
 				A1903016209CF977004F1EA5 /* AppDelegate.swift in Sources */,
 				A1E5B0BB221306F6007172D8 /* OptionMenuTabGroupTableViewModel.swift in Sources */,

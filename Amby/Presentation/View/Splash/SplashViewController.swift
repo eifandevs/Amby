@@ -26,6 +26,7 @@ class SplashViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // TODO: get accesstoken
         rx_action.onNext(.endDrawing)
     }
 

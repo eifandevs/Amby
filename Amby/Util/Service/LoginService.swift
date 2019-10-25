@@ -41,8 +41,6 @@ class LoginService {
                     }
                     log.debug("firebase login success. userid: \(Auth.auth().currentUser!.uid)")
                     resolve(true)
-                    // User is signed in
-                    // ...
                 }
             }
         }

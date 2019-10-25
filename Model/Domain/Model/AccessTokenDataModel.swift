@@ -35,6 +35,7 @@ protocol AccessTokenDataModelProtocol {
     var realmEncryptionToken: String! { get }
     var keychainServiceToken: String! { get }
     var keychainIvToken: String! { get }
+    var hasApiToken: Bool { get }
     func fetch(request: GetAccessTokenRequest)
 }
 
@@ -44,6 +45,8 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
     /// エラー通知用RX
     let rx_error = PublishSubject<AccessTokenDataModelError>()
 
+    /// APIトークン
+    var apiToken: String?
     /// DBトークン
     let realmEncryptionToken: String!
     /// キーチェーントークン
@@ -51,12 +54,19 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
     /// キーチェーンIVトークン
     let keychainIvToken: String!
 
+    var hasApiToken: Bool {
+        return apiToken != nil
+    }
+
     static let s = AccessTokenDataModel()
     private let disposeBag = DisposeBag()
 
     private init() {
         let repository = KeychainRepository()
 
+        if let apiToken = repository.get(key: ModelConst.KEY.API_TOKEN) {
+            self.apiToken = apiToken
+        }
         if let realmEncryptionToken = repository.get(key: ModelConst.KEY.REALM_TOKEN) {
             self.realmEncryptionToken = realmEncryptionToken
         } else {
@@ -79,7 +89,7 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
         }
     }
 
-    /// 記事取得
+    /// Get API access token
     func fetch(request: GetAccessTokenRequest) {
         let repository = ApiRepository<App>()
 

@@ -26,6 +26,8 @@
 	<string>com.eifandevs.amby-encrypt-service-token</string>
 	<key>KEY_REALM_TOKEN</key>
 	<string>com.eifandevs.amby-realm-token</string>
+	<key>KEY_API_TOKEN</key>
+	<string>com.eifandevs.amby-api-token</string>
 	<key>SUGGEST_SERVER_PATH</key>
 	<string>/complete/search</string>
 	<key>SUGGEST_SERVER_DOMAIN</key>

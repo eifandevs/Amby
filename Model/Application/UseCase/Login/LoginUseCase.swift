@@ -12,7 +12,6 @@ import RxCocoa
 import RxSwift
 
 public final class LoginUseCase {
-    public static let s = LoginUseCase()
 
     private var accessTokenDataModel: AccessTokenDataModelProtocol!
 
