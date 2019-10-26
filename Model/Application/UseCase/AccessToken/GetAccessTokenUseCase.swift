@@ -1,8 +1,8 @@
 //
-//  LoginUseCase.swift
-//  Amby
+//  GetAccessTokenUseCase.swift
+//  Model
 //
-//  Created by tenma.i on 2019/08/14.
+//  Created by tenma.i on 2019/10/25.
 //  Copyright © 2019 eifandevs. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import Entity
 import RxCocoa
 import RxSwift
 
-public final class LoginUseCase {
+public final class GetAccessTokenUseCase {
 
     private var accessTokenDataModel: AccessTokenDataModelProtocol!
 
@@ -27,6 +27,7 @@ public final class LoginUseCase {
     }
 
     public func exe() {
+        log.debug("has not api token. will common login")
         let request = GetAccessTokenRequest(authHeaderToken: "")
         accessTokenDataModel.rx_action
             .subscribe { [weak self] action in

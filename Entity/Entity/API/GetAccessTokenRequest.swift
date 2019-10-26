@@ -11,11 +11,9 @@ import Foundation
 /// トークン取得リクエスト
 public struct GetAccessTokenRequest {
 
-    public init(auth_type: Int, email: String?) {
-        self.auth_type = auth_type
-        self.email = email
+    public init(authHeaderToken: String) {
+        self.authHeaderToken = authHeaderToken
     }
 
-    public let auth_type: Int // 1: 共通, 2: Google
-    public let email: String?
+    public let authHeaderToken: String
 }

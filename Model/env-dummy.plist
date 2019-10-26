@@ -14,8 +14,14 @@
 	<string>https://github.com/eifandevs/Amby/issues</string>
 	<key>ARTICLE_API_PATH</key>
 	<string>/path</string>
+	<key>API_AUTH_HEADER_TOKEN</key>
+	<string>fhjdk</string>
+	<key>API_BASIC_AUTH_USER</key>
+	<string>fhdjks</string>
+	<key>API_BASIC_AUTH_PASS</key>
+	<string>hfdj</string>
 	<key>ACCESSTOKEN_API_PATH</key>
-	<string></string>
+	<string>/access-token</string>
 	<key>APP_SERVER_DOMAIN</key>
 	<string>https://</string>
 	<key>TREND_HOME_URL</key>
