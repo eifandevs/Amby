@@ -18,7 +18,11 @@ class SplashViewController: UIViewController {
     /// アクション通知用RX
     let rx_action = PublishSubject<SplashViewControllerAction>()
 
+    let viewModel = SplashViewControllerViewModel()
+
     @IBOutlet var contentView: UIView!
+
+    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,14 @@ class SplashViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // TODO: get accesstoken
+//        viewModel.getAccessToken().subscribe { result in
+//            switch result {
+//            case let .success(response):
+//                log.debug("success get access token. response: \(response)")
+//            case .error:
+//                log.error("fail to get access token")
+//            }
+//        }.disposed(by: disposeBag)
         rx_action.onNext(.endDrawing)
     }
 

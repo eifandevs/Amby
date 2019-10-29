@@ -18,7 +18,7 @@ public final class GetAccessTokenUseCase {
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
-    private init() {
+    public init() {
         setupProtocolImpl()
     }
 
@@ -26,18 +26,36 @@ public final class GetAccessTokenUseCase {
         accessTokenDataModel = AccessTokenDataModel.s
     }
 
-    public func exe() {
+    public func exe() -> Single<GetAccessTokenResponse.AccessToken> {
         log.debug("has not api token. will common login")
-        let request = GetAccessTokenRequest(authHeaderToken: "")
-        accessTokenDataModel.rx_action
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element else { return }
-                switch action {
-                case let .fetch(accessToken):
-                    log.debug("accessToken: \(accessToken)")
-                }
+        return Single<GetAccessTokenResponse.AccessToken>.create(subscribe: { [weak self] (observer) -> Disposable in
+            guard let `self` = self else {
+                return Disposables.create()
             }
-            .disposed(by: disposeBag)
-        accessTokenDataModel.fetch(request: request)
+            let request = GetAccessTokenRequest(authHeaderToken: ModelConst.KEY.API_AUTH_HEADER_TOKEN)
+            self.accessTokenDataModel.rx_action
+                .subscribe { action in
+                    guard let action = action.element else { return }
+                    switch action {
+                    case let .fetch(accessToken):
+                        observer(.success(accessToken))
+                    }
+                }
+            .disposed(by: self.disposeBag)
+
+            self.accessTokenDataModel.rx_error
+                .subscribe { error in
+                    guard let error = error.element else { return }
+                    switch error {
+                    case .fetch:
+                        observer(.error(NSError.empty))
+                    }
+                }
+            .disposed(by: self.disposeBag)
+
+            self.accessTokenDataModel.fetch(request: request)
+
+            return Disposables.create()
+        })
     }
 }

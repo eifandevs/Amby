@@ -115,7 +115,8 @@ public final class NoticeHandlerUseCase {
             memoDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             thumbnailDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             issueDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
-            LocalAuthenticationHandlerUseCase.s.rx_error.flatMap { Observable.just($0 as ModelError) }
+            LocalAuthenticationHandlerUseCase.s.rx_error.flatMap { Observable.just($0 as ModelError) },
+            AccessTokenDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) }
         ]).subscribe { [weak self] modelError in
             guard let `self` = self, let modelError = modelError.element else { return }
             self.rx_action.onNext(.present(message: modelError.message, isSuccess: false))

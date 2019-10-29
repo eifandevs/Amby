@@ -12,4 +12,10 @@ import Model
 import RxCocoa
 import RxSwift
 
-final class SplashViewControllerViewModel {}
+final class SplashViewControllerViewModel {
+    let getAccessTokenUC = GetAccessTokenUseCase()
+
+    func getAccessToken() -> Single<GetAccessTokenResponse.AccessToken> {
+        return getAccessTokenUC.exe()
+    }
+}
