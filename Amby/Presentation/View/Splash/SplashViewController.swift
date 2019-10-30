@@ -30,15 +30,7 @@ class SplashViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        viewModel.getAccessToken().subscribe { result in
-//            switch result {
-//            case let .success(response):
-//                log.debug("success get access token. response: \(response)")
-//            case .error:
-//                log.error("fail to get access token")
-//            }
-//        }.disposed(by: disposeBag)
-        rx_action.onNext(.endDrawing)
+        getAccessToken()
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,5 +40,20 @@ class SplashViewController: UIViewController {
 
     deinit {
         log.debug("deinit called.")
+    }
+
+    func getAccessToken() {
+        viewModel.getAccessToken().subscribe { [weak self] result in
+            switch result {
+            case let .success:
+                log.debug("success get access token")
+                self!.rx_action.onNext(.endDrawing)
+            case .error:
+                log.error("fail to get access token")
+                NotificationService.presentRetryAlert(title: MessageConst.ALERT.COMMON_TITLE, message: MessageConst.ALERT.COMMON_MESSAGE, completion: {
+                    self!.getAccessToken()
+                })
+            }
+        }.disposed(by: disposeBag)
     }
 }

@@ -26,19 +26,27 @@ public final class GetAccessTokenUseCase {
         accessTokenDataModel = AccessTokenDataModel.s
     }
 
-    public func exe() -> Single<GetAccessTokenResponse.AccessToken> {
-        log.debug("has not api token. will common login")
-        return Single<GetAccessTokenResponse.AccessToken>.create(subscribe: { [weak self] (observer) -> Disposable in
+    public func exe() -> Single<()> {
+
+        return Single<()>.create(subscribe: { [weak self] (observer) -> Disposable in
             guard let `self` = self else {
+                observer(.error(NSError.empty))
                 return Disposables.create()
             }
-            let request = GetAccessTokenRequest(authHeaderToken: ModelConst.KEY.API_AUTH_HEADER_TOKEN)
+
+            if self.accessTokenDataModel.hasApiToken {
+                log.debug("has api token. skip get api")
+                observer(.success(()))
+                return Disposables.create()
+            }
+            log.debug("has not api token. get api")
+            let request = GetAccessTokenRequest(authHeaderToken: ModelConst.API.API_AUTH_HEADER_TOKEN)
             self.accessTokenDataModel.rx_action
                 .subscribe { action in
                     guard let action = action.element else { return }
                     switch action {
                     case let .fetch(accessToken):
-                        observer(.success(accessToken))
+                        observer(.success(()))
                     }
                 }
             .disposed(by: self.disposeBag)

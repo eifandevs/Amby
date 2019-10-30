@@ -14,6 +14,7 @@ struct MessageConst {
 
     struct COMMON {
         static let OK = "OK"
+        static let RETRY = "リトライ"
         static let ERROR = "エラー"
         static let CANCEL = "キャンセル"
     }
@@ -27,6 +28,8 @@ struct MessageConst {
         static let FORM_SAVE_TITLE = "フォームデータ保存"
         static let FORM_EXIST = "保存済みフォームが存在します。自動入力しますか？"
         static let FORM_SAVE_MESSAGE = "入力したフォームデータを保存しますか？"
+        static let COMMON_TITLE = "通信エラー"
+        static let COMMON_MESSAGE = "通信に失敗しました"
         static let DELETE_TITLE = "データ削除"
         static let DELETE_COMMON_HISTORY = "閲覧履歴を全て削除します。よろしいですか？"
         static let DELETE_BOOK_MARK = "ブックマークを全て削除します。よろしいですか？"

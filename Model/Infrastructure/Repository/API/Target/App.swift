@@ -78,8 +78,8 @@ extension App: TargetType {
             return nil
         case .favorite:
             return nil
-        case .accessToken:
-            return nil
+        case let .accessToken(request):
+            return ["X-Auth-Token": request.authHeaderToken]
         }
     }
 }

@@ -54,7 +54,29 @@ class BaseViewController: UIViewController {
 
         onceExec.call {
             // iPhoneX対応を入れたいので、Lauout時にセットアップする
-            setup()
+            splash = SplashViewController()
+            splash!.view.frame.size = view.frame.size
+            splash!.view.frame.origin = CGPoint.zero
+
+            // スプラッシュ終了監視
+            splash!.rx_action
+                .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
+                .subscribe { [weak self] action in
+                    guard let `self` = self, let action = action.element, let splash = self.splash, case .endDrawing = action else { return }
+                    self.setup()
+                    UIView.animate(withDuration: 0.3, animations: {
+                        splash.view.alpha = 0
+                    }, completion: { finished in
+                        if finished {
+                            splash.view.removeFromSuperview()
+                            splash.removeFromParentViewController()
+                            self.splash = nil
+                        }
+                    })
+                }
+                .disposed(by: rx.disposeBag)
+
+            view.addSubview(splash!.view)
         }
     }
 
@@ -105,29 +127,6 @@ class BaseViewController: UIViewController {
             }
             .disposed(by: rx.disposeBag)
 
-        splash = SplashViewController()
-        splash!.view.frame.size = view.frame.size
-        splash!.view.frame.origin = CGPoint.zero
-
-        // スプラッシュ終了監視
-        splash!.rx_action
-            .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, let splash = self.splash, case .endDrawing = action else { return }
-                UIView.animate(withDuration: 0.3, animations: {
-                    splash.view.alpha = 0
-                }, completion: { finished in
-                    if finished {
-                        splash.view.removeFromSuperview()
-                        splash.removeFromParentViewController()
-                        self.splash = nil
-                    }
-                })
-            }
-            .disposed(by: rx.disposeBag)
-
-        view.addSubview(splash!.view)
-
         // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
         baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: view.bounds.size))
 
@@ -154,7 +153,9 @@ class BaseViewController: UIViewController {
 
         view.addSubview(baseLayer!)
 
-        view.bringSubview(toFront: splash!.view)
+        if let splash = splash {
+            view.bringSubview(toFront: splash.view)
+        }
     }
 
     override func didReceiveMemoryWarning() {

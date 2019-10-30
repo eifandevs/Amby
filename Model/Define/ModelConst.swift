@@ -24,13 +24,22 @@ struct ModelConst {
 
     // MARK: - キー情報
 
+    static let API = API_VALUE()
+    struct API_VALUE {
+        let API_AUTH_HEADER_TOKEN = ResourceUtil().get(key: "API_AUTH_HEADER_TOKEN")
+        let API_BASIC_AUTH_USER = ResourceUtil().get(key: "API_BASIC_AUTH_USER")
+        let API_BASIC_AUTH_PASS = ResourceUtil().get(key: "API_BASIC_AUTH_PASS")
+    }
+
+    // MARK: - キー情報
+
     static let KEY = KEY_VALUE()
     struct KEY_VALUE {
-        let API_AUTH_HEADER_TOKEN = ResourceUtil().get(key: "AUTH_HEADER_TOKEN")
-        let API_TOKEN = ResourceUtil().get(key: "KEY_API_TOKEN")
-        let REALM_TOKEN = ResourceUtil().get(key: "KEY_REALM_TOKEN")
-        let ENCRYPT_SERVICE_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_SERVICE_TOKEN")
-        let ENCRYPT_IV_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_IV_TOKEN")
+        let KEYCHAIN_KEY_API_ACCESS_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_API_ACCESS_TOKEN")
+        let KEYCHAIN_KEY_API_REFRESH_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_API_REFRESH_TOKEN")
+        let KEYCHAIN_KEY_REALM_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_API_ACCESS_TOKEN")
+        let KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN")
+        let KEYCHAIN_KEY_ENCRYPT_IV_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN")
         let GITHUB_ACCESS_TOKEN = ResourceUtil().get(key: "GITHUB_ACCESS_TOKEN")
         let OWNER = "eifandevs"
         let REPOSITORY = "IssueTest"

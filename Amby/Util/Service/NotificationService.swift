@@ -37,6 +37,17 @@ class NotificationService {
         }
     }
 
+    static func presentRetryAlert(title: String, message: String, completion: (() -> Void)?) {
+        DispatchQueue.mainSyncSafe {
+            let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let defaultAction: UIAlertAction = UIAlertAction(title: MessageConst.COMMON.RETRY, style: .default, handler: { (_: UIAlertAction!) -> Void in
+                completion?()
+            })
+            alert.addAction(defaultAction)
+            Util.foregroundViewController().present(alert, animated: true, completion: nil)
+        }
+    }
+
     /// 選択肢がある場合はこちらを使用する
     static func presentAlert(title: String, message: String, completion: (() -> Void)?) {
         DispatchQueue.mainSyncSafe {

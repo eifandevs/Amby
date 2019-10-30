@@ -14,6 +14,7 @@ public struct GetAccessTokenResponse: Codable {
     public struct AccessToken: Codable {
         public var access_token: String
         public var refresh_token: String
+        public var expire_date: String
     }
 
     public init(code: String, data: AccessToken) {

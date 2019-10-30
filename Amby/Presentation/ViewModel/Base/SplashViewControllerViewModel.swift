@@ -15,7 +15,7 @@ import RxSwift
 final class SplashViewControllerViewModel {
     let getAccessTokenUC = GetAccessTokenUseCase()
 
-    func getAccessToken() -> Single<GetAccessTokenResponse.AccessToken> {
+    func getAccessToken() -> Single<()> {
         return getAccessTokenUC.exe()
     }
 }
