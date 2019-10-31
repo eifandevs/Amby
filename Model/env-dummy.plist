@@ -12,6 +12,8 @@
 	<string>https://github.com/eifandevs/Amby</string>
 	<key>ISSUE_URL</key>
 	<string>https://github.com/eifandevs/Amby/issues</string>
+	<key>LOGIN_API_PATH</key>
+	<string>/login</string>
 	<key>ARTICLE_API_PATH</key>
 	<string>/article</string>
 	<key>ACCESSTOKEN_API_PATH</key>

@@ -22,4 +22,9 @@ final class KeychainRepository {
         let keychain = Keychain(service: key)
         return keychain[key]
     }
+
+    func delete(key: String) {
+        let keychain = Keychain(service: key)
+        try! keychain.remove(key)
+    }
 }

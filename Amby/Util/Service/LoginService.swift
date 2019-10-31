@@ -10,6 +10,7 @@ import Firebase
 import Foundation
 import GoogleSignIn
 import Hydra
+import Model
 
 class LoginService {
     var isLoggedIn: Bool {
@@ -49,6 +50,7 @@ class LoginService {
     func signOut() {
         GIDSignIn.sharedInstance()!.signOut()
         try! Auth.auth().signOut()
+        // TODO: delete user token
         NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_OUT_SUCCESS, isSuccess: true)
         log.debug("logout")
     }

@@ -27,16 +27,17 @@ public final class LoginUseCase {
     }
 
     public func exe() {
-        let request = GetAccessTokenRequest(authHeaderToken: "")
-        accessTokenDataModel.rx_action
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element else { return }
-                switch action {
-                case let .fetch(accessToken):
-                    log.debug("accessToken: \(accessToken)")
-                }
-            }
-            .disposed(by: disposeBag)
-        accessTokenDataModel.fetch(request: request)
+        // TODO: call userdatamodel post
+//        let request = GetAccessTokenRequest(authHeaderToken: "")
+//        accessTokenDataModel.rx_action
+//            .subscribe { [weak self] action in
+//                guard let `self` = self, let action = action.element else { return }
+//                switch action {
+//                case let .fetch(accessToken):
+//                    log.debug("accessToken: \(accessToken)")
+//                }
+//            }
+//            .disposed(by: disposeBag)
+//        accessTokenDataModel.fetch(request: request)
     }
 }

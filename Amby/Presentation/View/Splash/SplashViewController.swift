@@ -45,7 +45,7 @@ class SplashViewController: UIViewController {
     func getAccessToken() {
         viewModel.getAccessToken().subscribe { [weak self] result in
             switch result {
-            case let .success:
+            case .success:
                 log.debug("success get access token")
                 self!.rx_action.onNext(.endDrawing)
             case .error:

@@ -14,6 +14,10 @@
 		84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90A22EEAE1476346BDB6D1 /* Pods_CommonUtil.framework */; };
 		9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */; };
 		9D2E211F22FD7B610024F45D /* InvertLockMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */; };
+		9D40D8CF236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40D8CE236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift */; };
+		9D40D8D1236A810700A5CE70 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40D8D0236A810700A5CE70 /* UserDataModel.swift */; };
+		9D40D8D3236A86DA00A5CE70 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40D8D2236A86DA00A5CE70 /* LoginRequest.swift */; };
+		9D40D8D5236AA5A700A5CE70 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40D8D4236AA5A700A5CE70 /* LoginResponse.swift */; };
 		9D4136F722F9459E00277E2D /* GetListHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */; };
 		9D7916912362FC1B000054A1 /* SplashViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */; };
 		9DABBA46230BEABF0024DA0F /* GetFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */; };
@@ -557,6 +561,10 @@
 		93D0114BB59CFBCCAC13CB7A /* Pods-Model.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Model.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Model/Pods-Model.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoUseCase.swift; sourceTree = "<group>"; };
 		9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertLockMemoUseCase.swift; sourceTree = "<group>"; };
+		9D40D8CE236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccessTokenUseCase.swift; sourceTree = "<group>"; };
+		9D40D8D0236A810700A5CE70 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
+		9D40D8D2236A86DA00A5CE70 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		9D40D8D4236AA5A700A5CE70 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListHistoryUseCase.swift; sourceTree = "<group>"; };
 		9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewControllerViewModel.swift; sourceTree = "<group>"; };
 		9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteResponse.swift; sourceTree = "<group>"; };
@@ -1447,6 +1455,7 @@
 				A13D6A9C2187489C00B1832E /* MemoDataModel.swift */,
 				A1AA757C22F1E4B70089A522 /* AccessTokenDataModel.swift */,
 				A1AA75D722F7267E0089A522 /* GrepDataModel.swift */,
+				9D40D8D0236A810700A5CE70 /* UserDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1573,6 +1582,7 @@
 			isa = PBXGroup;
 			children = (
 				A121D5732364D33C00EC4D15 /* GetAccessTokenUseCase.swift */,
+				9D40D8CE236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift */,
 			);
 			path = AccessToken;
 			sourceTree = "<group>";
@@ -2349,6 +2359,8 @@
 				A1422B5623119F96002DAF52 /* GetMemoResponse.swift */,
 				A1422B4E2307B1A7002DAF52 /* GetAccessTokenRequest.swift */,
 				9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */,
+				9D40D8D2236A86DA00A5CE70 /* LoginRequest.swift */,
+				9D40D8D4236AA5A700A5CE70 /* LoginResponse.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -3438,9 +3450,11 @@
 				9DABBA46230BEABF0024DA0F /* GetFavoriteResponse.swift in Sources */,
 				A1B7F2D3220F45A0008F3850 /* SearchHistory.swift in Sources */,
 				A1422B5723119F96002DAF52 /* GetMemoResponse.swift in Sources */,
+				9D40D8D5236AA5A700A5CE70 /* LoginResponse.swift in Sources */,
 				A1B7F2D5220F45A0008F3850 /* Suggest.swift in Sources */,
 				A1422B462301EEF5002DAF52 /* GetAccessTokenResponse.swift in Sources */,
 				A1B7F2D7220F45A0008F3850 /* TabGroupList.swift in Sources */,
+				9D40D8D3236A86DA00A5CE70 /* LoginRequest.swift in Sources */,
 				A1B7F2DA220F45A0008F3850 /* Form.swift in Sources */,
 				A1B7F2D2220F45A0008F3850 /* Memo.swift in Sources */,
 				A1B7F2D9220F45A0008F3850 /* Input.swift in Sources */,
@@ -3511,6 +3525,7 @@
 				A1A3DE8F213AEDBC00F87009 /* UserDefaultRepository.swift in Sources */,
 				A1AA75B922F6A6EE0089A522 /* FavoriteHandlerUseCase.swift in Sources */,
 				A1724193223E751A00472477 /* HtmlAnalysisHandlerUseCase.swift in Sources */,
+				9D40D8D1236A810700A5CE70 /* UserDataModel.swift in Sources */,
 				A1A3DE96213AF31D00F87009 /* ResourceUtil.swift in Sources */,
 				A19506352143F8AF0091DF23 /* ArticleDataModel.swift in Sources */,
 				A1422B4923043F01002DAF52 /* LoginUseCase.swift in Sources */,
@@ -3543,6 +3558,7 @@
 				A1AA75BE22F6A6EE0089A522 /* FormHandlerUseCase.swift in Sources */,
 				A1422B2623013880002DAF52 /* UpdateUrlTabUseCase.swift in Sources */,
 				A1AA75D422F6B2E60089A522 /* StoreFormUseCase.swift in Sources */,
+				9D40D8CF236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift in Sources */,
 				A1AA75CC22F6A6EE0089A522 /* MemoHandlerUseCase.swift in Sources */,
 				A195063A2143F8AF0091DF23 /* ProgressDataModel.swift in Sources */,
 				A1422AFE23012C51002DAF52 /* CloseAllTabUseCase.swift in Sources */,

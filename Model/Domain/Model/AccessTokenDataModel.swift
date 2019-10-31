@@ -38,6 +38,7 @@ protocol AccessTokenDataModelProtocol {
     var apiAccessToken: String? { get }
     var apiRefreshToken: String? { get }
     var hasApiToken: Bool { get }
+    func delete()
     func fetch(request: GetAccessTokenRequest)
 }
 
@@ -98,11 +99,20 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
         }
     }
 
+    /// Delete API token
+    func delete() {
+        let repository = KeychainRepository()
+        self.apiAccessToken = nil
+        self.apiRefreshToken = nil
+        repository.delete(key: ModelConst.KEY.KEYCHAIN_KEY_API_ACCESS_TOKEN)
+        repository.delete(key: ModelConst.KEY.KEYCHAIN_KEY_API_REFRESH_TOKEN)
+    }
+
     /// Get API access token
     func fetch(request: GetAccessTokenRequest) {
         let repository = ApiRepository<App>()
 
-        repository.rx.request(.accessToken(request: request))
+        repository.rx.request(.getAccessToken(request: request))
             .observeOn(MainScheduler.asyncInstance)
             .map { (response) -> GetAccessTokenResponse? in
                 log.debug("response: \(String(data: response.data, encoding: .utf8))")
@@ -120,6 +130,12 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
                     guard let `self` = self else { return }
                     if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                         log.debug("get AccessToken success.")
+                        // store access token
+                        let repository = KeychainRepository()
+                        self.apiAccessToken = response.data.access_token
+                        self.apiRefreshToken = response.data.refresh_token
+                        repository.save(key: ModelConst.KEY.KEYCHAIN_KEY_API_ACCESS_TOKEN, value: response.data.access_token)
+                        repository.save(key: ModelConst.KEY.KEYCHAIN_KEY_API_REFRESH_TOKEN, value: response.data.refresh_token)
                         self.rx_action.onNext(.fetch(accessToken: response.data))
                     } else {
                         log.error("get AccessToken error. code: \(response?.code ?? "")")
