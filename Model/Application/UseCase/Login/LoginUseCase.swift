@@ -13,31 +13,31 @@ import RxSwift
 
 public final class LoginUseCase {
 
-    private var accessTokenDataModel: AccessTokenDataModelProtocol!
+    private var userDataModel: UserDataModelProtocol!
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
-    private init() {
+    public init() {
         setupProtocolImpl()
     }
 
     private func setupProtocolImpl() {
-        accessTokenDataModel = AccessTokenDataModel.s
+        userDataModel = UserDataModel.s
     }
 
-    public func exe() {
-        // TODO: call userdatamodel post
-//        let request = GetAccessTokenRequest(authHeaderToken: "")
-//        accessTokenDataModel.rx_action
-//            .subscribe { [weak self] action in
-//                guard let `self` = self, let action = action.element else { return }
-//                switch action {
-//                case let .fetch(accessToken):
-//                    log.debug("accessToken: \(accessToken)")
-//                }
-//            }
-//            .disposed(by: disposeBag)
-//        accessTokenDataModel.fetch(request: request)
+    public func exe(userId: String) {
+        let request = LoginRequest(userId: userId)
+
+        userDataModel.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element else { return }
+                switch action {
+                case let .post(userInfo):
+                    log.debug("userInfo: \(userInfo)")
+                }
+            }
+
+        userDataModel.post(request: request)
     }
 }
