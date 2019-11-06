@@ -37,9 +37,9 @@ struct ModelConst {
     struct KEY_VALUE {
         let KEYCHAIN_KEY_API_ACCESS_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_API_ACCESS_TOKEN")
         let KEYCHAIN_KEY_API_REFRESH_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_API_REFRESH_TOKEN")
-        let KEYCHAIN_KEY_REALM_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_API_ACCESS_TOKEN")
+        let KEYCHAIN_KEY_REALM_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_REALM_TOKEN")
         let KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN")
-        let KEYCHAIN_KEY_ENCRYPT_IV_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN")
+        let KEYCHAIN_KEY_ENCRYPT_IV_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_ENCRYPT_IV_TOKEN")
         let GITHUB_ACCESS_TOKEN = ResourceUtil().get(key: "GITHUB_ACCESS_TOKEN")
         let OWNER = "eifandevs"
         let REPOSITORY = "IssueTest"

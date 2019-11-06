@@ -14,6 +14,8 @@ import UIKit
 class SyncViewController: UIViewController, GIDSignInUIDelegate {
     @IBOutlet var closeButton: CornerRadiusButton!
     @IBOutlet var googleButton: UIButton!
+    @IBOutlet var facebookButton: UIButton!
+    @IBOutlet var twitterButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()

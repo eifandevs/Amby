@@ -11,7 +11,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SyncViewController" customModule="Amby" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="gn8-Wg-gpj" id="Jcl-Ng-BbQ"/>
+                <outlet property="facebookButton" destination="iVj-t5-N9e" id="N10-Hd-HEU"/>
                 <outlet property="googleButton" destination="QSK-aK-zwr" id="zBr-17-NwX"/>
+                <outlet property="twitterButton" destination="c2j-ad-dvz" id="Xtk-IT-y2d"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
