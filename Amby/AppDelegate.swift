@@ -6,6 +6,7 @@
 //  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
+import FBSDKCoreKit
 import Firebase
 import GoogleSignIn
 import Logger
@@ -25,11 +26,11 @@ let uncaughtExceptionHandler: Void = NSSetUncaughtExceptionHandler { exception i
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var baseViewController: BaseViewController?
 
-    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // log setup
         Logger.setup()
 
@@ -73,7 +74,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
             // google sign in
             GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-            GIDSignIn.sharedInstance()?.delegate = self
+
+            // facebook sign in
+            ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         #endif
 
         return true
@@ -127,31 +130,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         ExpireCheckHistoryUseCase().exe()
         ExpireCheckSearchUseCase().exe()
+        AppEvents.activateApp()
     }
 
     func applicationWillTerminate(_: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func sign(_: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        LoginService().signIn(nil, didSignInFor: user, withError: error)
-            .then { _ in
-                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
-                log.debug("signIn success")
-                // TODO: ログイン
-            }.catch { _ in
-                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
-                log.error("signIn error")
-            }
-    }
+    // MARK: Open URL
 
-    // 追記部分(デリゲートメソッド)エラー来た時
-    func sign(_: GIDSignIn!, didDisconnectWith _: GIDGoogleUser!,
-              withError error: Error!) {
-        log.error(error.localizedDescription)
-    }
-
-    func application(_: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
+    func application(application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
+        // TODO: URL判定
+        return ApplicationDelegate.shared.application(application, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
         return GIDSignIn.sharedInstance().handle(url,
                                                  sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
                                                  annotation: [:])

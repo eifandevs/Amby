@@ -6,28 +6,30 @@
 //  Copyright © 2019 eifandevs. All rights reserved.
 //
 
+import FBSDKCoreKit
+import FBSDKLoginKit
 import Firebase
 import GoogleSignIn
 import SnapKit
 import UIKit
 
-class SyncViewController: UIViewController, GIDSignInUIDelegate {
+class SyncViewController: UIViewController {
     @IBOutlet var closeButton: CornerRadiusButton!
-    @IBOutlet var googleButton: UIButton!
-    @IBOutlet var facebookButton: UIButton!
-    @IBOutlet var twitterButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        GIDSignIn.sharedInstance().uiDelegate = self
+        let loginButton = FBLoginButton()
+        loginButton.delegate = self
+//        loginButton.readPermissions = ["public_profile", "email"]
+        loginButton.frame = CGRect(x: 0, y: 0, width: 100, height: 60)
+        view.addSubview(loginButton)
 
-        googleButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let `self` = self else { return }
-                self.dismiss(animated: true, completion: nil)
-                GIDSignIn.sharedInstance()?.signIn()
-            })
-            .disposed(by: rx.disposeBag)
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance()?.delegate = self
+
+        let googleButton = GIDSignInButton()
+        googleButton.frame = CGRect(x: 0, y: 300, width: 100, height: 60)
+        view.addSubview(googleButton)
 
         // ボタンタップ
         closeButton.rx.tap
@@ -38,13 +40,29 @@ class SyncViewController: UIViewController, GIDSignInUIDelegate {
             .disposed(by: rx.disposeBag)
     }
 
-    /*
-     // MARK: - Navigation
+    // 追記部分(デリゲートメソッド)エラー来た時
+    func sign(_: GIDSignIn!, didDisconnectWith _: GIDGoogleUser!,
+              withError error: Error!) {
+        log.error(error.localizedDescription)
+    }
+}
 
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+extension SyncViewController: GIDSignInUIDelegate, GIDSignInDelegate {
+    func sign(_: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        LoginService().signIn(nil, didSignInFor: user, withError: error)
+            .then { _ in
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
+                log.debug("signIn success")
+                // TODO: ログイン
+            }.catch { _ in
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
+                log.error("signIn error")
+            }
+    }
+}
+
+extension SyncViewController: LoginButtonDelegate {
+    func loginButton(_: FBLoginButton, didCompleteWith _: LoginManagerLoginResult?, error _: Error?) {}
+
+    func loginButtonDidLogOut(_: FBLoginButton) {}
 }

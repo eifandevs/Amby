@@ -30,6 +30,14 @@ name: Fabric, nameSpecified:
 body: Fabric: Copyright 20…
 version: 1.10.2
 
+name: FBSDKCoreKit, nameSpecified: 
+body: Copyright (c) 2014-p…
+version: 5.6.0
+
+name: FBSDKLoginKit, nameSpecified: 
+body: Copyright (c) 2014-p…
+version: 5.6.0
+
 name: Firebase, nameSpecified: 
 body: Copyright 2019 Googl…
 version: 6.3.0

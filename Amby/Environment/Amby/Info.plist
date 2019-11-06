@@ -28,7 +28,17 @@
 				<string>com.googleusercontent.apps.124437400770-hrbpg1ro3275jtkpsk805efsh2jp3sin</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb785715298533119</string>
+			</array>
+		</dict>
 	</array>
+	<key>FacebookAppID</key>
+	<string>785715298533119</string>
+	<key>FacebookDisplayName</key>
+	<string>amby</string>
 	<key>CFBundleVersion</key>
 	<string>1.0.0</string>
 	<key>LSRequiresIPhoneOS</key>

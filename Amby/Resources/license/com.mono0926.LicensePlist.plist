@@ -46,6 +46,22 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/FBSDKCoreKit</string>
+			<key>Title</key>
+			<string>FBSDKCoreKit</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/FBSDKLoginKit</string>
+			<key>Title</key>
+			<string>FBSDKLoginKit</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/Firebase</string>
 			<key>Title</key>
 			<string>Firebase</string>

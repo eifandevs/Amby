@@ -12,6 +12,7 @@ import GoogleSignIn
 import Hydra
 import Model
 
+/// Firebaseログイン
 class LoginService {
     var isLoggedIn: Bool {
         return Auth.auth().currentUser != nil
