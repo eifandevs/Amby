@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var baseViewController: BaseViewController?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // log setup
         Logger.setup()
 
@@ -139,11 +139,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: Open URL
 
-    func application(application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
-        // TODO: URL判定
-        return ApplicationDelegate.shared.application(application, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
-        return GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                                                 annotation: [:])
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+        log.debug("open url. url: \(url.absoluteString)")
+        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
+        if GIDSignIn.sharedInstance().handle(url,
+                                             sourceApplication: sourceApplication,
+                                             annotation: [:]) {
+            return true
+        } else if ApplicationDelegate.shared.application(app,
+                                                         open: url,
+                                                         sourceApplication: sourceApplication,
+                                                         annotation: [:]) {
+            return true
+        }
+
+        log.error("cannot open url. url: \(url.absoluteString)")
+        return false
     }
 }

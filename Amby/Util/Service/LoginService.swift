@@ -18,29 +18,38 @@ class LoginService {
         return Auth.auth().currentUser != nil
     }
 
-    func signIn(_: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) -> Promise<Bool> {
+    func signIn(credential: AuthCredential) -> Promise<Bool> {
         return Promise<Bool>(in: .main, token: nil) { resolve, reject, _ in
-            if let error = error {
-                log.error("google signIn error. error: \(error.localizedDescription)")
-                reject(error)
-            } else {
-                // Perform any operations on signed in user here.
-                let userId = user.userID // For client-side use only!
-                let idToken = user.authentication.idToken // Safe to send to the server
-                let fullName = user.profile.name
-                let givenName = user.profile.givenName
-                let familyName = user.profile.familyName
-                let email = user.profile.email
-                log.debug("userId: \(userId ?? "") idToken: \(idToken) fullName: \(fullName) givenName: \(givenName) familyName: \(familyName) email: \(email)")
-                guard let authentication = user.authentication else { return }
-                let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                               accessToken: authentication.accessToken)
-                Auth.auth().signIn(with: credential) { _, error in
-                    if let error = error {
-                        log.error("firebase signIn error. error: \(error.localizedDescription)")
-                        reject(error)
-                        return
-                    }
+            Auth.auth().signIn(with: credential) { _, error in
+                if let error = error {
+                    log.error("firebase signIn error. error: \(error.localizedDescription)")
+                    reject(error)
+                } else {
+                    log.debug("firebase login success. userid: \(Auth.auth().currentUser!.uid)")
+                    resolve(true)
+                }
+            }
+        }
+    }
+
+    func signIn(_: GIDSignIn!, didSignInFor user: GIDGoogleUser!) -> Promise<Bool> {
+        return Promise<Bool>(in: .main, token: nil) { resolve, reject, _ in
+            // Perform any operations on signed in user here.
+            let userId = user.userID // For client-side use only!
+            let idToken = user.authentication.idToken // Safe to send to the server
+            let fullName = user.profile.name
+            let givenName = user.profile.givenName
+            let familyName = user.profile.familyName
+            let email = user.profile.email
+            log.debug("userId: \(userId ?? "") idToken: \(idToken) fullName: \(fullName) givenName: \(givenName) familyName: \(familyName) email: \(email)")
+            guard let authentication = user.authentication else { return }
+            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                           accessToken: authentication.accessToken)
+            Auth.auth().signIn(with: credential) { _, error in
+                if let error = error {
+                    log.error("firebase signIn error. error: \(error.localizedDescription)")
+                    reject(error)
+                } else {
                     log.debug("firebase login success. userid: \(Auth.auth().currentUser!.uid)")
                     resolve(true)
                 }
@@ -49,7 +58,7 @@ class LoginService {
     }
 
     func signOut() {
-        GIDSignIn.sharedInstance()!.signOut()
+        // Firebaseで一括管理しているので、プロバイダー毎にサインアウトは行わない
         try! Auth.auth().signOut()
         // TODO: delete user token
         NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_OUT_SUCCESS, isSuccess: true)
