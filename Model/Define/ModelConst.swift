@@ -51,6 +51,7 @@ struct ModelConst {
         let TAB_SAVE_COUNT = "tabSaveCount"
         let NEW_WINDOW_CONFIRM = "newWindowConfirm"
         let MENU_ORDER = "menuOrder"
+        let LOGIN_PROVIDER = "loginProvider"
         let NOTIFICATION_SUBTITLE = "subtitle"
         let NOTIFICATION_MESSAGE = "message"
         let NOTIFICATION_OPERATION = "operation"
@@ -82,6 +83,7 @@ struct ModelConst {
             UserOperation.closeAll.rawValue,
             UserOperation.grep.rawValue
         ]
+        let LOGIN_PROVIDER = LoginProvider.none.rawValue
         let COMMON_HISTORY_SAVE_COUNT = 90
         let SEARCH_HISTORY_SAVE_COUNT = 90
         let TAB_SAVE_COUNT = 30

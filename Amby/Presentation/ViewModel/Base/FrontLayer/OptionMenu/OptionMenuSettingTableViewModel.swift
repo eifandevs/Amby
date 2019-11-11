@@ -198,6 +198,7 @@ final class OptionMenuSettingTableViewModel {
 
     /// アカウント削除
     func deleteAccount() {
-        LoginService().deleteAccount()
+        let loginService = LoginService()
+        loginService.deleteAccount()
     }
 }

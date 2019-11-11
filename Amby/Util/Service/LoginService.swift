@@ -6,6 +6,8 @@
 //  Copyright © 2019 eifandevs. All rights reserved.
 //
 
+import FBSDKCoreKit
+import FBSDKLoginKit
 import Firebase
 import Foundation
 import GoogleSignIn
@@ -26,6 +28,7 @@ class LoginService {
                     reject(error)
                 } else {
                     log.debug("firebase login success. userid: \(Auth.auth().currentUser!.uid)")
+                    SettingAccessUseCase().loginProvider = .facebook
                     resolve(true)
                 }
             }
@@ -51,18 +54,37 @@ class LoginService {
                     reject(error)
                 } else {
                     log.debug("firebase login success. userid: \(Auth.auth().currentUser!.uid)")
+                    SettingAccessUseCase().loginProvider = .google
                     resolve(true)
                 }
             }
         }
     }
 
-    func signOut() {
-        // Firebaseで一括管理しているので、プロバイダー毎にサインアウトは行わない
+    func signOutSilent() {
+        // logout firebase
         try! Auth.auth().signOut()
+
+        // logout provider
+        let loginProvider = SettingAccessUseCase().loginProvider
+        switch loginProvider {
+        case .google:
+            log.debug("logout google")
+            GIDSignIn.sharedInstance()?.signOut()
+        case .facebook:
+            log.debug("logout facebook")
+            LoginManager().logOut()
+        case .twitter:
+            log.debug("logout twitter")
+        case .none:
+            log.error("logout failed. not login")
+        }
+    }
+
+    func signOut() {
+        signOutSilent()
         // TODO: delete user token
         NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_OUT_SUCCESS, isSuccess: true)
-        log.debug("logout")
     }
 
     func deleteAccount() {
@@ -79,6 +101,20 @@ class LoginService {
                     return
                 }
                 log.debug("delete account success.")
+                // logout provider
+                let loginProvider = SettingAccessUseCase().loginProvider
+                switch loginProvider {
+                case .google:
+                    log.debug("logout google")
+                    GIDSignIn.sharedInstance()?.signOut()
+                case .facebook:
+                    log.debug("logout facebook")
+                    LoginManager().logOut()
+                case .twitter:
+                    log.debug("logout twitter")
+                case .none:
+                    log.error("logout failed. not login")
+                }
                 NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.DELETE_ACCOUNT_SUCCESS, isSuccess: true)
             })
         }

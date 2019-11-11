@@ -13,6 +13,7 @@ protocol SettingDataModelProtocol {
     var lastReportDate: Date { get set }
     var autoScrollInterval: Float { get set }
     var menuOrder: [UserOperation] { get set }
+    var loginProvider: LoginProvider { get set }
     var newWindowConfirm: Bool { get set }
     var tabSaveCount: Int { get }
     var commonHistorySaveCount: Int { get }
@@ -57,6 +58,16 @@ final class SettingDataModel: SettingDataModelProtocol {
         }
         set(value) {
             repository.set(key: .autoScrollInterval, value: Double(value))
+        }
+    }
+
+    /// Login Provider
+    var loginProvider: LoginProvider {
+        get {
+            return LoginProvider(rawValue: repository.get(key: .loginProvider))!
+        }
+        set(value) {
+            repository.set(key: .loginProvider, value: value.rawValue)
         }
     }
 

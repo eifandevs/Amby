@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func initialize() {
-        GetSettingUseCase().initialize()
+        SettingAccessUseCase().initialize()
 
         if let baseViewController = self.window!.rootViewController as? BaseViewController {
             baseViewController.mRelease()

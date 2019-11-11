@@ -19,6 +19,9 @@
 		9D40D8D3236A86DA00A5CE70 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40D8D2236A86DA00A5CE70 /* LoginRequest.swift */; };
 		9D40D8D5236AA5A700A5CE70 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40D8D4236AA5A700A5CE70 /* LoginResponse.swift */; };
 		9D4136F722F9459E00277E2D /* GetListHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */; };
+		9D76C4BA2378F75800F3DB6F /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76C4B92378F75800F3DB6F /* LoginProvider.swift */; };
+		9D76C4BC2378FAD400F3DB6F /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76C4BB2378FAD400F3DB6F /* LogoutUseCase.swift */; };
+		9D76C4BE2378FAE500F3DB6F /* DeleteAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76C4BD2378FAE500F3DB6F /* DeleteAccountUseCase.swift */; };
 		9D7916912362FC1B000054A1 /* SplashViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */; };
 		9DABBA46230BEABF0024DA0F /* GetFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */; };
 		9DD2433422FD6966006A6F8B /* SelectMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */; };
@@ -568,6 +571,9 @@
 		9D40D8D4236AA5A700A5CE70 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListHistoryUseCase.swift; sourceTree = "<group>"; };
 		9D58DD452372C6AD00EE1683 /* AmbyRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AmbyRelease.entitlements; sourceTree = "<group>"; };
+		9D76C4B92378F75800F3DB6F /* LoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
+		9D76C4BB2378FAD400F3DB6F /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
+		9D76C4BD2378FAE500F3DB6F /* DeleteAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountUseCase.swift; sourceTree = "<group>"; };
 		9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewControllerViewModel.swift; sourceTree = "<group>"; };
 		9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteResponse.swift; sourceTree = "<group>"; };
 		9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemoUseCase.swift; sourceTree = "<group>"; };
@@ -1671,6 +1677,8 @@
 			isa = PBXGroup;
 			children = (
 				A1422B4823043F01002DAF52 /* LoginUseCase.swift */,
+				9D76C4BB2378FAD400F3DB6F /* LogoutUseCase.swift */,
+				9D76C4BD2378FAE500F3DB6F /* DeleteAccountUseCase.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2127,6 +2135,7 @@
 				A1950667214404DB0091DF23 /* MessageConst.swift */,
 				A1B778312173A6DA00BED141 /* UserOperation.swift */,
 				A1EF692321AC3A2000726371 /* RepositoryResult.swift */,
+				9D76C4B92378F75800F3DB6F /* LoginProvider.swift */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -3577,6 +3586,7 @@
 				A1422B0623013149002DAF52 /* ChangeTabUseCase.swift in Sources */,
 				A1422B2A23013880002DAF52 /* UpdateSessionTabUseCase.swift in Sources */,
 				A19506382143F8AF0091DF23 /* FavoriteDataModel.swift in Sources */,
+				9D76C4BA2378F75800F3DB6F /* LoginProvider.swift in Sources */,
 				A138CAE12137281800AEA669 /* Model.swift in Sources */,
 				A1422B55231066ED002DAF52 /* FetchFavoriteUseCase.swift in Sources */,
 				A19506342143F8AF0091DF23 /* SettingDataModel.swift in Sources */,
@@ -3608,10 +3618,12 @@
 				A1422B082301317E002DAF52 /* ChangeGroupUseCase.swift in Sources */,
 				A1A3DE8321387D7F00F87009 /* ModelLogger.swift in Sources */,
 				A1422B38230140E1002DAF52 /* GetThumbnailUseCase.swift in Sources */,
+				9D76C4BE2378FAE500F3DB6F /* DeleteAccountUseCase.swift in Sources */,
 				A1422B4023014402002DAF52 /* ExpireCheckSearchUseCase.swift in Sources */,
 				A1422B0223012F2B002DAF52 /* SwapTabUseCase.swift in Sources */,
 				9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */,
 				A1422B4D2307B17C002DAF52 /* GetPassCodeSettingUseCase.swift in Sources */,
+				9D76C4BC2378FAD400F3DB6F /* LogoutUseCase.swift in Sources */,
 				A1AA75B722F6A6EE0089A522 /* NoticeHandlerUseCase.swift in Sources */,
 				A1167CF0234E25C900024515 /* DefaultsService.swift in Sources */,
 				A1B7782E216B795400BED141 /* IssueDataModel.swift in Sources */,
