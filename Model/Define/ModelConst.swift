@@ -36,6 +36,7 @@ struct ModelConst {
     static let KEY = KEY_VALUE()
     struct KEY_VALUE {
         let KEYCHAIN_KEY_API_ACCESS_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_API_ACCESS_TOKEN")
+        let KEYCHAIN_KEY_USER_ID = ResourceUtil().get(key: "KEYCHAIN_KEY_USER_ID")
         let KEYCHAIN_KEY_API_REFRESH_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_API_REFRESH_TOKEN")
         let KEYCHAIN_KEY_REALM_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_REALM_TOKEN")
         let KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN")

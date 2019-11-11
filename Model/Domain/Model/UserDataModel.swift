@@ -32,6 +32,8 @@ extension UserDataModelError: ModelError {
 protocol UserDataModelProtocol {
     var rx_action: PublishSubject<UserDataModelAction> { get }
     var rx_error: PublishSubject<UserDataModelError> { get }
+    var uid: String? { get }
+    var hasUID: Bool { get }
     func post(request: LoginRequest)
 }
 
@@ -41,10 +43,23 @@ final class UserDataModel: UserDataModelProtocol {
     /// エラー通知用RX
     let rx_error = PublishSubject<UserDataModelError>()
 
+    /// uid
+    var uid: String?
+
+    var hasUID: Bool {
+        return uid != nil
+    }
+
     static let s = UserDataModel()
     private let disposeBag = DisposeBag()
 
-    private init() {}
+    private init() {
+        let repository = KeychainRepository()
+
+        if let uid = repository.get(key: ModelConst.KEY.KEYCHAIN_KEY_USER_ID) {
+            self.uid = uid
+        }
+    }
 
     /// Get API access token
     func post(request: LoginRequest) {
@@ -68,6 +83,8 @@ final class UserDataModel: UserDataModelProtocol {
                     guard let `self` = self else { return }
                     if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                         log.debug("login success.")
+                        self.uid = response.data.userId
+                        KeychainRepository().save(key: ModelConst.KEY.KEYCHAIN_KEY_USER_ID, value: response.data.userId)
                         self.rx_action.onNext(.post(userInfo: response.data))
                     } else {
                         log.error("login error. code: \(response?.code ?? "")")

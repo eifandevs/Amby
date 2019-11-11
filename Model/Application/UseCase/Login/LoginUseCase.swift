@@ -26,18 +26,44 @@ public final class LoginUseCase {
         userDataModel = UserDataModel.s
     }
 
-    public func exe(userId: String) {
-        let request = LoginRequest(userId: userId)
+    public func exe(uid: String) -> Single<()> {
 
-        userDataModel.rx_action
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element else { return }
-                switch action {
-                case let .post(userInfo):
-                    log.debug("userInfo: \(userInfo)")
-                }
+        return Single<()>.create(subscribe: { [weak self] (observer) -> Disposable in
+            guard let `self` = self else {
+                observer(.error(NSError.empty))
+                return Disposables.create()
             }
 
-        userDataModel.post(request: request)
+            log.debug("login start...")
+
+            if self.userDataModel.hasUID {
+                log.debug("has uid.")
+            }
+
+            let request = LoginRequest(userId: uid)
+            self.userDataModel.rx_action
+                .subscribe { [weak self] action in
+                    guard let `self` = self, let action = action.element else { return }
+                    switch action {
+                    case let .post(userInfo):
+                        log.debug("app login success: \(userInfo.userId)")
+                        observer(.success(()))
+                    }
+                }
+
+            self.userDataModel.rx_error
+                .subscribe { error in
+                    guard let error = error.element else { return }
+                    switch error {
+                    case .post:
+                        observer(.error(NSError.empty))
+                    }
+                }
+            .disposed(by: self.disposeBag)
+
+            self.userDataModel.post(request: request)
+
+            return Disposables.create()
+        })
     }
 }
