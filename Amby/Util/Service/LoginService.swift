@@ -27,7 +27,7 @@ class LoginService {
                     log.error("firebase signIn error. error: \(error.localizedDescription)")
                     reject(error)
                 } else {
-                    log.debug("firebase login success. userid: \(Auth.auth().currentUser!.uid)")
+                    log.debug("firebase signIn success. userid: \(Auth.auth().currentUser!.uid)")
                     SettingAccessUseCase().loginProvider = .facebook
                     resolve(true)
                 }

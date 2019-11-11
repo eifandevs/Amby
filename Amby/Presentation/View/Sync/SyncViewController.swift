@@ -10,6 +10,8 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
 import GoogleSignIn
+import RxCocoa
+import RxSwift
 import SnapKit
 import UIKit
 
@@ -18,6 +20,9 @@ class SyncViewController: UIViewController {
     @IBOutlet var facebookReAuthButton: UIButton!
     @IBOutlet var twitterReAuthButton: UIButton!
     @IBOutlet var googleReAuthButton: UIButton!
+
+    let viewModel = SyncViewControllerViewModel()
+    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +41,7 @@ class SyncViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
                 let manager = LoginManager()
-                manager.authType = .reauthorize
+                manager.authType = .reauthorize // not work
                 manager.logIn(permissions: ["email"], from: nil) { _, error in
                     if let error = error {
                         NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
@@ -46,12 +51,9 @@ class SyncViewController: UIViewController {
                             let credential = FacebookAuthProvider.credential(withAccessToken: current.tokenString)
                             LoginService().signIn(credential: credential)
                                 .then { _ in
-                                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
-                                    log.debug("facebook signIn success")
-                                    // TODO: ログイン
+                                    self.appSignIn()
                                 }.catch { _ in
                                     NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
-                                    log.error("facebook signIn error")
                                 }
                         } else {
                             NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
@@ -63,13 +65,30 @@ class SyncViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
 
-        // ボタンタップ
         closeButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
                 self.dismiss(animated: true, completion: nil)
             })
             .disposed(by: rx.disposeBag)
+    }
+
+    private func appSignIn() {
+        // app login
+        if let uid = Auth.auth().currentUser?.uid {
+            viewModel.login(uid: Auth.auth().currentUser!.uid).subscribe { [weak self] result in
+                switch result {
+                case .success:
+                    log.debug("app signIn success")
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
+                case .error:
+                    log.error("app signIn error")
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
+                }
+            }.disposed(by: disposeBag)
+        } else {
+            log.error("app signIn error. not exist currentUser")
+        }
     }
 }
 
@@ -81,8 +100,7 @@ extension SyncViewController: GIDSignInDelegate {
         } else {
             LoginService().signIn(nil, didSignInFor: user)
                 .then { _ in
-                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
-                    // TODO: ログイン
+                    self.appSignIn()
                 }.catch { _ in
                     NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
                 }
