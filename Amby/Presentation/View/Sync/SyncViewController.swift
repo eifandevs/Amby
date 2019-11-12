@@ -49,7 +49,7 @@ class SyncViewController: UIViewController {
                     } else {
                         if let current = AccessToken.current {
                             let credential = FacebookAuthProvider.credential(withAccessToken: current.tokenString)
-                            LoginService().signIn(credential: credential)
+                            FBLoginService().signIn(credential: credential)
                                 .then { _ in
                                     self.appSignIn()
                                 }.catch { _ in
@@ -98,7 +98,7 @@ extension SyncViewController: GIDSignInDelegate {
             NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
             log.error("google signIn error. error: \(error)")
         } else {
-            LoginService().signIn(nil, didSignInFor: user)
+            FBLoginService().signIn(nil, didSignInFor: user)
                 .then { _ in
                     self.appSignIn()
                 }.catch { _ in

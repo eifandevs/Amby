@@ -1,5 +1,5 @@
 //
-//  LoginService.swift
+//  FBLoginService.swift
 //  Amby
 //
 //  Created by tenma.i on 2019/10/16.
@@ -15,7 +15,7 @@ import Hydra
 import Model
 
 /// Firebaseログイン
-class LoginService {
+class FBLoginService {
     var isLoggedIn: Bool {
         return Auth.auth().currentUser != nil
     }

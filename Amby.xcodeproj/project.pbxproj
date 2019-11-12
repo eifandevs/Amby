@@ -395,7 +395,7 @@
 		A1C0E049220F698B00E7A7B6 /* UIButton+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C0E034220F698B00E7A7B6 /* UIButton+Extend.swift */; };
 		A1D001EF2340866600336A31 /* LocalAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D001EE2340866600336A31 /* LocalAuthenticationService.swift */; };
 		A1D828BF234E317E00743D57 /* XCTestCase+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D828BE234E317E00743D57 /* XCTestCase+Extend.swift */; };
-		A1D828C1235767B800743D57 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D828C0235767B800743D57 /* LoginService.swift */; };
+		A1D828C1235767B800743D57 /* FBLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D828C0235767B800743D57 /* FBLoginService.swift */; };
 		A1E33AB22137149B00C93FBE /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = A1E33AA22137149A00C93FBE /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A1E33AB52137149B00C93FBE /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; };
 		A1E33AB62137149B00C93FBE /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A1E33AA02137149A00C93FBE /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -945,7 +945,7 @@
 		A1C0E034220F698B00E7A7B6 /* UIButton+Extend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extend.swift"; sourceTree = "<group>"; };
 		A1D001EE2340866600336A31 /* LocalAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationService.swift; sourceTree = "<group>"; };
 		A1D828BE234E317E00743D57 /* XCTestCase+Extend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extend.swift"; sourceTree = "<group>"; };
-		A1D828C0235767B800743D57 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		A1D828C0235767B800743D57 /* FBLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLoginService.swift; sourceTree = "<group>"; };
 		A1E33AA02137149A00C93FBE /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E33AA22137149A00C93FBE /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		A1E33AA32137149A00C93FBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2058,7 +2058,7 @@
 				A1E5B0BE221F6BB1007172D8 /* PurchaseService.swift */,
 				A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */,
 				A1904FD022E1647000BC91B4 /* GoogleSignInService.swift */,
-				A1D828C0235767B800743D57 /* LoginService.swift */,
+				A1D828C0235767B800743D57 /* FBLoginService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -3706,7 +3706,7 @@
 				A15C5460214D699D001E8AB5 /* OptionMenuFormTableViewCell.swift in Sources */,
 				A1FFA6802199B2670092C4D6 /* OptionMenuCooperationTableViewModel.swift in Sources */,
 				A190305E209CF978004F1EA5 /* EGApplication.swift in Sources */,
-				A1D828C1235767B800743D57 /* LoginService.swift in Sources */,
+				A1D828C1235767B800743D57 /* FBLoginService.swift in Sources */,
 				A1869C2121795242007303B3 /* OptionMenuMemoTableViewCell.swift in Sources */,
 				A1FFA660219455D20092C4D6 /* OptionMenuSettingSwitchTableViewCellViewModel.swift in Sources */,
 				A15C5454214D699D001E8AB5 /* OptionMenuHelpTableViewCell.swift in Sources */,

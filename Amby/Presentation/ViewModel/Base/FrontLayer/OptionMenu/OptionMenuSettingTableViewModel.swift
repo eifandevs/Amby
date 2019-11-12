@@ -91,7 +91,7 @@ final class OptionMenuSettingTableViewModel {
 
     /// ログイン中
     var isLoggedIn: Bool {
-        return LoginService().isLoggedIn
+        return FBLoginService().isLoggedIn
     }
 
     /// セル数
@@ -193,12 +193,12 @@ final class OptionMenuSettingTableViewModel {
             NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.NOT_LOGIN_IN_ERROR, isSuccess: false)
             return
         }
-        LoginService().signOut()
+        FBLoginService().signOut()
     }
 
     /// アカウント削除
     func deleteAccount() {
-        let loginService = LoginService()
+        let loginService = FBLoginService()
         loginService.deleteAccount()
     }
 }
