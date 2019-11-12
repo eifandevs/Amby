@@ -13,6 +13,7 @@ import GoogleSignIn
 import RxCocoa
 import RxSwift
 import SnapKit
+import SVProgressHUD
 import UIKit
 
 class SyncViewController: UIViewController {
@@ -28,18 +29,26 @@ class SyncViewController: UIViewController {
         super.viewDidLoad()
 
         GIDSignIn.sharedInstance()?.delegate = self
+        GIDSignIn.sharedInstance()?.uiDelegate = self
 
         googleReAuthButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
+                guard FBLoginService().isLoggedOut else {
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.ALREADY_LOGGED_IN_ERROR, isSuccess: false)
+                    return
+                }
                 GIDSignIn.sharedInstance()?.signIn()
-                self.dismiss(animated: true, completion: nil)
             })
             .disposed(by: rx.disposeBag)
 
         facebookReAuthButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let `self` = self else { return }
+                guard FBLoginService().isLoggedOut else {
+                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.ALREADY_LOGGED_IN_ERROR, isSuccess: false)
+                    return
+                }
                 let manager = LoginManager()
                 manager.authType = .reauthorize // not work
                 manager.logIn(permissions: ["email"], from: nil) { _, error in
@@ -61,7 +70,6 @@ class SyncViewController: UIViewController {
                         }
                     }
                 }
-                self.dismiss(animated: true, completion: nil)
             })
             .disposed(by: rx.disposeBag)
 
@@ -76,23 +84,15 @@ class SyncViewController: UIViewController {
     private func appSignIn() {
         // app login
         if let uid = Auth.auth().currentUser?.uid {
-            viewModel.login(uid: Auth.auth().currentUser!.uid).subscribe { [weak self] result in
-                switch result {
-                case .success:
-                    log.debug("app signIn success")
-                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
-                case .error:
-                    log.error("app signIn error")
-                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
-                }
-            }.disposed(by: disposeBag)
+            viewModel.login(uid: uid)
+            dismiss(animated: true, completion: nil)
         } else {
             log.error("app signIn error. not exist currentUser")
         }
     }
 }
 
-extension SyncViewController: GIDSignInDelegate {
+extension SyncViewController: GIDSignInDelegate, GIDSignInUIDelegate {
     func sign(_: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)

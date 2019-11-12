@@ -193,6 +193,7 @@ final class OptionMenuSettingTableViewModel {
             NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.NOT_LOGIN_IN_ERROR, isSuccess: false)
             return
         }
+        LogoutUseCase().exe()
         FBLoginService().signOut()
     }
 
@@ -200,5 +201,6 @@ final class OptionMenuSettingTableViewModel {
     func deleteAccount() {
         let loginService = FBLoginService()
         loginService.deleteAccount()
+        // TODO: delete user for app
     }
 }

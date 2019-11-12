@@ -17,7 +17,11 @@ import Model
 /// Firebaseログイン
 class FBLoginService {
     var isLoggedIn: Bool {
-        return Auth.auth().currentUser != nil
+        return LoginUseCase().isLoggedIn
+    }
+
+    var isLoggedOut: Bool {
+        return !isLoggedIn
     }
 
     func signIn(credential: AuthCredential) -> Promise<Bool> {
@@ -66,8 +70,8 @@ class FBLoginService {
         try! Auth.auth().signOut()
 
         // logout provider
-        let loginProvider = SettingAccessUseCase().loginProvider
-        switch loginProvider {
+        let settingUC = SettingAccessUseCase()
+        switch settingUC.loginProvider {
         case .google:
             log.debug("logout google")
             GIDSignIn.sharedInstance()?.signOut()
@@ -79,11 +83,11 @@ class FBLoginService {
         case .none:
             log.error("logout failed. not login")
         }
+        settingUC.loginProvider = .none
     }
 
     func signOut() {
         signOutSilent()
-        // TODO: delete user token
         NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_OUT_SUCCESS, isSuccess: true)
     }
 

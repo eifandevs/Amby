@@ -24,7 +24,7 @@ extension UserDataModelError: ModelError {
     var message: String {
         switch self {
         case .post:
-            return MessageConst.NOTIFICATION.COMMON_ERROR
+            return MessageConst.NOTIFICATION.LOGIN_ERROR
         }
     }
 }
@@ -34,6 +34,7 @@ protocol UserDataModelProtocol {
     var rx_error: PublishSubject<UserDataModelError> { get }
     var uid: String? { get }
     var hasUID: Bool { get }
+    func logout()
     func post(request: LoginRequest)
 }
 
@@ -59,6 +60,11 @@ final class UserDataModel: UserDataModelProtocol {
         if let uid = repository.get(key: ModelConst.KEY.KEYCHAIN_KEY_USER_ID) {
             self.uid = uid
         }
+    }
+
+    func logout() {
+        uid = nil
+        KeychainRepository().delete(key: ModelConst.KEY.KEYCHAIN_KEY_USER_ID)
     }
 
     /// Get API access token

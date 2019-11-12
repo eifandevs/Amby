@@ -15,6 +15,9 @@ public final class LoginUseCase {
 
     private var userDataModel: UserDataModelProtocol!
 
+    public var isLoggedIn: Bool {
+        userDataModel.hasUID
+    }
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
@@ -26,7 +29,12 @@ public final class LoginUseCase {
         userDataModel = UserDataModel.s
     }
 
-    public func exe(uid: String) -> Single<()> {
+    public func exe(uid: String) {
+        let request = LoginRequest(userId: uid)
+        userDataModel.post(request: request)
+    }
+
+    public func exeWithSingle(uid: String) -> Single<()> {
 
         return Single<()>.create(subscribe: { [weak self] (observer) -> Disposable in
             guard let `self` = self else {
@@ -34,7 +42,7 @@ public final class LoginUseCase {
                 return Disposables.create()
             }
 
-            log.debug("login start...")
+            log.debug("app login start...")
 
             if self.userDataModel.hasUID {
                 log.debug("has uid.")
