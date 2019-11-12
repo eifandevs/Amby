@@ -14,6 +14,7 @@ struct AppConst {
     // MARK: - 共通
 
     struct APP {
+        static let CONFIRM = "確認"
         static let FONT = "Avenir"
         static let DATE_FORMAT = "yyyyMMdd"
         static let LOCALE = "ja_JP"
@@ -127,6 +128,8 @@ struct AppConst {
         static let TITLE_COOKIES = "Cookie"
         static let TITLE_SITE_DATA = "サイトデータ"
         static let TITLE_ALL = "全てのデータ"
+        static let ON_LOGIN = "ログイン中"
+        static let NOT_LOGIN = "未ログイン"
         static let SIGNIN = "ログイン"
         static let SIGNOUT = "ログアウト"
         static let ACCOUNT_DELETE = "アカウントの削除"

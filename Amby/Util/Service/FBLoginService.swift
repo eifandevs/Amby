@@ -97,30 +97,28 @@ class FBLoginService {
             return
         }
 
-        NotificationService.presentAlert(title: MessageConst.NOTIFICATION.ACCOUNT_DELETE, message: MessageConst.NOTIFICATION.ACCOUNT_DELETE_MESSAGE) {
-            Auth.auth().currentUser?.delete(completion: { [weak self] error in
-                if let error = error {
-                    log.error("delete account faild. error: \(error)")
-                    NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.DELETE_ACCOUNT_ERROR, isSuccess: false)
-                    return
-                }
-                log.debug("delete account success.")
-                // logout provider
-                let loginProvider = SettingAccessUseCase().loginProvider
-                switch loginProvider {
-                case .google:
-                    log.debug("logout google")
-                    GIDSignIn.sharedInstance()?.signOut()
-                case .facebook:
-                    log.debug("logout facebook")
-                    LoginManager().logOut()
-                case .twitter:
-                    log.debug("logout twitter")
-                case .none:
-                    log.error("logout failed. not login")
-                }
-                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.DELETE_ACCOUNT_SUCCESS, isSuccess: true)
-            })
-        }
+        Auth.auth().currentUser?.delete(completion: { [weak self] error in
+            if let error = error {
+                log.error("delete account faild. error: \(error)")
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.DELETE_ACCOUNT_ERROR, isSuccess: false)
+                return
+            }
+            log.debug("delete account success.")
+            // logout provider
+            let loginProvider = SettingAccessUseCase().loginProvider
+            switch loginProvider {
+            case .google:
+                log.debug("logout google")
+                GIDSignIn.sharedInstance()?.signOut()
+            case .facebook:
+                log.debug("logout facebook")
+                LoginManager().logOut()
+            case .twitter:
+                log.debug("logout twitter")
+            case .none:
+                log.error("logout failed. not login")
+            }
+            NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.DELETE_ACCOUNT_SUCCESS, isSuccess: true)
+        })
     }
 }

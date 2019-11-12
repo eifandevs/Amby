@@ -12,6 +12,8 @@
 		40DC748BD179960B0CF27593 /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 		71A90F5EED54E40F2C51B4EA /* Pods_Amby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769A089A76E185BB6109B3E4 /* Pods_Amby.framework */; };
 		84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90A22EEAE1476346BDB6D1 /* Pods_CommonUtil.framework */; };
+		9D14EE42237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */; };
+		9D14EE43237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */; };
 		9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */; };
 		9D2E211F22FD7B610024F45D /* InvertLockMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */; };
 		9D40D8CF236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40D8CE236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift */; };
@@ -564,6 +566,8 @@
 		8CFAE618442B97B2C1580990 /* Pods-CommonUtil.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommonUtil.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-CommonUtil/Pods-CommonUtil.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		8E7C858DA7FEA863296A603D /* Pods-Model.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Model.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-Model/Pods-Model.debug-local.xcconfig"; sourceTree = "<group>"; };
 		93D0114BB59CFBCCAC13CB7A /* Pods-Model.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Model.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Model/Pods-Model.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingLoginStatusTableViewCell.swift; sourceTree = "<group>"; };
+		9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuSettingLoginStatusTableViewCell.xib; sourceTree = "<group>"; };
 		9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoUseCase.swift; sourceTree = "<group>"; };
 		9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertLockMemoUseCase.swift; sourceTree = "<group>"; };
 		9D40D8CE236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccessTokenUseCase.swift; sourceTree = "<group>"; };
@@ -1801,6 +1805,8 @@
 				A15C543F214D699D001E8AB5 /* OptionMenuSettingSliderTableViewCell.xib */,
 				A1FFA6592194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.swift */,
 				A1FFA65A2194555C0092C4D6 /* OptionMenuSettingSwitchTableViewCell.xib */,
+				9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */,
+				9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -2906,6 +2912,7 @@
 			files = (
 				A17241D12245708A00472477 /* dns.html in Resources */,
 				A152086020C5543B00201B30 /* env.plist in Resources */,
+				9D14EE43237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib in Resources */,
 				A112E831212CD76500320048 /* SplashViewController.xib in Resources */,
 				A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */,
 				A15C5451214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */,
@@ -3700,6 +3707,7 @@
 				A112E8B1212CD76500320048 /* HeaderField.swift in Sources */,
 				A13D6A8121848B8900B1832E /* PasscodeViewControllerViewModel.swift in Sources */,
 				A1B778382173C57100BED141 /* MenuOrderTableViewCell.swift in Sources */,
+				9D14EE42237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift in Sources */,
 				A1904FD122E1647000BC91B4 /* GoogleSignInService.swift in Sources */,
 				A11CD32C214F059000D9333F /* OptionMenuFavoriteTableViewModel.swift in Sources */,
 				A112E899212CD76500320048 /* Thumbnail.swift in Sources */,

@@ -13,6 +13,7 @@ struct MessageConst {
     // MARK: - 汎用
 
     struct COMMON {
+        static let CONFIRM = "確認"
         static let OK = "OK"
         static let RETRY = "リトライ"
         static let ERROR = "エラー"
@@ -48,6 +49,7 @@ struct MessageConst {
     struct NOTIFICATION {
         static let ACCOUNT_DELETE = "アカウント削除"
         static let ACCOUNT_DELETE_MESSAGE = "アカウントを削除してもよろしいですか？\nこのアカウントに紐づく全てのデータが削除されます。"
+        static let ACCOUNT_LOGOUT_MESSAGE = "ログアウトしてもよろしいですか？"
         static let DELETE_ACCOUNT_SUCCESS = "アカウントを削除しました"
         static let DELETE_ACCOUNT_ERROR_NOT_LOGGED_IN = "アカウント削除をするために、ログインしてください"
         static let DELETE_ACCOUNT_ERROR = "アカウント削除に失敗しました"
