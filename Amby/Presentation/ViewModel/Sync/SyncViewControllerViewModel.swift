@@ -13,9 +13,7 @@ import RxCocoa
 import RxSwift
 
 final class SyncViewControllerViewModel {
-    let loginUseCase = LoginUseCase()
-
-    func login(uid: String) -> Single<()> {
-        loginUseCase.exeWithSingle(uid: uid)
+    func loginRequest() {
+        LoginHandlerUseCase.s.begin()
     }
 }

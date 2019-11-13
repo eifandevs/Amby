@@ -25,7 +25,7 @@ public final class GrepHandlerUseCase {
     /// アクション通知用RX
     public let rx_action = PublishSubject<GrepHandlerUseCaseAction>()
 
-    public init() {
+    private init() {
         setupProtocolImpl()
     }
 

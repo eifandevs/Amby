@@ -25,6 +25,7 @@ enum BaseViewControllerViewModelAction {
     case memo(memo: Memo)
     case notice(message: String, isSuccess: Bool)
     case tabGroupTitle(groupContext: String)
+    case loginRequest
 }
 
 final class BaseViewControllerViewModel {
@@ -52,6 +53,14 @@ final class BaseViewControllerViewModel {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case let .presentGroupTitleEdit(groupContext) = action else { return }
                 self.rx_action.onNext(.tabGroupTitle(groupContext: groupContext))
+            }
+            .disposed(by: disposeBag)
+
+        // ヘルプ監視
+        LoginHandlerUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case .begin = action else { return }
+                self.rx_action.onNext(.loginRequest)
             }
             .disposed(by: disposeBag)
 

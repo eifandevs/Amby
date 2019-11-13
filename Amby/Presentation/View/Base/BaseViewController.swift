@@ -9,6 +9,7 @@
 import Entity
 import MessageUI
 import Model
+import PKHUD
 import Report
 import RxCocoa
 import RxSwift
@@ -123,6 +124,7 @@ class BaseViewController: UIViewController {
                 case let .notice(message, isSuccess): self.notice(message: message, isSuccess: isSuccess)
                 case let .tabGroupTitle(groupContext): self.tabGroupTitle(groupContext: groupContext)
                 case .sync: self.sync()
+                case .loginRequest: self.loginRequest()
                 }
             }
             .disposed(by: rx.disposeBag)
@@ -241,6 +243,14 @@ class BaseViewController: UIViewController {
     private func sync() {
         let vc = SyncViewController()
         present(vc, animated: true)
+    }
+
+    /// ログインリクエスト
+    private func loginRequest() {
+        DispatchQueue.main.async {
+            HUD.show(.progress, onView: self.view)
+            // TODO: ログイン処理
+        }
     }
 
     /// メモ画面表示

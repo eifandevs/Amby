@@ -14,6 +14,7 @@
 		84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90A22EEAE1476346BDB6D1 /* Pods_CommonUtil.framework */; };
 		9D0BAAD2237BE8DF00D83566 /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD65993237BE755005B2B98 /* PKHUD.framework */; };
 		9D0BAAD3237BE8DF00D83566 /* PKHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD65993237BE755005B2B98 /* PKHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D0BAAD5237C01A200D83566 /* LoginHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0BAAD4237C01A200D83566 /* LoginHandlerUseCase.swift */; };
 		9D14EE42237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */; };
 		9D14EE43237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */; };
 		9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */; };
@@ -570,6 +571,7 @@
 		8CFAE618442B97B2C1580990 /* Pods-CommonUtil.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CommonUtil.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-CommonUtil/Pods-CommonUtil.debug-ut.xcconfig"; sourceTree = "<group>"; };
 		8E7C858DA7FEA863296A603D /* Pods-Model.debug-local.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Model.debug-local.xcconfig"; path = "Pods/Target Support Files/Pods-Model/Pods-Model.debug-local.xcconfig"; sourceTree = "<group>"; };
 		93D0114BB59CFBCCAC13CB7A /* Pods-Model.debug-ut.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Model.debug-ut.xcconfig"; path = "Pods/Target Support Files/Pods-Model/Pods-Model.debug-ut.xcconfig"; sourceTree = "<group>"; };
+		9D0BAAD4237C01A200D83566 /* LoginHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHandlerUseCase.swift; sourceTree = "<group>"; };
 		9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingLoginStatusTableViewCell.swift; sourceTree = "<group>"; };
 		9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuSettingLoginStatusTableViewCell.xib; sourceTree = "<group>"; };
 		9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoUseCase.swift; sourceTree = "<group>"; };
@@ -1702,6 +1704,7 @@
 				A1422B4823043F01002DAF52 /* LoginUseCase.swift */,
 				9D76C4BB2378FAD400F3DB6F /* LogoutUseCase.swift */,
 				9D76C4BD2378FAE500F3DB6F /* DeleteAccountUseCase.swift */,
+				9D0BAAD4237C01A200D83566 /* LoginHandlerUseCase.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -3567,6 +3570,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A19506302143F89B0091DF23 /* Cache.swift in Sources */,
+				9D0BAAD5237C01A200D83566 /* LoginHandlerUseCase.swift in Sources */,
 				A19352A22141569C002A0865 /* App.swift in Sources */,
 				A1AA75E422FAF4750089A522 /* DeletaMemoUseCase.swift in Sources */,
 				A15C53F6214D4CDC001E8AB5 /* ReportHandlerUseCase.swift in Sources */,

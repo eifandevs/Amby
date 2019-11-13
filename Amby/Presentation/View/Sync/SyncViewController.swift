@@ -82,21 +82,8 @@ class SyncViewController: UIViewController {
     }
 
     private func appSignIn() {
-        HUD.show(.progress, onView: view)
-
-        // app login
-        if let uid = Auth.auth().currentUser?.uid {
-            viewModel.login(uid: uid).subscribe(onSuccess: { _ in
-                HUD.hide()
-                self.dismiss(animated: true, completion: nil)
-                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
-            }) { _ in
-                HUD.hide()
-                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
-            }.disposed(by: disposeBag)
-        } else {
-            log.error("app signIn error. not exist currentUser")
-        }
+        dismiss(animated: true, completion: nil)
+        viewModel.loginRequest()
     }
 }
 
