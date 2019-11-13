@@ -83,13 +83,14 @@ class SyncViewController: UIViewController {
 
     private func appSignIn() {
         // TODO: PKHUDの表示
+        HUD.show(.progress, onView: view)
         // app login
-        if let uid = Auth.auth().currentUser?.uid {
-            viewModel.login(uid: uid)
-            dismiss(animated: true, completion: nil)
-        } else {
-            log.error("app signIn error. not exist currentUser")
-        }
+//        if let uid = Auth.auth().currentUser?.uid {
+//            viewModel.login(uid: uid)
+//            dismiss(animated: true, completion: nil)
+//        } else {
+//            log.error("app signIn error. not exist currentUser")
+//        }
     }
 }
 
