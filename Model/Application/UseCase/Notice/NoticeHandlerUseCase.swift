@@ -31,7 +31,6 @@ public final class NoticeHandlerUseCase {
     private var memoDataModel: MemoDataModelProtocol!
     private var thumbnailDataModel: ThumbnailDataModelProtocol!
     private var issueDataModel: IssueDataModelProtocol!
-    private var userDataModel: UserDataModelProtocol!
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -50,18 +49,12 @@ public final class NoticeHandlerUseCase {
         memoDataModel = MemoDataModel.s
         thumbnailDataModel = ThumbnailDataModel.s
         issueDataModel = IssueDataModel.s
-        userDataModel = UserDataModel.s
     }
 
     private func setupRx() {
         // 正常終了監視
         Observable
             .merge([
-                userDataModel.rx_action.flatMap { action -> Observable<String> in
-                    switch action {
-                    case .post: return Observable.just(MessageConst.NOTIFICATION.LOGIN)
-                    }
-                },
                 favoriteDataModel.rx_action.flatMap { action -> Observable<String> in
                     switch action {
                     case .deleteAll: return Observable.just(MessageConst.NOTIFICATION.DELETE_BOOK_MARK)
@@ -122,9 +115,7 @@ public final class NoticeHandlerUseCase {
             memoDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             thumbnailDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             issueDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
-            LocalAuthenticationHandlerUseCase.s.rx_error.flatMap { Observable.just($0 as ModelError) },
-            AccessTokenDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) },
-            UserDataModel.s.rx_error.flatMap { Observable.just($0 as ModelError) }
+            LocalAuthenticationHandlerUseCase.s.rx_error.flatMap { Observable.just($0 as ModelError) }
         ]).subscribe { [weak self] modelError in
             guard let `self` = self, let modelError = modelError.element else { return }
             self.rx_action.onNext(.present(message: modelError.message, isSuccess: false))

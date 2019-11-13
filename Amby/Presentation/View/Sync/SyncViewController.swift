@@ -10,11 +10,11 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
 import GoogleSignIn
+import PKHUD
 import RxCocoa
 import RxSwift
 import SnapKit
 import UIKit
-import PKHUD
 
 class SyncViewController: UIViewController {
     @IBOutlet var closeButton: CornerRadiusButton!
@@ -82,15 +82,21 @@ class SyncViewController: UIViewController {
     }
 
     private func appSignIn() {
-        // TODO: PKHUDの表示
         HUD.show(.progress, onView: view)
+
         // app login
-//        if let uid = Auth.auth().currentUser?.uid {
-//            viewModel.login(uid: uid)
-//            dismiss(animated: true, completion: nil)
-//        } else {
-//            log.error("app signIn error. not exist currentUser")
-//        }
+        if let uid = Auth.auth().currentUser?.uid {
+            viewModel.login(uid: uid).subscribe(onSuccess: { _ in
+                HUD.hide()
+                self.dismiss(animated: true, completion: nil)
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
+            }) { _ in
+                HUD.hide()
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
+            }.disposed(by: disposeBag)
+        } else {
+            log.error("app signIn error. not exist currentUser")
+        }
     }
 }
 
