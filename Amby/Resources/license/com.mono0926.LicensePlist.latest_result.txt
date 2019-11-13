@@ -225,11 +225,11 @@ name: Kingfisher, nameSpecified: , owner: onevcat, version: 5.8.2
 
 name: NVActivityIndicatorView, nameSpecified: , owner: ninjaprox, version: 4.8.0
 
+name: PKHUD, nameSpecified: , owner: pkluz, version: 5.3.0
+
 name: realm-cocoa, nameSpecified: , owner: realm, version: v3.19.0
 
 name: SnapKit, nameSpecified: , owner: SnapKit, version: 5.0.1
-
-name: SVProgressHUD, nameSpecified: , owner: SVProgressHUD, version: 2.2.5
 
 name: SwiftyBeaver, nameSpecified: , owner: SwiftyBeaver, version: 1.8.2
 

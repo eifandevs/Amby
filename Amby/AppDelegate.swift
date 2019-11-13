@@ -11,7 +11,7 @@ import Firebase
 import GoogleSignIn
 import Logger
 import Model
-import SVProgressHUD
+import PKHUD
 import UIKit
 
 let log = AppLogger.self
@@ -62,9 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.verbose("BUNDLE PATH: \(AppConst.DEVICE.BUNDLE_PATH)")
         log.verbose("APPLICATION PATH: \(AppConst.DEVICE.APPLICATION_PATH)")
 
-        // progress setup
-        SVProgressHUD.setForegroundColor(UIColor.ultraViolet)
-
         // view setup
         setup()
 
@@ -101,11 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController?.removeFromParentViewController()
         window!.rootViewController = nil
 
-        // プログレス表示
-        SVProgressHUD.show()
-
-        // 各サブビューのdismissがコールされるのを待つ
-        SVProgressHUD.dismiss(withDelay: 2.5) {
+        HUD.flash(.progress, onView: window, delay: 2.5) { _ in
             self.window!.rootViewController = BaseViewController()
         }
     }

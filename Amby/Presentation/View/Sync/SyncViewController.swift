@@ -13,8 +13,8 @@ import GoogleSignIn
 import RxCocoa
 import RxSwift
 import SnapKit
-import SVProgressHUD
 import UIKit
+import PKHUD
 
 class SyncViewController: UIViewController {
     @IBOutlet var closeButton: CornerRadiusButton!
@@ -82,6 +82,7 @@ class SyncViewController: UIViewController {
     }
 
     private func appSignIn() {
+        // TODO: PKHUDの表示
         // app login
         if let uid = Auth.auth().currentUser?.uid {
             viewModel.login(uid: uid)

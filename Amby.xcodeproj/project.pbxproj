@@ -12,6 +12,8 @@
 		40DC748BD179960B0CF27593 /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 		71A90F5EED54E40F2C51B4EA /* Pods_Amby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769A089A76E185BB6109B3E4 /* Pods_Amby.framework */; };
 		84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90A22EEAE1476346BDB6D1 /* Pods_CommonUtil.framework */; };
+		9D0BAAD2237BE8DF00D83566 /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD65993237BE755005B2B98 /* PKHUD.framework */; };
+		9D0BAAD3237BE8DF00D83566 /* PKHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD65993237BE755005B2B98 /* PKHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D14EE42237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */; };
 		9D14EE43237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */; };
 		9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */; };
@@ -109,7 +111,6 @@
 		A11D130D234588DD00AE595A /* NSError+Extend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D130C234588DD00AE595A /* NSError+Extend.swift */; };
 		A121D5742364D33C00EC4D15 /* GetAccessTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A121D5732364D33C00EC4D15 /* GetAccessTokenUseCase.swift */; };
 		A123451B2135ADB400C791B8 /* ResourceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A123451A2135ADB400C791B8 /* ResourceUtil.swift */; };
-		A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9920CE99AD00146010 /* SVProgressHUD.framework */; };
 		A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A9C9C20CE9D1F00146010 /* NVActivityIndicatorView.framework */; };
 		A12B93F8214EF7480082EEA5 /* com.mono0926.LicensePlist in Resources */ = {isa = PBXBuildFile; fileRef = A12B93F7214EF7480082EEA5 /* com.mono0926.LicensePlist */; };
 		A12B93FB214EFD710082EEA5 /* OpenSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12B93F9214EFD710082EEA5 /* OpenSourceViewController.swift */; };
@@ -527,6 +528,7 @@
 				A1A3DE6F213878D200F87009 /* Logger.framework in Embed Frameworks */,
 				A1E33AB62137149B00C93FBE /* Model.framework in Embed Frameworks */,
 				A16A6EE1220F248100FFCB5B /* Entity.framework in Embed Frameworks */,
+				9D0BAAD3237BE8DF00D83566 /* PKHUD.framework in Embed Frameworks */,
 				A1A65E6C22886705000FACA7 /* Report.framework in Embed Frameworks */,
 				A1C0E00F220F67F300E7A7B6 /* CommonUtil.framework in Embed Frameworks */,
 			);
@@ -586,6 +588,7 @@
 		9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewControllerViewModel.swift; sourceTree = "<group>"; };
 		9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteResponse.swift; sourceTree = "<group>"; };
 		9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemoUseCase.swift; sourceTree = "<group>"; };
+		9DD65993237BE755005B2B98 /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
 		9DF1246A234D77C800B80BB2 /* DefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsService.swift; sourceTree = "<group>"; };
 		9DFF6504237948830065B7DB /* SyncViewControllerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
@@ -1081,10 +1084,10 @@
 				A1FFA6742195B9680092C4D6 /* SnapKit.framework in Frameworks */,
 				A112E735212AF83800320048 /* MessageUI.framework in Frameworks */,
 				A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */,
+				9D0BAAD2237BE8DF00D83566 /* PKHUD.framework in Frameworks */,
 				A16A6EE0220F248100FFCB5B /* Entity.framework in Frameworks */,
 				A1A65E6B22886705000FACA7 /* Report.framework in Frameworks */,
 				A1C0E00E220F67F300E7A7B6 /* CommonUtil.framework in Frameworks */,
-				A12A9C9A20CE99AD00146010 /* SVProgressHUD.framework in Frameworks */,
 				A1A3DE6E213878D200F87009 /* Logger.framework in Frameworks */,
 				A1ED0C0020CBCAAD00DFC55B /* SwiftyBeaver.framework in Frameworks */,
 				A1ED0BFD20C94DDD00DFC55B /* Kingfisher.framework in Frameworks */,
@@ -1099,6 +1102,7 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9DD65993237BE755005B2B98 /* PKHUD.framework */,
 				A17AC347225F617900E4262E /* SwiftyJSON.framework */,
 				A16C2D13220F36640050C1DD /* RealmSwift.framework */,
 				A16C2D11220F36400050C1DD /* Realm.framework */,
@@ -3248,7 +3252,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PKHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Hydra.framework",
