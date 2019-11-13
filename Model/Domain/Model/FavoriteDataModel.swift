@@ -156,7 +156,7 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
     func fetch() {
         let repository = ApiRepository<App>()
 
-        repository.rx.request(.getFavorite)
+        repository.rx.request(.getFavorite(request: GetFavoriteRequest()))
             .observeOn(MainScheduler.asyncInstance)
             .map { (response) -> GetFavoriteResponse? in
 

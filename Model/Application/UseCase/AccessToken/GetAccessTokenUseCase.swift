@@ -40,7 +40,6 @@ public final class GetAccessTokenUseCase {
                 return Disposables.create()
             }
             log.debug("has not api token. get api")
-            let request = GetAccessTokenRequest(authHeaderToken: ModelConst.API.API_AUTH_HEADER_TOKEN)
             self.accessTokenDataModel.rx_action
                 .subscribe { action in
                     guard let action = action.element else { return }
@@ -61,7 +60,7 @@ public final class GetAccessTokenUseCase {
                 }
             .disposed(by: self.disposeBag)
 
-            self.accessTokenDataModel.fetch(request: request)
+            self.accessTokenDataModel.fetch(request: GetAccessTokenRequest())
 
             return Disposables.create()
         })

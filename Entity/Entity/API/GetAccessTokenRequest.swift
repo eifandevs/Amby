@@ -10,10 +10,5 @@ import Foundation
 
 /// トークン取得リクエスト
 public struct GetAccessTokenRequest {
-
-    public init(authHeaderToken: String) {
-        self.authHeaderToken = authHeaderToken
-    }
-
-    public let authHeaderToken: String
+    public init() {}
 }

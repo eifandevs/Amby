@@ -30,6 +30,7 @@ public final class LoginUseCase {
     }
 
     public func exe(uid: String) {
+        log.debug("app login start...")
         let request = LoginRequest(userId: uid)
         userDataModel.post(request: request)
     }

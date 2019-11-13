@@ -12,8 +12,8 @@ import Moya
 
 enum App {
     case login(request: LoginRequest)
-    case getArticle
-    case getFavorite
+    case getArticle(request: GetArticleRequest)
+    case getFavorite(request: GetFavoriteRequest)
     case getAccessToken(request: GetAccessTokenRequest)
 }
 
@@ -69,8 +69,8 @@ extension App: TargetType {
     // リクエストパラメータ等
     var task: Task {
         switch self {
-        case let .login(request):
-            return .requestParameters(parameters: ["user_id": request.userId], encoding: URLEncoding.default)
+        case .login:
+            return .requestPlain
         case .getArticle:
             return .requestPlain
         case .getFavorite:
@@ -83,14 +83,14 @@ extension App: TargetType {
     // ヘッダー
     var headers: [String: String]? {
         switch self {
-        case .login:
-            return nil
+        case let .login(request):
+            return ["AccessToken": "aaa", "UserRawToken": request.userId]
         case .getArticle:
-            return nil
+            return ["AccessToken": "aaa", "UserToken": "aaa"]
         case .getFavorite:
+            return ["AccessToken": "aaa", "UserToken": "aaa"]
+        case .getAccessToken:
             return nil
-        case let .getAccessToken(request):
-            return ["X-Auth-Token": request.authHeaderToken]
         }
     }
 }
