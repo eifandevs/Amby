@@ -52,7 +52,7 @@ protocol FavoriteDataModelProtocol {
     func delete(favorites: [Favorite])
     func reload(currentTab: Tab)
     func update(currentTab: Tab)
-    func fetch()
+    func fetch(request: GetFavoriteRequest)
 }
 
 final class FavoriteDataModel: FavoriteDataModelProtocol {
@@ -153,10 +153,10 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
     }
 
     /// 記事取得
-    func fetch() {
+    func fetch(request: GetFavoriteRequest) {
         let repository = ApiRepository<App>()
 
-        repository.rx.request(.getFavorite(request: GetFavoriteRequest()))
+        repository.rx.request(.getFavorite(request: request))
             .observeOn(MainScheduler.asyncInstance)
             .map { (response) -> GetFavoriteResponse? in
 
@@ -182,12 +182,12 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
                         })
                         self.rx_action.onNext(.fetch(favorites: favorites))
                     } else {
-                        log.error("get AccessToken error. code: \(response?.code ?? "")")
+                        log.error("get favorite error. code: \(response?.code ?? "")")
                         self.rx_error.onNext(.fetch)
                     }
                 }, onError: { [weak self] error in
                     guard let `self` = self else { return }
-                    log.error("get AccessToken error. error: \(error.localizedDescription)")
+                    log.error("get favorite error. error: \(error.localizedDescription)")
                     self.rx_error.onNext(.fetch)
             })
             .disposed(by: disposeBag)

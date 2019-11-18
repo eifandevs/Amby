@@ -10,5 +10,9 @@ import Foundation
 
 /// お気に入り取得リクエスト
 public struct GetFavoriteRequest {
-    public init() {}
+    public init(userId: String) {
+        self.userId = userId
+    }
+
+    public let userId: String
 }
