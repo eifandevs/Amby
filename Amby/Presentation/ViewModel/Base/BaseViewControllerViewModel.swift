@@ -25,7 +25,7 @@ enum BaseViewControllerViewModelAction {
     case memo(memo: Memo)
     case notice(message: String, isSuccess: Bool)
     case tabGroupTitle(groupContext: String)
-    case loginRequest
+    case loginRequest(uid: String)
 }
 
 final class BaseViewControllerViewModel {
@@ -35,6 +35,7 @@ final class BaseViewControllerViewModel {
     let changeGroupTitleUseCase = ChangeGroupTitleUseCase()
     let insertTabUseCase = InsertTabUseCase()
     let initializeTabUseCase = InitializeTabUseCase()
+    let loginUseCase = LoginUseCase()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -59,8 +60,8 @@ final class BaseViewControllerViewModel {
         // ヘルプ監視
         LoginHandlerUseCase.s.rx_action
             .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case .begin = action else { return }
-                self.rx_action.onNext(.loginRequest)
+                guard let `self` = self, let action = action.element, case let .begin(uid) = action else { return }
+                self.rx_action.onNext(.loginRequest(uid: uid))
             }
             .disposed(by: disposeBag)
 
@@ -160,5 +161,9 @@ final class BaseViewControllerViewModel {
 
     func changeGroupTitle(groupContext: String, title: String) {
         changeGroupTitleUseCase.exe(groupContext: groupContext, title: title)
+    }
+
+    func login(uid: String) -> Single<()> {
+        return loginUseCase.exeWithSingle(uid: uid)
     }
 }

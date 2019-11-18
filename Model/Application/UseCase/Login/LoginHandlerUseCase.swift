@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 public enum LoginHandlerUseCaseAction {
-    case begin
+    case begin(uid: String)
 }
 
 /// グレップユースケース
@@ -25,7 +25,7 @@ public final class LoginHandlerUseCase {
     }
 
     /// ログイン開始
-    public func begin() {
-        rx_action.onNext(.begin)
+    public func begin(uid: String) {
+        rx_action.onNext(.begin(uid: uid))
     }
 }

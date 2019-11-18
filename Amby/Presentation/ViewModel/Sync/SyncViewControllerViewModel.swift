@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 
 final class SyncViewControllerViewModel {
-    func loginRequest() {
-        LoginHandlerUseCase.s.begin()
+    func loginRequest(uid: String) {
+        LoginHandlerUseCase.s.begin(uid: uid)
     }
 }

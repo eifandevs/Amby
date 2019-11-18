@@ -12,7 +12,6 @@
 		40DC748BD179960B0CF27593 /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 		71A90F5EED54E40F2C51B4EA /* Pods_Amby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769A089A76E185BB6109B3E4 /* Pods_Amby.framework */; };
 		84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90A22EEAE1476346BDB6D1 /* Pods_CommonUtil.framework */; };
-		9D0BAAD2237BE8DF00D83566 /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD65993237BE755005B2B98 /* PKHUD.framework */; };
 		9D0BAAD3237BE8DF00D83566 /* PKHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD65993237BE755005B2B98 /* PKHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D0BAAD5237C01A200D83566 /* LoginHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0BAAD4237C01A200D83566 /* LoginHandlerUseCase.swift */; };
 		9D14EE42237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */; };
@@ -33,6 +32,7 @@
 		9DABBA46230BEABF0024DA0F /* GetFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DABBA45230BEABF0024DA0F /* GetFavoriteResponse.swift */; };
 		9DD2433422FD6966006A6F8B /* SelectMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */; };
 		9DF1246B234D77C800B80BB2 /* DefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF1246A234D77C800B80BB2 /* DefaultsService.swift */; };
+		9DF3D567238265D800A7F175 /* IndicatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF3D566238265D800A7F175 /* IndicatorService.swift */; };
 		9DFF6505237948830065B7DB /* SyncViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF6504237948830065B7DB /* SyncViewControllerViewModel.swift */; };
 		A1042F442258E70400DA6E78 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1042F432258E70400DA6E78 /* R.generated.swift */; };
 		A106154B226B4A5400AB371F /* CommonHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106154A226B4A5400AB371F /* CommonHistoryDataModelTest.swift */; };
@@ -592,6 +592,7 @@
 		9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemoUseCase.swift; sourceTree = "<group>"; };
 		9DD65993237BE755005B2B98 /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
 		9DF1246A234D77C800B80BB2 /* DefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsService.swift; sourceTree = "<group>"; };
+		9DF3D566238265D800A7F175 /* IndicatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorService.swift; sourceTree = "<group>"; };
 		9DFF6504237948830065B7DB /* SyncViewControllerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		A1042F432258E70400DA6E78 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
@@ -1086,7 +1087,6 @@
 				A1FFA6742195B9680092C4D6 /* SnapKit.framework in Frameworks */,
 				A112E735212AF83800320048 /* MessageUI.framework in Frameworks */,
 				A12A9C9D20CE9D1F00146010 /* NVActivityIndicatorView.framework in Frameworks */,
-				9D0BAAD2237BE8DF00D83566 /* PKHUD.framework in Frameworks */,
 				A16A6EE0220F248100FFCB5B /* Entity.framework in Frameworks */,
 				A1A65E6B22886705000FACA7 /* Report.framework in Frameworks */,
 				A1C0E00E220F67F300E7A7B6 /* CommonUtil.framework in Frameworks */,
@@ -2076,6 +2076,7 @@
 				A111F8FA2222CEBD00DE457F /* CustomDialogService.swift */,
 				A1904FD022E1647000BC91B4 /* GoogleSignInService.swift */,
 				A1D828C0235767B800743D57 /* FBLoginService.swift */,
+				9DF3D566238265D800A7F175 /* IndicatorService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -3255,7 +3256,6 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyBeaver.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/PKHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Hydra.framework",
@@ -3810,6 +3810,7 @@
 				A13D6A8A2184A43000B1832E /* FormViewController.swift in Sources */,
 				A11CD33B214F8F8500D9333F /* OpenSourceTableViewCell.swift in Sources */,
 				A11CD32B214F059000D9333F /* OptionMenuFormTableViewModel.swift in Sources */,
+				9DF3D567238265D800A7F175 /* IndicatorService.swift in Sources */,
 				A112E8A9212CD76500320048 /* BaseLayer.swift in Sources */,
 				A13D6AA12189F7A000B1832E /* OptionMenuMemoTableViewModel.swift in Sources */,
 				A15C544D214D699D001E8AB5 /* OptionMenuTableView.swift in Sources */,

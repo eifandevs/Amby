@@ -11,7 +11,6 @@ import Firebase
 import GoogleSignIn
 import Logger
 import Model
-import PKHUD
 import UIKit
 
 let log = AppLogger.self
@@ -85,6 +84,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = baseViewController!
         window!.backgroundColor = UIColor.white
         window!.makeKeyAndVisible()
+
+        // indicator
+        _ = IndicatorService.s
     }
 
     func initialize() {
@@ -98,7 +100,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController?.removeFromParentViewController()
         window!.rootViewController = nil
 
-        HUD.flash(.progress, onView: window, delay: 2.5) { _ in
+        IndicatorService.s.showCircleIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            IndicatorService.s.dismissCircleIndicator()
             self.window!.rootViewController = BaseViewController()
         }
     }

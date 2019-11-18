@@ -10,7 +10,6 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
 import GoogleSignIn
-import PKHUD
 import RxCocoa
 import RxSwift
 import SnapKit
@@ -60,7 +59,7 @@ class SyncViewController: UIViewController {
                             let credential = FacebookAuthProvider.credential(withAccessToken: current.tokenString)
                             FBLoginService().signIn(credential: credential)
                                 .then { _ in
-                                    self.appSignIn()
+                                    self.appSignIn(uid: Auth.auth().currentUser!.uid)
                                 }.catch { _ in
                                     NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
                                 }
@@ -81,9 +80,9 @@ class SyncViewController: UIViewController {
             .disposed(by: rx.disposeBag)
     }
 
-    private func appSignIn() {
+    private func appSignIn(uid: String) {
         dismiss(animated: true, completion: nil)
-        viewModel.loginRequest()
+        viewModel.loginRequest(uid: uid)
     }
 }
 
@@ -95,7 +94,7 @@ extension SyncViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         } else {
             FBLoginService().signIn(nil, didSignInFor: user)
                 .then { _ in
-                    self.appSignIn()
+                    self.appSignIn(uid: Auth.auth().currentUser!.uid)
                 }.catch { _ in
                     NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
                 }

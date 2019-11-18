@@ -9,7 +9,6 @@
 import Entity
 import MessageUI
 import Model
-import PKHUD
 import Report
 import RxCocoa
 import RxSwift
@@ -124,7 +123,7 @@ class BaseViewController: UIViewController {
                 case let .notice(message, isSuccess): self.notice(message: message, isSuccess: isSuccess)
                 case let .tabGroupTitle(groupContext): self.tabGroupTitle(groupContext: groupContext)
                 case .sync: self.sync()
-                case .loginRequest: self.loginRequest()
+                case let .loginRequest(uid): self.loginRequest(uid: uid)
                 }
             }
             .disposed(by: rx.disposeBag)
@@ -246,11 +245,34 @@ class BaseViewController: UIViewController {
     }
 
     /// ログインリクエスト
-    private func loginRequest() {
-        DispatchQueue.main.async {
-            HUD.show(.progress, onView: self.view)
-            // TODO: ログイン処理
+    private func loginRequest(uid: String) {
+        log.debug("login request. uid: \(uid)")
+        IndicatorService.s.showCircleIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            IndicatorService.s.dismissCircleIndicator()
         }
+//        DispatchQueue.main.async {
+//            HUD.show(.progress, onView: self.view)
+//            Thread.sleep(forTimeInterval: 5)
+//            HUD.hide()
+//        }
+
+//        DispatchQueue.main.async {
+//            HUD.show(.progress, onView: self.view)
+
+//            viewModel.login(uid: "").subscribe { [weak self] result in
+//                switch result {
+//                case .success:
+//                    log.debug("success get access token")
+//                    self!.rx_action.onNext(.endDrawing)
+//                case .error:
+//                    log.error("fail to get access token")
+//                    NotificationService.presentRetryAlert(title: MessageConst.ALERT.COMMON_TITLE, message: MessageConst.ALERT.COMMON_MESSAGE, completion: {
+//                        self!.getAccessToken()
+//                    })
+//                }
+//            }.disposed(by: rx.disposeBag)
+//        }
     }
 
     /// メモ画面表示
