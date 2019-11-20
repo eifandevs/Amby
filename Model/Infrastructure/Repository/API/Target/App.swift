@@ -15,6 +15,7 @@ enum App {
     case getArticle(request: GetArticleRequest)
     case getFavorite(request: GetFavoriteRequest)
     case getAccessToken(request: GetAccessTokenRequest)
+    case getMemo(request: GetMemoRequest)
 }
 
 extension App: TargetType {
@@ -32,6 +33,8 @@ extension App: TargetType {
             return ModelConst.URL.FAVORITE_API_PATH
         case .getAccessToken:
             return ModelConst.URL.ACCESSTOKEN_API_PATH
+        case .getMemo:
+            return ModelConst.URL.MEMO_API_PATH
         }
     }
 
@@ -45,6 +48,8 @@ extension App: TargetType {
         case .getFavorite:
             return .get
         case .getAccessToken:
+            return .get
+        case .getMemo:
             return .get
         }
     }
@@ -60,7 +65,9 @@ extension App: TargetType {
             case .getFavorite:
                 return Bundle.main.path(forResource: "favorite_stub", ofType: "json")!
             case .getAccessToken:
-            return Bundle.main.path(forResource: "accesstoken_stub", ofType: "json")!
+                return Bundle.main.path(forResource: "accesstoken_stub", ofType: "json")!
+            case .getMemo:
+                return Bundle.main.path(forResource: "memo_stub", ofType: "json")!
         }
         }()
         return FileHandle(forReadingAtPath: path)!.readDataToEndOfFile()
@@ -77,6 +84,8 @@ extension App: TargetType {
             return .requestPlain
         case .getAccessToken:
             return .requestPlain
+        case .getMemo:
+            return .requestPlain
         }
     }
 
@@ -91,6 +100,8 @@ extension App: TargetType {
             return ["AccessToken": "aaa", "UserToken": "aaa"]
         case .getAccessToken:
             return nil
+        case .getMemo:
+            return ["AccessToken": "aaa", "UserToken": "aaa"]
         }
     }
 }

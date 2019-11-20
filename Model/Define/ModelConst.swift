@@ -126,6 +126,7 @@ struct ModelConst {
         let ARTICLE_API_PATH = ResourceUtil().get(key: "ARTICLE_API_PATH")
         let FAVORITE_API_PATH = ResourceUtil().get(key: "FAVORITE_API_PATH")
         let ACCESSTOKEN_API_PATH = ResourceUtil().get(key: "ACCESSTOKEN_API_PATH")
+        let MEMO_API_PATH = ResourceUtil().get(key: "MEMO_API_PATH")
 
         // トレンドホーム
         let TREND_HOME_URL = ResourceUtil().get(key: "TREND_HOME_URL")
