@@ -69,6 +69,7 @@ struct MessageConst {
         static let LOG_IN_SUCCESS = "ログインしました"
         static let LOG_IN_ERROR = "ログインに失敗しました"
         static let LOG_OUT_SUCCESS = "ログアウトしました"
+        static let INPUT_ERROR_AUTH = "認証に失敗しました"
         static let ALREADY_LOGGED_IN_ERROR = "ログイン済みです"
         static let NOT_LOGIN_IN_ERROR = "ログインしていません"
         static let GREP_ERROR = "ページ内検索に失敗しました"

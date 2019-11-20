@@ -1,0 +1,25 @@
+{
+    "code": "0000",
+    "data": [
+        {
+            "id": "2345",
+            "text": "business",
+            "isLocked": false
+        },
+        {
+            "id": "2346",
+            "text": "business",
+            "isLocked": false
+        },
+        {
+            "id": "2347",
+            "text": "business",
+            "isLocked": true
+        },
+        {
+            "id": "2348",
+            "text": "business",
+            "isLocked": false
+        }
+    ]
+}

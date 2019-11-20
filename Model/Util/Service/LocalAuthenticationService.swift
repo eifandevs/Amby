@@ -13,7 +13,7 @@ import CommonUtil
 
 class LocalAuthenticationService {
 
-    class func challenge() -> Observable<RepositoryResult<LABiometryType>> {
+    class func challenge() -> Observable<LABiometryType> {
         let context = LAContext()
         var error: NSError?
         let description: String = "認証します"
@@ -23,19 +23,20 @@ class LocalAuthenticationService {
                 context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: description, reply: {success, _ in
                     if (success) {
                         // 認証成功
-                        observable.onNext(.success(context.biometryType))
+                        observable.onNext(context.biometryType)
+                        observable.onCompleted()
                     } else {
-                        observable.onNext(.failure(NSError.empty))
+                        observable.onError(NSError.empty)
                     }
                 })
             } else {
-                observable.onNext(.failure(NSError.empty))
+                observable.onError(NSError.empty)
             }
             return Disposables.create()
         }
     }
 
-    class func challengeWithBiometry() -> Observable<RepositoryResult<LABiometryType>> {
+    class func challengeWithBiometry() -> Observable<LABiometryType> {
         let context = LAContext()
         var error: NSError?
         let description: String = "認証します"
@@ -45,13 +46,14 @@ class LocalAuthenticationService {
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: description, reply: {success, _ in
                     if (success) {
                         // 認証成功
-                        observable.onNext(.success(context.biometryType))
+                        observable.onNext(context.biometryType)
+                        observable.onCompleted()
                     } else {
-                        observable.onNext(.failure(NSError.empty))
+                        observable.onError(NSError.empty)
                     }
                 })
             } else {
-                observable.onNext(.failure(NSError.empty))
+                observable.onError(NSError.empty)
             }
             return Disposables.create()
         }

@@ -248,31 +248,20 @@ class BaseViewController: UIViewController {
     private func loginRequest(uid: String) {
         log.debug("login request. uid: \(uid)")
         IndicatorService.s.showCircleIndicator()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+
+        Observable.of(
+            viewModel.login(uid: uid),
+            viewModel.fetchFavorite()
+        ).concat().subscribe(onNext: nil, onError: { _ in
+            log.debug("error login sequence")
+            NotificationService.presentToastNotification(message: MessageConst.ALERT.COMMON_MESSAGE, isSuccess: false)
             IndicatorService.s.dismissCircleIndicator()
-        }
-//        DispatchQueue.main.async {
-//            HUD.show(.progress, onView: self.view)
-//            Thread.sleep(forTimeInterval: 5)
-//            HUD.hide()
-//        }
-
-//        DispatchQueue.main.async {
-//            HUD.show(.progress, onView: self.view)
-
-//            viewModel.login(uid: "").subscribe { [weak self] result in
-//                switch result {
-//                case .success:
-//                    log.debug("success get access token")
-//                    self!.rx_action.onNext(.endDrawing)
-//                case .error:
-//                    log.error("fail to get access token")
-//                    NotificationService.presentRetryAlert(title: MessageConst.ALERT.COMMON_TITLE, message: MessageConst.ALERT.COMMON_MESSAGE, completion: {
-//                        self!.getAccessToken()
-//                    })
-//                }
-//            }.disposed(by: rx.disposeBag)
-//        }
+        }, onCompleted: {
+            log.debug("success login sequence")
+            NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
+            IndicatorService.s.dismissCircleIndicator()
+        }, onDisposed: nil)
+            .disposed(by: rx.disposeBag)
     }
 
     /// メモ画面表示

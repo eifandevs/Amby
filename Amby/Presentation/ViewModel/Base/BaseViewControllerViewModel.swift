@@ -36,6 +36,7 @@ final class BaseViewControllerViewModel {
     let insertTabUseCase = InsertTabUseCase()
     let initializeTabUseCase = InitializeTabUseCase()
     let loginUseCase = LoginUseCase()
+    let fetchFavoriteUseCase = FetchFavoriteUseCase()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -163,7 +164,11 @@ final class BaseViewControllerViewModel {
         changeGroupTitleUseCase.exe(groupContext: groupContext, title: title)
     }
 
-    func login(uid: String) -> Single<()> {
-        return loginUseCase.exeWithSingle(uid: uid)
+    func login(uid: String) -> Observable<()> {
+        return loginUseCase.exe(uid: uid)
+    }
+
+    func fetchFavorite() -> Observable<()> {
+        return fetchFavoriteUseCase.exe()
     }
 }

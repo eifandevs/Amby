@@ -18,12 +18,11 @@ final class OptionMenuFormTableViewCellViewModel {
     /// 閲覧リクエスト
     func readForm(id: String) {
         ChallengeLocalAuthenticationUseCase().exe()
-            .subscribe { result in
-                guard let result = result.element else { return }
-                if case .success = result {
-                    FormHandlerUseCase.s.read(id: id)
-                }
-
-            }.disposed(by: disposeBag)
+            .subscribe(onNext: nil, onError: { _ in
+                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.INPUT_ERROR_AUTH, isSuccess: false)
+            }, onCompleted: {
+                FormHandlerUseCase.s.read(id: id)
+            }, onDisposed: nil)
+            .disposed(by: disposeBag)
     }
 }

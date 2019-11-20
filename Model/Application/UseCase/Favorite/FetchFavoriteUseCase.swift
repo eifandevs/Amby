@@ -27,10 +27,10 @@ public final class FetchFavoriteUseCase {
         userDataModel = UserDataModel.s
     }
 
-    public func exe() -> Single<()> {
-        return Single<()>.create(subscribe: { [weak self] (observer) -> Disposable in
+    public func exe() -> Observable<()> {
+        return Observable.create { [weak self] observable in
             guard let `self` = self, let uid = self.userDataModel.uid else {
-                observer(.error(NSError.empty))
+                observable.onError(NSError.empty)
                 return Disposables.create()
             }
 
@@ -42,7 +42,7 @@ public final class FetchFavoriteUseCase {
                     switch action {
                     case .fetch:
                         log.debug("fetch favorite success")
-                        observer(.success(()))
+                        observable.onCompleted()
                     default: break
                     }
                 }
@@ -53,7 +53,7 @@ public final class FetchFavoriteUseCase {
                     switch error {
                     case .fetch:
                         log.error("fetch favorite error")
-                        observer(.error(NSError.empty))
+                        observable.onError(NSError.empty)
                     default: break
                     }
                 }
@@ -62,6 +62,6 @@ public final class FetchFavoriteUseCase {
             self.favoriteDataModel.fetch(request: GetFavoriteRequest(userId: uid))
 
             return Disposables.create()
-       })
+       }
     }
 }

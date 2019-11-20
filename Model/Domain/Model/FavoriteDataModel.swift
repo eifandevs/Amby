@@ -180,6 +180,9 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
                             favorite.url = obj.url
                             return favorite
                         })
+                        // initialize data
+                        _ = self.repository.delete(data: self.select())
+                        _ = self.repository.insert(data: favorites)
                         self.rx_action.onNext(.fetch(favorites: favorites))
                     } else {
                         log.error("get favorite error. code: \(response?.code ?? "")")

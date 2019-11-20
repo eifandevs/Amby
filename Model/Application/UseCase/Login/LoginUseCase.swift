@@ -35,11 +35,11 @@ public final class LoginUseCase {
         userDataModel.post(request: request)
     }
 
-    public func exeWithSingle(uid: String) -> Single<()> {
+    public func exe(uid: String) -> Observable<()> {
 
-        return Single<()>.create(subscribe: { [weak self] (observer) -> Disposable in
+        return Observable.create { [weak self] observable in
             guard let `self` = self else {
-                observer(.error(NSError.empty))
+                observable.onError(NSError.empty)
                 return Disposables.create()
             }
 
@@ -56,7 +56,7 @@ public final class LoginUseCase {
                     switch action {
                     case let .post(userInfo):
                         log.debug("app login success: \(userInfo.userId)")
-                        observer(.success(()))
+                        observable.onCompleted()
                     }
                 }
 
@@ -65,14 +65,13 @@ public final class LoginUseCase {
                     guard let error = error.element else { return }
                     switch error {
                     case .post:
-                        observer(.error(NSError.empty))
+                        observable.onError(NSError.empty)
                     }
                 }
             .disposed(by: self.disposeBag)
 
             self.userDataModel.post(request: request)
-
             return Disposables.create()
-        })
+        }
     }
 }
