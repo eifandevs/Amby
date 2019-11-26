@@ -22,6 +22,8 @@
 	<string>/favorite</string>
 	<key>MEMO_API_PATH</key>
 	<string>/memo</string>
+	<key>TAB_API_PATH</key>
+	<string>/tab</string>
 	<key>API_AUTH_HEADER_TOKEN</key>
 	<string>djks</string>
 	<key>API_BASIC_AUTH_USER</key>

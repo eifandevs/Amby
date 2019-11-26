@@ -16,6 +16,7 @@ enum App {
     case getFavorite(request: GetFavoriteRequest)
     case getAccessToken(request: GetAccessTokenRequest)
     case getMemo(request: GetMemoRequest)
+    case getTabData(request: GetTabRequest)
 }
 
 extension App: TargetType {
@@ -35,6 +36,8 @@ extension App: TargetType {
             return ModelConst.URL.ACCESSTOKEN_API_PATH
         case .getMemo:
             return ModelConst.URL.MEMO_API_PATH
+        case .getTabData:
+            return ModelConst.URL.TAB_API_PATH
         }
     }
 
@@ -50,6 +53,8 @@ extension App: TargetType {
         case .getAccessToken:
             return .get
         case .getMemo:
+            return .get
+        case .getTabData:
             return .get
         }
     }
@@ -68,6 +73,8 @@ extension App: TargetType {
                 return Bundle.main.path(forResource: "accesstoken_stub", ofType: "json")!
             case .getMemo:
                 return Bundle.main.path(forResource: "memo_stub", ofType: "json")!
+            case .getTabData:
+                return Bundle.main.path(forResource: "page_history_stub", ofType: "dat")!
         }
         }()
         return FileHandle(forReadingAtPath: path)!.readDataToEndOfFile()
@@ -86,6 +93,11 @@ extension App: TargetType {
             return .requestPlain
         case .getMemo:
             return .requestPlain
+        case .getTabData:
+            let downloadDestination: DownloadDestination = { _, _ in
+                return (Cache.tab.url, [.removePreviousFile, .createIntermediateDirectories])
+            }
+            return .downloadDestination(downloadDestination)
         }
     }
 
@@ -101,6 +113,8 @@ extension App: TargetType {
         case .getAccessToken:
             return nil
         case .getMemo:
+            return ["AccessToken": "aaa", "UserToken": "aaa"]
+        case .getTabData:
             return ["AccessToken": "aaa", "UserToken": "aaa"]
         }
     }

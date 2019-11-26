@@ -16,6 +16,7 @@
 		9D0BAAD5237C01A200D83566 /* LoginHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0BAAD4237C01A200D83566 /* LoginHandlerUseCase.swift */; };
 		9D14EE42237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */; };
 		9D14EE43237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */; };
+		9D27F0B7238D16A4004B8245 /* GetTabRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D27F0B6238D16A4004B8245 /* GetTabRequest.swift */; };
 		9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */; };
 		9D2E211F22FD7B610024F45D /* InvertLockMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */; };
 		9D40D8CF236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40D8CE236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift */; };
@@ -577,6 +578,7 @@
 		9D0BAAD4237C01A200D83566 /* LoginHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHandlerUseCase.swift; sourceTree = "<group>"; };
 		9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingLoginStatusTableViewCell.swift; sourceTree = "<group>"; };
 		9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuSettingLoginStatusTableViewCell.xib; sourceTree = "<group>"; };
+		9D27F0B6238D16A4004B8245 /* GetTabRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTabRequest.swift; sourceTree = "<group>"; };
 		9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoUseCase.swift; sourceTree = "<group>"; };
 		9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertLockMemoUseCase.swift; sourceTree = "<group>"; };
 		9D40D8CE236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccessTokenUseCase.swift; sourceTree = "<group>"; };
@@ -1187,6 +1189,7 @@
 				9DD5D841238540F0006E951B /* GetAccessTokenRequest.swift */,
 				9DD5D842238540F0006E951B /* GetMemoRequest.swift */,
 				9DD5D843238540F0006E951B /* GetFavoriteRequest.swift */,
+				9D27F0B6238D16A4004B8245 /* GetTabRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -3541,6 +3544,7 @@
 				A1B7F2DD220F45A0008F3850 /* Favorite.swift in Sources */,
 				9DD5D850238540F0006E951B /* GetAccessTokenResponse.swift in Sources */,
 				9DD5D853238540F0006E951B /* GetFavoriteResponse.swift in Sources */,
+				9D27F0B7238D16A4004B8245 /* GetTabRequest.swift in Sources */,
 				9DD5D854238540F0006E951B /* LoginResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
