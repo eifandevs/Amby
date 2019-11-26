@@ -45,6 +45,7 @@ public final class  MemoHandlerUseCase {
                 switch action {
                 case .insert, .update, .delete, .deleteAll, .invertLock:
                     self.rx_action.onNext(.update)
+                default: break
                 }
             }
             .disposed(by: disposeBag)

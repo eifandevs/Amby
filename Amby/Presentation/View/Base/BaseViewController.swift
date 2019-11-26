@@ -251,6 +251,7 @@ class BaseViewController: UIViewController {
 
         Observable.of(
             viewModel.login(uid: uid),
+            viewModel.fetchMemo(),
             viewModel.fetchFavorite()
         ).concat().subscribe(onNext: nil, onError: { _ in
             log.debug("error login sequence")

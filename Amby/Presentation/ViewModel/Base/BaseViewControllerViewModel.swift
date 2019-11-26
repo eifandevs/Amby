@@ -37,6 +37,7 @@ final class BaseViewControllerViewModel {
     let initializeTabUseCase = InitializeTabUseCase()
     let loginUseCase = LoginUseCase()
     let fetchFavoriteUseCase = FetchFavoriteUseCase()
+    let fetchMemoUseCase = FetchMemoUseCase()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -170,5 +171,9 @@ final class BaseViewControllerViewModel {
 
     func fetchFavorite() -> Observable<()> {
         return fetchFavoriteUseCase.exe()
+    }
+
+    func fetchMemo() -> Observable<()> {
+        return fetchMemoUseCase.exe()
     }
 }
