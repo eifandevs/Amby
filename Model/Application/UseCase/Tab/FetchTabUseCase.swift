@@ -13,7 +13,7 @@ import RxSwift
 
 public final class FetchTabUseCase {
 
-    private var favoriteDataModel: FavoriteDataModelProtocol!
+    private var tabDataModel: TabDataModelProtocol!
     private var userDataModel: UserDataModelProtocol!
 
     let disposeBag = DisposeBag()
@@ -23,7 +23,7 @@ public final class FetchTabUseCase {
     }
 
     private func setupProtocolImpl() {
-        favoriteDataModel = FavoriteDataModel.s
+        tabDataModel = TabDataModel.s
         userDataModel = UserDataModel.s
     }
 
@@ -36,7 +36,7 @@ public final class FetchTabUseCase {
 
             log.debug("fetch tab data start...")
 
-            self.favoriteDataModel.rx_action
+            self.tabDataModel.rx_action
                 .subscribe { [weak self] action in
                     guard let `self` = self, let action = action.element else { return }
                     switch action {
@@ -47,7 +47,7 @@ public final class FetchTabUseCase {
                     }
                 }
 
-            self.favoriteDataModel.rx_error
+            self.tabDataModel.rx_error
                 .subscribe { error in
                     guard let error = error.element else { return }
                     switch error {
@@ -59,7 +59,7 @@ public final class FetchTabUseCase {
                 }
             .disposed(by: self.disposeBag)
 
-            self.favoriteDataModel.fetch(request: GetFavoriteRequest(userId: uid))
+            self.tabDataModel.fetch(request: GetTabRequest(userId: uid))
 
             return Disposables.create()
        }

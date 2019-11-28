@@ -86,6 +86,7 @@ protocol TabDataModelProtocol {
     func goNext()
     func store()
     func delete()
+    func fetch(request: GetTabRequest)
 }
 
 final class TabDataModel: TabDataModelProtocol {
