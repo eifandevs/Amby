@@ -28,11 +28,13 @@ enum TabDataModelAction {
     case startLoading(context: String)
     case endLoading(context: String)
     case endRendering(context: String)
+    case fetch
 }
 
 enum TabDataModelError {
     case delete
     case store
+    case fetch
 }
 
 extension TabDataModelError: ModelError {
@@ -42,6 +44,8 @@ extension TabDataModelError: ModelError {
             return MessageConst.NOTIFICATION.DELETE_TAB_ERROR
         case .store:
             return MessageConst.NOTIFICATION.STORE_TAB_ERROR
+        case .fetch:
+            return MessageConst.NOTIFICATION.FETCH_TAB_ERROR
         }
     }
 }
@@ -93,6 +97,8 @@ final class TabDataModel: TabDataModelProtocol {
     static let s = TabDataModel()
 
     private let repository = UserDefaultRepository()
+
+    private let disposeBag = DisposeBag()
 
     /// webViewそれぞれの履歴とカレントページインデックス
     var tabGroupList = TabGroupList()
@@ -463,5 +469,39 @@ final class TabDataModel: TabDataModelProtocol {
         if case .failure = result {
             rx_error.onNext(.delete)
         }
+    }
+
+    /// 記事取得
+    func fetch(request: GetTabRequest) {
+        let repository = ApiRepository<App>()
+
+        repository.rx.request(.getTabData(request: request))
+            .observeOn(MainScheduler.asyncInstance)
+            .subscribe(
+                onSuccess: { [weak self] _ in
+                    guard let `self` = self else { return }
+//                    if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
+//                        log.debug("get tab success.")
+//                        let favorites = response.data.map({ obj -> Favorite in
+//                            let favorite = Favorite()
+//                            favorite.id = obj.id
+//                            favorite.title = obj.title
+//                            favorite.url = obj.url
+//                            return favorite
+//                        })
+//                        // initialize data
+//                        _ = self.repository.delete(data: self.select())
+//                        _ = self.repository.insert(data: favorites)
+//                        self.rx_action.onNext(.fetch(favorites: favorites))
+//                    } else {
+//                        log.error("get favorite error. code: \(response?.code ?? "")")
+//                        self.rx_error.onNext(.fetch)
+//                    }
+                }, onError: { [weak self] error in
+                    guard let `self` = self else { return }
+                    log.error("get tab error. error: \(error.localizedDescription)")
+                    self.rx_error.onNext(.fetch)
+            })
+            .disposed(by: disposeBag)
     }
 }

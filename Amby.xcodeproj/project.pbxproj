@@ -16,6 +16,8 @@
 		9D0BAAD5237C01A200D83566 /* LoginHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0BAAD4237C01A200D83566 /* LoginHandlerUseCase.swift */; };
 		9D14EE42237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */; };
 		9D14EE43237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */; };
+		9D1EE146238F5F79001F604B /* page_history_stub.dat in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EE145238F5F79001F604B /* page_history_stub.dat */; };
+		9D1EE148238F6918001F604B /* FetchTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EE147238F6918001F604B /* FetchTabUseCase.swift */; };
 		9D27F0B7238D16A4004B8245 /* GetTabRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D27F0B6238D16A4004B8245 /* GetTabRequest.swift */; };
 		9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */; };
 		9D2E211F22FD7B610024F45D /* InvertLockMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */; };
@@ -578,6 +580,8 @@
 		9D0BAAD4237C01A200D83566 /* LoginHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHandlerUseCase.swift; sourceTree = "<group>"; };
 		9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingLoginStatusTableViewCell.swift; sourceTree = "<group>"; };
 		9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuSettingLoginStatusTableViewCell.xib; sourceTree = "<group>"; };
+		9D1EE145238F5F79001F604B /* page_history_stub.dat */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = page_history_stub.dat; sourceTree = "<group>"; };
+		9D1EE147238F6918001F604B /* FetchTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTabUseCase.swift; sourceTree = "<group>"; };
 		9D27F0B6238D16A4004B8245 /* GetTabRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTabRequest.swift; sourceTree = "<group>"; };
 		9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoUseCase.swift; sourceTree = "<group>"; };
 		9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertLockMemoUseCase.swift; sourceTree = "<group>"; };
@@ -2078,6 +2082,7 @@
 		A1902F95209CF976004F1EA5 /* stub */ = {
 			isa = PBXGroup;
 			children = (
+				9D1EE145238F5F79001F604B /* page_history_stub.dat */,
 				9DD5D856238541AD006E951B /* memo_stub.json */,
 				A145D44C236FEF8D00660B8D /* login_stub.json */,
 				A1422B52231061A7002DAF52 /* favorite_stub.json */,
@@ -2247,6 +2252,7 @@
 				A1422B152301357B002DAF52 /* RebuildTabUseCase.swift */,
 				A1422B1723013712002DAF52 /* GetIndexTabUseCase.swift */,
 				A1422B2F23013B87002DAF52 /* InitializeTabUseCase.swift */,
+				9D1EE147238F6918001F604B /* FetchTabUseCase.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -2991,6 +2997,7 @@
 				A1904FCF22D13A1900BC91B4 /* GoogleService-Info.plist in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
 				9DD5D857238541AE006E951B /* memo_stub.json in Resources */,
+				9D1EE146238F5F79001F604B /* page_history_stub.dat in Resources */,
 				A15C5459214D699D001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
 				A17241B722452CD800472477 /* bundle.js in Resources */,
@@ -3668,6 +3675,7 @@
 				A19506372143F8AF0091DF23 /* CommonHistoryDataModel.swift in Sources */,
 				9DD5D83B23853FD1006E951B /* FetchMemoUseCase.swift in Sources */,
 				A1EF692721AC3A8E00726371 /* ModelError.swift in Sources */,
+				9D1EE148238F6918001F604B /* FetchTabUseCase.swift in Sources */,
 				A1422B0423012F6E002DAF52 /* RemoveTabUseCase.swift in Sources */,
 				A195062D2143F8840091DF23 /* DBRepository.swift in Sources */,
 				A19352A32141569C002A0865 /* ApiRepository.swift in Sources */,
