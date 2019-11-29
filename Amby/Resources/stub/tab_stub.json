@@ -1,0 +1,25 @@
+{
+    "code": "0000",
+    "data": [
+        {
+            "id": "2345",
+            "title": "business",
+            "url": "https://google.com/"
+        },
+        {
+            "id": "2346",
+            "title": "business",
+            "url": "https://abc.com/"
+        },
+        {
+            "id": "2347",
+            "title": "business",
+            "url": "https://def.com/"
+        },
+        {
+            "id": "2348",
+            "title": "business",
+            "url": "https://ghi.com/"
+        }
+    ]
+}

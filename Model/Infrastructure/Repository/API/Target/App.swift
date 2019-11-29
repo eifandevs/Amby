@@ -74,7 +74,7 @@ extension App: TargetType {
             case .getMemo:
                 return Bundle.main.path(forResource: "memo_stub", ofType: "json")!
             case .getTabData:
-                return Bundle.main.path(forResource: "page_history_stub", ofType: "dat")!
+                return Bundle.main.path(forResource: "tab_stub", ofType: "json")!
         }
         }()
         return FileHandle(forReadingAtPath: path)!.readDataToEndOfFile()
@@ -94,10 +94,7 @@ extension App: TargetType {
         case .getMemo:
             return .requestPlain
         case .getTabData:
-            let downloadDestination: DownloadDestination = { _, _ in
-                return (Cache.tab.url, [.removePreviousFile, .createIntermediateDirectories])
-            }
-            return .downloadDestination(downloadDestination)
+            return .requestPlain
         }
     }
 

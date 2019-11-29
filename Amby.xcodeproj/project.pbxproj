@@ -16,8 +16,9 @@
 		9D0BAAD5237C01A200D83566 /* LoginHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0BAAD4237C01A200D83566 /* LoginHandlerUseCase.swift */; };
 		9D14EE42237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */; };
 		9D14EE43237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */; };
-		9D1EE146238F5F79001F604B /* page_history_stub.dat in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EE145238F5F79001F604B /* page_history_stub.dat */; };
 		9D1EE148238F6918001F604B /* FetchTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EE147238F6918001F604B /* FetchTabUseCase.swift */; };
+		9D1EE18E23910E1B001F604B /* GetTabResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1EE18D23910E1B001F604B /* GetTabResponse.swift */; };
+		9D1EE190239116B2001F604B /* tab_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D1EE18F239116B2001F604B /* tab_stub.json */; };
 		9D27F0B7238D16A4004B8245 /* GetTabRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D27F0B6238D16A4004B8245 /* GetTabRequest.swift */; };
 		9D2E211B22FD6CB20024F45D /* UpdateMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */; };
 		9D2E211F22FD7B610024F45D /* InvertLockMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */; };
@@ -580,8 +581,9 @@
 		9D0BAAD4237C01A200D83566 /* LoginHandlerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginHandlerUseCase.swift; sourceTree = "<group>"; };
 		9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionMenuSettingLoginStatusTableViewCell.swift; sourceTree = "<group>"; };
 		9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionMenuSettingLoginStatusTableViewCell.xib; sourceTree = "<group>"; };
-		9D1EE145238F5F79001F604B /* page_history_stub.dat */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = page_history_stub.dat; sourceTree = "<group>"; };
 		9D1EE147238F6918001F604B /* FetchTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTabUseCase.swift; sourceTree = "<group>"; };
+		9D1EE18D23910E1B001F604B /* GetTabResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTabResponse.swift; sourceTree = "<group>"; };
+		9D1EE18F239116B2001F604B /* tab_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tab_stub.json; sourceTree = "<group>"; };
 		9D27F0B6238D16A4004B8245 /* GetTabRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTabRequest.swift; sourceTree = "<group>"; };
 		9D2E211A22FD6CB20024F45D /* UpdateMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoUseCase.swift; sourceTree = "<group>"; };
 		9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertLockMemoUseCase.swift; sourceTree = "<group>"; };
@@ -1207,6 +1209,7 @@
 				9DD5D848238540F0006E951B /* GetFavoriteResponse.swift */,
 				9DD5D849238540F0006E951B /* LoginResponse.swift */,
 				9DD5D84A238540F0006E951B /* GetSuggestResponse.swift */,
+				9D1EE18D23910E1B001F604B /* GetTabResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -2082,7 +2085,7 @@
 		A1902F95209CF976004F1EA5 /* stub */ = {
 			isa = PBXGroup;
 			children = (
-				9D1EE145238F5F79001F604B /* page_history_stub.dat */,
+				9D1EE18F239116B2001F604B /* tab_stub.json */,
 				9DD5D856238541AD006E951B /* memo_stub.json */,
 				A145D44C236FEF8D00660B8D /* login_stub.json */,
 				A1422B52231061A7002DAF52 /* favorite_stub.json */,
@@ -2967,6 +2970,7 @@
 				A1904FCE22D13A1900BC91B4 /* GoogleService-Info_dummy.plist in Resources */,
 				A17241C32245639200472477 /* shaper.js in Resources */,
 				A15C5420214D5E4D001E8AB5 /* SearchMenuNewsTableViewCell.xib in Resources */,
+				9D1EE190239116B2001F604B /* tab_stub.json in Resources */,
 				A17241CF2245708A00472477 /* timeout.html in Resources */,
 				A15C5484214D935E001E8AB5 /* com.mono0926.LicensePlist.plist in Resources */,
 				A17241C6224563A200472477 /* alertTest.html in Resources */,
@@ -2997,7 +3001,6 @@
 				A1904FCF22D13A1900BC91B4 /* GoogleService-Info.plist in Resources */,
 				A1903054209CF978004F1EA5 /* Assets.xcassets in Resources */,
 				9DD5D857238541AE006E951B /* memo_stub.json in Resources */,
-				9D1EE146238F5F79001F604B /* page_history_stub.dat in Resources */,
 				A15C5459214D699D001E8AB5 /* OptionMenuAppTableViewCell.xib in Resources */,
 				A1903057209CF978004F1EA5 /* suggest_stub.json in Resources */,
 				A17241B722452CD800472477 /* bundle.js in Resources */,
@@ -3535,6 +3538,7 @@
 				9DD5D855238540F0006E951B /* GetSuggestResponse.swift in Sources */,
 				A1B7F2D6220F45A0008F3850 /* Tab.swift in Sources */,
 				9DD5D84B238540F0006E951B /* LoginRequest.swift in Sources */,
+				9D1EE18E23910E1B001F604B /* GetTabResponse.swift in Sources */,
 				A1B7F2D3220F45A0008F3850 /* SearchHistory.swift in Sources */,
 				A1B7F2D5220F45A0008F3850 /* Suggest.swift in Sources */,
 				9DD5D84D238540F0006E951B /* GetAccessTokenRequest.swift in Sources */,
