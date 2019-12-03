@@ -12,7 +12,7 @@ import UIKit
 
 // swiftlint:disable force_cast
 
-public class TabGroupList: NSObject, NSCoding {
+public class TabGroupList: NSObject, NSCoding, Codable {
     public var currentGroupContext: String
     public var groups: [TabGroup]
     public var currentGroup: TabGroup {

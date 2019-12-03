@@ -11,17 +11,11 @@ import Foundation
 /// お気に入り取得APIレスポンス
 public struct GetFavoriteResponse: Codable {
 
-    public struct Favorite: Codable {
-        public var id: String
-        public var title: String
-        public var url: String
-    }
-
-    public init(code: String, data: [GetFavoriteResponse.Favorite]) {
+    public init(code: String, data: [Favorite]) {
         self.code = code
         self.data = data
     }
 
     public let code: String
-    public let data: [GetFavoriteResponse.Favorite]
+    public let data: [Favorite]
 }

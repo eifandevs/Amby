@@ -173,13 +173,7 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
                     guard let `self` = self else { return }
                     if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                         log.debug("get favorite success.")
-                        let favorites = response.data.map({ obj -> Favorite in
-                            let favorite = Favorite()
-                            favorite.id = obj.id
-                            favorite.title = obj.title
-                            favorite.url = obj.url
-                            return favorite
-                        })
+                        let favorites = response.data.map {$0}
                         // initialize data
                         _ = self.repository.delete(data: self.select())
                         _ = self.repository.insert(data: favorites)

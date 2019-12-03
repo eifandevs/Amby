@@ -177,13 +177,7 @@ final class MemoDataModel: MemoDataModelProtocol {
                     guard let `self` = self else { return }
                     if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                         log.debug("get memo success.")
-                        let memos = response.data.map({ obj -> Memo in
-                            let memo = Memo()
-                            memo.id = obj.id
-                            memo.isLocked = obj.isLocked
-                            memo.text = obj.text
-                            return memo
-                        })
+                        let memos = response.data.map {$0}
                         // initialize data
                         _ = self.repository.delete(data: self.select())
                         _ = self.repository.insert(data: memos)

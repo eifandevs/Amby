@@ -28,7 +28,7 @@ enum TabDataModelAction {
     case startLoading(context: String)
     case endLoading(context: String)
     case endRendering(context: String)
-    case fetch
+    case fetch(tabGroupList: TabGroupList)
 }
 
 enum TabDataModelError {
@@ -478,12 +478,28 @@ final class TabDataModel: TabDataModelProtocol {
 
         repository.rx.request(.getTabData(request: request))
             .observeOn(MainScheduler.asyncInstance)
+            .map { (response) -> GetTabResponse? in
+
+                let decoder: JSONDecoder = JSONDecoder()
+                do {
+                    let tabDataResponse: GetTabResponse = try decoder.decode(GetTabResponse.self, from: response.data)
+                    return tabDataResponse
+                } catch {
+                    return nil
+                }
+            }
             .subscribe(
                 onSuccess: { [weak self] response in
                     guard let `self` = self else { return }
-                    log.debug("get tab success. response: \(response)")
-                    // TODO: save tab
-                    self.rx_action.onNext(.fetch)
+                    if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
+                        log.debug("get tab success.")
+                        let tabGroupList = response.data
+                        // TODO: initialize data
+                        self.rx_action.onNext(.fetch(tabGroupList: tabGroupList))
+                    } else {
+                        log.error("get tab error. code: \(response?.code ?? "")")
+                        self.rx_error.onNext(.fetch)
+                    }
                 }, onError: { [weak self] error in
                     guard let `self` = self else { return }
                     log.error("get tab error. error: \(error.localizedDescription)")

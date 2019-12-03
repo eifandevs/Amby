@@ -251,8 +251,9 @@ class BaseViewController: UIViewController {
 
         Observable.of(
             viewModel.login(uid: uid),
-            viewModel.fetchMemo(),
-            viewModel.fetchFavorite()
+            //            viewModel.fetchMemo(),
+//            viewModel.fetchFavorite(),
+            viewModel.fetchTab()
         ).concat().subscribe(onNext: nil, onError: { _ in
             log.debug("error login sequence")
             NotificationService.presentToastNotification(message: MessageConst.ALERT.COMMON_MESSAGE, isSuccess: false)

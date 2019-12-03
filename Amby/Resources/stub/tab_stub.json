@@ -1,25 +1,36 @@
 {
     "code": "0000",
-    "data": [
-        {
-            "id": "2345",
-            "title": "business",
-            "url": "https://google.com/"
-        },
-        {
-            "id": "2346",
-            "title": "business",
-            "url": "https://abc.com/"
-        },
-        {
-            "id": "2347",
-            "title": "business",
-            "url": "https://def.com/"
-        },
-        {
-            "id": "2348",
-            "title": "business",
-            "url": "https://ghi.com/"
-        }
-    ]
+    "data": {
+        "currentGroupContext": "iejfaojefioejfiejfeofier",
+        "groups": [
+            {
+                "groupContext": "aaaaaaaaaaaaaaaa",
+                "title": "新しいグループ",
+                "isPrivate": false,
+                "currentContext": "aaaaaaaaaaaaaaaa",
+                "histories": [
+                    {
+                        "context": "aaaaaaaaaaaaaaa",
+                        "url": "https://google.com",
+                        "title": "test",
+                        "session": {
+                            "urls": [
+                                "https://google.com",
+                                "https://google.com",
+                                "https://google.com"
+                            ],
+                            "currentPage": 1
+                        },
+                        "isLoading": false
+                    }
+
+                ],
+                "backForwardContextList": [
+                    "aaaaaaaaaaa",
+                    "bbbbbbbbbbb",
+                    "ccccccccccc"
+                ]
+            }
+        ]
+    }
 }
