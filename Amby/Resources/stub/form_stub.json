@@ -1,0 +1,18 @@
+{
+    "code": "0000",
+    "data": {
+        "id": "aaaaaaaaaaaa",
+        "title": "aaaaaaaaaaaaaaa",
+        "host": "google.com",
+        "url": "https://google.com",
+        "date": "2019-10-10T13:50:40+09:00",
+        "inputs": [
+            {
+                "formIndex": 0,
+                "formInputIndex": 0,
+                "type": "password",
+                "value": "A45675B246X"
+            }
+        ]
+    }
+}
