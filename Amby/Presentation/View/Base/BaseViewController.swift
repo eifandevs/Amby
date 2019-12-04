@@ -89,21 +89,12 @@ class BaseViewController: UIViewController {
         viewModel.initializeTab()
 
         // iPhoneX対応
-        if #available(iOS 11.0, *) {
-            let insets = self.view.safeAreaInsets
-            if Util.isiPhoneX() {
-                AppConst.BASE_LAYER.HEADER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 1.3 + insets.top
-                AppConst.BASE_LAYER.HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER.HEADER_PROGRESS_BAR_HEIGHT * 2.2
-                AppConst.BASE_LAYER.FOOTER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height + insets.bottom
-                AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT = AppConst.BASE_LAYER.HEADER_HEIGHT / 2.5
-                AppConst.BASE_LAYER.THUMBNAIL_SIZE.height += insets.bottom / 2.5
-            } else {
-                AppConst.BASE_LAYER.HEADER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 1.3
-                AppConst.BASE_LAYER.HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER.HEADER_PROGRESS_BAR_HEIGHT
-                AppConst.BASE_LAYER.FOOTER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height
-                AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT = AppConst.BASE_LAYER.HEADER_HEIGHT / 2
-            }
-        }
+        let insets = view.safeAreaInsets
+        AppConst.BASE_LAYER.HEADER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 1.1 + insets.top
+        AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT = (AppConst.BASE_LAYER.HEADER_HEIGHT / 2) - (insets.top / 3)
+        AppConst.BASE_LAYER.HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER.HEADER_PROGRESS_BAR_HEIGHT * 2.2
+        AppConst.BASE_LAYER.FOOTER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height + insets.bottom
+        AppConst.BASE_LAYER.BASE_HEIGHT = AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT - AppConst.DEVICE.STATUS_BAR_HEIGHT
 
         // アクション監視
         viewModel.rx_action
@@ -251,17 +242,20 @@ class BaseViewController: UIViewController {
 
         Observable.of(
             viewModel.login(uid: uid),
-            //            viewModel.fetchMemo(),
-//            viewModel.fetchFavorite(),
-            viewModel.fetchTab()
+            viewModel.fetchMemo(),
+            viewModel.fetchFavorite()
+//            viewModel.fetchTab()
         ).concat().subscribe(onNext: nil, onError: { _ in
             log.debug("error login sequence")
             NotificationService.presentToastNotification(message: MessageConst.ALERT.COMMON_MESSAGE, isSuccess: false)
             IndicatorService.s.dismissCircleIndicator()
         }, onCompleted: {
             log.debug("success login sequence")
-            NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
+//            NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
             IndicatorService.s.dismissCircleIndicator()
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.reload()
+            }
         }, onDisposed: nil)
             .disposed(by: rx.disposeBag)
     }
