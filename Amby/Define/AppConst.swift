@@ -49,7 +49,8 @@ struct AppConst {
         static var HEADER_PROGRESS_BAR_HEIGHT = 2.1.f
         static var HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER.HEADER_PROGRESS_BAR_HEIGHT // プログレスバーの高さをマージンにする
         static var FOOTER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height // サムネイルの高さ
-        static var BASE_HEIGHT = AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT - AppConst.DEVICE.STATUS_BAR_HEIGHT // デバイスの高さ - フッターの高さ - ステータスバーの高さ
+        static var BASE_HEIGHT = AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT // デバイスの高さ - フッターの高さ - ヘッダーの高さ
+        static var BASE_HEIGHT_SCROLLED = AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT - AppConst.DEVICE.STATUS_BAR_HEIGHT // デバイスの高さ - フッターの高さ - ステータスバーの高さ
         static var HEADER_FIELD_WIDTH = AppConst.DEVICE.DISPLAY_SIZE.width / 1.8
         static var THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
     }

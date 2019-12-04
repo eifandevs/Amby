@@ -94,7 +94,7 @@ class BaseViewController: UIViewController {
         AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT = (AppConst.BASE_LAYER.HEADER_HEIGHT / 2) - (insets.top / 3)
         AppConst.BASE_LAYER.HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER.HEADER_PROGRESS_BAR_HEIGHT * 2.2
         AppConst.BASE_LAYER.FOOTER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height + insets.bottom
-        AppConst.BASE_LAYER.BASE_HEIGHT = AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT - AppConst.DEVICE.STATUS_BAR_HEIGHT
+        AppConst.BASE_LAYER.BASE_HEIGHT = AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT
 
         // アクション監視
         viewModel.rx_action
