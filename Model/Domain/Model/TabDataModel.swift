@@ -494,7 +494,8 @@ final class TabDataModel: TabDataModelProtocol {
                     if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                         log.debug("get tab success.")
                         let tabGroupList = response.data
-                        // TODO: initialize data
+                        self.tabGroupList = tabGroupList
+                        self.store()
                         self.rx_action.onNext(.fetch(tabGroupList: tabGroupList))
                     } else {
                         log.error("get tab error. code: \(response?.code ?? "")")

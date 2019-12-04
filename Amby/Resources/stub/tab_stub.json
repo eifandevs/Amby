@@ -1,16 +1,16 @@
 {
     "code": "0000",
     "data": {
-        "currentGroupContext": "iejfaojefioejfiejfeofier",
+        "currentGroupContext": "efefaewfewafeawfefawef",
         "groups": [
             {
-                "groupContext": "aaaaaaaaaaaaaaaa",
+                "groupContext": "efefaewfewafeawfefawef",
                 "title": "新しいグループ",
                 "isPrivate": false,
-                "currentContext": "aaaaaaaaaaaaaaaa",
+                "currentContext": "efawefaewfeawfewafewf",
                 "histories": [
                     {
-                        "context": "aaaaaaaaaaaaaaa",
+                        "context": "efawefaewfeawfewafewf",
                         "url": "https://google.com",
                         "title": "test",
                         "session": {
@@ -26,9 +26,9 @@
 
                 ],
                 "backForwardContextList": [
-                    "aaaaaaaaaaa",
-                    "bbbbbbbbbbb",
-                    "ccccccccccc"
+                    "https://google.com",
+                    "https://google.com",
+                    "https://google.com"
                 ]
             }
         ]
