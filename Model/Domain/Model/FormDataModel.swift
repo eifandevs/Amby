@@ -15,9 +15,11 @@ enum FormDataModelAction {
     case insert
     case delete
     case deleteAll
+    case fetch(forms: [Form])
 }
 
 enum FormDataModelError {
+    case fetch
     case get
     case store
     case delete
@@ -26,6 +28,8 @@ enum FormDataModelError {
 extension FormDataModelError: ModelError {
     var message: String {
         switch self {
+        case .fetch:
+            return MessageConst.NOTIFICATION.GET_FORM_ERROR
         case .get:
             return MessageConst.NOTIFICATION.GET_FORM_ERROR
         case .store:
@@ -58,6 +62,8 @@ final class FormDataModel: FormDataModelProtocol {
 
     /// db repository
     private let repository = DBRepository()
+
+    private let disposeBag = DisposeBag()
 
     private init() {}
 
@@ -141,5 +147,42 @@ final class FormDataModel: FormDataModelProtocol {
         } else {
             rx_error.onNext(.store)
         }
+    }
+
+    func fetch(request: GetFormRequest) {
+        let repository = ApiRepository<App>()
+
+        repository.rx.request(.getForm(request: request))
+            .observeOn(MainScheduler.asyncInstance)
+            .map { (response) -> GetFormResponse? in
+
+                let decoder: JSONDecoder = JSONDecoder()
+                do {
+                    let formResponse: GetFormResponse = try decoder.decode(GetFormResponse.self, from: response.data)
+                    return formResponse
+                } catch {
+                    return nil
+                }
+            }
+            .subscribe(
+                onSuccess: { [weak self] response in
+                    guard let `self` = self else { return }
+                    if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
+                        log.debug("get form success.")
+                        let forms = response.data.map {$0}
+                        // initialize data
+                        _ = self.repository.delete(data: self.select())
+                        _ = self.repository.insert(data: forms)
+                        self.rx_action.onNext(.fetch(forms: forms))
+                    } else {
+                        log.error("get form error. code: \(response?.code ?? "")")
+                        self.rx_error.onNext(.fetch)
+                    }
+                }, onError: { [weak self] error in
+                    guard let `self` = self else { return }
+                    log.error("get form error. error: \(error.localizedDescription)")
+                    self.rx_error.onNext(.fetch)
+            })
+            .disposed(by: disposeBag)
     }
 }
