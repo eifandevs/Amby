@@ -79,11 +79,17 @@ workflows:
   version: 2
   build-test-lint:
     jobs:
-      - danger
+      - danger:
+          filters:
+            branches:
+              ignore:
+               - master
+               - develop
       - build-and-test:
           requires:
             - danger
           filters:
             branches:
               only:
+                - master
                 - develop
