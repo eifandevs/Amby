@@ -26,7 +26,7 @@ final class FormViewControllerViewModel {
     }
 
     private var rows: [Row] {
-        return form.inputs.map { Row(value: EncryptService.decrypt(data: $0.value)) }
+        return form.inputs.map { Row(value: EncryptService.decrypt(dataString: $0.value)) }
     }
 
     func getRow(index: Int) -> Row {

@@ -50,6 +50,7 @@ protocol FormDataModelProtocol {
     func delete()
     func delete(forms: [Form])
     func store(form: Form)
+    func fetch(request: GetFormRequest)
 }
 
 final class FormDataModel: FormDataModelProtocol {

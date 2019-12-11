@@ -67,7 +67,7 @@ struct ModelConst {
 
     static let UD = UD_VALUE()
     struct UD_VALUE {
-        let ROOT_PASSCODE = Data()
+        let ROOT_PASSCODE = ""
         let LAST_REPORT_DATE = Date.distantPast
         let AUTO_SCROLL_INTERVAL = 0.06
         let MENU_ORDER: [Int] = [

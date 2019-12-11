@@ -32,7 +32,7 @@ final class SettingDataModel: SettingDataModelProtocol {
         get {
             // 復号化
             let code = repository.get(key: .rootPasscode)
-            return code.bytes.count == 0 ? "" : EncryptService.decrypt(data: code)
+            return code.bytes.count == 0 ? "" : EncryptService.decrypt(dataString: code)
         }
         set(value) {
             // 暗号化

@@ -528,7 +528,7 @@ final class BaseViewModel {
     }
 
     /// 複合化
-    func decrypt(value: Data) -> String {
-        return EncryptService.decrypt(data: value)
+    func decrypt(value: String) -> String {
+        return EncryptService.decrypt(dataString: value)
     }
 }

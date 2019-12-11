@@ -9,7 +9,7 @@
 import Foundation
 
 extension DefaultKey {
-    static var rootPasscode: DefaultKey<Data> { return DefaultKey<Data>(name: ModelConst.KEY.ROOT_PASSCODE, defaultValue: ModelConst.UD.ROOT_PASSCODE) }
+    static var rootPasscode: DefaultKey<String> { return DefaultKey<String>(name: ModelConst.KEY.ROOT_PASSCODE, defaultValue: ModelConst.UD.ROOT_PASSCODE) }
     static var lastReportDate: DefaultKey<Date> { return DefaultKey<Date>(name: ModelConst.KEY.LAST_REPORT_DATE, defaultValue: ModelConst.UD.LAST_REPORT_DATE) }
     static var autoScrollInterval: DefaultKey<Double> { return DefaultKey<Double>(name: ModelConst.KEY.AUTO_SCROLL_INTERVAL, defaultValue: ModelConst.UD.AUTO_SCROLL_INTERVAL) }
     static var menuOrder: DefaultKey<[Int]> { return DefaultKey<[Int]>(name: ModelConst.KEY.MENU_ORDER, defaultValue: ModelConst.UD.MENU_ORDER) }
