@@ -6,11 +6,11 @@
 //  Copyright © 2017年 eifandevs. All rights reserved.
 //
 
+import FBSDKCoreKit
 import Firebase
 import GoogleSignIn
 import Logger
 import Model
-import SVProgressHUD
 import UIKit
 
 let log = AppLogger.self
@@ -25,11 +25,11 @@ let uncaughtExceptionHandler: Void = NSSetUncaughtExceptionHandler { exception i
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var baseViewController: BaseViewController?
 
-    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // log setup
         Logger.setup()
 
@@ -61,9 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         log.verbose("BUNDLE PATH: \(AppConst.DEVICE.BUNDLE_PATH)")
         log.verbose("APPLICATION PATH: \(AppConst.DEVICE.APPLICATION_PATH)")
 
-        // progress setup
-        SVProgressHUD.setForegroundColor(UIColor.ultraViolet)
-
         // view setup
         setup()
 
@@ -73,7 +70,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
             // google sign in
             GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-            GIDSignIn.sharedInstance()?.delegate = self
+
+            // facebook sign in
+            ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         #endif
 
         return true
@@ -85,11 +84,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         window!.rootViewController = baseViewController!
         window!.backgroundColor = UIColor.white
         window!.makeKeyAndVisible()
+
+        // indicator
+        _ = IndicatorService.s
     }
 
     func initialize() {
-        GetSettingUseCase().initialize()
+        SettingAccessUseCase().initialize()
+        reload()
+    }
 
+    func reload() {
         if let baseViewController = self.window!.rootViewController as? BaseViewController {
             baseViewController.mRelease()
         }
@@ -98,11 +103,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         window!.rootViewController?.removeFromParentViewController()
         window!.rootViewController = nil
 
-        // プログレス表示
-        SVProgressHUD.show()
-
-        // 各サブビューのdismissがコールされるのを待つ
-        SVProgressHUD.dismiss(withDelay: 2.5) {
+        IndicatorService.s.showCircleIndicator()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            IndicatorService.s.dismissCircleIndicator()
             self.window!.rootViewController = BaseViewController()
         }
     }
@@ -133,27 +136,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func sign(_: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        LoginService().signIn(nil, didSignInFor: user, withError: error)
-            .then { _ in
-                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
-                log.debug("signIn success")
-                // TODO: ログイン
-            }.catch { _ in
-                NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_ERROR, isSuccess: false)
-                log.error("signIn error")
-            }
-    }
+    // MARK: Open URL
 
-    // 追記部分(デリゲートメソッド)エラー来た時
-    func sign(_: GIDSignIn!, didDisconnectWith _: GIDGoogleUser!,
-              withError error: Error!) {
-        log.error(error.localizedDescription)
-    }
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+        log.debug("open url. url: \(url.absoluteString)")
+        let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
+        if GIDSignIn.sharedInstance().handle(url,
+                                             sourceApplication: sourceApplication,
+                                             annotation: [:]) {
+            return true
+        } else if ApplicationDelegate.shared.application(app,
+                                                         open: url,
+                                                         sourceApplication: sourceApplication,
+                                                         annotation: [:]) {
+            return true
+        }
 
-    func application(_: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                                                 annotation: [:])
+        log.error("cannot open url. url: \(url.absoluteString)")
+        return false
     }
 }

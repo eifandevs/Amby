@@ -115,7 +115,7 @@ final class OptionMenuTableViewModel {
 
     /// 同期画面表示
     func openSync() {
-        if LoginService().isLoggedIn {
+        if FBLoginService().isLoggedIn {
             NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.ALREADY_LOGGED_IN_ERROR, isSuccess: false)
             return
         }

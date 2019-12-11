@@ -33,6 +33,7 @@ final class OptionMenuSettingTableViewModel {
         case cookies
         case siteData
         case all
+        case loginStatus
         case signIn
         case signOut
         case accountDelete
@@ -47,6 +48,7 @@ final class OptionMenuSettingTableViewModel {
             case .cookies: return AppConst.SETTING.TITLE_COOKIES
             case .siteData: return AppConst.SETTING.TITLE_SITE_DATA
             case .all: return AppConst.SETTING.TITLE_ALL
+            case .loginStatus: return FBLoginService().isLoggedIn ? AppConst.SETTING.ON_LOGIN : AppConst.SETTING.NOT_LOGIN
             case .signIn: return AppConst.SETTING.SIGNIN
             case .signOut: return AppConst.SETTING.SIGNOUT
             case .accountDelete: return AppConst.SETTING.ACCOUNT_DELETE
@@ -64,34 +66,48 @@ final class OptionMenuSettingTableViewModel {
     // セクションの高さ
     let sectionHeight = AppConst.FRONT_LAYER.TABLE_VIEW_SECTION_HEIGHT
 
+    var loginRows: [Section.Row] {
+        if FBLoginService().isLoggedIn {
+            return [
+                Section.Row(cellType: .loginStatus),
+                Section.Row(cellType: .signOut),
+                Section.Row(cellType: .accountDelete)
+            ]
+        } else {
+            return [
+                Section.Row(cellType: .loginStatus),
+                Section.Row(cellType: .signIn)
+            ]
+        }
+    }
+
     // セル情報
-    var sections: [Section] = [
-        Section(title: AppConst.SETTING.SECTION_SETTING, rows: [
-            Section.Row(cellType: .menu),
-            Section.Row(cellType: .autoScroll),
-            Section.Row(cellType: .windowConfirm)
-        ]),
-        Section(title: AppConst.SETTING.SECTION_SYNC, rows: [
-            Section.Row(cellType: .signIn),
-            Section.Row(cellType: .signOut),
-            Section.Row(cellType: .accountDelete)
-        ]),
-        Section(title: AppConst.SETTING.SECTION_DELETE, rows: [
-            Section.Row(cellType: .commonHistory),
-            Section.Row(cellType: .form),
-            Section.Row(cellType: .bookMark),
-            Section.Row(cellType: .searchHistory),
-            Section.Row(cellType: .cookies),
-            Section.Row(cellType: .siteData),
-            Section.Row(cellType: .all)
-        ])
-    ]
+    var sections: [Section] {
+        return [
+            Section(title: AppConst.SETTING.SECTION_SETTING, rows: [
+                Section.Row(cellType: .menu),
+                Section.Row(cellType: .autoScroll),
+                Section.Row(cellType: .windowConfirm)
+            ]),
+            Section(title: AppConst.SETTING.SECTION_SYNC, rows: loginRows),
+            Section(title: AppConst.SETTING.SECTION_DELETE, rows: [
+                Section.Row(cellType: .commonHistory),
+                Section.Row(cellType: .form),
+                Section.Row(cellType: .bookMark),
+                Section.Row(cellType: .searchHistory),
+                Section.Row(cellType: .cookies),
+                Section.Row(cellType: .siteData),
+                Section.Row(cellType: .all)
+            ])
+        ]
+    }
+
     // セクションフォントサイズ
     let sectionFontSize = 12.f
 
     /// ログイン中
     var isLoggedIn: Bool {
-        return LoginService().isLoggedIn
+        return FBLoginService().isLoggedIn
     }
 
     /// セル数
@@ -193,11 +209,14 @@ final class OptionMenuSettingTableViewModel {
             NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.NOT_LOGIN_IN_ERROR, isSuccess: false)
             return
         }
-        LoginService().signOut()
+        LogoutUseCase().exe()
+        FBLoginService().signOut()
     }
 
     /// アカウント削除
     func deleteAccount() {
-        LoginService().deleteAccount()
+        let loginService = FBLoginService()
+        loginService.deleteAccount()
+        // TODO: delete user for app
     }
 }

@@ -47,7 +47,7 @@ class BaseLayer: UIView {
         // フッタービュー
         footerView = FooterView(frame: CGRect(x: 0, y: AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT, width: AppConst.DEVICE.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER.FOOTER_HEIGHT))
         // ベースビュー
-        baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: AppConst.DEVICE.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + AppConst.DEVICE.STATUS_BAR_HEIGHT))
+        baseView = BaseView(frame: CGRect(x: 0, y: baseViewOriginY.max, width: AppConst.DEVICE.DISPLAY_SIZE.width, height: AppConst.BASE_LAYER.BASE_HEIGHT))
         super.init(frame: frame)
 
         addSubview(baseView)

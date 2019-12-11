@@ -9,9 +9,9 @@
 import Foundation
 import RealmSwift
 
-public class Input: Object {
+public class Input: Object, Codable {
     @objc public dynamic var formIndex: Int = 0
     @objc public dynamic var formInputIndex: Int = 0
     @objc public dynamic var type: String = ""
-    @objc public dynamic var value: Data = Data()
+    @objc public dynamic var value: String = ""
 }

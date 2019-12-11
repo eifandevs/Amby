@@ -55,7 +55,7 @@ final class BaseViewModel {
     let rx_action = PublishSubject<BaseViewModelAction>()
 
     /// usecase
-    let getSettingUseCase = GetSettingUseCase()
+    let settingAccessUseCase = SettingAccessUseCase()
 
     var currentUrl: String? {
         return TabHandlerUseCase.s.currentUrl
@@ -87,7 +87,7 @@ final class BaseViewModel {
 
     /// 新規ウィンドウ許諾
     var newWindowConfirm: Bool {
-        return getSettingUseCase.newWindowConfirm
+        return settingAccessUseCase.newWindowConfirm
     }
 
     /// baseViewControllerの状態取得
@@ -528,7 +528,7 @@ final class BaseViewModel {
     }
 
     /// 複合化
-    func decrypt(value: Data) -> String {
-        return EncryptService.decrypt(data: value)
+    func decrypt(value: String) -> String {
+        return EncryptService.decrypt(dataString: value)
     }
 }

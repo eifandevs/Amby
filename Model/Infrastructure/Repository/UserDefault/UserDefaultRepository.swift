@@ -9,10 +9,11 @@
 import Foundation
 
 extension DefaultKey {
-    static var rootPasscode: DefaultKey<Data> { return DefaultKey<Data>(name: ModelConst.KEY.ROOT_PASSCODE, defaultValue: ModelConst.UD.ROOT_PASSCODE) }
+    static var rootPasscode: DefaultKey<String> { return DefaultKey<String>(name: ModelConst.KEY.ROOT_PASSCODE, defaultValue: ModelConst.UD.ROOT_PASSCODE) }
     static var lastReportDate: DefaultKey<Date> { return DefaultKey<Date>(name: ModelConst.KEY.LAST_REPORT_DATE, defaultValue: ModelConst.UD.LAST_REPORT_DATE) }
     static var autoScrollInterval: DefaultKey<Double> { return DefaultKey<Double>(name: ModelConst.KEY.AUTO_SCROLL_INTERVAL, defaultValue: ModelConst.UD.AUTO_SCROLL_INTERVAL) }
     static var menuOrder: DefaultKey<[Int]> { return DefaultKey<[Int]>(name: ModelConst.KEY.MENU_ORDER, defaultValue: ModelConst.UD.MENU_ORDER) }
+    static var loginProvider: DefaultKey<Int> { return DefaultKey<Int>(name: ModelConst.KEY.LOGIN_PROVIDER, defaultValue: ModelConst.UD.LOGIN_PROVIDER) }
     static var commonhistorySaveCount: DefaultKey<Int> { return DefaultKey<Int>(name: ModelConst.KEY.COMMON_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.COMMON_HISTORY_SAVE_COUNT) }
     static var searchHistorySaveCount: DefaultKey<Int> { return DefaultKey<Int>(name: ModelConst.KEY.SEARCH_HISTORY_SAVE_COUNT, defaultValue: ModelConst.UD.SEARCH_HISTORY_SAVE_COUNT) }
     static var tabSaveCount: DefaultKey<Int> { return DefaultKey<Int>(name: ModelConst.KEY.TAB_SAVE_COUNT, defaultValue: ModelConst.UD.TAB_SAVE_COUNT) }

@@ -28,11 +28,13 @@ enum TabDataModelAction {
     case startLoading(context: String)
     case endLoading(context: String)
     case endRendering(context: String)
+    case fetch(tabGroupList: TabGroupList)
 }
 
 enum TabDataModelError {
     case delete
     case store
+    case fetch
 }
 
 extension TabDataModelError: ModelError {
@@ -42,6 +44,8 @@ extension TabDataModelError: ModelError {
             return MessageConst.NOTIFICATION.DELETE_TAB_ERROR
         case .store:
             return MessageConst.NOTIFICATION.STORE_TAB_ERROR
+        case .fetch:
+            return MessageConst.NOTIFICATION.FETCH_TAB_ERROR
         }
     }
 }
@@ -82,6 +86,7 @@ protocol TabDataModelProtocol {
     func goNext()
     func store()
     func delete()
+    func fetch(request: GetTabRequest)
 }
 
 final class TabDataModel: TabDataModelProtocol {
@@ -93,6 +98,8 @@ final class TabDataModel: TabDataModelProtocol {
     static let s = TabDataModel()
 
     private let repository = UserDefaultRepository()
+
+    private let disposeBag = DisposeBag()
 
     /// webViewそれぞれの履歴とカレントページインデックス
     var tabGroupList = TabGroupList()
@@ -463,5 +470,42 @@ final class TabDataModel: TabDataModelProtocol {
         if case .failure = result {
             rx_error.onNext(.delete)
         }
+    }
+
+    /// 記事取得
+    func fetch(request: GetTabRequest) {
+        let repository = ApiRepository<App>()
+
+        repository.rx.request(.getTabData(request: request))
+            .observeOn(MainScheduler.asyncInstance)
+            .map { (response) -> GetTabResponse? in
+
+                let decoder: JSONDecoder = JSONDecoder()
+                do {
+                    let tabDataResponse: GetTabResponse = try decoder.decode(GetTabResponse.self, from: response.data)
+                    return tabDataResponse
+                } catch {
+                    return nil
+                }
+            }
+            .subscribe(
+                onSuccess: { [weak self] response in
+                    guard let `self` = self else { return }
+                    if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
+                        log.debug("get tab success.")
+                        let tabGroupList = response.data
+                        self.tabGroupList = tabGroupList
+                        self.store()
+                        self.rx_action.onNext(.fetch(tabGroupList: tabGroupList))
+                    } else {
+                        log.error("get tab error. code: \(response?.code ?? "")")
+                        self.rx_error.onNext(.fetch)
+                    }
+                }, onError: { [weak self] error in
+                    guard let `self` = self else { return }
+                    log.error("get tab error. error: \(error.localizedDescription)")
+                    self.rx_error.onNext(.fetch)
+            })
+            .disposed(by: disposeBag)
     }
 }

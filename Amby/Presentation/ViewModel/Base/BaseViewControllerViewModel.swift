@@ -25,6 +25,7 @@ enum BaseViewControllerViewModelAction {
     case memo(memo: Memo)
     case notice(message: String, isSuccess: Bool)
     case tabGroupTitle(groupContext: String)
+    case loginRequest(uid: String)
 }
 
 final class BaseViewControllerViewModel {
@@ -34,6 +35,11 @@ final class BaseViewControllerViewModel {
     let changeGroupTitleUseCase = ChangeGroupTitleUseCase()
     let insertTabUseCase = InsertTabUseCase()
     let initializeTabUseCase = InitializeTabUseCase()
+    let loginUseCase = LoginUseCase()
+    let fetchFavoriteUseCase = FetchFavoriteUseCase()
+    let fetchMemoUseCase = FetchMemoUseCase()
+    let fetchTabUseCase = FetchTabUseCase()
+    let fetchFormUseCase = FetchFormUseCase()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -52,6 +58,14 @@ final class BaseViewControllerViewModel {
             .subscribe { [weak self] action in
                 guard let `self` = self, let action = action.element, case let .presentGroupTitleEdit(groupContext) = action else { return }
                 self.rx_action.onNext(.tabGroupTitle(groupContext: groupContext))
+            }
+            .disposed(by: disposeBag)
+
+        // ヘルプ監視
+        LoginHandlerUseCase.s.rx_action
+            .subscribe { [weak self] action in
+                guard let `self` = self, let action = action.element, case let .begin(uid) = action else { return }
+                self.rx_action.onNext(.loginRequest(uid: uid))
             }
             .disposed(by: disposeBag)
 
@@ -151,5 +165,25 @@ final class BaseViewControllerViewModel {
 
     func changeGroupTitle(groupContext: String, title: String) {
         changeGroupTitleUseCase.exe(groupContext: groupContext, title: title)
+    }
+
+    func login(uid: String) -> Observable<()> {
+        return loginUseCase.exe(uid: uid)
+    }
+
+    func fetchFavorite() -> Observable<()> {
+        return fetchFavoriteUseCase.exe()
+    }
+
+    func fetchMemo() -> Observable<()> {
+        return fetchMemoUseCase.exe()
+    }
+
+    func fetchTab() -> Observable<()> {
+        return fetchTabUseCase.exe()
+    }
+
+    func fetchForm() -> Observable<()> {
+        return fetchFormUseCase.exe()
     }
 }

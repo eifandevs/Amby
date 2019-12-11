@@ -14,6 +14,7 @@ struct AppConst {
     // MARK: - 共通
 
     struct APP {
+        static let CONFIRM = "確認"
         static let FONT = "Avenir"
         static let DATE_FORMAT = "yyyyMMdd"
         static let LOCALE = "ja_JP"
@@ -43,13 +44,14 @@ struct AppConst {
     // MARK: - ベースレイヤーの定数
 
     struct BASE_LAYER {
-        static var HEADER_HEIGHT = ((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height) * 1.3 // サムネイルの高さ * 1.3
-        static var HEADER_FIELD_HEIGHT = (((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height) * 1.3) / 2 // ヘッダーの高さ / 2
-        static let HEADER_PROGRESS_BAR_HEIGHT = 2.1.f
-        static var HEADER_PROGRESS_MARGIN = 2.1.f // プログレスバーの高さをマージンにする
-        static var FOOTER_HEIGHT = ((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height) // サムネイルの高さ
-        static let BASE_HEIGHT = AppConst.DEVICE.DISPLAY_SIZE.height - ((UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height) - AppConst.DEVICE.STATUS_BAR_HEIGHT // デバイスの高さ - フッターの高さ - ステータスバーの高さ
-        static let HEADER_FIELD_WIDTH = AppConst.DEVICE.DISPLAY_SIZE.width / 1.8
+        static var HEADER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 1.1 // サムネイルの高さ * 1.3
+        static var HEADER_FIELD_HEIGHT = AppConst.BASE_LAYER.HEADER_HEIGHT / 2 // ヘッダーの高さ / 2
+        static var HEADER_PROGRESS_BAR_HEIGHT = 2.1.f
+        static var HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER.HEADER_PROGRESS_BAR_HEIGHT // プログレスバーの高さをマージンにする
+        static var FOOTER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height // サムネイルの高さ
+        static var BASE_HEIGHT = AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT // デバイスの高さ - フッターの高さ - ヘッダーの高さ
+        static var BASE_HEIGHT_SCROLLED = AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT - AppConst.DEVICE.STATUS_BAR_HEIGHT // デバイスの高さ - フッターの高さ - ステータスバーの高さ
+        static var HEADER_FIELD_WIDTH = AppConst.DEVICE.DISPLAY_SIZE.width / 1.8
         static var THUMBNAIL_SIZE = CGSize(width: UIScreen.main.bounds.size.width / 4.3, height: (UIScreen.main.bounds.size.width / 4.3) * UIScreen.main.bounds.size.width / UIScreen.main.bounds.size.height)
     }
 
@@ -127,6 +129,8 @@ struct AppConst {
         static let TITLE_COOKIES = "Cookie"
         static let TITLE_SITE_DATA = "サイトデータ"
         static let TITLE_ALL = "全てのデータ"
+        static let ON_LOGIN = "ログイン中"
+        static let NOT_LOGIN = "未ログイン"
         static let SIGNIN = "ログイン"
         static let SIGNOUT = "ログアウト"
         static let ACCOUNT_DELETE = "アカウントの削除"

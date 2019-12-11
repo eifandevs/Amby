@@ -1,0 +1,36 @@
+{
+    "code": "0000",
+    "data": {
+        "currentGroupContext": "efefaewfewafeawfefawef",
+        "groups": [
+            {
+                "groupContext": "efefaewfewafeawfefawef",
+                "title": "新しいグループ",
+                "isPrivate": false,
+                "currentContext": "efawefaewfeawfewafewf",
+                "histories": [
+                    {
+                        "context": "efawefaewfeawfewafewf",
+                        "url": "https://google.com",
+                        "title": "test",
+                        "session": {
+                            "urls": [
+                                "https://google.com",
+                                "https://google.com",
+                                "https://google.com"
+                            ],
+                            "currentPage": 1
+                        },
+                        "isLoading": false
+                    }
+
+                ],
+                "backForwardContextList": [
+                    "https://google.com",
+                    "https://google.com",
+                    "https://google.com"
+                ]
+            }
+        ]
+    }
+}

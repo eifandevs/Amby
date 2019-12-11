@@ -17,25 +17,14 @@ public final class ChallengeLocalAuthenticationUseCase {
 
     public init() {}
 
-    public func exe() -> Observable<RepositoryResult<LABiometryType>> {
+    public func exe() -> Observable<LABiometryType> {
         if LocalAuthenticationService.canUseFaceID() || LocalAuthenticationService.canUseTouchID() {
-            return LocalAuthenticationService.challengeWithBiometry().flatMap { result -> Observable<RepositoryResult<LABiometryType>> in
-                if case .failure = result {
-                    LocalAuthenticationHandlerUseCase.s.noticeInputError()
-                }
-                return Observable.just(result)
-            }
+            return LocalAuthenticationService.challengeWithBiometry()
         } else if LocalAuthenticationService.canUseDevicePasscode() {
-            return LocalAuthenticationService.challenge().flatMap { result -> Observable<RepositoryResult<LABiometryType>> in
-                if case .failure = result {
-                    LocalAuthenticationHandlerUseCase.s.noticeInputError()
-                }
-                return Observable.just(result)
-            }
+            return LocalAuthenticationService.challenge()
         } else {
-            LocalAuthenticationHandlerUseCase.s.noticeCannotUse()
             return Observable.create { observable in
-                observable.onNext(.failure(NSError.empty))
+                observable.onError(NSError.empty)
                 return Disposables.create()
             }
         }

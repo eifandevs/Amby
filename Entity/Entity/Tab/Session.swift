@@ -11,7 +11,7 @@ import UIKit
 
 // swiftlint:disable force_cast
 
-public class Session: NSObject, NSCoding {
+public class Session: NSObject, NSCoding, Codable {
     public var urls: [String]
     public var currentPage: Int
 

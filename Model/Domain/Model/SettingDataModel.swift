@@ -13,6 +13,7 @@ protocol SettingDataModelProtocol {
     var lastReportDate: Date { get set }
     var autoScrollInterval: Float { get set }
     var menuOrder: [UserOperation] { get set }
+    var loginProvider: LoginProvider { get set }
     var newWindowConfirm: Bool { get set }
     var tabSaveCount: Int { get }
     var commonHistorySaveCount: Int { get }
@@ -31,7 +32,7 @@ final class SettingDataModel: SettingDataModelProtocol {
         get {
             // 復号化
             let code = repository.get(key: .rootPasscode)
-            return code.bytes.count == 0 ? "" : EncryptService.decrypt(data: code)
+            return code.bytes.count == 0 ? "" : EncryptService.decrypt(dataString: code)
         }
         set(value) {
             // 暗号化
@@ -57,6 +58,16 @@ final class SettingDataModel: SettingDataModelProtocol {
         }
         set(value) {
             repository.set(key: .autoScrollInterval, value: Double(value))
+        }
+    }
+
+    /// Login Provider
+    var loginProvider: LoginProvider {
+        get {
+            return LoginProvider(rawValue: repository.get(key: .loginProvider))!
+        }
+        set(value) {
+            repository.set(key: .loginProvider, value: value.rawValue)
         }
     }
 

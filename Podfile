@@ -19,6 +19,7 @@ target 'Amby' do
   pod 'Firebase/Auth'
   pod 'Firebase/Analytics'
   pod 'GoogleSignIn'
+  pod 'FBSDKLoginKit'
 end
 
 target 'Model' do

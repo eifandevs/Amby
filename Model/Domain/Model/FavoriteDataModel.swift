@@ -52,7 +52,7 @@ protocol FavoriteDataModelProtocol {
     func delete(favorites: [Favorite])
     func reload(currentTab: Tab)
     func update(currentTab: Tab)
-    func fetch()
+    func fetch(request: GetFavoriteRequest)
 }
 
 final class FavoriteDataModel: FavoriteDataModelProtocol {
@@ -153,10 +153,10 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
     }
 
     /// 記事取得
-    func fetch() {
+    func fetch(request: GetFavoriteRequest) {
         let repository = ApiRepository<App>()
 
-        repository.rx.request(.favorite)
+        repository.rx.request(.getFavorite(request: request))
             .observeOn(MainScheduler.asyncInstance)
             .map { (response) -> GetFavoriteResponse? in
 
@@ -173,21 +173,18 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
                     guard let `self` = self else { return }
                     if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                         log.debug("get favorite success.")
-                        let favorites = response.data.map({ obj -> Favorite in
-                            let favorite = Favorite()
-                            favorite.id = obj.id
-                            favorite.title = obj.title
-                            favorite.url = obj.url
-                            return favorite
-                        })
+                        let favorites = response.data.map {$0}
+                        // initialize data
+                        _ = self.repository.delete(data: self.select())
+                        _ = self.repository.insert(data: favorites)
                         self.rx_action.onNext(.fetch(favorites: favorites))
                     } else {
-                        log.error("get AccessToken error. code: \(response?.code ?? "")")
+                        log.error("get favorite error. code: \(response?.code ?? "")")
                         self.rx_error.onNext(.fetch)
                     }
                 }, onError: { [weak self] error in
                     guard let `self` = self else { return }
-                    log.error("get AccessToken error. error: \(error.localizedDescription)")
+                    log.error("get favorite error. error: \(error.localizedDescription)")
                     self.rx_error.onNext(.fetch)
             })
             .disposed(by: disposeBag)

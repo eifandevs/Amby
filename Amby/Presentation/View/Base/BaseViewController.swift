@@ -54,7 +54,29 @@ class BaseViewController: UIViewController {
 
         onceExec.call {
             // iPhoneX対応を入れたいので、Lauout時にセットアップする
-            setup()
+            splash = SplashViewController()
+            splash!.view.frame.size = view.frame.size
+            splash!.view.frame.origin = CGPoint.zero
+
+            // スプラッシュ終了監視
+            splash!.rx_action
+                .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
+                .subscribe { [weak self] action in
+                    guard let `self` = self, let action = action.element, let splash = self.splash, case .endDrawing = action else { return }
+                    self.setup()
+                    UIView.animate(withDuration: 0.3, animations: {
+                        splash.view.alpha = 0
+                    }, completion: { finished in
+                        if finished {
+                            splash.view.removeFromSuperview()
+                            splash.removeFromParentViewController()
+                            self.splash = nil
+                        }
+                    })
+                }
+                .disposed(by: rx.disposeBag)
+
+            view.addSubview(splash!.view)
         }
     }
 
@@ -67,21 +89,12 @@ class BaseViewController: UIViewController {
         viewModel.initializeTab()
 
         // iPhoneX対応
-        if #available(iOS 11.0, *) {
-            let insets = self.view.safeAreaInsets
-            if Util.isiPhoneX() {
-                AppConst.BASE_LAYER.HEADER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 1.3 + insets.top
-                AppConst.BASE_LAYER.HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER.HEADER_PROGRESS_BAR_HEIGHT * 2.2
-                AppConst.BASE_LAYER.FOOTER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height + insets.bottom
-                AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT = AppConst.BASE_LAYER.HEADER_HEIGHT / 2.5
-                AppConst.BASE_LAYER.THUMBNAIL_SIZE.height += insets.bottom / 2.5
-            } else {
-                AppConst.BASE_LAYER.HEADER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 1.3
-                AppConst.BASE_LAYER.HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER.HEADER_PROGRESS_BAR_HEIGHT
-                AppConst.BASE_LAYER.FOOTER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height
-                AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT = AppConst.BASE_LAYER.HEADER_HEIGHT / 2
-            }
-        }
+        let insets = view.safeAreaInsets
+        AppConst.BASE_LAYER.HEADER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height * 1.1 + insets.top
+        AppConst.BASE_LAYER.HEADER_FIELD_HEIGHT = (AppConst.BASE_LAYER.HEADER_HEIGHT / 2) - (insets.top / 3)
+        AppConst.BASE_LAYER.HEADER_PROGRESS_MARGIN = AppConst.BASE_LAYER.HEADER_PROGRESS_BAR_HEIGHT * 2.2
+        AppConst.BASE_LAYER.FOOTER_HEIGHT = AppConst.BASE_LAYER.THUMBNAIL_SIZE.height + insets.bottom
+        AppConst.BASE_LAYER.BASE_HEIGHT = AppConst.DEVICE.DISPLAY_SIZE.height - AppConst.BASE_LAYER.FOOTER_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT
 
         // アクション監視
         viewModel.rx_action
@@ -101,32 +114,10 @@ class BaseViewController: UIViewController {
                 case let .notice(message, isSuccess): self.notice(message: message, isSuccess: isSuccess)
                 case let .tabGroupTitle(groupContext): self.tabGroupTitle(groupContext: groupContext)
                 case .sync: self.sync()
+                case let .loginRequest(uid): self.loginRequest(uid: uid)
                 }
             }
             .disposed(by: rx.disposeBag)
-
-        splash = SplashViewController()
-        splash!.view.frame.size = view.frame.size
-        splash!.view.frame.origin = CGPoint.zero
-
-        // スプラッシュ終了監視
-        splash!.rx_action
-            .observeOn(MainScheduler.asyncInstance) // アニメーションさせるのでメインスレッドで実行
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, let splash = self.splash, case .endDrawing = action else { return }
-                UIView.animate(withDuration: 0.3, animations: {
-                    splash.view.alpha = 0
-                }, completion: { finished in
-                    if finished {
-                        splash.view.removeFromSuperview()
-                        splash.removeFromParentViewController()
-                        self.splash = nil
-                    }
-                })
-            }
-            .disposed(by: rx.disposeBag)
-
-        view.addSubview(splash!.view)
 
         // レイヤー構造にしたいので、self.viewに対してaddSubViewする(self.view = baseLayerとしない)
         baseLayer = BaseLayer(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: view.bounds.size))
@@ -154,7 +145,9 @@ class BaseViewController: UIViewController {
 
         view.addSubview(baseLayer!)
 
-        view.bringSubview(toFront: splash!.view)
+        if let splash = splash {
+            view.bringSubview(toFront: splash.view)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -240,6 +233,32 @@ class BaseViewController: UIViewController {
     private func sync() {
         let vc = SyncViewController()
         present(vc, animated: true)
+    }
+
+    /// ログインリクエスト
+    private func loginRequest(uid: String) {
+        log.debug("login request. uid: \(uid)")
+        IndicatorService.s.showCircleIndicator()
+
+        Observable.of(
+            viewModel.login(uid: uid),
+            //            viewModel.fetchMemo(),
+//            viewModel.fetchFavorite()
+//            viewModel.fetchTab()
+            viewModel.fetchForm()
+        ).concat().subscribe(onNext: nil, onError: { _ in
+            log.debug("error login sequence")
+            NotificationService.presentToastNotification(message: MessageConst.ALERT.COMMON_MESSAGE, isSuccess: false)
+            IndicatorService.s.dismissCircleIndicator()
+        }, onCompleted: {
+            log.debug("success login sequence")
+//            NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)
+            IndicatorService.s.dismissCircleIndicator()
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.reload()
+            }
+        }, onDisposed: nil)
+            .disposed(by: rx.disposeBag)
     }
 
     /// メモ画面表示

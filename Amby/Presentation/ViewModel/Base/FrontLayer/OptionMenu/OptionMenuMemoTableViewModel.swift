@@ -78,13 +78,12 @@ final class OptionMenuMemoTableViewModel {
         if let memo = memo {
             if memo.isLocked {
                 ChallengeLocalAuthenticationUseCase().exe()
-                    .subscribe { result in
-                        guard let result = result.element else { return }
-                        if case .success = result {
-                            MemoHandlerUseCase.s.open(memo: memo)
-                        }
-
-                    }.disposed(by: disposeBag)
+                    .subscribe(onNext: nil, onError: { _ in
+                        NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.INPUT_ERROR_AUTH, isSuccess: false)
+                    }, onCompleted: {
+                        MemoHandlerUseCase.s.open(memo: memo)
+                    }, onDisposed: nil)
+                    .disposed(by: disposeBag)
             } else {
                 MemoHandlerUseCase.s.open(memo: memo)
             }

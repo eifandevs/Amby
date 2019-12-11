@@ -18,7 +18,11 @@ class SplashViewController: UIViewController {
     /// アクション通知用RX
     let rx_action = PublishSubject<SplashViewControllerAction>()
 
+    let viewModel = SplashViewControllerViewModel()
+
     @IBOutlet var contentView: UIView!
+
+    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +30,7 @@ class SplashViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        rx_action.onNext(.endDrawing)
+        getAccessToken()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,5 +40,20 @@ class SplashViewController: UIViewController {
 
     deinit {
         log.debug("deinit called.")
+    }
+
+    func getAccessToken() {
+        viewModel.getAccessToken().subscribe { [weak self] result in
+            switch result {
+            case .success:
+                log.debug("success get access token")
+                self!.rx_action.onNext(.endDrawing)
+            case .error:
+                log.error("fail to get access token")
+                NotificationService.presentRetryAlert(title: MessageConst.ALERT.COMMON_TITLE, message: MessageConst.ALERT.COMMON_MESSAGE, completion: {
+                    self!.getAccessToken()
+                })
+            }
+        }.disposed(by: disposeBag)
     }
 }

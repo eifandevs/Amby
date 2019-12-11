@@ -50,6 +50,7 @@ class OptionMenuSettingTableView: UIView, ShadowView, OptionMenuView {
         tableView.register(R.nib.optionMenuSettingSliderTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingSliderCell.identifier)
         tableView.register(R.nib.optionMenuSettingSwitchTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingSwitchCell.identifier)
         tableView.register(R.nib.optionMenuSettingTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingCell.identifier)
+        tableView.register(R.nib.optionMenuSettingLoginStatusTableViewCell(), forCellReuseIdentifier: R.reuseIdentifier.optionMenuSettingLoginStatusCell.identifier)
 
         addSubview(tableView)
 
@@ -76,6 +77,13 @@ extension OptionMenuSettingTableView: UITableViewDataSource {
             let identifier = R.reuseIdentifier.optionMenuSettingSliderCell.identifier
             if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuSettingSliderTableViewCell {
                 cell.selectionStyle = .none
+                return cell
+            }
+        } else if row.cellType == .loginStatus {
+            let identifier = R.reuseIdentifier.optionMenuSettingLoginStatusCell.identifier
+            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? OptionMenuSettingLoginStatusTableViewCell {
+                cell.selectionStyle = .none
+                cell.setRow(row: row)
                 return cell
             }
         } else if row.cellType == .windowConfirm {
@@ -144,9 +152,15 @@ extension OptionMenuSettingTableView: UITableViewDelegate {
             viewModel.signIn()
             rx_action.onNext(.close)
         case .signOut:
-            viewModel.signOut()
+            NotificationService.presentAlert(title: MessageConst.COMMON.CONFIRM, message: MessageConst.NOTIFICATION.ACCOUNT_LOGOUT_MESSAGE) { [weak self] in
+                self!.viewModel.signOut()
+                self!.rx_action.onNext(.close)
+            }
         case .accountDelete:
-            viewModel.deleteAccount()
+            NotificationService.presentAlert(title: MessageConst.COMMON.CONFIRM, message: MessageConst.NOTIFICATION.ACCOUNT_DELETE_MESSAGE) { [weak self] in
+                self!.viewModel.deleteAccount()
+                self!.rx_action.onNext(.close)
+            }
         default:
             break
         }

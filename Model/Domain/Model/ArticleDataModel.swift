@@ -55,7 +55,7 @@ final class ArticleDataModel: ArticleDataModelProtocol {
         if articles.count == 0 {
             let repository = ApiRepository<App>()
 
-            repository.rx.request(.article)
+            repository.rx.request(.getArticle(request: GetArticleRequest()))
                 .observeOn(MainScheduler.asyncInstance)
                 .map { (response) -> GetArticleResponse in
 
