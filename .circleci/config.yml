@@ -86,8 +86,6 @@ workflows:
                - master
                - develop
       - build-and-test:
-          requires:
-            - danger
           filters:
             branches:
               only:
