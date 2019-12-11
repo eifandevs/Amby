@@ -41,13 +41,13 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - carthage-cache-v2-{{ checksum "Cartfile.resolved" }}
-            - carthage-cache-v2-
+            - carthage-cache-v3-{{ checksum "Cartfile.resolved" }}
+            - carthage-cache-v3-
       - run:
           name: bootstrap
           command: ./bootstrap.sh
       - save_cache:
-          key: carthage-cache-v2-{{ checksum "Cartfile.resolved" }}
+          key: carthage-cache-v3-{{ checksum "Cartfile.resolved" }}
           paths:
             - Carthage
 

@@ -12,7 +12,6 @@
 		40DC748BD179960B0CF27593 /* Pods_ModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB6A1A3CA13296FA1447832 /* Pods_ModelTests.framework */; };
 		71A90F5EED54E40F2C51B4EA /* Pods_Amby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769A089A76E185BB6109B3E4 /* Pods_Amby.framework */; };
 		84B83A5DA48DEAD64AC3D0EA /* Pods_CommonUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB90A22EEAE1476346BDB6D1 /* Pods_CommonUtil.framework */; };
-		9D0BAAD3237BE8DF00D83566 /* PKHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD65993237BE755005B2B98 /* PKHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D0BAAD5237C01A200D83566 /* LoginHandlerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0BAAD4237C01A200D83566 /* LoginHandlerUseCase.swift */; };
 		9D14EE42237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D14EE40237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.swift */; };
 		9D14EE43237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D14EE41237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib */; };
@@ -540,7 +539,6 @@
 				A1A3DE6F213878D200F87009 /* Logger.framework in Embed Frameworks */,
 				A1E33AB62137149B00C93FBE /* Model.framework in Embed Frameworks */,
 				A16A6EE1220F248100FFCB5B /* Entity.framework in Embed Frameworks */,
-				9D0BAAD3237BE8DF00D83566 /* PKHUD.framework in Embed Frameworks */,
 				A1A65E6C22886705000FACA7 /* Report.framework in Embed Frameworks */,
 				A1C0E00F220F67F300E7A7B6 /* CommonUtil.framework in Embed Frameworks */,
 			);
@@ -617,7 +615,6 @@
 		9DD5D849238540F0006E951B /* LoginResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		9DD5D84A238540F0006E951B /* GetSuggestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSuggestResponse.swift; sourceTree = "<group>"; };
 		9DD5D856238541AD006E951B /* memo_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = memo_stub.json; sourceTree = "<group>"; };
-		9DD65993237BE755005B2B98 /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = Carthage/Build/iOS/PKHUD.framework; sourceTree = "<group>"; };
 		9DF1246A234D77C800B80BB2 /* DefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsService.swift; sourceTree = "<group>"; };
 		9DF3D566238265D800A7F175 /* IndicatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorService.swift; sourceTree = "<group>"; };
 		9DFF6504237948830065B7DB /* SyncViewControllerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncViewControllerViewModel.swift; sourceTree = "<group>"; };
@@ -1126,7 +1123,6 @@
 		1BAE9B5DD71F0DF92296651C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9DD65993237BE755005B2B98 /* PKHUD.framework */,
 				A17AC347225F617900E4262E /* SwiftyJSON.framework */,
 				A16C2D13220F36640050C1DD /* RealmSwift.framework */,
 				A16C2D11220F36400050C1DD /* Realm.framework */,
