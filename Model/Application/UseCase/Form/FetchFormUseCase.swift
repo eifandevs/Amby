@@ -46,6 +46,7 @@ public final class FetchFormUseCase {
                     default: break
                     }
                 }
+            .disposed(by: self.disposeBag)
 
             self.formDataModel.rx_error
                 .subscribe { error in

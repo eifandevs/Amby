@@ -248,9 +248,9 @@ class BaseViewController: UIViewController {
             viewModel.fetchForm()
         ).concat().subscribe(onNext: nil, onError: { _ in
             log.debug("error login sequence")
+            IndicatorService.s.dismissCircleIndicator()
 //            NotificationService.presentToastNotification(message: MessageConst.ALERT.COMMON_MESSAGE, isSuccess: false)
             LogoutUseCase().exe()
-            IndicatorService.s.dismissCircleIndicator()
         }, onCompleted: {
             log.debug("success login sequence")
 //            NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.LOG_IN_SUCCESS, isSuccess: true)

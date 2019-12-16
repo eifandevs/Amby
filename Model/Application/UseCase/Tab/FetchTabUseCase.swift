@@ -46,6 +46,7 @@ public final class FetchTabUseCase {
                     default: break
                     }
                 }
+            .disposed(by: self.disposeBag)
 
             self.tabDataModel.rx_error
                 .subscribe { error in

@@ -46,6 +46,7 @@ public final class FetchFavoriteUseCase {
                     default: break
                     }
                 }
+            .disposed(by: self.disposeBag)
 
             self.favoriteDataModel.rx_error
                 .subscribe { error in

@@ -46,6 +46,7 @@ public final class FetchMemoUseCase {
                     default: break
                     }
                 }
+            .disposed(by: self.disposeBag)
 
             self.memoDataModel.rx_error
                 .subscribe { error in
