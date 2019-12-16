@@ -17,6 +17,8 @@ public final class FetchMemoUseCase {
     private var userDataModel: UserDataModelProtocol!
 
     let disposeBag = DisposeBag()
+    var fetchMemoDispose: Disposable?
+    var fetchMemoErrorDispose: Disposable?
 
     public init() {
         setupProtocolImpl()
@@ -36,29 +38,29 @@ public final class FetchMemoUseCase {
 
             log.debug("fetch memo start...")
 
-            self.memoDataModel.rx_action
+            self.fetchMemoDispose = self.memoDataModel.rx_action
                 .subscribe { [weak self] action in
                     guard let `self` = self, let action = action.element else { return }
                     switch action {
                     case .fetch:
                         log.debug("fetch memo success")
                         observable.onCompleted()
+                        self.fetchMemoDispose!.dispose()
                     default: break
                     }
                 }
-            .disposed(by: self.disposeBag)
 
-            self.memoDataModel.rx_error
+            self.fetchMemoErrorDispose = self.memoDataModel.rx_error
                 .subscribe { error in
                     guard let error = error.element else { return }
                     switch error {
                     case .fetch:
                         log.error("fetch memo error")
                         observable.onError(NSError.empty)
+                        self.fetchMemoErrorDispose!.dispose()
                     default: break
                     }
                 }
-            .disposed(by: self.disposeBag)
 
             self.memoDataModel.fetch(request: GetMemoRequest(userId: uid))
 

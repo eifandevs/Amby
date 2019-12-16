@@ -15,6 +15,8 @@ public final class FetchTabUseCase {
 
     private var tabDataModel: TabDataModelProtocol!
     private var userDataModel: UserDataModelProtocol!
+    private var fetchTabDispose: Disposable?
+    private var fetchTabErrorDispose: Disposable?
 
     let disposeBag = DisposeBag()
 
@@ -36,29 +38,29 @@ public final class FetchTabUseCase {
 
             log.debug("fetch tab data start...")
 
-            self.tabDataModel.rx_action
+            self.fetchTabDispose = self.tabDataModel.rx_action
                 .subscribe { [weak self] action in
                     guard let `self` = self, let action = action.element else { return }
                     switch action {
                     case .fetch:
                         log.debug("fetch tab success")
                         observable.onCompleted()
+                        self.fetchTabDispose!.dispose()
                     default: break
                     }
                 }
-            .disposed(by: self.disposeBag)
 
-            self.tabDataModel.rx_error
+            self.fetchTabErrorDispose = self.tabDataModel.rx_error
                 .subscribe { error in
                     guard let error = error.element else { return }
                     switch error {
                     case .fetch:
                         log.error("fetch tab error")
                         observable.onError(NSError.empty)
+                        self.fetchTabErrorDispose!.dispose()
                     default: break
                     }
                 }
-            .disposed(by: self.disposeBag)
 
             self.tabDataModel.fetch(request: GetTabRequest(userId: uid))
 

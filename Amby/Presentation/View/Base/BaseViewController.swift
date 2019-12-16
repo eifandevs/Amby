@@ -243,9 +243,9 @@ class BaseViewController: UIViewController {
         Observable.of(
             viewModel.login(uid: uid),
             viewModel.fetchMemo(),
-            viewModel.fetchFavorite(),
             viewModel.fetchTab(),
-            viewModel.fetchForm()
+            viewModel.fetchForm(),
+            viewModel.fetchFavorite()
         ).concat().subscribe(onNext: nil, onError: { _ in
             log.debug("error login sequence")
             IndicatorService.s.dismissCircleIndicator()

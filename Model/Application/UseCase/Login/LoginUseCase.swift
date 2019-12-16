@@ -14,6 +14,8 @@ import RxSwift
 public final class LoginUseCase {
 
     private var userDataModel: UserDataModelProtocol!
+    private var loginDispose: Disposable?
+    private var loginErrorDispose: Disposable?
 
     public var isLoggedIn: Bool {
         userDataModel.hasUID
@@ -50,26 +52,26 @@ public final class LoginUseCase {
             }
 
             let request = LoginRequest(userId: uid)
-            self.userDataModel.rx_action
+            self.loginDispose = self.userDataModel.rx_action
                 .subscribe { [weak self] action in
                     guard let `self` = self, let action = action.element else { return }
                     switch action {
                     case let .post(userInfo):
                         log.debug("app login success: \(userInfo.userId)")
                         observable.onCompleted()
+                        self.loginDispose!.dispose()
                     }
                 }
-            .disposed(by: self.disposeBag)
 
-            self.userDataModel.rx_error
+            self.loginErrorDispose = self.userDataModel.rx_error
                 .subscribe { error in
                     guard let error = error.element else { return }
                     switch error {
                     case .post:
                         observable.onError(NSError.empty)
+                        self.loginErrorDispose!.dispose()
                     }
                 }
-            .disposed(by: self.disposeBag)
 
             self.userDataModel.post(request: request)
             return Disposables.create()

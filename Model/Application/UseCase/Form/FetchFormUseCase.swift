@@ -16,6 +16,8 @@ public final class FetchFormUseCase {
     private var formDataModel: FormDataModelProtocol!
     private var userDataModel: UserDataModelProtocol!
 
+    private var fetchFormDispose: Disposable?
+    private var fetchFormErrorDispose: Disposable?
     let disposeBag = DisposeBag()
 
     public init() {
@@ -36,29 +38,29 @@ public final class FetchFormUseCase {
 
             log.debug("fetch form start...")
 
-            self.formDataModel.rx_action
+            self.fetchFormDispose = self.formDataModel.rx_action
                 .subscribe { [weak self] action in
                     guard let `self` = self, let action = action.element else { return }
                     switch action {
                     case .fetch:
                         log.debug("fetch form success")
                         observable.onCompleted()
+                        self.fetchFormDispose!.dispose()
                     default: break
                     }
                 }
-            .disposed(by: self.disposeBag)
 
-            self.formDataModel.rx_error
+            self.fetchFormErrorDispose = self.formDataModel.rx_error
                 .subscribe { error in
                     guard let error = error.element else { return }
                     switch error {
                     case .fetch:
                         log.error("fetch form error")
                         observable.onError(NSError.empty)
+                        self.fetchFormErrorDispose!.dispose()
                     default: break
                     }
                 }
-            .disposed(by: self.disposeBag)
 
             self.formDataModel.fetch(request: GetFormRequest(userId: uid))
 
