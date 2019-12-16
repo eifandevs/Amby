@@ -59,6 +59,7 @@ public final class LoginUseCase {
                         observable.onCompleted()
                     }
                 }
+            .disposed(by: self.disposeBag)
 
             self.userDataModel.rx_error
                 .subscribe { error in
