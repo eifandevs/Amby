@@ -94,22 +94,6 @@ final class SearchMenuTableViewModel {
                 }
             }
             .disposed(by: disposeBag)
-
-        // 記事取得監視
-        NewsHandlerUseCase.s.rx_action
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case let .fetch(articles) = action else { return }
-                if articles.count > 0 {
-                    // exist article
-                    self.newsItem = articles
-                } else {
-                    self.newsItem = []
-                }
-
-                // 画面更新
-                self.rx_action.onNext(.update)
-            }
-            .disposed(by: disposeBag)
     }
 
     deinit {
@@ -120,7 +104,20 @@ final class SearchMenuTableViewModel {
     /// 記事取得
     public func getArticle() {
         // 記事取得
-        getNewsUseCase.exe()
+        getNewsUseCase.exe().subscribe(
+            onNext: { articles in
+                if let articles = articles {
+                    if articles.count > 0 {
+                        // exist article
+                        self.newsItem = articles
+                    } else {
+                        self.newsItem = []
+                    }
+                    self.rx_action.onNext(.update)
+                }
+            }, onError: nil, onCompleted: nil, onDisposed: nil
+        )
+        .disposed(by: disposeBag)
     }
 
     /// 検索開始
