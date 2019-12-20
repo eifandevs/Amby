@@ -18,6 +18,7 @@ enum App {
     case getMemo(request: GetMemoRequest)
     case getTabData(request: GetTabRequest)
     case getForm(request: GetFormRequest)
+    case postFavorite(request: PostFavoriteRequest)
 }
 
 extension App: TargetType {
@@ -31,7 +32,7 @@ extension App: TargetType {
             return ModelConst.URL.LOGIN_API_PATH
         case .getArticle:
             return ModelConst.URL.ARTICLE_API_PATH
-        case .getFavorite:
+        case .getFavorite, .postFavorite:
             return ModelConst.URL.FAVORITE_API_PATH
         case .getAccessToken:
             return ModelConst.URL.ACCESSTOKEN_API_PATH
@@ -47,7 +48,7 @@ extension App: TargetType {
     // HTTPメソッド
     var method: Moya.Method {
         switch self {
-        case .login:
+        case .login, .postFavorite:
             return .post
         case .getArticle:
             return .get
@@ -82,6 +83,8 @@ extension App: TargetType {
                 return Bundle.main.path(forResource: "tab_stub", ofType: "json")!
             case .getForm:
                 return Bundle.main.path(forResource: "form_stub", ofType: "json")!
+            case .postFavorite:
+                return Bundle.main.path(forResource: "post_favorite_stub", ofType: "json")!
         }
         }()
         return FileHandle(forReadingAtPath: path)!.readDataToEndOfFile()
@@ -104,7 +107,8 @@ extension App: TargetType {
             return .requestPlain
         case .getForm:
             return .requestPlain
-
+        case .postFavorite(request):
+            
         }
     }
 
@@ -115,7 +119,7 @@ extension App: TargetType {
             return ["AccessToken": "aaa", "UserRawToken": request.userId]
         case .getArticle:
             return ["AccessToken": "aaa", "UserToken": "aaa"]
-        case .getFavorite:
+        case .getFavorite, .postFavorite:
             return ["AccessToken": "aaa", "UserToken": "aaa"]
         case .getAccessToken:
             return nil

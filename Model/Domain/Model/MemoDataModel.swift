@@ -66,6 +66,9 @@ final class MemoDataModel: MemoDataModelProtocol {
     /// エラー通知用RX
     let rx_error = PublishSubject<MemoDataModelError>()
 
+    /// 更新有無フラグ(更新されていればサーバーと同期する)
+    var isUpdated = false
+    
     private let disposeBag = DisposeBag()
 
     /// db repository

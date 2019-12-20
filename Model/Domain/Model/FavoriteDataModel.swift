@@ -65,6 +65,9 @@ final class FavoriteDataModel: FavoriteDataModelProtocol {
 
     static let s = FavoriteDataModel()
 
+    /// 更新有無フラグ(更新されていればサーバーと同期する)
+    var isUpdated = false
+    
     /// DBリポジトリ
     private let repository = DBRepository()
 

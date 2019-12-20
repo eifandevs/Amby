@@ -61,6 +61,9 @@ final class FormDataModel: FormDataModelProtocol {
     /// エラー通知用RX
     let rx_error = PublishSubject<FormDataModelError>()
 
+    /// 更新有無フラグ(更新されていればサーバーと同期する)
+    var isUpdated = false
+    
     /// db repository
     private let repository = DBRepository()
 

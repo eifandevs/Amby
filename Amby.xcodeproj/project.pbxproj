@@ -32,6 +32,8 @@
 		9D76C4BC2378FAD400F3DB6F /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76C4BB2378FAD400F3DB6F /* LogoutUseCase.swift */; };
 		9D76C4BE2378FAE500F3DB6F /* DeleteAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76C4BD2378FAE500F3DB6F /* DeleteAccountUseCase.swift */; };
 		9D7916912362FC1B000054A1 /* SplashViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */; };
+		9D81CC6F23AB63E900095B78 /* PostFavoriteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D81CC6E23AB63E900095B78 /* PostFavoriteRequest.swift */; };
+		9D81CC7123AB6F5300095B78 /* post_favorite_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D81CC7023AB6F5300095B78 /* post_favorite_stub.json */; };
 		9DD2433422FD6966006A6F8B /* SelectMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */; };
 		9DD5D83B23853FD1006E951B /* FetchMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5D83A23853FD1006E951B /* FetchMemoUseCase.swift */; };
 		9DD5D84B238540F0006E951B /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5D83F238540F0006E951B /* LoginRequest.swift */; };
@@ -601,6 +603,8 @@
 		9D76C4BB2378FAD400F3DB6F /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
 		9D76C4BD2378FAE500F3DB6F /* DeleteAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountUseCase.swift; sourceTree = "<group>"; };
 		9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewControllerViewModel.swift; sourceTree = "<group>"; };
+		9D81CC6E23AB63E900095B78 /* PostFavoriteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFavoriteRequest.swift; sourceTree = "<group>"; };
+		9D81CC7023AB6F5300095B78 /* post_favorite_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = post_favorite_stub.json; sourceTree = "<group>"; };
 		9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemoUseCase.swift; sourceTree = "<group>"; };
 		9DD5D83A23853FD1006E951B /* FetchMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMemoUseCase.swift; sourceTree = "<group>"; };
 		9DD5D83F238540F0006E951B /* LoginRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
@@ -1196,11 +1200,12 @@
 			children = (
 				9DD5D83F238540F0006E951B /* LoginRequest.swift */,
 				9DD5D840238540F0006E951B /* GetArticleRequest.swift */,
-				9DD5D841238540F0006E951B /* GetAccessTokenRequest.swift */,
 				9DD5D842238540F0006E951B /* GetMemoRequest.swift */,
+				9DD5D841238540F0006E951B /* GetAccessTokenRequest.swift */,
 				9DD5D843238540F0006E951B /* GetFavoriteRequest.swift */,
 				9D27F0B6238D16A4004B8245 /* GetTabRequest.swift */,
 				9D1EE1932397B5B8001F604B /* GetFormRequest.swift */,
+				9D81CC6E23AB63E900095B78 /* PostFavoriteRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -2091,6 +2096,7 @@
 		A1902F95209CF976004F1EA5 /* stub */ = {
 			isa = PBXGroup;
 			children = (
+				9D81CC7023AB6F5300095B78 /* post_favorite_stub.json */,
 				9D1EE191239796F4001F604B /* form_stub.json */,
 				9D1EE18F239116B2001F604B /* tab_stub.json */,
 				9DD5D856238541AD006E951B /* memo_stub.json */,
@@ -2974,6 +2980,7 @@
 				9D14EE43237A8C240027BFDE /* OptionMenuSettingLoginStatusTableViewCell.xib in Resources */,
 				A112E831212CD76500320048 /* SplashViewController.xib in Resources */,
 				A1869C2221795242007303B3 /* OptionMenuMemoTableViewCell.xib in Resources */,
+				9D81CC7123AB6F5300095B78 /* post_favorite_stub.json in Resources */,
 				A15C5451214D699D001E8AB5 /* OptionMenuHistoryTableViewCell.xib in Resources */,
 				A1904FCE22D13A1900BC91B4 /* GoogleService-Info_dummy.plist in Resources */,
 				A17241C32245639200472477 /* shaper.js in Resources */,
@@ -3542,6 +3549,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D81CC6F23AB63E900095B78 /* PostFavoriteRequest.swift in Sources */,
 				A10DB09122674D3B0088F4D1 /* Session.swift in Sources */,
 				A1B7F2D4220F45A0008F3850 /* CommonHistory.swift in Sources */,
 				9DD5D855238540F0006E951B /* GetSuggestResponse.swift in Sources */,
