@@ -50,6 +50,8 @@
 		9DD5D857238541AE006E951B /* memo_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = 9DD5D856238541AD006E951B /* memo_stub.json */; };
 		9DF1246B234D77C800B80BB2 /* DefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF1246A234D77C800B80BB2 /* DefaultsService.swift */; };
 		9DF3D567238265D800A7F175 /* IndicatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF3D566238265D800A7F175 /* IndicatorService.swift */; };
+		9DF76A5F23B30AE200EB551C /* PostFavoriteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF76A5E23B30AE200EB551C /* PostFavoriteResponse.swift */; };
+		9DF76A6123B311BC00EB551C /* PostFavoriteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF76A6023B311BC00EB551C /* PostFavoriteUseCase.swift */; };
 		9DFF6505237948830065B7DB /* SyncViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF6504237948830065B7DB /* SyncViewControllerViewModel.swift */; };
 		A1042F442258E70400DA6E78 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1042F432258E70400DA6E78 /* R.generated.swift */; };
 		A106154B226B4A5400AB371F /* CommonHistoryDataModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A106154A226B4A5400AB371F /* CommonHistoryDataModelTest.swift */; };
@@ -621,6 +623,8 @@
 		9DD5D856238541AD006E951B /* memo_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = memo_stub.json; sourceTree = "<group>"; };
 		9DF1246A234D77C800B80BB2 /* DefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsService.swift; sourceTree = "<group>"; };
 		9DF3D566238265D800A7F175 /* IndicatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorService.swift; sourceTree = "<group>"; };
+		9DF76A5E23B30AE200EB551C /* PostFavoriteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFavoriteResponse.swift; sourceTree = "<group>"; };
+		9DF76A6023B311BC00EB551C /* PostFavoriteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFavoriteUseCase.swift; sourceTree = "<group>"; };
 		9DFF6504237948830065B7DB /* SyncViewControllerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncViewControllerViewModel.swift; sourceTree = "<group>"; };
 		A101649620C56376007A3CC7 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		A1042F432258E70400DA6E78 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
@@ -1221,6 +1225,7 @@
 				9DD5D84A238540F0006E951B /* GetSuggestResponse.swift */,
 				9D1EE18D23910E1B001F604B /* GetTabResponse.swift */,
 				9D1EE1952397B7C3001F604B /* GetFormResponse.swift */,
+				9DF76A5E23B30AE200EB551C /* PostFavoriteResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -2312,6 +2317,7 @@
 				A1AA759122F6A6ED0089A522 /* FavoriteHandlerUseCase.swift */,
 				A1AA759322F6A6ED0089A522 /* DeleteFavoriteUseCase.swift */,
 				A1422B54231066ED002DAF52 /* FetchFavoriteUseCase.swift */,
+				9DF76A6023B311BC00EB551C /* PostFavoriteUseCase.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -3575,6 +3581,7 @@
 				9DD5D850238540F0006E951B /* GetAccessTokenResponse.swift in Sources */,
 				9DD5D853238540F0006E951B /* GetFavoriteResponse.swift in Sources */,
 				9D27F0B7238D16A4004B8245 /* GetTabRequest.swift in Sources */,
+				9DF76A5F23B30AE200EB551C /* PostFavoriteResponse.swift in Sources */,
 				9DD5D854238540F0006E951B /* LoginResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3761,6 +3768,7 @@
 				A1AA75DC22FAF3720089A522 /* DeleteHistoryUseCase.swift in Sources */,
 				A1AA75DA22FAF3510089A522 /* ExpireCheckHistoryUseCase.swift in Sources */,
 				A1422B1223013517002DAF52 /* InsertTabUseCase.swift in Sources */,
+				9DF76A6123B311BC00EB551C /* PostFavoriteUseCase.swift in Sources */,
 				A121D5742364D33C00EC4D15 /* GetAccessTokenUseCase.swift in Sources */,
 				A1AA75CB22F6A6EE0089A522 /* ScrollHandlerUseCase.swift in Sources */,
 				A1422B2B23013880002DAF52 /* UpdateTitleTabUseCase.swift in Sources */,

@@ -107,8 +107,8 @@ extension App: TargetType {
             return .requestPlain
         case .getForm:
             return .requestPlain
-        case .postFavorite(request):
-            
+        case let .postFavorite(request):
+            return .requestParameters(parameters: ["favorite": request.favorites], encoding: URLEncoding.default)
         }
     }
 

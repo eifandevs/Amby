@@ -63,7 +63,7 @@ final class FormDataModel: FormDataModelProtocol {
 
     /// 更新有無フラグ(更新されていればサーバーと同期する)
     var isUpdated = false
-    
+
     /// db repository
     private let repository = DBRepository()
 

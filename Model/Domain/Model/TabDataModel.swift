@@ -97,7 +97,7 @@ final class TabDataModel: TabDataModelProtocol {
 
     /// 更新有無フラグ(更新されていればサーバーと同期する)
     var isUpdated = false
-    
+
     static let s = TabDataModel()
 
     private let repository = UserDefaultRepository()

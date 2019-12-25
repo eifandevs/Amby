@@ -68,7 +68,7 @@ final class MemoDataModel: MemoDataModelProtocol {
 
     /// 更新有無フラグ(更新されていればサーバーと同期する)
     var isUpdated = false
-    
+
     private let disposeBag = DisposeBag()
 
     /// db repository
