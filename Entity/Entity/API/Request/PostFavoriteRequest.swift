@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// お気に入り取得リクエスト
+/// お気に入り登録リクエスト
 public struct PostFavoriteRequest {
     public init(userId: String, favorites: [Favorite]) {
         self.userId = userId

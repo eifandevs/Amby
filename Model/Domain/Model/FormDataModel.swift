@@ -16,6 +16,7 @@ enum FormDataModelAction {
     case delete
     case deleteAll
     case fetch(forms: [Form])
+    case post
 }
 
 enum FormDataModelError {
@@ -23,6 +24,7 @@ enum FormDataModelError {
     case get
     case store
     case delete
+    case post
 }
 
 extension FormDataModelError: ModelError {
@@ -36,6 +38,8 @@ extension FormDataModelError: ModelError {
             return MessageConst.NOTIFICATION.STORE_FORM_ERROR
         case .delete:
             return MessageConst.NOTIFICATION.DELETE_FORM_ERROR
+        case .post:
+            return MessageConst.NOTIFICATION.POST_FORM_ERROR
         }
     }
 }
@@ -186,6 +190,40 @@ final class FormDataModel: FormDataModelProtocol {
                     guard let `self` = self else { return }
                     log.error("get form error. error: \(error.localizedDescription)")
                     self.rx_error.onNext(.fetch)
+            })
+            .disposed(by: disposeBag)
+    }
+
+    /// 記事取得
+    func post(request: PostFormRequest) {
+        let repository = ApiRepository<App>()
+
+        repository.rx.request(.postForm(request: request))
+            .observeOn(MainScheduler.asyncInstance)
+            .map { (response) -> PostFormResponse? in
+
+                let decoder: JSONDecoder = JSONDecoder()
+                do {
+                    let formResponse: PostFormResponse = try decoder.decode(PostFormResponse.self, from: response.data)
+                    return formResponse
+                } catch {
+                    return nil
+                }
+            }
+            .subscribe(
+                onSuccess: { [weak self] response in
+                    guard let `self` = self else { return }
+                    if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
+                        log.debug("post form success.")
+                        self.rx_action.onNext(.post)
+                    } else {
+                        log.error("post form error. code: \(response?.code ?? "")")
+                        self.rx_error.onNext(.post)
+                    }
+                }, onError: { [weak self] error in
+                    guard let `self` = self else { return }
+                    log.error("post form error. error: \(error.localizedDescription)")
+                    self.rx_error.onNext(.post)
             })
             .disposed(by: disposeBag)
     }

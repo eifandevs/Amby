@@ -19,6 +19,7 @@ enum App {
     case getTabData(request: GetTabRequest)
     case getForm(request: GetFormRequest)
     case postFavorite(request: PostFavoriteRequest)
+    case postForm(request: PostFormRequest)
 }
 
 extension App: TargetType {
@@ -40,7 +41,7 @@ extension App: TargetType {
             return ModelConst.URL.MEMO_API_PATH
         case .getTabData:
             return ModelConst.URL.TAB_API_PATH
-        case .getForm:
+        case .getForm, .postForm:
             return ModelConst.URL.FORM_API_PATH
         }
     }
@@ -48,7 +49,7 @@ extension App: TargetType {
     // HTTPメソッド
     var method: Moya.Method {
         switch self {
-        case .login, .postFavorite:
+        case .login, .postFavorite, .postForm:
             return .post
         case .getArticle:
             return .get
@@ -85,6 +86,8 @@ extension App: TargetType {
                 return Bundle.main.path(forResource: "form_stub", ofType: "json")!
             case .postFavorite:
                 return Bundle.main.path(forResource: "post_favorite_stub", ofType: "json")!
+            case .postForm:
+                return Bundle.main.path(forResource: "post_form_stub", ofType: "json")!
         }
         }()
         return FileHandle(forReadingAtPath: path)!.readDataToEndOfFile()
@@ -108,7 +111,9 @@ extension App: TargetType {
         case .getForm:
             return .requestPlain
         case let .postFavorite(request):
-            return .requestParameters(parameters: ["favorite": request.favorites], encoding: URLEncoding.default)
+            return .requestParameters(parameters: ["favorites": request.favorites], encoding: URLEncoding.default)
+        case let .postForm(request):
+            return .requestParameters(parameters: ["forms": request.forms], encoding: URLEncoding.default)
         }
     }
 
@@ -127,7 +132,7 @@ extension App: TargetType {
             return ["AccessToken": "aaa", "UserToken": "aaa"]
         case .getTabData:
             return ["AccessToken": "aaa", "UserToken": "aaa"]
-        case .getForm:
+        case .getForm, .postForm:
             return ["AccessToken": "aaa", "UserToken": "aaa"]
         }
     }
