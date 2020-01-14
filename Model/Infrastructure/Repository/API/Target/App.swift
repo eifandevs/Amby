@@ -20,6 +20,7 @@ enum App {
     case getForm(request: GetFormRequest)
     case postFavorite(request: PostFavoriteRequest)
     case postForm(request: PostFormRequest)
+    case postMemo(request: PostMemoRequest)
 }
 
 extension App: TargetType {
@@ -37,7 +38,7 @@ extension App: TargetType {
             return ModelConst.URL.FAVORITE_API_PATH
         case .getAccessToken:
             return ModelConst.URL.ACCESSTOKEN_API_PATH
-        case .getMemo:
+        case .getMemo, .postMemo:
             return ModelConst.URL.MEMO_API_PATH
         case .getTabData:
             return ModelConst.URL.TAB_API_PATH
@@ -49,7 +50,7 @@ extension App: TargetType {
     // HTTPメソッド
     var method: Moya.Method {
         switch self {
-        case .login, .postFavorite, .postForm:
+        case .login, .postFavorite, .postForm, .postMemo:
             return .post
         case .getArticle:
             return .get
@@ -88,6 +89,8 @@ extension App: TargetType {
                 return Bundle.main.path(forResource: "post_favorite_stub", ofType: "json")!
             case .postForm:
                 return Bundle.main.path(forResource: "post_form_stub", ofType: "json")!
+            case .postMemo:
+                return Bundle.main.path(forResource: "post_memo_stub", ofType: "json")!
         }
         }()
         return FileHandle(forReadingAtPath: path)!.readDataToEndOfFile()
@@ -114,6 +117,8 @@ extension App: TargetType {
             return .requestParameters(parameters: ["favorites": request.favorites], encoding: URLEncoding.default)
         case let .postForm(request):
             return .requestParameters(parameters: ["forms": request.forms], encoding: URLEncoding.default)
+        case let .postMemo(request):
+            return .requestParameters(parameters: ["memos": request.memos], encoding: URLEncoding.default)
         }
     }
 
@@ -128,7 +133,7 @@ extension App: TargetType {
             return ["AccessToken": "aaa", "UserToken": "aaa"]
         case .getAccessToken:
             return nil
-        case .getMemo:
+        case .getMemo, .postMemo:
             return ["AccessToken": "aaa", "UserToken": "aaa"]
         case .getTabData:
             return ["AccessToken": "aaa", "UserToken": "aaa"]

@@ -42,6 +42,7 @@ final class BaseViewControllerViewModel {
     let fetchFormUseCase = FetchFormUseCase()
     let postFavoriteUC = PostFavoriteUseCase()
     let postFormUC = PostFormUseCase()
+    let postMemoUC = PostMemoUseCase()
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -187,6 +188,10 @@ final class BaseViewControllerViewModel {
 
     func fetchMemo() -> Observable<()> {
         return fetchMemoUseCase.exe()
+    }
+
+    func postMemo() -> Observable<()> {
+        return postMemoUC.exe()
     }
 
     func fetchTab() -> Observable<()> {

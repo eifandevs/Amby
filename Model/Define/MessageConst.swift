@@ -25,6 +25,7 @@ struct MessageConst {
         static let STORE_THUMBNAIL_ERROR = "サムネイルの保存に失敗しました"
         static let CREATE_THUMBNAIL_ERROR = "サムネイルフォルダの作成に失敗しました"
         static let GET_MEMO_ERROR = "メモ情報の取得に失敗しました"
+        static let POST_MEMO_ERROR = "メモ情報の同期に失敗しました"
         static let UPDATE_MEMO_ERROR = "メモ情報の更新に失敗しました"
         static let STORE_MEMO_ERROR = "メモ情報の保存に失敗しました"
         static let DELETE_MEMO_ERROR = "メモ情報の削除に失敗しました"

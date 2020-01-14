@@ -29,6 +29,7 @@
 		9D40D8D1236A810700A5CE70 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40D8D0236A810700A5CE70 /* UserDataModel.swift */; };
 		9D4136F722F9459E00277E2D /* GetListHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */; };
 		9D6983F723C7145900A82147 /* PostFormUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6983F623C7145900A82147 /* PostFormUseCase.swift */; };
+		9D6983F923CD6FA600A82147 /* PostMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6983F823CD6FA600A82147 /* PostMemoUseCase.swift */; };
 		9D76C4BA2378F75800F3DB6F /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76C4B92378F75800F3DB6F /* LoginProvider.swift */; };
 		9D76C4BC2378FAD400F3DB6F /* LogoutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76C4BB2378FAD400F3DB6F /* LogoutUseCase.swift */; };
 		9D76C4BE2378FAE500F3DB6F /* DeleteAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D76C4BD2378FAE500F3DB6F /* DeleteAccountUseCase.swift */; };
@@ -612,6 +613,7 @@
 		9D4136F622F9459E00277E2D /* GetListHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetListHistoryUseCase.swift; sourceTree = "<group>"; };
 		9D58DD452372C6AD00EE1683 /* AmbyRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AmbyRelease.entitlements; sourceTree = "<group>"; };
 		9D6983F623C7145900A82147 /* PostFormUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFormUseCase.swift; sourceTree = "<group>"; };
+		9D6983F823CD6FA600A82147 /* PostMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMemoUseCase.swift; sourceTree = "<group>"; };
 		9D76C4B92378F75800F3DB6F /* LoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
 		9D76C4BB2378FAD400F3DB6F /* LogoutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUseCase.swift; sourceTree = "<group>"; };
 		9D76C4BD2378FAE500F3DB6F /* DeleteAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountUseCase.swift; sourceTree = "<group>"; };
@@ -2407,6 +2409,7 @@
 				9D2E211E22FD7B610024F45D /* InvertLockMemoUseCase.swift */,
 				A1AA75E522FF124F0089A522 /* InsertMemoUseCase.swift */,
 				9DD5D83A23853FD1006E951B /* FetchMemoUseCase.swift */,
+				9D6983F823CD6FA600A82147 /* PostMemoUseCase.swift */,
 			);
 			path = Memo;
 			sourceTree = "<group>";
@@ -3740,6 +3743,7 @@
 				A1AA75E222FAF3C60089A522 /* SelectHistoryUseCase.swift in Sources */,
 				9DF1246B234D77C800B80BB2 /* DefaultsService.swift in Sources */,
 				A1AA75CA22F6A6EE0089A522 /* GetSettingUseCase.swift in Sources */,
+				9D6983F923CD6FA600A82147 /* PostMemoUseCase.swift in Sources */,
 				A1422B3A2301410F002DAF52 /* DeleteThumbnailUseCase.swift in Sources */,
 				A19352A12141569C002A0865 /* Google.swift in Sources */,
 				A19506372143F8AF0091DF23 /* CommonHistoryDataModel.swift in Sources */,
