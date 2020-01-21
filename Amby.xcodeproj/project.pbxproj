@@ -36,6 +36,7 @@
 		9D7916912362FC1B000054A1 /* SplashViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */; };
 		9D81CC6F23AB63E900095B78 /* PostFavoriteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D81CC6E23AB63E900095B78 /* PostFavoriteRequest.swift */; };
 		9D81CC7123AB6F5300095B78 /* post_favorite_stub.json in Resources */ = {isa = PBXBuildFile; fileRef = 9D81CC7023AB6F5300095B78 /* post_favorite_stub.json */; };
+		9D84F51E23D6F94D0019D40F /* PostTabUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D84F51D23D6F94D0019D40F /* PostTabUseCase.swift */; };
 		9DD2433422FD6966006A6F8B /* SelectMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */; };
 		9DD5D83B23853FD1006E951B /* FetchMemoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5D83A23853FD1006E951B /* FetchMemoUseCase.swift */; };
 		9DD5D84B238540F0006E951B /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD5D83F238540F0006E951B /* LoginRequest.swift */; };
@@ -620,6 +621,7 @@
 		9D7916902362FC1B000054A1 /* SplashViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewControllerViewModel.swift; sourceTree = "<group>"; };
 		9D81CC6E23AB63E900095B78 /* PostFavoriteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFavoriteRequest.swift; sourceTree = "<group>"; };
 		9D81CC7023AB6F5300095B78 /* post_favorite_stub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = post_favorite_stub.json; sourceTree = "<group>"; };
+		9D84F51D23D6F94D0019D40F /* PostTabUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTabUseCase.swift; sourceTree = "<group>"; };
 		9DD2433322FD6966006A6F8B /* SelectMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemoUseCase.swift; sourceTree = "<group>"; };
 		9DD5D83A23853FD1006E951B /* FetchMemoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMemoUseCase.swift; sourceTree = "<group>"; };
 		9DD5D83F238540F0006E951B /* LoginRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
@@ -2305,6 +2307,7 @@
 				A1422B1723013712002DAF52 /* GetIndexTabUseCase.swift */,
 				A1422B2F23013B87002DAF52 /* InitializeTabUseCase.swift */,
 				9D1EE147238F6918001F604B /* FetchTabUseCase.swift */,
+				9D84F51D23D6F94D0019D40F /* PostTabUseCase.swift */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -3722,6 +3725,7 @@
 				A1AA75BE22F6A6EE0089A522 /* FormHandlerUseCase.swift in Sources */,
 				A1422B2623013880002DAF52 /* UpdateUrlTabUseCase.swift in Sources */,
 				A1AA75D422F6B2E60089A522 /* StoreFormUseCase.swift in Sources */,
+				9D84F51E23D6F94D0019D40F /* PostTabUseCase.swift in Sources */,
 				9D40D8CF236A7B5900A5CE70 /* DeleteAccessTokenUseCase.swift in Sources */,
 				A1AA75CC22F6A6EE0089A522 /* MemoHandlerUseCase.swift in Sources */,
 				A195063A2143F8AF0091DF23 /* ProgressDataModel.swift in Sources */,

@@ -242,7 +242,7 @@ class BaseViewController: UIViewController {
 
         Observable.of(
             viewModel.login(uid: uid),
-            viewModel.postMemo()
+            viewModel.postTab()
         ).concat().subscribe(onNext: nil, onError: { _ in
             log.debug("error login sequence")
             IndicatorService.s.dismissCircleIndicator()
