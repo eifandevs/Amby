@@ -14,7 +14,6 @@ public class Form: Object, Codable {
     @objc public dynamic var title: String = ""
     @objc public dynamic var host: String = ""
     @objc public dynamic var url: String = ""
-    @objc public dynamic var date: Date = Date()
     public let inputs = List<Input>()
 
     public override static func primaryKey() -> String? {

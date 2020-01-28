@@ -1,23 +1,22 @@
 //
-//  FetchFormUseCase.swift
+//  PostFormUseCase.swift
 //  Model
 //
-//  Created by tenma.i on 2019/12/06.
-//  Copyright © 2019 eifandevs. All rights reserved.
+//  Created by tenma.i on 2020/01/09.
+//  Copyright © 2020 eifandevs. All rights reserved.
 //
 
 import Foundation
 import Entity
-import RxCocoa
 import RxSwift
 
-public final class FetchFormUseCase {
+public final class PostFormUseCase {
 
     private var formDataModel: FormDataModelProtocol!
     private var userDataModel: UserDataModelProtocol!
+    private var postFormDispose: Disposable?
+    private var postFormErrorDispose: Disposable?
 
-    private var fetchFormDispose: Disposable?
-    private var fetchFormErrorDispose: Disposable?
     let disposeBag = DisposeBag()
 
     public init() {
@@ -36,33 +35,33 @@ public final class FetchFormUseCase {
                 return Disposables.create()
             }
 
-            log.debug("fetch form start...")
+            log.debug("post form start...")
 
-            self.fetchFormDispose = self.formDataModel.rx_action
+            self.postFormDispose = self.formDataModel.rx_action
                 .subscribe { [weak self] action in
                     guard let `self` = self, let action = action.element else { return }
                     switch action {
-                    case .fetch:
-                        log.debug("fetch form success")
+                    case .post:
+                        log.debug("post form success")
                         observable.onCompleted()
-                        self.fetchFormDispose!.dispose()
+                        self.postFormDispose!.dispose()
                     default: break
                     }
                 }
 
-            self.fetchFormErrorDispose = self.formDataModel.rx_error
+            self.postFormErrorDispose = self.formDataModel.rx_error
                 .subscribe { error in
                     guard let error = error.element else { return }
                     switch error {
-                    case .fetch:
-                        log.error("fetch form error")
+                    case .post:
+                        log.error("post form error")
                         observable.onError(NSError.empty)
-                        self.fetchFormErrorDispose!.dispose()
+                        self.postFormErrorDispose!.dispose()
                     default: break
                     }
                 }
 
-            self.formDataModel.fetch(request: GetFormRequest(userId: uid))
+            self.formDataModel.post(request: PostFormRequest(userId: uid, forms: self.formDataModel.select()))
 
             return Disposables.create()
        }

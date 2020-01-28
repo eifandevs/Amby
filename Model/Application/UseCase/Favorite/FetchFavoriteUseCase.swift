@@ -8,13 +8,14 @@
 
 import Foundation
 import Entity
-import RxCocoa
 import RxSwift
 
 public final class FetchFavoriteUseCase {
 
     private var favoriteDataModel: FavoriteDataModelProtocol!
     private var userDataModel: UserDataModelProtocol!
+    private var fetchFavoriteDispose: Disposable?
+    private var fetchFavoriteErrorDispose: Disposable?
 
     let disposeBag = DisposeBag()
 
@@ -36,28 +37,29 @@ public final class FetchFavoriteUseCase {
 
             log.debug("fetch favorite start...")
 
-            self.favoriteDataModel.rx_action
+            self.fetchFavoriteDispose = self.favoriteDataModel.rx_action
                 .subscribe { [weak self] action in
                     guard let `self` = self, let action = action.element else { return }
                     switch action {
                     case .fetch:
                         log.debug("fetch favorite success")
                         observable.onCompleted()
+                        self.fetchFavoriteDispose!.dispose()
                     default: break
                     }
                 }
 
-            self.favoriteDataModel.rx_error
+            self.fetchFavoriteErrorDispose = self.favoriteDataModel.rx_error
                 .subscribe { error in
                     guard let error = error.element else { return }
                     switch error {
                     case .fetch:
                         log.error("fetch favorite error")
                         observable.onError(NSError.empty)
+                        self.fetchFavoriteErrorDispose!.dispose()
                     default: break
                     }
                 }
-            .disposed(by: self.disposeBag)
 
             self.favoriteDataModel.fetch(request: GetFavoriteRequest(userId: uid))
 

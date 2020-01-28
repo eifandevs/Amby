@@ -1,23 +1,22 @@
 //
-//  FetchFormUseCase.swift
+//  PostMemoUseCase.swift
 //  Model
 //
-//  Created by tenma.i on 2019/12/06.
-//  Copyright © 2019 eifandevs. All rights reserved.
+//  Created by tenma.i on 2020/01/14.
+//  Copyright © 2020 eifandevs. All rights reserved.
 //
 
 import Foundation
 import Entity
-import RxCocoa
 import RxSwift
 
-public final class FetchFormUseCase {
+public final class PostMemoUseCase {
 
-    private var formDataModel: FormDataModelProtocol!
+    private var memoDataModel: MemoDataModelProtocol!
     private var userDataModel: UserDataModelProtocol!
+    private var postMemoDispose: Disposable?
+    private var postMemoErrorDispose: Disposable?
 
-    private var fetchFormDispose: Disposable?
-    private var fetchFormErrorDispose: Disposable?
     let disposeBag = DisposeBag()
 
     public init() {
@@ -25,7 +24,7 @@ public final class FetchFormUseCase {
     }
 
     private func setupProtocolImpl() {
-        formDataModel = FormDataModel.s
+        memoDataModel = MemoDataModel.s
         userDataModel = UserDataModel.s
     }
 
@@ -36,33 +35,33 @@ public final class FetchFormUseCase {
                 return Disposables.create()
             }
 
-            log.debug("fetch form start...")
+            log.debug("post memo start...")
 
-            self.fetchFormDispose = self.formDataModel.rx_action
+            self.postMemoDispose = self.memoDataModel.rx_action
                 .subscribe { [weak self] action in
                     guard let `self` = self, let action = action.element else { return }
                     switch action {
-                    case .fetch:
-                        log.debug("fetch form success")
+                    case .post:
+                        log.debug("post memo success")
                         observable.onCompleted()
-                        self.fetchFormDispose!.dispose()
+                        self.postMemoDispose!.dispose()
                     default: break
                     }
                 }
 
-            self.fetchFormErrorDispose = self.formDataModel.rx_error
+            self.postMemoErrorDispose = self.memoDataModel.rx_error
                 .subscribe { error in
                     guard let error = error.element else { return }
                     switch error {
-                    case .fetch:
-                        log.error("fetch form error")
+                    case .post:
+                        log.error("post memo error")
                         observable.onError(NSError.empty)
-                        self.fetchFormErrorDispose!.dispose()
+                        self.postMemoErrorDispose!.dispose()
                     default: break
                     }
                 }
 
-            self.formDataModel.fetch(request: GetFormRequest(userId: uid))
+            self.memoDataModel.post(request: PostMemoRequest(userId: uid, memos: self.memoDataModel.select()))
 
             return Disposables.create()
        }
