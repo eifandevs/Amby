@@ -64,16 +64,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // view setup
         setup()
 
-        #if RELEASE
-            // tracking service
-            TrackingService.setup()
+        // tracking service
+        TrackingService.setup()
 
-            // google sign in
-            GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        // google sign in
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
 
-            // facebook sign in
-            ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-        #endif
+        // facebook sign in
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         return true
     }
