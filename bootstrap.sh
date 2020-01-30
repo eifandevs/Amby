@@ -33,6 +33,9 @@ fi
 # carthage
 carthage bootstrap --no-use-binaries --platform iOS --cache-builds
 
+# firebase distribution
+npm install
+
 # report
 pushd Report/client
 npm install

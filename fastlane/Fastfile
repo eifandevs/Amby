@@ -71,6 +71,14 @@ platform :ios do
 
   after_all do |lane|
     commit = last_git_commit
+
+    firebase_app_distribution(
+      app: AMBY_APP_ID,
+      testers: "eifan.devs@gmail.com",
+      release_notes: "test",
+      firebase_cli_path: "node_modules/.bin/firebase"
+    )
+
     slack(
       message: "Successfully deployed new app update",
       channel: "#jenkins"
