@@ -75,6 +75,8 @@ platform :ios do
     firebase_app_distribution(
       app: AMBY_APP_ID,
       testers: "eifan.devs@gmail.com",
+      testers_file: "./tester/testers.txt",
+      groups_file: "./tester/groups.txt",
       release_notes: "test",
       firebase_cli_token: ENV['FIREBASE_TOKEN'],
       firebase_cli_path: "node_modules/.bin/firebase"
