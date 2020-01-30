@@ -76,6 +76,7 @@ platform :ios do
       app: AMBY_APP_ID,
       testers: "eifan.devs@gmail.com",
       release_notes: "test",
+      firebase_cli_token: ENV['FIREBASE_TOKEN'],
       firebase_cli_path: "node_modules/.bin/firebase"
     )
 
