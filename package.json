@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/eifandevs/Amby#readme",
   "devDependencies": {
+    "firebase-tools": "^7.12.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
   },
