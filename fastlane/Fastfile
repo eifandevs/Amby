@@ -73,12 +73,11 @@ platform :ios do
     commit = last_git_commit
 
     firebase_app_distribution(
-      app: AMBY_APP_ID,
-      testers: "eifan.devs@gmail.com",
+      app: ENV['FIREBASE_APP_ID'],
       testers_file: "./tester/testers.txt",
       groups_file: "./tester/groups.txt",
       release_notes: "test",
-      firebase_cli_token: ENV['FIREBASE_TOKEN'],
+      firebase_cli_token: ENV['FIREBASE_CLI_TOKEN'],
       firebase_cli_path: "node_modules/.bin/firebase"
     )
 
