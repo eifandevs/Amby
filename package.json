@@ -22,7 +22,7 @@
     "webpack-cli": "^3.3.0"
   },
   "dependencies": {
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "js-beautify": "^1.9.0"
   }
 }
