@@ -11,7 +11,7 @@ import UIKit
 
 // swiftlint:disable force_cast
 
-public class TabGroup: NSObject, NSCoding {
+public class TabGroup: NSObject, NSCoding, Codable {
     public var groupContext: String = NSUUID().uuidString
     public var title = "新しいグループ"
     public var isPrivate = false

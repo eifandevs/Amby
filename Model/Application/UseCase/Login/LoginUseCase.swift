@@ -12,32 +12,69 @@ import RxCocoa
 import RxSwift
 
 public final class LoginUseCase {
-    public static let s = LoginUseCase()
 
-    private var accessTokenDataModel: AccessTokenDataModelProtocol!
+    private var userDataModel: UserDataModelProtocol!
+    private var loginDispose: Disposable?
+    private var loginErrorDispose: Disposable?
 
+    public var isLoggedIn: Bool {
+        userDataModel.hasUID
+    }
     /// Observable自動解放
     let disposeBag = DisposeBag()
 
-    private init() {
+    public init() {
         setupProtocolImpl()
     }
 
     private func setupProtocolImpl() {
-        accessTokenDataModel = AccessTokenDataModel.s
+        userDataModel = UserDataModel.s
     }
 
-    public func exe() {
-        let request = GetAccessTokenRequest(auth_type: 1, email: "")
-        accessTokenDataModel.rx_action
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element else { return }
-                switch action {
-                case let .fetch(accessToken):
-                    log.debug("accessToken: \(accessToken)")
-                }
+    public func exe(uid: String) {
+        log.debug("app login start...")
+        let request = LoginRequest(userId: uid)
+        userDataModel.post(request: request)
+    }
+
+    public func exe(uid: String) -> Observable<()> {
+
+        return Observable.create { [weak self] observable in
+            guard let `self` = self else {
+                observable.onError(NSError.empty)
+                return Disposables.create()
             }
-            .disposed(by: disposeBag)
-        accessTokenDataModel.fetch(request: request)
+
+            log.debug("app login start...")
+
+            if self.userDataModel.hasUID {
+                log.debug("has uid.")
+            }
+
+            let request = LoginRequest(userId: uid)
+            self.loginDispose = self.userDataModel.rx_action
+                .subscribe { [weak self] action in
+                    guard let `self` = self, let action = action.element else { return }
+                    switch action {
+                    case let .post(userInfo):
+                        log.debug("app login success: \(userInfo.userId)")
+                        observable.onCompleted()
+                        self.loginDispose!.dispose()
+                    }
+                }
+
+            self.loginErrorDispose = self.userDataModel.rx_error
+                .subscribe { error in
+                    guard let error = error.element else { return }
+                    switch error {
+                    case .post:
+                        observable.onError(NSError.empty)
+                        self.loginErrorDispose!.dispose()
+                    }
+                }
+
+            self.userDataModel.post(request: request)
+            return Disposables.create()
+        }
     }
 }

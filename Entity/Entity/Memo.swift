@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class Memo: Object {
+public class Memo: Object, Codable {
     @objc public dynamic var id: String = NSUUID().uuidString
     @objc public dynamic var text: String = ""
     @objc public dynamic var isLocked: Bool = false

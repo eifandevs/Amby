@@ -86,6 +86,8 @@ class BaseView: UIView {
     private var autoScrollTimer: Timer?
     /// タッチ開始位置
     private var touchBeganPoint: CGPoint?
+    // スクロール開始位置
+    private var scrollBeganPoint: CGPoint?
 
     /// 初期化済みフラグ
     var isBuilt: Bool {
@@ -555,14 +557,14 @@ class BaseView: UIView {
 
     /// サイズの最大化
     private func scaleToMax() {
-        frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT
-        front.frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT
+        frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT_SCROLLED
+        front.frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT_SCROLLED
     }
 
     /// サイズの最小化
     private func scaleToMin() {
-        frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + AppConst.DEVICE.STATUS_BAR_HEIGHT
-        front.frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT - AppConst.BASE_LAYER.HEADER_HEIGHT + AppConst.DEVICE.STATUS_BAR_HEIGHT
+        frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT
+        front.frame.size.height = AppConst.BASE_LAYER.BASE_HEIGHT
     }
 
     /// store session
@@ -699,127 +701,35 @@ extension BaseView: EGApplicationDelegate {
 
 extension BaseView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        viewModel.state.insert(.isScrolling)
+        scrollBeganPoint = scrollView.contentOffset
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // フロントのみ通知する
-        if let front = front, viewModel.state.contains(.isScrolling) {
-            if front.scrollView == scrollView {
-                if scrollMovingPointY != 0 {
-                    let isOverScrolling = (scrollView.contentOffset.y <= 0) || (scrollView.contentOffset.y >= scrollView.contentSize.height - frame.size.height)
-                    var speed = scrollView.contentOffset.y - scrollMovingPointY
-                    if scrollMovingPointY != 0 && !isOverScrolling || (canForwardScroll && isOverScrolling && speed < 0) || (isOverScrolling && speed > 0 && scrollView.contentOffset.y > 0) {
-                        speed = -speed
-                        // スライド処理
-                        if speed > 0 {
-                            // ベースビューがスライド可能な場合にスライドさせる
-                            if !isLocateMax {
-                                if frame.origin.y + speed > viewModel.positionY.max {
-                                    // スライドした結果、Maxを超える場合は、調整する
-                                    slideToMax()
-                                } else {
-                                    // コンテンツサイズが画面より小さい場合は、過去スクロールしない
-                                    if speed >= 0 || shouldScroll {
-                                        if !viewModel.state.contains(.isAnimating) {
-                                            slide(value: speed)
-                                        }
-                                    }
-                                }
-                            }
-                        } else if speed < 0 {
-                            // 順方向(未来)のスクロール
-                            // ベースビューがスライド可能な場合にスライドさせる
-                            if !isLocateMin {
-                                if frame.origin.y + speed < viewModel.positionY.min {
-                                    // スライドした結果、Minを下回る場合は、調整する
-                                    slideToMin()
-                                } else {
-                                    // コンテンツサイズが画面より小さい場合は、過去スクロールしない
-                                    if speed >= 0 || shouldScroll {
-                                        if !viewModel.state.contains(.isAnimating) {
-                                            slide(value: speed)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                scrollMovingPointY = scrollView.contentOffset.y
-            }
+        guard let scrollBeganPoint = scrollBeganPoint else { return }
+        let currentPoint = scrollView.contentOffset
+        let contentSize = scrollView.contentSize
+        let frameSize = scrollView.frame
+        let maxOffset = contentSize.height - frameSize.height
+
+        if currentPoint.y >= maxOffset {
+            log.debug("hit the bottom")
+        } else if scrollBeganPoint.y + 100 < currentPoint.y {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.slideToMin()
+            }, completion: nil)
+        } else if scrollBeganPoint.y - 100 > currentPoint.y {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.slideToMax()
+            }, completion: nil)
         }
     }
 
     /// スクロールさせずに、その場で手を離した場合
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset _: UnsafeMutablePointer<CGPoint>) {
-        // フロントのみ通知する
-        if let front = front, front.scrollView == scrollView {
-            if velocity.y == 0 && !viewModel.state.contains(.isTouching) {
-                // タッチ終了時にベースビューの高さを調整する
-                if viewModel.state.contains(.isScrolling) && !viewModel.state.contains(.isAnimating) {
-                    viewModel.state.remove(.isScrolling)
-                    if isMoving {
-                        viewModel.state.insert(.isAnimating)
-
-                        if frame.origin.y > viewModel.positionY.max / 2 {
-                            UIView.animate(withDuration: 0.2, animations: {
-                                self.slideToMax()
-                            }, completion: { finished in
-                                if finished {
-                                    self.viewModel.state.remove(.isAnimating)
-                                }
-                            })
-                        } else {
-                            UIView.animate(withDuration: 0.2, animations: {
-                                self.slideToMin()
-                            }, completion: { finished in
-                                if finished {
-                                    self.viewModel.state.remove(.isAnimating)
-                                }
-                            })
-                        }
-                    }
-                }
-                scrollMovingPointY = 0
-            }
-        }
-    }
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset _: UnsafeMutablePointer<CGPoint>) {}
 
     /// 慣性スクロールをした場合
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // フロントのみ通知する
-        if let front = front, front.scrollView == scrollView {
-            if !viewModel.state.contains(.isTouching) && !viewModel.state.contains(.isAnimating) {
-                // タッチ終了時にベースビューの高さを調整する
-                if viewModel.state.contains(.isScrolling) && !viewModel.state.contains(.isAnimating) {
-                    viewModel.state.remove(.isScrolling)
-                    if isMoving {
-                        viewModel.state.insert(.isAnimating)
-                        if frame.origin.y > viewModel.positionY.max / 2 {
-                            UIView.animate(withDuration: 0.2, animations: {
-                                self.slideToMax()
-                            }, completion: { finished in
-                                if finished {
-                                    self.viewModel.state.remove(.isAnimating)
-                                }
-                            })
-                        } else {
-                            UIView.animate(withDuration: 0.2, animations: {
-                                self.slideToMin()
-                            }, completion: { finished in
-                                if finished {
-                                    self.viewModel.state.remove(.isAnimating)
-                                }
-                            })
-                        }
-                    }
-                }
-                scrollMovingPointY = 0
-            }
-        }
-    }
+    func scrollViewDidEndDecelerating(_: UIScrollView) {}
 }
 
 // MARK: WKNavigationDelegate, UIWebViewDelegate, WKUIDelegate

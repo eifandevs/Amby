@@ -27,12 +27,11 @@ public final class InvertPrivateModeUseCase {
     /// change private mode
     public func exe(groupContext: String) {
         ChallengeLocalAuthenticationUseCase().exe()
-            .subscribe { [weak self] result in
-                guard let `self` = self, let result = result.element else { return }
-                if case .success = result {
-                    self.tabDataModel.invertPrivateMode(groupContext: groupContext)
-                }
-
-            }.disposed(by: disposeBag)
+            .subscribe(onNext: nil, onError: { _ in
+                LocalAuthenticationHandlerUseCase.s.noticeInputError()
+            }, onCompleted: {
+                self.tabDataModel.invertPrivateMode(groupContext: groupContext)
+            }, onDisposed: nil)
+            .disposed(by: disposeBag)
     }
 }

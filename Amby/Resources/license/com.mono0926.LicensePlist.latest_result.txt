@@ -30,6 +30,14 @@ name: Fabric, nameSpecified:
 body: Fabric: Copyright 20…
 version: 1.10.2
 
+name: FBSDKCoreKit, nameSpecified: 
+body: Copyright (c) 2014-p…
+version: 5.6.0
+
+name: FBSDKLoginKit, nameSpecified: 
+body: Copyright (c) 2014-p…
+version: 5.6.0
+
 name: Firebase, nameSpecified: 
 body: Copyright 2019 Googl…
 version: 6.3.0
@@ -220,8 +228,6 @@ name: NVActivityIndicatorView, nameSpecified: , owner: ninjaprox, version: 4.8.0
 name: realm-cocoa, nameSpecified: , owner: realm, version: v3.19.0
 
 name: SnapKit, nameSpecified: , owner: SnapKit, version: 5.0.1
-
-name: SVProgressHUD, nameSpecified: , owner: SVProgressHUD, version: 2.2.5
 
 name: SwiftyBeaver, nameSpecified: , owner: SwiftyBeaver, version: 1.8.2
 

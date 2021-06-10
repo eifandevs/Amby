@@ -11,7 +11,7 @@ import UIKit
 
 // swiftlint:disable force_cast
 
-public class Tab: NSObject, NSCoding {
+public class Tab: NSObject, NSCoding, Codable {
     public var context: String
     public var url: String
     public var title: String

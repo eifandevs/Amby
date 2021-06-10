@@ -1,5 +1,5 @@
 //
-//  GetSettingUseCase.swift
+//  SettingAccessUseCase.swift
 //  Amby
 //
 //  Created by tenma on 2018/08/27.
@@ -11,7 +11,17 @@ import RxCocoa
 import RxSwift
 
 /// 設定ユースケース
-public final class GetSettingUseCase {
+public final class SettingAccessUseCase {
+
+    /// Login Provider
+    public var loginProvider: LoginProvider {
+        get {
+            return settingDataModel.loginProvider
+        }
+        set(value) {
+            settingDataModel.loginProvider = value
+        }
+    }
 
     /// 閲覧履歴保存日数
     public var commonHistorySaveCount: Int {

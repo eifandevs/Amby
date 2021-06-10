@@ -24,11 +24,23 @@ struct ModelConst {
 
     // MARK: - キー情報
 
+    static let API = API_VALUE()
+    struct API_VALUE {
+        let API_AUTH_HEADER_TOKEN = ResourceUtil().get(key: "API_AUTH_HEADER_TOKEN")
+        let API_BASIC_AUTH_USER = ResourceUtil().get(key: "API_BASIC_AUTH_USER")
+        let API_BASIC_AUTH_PASS = ResourceUtil().get(key: "API_BASIC_AUTH_PASS")
+    }
+
+    // MARK: - キー情報
+
     static let KEY = KEY_VALUE()
     struct KEY_VALUE {
-        let REALM_TOKEN = ResourceUtil().get(key: "KEY_REALM_TOKEN")
-        let ENCRYPT_SERVICE_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_SERVICE_TOKEN")
-        let ENCRYPT_IV_TOKEN = ResourceUtil().get(key: "KEY_ENCRYPT_IV_TOKEN")
+        let KEYCHAIN_KEY_API_ACCESS_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_API_ACCESS_TOKEN")
+        let KEYCHAIN_KEY_USER_ID = ResourceUtil().get(key: "KEYCHAIN_KEY_USER_ID")
+        let KEYCHAIN_KEY_API_REFRESH_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_API_REFRESH_TOKEN")
+        let KEYCHAIN_KEY_REALM_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_REALM_TOKEN")
+        let KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN")
+        let KEYCHAIN_KEY_ENCRYPT_IV_TOKEN = ResourceUtil().get(key: "KEYCHAIN_KEY_ENCRYPT_IV_TOKEN")
         let GITHUB_ACCESS_TOKEN = ResourceUtil().get(key: "GITHUB_ACCESS_TOKEN")
         let OWNER = "eifandevs"
         let REPOSITORY = "IssueTest"
@@ -40,6 +52,7 @@ struct ModelConst {
         let TAB_SAVE_COUNT = "tabSaveCount"
         let NEW_WINDOW_CONFIRM = "newWindowConfirm"
         let MENU_ORDER = "menuOrder"
+        let LOGIN_PROVIDER = "loginProvider"
         let NOTIFICATION_SUBTITLE = "subtitle"
         let NOTIFICATION_MESSAGE = "message"
         let NOTIFICATION_OPERATION = "operation"
@@ -54,7 +67,7 @@ struct ModelConst {
 
     static let UD = UD_VALUE()
     struct UD_VALUE {
-        let ROOT_PASSCODE = Data()
+        let ROOT_PASSCODE = ""
         let LAST_REPORT_DATE = Date.distantPast
         let AUTO_SCROLL_INTERVAL = 0.06
         let MENU_ORDER: [Int] = [
@@ -71,6 +84,7 @@ struct ModelConst {
             UserOperation.closeAll.rawValue,
             UserOperation.grep.rawValue
         ]
+        let LOGIN_PROVIDER = LoginProvider.none.rawValue
         let COMMON_HISTORY_SAVE_COUNT = 90
         let SEARCH_HISTORY_SAVE_COUNT = 90
         let TAB_SAVE_COUNT = 30
@@ -108,9 +122,13 @@ struct ModelConst {
         let APP_SERVER_DOMAIN = ResourceUtil().get(key: "APP_SERVER_DOMAIN")
 
         // パス
+        let LOGIN_API_PATH = ResourceUtil().get(key: "LOGIN_API_PATH")
         let ARTICLE_API_PATH = ResourceUtil().get(key: "ARTICLE_API_PATH")
         let FAVORITE_API_PATH = ResourceUtil().get(key: "FAVORITE_API_PATH")
         let ACCESSTOKEN_API_PATH = ResourceUtil().get(key: "ACCESSTOKEN_API_PATH")
+        let MEMO_API_PATH = ResourceUtil().get(key: "MEMO_API_PATH")
+        let TAB_API_PATH = ResourceUtil().get(key: "TAB_API_PATH")
+        let FORM_API_PATH = ResourceUtil().get(key: "FORM_API_PATH")
 
         // トレンドホーム
         let TREND_HOME_URL = ResourceUtil().get(key: "TREND_HOME_URL")

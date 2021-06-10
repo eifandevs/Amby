@@ -31,6 +31,7 @@ public final class NoticeHandlerUseCase {
     private var memoDataModel: MemoDataModelProtocol!
     private var thumbnailDataModel: ThumbnailDataModelProtocol!
     private var issueDataModel: IssueDataModelProtocol!
+    private var userDataModel: UserDataModelProtocol!
 
     /// Observable自動解放
     let disposeBag = DisposeBag()
@@ -49,6 +50,7 @@ public final class NoticeHandlerUseCase {
         memoDataModel = MemoDataModel.s
         thumbnailDataModel = ThumbnailDataModel.s
         issueDataModel = IssueDataModel.s
+        userDataModel = UserDataModel.s
     }
 
     private func setupRx() {
@@ -115,6 +117,7 @@ public final class NoticeHandlerUseCase {
             memoDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             thumbnailDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             issueDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
+            userDataModel.rx_error.flatMap { Observable.just($0 as ModelError) },
             LocalAuthenticationHandlerUseCase.s.rx_error.flatMap { Observable.just($0 as ModelError) }
         ]).subscribe { [weak self] modelError in
             guard let `self` = self, let modelError = modelError.element else { return }

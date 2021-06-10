@@ -41,9 +41,9 @@ final class SearchMenuTableViewModel {
     /// 記事アイテム
     var newsItem: [GetArticleResponse.Article] = []
     /// 閲覧履歴読み込み数
-    private let readCommonHistoryNum = GetSettingUseCase().commonHistorySaveCount
+    private let readCommonHistoryNum = SettingAccessUseCase().commonHistorySaveCount
     /// 検索履歴読み込み数
-    private let readSearchHistoryNum = GetSettingUseCase().searchHistorySaveCount
+    private let readSearchHistoryNum = SettingAccessUseCase().searchHistorySaveCount
     /// サジェスト取得キュー
     private var requestSearchQueue = [String?]()
     /// サジェスト取得中フラグ
@@ -94,22 +94,6 @@ final class SearchMenuTableViewModel {
                 }
             }
             .disposed(by: disposeBag)
-
-        // 記事取得監視
-        NewsHandlerUseCase.s.rx_action
-            .subscribe { [weak self] action in
-                guard let `self` = self, let action = action.element, case let .fetch(articles) = action else { return }
-                if articles.count > 0 {
-                    // exist article
-                    self.newsItem = articles
-                } else {
-                    self.newsItem = []
-                }
-
-                // 画面更新
-                self.rx_action.onNext(.update)
-            }
-            .disposed(by: disposeBag)
     }
 
     deinit {
@@ -120,7 +104,20 @@ final class SearchMenuTableViewModel {
     /// 記事取得
     public func getArticle() {
         // 記事取得
-        getNewsUseCase.exe()
+        getNewsUseCase.exe().subscribe(
+            onNext: { articles in
+                if let articles = articles {
+                    if articles.count > 0 {
+                        // exist article
+                        self.newsItem = articles
+                    } else {
+                        self.newsItem = []
+                    }
+                    self.rx_action.onNext(.update)
+                }
+            }, onError: nil, onCompleted: nil, onDisposed: nil
+        )
+        .disposed(by: disposeBag)
     }
 
     /// 検索開始

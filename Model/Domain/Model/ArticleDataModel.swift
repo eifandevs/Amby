@@ -33,7 +33,7 @@ protocol ArticleDataModelProtocol {
     var rx_action: PublishSubject<ArticleDataModelAction> { get }
     var rx_error: PublishSubject<ArticleDataModelError> { get }
     var articles: [GetArticleResponse.Article] { get }
-    func fetch()
+    func fetch(request: GetArticleRequest)
 }
 
 final class ArticleDataModel: ArticleDataModelProtocol {
@@ -51,11 +51,11 @@ final class ArticleDataModel: ArticleDataModelProtocol {
     private init() {}
 
     /// 記事取得
-    func fetch() {
+    func fetch(request: GetArticleRequest) {
         if articles.count == 0 {
             let repository = ApiRepository<App>()
 
-            repository.rx.request(.article)
+            repository.rx.request(.getArticle(request: request))
                 .observeOn(MainScheduler.asyncInstance)
                 .map { (response) -> GetArticleResponse in
 

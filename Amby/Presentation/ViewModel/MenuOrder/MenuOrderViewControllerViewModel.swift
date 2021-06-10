@@ -31,12 +31,12 @@ final class MenuOrderViewControllerViewModel {
         return rows.count
     }
 
-    var menuOrder = GetSettingUseCase().menuOrder
+    var menuOrder = SettingAccessUseCase().menuOrder
 
     private var rows = UserOperation.allCases.map { Row(operation: $0) }
 
     /// usecase
-    let getSettingUseCase = GetSettingUseCase()
+    let settingAccessUseCase = SettingAccessUseCase()
 
     func getRow(index: Int) -> Row {
         return rows[index]
@@ -56,7 +56,7 @@ final class MenuOrderViewControllerViewModel {
                 }
             } else {
                 log.debug("change menu order")
-                getSettingUseCase.menuOrder = menuOrder
+                settingAccessUseCase.menuOrder = menuOrder
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     NotificationService.presentToastNotification(message: MessageConst.NOTIFICATION.MENU_ORDER_SUCCESS, isSuccess: true)
                 }
@@ -84,8 +84,8 @@ final class MenuOrderViewControllerViewModel {
 
     /// 初期化
     func initialize() {
-        getSettingUseCase.initializeMenuOrder()
-        menuOrder = getSettingUseCase.menuOrder
+        settingAccessUseCase.initializeMenuOrder()
+        menuOrder = settingAccessUseCase.menuOrder
         rx_action.onNext(.reload)
     }
 }

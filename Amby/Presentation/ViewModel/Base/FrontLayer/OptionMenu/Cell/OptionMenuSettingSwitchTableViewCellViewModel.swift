@@ -11,7 +11,7 @@ import Model
 
 final class OptionMenuSettingSwitchTableViewCellViewModel {
     /// usecase
-    let usecase = GetSettingUseCase()
+    let usecase = SettingAccessUseCase()
 
     /// 新規ウィンドウ許諾フラグ
     var newWindowConfirm: Bool {

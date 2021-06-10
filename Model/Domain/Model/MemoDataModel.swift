@@ -17,6 +17,8 @@ enum MemoDataModelAction {
     case delete
     case deleteAll
     case invertLock
+    case fetch(memos: [Memo])
+    case post
 }
 
 enum MemoDataModelError {
@@ -24,6 +26,8 @@ enum MemoDataModelError {
     case store
     case delete
     case update
+    case fetch
+    case post
 }
 
 extension MemoDataModelError: ModelError {
@@ -37,6 +41,10 @@ extension MemoDataModelError: ModelError {
             return MessageConst.NOTIFICATION.DELETE_MEMO_ERROR
         case .update:
             return MessageConst.NOTIFICATION.UPDATE_MEMO_ERROR
+        case .fetch:
+            return MessageConst.NOTIFICATION.GET_MEMO_ERROR
+        case .post:
+            return MessageConst.NOTIFICATION.POST_MEMO_ERROR
         }
     }
 }
@@ -51,6 +59,8 @@ protocol MemoDataModelProtocol {
     func invertLock(memo: Memo)
     func delete()
     func delete(memo: Memo)
+    func fetch(request: GetMemoRequest)
+    func post(request: PostMemoRequest)
 }
 
 final class MemoDataModel: MemoDataModelProtocol {
@@ -60,6 +70,11 @@ final class MemoDataModel: MemoDataModelProtocol {
     let rx_action = PublishSubject<MemoDataModelAction>()
     /// エラー通知用RX
     let rx_error = PublishSubject<MemoDataModelError>()
+
+    /// 更新有無フラグ(更新されていればサーバーと同期する)
+    var isUpdated = false
+
+    private let disposeBag = DisposeBag()
 
     /// db repository
     private let repository = DBRepository()
@@ -147,5 +162,77 @@ final class MemoDataModel: MemoDataModelProtocol {
         } else {
             rx_error.onNext(.delete)
         }
+    }
+
+    /// 取得
+    func fetch(request: GetMemoRequest) {
+        let repository = ApiRepository<App>()
+
+        repository.rx.request(.getMemo(request: request))
+            .observeOn(MainScheduler.asyncInstance)
+            .map { (response) -> GetMemoResponse? in
+
+                let decoder: JSONDecoder = JSONDecoder()
+                do {
+                    let memoResponse: GetMemoResponse = try decoder.decode(GetMemoResponse.self, from: response.data)
+                    return memoResponse
+                } catch {
+                    return nil
+                }
+            }
+            .subscribe(
+                onSuccess: { [weak self] response in
+                    guard let `self` = self else { return }
+                    if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
+                        log.debug("get memo success.")
+                        let memos = response.data.map {$0}
+                        // initialize data
+                        _ = self.repository.delete(data: self.select())
+                        _ = self.repository.insert(data: memos)
+                        self.rx_action.onNext(.fetch(memos: memos))
+                    } else {
+                        log.error("get memo error. code: \(response?.code ?? "")")
+                        self.rx_error.onNext(.fetch)
+                    }
+                }, onError: { [weak self] error in
+                    guard let `self` = self else { return }
+                    log.error("get memo error. error: \(error.localizedDescription)")
+                    self.rx_error.onNext(.fetch)
+            })
+            .disposed(by: disposeBag)
+    }
+
+    /// 記事取得
+    func post(request: PostMemoRequest) {
+        let repository = ApiRepository<App>()
+
+        repository.rx.request(.postMemo(request: request))
+            .observeOn(MainScheduler.asyncInstance)
+            .map { (response) -> PostMemoResponse? in
+
+                let decoder: JSONDecoder = JSONDecoder()
+                do {
+                    let memoResponse: PostMemoResponse = try decoder.decode(PostMemoResponse.self, from: response.data)
+                    return memoResponse
+                } catch {
+                    return nil
+                }
+            }
+            .subscribe(
+                onSuccess: { [weak self] response in
+                    guard let `self` = self else { return }
+                    if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
+                        log.debug("post memo success.")
+                        self.rx_action.onNext(.post)
+                    } else {
+                        log.error("post memo error. code: \(response?.code ?? "")")
+                        self.rx_error.onNext(.post)
+                    }
+                }, onError: { [weak self] error in
+                    guard let `self` = self else { return }
+                    log.error("post memo error. error: \(error.localizedDescription)")
+                    self.rx_error.onNext(.post)
+            })
+            .disposed(by: disposeBag)
     }
 }

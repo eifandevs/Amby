@@ -35,6 +35,10 @@ protocol AccessTokenDataModelProtocol {
     var realmEncryptionToken: String! { get }
     var keychainServiceToken: String! { get }
     var keychainIvToken: String! { get }
+    var apiAccessToken: String? { get }
+    var apiRefreshToken: String? { get }
+    var hasApiToken: Bool { get }
+    func delete()
     func fetch(request: GetAccessTokenRequest)
 }
 
@@ -44,6 +48,10 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
     /// エラー通知用RX
     let rx_error = PublishSubject<AccessTokenDataModelError>()
 
+    /// APIアクセストークン
+    var apiAccessToken: String?
+    /// APIリフレッシュトークン
+    var apiRefreshToken: String?
     /// DBトークン
     let realmEncryptionToken: String!
     /// キーチェーントークン
@@ -51,47 +59,69 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
     /// キーチェーンIVトークン
     let keychainIvToken: String!
 
+    var hasApiToken: Bool {
+        return apiAccessToken != nil && apiRefreshToken != nil
+    }
+
     static let s = AccessTokenDataModel()
     private let disposeBag = DisposeBag()
 
     private init() {
         let repository = KeychainRepository()
 
-        if let realmEncryptionToken = repository.get(key: ModelConst.KEY.REALM_TOKEN) {
+        if let apiAccessToken = repository.get(key: ModelConst.KEY.KEYCHAIN_KEY_API_ACCESS_TOKEN) {
+            self.apiAccessToken = apiAccessToken
+        }
+
+        if let apiRefreshToken = repository.get(key: ModelConst.KEY.KEYCHAIN_KEY_API_REFRESH_TOKEN) {
+            self.apiRefreshToken = apiRefreshToken
+        }
+
+        if let realmEncryptionToken = repository.get(key: ModelConst.KEY.KEYCHAIN_KEY_REALM_TOKEN) {
             self.realmEncryptionToken = realmEncryptionToken
         } else {
             realmEncryptionToken = String.getRandomStringWithLength(length: 64)
-            repository.save(key: ModelConst.KEY.REALM_TOKEN, value: realmEncryptionToken)
+            repository.save(key: ModelConst.KEY.KEYCHAIN_KEY_REALM_TOKEN, value: realmEncryptionToken)
         }
 
-        if let keychainServiceToken = repository.get(key: ModelConst.KEY.ENCRYPT_SERVICE_TOKEN) {
+        if let keychainServiceToken = repository.get(key: ModelConst.KEY.KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN) {
             self.keychainServiceToken = keychainServiceToken
         } else {
             keychainServiceToken = String.getRandomStringWithLength(length: 32)
-            repository.save(key: ModelConst.KEY.ENCRYPT_SERVICE_TOKEN, value: keychainServiceToken)
+            repository.save(key: ModelConst.KEY.KEYCHAIN_KEY_ENCRYPT_SERVICE_TOKEN, value: keychainServiceToken)
         }
 
-        if let keychainIvToken = repository.get(key: ModelConst.KEY.ENCRYPT_IV_TOKEN) {
+        if let keychainIvToken = repository.get(key: ModelConst.KEY.KEYCHAIN_KEY_ENCRYPT_IV_TOKEN) {
             self.keychainIvToken = keychainIvToken
         } else {
             keychainIvToken = String.getRandomStringWithLength(length: 16)
-            repository.save(key: ModelConst.KEY.ENCRYPT_IV_TOKEN, value: keychainIvToken)
+            repository.save(key: ModelConst.KEY.KEYCHAIN_KEY_ENCRYPT_IV_TOKEN, value: keychainIvToken)
         }
     }
 
-    /// 記事取得
+    /// Delete API token
+    func delete() {
+        let repository = KeychainRepository()
+        self.apiAccessToken = nil
+        self.apiRefreshToken = nil
+        repository.delete(key: ModelConst.KEY.KEYCHAIN_KEY_API_ACCESS_TOKEN)
+        repository.delete(key: ModelConst.KEY.KEYCHAIN_KEY_API_REFRESH_TOKEN)
+    }
+
+    /// Get API access token
     func fetch(request: GetAccessTokenRequest) {
         let repository = ApiRepository<App>()
 
-        repository.rx.request(.accessToken(request: request))
+        repository.rx.request(.getAccessToken(request: request))
             .observeOn(MainScheduler.asyncInstance)
             .map { (response) -> GetAccessTokenResponse? in
-
+                log.debug("response: \(String(data: response.data, encoding: .utf8))")
                 let decoder: JSONDecoder = JSONDecoder()
                 do {
                     let accessTokenResponse: GetAccessTokenResponse = try decoder.decode(GetAccessTokenResponse.self, from: response.data)
                     return accessTokenResponse
-                } catch {
+                } catch let error as NSError {
+                    log.error("parse error. error: \(error)")
                     return nil
                 }
             }
@@ -100,6 +130,12 @@ final class AccessTokenDataModel: AccessTokenDataModelProtocol {
                     guard let `self` = self else { return }
                     if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
                         log.debug("get AccessToken success.")
+                        // store access token
+                        let repository = KeychainRepository()
+                        self.apiAccessToken = response.data.access_token
+                        self.apiRefreshToken = response.data.refresh_token
+                        repository.save(key: ModelConst.KEY.KEYCHAIN_KEY_API_ACCESS_TOKEN, value: response.data.access_token)
+                        repository.save(key: ModelConst.KEY.KEYCHAIN_KEY_API_REFRESH_TOKEN, value: response.data.refresh_token)
                         self.rx_action.onNext(.fetch(accessToken: response.data))
                     } else {
                         log.error("get AccessToken error. code: \(response?.code ?? "")")

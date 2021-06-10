@@ -13,7 +13,9 @@ struct MessageConst {
     // MARK: - 汎用
 
     struct COMMON {
+        static let CONFIRM = "確認"
         static let OK = "OK"
+        static let RETRY = "リトライ"
         static let ERROR = "エラー"
         static let CANCEL = "キャンセル"
     }
@@ -27,6 +29,8 @@ struct MessageConst {
         static let FORM_SAVE_TITLE = "フォームデータ保存"
         static let FORM_EXIST = "保存済みフォームが存在します。自動入力しますか？"
         static let FORM_SAVE_MESSAGE = "入力したフォームデータを保存しますか？"
+        static let COMMON_TITLE = "通信エラー"
+        static let COMMON_MESSAGE = "通信に失敗しました"
         static let DELETE_TITLE = "データ削除"
         static let DELETE_COMMON_HISTORY = "閲覧履歴を全て削除します。よろしいですか？"
         static let DELETE_BOOK_MARK = "ブックマークを全て削除します。よろしいですか？"
@@ -45,6 +49,7 @@ struct MessageConst {
     struct NOTIFICATION {
         static let ACCOUNT_DELETE = "アカウント削除"
         static let ACCOUNT_DELETE_MESSAGE = "アカウントを削除してもよろしいですか？\nこのアカウントに紐づく全てのデータが削除されます。"
+        static let ACCOUNT_LOGOUT_MESSAGE = "ログアウトしてもよろしいですか？"
         static let DELETE_ACCOUNT_SUCCESS = "アカウントを削除しました"
         static let DELETE_ACCOUNT_ERROR_NOT_LOGGED_IN = "アカウント削除をするために、ログインしてください"
         static let DELETE_ACCOUNT_ERROR = "アカウント削除に失敗しました"
@@ -64,6 +69,7 @@ struct MessageConst {
         static let LOG_IN_SUCCESS = "ログインしました"
         static let LOG_IN_ERROR = "ログインに失敗しました"
         static let LOG_OUT_SUCCESS = "ログアウトしました"
+        static let INPUT_ERROR_AUTH = "認証に失敗しました"
         static let ALREADY_LOGGED_IN_ERROR = "ログイン済みです"
         static let NOT_LOGIN_IN_ERROR = "ログインしていません"
         static let GREP_ERROR = "ページ内検索に失敗しました"

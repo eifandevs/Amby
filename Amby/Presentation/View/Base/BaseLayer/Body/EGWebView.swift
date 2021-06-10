@@ -364,7 +364,7 @@ class EGWebView: WKWebView {
                         input.type = type
                         input.formIndex = i
                         input.formInputIndex = j
-                        input.value = EncryptService.encrypt(value: value)
+                        input.value = EncryptService.encrypt(value: value) ?? ""
                         form.inputs.append(input)
                     }
                 }

@@ -15,23 +15,31 @@ enum FormDataModelAction {
     case insert
     case delete
     case deleteAll
+    case fetch(forms: [Form])
+    case post
 }
 
 enum FormDataModelError {
+    case fetch
     case get
     case store
     case delete
+    case post
 }
 
 extension FormDataModelError: ModelError {
     var message: String {
         switch self {
+        case .fetch:
+            return MessageConst.NOTIFICATION.GET_FORM_ERROR
         case .get:
             return MessageConst.NOTIFICATION.GET_FORM_ERROR
         case .store:
             return MessageConst.NOTIFICATION.STORE_FORM_ERROR
         case .delete:
             return MessageConst.NOTIFICATION.DELETE_FORM_ERROR
+        case .post:
+            return MessageConst.NOTIFICATION.POST_FORM_ERROR
         }
     }
 }
@@ -46,6 +54,8 @@ protocol FormDataModelProtocol {
     func delete()
     func delete(forms: [Form])
     func store(form: Form)
+    func fetch(request: GetFormRequest)
+    func post(request: PostFormRequest)
 }
 
 final class FormDataModel: FormDataModelProtocol {
@@ -56,8 +66,13 @@ final class FormDataModel: FormDataModelProtocol {
     /// エラー通知用RX
     let rx_error = PublishSubject<FormDataModelError>()
 
+    /// 更新有無フラグ(更新されていればサーバーと同期する)
+    var isUpdated = false
+
     /// db repository
     private let repository = DBRepository()
+
+    private let disposeBag = DisposeBag()
 
     private init() {}
 
@@ -141,5 +156,76 @@ final class FormDataModel: FormDataModelProtocol {
         } else {
             rx_error.onNext(.store)
         }
+    }
+
+    func fetch(request: GetFormRequest) {
+        let repository = ApiRepository<App>()
+
+        repository.rx.request(.getForm(request: request))
+            .observeOn(MainScheduler.asyncInstance)
+            .map { (response) -> GetFormResponse? in
+
+                let decoder: JSONDecoder = JSONDecoder()
+                do {
+                    let formResponse: GetFormResponse = try decoder.decode(GetFormResponse.self, from: response.data)
+                    return formResponse
+                } catch {
+                    return nil
+                }
+            }
+            .subscribe(
+                onSuccess: { [weak self] response in
+                    guard let `self` = self else { return }
+                    if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
+                        log.debug("get form success.")
+                        let forms = response.data.map {$0}
+                        // initialize data
+                        _ = self.repository.delete(data: self.select())
+                        _ = self.repository.insert(data: forms)
+                        self.rx_action.onNext(.fetch(forms: forms))
+                    } else {
+                        log.error("get form error. code: \(response?.code ?? "")")
+                        self.rx_error.onNext(.fetch)
+                    }
+                }, onError: { [weak self] error in
+                    guard let `self` = self else { return }
+                    log.error("get form error. error: \(error.localizedDescription)")
+                    self.rx_error.onNext(.fetch)
+            })
+            .disposed(by: disposeBag)
+    }
+
+    /// 記事取得
+    func post(request: PostFormRequest) {
+        let repository = ApiRepository<App>()
+
+        repository.rx.request(.postForm(request: request))
+            .observeOn(MainScheduler.asyncInstance)
+            .map { (response) -> PostFormResponse? in
+
+                let decoder: JSONDecoder = JSONDecoder()
+                do {
+                    let formResponse: PostFormResponse = try decoder.decode(PostFormResponse.self, from: response.data)
+                    return formResponse
+                } catch {
+                    return nil
+                }
+            }
+            .subscribe(
+                onSuccess: { [weak self] response in
+                    guard let `self` = self else { return }
+                    if let response = response, response.code == ModelConst.APP_STATUS_CODE.NORMAL {
+                        log.debug("post form success.")
+                        self.rx_action.onNext(.post)
+                    } else {
+                        log.error("post form error. code: \(response?.code ?? "")")
+                        self.rx_error.onNext(.post)
+                    }
+                }, onError: { [weak self] error in
+                    guard let `self` = self else { return }
+                    log.error("post form error. error: \(error.localizedDescription)")
+                    self.rx_error.onNext(.post)
+            })
+            .disposed(by: disposeBag)
     }
 }
